@@ -885,6 +885,8 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 >           - In *"1: Dataset"*:
 >               - {% icon param-file %} *"Select"*: output of **Text reformatting**
 >
+> 4. Rename the output as `CPAT_file.tabular`
+>
 {: .hands_on}
 
 ## Isoform switching analysis
@@ -910,9 +912,9 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >        - *"Analysis mode"*: `Analyze specific gene`
 >        - *"Gene name"*: `RGMB`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `CPAT_file.tabular`
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `PfamScan on data ...` (output of **PfamScan** {% icon tool %})
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: output of **PfamScan** {% icon tool %}
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
