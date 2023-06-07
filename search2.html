@@ -1,0 +1,132 @@
+---
+layout: page
+title: Search Tutorials
+---
+
+<form class="form" id="search-form">
+	<div class="row">
+		<div class="col-md-4">
+		<div class="form-group">
+		<label for="title">Search</label>
+		<input type="text" class="form-control" id="title" placeholder="Search Materials">
+		</div>
+		</div>
+
+		<div class="col-md-4">
+		<div class="form-group">
+		<label for="type">Type</label>
+		<select class="form-control" id="type">
+			<option value="Any">Any</option>
+			<option value="Hands-on">Hands-on</option>
+			<option value="Slides">Slides</option>
+			<option value="FAQ">FAQs</option>
+		</select>
+		</div>
+		</div>
+		
+		<div class="col-md-4">
+		<div class="form-group">
+		<label for="level">Level</label>
+		<select class="form-control" id="level">
+			<option value="Any">Any</option>
+			<option value="Introductory">Introductory</option>
+			<option value="Intermediate">Intermediate</option>
+			<option value="Advanced">Advanced</option>
+		</select>
+		</div>
+		</div>
+	</div>
+</form>
+
+<table class="table" id="results">
+	<thead>
+		<tr>
+			<th scope="col">Identifier</th>
+			<th scope="col">Title</th>
+			<th scope="col">Topic</th>
+			<th scope="col">Type</th>
+			<th scope="col">Level</th>
+			<th scope="col">Length</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for page in site.pages %}
+			{% if page.short_id %}
+			<tr id="{{ page.short_id }}">
+				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{% icon purl %} GTN:{{ page.short_id }}</a></td>
+				<td><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a><br/>
+					{% for tag in page.tags %}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{% endfor %}
+				</td>
+				<td>{{ page | topic_name_from_page: site }}</td>
+				<td>{{ page.layout | layout_to_human }}</td>
+				<td>{{ page.level }}</td>
+				<td>{{ page.time_estimation }}</td>
+			</tr>
+			{% endif %}
+		{% endfor %}
+	</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const textInput = document.getElementById("title")
+const otherInputs = document.querySelectorAll("#search-form select")
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+var previousSearch = "";
+
+function search(){
+	const textQuery = document.getElementById("title").value
+	const typeFilter = document.getElementById("type").value
+	const levelFilter = document.getElementById("level").value
+
+	if (previousSearch == `${textQuery} ${typeFilter} ${levelFilter}`) {
+		console.log("Skipping search for the same query")
+		return
+	}
+
+	console.log(`Searching! ${textQuery} ${typeFilter} ${levelFilter}`)
+
+	// Which should be hidden
+
+	var to_hide = rows.filter(row => {
+		if (typeFilter != "Any" && row.children[3].innerText != typeFilter) {
+			return true;
+		}
+		if (levelFilter != "Any" && row.children[4].innerText != levelFilter) {
+			return true;
+		}
+		if (textQuery != "" && (row.children[1].innerText.toLowerCase() + " " + row.children[2].innerText.toLowerCase()).indexOf(textQuery.toLowerCase()) == -1) {
+			return true;
+		}
+		return false;
+	});
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+
+	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
+}
+
+textInput.addEventListener("oninput", (event) => {
+	console.log(`Input! ${event}`)
+	search()
+});
+otherInputs.forEach((input) => {
+	addEventListener("change", (event) => {
+		console.log(`Change! ${event}`)
+		search()
+	})
+});
+</script>

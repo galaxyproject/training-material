@@ -40,12 +40,12 @@ module Jekyll
 
         %(
           <div style="overflow-x: auto">
-          <object data="#{url}" #{style} type="image/svg+xml">
+          <object data="#{url}" #{style} type="image/svg+xml" alt="#{alt}">
             #{fallback}
             #{alt}
           </object>
           </div>
-          <small><a href="#{url}">Open image in new tab</a></small>
+          <small><a target="_blank" href="#{url}">Open image in new tab</a></small>
         )
       else
         %(
