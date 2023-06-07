@@ -148,6 +148,12 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Public tool listing
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'psl.json')
+      page2.content = JSON.generate(site.data['public-server-tools'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
       puts '[GTN/API] Contributors'
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.json')
