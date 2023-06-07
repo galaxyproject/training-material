@@ -209,11 +209,11 @@ If you click on the resulting collection you will see several plots. Click on {%
 
 If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
 We will go forward with n-neighbour value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
-Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on {% icon eye-slash %} *Show hidden* (next to {% icon galaxy-delete %} bin icon). You can bring each individual dataset to the visible and active datasets by clicking {% icon eye-slash %} *Unhide*.
+Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on *Show hidden* (next to {% icon galaxy-delete %} bin icon). You can bring each individual dataset to the visible and active datasets by clicking *Unhide*.
 
 > <hands-on-title> Unhide the dataset of interest </hands-on-title>
-> 1. In {% icon eye-slash %} *Show hidden* find the dataset `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15` (or any value that you want to go forward with).
-> 2. Click on {% icon eye-slash %} *Unhide*
+> 1. In *Show hidden* find the dataset `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15` (or any value that you want to go forward with).
+> 2. Click on *Unhide*
 > 3. Your chosen dataset is now visible amongst the active datasets in your history!
 >
 {: .hands_on}
@@ -297,8 +297,8 @@ The input data for the **Scanpy FindCluster** {% icon tool %} is the output of *
 
 
 > <hands-on-title> Unhide the dataset of interest </hands-on-title>
-> 1. In {% icon eye-slash %} *Show hidden* find the dataset `Scanpy RunUMAP on data X: UMAP object AnnData` with the tags `#n-neighbours_15` and `#perplexity_30` (or any value that you want to go forward with).
-> 2. Click on {% icon eye-slash %} *Unhide*
+> 1. In *Show hidden* find the dataset `Scanpy RunUMAP on data X: UMAP object AnnData` with the tags `#n-neighbours_15` and `#perplexity_30` (or any value that you want to go forward with).
+> 2. Click on *Unhide*
 > 3. Your chosen dataset is now visible amongst the active datasets in your history!
 >
 {: .hands_on}
