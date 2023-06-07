@@ -6,7 +6,7 @@ tags: [new feature, gtn]
 layout: news
 abbreviations:
   SEO: Search Engine Optimisation
-tutorial: /training-material/search-tools.html
+tutorial: search-tools.html
 ---
 
 Did you ever want to run a tool, but not know where it might be available?
