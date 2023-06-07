@@ -29,114 +29,6 @@
   font-display: swap;
 }
 
-$font-size: 15px;
-$tutorial-box-spacing: 1rem;
-
-
-:root {
-	--color-background: #fff;
-	--text-color: #292b2c;
-	--text-color-muted: #555; // AA :(
-        --text-color-inverted: #eee;
-	 // Allow overriding this separately, should generally default to same
-	 // as textcolour because box titles are still light in every theme.
-	--text-color-boxtitle: var(--text-color);
-	--slide-heading-color: var(--text-color); // Slides
-
-	--code-foreground: #fff;
-	--code-background: #000;
-
-	--border-light: #ddd;
-	--hyperlink: #0056b3;
-	--hyperlink-hover: #004590;
-
-	// From Galaxy
-	--brand-color: #2c3143;
-	--brand-color-contrast: #fff;
-	--navbar-border-size: 0px;
-	--navbar-border-color: white;
-	--navbar-item-background: transparent;
-	--navbar-item-hover: transparent;
-
-	// Basically only for the breadcrumbs.
-	--secondary-color: #e9ecef;
-	--secondary-color-text: #000;
-
-	// A11y
-	--outline-color: red;
-
-
-	--h1-theme-before: "";
-	--h1-theme-after: "";
-	--h2-theme-before: "";
-	--h2-theme-after: "";
-}
-
-/* SLIDES */
-@import "./slides.scss";
-/* SYNTAX */
-@import "./syntax_highlighting.scss";
-/* THEMES */
-@import "./themes.scss";
-
-/* Other CSS libraries we use */
-// If you use .css (i.e. from the file extension) it will use a CSS import
-// which triggers multiple requests.
-@import "./academicons";
-@import "./bootstrap.min";
-@import "./bootstrap-toc.min";
-@import "./leaflet-1.9.3";
-@import "../fontawesome/css/all.min";
-
-
-// palette
-// These remain SASS variables because they're used in mixins.
-// Boxes
-$overview-color: #8A9AD0;
-$agenda-color: #86D486;
-$keypoints-color: #FFA1A1;
-$tip-color: #FFE19E;
-$warning-color: #de8875;
-$comment-color: #ffecc1;
-$handson-color: #dfe5f9;
-$question-color: #8A9AD0;
-$solution-color: #B8C3EA;
-$details-color: #ddd;
-$feedback-color: #86D486;
-$code-color: #86D486;
-$code-out-color: #fb99d0;
-
-.color-overview { background: $overview-color; }
-.color-agenda { background: $agenda-color; }
-.color-keypoints { background: $keypoints-color; }
-.color-tip { background: $tip-color; }
-.color-warning { background: $warning-color; }
-.color-comment { background: $comment-color; }
-.color-handson { background: $handson-color; }
-.color-question { background: $question-color; }
-.color-solution { background: $solution-color; }
-.color-details { background: $details-color; }
-.color-feedback { background: $feedback-color; }
-.color-code { background: $code-color; }
-.color-code-out { background: $code-out-color; }
-
-
-body {
-	font-family: "Atkinson Hyperlegible",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-
-	background: var(--color-background);
-	color: var(--text-color);
-
-	h1::before { content: var(--h1-theme-before) };
-	h1::after { content: var(--h1-theme-after) };
-	h2::before { content: var(--h2-theme-before) };
-	h2::after { content: var(--h2-theme-after) };
-
-	font-size: $font-size;
-	word-wrap: break-word;
-	position: relative;
-}
-
 @mixin tutorial-box ($bg-color) {
     margin-top: 4 * $tutorial-box-spacing;
 
@@ -200,6 +92,115 @@ body {
       border-right: 1px solid #ddd;
       border-left: 1px solid #ddd;
   }
+}
+
+
+$font-size: 15px;
+$tutorial-box-spacing: 1rem;
+
+
+:root {
+	--color-background: #fff;
+	--text-color: #292b2c;
+	--text-color-muted: #555; // AA :(
+        --text-color-inverted: #eee;
+	 // Allow overriding this separately, should generally default to same
+	 // as textcolour because box titles are still light in every theme.
+	--text-color-boxtitle: var(--text-color);
+	--slide-heading-color: var(--text-color); // Slides
+
+	--code-foreground: #fff;
+	--code-background: #000;
+
+	--border-light: #ddd;
+	--hyperlink: #0056b3;
+	--hyperlink-hover: #004590;
+
+	// From Galaxy
+	--brand-color: #2c3143;
+	--brand-color-contrast: #fff;
+	--navbar-border-size: 0px;
+	--navbar-border-color: white;
+	--navbar-item-background: transparent;
+	--navbar-item-hover: transparent;
+
+	// Basically only for the breadcrumbs.
+	--secondary-color: #e9ecef;
+	--secondary-color-text: #000;
+
+	// A11y
+	--outline-color: red;
+
+
+	--h1-theme-before: "";
+	--h1-theme-after: "";
+	--h2-theme-before: "";
+	--h2-theme-after: "";
+}
+
+
+// palette
+// These remain SASS variables because they're used in mixins.
+// Boxes
+$overview-color: #8A9AD0;
+$agenda-color: #86D486;
+$keypoints-color: #FFA1A1;
+$tip-color: #FFE19E;
+$warning-color: #de8875;
+$comment-color: #ffecc1;
+$handson-color: #dfe5f9;
+$question-color: #8A9AD0;
+$solution-color: #B8C3EA;
+$details-color: #ddd;
+$feedback-color: #86D486;
+$code-color: #86D486;
+$code-out-color: #fb99d0;
+
+/* SLIDES */
+@import "./slides.scss";
+/* SYNTAX */
+@import "./syntax_highlighting.scss";
+/* THEMES */
+@import "./themes.scss";
+
+/* Other CSS libraries we use */
+// If you use .css (i.e. from the file extension) it will use a CSS import
+// which triggers multiple requests.
+@import "./academicons";
+@import "./bootstrap.min";
+@import "./bootstrap-toc.min";
+@import "./leaflet-1.9.3";
+@import "../fontawesome/css/all.min";
+
+.color-overview { background: $overview-color; }
+.color-agenda { background: $agenda-color; }
+.color-keypoints { background: $keypoints-color; }
+.color-tip { background: $tip-color; }
+.color-warning { background: $warning-color; }
+.color-comment { background: $comment-color; }
+.color-handson { background: $handson-color; }
+.color-question { background: $question-color; }
+.color-solution { background: $solution-color; }
+.color-details { background: $details-color; }
+.color-feedback { background: $feedback-color; }
+.color-code { background: $code-color; }
+.color-code-out { background: $code-out-color; }
+
+
+body {
+	font-family: "Atkinson Hyperlegible",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+	background: var(--color-background);
+	color: var(--text-color);
+
+	h1::before { content: var(--h1-theme-before) };
+	h1::after { content: var(--h1-theme-after) };
+	h2::before { content: var(--h2-theme-before) };
+	h2::after { content: var(--h2-theme-after) };
+
+	font-size: $font-size;
+	word-wrap: break-word;
+	position: relative;
 }
 
 
