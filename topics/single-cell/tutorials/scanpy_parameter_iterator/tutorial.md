@@ -135,7 +135,7 @@ k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP de
 >
 > 1. {% tool [Scanpy ParameterIterator](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9) %} with the following parameters:
 >    - *"Parameter type"*: `n-neighbours`
->    - *"Choose the format of the input values"*: `List of all parameter values to be iterated
+>    - *"Choose the format of the input values"*: `List of all parameter values to be iterated`
 >    - *"User input values"*: `5,10,15,20,25,30,35,40`
 > 
 > 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - n-neighbours` (you have to first click on the collection so that you see the datasets, and then raname it)
@@ -162,7 +162,7 @@ The output of the Parameter Iterator is the list of datasets. We will be working
 >
 {: .hands_on}
 
-You should now see the output `Scanpy ComputeGraph on collection 2: Graph object AnnData` - it’s also a collection. If you click on that, you will see Anndata files, differing only by the n-neighbour value. You can access those files separately if you go back to your history and click on {% icon eye-slash %} *Show hidden*. You can bring each individual dataset to the visible and active datasets by clicking {% icon eye-slash %} *Unhide*.
+You should now see the output `Scanpy ComputeGraph on collection 2: Graph object AnnData` - it’s also a collection. If you click on that, you will see Anndata files, differing only by the n-neighbour value. 
 
 Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this option is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.
 
@@ -208,283 +208,178 @@ If you click on the resulting collection you will see several plots. Click on {%
 ![Eight graphs showing the differences between UMAP embeddings caused by different values of n-neighbours.](../../images/scrna-casestudy_parameter-iterator/n_neighbours.png "Comparison of UMAP embedding with different values of n-neighbours, perplexity set to 30 and resolution to 0.6.")
 
 If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
-We will go forward with n-neighbour value equal to 15. 
+We will go forward with n-neighbour value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
+Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on {% icon eye-slash %} *Show hidden* (next to {% icon galaxy-delete %} bin icon). You can bring each individual dataset to the visible and active datasets by clicking {% icon eye-slash %} *Unhide*.
 
-HANDS ON 
-Unhide n-neighbours equal to 15
-
-## Sub-step with **Scanpy PlotEmbed**
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
->    - *"color by attributes, comma separated texts"*: `louvain`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> <hands-on-title> Unhide the dataset of interest </hands-on-title>
+> 1. In {% icon eye-slash %} *Show hidden* find the dataset `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15` (or any value that you want to go forward with).
+> 2. Click on {% icon eye-slash %} *Unhide*
+> 3. Your chosen dataset is now visible amongst the active datasets in your history!
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Perplexity (for Scanpy RunTSNE)
 
-## Sub-step with **Scanpy PlotEmbed**
+Let’s have another look at our wee workflow. 
+![Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator.](../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png "We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with perplexity parameter.")
 
-> <hands-on-title> Task description </hands-on-title>
+The next tool in our workflow is Scanpy RunTSNE which takes the parameter perplexity. Even though the tool description says that this value should be an integer, we tested it with floats as well and it works well, so you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run Parameter Iterator again.
+
+> <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
+>
+> 1. {% tool [Scanpy ParameterIterator](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9) %} with the following parameters:
+>    - *"Parameter type"*: `perplexity`
+>    - *"Choose the format of the input values"*: `Step increase values to be iterated`
+>    - *"Starting value"*: `15`
+>    - *"Step"*: `5`
+>    - *"Ending value"*: `45`
+> 
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - perplexity` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 
+> 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
+>    - *perplexity_15*: `#perplexity_15` etc.
+>    If you want to refresh your memory on how to add tags to datasets, have a look here: 
+>    {% snippet faqs/galaxy/datasets_add_tag.md %} 
+>    
+{: .hands_on}
+
+> <hands-on-title> RunTSNE with iterated parameter </hands-on-title>
+> 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15` 
+>    - *"Use the indicated representation"*: `X_pca`
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"The perplexity is related to the number of nearest neighbours"*: 
+>       - Click on {% icon param-collection %} (*Dataset collection*)
+>       - Choose `Parameter iterated - perplexity`
+>
+{: .hands_on}
+
+Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the plots to choose the best value for further analysis. 
+
+> <hands-on-title> Complete the workflow </hands-on-title>
+> 1. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunTSNE on collection X: tSNE object AnnData` 
+>    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>
+> 2. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunUMAP on collection X: UMAP object AnnData` 
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Resolution, high value for more and smaller clusters"*: `0.6`
+{: .hands_on}
+
+> <warning-title></warning-title>
+> In ‘Use programme defaults’ you can specify ‘Additional suffix to the name of the slot to save the embedding’ – if it’s included, PERPLEXITY will be substituted with the value of the perplexity setting. However, in that case you will get an error when using ‘Scanpy PlotEmbed’: due to the value included in the entry name, the tool will not recognise the correct embedding. Therefore, we leave that box unfilled even though it would make it easier to differentiate between datasets. 
+{: .warning}
+
+
+> <hands-on-title> Plot tSNE embedding </hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy FindCluster on collection X: Clusters AnnData`
 >    - *"name of the embedding to plot"*: `tsne`
 >    - *"color by attributes, comma separated texts"*: `louvain`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Use raw attributes if present"*: `No`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+Can you see those differences?
+![Graphs showing the differences between tSNE embeddings caused by different values of perplexity.](../../images/scrna-casestudy_parameter-iterator/perplexity.png "Comparison of tSNE  embedding with different values of perplexity, n-neighbours set to 15 and resolution to 0.6.")
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+What do you think about those plots? Which value would you choose? Well, we will go forward with a perplexity value equal to 30 to demonstrate the final step.
 
-## Sub-step with **Scanpy FindCluster**
+# Resolution (for **Scanpy FindCluster** {% icon tool %})
 
-> <hands-on-title> Task description </hands-on-title>
+Where is **Scanpy FindCluster** {% icon tool %} in our workflow?
+![Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster.](../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png "We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can use the Parameter Iterator with resolution parameter.")
+
+The input data for the **Scanpy FindCluster** {% icon tool %} is the output of **Scanpy RunUMAP** {% icon tool %}, so let’s get this single dataset with the parameter values (from previous tools) of our choice, that is n-neighbours=15 and perplexity=30.
+
+
+> <hands-on-title> Unhide the dataset of interest </hands-on-title>
+> 1. In {% icon eye-slash %} *Show hidden* find the dataset `Scanpy RunUMAP on data X: UMAP object AnnData` with the tags `#n-neighbours_15` and `#perplexity_30` (or any value that you want to go forward with).
+> 2. Click on {% icon eye-slash %} *Unhide*
+> 3. Your chosen dataset is now visible amongst the active datasets in your history!
 >
+{: .hands_on}
+
+The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {% icon tool %}. We will iterate over the resolution values and in this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters. 
+
+> <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
+>
+> 1. {% tool [Scanpy ParameterIterator](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9) %} with the following parameters:
+>    - *"Parameter type"*: `resolution`
+>    - *"Choose the format of the input values"*: `Step increase values to be iterated`
+>    - *"Starting value"*: `0.2`
+>    - *"Step"*: `0.2`
+>    - *"Ending value"*: `1.4`
+> 
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - resolution` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 
+> 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
+>    - *resolution_0.2*: `#resolution_0.2` etc.
+>    If you want to refresh your memory on how to add tags to datasets, have a look here: 
+>    {% snippet faqs/galaxy/datasets_add_tag.md %} 
+>    
+{: .hands_on}
+
+> <hands-on-title> FindCluster with iterated parameter </hands-on-title>
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>   - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Scanpy RunUMAP on data X: UMAP object AnnData` with the tags `#n-neighbours_15` and `#perplexity_30` 
+>    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"File with resolution, use with parameter iterator. Overrides the resolution setting"*: 
+>       - Click on {% icon param-collection %} (*Dataset collection*)
+>       - Choose `Parameter iterated - resolution`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+You can see the effect of resolution parameter on all embeddings: UMAP, tSNE and PCA so you can plot them all and compare the granularity of the clusters. It is also useful to see how the equal increments affect the clustering and what is the rate of change of the granularity. 
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy FindMarkers**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindCluster** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy FindMarkers**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindCluster** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Plot the embeddings </hands-on-title>
 >
 > 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy FindCluster on collection X: Clusters AnnData`
+>    - *"name of the embedding to plot"*: `pca`
+>    - *"color by attributes, comma separated texts"*: `louvain`
+>    - *"Use raw attributes if present"*: `No`
+> *You can re-run {% icon galaxy-refresh %} the same tool again, but change `pca` to `tsne` and then finally to `umap` in order to skip the following two steps.*
+>
+> 2. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy FindCluster on collection X: Clusters AnnData`
 >    - *"name of the embedding to plot"*: `tsne`
 >    - *"color by attributes, comma separated texts"*: `louvain`
+>    - *"Use raw attributes if present"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Scanpy PlotEmbed**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
->    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindMarkers** {% icon tool %})
+> 3. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9) %} with the following parameters:
+>    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy FindCluster on collection X: Clusters AnnData`
+>    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `louvain`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    - *"Use raw attributes if present"*: `No`
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+That’s the last tool in our workflow which uses Parameter Iterator! Let’s have a final look at the generated plots.
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![Graphs showing the differences between PCA embeddings caused by different values of resolution.](../../images/scrna-casestudy_parameter-iterator/resolution_pca.png "Comparison of PCA embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.")
+
+![Graphs showing the differences between tSNE embeddings caused by different values of resolution.](../../images/scrna-casestudy_parameter-iterator/resolution_tsne.png "Comparison of tSNE embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.")
+
+![Graphs showing the differences between UMAP embeddings caused by different values of resolution.](../../images/scrna-casestudy_parameter-iterator/resolution_umap.png "Comparison of UMAP embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.")
+
+> <comment-title></comment-title>
+> Still not sure which value works best? For more explanation and in-depth analysis, please read through [this tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). Hopefully it will give you more insight into interpretation of the resulting plots. 
+{: .comment}
 
 
-## Re-arrange
+# Additional steps
+It may happen that some of the values you choose will give an error, but some will work fine. In that case, you can use {% icon tool %} *Filter failed datasets* tool to remove datasets with errors from a collection. 
 
-To create the template, each step of the workflow had its own subsection.
+If you still haven’t found an answer that would help you with the parameter iteration in your own analysis, check out [another workflow](https://usegalaxy.eu/published/workflow?id=8f677efac7100097) which has some extra steps, not directly related to our analysis. But it might contain steps that would be helpful for you. 
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> <comment-title></comment-title>
+> If you feel confident both with your data and with the Galaxy tools, you can try to accelerate the process and plot the results of parameter iteration before proceeding to the next step (if that’s possible, oftentimes you would have to run the next tool to get sensible results). Then you can select one dataset from the collection even before running the next tool supported by another Parameter Iterator.
+{: .comment}
+
 
 # Conclusion
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+You might want to consult your results with this [control history], or check out the [full workflow] for this tutorial. You can also continue to analyse this data by returning to the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. 
+{% icon congratulations %} In this tutorial you have learnt how to use Parameter Iterator with the number of nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Eventually, you were able to choose the most optimal values for the analysis. Hopefully this tool will make you more confident with the choices you make in terms of the parameters that are crucial for the correct interpretation of biological data. 
