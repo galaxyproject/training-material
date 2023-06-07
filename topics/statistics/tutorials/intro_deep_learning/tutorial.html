@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9df592fe7466e0f098d2daea62ad9471ce46169e",
+  release: "galaxy-training-network@6ea7dedf3cc1a845506767cb7327497592886fc6",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -32,11 +32,19 @@ Sentry.init({
 </script>
 
         
-        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
         <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html">
         <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
@@ -351,13 +359,13 @@ Sentry.init({
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/statistics/tutorials/intro_deep_learning/tutorial.html" title="Version smorgasbord2023">smorgasbord2023</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/statistics/tutorials/intro_deep_learning/tutorial.html">smorgasbord2023</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/topics/statistics/tutorials/intro_deep_learning/tutorial.html" title="Version 2023-06-01">2023-06-01</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/topics/statistics/tutorials/intro_deep_learning/tutorial.html">2023-06-01</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/topics/statistics/tutorials/intro_deep_learning/tutorial.html" title="Version 2023-05-02">2023-05-02</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/topics/statistics/tutorials/intro_deep_learning/tutorial.html">2023-05-02</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
         </div>
@@ -424,7 +432,7 @@ Sentry.init({
     <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=27" alt="Avatar">Anup Kumar</a><a href="/training-material/hall-of-fame/khanteymoori/" class="contributor-badge contributor-khanteymoori"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/khanteymoori?s=27" alt="Avatar">Alireza Khanteymoori</a>
+		Authors: <a href="/training-material/hall-of-fame/anuprulez/" class="contributor-badge contributor-anuprulez"><img src="https://avatars.githubusercontent.com/anuprulez?s=36" alt="Avatar">Anup Kumar</a><a href="/training-material/hall-of-fame/khanteymoori/" class="contributor-badge contributor-khanteymoori"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/khanteymoori?s=36" alt="Avatar">Alireza Khanteymoori</a>
 	</div>
 
 </div>
@@ -636,7 +644,7 @@ Sentry.init({
              The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
         </div>
         
-        <div><strong>Short Link:</strong> <a href="https://gxy.io/GTN:T00268">https://gxy.io/GTN:T00268</a> </div>
+        <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00268">https://gxy.io/GTN:T00268</a> </div>
         
     </blockquote>
     </section>
@@ -656,7 +664,7 @@ Sentry.init({
 <h3 id="deep-learning-and-neural-networks">Deep learning and neural networks</h3>
 <p><a href="https://en.wikipedia.org/wiki/Deep_learning">Deep learning</a>, a branch of artificial intelligence, provides a collection of learning methods to model data with complex architectures to perform different non-linear transformations of data. Using these transformations, patterns are recognised in large volumes of data and new data can be categorised using these patterns extracted on existing data. These patterns are learned by computational models devised using different architectures of neural networks. In the recent years, the neural network architectures such as convolutional, long short-term memory networks, deep belief networks have become increasingly popular as machine learning tools in the fields of computer vision, image analysis, bioinformatics, speech recognition, natural language processing and so on achieving state-of-the-art performance, sometimes exceeding human performance. The availability of greater computational resources, more data, new algorithms for training deep models and easy to use libraries for implementation and training of neural networks are the drivers of this development. Deep learning works by approximating the mathematical function which maps data to its output and it has been shown that it can <a href="https://arxiv.org/pdf/1910.03344.pdf">approximate</a> any function making it widely popular across multiple fields to analyse data. A neural network is a web of artificial neurons which are also called processing units. The idea of a neural network is inspired by <a href="https://en.wikipedia.org/wiki/Neural_circuit">biological neural networks</a> where neuronal circuits are used to process information and learn. An artificial neural network is structured into multiple layers where each layer contains several neurons. The neurons from adjacent layers are interconnected (<a href="https://en.wikipedia.org/wiki/Feedforward_neural_network">feed-forward neural network</a>) allowing the exchange of information between layers of neurons.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/neuron.svg" type="image/svg+xml">data.</object></div><small><a href="../../images/neuron.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output y</figcaption></figure>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/neuron.svg" type="image/svg+xml" alt="data. ">data.</object></div><small><a target="_blank" href="../../images/neuron.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output y</figcaption></figure>
 
 <p>An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes input <code class="language-plaintext highlighter-rouge">x</code> (only <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> are shown for simplicity) and computes output <code class="language-plaintext highlighter-rouge">y</code>. The entities <code class="language-plaintext highlighter-rouge">w1</code>, <code class="language-plaintext highlighter-rouge">w2</code> are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output <code class="language-plaintext highlighter-rouge">y</code> (shown in Figures 2, 3 and 4).</p>
 
@@ -686,7 +694,7 @@ Sentry.init({
 <h4 id="hidden-layer">Hidden layer</h4>
 <p>The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determines if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is called deep learning. More the number of hidden layers, the more complex the architecture is. A complex architecture is beneficial for learning unique patterns from big data. But, complex architecture is prone to <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a> when a neural network starts memorising data without learning unique and general patterns.</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/neural_network.svg" type="image/svg+xml">data.</object></div><small><a href="../../images/neural_network.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> A neural network consisting of 4 layers - 1 input, 2 hidden and 1 output. The neurons in each layer are connected to all neurons in the adjacent layer. Each connection between a pair of neurons contains a weight.</figcaption></figure>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/neural_network.svg" type="image/svg+xml" alt="data. ">data.</object></div><small><a target="_blank" href="../../images/neural_network.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> A neural network consisting of 4 layers - 1 input, 2 hidden and 1 output. The neurons in each layer are connected to all neurons in the adjacent layer. Each connection between a pair of neurons contains a weight.</figcaption></figure>
 
 <p>The number of hidden layers and the size of each hidden layer is not fixed as it completely depends on the data. If the dataset is small (say only 1,000 samples), then it is sufficient to choose a less complex architecture (fewer hidden layers) to avoid the danger of overfitting. However, if the dataset is large (say &gt; 100,000 samples), more complex architecture can be chosen. In short, the architecture of the hidden layer is completely dependent on the nature and size of data.</p>
 
@@ -1149,19 +1157,19 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9df592fe7466e0f098d2daea62ad9471ce46169e">9df592f</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6ea7dedf3cc1a845506767cb7327497592886fc6">6ea7ded</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
 				
 				<p>
-					Resource <abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00268">https://gxy.io/GTN:T00268</a>
+					Resource <i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:T00268">https://gxy.io/GTN:T00268</a>
 				</p>
 				
 				<p>
 					<i>This Material</i>:
 					
-					It is licensed under
+					is licensed under
 					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
 						Creative Commons Attribution 4.0 International License
 					</a>
