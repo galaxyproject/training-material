@@ -495,9 +495,9 @@ Once the mapping is done, in this section we will use the information contained 
 
 > <comment-title>StringTie algorithm</comment-title>
 >
-> StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (fig. 10).
+> StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (fig. 11).
 >
-> ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
+> ![Figure 11. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
 >
 > **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron, **StringTie** accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term *anchor* refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
@@ -517,9 +517,9 @@ The main reason underlying the greater accuracy of **StringTie** most likely der
 
 Despite in this training we make use of **RNA STAR** as mapping tool, it is possible to use different splice-aware aligner such as **HISAT2**. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated.
 
-This step could be divided into two substeps: transcriptome assembly and quantification isoform (fig. 11). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
+This step could be divided into two substeps: transcriptome assembly and quantification isoform (fig. 12). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
 
-![Figure 11. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. The yellow area represents the substep corresponding to transcriptome assembly; this substep generates an annotation corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
+![Figure 12. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. The yellow area represents the substep corresponding to transcriptome assembly; this substep generates an annotation corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
 
 Then, let's start with the transcriptome assemby.
 
@@ -626,15 +626,19 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 >
 {: .hands_on}
 
-Let's have a look at the plots:
+By default, **rnaQUAST** generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 13) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.
 
-<!-- Explanations are missing-->
+![Figure 13. rnaQUAST metrics table summary](../../images/differential_isoform/rnaQUAST_summary_table.png  "rnaQUAST tabular summary of metrics and statistics.")
 
-![Figure X. rnaQUAST cummulative isoform](../../images/differential_isoform/rnaQUAST_cumulative_isoform.png "rnaQUAST cummulative isoform.")
+Let's have a look at the plots. The rnaQUAST cumulative isoform (fig. 14) can help us to identify any trends or patterns in the distribution of transcript and isoform lengths across different abundance levels.
 
-![Figure X. rnaQUAST cumulativesubstitutions](../../images/differential_isoform/rnaQUAST_cumulative_substitutions.png "rnaQUAST cumulativesubstitutions.")
+![Figure 14. rnaQUAST cummulative isoform](../../images/differential_isoform/rnaQUAST_cumulative_isoform.png "rnaQUAST cummulative isoform plot. The x-axis of the plot represents the cumulative length of transcripts and isoforms, while the y-axis represents the sequence abundance.")
 
-![Figure X. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx.")
+According the plot, the transcripts length distribution is similar for all samples, except for SRR9050441; it suggests that the gene expression pattern this sample differs with respect to the remaining ones. Now, let's evaluate the cumulative substitution errors plot (fig. 14). Finally, we are going to evaluate the NAx plot (fig. 15).
+
+![Figure 15. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx plot.  The x-axis of the plot represents the NAx metric, while the y-axis represents the contig length.")
+
+NAx is a metric that represents the length for which the collection of all aligned contigs of that length or longer covers at least x percent of the total length of the aligned assembled contigs, ranging from 0 to 100, per assembler.In that case, we cannot appreciate differences regarding distribution of transcript lengths across the samples.
 
 # Isoform switching analysis with **IsoformSwitchAnalyzeR**
 
@@ -660,7 +664,7 @@ In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 >
 {: .comment}
 
-![Figure 12. IsoformSwitchAnalyzeR pipeline scheme](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
+![Figure 16. IsoformSwitchAnalyzeR pipeline scheme](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
 
 Now, we can start with the {IS} analysis.
 
@@ -811,17 +815,17 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 
 > <details-title>CPAT scores in detail</details-title>
 >
-> CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 13 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
+> CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 17 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
 >
-> ![Figure 13. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013")
+> ![Figure 17. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013")
 >
-> The maximum length of the ORF (fig. 13.A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
+> The maximum length of the ORF (fig. 17.A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
 >
-> The ORF coverage (fig. 13.B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
+> The ORF coverage (fig. 17.B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
 >
-> The Fickett TESTCODE (fig. 13.C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
+> The Fickett TESTCODE (fig. 17.C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
 >
-> Finally, the fourth metric is the hexamer usage bias (fig. 13.D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
+> Finally, the fourth metric is the hexamer usage bias (fig. 17.D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
 >
 {: .details}
 
@@ -920,9 +924,9 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >
 {: .hands_on}
 
-Let's have a look at the generated plot (fig. 14).
+Let's have a look at the generated plot (fig. 18).
 
-![Figure 14. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
+![Figure 18. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
 We can appreciate that despite differences in overall gene expression are not statistically significant between healthy and cancerous tissues, there exists stringking differences between isoforms:
 
@@ -961,19 +965,19 @@ We will try to confirm this {IS} by visualising the coverage on this gene and mo
 >
 {: .hands_on}
 
-Let's have a look at the plots generated by **pyGenometracks**. The first plot (fig. 15), corresponding with the coordinates `chr5:98,762,495-98,803,294`, allows to evaluate the region corresponding to the whole gene. 
+Let's have a look at the plots generated by **pyGenometracks**. The first plot (fig. 19), corresponding with the coordinates `chr5:98,762,495-98,803,294`, allows to evaluate the region corresponding to the whole gene. 
 
-![Figure 15. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_out.png "pyGenometracks isoform visualization of coordinates chr5:98,762,495-98,803,294. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
+![Figure 19. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_out.png "pyGenometracks isoform visualization of coordinates chr5:98,762,495-98,803,294. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
 
-The second image shows a only the region corresponding to the 5'end (fig. 16). 
+The second image shows a only the region corresponding to the 5'end (fig. 20). 
 
-![Figure 16. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_in.png "pyGenometracks isoform visualization chr5:98,767,000-98,775,000. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
+![Figure 20. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_in.png "pyGenometracks isoform visualization chr5:98,767,000-98,775,000. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
 
 > <comment-title>Results on original full-data</comment-title>
 >
-> According the full data results, the isoform ENST00000308234.11 shows statistically significat differences between health and cancer samples (fig. 17).
+> According the full data results, the isoform ENST00000308234.11 shows statistically significat differences between health and cancer samples (fig. 21).
 >
-> ![Figure 17. RGMB gene isoform expression profile plot full data](../../images/differential_isoform/isoformSwitchAnalyzer_gene_fulldata.png "RGMB isoform expression profile plot of full data. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
+> ![Figure 21. RGMB gene isoform expression profile plot full data](../../images/differential_isoform/isoformSwitchAnalyzer_gene_fulldata.png "RGMB isoform expression profile plot of full data. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 >
 >
 {: .comment}
@@ -1029,9 +1033,9 @@ It generates five tabular files with the results of the different statistical an
 >
 > > <solution-title></solution-title>
 > >
-> > The top three genes are [CDC42SE2](https://www.ncbi.nlm.nih.gov/gene/56990), [ENSG00000286753](https://www.ncbi.nlm.nih.gov/gene/?term=ENSG00000286753) and [NDUFAF2](https://www.ncbi.nlm.nih.gov/gene/91942) (fig. 18).
+> > The top three genes are [CDC42SE2](https://www.ncbi.nlm.nih.gov/gene/56990), [ENSG00000286753](https://www.ncbi.nlm.nih.gov/gene/?term=ENSG00000286753) and [NDUFAF2](https://www.ncbi.nlm.nih.gov/gene/91942) (fig. 22).
 > >
-> > ![Figure  18. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
+> > ![Figure  22. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
 > >
 > > CDC42SE2 is a protein coding gene robably involved in the organization of the actin cytoskeleton by acting downstream of CDC42. ENSG00000286753 is a uncharacterized gene affiliated with the lncRNA class. NDUFAF2 encondes a protein chaperone involved in the assembly of NADH dehydrogenase.
 > > 
@@ -1046,52 +1050,52 @@ In this section we will assess whether there are differences with respect to the
 
 > <comment-title>Interpretation of splicing events</comment-title>
 >
-> The events are classified by comparing the splicing patterns with a hypothetical pre-RNA (fig. 19).
+> The events are classified by comparing the splicing patterns with a hypothetical pre-RNA (fig. 23).
 >
-> ![Figure 19. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
+> ![Figure 23. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 >
 > Mutually exclusive exon (MEE) is a special case where two isoforms from the same gene contain exons which are not found in any of the other isoforms from that gene.
 >
 {: .comment}
 
-First, we will start analyzing the total number of splicing events (fig. 20).
+First, we will start analyzing the total number of splicing events (fig. 24).
 
-![Figure 20. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.")
+![Figure 24. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.")
 
-From the figure 20 , it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 21).
+From the figure 25 , it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 25).
 
-![Figure 21. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 25. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black).")
 
 
-According to the results (fig. 21), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).
+According to the results (fig. 26), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).
 
 > <comment-title>Results on original full-data</comment-title>
 >
-> If we perform the analysis on the original datasets, we can see a more homogeneous distribution of the different splice junction patters (fig. 22.A).
+> If we perform the analysis on the original datasets, we can see a more homogeneous distribution of the different splice junction patters (fig. 26.A).
 >
-> ![Figure 22. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black) (B).")
+> ![Figure 26. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black) (B).")
 >
-> According the results, there's statistically significant mutually exon skipping events in cancer tissues (fig. 22.B) On the other hand, health tissues utilize alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.
+> According the results, there's statistically significant mutually exon skipping events in cancer tissues (fig. 26.B) On the other hand, health tissues utilize alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.
 >
 {: .comment}
 
 #### Analysis of consequence enrichment
 
-To analyze large-scale patterns in predicted {IS} consequences, **IsoformSwitchAnalyzeR** computes all {IS} events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss). According the results, some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention) (fig. 23).
+To analyze large-scale patterns in predicted {IS} consequences, **IsoformSwitchAnalyzeR** computes all {IS} events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss). According the results, some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention) (fig. 27).
 
-![Figure 23. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
+![Figure 27. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
 
-To assess this observation, **IsoformSwitchAnalyzeR** performs a standard proportion test is performed (fig. 24). The results indicate that differences are not statistically significant.
+To assess this observation, **IsoformSwitchAnalyzeR** performs a standard proportion test is performed (fig. 28). The results indicate that differences are not statistically significant.
 
-![Figure 24. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 28. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
 > <comment-title>Results on original full-data</comment-title>
 >
 > Let's have a look at the results corresponding to the complete original dataset analysis.
 >
-> ![Figure 25. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+> ![Figure 29. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 >
-> According with the results, there is a gain in coding transcript in cancer samples (fig. 25.B). It means that differential isoform translates in the emergence of uncharacterized or unannotated open-reading frames, also known as novel open-reading frames (nORFs), in cancer. This phaenomenon has been reported previously by {% cite Erady2021 %}. According those authors, nORFs are typically smaller than canonical ORFs, the peptides or micro-proteins they encode are particularly attractive as putative allosteric cellular regulators. 
+> According with the results, despite not being statistically significant, it seems that there is a gain in coding transcript in cancer samples (fig. 29.B). It means that differential isoform translates in the emergence of uncharacterized or unannotated open-reading frames, also known as novel open-reading frames (nORFs), in cancer. This phaenomenon has been reported previously by {% cite Erady2021 %}. According those authors, nORFs are typically smaller than canonical ORFs, the peptides or micro-proteins they encode are particularly attractive as putative allosteric cellular regulators. 
 >
 {: .comment}
 
@@ -1117,11 +1121,9 @@ To assess this observation, **IsoformSwitchAnalyzeR** performs a standard propor
 >
 > > <solution-title></solution-title>
 > >
-> > This information can be found in the eighth column of the Consequences enrichment dataset (fig. 26).
+> > This information can be found in the eighth column of the Consequences enrichment dataset.
 > >
-> > ![Figure 26. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
-> >
-> > In that case, the adjusted P-value is 0.598.
+> > In that case, the adjusted P-value is 0.79052734375.
 > >
 > {: .solution}
 {: .question}
@@ -1129,13 +1131,13 @@ To assess this observation, **IsoformSwitchAnalyzeR** performs a standard propor
 
 #### Analysis of genome-wide changes in isoform usage
 
-Here, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows us to identify if differences in splicing events are genome-wide or restricted to specific regions, and is particularly interesting if the expected difference between conditions is large (fig. 27).
+Here, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows us to identify if differences in splicing events are genome-wide or restricted to specific regions, and is particularly interesting if the expected difference between conditions is large (fig. 30).
 
-![Figure 27. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
+![Figure 30. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
-As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 28). 
+As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 31). 
 
-![Figure 28. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
+![Figure 31. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
 
 Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).
 
@@ -1143,9 +1145,9 @@ Here we can see that changes in gene expression and isoform switches are not in 
 >
 > Let's have a look at the results corresponding to the complete original dataset analysis.
 >
-> ![Figure 29. Genome-wide changes violing plot fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png "Genome-wide gene expression plots. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles (A). The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (B). The scaterplot represents the dIF vs gene log2 fold change (C)")
+> ![Figure 32. Genome-wide changes violing plot fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png "Genome-wide gene expression plots. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles (A). The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (B). The scaterplot represents the dIF vs gene log2 fold change (C)")
 >
-> According with results corresponding to the whole dataset (fig. 29.A), the differential isoform usage differences are not homogeneously distributed across the genome. It suggest that there should be some specific regions enriched in MES and alternative 5’ acceptor sites. 
+> According with results corresponding to the whole dataset (fig. 32.A), the differential isoform usage differences are not homogeneously distributed across the genome. It suggest that there should be some specific regions enriched in MES and alternative 5’ acceptor sites. 
 >
 {: .comment}
 
