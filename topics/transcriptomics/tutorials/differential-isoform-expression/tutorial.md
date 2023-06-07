@@ -479,7 +479,7 @@ After confirming that the saturation level is good enough, now we will check the
 
 According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%) (fig. 9.B), a large proportion of reads show novel splicing junction patterns (fig. 9.A).
 
-![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseq_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2.") 
+![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseqc_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2.") 
 
 
 Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually veery short inner distances appear in old or degraded samples; in addition and values can be negative if the reads overlap consistently.
@@ -490,7 +490,7 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 
 Once the mapping is done, in this section we will use the information contained in the BAM files to carry out the assembly of the transcriptomes, as well as the quantification of the transcripts. In addition, we will evaluate the transcriptome assemblies quality.
 
-## Reference-based transcriptome assembly and quantification with **Stringtie**
+## Reference-based transcriptome assembly and quantification with **StringTie**
 
 **StringTie** is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase ({% cite Kovaka2019 %}, {% cite Pertea2015 %}).
 
@@ -843,7 +843,7 @@ First, we will generate two intermediate files that we will use as input for CPA
 >    - *"Reference Genome"*: `From your history`
 >       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
-> 4. Rename the output as `GRCh38.p53.chrom5.lncRNA.fasta` and `GRCh38.p53.chrom5.pc.fasta`
+> 4. Rename the output as `GRCh38.p53.chrom5.lncRNA.fasta`
 {: .hands_on}
 
 As result, we will have two new FASTA files, one of them corresponding to long non-coding RNAs and the other one corresponding to the sequences of protein coding isoforms. Now, we can run CPAT:
