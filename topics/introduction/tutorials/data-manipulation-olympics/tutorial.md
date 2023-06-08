@@ -1104,6 +1104,12 @@ $$ BMI = weight / (height^2) $$
 
 (with weight in kilograms and height in meters).
 
+> <tip-title>BMI is problematic</tip-title>
+> [Adolphe Quetelet](https://en.wikipedia.org/wiki/Adolphe_Quetelet), who invented [BMI](https://en.wikipedia.org/wiki/Body_mass_index), was not a doctor of medicine, instead he was a Belgian astronomer, mathematician, statistician, and sociologist. His data consisted probably entirely of cisgender, white, european men and women {% cite Eknoyan_2007 %}.
+> In his defense, he did argue it should not be used at individual levels, however it came to be used as such due to simplicity. (See [Wikipedia's History section](https://en.wikipedia.org/wiki/Body_mass_index#History)). BMI is a poor measure of health, especially for populations with high muscle content, and cannot be simply re-used as-is with anyone other than Anglo Saxons {% cite Caleyachetty_2021 %}, [Wikipedia:Limitations](https://en.wikipedia.org/wiki/Body_mass_index#Limitations).
+>
+> However as it is an easy to calculate metric, we include the calculation here.
+{:.tip}
 
 Let's use the {% tool [Compute on rows]({{version_compute}}) %} tool to compute this data for all athletes and add it as a new column directly after the existing height and weight columns.
 

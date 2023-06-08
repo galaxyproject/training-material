@@ -49,7 +49,6 @@ Galaxy has a large collection of tools to perform such basic data manipulation t
 
 
 > <agenda-title></agenda-title>
-
 >
 > In this tutorial, we will cover:
 >
@@ -716,6 +715,7 @@ Ok, let's practice!
 {: .question}
 
 
+<!--
 # Grouping (TODO)
 
 Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of athletes, etc).
@@ -933,6 +933,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 >
 {: .question}
 
+-->
 
 # Computing
 
@@ -1490,8 +1491,7 @@ This section provides a number of exercises that require you to combine two or m
 >
 {: .question}
 
-Ok, let's try another exercise! If you have done the exercises in the [Grouping](#grouping) section, you will have noticed that we were not able
-to perform computation on the weight column, because some of the values were weight classes, e.g. `63-78` (kg), and we had to exclude those values.
+Ok, let's try another exercise! You might have noticed that some of the values in the weight column were classes, e.g. `63-78` (kg).
 In this exercise, we will first clean up this weight column to avoid ranges (by taking the lower number in the range for every
 row a weight range is used), and then answering the question a couple of questions around the weight of athletes.
 
