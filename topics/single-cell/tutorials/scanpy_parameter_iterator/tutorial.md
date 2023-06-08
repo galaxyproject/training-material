@@ -91,7 +91,7 @@ Here are several ways of getting our toy dataset – choose whichever you like!
 >     -> `{{ page.title }}`):
 >
 >    ```
->    {{ page.zenodo_link }}
+>    {{ page.zenodo_link }}/files/Scanpy_RunPCA_AnnData_object.h5ad
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
