@@ -164,7 +164,7 @@ k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP de
 
 
 
-The output of the Parameter Iterator is the list of datasets. We will be working on dataset collections quite a lot, so if you want to gain more understanding of collection operations, visit the [corresponding tutorial](% link topics/galaxy-interface/tutorials/collections/tutorial.md %)
+The output of the Parameter Iterator is the list of datasets. We will be working on dataset collections quite a lot, so if you want to gain more understanding of collection operations, visit the [corresponding tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 
 > <hands-on-title> Derive kNN graph with iterated parameter </hands-on-title>
 >
@@ -185,7 +185,7 @@ You should now see the output is also a collection. If you click on that, you wi
 
 Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this option is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.
 
-> <comment-title>Why only one Parameter Iteration per workflow?</comment-title>
+> <comment-title>Why only one Parameter Iteration at a time?</comment-title>
 > Iterating the parameters within one tool will give you a list with X datasets: each dataset is the output with the given parameter value. However, if you want to use Parameter Iterator again within another tool, specifying Y parameter values, you **will not** get X x Y datasets as you might expect. Therefore you have to choose **just one** output file to be passed on to the next tool which will use Parameter Iterator again. Alternatively, you can use Parameter Iterator once and run the rest of the tools on dataset collection with just one parameter value. 
 {: .comment}
 
@@ -306,7 +306,7 @@ Changing the value of perplexity will only affect the tSNE graphs, so we can com
 {: .hands_on}
 
 > <warning-title></warning-title>
-> In ‘Use programme defaults’ you can specify ‘Additional suffix to the name of the slot to save the embedding’ – if it’s included, PERPLEXITY will be substituted with the value of the perplexity setting. However, in that case you will get an error when using ‘Scanpy PlotEmbed’: due to the value included in the entry name, the tool will not recognise the correct embedding. Therefore, we leave that box unfilled even though it would make it easier to differentiate between datasets. 
+> In *Use programme defaults* you can specify *Additional suffix to the name of the slot to save the embedding* – if it’s included, PERPLEXITY will be substituted with the value of the perplexity setting. However, in that case you will get an error when using **Scanpy PlotEmbed**: due to the value included in the entry name, the tool will not recognise the correct embedding. Therefore, we leave that box unfilled even though it would make it easier to differentiate between datasets. 
 {: .warning}
 
 
@@ -414,7 +414,7 @@ That’s the last tool in our workflow which uses Parameter Iterator! Let’s ha
 
 
 # Additional steps
-- It may happen that some of the values you choose will give an error, but some will work fine. In that case, you can use {% icon tool %} *Filter failed datasets* tool to remove datasets with errors from a collection. 
+- It may happen that some of the values you choose will give an error, but some will work fine. In that case, you can use {% icon tool %} **Filter failed datasets** tool to remove datasets with errors from a collection. 
 
 - If you still haven’t found an answer that would help you with the parameter iteration in your own analysis, check out [another workflow](https://usegalaxy.eu/published/workflow?id=8f677efac7100097) which has some extra steps, not directly related to our analysis. But it might contain steps that would be helpful for you. 
 
