@@ -570,7 +570,7 @@ Principal components are calculated from highly dimensional data to find the mos
 > Where did the `3248` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
-> <warning-title>Check your AnnData object!</warning>
+> <warning-title>Check your AnnData object!<warning-title>
 > Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '3248'.
 {: .warning}
 
