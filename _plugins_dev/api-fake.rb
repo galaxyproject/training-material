@@ -1,5 +1,4 @@
 require 'json'
-require './_plugins/jekyll-topic-filter.rb'
 
 module Jekyll
   class APIGenerator < Generator
