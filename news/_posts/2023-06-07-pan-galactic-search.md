@@ -12,6 +12,12 @@ tutorial: search-tools.html
 Did you ever want to run a tool, but not know where it might be available?
 The GTN has you covered with the Pan-Galactic Tool Search that is now available.
 
+**Update**: the authors were reminded of
+[GalaxyCat](https://galaxycat.france-bioinformatique.fr/) which does the same
+thing as the GTN but better! Please go use that.
+
+---
+
 We recently received a question online from our colleague [Dr. Scott Cain](https://github.com/scottcain)
 trying to find the *Manta* Structural Variant analysis tool amongst the Galaxies. While
 his complaints about generic names are very apt (and Galaxy existed before the
