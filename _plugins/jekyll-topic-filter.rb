@@ -253,12 +253,13 @@ module TopicFilter
   ##
   # Collate the materials into a large hash
   # Params:
+  # +site+:: The +Jekyll::Site+ object
   # +pages+:: The list of pages to collate
   # Returns:
   # +Hash+:: The collated materials
   #
   # Example:
-  # collate_materials(pages)
+  # collate_materials(site, pages)
   # => {
   # "assembly/velvet-assembly" => {
   #  "topic" => "assembly",
@@ -281,11 +282,16 @@ module TopicFilter
   #    }
   #   ]
   #  }
-  def self.collate_materials(pages)
+  def self.collate_materials(site, pages)
     # In order to speed up queries later, we'll store a set of "interesting"
     # pages (i.e. things that are under `topic_name`)
+    shortlinks = site.data['shortlinks']
+    shortlinks_reversed = shortlinks['id'].invert
+
     interesting = {}
     pages.each do |page|
+      page.data['short_id'] = shortlinks_reversed[page.data['url']]
+
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
 
@@ -307,6 +313,7 @@ module TopicFilter
       page.data['topic_name'] = material_meta['topic_name']
       page.data['tutorial_name'] = material_meta['tutorial_name']
       page.data['dir'] = material_meta['dir']
+      page.data['short_id'] = shortlinks_reversed[page.data['url']]
 
       interesting[mk]['resources'].push([material_meta['type'], page])
     end
@@ -332,6 +339,7 @@ module TopicFilter
     slide_has_video = false
     slide_translations = []
     page_ref = nil
+
     if slides.length.positive?
       page = slides.min { |a, b| a[1].path <=> b[1].path }[1]
       slide_has_video = page.data.fetch('video', false)
@@ -491,13 +499,12 @@ module TopicFilter
     # eww.
     return site.data['cache_processed_pages'] if site.data.key?('cache_processed_pages')
 
-    materials = collate_materials(pages).map { |_k, v| resolve_material(site, v) }
+    materials = collate_materials(site, pages).map { |_k, v| resolve_material(site, v) }
     puts '[GTN/TopicFilter] Filling Materials Cache'
     site.data['cache_processed_pages'] = materials
 
     # Prepare short URLs
     shortlinks = site.data['shortlinks']
-    shortlinks_reversed = shortlinks['id'].invert
     mappings = Hash.new { |h, k| h[k] = [] }
 
     shortlinks.each_key do |kp|
@@ -508,12 +515,6 @@ module TopicFilter
     # Update the materials with their short IDs + redirects
     pages.select { |p| mappings.keys.include? p.url }.each do |p|
       # Set the short id on the material
-      #
-      begin
-        p['short_id'] = shortlinks_reversed[p.url]
-      rescue StandardError
-        p.data['short_id'] = shortlinks_reversed[p.url]
-      end
       if p['ref']
         # Initialise redirects if it wasn't set
         p['ref'].data['redirect_from'] = [] if !p['ref'].data.key?('redirect_from')
