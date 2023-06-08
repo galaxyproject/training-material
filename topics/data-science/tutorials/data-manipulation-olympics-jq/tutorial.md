@@ -5,6 +5,7 @@ title: 'Data Manipulation Olympics - JQ'
 zenodo_link: 'https://zenodo.org/record/6803028'
 tags:
 - cyoa
+- json
 questions:
 - How can I do basic data manipulation with JQ?
 - Which functions are available to convert, reformat, filter, sort etc my JSON-based data?
@@ -66,19 +67,19 @@ If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu
 
 Operation                | Description                                                         | Galaxy Tool
 ------------------------ | ------------------------------------                                | ----------------
+Compute an expression    | Over each row, add it as a new column                               | `.key1 * .key2`
+Concatenate datasets     | one after the other                                                 | `cat *.json | jq`
 Convert format           | Change the file format                                              | Often xsv, other tools.
 Counting                 | Count the number of objects in an array                             | `length`
-Sort on a column         | Change the order of the rows based on values in one or more columns | `sort`, `sort_by(.key)`
+Cut Columns              | By header name                                                      | `.key`
 Filter                   | Remove objects based on values                                      | `select(.key == "value")`
-Group on a column        | And perform simple operations (count, mean, min, max etc)           | `group_by(.key1, -.key2)`
-Compute an expression    | Over each row, add it as a new column                               | `.key1 * .key2`
 Find and Replace         | in a specific column                                                | `gsub("(?<a>...)", "xyz\\(.a)abc")`
+Group on a column        | And perform simple operations (count, mean, min, max etc)           | `group_by(.key1, -.key2)`
 Join two Datasets        | side by side on a specified field                                   | `[JOIN(INDEX(input[]; .right); .[]; .left; add)]`
-Concatenate datasets     | one after the other                                                 | `cat *.json | jq`
+Paste                    | Two files side by side                                              | `-s '[.[][]]'`
 Remove Beginning         | Good for removing header lines                                      | `last`, `index`
 Select First lines       | Good for finding top 10s or saving header lines                     | `first`, `index`
-Cut Columns              | By header name                                                      | `.key`
-Paste                    | Two files side by side                                              | `-s '[.[][]]'`
+Sort on a column         | Change the order of the rows based on values in one or more columns | `sort`, `sort_by(.key)`
 Split file               | Based on values of a column                                         | n/a (requires bash/awk/etc.)
 Unique                   | Remove duplicate rows                                               | `unique`
 
