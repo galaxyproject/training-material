@@ -7,45 +7,45 @@ contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,ne
 ---
 
 * Copy the link location
-* Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
-{% if include.reset_form %}
+* Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+{%- if include.reset_form -%}
 * Click **Reset** button at the bottom of the form. If the button is greyed out -> skip to the next step.
-{% endif %}
-{% if include.collection %}
+{%- endif -%}
+{%- if include.collection -%}
 * Click on **Collection** on the top
-{% endif %}
-{% if include.collection_type %}
+{%- endif -%}
+{%- if include.collection_type -%}
 * Click on **Collection Type** and select `{{ include.collection_type }}`
-{% endif %}
-* Select **Paste/Fetch Data**
+{%- endif -%}
+* Select {% icon galaxy-wf-edit %} **Paste/Fetch Data**
 * Paste the link(s) into the text field
-{% if include.link %}
+{%- if include.link -%}
   `{{ include.link }}`
-{% endif %}
-{% if include.link2 %}
+{%- endif -%}
+{%- if include.link2 -%}
   `{{ include.link2 }}`
-{% endif %}
-{% if include.format %}
+{%- endif -%}
+{%- if include.format -%}
 * Change **Type (set all):** from "Auto-detect" to `{{ include.format }}`
-{% endif %}
-{% if include.genome %}
+{%- endif -%}
+{%- if include.genome -%}
 * Change **Genome** to `{{ include.genome }}`
-{% endif %}
+{%- endif -%}
 * Press **Start**
-{% if include.collection %}
+{%- if include.collection -%}
 * Click on **Build** when available
-{% if include.pairswaptext %}
+{%- if include.pairswaptext -%}
 * Ensure that the forward and reverse reads are set to {{ include.pairswaptext }}, respectively.
     * Click **Swap** otherwise
-{% endif %}
+{%- endif -%}
 * Enter a name for the collection
-{% if include.collection_name_convention %}
+{%- if include.collection_name_convention -%}
     * A useful naming convention is to use {{ include.collection_name_convention }}
-{% endif %}
-{% if include.collection_name %}
+{%- endif -%}
+{%- if include.collection_name -%}
     * {{ include.collection_name }}
-{% endif %}
+{%- endif -%}
 * Click on **Create list** (and wait a bit)
-{% else %}
+{%- else -%}
 * **Close** the window
-{% endif %}
+{%- endif -%}
