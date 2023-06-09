@@ -6,7 +6,7 @@ layout: faq
 contributors: [shiltemann, hexylena, delphine-l]
 ---
 
-1. Click on the collection in your history
+1. Click on the collection in your history to view it
 2. Click on **Edit** {% icon galaxy-pencil %} next to the collection name at the top of the history panel
 3. Click on **Add Tags** {% icon galaxy-tags %}
 4. Add a tag {% if include.tag %} named `{{include.tag}}`{% else %} starting with `#` {% endif %}
