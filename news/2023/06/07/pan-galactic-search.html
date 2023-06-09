@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@3d01a52e706d918a9f38d6bd56fa2ee573d30ab2",
+  release: "galaxy-training-network@0440472e513d0b1f8eec4b585dbdbdf299ea597d",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -50,7 +50,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="New Feature: Pan-Galactic Tool Search">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-07 13:36:51 +0000">
+<meta name="DC.date" content="2023-06-08 08:29:42 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -250,9 +250,9 @@ Sentry.init({
 
 
 
-<button class="label label-default tutorial_tag" id="new feature" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;" title="new feature">new feature</button>
+<button class="label label-default tutorial_tag" id="new feature" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;" title="new feature">new feature</button>
 
-<button class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;" title="gtn">gtn</button>
+<button class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;" title="gtn">gtn</button>
 
 
 <hr/>
@@ -265,6 +265,12 @@ Sentry.init({
 
     <p>Did you ever want to run a tool, but not know where it might be available?
 The GTN has you covered with the Pan-Galactic Tool Search that is now available.</p>
+
+<p><strong>Update</strong>: the authors were reminded of
+<a href="https://galaxycat.france-bioinformatique.fr/">GalaxyCat</a> which does the same
+thing as the GTN but better! Please go use that.</p>
+
+<hr />
 
 <p>We recently received a question online from our colleague <a href="https://github.com/scottcain">Dr. Scott Cain</a>
 trying to find the <em>Manta</em> Structural Variant analysis tool amongst the Galaxies. While
@@ -337,9 +343,9 @@ across the Galaxy.</p>
     "gtn"
   ],
   "description": "<p>Did you ever want to run a tool, but not know where it might be available? The GTN has you covered",
-  "articleBody": "<p>Did you ever want to run a tool, but not know where it might be available?\nThe GTN has you covered with the Pan-Galactic Tool Search that is now available.</p>\n\n<p>We recently received a question online from our colleague <a href=\"https://github.com/scottcain\">Dr. Scott Cain</a>\ntrying to find the <em>Manta</em> Structural Variant analysis tool amongst the Galaxies. While\nhis complaints about generic names are very apt (and Galaxy existed before the\nphone!) we do still have very generic names in our tools.</p>\n\n<p>Unfortunately Search Engine Optimisation (SEO) is also quite difficult with these large, complex,\nJavaScript based web applications. So, the GTN has added a Pan Galactic Tool\nSearch!</p>\n\n<iframe src=\"https://genomic.social/@scottcain/110498601155255378/embed\" width=\"100%\" height=\"250\">\nScott: Arg! Please don't use common words to name your software projects! First (and a long time ago) you have the fine folks @galaxyproject using that word, then you have the SV caller Manta, making it impossible to answer with a simple google whether manta is available at a public Galaxy hub.\n</iframe>\n\n<h2 id=\"how-it-works\">How it Works</h2>\n\n<p>The GTN uses the list of <a href=\"https://galaxyproject.org/use/\">Public Galaxy\nServers</a> available from the Hub to construct\nthe dropdowns you see on Tutorials indicating which servers support a given\ntutorial.</p>\n\n<p>Every time the GTN gets deployed (at minimum once a day), we collect a list of\ntools that are available from each of those servers. This metadata is available\ndirectly from the GTN (<code class=\"language-plaintext highlighter-rouge\">/api/psl.json</code>).</p>\n\n<p>When we render a tutorial, we check the list of tools used in that tutorial,\nboth those annotated by authors, as well as whichever ones are mentioned in the\nassociated workflows, and list the intersection of what’s available.</p>\n\n<p>Since we had this metadata already available, it was trivial to generate a tool\nsearch which simply searches through this file and lists the relevant servers.</p>\n\n<h2 id=\"implementation\">Implementation</h2>\n\n<p>As the GTN is a static site, so is our search. It takes a second to load the\ntool search interface (~7MB uncompressed), but after that you can search more\nor less instantaneously through all 15k versions of the 6k known tools we see\nacross the Galaxy.</p>\n",
+  "articleBody": "<p>Did you ever want to run a tool, but not know where it might be available?\nThe GTN has you covered with the Pan-Galactic Tool Search that is now available.</p>\n\n<p><strong>Update</strong>: the authors were reminded of\n<a href=\"https://galaxycat.france-bioinformatique.fr/\">GalaxyCat</a> which does the same\nthing as the GTN but better! Please go use that.</p>\n\n<hr />\n\n<p>We recently received a question online from our colleague <a href=\"https://github.com/scottcain\">Dr. Scott Cain</a>\ntrying to find the <em>Manta</em> Structural Variant analysis tool amongst the Galaxies. While\nhis complaints about generic names are very apt (and Galaxy existed before the\nphone!) we do still have very generic names in our tools.</p>\n\n<p>Unfortunately Search Engine Optimisation (SEO) is also quite difficult with these large, complex,\nJavaScript based web applications. So, the GTN has added a Pan Galactic Tool\nSearch!</p>\n\n<iframe src=\"https://genomic.social/@scottcain/110498601155255378/embed\" width=\"100%\" height=\"250\">\nScott: Arg! Please don't use common words to name your software projects! First (and a long time ago) you have the fine folks @galaxyproject using that word, then you have the SV caller Manta, making it impossible to answer with a simple google whether manta is available at a public Galaxy hub.\n</iframe>\n\n<h2 id=\"how-it-works\">How it Works</h2>\n\n<p>The GTN uses the list of <a href=\"https://galaxyproject.org/use/\">Public Galaxy\nServers</a> available from the Hub to construct\nthe dropdowns you see on Tutorials indicating which servers support a given\ntutorial.</p>\n\n<p>Every time the GTN gets deployed (at minimum once a day), we collect a list of\ntools that are available from each of those servers. This metadata is available\ndirectly from the GTN (<code class=\"language-plaintext highlighter-rouge\">/api/psl.json</code>).</p>\n\n<p>When we render a tutorial, we check the list of tools used in that tutorial,\nboth those annotated by authors, as well as whichever ones are mentioned in the\nassociated workflows, and list the intersection of what’s available.</p>\n\n<p>Since we had this metadata already available, it was trivial to generate a tool\nsearch which simply searches through this file and lists the relevant servers.</p>\n\n<h2 id=\"implementation\">Implementation</h2>\n\n<p>As the GTN is a static site, so is our search. It takes a second to load the\ntool search interface (~7MB uncompressed), but after that you can search more\nor less instantaneously through all 15k versions of the 6k known tools we see\nacross the Galaxy.</p>\n",
   "datePublished": "2023-06-07 00:00:00 +0000",
-  "dateModified": "2023-06-07 13:36:51 +0000",
+  "dateModified": "2023-06-08 08:29:42 +0000",
   "author": [
     {
       "@context": "https://schema.org",
@@ -434,7 +440,7 @@ across the Galaxy.</p>
 	<p>
 	15 May 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffd8ba; --color-darker: #ffb96c; --color-dimmed: #ffc998;">new tutorial</span>
 	
 	</p>
 	<p class="card-text">
@@ -453,9 +459,9 @@ across the Galaxy.</p>
 	<p>
 	11 May 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #deddff; --color-darker: #c3c1ff; --color-dimmed: #d0cfff;">new topic</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;">new feature</span>
 	
 	</p>
 	<p class="card-text">
@@ -475,9 +481,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 	<p>
 	20 April 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;">new feature</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -496,9 +502,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 	<p>
 	19 April 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #dcddff; --color-darker: #c0c2ff; --color-dimmed: #cecfff;">new feature</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff8d5; --color-darker: #f3de00; --color-dimmed: #ffeb5c;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -529,7 +535,7 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/3d01a52e706d918a9f38d6bd56fa2ee573d30ab2">3d01a52</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0440472e513d0b1f8eec4b585dbdbdf299ea597d">0440472</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
