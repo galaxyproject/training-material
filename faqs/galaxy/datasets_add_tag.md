@@ -12,5 +12,5 @@ contributors: [bebatut,wm75,hexylena,shiltemann]
 3. Add a tag {% if include.tag %}named `{{include.tag}}` {% else %} starting with `#` {% endif %}
    - Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.
 4. Press <kbd>Enter</kbd>
-4. Check that the tag appears below the dataset name
+5. Check that the tag appears below the dataset name
 
