@@ -65,9 +65,9 @@ A report from the European Commission Expert Group on [FAIR data](https://zenodo
 ## Open data and FAIR
 The level of accessibility and usability criteria distinguish open from FAIR data. Open data is accessible without limitations, whereas FAIR data specifies certain requirements for access and use.
 
-![](../../images/fair_open.png)
+![text reading fair does not equal open](../../images/fair_open.png)
 
-Open data can be modify, and distribute for any reason. Although extensively used and accessible, FAIR data additionally includes the following usability standards that go beyond permission alone: 
+Open data can be modified, and distributed for any reason. Although extensively used and accessible, FAIR data additionally includes the following usability standards that go beyond permission alone: 
 
 - In order to be found and cited, FAIR data must be identified and deposited into online public records. 
 
