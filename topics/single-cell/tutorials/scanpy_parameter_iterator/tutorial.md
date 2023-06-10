@@ -113,7 +113,7 @@ Here are several ways of getting our toy dataset – choose whichever you like!
 
 This tutorial is an extension of the full analysis shown in [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial in the Single-cell RNA-seq: Case Study series. So if you've been working through it, you can use your dataset from that tutorial here. If you haven’t completed it but you’re interested in how we get to this point, feel free to have a look at the mentioned tutorial.
 
-Our starting data will be the output of **Scanpy RunPCA** {% icon tool %}. It is part of the full analysis tutorial, but we will only focus on a smaller and shortened bit of the [full workflow](https://usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-filter-plot-and-explore-single-cell-rna-seq-data-updated-tools) to show the application of the Parameter Iterator. Our workflow consists of the following steps:
+Our starting data will be the output of **Scanpy RunPCA** {% icon tool %}. It is part of the full analysis tutorial, but we will only focus on a smaller and shortened bit of the [full workflow](https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3) to show the application of the Parameter Iterator. Our workflow consists of the following steps:
 
 ![Workflow that we are going to use in this tutorial: Scanpy RunPCA, Scanpy ComputeGraph, Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed](../../images/scrna-casestudy_parameter-iterator/workflow.png "Shortened workflow that we are going to use in this tutorial.")
 
@@ -424,7 +424,7 @@ That’s the last tool in our workflow which uses Parameter Iterator! Let’s ha
 
 
 # Conclusion
-You might want to consult your results with this [control history](https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-1), or check out the [workflow](https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow) for this tutorial. You can also continue to analyse this data by returning to the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. 
+You might want to consult your results with this [control history](https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated), or check out the [workflow](https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow) for this tutorial. You can also continue to analyse this data by returning to the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. 
 
 
 {% icon congratulations %} In this tutorial you have learnt how to use Parameter Iterator with the number of nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Eventually, you were able to choose the most optimal values for the analysis. Hopefully this tool will make you more confident with the choices you make in terms of the parameters that are crucial for the correct interpretation of biological data. 
