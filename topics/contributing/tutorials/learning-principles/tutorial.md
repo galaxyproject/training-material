@@ -96,6 +96,13 @@ Why is it important to learn about how people learn?
 * Understanding  how people learn makes you a more aware and therefore better teacher
 * You  can use such knowledge to improve your day-to-day teaching
 
+Ausubel, quoted by Dinarte (2010), indicates that meaningful learning
+generally arises from a process of learning to learn. If meaningful learning
+is achieved, it transcends the rote repetition of unconnected content and
+allows for the construction of meaning, making sense of what has been
+learned, and understanding its scope of application and relevance in
+academic and everyday situations.
+
 
 ## Learning metaphors, theories and models
 
@@ -141,25 +148,21 @@ Learning is participation in social practices | Community that shares activities
 
 Learning theories describes how students receive, process, and retain knowledge during learning. However, there is no single one theory (as in physics for example). There is a massive catalogue of learning theories out there and there is no universal theory of learning.
 
-There is no universal theory of learning but evidence-based research results supporting some learning principles, which are today accepted and applied
-
 ![The figure shows a dendrogram of the main learning theories that are currently available. The information is organized across four main levels; the Scientific Discipline (such as Organization, Education, Philosophy, etc), the Learning Theorists (such as Montessori and Bloom), the Learning Paradigms (such as Behaviourism, Constructivism), and the key concepts.](images/LearningTheories.png "This is a diagram representing the landscape of many known learning theories available.")
 
-Researchers in the fields of cognitive science and educational psychology have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the [HoTEL](http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap) (Holistic approach to Technology-Enhanced Learning) website. But which should we rely on? Which should we learn, teach and apply?
+Philosphers and researchers from multiple disciplnes have proposed a large number of learning theories: a flavour of the diversity of approaches and philosophies can be gained, for example, from the [HoTEL](http://cmapspublic3.ihmc.us/rid=1LNV3H2J9-HWSVMQ-13LH/Learning%20Theory.cmap) (Holistic approach to Technology-Enhanced Learning) website. But which should we rely on? Which should we learn, teach and apply?
 
-There is no universal theory of learning, but there are interesting elements for classroom teaching in many different theories There are elements of truth in different theories, and **evidence-based** research results that support learning principles recognized and applied today.
-
-In this sense there are interesting elements for a teacher in many different theories.
+There is no universal theory of learning, but there are interesting elements for classroom teaching in many different theories There are elements of truth in different theories, and **evidence-based** research results that support learning principles recognized and applied today. In this sense there are interesting elements for a teacher in many different theories.
 
 Existing theories can be grouped according to whether they focus on changes in behavior or in thinking
 
-The distinction is rough and inexact, but a good place to begin. Let’s consider two perspectives about learning, called **behaviorism**, **connectivism** and **constructivism**. This latter can be further divided into **psychological constructivism** and **social constructivism**.
+In the following sections we will explore the most important learning theories. But first, we will start by introducing them.
 
-> <details-title>More details on the key ideas from each of these perspectives</details-title>
+> <comment-title>Principal learning theories</comment-title>
 >
 > We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners' learning.
 >
-> #### Behaviourism
+> #### Behaviourist learning theory
 >
 > In Behaviourism, Learning is viewed as changes in overt behavior. In this cntext, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment / (learning as changes in overt behavior → perspective on learning that focusesfouses on changes in individuals' observable behaviours)
 >
@@ -174,27 +177,82 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 >     * Learning is internal and is the result of a student processing and organising new information (short and long term memory)
 >     * Educators who embrace cognitive theory believe that the definition of learning as a change in behaviour is too narrow, and study the learner (complexities of the memory) rather than their environment.
 >
+>  #### Cognitivist learning theory
+>
+>Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
+> 
+> Cognitive learning theory aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32]. Two important theories derive from this one: information processing theory and cognitive load theory.
+>
+> The information processing theory describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
+>
+> On the other hand, cognitive load theory seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
+>
+>
 > #### Constructivism
 >
-> Under Constructivism, Learning is viewed as changes in thinking, that is how learners actively create (or "construct") knowledge out of experience.
+> Constructivism holds that learning is essentially ac- tive; a person
+who learns something new incorporates it into their previous experiences
+and their own mental structures (Payer, 2005). Each new piece of
+information is assimilated and deposited into a network of previously
+existing knowledge and experiences (Payer, 2005).
+All these ideas have been taken from different nuances, and two
+authors stand out: Jean Piaget with psychological constructivism and Lev
+Vigotsky with social constructivism. Piaget, however, does not emphasise the
+concept of learning; his theory is one of cognitive development; he prefers
+to speak of increasing knowledge (Moreira, 1997).
+
+All these ideas have been taken from different nuances, and two
+authors stand out: Jean Piaget with psychological constructivism and Lev
+Vigotsky with social constructivism. Piaget, however, does not emphasise the
+concept of learning; his theory is one of cognitive development; he prefers
+to speak of increasing knowledge (Moreira, 1997).
+
+According to Payer (2005), psychological constructivism maintains the
+idea that the individual, both through cognitive and social aspects of
+knowledge as well as affective ones, is not a mere product of the
+environment or a simple result of his or her internal dispositions, but a
+construction of his or her own that is produced day by day as a result of the
+interaction between these two factors.
+
+The driving force of this activity would be cognitive
+conflict; in any constructivist activity there must be a circumstance that
+shakes the previous structures of knowledge and forces a rearrangement of
+the old knowledge in order to assimilate the new (Payer, 2005).
+
+According to the historical-cultural approach of Lev Vigotsky,
+learning is that process in which the individual assimilates certain
+historical-cultural experience at the same time as he/she appropriates it,
+which requires an active subject who gives meaning to this experience,
+transforming it into his/her subjectivity (Ruiz and García, 2005).
+The aim of Vigotsky's theory is to discover and stimulate the zone of
+potential development or zone of proximal development in each student, which
+is defined as the distance between the actual level of development, determined by
+the ability to independently solve a problem, and the level of development potential, determined through solving a problem under the guidance of an adult or
+in collaboration with a more able peer (Moreira, 1997).
+For Vigotsky, cognitive development cannot be understood
+without reference to the social, historical and cultural context in which it
+occurs (Moreira, 1997).
+. According to this author, higher mental processes (thought, language,
+voluntary behaviour) have their origin in social processes; cognitive
+development would be the conversion of social relations into men- tal
+functions (Moreira, 1997).
+
 >
-> Behaviorist models of learning may be helpful in understanding and influencing what students do, but teachers usually also want to know what students are thinking, and how to enrich what students are thinking. For this goal of teaching, some of the best help comes from constructivism, which is a perspective on learning focused on how students actively create (or "construct") knowledge out of experiences. Constructivist models of learning differ about how much a learner constructs knowledge independently, compared to how much he or she takes cues from people who may be more of an expert and who help the learner’s efforts (Fosnot, 2005; Rockmore, 2005).
+>  #### Critical learning theory
 >
-> * Knowledge is constructed by adapting new information based on previous individual experience
-> * Learners build on personal experience, active & social in the learning process
-> * Constructivists believe that a learner's ability to learn relies largely on what they already know and understand, and the acquisition of knowledge should be an individually tailored process of construction.
+> The main task of critical learning theory, also known as transformative learning theory, is to unravel the skein concerning how schools reproduce the logic of capital through the ideological and material forms of privilege and domination that structure students' lives (Giroux, 2001).
 >
-> **Psychological constructivism**: changes in thinking resulting from individual experiences. A person learns by mentally organising and reorganising new information or experiences.
+> Transformative learning theory [42] aims to define the mechanisms involved in the development of critical thinking during the learning process. In contrast to this superficial and clearly insufficient conception, Gouldner, quoted by Giroux (2001), points out that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what h a d previously been simply a tool. To quote Marcuse (1968), critical thinking aims to define the irrational
+character of established rationality.
 >
-> **Social constructivism**: changes in thinking due to assistance from / interaction with others
+>Transformative learning occurs when the learning process induces a shift in the student's frame of reference [42] [44], e.g. the role assigned to science by the students, their self-concept and role in society, etc. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions, such as those derived from cultural assimilation, through the exchange of points of view within a learning community [42] [45] [46]. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose [43].
 >
-> For convenience these are called psychological constructivism and social constructivism (or sometimes sociocultural theory). As explained in the next section, both focus on individuals’ thinking rather than their behavior, but they have distinctly different implications for teaching.
+> Critical learning theory emphasises two elements: the
+importance of the subjective role of each learner in finding meaning for
+him/herself, and how social and economic conditions constrain and distort
+the social construction of meaning (Giroux, 2001).
 >
-> #### The socio-constructivist perspective
->
-> Learning is an active process that essentially takes place within an interaction with others and with objects belonging to the culture in which we live (Bruner, Vygotskij, Dewey ......)
->
-{: .details}
+{: .comment}
 
 
 > <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*</hands-on-title>
@@ -207,60 +265,57 @@ The distinction is rough and inexact, but a good place to begin. Let’s conside
 > - Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism) in your way of learning
 {: .hands_on}
 
-For classroom teaching
 
-- Behaviourism / operant conditioning:
-    - Encourage intrinsic and extrinsic motivation: 1st thing we will do as teacher
-        - Intrinsic: the reinforcement for a behaviour is the the behaviour itself. Positive input come from the action
+# Principal learning theories: practical examples
 
-            Example: reading reinforced by the enjoyment of reading
+In this section we will introduce some examples of practical applications from the different learning theories:
 
-        - Extrinsic: the reinforcement comes from an external reward (from teachers, family, friends, etc)
+- Behaviorist learning theory: Dreyfuss model for skill acquisition.
+- Cognitivist learning theory: Human Memory and Learning from cognitive sciences
+- Constructivist learning theory: Bloom's Taxonomy
+- Critical learning theory: the hidden curriculum
 
-            Example: praise
-    - Formative assessment or feedback: Type of assessment and feedback done all the time to give inputs (showing / comment answers)
+##  Behaviorist Learning theory: Dreyfuss model for skill acquisition
 
-- Constructivism: 4 learning frameworks and models that we will details
-    1. Bloom's taxonomy
-    2. Working memory and long term memory
-    3. Dreyfuss model for skills acquisition
-    4. Mental models
+The Dreyfus model of skill acquisition presents a framework illustrating the process by which learners acquire skills through a combination of formal instruction and dedicated practice. It was presented by Hubert and Stuart Dreyfus in 1980 in a report on their research at the University of California, Berkeley, Operations Research Center for the United States Air Force Office of Scientific Research. Hubert Lederer Dreyfus (1929-2017) was a prominent American philosopher and a professor of philosophy at the University of California, Berkeley. His areas of expertise encompassed phenomenology, existentialism, and the philosophy of psychology, literature, and artificial intelligence, exploring their profound philosophical implications. Stuart E. Dreyfus holds the position of professor emeritus in the Industrial Engineering and Operations Research Department at the University of California, Berkeley.
 
-# Constructivism
+The Dreyfus model for skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
 
-## The Bloom's 6 categories of cognitive skills
+![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](./images/DreyfussModel.png "Dreyfuss model")
 
-And one of the most used "models" or concepts is the one based on the Bloom’s six categories of cognitive skills. This tool is important to develop training, but not only.
+The stages follow a progression from rigid adherence (novice) to rules to an intuitive mode of reasoning based on tacit knowledge "silent knowledge" (expert).
 
-**Bloom's taxonomy** is a set of six categories of cognitive skills, that are accompanied by actionable verb.
+The fundamental idea is that when teaching a concept, you have to tailor the style of teaching to where the learner is in their understanding and that progression follows a common pattern. Early stages of learning focus on concrete steps to imitate, the focus then shifts to understanding principles and finally into self-directed innovation.
 
-![The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating.](./images/bloomsTaxonomyPyramid.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
+The skill level is tied to a mental function transitioning from recollection (non-situational or situational), recognition (decomposed or holistic), decision (analytical or intuitive), and awareness (monitoring or absorbed)
 
-From bottom to top:
-* **Remembering (original Knowledge):** involves recognizing or remembering facts, terms, basic concepts, or answers without necessarily understanding what they mean.
-* **Understand (original comprehension):** involves demonstrating an understanding of facts and ideas by organizing, summarizing, translating, generalizing, giving descriptions, and stating the main ideas.
-* **Apply/Application:** involves using acquired knowledge—solving problems in new situations by applying acquired knowledge, facts, techniques and rules. Learners should be able to use prior knowledge to solve problems, identify connections and relationships and how they apply in new situations.
-* **Analyze:** involves examining and breaking information into component parts, determining how the parts relate to one another, identifying motives or causes, making inferences, and finding evidence to support generalizations.
-* **Evaluate:** involves presenting and defending opinions by making judgments about information, the validity of ideas, or quality of work based on a set of criteria
-* **Create (original synthesize):**involves building a structure or pattern from diverse elements; it also refers to the act of putting parts together to form a whole.
+### Example of Dreyfus model: the Carpentries
 
-It is important to highlight that critical thinking is mostly a combination of Analyzing, Evaluating and Creating, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
+The Carpentries (a global organization building global capacity in essential data and computational skills for research) uses the Dreyfus model as its global [approach](https://carpentries.github.io/instructor-training/02-practice-learning/index.html#the-acquisition-of-skill) for skill acquisition:
 
-What are the uses of this tool?
-- For learners
-    - Help to structure their knowledge
-- For instructors
-    - Knowing at which level of cognitive complexity you want to teach
-    - Write Learning Outcomes
+![A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert.](./images/DreyfussModelCarpentries.jpg "Carpentries build on the Dreyfus model. Source: The Carpentries Instructor training")
 
-        ![6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make & defend judgements, assess theories & outcomes) with critique, compare ideas, solve, recommend, rate](./images/bloomsTaxonomy.png "ACTION verbs express levels of cognitive complexity")
+- **Novice**: someone who does not know what they do not know, i.e., they do not yet know what the key ideas in the domain are or how they relate. Novices may have difficulty formulating questions, or may ask questions that seem irrelevant or off-topic as they rely on prior knowledge, without knowing what is or is not related yet.
+
+    Example: A novice learner in a Carpentries workshop might never have heard of the bash shell, and therefore may have no understanding of how it relates to their file system or other programs on their computer.
+
+- **Competent practitioner**: someone who has enough understanding for everyday purposes. They will not know all the details of how something works and their understanding may not be entirely accurate, but it is sufficient for completing normal tasks with normal effort under normal circumstances.
+
+    Example: A competent practitioner in a Carpentries workshop might have used the shell before and understand how to move around directories and use individual programs, but they might not understand how they can fit these programs together to build scripts and automate large tasks.
+
+- **Expert**: someone who can easily handle situations that are out of the ordinary.
+
+    Example: An expert in a Carpentries workshop may have experience writing and running shell scripts and, when presented with a problem, immediately sees how these skills can be used to solve the problem.
+
+> <details-title>The Carpentries</details-title>
+>
+> [The Carpentries](https://carpentries.org/) was started by Greg Wilson and Brent Gorda and they coined the term "The Carpentries" for enabling researchers to do "computational thinking" and use tools of computation effectively.
+>
+> The Style of the Carpentries are that teachers are where the learners are e.g. by doing live-coding together.
+{: .details}
 
 
-    - Design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
-    - Assess learning (taking place during curricula or course and after)
-    - Align instruction with learners' level of complexity of thinking as well as experience.
-
-## Memory and learning
+#  Cognitivist Learning Theory: Memory and learning
 
 In a simple model from cognitive science (quite involved in constructivism), learning happens when information moves from **working memory** to **long-term memory**. This process can be impacted by **environment**
 
@@ -317,7 +372,6 @@ To facilitate learning, we as instructors have to make room in working memory.
 
 <!--{% include _includes/quiz.html id="short_term_memory.yaml" %}-->
 
-
 > <hands-on-title>How can you avoid to overload learners working memory?  - *{% icon details %} 5 min - Groups of 2/3 persons*</hands-on-title>
 >
 > - Discuss one thing a teacher could do to avoid overloading their students' working memory
@@ -353,138 +407,10 @@ Split-attention occurs when learners are required to **split their attention** b
 >     * How can you avoid it?
 {: .hands_on}
 
-## Dreyfuss model for skill acquisition
 
-The Dreyfus model for skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
+### Six strategies for effective learning from cognitive sciences
 
-![A representation of the Dreyfuss model, as a gradient bar. Starting from the left, is the Novice which relies primarily on rules to organize their skills. The Novice, with experience, transitions to Advanced Beginner and then competent, increasing the use of their intuition along with the rules. The next two stages are Proficient and Expert (at the right end of the bar), which know relies almost exclusively on their intuition.](./images/DreyfussModel.png "Dreyfuss model")
-
-The stages follow a progression from rigid adherence (novice) to rules to an intuitive mode of reasoning based on tacit knowledge "silent knowledge" (expert).
-
-The fundamental idea is that when teaching a concept, you have to tailor the style of teaching to where the learner is in their understanding and that progression follows a common pattern. Early stages of learning focus on concrete steps to imitate, the focus then shifts to understanding principles and finally into self-directed innovation.
-
-The skill level is tied to a mental function transitioning from recollection (non-situational or situational), recognition (decomposed or holistic), decision (analytical or intuitive), and awareness (monitoring or absorbed)
-
-### Example of Dreyfus model: the Carpentries
-
-The Carpentries (a global organization building global capacity in essential data and computational skills for research) uses the Dreyfus model as its global [approach](https://carpentries.github.io/instructor-training/02-practice-learning/index.html#the-acquisition-of-skill) for skill acquisition:
-
-![A simplified version of the Dreyfus model, as built by the Carpentries. There are three levels; the Novice, the Competent Practicioner and the Expert.](./images/DreyfussModelCarpentries.jpg "Carpentries build on the Dreyfus model. Source: The Carpentries Instructor training")
-
-- **Novice**: someone who does not know what they do not know, i.e., they do not yet know what the key ideas in the domain are or how they relate. Novices may have difficulty formulating questions, or may ask questions that seem irrelevant or off-topic as they rely on prior knowledge, without knowing what is or is not related yet.
-
-    Example: A novice learner in a Carpentries workshop might never have heard of the bash shell, and therefore may have no understanding of how it relates to their file system or other programs on their computer.
-
-- **Competent practitioner**: someone who has enough understanding for everyday purposes. They will not know all the details of how something works and their understanding may not be entirely accurate, but it is sufficient for completing normal tasks with normal effort under normal circumstances.
-
-    Example: A competent practitioner in a Carpentries workshop might have used the shell before and understand how to move around directories and use individual programs, but they might not understand how they can fit these programs together to build scripts and automate large tasks.
-
-- **Expert**: someone who can easily handle situations that are out of the ordinary.
-
-    Example: An expert in a Carpentries workshop may have experience writing and running shell scripts and, when presented with a problem, immediately sees how these skills can be used to solve the problem.
-
-> <details-title>The Carpentries</details-title>
->
-> [The Carpentries](https://carpentries.org/) was started by Greg Wilson and Brent Gorda and they coined the term "The Carpentries" for enabling researchers to do "computational thinking" and use tools of computation effectively.
->
-> The Style of the Carpentries are that teachers are where the learners are e.g. by doing live-coding together.
-{: .details}
-
-## Mental models
-
-**Mental model** is a collection of concepts and facts, along with the relationships between those concepts, that a person has about a topic or field. It is how people organize their knowledge
-
-You can think of mental models as a graph with nodes (facts, concepts) and edges (connections), as seen in the figure of the mental model of animals below:
-
-![A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box "animal" is connected to the entities "eats", "breathes" and "can move", as well as sub-entities, such as "bird" and "fish". Each one of these, in turn, is connected to even more specific sub-entities (such as "penguin" for "bird" and "salmon" for "fish").](./images/animalMentalModel.png "mental model of animals")
-
-The mental model of an expert in any given subject will be far larger and more complex than that of a novice, including both more concepts and more detailed and numerous relationships. Linking with Dreyfus model:
-
-- A novice has a minimal mental model of surface features of the domain. Inaccuracies based on limited prior knowledge may interfere with adding new information. Predictions are likely to borrow heavily from mental models of other domains which seem superficially similar.
-- A competent practitioner has a mental model that is useful for everyday purposes. Most new information they are likely to encounter will fit well with their existing model. Even though many potential elements of their mental model may still be missing or wrong, predictions about their area of work are usually accurate.
-- An expert has a densely populated and connected mental model that is especially good for problem solving. They quickly connect concepts that others may not see as being related. They may have difficulty explaining how they are thinking in ways that do not rely on other features unique to their own mental model.
-
-### Misconceptions
-
-* **Simple factual errors**: These are the easiest to correct.
-* **Broken models**: We can address these by having learners reason through examples to see contradictions.
-* **Fundamental beliefs**: These beliefs are deeply connected to the learner’s social identity and are the hardest to change.
-
-## An overview so far
-
-Model  | How it can support learning
---- | ---
-Bloom's Taxonomy | Learning outcomes, instructional design, assessment
-Working memory | Make room in the working memory (chunking and extraneous cognitive load)
-Mental model | Help learners to build and enrich them
-Dreyfuss model for skill acquisition | Differences between novices and experts. Expert blind spot
-
-# Evidence-based research on how learning works learning
-
-> <details-title>Resources to learn more about evidence-based research on how learning works</details-title>
->
-> There is a great deal of literature on how learning works.
->
-> The reason why we mention these three books is that they show how to integrate effective, research based strategies for learning into classroom practice.
->
-> Educational practice usually does not rely on research findings. People tend to rely on their intuitions about what’s best for learning. But relying on intuition may be a bad idea for teachers and learners alike.
->
-> - ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) ({% cite ambrose2010learning %})
->
->    This book presents a set of evidence-based principles for how to help people learn that is grounded in cognitive theory (that is, the science of instruction). It tries to help teachers understand how research in the science of learning can improve their reaching.
->
->    The book is organised around seven learning principles. Each principle is based on research evidence from the science of learning and the science of instruction.
->
-> - ["Small Teaching"](https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555) ({% cite smallTeaching2021 %})
->
->    Cognitive psychologists, neuroscientists, and biologists all have produced a revealing body of research over the past several decades on how human beings learn, but often translating these findings into the classroom is overwhelming for busy instructors.
->
->    "Small Teaching" bridges the gap between research and practice  by providing a fully developed strategy for making deliberate, structured, and incremental steps towards tuning into how students are hardwired to learn.
->
->    The book introduces small activities that require minimal preparation and grading. The models presented are specifically designed to be used as both one-time experiences to innovate a course session or unit plan as well as a menu of options that can be combined into an entirely new teaching approach.
->
-> - "Understanding how we learn" {% cite weinstein2018understanding %}
->
->    By the "learning scientists" Weinstein and Sumeracki (and illustrated by Oliver Caviglioli), the books examines the cognitive psychology's application to education
->
->   It is designed to convey the concepts of research to the reality of an instructor's classroom. The book proposes 6 strategies for effective learning (based on evidence from cognitive research). It is structured in four parts:
->   - Evidence-based education and the science of learning
->   - Basics of human cognitive processes
->   - Strategies for effective learning
->   - Tips for students, teachers, and parents
->
-> - [The Carpentries Instructor Training materials](https://carpentries.github.io/instructor-training/)
->
->   The Carpentries is a community of volunteers teaching computational and data management skills worldwide. The community also developed training materials to teach pedagogical skills. Much of the GTN TtT was inspired by the pedagogical materials from the Carpentries and the ELIXIR TtT.
->
-{: .details}
-
-
-<!-- 
-> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
->
-> _Break-out_ room (2 ppl per room)
->
-> We follow the first challenge with another one. Now IN PAIRS in breakout rooms (Zoom). Here the reflection is on LEARNING and what learning is in your experience. Write your thoughts, one or more sentences, in the shared Google Doc.
-> 	* Discuss your reflections on learning and what learning is in your experience
->	* Write here any insights/thoughts/comments to share from your breakout room
-{: .hands_on} -->
-
-Some theories /  models are good tools to explain concepts, but they should be taken with a grain of salt.
-
-Some models have never been broken - whereas some have been broken (e.g. learning styles) and some can be very helpful tools for instructors and learners.
-
-One example is the Bloom’s Taxonomy that can be a great model to refer to when we write learning outcomes.
-
-We will make a couple of examples from cognitivism.
-
-The idea is that we should be very flexible as for learning theories, and rather **focus on evidence-based research results**. Research results described in the books mentioned above support a number of **learning principles and strategies** that can be easily translated into classroom effective practice.
-
-Our learning model is based on such evidence-based learning principles and strategies
-
-## Six strategies for effective learning
-
-**Six strategies for effective learning** (from "Understanding how we learn" {% cite weinstein2018understanding %}) are based on evidence from cognitive research
+**Six strategies for effective learning** (from "Understanding how we learn" {% cite weinstein2018understanding %}) are based on evidence from cognitive research.
 
 ![Six circles representing the six Strategies for Effective Learning.](./images/StrategiesEffectiveLearning.png "Six Strategies for Effective Learning {% cite weinstein2018understanding %} Six Strategies for Effective Learning by [Yana Weinstein, Megan Smith, & Oliver Caviglioli](http://www.learningscientists.org/downloadable-materials/) / [Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nc-nd/4.0/), based on a work at[http://www.learningscientists.org](http://www.learningscientists.org/), [teachinghow2s.com/cogsci](http://teachinghow2s.com/cogsci).")
 
@@ -523,7 +449,7 @@ Our learning model is based on such evidence-based learning principles and strat
 
 We highly recommend to look at the materials in a book and a website and blog as they are intended to teach about principles of learning and to provide teachers and students with flexible guiding principles to guide learning and studying. In ["Training techniques to enhance learner participation and engagement" tutorial]({% link topics/teaching/tutorials/learner_participation_engagement/tutorial.md %}), a number of teaching practices are described. You should try to reconnect them to these learning strategies, i.e. try to understand how the proposed teaching practices facilitate learning based on these six strategies.
 
-## Seven evidence-based learning principles
+### Seven learning principles from cognitive sciences
 
 From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer) {% cite ambrose2010learning %}
 
@@ -575,6 +501,165 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
 > * Ask one question about this principle
 > * Write here any insights/thoughts/comments to share from your breakout room
 {: .hands_on}-->
+
+> <details-title>Resources to learn more about cognitive learning theory</details-title>
+>
+> There is a great deal of literature on how learning works.
+>
+> The reason why we mention these three books is that they show how to integrate effective, research based strategies for learning into classroom practice.
+>
+> Educational practice usually does not rely on research findings. People tend to rely on their intuitions about what’s best for learning. But relying on intuition may be a bad idea for teachers and learners alike.
+>
+> - ["How Learning Works"](https://www.amazon.it/How-Learning-Works-Research-Based-Principles/dp/0470484101) ({% cite ambrose2010learning %})
+>
+>    This book presents a set of evidence-based principles for how to help people learn that is grounded in cognitive theory (that is, the science of instruction). It tries to help teachers understand how research in the science of learning can improve their reaching.
+>
+>    The book is organised around seven learning principles. Each principle is based on research evidence from the science of learning and the science of instruction.
+>
+> - ["Small Teaching"](https://www.wiley.com/en-gb/Small+Teaching%3A+Everyday+Lessons+from+the+Science+of+Learning%2C+2nd+Edition-p-9781119755555) ({% cite smallTeaching2021 %})
+>
+>    Cognitive psychologists, neuroscientists, and biologists all have produced a revealing body of research over the past several decades on how human beings learn, but often translating these findings into the classroom is overwhelming for busy instructors.
+>
+>    "Small Teaching" bridges the gap between research and practice  by providing a fully developed strategy for making deliberate, structured, and incremental steps towards tuning into how students are hardwired to learn.
+>
+>    The book introduces small activities that require minimal preparation and grading. The models presented are specifically designed to be used as both one-time experiences to innovate a course session or unit plan as well as a menu of options that can be combined into an entirely new teaching approach.
+>
+> - "Understanding how we learn" {% cite weinstein2018understanding %}
+>
+>    By the "learning scientists" Weinstein and Sumeracki (and illustrated by Oliver Caviglioli), the books examines the cognitive psychology's application to education
+>
+>   It is designed to convey the concepts of research to the reality of an instructor's classroom. The book proposes 6 strategies for effective learning (based on evidence from cognitive research). It is structured in four parts:
+>   - Evidence-based education and the science of learning
+>   - Basics of human cognitive processes
+>   - Strategies for effective learning
+>   - Tips for students, teachers, and parents
+>
+> - [The Carpentries Instructor Training materials](https://carpentries.github.io/instructor-training/)
+>
+>   The Carpentries is a community of volunteers teaching computational and data management skills worldwide. The community also developed training materials to teach pedagogical skills. Much of the GTN TtT was inspired by the pedagogical materials from the Carpentries and the ELIXIR TtT.
+>
+{: .details}
+
+
+<!-- 
+> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
+>
+> _Break-out_ room (2 ppl per room)
+>
+> We follow the first challenge with another one. Now IN PAIRS in breakout rooms (Zoom). Here the reflection is on LEARNING and what learning is in your experience. Write your thoughts, one or more sentences, in the shared Google Doc.
+> 	* Discuss your reflections on learning and what learning is in your experience
+>	* Write here any insights/thoughts/comments to share from your breakout room
+{: .hands_on} -->
+
+
+## Constructivist Learning Theory: The Bloom's 6 categories of cognitive skills
+
+And one of the most used "models" or concepts is the one based on the Bloom’s six categories of cognitive skills. This tool is important to develop training, but not only.
+
+**Bloom's taxonomy** is a set of six categories of cognitive skills, that are accompanied by actionable verb.
+
+![The pyramid of Blooms Taxonomy of verbs. Starting from the bottom layer, the corresponding aspects are: remembering, understanding, applying, analyzing, evaluating and creating.](./images/bloomsTaxonomyPyramid.png "Source: https://tips.uark.edu/blooms-taxonomy-verb-chart/")
+
+From bottom to top:
+* **Remembering (original Knowledge):** involves recognizing or remembering facts, terms, basic concepts, or answers without necessarily understanding what they mean.
+* **Understand (original comprehension):** involves demonstrating an understanding of facts and ideas by organizing, summarizing, translating, generalizing, giving descriptions, and stating the main ideas.
+* **Apply/Application:** involves using acquired knowledge—solving problems in new situations by applying acquired knowledge, facts, techniques and rules. Learners should be able to use prior knowledge to solve problems, identify connections and relationships and how they apply in new situations.
+* **Analyze:** involves examining and breaking information into component parts, determining how the parts relate to one another, identifying motives or causes, making inferences, and finding evidence to support generalizations.
+* **Evaluate:** involves presenting and defending opinions by making judgments about information, the validity of ideas, or quality of work based on a set of criteria
+* **Create (original synthesize):**involves building a structure or pattern from diverse elements; it also refers to the act of putting parts together to form a whole.
+
+It is important to highlight that, under this framework, critical thinking is considered a combination of Analyzing, Evaluating and Creating, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
+
+What are the uses of this tool?
+- For learners
+    - Help to structure their knowledge
+- For instructors
+    - Knowing at which level of cognitive complexity you want to teach
+    - Write Learning Outcomes
+
+        ![6 levels of Bloom's taxonomy (and their verbs) from bottom (lower-order thinking skills) to top (higher-order 'critical' thinking skills): Remember (recall or reiterate information) with memorize, recognise, identify, describe, reproduce, list, define, label, name, state, outline, order, arrange; Understand (demonstrate understanding of facts) with distinguish, classify, select, review, discuss, indicate, explain, estimate, locate, summarise; Apply (apply knowledge to real situations) with operate, manipulate, experiment, choose, modify, prepare, produce; Analyze (resolve ideas into simple parts, identify patterns) with calculate, examine, model, test, break down, infer, predict, solve; Synthesise (pull ideas into a coherent whole, create new ideas) with combine, formulate, illustrate, imagine, design, invent, compose; Evaluate (make & defend judgements, assess theories & outcomes) with critique, compare ideas, solve, recommend, rate](./images/bloomsTaxonomy.png "ACTION verbs express levels of cognitive complexity")
+
+
+    - Design instruction and learning experiences i.e. how you are to teach/train, which infrastructure and how to present the materials etc
+    - Assess learning (taking place during curricula or course and after)
+    - Align instruction with learners' level of complexity of thinking as well as experience.
+
+
+# Critical Learning theory: The hidden curriculum
+
+The hidden curriculum is learning that is incorporated by students even though these aspects do not appear explicitly in the official curriculum. Unlike the official curriculum, with its explicitly stated
+cognitive and affective objectives, the hidden curriculum, in this case, relies on those organisational aspects of classroom life that are generally not perceived by either students or teachers (Giroux, 2001). What students learn
+from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the three communicative systems of the school: the curricular system, the system of pedagogical styles of classroom control, and the evaluative system (Giroux, 2001).
+
+Through the hidden curriculum, students internalise values that
+emphasise respect for authority, punctuality, cleanliness, do- cility and
+conformity (Giroux, 2001). As García (2005) points out, although
+under democracy teachers feel impelled to disappear strategically from the
+scene, they place between themselves and the students a didactic and
+methodological structure which will act on the students' consciousness,
+insidiously moulding their personalities.
+
+Bowles and Gintis, cited by Giroux (2001), point out that students
+who are best suited to the social ordering of school also had significantly below
+average scores on measures of mental creativity and flexibility. The underlying
+message assimilated under the practices of the hidden curriculum points less to
+schools that help students think critically about the world they live in, than to
+schools that act as agents of social control (Giroux, 2001).
+The structure, organisation and content of contemporary teaching
+endows students with the personality needs required in the bureaucratically
+structured and hierarchically organised workforce (Giroux, 2001). The
+social processes of most classrooms militate against students developing a
+sense of community, given collectivity and social solidarity (Giroux, 2001).
+The school architecture linked to the cellular development of education
+constitutes a rectangular space that reflects the authoritarian conception of
+life within it (Planas et al., 2010). Elements such as exposure to a core of
+common subjects lead to a dissolution of individuality in the mass, in the
+collective, to a standardisation and homogenisation of psycho- logies
+(García Olivo et al., 2005).
+
+Through the use of the hidden curriculum, differences are
+repressed on a daily basis and the dissemination of the values and principles
+of our culture is stimulated, and this repression is accentuated by the moral figure
+of the educator (García Olivo et al., 2005).
+
+One of the obvious manifestations of the hidden curriculum that
+showed itself in all its intensity during the internship period was the
+hegemonic discourse mode, i.e. the expository discursive mode. In this discursive mode, the sender acts repeatedly on the receiver but gives
+him/her a passive role (Castejón, España and Ganzarain, 2004).
+
+If there were really an interest in fostering critical thinking, the
+discursive mode that should dominate in the classroom should be the in-
+terrogative one. As Sztajnzrajber (2013) states, questioning is an exercise in
+dismantling those certainties that are installed as layers of truths imposing
+the tyranny of the obvious. Questioning is a way of thinking, and that is
+why thinking is not only deriving conclusions, but often consists of the
+opposite: starting from the accepted conclusions of a community and
+turning them upside down (Sztajnzrajber, 2013).
+
+As Giroux (2001) notes, no matter how progressive an approach to
+critical thinking may be, it will squander its own potential if it operates on
+the basis of a web of social relations in the classroom that are
+authoritarianly hierarchical and promote passivity, docility and silence.
+
+# Mental models
+
+**Mental model** is a collection of concepts and facts, along with the relationships between those concepts, that a person has about a topic or field. It is how people organize their knowledge
+
+You can think of mental models as a graph with nodes (facts, concepts) and edges (connections), as seen in the figure of the mental model of animals below:
+
+![A dendrogram showing the various descriptors of an animal, and the relationships between them. For example, the box "animal" is connected to the entities "eats", "breathes" and "can move", as well as sub-entities, such as "bird" and "fish". Each one of these, in turn, is connected to even more specific sub-entities (such as "penguin" for "bird" and "salmon" for "fish").](./images/animalMentalModel.png "mental model of animals")
+
+The mental model of an expert in any given subject will be far larger and more complex than that of a novice, including both more concepts and more detailed and numerous relationships. Linking with Dreyfus model:
+
+- A novice has a minimal mental model of surface features of the domain. Inaccuracies based on limited prior knowledge may interfere with adding new information. Predictions are likely to borrow heavily from mental models of other domains which seem superficially similar.
+- A competent practitioner has a mental model that is useful for everyday purposes. Most new information they are likely to encounter will fit well with their existing model. Even though many potential elements of their mental model may still be missing or wrong, predictions about their area of work are usually accurate.
+- An expert has a densely populated and connected mental model that is especially good for problem solving. They quickly connect concepts that others may not see as being related. They may have difficulty explaining how they are thinking in ways that do not rely on other features unique to their own mental model.
+
+### Misconceptions
+
+* **Simple factual errors**: These are the easiest to correct.
+* **Broken models**: We can address these by having learners reason through examples to see contradictions.
+* **Fundamental beliefs**: These beliefs are deeply connected to the learner’s social identity and are the hardest to change.
 
 # Teaching or training?
 
