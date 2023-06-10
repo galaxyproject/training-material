@@ -96,12 +96,7 @@ Why is it important to learn about how people learn?
 * Understanding  how people learn makes you a more aware and therefore better teacher
 * You  can use such knowledge to improve your day-to-day teaching
 
-Ausubel, quoted by Dinarte (2010), indicates that meaningful learning
-generally arises from a process of learning to learn. If meaningful learning
-is achieved, it transcends the rote repetition of unconnected content and
-allows for the construction of meaning, making sense of what has been
-learned, and understanding its scope of application and relevance in
-academic and everyday situations.
+Ausubel, quoted by {% cite Dnarte2011 %}, indicates that meaningful learning generally arises from a process of learning to learn. According him, ff meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.
 
 
 ## Learning metaphors, theories and models
@@ -154,9 +149,7 @@ Philosphers and researchers from multiple disciplnes have proposed a large numbe
 
 There is no universal theory of learning, but there are interesting elements for classroom teaching in many different theories There are elements of truth in different theories, and **evidence-based** research results that support learning principles recognized and applied today. In this sense there are interesting elements for a teacher in many different theories.
 
-Existing theories can be grouped according to whether they focus on changes in behavior or in thinking
-
-In the following sections we will explore the most important learning theories. But first, we will start by introducing them.
+In the following sections we will explore the most important learning theories.
 
 > <comment-title>Principal learning theories</comment-title>
 >
@@ -164,93 +157,46 @@ In the following sections we will explore the most important learning theories. 
 >
 > #### Behaviourist learning theory
 >
-> In Behaviourism, Learning is viewed as changes in overt behavior. In this cntext, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment / (learning as changes in overt behavior → perspective on learning that focusesfouses on changes in individuals' observable behaviours)
+> Behaviorism is a psychological movement that posits behavior should be studied as a natural science akin to fields like chemistry or physics. It conceives learning as changes in overt behavior. In this context, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment.
 >
-> **Operant conditioning**: a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
+> An important concept from this theory is **operant conditioning**, a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
 >
-> It is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently.
->
-> * learning and behaviour changes are acquired by linking stimuli and responses
-> * Learner is passive; they learn via external processes, i.e., positive reinforcement.
-> * Behaviorists look at learning as an aspect of conditioning (looking at the environment of the learner).
-> * Cognitivism
->     * Learning is internal and is the result of a student processing and organising new information (short and long term memory)
->     * Educators who embrace cognitive theory believe that the definition of learning as a change in behaviour is too narrow, and study the learner (complexities of the memory) rather than their environment.
->
+> This theory is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently. According to the behaviorist perspective on learning, the instructor assumes a dominant role within the classroom, exerting complete control over the learning process. Evaluation of learning is carried out by the teacher, who determines what is considered correct or incorrect.
+>  
 >  #### Cognitivist learning theory
 >
->Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
-> 
-> Cognitive learning theory aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32]. Two important theories derive from this one: information processing theory and cognitive load theory.
 >
-> The information processing theory describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
+> Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
 >
-> On the other hand, cognitive load theory seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
+> Cognitivism emerged in the 1950s as a response to behaviorism, which was deemed inadequate in explaining cognition. **Cognitive learning theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
+>
+> Two important theories derive from this one: **information processing theory** and **cognitive load theory**:
+>
+> The **information processing theory** describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
+>
+> On the other hand, **cognitive load theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
 >
 >
-> #### Constructivism
+> #### Constructivist learning theory
 >
-> Constructivism holds that learning is essentially ac- tive; a person
-who learns something new incorporates it into their previous experiences
-and their own mental structures (Payer, 2005). Each new piece of
-information is assimilated and deposited into a network of previously
-existing knowledge and experiences (Payer, 2005).
-All these ideas have been taken from different nuances, and two
-authors stand out: Jean Piaget with psychological constructivism and Lev
-Vigotsky with social constructivism. Piaget, however, does not emphasise the
-concept of learning; his theory is one of cognitive development; he prefers
-to speak of increasing knowledge (Moreira, 1997).
-
-All these ideas have been taken from different nuances, and two
-authors stand out: Jean Piaget with psychological constructivism and Lev
-Vigotsky with social constructivism. Piaget, however, does not emphasise the
-concept of learning; his theory is one of cognitive development; he prefers
-to speak of increasing knowledge (Moreira, 1997).
-
-According to Payer (2005), psychological constructivism maintains the
-idea that the individual, both through cognitive and social aspects of
-knowledge as well as affective ones, is not a mere product of the
-environment or a simple result of his or her internal dispositions, but a
-construction of his or her own that is produced day by day as a result of the
-interaction between these two factors.
-
-The driving force of this activity would be cognitive
-conflict; in any constructivist activity there must be a circumstance that
-shakes the previous structures of knowledge and forces a rearrangement of
-the old knowledge in order to assimilate the new (Payer, 2005).
-
-According to the historical-cultural approach of Lev Vigotsky,
-learning is that process in which the individual assimilates certain
-historical-cultural experience at the same time as he/she appropriates it,
-which requires an active subject who gives meaning to this experience,
-transforming it into his/her subjectivity (Ruiz and García, 2005).
-The aim of Vigotsky's theory is to discover and stimulate the zone of
-potential development or zone of proximal development in each student, which
-is defined as the distance between the actual level of development, determined by
-the ability to independently solve a problem, and the level of development potential, determined through solving a problem under the guidance of an adult or
-in collaboration with a more able peer (Moreira, 1997).
-For Vigotsky, cognitive development cannot be understood
-without reference to the social, historical and cultural context in which it
-occurs (Moreira, 1997).
-. According to this author, higher mental processes (thought, language,
-voluntary behaviour) have their origin in social processes; cognitive
-development would be the conversion of social relations into men- tal
-functions (Moreira, 1997).
-
+> **Constructivism** holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of
+information is assimilated and deposited into a network of previously existing knowledge and experiences  ({% cite Abbot1999 %}). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with **psychological constructivism** and Lev Vigotsky with **social constructivism**.
+>
+>**Psychological constructivism** maintains the idea that the individual, both through cognitive and social aspects of knowledge as well as affective ones, is not a mere product of the environment or a simple result of his or her internal dispositions, but a construction of his or her own that is produced day by day as a result of the interaction between these two factors. The driving force of this activity would be cognitive conflict; in any constructivist activity there must be a circumstance that shakes the previous structures of knowledge and forces a rearrangement of the old knowledge in order to assimilate the new.
+>
+>According to the **social approach of Lev Vigotsky**, learning is that process in which the individual assimilates certain historical-cultural experience at the same time as he/she appropriates it, which requires an active subject who gives meaning to this experience, transforming it into his/her subjectivity ({% cite RodrguezRuiz2005 %}). 
+>
+> The aim of Vigotsky's theory is to discover and stimulate the **zone of potential development** or zone of proximal development in each student, which is defined as the distance between the actual level of development, determined by the ability to independently solve a problem, and the level of development potential, determined through solving a problem in collaboration with a more able peer ({% cite Moreira1997 %}).
+>
+> For Vigotsky, cognitive development cannot be understood without reference to the social, historical and cultural context in which it occurs. According to this author, higher mental processes (thought, language,voluntary behaviour) have their origin in social processes; cognitive development would be the conversion of social relations into mental functions ({% cite Moreira1997 %}).
 >
 >  #### Critical learning theory
 >
-> The main task of critical learning theory, also known as transformative learning theory, is to unravel the skein concerning how schools reproduce the logic of capital through the ideological and material forms of privilege and domination that structure students' lives (Giroux, 2001).
+> The critical learning theory, also known as transformative learning theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. In contrast to this superficial and clearly insufficient conception, Gouldner, quoted by {% cite Giroux2018 %}, points out that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what h a d previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
 >
-> Transformative learning theory [42] aims to define the mechanisms involved in the development of critical thinking during the learning process. In contrast to this superficial and clearly insufficient conception, Gouldner, quoted by Giroux (2001), points out that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what h a d previously been simply a tool. To quote Marcuse (1968), critical thinking aims to define the irrational
-character of established rationality.
+> According this theory, learning occurs when the learning process induces a shift in the student's frame of reference, e.g. the role assigned to science by the students, their self-concept and role in society, etc. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.
 >
->Transformative learning occurs when the learning process induces a shift in the student's frame of reference [42] [44], e.g. the role assigned to science by the students, their self-concept and role in society, etc. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions, such as those derived from cultural assimilation, through the exchange of points of view within a learning community [42] [45] [46]. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose [43].
->
-> Critical learning theory emphasises two elements: the
-importance of the subjective role of each learner in finding meaning for
-him/herself, and how social and economic conditions constrain and distort
-the social construction of meaning (Giroux, 2001).
+> Critical learning theory emphasises two elements: the importance of the subjective role of each learner in finding meaning for him/herself, and how social and economic conditions constrain and distort the social construction of meaning ({% cite Giroux2018 %}).
 >
 {: .comment}
 
@@ -262,7 +208,8 @@ the social construction of meaning (Giroux, 2001).
 >   * Attend a training session !
 >   * Have a go ?
 >   * Do, reflect, process, further understand?
-> - Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism) in your way of learning
+> - Write if you recognise elements of one of more learning perspectives (constructivism / behaviourism) in your way of learning.
+>
 {: .hands_on}
 
 
@@ -277,7 +224,7 @@ In this section we will introduce some examples of practical applications from t
 
 ##  Behaviorist Learning theory: Dreyfuss model for skill acquisition
 
-The Dreyfus model of skill acquisition presents a framework illustrating the process by which learners acquire skills through a combination of formal instruction and dedicated practice. It was presented by Hubert and Stuart Dreyfus in 1980 in a report on their research at the University of California, Berkeley, Operations Research Center for the United States Air Force Office of Scientific Research. Hubert Lederer Dreyfus (1929-2017) was a prominent American philosopher and a professor of philosophy at the University of California, Berkeley. His areas of expertise encompassed phenomenology, existentialism, and the philosophy of psychology, literature, and artificial intelligence, exploring their profound philosophical implications. Stuart E. Dreyfus holds the position of professor emeritus in the Industrial Engineering and Operations Research Department at the University of California, Berkeley.
+The Dreyfus model of skill acquisition presents a framework illustrating the process by which learners acquire skills through a combination of formal instruction and dedicated practice. It was presented by Hubert and Stuart Dreyfus in 1980 in a report on their research at the University of California, Berkeley, Operations Research Center for the United States Air Force Office of Scientific Research. Hubert Lederer Dreyfus (1929-2017) was a prominent American philosopher and a professor of philosophy. His areas of expertise encompassed phenomenology, existentialism, and the philosophy of psychology, literature, and artificial intelligence, exploring their profound philosophical implications. Stuart E. Dreyfus holds the position of professor emeritus in the Industrial Engineering and Operations Research Department at the University of California.
 
 The Dreyfus model for skills acquisition by brothers Stuart and Huber Dreyfus uses a 5 stage from novice to expert.
 
@@ -317,7 +264,7 @@ The Carpentries (a global organization building global capacity in essential dat
 
 #  Cognitivist Learning Theory: Memory and learning
 
-In a simple model from cognitive science (quite involved in constructivism), learning happens when information moves from **working memory** to **long-term memory**. This process can be impacted by **environment**
+In a simple model from cognitive science, learning happens when information moves from **working memory** to **long-term memory**. This process can be impacted by **environment**
 
 ![A figure showning a simple representation of how memory works. The main interaction is between the two central boxes, representing the working memory and the long-term memory. The working memory maintain the active consiousness, when paying attention to the envnironment, and is extremely fast but rather limited in capacity (experiments have shown that it can keep track of 7+/-2 items). The long-term memory is much larger in capacity, but it's significantly slower to access - using a process called "remembering". At the same time, the process of depositing information from the working memory into the long-term memory, is the learning process.)](./images/HowMemoryWorks.png "Simple model (brain is much more complex)")
 
@@ -408,7 +355,7 @@ Split-attention occurs when learners are required to **split their attention** b
 {: .hands_on}
 
 
-### Six strategies for effective learning from cognitive sciences
+### Six strategies for effective learning from cognitive psychology
 
 **Six strategies for effective learning** (from "Understanding how we learn" {% cite weinstein2018understanding %}) are based on evidence from cognitive research.
 
@@ -552,7 +499,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
 {: .hands_on} -->
 
 
-## Constructivist Learning Theory: The Bloom's 6 categories of cognitive skills
+## Constructivist Learning Theory: The Bloom's Taxonomy
 
 And one of the most used "models" or concepts is the one based on the Bloom’s six categories of cognitive skills. This tool is important to develop training, but not only.
 
@@ -568,7 +515,7 @@ From bottom to top:
 * **Evaluate:** involves presenting and defending opinions by making judgments about information, the validity of ideas, or quality of work based on a set of criteria
 * **Create (original synthesize):**involves building a structure or pattern from diverse elements; it also refers to the act of putting parts together to form a whole.
 
-It is important to highlight that, under this framework, critical thinking is considered a combination of Analyzing, Evaluating and Creating, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
+It is important to highlight that, under this framework, **critical thinking is considered a combination of analyzing, evaluating and creating**, i.e. the top three layers of the taxonomy. Blooms taxonomy levels are very useful to align instruction with learners' level of complexity of thinking as well as experience.
 
 What are the uses of this tool?
 - For learners
@@ -585,61 +532,15 @@ What are the uses of this tool?
     - Align instruction with learners' level of complexity of thinking as well as experience.
 
 
-# Critical Learning theory: The hidden curriculum
+# Critical Learning theory: The Hidden Curriculum
 
-The hidden curriculum is learning that is incorporated by students even though these aspects do not appear explicitly in the official curriculum. Unlike the official curriculum, with its explicitly stated
-cognitive and affective objectives, the hidden curriculum, in this case, relies on those organisational aspects of classroom life that are generally not perceived by either students or teachers (Giroux, 2001). What students learn
-from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the three communicative systems of the school: the curricular system, the system of pedagogical styles of classroom control, and the evaluative system (Giroux, 2001).
+The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum relying on those organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
 
-Through the hidden curriculum, students internalise values that
-emphasise respect for authority, punctuality, cleanliness, do- cility and
-conformity (Giroux, 2001). As García (2005) points out, although
-under democracy teachers feel impelled to disappear strategically from the
-scene, they place between themselves and the students a didactic and
-methodological structure which will act on the students' consciousness,
-insidiously moulding their personalities.
+According the Hidden Curriculum Theory, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the communicative systems. Through the hidden curriculum, students would internalise values that emphasise respect for authority, punctuality, cleanliness, docility and conformity ({% cite Giroux2018 %}). It considers that elements such as exposure to a core of common subjects would lead to a dissolution of individuality in the mass, in the collective, to a standardisation and homogenisation of psychologies ({% cite Olivo2005 %}).
 
-Bowles and Gintis, cited by Giroux (2001), point out that students
-who are best suited to the social ordering of school also had significantly below
-average scores on measures of mental creativity and flexibility. The underlying
-message assimilated under the practices of the hidden curriculum points less to
-schools that help students think critically about the world they live in, than to
-schools that act as agents of social control (Giroux, 2001).
-The structure, organisation and content of contemporary teaching
-endows students with the personality needs required in the bureaucratically
-structured and hierarchically organised workforce (Giroux, 2001). The
-social processes of most classrooms militate against students developing a
-sense of community, given collectivity and social solidarity (Giroux, 2001).
-The school architecture linked to the cellular development of education
-constitutes a rectangular space that reflects the authoritarian conception of
-life within it (Planas et al., 2010). Elements such as exposure to a core of
-common subjects lead to a dissolution of individuality in the mass, in the
-collective, to a standardisation and homogenisation of psycho- logies
-(García Olivo et al., 2005).
+According the Hidden Curriculum Theory, if there is really an interest in **fostering critical thinking**, the **discursive mode that should dominate in the classroom should be the interrogative one**. It considers that questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down ({% cite Sztajnszrajber2013 %}).
 
-Through the use of the hidden curriculum, differences are
-repressed on a daily basis and the dissemination of the values and principles
-of our culture is stimulated, and this repression is accentuated by the moral figure
-of the educator (García Olivo et al., 2005).
-
-One of the obvious manifestations of the hidden curriculum that
-showed itself in all its intensity during the internship period was the
-hegemonic discourse mode, i.e. the expository discursive mode. In this discursive mode, the sender acts repeatedly on the receiver but gives
-him/her a passive role (Castejón, España and Ganzarain, 2004).
-
-If there were really an interest in fostering critical thinking, the
-discursive mode that should dominate in the classroom should be the in-
-terrogative one. As Sztajnzrajber (2013) states, questioning is an exercise in
-dismantling those certainties that are installed as layers of truths imposing
-the tyranny of the obvious. Questioning is a way of thinking, and that is
-why thinking is not only deriving conclusions, but often consists of the
-opposite: starting from the accepted conclusions of a community and
-turning them upside down (Sztajnzrajber, 2013).
-
-As Giroux (2001) notes, no matter how progressive an approach to
-critical thinking may be, it will squander its own potential if it operates on
-the basis of a web of social relations in the classroom that are
-authoritarianly hierarchical and promote passivity, docility and silence.
+As {% cite Giroux2018 %} notes, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence.
 
 # Mental models
 
