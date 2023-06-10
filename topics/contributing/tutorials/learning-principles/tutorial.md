@@ -155,20 +155,20 @@ In the following sections we will explore the most important learning theories.
 >
 > We will briefly describe the key ideas from each of these perspectives and explain how you can use them in your classroom to support learners' learning.
 >
-> #### Behaviourist learning theory
+> #### Behaviourist Learning Theory
 >
-> Behaviorism is a psychological movement that posits behavior should be studied as a natural science akin to fields like chemistry or physics. It conceives learning as changes in overt behavior. In this context, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment.
+> **Behaviorism** is a psychological movement that posits behavior should be studied as a natural science akin to fields like chemistry or physics. It conceives learning as changes in overt behavior. In this context, learning is acquiring new behaviours by conditioning, reflex response to stimuli, reward/punishment.
 >
 > An important concept from this theory is **operant conditioning**, a variety of behaviourism that focuses on how the consequences of a behaviour affect the behaviour over time.
 >
 > This theory is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently. According to the behaviorist perspective on learning, the instructor assumes a dominant role within the classroom, exerting complete control over the learning process. Evaluation of learning is carried out by the teacher, who determines what is considered correct or incorrect.
 >  
->  #### Cognitivist learning theory
+>  #### Cognitivist Learning Theory
 >
 >
 > Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
 >
-> Cognitivism emerged in the 1950s as a response to behaviorism, which was deemed inadequate in explaining cognition. **Cognitive learning theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
+> **Cognitivism** emerged in the 1950s as a response to Behaviorism*, which was deemed inadequate in explaining cognition. **Cognitive learning theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
 >
 > Two important theories derive from this one: **information processing theory** and **cognitive load theory**:
 >
@@ -177,7 +177,7 @@ In the following sections we will explore the most important learning theories.
 > On the other hand, **cognitive load theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
 >
 >
-> #### Constructivist learning theory
+> #### Constructivist Learning Theory
 >
 > **Constructivism** holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of
 information is assimilated and deposited into a network of previously existing knowledge and experiences  ({% cite Abbot1999 %}). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with **psychological constructivism** and Lev Vigotsky with **social constructivism**.
@@ -190,9 +190,9 @@ information is assimilated and deposited into a network of previously existing k
 >
 > For Vigotsky, cognitive development cannot be understood without reference to the social, historical and cultural context in which it occurs. According to this author, higher mental processes (thought, language,voluntary behaviour) have their origin in social processes; cognitive development would be the conversion of social relations into mental functions ({% cite Moreira1997 %}).
 >
->  #### Critical learning theory
+>  #### Critical Learning Theory
 >
-> The critical learning theory, also known as transformative learning theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what h a d previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
+> The **Critical Learning Theory**, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what h a d previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
 >
 > According this theory, learning occurs when the learning process induces a shift in the student's frame of reference, e.g. the role assigned to science by the students, their self-concept and role in society, etc. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.
 >
