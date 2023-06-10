@@ -540,6 +540,8 @@ Then, let's start with the transcriptome assemby.
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `GRCh38.p13.chrom5.gtf`
 >        - *"Use Reference transcripts only?"*: `No`
+>    - In *"Advanced options"*:
+>        - "*Minimum junction coverage*": `3`
 >
 > 2. Rename the generated collection as `Assembled transcripts coordinates`
 >
@@ -570,6 +572,8 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `StringTie annotation`
 >        - *"Use Reference transcripts only?"*: `Yes`
 >        - *"Output files for differential expression?"*: `Ballgown`
+>    - In *"Advanced options"*:
+>        - "*Minimum junction coverage*": `3`
 >
 > 2. Rename the collection `Transcript-level expression measurements` as `Transcriptomes quantification`
 >
