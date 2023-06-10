@@ -264,19 +264,25 @@ Before running **RNA STAR** we are going to two parameters that will be used dur
 >
 > 4. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
 >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{print $4,$3-$2}`
+>   - "*AWK Program*": `{print $3-$2}`
 >
-> 5. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
+>   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
+>   - "*On column*": `Column 1`
+>   - "*In*": `Descending order`
+>   - "*Output unique values*": `Yes`
+>
+> 6. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
 >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{if (min == "") min=$2 ; else if ($2 &lt; min) min=$2}END{print min}`
+>   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}`
 >
-> 6. Rename the output as `Minimum intron size`
+> 7. Rename the output as `Minimum intron size`
 >
-> 7. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> 8. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
 >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{if (max == "") max=$2 ; else if ($2 &gt; max) max=$2}END{print max}`
+>   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}`
 >
-> 8. Rename the output as `Maximum intron size`
+> 9. Rename the output as `Maximum intron size`
 >
 {: .hands_on}
 
@@ -296,7 +302,7 @@ Now we can perform the mapping step.
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `14` (value of the **Minimium intron size** file)
+>                - *"Minimum intron size*": `32` (value of the **Minimium intron size** file)
 >                - *"Maximum intron size*": `772519` (value of the **Maximum intron size** file)
 >
 >
@@ -344,8 +350,8 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `14` (value of the `Minimium intron size file`)
->                - *"Maximum intron size*": `772519` (value of the `Maximum intron size file`)
+>                - *"Minimum intron size*": `32` (value of the `Minimium intron size file`)
+>                - *"Maximum intron size*": `428926` (value of the `Maximum intron size file`)
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
@@ -386,11 +392,13 @@ Once all required outputs have been generated, we will integrate them by using *
 > 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
+>    - *"Minimum intron length (bp)"*: `32` (value of the `Minimium intron size file`)
 >    - *"Output R-Script"*: `Yes`
 >
 > 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
+>    - *"Minimum intron length (bp)"*: `32` (value of the `Minimium intron size file`)
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
