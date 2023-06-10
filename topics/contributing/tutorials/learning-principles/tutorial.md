@@ -168,7 +168,7 @@ In the following sections we will explore the most important learning theories.
 >
 > Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
 >
-> **Cognitivism** emerged in the 1950s as a response to Behaviorism*, which was deemed inadequate in explaining cognition. **Cognitive learning theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
+> **Cognitivism** emerged in the 1950s as a response to Behaviorism*, which was deemed inadequate in explaining cognition. **Cognitive Learning Theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
 >
 > Two important theories derive from this one: **information processing theory** and **cognitive load theory**:
 >
@@ -196,7 +196,7 @@ information is assimilated and deposited into a network of previously existing k
 >
 > According this theory, learning occurs when the learning process induces a shift in the student's frame of reference, e.g. the role assigned to science by the students, their self-concept and role in society, etc. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.
 >
-> Critical learning theory emphasises two elements: the importance of the subjective role of each learner in finding meaning for him/herself, and how social and economic conditions constrain and distort the social construction of meaning ({% cite Giroux2018 %}).
+> Critical Learning Theory emphasises two elements: the importance of the subjective role of each learner in finding meaning for him/herself, and how social and economic conditions constrain and distort the social construction of meaning ({% cite Giroux2018 %}).
 >
 {: .comment}
 
@@ -449,7 +449,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
 > * Write here any insights/thoughts/comments to share from your breakout room
 {: .hands_on}-->
 
-> <details-title>Resources to learn more about cognitive learning theory</details-title>
+> <details-title>Resources to learn more about the Cognitive Learning Theory</details-title>
 >
 > There is a great deal of literature on how learning works.
 >
@@ -532,7 +532,7 @@ What are the uses of this tool?
     - Align instruction with learners' level of complexity of thinking as well as experience.
 
 
-# Critical Learning theory: The Hidden Curriculum
+# Critical Learning Theory: The Hidden Curriculum
 
 The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum, relying on the organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
 
