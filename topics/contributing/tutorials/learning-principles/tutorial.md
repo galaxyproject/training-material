@@ -217,10 +217,10 @@ information is assimilated and deposited into a network of previously existing k
 
 In this section we will introduce some examples of practical applications from the different learning theories:
 
-- Behaviorist learning theory: Dreyfuss model for skill acquisition.
-- Cognitivist learning theory: Human Memory and Learning from cognitive sciences
-- Constructivist learning theory: Bloom's Taxonomy
-- Critical learning theory: the hidden curriculum
+- Behaviorist Learning Theory: Dreyfuss model for skill acquisition.
+- Cognitivist Learning Theory: Human Memory and Learning from cognitive sciences
+- Constructivist Learning Theory: Bloom's Taxonomy
+- Critical Learning Theory: the hidden curriculum
 
 ##  Behaviorist Learning theory: Dreyfuss model for skill acquisition
 
