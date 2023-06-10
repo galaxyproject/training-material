@@ -192,7 +192,7 @@ information is assimilated and deposited into a network of previously existing k
 >
 >  #### Critical Learning Theory
 >
-> The **Critical Learning Theory**, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that critical thinking must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
+> The **Critical Learning Theory**, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that thought must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
 >
 > According this theory, learning occurs when the learning process induces a shift in the student's frame of reference. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.
 >
