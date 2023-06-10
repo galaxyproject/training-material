@@ -168,13 +168,13 @@ In the following sections we will explore the most important learning theories.
 >
 > Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
 >
-> **Cognitivism** emerged in the 1950s as a response to Behaviorism*, which was deemed inadequate in explaining cognition. **Cognitive Learning Theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
+> **Cognitivism** emerged in the 1950s as a response to Behaviorism, which was deemed inadequate in explaining cognition. **Cognitive Learning Theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
 >
-> Two important theories derive from this one: **information processing theory** and **cognitive load theory**:
+> Two important theories derive from this one: **Information Processing Theory** and **Cognitive load theory**:
 >
-> The **information processing theory** describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
+> The **Information Processing Theory** describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
 >
-> On the other hand, **cognitive load theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
+> On the other hand, **Cognitive Load Theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
 >
 >
 > #### Constructivist Learning Theory
