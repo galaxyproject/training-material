@@ -540,7 +540,7 @@ According the Hidden Curriculum Theory, what students learn from the formally sa
 
 According the Hidden Curriculum Theory, if there is really an interest in **fostering critical thinking**, the **discursive mode that should dominate in the classroom should be the interrogative one**. It considers that questioning is a way of thinking, and that is why thinking is not only deriving conclusions, but often consists of the opposite: starting from the accepted conclusions of a community and turning them upside down ({% cite Sztajnszrajber2013 %}).
 
-As {% cite Giroux2018 %} notes, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence.
+According this theory, technological tools, due to their design, do not act just as neutral means for transmitting information, but they also transmit values and habits of thought ({% cite Anders1980 %}). As {% cite Giroux2018 %} notes, no matter how progressive an approach to critical thinking may be, it will squander its own potential if it operates on the basis of a web of social relations in the classroom that are authoritarianly hierarchical and promote passivity, docility and silence.
 
 # Mental models
 
