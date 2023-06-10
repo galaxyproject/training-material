@@ -534,7 +534,7 @@ What are the uses of this tool?
 
 # Critical Learning theory: The Hidden Curriculum
 
-The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum relying on those organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
+The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum, relying on the organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
 
 According the Hidden Curriculum Theory, what students learn from the formally sanctioned content of the curriculum is much less important than what they learn from the ideological assumptions embodied in the communicative systems. Through the hidden curriculum, students would internalise values that emphasise respect for authority, punctuality, cleanliness, docility and conformity ({% cite Giroux2018 %}). It considers that elements such as exposure to a core of common subjects would lead to a dissolution of individuality in the mass, in the collective, to a standardisation and homogenisation of psychologies ({% cite Olivo2005 %}).
 
