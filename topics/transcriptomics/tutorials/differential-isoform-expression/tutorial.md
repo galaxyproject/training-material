@@ -334,7 +334,6 @@ The first **RNA STAR** run generates three collections: logs, alignments in BAM 
 >   - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
 >   - "*AWK Program*": `($5 > 0 && $7 > 2 && $6==0)`
 >
->
 > 3. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >   - "*Cut columns*": `c1,c2,c3,c4,c5,c6`
 >   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
@@ -609,15 +608,15 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 >  The transcript-level expression measurements (t_tab.ctab) file includes one row per transcript, with the following columns:
 >
-> - t_id: numeric transcript id
-> - chr, strand, start, end: genomic location of the transcript
-> - t_name: generated transcript id
-> - num_exons: number of exons comprising the transcript
-> - length: transcript length, including both exons and introns
-> - gene_id: gene the transcript belongs to
-> - gene_name: HUGO gene name for the transcript, if known
-> - cov: per-base coverage for the transcript (available for each sample)
-> - FPKM: Estimated FPKM for the transcript (available for each sample)
+> - **t_id**: numeric transcript id
+> - **chr**, **strand**, **start**, **end**: genomic location of the transcript
+> - **t_name**: generated transcript id
+> - **num_exons**: number of exons comprising the transcript
+> - **length**: transcript length, including both exons and introns
+> - **gene_id**: gene the transcript belongs to
+> - **gene_name**: HUGO gene name for the transcript, if known
+> - **cov**: per-base coverage for the transcript (available for each sample)
+> - **FPKM**: Estimated FPKM for the transcript (available for each sample)
 >
 {: .details}
 
@@ -635,7 +634,87 @@ Before starting with the analysis of the isoforms, we will generate a FASTA file
 >
 {: .hands_on}
 
-## Transcriptome quality evaluation with **rnaQUAST**
+## Transcriptome evaluation
+
+The evaluation of assembled transcriptomes is crucial to assess the quality and accuracy of the transcript reconstruction process. It helps researchers ensure that the assembled transcripts represent the true expression patterns and capture the full diversity of transcripts present in the biological sample.
+
+Two commonly used tools for evaluating assembled transcriptomes are **rnaQUAST** and **GFFCompare**. **rnaAQUAST** is specifically designed for assessing the quality of RNA-seq assemblies by comparing them to a reference genome. On the other hand, **GFFCompare** is a tool used for comparing and annotating assembled transcripts against a reference annotation file. 
+
+### Annotation accuracy evaluation with **GFFCompare**
+
+**GFFcompare** is an open-source utility designed to systematically compare one or more sets of transcript predictions to a reference annotation at different levels ({% cite Pertea2020 %}). **GFFCompare** assigns class codes to each assembled transcript, indicating their relationship to the reference transcripts, such as complete match, partial match, novel transcripts, and alternative splicing events. This information will help us in understanding the reliability and completeness of the assembled transcriptome.
+
+> <hands-on-title>Transcriptome accuracy evaluation</hands-on-title>
+>
+> {% tool [GFFCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"GTF inputs for comparison"*: `Reference transcriptome annotation` (output of **StringTie merge** {% icon tool %})
+>    - *"Use reference annotation"*: `Yes`
+>       - *"Choose the source for the reference annotation*": `History`
+>          - *"Reference annotation*": `GRCh38.p13.chrom5.gtf`
+{: .hands_on}
+
+The output of GFFCompare includes several files, which can be used to analyze the results in different ways. Some of the main output files are:
+
+- **Annotated transcripts**: contains all the input transcripts annotated with several additional attributes: **xloc**, **tss_id**, **cmp_ref**, and **class_code**.
+- **Loci file**: Lists the loci (locations) of the features in the input files.
+- **RefMap**: Contains a list of input loci with their best matches in the reference annotation.
+- **TMAP**: Lists the most closely matching reference transcript for each query transcript.
+- **Accuracy stats**: Provides statistics on the comparison, including the number of input and reference features, the number of unique input features, and the total number of features.
+- **Tracking file**: Contains the genomic coordinates of the input features and their matching or non-matching reference features.
+
+> <details-title>Details on the GffCompare attributes</details-title>
+>
+> The **xloc** attribute indicates the super-locus to which a particular transcript belongs. The **tss_id** attribute serves as a unique identifier for the transcription start of that transcript. In cases where applicable, the **cmp_ref** attribute provides the nearest reference transcript, and the **class_code** attribute describes the relationship to this reference transcript. Additional information can be found in {% cite Pertea2020 %}.
+>
+{: .details}
+
+In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be cound in the **Accracy stats** file. Sensitivity is defined as the proportion of true positives (TP) among the total predicted features, while precision is defined as the proportion of true positives among the total predicted features and false positives (FP). 
+
+> <question-title>Sensitivity and precision</question-title>
+>
+> 1. What are the sensitivity and precission at transcript level?
+> 2. How many novel exons have been identified?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. At transcript level, precission is 99.6% and sensitivity 91.3%.
+> > 2. According the stats file, 112 new exons (0.6%) have been identified.
+> > 
+> {: .solution}
+{: .question}
+
+To analyze the output, we can use the **TMAP** file and perform some text manipulation. For example, in order to extract the transcripts fully contained within a reference intron, we can filter for the **class_code** `i`.
+
+> <hands-on-title>Extract novel transcripts information</hands-on-title>
+>
+> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: **TMAP** file
+>    - *"AWK Program"*: `$3=="i"{print $0}`
+> 
+> 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
+>   - "*Cut columns*": `c4`
+>   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
+>
+> 3. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
+>   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
+>   - "*Output unique values*": `Yes`
+>
+> 4. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - *"Select lines from"*: `Reference transcriptome annotation `
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `\"MSTRG.7\"`(content of the file generated by **Sort** {% icon tool %})
+>
+> 5. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: output of **Search in textfiles** {% icon tool %}
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+>
+> 6. Rename the output as `Transcripts fully contained within a reference intron`
+>
+{: .hands_on}
+
+### Transcriptome quality assessment with **rnaQUAST**
 
 To assess the quality of assembled transcripts, we are going to use **rnaQUAST**, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. In addition, it will allow us to identify misassembled transcriptomes, ensuring higher data quality for downstream analyses ({% cite Bushmanova2016 %}).
 
@@ -650,15 +729,11 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 >
 > 1. {% tool [rnaQUAST](toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts sequences`
->    - {% icon param-files %} *"Reference genome"*: `Assembled transcripts sequences`
+>    - {% icon param-files %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >    - *"Genome annotation"*: `Enabled`
->       - {% icon param-files %} *"GTF/GFF"*: `Assembled transcripts sequences`
+>       - {% icon param-files %} *"GTF/GFF"*: `Reference transcriptome annotation`
 >    - *"Disable infer genes"*: `Yes`
 >    - *"Disable infer transcripts"*: `Yes`
->    - {% icon param-file %} *"Aligned reads to reference genome"*: `Assembled transcripts sequences`
->    - *"Run BUSCO"*: `Enabled`
->       - *"Lineage data source"*: `Download lineage data`
->       - *"Lineage"*: `Vertebrata`
 >
 {: .hands_on}
 
@@ -1060,20 +1135,19 @@ It generates five tabular files with the results of the different statistical an
 - **Splicing enrichment**: results of enrichment statistical analysis for the different splicing events.
 - **Consequences summary**: values of global usage of {IS}
 - **Consequences enrichment**: results of enrichment statistical analysis for the different functional consequences.
-- **Switching gene/isoforms**: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).
+- **Switching gene/isoforms**: list of genes with statistically significant isoform swiching between conditions. The switches are ranked (by p-value or switch size).
 
-> <question-title></question-title>
+> <question-title>Top IS events</question-title>
 >
 > What are the the top three {IS} events (as defined by alpha and dIFcutoff)?
 >
->
 > > <solution-title></solution-title>
 > >
-> > The top three genes are [CDC42SE2](https://www.ncbi.nlm.nih.gov/gene/56990), [ENSG00000286753](https://www.ncbi.nlm.nih.gov/gene/?term=ENSG00000286753) and [NDUFAF2](https://www.ncbi.nlm.nih.gov/gene/91942) (fig. 22).
+> > The top three genes are [WDR70](https://www.ncbi.nlm.nih.gov/gene/55100), [STARD4](https://www.ncbi.nlm.nih.gov/gene/134429) and [MGAT1](https://www.ncbi.nlm.nih.gov/gene/4245) (fig. 22).
 > >
 > > ![Figure  22. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
 > >
-> > CDC42SE2 is a protein coding gene robably involved in the organization of the actin cytoskeleton by acting downstream of CDC42. ENSG00000286753 is a uncharacterized gene affiliated with the lncRNA class. NDUFAF2 encondes a protein chaperone involved in the assembly of NADH dehydrogenase.
+> > WDR70 is a protein coding gene predicted to be involved in regulation of DNA double-strand break processing and regulation of histone H2B conserved C-terminal lysine ubiquitination. STARD4 is a protein coding gene probably involved in the metabolism of steroid hormones. MGAT1 is a glycosyltransferase involved in the synthesis of protein-bound and lipid-bound oligosaccharides.
 > > 
 > {: .solution}
 {: .question}
