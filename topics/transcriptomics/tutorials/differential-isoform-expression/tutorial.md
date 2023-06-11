@@ -668,7 +668,7 @@ The output of GFFCompare includes several files, which can be used to analyze th
 >
 {: .details}
 
-In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be cound in the **Accracy stats** file. Sensitivity is defined as the proportion of true positives (TP) among the total predicted features, while precision is defined as the proportion of true positives among the total predicted features and false positives (FP). 
+In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be cound in the **Accuracy stats** file. Sensitivity is defined as the proportion of true positives among the total predicted features, while precision is defined as the proportion of true positives among the total predicted features and false positives. 
 
 > <question-title>Sensitivity and precision</question-title>
 >
