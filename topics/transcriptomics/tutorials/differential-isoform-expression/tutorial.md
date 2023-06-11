@@ -289,6 +289,12 @@ Before running **RNA STAR** we are going to two parameters that will be used dur
 
 Now we can perform the mapping step.
 
+> <comment-title>ENCODE options</comment-title>
+>
+> In this training, for **RNA STAR**, we adopted the parameters from the [ENCODE pipeline](https://www.encodeproject.org/pipelines/), developed by the ENCODE RNA Working Group. It is **specially designed for the human genome**. If your samples belong to a different organism, probably you will need to adapt the configuration a bit. You can find more information in the [**RNA STAR** manual]https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).
+>
+{: .comment}
+
 > <hands-on-title> Generate intermediate file with RNA STAR</hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
@@ -299,11 +305,19 @@ Now we can perform the mapping step.
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
 >            - *"Length of the genomic sequence around annotated junctions*": `150`
+>    - *"Would you like to set additional output filters?"*: `Yes`
+>        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
+>        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
+>        - *"Maximum number of mismatches to output an alignment, plus 1*": `999`
+>        - *"Maximum ratio of mismatches to read length*": `0.04`
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
 >                - *"Minimum intron size*": `32` (value of the **Minimium intron size** file)
 >                - *"Maximum intron size*": `772519` (value of the **Maximum intron size** file)
+>                - *"Maximum gap between two mates*": `1000000`
+>                - *"Minimum overhang for spliced alignments*": `8`
+>                - *"Minimum overhang for annotated spliced alignments*": `1`
 >
 >
 {: .hands_on}
@@ -347,11 +361,19 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
 >       - {% icon param-file %} *"Pregenerated splice junctions datasets of your samples"*: `Splicing database`
 >            - *"Length of the genomic sequence around annotated junctions*": `150`
+>    - *"Would you like to set additional output filters?"*: `Yes`
+>        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
+>        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
+>        - *"Maximum number of mismatches to output an alignment, plus 1*": `999`
+>        - *"Maximum ratio of mismatches to read length*": `0.04`
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
 >                - *"Minimum intron size*": `32` (value of the `Minimium intron size file`)
 >                - *"Maximum intron size*": `428926` (value of the `Maximum intron size file`)
+>                - *"Maximum gap between two mates*": `1000000`
+>                - *"Minimum overhang for spliced alignments*": `8`
+>                - *"Minimum overhang for annotated spliced alignments*": `1`
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
