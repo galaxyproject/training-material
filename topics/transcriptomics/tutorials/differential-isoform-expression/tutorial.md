@@ -239,7 +239,7 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 >
 {: .details}
 
-The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}).
+The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **Minimap2** as alignment tool.
 
 > <comment-title>Inference of intron size (optional)</comment-title>
 >
