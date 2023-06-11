@@ -683,7 +683,7 @@ In order to have an overview of the transcriptome, we can have a look at the **s
 > {: .solution}
 {: .question}
 
-To analyze the output, we can use the **TMAP** file and perform some text manipulation. For example, in order to extract the transcripts fully contained within a reference intron, we can filter for the **class_code** `i`.
+For a more in-depth analysis of the output, we can use the **TMAP** file and perform some text manipulation. For example, in order to extract new transcripts fully contained within a reference intron, we can filter for the **class_code** `i`.
 
 > <hands-on-title>Extract novel transcripts information</hands-on-title>
 >
