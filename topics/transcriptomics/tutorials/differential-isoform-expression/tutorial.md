@@ -416,13 +416,13 @@ Once all required outputs have been generated, we will integrate them by using *
 > 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
->    - *"Minimum intron length (bp)"*: `32` (value of the `Minimium intron size file`)
+>    - *"Minimum intron length (bp)"*: `20`
 >    - *"Output R-Script"*: `Yes`
 >
 > 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
->    - *"Minimum intron length (bp)"*: `32` (value of the `Minimium intron size file`)
+>    - *"Minimum intron length (bp)"*: `20`
 >
 > 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
