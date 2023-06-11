@@ -291,7 +291,7 @@ Now we can perform the mapping step.
 
 > <comment-title>ENCODE options</comment-title>
 >
-> In this training, for **RNA STAR**, we adopted the parameters from the [ENCODE pipeline](https://www.encodeproject.org/pipelines/), developed by the ENCODE RNA Working Group. It is **specially designed for the human genome**. If your samples belong to a different organism, probably you will need to adapt the configuration a bit. You can find more information in the [**RNA STAR** manual]https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).
+> In this training, for **RNA STAR**, we adopted the parameters from the [ENCODE pipeline](https://www.encodeproject.org/pipelines/), developed by the ENCODE RNA Working Group. It is **specially designed for the human genome**. If your samples belong to a different organism, probably you will need to adapt the configuration a bit. You can find more information in the [**RNA STAR** manual](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf).
 >
 {: .comment}
 
@@ -324,7 +324,7 @@ Now we can perform the mapping step.
 
 The first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 > 5).
 
-> <hands-on-title> Pre-processing of splice junction coordinatesR</hands-on-title>
+> <hands-on-title> Pre-processing of splice junction coordinates</hands-on-title>
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
 >
