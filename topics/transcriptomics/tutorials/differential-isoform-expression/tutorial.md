@@ -581,6 +581,7 @@ Then, let's start with the transcriptome assemby.
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `GRCh38.p13.chrom5.gtf`
 >
 > 6. Rename the output as `Reference transcriptome annotation`
+>
 {: .hands_on}
 
 Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.
