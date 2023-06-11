@@ -241,51 +241,48 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 
 The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}).
 
-> <comment-title>Intron spanning in RNA-seq analysis</comment-title>
+> <comment-title>Inference of intron size (optional)</comment-title>
 >
-> RNA-seq mappers need to face the challenge associated with intron spanning of mature mRNA molecules, from which introns have been removed by splicing (single short read might align to two locations that are separated by 10 kbp or more). The complexity of this operation can be better understood if we take in account that for a typical human RNA-seq data set using 100-bp reads, more than 35% of the reads will span multiple exons.
+> If you are interested in analyzing non-human samples, it is a good idea to infer the **minimium and maximum intron sizes** before running **RNA STAR**.
+>
+> > <hands-on-title>Inference of intron size </hands-on-title>
+> >
+> > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
+> >    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
+> >    - *"Advanced options"*: `Set advanced options`
+> >        - *"Ignore groups without exons"*: `Yes`
+> >
+> > 2. Rename the output as `BED12 annotation`
+> >
+> > 3. {% tool [Gene BED To Exon/Intron/Codon BED](gene2exon1) %} with the following parameters:
+> >    - *"Extract"*: `Introns`
+> >        - {% icon param-file %} *"from"*: `BED12 annotation`
+> >
+> > 4. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+> >   - "*AWK Program*": `{print $3-$2}`
+> >
+> > 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
+> >   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
+> >   - "*On column*": `Column 1`
+> >   - "*In*": `Descending order`
+> >   - "*Output unique values*": `Yes`
+> >
+> > 6. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+> >   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}`
+> >
+> > 7. Rename the output as `Minimum intron size`
+> >
+> > 8. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
+> >   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}`
+> >
+> > 9. Rename the output as `Maximum intron size`
+> >
+> {: .hands_on}
 >
 {: .comment}
-
-Before running **RNA STAR** we are going to two parameters that will be used during the mapping step, and that will allow us to tune the assembly according the genome characristics: the **minimum and the maximum intron sizes**. **RNA STAR** default configuration is optimized for mammalia genomes, so if you plan to work with a different taxa, this step is important.
-
-> <hands-on-title>Inference of intron size </hands-on-title>
->
-> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
->    - *"Advanced options"*: `Set advanced options`
->        - *"Ignore groups without exons"*: `Yes`
->
-> 2. Rename the output as `BED12 annotation`
->
-> 3. {% tool [Gene BED To Exon/Intron/Codon BED](gene2exon1) %} with the following parameters:
->    - *"Extract"*: `Introns`
->        - {% icon param-file %} *"from"*: `BED12 annotation`
->
-> 4. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
->   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{print $3-$2}`
->
-> 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
->   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
->   - "*On column*": `Column 1`
->   - "*In*": `Descending order`
->   - "*Output unique values*": `Yes`
->
-> 6. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
->   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}`
->
-> 7. Rename the output as `Minimum intron size`
->
-> 8. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
->   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
->   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}`
->
-> 9. Rename the output as `Maximum intron size`
->
-{: .hands_on}
-
 
 Now we can perform the mapping step.
 
@@ -313,12 +310,17 @@ Now we can perform the mapping step.
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `32` (value of the **Minimium intron size** file)
->                - *"Maximum intron size*": `772519` (value of the **Maximum intron size** file)
+>                - *"Minimum intron size*": `20`
+>                - *"Maximum intron size*": `1000000`
 >                - *"Maximum gap between two mates*": `1000000`
 >                - *"Minimum overhang for spliced alignments*": `8`
 >                - *"Minimum overhang for annotated spliced alignments*": `1`
 >
+> > <comment-title>Intron size values</comment-title>
+> >
+> >  Here we are using the parameters recommended by **ENCODE** for human samples. If you are working with a different organism, you can use the intron sizes computed previously.
+> >
+> {: .comment}
 >
 {: .hands_on}
 
@@ -369,8 +371,8 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `32` (value of the `Minimium intron size file`)
->                - *"Maximum intron size*": `428926` (value of the `Maximum intron size file`)
+>                - *"Minimum intron size*": `20`
+>                - *"Maximum intron size*": `1000000`
 >                - *"Maximum gap between two mates*": `1000000`
 >                - *"Minimum overhang for spliced alignments*": `8`
 >                - *"Minimum overhang for annotated spliced alignments*": `1`
