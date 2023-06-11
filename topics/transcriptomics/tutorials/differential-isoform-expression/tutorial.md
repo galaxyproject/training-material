@@ -536,9 +536,14 @@ The main reason underlying the greater accuracy of **StringTie** most likely der
 
 Despite in this training we make use of **RNA STAR** as mapping tool, it is possible to use different splice-aware aligner such as **HISAT2**.
 
-This step could be divided into two substeps: transcriptome assembly and quantification isoform (fig. 12). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
+This step could be divided into two substeps: transcriptome assembly and quantification isoform. The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
 
-![Figure 12. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. The yellow area represents the substep corresponding to transcriptome assembly; this substep generates an annotation corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
+> <details-title>StringTie workflow details</details-title>
+>
+> ![Figure 12. StringTie workflow](../../images/differential_isoform/stringtie_pipeline.png "StringTie worklow. The yellow area represents the substep corresponding to transcriptome assembly; this substep generates an annotation corresponding to the set of non-redundant transcripts observed in any of the RNA-Seq samples. The grey region corresponds to the quantification step, which makes use of the previously generated. Adapted from Perea et al. 2016.")
+>
+>
+{: .details}
 
 Then, let's start with the transcriptome assemby.
 
