@@ -239,7 +239,7 @@ In that section makes use of three main tools: **RNA STAR**, considered a state-
 >
 {: .details}
 
-The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **GMAP** as alignment tool ({% cite Krianovi2017 %}).
+The choice of **RNA STAR** as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use **Minimap2** as alignment tool.
 
 > <comment-title>Inference of intron size (optional)</comment-title>
 >
@@ -581,6 +581,7 @@ Then, let's start with the transcriptome assemby.
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `GRCh38.p13.chrom5.gtf`
 >
 > 6. Rename the output as `Reference transcriptome annotation`
+>
 {: .hands_on}
 
 Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.
