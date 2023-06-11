@@ -735,6 +735,10 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 >    - *"Disable infer genes"*: `Yes`
 >    - *"Disable infer transcripts"*: `Yes`
 >
+> > <warning-title>Significant computational resources and run time</warning-title>
+> > rnaQUAST can require around 2 hours to complete. Meanwhile we recommend you to continue and back to this part later.
+> {: .warning}
+>
 {: .hands_on}
 
 By default, **rnaQUAST** generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 13) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.
@@ -1266,7 +1270,7 @@ Here we can see that changes in gene expression and isoform switches are not in 
 As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps.
 
 > <warning-title>Significant computational resources and run time</warning-title>
-> When using the full data, the analysis can last for more than 24 hours.
+> When using the full data, the analysis can last for more than 48 hours.
 {: .warning}
 
 
