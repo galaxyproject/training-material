@@ -1043,9 +1043,9 @@ Let's have a look at the generated plot (fig. 18).
 
 ![Figure 18. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
-We can appreciate that despite differences in overall gene expression are not statistically significant between healthy and cancerous tissues, there exists stringking differences between isoforms:
+We can appreciate that there exists stringking differences between isoforms:
 
-- The isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer. This transcript shows statistically significant differential usage. 
+- The isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer. This transcript shows statistically significant differential usage.
 - The isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid **Repulsive guidance molecule B** is induced.
 - A new isoform has been identified: `MSTRG.1060.6` (this is a random ID assigned by **StringTie**).
 
@@ -1088,14 +1088,6 @@ The second image shows a only the region corresponding to the 5'end (fig. 20).
 
 ![Figure 20. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_in.png "pyGenometracks isoform visualization chr5:98,767,000-98,775,000. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
 
-> <comment-title>Results on original full-data</comment-title>
->
-> According the full data results, the isoform ENST00000308234.11 shows statistically significat differences between health and cancer samples (fig. 21).
->
-> ![Figure 21. RGMB gene isoform expression profile plot full data](../../images/differential_isoform/isoformSwitchAnalyzer_gene_fulldata.png "RGMB isoform expression profile plot of full data. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
->
->
-{: .comment}
 
 ### IsoformSwitchAnalyzer genome-wide analysis
 
