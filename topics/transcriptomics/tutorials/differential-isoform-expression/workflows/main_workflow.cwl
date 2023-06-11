@@ -1,47 +1,57 @@
-class: Workflow
+#!/usr/bin/env cwl-runner
+
 cwlVersion: v1.2.0-dev2
-doc: 'Abstract CWL Automatically generated from the Galaxy workflow file: Genome-wide
-  alternative splicing analysis'
+class: Workflow
+doc: |-
+  Abstract CWL Automatically generated from the Galaxy workflow file: Genome-wide alternative splicing analysis: human
+
 inputs:
   Active sites dataset:
-    format: data
+    doc: Active sites dataset.
     type: File
+    format: data
   CPAT header:
-    format: data
+    doc: Galaxy compatible CPAT header.
     type: File
+    format: data
   Control IDs:
-    format: data
+    doc: IDs of control sequences, corresponding to filenames.
     type: File
+    format: data
   Genome annotation:
-    format: data
+    doc: Reference genome annotation in GTF format.
     type: File
+    format: data
   Pfam-A HMM Stockholm file:
-    format: data
+    doc: Stockholm file.
     type: File
+    format: data
   Pfam-A HMM library:
-    format: data
+    doc: HMM library.
     type: File
+    format: data
   RNA-seq data collection:
-    format: data
+    doc: Collection of paired-end RNA-seq datasets.
     type: File
+    format: data
   Reference genome:
-    format: data
+    doc: Genome reference in FASTA format.
     type: File
+    format: data
+
 outputs: {}
+
 steps:
   10_fastp:
     in:
       single_paired|paired_input: RNA-seq data collection
-    out:
-    - output_paired_coll
-    - report_json
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_iuc_fastp_fastp_0_23_2+galaxy0
+      class: Operation
       inputs:
         single_paired|paired_input:
-          format: Any
           type: File
+          format: Any
       outputs:
         output_paired_coll:
           doc: input
@@ -49,83 +59,83 @@ steps:
         report_json:
           doc: json
           type: File
+    out:
+    - output_paired_coll
+    - report_json
   11_Flatten collection:
     in:
       input: RNA-seq data collection
-    out:
-    - output
     run:
-      class: Operation
       id: __FLATTEN__
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
       outputs:
         output:
           doc: input
           type: File
+    out:
+    - output
   12_Search in textfiles:
     in:
       infile: Genome annotation
-    out:
-    - output
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
+      class: Operation
       inputs:
         infile:
-          format: Any
           type: File
+          format: Any
       outputs:
         output:
           doc: input
           type: File
-  13_Convert GTF to BED12:
+    out:
+    - output
+  13_Search in textfiles:
+    in:
+      infile: Genome annotation
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
+      class: Operation
+      inputs:
+        infile:
+          type: File
+          format: Any
+      outputs:
+        output:
+          doc: input
+          type: File
+    out:
+    - output
+  14_Convert GTF to BED12:
     in:
       gtf_file: Genome annotation
-    out:
-    - bed_file
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_iuc_gtftobed12_gtftobed12_357
+      class: Operation
       inputs:
         gtf_file:
-          format: Any
           type: File
+          format: Any
       outputs:
         bed_file:
           doc: bed12
           type: File
-  14_Search in textfiles:
-    in:
-      infile: Genome annotation
     out:
-    - output
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        output:
-          doc: input
-          type: File
+    - bed_file
   15_FastQC:
     in:
       input_file: 11_Flatten collection/output
-    out:
-    - html_file
-    - text_file
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_devteam_fastqc_fastqc_0_73+galaxy0
+      class: Operation
       inputs:
         input_file:
-          format: Any
           type: File
+          format: Any
       outputs:
         html_file:
           doc: html
@@ -133,95 +143,63 @@ steps:
         text_file:
           doc: txt
           type: File
+    out:
+    - html_file
+    - text_file
   16_gffread:
     in:
       input: 12_Search in textfiles/output
-      reference_genome|genome_fasta: Genome annotation
-    out:
-    - output_exons
+      reference_genome|genome_fasta: Reference genome
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_devteam_gffread_gffread_2_2_1_3+galaxy0
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         reference_genome|genome_fasta:
-          format: Any
           type: File
+          format: Any
       outputs:
         output_exons:
           doc: fasta
           type: File
-  17_Gene BED To Exon_Intron_Codon BED:
-    in:
-      input1: 13_Convert GTF to BED12/bed_file
-    out:
-    - out_file1
-    run:
-      class: Operation
-      id: gene2exon1
-      inputs:
-        input1:
-          format: Any
-          type: File
-      outputs:
-        out_file1:
-          doc: bed
-          type: File
-  18_gffread:
-    in:
-      input: 14_Search in textfiles/output
-      reference_genome|genome_fasta: Genome annotation
     out:
     - output_exons
+  17_gffread:
+    in:
+      input: 13_Search in textfiles/output
+      reference_genome|genome_fasta: Reference genome
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_devteam_gffread_gffread_2_2_1_3+galaxy0
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         reference_genome|genome_fasta:
-          format: Any
           type: File
+          format: Any
       outputs:
         output_exons:
           doc: fasta
           type: File
-  19_Search in textfiles:
-    in:
-      infile: 15_FastQC/text_file
     out:
-    - output
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        output:
-          doc: input
-          type: File
-  20_MultiQC:
+    - output_exons
+  18_MultiQC:
     in:
       results_0|software_cond|output_0|input: 15_FastQC/text_file
       results_1|software_cond|input: 10_fastp/report_json
-    out:
-    - stats
-    - html_report
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_iuc_multiqc_multiqc_1_11+galaxy1
+      class: Operation
       inputs:
         results_0|software_cond|output_0|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|input:
-          format: Any
           type: File
+          format: Any
       outputs:
         html_report:
           doc: html
@@ -229,184 +207,127 @@ steps:
         stats:
           doc: input
           type: File
-  21_Text reformatting:
-    in:
-      infile: 17_Gene BED To Exon_Intron_Codon BED/out_file1
     out:
-    - outfile
+    - stats
+    - html_report
+  19_Search in textfiles:
+    in:
+      infile: 15_FastQC/text_file
     run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
       inputs:
         infile:
-          format: Any
           type: File
+          format: Any
       outputs:
-        outfile:
+        output:
           doc: input
           type: File
-  22_Concatenate datasets:
+    out:
+    - output
+  20_Concatenate datasets:
     in:
       inputs: 19_Search in textfiles/output
-    out:
-    - out_file1
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_cat_0_1_1
+      class: Operation
       inputs:
         inputs:
-          format: Any
           type: File
+          format: Any
       outputs:
         out_file1:
           doc: input
           type: File
-  23_Text reformatting:
-    in:
-      infile: 21_Text reformatting/outfile
-    out:
-    - outfile
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        outfile:
-          doc: input
-          type: File
-  24_Text reformatting:
-    in:
-      infile: 21_Text reformatting/outfile
-    out:
-    - outfile
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        outfile:
-          doc: input
-          type: File
-  25_Cut:
-    in:
-      input: 22_Concatenate datasets/out_file1
     out:
     - out_file1
+  21_Search in textfiles:
+    in:
+      infile: 20_Concatenate datasets/out_file1
     run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_grep_tool_1_1_1
       class: Operation
+      inputs:
+        infile:
+          type: File
+          format: Any
+      outputs:
+        output:
+          doc: input
+          type: File
+    out:
+    - output
+  22_Cut:
+    in:
+      input: 21_Search in textfiles/output
+    run:
       id: Cut1
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
       outputs:
         out_file1:
           doc: tabular
           type: File
-  26_Parse parameter value:
-    in:
-      input1: 23_Text reformatting/outfile
     out:
-    - integer_param
-    run:
-      class: Operation
-      id: param_value_from_file
-      inputs:
-        input1:
-          format: Any
-          type: File
-      outputs:
-        integer_param:
-          doc: expression.json
-          type: File
-  27_Parse parameter value:
+    - out_file1
+  23_Text reformatting:
     in:
-      input1: 24_Text reformatting/outfile
-    out:
-    - integer_param
+      infile: 22_Cut/out_file1
     run:
-      class: Operation
-      id: param_value_from_file
-      inputs:
-        input1:
-          format: Any
-          type: File
-      outputs:
-        integer_param:
-          doc: expression.json
-          type: File
-  28_Text reformatting:
-    in:
-      infile: 25_Cut/out_file1
-    out:
-    - outfile
-    run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
+      class: Operation
       inputs:
         infile:
-          format: Any
           type: File
+          format: Any
       outputs:
         outfile:
           doc: input
           type: File
-  29_Parse parameter value:
-    in:
-      input1: 28_Text reformatting/outfile
     out:
-    - integer_param
+    - outfile
+  24_Parse parameter value:
+    in:
+      input1: 23_Text reformatting/outfile
     run:
-      class: Operation
       id: param_value_from_file
+      class: Operation
       inputs:
         input1:
-          format: Any
           type: File
+          format: Any
       outputs:
         integer_param:
           doc: expression.json
           type: File
-  30_RNA STAR:
+    out:
+    - integer_param
+  25_RNA STAR:
     in:
-      algo|params|align|alignIntronMax: 27_Parse parameter value/integer_param
-      algo|params|align|alignIntronMin: 26_Parse parameter value/integer_param
       refGenomeSource|GTFconditional|sjdbGTFfile: Genome annotation
-      refGenomeSource|GTFconditional|sjdbOverhang: 29_Parse parameter value/integer_param
+      refGenomeSource|GTFconditional|sjdbOverhang: 24_Parse parameter value/integer_param
       refGenomeSource|genomeFastaFiles: Reference genome
       singlePaired|input: 10_fastp/output_paired_coll
-    out:
-    - output_log
-    - splice_junctions
-    - mapped_reads
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_iuc_rgrnastar_rna_star_2_7_10b+galaxy3
+      class: Operation
       inputs:
-        algo|params|align|alignIntronMax:
-          format: Any
-          type: File
-        algo|params|align|alignIntronMin:
-          format: Any
-          type: File
         refGenomeSource|GTFconditional|sjdbGTFfile:
-          format: Any
           type: File
+          format: Any
         refGenomeSource|GTFconditional|sjdbOverhang:
-          format: Any
           type: File
+          format: Any
         refGenomeSource|genomeFastaFiles:
-          format: Any
           type: File
+          format: Any
         singlePaired|input:
-          format: Any
           type: File
+          format: Any
       outputs:
         mapped_reads:
           doc: bam
@@ -417,126 +338,116 @@ steps:
         splice_junctions:
           doc: interval
           type: File
-  31_Concatenate datasets:
-    in:
-      inputs: 30_RNA STAR/splice_junctions
-    out:
-    - out_file1
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_cat_0_1_1
-      inputs:
-        inputs:
-          format: Any
-          type: File
-      outputs:
-        out_file1:
-          doc: input
-          type: File
-  32_Text reformatting:
-    in:
-      infile: 31_Concatenate datasets/out_file1
-    out:
-    - outfile
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        outfile:
-          doc: input
-          type: File
-  33_Cut:
-    in:
-      input: 32_Text reformatting/outfile
-    out:
-    - out_file1
-    run:
-      class: Operation
-      id: Cut1
-      inputs:
-        input:
-          format: Any
-          type: File
-      outputs:
-        out_file1:
-          doc: tabular
-          type: File
-  34_Sort:
-    in:
-      input: 33_Cut/out_file1
-    out:
-    - out_file1
-    run:
-      class: Operation
-      id: sort1
-      inputs:
-        input:
-          format: Any
-          type: File
-      outputs:
-        out_file1:
-          doc: input
-          type: File
-  35_Unique:
-    in:
-      infile: 34_Sort/out_file1
-    out:
-    - outfile
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_sorted_uniq_1_1_0
-      inputs:
-        infile:
-          format: Any
-          type: File
-      outputs:
-        outfile:
-          doc: input
-          type: File
-  36_RNA STAR:
-    in:
-      algo|params|align|alignIntronMax: 27_Parse parameter value/integer_param
-      algo|params|align|alignIntronMin: 26_Parse parameter value/integer_param
-      refGenomeSource|GTFconditional|sjdbGTFfile: Genome annotation
-      refGenomeSource|GTFconditional|sjdbOverhang: 29_Parse parameter value/integer_param
-      refGenomeSource|genomeFastaFiles: Reference genome
-      singlePaired|input: 10_fastp/output_paired_coll
-      twopass|sj_precalculated: 35_Unique/outfile
     out:
     - output_log
     - splice_junctions
     - mapped_reads
-    - signal_unique_str1
-    - signal_uniquemultiple_str1
+  26_Concatenate datasets:
+    in:
+      inputs: 25_RNA STAR/splice_junctions
     run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_cat_0_1_1
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_rgrnastar_rna_star_2_7_10b+galaxy3
       inputs:
-        algo|params|align|alignIntronMax:
-          format: Any
+        inputs:
           type: File
-        algo|params|align|alignIntronMin:
           format: Any
+      outputs:
+        out_file1:
+          doc: input
           type: File
+    out:
+    - out_file1
+  27_Text reformatting:
+    in:
+      infile: 26_Concatenate datasets/out_file1
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
+      class: Operation
+      inputs:
+        infile:
+          type: File
+          format: Any
+      outputs:
+        outfile:
+          doc: input
+          type: File
+    out:
+    - outfile
+  28_Cut:
+    in:
+      input: 27_Text reformatting/outfile
+    run:
+      id: Cut1
+      class: Operation
+      inputs:
+        input:
+          type: File
+          format: Any
+      outputs:
+        out_file1:
+          doc: tabular
+          type: File
+    out:
+    - out_file1
+  29_Sort:
+    in:
+      input: 28_Cut/out_file1
+    run:
+      id: sort1
+      class: Operation
+      inputs:
+        input:
+          type: File
+          format: Any
+      outputs:
+        out_file1:
+          doc: input
+          type: File
+    out:
+    - out_file1
+  30_Unique:
+    in:
+      infile: 29_Sort/out_file1
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_sorted_uniq_1_1_0
+      class: Operation
+      inputs:
+        infile:
+          type: File
+          format: Any
+      outputs:
+        outfile:
+          doc: input
+          type: File
+    out:
+    - outfile
+  31_RNA STAR:
+    in:
+      refGenomeSource|GTFconditional|sjdbGTFfile: Genome annotation
+      refGenomeSource|GTFconditional|sjdbOverhang: 24_Parse parameter value/integer_param
+      refGenomeSource|genomeFastaFiles: Reference genome
+      singlePaired|input: 10_fastp/output_paired_coll
+      twopass|sj_precalculated: 30_Unique/outfile
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_iuc_rgrnastar_rna_star_2_7_10b+galaxy3
+      class: Operation
+      inputs:
         refGenomeSource|GTFconditional|sjdbGTFfile:
-          format: Any
           type: File
+          format: Any
         refGenomeSource|GTFconditional|sjdbOverhang:
-          format: Any
           type: File
+          format: Any
         refGenomeSource|genomeFastaFiles:
-          format: Any
           type: File
+          format: Any
         singlePaired|input:
-          format: Any
           type: File
+          format: Any
         twopass|sj_precalculated:
-          format: Any
           type: File
+          format: Any
       outputs:
         mapped_reads:
           doc: bam
@@ -553,25 +464,47 @@ steps:
         splice_junctions:
           doc: interval
           type: File
-  37_Junction Annotation:
-    in:
-      input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
     out:
-    - outputpdf
-    - outputjpdf
-    - outputxls
-    - stats
+    - output_log
+    - splice_junctions
+    - mapped_reads
+    - signal_unique_str1
+    - signal_uniquemultiple_str1
+  32_StringTie:
+    in:
+      guide|guide_source|ref_hist: Genome annotation
+      input_options|input_bam: 31_RNA STAR/mapped_reads
     run:
+      id: toolshed_g2_bx_psu_edu_repos_iuc_stringtie_stringtie_2_2_1+galaxy1
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_junction_annotation_5_0_1+galaxy2
+      inputs:
+        guide|guide_source|ref_hist:
+          type: File
+          format: Any
+        input_options|input_bam:
+          type: File
+          format: Any
+      outputs:
+        output_gtf:
+          doc: gtf
+          type: File
+    out:
+    - output_gtf
+  33_Junction Annotation:
+    in:
+      input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
+    run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_junction_annotation_5_0_1+galaxy2
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         refgene:
-          format: Any
           type: File
+          format: Any
       outputs:
         outputjpdf:
           doc: pdf
@@ -585,43 +518,50 @@ steps:
         stats:
           doc: txt
           type: File
-  38_Infer Experiment:
-    in:
-      input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
     out:
-    - output
+    - outputpdf
+    - outputjpdf
+    - outputxls
+    - stats
+  34_Junction Saturation:
+    in:
+      input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
     run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_junction_saturation_5_0_1+galaxy2
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_infer_experiment_5_0_1+galaxy2
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         refgene:
-          format: Any
           type: File
+          format: Any
       outputs:
-        output:
+        outputpdf:
+          doc: pdf
+          type: File
+        outputr:
           doc: txt
           type: File
-  39_Gene Body Coverage (BAM):
-    in:
-      batch_mode|input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
     out:
-    - outputcurvespdf
-    - outputtxt
+    - outputpdf
+    - outputr
+  35_Gene Body Coverage (BAM):
+    in:
+      batch_mode|input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_geneBody_coverage_5_0_1+galaxy2
+      class: Operation
       inputs:
         batch_mode|input:
-          format: Any
           type: File
+          format: Any
         refgene:
-          format: Any
           type: File
+          format: Any
       outputs:
         outputcurvespdf:
           doc: pdf
@@ -629,24 +569,23 @@ steps:
         outputtxt:
           doc: txt
           type: File
-  40_Inner Distance:
-    in:
-      input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
     out:
-    - outputpdf
+    - outputcurvespdf
     - outputtxt
-    - outputfreqtxt
+  36_Inner Distance:
+    in:
+      input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_inner_distance_5_0_1+galaxy2
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         refgene:
-          format: Any
           type: File
+          format: Any
       outputs:
         outputfreqtxt:
           doc: txt
@@ -657,107 +596,124 @@ steps:
         outputtxt:
           doc: txt
           type: File
-  41_Junction Saturation:
-    in:
-      input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
     out:
     - outputpdf
-    - outputr
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_junction_saturation_5_0_1+galaxy2
-      inputs:
-        input:
-          format: Any
-          type: File
-        refgene:
-          format: Any
-          type: File
-      outputs:
-        outputpdf:
-          doc: pdf
-          type: File
-        outputr:
-          doc: txt
-          type: File
-  42_Read Distribution:
+    - outputtxt
+    - outputfreqtxt
+  37_Infer Experiment:
     in:
-      input: 36_RNA STAR/mapped_reads
-      refgene: 13_Convert GTF to BED12/bed_file
-    out:
-    - output
+      input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
     run:
+      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_infer_experiment_5_0_1+galaxy2
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_read_distribution_5_0_1+galaxy2
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
         refgene:
-          format: Any
           type: File
+          format: Any
       outputs:
         output:
           doc: txt
           type: File
-  43_StringTie:
-    in:
-      guide|guide_source|ref_hist: Genome annotation
-      input_options|input_bam: 36_RNA STAR/mapped_reads
     out:
-    - output_gtf
+    - output
+  38_Read Distribution:
+    in:
+      input: 31_RNA STAR/mapped_reads
+      refgene: 14_Convert GTF to BED12/bed_file
     run:
+      id: toolshed_g2_bx_psu_edu_repos_nilesh_rseqc_rseqc_read_distribution_5_0_1+galaxy2
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_stringtie_stringtie_2_2_1+galaxy1
       inputs:
-        guide|guide_source|ref_hist:
-          format: Any
+        input:
           type: File
-        input_options|input_bam:
           format: Any
+        refgene:
           type: File
+          format: Any
       outputs:
-        output_gtf:
+        output:
+          doc: txt
+          type: File
+    out:
+    - output
+  39_gffread:
+    in:
+      input: 32_StringTie/output_gtf
+      reference_genome|genome_fasta: Reference genome
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_devteam_gffread_gffread_2_2_1_3+galaxy0
+      class: Operation
+      inputs:
+        input:
+          type: File
+          format: Any
+        reference_genome|genome_fasta:
+          type: File
+          format: Any
+      outputs:
+        output_exons:
+          doc: fasta
+          type: File
+    out:
+    - output_exons
+  40_StringTie merge:
+    in:
+      guide_gff: Genome annotation
+      input_gtf: 32_StringTie/output_gtf
+    run:
+      id: toolshed_g2_bx_psu_edu_repos_iuc_stringtie_stringtie_merge_2_2_1+galaxy1
+      class: Operation
+      inputs:
+        guide_gff:
+          type: File
+          format: Any
+        input_gtf:
+          type: File
+          format: Any
+      outputs:
+        out_gtf:
           doc: gtf
           type: File
-  44_MultiQC:
-    in:
-      results_0|software_cond|output_0|type|input: 36_RNA STAR/output_log
-      results_1|software_cond|output_0|type|input: 38_Infer Experiment/output
-      results_1|software_cond|output_1|type|input: 42_Read Distribution/output
-      results_1|software_cond|output_2|type|input: 41_Junction Saturation/outputr
-      results_1|software_cond|output_3|type|input: 37_Junction Annotation/stats
-      results_1|software_cond|output_4|type|input: 39_Gene Body Coverage (BAM)/outputtxt
-      results_1|software_cond|output_5|type|input: 40_Inner Distance/outputfreqtxt
     out:
-    - stats
-    - html_report
+    - out_gtf
+  41_MultiQC:
+    in:
+      results_0|software_cond|output_0|type|input: 31_RNA STAR/output_log
+      results_1|software_cond|output_0|type|input: 37_Infer Experiment/output
+      results_1|software_cond|output_1|type|input: 38_Read Distribution/output
+      results_1|software_cond|output_2|type|input: 34_Junction Saturation/outputr
+      results_1|software_cond|output_3|type|input: 33_Junction Annotation/stats
+      results_1|software_cond|output_4|type|input: 35_Gene Body Coverage (BAM)/outputtxt
+      results_1|software_cond|output_5|type|input: 36_Inner Distance/outputfreqtxt
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_iuc_multiqc_multiqc_1_11+galaxy1
+      class: Operation
       inputs:
         results_0|software_cond|output_0|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_0|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_1|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_2|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_3|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_4|type|input:
-          format: Any
           type: File
+          format: Any
         results_1|software_cond|output_5|type|input:
-          format: Any
           type: File
+          format: Any
       outputs:
         html_report:
           doc: html
@@ -765,47 +721,75 @@ steps:
         stats:
           doc: input
           type: File
-  45_StringTie merge:
-    in:
-      guide_gff: Genome annotation
-      input_gtf: 43_StringTie/output_gtf
     out:
-    - out_gtf
+    - stats
+    - html_report
+  42_rnaQUAST:
+    in:
+      gene_coordinates|gtf: Genome annotation
+      reference: Reference genome
+      transcripts: 39_gffread/output_exons
     run:
+      id: toolshed_g2_bx_psu_edu_repos_iuc_rnaquast_rna_quast_2_2_3+galaxy0
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_stringtie_stringtie_merge_2_2_1+galaxy1
       inputs:
-        guide_gff:
-          format: Any
+        gene_coordinates|gtf:
           type: File
-        input_gtf:
           format: Any
+        reference:
           type: File
+          format: Any
+        transcripts:
+          type: File
+          format: Any
       outputs:
-        out_gtf:
-          doc: gtf
+        fasta_files:
+          doc: input
           type: File
-  46_StringTie:
-    in:
-      guide|guide_source|ref_hist: 45_StringTie merge/out_gtf
-      input_options|input_bam: 36_RNA STAR/mapped_reads
+        short_report_pdf:
+          doc: pdf
+          type: File
+        stats:
+          doc: txt
+          type: File
     out:
-    - output_gtf
-    - exon_expression
-    - intron_expression
-    - transcript_expression
-    - exon_transcript_mapping
-    - intron_transcript_mapping
+    - fasta_files
+    - stats
+    - short_report_pdf
+  43_gffread:
+    in:
+      input: 40_StringTie merge/out_gtf
+      reference_genome|genome_fasta: Reference genome
     run:
+      id: toolshed_g2_bx_psu_edu_repos_devteam_gffread_gffread_2_2_1_3+galaxy0
       class: Operation
+      inputs:
+        input:
+          type: File
+          format: Any
+        reference_genome|genome_fasta:
+          type: File
+          format: Any
+      outputs:
+        output_exons:
+          doc: fasta
+          type: File
+    out:
+    - output_exons
+  44_StringTie:
+    in:
+      guide|guide_source|ref_hist: 40_StringTie merge/out_gtf
+      input_options|input_bam: 31_RNA STAR/mapped_reads
+    run:
       id: toolshed_g2_bx_psu_edu_repos_iuc_stringtie_stringtie_2_2_1+galaxy1
+      class: Operation
       inputs:
         guide|guide_source|ref_hist:
-          format: Any
           type: File
+          format: Any
         input_options|input_bam:
-          format: Any
           type: File
+          format: Any
       outputs:
         exon_expression:
           doc: tabular
@@ -825,43 +809,27 @@ steps:
         transcript_expression:
           doc: tabular
           type: File
-  47_gffread:
-    in:
-      input: 45_StringTie merge/out_gtf
-      reference_genome|genome_fasta: Reference genome
     out:
-    - output_exons
-    run:
-      class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_devteam_gffread_gffread_2_2_1_3+galaxy0
-      inputs:
-        input:
-          format: Any
-          type: File
-        reference_genome|genome_fasta:
-          format: Any
-          type: File
-      outputs:
-        output_exons:
-          doc: fasta
-          type: File
-  48_Filter collection:
+    - output_gtf
+    - exon_expression
+    - intron_expression
+    - transcript_expression
+    - exon_transcript_mapping
+    - intron_transcript_mapping
+  45_Filter collection:
     in:
       how|filter_source: Control IDs
-      input: 46_StringTie/transcript_expression
-    out:
-    - output_filtered
-    - output_discarded
+      input: 44_StringTie/transcript_expression
     run:
-      class: Operation
       id: __FILTER_FROM_FILE__
+      class: Operation
       inputs:
         how|filter_source:
-          format: Any
           type: File
+          format: Any
         input:
-          format: Any
           type: File
+          format: Any
       outputs:
         output_discarded:
           doc: input
@@ -869,73 +837,65 @@ steps:
         output_filtered:
           doc: input
           type: File
-  49_IsoformSwitchAnalyzeR:
+    out:
+    - output_filtered
+    - output_discarded
+  46_IsoformSwitchAnalyzeR:
     in:
       functionMode|genomeAnnotation: Genome annotation
-      functionMode|tool_source|averageSize: 29_Parse parameter value/integer_param
+      functionMode|tool_source|averageSize: 24_Parse parameter value/integer_param
       functionMode|tool_source|first_factor|factorLevel: 5_Input parameter/output
-      functionMode|tool_source|first_factor|trans_counts: 48_Filter collection/output_filtered
-      functionMode|tool_source|novoisoforms|stringtieAnnotation: 45_StringTie merge/out_gtf
+      functionMode|tool_source|first_factor|trans_counts: 45_Filter collection/output_filtered
+      functionMode|tool_source|novoisoforms|stringtieAnnotation: 40_StringTie merge/out_gtf
       functionMode|tool_source|second_factor|factorLevel: 4_Input parameter/output
-      functionMode|tool_source|second_factor|trans_counts: 48_Filter collection/output_discarded
-      functionMode|transcriptome: 47_gffread/output_exons
-    out:
-    - switchList
+      functionMode|tool_source|second_factor|trans_counts: 45_Filter collection/output_discarded
+      functionMode|transcriptome: 43_gffread/output_exons
     run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       inputs:
         functionMode|genomeAnnotation:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|averageSize:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|first_factor|factorLevel:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|first_factor|trans_counts:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|novoisoforms|stringtieAnnotation:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|second_factor|factorLevel:
-          format: Any
           type: File
+          format: Any
         functionMode|tool_source|second_factor|trans_counts:
-          format: Any
           type: File
+          format: Any
         functionMode|transcriptome:
-          format: Any
           type: File
+          format: Any
       outputs:
         switchList:
           doc: rdata
           type: File
-  4_Input parameter:
-    in: {}
-    out: []
-    run:
-      class: Operation
-      id: null
-      inputs: {}
-      outputs: {}
-  50_IsoformSwitchAnalyzeR:
-    in:
-      functionMode|robject: 49_IsoformSwitchAnalyzeR/switchList
     out:
     - switchList
-    - isoformAA
-    - isoformNT
-    - switchSummary
+  47_IsoformSwitchAnalyzeR:
+    in:
+      functionMode|robject: 46_IsoformSwitchAnalyzeR/switchList
     run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       inputs:
         functionMode|robject:
-          format: Any
           type: File
+          format: Any
       outputs:
         isoformAA:
           doc: fasta
@@ -949,33 +909,33 @@ steps:
         switchSummary:
           doc: tabular
           type: File
-  51_CPAT:
+    out:
+    - switchList
+    - isoformAA
+    - isoformNT
+    - switchSummary
+  48_CPAT:
     in:
-      c: 18_gffread/output_exons
-      gene: 50_IsoformSwitchAnalyzeR/isoformNT
+      c: 17_gffread/output_exons
+      gene: 47_IsoformSwitchAnalyzeR/isoformNT
       n: 16_gffread/output_exons
       r: Reference genome
-    out:
-    - orf_seqs
-    - orf_seqs_prob
-    - orf_seqs_prob_best
-    - no_orf_seqs
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_cpat_cpat_3_0_4+galaxy0
+      class: Operation
       inputs:
         c:
-          format: Any
           type: File
+          format: Any
         gene:
-          format: Any
           type: File
+          format: Any
         n:
-          format: Any
           type: File
+          format: Any
         r:
-          format: Any
           type: File
+          format: Any
       outputs:
         no_orf_seqs:
           doc: txt
@@ -989,107 +949,118 @@ steps:
         orf_seqs_prob_best:
           doc: tsv
           type: File
-  52_PfamScan:
+    out:
+    - orf_seqs
+    - orf_seqs_prob
+    - orf_seqs_prob_best
+    - no_orf_seqs
+  49_PfamScan:
     in:
       active_sites|active_file: Active sites dataset
-      fasta: 50_IsoformSwitchAnalyzeR/isoformAA
+      fasta: 47_IsoformSwitchAnalyzeR/isoformAA
       pfam_data: Pfam-A HMM Stockholm file
       pfam_library: Pfam-A HMM library
-    out:
-    - output
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_pfamscan_pfamscan_1_6+galaxy0
+      class: Operation
       inputs:
         active_sites|active_file:
-          format: Any
           type: File
+          format: Any
         fasta:
-          format: Any
           type: File
+          format: Any
         pfam_data:
-          format: Any
           type: File
+          format: Any
         pfam_library:
-          format: Any
           type: File
+          format: Any
       outputs:
         output:
           doc: tabular
           type: File
-  53_Remove beginning:
-    in:
-      input: 51_CPAT/orf_seqs_prob_best
     out:
-    - out_file1
+    - output
+  4_Input parameter:
+    in: {}
     run:
+      id:
       class: Operation
+      inputs: {}
+      outputs: {}
+    out: []
+  50_Remove beginning:
+    in:
+      input: 48_CPAT/orf_seqs_prob_best
+    run:
       id: Remove_beginning1
+      class: Operation
       inputs:
         input:
-          format: Any
           type: File
+          format: Any
       outputs:
         out_file1:
           doc: input
           type: File
-  54_Text reformatting:
-    in:
-      infile: 53_Remove beginning/out_file1
     out:
-    - outfile
+    - out_file1
+  51_Text reformatting:
+    in:
+      infile: 50_Remove beginning/out_file1
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_awk_tool_1_1_2
+      class: Operation
       inputs:
         infile:
-          format: Any
           type: File
+          format: Any
       outputs:
         outfile:
           doc: input
           type: File
-  55_Concatenate datasets:
+    out:
+    - outfile
+  52_Concatenate datasets:
     in:
       inputs: CPAT header
-      queries_0|inputs2: 54_Text reformatting/outfile
-    out:
-    - out_file1
+      queries_0|inputs2: 51_Text reformatting/outfile
     run:
-      class: Operation
       id: toolshed_g2_bx_psu_edu_repos_bgruening_text_processing_tp_cat_0_1_1
+      class: Operation
       inputs:
         inputs:
-          format: Any
           type: File
+          format: Any
         queries_0|inputs2:
-          format: Any
           type: File
+          format: Any
       outputs:
         out_file1:
           doc: input
           type: File
-  56_IsoformSwitchAnalyzeR:
-    in:
-      functionMode|coding_potential|analyzeCPAT: 55_Concatenate datasets/out_file1
-      functionMode|protein_domains|analyzePFAM: 52_PfamScan/output
-      functionMode|robject: 50_IsoformSwitchAnalyzeR/switchList
     out:
-    - switchList
-    - single_gene
+    - out_file1
+  53_IsoformSwitchAnalyzeR:
+    in:
+      functionMode|coding_potential|analyzeCPAT: 52_Concatenate datasets/out_file1
+      functionMode|protein_domains|analyzePFAM: 49_PfamScan/output
+      functionMode|robject: 47_IsoformSwitchAnalyzeR/switchList
     run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       inputs:
         functionMode|coding_potential|analyzeCPAT:
-          format: Any
           type: File
+          format: Any
         functionMode|protein_domains|analyzePFAM:
-          format: Any
           type: File
+          format: Any
         functionMode|robject:
-          format: Any
           type: File
+          format: Any
       outputs:
         single_gene:
           doc: pdf
@@ -1097,37 +1068,28 @@ steps:
         switchList:
           doc: rdata
           type: File
-  57_IsoformSwitchAnalyzeR:
-    in:
-      functionMode|coding_potential|analyzeCPAT: 55_Concatenate datasets/out_file1
-      functionMode|protein_domains|analyzePFAM: 52_PfamScan/output
-      functionMode|robject: 50_IsoformSwitchAnalyzeR/switchList
     out:
-    - plots_summary
-    - genes_consequences
-    - genes_wo_consequences
     - switchList
-    - mostSwitching
-    - consequencesSummary
-    - consequencesEnrichment
-    - splicingSummary
-    - splicingEnrichment
-    - splicing_fulldata
-    - consequences_fulldata
-    - isoformFeatures
+    - single_gene
+  54_IsoformSwitchAnalyzeR:
+    in:
+      functionMode|coding_potential|analyzeCPAT: 52_Concatenate datasets/out_file1
+      functionMode|protein_domains|analyzePFAM: 49_PfamScan/output
+      functionMode|robject: 47_IsoformSwitchAnalyzeR/switchList
     run:
+      id: |-
+        toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       class: Operation
-      id: toolshed_g2_bx_psu_edu_repos_iuc_isoformswitchanalyzer_isoformswitchanalyzer_1_20_0+galaxy5
       inputs:
         functionMode|coding_potential|analyzeCPAT:
-          format: Any
           type: File
+          format: Any
         functionMode|protein_domains|analyzePFAM:
-          format: Any
           type: File
+          format: Any
         functionMode|robject:
-          format: Any
           type: File
+          format: Any
       outputs:
         consequencesEnrichment:
           doc: tabular
@@ -1165,12 +1127,24 @@ steps:
         switchList:
           doc: rdata
           type: File
+    out:
+    - plots_summary
+    - genes_consequences
+    - genes_wo_consequences
+    - switchList
+    - mostSwitching
+    - consequencesSummary
+    - consequencesEnrichment
+    - splicingSummary
+    - splicingEnrichment
+    - splicing_fulldata
+    - consequences_fulldata
+    - isoformFeatures
   5_Input parameter:
     in: {}
-    out: []
     run:
+      id:
       class: Operation
-      id: null
       inputs: {}
       outputs: {}
-
+    out: []
