@@ -217,15 +217,13 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 
 # RNA-seq mapping and evaluation
 
-The following section can be considered as the hard-core part of the training, the reason is  not because of it’s complexity (not all the details about the computational procedures will be presented, just those elements required for a basic understanding), but because it allows to characterize isoform quantification approach as genome-guided-based method.
+Mapping is crucial in genome-guided-based isoform analysis as it allows for the accurate identification and quantification of RNA isoforms present in a sample. That section makes use of two main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, and **RSeQC**, a critical tool in isoform analysis that provides comprehensive quality assessment metrics and analyses to evaluate the reliability and integrity of RNA-seq data. 
 
 > <comment-title>Transcriptome-reconstruction approaches</comment-title>
 >
 >  The different methods for estimating transcript/isoform abundance can be classified depending on two main requirements: reference sequence and alignment. Reference-guided transcriptome assembly strategy requires to aligning sequencing reads to a reference genome first, and then assembling overlapping alignments into transcripts. In contrast, *de novo* transcriptome assembly methods directly reconstructs overlapping reads into transcripts by utilising the redundancy of sequencing reads themselves ({% cite Lu2013 %}).
 >
 {: .comment}
-
-In that section makes use of three main tools: **RNA STAR**, considered a state-of-the-art mapping tool for RNA-seq data, **RSeQC**, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and **StringTie**, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification.
 
 ## RNA-seq mapping with **RNA STAR**
 
@@ -536,17 +534,7 @@ Once the mapping is done, in this section we will use the information contained 
 
 The main reason underlying the greater accuracy of **StringTie** most likely derives from its optimization criteria. By balancing the coverage of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself ({% cite Pertea2015 %}).
 
-> <details-title>StringTie long RNA-seq assembly</details-title>
->
-> To handle the high error rates in the long reads, **StringTie** implements two techniques:
->
-> First, it corrects potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site that is supported by the most alignments among all nearby splice sites. 
->
-> Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold.
->
-{: .details}
-
-Despite in this training we make use of **RNA STAR** as mapping tool, it is possible to use different splice-aware aligner such as **HISAT2**. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated.
+Despite in this training we make use of **RNA STAR** as mapping tool, it is possible to use different splice-aware aligner such as **HISAT2**.
 
 This step could be divided into two substeps: transcriptome assembly and quantification isoform (fig. 12). The first step will allow us to obtain a transcriptome annotation, including coordinates of whole transcripts and exon localization. This information will be used for improving the quantification in the second step.
 
@@ -603,7 +591,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 {: .hands_on}
 
-**Stringtie** generates six collection with six elements each one, but we will use only the `transcript-level expression measurements` dataset collection.
+**StringTie** generates six collection with six elements each one, but we will use only the `transcript-level expression measurements` dataset collection.
 
 > <details-title>Transcription-level expression measurements file</details-title>
 >
