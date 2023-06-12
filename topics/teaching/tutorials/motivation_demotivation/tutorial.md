@@ -73,15 +73,15 @@ What is motivation?
 
 Motivation influences **direction**, **intensity**, **persistence** and **quality** of the learning behaviors.
 
-<!-- 
-> <hands-on-title>Recall a motivating learning experience (5 min - Silent reflection)</hands-on-title>
+
+> <hands-on-title>Recall a motivating learning experience - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
 >
 > Write in the shared notes about a **motivating** experience in your life (as a learner) and how it impacted you
 >
 >
-{: .hands_on}-->
+{: .hands_on}
 
-{% include _includes/quiz.html id="motivating_learning_experience.yaml" %}
+<!--{% include _includes/quiz.html id="motivating_learning_experience.yaml" %}-->
 
 > <tip-title>For trainer</tip-title>
 >
@@ -251,17 +251,18 @@ Motivation can go both ways: motivation and de-motivation are strictly connected
 Adult learners usually come motivated to courses and the point is to not demotivate them.
 In many cases, to not de-motivate learners is an excellent way to support motivation.
 
-<!-- 
-> <hands-on-title>Recall a demotivating experience (5 min - Silent reflection)</hands-on-title>
+
+> <hands-on-title>Recall a demotivating experience - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
 >
 > Write in the shared notes about a **demotivating** experience in your life (as a learner) and how it impacted you
 >
-{: .hands_on}-->
+{: .hands_on}
 
-{% include _includes/quiz.html id="demotivating_learning_experience.yaml" %}
+<!--{% include _includes/quiz.html id="demotivating_learning_experience.yaml" %}-->
 
 
-**Things you should not do as instructors**
+## Things you should not do as instructors
+
 - Tell learners they are rubbish because they use a technology, etc
 - Say negative things about a technology or applications
 - Pretend to know more than what you do
@@ -347,7 +348,7 @@ It can be difficult to avoid these demotivators entirely. Teaching yourself to a
 Motivation is personal and it is very difficult to work with demotivated learners. Often, teachers cannot do much with deep lack of motivation.
 But this is not always true: **there are things a trainer can do to support learners' motivation and to NOT demotivate them**. For example, using stereotypes will demotivate minority-status individuals.
 
-**What can we do to increase learners' motivation?**
+## What can we do to increase learners' motivation?
 
 We can act to establish or reinforce the value of goals, we can help build positive expectancies and we can definitely create an environment that supports motivation.
 
@@ -422,7 +423,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-> <hands-on-title>Strategies to improve motivation - _⏰ 15 min - Groups of 2 people_</hands-on-title>
+> <hands-on-title>Strategies to improve motivation - _{% icon time %} 15 min - Groups of 2 people_</hands-on-title>
 >
 > - Pick 1 strategy associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
 >
