@@ -23,6 +23,7 @@ contributions:
     - fpsom
     - allegravia
     - ppalagi
+    - gallardoalba
     - elixir-goblet-ttt
   funding:
     - erasmusplus
