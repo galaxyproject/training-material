@@ -508,9 +508,9 @@ Merqury works by comparing k-mers of an assembly to those from unassembled high-
 
 Let's have a closer look at the copy number plots for each of the three species. Merqury will generate k-mers from the raw sequencing data (in the following called the 'read set') and will compare them to the assembly, in contrast to genomescope. Despite being diploid or triploid the species only got plotted with the primary assembly. This is why only one-copy k-mers get evaluated.
 
-![Figure 14: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers (CN) plot of Eschrichtius robustus. The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
+![Figure 14: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers (CN) plot of the whale (*Eschrichtius robustus*). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
 
-The small black area indicates that most of the k-mers found in the read set are also found in the assembly (but not all). This plot indicates a sequencing coverage at ~30x.
+The small black area indicates that most of the k-mers found in the read set are also found in the assembly (but not all since only the primary assembly got plotted). It reflects a highly homozygous assembly. This plot indicates a sequencing coverage at ~30x as seen before with genomescope.
 
 > <question-title>Genome profile question</question-title>
 >
@@ -520,18 +520,12 @@ The small black area indicates that most of the k-mers found in the read set are
 > >
 > > ![Figure 15: Merqury plot](../../images/post-assembly-QC/merqury_comparison_plot.png "Merqury copy numbers (CN) plot of Chondrosia reniformis (A) and Erythrolamprus reginae (B). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
 > >
-> > - (A) The sponge (*Chondrosia reniformis*) 
-> > - (B) The snake (*Erythrolamprus reginae*) 
+> > - (A) The sponge (*Chondrosia reniformis*) does have two peaks as seen before with genomescope which is typical for a diploid species. The large black area indicates that there is a high amount of k-mers in the read set which is not used in the assembly since only the primary assembly got plotted. The secondary assembly is missing.
+> > - (B) The snake (*Erythrolamprus reginae*) does have three peaks as seen before with genomescope which is typical for a triploid species. The black area is even larger compared to the sponge since only the primary assembly got plotted. The secondary and third assembly are missing. 
 > >
 > {: .solution}
 >
 {: .question}
-
-A. The large black area indicates that there is a high amount of k-mers in the reads set, which are not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. The red area represents the one-copy k-mers in the genome (heterozygous part). This plot indicates a sequencing coverage at ~90x.
-
-B. The small black area indicates that most of the k-mers found in the reads set are also found in the assembly (but not all). This plot indicates a sequencing coverage at ~30x.
-
-C. As before with chondrosia reniformis here the large black area can indicate the same: a high amount of k-mers in the reads set is not used in the assembly. This can indicate a high amount of contamination or sequencing errors in the read set. It could also mean that there are missing sequences in the assembly. This plot indicates a sequencing coverage at ~23x.
 
 
 ## Providing assembly statistics with **gfastats**
@@ -686,12 +680,9 @@ Bandage is a tool to visualise de novo assembly graphs with connections. ({% cit
 {: .question}
 
 
-
-
-
-
 # Conclusion
 
 In conclusion, it's worth to run the the post-assembly workflow to assess the quality of genome assemblies. The following table contains metrics to sum up the quality control.
 
-![Figure 21:  Final stats](../../images/post-assembly-QC/ "This table contains 10 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
+
+![Figure 21:  Final stats](../../images/post-assembly-QC/table_of_metrics.png "This table contains 9 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
