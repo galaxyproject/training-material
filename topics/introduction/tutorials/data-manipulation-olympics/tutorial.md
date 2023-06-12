@@ -1542,7 +1542,7 @@ First, let's get this data for the 2022 Olympics
 
 > <hands-on-title>Get 2022 Olympics data</hands-on-title>
 >
-> 1. {% tool [Import](upload1) %} the file `country-information.tsv` via link
+> 1. {% tool [Import](upload1) %} the file `olympics_2022.tsv` via link
 >
 >    ```
 >    {{page.zenodo_link}}/files/olympics_2022.tsv
