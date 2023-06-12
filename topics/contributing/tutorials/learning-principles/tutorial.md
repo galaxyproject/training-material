@@ -262,7 +262,7 @@ The Carpentries (a global organization building global capacity in essential dat
 {: .details}
 
 
-#  Cognitivist Learning Theory: Memory and learning
+##  Cognitivist Learning Theory: Memory and learning
 
 In a simple model from cognitive science, learning happens when information moves from **working memory** to **long-term memory**. This process can be impacted by **environment**
 
