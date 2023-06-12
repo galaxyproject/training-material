@@ -179,8 +179,7 @@ In the following sections we will explore the most important learning theories.
 >
 > #### Constructivist Learning Theory
 >
-> **Constructivism** holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of
-information is assimilated and deposited into a network of previously existing knowledge and experiences  ({% cite Abbot1999 %}). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with **psychological constructivism** and Lev Vigotsky with **social constructivism**.
+> **Constructivism** holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of information is assimilated and deposited into a network of previously existing knowledge and experiences  ({% cite Abbot1999 %}). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with **psychological constructivism** and Lev Vigotsky with **social constructivism**.
 >
 >**Psychological constructivism** maintains the idea that the individual, both through cognitive and social aspects of knowledge as well as affective ones, is not a mere product of the environment or a simple result of his or her internal dispositions, but a construction of his or her own that is produced day by day as a result of the interaction between these two factors. The driving force of this activity would be cognitive conflict; in any constructivist activity there must be a circumstance that shakes the previous structures of knowledge and forces a rearrangement of the old knowledge in order to assimilate the new.
 >
