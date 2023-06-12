@@ -532,7 +532,7 @@ What are the uses of this tool?
     - Align instruction with learners' level of complexity of thinking as well as experience.
 
 
-# Critical Learning Theory: The Hidden Curriculum
+## Critical Learning Theory: The Hidden Curriculum
 
 The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum, relying on the organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
 
