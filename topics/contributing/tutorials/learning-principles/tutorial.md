@@ -96,7 +96,7 @@ Why is it important to learn about how people learn?
 * Understanding  how people learn makes you a more aware and therefore better teacher
 * You  can use such knowledge to improve your day-to-day teaching
 
-Ausubel, quoted by {% cite Dnarte2011 %}, indicates that meaningful learning generally arises from a process of learning to learn. According him, ff meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.
+According the  **Meaningful Learning Theory**, developed by the psychologist David Ausubel, meaningful learning generally arises from a process of learning to learn. He considers that if meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.
 
 
 ## Learning metaphors, theories and models
