@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0eb893ab4a3f5d58a22e7bff82410d2ebf68095d",
+  release: "galaxy-training-network@9ba3889abaf8f7c4ec79662dce5e70fc3bf5b5a7",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -50,7 +50,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome-wide alternative splicing analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-19 15:09:23 +0000">
+<meta name="DC.date" content="2023-06-11 22:57:29 +0000">
 <meta name="DC.creator" content="Cristóbal Gallardo">
 <meta name="DC.creator" content="Lucille Delisle">
 
@@ -92,7 +92,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-19 15:09:23 +0000",
+  "dateModified": "2023-06-11 22:57:29 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Genome-wide alternative splicing analysis",
   "interactivityType": "mixed",
@@ -150,7 +150,7 @@ Sentry.init({
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html",
   "timeRequired": "PT3H",
   "teaches": "Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between cancer and healthy tissues\n - Evaluate the differential alternative splicing in specific genes",
-  "keywords": "transcriptomics, alternative-splicing, isoform-switching",
+  "keywords": "transcriptomics, alternative splicing, isoform switching",
   "description": "The questions this  addresses are:\n - Are there statistically significant differences in gene splicing patterns between samples?\n - Are there significant isoform switching events between the experimental conditions?\n\n\nThe objectives are:\n - Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between cancer and healthy tissues\n - Evaluate the differential alternative splicing in specific genes\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -299,11 +299,11 @@ Sentry.init({
   "mentions": [
     {
       "@type": "Thing",
-      "name": "alternative-splicing"
+      "name": "alternative splicing"
     },
     {
       "@type": "Thing",
-      "name": "isoform-switching"
+      "name": "isoform switching"
     }
   ],
   "abstract": "# Introduction"
@@ -657,7 +657,7 @@ Sentry.init({
                 <li class="btn btn-default supporting_material">
 
 
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7941871">
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7974884">
     <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
 </a>
 
@@ -725,21 +725,15 @@ Sentry.init({
 	
 
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
-			UseGalaxy.org.au
-		</a>
 	</li>
     
 
@@ -760,7 +754,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 19, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 11, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -810,15 +804,19 @@ Sentry.init({
       <li><a href="#read-pre-processing-with-fastp" id="markdown-toc-read-pre-processing-with-fastp">Read pre-processing with fastp</a></li>
     </ol>
   </li>
-  <li><a href="#rna-seq-mapping-and-isoform-quantification" id="markdown-toc-rna-seq-mapping-and-isoform-quantification">RNA-seq mapping and isoform quantification</a>    <ol>
+  <li><a href="#rna-seq-mapping-and-evaluation" id="markdown-toc-rna-seq-mapping-and-evaluation">RNA-seq mapping and evaluation</a>    <ol>
       <li><a href="#rna-seq-mapping-with-rna-star" id="markdown-toc-rna-seq-mapping-with-rna-star">RNA-seq mapping with <strong>RNA STAR</strong></a></li>
       <li><a href="#rna-seq-specific-quality-control-metrics-with-rseqc" id="markdown-toc-rna-seq-specific-quality-control-metrics-with-rseqc">RNA-seq specific quality control metrics with <strong>RSeQC</strong></a></li>
-      <li><a href="#transcriptome-assembly-and-quantification-with-stringtie" id="markdown-toc-transcriptome-assembly-and-quantification-with-stringtie">Transcriptome assembly and quantification with <strong>StringTie</strong></a></li>
     </ol>
   </li>
-  <li><a href="#isoform-analysis-with-isoformswitchanalyzer" id="markdown-toc-isoform-analysis-with-isoformswitchanalyzer">Isoform analysis with <strong>IsoformSwitchAnalyzeR</strong></a>    <ol>
+  <li><a href="#transcriptome-assembly-quantification-and-evaluation" id="markdown-toc-transcriptome-assembly-quantification-and-evaluation">Transcriptome assembly, quantification and evaluation</a>    <ol>
+      <li><a href="#reference-based-transcriptome-assembly-and-quantification-with-stringtie" id="markdown-toc-reference-based-transcriptome-assembly-and-quantification-with-stringtie">Reference-based transcriptome assembly and quantification with <strong>StringTie</strong></a></li>
+      <li><a href="#transcriptome-evaluation" id="markdown-toc-transcriptome-evaluation">Transcriptome evaluation</a></li>
+    </ol>
+  </li>
+  <li><a href="#isoform-switching-analysis-with-isoformswitchanalyzer" id="markdown-toc-isoform-switching-analysis-with-isoformswitchanalyzer">Isoform switching analysis with <strong>IsoformSwitchAnalyzeR</strong></a>    <ol>
       <li><a href="#split-collection-between-the-2-conditions" id="markdown-toc-split-collection-between-the-2-conditions">Split collection between the 2 conditions</a></li>
-      <li><a href="#import-data-into-isoformswitchanalyzer" id="markdown-toc-import-data-into-isoformswitchanalyzer">Import data into <strong>IsoformSwitchAnalyzeR</strong></a></li>
+      <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
       <li><a href="#pre-processing-step" id="markdown-toc-pre-processing-step">Pre-processing step</a></li>
       <li><a href="#outward-sequence-analysis" id="markdown-toc-outward-sequence-analysis">Outward sequence analysis</a></li>
       <li><a href="#isoform-switching-analysis" id="markdown-toc-isoform-switching-analysis">Isoform switching analysis</a></li>
@@ -853,18 +851,18 @@ Sentry.init({
         <li>
           <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR9050437_Health	https://zenodo.org/record/7941871/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050437_Health	https://zenodo.org/record/7941871/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050438_Health	https://zenodo.org/record/7941871/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050438_Health	https://zenodo.org/record/7941871/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050439_Health	https://zenodo.org/record/7941871/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050439_Health	https://zenodo.org/record/7941871/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050440_Cancer	https://zenodo.org/record/7941871/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050440_Cancer	https://zenodo.org/record/7941871/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050441_Cancer	https://zenodo.org/record/7941871/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050441_Cancer	https://zenodo.org/record/7941871/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR9050437_Health	https://zenodo.org/record/7974884/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
+SRR9050437_Health	https://zenodo.org/record/7974884/files/SRR9050437R_health.fastq.gz	fastqsanger.gz	2
+SRR9050438_Health	https://zenodo.org/record/7974884/files/SRR9050438F_health.fastq.gz	fastqsanger.gz	1
+SRR9050438_Health	https://zenodo.org/record/7974884/files/SRR9050438R_health.fastq.gz	fastqsanger.gz	2
+SRR9050439_Health	https://zenodo.org/record/7974884/files/SRR9050439F_health.fastq.gz	fastqsanger.gz	1
+SRR9050439_Health	https://zenodo.org/record/7974884/files/SRR9050439R_health.fastq.gz	fastqsanger.gz	2
+SRR9050440_Cancer	https://zenodo.org/record/7974884/files/SRR9050440F_cancer.fastq.gz	fastqsanger.gz	1
+SRR9050440_Cancer	https://zenodo.org/record/7974884/files/SRR9050440R_cancer.fastq.gz	fastqsanger.gz	2
+SRR9050441_Cancer	https://zenodo.org/record/7974884/files/SRR9050441F_cancer.fastq.gz	fastqsanger.gz	1
+SRR9050441_Cancer	https://zenodo.org/record/7974884/files/SRR9050441R_cancer.fastq.gz	fastqsanger.gz	2
+SRR9050442_Cancer	https://zenodo.org/record/7974884/files/SRR9050442F_cancer.fastq.gz	fastqsanger.gz	1
+SRR9050442_Cancer	https://zenodo.org/record/7974884/files/SRR9050442R_cancer.fastq.gz	fastqsanger.gz	2
 </code></pre></div>          </div>
         </li>
         <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
@@ -905,15 +903,12 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
         <li>
           <p>Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CPAT_header.tab  https://zenodo.org/record/7941871/files/CPAT_header.tab
-active_site.dat.gz	https://zenodo.org/record/7941871/files/active_site.dat.gz
-gencode.v43.lncRNA_transcripts.fa.gz	https://zenodo.org/record/7941871/files/gencode.v43.lncRNA_transcripts.fa.gz
-gencode.v43.pc_transcripts.fa.gz	https://zenodo.org/record/7941871/files/gencode.v43.pc_transcripts.fa.gz
-gencode.v43.annotation.gtf.gz	https://zenodo.org/record/7941871/files/gencode.v43.annotation.gtf.gz
-gencode.v43.transcripts.fa.gz	https://zenodo.org/record/7941871/files/gencode.v43.transcripts.fa.gz
-GRCh38.p13.genome.fa.gz	https://zenodo.org/record/7941871/files/GRCh38.p13.genome.fa.gz
-Pfam-A.hmm.dat.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.dat.gz
-Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CPAT_header.tab  https://zenodo.org/record/7974884/files/CPAT_header.tab
+active_site.dat.gz	https://zenodo.org/record/7974884/files/active_site.dat.gz
+GRCh38.p13.chrom5.gtf	https://zenodo.org/record/7974884/files/GRCh38.p13.chrom5.gtf
+GRCh38.p13.chrom5.fasta.gz	https://zenodo.org/record/7974884/files/GRCh38.p13.chrom5.fasta.gz
+Pfam-A.hmm.dat.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.dat.gz
+Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
 </code></pre></div>          </div>
         </li>
         <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
@@ -1066,12 +1061,6 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
             </li>
           </ul>
         </li>
-        <li>In <em>“Overrepresented Sequence Analysis”</em>:
-          <ul>
-            <li><em>“Enable overrepresented analysis”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-            <li><em>“Overrepresentation sampling”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
-          </ul>
-        </li>
         <li>In <em>“Filter Options”</em>:
           <ul>
             <li>In <em>“Quality filtering options”</em>:
@@ -1088,9 +1077,9 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<h1 id="rna-seq-mapping-and-isoform-quantification">RNA-seq mapping and isoform quantification</h1>
+<h1 id="rna-seq-mapping-and-evaluation">RNA-seq mapping and evaluation</h1>
 
-<p>The following section can be considered as the hard-core part of the training, the reason is  not because of it’s complexity (not all the details about the computational procedures will be presented, just those elements required for a basic understanding), but because it allows to characterize isoform quantification approach as genome-guided-based method.</p>
+<p>Mapping is crucial in genome-guided-based isoform analysis as it allows for the accurate identification and quantification of RNA isoforms present in a sample. That section makes use of two main tools: <strong>RNA STAR</strong>, considered a state-of-the-art mapping tool for RNA-seq data, and <strong>RSeQC</strong>, a critical tool in isoform analysis that provides comprehensive quality assessment metrics and analyses to evaluate the reliability and integrity of RNA-seq data.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-transcriptome-reconstruction-approaches"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Transcriptome-reconstruction approaches</div>
@@ -1099,14 +1088,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<p>In that section makes use of three main tools: <strong>RNA STAR</strong>, considered a state-of-the-art mapping tool for RNA-seq data, <strong>RSeQC</strong>, a package that allows comprehensively evaluate different aspects of the RNA-seq data, and <strong>StringTie</strong>, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification.</p>
-
 <h2 id="rna-seq-mapping-with-rna-star">RNA-seq mapping with <strong>RNA STAR</strong></h2>
 
 <p><strong>RNA STAR</strong> is a splice-aware RNA-seq alignment tool that allows to identify canonical and non-canonical splice junctions by making use of sequential maximum mappable seed search in uncompressed suffix arrays followed by seed clustering and stitching procedure (<span class="citation"><a href="#Krianovi2017">Križanović <i>et al.</i> 2017</a></span>). One advantage of <strong>RNA STAR</strong> with respect to other tools is that it includes a feature called <em>two-pass mode</em>, a framework in which splice junctions are separately discovered and quantified, allowing robustly and accurately identify  splice junction patterns for differential splicing analysis and variant discovery.</p>
 
-<blockquote class="details">
-  <div class="box-title details-title" id="details-rna-star-two-pass-mode"><button class="gtn-boxify-button details" type="button" aria-controls="details-rna-star-two-pass-mode" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: RNA STAR two-pass mode<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-rna-star-two-pass-mode"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: RNA STAR two-pass mode</div>
 
   <p>During two-pass mode splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity (fig. 3). Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions that one-pass alignment (<span class="citation"><a href="#Veeneman2015">Veeneman <i>et al.</i> 2015</a></span>).</p>
 
@@ -1114,19 +1101,86 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<p>The choice of <strong>RNA STAR</strong> as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use <strong>GMAP</strong> as alignment tool (<span class="citation"><a href="#Krianovi2017">Križanović <i>et al.</i> 2017</a></span>).</p>
+<p>The choice of <strong>RNA STAR</strong> as mapper is also determined by the sequencing technology; it has been demonstrated adequate for short-read sequencing data, but when using long-read data, such as PacBio or ONT reads, it is recommended to use <strong>Minimap2</strong> as alignment tool.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-intron-spanning-in-rna-seq-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Intron spanning in RNA-seq analysis</div>
+  <div class="box-title comment-title" id="comment-inference-of-intron-size-optional"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Inference of intron size (optional)</div>
 
-  <p>RNA-seq mappers need to face the challenge associated with intron spanning of mature mRNA molecules, from which introns have been removed by splicing (single short read might align to two locations that are separated by 10 kbp or more). The complexity of this operation can be better understood if we take in account that for a typical human RNA-seq data set using 100-bp reads, more than 35% of the reads will span multiple exons.</p>
+  <p>If you are interested in analyzing non-human samples, it is a good idea to infer the <strong>minimium and maximum intron sizes</strong> before running <strong>RNA STAR</strong>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-inference-of-intron-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inference of intron size</div>
+
+    <ol>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="link"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+          <li><em>“Advanced options”</em>: <code class="language-plaintext highlighter-rouge">Set advanced options</code>
+            <ul>
+              <li><em>“Ignore groups without exons”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output as <code class="language-plaintext highlighter-rouge">BED12 annotation</code></p>
+      </li>
+      <li><span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED tool" aria-role="link"><strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: gene2exon1</span></span> with the following parameters:
+        <ul>
+          <li><em>“Extract”</em>: <code class="language-plaintext highlighter-rouge">Introns</code>
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{print $3-$2}</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>“<em>On column</em>”: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+          <li>“<em>In</em>”: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+          <li>“<em>Output unique values</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        </ul>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}</code></li>
+        </ul>
+      </li>
+      <li>
+        <p>Rename the output as <code class="language-plaintext highlighter-rouge">Minimum intron size</code></p>
+      </li>
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}</code></li>
+        </ul>
+      </li>
+      <li>Rename the output as <code class="language-plaintext highlighter-rouge">Maximum intron size</code></li>
+    </ol>
+
+  </blockquote>
 
 </blockquote>
 
-<p>So, let’s perform the mapping step.</p>
+<p>Now we can perform the mapping step.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-encode-options"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: ENCODE options</div>
+
+  <p>In this training, for <strong>RNA STAR</strong>, we adopted the parameters from the <a href="https://www.encodeproject.org/pipelines/">ENCODE pipeline</a>, developed by the ENCODE RNA Working Group. It is <strong>specially designed for the human genome</strong>. If your samples belong to a different organism, probably you will need to adapt the configuration a bit. You can find more information in the <a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf"><strong>RNA STAR</strong> manual</a>.</p>
+
+</blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-intermediate-file-with-rna-star"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Generate intermediate file with RNA STAR</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="link"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</span></span> with the following parameters:
@@ -1138,15 +1192,147 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
         </li>
         <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use reference genome from history and create temporary index</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.genome.fa.gz</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
             <li><em>“Build index with or without known splice junctions annotation”</em>: <code class="language-plaintext highlighter-rouge">build index with gene-model</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+                <li><em>“Length of the genomic sequence around annotated junctions</em>”: <code class="language-plaintext highlighter-rouge">150</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Use 2-pass mapping for more sensitive novel splice junction discovery”</em>: <code class="language-plaintext highlighter-rouge">Yes, perform single-sample 2-pass mapping of all reads</code></li>
+        <li><em>“Would you like to set additional output filters?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Would you like to keep only reads that contain junctions that passed filtering?</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Maximum number of alignments to output a read’s alignment results, plus 1</em>”: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Maximum number of mismatches to output an alignment, plus 1</em>”: <code class="language-plaintext highlighter-rouge">999</code></li>
+            <li><em>“Maximum ratio of mismatches to read length</em>”: <code class="language-plaintext highlighter-rouge">0.04</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Algorithmic settings”</em>:
+          <ul>
+            <li><em>“Configure seed, alignment and limits options</em>”: <code class="language-plaintext highlighter-rouge">Extended parameter list</code>
+              <ul>
+                <li>In <em>“Alignment parameters”</em>:
+                  <ul>
+                    <li><em>“Minimum intron size</em>”: <code class="language-plaintext highlighter-rouge">20</code></li>
+                    <li><em>“Maximum intron size</em>”: <code class="language-plaintext highlighter-rouge">1000000</code></li>
+                    <li><em>“Maximum gap between two mates</em>”: <code class="language-plaintext highlighter-rouge">1000000</code></li>
+                    <li><em>“Minimum overhang for spliced alignments</em>”: <code class="language-plaintext highlighter-rouge">8</code></li>
+                    <li><em>“Minimum overhang for annotated spliced alignments</em>”: <code class="language-plaintext highlighter-rouge">1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-intron-size-values"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Intron size values</div>
+
+    <p>Here we are using the parameters recommended by <strong>ENCODE</strong> for human samples. If you are working with a different organism, you can use the intron sizes computed previously.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<p>The first <strong>RNA STAR</strong> run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 &gt; 0), unannotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 &gt; 5).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-pre-processing-of-splice-junction-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Pre-processing of splice junction coordinates</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">spliced junctions.bed</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">($5 &gt; 0 &amp;&amp; $7 &gt; 2 &amp;&amp; $6==0)</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table with the following parameters:
+      <ul>
+        <li>“<em>Cut columns</em>”: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c4,c5,c6</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>“<em>On column</em>”: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Unique lines tool" aria-role="link"><strong>Unique lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> assuming sorted input file with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Splicing database</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Finally, we will re-run <strong>RNA STAR</strong> in order to integrate the information about the new splicing events in the analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-sequence-alignment-with-star"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Sequence alignment with STAR</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="link"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</span></span> with the following parameters:
+      <ul>
+        <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RNA-Seq FASTQ/FASTA paired reads”</em>: <code class="language-plaintext highlighter-rouge">Trimmed samples</code> (output of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use reference genome from history and create temporary index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+            <li><em>“Build index with or without known splice junctions annotation”</em>: <code class="language-plaintext highlighter-rouge">build index with gene-model</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Use 2-pass mapping for more sensitive novel splice junction discovery”</em>: <code class="language-plaintext highlighter-rouge">Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pregenerated splice junctions datasets of your samples”</em>: <code class="language-plaintext highlighter-rouge">Splicing database</code>
+              <ul>
+                <li><em>“Length of the genomic sequence around annotated junctions</em>”: <code class="language-plaintext highlighter-rouge">150</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Would you like to set additional output filters?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><em>“Would you like to keep only reads that contain junctions that passed filtering?</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Maximum number of alignments to output a read’s alignment results, plus 1</em>”: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Maximum number of mismatches to output an alignment, plus 1</em>”: <code class="language-plaintext highlighter-rouge">999</code></li>
+            <li><em>“Maximum ratio of mismatches to read length</em>”: <code class="language-plaintext highlighter-rouge">0.04</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Algorithmic settings”</em>:
+          <ul>
+            <li><em>“Configure seed, alignment and limits options</em>”: <code class="language-plaintext highlighter-rouge">Extended parameter list</code>
+              <ul>
+                <li>In <em>“Alignment parameters”</em>:
+                  <ul>
+                    <li><em>“Minimum intron size</em>”: <code class="language-plaintext highlighter-rouge">20</code></li>
+                    <li><em>“Maximum intron size</em>”: <code class="language-plaintext highlighter-rouge">1000000</code></li>
+                    <li><em>“Maximum gap between two mates</em>”: <code class="language-plaintext highlighter-rouge">1000000</code></li>
+                    <li><em>“Minimum overhang for spliced alignments</em>”: <code class="language-plaintext highlighter-rouge">8</code></li>
+                    <li><em>“Minimum overhang for annotated spliced alignments</em>”: <code class="language-plaintext highlighter-rouge">1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
         <li><em>“Compute coverage”</em>: <code class="language-plaintext highlighter-rouge">Yes in bedgraph format</code>
           <ul>
             <li><em>“Generate a coverage for each strand (stranded coverage)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1165,26 +1351,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>RNA-seq-specific quality control metrics, such as sequencing depth, read distribution and coverage uniformity, are essential to ensure that the RNA-seq data are adequate for transcriptome reconstruction and <abbr title="alternative splicing">AS</abbr> analysis. For example, the use of RNA-seq with unsaturated sequencing depth gives imprecise estimations  and fails to detect low abundance splice junctions, limiting the precision of many analyses (<span class="citation"><a href="#Wang2012">Wang <i>et al.</i> 2012</a></span>).</p>
 
-<p>In this section we will make use of of the <strong>RSeQC</strong> toolkit in order to generate the RNA-seq-specific quality control metrics. But before starting, we need to convert the annotation GTF file into BED12 format, which will be required in subsequent steps.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-gtf-to-bed12-gtf-conversion"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: GTF to BED12 GTF conversion</div>
-
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="link"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
-        <li><em>“Advanced options”</em>: <code class="language-plaintext highlighter-rouge">Set advanced options</code>
-          <ul>
-            <li><em>“Ignore groups without exons”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li>Rename the output as <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
-  </ol>
-
-</blockquote>
+<p>In this section we will make use of of the <strong>RSeQC</strong> toolkit in order to generate the RNA-seq-specific quality control metrics.</p>
 
 <p>We are going to use the following RSeQC modules:</p>
 
@@ -1194,6 +1361,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
   <li><strong>Junction Saturation</strong>: check junction saturation</li>
   <li><strong>Junction Annotation</strong>: compares detected splice junctions to a reference gene model</li>
   <li><strong>Read Distribution</strong>: calculates how mapped reads are distributed over genome features</li>
+  <li><strong>Inner Distance</strong>: calculate the inner distance (or insert size) between two paired RNA reads</li>
 </ul>
 
 <p>Once all required outputs have been generated, we will integrate them by using <strong>MultiQC</strong> in order to interpret the results.</p>
@@ -1218,6 +1386,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
+        <li><em>“Minimum intron length (bp)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
         <li><em>“Output R-Script”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
@@ -1225,9 +1394,16 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
+        <li><em>“Minimum intron length (bp)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1" title="Read Distribution tool" aria-role="link"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2" title="Inner Distance tool" aria-role="link"><strong>Inner Distance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
@@ -1240,7 +1416,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <p>Now, we will integrate the outputs into <strong>MultiQC</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-report-integration-with-multiqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Report integration with MultiQC</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> with the following parameters:
@@ -1319,6 +1495,15 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
                             </li>
                           </ul>
                         </li>
+                        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Inner Distance output”</em>
+                          <ul>
+                            <li><em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">Inner distance</code>
+                              <ul>
+                                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC inner distance: frequency file”</em>: select <strong>frequency (TXT)</strong> collections</li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -1335,13 +1520,13 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <p>First, we will evaluate the plot corresponding to the <strong>RNA STAR</strong> alignment scores (fig. 4), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/star_alignment.png" alt="Figure 04. RNA STAR alignment stats plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> RNA star alignment stats plot. Note that STAR counts a paired-end read as one read.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/star_alignment.png" alt="Figure 04. RNA STAR alignment stats plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> RNA STAR alignment stats percentage plot. Note that STAR counts a paired-end read as one read.</figcaption></figure>
 
 <p>Now we can have a look at the <strong>RSeQC</strong> results;  we will evaluate the RSeQC <strong>Read Distribution plot</strong> (fig. 5).</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_read_distribution_plot.png" alt="Figure 05. RSeQC read distribution plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_read_distribution_plot.png" alt="Figure 05. RSeQC read distribution plot. " width="1232" height="672" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions). Distribution of all features (A). Distribution of low frequency features (B).</figcaption></figure>
 
-<p>In that case, all samples show a similar trend, both in health and cancer samples, with most reads mapping on CDS exons (around 72%), 5’UTR (around 4.5%) and 3’UTR (around 13.5%).</p>
+<p>According the figure 5.A, all samples show show a similar trend, both in health and cancer samples, with most reads mapping on CDS exons (around 72%), 5’UTR (around 4.5%) and 3’UTR (around 13.5%). We can also evaluate the frequency of less common features by hidding the main ones; it can be done by clicking in the correspoding feature label. According the figure, mapping on the region <code class="language-plaintext highlighter-rouge">TSS_up_1kb</code> (transcription start site up to 5’kb upstream) seems to be slighly more frequent in cancer samples (fig. 5B).</p>
 
 <p>Now we will evaluate the results of the <strong>Infer Experiment</strong> module, which allows to speculate the experimental design (whether sequencing is strand-specific, and if so, how reads are stranded) by sampling a subset of reads from the BAM file and comparing their genome coordinates and strands with those of the reference gene model (<span class="citation"><a href="#Wang2012">Wang <i>et al.</i> 2012</a></span>).</p>
 
@@ -1353,11 +1538,9 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_gene_body_coverage_plot.png" alt="Figure 07. RSeQC gene body coverage plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> RSeQC gene body coverage plot. It calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.</figcaption></figure>
 
-<p>The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3’ skew in libraries. For example, a skew towards increased 3’ coverage can happen in degraded samples prepared with poly-A selection. According the figure 5, there’re not bias in our reads as a result of sequencing technical problems.</p>
+<p>The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3’ skew in libraries. For example, a skew towards increased 3’ coverage can happen in degraded samples prepared with poly-A selection. According the figure 7, there’re not bias in our reads as a result of sequencing technical problems.</p>
 
-<p>Other important metric for <abbr title="alternative splicing">AS</abbr> analysis is the one provided by the <strong>Junction Saturation</strong> module, which allows to determine if the current sequencing depth is sufficient to perform <abbr title="alternative splicing">AS</abbr> analyses by comparing the detected splice junctions to reference gene model (fig. 8).</p>
-
-<p>Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, if the number of known junctions reaches a plateau means that the current sequencing depth is almost saturated for known junction detection. In other words, nearly all known junctions have already been detected, and deeper sequencing will not likely detect additional known junctions. Using an unsaturated sequencing depth would miss many rare splice junctions (<span class="citation"><a href="#Wang2012">Wang <i>et al.</i> 2012</a></span>).</p>
+<p>Other important metric for <abbr title="alternative splicing">AS</abbr> analysis is the one provided by the <strong>Junction Saturation</strong> module, which allows to determine if the current sequencing depth is sufficient to perform <abbr title="alternative splicing">AS</abbr> analyses by comparing the detected splice junctions to reference gene model (fig. 8). Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, we expect the number of known junctions to reach a plateau if the current sequencing depth is almost saturated for known junction detection. Using an unsaturated sequencing depth would miss many rare splice junctions (<span class="citation"><a href="#Wang2012">Wang <i>et al.</i> 2012</a></span>). As we can appreciate in the plot (fig. 8.A), the known junctions tend to stabilize around 7.000, which indicates that the read sequencing depth is good enough for performing the <abbr title="alternative splicing">AS</abbr> analysis.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-rseqc-junction-saturation-details"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: RSeQC junction saturation details</div>
@@ -1366,73 +1549,137 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_saturation_plot.png" alt="Figure 08. RSeQC junction saturation plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file, and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).</figcaption></figure>
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_saturation_plot.png" alt="Figure 08. RSeQC junction saturation plot. " width="1085" height="586" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file, and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).</figcaption></figure>
 
-<p>As we can appreciate in the plot, the known junctions tend to stabilize around 110.000, which indicates that the read sequencing depth is good enough for performing the <abbr title="alternative splicing">AS</abbr> analysis.</p>
+<p>Regarding the novel junctions (fig. 8.B), we can appreciate that the number of new splice junctions increase with the coverage.</p>
 
-<p>After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module; it allows to evaluate both splice junctions (multiple reads show the same splicing event) and splice events (single read level) (fig. 9).</p>
+<p>After confirming that the saturation level is good enough, now we will check the output generated by the <strong>RSeQC junction annotation</strong> module; it allows to evaluate both splice junctions (multiple reads show the same splicing event) and splice events (single read level) (fig. 9).</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png" alt="Figure 09.A RSeQC junction annotation plot. " width="1210" height="690" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.</figcaption></figure>
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png" alt="Figure 09. RSeQC junction annotation plot. " width="1085" height="672" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.</figcaption></figure>
 
-<p>According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%), a large proportion of reads show novel splicing junction patterns.</p>
+<p>According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%) (fig. 9.B), a large proportion of reads show novel splicing junction patterns (fig. 9.A).</p>
+
+<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rseqc_inner_distance_plot.png" alt="Figure 10. RSeQC inner distance plot. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> RSeQC inner distance. The plot represents gap sizes between R1 and R2.</figcaption></figure>
+
+<p>Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually veery short inner distances appear in old or degraded samples; in addition and values can be negative if the reads overlap consistently.</p>
 
 <p>After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.</p>
 
-<h2 id="transcriptome-assembly-and-quantification-with-stringtie">Transcriptome assembly and quantification with <strong>StringTie</strong></h2>
+<h1 id="transcriptome-assembly-quantification-and-evaluation">Transcriptome assembly, quantification and evaluation</h1>
+
+<p>Once the mapping is done, in this section we will use the information contained in the BAM files to carry out the assembly of the transcriptomes, as well as the quantification of the transcripts. In addition, we will evaluate the transcriptome assemblies quality.</p>
+
+<h2 id="reference-based-transcriptome-assembly-and-quantification-with-stringtie">Reference-based transcriptome assembly and quantification with <strong>StringTie</strong></h2>
 
 <p><strong>StringTie</strong> is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts. It uses a network flow algorithm to reconstruct transcripts and quantitate them simultaneously. This algorithm is combined with an assembly method to merge read pairs into full fragments in the initial phase (<span class="citation"><a href="#Kovaka2019">Kovaka <i>et al.</i> 2019</a></span>, <span class="citation"><a href="#Pertea2015">Pertea <i>et al.</i> 2015</a></span>).</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-stringtie-algorithm"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: StringTie algorithm</div>
 
-  <p>StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm (<span class="citation"><a href="#Pertea2015">Pertea <i>et al.</i> 2015</a></span>) (fig. 10).</p>
+  <p><strong>StringTie</strong> first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed, then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm (<span class="citation"><a href="#Pertea2015">Pertea <i>et al.</i> 2015</a></span>) (fig. 11). The algorithm groups the reads into distinct gene loci and then assembles each locus into as many isoforms as needed to explain the data. It begins with the most highly-expressed transcript, assembling and quantitating it simultaneously. The process is repeated until all reads are used, or until the number of remaining reads is below a user-adjustable level of transcriptional noise.</p>
 
-  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/stringtie_algorithm.png" alt="Figure 10. StringTie algorithm details. " width="1275" height="342" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015</figcaption></figure>
+  <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/stringtie_algorithm.png" alt="Figure 11. StringTie algorithm details. " width="1275" height="342" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015</figcaption></figure>
 
-  <p><strong>StringTie</strong> uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate &lt; 0.5%, then <strong>StringTie</strong> requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), <strong>StringTie</strong> accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary (<span class="citation"><a href="#Kovaka2019">Kovaka <i>et al.</i> 2019</a></span>).</p>
-
-</blockquote>
-
-<p>The main reason underlying the greater accuracy of <strong>StringTie</strong> most likely derives from its optimization criteria. By balancing the coverage (or flow) of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself. When assembling a whole genome, coverage is a crucial parameter that must be used to constrain the algorithm; otherwise an assembler may incorrectly collapse repetitive sequences. Similarly, when assembling a transcript, each exon within an isoform should have similar coverage, and ignoring this parameter may produce sets of transcripts that are parsimonious but wrong (<span class="citation"><a href="#Pertea2015">Pertea <i>et al.</i> 2015</a></span>).</p>
-
-<blockquote class="details">
-  <div class="box-title details-title" id="details-stringtie-long-rna-seq-assembly"><button class="gtn-boxify-button details" type="button" aria-controls="details-stringtie-long-rna-seq-assembly" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: StringTie long RNA-seq assembly<span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-  <p>To handle the high error rates in the long reads, <strong>StringTie</strong> implements two techniques. First, it correct potentially wrong splice sites by checking all the splice sites present in the alignment of a read with a high-error alignment rate. If a splice site is not supported by any low-error alignment reads, then it tries to find a nearby splice site (within 10 bp, by default) that is supported by the most alignments among all nearby splice sites. Secondly, it implements a pruning algorithm that reduces the size of the splicing graph to a more realistic size by removing the edges in the graph starting from the edge least supported by reads to the most supported edge, until the number of nodes in the splicing graph falls under a given threshold (by default 1000 nodes).</p>
+  <p><strong>StringTie</strong> uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate &lt; 0.5%, then <strong>StringTie</strong> requires 25% more reads than usual to support that particular spliced alignment. In addition, if a spliced read spans a very long intron, <strong>StringTie</strong> accepts that alignment only if a larger anchor of 25 bp is present on both sides of the splice site. Here the term <em>anchor</em> refers to the portion of the read aligned within the exon beginning at the exon-intron boundary (<span class="citation"><a href="#Kovaka2019">Kovaka <i>et al.</i> 2019</a></span>).</p>
 
 </blockquote>
 
-<p>Despite in this training we make use of RNA STAR as mapping tool, it is possible to use different splice-aware aligner such as HISAT2. Independently of the tool, each record with a spliced alignment should have the XS tag in the SAM/BAM file, which indicates the genomic strand from which the RNA that produced the read originated .</p>
+<p>Transcriptome reconstruction, which involves assembling RNA-seq reads into transcription units, is a complex computational task due to three main challenges. Firstly, gene expression levels vary widely, with some genes having low read representation, complicating their identification. Secondly, reads arise from both mature mRNA and incompletely spliced precursor RNA, making it challenging to distinguish mature transcripts. Lastly, the short length of reads coupled with the presence of multiple isoforms per gene makes it difficult to determine the specific isoform responsible for each read (<span class="citation"><a href="#Garber2011">Garber <i>et al.</i> 2011</a></span>).</p>
+
+<p>Then, let’s start with the transcriptome assemby.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-transcriptome-assembly-with-stringtie"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Transcriptome assembly with StringTie</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="link"><strong>StringTie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1</span></span> with the following parameters:
       <ul>
         <li><em>“Input options”</em>: <code class="language-plaintext highlighter-rouge">Short reads</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input short mapped reads”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input short mapped reads”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
           </ul>
         </li>
         <li><em>“Use a reference file to guide assembly?”</em>: <code class="language-plaintext highlighter-rouge">Use reference GTF/GFF3</code>
           <ul>
             <li><em>“Reference file”</em>: <code class="language-plaintext highlighter-rouge">Use a file from history</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+              </ul>
+            </li>
+            <li><em>“Use Reference transcripts only?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li>“<em>Minimum junction coverage</em>”: <code class="language-plaintext highlighter-rouge">3</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the generated collection as <code class="language-plaintext highlighter-rouge">Assembled transcripts coordinates</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts</code></li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome Reference Fasta”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+            <li>From <em>“Select fasta outputs”</em>: <code class="language-plaintext highlighter-rouge">fasta file with spliced exons for each GFF transcript</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the collection as <code class="language-plaintext highlighter-rouge">Assembled transcripts sequences</code></p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1" title="StringTie merge tool" aria-role="link"><strong>StringTie merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1</span></span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts</code> (output of <strong>StringTie</strong>)
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation to include in the merging”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code></li>
+  </ol>
+
+</blockquote>
+
+<p>Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-isoform-quantification-with-stringtie"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Isoform quantification with StringTie</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="link"><strong>StringTie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1</span></span> with the following parameters:
+      <ul>
+        <li><em>“Input options”</em>: <code class="language-plaintext highlighter-rouge">Short reads</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input short mapped reads”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
+          </ul>
+        </li>
+        <li><em>“Use a reference file to guide assembly?”</em>: <code class="language-plaintext highlighter-rouge">Use reference GTF/GFF3</code>
+          <ul>
+            <li><em>“Reference file”</em>: <code class="language-plaintext highlighter-rouge">Use a file from history</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">StringTie annotation</code></li>
               </ul>
             </li>
             <li><em>“Use Reference transcripts only?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Output files for differential expression?”</em>: <code class="language-plaintext highlighter-rouge">Ballgown</code></li>
           </ul>
         </li>
+        <li>In <em>“Advanced options”</em>:
+          <ul>
+            <li>“<em>Minimum junction coverage</em>”: <code class="language-plaintext highlighter-rouge">3</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
+    <li>Rename the collection <code class="language-plaintext highlighter-rouge">Transcript-level expression measurements</code> as <code class="language-plaintext highlighter-rouge">Transcriptomes quantification</code></li>
   </ol>
 
 </blockquote>
 
-<p><strong>Stringtie</strong> generates six collection with six elements each one, but we will use only the <code class="language-plaintext highlighter-rouge">transcript-level expression measurements</code> dataset collection.</p>
+<p><strong>StringTie</strong> generates six collection with six elements each one, but we will use only the <code class="language-plaintext highlighter-rouge">transcript-level expression measurements</code> dataset collection.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-transcription-level-expression-measurements-file"><button class="gtn-boxify-button details" type="button" aria-controls="details-transcription-level-expression-measurements-file" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Transcription-level expression measurements file<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1440,20 +1687,209 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
   <p>The transcript-level expression measurements (t_tab.ctab) file includes one row per transcript, with the following columns:</p>
 
   <ul>
-    <li>t_id: numeric transcript id</li>
-    <li>chr, strand, start, end: genomic location of the transcript</li>
-    <li>t_name: generated transcript id</li>
-    <li>num_exons: number of exons comprising the transcript</li>
-    <li>length: transcript length, including both exons and introns</li>
-    <li>gene_id: gene the transcript belongs to</li>
-    <li>gene_name: HUGO gene name for the transcript, if known</li>
-    <li>cov: per-base coverage for the transcript (available for each sample)</li>
-    <li>FPKM: Estimated FPKM for the transcript (available for each sample)</li>
+    <li><strong>t_id</strong>: numeric transcript id</li>
+    <li><strong>chr</strong>, <strong>strand</strong>, <strong>start</strong>, <strong>end</strong>: genomic location of the transcript</li>
+    <li><strong>t_name</strong>: generated transcript id</li>
+    <li><strong>num_exons</strong>: number of exons comprising the transcript</li>
+    <li><strong>length</strong>: transcript length, including both exons and introns</li>
+    <li><strong>gene_id</strong>: gene the transcript belongs to</li>
+    <li><strong>gene_name</strong>: HUGO gene name for the transcript, if known</li>
+    <li><strong>cov</strong>: per-base coverage for the transcript (available for each sample)</li>
+    <li><strong>FPKM</strong>: Estimated FPKM for the transcript (available for each sample)</li>
   </ul>
 
 </blockquote>
 
-<h1 id="isoform-analysis-with-isoformswitchanalyzer">Isoform analysis with <strong>IsoformSwitchAnalyzeR</strong></h1>
+<p>Before starting with the analysis of the isoforms, we will generate a FASTA file that will be used in the next step: the reference transcriptome. This output will be used in the next section.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-reference-transcriptome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract reference transcriptome</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code></li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome Reference Fasta”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+            <li>From <em>“Select fasta outputs”</em>: <code class="language-plaintext highlighter-rouge">fasta file with spliced exons for each GFF transcript</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Reference transcriptome sequences</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="transcriptome-evaluation">Transcriptome evaluation</h2>
+
+<p>The evaluation of assembled transcriptomes is crucial to assess the quality and accuracy of the transcript reconstruction process. It helps researchers ensure that the assembled transcripts represent the true expression patterns and capture the full diversity of transcripts present in the biological sample.</p>
+
+<p>Two commonly used tools for evaluating assembled transcriptomes are <strong>rnaQUAST</strong> and <strong>GFFCompare</strong>. <strong>rnaAQUAST</strong> is specifically designed for assessing the quality of RNA-seq assemblies by comparing them to a reference genome. On the other hand, <strong>GFFCompare</strong> is a tool used for comparing and annotating assembled transcripts against a reference annotation file.</p>
+
+<h3 id="annotation-accuracy-evaluation-with-gffcompare">Annotation accuracy evaluation with <strong>GFFCompare</strong></h3>
+
+<p><strong>GFFcompare</strong> is an open-source utility designed to systematically compare one or more sets of transcript predictions to a reference annotation at different levels (<span class="citation"><a href="#Pertea2020">Pertea and Pertea 2020</a></span>). <strong>GFFCompare</strong> assigns class codes to each assembled transcript, indicating their relationship to the reference transcripts, such as complete match, partial match, novel transcripts, and alternative splicing events. This information will help us in understanding the reliability and completeness of the assembled transcriptome.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-transcriptome-accuracy-evaluation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Transcriptome accuracy evaluation</div>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0" title="GFFCompare tool" aria-role="link"><strong>GFFCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0</span></span> with the following parameters:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code> (output of <strong>StringTie merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><em>“Use reference annotation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+      <ul>
+        <li><em>“Choose the source for the reference annotation</em>”: <code class="language-plaintext highlighter-rouge">History</code>
+          <ul>
+            <li><em>“Reference annotation</em>”: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>The output of GFFCompare includes several files, which can be used to analyze the results in different ways. Some of the main output files are:</p>
+
+<ul>
+  <li><strong>Annotated transcripts</strong>: contains all the input transcripts annotated with several additional attributes: <strong>xloc</strong>, <strong>tss_id</strong>, <strong>cmp_ref</strong>, and <strong>class_code</strong>.</li>
+  <li><strong>Loci file</strong>: Lists the loci (locations) of the features in the input files.</li>
+  <li><strong>RefMap</strong>: Contains a list of input loci with their best matches in the reference annotation.</li>
+  <li><strong>TMAP</strong>: Lists the most closely matching reference transcript for each query transcript.</li>
+  <li><strong>Accuracy stats</strong>: Provides statistics on the comparison, including the number of input and reference features, the number of unique input features, and the total number of features.</li>
+  <li><strong>Tracking file</strong>: Contains the genomic coordinates of the input features and their matching or non-matching reference features.</li>
+</ul>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-details-on-the-gffcompare-attributes"><button class="gtn-boxify-button details" type="button" aria-controls="details-details-on-the-gffcompare-attributes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Details on the GffCompare attributes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>The <strong>xloc</strong> attribute indicates the super-locus to which a particular transcript belongs. The <strong>tss_id</strong> attribute serves as a unique identifier for the transcription start of that transcript. In cases where applicable, the <strong>cmp_ref</strong> attribute provides the nearest reference transcript, and the <strong>class_code</strong> attribute describes the relationship to this reference transcript. Additional information can be found in <span class="citation"><a href="#Pertea2020">Pertea and Pertea 2020</a></span>.</p>
+
+</blockquote>
+
+<p>In order to have an overview of the transcriptome, we can have a look at the <strong>sensitivity</strong> and <strong>precision</strong> metrics, which can be found in the <strong>accuracy stats</strong> file. Sensitivity is defined as the proportion of true positives among the total predicted features, while precision is defined as the proportion of true positives among the total predicted features and false positives.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-sensitivity-and-precision"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Sensitivity and precision</div>
+
+  <ol>
+    <li>What are the sensitivity and precission at transcript level?</li>
+    <li>How many novel exons have been identified?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>At transcript level, precission is 99.6% and sensitivity 91.3%.</li>
+      <li>According the stats file, 112 new exons (0.6%) have been identified.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<p>For a more in-depth analysis of the output, we could use the <strong>TMAP</strong> file and perform some text manipulation. For example, in order to extract the transcripts fully contained within a reference intron, we can filter for the <strong>class_code</strong> <code class="language-plaintext highlighter-rouge">i</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-novel-transcripts-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract novel transcripts information</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <strong>TMAP</strong> file</li>
+        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">$3=="i"{print $0}</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table with the following parameters:
+      <ul>
+        <li>“<em>Cut columns</em>”: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li>“<em>Output unique values</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
+      <ul>
+        <li><em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation </code></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
+        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">\"MSTRG.7\"</code>(content of the file generated by <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input BED, GFF3 or GTF feature file “</em>: output of <strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome Reference Fasta”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+            <li>From <em>“Select fasta outputs”</em>: <code class="language-plaintext highlighter-rouge">fasta file with spliced exons for each GFF transcript</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Transcripts fully contained within a reference intron</code></li>
+  </ol>
+
+</blockquote>
+
+<h3 id="transcriptome-quality-assessment-with-rnaquast">Transcriptome quality assessment with <strong>rnaQUAST</strong></h3>
+
+<p>To assess the quality of assembled transcripts, we are going to use <strong>rnaQUAST</strong>, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. In addition, it will allow us to identify misassembled transcriptomes, ensuring higher data quality for downstream analyses (<span class="citation"><a href="#Bushmanova2016">Bushmanova <i>et al.</i> 2016</a></span>).</p>
+
+<p>rnaQUAST generates several metrics to evaluate the quality of transcriptome assemblies, such as:</p>
+
+<ul>
+  <li><strong>Isoform metrics</strong>: Aligned transcripts are compared to the gene database and calculates metrics such as sensitivity, specificity, and precision. These metrics assess how well the assembled transcripts match the known gene isoforms, indicating the completeness and correctness of the assembly.</li>
+  <li><strong>Exon metrics</strong>: It calculates metrics such as the number of correctly predicted exons, missed exons, and falsely predicted exons. These metrics provide insights into the accuracy of exon prediction.</li>
+  <li><strong>Gene coverage by raw reads</strong>: This metric indicates the extent to which the expression of genes in the dataset is captured by the assembled transcriptome.</li>
+  <li><strong>BUSCO score</strong>: This metric represents the completeness of the assembly based on conserved orthologs.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-transcriptome-evaluation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Transcriptome evaluation</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1" title="rnaQUAST tool" aria-role="link"><strong>rnaQUAST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts sequences</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+        <li><em>“Genome annotation”</em>: <code class="language-plaintext highlighter-rouge">Enabled</code>
+          <ul>
+            <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GTF/GFF”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code></li>
+          </ul>
+        </li>
+        <li><em>“Disable infer genes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Disable infer transcripts”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-significant-computational-resources-and-run-time"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Significant computational resources and run time</div>
+    <p>rnaQUAST can require around 2 hours to complete. Meanwhile we recommend you to continue and back to this part later.</p>
+  </blockquote>
+
+</blockquote>
+
+<p>By default, <strong>rnaQUAST</strong> generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 12) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.</p>
+
+<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rnaQUAST_summary_table.png" alt="Figure 12. rnaQUAST metrics table summary. " width="1036" height="454" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> rnaQUAST tabular summary of metrics and statistics.</figcaption></figure>
+
+<p>Let’s have a look at the plots. The rnaQUAST cumulative isoform (fig. 13) can help us to identify any trends or patterns in the distribution of transcript and isoform lengths across different abundance levels.</p>
+
+<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rnaQUAST_cumulative_isoform.png" alt="Figure 13. rnaQUAST cummulative isoform. " width="843" height="671" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> rnaQUAST cummulative isoform plot. The x-axis of the plot represents the cumulative length of transcripts and isoforms, while the y-axis represents the sequence abundance.</figcaption></figure>
+
+<p>According the plot, the transcripts length distribution is similar for all samples, except for SRR9050441; it suggests that the gene expression pattern this sample differs with respect to the remaining ones. Now, let’s evaluate the cumulative substitution errors plot (fig. 13). Finally, we are going to evaluate the NAx plot (fig. 14).</p>
+
+<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/rnaQUAST_NAx.png" alt="Figure 14. rnaQUAST NAx. " width="984" height="730" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> rnaQUAST NAx plot.  The x-axis of the plot represents the NAx metric, while the y-axis represents the contig length.</figcaption></figure>
+
+<p>NAx is a metric that represents the length for which the collection of all aligned contigs of that length or longer covers at least x percent of the total length of the aligned assembled contigs, ranging from 0 to 100, per assembler.In that case, we cannot appreciate differences regarding distribution of transcript lengths across the samples.</p>
+
+<h1 id="isoform-switching-analysis-with-isoformswitchanalyzer">Isoform switching analysis with <strong>IsoformSwitchAnalyzeR</strong></h1>
 
 <p><strong>IsoformSwitchAnalyzeR</strong> is an open-source R package that enables both analyze changes in genome-wide patterns of <abbr title="alternative splicing">AS</abbr> and specific gene isoforms switch consequences (note: <abbr title="alternative splicing">AS</abbr> literally will result in <abbr title="isoform switching">IS</abbr>). An advantage of <strong>IsoformSwitchAnalyzeR</strong> over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an <abbr title="isoform switching">IS</abbr> (<span class="citation"><a href="#isoformswitchanalyzer">Kristoffer 2017</a></span>)</p>
 
@@ -1480,7 +1916,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/scheme.jpeg" alt="Figure 11. IsoformSwitchAnalyzeR pipeline scheme. " width="939" height="659" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.</figcaption></figure>
+<figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/scheme.jpeg" alt="Figure 15. IsoformSwitchAnalyzeR pipeline scheme. " width="939" height="659" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.</figcaption></figure>
 
 <p>Now, we can start with the <abbr title="isoform switching">IS</abbr> analysis.</p>
 
@@ -1489,12 +1925,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <p>We will generate 2 collections from the Stringtie output, one with the cancer samples and one with the healthy samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-split-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Split collection</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="link"><strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2</span></span> with the following parameters:
       <ul>
-        <li><em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">StringTie on collection N: transcript-level expression measurements</code></li>
+        <li><em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Transcriptomes quantification</code></li>
       </ul>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
@@ -1514,12 +1950,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
         </li>
       </ul>
     </li>
-    <li>Rename both collections <code class="language-plaintext highlighter-rouge">Transcripts Health</code> and <code class="language-plaintext highlighter-rouge">Transcripts Cancer</code>.</li>
+    <li>Rename both collections <code class="language-plaintext highlighter-rouge">Health transcriptomes quantification</code> (the filtered collection) and <code class="language-plaintext highlighter-rouge">Health transcriptomes quantification</code> (the discarted collection).</li>
   </ol>
 
 </blockquote>
 
-<h2 id="import-data-into-isoformswitchanalyzer">Import data into <strong>IsoformSwitchAnalyzeR</strong></h2>
+<h2 id="import-data">Import data</h2>
 
 <p>The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.</p>
 
@@ -1531,32 +1967,38 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-import-data-with-isoformswitchanalyzer"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import data with IsoformSwitchAnalyzeR</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Import data</code>
           <ul>
             <li>In <em>“1: Factor level”</em>:
               <ul>
-                <li><em>“Specify a factor level, typical values could be ‘tumor’ or ‘treated’“</em>: <code class="language-plaintext highlighter-rouge">Cancer</code></li>
-                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcript-level expression measurements”</em>: <code class="language-plaintext highlighter-rouge">Transcripts Cancer</code></li>
+                <li><em>“Specify a factor level, typical values could be ‘tumor’ or ‘treated’“</em>: <code class="language-plaintext highlighter-rouge">Health</code></li>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcript-level expression measurements”</em>: <code class="language-plaintext highlighter-rouge">Transcripts Health</code></li>
               </ul>
             </li>
             <li>In <em>“2: Factor level”</em>:
               <ul>
-                <li><em>“Specify a factor level, typical values could be ‘tumor’ or ‘treated’“</em>: <code class="language-plaintext highlighter-rouge">Health</code></li>
-                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcript-level expression measurements”</em>: <code class="language-plaintext highlighter-rouge">Transcripts Health</code></li>
+                <li><em>“Specify a factor level, typical values could be ‘tumor’ or ‘treated’“</em>: <code class="language-plaintext highlighter-rouge">Cancer</code></li>
+                <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcript-level expression measurements”</em>: <code class="language-plaintext highlighter-rouge">Transcripts Cancer</code></li>
               </ul>
             </li>
             <li><em>“Quantification data source”</em>: <code class="language-plaintext highlighter-rouge">StringTie</code>
               <ul>
                 <li><em>“Average read length”</em>: <code class="language-plaintext highlighter-rouge">140</code></li>
+                <li>From <em>“Analysis mode”</em>:
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation generated by StringTie merge”</em>: <code class="language-plaintext highlighter-rouge">StringTie annotation</code></li>
+                  </ul>
+                </li>
               </ul>
             </li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome annotation (GTF)”</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcriptome”</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.transcripts.fa.gz</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome annotation (GTF)”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcriptome”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome sequences</code></li>
+            <li><em>“Remove non-conventional chromosomes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1569,12 +2011,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 <h2 id="pre-processing-step">Pre-processing step</h2>
 
-<p>Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhace the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).</p>
+<p>Once the datasets have been imported into a RData file, we can start with the pre-processing step. In order to enhance the reliability of the downstream analysis, it is important to remove the non-informative genes/isoforms (e.g. single isoform genes and non-expressed isoforms).</p>
 
-<p>After the pre-processing, <strong>IsoformSwitchAnalyzieR</strong> performs the differential isoform usage analysis by using <strong>DESXSeq</strong>, which despite originally designed for testing differential exon usage, it has demonstrated to perform exceptionally well for differential isoform usage.<strong>DEXSeq</strong> uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates (<span class="citation"><a href="#dexseq">Anders and Reyes 2017</a></span>).</p>
+<p>After the pre-processing, <strong>IsoformSwitchAnalyzieR</strong> performs the differential isoform usage analysis by using <strong>DESXSeq</strong>, which despite originally designed for testing differential exon usage, it has been demonstrated to perform exceptionally well for differential isoform usage.<strong>DEXSeq</strong> uses generalized linear models to assess the significance of observed differences in isoform usage values between conditions, taking into account the biological variation between replicates (<span class="citation"><a href="#dexseq">Anders and Reyes 2017</a></span>).</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-difference-in-isoform-fraction-contept"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Difference in isoform fraction contept</div>
+  <div class="box-title comment-title" id="comment-difference-in-isoform-fraction-concept"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Difference in isoform fraction concept</div>
 
   <p>IsoformSwitchAnalyzeR measures isoform usage vian isoform fraction (IF) values which quantifies the fraction of the parent gene expression originating from a specific isoform, (calculated as isoform_exp / gene_exp). Consequently, the difference in isoform usage is quantified as the difference in isoform fraction (dIF) calculated as IF2 - IF1, and these dIF are used to measure the effect size  (<span class="citation"><a href="#isoformswitchanalyzer">Kristoffer 2017</a></span>).</p>
 
@@ -1600,11 +2042,17 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-isoformswitchanalyzer-pre-processing-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: IsoformSwitchAnalyzeR pre-processing step</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part one: Extract isoform switches and their sequences</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“IsoformSwitchAnalyzeR R object”</em>: <code class="language-plaintext highlighter-rouge">SwitchList</code> (output of <strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“IsoformSwitchAnalyzeR R object”</em>: <code class="language-plaintext highlighter-rouge">SwitchList</code> (output of <strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
+              <ul>
+                <li>In <em>“Sequence extraction parameters”</em>:</li>
+              </ul>
+            </li>
+            <li>“<em>Remove short aminoacid sequences</em>”: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Remove ORFs containint STOP codons</em>”: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
@@ -1680,19 +2128,56 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <blockquote class="details">
   <div class="box-title details-title" id="details-cpat-scores-in-detail"><button class="gtn-boxify-button details" type="button" aria-controls="details-cpat-scores-in-detail" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: CPAT scores in detail<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 10 shows the scoring distribution between coding and noncoding transcripts for the four metrics.</p>
+  <p>CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 16 shows the scoring distribution between coding and noncoding transcripts for the four metrics.</p>
 
-  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/CPAT_distributions.jpg" alt="Figure 12. CPAT predictor score distributions. " width="771" height="730" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013</figcaption></figure>
+  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/CPAT_distributions.jpg" alt="Figure 16. CPAT predictor score distributions. " width="771" height="730" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013</figcaption></figure>
 
-  <p>The maximum length of the ORF (fig. 10,A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.</p>
+  <p>The maximum length of the ORF (fig. 16.A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.</p>
 
-  <p>The ORF coverage (fig. 10, B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).</p>
+  <p>The ORF coverage (fig. 16.B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).</p>
 
-  <p>The Fickett TESTCODE (fig. 10, C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.</p>
+  <p>The Fickett TESTCODE (fig. 16.C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.</p>
 
-  <p>Finally, the fourth metric is the hexamer usage bias (fig. 10, D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.</p>
+  <p>Finally, the fourth metric is the hexamer usage bias (fig. 16.D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.</p>
 
 </blockquote>
+
+<p>First, we will generate two intermediate files that we will use as input for CPAT.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-extract-lncrna-and-protein-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract lncRNA and protein sequences</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> converter with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+        <li><em>“Regular Expression2”</em>: <code class="language-plaintext highlighter-rouge">lncRNA</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.lncRNA.gtf</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> converter with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
+        <li><em>“Regular Expression2”</em>: <code class="language-plaintext highlighter-rouge">protein_coding</code></li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.pc.gtf</code></li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.lncRNA.gtf</code> and <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.pc.gtf</code></li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome Reference Fasta”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+            <li>From <em>“Select fasta outputs”</em>: <code class="language-plaintext highlighter-rouge">fasta file with spliced exons for each GFF transcript</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">lncRNA.fasta</code> and <code class="language-plaintext highlighter-rouge">coding.fasta</code></li>
+  </ol>
+</blockquote>
+
+<p>As result, we will have two new FASTA files, one of them corresponding to long non-coding RNAs and the other one corresponding to the sequences of protein coding isoforms. Now, we can run CPAT:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-coding-prediction-with-cpat"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Coding prediction with CPAT</div>
@@ -1701,9 +2186,9 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0" title="CPAT tool" aria-role="link"><strong>CPAT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query nucletide sequences”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide sequences</code> (output of <strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.genome.fa.gz</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Coding sequences file”</em>: <code class="language-plaintext highlighter-rouge">gencode.v42.pc_transcripts.fa.gz</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Non coding sequeces file”</em>: <code class="language-plaintext highlighter-rouge">gencode.v42.lncRNA_transcripts.fa.gz</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Coding sequences file”</em>: <code class="language-plaintext highlighter-rouge">lncRNA.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Non coding sequeces file”</em>: <code class="language-plaintext highlighter-rouge">coding.fasta</code></li>
       </ul>
     </li>
   </ol>
@@ -1713,10 +2198,10 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <p>CPAT generates four files:</p>
 
 <ul>
-  <li>No ORF: Sequence IDs or BED entries with no ORF found. Should be considered as non-coding.</li>
-  <li>ORF probabilities (TSV): ORF information (strand, frame, start, end, size, Fickett TESTCODE score, Hexamer score) and coding probability.</li>
-  <li>ORF best probabilities (TSV): The information of the best ORF. This file is a subset of the previous one.</li>
-  <li>ORF sequences (FASTA): The top ORF sequences (at least 75 nucleotides long) in FASTA format.</li>
+  <li><strong>No ORF</strong>: Sequence IDs or BED entries with no ORF found. Should be considered as non-coding.</li>
+  <li><strong>ORF probabilities (TSV)</strong>: ORF information (strand, frame, start, end, size, Fickett TESTCODE score, Hexamer score) and coding probability.</li>
+  <li><strong>ORF best probabilities (TSV)</strong>: The information of the best ORF. This file is a subset of the previous one.</li>
+  <li><strong>ORF sequences (FASTA)</strong>: The top ORF sequences (at least 75 nucleotides long) in FASTA format.</li>
 </ul>
 
 <p>For the downstream analysis, we will use only the <code class="language-plaintext highlighter-rouge">ORF best probabilities</code>, but it will require some minor modifications in order to be used as input to <strong>IsoformSwitchAnalyzeR</strong>.</p>
@@ -1755,6 +2240,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
         </li>
       </ul>
     </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">CPAT_file.tabular</code></li>
   </ol>
 
 </blockquote>
@@ -1780,7 +2266,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-gene-specific-isoform-switching-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Gene-specific isoform switching analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part two: Plot all isoform switches and their annotation</code>
           <ul>
@@ -1789,12 +2275,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
             <li><em>“Gene name”</em>: <code class="language-plaintext highlighter-rouge">RGMB</code></li>
             <li><em>“Include prediction of coding potential information”</em>: <code class="language-plaintext highlighter-rouge">CPAT</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“CPAT result file”</em>: <code class="language-plaintext highlighter-rouge">Concatenate datasets on data ...</code> (output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“CPAT result file”</em>: <code class="language-plaintext highlighter-rouge">CPAT_file.tabular</code></li>
               </ul>
             </li>
             <li><em>“Include Pfam information”</em>: <code class="language-plaintext highlighter-rouge">Enabled</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include Pfam results (sequence analysis of protein domains)”</em>: <code class="language-plaintext highlighter-rouge">PfamScan on data ...</code> (output of <strong>PfamScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include Pfam results (sequence analysis of protein domains)”</em>: output of <strong>PfamScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               </ul>
             </li>
             <li><em>“Include SignalP results”</em>: <code class="language-plaintext highlighter-rouge">Disabled</code></li>
@@ -1807,13 +2293,19 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 
 </blockquote>
 
-<p>Let’s have a look at the generated plot (fig. 13).</p>
+<p>Let’s have a look at the generated plot (fig. 17).</p>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_gene.png" alt="Figure 13. RGMB gene isoform expression profile plot. " width="1086" height="776" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.</figcaption></figure>
+<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_gene.png" alt="Figure 17. RGMB gene isoform expression profile plot. " width="1042" height="764" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.</figcaption></figure>
 
-<p>In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant <abbr title="isoform switching">IS</abbr>: the isoform <a href="https://www.uniprot.org/uniprotkb/J3KNF6/entry">ENST00000308234.11</a>, which encodes the 478 aminoacid <strong>Repulsive guidance molecule BMP co-receptor b protein</strong> is repressed in cancer; on the other hand, the isoform <a href="https://www.uniprot.org/uniprotkb/Q6NW40/entry">ENST00000513185.3</a>, which encodes the 437 aminoanid <strong>Repulsive guidance molecule B</strong> is induced.</p>
+<p>We can appreciate that there exists stringking differences between isoforms:</p>
 
-<p>We will try to confirm this <abbr title="isoform switching">IS</abbr> by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with <strong>STAR</strong> and use a software called <strong>pyGenomeTracks</strong></p>
+<ul>
+  <li>The isoform <a href="https://www.uniprot.org/uniprotkb/J3KNF6/entry">ENST00000308234.11</a>, which encodes the 478 aminoacid <strong>Repulsive guidance molecule BMP co-receptor b protein</strong> is repressed in cancer. This transcript shows statistically significant differential usage.</li>
+  <li>The isoform <a href="https://www.uniprot.org/uniprotkb/Q6NW40/entry">ENST00000513185.3</a>, which encodes the 437 aminoanid <strong>Repulsive guidance molecule B</strong> is induced.</li>
+  <li>A new isoform has been identified: <code class="language-plaintext highlighter-rouge">MSTRG.905.6</code> (this is a random ID assigned by <strong>StringTie</strong>).</li>
+</ul>
+
+<p>We will try to confirm this <abbr title="isoform switching">IS</abbr> by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with <strong>STAR</strong> and the annotation generated by <strong>StringTie</strong>, and will use a software called <strong>pyGenomeTracks</strong></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-isoform-switching-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check isoform switching with pyGenometracks from STAR coverage</div>
@@ -1843,7 +2335,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / Bed track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bed or gtf format”</em>: Select <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bed or gtf format”</em>: Select <code class="language-plaintext highlighter-rouge">StringTie annotation</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
                     <li><em>“Put all labels inside the plotted region”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                     <li><em>“Bed style”</em>: <code class="language-plaintext highlighter-rouge">UCSC</code>
@@ -1867,13 +2359,18 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
         </li>
       </ul>
     </li>
+    <li>Repeat with <em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr5:98,767,000-98,775,000</code> in order to better see the 5’ of the gene.</li>
   </ol>
 
 </blockquote>
 
-<p>Let’s have a look at the plot generated by <strong>pyGenometracks</strong> (fig. 14).</p>
+<p>Let’s have a look at the plots generated by <strong>pyGenometracks</strong>. The first plot (fig. 18), corresponding with the coordinates <code class="language-plaintext highlighter-rouge">chr5:98,762,495-98,803,294</code>, allows to evaluate the region corresponding to the whole gene.</p>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/pgt_RGMB_zoom_out.png" alt="Figure 14. RGMB gene isoform expression profile plot. " width="1133" height="844" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> pyGenometracks isoform visualization. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.</figcaption></figure>
+<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/pgt_RGMB_zoom_out.png" alt="Figure 18. RGMB gene isoform expression profile plot. " width="1133" height="1025" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> pyGenometracks isoform visualization of coordinates chr5:98,762,495-98,803,294. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.</figcaption></figure>
+
+<p>The second image shows a only the region corresponding to the 5’end (fig. 19).</p>
+
+<figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/pgt_RGMB_zoom_in.png" alt="Figure 19. RGMB gene isoform expression profile plot. " width="1133" height="1025" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> pyGenometracks isoform visualization chr5:98,767,000-98,775,000. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.</figcaption></figure>
 
 <h3 id="isoformswitchanalyzer-genome-wide-analysis">IsoformSwitchAnalyzer genome-wide analysis</h3>
 
@@ -1896,7 +2393,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-isoform-switch-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Isoform switch analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part two: Plot all isoform switches and their annotation</code>
           <ul>
@@ -1932,24 +2429,26 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <p>It generates five tabular files with the results of the different statistical analysis:</p>
 
 <ul>
-  <li>Splicing summary: values of the different splicing events</li>
-  <li>Splicing enrichment: results of enrichment statistical analysis for the different splicing events.</li>
-  <li>Consequences summary: values of global usage of <abbr title="isoform switching">IS</abbr></li>
-  <li>Consequences enrichment: results of enrichment statistical analysis for the different functional consequences.</li>
-  <li>Switching gene/isoforms: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).</li>
+  <li><strong>Splicing summary</strong>: values of the different splicing events</li>
+  <li><strong>Splicing enrichment</strong>: results of enrichment statistical analysis for the different splicing events.</li>
+  <li><strong>Consequences summary</strong>: values of global usage of <abbr title="isoform switching">IS</abbr></li>
+  <li><strong>Consequences enrichment</strong>: results of enrichment statistical analysis for the different functional consequences.</li>
+  <li><strong>Switching gene/isoforms</strong>: list of genes with statistically significant isoform swiching between conditions. The switches are ranked (by p-value or switch size).</li>
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-top-is-events"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Top IS events</div>
 
   <p>What are the the top three <abbr title="isoform switching">IS</abbr> events (as defined by alpha and dIFcutoff)?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The top three genes are MPDU1, RGMB and ARAP1 (fig. 15).</p>
+    <p>The top three genes are <a href="https://www.ncbi.nlm.nih.gov/gene/55100">WDR70</a>, <a href="https://www.ncbi.nlm.nih.gov/gene/134429">STARD4</a> and <a href="https://www.ncbi.nlm.nih.gov/gene/4245">MGAT1</a> (fig. 20).</p>
 
-    <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/list_genes.png" alt="Figure  15. Switching gene/isoform tabular dataset. " width="1226" height="410" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Switching gene/isoform dataset.</figcaption></figure>
+    <figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/list_genes.png" alt="Figure  20. Switching gene/isoform tabular dataset. " width="1069" height="690" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Switching gene/isoform dataset.</figcaption></figure>
+
+    <p>WDR70 is a protein coding gene predicted to be involved in regulation of DNA double-strand break processing and regulation of histone H2B conserved C-terminal lysine ubiquitination. STARD4 is a protein coding gene probably involved in the metabolism of steroid hormones. MGAT1 is a glycosyltransferase involved in the synthesis of protein-bound and lipid-bound oligosaccharides.</p>
 
   </blockquote>
 </blockquote>
@@ -1963,69 +2462,58 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-interpretation-of-splicing-events"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Interpretation of splicing events</div>
 
-  <p>The events are classified by comparing the splicing patterns with a hypothetical pre-RNA generated by combining all the exons (fig. 16).</p>
+  <p>The events are classified by comparing the splicing patterns with a hypothetical pre-RNA (fig. 21).</p>
 
-  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitcher_splicing_patterns.png" alt="Figure 16. Classification of splicing patterns. " width="1214" height="880" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).</figcaption></figure>
+  <figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitcher_splicing_patterns.png" alt="Figure 21. Classification of splicing patterns. " width="1214" height="880" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).</figcaption></figure>
 
-  <ul>
-    <li>ES: Exon Skipping. Compared to the hypothetical pre-RNA a single exon was skipped in the isoform analyzed.</li>
-    <li>MEE: Mutually exclusive exon. Special case were two isoforms form the same gene contains two mutually exclusive exons and which are not found in any of the other isoforms from that gene.</li>
-    <li>MES: Multiple Exon Skipping. Compared to the hypothetical pre-RNA multiple consecutive exon was skipped in the isoform analyzed.</li>
-    <li>IR: Intron Retention. Compared to the hypothetical pre-RNA an intron was retained in the isoform analyzed.</li>
-    <li>A5: Alternative 5’end donor site. Compared to the hypothetical pre-RNA an alternative 5’end donor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more upstream than the pre-RNA (the upstream exon is shorter).</li>
-    <li>A3: Alternative 3’end acceptor site. Compared to the hypothetical pre-RNA an alternative 3’end acceptor site was used. Since it is compared to the pre-RNA, the donor site used is per definition more downstream than the pre-RNA (the downstream exon is shorter).</li>
-    <li>ATSS: Alternative Transcription Start Sites. Compared to the hypothetical pre-RNA an alternative transcription start sites was used. Since it is compared to the pre-RNA, the ATSS site used is per definition more downstream the the pre-RNA.</li>
-    <li>ATTS: Alternative Transcription Termination Sites. Compared to the hypothetical pre-RNA an alternative transcription Termination sites was used. Since it is compared to the pre-RNA, the ATTS site used is per definition more upstream than the pre-RNA.</li>
-  </ul>
+  <p>Mutually exclusive exon (MEE) is a special case where two isoforms from the same gene contain exons which are not found in any of the other isoforms from that gene.</p>
 
 </blockquote>
 
-<p>First, we will start analyzing the total number of splicing events (fig. 17).</p>
+<p>First, we will start analyzing the total number of splicing events (fig. 22).</p>
 
-<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png" alt="Figure 17. Summary of genome-wide total splicing events. " width="866" height="568" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.</figcaption></figure>
+<figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png" alt="Figure 22. Summary of genome-wide total splicing events. " width="800" height="400" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.</figcaption></figure>
 
-<p>From the figure 17 , it can be hypothesised that some of the <abbr title="alternative splicing">AS</abbr> events are not equally used. To formally analyze this type of uneven <abbr title="alternative splicing">AS</abbr>, <strong>IsoformSwithAnalyzeR</strong> computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).</p>
+<p>From the figure 22 , it can be hypothesised that some of the <abbr title="alternative splicing">AS</abbr> events are not equally used. To formally analyze this type of uneven <abbr title="alternative splicing">AS</abbr>, <strong>IsoformSwithAnalyzeR</strong> computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 23).</p>
 
-<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png" alt="Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="860" height="571" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+<figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png" alt="Figure 24. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence interval) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
-<p>According with the results (fig. 18), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).</p>
+<p>According to the results (fig. 23), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-results-on-original-full-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results on original full-data</div>
 
-  <p>If we perform the analysis on the original datasets, there exist statistically significant differences in <abbr title="isoform switching">IS</abbr> in three splicing patterns (fig. 19).</p>
+  <p>If we perform the analysis on the original datasets, we can see a more homogeneous distribution of the different splice junction patters (fig. 24.A).</p>
 
-  <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png" alt="Figure 19. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="854" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+  <figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png" alt="Figure 24. Enrichment/depletion in isoform switch with consequences statistical analysis. " width="800" height="1009" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR &lt; 0.05 (red) or not (black) (B).</figcaption></figure>
 
-  <p>According the results, there’s statistically significant gain of introl retention in cancer tissues. On the other hand, health tissues utilize alternative 3’ acceptor sites (A3) and alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.</p>
+  <p>According the results, there’s statistically significant mutually exon skipping events in cancer tissues (fig. 24.B) On the other hand, health tissues utilize alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.</p>
 
 </blockquote>
 
 <h4 id="analysis-of-consequence-enrichment">Analysis of consequence enrichment</h4>
 
-<p>To analyze large-scale patterns in predicted <abbr title="isoform switching">IS</abbr> consequences, <strong>IsoformSwitchAnalyzer</strong> computes all <abbr title="isoform switching">IS</abbr> events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 20). According the results some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention).</p>
+<p>To analyze large-scale patterns in predicted <abbr title="isoform switching">IS</abbr> consequences, <strong>IsoformSwitchAnalyzeR</strong> computes all <abbr title="isoform switching">IS</abbr> events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss). According the results, some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention) (fig. 25).</p>
 
-<figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png" alt="Figure 20. Summary of genome-wide enrichment/depletion o isoform switching events. " width="859" height="577" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.</figcaption></figure>
+<figure id="figure-25" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png" alt="Figure 25. Summary of genome-wide enrichment/depletion o isoform switching events. " width="800" height="400" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.</figcaption></figure>
 
-<p>To assess this observation, a standard proportion test is performed (fig. 21). The results indicate that differences in intron retention between health and cancer samples is statistically significant).</p>
+<p>To assess this observation, <strong>IsoformSwitchAnalyzeR</strong> performs a standard proportion test is performed (fig. 26). The results indicate that differences are not statistically significant.</p>
 
-<figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="854" height="569" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
-
-<p>According with the results (fig. 21), there are not statistically significant differences of IS consequences despite the apparent differentes in total event counts. However, as noted previously, in that case it is due to the small size of the datasets used.</p>
+<figure id="figure-26" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png" alt="Figure 26. Enrichment/depletion isoform switch analysis. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 26</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-results-on-original-full-data-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results on original full-data</div>
 
   <p>Let’s have a look at the results corresponding to the complete original dataset analysis.</p>
 
-  <figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png" alt="Figure 20. Enrichment/depletion isoform switch analysis. " width="861" height="573" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
+  <figure id="figure-27" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png" alt="Figure 27. Enrichment/depletion isoform switch analysis. " width="800" height="1009" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR &lt; 0.05 (red) or not (black).</figcaption></figure>
 
-  <p>According with the results (fig. 22), the difference in intron retention is statistically significant; it means that the probability of a specific intron to remain unspliced in the mature mRNA in cancer is higher than in health tissues.</p>
+  <p>According with the results, despite not being statistically significant, it seems that there is a gain in coding transcript in cancer samples (fig. 27.B). It means that differential isoform translates in the emergence of uncharacterized or unannotated open-reading frames, also known as novel open-reading frames (nORFs), in cancer. This phaenomenon has been reported previously by <span class="citation"><a href="#Erady2021">Erady <i>et al.</i> 2021</a></span>. According those authors, nORFs are typically smaller than canonical ORFs, the peptides or micro-proteins they encode are particularly attractive as putative allosteric cellular regulators.</p>
 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
 
   <p>What is the adjusted P-value corresponding to the Intron retention gain/lost feature test?</p>
 
@@ -2035,42 +2523,62 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
     <p>The consequences enrichment tabular dataset includes the following columns:</p>
 
     <ul>
-      <li>conseqPair: The set of opposite consequences considered.</li>
-      <li>feature: Description of the functional consequence</li>
-      <li>propOfRelevantEvents: Proportion of total number of genes being of the type described in the feature column.</li>
-      <li>propCiLo: The lower boundary of the confidence interval.</li>
-      <li>propCiHi: The high boundary of the confidence interval.</li>
-      <li>propPval: The p-value associated with the null hypothesis.</li>
-      <li>nUp: The number of genes with the consequence described in the feature column.</li>
-      <li>nDown: The number of genes with the opposite consequence of what is described in the feature column.</li>
-      <li>propQval: The adjusted P-value resulting when p-values are corrected using FDR (BenjaminiHochberg).</li>
+      <li><strong>conseqPair</strong>: The set of opposite consequences considered.</li>
+      <li><strong>feature</strong>: Description of the functional consequence</li>
+      <li><strong>propOfRelevantEvents</strong>: Proportion of total number of genes being of the type described in the feature column.</li>
+      <li><strong>propCiLo</strong>: The lower boundary of the confidence interval.</li>
+      <li><strong>propCiHi</strong>: The high boundary of the confidence interval.</li>
+      <li><strong>propPval</strong>: The p-value associated with the null hypothesis.</li>
+      <li><strong>nUp</strong>: The number of genes with the consequence described in the feature column.</li>
+      <li><strong>nDown</strong>: The number of genes with the opposite consequence of what is described in the feature column.</li>
+      <li><strong>propQval</strong>: The adjusted P-value resulting when p-values are corrected using FDR (BenjaminiHochberg).</li>
     </ul>
 
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>This information can be found in the eighth column of the Consequences enrichment dataset (fig. 23).</p>
+    <p>This information can be found in the eighth column of the Consequences enrichment dataset.</p>
 
-    <figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/consequences_dataset.png" alt="Figure 23. Consequences enrichment dataset. " width="1583" height="302" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Consequences enrichment table.</figcaption></figure>
-
-    <p>In that case, the adjusted P-value is 0.598.</p>
+    <p>In that case, the adjusted P-value is 0.79052734375.</p>
 
   </blockquote>
 </blockquote>
 
 <h4 id="analysis-of-genome-wide-changes-in-isoform-usage">Analysis of genome-wide changes in isoform usage</h4>
 
-<p>Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 24).</p>
+<p>Here, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows us to identify if differences in splicing events are genome-wide or restricted to specific regions, and is particularly interesting if the expected difference between conditions is large (fig. 28).</p>
 
-<figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_summary.png" alt="Figure 24. Genome-wide changes violing plot. " width="861" height="561" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.</figcaption></figure>
+<figure id="figure-28" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_summary.png" alt="Figure 28. Genome-wide changes violing plot. " width="800" height="343" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> Genome-wide changes violin plot. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.</figcaption></figure>
 
-<p>As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.</p>
+<p>As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events. Finally, we can have a look at the remaining plots (fig. 29).</p>
+
+<figure id="figure-29" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png" alt="Figure 29. Genome-wide changes volcano and scatterplots. " width="800" height="533" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).</figcaption></figure>
+
+<p>Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-results-on-original-full-data-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results on original full-data</div>
+
+  <p>Let’s have a look at the results corresponding to the complete original dataset analysis.</p>
+
+  <figure id="figure-30" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png" alt="Figure 30. Genome-wide changes violing plot fulldata. " width="800" height="678" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Genome-wide gene expression plots. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles (A). The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (B). The scaterplot represents the dIF vs gene log2 fold change (C)</figcaption></figure>
+
+  <p>According with results corresponding to the whole dataset (fig. 30.A), the differential isoform usage differences are not homogeneously distributed across the genome. It suggest that there should be some specific regions enriched in MES and alternative 5’ acceptor sites.</p>
+
+</blockquote>
 
 <h1 id="optional-exercise-original-data-analysis">Optional exercise: original data analysis</h1>
 
-<p>As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps. We will start by importing the datasets from Zenodo.</p>
+<p>As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-significant-computational-resources-and-run-time-1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Significant computational resources and run time</div>
+  <p>When using the full data, the analysis can last for more than 48 hours.</p>
+</blockquote>
+
+<p>We will start by importing the datasets from Zenodo.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-retrieve-mirna-seq-and-mrna-seq-datasets-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve miRNA-Seq and mRNA-Seq datasets</div>
@@ -2087,18 +2595,18 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7941871/files/Pfam-A.hmm.gz
         <li>
           <p>Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR9050437_Health	https://zenodo.org/record/7941871/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050437_Health	https://zenodo.org/record/7941871/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050438_Health	https://zenodo.org/record/7941871/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050438_Health	https://zenodo.org/record/7941871/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050439_Health	https://zenodo.org/record/7941871/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050439_Health	https://zenodo.org/record/7941871/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050440_Cancer	https://zenodo.org/record/7941871/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050440_Cancer	https://zenodo.org/record/7941871/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050441_Cancer	https://zenodo.org/record/7941871/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050441_Cancer	https://zenodo.org/record/7941871/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
-SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
-SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR9050437_Health	https://zenodo.org/record/7974884/files/SRR9050437_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050437_Health	https://zenodo.org/record/7974884/files/SRR9050437_reverse.fastqsanger.gz	fastqsanger.gz	2
+SRR9050438_Health	https://zenodo.org/record/7974884/files/SRR9050438_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050438_Health	https://zenodo.org/record/7974884/files/SRR9050438_reverse.fastqsanger.gz	fastqsanger.gz	2
+SRR9050439_Health	https://zenodo.org/record/7974884/files/SRR9050439_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050439_Health	https://zenodo.org/record/7974884/files/SRR9050439_reverse.fastqsanger.gz	fastqsanger.gz	2
+SRR9050440_Cancer	https://zenodo.org/record/7974884/files/SRR9050440_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050440_Cancer	https://zenodo.org/record/7974884/files/SRR9050440_reverse.fastqsanger.gz	fastqsanger.gz	2
+SRR9050441_Cancer	https://zenodo.org/record/7974884/files/SRR9050441_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050441_Cancer	https://zenodo.org/record/7974884/files/SRR9050441_reverse.fastqsanger.gz	fastqsanger.gz	2
+SRR9050442_Cancer	https://zenodo.org/record/7974884/files/SRR9050442_forward.fastqsanger.gz	fastqsanger.gz	1
+SRR9050442_Cancer	https://zenodo.org/record/7974884/files/SRR9050442_reverse.fastqsanger.gz	fastqsanger.gz	2
 </code></pre></div>          </div>
         </li>
         <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
@@ -2116,6 +2624,39 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 
 </blockquote>
 
+<p>Next we will retrieve the datasets corresponding to the original reference genome data.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-retrieve-the-additional-datasets-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve the additional datasets</div>
+
+  <ol>
+    <li>
+      <p>Import the files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Datasets</code></li>
+        <li>
+          <p>Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gencode.v43.annotation.gtf.gz	https://zenodo.org/record/7974884/files/gencode.v43.annotation.gtf.gz
+GRCh38.p13.genome.fa.gz	https://zenodo.org/record/7974884/files/GRCh38.p13.genome.fa.gz
+</code></pre></div>          </div>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
 <p>Also, you will need to import the additional datasets. Now, we will import the worfklow from WorkflowHub.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2127,7 +2668,7 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
     <li>
       <p>In the section “Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)”, click on <strong>Search form</strong>.</p>
     </li>
-    <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">Genome-wide alternative splicing analysis</code></li>
+    <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">Genome-wide alternative splicing analysis v.2</code></li>
     <li>Finally select the latest available version.</li>
   </ol>
 </blockquote>
@@ -2139,15 +2680,12 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 
   <ol>
     <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">Genome-wide alternative splicing analysis</code></li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">Genome-wide alternative splicing analysis v.2</code></li>
     <li>In the <strong>Workflow: VGP genome profile analysis</strong> menu:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Reference genome</em>”: <code class="language-plaintext highlighter-rouge">GRCh38.p13.genome.fa.gz</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Genome annotation</em>”: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.gtf.gz</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>RNA-seq data collection</em>”: <code class="language-plaintext highlighter-rouge">Original samples</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Transcriptome</em>”: <code class="language-plaintext highlighter-rouge">gencode.v43.transcripts.fa.gz</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Protein coding transcripts</em>”: <code class="language-plaintext highlighter-rouge">gencode.v43.pc_transcripts.fa.gz</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>lncRNA transcripts</em>”: <code class="language-plaintext highlighter-rouge">gencode.v43.lncRNA_transcripts.fa.gz</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>CPAT header</em>”: <code class="language-plaintext highlighter-rouge">CPAT_header.tab</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Pfam-A HMM Stockholm file</em>”: <code class="language-plaintext highlighter-rouge">Pfam-A.hmm.dat.gz</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Active sites dataset</em>”: <code class="language-plaintext highlighter-rouge">active_site.dat.gz</code></li>
@@ -2161,7 +2699,9 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for  the statistical identification and analysis of splicing event and <abbr title="isoform switching">IS</abbr> events with predicted functional consequences.</p>
+<p>Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline (fig. 31) for performing genome-wide alternative splicing analysis.</p>
+
+<figure id="figure-31" style="max-width: 90%; margin:auto;"><img src="../../images/differential_isoform/full_workflow.png" alt="Figure 31. Genome-wide alternative splicing pipeline scheme. " width="2585" height="1429" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 31</strong>:</span> Genome-wide isoform switching pipeline scheme.</figcaption></figure>
 
                 </section>
 
@@ -2202,6 +2742,7 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
                 <ol class="bibliography"><li id="Alt1980">Alt, F., 1980 <b>Synthesis of secreted and membrane-bound immunoglobulin mu heavy chains is directed by mRNAs that differ at their 3\prime ends</b>. Cell 20: 293–301. <a href="https://doi.org/10.1016/0092-8674(80)90615-7">10.1016/0092-8674(80)90615-7</a></li>
 <li id="Carninci2006">Carninci, P., A. Sandelin, B. Lenhard, S. Katayama, K. Shimokawa <i>et al.</i>, 2006 <b>Genome-wide analysis of mammalian promoter architecture and evolution</b>. Nature Genetics 38: 626–635. <a href="https://doi.org/10.1038/ng1789">10.1038/ng1789</a></li>
 <li id="Wang2008">Wang, E. T., R. Sandberg, S. Luo, I. Khrebtukova, L. Zhang <i>et al.</i>, 2008 <b>Alternative isoform regulation in human tissue transcriptomes</b>. Nature 456: 470–476. <a href="https://doi.org/10.1038/nature07509">10.1038/nature07509</a></li>
+<li id="Garber2011">Garber, M., M. G. Grabherr, M. Guttman, and C. Trapnell, 2011 <b>Computational methods for transcriptome annotation and quantification using RNA-seq</b>. Nature Methods 8: 469–477. <a href="https://doi.org/10.1038/nmeth.1613">10.1038/nmeth.1613</a></li>
 <li id="Kalsotra2011">Kalsotra, A., and T. A. Cooper, 2011 <b>Functional consequences of developmentally regulated alternative splicing</b>. Nature Reviews Genetics 12: 715–729. <a href="https://doi.org/10.1038/nrg3052">10.1038/nrg3052</a></li>
 <li id="Miura2012">Miura, K., W. Fujibuchi, and M. Unno, 2012 <b>Splice isoforms as therapeutic targets for colorectal cancer</b>. Carcinogenesis 33: 2311–2319. <a href="https://doi.org/10.1093/carcin/bgs347">10.1093/carcin/bgs347</a></li>
 <li id="Wang2012">Wang, L., S. Wang, and W. Li, 2012 <b>RSeQC: quality control of RNA-seq experiments</b>. Bioinformatics 28: 2184–2185. <a href="https://doi.org/10.1093/bioinformatics/bts356">10.1093/bioinformatics/bts356</a></li>
@@ -2210,6 +2751,7 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 <li id="Pertea2015">Pertea, M., G. M. Pertea, C. M. Antonescu, T.-C. Chang, J. T. Mendell <i>et al.</i>, 2015 <b>StringTie enables improved reconstruction of a transcriptome from RNA-seq reads</b>. Nature Biotechnology 33: 290–295. <a href="https://doi.org/10.1038/nbt.3122">10.1038/nbt.3122</a></li>
 <li id="Shi2015">Shi, Y., G.-B. Chen, X.-X. Huang, C.-X. Xiao, H.-H. Wang <i>et al.</i>, 2015 <b>Dragon (repulsive guidance molecule b,  RGMb) is a novel gene that promotes colorectal cancer growth</b>. Oncotarget 6: 20540–20554. <a href="https://doi.org/10.18632/oncotarget.4110">10.18632/oncotarget.4110</a></li>
 <li id="Veeneman2015">Veeneman, B. A., S. Shukla, S. M. Dhanasekaran, A. M. Chinnaiyan, and A. I. Nesvizhskii, 2015 <b>Two-pass alignment improves novel splice junction quantification</b>. Bioinformatics 32: 43–49. <a href="https://doi.org/10.1093/bioinformatics/btv642">10.1093/bioinformatics/btv642</a></li>
+<li id="Bushmanova2016">Bushmanova, E., D. Antipov, A. Lapidus, V. Suvorov, and A. D. Prjibelski, 2016 <b>rnaQUAST: a quality assessment tool for \lessi\greaterde novo\less/i\greater transcriptome assemblies</b>. Bioinformatics 32: 2210–2212. <a href="https://doi.org/10.1093/bioinformatics/btw218">10.1093/bioinformatics/btw218</a></li>
 <li id="Piovesan2016">Piovesan, A., M. Caracausi, F. Antonaros, M. C. Pelleri, and L. Vitale, 2016 <b>GeneBase 1.1: a tool to summarize data from NCBI gene datasets and its application to an update of human gene statistics</b>. Database 2016: baw153. <a href="https://doi.org/10.1093/database/baw153">10.1093/database/baw153</a></li>
 <li id="dexseq">Anders, S., and A. Reyes, 2017 <b>DEXSeq</b>. <a href="https://doi.org/10.18129/B9.BIOC.DEXSEQ">10.18129/B9.BIOC.DEXSEQ</a> <a href="https://bioconductor.org/packages/DEXSeq">https://bioconductor.org/packages/DEXSeq</a></li>
 <li id="isoformswitchanalyzer">Kristoffer, V.-S., 2017 <b>IsoformSwitchAnalyzeR</b>. <a href="https://doi.org/10.18129/B9.BIOC.ISOFORMSWITCHANALYZER">10.18129/B9.BIOC.ISOFORMSWITCHANALYZER</a> <a href="https://bioconductor.org/packages/IsoformSwitchAnalyzeR">https://bioconductor.org/packages/IsoformSwitchAnalyzeR</a></li>
@@ -2218,6 +2760,8 @@ SRR9050442_Cancer	https://zenodo.org/record/7941871/files/SRR9050442_reverse.fas
 <li id="Bashyam2019">Bashyam, M. D., S. Animireddy, P. Bala, A. Naz, and S. A. George, 2019 <b>The Yin and Yang of cancer genes</b>. Gene 704: 121–133. <a href="https://doi.org/10.1016/j.gene.2019.04.025">10.1016/j.gene.2019.04.025</a></li>
 <li id="Kovaka2019">Kovaka, S., A. V. Zimin, G. M. Pertea, R. Razaghi, S. L. Salzberg <i>et al.</i>, 2019 <b>Transcriptome assembly from long-read RNA-seq alignments with StringTie2</b>. Genome Biology 20: <a href="https://doi.org/10.1186/s13059-019-1910-1">10.1186/s13059-019-1910-1</a></li>
 <li id="Bonnal2020">Bonnal, S. C., I. López-Oreja, and J. Valcárcel, 2020 <b>Roles and mechanisms of alternative splicing in cancer — implications for care</b>. Nature Reviews Clinical Oncology 17: 457–474. <a href="https://doi.org/10.1038/s41571-020-0350-x">10.1038/s41571-020-0350-x</a></li>
+<li id="Pertea2020">Pertea, G., and M. Pertea, 2020 <b>GFF Utilities: GffRead and GffCompare</b>. F1000Research 9: 304. <a href="https://doi.org/10.12688/f1000research.23297.2">10.12688/f1000research.23297.2</a></li>
+<li id="Erady2021">Erady, C., A. Boxall, S. Puntambekar, N. S. Jagannathan, R. Chauhan <i>et al.</i>, 2021 <b>Pan-cancer analysis of transcripts encoding novel open-reading frames (nORFs) and their potential biological functions</b>. npj Genomic Medicine 6: <a href="https://doi.org/10.1038/s41525-020-00167-4">10.1038/s41525-020-00167-4</a></li>
 <li id="Namba2021">Namba, S., T. Ueno, S. Kojima, K. Kobayashi, K. Kawase <i>et al.</i>, 2021 <b>Transcript-targeted analysis reveals isoform alterations and double-hop fusions in breast cancer</b>. Communications Biology 4: <a href="https://doi.org/10.1038/s42003-021-02833-4">10.1038/s42003-021-02833-4</a></li></ol>
                 
 
@@ -2362,9 +2906,19 @@ tools:
   revisions: d698c222f354
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fastqc
   owner: devteam
   revisions: 3d0c7bdf12f5
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: gffread
+  owner: devteam
+  revisions: 154d00cbbf2d
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: tabular_to_fasta
@@ -2382,6 +2936,11 @@ tools:
   revisions: 65b93b623c77
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: gffcompare
+  owner: iuc
+  revisions: f99dd58de04f
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: gtftobed12
   owner: iuc
   revisions: b026dae67fba
@@ -2394,7 +2953,7 @@ tools:
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: isoformswitchanalyzer
   owner: iuc
-  revisions: f3fefb6d8254
+  revisions: b3f292d9f35d
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: multiqc
@@ -2410,6 +2969,21 @@ tools:
 - name: rgrnastar
   owner: iuc
   revisions: 3ea5a2a63fa2
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: rnaquast
+  owner: iuc
+  revisions: 96f74538896e
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: rnaquast
+  owner: iuc
+  revisions: f89e3c318453
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: stringtie
+  owner: iuc
+  revisions: ae618321f34a
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: stringtie
@@ -2430,6 +3004,11 @@ tools:
 - name: rseqc
   owner: nilesh
   revisions: 5968573462fa
+  tool_panel_section_label: Transcriptomics
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: rseqc
+  owner: nilesh
+  revisions: 473382134e56
   tool_panel_section_label: Transcriptomics
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: rseqc
@@ -2496,7 +3075,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0eb893ab4a3f5d58a22e7bff82410d2ebf68095d">0eb893a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/9ba3889abaf8f7c4ec79662dce5e70fc3bf5b5a7">9ba3889</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
