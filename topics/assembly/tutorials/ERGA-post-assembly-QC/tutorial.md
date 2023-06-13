@@ -508,7 +508,7 @@ Merqury works by comparing k-mers of an assembly to those from unassembled high-
 
 Let's have a closer look at the copy number plots for each of the three species. Merqury will generate k-mers from the raw sequencing data (in the following called the 'read set') and will compare them to the assembly, in contrast to genomescope. Despite being diploid or triploid the species only got plotted with the primary assembly. This is why only one-copy k-mers get evaluated.
 
-![Figure 14: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers (CN) plot of the whale (*Eschrichtius robustus*). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
+![Figure 14: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers (CN) plot of the whale (*Eschrichtius robustus*). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set. The black area can be indicative for sequencing error in the read set or missing sequences in the assembly.")
 
 The small black area indicates that most of the k-mers found in the read set are also found in the assembly (but not all since only the primary assembly got plotted). It reflects a highly homozygous assembly. This plot indicates a sequencing coverage at ~30x as seen before with genomescope.
 
@@ -518,7 +518,7 @@ The small black area indicates that most of the k-mers found in the read set are
 >
 > > <solution-title></solution-title>
 > >
-> > ![Figure 15: Merqury plot](../../images/post-assembly-QC/merqury_comparison_plot.png "Merqury copy numbers (CN) plot of Chondrosia reniformis (A) and Erythrolamprus reginae (B). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set.")
+> > ![Figure 15: Merqury plot](../../images/post-assembly-QC/merqury_comparison_plot.png "Merqury copy numbers (CN) plot of Chondrosia reniformis (A) and Erythrolamprus reginae (B). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set. The black area can be indicative for sequencing error in the read set or missing sequences in the assembly.")
 > >
 > > - (A) The sponge (*Chondrosia reniformis*) does have two peaks as seen before with genomescope which is typical for a diploid species. The large black area indicates that there is a high amount of k-mers in the read set which is not used in the assembly since only the primary assembly got plotted. The secondary assembly is missing.
 > > - (B) The snake (*Erythrolamprus reginae*) does have three peaks as seen before with genomescope which is typical for a triploid species. The black area is even larger compared to the sponge since only the primary assembly got plotted. The secondary and third assembly are missing. 
@@ -663,17 +663,16 @@ Bandage is a tool to visualise de novo assembly graphs with connections. ({% cit
 >
 {: .hands_on}
 
-![Figure 18: Assembly Graph Sponge](../../images/post-assembly-QC/bandage_sponge.jpg "Represents a contigious assembly.")
+![Figure 18: Assembly Graph Sponge](../../images/post-assembly-QC/bandage_sponge.jpg "Assembly graph of the sponge (*Chrondrosia reniformis*). Contigs (nodes) are displayed in different colors and their connections (edges) are displayed as red dotted lines.")
 
-> <question-title>Hi-C contact map question</question-title>
+> <question-title>Assembly graph question</question-title>
 >
-> What can you say about the Hi-C map corresponding to *Chondrosia reniformis*?.
+> Which differences can you appreciate between the assembly graph corresponding to *Erythrolamprus reginae* and *Eschrichtius robustus*?
 >
 > > <solution-title></solution-title>
 > >
-> > ![Figure 19: Assembly Graph Whale](../../images/post-assembly-QC/bandage_whale.jpg "Some good assembled contigs and many small contigs.")
+> > ![Figure 19: Assembly Graph Snake and Whale](../../images/post-assembly-QC/bandage.jpg "Assembly graph of Erythrolamprus reginae (A) and Eschrichtius robustus (B). Contigs (nodes) are displayed in different colors and their connections (edges) are displayed as red dotted lines.")
 > >
-> > ![Figure 20: Assembly Graph Whale](../../images/post-assembly-QC/bandage_snake.jpg "Some good assembled contigs and many small contigs.")
 > >
 > {: .solution}
 >
@@ -685,4 +684,4 @@ Bandage is a tool to visualise de novo assembly graphs with connections. ({% cit
 In conclusion, it's worth to run the the post-assembly workflow to assess the quality of genome assemblies. The following table contains metrics to sum up the quality control.
 
 
-![Figure 21:  Final stats](../../images/post-assembly-QC/table_of_metrics.png "This table contains 9 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
+![Figure 20:  Final stats](../../images/post-assembly-QC/table_of_metrics.png "This table contains 9 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
