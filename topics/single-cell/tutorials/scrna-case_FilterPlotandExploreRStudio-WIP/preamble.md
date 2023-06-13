@@ -6,7 +6,16 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 > This tutorial is significantly based on the [Seurat documentation](https://satijalab.com/seurat) as well as [Seurat's Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html).
 {: .comment}
 
-## Get Data onto Galaxy 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+# Get Data onto Galaxy 
 > Let's get our dataset loaded into Galaxy, first. 
 
 > <hands-on-title>GetData</hands-on-title>
@@ -15,7 +24,7 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 > - *"Choose the type of matrix to download"*: 'Raw filtered counts'
 {: .hands_on}
 
-## Open RStudio in Galaxy 
+# Open RStudio in Galaxy 
 You should now see a matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files in your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 {% tool [RStudio](interactive_tool_rstudio)}
