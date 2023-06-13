@@ -90,7 +90,7 @@ barcodes.tsv<-read.delim("/import/3", header = FALSE)
 gx_get(4) #exp_design.tsv
 exp_design.tsv<-read.delim("/import/4")
 ```
-> The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes  the row names. This can be accomplished by doing the following: 
+ The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes  the row names. This can be accomplished by doing the following: 
 
 ```r
 rownames(exp_design.tsv)<-exp_design.tsv$Assay 
@@ -202,7 +202,7 @@ plot(x = srt$nCount_RNA,
 ```
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
->High mito expression typically indicates stressed out cells (typically due to the extraction, sorting, or sample prep protocols). These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data.  
+High mito expression typically indicates stressed out cells (typically due to the extraction, sorting, or sample prep protocols). These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data.  
 
 We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
 
@@ -492,7 +492,7 @@ We can see that DP-L, which seems to be extending away from the DP-M bunch, as w
 # Technical Assessment 
 Is our analysis real? Is it right? Well, we can assess that a little bit.
 
->First thing's first, is there a batch effect?
+First thing's first, is there a batch effect?
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
@@ -500,7 +500,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
 
 While some differences across batch are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
 
->Additionally, we will also look at the confounding effect of sex: 
+Additionally, we will also look at the confounding effect of sex: 
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individual", "Genotype"))
