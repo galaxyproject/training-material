@@ -16,10 +16,10 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 {: .agenda}
 
 # Get Data onto Galaxy 
-> Let's get our dataset loaded into Galaxy, first. 
+Let's get our dataset loaded into Galaxy, first. 
 
 > <hands-on-title>GetData</hands-on-title>
-{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
+> Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
 > - *"SC-Atlas experiment accession"*: 'E-MTAB-6945'
 > - *"Choose the type of matrix to download"*: 'Raw filtered counts'
 {: .hands_on}
@@ -27,7 +27,7 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 # Open RStudio in Galaxy 
 You should now see a matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files in your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
-{% tool [RStudio](interactive_tool_rstudio)}
+> Run {% tool [RStudio](interactive_tool_rstudio)}
 {: .hands_on}
 
 The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar)> Active Interactive Tools > RStudio)

@@ -66,7 +66,7 @@ library(dplyr)
 # Upload, view and modify the files
  Now that we have made it into RStudio and called the packages we'll use, let's begin loading the datasets we retrieved in Galaxy into RStudio. Galaxy expedites this process by providing us the gx_get() function, which will output the file path to locate each dataset within our history. 
 
-> So, for example, our matrix was the first to be saved in our history. As such, we will ask for the filepath for the first piece of  in our history with the following line:  
+So, for example, our matrix was the first to be saved in our history. As such, we will ask for the filepath for the first piece of  in our history with the following line:  
 
 ```r
 gx_get(1)  #get the file path for matrix.mtx  Galaxy history
@@ -172,7 +172,8 @@ VlnPlot(srt,
 ```
 
 This plot shows us the number of cells split by the individual (mouse) from which the cells came from. Now, depending on your experimental design, batch may be represented by something other than individual--like timepoint or even the wet lab researcher who isolated the cells. 
-> Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
+
+Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
 
 In order to accurately assess potential batch effects, use the "group.by" argument to indicate the variable which differed across experiments.   
 
@@ -235,7 +236,8 @@ prop.table(table(srt@meta.data$nCount_RNA > 1750))
 prop.table(table(srt@meta.data$perc.mt > 3))
 ```
 If we are happy with those thresholds for cells and percent mito, we can look at the the gene count threshold next. 
->If not, repeat the preceding steps to hone in on a threshold more suited for your dataset.
+
+If not, repeat the preceding steps to hone in on a threshold more suited for your dataset.
 
 To do so, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
 
@@ -311,18 +313,20 @@ filtered_srt<- SCTransform(filtered_srt,
                           seed.use = 1448145)
 ```
 
-> Normalisation helps reduce the differences between gene and UMI counts by fitting total counts to 10,000 per cell. The inherent log-transform (by log(count+1)) aligns the gene expression level better with a normal distribution. This is fairly standard to prepare for any future dimensionality reductions.
+Normalisation helps reduce the differences between gene and UMI counts by fitting total counts to 10,000 per cell. The inherent log-transform (by log(count+1)) aligns the gene expression level better with a normal distribution. This is fairly standard to prepare for any future dimensionality reductions.
 
-> We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses. The find variable genes step within SCTransform (and Seurat's FindVariableFeatures function) will flag the genes that do vary across the cells for future analysis.
+We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses. The find variable genes step within SCTransform (and Seurat's FindVariableFeatures function) will flag the genes that do vary across the cells for future analysis.
 
-> Then, SCTransform (or Seurat's ScaleData function) will scale the data so that all genes have the same variance and a zero mean. 
->This is an important step to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. 
+Then, SCTransform (or Seurat's ScaleData function) will scale the data so that all genes have the same variance and a zero mean. 
 
->>Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.
+This is an important step to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. 
+
+>Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.
 
 Although we've made our expression values comparable to one another and our overall dataset less computationally demanding, we still have too many dimensions (n cells x n genes!). 
 
 Transcript changes are not usually singular - which is to say, genes were in pathways and in groups. It would be easier to analyse our data if we could more easily group these changes.To address this we will run principal component analysis (PCA). 
+
 >Principal components are calculated from highly dimensional data to find the most representative spread in the dataset. So in our highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:
 
 ```r
@@ -337,14 +341,16 @@ ElbowPlot(filtered_srt, ndims=50)
 ```
 
 We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs. 
+
 > You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs. 
 
 We’re still looking at around 10 dimensions at this point--likely not the easiest to visualize. To make our lives easier, we need to identify how similar a cell is to another cell, across every cell across each of these dimensions. 
 
 For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. 
+
 >The kNN graph plots connections between cells if their distance (when plotted in this 10 dimensional space!) is amongst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP--which is what will ultimately allow us to visualize our data in 2 dimensions. 
 
->From UMAP developers: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
+>>From UMAP developers: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
 
 Let's now use the 10 PC threshold we chose from the Elbowplot and apply it to find neighbors:
 
@@ -384,7 +390,8 @@ FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 We just plotted a housekeeping gene, Gapdh, so the broad expression is expected. 
 
 In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered. 
->For example, we can plot macrophage marker Aif1 and get an idea of which cells and/or clusters might resemble macrophages: 
+
+For example, we can plot macrophage marker Aif1 and get an idea of which cells and/or clusters might resemble macrophages: 
 
 ```r
 FeaturePlot(filtered_srt, features = "Aif1", order = TRUE)
@@ -447,7 +454,7 @@ Let's take a look at what our clusters look like:
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
 ```
 
->Note that the cluster numbering is based on size alone - clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
+Note that Seurat's cluster numbering is based on size alone - clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are as well as going through the marker tables you generated!) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
 
@@ -458,7 +465,7 @@ It would be nice to know what these cells are. This analysis (googling all of th
 | 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
 | 5        | Itm2a                   | Mature T-cell                       |
 
->We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
+We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 ```r
 library(dplyr)
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
@@ -472,18 +479,18 @@ Once we have labelled our clusters, we can visualize what our cell types actuall
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
 ```
->Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some realy biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!
+Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some realy biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!
 
->Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" argument in Seurat's plot functions.  
+Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" argument in Seurat's plot functions.  
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.by = "Genotype")
 ```
 
->We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
+We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
 # Technical Assessment 
->Is our analysis real? Is it right? Well, we can assess that a little bit.
+Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 >First thing's first, is there a batch effect?
 
@@ -491,41 +498,41 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
 ```
 
->While some differences across batch are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
+While some differences across batch are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
 
 >Additionally, we will also look at the confounding effect of sex: 
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individual", "Genotype"))
 ```
->We note that the one female sample - unfortunately one of mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
+We note that the one female sample - unfortunately one of mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
 
->Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
+Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "nCount_SCT")
 ```
 
->Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
+Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
 
->Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check: 
+Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check: 
 
 ```r
 FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hbb-a1")
 ```
 
->Hemoglobin - a red blood cell marker that should NOT be found in T-cells - appears throughout the entire dataset in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
+Hemoglobin - a red blood cell marker that should NOT be found in T-cells - appears throughout the entire dataset in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
 
->Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
+Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
 
 ```r
 DimPlot(object = "filtered_srt", reduction = "umap", group.by = "celltype")
 FeaturePlot(object = filtered_srt, reduction = "umap", features = "Itm2a")
 ```
 
->Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That’s a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone. If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
+Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That’s a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone. If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
 
-> Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
+Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
-> Congratulations! You have interpreted your plots in several important ways!
+Congratulations! You have interpreted your plots in several important ways!
