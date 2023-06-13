@@ -74,7 +74,7 @@ What is motivation?
 Motivation influences **direction**, **intensity**, **persistence** and **quality** of the learning behaviors.
 
 
-> <hands-on-title>Recall a motivating learning experience - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>Recall a motivating learning experience - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > Write in the shared notes about a **motivating** experience in your life (as a learner) and how it impacted you
 >
@@ -252,7 +252,7 @@ Adult learners usually come motivated to courses and the point is to not demotiv
 In many cases, to not de-motivate learners is an excellent way to support motivation.
 
 
-> <hands-on-title>Recall a demotivating experience - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>Recall a demotivating experience - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > Write in the shared notes about a **demotivating** experience in your life (as a learner) and how it impacted you
 >
@@ -423,7 +423,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-> <hands-on-title>Strategies to improve motivation - _{% icon time %} 15 min - Groups of 2 people_</hands-on-title>
+> <hands-on-title>Strategies to improve motivation - {% icon time %} 15 min - Groups of 2 people</hands-on-title>
 >
 > - Pick 1 strategy associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
 >

@@ -67,7 +67,7 @@ and different ways that we can categorise them:
 
 ![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png)
 
-> <hands-on-title>Diagnostic Assessment - *{% icon time %} 15 min - Groups of 4*</hands-on-title>
+> <hands-on-title>Diagnostic Assessment - {% icon time %} 15 min - Groups of 4</hands-on-title>
 >
 > - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it
 {: .hands_on}
@@ -111,7 +111,7 @@ Formative assessment collect feedback (information) from learners' on their lear
 - **Frequent mistakes**: which types of mistakes need special attention
 - **Ability to perform a task**
 
-> <hands-on-title>Collecting formative assessment - *{% icon time %} 10 min - Groups of 4*</hands-on-title>
+> <hands-on-title>Collecting formative assessment - {% icon time %} 10 min - Groups of 4</hands-on-title>
 >
 > 1. Find an example on how to collect information on **learners' mental models**
 > 2. Find an example on how to collect information on **learners' goals and objectives**
@@ -202,7 +202,7 @@ Many group activities are possible
 
     Tools like Google docs, Etherpad or HackMD could be used
 
-> <hands-on-title>How to integrate the result of formative assessment / feedback in your course? - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>How to integrate the result of formative assessment / feedback in your course? - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > 1. In this session, how did we assess your learning?
 > 2. Choose one of the techniques to collect feedback, and describe in the how you can integrate the result in your lesson, on the fly
@@ -215,7 +215,7 @@ Many group activities are possible
 
 <!--{% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}-->
 
-> <hands-on-title>How frequent should formative feedback be? - *{% icon time %} 5 min - Self-reflection*</hands-on-title>
+> <hands-on-title>How frequent should formative feedback be? - {% icon time %} 5 min - Self-reflection</hands-on-title>
 >
 > - In this session, how many feedback opportunities have you had so far?
 >
@@ -235,7 +235,7 @@ Formative assessment should be frequent: ideally **every 5 min**, at least every
 
 Feedback is hard.
 
-> <hands-on-title>How to deal with feedback - discuss experiences  - *{% icon time %} 15 min - Groups of 4*</hands-on-title>
+> <hands-on-title>How to deal with feedback - discuss experiences  - {% icon time %} 15 min - Groups of 4</hands-on-title>
 >
 > - Share one or two experiences that you have had in either offering or receiving feedback.
 > - Share your strategy in dealing with this feedback. What were the challenges, and what worked?
