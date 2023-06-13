@@ -51,6 +51,7 @@ worth spending some time learning a bit about Python
 coding style conventions to make sure that your code is consistently formatted and readable by yourself and others.
 
 > *"Any fool can write code that a computer can understand. Good programmers write code that humans can understand."* - [Martin Fowler](https://en.wikiquote.org/wiki/Martin_Fowler), British software engineer, author and international speaker on software development
+{: .quote}
 
 > <comment-title></comment-title>
 >

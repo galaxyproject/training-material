@@ -98,6 +98,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Upload Disease Dataset**

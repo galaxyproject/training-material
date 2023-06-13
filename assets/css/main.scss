@@ -79,6 +79,16 @@ $tutorial-box-spacing: 1rem;
 /* THEMES */
 @import "./themes.scss";
 
+/* Other CSS libraries we use */
+// If you use .css (i.e. from the file extension) it will use a CSS import
+// which triggers multiple requests.
+@import "./academicons";
+@import "./bootstrap.min";
+@import "./bootstrap-toc.min";
+@import "./leaflet-1.9.3";
+@import "../fontawesome/css/all.min";
+
+
 // palette
 // These remain SASS variables because they're used in mixins.
 // Boxes
@@ -220,6 +230,28 @@ img {
     margin: 2.5%;
 }
 
+div.main-content {
+	img {
+		height: auto;
+		width: auto;
+	}
+}
+
+figure {
+  text-align: center;
+  margin: 1rem 2rem;
+
+  & > img {
+      margin-bottom: 1rem;
+      height: auto;
+  }
+
+  figcaption {
+    text-align: justify;
+  }
+}
+
+
 :not(pre) > code {
     color: var(--code-foreground);
     background: var(--code-background);
@@ -255,20 +287,6 @@ div.language-diff .p {
 	margin-right: 1em;
 	padding-left: 1em;
 	padding-right: 1em;
-}
-
-figure {
-  text-align: center;
-  margin: 1rem 2rem;
-
-  & > img {
-      margin-bottom: 1rem;
-      height: auto;
-  }
-
-  figcaption {
-    text-align: justify;
-  }
 }
 
 footer {
@@ -745,17 +763,17 @@ blockquote {
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-            background-color: transparent;
+		background-color: var(--color-background);
             border-color: transparent;
         }
 
         .dropdown-item {
-            color: var(--text-color-muted);
+		color: var(--text-color);
 
             &:hover,
             &:focus,
             &:active {
-                background-color: transparent;
+                background-color: var(--brand-color);
                 color:  var(--text-color);
             }
         }
@@ -866,6 +884,9 @@ a {
     // Unset this for logos on the homepage
     &.logo {
 	border: none;
+	img {
+		max-height: 5em;
+	}
     }
 }
 
@@ -971,7 +992,8 @@ nav[data-toggle='toc'] {
     flex-shrink: 0;
 
     img {
-        height: 1em;
+	height: 2em !important;
+	width: 2em !important;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
     }
@@ -1367,9 +1389,23 @@ ul.text-list, ol.text-list {
         margin-bottom: 0;
         text-align: center;
     }
+
+    .card-title-small {
+        font-size: 250%;
+        font-weight: 900;
+        margin-bottom: 0;
+        text-align: center;
+
+    }
     .card-text {
         text-align: center;
         font-size: 150%;
+        padding: 0.3em;
+    }
+
+    .card-text-small {
+        text-align: center;
+        font-size: 125%;
         padding: 0.3em;
     }
 }
@@ -1429,3 +1465,34 @@ a[target="_blank"]::after {
     }
 }
 }
+
+// For the git-gat learning pathway boxes
+#git-gat-timeline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#git-gat-timeline li  {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+#git-gat-timeline li.active {
+    background: #a8ffa8;
+}
+#git-gat-timeline li.active a {
+    color: black;
+}
+#git-gat-timeline li.disabled {
+    background: #eee;
+}
+#git-gat-timeline li.disabled a {
+    color: #555;
+}
+#git-gat-timeline span {
+    align-self: center;
+}
+

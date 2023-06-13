@@ -137,6 +137,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.
@@ -486,7 +487,7 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Import this file as type BED file:
 >    ```

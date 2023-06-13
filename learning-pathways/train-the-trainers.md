@@ -10,7 +10,7 @@ pathway:
   - section: "Module 1: Learning principles"
     description: |
         This module covers the following questions:
-        - What are the main principles that drive learning? 
+        - What are the main principles that drive learning?
         - How can these principles be applied to training and teaching?
 
         At the end of this module, learners should be able to:
@@ -25,7 +25,7 @@ pathway:
   - section: "Module 2: Design and plan session, course, materials"
     description: |
         This module covers the following questions:
-        - What is the structured approach to course design? 
+        - What is the structured approach to course design?
         - How to articulate learning outcomes commensurate with the cognitive complexity of the target learning?
         - How to devise learning experiences and course content?
         - What are the steps that can help trainers devise and deploy effective courses?
@@ -40,14 +40,14 @@ pathway:
         - Summarise the benefits of course evaluation
 
     tutorials:
-      - name: contributing
-        topic: design
+      - name: design
+        topic: contributing
 
 
-      - section: "Module 3: Training techniques to enhance learner participation and engagement"
+  - section: "Module 3: Training techniques to enhance learner participation and engagement"
     description: |
         This module covers the following questions:
-        - What does make a training effective? 
+        - What does make a training effective?
         - How can instructors enhance learner participation and engagement?
 
         At the end of this module, learners should be able to:

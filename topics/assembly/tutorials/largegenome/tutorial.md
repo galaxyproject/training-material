@@ -126,6 +126,7 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/7055935) or a data library (ask your instructor):
@@ -142,6 +143,7 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >    
 > 3. Check that the datatypes for the three files of sequencing reads are `fastq.gz`, not `fastqsanger.gz` and change datatype if needed.
@@ -184,11 +186,9 @@ Options:
 
 > <hands-on-title>Run the Data QC workflow</hands-on-title>
 >
-> 1. **Import the Data QC workflow** into Galaxy:
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Data_QC.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
 >
 >    - Click "Expand to full workflow form"
 >
@@ -270,11 +270,13 @@ Options:
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-kmer_counting.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+> 1. **Import the workflow** into Galaxy:
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-kmer_counting.ga" title="Kmer counting workflow" %}
 >
 >    - Click "Expand to full workflow form"
 >
-> 2. Run **Data QC** {% icon workflow %} using the following parameters:
+> 2. Run **Kmer counting** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Input file: Illumina reads R1"*: the illumina R1 fastq.gz file
 >
@@ -359,11 +361,9 @@ Options:
 
 > <hands-on-title>Run the Trim and Filter Reads workflow</hands-on-title>
 >
-> 1. **Import the Trim and Filter reads workflow** into Galaxy:
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Trim_and_filter_reads.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Trim_and_filter_reads.ga" title="Trim and Filter reads" %}
 >
 >    - Click "Expand to full workflow form"
 >
@@ -459,11 +459,9 @@ Options
 
 > <hands-on-title>Run the Assembly with Flye workflow</hands-on-title>
 >
-> 1. **Import the Assembly with Flye workflow** into Galaxy:
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assembly_with_Flye.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_with_Flye.ga" title="Assembly with Flye" %}
 >
 >    - Click "Expand to full workflow form"
 >
@@ -572,11 +570,9 @@ Options:
 
 > <hands-on-title>Run the Assembly polishing workflow</hands-on-title>
 >
-> 1. **Import the Assembly polishing workflow** into Galaxy:
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assembly_polishing.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_polishing.ga" title="Assembly polishing workflow" %}
 >
 >    - Click "Expand to full workflow form"
 >
@@ -673,11 +669,9 @@ Options:
 
 > <hands-on-title>Run the Assess Genome Quality workflow</hands-on-title>
 >
-> 1. **Import the Assess Genome Quality workflow** into Galaxy:
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assess_genome_quality.ga) or download it to your computer.
->    - Import the workflow into Galaxy
+> 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assess_genome_quality.ga" title="Assess Genome Quality" %}
 >
 >    - Click "Expand to full workflow form"
 >

@@ -1,7 +1,8 @@
 ---
 title: "New Feature: Easy Abbreviation"
 tags: [new feature]
-contributors: [hexylena, rikeshi, simonbray]
+contributions:
+  authorship: [hexylena, rikeshi, simonbray]
 tutorial: "topics/dev/tutorials/bioblend-dev/tutorial.html"
 layout: news
 ---

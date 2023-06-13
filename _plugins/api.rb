@@ -148,6 +148,12 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
+      # Public tool listing
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'psl.json')
+      page2.content = JSON.generate(site.data['public-server-tools'])
+      page2.data['layout'] = nil
+      site.pages << page2
+
       # Contributors
       puts '[GTN/API] Contributors'
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.json')
@@ -238,6 +244,24 @@ module Jekyll
           }
         end
       end
+
+      # Videos.json
+      # {
+      # "id": "transcriptomics/tutorials/mirna-target-finder/slides",
+      # "topic": "Transcriptomics",
+      # "title": "Whole transcriptome analysis of Arabidopsis thaliana"
+      # },
+
+      page2 = PageWithoutAFile.new(site, '', 'api/', 'videos.json')
+      page2.content = JSON.pretty_generate(TopicFilter.list_videos(site).map do |m|
+        {
+          id: "#{m['topic_name']}/tutorials/#{m['tutorial_name']}/slides",
+          topic: m['topic_name_human'],
+          title: m['title']
+        }
+      end)
+      page2.data['layout'] = nil
+      site.pages << page2
 
       # Overall topic index
       page2 = PageWithoutAFile.new(site, '', 'api/', 'topics.json')

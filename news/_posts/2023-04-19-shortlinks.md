@@ -1,10 +1,11 @@
 ---
 title: "New Feature: Persistent URLs (PURLs) / Shortlinks"
-contributors: [hexylena]
+contributions:
+  authorship: [hexylena]
 tags: [new feature, gtn]
 layout: news
 cover: "assets/images/purl.png"
-cover_alt: the bottom left corner of an overview box from a training material is shown, a label short link clearly has a short link as described in the tutorial
+coveralt: the bottom left corner of an overview box from a training material is shown, a label short link clearly has a short link as described in the tutorial
 ---
 
 The GTN has added persistent URL identifiers for our tutorials, slides, and FAQs. Using the `gxy.io` service, we have reserved `GTN` namespace for our persistent URLs. These work similarly to DOIs in that they will always point to a specific training material.

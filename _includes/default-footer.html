@@ -17,15 +17,15 @@
 			<div class="col-sm-6" style="text-align: right">
 				{% if page.short_id %}
 				<p>
-					Resource <abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+					Resource {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
 				</p>
 				{% endif %}
 				<p>
-					{% if page.layout == "tutorial_hands_on" %}
-						This material licensed under
-					{% else %}
-						Materials licensed under
+					<i>This Material</i>:
+					{% if page.copyright %}
+						is {{ page.copyright }}.
 					{% endif %}
+					is licensed under
 					<a rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
 						{% if page.license %}{{ page.license }}{% else %}Creative Commons Attribution 4.0 International License{% endif %}
 					</a>

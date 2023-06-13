@@ -25,6 +25,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. Check that the datatype is `h5ad`

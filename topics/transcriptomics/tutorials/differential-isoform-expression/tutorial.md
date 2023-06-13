@@ -23,19 +23,25 @@ contributions:
     - lldelisle
   editing:
     - pavanvidem
+abbreviations:
+    AS: alternative splicing
+    IS: isoform switching
+    TSGs: tumor supression genes
+    OCGs: oncogenes
+
 ---
 
 # Introduction
 
-Discovered over 40 years ago, alternative splicing formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of alternative splicing (AS) and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}).
+Discovered over 40 years ago, {AS} formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of {AS} and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}).
 
-AS regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}), and its disruption has been demonstrated to be able to contribute to virtually every aspect of cancer progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}) (fig. 1).
+Alterations in gene splicing has been demonstrated to have significant impact on cancer development, and multiple evidences indicate that its disruption can exhibit effects on virtually all aspect of tumor progression ({% cite Namba2021 %}, {% cite Bonnal2020 %}). For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer ({% cite Namba2021 %}). 
 
-![Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks](../../images/differential_isoform/differential_cancer.png "Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks.")
+![Figure 01. Examples of cancer splicing dysregulation on cancer hallmarks](../../images/differential_isoform/differential_cancer.png "Effect of alternative splicing dysregulation on cancer progression. The diagram depicts various cancer hallmarks and examples of genes whose splicing dysregulation has been demostrated to be implicated in the corresponding functional modification.")
 
-Alterations in gene splicing has been demonstrated to have significant impact on cancer development and progression. For instance, the unannotated isoform of TNS3 was found to be a novel driver of breast cancer ({% cite Namba2021 %}). These alterations can lead to the activation of oncogenes (OCGs) or the inactivation of tumor suppressor genes (TSGs), which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either OCGs or TSGs may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}).
+Disregulation in {AS} can lead to the activation of {OCGs} or the inactivation of {TSGs}, which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either {OCGs} or {TSGs} may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}). One of the mechanism that has been proposed to partially explain this apparently contradictory effect is the differential usage of isoforms, often referred to as {IS}. This regulatory phenomenon has been demonstrated to have a substantial biological impact in a diverse range of biological contexts, caused by functional diversity potential of the different isoforms ({% cite VittingSeerup2017 %}). 
 
-Differential usage of isoforms in different conditions, often referred to as isoform switching (IS), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite VittingSeerup2017 %}). In this tutorial, we aim to perform a genome-wide analysis of the IS phaenomena in cancer, which offers improved resolution over gene expression, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on a genome-scale.
+In this tutorial, we aim to perform a genome-wide analysis of {IS} in cancer, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on genome-scale.
 
 > <agenda-title></agenda-title>
 >
@@ -49,7 +55,7 @@ Differential usage of isoforms in different conditions, often referred to as iso
 
 # Background on data
 
-The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. The samples were obtained by RNA sequencing on PANC1 cell line samples. The protocol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. For this training we will use a reduced set of reads, in order to speed up the analysis. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
+The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. Half of the samples were obtained from PANC1 tumour lines, and the rest from control cells. The protocol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. For this training we will use a reduced set of reads, in order to speed up the analysis. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
 
 ## Get data
 
@@ -221,7 +227,7 @@ The following section can be considered as the hard-core part of the training, t
 
 > <comment-title>Transcriptome-reconstruction approaches</comment-title>
 >
->  The different methods for estimating transcript/isoform abundance can be classified depending on two main requirements: reference sequence and alignment. reference-guided transcriptome assembly strategy requires to aligning sequencing reads to a reference genome first, and then assembling overlapping alignments into transcripts. In contrast, *de novo* transcriptome assembly methods directly reconstructs overlapping reads into transcripts by utilising the redundancy of sequencing reads themselves ({% cite Lu2013 %}).
+>  The different methods for estimating transcript/isoform abundance can be classified depending on two main requirements: reference sequence and alignment. Reference-guided transcriptome assembly strategy requires to aligning sequencing reads to a reference genome first, and then assembling overlapping alignments into transcripts. In contrast, *de novo* transcriptome assembly methods directly reconstructs overlapping reads into transcripts by utilising the redundancy of sequencing reads themselves ({% cite Lu2013 %}).
 >
 {: .comment}
 
@@ -274,7 +280,7 @@ Before moving to the transcriptome assembly and quantification step, we are goin
 
 ## RNA-seq specific quality control metrics with **RSeQC**
 
-RNA-seq-specific quality control metrics, such as sequencing depth, read distribution and coverage uniformity, are essential to ensure that the RNA-seq data are adequate for transcriptome reconstruction and alternative splicing analysis. For example, the use of RNA-seq with unsaturated sequencing depth gives imprecise estimations  and fails to detect low abundance splice junctions, limiting the precision of many analyses ({% cite Wang2012 %}).
+RNA-seq-specific quality control metrics, such as sequencing depth, read distribution and coverage uniformity, are essential to ensure that the RNA-seq data are adequate for transcriptome reconstruction and {AS} analysis. For example, the use of RNA-seq with unsaturated sequencing depth gives imprecise estimations  and fails to detect low abundance splice junctions, limiting the precision of many analyses ({% cite Wang2012 %}).
 
 In this section we will make use of of the **RSeQC** toolkit in order to generate the RNA-seq-specific quality control metrics. But before starting, we need to convert the annotation GTF file into BED12 format, which will be required in subsequent steps.
 
@@ -358,11 +364,11 @@ Now, we will integrate the outputs into **MultiQC**.
 {: .hands_on}
 
 
-First, we will evaluate the plot corresponding to the RNA STAR alignment scores (fig. 6), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.
+First, we will evaluate the plot corresponding to the **RNA STAR** alignment scores (fig. 4), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.
 
-![Figure 04. RNA STAR alignment stats plot](../../images/differential_isoform/star_alignment.png "RNA star alignment stats plot. Note that STAR counts a paired-end read as one read..")
+![Figure 04. RNA STAR alignment stats plot](../../images/differential_isoform/star_alignment.png "RNA star alignment stats plot. Note that STAR counts a paired-end read as one read.")
 
-Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (fig. 7).
+Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **Read Distribution plot** (fig. 5).
 
 ![Figure 05. RSeQC read distribution plot](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions).")
 
@@ -374,27 +380,27 @@ Now we will evaluate the results of the **Infer Experiment** module, which allow
 
 As can be appreciated in the image, the proportion of reads assigned as *sense* is similar to the ones assigned as *antisense*, which indicates that in that case our RNA-seq data is non-strand specific.
 
-Now, let's evaluate the results generated by the **Gene Body Coverage** module. It scales all transcripts to 100 nt and calculates the number of reads covering each nucleotide position. The plot generated from this information illustrates the coverage profile along the gene body, defined as the entire gene from the transcription start site to the end of the transcript (fig. 5).
+Now, let's evaluate the results generated by the **Gene Body Coverage** module. It scales all transcripts to 100 nt and calculates the number of reads covering each nucleotide position. The plot generated from this information illustrates the coverage profile along the gene body, defined as the entire gene from the transcription start site to the end of the transcript (fig. 7).
 
 ![Figure 07. RSeQC gene body coverage plot](../../images/differential_isoform/rseqc_gene_body_coverage_plot.png "RSeQC gene body coverage plot. It calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.")
 
 The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3' skew in libraries. For example, a skew towards increased 3' coverage can happen in degraded samples prepared with poly-A selection. According the figure 5, there're not bias in our reads as a result of sequencing technical problems.
 
-Other important metric for alternative splicing analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform alternative splicing analyses by comparing the detected splice junctions to reference gene model (fig. 6).
+Other important metric for {AS} analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform {AS} analyses by comparing the detected splice junctions to reference gene model (fig. 8).
 
 Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, if the number of known junctions reaches a plateau means that the current sequencing depth is almost saturated for known junction detection. In other words, nearly all known junctions have already been detected, and deeper sequencing will not likely detect additional known junctions. Using an unsaturated sequencing depth would miss many rare splice junctions ({% cite Wang2012 %}).
 
 > <comment-title>RSeQC junction saturation details</comment-title>
 >
-> This approach helps identify if the sequencing depth is sufficient for alternative splicing analysis. However, it relies on the reference gene model for junction comparison, which might not be complete or accurate for all organisms. In addition, it might not provide enough information for novel junction detection, as the sequencing depth might still be insufficient for detecting new splice junctions.
+> This approach helps identify if the sequencing depth is sufficient for {AS} analysis. However, it relies on the reference gene model for junction comparison, which might not be complete or accurate for all organisms. In addition, it might not provide enough information for novel junction detection, as the sequencing depth might still be insufficient for detecting new splice junctions.
 >
 {: .comment}
 
-![Figure 08. RSeQC junction saturation plot](../../images/differential_isoform/rseqc_junction_saturation_plot.png "RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file (5%, 10%, 15%,...), and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).")
+![Figure 08. RSeQC junction saturation plot](../../images/differential_isoform/rseqc_junction_saturation_plot.png "RSeQC junction saturation. Saturation is checked by re-sampling the alignments from the BAM file, and the splice junctions from each subset is detected (green) and and compared them to the reference model (grey).")
 
-As we can appreciate in the plot, the known junctions tend to stabilize around 160.000, which indicates that the read sequencing depth is good enough for performing the alternative splicing analysis.
+As we can appreciate in the plot, the known junctions tend to stabilize around 110.000, which indicates that the read sequencing depth is good enough for performing the {AS} analysis.
 
-After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module (fig. 8); it allows to distinguish between splice junctions (multiple reads show the same splicing event) and splice events (single read level). In addition, the detected junctions are divided in three exclusive categories: known splicing junctions, partial novel splicing junction (one of the splice site is novel) and new splicing junctions (fig. 9).
+After confirming that the saturation level is good enough, finally, we will check the output generated by the RSeQC junction annotation module; it allows to evaluate both splice junctions (multiple reads show the same splicing event) and splice events (single read level) (fig. 9).
 
 ![Figure 09.A RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
 
@@ -410,7 +416,7 @@ After evaluating the quality of the RNA-seq data, we can start with the transcri
 >
 > StringTie first groups the reads into clusters, collapsing the reads that align to the identical location on the genome and keeping a count of how many alignments were collapsed,  then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm ({% cite Pertea2015 %}) (fig. 10).
 >
-> > ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
+> ![Figure 10. StringTie algorithm details](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begins with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned. Source: Perea et al., 2015")
 >
 > **StringTie** uses an aggressive strategy for identifying and removing spurious spliced alignments. If a spliced read is aligned with more than 1% mismatches, keeping in mind that Illumina sequencers have an error rate < 0.5%, then **StringTie** requires 25% more reads than usual (the default is 1 read per bp) to support that particular spliced alignment. In addition, if a spliced read spans a very long intron (more than 100,000 bp), **StringTie** accepts that alignment (and the intron) only if a larger anchor of 25 bp (10 bp is the default) is present on both sides of the splice site. Here the term “anchor” refers to the portion of the read aligned within the exon beginning at the exon-intron boundary ({% cite Kovaka2019 %}).
 >
@@ -462,7 +468,7 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 
 # Isoform analysis with **IsoformSwitchAnalyzeR**
 
-**IsoformSwitchAnalyzeR** is an open-source R package that enables both analyze changes in genome-wide patterns of alternative splicing and specific gene isoforms switch consequences (note: alternative splicing literally will result in isoform switches). An advantage of **IsoformSwitchAnalyzeR** over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an isoform switch ({% cite isoformswitchanalyzer %})
+**IsoformSwitchAnalyzeR** is an open-source R package that enables both analyze changes in genome-wide patterns of {AS} and specific gene isoforms switch consequences (note: {AS} literally will result in {IS}). An advantage of **IsoformSwitchAnalyzeR** over other approaches is that it allows allows to integrate multiple layers of information, such as previously annotated coding sequences, de-novo coding potential predictions, protein domains and signal peptides. In addition, IsoformSwitchAnalyzeR facilitates identification of IS by making use of a new statistical methods that tests each individual isoform for differential usage, identifying the exact isoforms involved in an {IS} ({% cite isoformswitchanalyzer %})
 
 > <comment-title>Nonsense mediated decay</comment-title>
 >
@@ -473,9 +479,9 @@ Despite in this training we make use of RNA STAR as mapping tool, it is possible
 In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
 1. Data import: import into **IsoformSwitchAnalyzeR** the transcription-level expression measurement dataset generated by **Stringtie**. This step also requires to import the GTF annotation file and the transcriptome.
-2. Pre-processing step: non-informative gene/isoforms are removed from the datasets and differentially isoform usage analysis with **DEXSeq**. Once the IS have been found, the corresponding nucleotide and aminoacid sequences are extracted.
+2. Pre-processing step: non-informative gene/isoforms are removed from the datasets and differentially isoform usage analysis with **DEXSeq**. Once the {IS} have been found, the corresponding nucleotide and aminoacid sequences are extracted.
 3. Outward sequence analysis: The sequences obtained in the previous step are used in order to evaluate their coding potential and the motifs that they contain by using two different tools: **PfamScan** and **CPAT**.
-4. Isoform switching analysis: The final step involves importing and incorporating the results of the external sequence analysis, identifying intron retention, predicting functional consequences and generating the reports.
+4. Isoform splicing analysis: The final step involves importing and incorporating the results of the external sequence analysis, identifying intron retention, predicting functional consequences and generating the reports.
 
 
 > <comment-title>On the alternative splicing concept</comment-title>
@@ -486,7 +492,7 @@ In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 
 ![Figure 11. IsoformSwitchAnalyzeR pipeline scheme](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
 
-Now, we can start with the isoform switch analysis.
+Now, we can start with the {IS} analysis.
 
 ## Split collection between the 2 conditions
 
@@ -554,7 +560,7 @@ After the pre-processing, **IsoformSwitchAnalyzieR** performs the differential i
 >
 {: .comment}
 
-IsoformSwitchAnalyzeR uses two parameters to define a significant isoform switch:
+IsoformSwitchAnalyzeR uses two parameters to define a significant {IS}:
 
 - Alpha: the FDR corrected P-value (Q-value) cutoff.
 - dIFcutoff: the minimum (absolute) change in isoform usage (dIF).
@@ -563,7 +569,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 > <comment-title>Isoform or gene resolution analysis?</comment-title>
 >
-> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysi, it is recommended to tu use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in isoform switch, gene-level analysis is conditioned by higher false positive rates.
+> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysi, it is recommended to tu use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in {IS}, gene-level analysis is conditioned by higher false positive rates.
 >
 {: .comment}
 
@@ -575,7 +581,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
->   > An important argument is the 'Reduce to switch genes' option. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without IS are not analyzed.
+>   > An important argument is the 'Reduce to switch genes' option. When enabled, it will reduce/subset  of genes to those which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without {IS} are not analyzed.
 >   >
 >   {: .comment}
 >
@@ -689,8 +695,8 @@ Once the expression data has been integrated and the required auxiliar informati
 
 IsoformSwitchAnalyzeR allows two analysis modes:
 
-1. Analysis of individual isoform switching
-2. Genome-wide analysis of isoform switching
+1. Analysis of individual {IS}
+2. Genome-wide analysis of {IS}
 
 In the next sections we will illustrate both different use-cases.
 
@@ -718,9 +724,9 @@ Let's have a look at the generated plot (fig. 13).
 
 ![Figure 13. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
-In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant isoform switching: the isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid Repulsive guidance molecule BMP co-receptor b protein is repressed in cancer; on the other hand, the isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid Repulsive guidance molecule B is induced.
+In that case, we can appreciate that despite differences in overall gene expression is not statistically significant between health and cancerous tissues, there exists statistically significant {IS}: the isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer; on the other hand, the isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid **Repulsive guidance molecule B** is induced.
 
-We will try to confirm this isoform switching by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and use a software called **pyGenomeTracks**
+We will try to confirm this {IS} by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and use a software called **pyGenomeTracks**
 
 > <hands-on-title>Check isoform switching with pyGenometracks from STAR coverage</hands-on-title>
 >
@@ -755,7 +761,7 @@ Let's have a look at the plot generated by **pyGenometracks** (fig. 14).
 
 ### IsoformSwitchAnalyzer genome-wide analysis
 
-A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. In this training we will perform three different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences:
+A genome-wide analysis is both useful for getting an overview of the extent of {IS} as well as discovering general patterns. In this training we will perform three different summaries/analyses for both the analysis of {AS} and {IS} with predicted consequences:
 
 1. Global summary statistics for summarizing the number of switches with predicted consequences and the number of splicing events occurring in the different comparisons.
 2. Analysis of splicing/consequence enrichment for analyzing whether a particular consequence/splice type occurs more frequently than the opposite event.
@@ -763,7 +769,7 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 
 > <comment-title>Difference in isoform fraction</comment-title>
 >
-> If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. Thus,the isoforms used more (positive dIF) can be compared to the isoforms used less (negative dIF) and by systematically identify differences annotation it is possible to identify potential function consequences of the isoform switch.
+> If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. Thus,the isoforms used more (positive dIF) can be compared to the isoforms used less (negative dIF) and by systematically identify differences annotation it is possible to identify potential function consequences of the {IS} event.
 >
 {: .comment}
 
@@ -792,13 +798,13 @@ It generates five tabular files with the results of the different statistical an
 
 - Splicing summary: values of the different splicing events
 - Splicing enrichment: results of enrichment statistical analysis for the different splicing events.
-- Consequences summary: values of global usage of isoform switches
+- Consequences summary: values of global usage of {IS}
 - Consequences enrichment: results of enrichment statistical analysis for the different functional consequences.
 - Switching gene/isoforms: list of genes with statistically significant isoform swiching between conditions (table 1). The switches are ranked (by p-value or switch size).
 
 > <question-title></question-title>
 >
-> What are the the top three isoform switches (as defined by alpha and dIFcutoff)?
+> What are the the top three {IS} events (as defined by alpha and dIFcutoff)?
 >
 >
 > > <solution-title></solution-title>
@@ -812,15 +818,15 @@ It generates five tabular files with the results of the different statistical an
 {: .question}
 
 
-In addition, it provides a RData object and three collections of plots: isoform switches with predicted functional consequences, isoform switches without predicted functional consequences and genome-wide plots.
+In addition, it provides a RData object and three collections of plots: {IS} events with predicted functional consequences, {IS} without predicted functional consequences and genome-wide plots.
 
 #### Analysis of splicing enrichment
 
-Alternative splicing events are classified for each isoform comparing it to the hypothetical pre-RNA generated by combining all the exons within a gene.
+In this section we will assess whether there are differences with respect to the type of {AS} event .
 
 > <comment-title>Interpretation of splicing events</comment-title>
 >
-> The events are interpreted as follows:
+> The events are classified by comparing the splicing patterns with a hypothetical pre-RNA generated by combining all the exons (fig. 16).
 >
 > ![Figure 16. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 >
@@ -839,15 +845,15 @@ First, we will start analyzing the total number of splicing events (fig. 17).
 
 ![Figure 17. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.")
 
-From the figure 17 , it can be hypothesised that some of the alternative splicing events are not equally used. To formally analyze this type of uneven alternative splicing, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).
+From the figure 17 , it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 18).
 
-> ![Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 18. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
 According with the results (fig. 18), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the origital datasets in order to speed up the analysis).
 
 > <comment-title>Results on original full-data</comment-title>
 >
-> If we perform the analysis on the original datasets, there exist statistically significant differences in isoform switching in three splicing patterns (fig. 19).
+> If we perform the analysis on the original datasets, there exist statistically significant differences in {IS} in three splicing patterns (fig. 19).
 >
 > ![Figure 19. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 >
@@ -857,7 +863,7 @@ According with the results (fig. 18), there are not statistically significant di
 
 #### Analysis of consequence enrichment
 
-To analyze large-scale patterns in predicted isoform switch consequences, **IsoformSwitchAnalyzer** computes all isoform switches resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 20). According the results some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention).
+To analyze large-scale patterns in predicted {IS} consequences, **IsoformSwitchAnalyzer** computes all {IS} events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss) when comparing cancer and ctrl (fig. 20). According the results some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention).
 
 ![Figure 20. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
 
@@ -899,9 +905,9 @@ According with the results (fig. 21), there are not statistically significant di
 >
 > > <solution-title></solution-title>
 > >
-> > This information can be found in the eighth column of the Consequences enrichment dataset (fig. 21).
+> > This information can be found in the eighth column of the Consequences enrichment dataset (fig. 23).
 > >
-> > ![Figure 21. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
+> > ![Figure 23. Consequences enrichment dataset](../../images/differential_isoform/consequences_dataset.png "Consequences enrichment table.")
 > >
 > > In that case, the adjusted P-value is 0.598.
 > >
@@ -911,9 +917,9 @@ According with the results (fig. 21), there are not statistically significant di
 
 #### Analysis of genome-wide changes in isoform usage
 
-Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 22).
+Finally, we will evaluate the genome-wide changes in isoform usage. This type of analysis allows to identify if differentes in splicing events are genome-wide or retricted to specific regions, and is particular interesting if the expected difference between conditions is large (fig. 24).
 
-![Figure 22. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
+![Figure 24. Genome-wide changes violing plot](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Genome-wide changes violin plot. The the dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles.")
 
 As expected from the previous results, in that case there are not statistically significant genome-wide differences in splicing events.
 
@@ -993,4 +999,4 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 
 # Conclusion
 
-Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for  the statistical identification and analysis of splicing event and isoform switches with predicted functional consequences.
+Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for  the statistical identification and analysis of splicing event and {IS} events with predicted functional consequences.

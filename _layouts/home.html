@@ -44,8 +44,8 @@ layout: base
             <table class="table table-striped" role="presentation">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th role="presentation">Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col" role="presentation">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,8 +67,8 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,8 +90,8 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -113,8 +113,8 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -144,8 +144,8 @@ layout: base
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>Topic</th>
-                        <th>Tutorials</th>
+                        <th scope="col">Topic</th>
+                        <th scope="col">Tutorials</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -203,41 +203,34 @@ layout: base
            <!-- Our awesome Contributors -->
         <div class="col-12">
             <h2>Contributor Hall of Fame</h2>
-	    <div class="row">
-		<div class="col-md-6">
-			<p>
-			This project would not be possible without the many amazing community contributors! 
+
+            <p>
+             {% snippet faqs/gtn/gtn_stats.md compact=true %}
+			</p>
+            <p>
+			This project would not be possible without the many amazing community contributors!
 			</p>
 			<p>
-				Check out the full <a class="btn btn-primary" href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
+		<a class="btn btn-info" href="{{ site.baseurl }}/hall-of-fame">View the Hall of Fame</a>
+
+        <a class="btn btn-warning" href="{{ site.baseurl }}/stats">View all GTN stats</a>
+
 			</p>
 			<p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
-		</div>
-		<div class="col-md-6">
-		<a  href="{{ site.baseurl }}/hall-of-fame" class="logo">
-		<div class="gtn-card color-agenda" style="color: black">
-			{% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
-			<div class="card-title">{{ contributors | size }}</div>
-			<div class="card-text">Contributors</div>
-		</div>
-		</a>
-		</div>
-	</div>
-
 
         </div>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-12">
           <div class="col-12">
                         <h2>The Galaxy Training Network</h2>
-                        {% include _includes/map.html %}
+                        {% include _includes/map.html height=300 %}
 
             </div>
           </div>
         </div>
         <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
     <p>
-            More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
+            More information about this project can be found in our <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">publication in PLOS Computational Biology</a>.
             We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
             training materials, the Galaxy community for their constant support, and our funding sources:
     </p>

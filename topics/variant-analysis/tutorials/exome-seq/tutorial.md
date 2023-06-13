@@ -149,6 +149,7 @@ data for either analysis.
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Obtain the raw sequencing data

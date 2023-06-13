@@ -50,6 +50,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 1. Create a new history and name it something meaningful (*e.g.* sRNA-seq tutorial)
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the 3 `Blank_RNAi_sRNA-seq` and 3 `Symp_RNAi_sRNA-seq` FASTQ files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
@@ -64,6 +65,7 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    Set the datatype of the read (.fastqsanger) files to **fastq**

@@ -1,7 +1,8 @@
 ---
 title: Report on the GTN Smörgåsbord event
 tags: [event, pandemic, remote-teaching]
-contributors: [shiltemann,hexylena]
+contributions:
+  authorship: [shiltemann,hexylena]
 cover: "https://gallantries.github.io/assets/images/smorgasbord/emoji-cloud.jpeg"
 coveralt: "Wordcloud of emoji with them in different sizes based on frequency"
 link:  "https://gallantries.github.io/posts/2021/03/01/sm%C3%B6rg%C3%A5sbord/"

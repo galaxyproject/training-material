@@ -32,29 +32,3 @@ The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use t
     {% endunless %}
 {% endfor %}
 </ol>
-
-<style type="text/css">
-#git-gat-timeline {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-#git-gat-timeline li  {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 0.5em;
-    margin: 0.5em;
-}
-#git-gat-timeline li.active {
-    background: #a8ffa8;
-    color: black;
-}
-#git-gat-timeline li.disabled {
-    background: #eee;
-}
-#git-gat-timeline span {
-    align-self: center;
-}
-</style>

@@ -6,6 +6,7 @@ layout: base
 
 <section class="tutorial">
     <h1 data-toc-skip>Workflows</h1>
+    <p>These workflows are associated with <a href="../tutorial.html">{{ material.title }}</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
     <table class="table table-striped">
@@ -14,6 +15,7 @@ layout: base
             <th>Workflow</th>
             <th>Updated</th>
             <th>Import</th>
+            <th>Has Tests</th>
             <th>Tested</th>
             <th>License</th>
             <th>Creators</th>
@@ -26,6 +28,7 @@ layout: base
             <td>{{ workflow.path | gtn_mod_date | date: "%b %-d, %Y" }}</td>
             <td>
                 <span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
+		<abbr class="hide-when-galaxy-proxy-active" title="This feature only available when the GTN is accessed through Galaxy">?</abbr>
                 <br/>
                 <a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}" class="btn btn-primary hide-when-galaxy-proxy-active">Import to UseGalaxy.eu</a>
 		<br/>
@@ -36,10 +39,14 @@ layout: base
             </td>
             <td>{% if workflow.tests %}✅{% else %}❌{% endif %}</td>
             <td>
+		    {% if workflow.test_results != nil %}✅ View Results{% else %}❌{% endif %}
+	    </td>
+            <td>
                 {% if workflow.license %}
                 <a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
                 {% else %}
-                None Specified
+                None Specified, defaults to
+                <a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
                 {% endif %}
             </td>
             <td>

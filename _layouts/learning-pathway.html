@@ -51,7 +51,7 @@ layout: base
 
     {% for section in page.pathway %}
         <h3 id="st-{{ section.section | slugify }}">{{ section.section }}</h3>
-        <p>{{ section.description }}</p>
+        <p>{{ section.description | markdownify }}</p>
 
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
 	{% include _includes/tutorial_list.html sub=material_list %}

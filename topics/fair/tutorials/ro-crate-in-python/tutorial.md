@@ -13,7 +13,7 @@ key_points:
 - However the rocrate command line tool adds several commands to make it easier to automatically generate crates based on existing folder structures.
 tags:
 - ro-crate
-priority: 1
+priority: 2
 contributions:
   authorship:
     - simleo

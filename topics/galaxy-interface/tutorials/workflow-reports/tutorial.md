@@ -63,10 +63,9 @@ We will start by importing this workflow into your Galaxy account:
 > <hands-on-title>Import the workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/galaxy-101-everyone.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="/topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.ga" title="Galaxy 101 for Everyone" %}
+>
 >
 {: .hands_on}
 

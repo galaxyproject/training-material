@@ -114,6 +114,7 @@ In this tutorial we use the same data as in the [Funannotate](../funannotate/tut
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}

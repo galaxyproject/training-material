@@ -75,6 +75,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets to their basename (ACPs.fasta, non_ACPs.fasta)

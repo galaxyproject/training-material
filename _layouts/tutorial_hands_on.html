@@ -160,6 +160,9 @@ We should ONLY be using new_material (if at all possible.)
 
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
+		{% if page.copyright %}
+		{{ page.copyright }}.
+		{% endif %}
             {% if page.license %}
 	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
             {% else %}
@@ -167,7 +170,7 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %} The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
         {% if page.short_id %}
-        <div><strong>{{ locale['short-link'] | default: "Short Link" }}:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
+        <div><strong>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
     </blockquote>
     </section>
@@ -339,6 +342,9 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                             {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
                         </li>
                     </ol>
@@ -360,13 +366,13 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
 {% assign authors = page.contributors | filter_authors:page.contributions -%}
-author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
-title = "{{ page.title }} (Galaxy Training Materials)",
-year = "{{ page.last_modified_at | date: "%Y"}}",
-month = "{{ page.last_modified_at | date: "%m"}}",
-day = "{{ page.last_modified_at | date: "%d" }}"
-url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
-note = "[Online; accessed TODAY]"
+	author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
+	title = "{{ page.title }} (Galaxy Training Materials)",
+	year = "{{ page.last_modified_at | date: "%Y"}}",
+	month = "{{ page.last_modified_at | date: "%m"}}",
+	day = "{{ page.last_modified_at | date: "%d" }}"
+	url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
+	note = "[Online; accessed TODAY]"
 }
 @article{Hiltemann_2023,
 	doi = {10.1371/journal.pcbi.1010752},

@@ -308,9 +308,21 @@ module Jekyll
       return 'GTN_TRS_ERROR_NIL' if str.nil?
 
       m = str.match(%r{topics/(?<topic>.*)/tutorials/(?<tutorial>.*)/workflows/(?<workflow>.*)\.ga})
-      return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}" if m
+      return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow].downcase}" if m
 
       'GTN_TRS_ERROR'
+    end
+
+    def layout_to_human(layout)
+      if layout =~ /slides/
+        'Slides'
+      elsif layout =~ /tutorial_hands_on/
+        'Hands-on'
+      end
+    end
+
+    def topic_name_from_page(page, site)
+      site.data[page['topic_name']]['title']
     end
 
     ##
