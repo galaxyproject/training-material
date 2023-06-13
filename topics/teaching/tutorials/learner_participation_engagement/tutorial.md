@@ -65,7 +65,7 @@ Effective training
 
 # Effective training & good trainer
 
-> <hands-on-title>What makes training effective and a good trainer? - *{% icon time %} 10 min - Discussion in groups of 2*</hands-on-title>
+> <hands-on-title>What makes training effective and a good trainer? - {% icon time %} 10 min - Discussion in groups of 2</hands-on-title>
 >
 > - Recall concrete examples of your past training experience
 > - Share with your colleague
@@ -101,7 +101,7 @@ This matrix is then a **tool for self evaluation**:
 - In which area(s) do you feel you are ok?
 
 
-> <hands-on-title>Reflect on your skills as a trainer? - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>Reflect on your skills as a trainer? - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > - Look at the GOBLET Skill Matrix
 > - Reflect on the following questions
@@ -149,7 +149,7 @@ We are now going to watch a short video (13 min) from Eric Mazur, professor at t
 In this video, Eric Mazur discusses some of these teaching practices and a **paradigm change: from the traditional lecture to active learning-based approaches**. Can you recognise the main features of this change of paradigm?
 
 
-> <hands-on-title>Reflect on Mazur's interview - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>Reflect on Mazur's interview - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > - Write something that really impressed you in Mazur’s interview
 >
@@ -225,7 +225,7 @@ These two techniques can be implemented in many different ways and incorporated 
 
 Peer instruction is a 1-to-1 instruction done in a scalable way by **interleaving formative assessment with learner discussion**.
 
-> <details-title>Peer-to-peer or peer-learning: what is it? - *{% icon time %} 2-min video*</details-title>
+> <details-title>Peer-to-peer or peer-learning: what is it? - {% icon time %} 2-min video</details-title>
 >
 > <iframe width="560" height="315" src="https://www.youtube.com/embed/MYa4hgcMRNc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 >
@@ -241,7 +241,7 @@ In its "traditional" form, the teacher
 
 You may also be creative and implement this technique in your own way.
 
-> <details-title>Concept Tests at Avanti's Learning Centre in Kanpur - *{% icon time %} 2-min video*</details-title>
+> <details-title>Concept Tests at Avanti's Learning Centre in Kanpur - {% icon time %} 2-min video</details-title>
 >
 > <iframe width="560" height="315" src="https://www.youtube.com/embed/2LbuoxAy56o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 >
@@ -368,9 +368,9 @@ Don't start by flipping an entire course. Start small. Test. Add up.
 
 - **Build an artefact**, e.g. concept map
 
-{% include _includes/quiz.html id="active_learning_strategies.yaml" %}
+<!--{% include _includes/quiz.html id="active_learning_strategies.yaml" %}-->
 
-> <hands-on-title>Which strategies for active learning training did you use? - *{% icon time %} 5 min - Silent reflection*</hands-on-title>
+> <hands-on-title>Which strategies for active learning training did you use? - {% icon time %} 5 min - Silent reflection</hands-on-title>
 >
 > Which strategies for active learning training did you use? (Add +)
 > - Peer instruction 
@@ -480,7 +480,7 @@ Each of the techniques presented here will make your classes better, but **you s
 
 <!--{% include _includes/quiz.html id="active_learning_strategies_bloom_levels.yaml" %}-->
 
-> <question-title>What is the highest Bloom’s level supported by each teaching technique? - *{% icon time %} 5 min - Silent reflection*</question-title>
+> <question-title>What is the highest Bloom’s level supported by each teaching technique? - {% icon time %} 5 min - Silent reflection</question-title>
 >
 > 1. What is the highest Bloom's level supported by **Peer instruction**?
 >    - Remember

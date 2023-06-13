@@ -99,7 +99,7 @@ Why is it important to learn about how people learn?
 * Understanding  how people learn makes you a more aware and therefore better teacher
 * You  can use such knowledge to improve your day-to-day teaching
 
-According the  **Meaningful Learning Theory**, developed by the psychologist David Ausubel, meaningful learning generally arises from a process of learning to learn. He considers that if meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.
+According the **Meaningful Learning Theory**, developed by the psychologist David Ausubel, meaningful learning generally arises from a process of learning to learn. He considers that if meaningful learning is achieved, it transcends the rote repetition of unconnected content and allows for the construction of meaning, making sense of what has been learned, and understanding its scope of application and relevance in academic and everyday situations.
 
 
 ## Learning metaphors, theories and models
@@ -127,7 +127,7 @@ How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? 
 <!--{% include _includes/quiz.html id="learning_metaphors.yaml" %}-->
 
 
-> <hands-on-title>Learning metaphors - *{% icon time %} 5 min*</hands-on-title>
+> <hands-on-title>Learning metaphors - {% icon time %} 5 min</hands-on-title>
 >
 > 1. Think about the following metaphors "A mind is a fire to be kindled". How this metaphors may affect your way of teaching?
 > 2. Think about the following metaphors "Teaching is growing a garden". How this metaphors may affect your way of teaching?
@@ -137,7 +137,7 @@ How the mind-as-a-vessel-to-be-filled metaphor may affect your way of teaching? 
 
 ## Metaphors define the role of the teacher and the learners
 
-- | Teacher | Learner
+Metaphor | Teacher | Learner
 --- | --- | ---
 Learning is knowledge transfer | Defines, develops and prepares contents | Receivers and memorizes
 Learning metaphors | Prepares the environment, guides the exploration | Explores, works on information, attributes meanings
@@ -167,7 +167,7 @@ In the following sections we will explore the most important learning theories.
 >
 > This theory is based on the idea that certain consequences (reinforcement or inhibition of a behaviour) tend to make a behaviour happen more or less frequently. According to the behaviorist perspective on learning, the instructor assumes a dominant role within the classroom, exerting complete control over the learning process. Evaluation of learning is carried out by the teacher, who determines what is considered correct or incorrect.
 >  
->  #### Cognitivist Learning Theory
+> #### Cognitivist Learning Theory
 >
 >
 > Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
@@ -193,9 +193,9 @@ In the following sections we will explore the most important learning theories.
 >
 > For Vigotsky, cognitive development cannot be understood without reference to the social, historical and cultural context in which it occurs. According to this author, higher mental processes (thought, language,voluntary behaviour) have their origin in social processes; cognitive development would be the conversion of social relations into mental functions ({% cite Moreira1997 %}).
 >
->  #### Critical Learning Theory
+> #### Critical Learning Theory
 >
-> The **Critical Learning Theory**, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that thought must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool. According {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
+> The **Critical Learning Theory**, also known as Transformative Learning Theory, aims to define the mechanisms involved in the development of critical thinking during the learning process. It considers that thought must be capable of questioning even the logic of reasoning itself, that is, it must be capable of problematising what has hitherto been treated as self-evident, of turning into an object of reflection what had previously been simply a tool. According to {% cite Marcuse1964 %}, critical thinking aims to define the irrational character of established rationality.
 >
 > According this theory, learning occurs when the learning process induces a shift in the student's frame of reference. Although this goal can be achieved in multiple ways, a successful strategy is to stimulate reflection on uncritically accepted assumptions. It is the educator responsibility to cultivate students’ skills related to autonomous thinking by designing activities for that purpose.
 >
@@ -204,7 +204,7 @@ In the following sections we will explore the most important learning theories.
 {: .comment}
 
 
-> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - *{% icon time %} 5 min*</hands-on-title>
+> <hands-on-title>How do you go about learning something new? / How do you approach learning new things? - {% icon time %} 5 min</hands-on-title>
 >
 > - Order the following approaches (from the most to the less effective one) for you when you want to learn something new
 >	* Read about it
@@ -220,12 +220,14 @@ In the following sections we will explore the most important learning theories.
 
 In this section we will introduce some examples of practical applications from the different learning theories:
 
-- Behaviorist Learning Theory: Dreyfuss model for skill acquisition.
-- Cognitivist Learning Theory: Human Memory and Learning from cognitive sciences
-- Constructivist Learning Theory: Bloom's Taxonomy
-- Critical Learning Theory: the hidden curriculum
+Learning theory | Example
+--- | ---
+Behaviorist | Dreyfuss model for skill acquisition.
+Cognitivist | Human Memory and Learning from cognitive sciences
+Constructivist | Bloom's Taxonomy
+Critical | The hidden curriculum
 
-##  Behaviorist Learning theory: Dreyfuss model for skill acquisition
+## Behaviorist Learning theory: Dreyfuss model for skill acquisition
 
 The Dreyfus model of skill acquisition presents a framework illustrating the process by which learners acquire skills through a combination of formal instruction and dedicated practice. It was presented by Hubert and Stuart Dreyfus in 1980 in a report on their research at the University of California, Berkeley, Operations Research Center for the United States Air Force Office of Scientific Research. Hubert Lederer Dreyfus (1929-2017) was a prominent American philosopher and a professor of philosophy. His areas of expertise encompassed phenomenology, existentialism, and the philosophy of psychology, literature, and artificial intelligence, exploring their profound philosophical implications. Stuart E. Dreyfus holds the position of professor emeritus in the Industrial Engineering and Operations Research Department at the University of California.
 
@@ -265,7 +267,7 @@ The Carpentries (a global organization building global capacity in essential dat
 {: .details}
 
 
-##  Cognitivist Learning Theory: Memory and learning
+## Cognitivist Learning Theory: Memory and learning
 
 In a simple model from cognitive science, learning happens when information moves from **working memory** to **long-term memory**. This process can be impacted by **environment**
 
@@ -280,7 +282,7 @@ In a simple model from cognitive science, learning happens when information move
 	* How much effort to remember a full poem-->
 
  
-> <hands-on-title>How short is your short term memory? - *{% icon time %} 10 min*</hands-on-title>
+> <hands-on-title>How short is your short term memory? - {% icon time %} 10 min</hands-on-title>
 >
 > Based on {% cite Willingham2009 %}.
 >
@@ -349,7 +351,7 @@ There are 3 cognitive loads recognized by cognitive science:
 
 Split-attention occurs when learners are required to **split their attention** between **at least two sources of information** that have been separated either spatially or temporally
 
-> <hands-on-title>Extraneous cognitive load - *{% icon time %} 10 min - Groups of 2/3 persons*</hands-on-title>
+> <hands-on-title>Extraneous cognitive load - {% icon time %} 10 min - Groups of 2/3 persons</hands-on-title>
 >
 > * Pick one task you teach in your lessons/courses
 > * Think and discuss within the room about the following questions
@@ -388,7 +390,7 @@ Split-attention occurs when learners are required to **split their attention** b
 
     Concept maps are examples of a retrieval practice when you bring out knowledge/memories from long-term memory
 
-> <hands-on-title>How do you understand the 6 strategies for effective learning? - *{% icon time %} 15 min - Groups of 2 persons*</hands-on-title>
+> <hands-on-title>How do you understand the 6 strategies for effective learning? - {% icon time %} 15 min - Groups of 2 persons</hands-on-title>
 >
 > - Pick up one strategy per group
 > - Discuss about the strategy
@@ -444,7 +446,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
     - apply strategies to monitor their performance, while making adjustments to the selected approach.
 
 <!-- 
-> <hands-on-title>How do you understand the 7 principles of learning?  - *{% icon time %} 15 min - Groups of 2/3 person*</hands-on-title>
+> <hands-on-title>How do you understand the 7 principles of learning?  - {% icon time %} 15 min - Groups of 2/3 person</hands-on-title>
 >
 > * Read and reflect together the principles
 > * Pick one principle that is not (fully) clear to you
@@ -492,7 +494,7 @@ From ["How Learning works"](https://www.academia.edu/6743627/How_Learning_Works_
 
 
 <!-- 
-> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - *{% icon time %} 5 min*</hands-on-title>
+> <hands-on-title>What is learning in your opinion/experience? How does learning occur? - {% icon time %} 5 min</hands-on-title>
 >
 > _Break-out_ room (2 ppl per room)
 >
@@ -567,9 +569,9 @@ The mental model of an expert in any given subject will be far larger and more c
 
 # Teaching or training?
 
-{% include _includes/quiz.html id="teaching_or_training.yaml" %}
+<!--{% include _includes/quiz.html id="teaching_or_training.yaml" %}-->
 
-> <hands-on-title>Teaching or training?  - *{% icon time %} 15 min*</hands-on-title>
+> <hands-on-title>Teaching or training?  - {% icon time %} 15 min</hands-on-title>
 >
 > * Based on your experience, what are the differences between teaching and training?
 > * Write your reflexions in the shared notes
