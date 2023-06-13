@@ -145,7 +145,7 @@ used to inform the design of effective courses.
 >
 {: .comment}
 
-> <hands-on-title>Select a topic for a 3 minute training - _{% icon time %} 1 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Select a topic for a 3 minute training - {% icon time %} 1 min - Silent reflection</hands-on-title>
 >
 > - Choose a topic for a 3 minutes training related to Galaxy
 >
@@ -220,7 +220,7 @@ and courses.
 >
 {: .comment}
 
-> <hands-on-title>Define audience and teaching goal - _{% icon time %} 10 min - Silent reflection_</hands-on-title>
+> <hands-on-title>Define audience and teaching goal - {% icon time %} 10 min - Silent reflection</hands-on-title>
 >
 > 1. Take the topic you chose before
 > 2. Define teaching objectives
@@ -429,7 +429,7 @@ In order to write learning outcomes, you can use the following scheme:
 
 Identify observable and non observable actions (verbs)
 
-> <hands-on-title>Identify observable and non observable actions (verbs) - *{% icon time %} 3 min*</hands-on-title>
+> <hands-on-title>Identify observable and non observable actions (verbs) - {% icon time %} 3 min</hands-on-title>
 >
 > Here is a list of verbs:
 > - Compare
@@ -536,7 +536,7 @@ below.
 
 <!-- NILOA five principles for articulating LOs -->
 
-> <hands-on-title>Learning outcomes - _{% icon time %} 2 min - Silent working_</hands-on-title>
+> <hands-on-title>Learning outcomes - {% icon time %} 2 min - Silent working</hands-on-title>
 >
 > 1. Take the small lesson you selected at the beginning
 > 2. Try to jot a few LOs down
@@ -552,7 +552,7 @@ target LOs meet, or are consistent with, the characteristics outlined in the box
 below helps to promote better alignment of instructional inputs and learner
 outcomes.
 
-{% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}
+<!--{% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}-->
 
 > <question-title>Evaluate LOs</question-title>
 >
@@ -592,7 +592,7 @@ these criteria is it safe to progress to Phase 2, as shown in [Figure 2](#figure
 SMART LOs will be the roadmap as we plan out instructional strategies, write the
 content and **create assessments**.
 
-> <hands-on-title>Create SMART LOs - _{% icon time %} 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Create SMART LOs - {% icon time %} 10 min - Silent working</hands-on-title>
 >
 > 1. Take the LOs you created
 > 2. Consider if your LOs are SMART
@@ -901,7 +901,7 @@ learners and new concepts This helps in the teaching plan to measure how much
 can be covered, and the hierarchical organization suggests a sequence to cover
 material.
 
-> <hands-on-title>Draw a concept map - _{% icon time %} 15 min - Silent working_</hands-on-title>
+> <hands-on-title>Draw a concept map - {% icon time %} 15 min - Silent working</hands-on-title>
 >
 > - Draw a concept map of your topic of interest
 > - Start with a question
@@ -911,7 +911,7 @@ material.
 > - Count the items (concepts and links)
 {: .hands_on}
 
-> <hands-on-title>Give / receive feedback on concept maps - _{% icon time %} 10 min - Group of 2 persons_</hands-on-title>
+> <hands-on-title>Give / receive feedback on concept maps - {% icon time %} 10 min - Group of 2 persons</hands-on-title>
 >
 > - Pair with someone
 > - Check the concept name of your partner
@@ -935,7 +935,7 @@ material.
 - **Content reduction**: one of the biggest challenges in designing training
   courses is the reduction of content to the training format. key points!
 
-> <hands-on-title>Producing the content and the training material - _{% icon time %} 15 min_</hands-on-title>
+> <hands-on-title>Producing the content and the training material - {% icon time %} 15 min</hands-on-title>
 >
 > - Prepare the content for your 3 min training
 >
@@ -1077,7 +1077,7 @@ specifically needs to be assessed and why.**
 
 <!--{% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}-->
 
-> <hands-on-title>Assessment in mini-training - _{% icon time %} 5 min_</hands-on-title>
+> <hands-on-title>Assessment in mini-training - {% icon time %} 5 min</hands-on-title>
 >
 > - Take the content of your 3 min training
 > - Analyse the flow of the lesson, identify points where you could introduce
@@ -1204,7 +1204,7 @@ LOs**.
 <!-- ELIXIR TtT -->
 # Testing the mini-training
 
-> <hands-on-title>Delivery planning - _{% icon time %} 10 min - Silent working_</hands-on-title>
+> <hands-on-title>Delivery planning - {% icon time %} 10 min - Silent working</hands-on-title>
 >
 > - Think if you want to make your training interactive
 > - Think whether you need or want to use a visual support (images)
@@ -1214,7 +1214,7 @@ LOs**.
 >
 {: .hands_on}
 
-> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - _{% icon time %} 15 min - Groups of 2 persons_</hands-on-title>
+> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - {% icon time %} 15 min - Groups of 2 persons</hands-on-title>
 >
 > - Deliver each one your 3 minute session to others with 1 person noting down feedback in real-time
 >
