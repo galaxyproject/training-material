@@ -57,6 +57,208 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Designing plasmids encoding predicted pathways by using the BASIC assembly method",
+      "zenodo_link": "https://zenodo.org/record/6123887",
+      "questions": [
+        "How to design plasmids encoding predicted pathways using BASIC assembly method ?",
+        "How to generate scripts enabling the automatic build of plasmids ?"
+      ],
+      "objectives": [
+        "Annotate the SBML pathway using Selenzy tool.",
+        "Design plasmids encoding predicted pathways using rpbasicdesign tool.",
+        "Generate dnabot scripts enabling the automatic build of plasmids."
+      ],
+      "time_estimation": "15M",
+      "key_points": [
+        "Knowing the reaction is not sufficient to implement a pathway, one needs to find out which enzyme is capable of catalyzing the reactions. For this, Selenzyme is used to search for enzymes using reactions as query. As a result, UniProt IDs of enzymes are stored as annotation in SBML files.",
+        "Expressing pathways into cells involved not only gene encoding enzymes, but also additional genetic parts such as libraries of promoter(s), RBSs, terminators, ... From these, multiple combinations of parts are possible, and each one could produce different results. Several methods exist to assemble genetic parts together into plasmids, the BASIC Assembly approach is one of them. The BasicDesign tool generates combinations of the genetic parts that are compliant with the BASIC Assembly patterns.",
+        "Automatizing the construction of compound producing strains necessitate to translate protocols into instructions that could be understable by lab robots. To do this, DNA-Bot reads the list of constructs and the DNA parts information and generates python instructions for the automated build of the genetic constructs using OpenTrons liquid handling robots."
+      ],
+      "contributors": [
+        {
+          "name": "Kenza Bazi-Kabbaj",
+          "email": "kenza.bazi-kabbaj@inrae.fr",
+          "orcid": "0000-0002-4319-5616",
+          "joined": "2022-03",
+          "id": "kenza12",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kenza12.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/"
+        },
+        {
+          "name": "Thomas Duigou",
+          "email": "thomas.duigou@inrae.fr",
+          "orcid": "0000-0002-2649-2950",
+          "linkedin": "thomas-duigou-ba281730",
+          "joined": "2022-03",
+          "id": "tduigou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tduigou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/"
+        },
+        {
+          "name": "Joan Hérisson",
+          "email": "joan.herisson@univ-evry.fr",
+          "orcid": "0000-0001-9741-0847",
+          "linkedin": "joanherisson",
+          "joined": "2022-03",
+          "id": "breakthewall",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/breakthewall.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/"
+        },
+        {
+          "name": "Guillaume Gricourt",
+          "email": "guillaume.gricourt@inrae.fr",
+          "orcid": "0000-0003-0143-5535",
+          "linkedin": "guillaume-gricourt",
+          "joined": "2022-03",
+          "id": "guillaume-gricourt",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/guillaume-gricourt.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/"
+        },
+        {
+          "name": "Ioana Popescu",
+          "email": "ioana.popescu@univ-evry.fr",
+          "orcid": "0000-0003-2547-8935",
+          "twitter": "ioanagrig",
+          "linkedin": "ioana-popescu-8207a026",
+          "joined": "2022-03",
+          "id": "ioanagry",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/ioanagry.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/"
+        },
+        {
+          "name": "Jean-Loup Faulon",
+          "email": "Jean-loup.Faulon@inrae.fr",
+          "orcid": "0000-0003-4274-2953",
+          "linkedin": "jean-loup-faulon-6b85976",
+          "twitter": "jeanloupfaulon",
+          "joined": "2022-03",
+          "elixir_node": "fr",
+          "id": "jfaulon",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jfaulon.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/"
+        }
+      ],
+      "short_id": "T00273",
+      "url": "/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html",
+      "topic_name": "synthetic-biology",
+      "tutorial_name": "basic_assembly_analysis",
+      "dir": "topics/synthetic-biology/tutorials/basic_assembly_analysis",
+      "id": "synthetic-biology/basic_assembly_analysis",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": {
+          "materials": [
+            {
+              "link": "topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "synthetic-biology"
+          ],
+          "title": "Designing plasmids encoding predicted pathways by using the BASIC assembly method",
+          "type": "Demo",
+          "versions": [
+            {
+              "captions": [
+                "kenza12"
+              ],
+              "date": "2022-05-11",
+              "length": "3M",
+              "link": "0ItpHuSM7t0",
+              "speakers": [
+                "breakthewall"
+              ]
+            }
+          ],
+          "gtn_id": "synthetic-biology/basic_assembly_analysis",
+          "captioned": true
+        },
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Genetic_Design_BASIC_Assembly.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
+          "path": "topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
+          "wfid": "synthetic-biology-basic_assembly_analysis",
+          "wfname": "genetic_design_basic_assembly",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-basic_assembly_analysis/versions/genetic_design_basic_assembly",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0",
+        "toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4",
+        "toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Synthetic Biology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "dnabot",
+            "owner": "tduigou",
+            "revisions": "b450154dc448",
+            "tool_panel_section_label": "Synthetic Biology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "rpbasicdesign",
+            "owner": "tduigou",
+            "revisions": "de9f53630349",
+            "tool_panel_section_label": "Synthetic Biology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "selenzy",
+            "owner": "tduigou",
+            "revisions": "34a9d136a5bf",
+            "tool_panel_section_label": "Synthetic Biology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: dnabot\n  owner: tduigou\n  revisions: b450154dc448\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rpbasicdesign\n  owner: tduigou\n  revisions: de9f53630349\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: selenzy\n  owner: tduigou\n  revisions: 34a9d136a5bf\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Evaluating and ranking a set of pathways based on multiple metrics",
       "zenodo_link": "https://zenodo.org/record/6628296",
       "questions": [
@@ -480,208 +682,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/retrosynthesis_analysis/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Designing plasmids encoding predicted pathways by using the BASIC assembly method",
-      "zenodo_link": "https://zenodo.org/record/6123887",
-      "questions": [
-        "How to design plasmids encoding predicted pathways using BASIC assembly method ?",
-        "How to generate scripts enabling the automatic build of plasmids ?"
-      ],
-      "objectives": [
-        "Annotate the SBML pathway using Selenzy tool.",
-        "Design plasmids encoding predicted pathways using rpbasicdesign tool.",
-        "Generate dnabot scripts enabling the automatic build of plasmids."
-      ],
-      "time_estimation": "15M",
-      "key_points": [
-        "Knowing the reaction is not sufficient to implement a pathway, one needs to find out which enzyme is capable of catalyzing the reactions. For this, Selenzyme is used to search for enzymes using reactions as query. As a result, UniProt IDs of enzymes are stored as annotation in SBML files.",
-        "Expressing pathways into cells involved not only gene encoding enzymes, but also additional genetic parts such as libraries of promoter(s), RBSs, terminators, ... From these, multiple combinations of parts are possible, and each one could produce different results. Several methods exist to assemble genetic parts together into plasmids, the BASIC Assembly approach is one of them. The BasicDesign tool generates combinations of the genetic parts that are compliant with the BASIC Assembly patterns.",
-        "Automatizing the construction of compound producing strains necessitate to translate protocols into instructions that could be understable by lab robots. To do this, DNA-Bot reads the list of constructs and the DNA parts information and generates python instructions for the automated build of the genetic constructs using OpenTrons liquid handling robots."
-      ],
-      "contributors": [
-        {
-          "name": "Kenza Bazi-Kabbaj",
-          "email": "kenza.bazi-kabbaj@inrae.fr",
-          "orcid": "0000-0002-4319-5616",
-          "joined": "2022-03",
-          "id": "kenza12",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kenza12.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kenza12/"
-        },
-        {
-          "name": "Thomas Duigou",
-          "email": "thomas.duigou@inrae.fr",
-          "orcid": "0000-0002-2649-2950",
-          "linkedin": "thomas-duigou-ba281730",
-          "joined": "2022-03",
-          "id": "tduigou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tduigou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tduigou/"
-        },
-        {
-          "name": "Joan Hérisson",
-          "email": "joan.herisson@univ-evry.fr",
-          "orcid": "0000-0001-9741-0847",
-          "linkedin": "joanherisson",
-          "joined": "2022-03",
-          "id": "breakthewall",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/breakthewall.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/breakthewall/"
-        },
-        {
-          "name": "Guillaume Gricourt",
-          "email": "guillaume.gricourt@inrae.fr",
-          "orcid": "0000-0003-0143-5535",
-          "linkedin": "guillaume-gricourt",
-          "joined": "2022-03",
-          "id": "guillaume-gricourt",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/guillaume-gricourt.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/guillaume-gricourt/"
-        },
-        {
-          "name": "Ioana Popescu",
-          "email": "ioana.popescu@univ-evry.fr",
-          "orcid": "0000-0003-2547-8935",
-          "twitter": "ioanagrig",
-          "linkedin": "ioana-popescu-8207a026",
-          "joined": "2022-03",
-          "id": "ioanagry",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/ioanagry.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ioanagry/"
-        },
-        {
-          "name": "Jean-Loup Faulon",
-          "email": "Jean-loup.Faulon@inrae.fr",
-          "orcid": "0000-0003-4274-2953",
-          "linkedin": "jean-loup-faulon-6b85976",
-          "twitter": "jeanloupfaulon",
-          "joined": "2022-03",
-          "elixir_node": "fr",
-          "id": "jfaulon",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jfaulon.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jfaulon/"
-        }
-      ],
-      "short_id": "T00273",
-      "url": "/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html",
-      "topic_name": "synthetic-biology",
-      "tutorial_name": "basic_assembly_analysis",
-      "dir": "topics/synthetic-biology/tutorials/basic_assembly_analysis",
-      "id": "synthetic-biology/basic_assembly_analysis",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": {
-          "materials": [
-            {
-              "link": "topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "synthetic-biology"
-          ],
-          "title": "Designing plasmids encoding predicted pathways by using the BASIC assembly method",
-          "type": "Demo",
-          "versions": [
-            {
-              "captions": [
-                "kenza12"
-              ],
-              "date": "2022-05-11",
-              "length": "3M",
-              "link": "0ItpHuSM7t0",
-              "speakers": [
-                "breakthewall"
-              ]
-            }
-          ],
-          "gtn_id": "synthetic-biology/basic_assembly_analysis",
-          "captioned": true
-        },
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Genetic_Design_BASIC_Assembly.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
-          "path": "topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga",
-          "wfid": "synthetic-biology-basic_assembly_analysis",
-          "wfname": "genetic_design_basic_assembly",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/synthetic-biology-basic_assembly_analysis/versions/genetic_design_basic_assembly",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0",
-        "toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4",
-        "toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Synthetic Biology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "dnabot",
-            "owner": "tduigou",
-            "revisions": "b450154dc448",
-            "tool_panel_section_label": "Synthetic Biology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "rpbasicdesign",
-            "owner": "tduigou",
-            "revisions": "de9f53630349",
-            "tool_panel_section_label": "Synthetic Biology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "selenzy",
-            "owner": "tduigou",
-            "revisions": "34a9d136a5bf",
-            "tool_panel_section_label": "Synthetic Biology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: dnabot\n  owner: tduigou\n  revisions: b450154dc448\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rpbasicdesign\n  owner: tduigou\n  revisions: de9f53630349\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: selenzy\n  owner: tduigou\n  revisions: 34a9d136a5bf\n  tool_panel_section_label: Synthetic Biology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/synthetic-biology/tutorials/basic_assembly_analysis/tutorial.json"
       }
     }
   ]
