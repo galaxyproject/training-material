@@ -31,7 +31,7 @@ contributions:
     - erasmusplus
 level: Introductory
 notebook:
-  language: R
+  language: r
   packages:
   - tidyverse
   - patchwork
