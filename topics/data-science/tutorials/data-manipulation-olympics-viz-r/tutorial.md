@@ -417,7 +417,7 @@ better distribute the observations in the space of the plot.  Changing the scale
 of the axes is done similarly to adding/modifying other components (i.e., by
 incrementally adding commands). Try making these modifications:
 
-- Represent height on the log~~10~~ scale; see `scale_y_log10()` and `scale_x_log10()`.
+- Represent height on the `log_10` scale; see `scale_y_log10()` and `scale_x_log10()`.
 
 > <solution-title></solution-title>
 > 
@@ -616,8 +616,7 @@ ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal))
 
 In addition to `theme_bw()`, which changes the plot background to white, `ggplot2`
 comes with several other themes which can be useful to quickly change the look
-of your visualization. The complete list of themes is available
-at [https://ggplot2.tidyverse.org/reference/ggtheme.html](https://ggplot2.tidyverse.org/reference/ggtheme.html). `theme_minimal()` and
+of your visualization. The complete list of themes is [documented in the ggthemes reference](https://ggplot2.tidyverse.org/reference/ggtheme.html). `theme_minimal()` and
 `theme_light()` are popular, and `theme_void()` can be useful as a starting
 point to create a new hand-crafted theme.
 
@@ -724,11 +723,12 @@ ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal)) 
 > 
 > - See if you can change the plot type to another plot
 > - Can you find a way to change the name of the legend? What about its labels?
-> - Try using a different color palette (see
->   [https://r-graphics.org/chapter-colors](https://r-graphics.org/chapter-colors)).
+> - Try using a different color palette (see [https://r-graphics.org/chapter-colors](https://r-graphics.org/chapter-colors)).
+>
 > > <solution-title></solution-title>
 > > This optional exercise currently lacks solutions. If you have them, please feel free to contribute suggestions here :)
 > {: .solution}
+>
 {: .question}
 
 
@@ -739,7 +739,7 @@ sometimes you may want to produce a single figure that contains multiple plots
 using different variables or even different data frames. The `patchwork`
 package allows us to combine separate ggplots into a single figure while keeping
 everything aligned properly. Like most R packages, we can install `patchwork`
-from CRAN, the R package repository:
+from CRAN, the R package repository, if it isn't already available:
 
 ```r
 # install.packages("patchwork")
@@ -797,7 +797,7 @@ my_plot <- year_detail_counts %>% ggplot(aes(x = year, y = n, fill = medal))  +
 ggsave("name_of_file.png", my_plot, width = 15, height = 10)
 
 ## This also works for plots combined with patchwork
-plot_combined <- plot_weight / plot_count + plot_layout(heights = c(3, 2))
+plot_combined <- plot_weight / plot_height + plot_layout(heights = c(3, 2))
 ggsave("plot_combined.png", plot_combined, width = 10, dpi = 300)
 ```
 
