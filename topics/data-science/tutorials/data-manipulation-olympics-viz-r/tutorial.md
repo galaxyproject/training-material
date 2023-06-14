@@ -7,6 +7,9 @@ tags:
 - cyoa
 - R
 questions:
+- How does plotting work in R?
+- How can I facet plots?
+- How do I produce a nice, publication ready plot with ggplot2?
 objectives:
 - Produce scatter plots, boxplots, and time series plots using ggplot.
 - Set universal plot settings.
@@ -15,6 +18,8 @@ objectives:
 - Build complex and customized plots from data in a data frame.
 time_estimation: 1h
 key_points:
+- Plotting is easy with ggplot2.
+- Start small, and build up plots over time.
 contributions:
   authorship:
     - carpentries
@@ -283,19 +288,23 @@ We'll calculate some new fields to enable us to answer more questions, let's do 
 
 ```r
 olympics <- olympics %>%
-	mutate(age = year - birth_year) %>%
-	mutate(weight = as.integer(weight)) %>%
-	filter(!is.na(weight)) %>%
-	filter(!is.na(height))
+    mutate(age = year - birth_year) %>%
+    mutate(weight = as.integer(weight)) %>%
+    filter(!is.na(weight)) %>%
+    filter(!is.na(height))
 ```
 
-And to speed up future plots, before we go further, let's take a random subset of the data.
+And to speed up future plots, let's pick three countries and three sports we're
+interested in to reduce the amount of data we'll need to plot:
 
 ```r
-# Make this reproducible
-set.seed(42)
-# Take 25% of the data, randomly.
-olympics_small <- olympics %>% sample_frac(0.25)
+sports = c("Archery", "Judo", "Speed Skating")
+# You can change this to any of:
+# c("Alpine Skiing", "Archery", "Art Competitions", "Artistic Gymnastics", "Artistic Swimming", "Athletics", "Badminton", "Baseball", "Basketball", "Biathlon", "Bobsleigh", "Bowling", "Boxing", "Canoe Marathon", "Canoe Slalom", "Canoe Sprint", "Cross Country Skiing", "Cycling BMX Freestyle", "Cycling BMX Racing", "Cycling Mountain Bike", "Cycling Road", "Cycling Track", "Diving", "Dogsled Racing", "Equestrian Dressage", "Equestrian Eventing", "Equestrian Jumping", "Fencing", "Figure Skating", "Freestyle Skiing", "Golf", "Handball", "Hockey", "Judo", "Karate", "Luge", "Marathon Swimming", "Military Ski Patrol", "Modern Pentathlon", "Nordic Combined", "Rhythmic Gymnastics", "Rowing", "Rugby", "Sailing", "Shooting", "Short Track Speed Skating", "Skateboarding", "Skeleton", "Ski Jumping", "Snowboarding", "Speed Skating", "Speed Skiing", "Surfing", "Swimming", "Table Tennis", "Taekwondo", "Tennis", "Trampolining", "Triathlon", "Tug-Of-War", "Volleyball", "Water Polo", "Weightlifting", "Winter Pentathlon", "Wrestling", "Wushu")
+
+countries = c("NED", "USA", "CHN")
+
+olympics_small <- olympics %>% filter(sport %in% sports) %>% filter(noc %in% countries)
 ```
 
 ## Building your plots iteratively
@@ -353,14 +362,14 @@ ggplot(olympics_small, aes(x=age, y=sport)) +
 We can use boxplots to visualize the distribution of height within each sport:
 
 ```r
-ggplot(data = olympics, mapping = aes(x = height, y = sport)) +
+ggplot(data = olympics_small, mapping = aes(x = height, y = sport)) +
     geom_boxplot()
 ```
 
-But this is a very busy plot, so why not filter by your nation's NOC? (Please edit the plot below)
+But this is a bit boring with all three merged together, so let's colour by NOC.
 
 ```r
-ggplot(olympics %>% filter(noc=="NED"), aes(x = height, y = sport)) +
+ggplot(olympics_small, aes(x = height, y = sport, fill=noc)) +
     geom_boxplot()
 ```
 
@@ -371,7 +380,7 @@ by default these points will be plotted twice -- by `geom_boxplot` and
 to the boxplot by specifying `outlier.shape = NA`.
 
 ```r
-ggplot(olympics %>% filter(noc=="NED"), aes(x = height, y = sport)) +
+ggplot(olympics_small, aes(x = height, y = sport, fill=noc)) +
     geom_boxplot(outlier.shape = NA) +
     geom_jitter(alpha = 0.3, color = "orange")
 ```
@@ -379,7 +388,6 @@ ggplot(olympics %>% filter(noc=="NED"), aes(x = height, y = sport)) +
 Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
 hidden?
-
 
 > <question-title>Challenge</question-title>
 > 
@@ -392,7 +400,7 @@ hidden?
 > 
 > > <solution-title></solution-title>
 > > ```
-> > ggplot(olympics %>% filter(noc=="NED"), aes(x = height, y = sport)) +
+> > ggplot(olympics_small, aes(x = height, y = sport)) +
 > >     geom_jitter(alpha = 0.3, color = "orange") +
 > >     geom_violin()
 > > ```
@@ -410,7 +418,7 @@ incrementally adding commands). Try making these modifications:
 > <solution-title></solution-title>
 > 
 > ```r
-> ggplot(olympics %>% filter(noc=="NED"), aes(x = height, y = sport)) +
+> ggplot(olympics_small, aes(x = height, y = sport)) +
 > scale_x_log10() +
 > geom_jitter(alpha = 0.3, color = "orange") +
 > geom_boxplot(outlier.shape = NA)
@@ -418,87 +426,87 @@ incrementally adding commands). Try making these modifications:
 {: .solution}
 
 So far, we've looked at the distribution of height within specific sports. Try making
-a new plot to explore the distribution of another variable within each group.
+a new plot to explore the distribution of another variable within each sport!
 
-<!-- Here -->
+Create boxplot for `age` by sport.  Overlay the boxplot layer on a jitter
+layer to show actual measurements.
 
-- Create boxplot for `hindfoot_length`.  Overlay the boxplot layer on a jitter
-  layer to show actual measurements.
+> <solution-title></solution-title>
+> ```r
+> ggplot(olympics_small, aes(x = age, y = sport)) +
+> geom_jitter(alpha = 0.3, color = "orange") +
+> geom_boxplot(outlier.shape = NA)
+> ```
+{: .solution}
 
-:::::::: solution
+Add color to the data points on your boxplot according to the year from which
+the sample was taken (`year`).
 
-```{r, answer=TRUE, purl=FALSE}
-ggplot(data = olympics, mapping = aes(x = species_id, y = hindfoot_length)) +
-geom_jitter(alpha = 0.3, color = "tomato") +
-geom_boxplot(outlier.shape = NA)
-```
-
-:::::::::::::::::
-
-- Add color to the data points on your boxplot according to the plot from which
-  the sample was taken (`plot_id`).
-
-Hint: Check the class for `plot_id`. Consider changing the class of `plot_id`
+Hint: Check the class for `year`. Consider changing the class of `year`
 from integer to factor. Why does this change how R makes the graph?
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
-```{r boxplot-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
-## Challenge with boxplots:
-##  Start with the boxplot we created:
-ggplot(data = olympics, mapping = aes(x = species_id, y = weight)) +
-  geom_jitter(alpha = 0.3, color = "tomato") +
-  geom_boxplot(outlier.shape = NA)
-## By ordering the geom layers like this, we can make sure that the boxplot is
-## layered over the jittered points.
-
-##  1. Replace the box plot with a violin plot; see `geom_violin()`.
-
-##  2. Represent weight on the log10 scale; see `scale_y_log10()`.
-
-##  3. Create boxplot for `hindfoot_length` overlaid on a jitter layer.
-
-##  4. Add color to the data points on your boxplot according to the
-##  plot from which the sample was taken (`plot_id`).
-##  *Hint:* Check the class for `plot_id`. Consider changing the class
-##  of `plot_id` from integer to factor. Why does this change how R
-##  makes the graph?
-
-```
+> <solution-title></solution-title>
+> ```r
+> ggplot(olympics_small, aes(x = age, y = sport)) +
+>   geom_jitter(alpha = 0.3, aes(color=year)) +
+>   geom_boxplot(outlier.shape = NA)
+>
+> # As a factor:
+> ggplot(olympics_small, aes(x = age, y = sport)) +
+>   geom_jitter(alpha = 0.3, aes(color=as.factor(year))) +
+>   geom_boxplot(outlier.shape = NA)
+> ```
+{: .solution}
 
 ## Plotting time series data
 
-Let's calculate number of counts per year for each genus. First we need
+Let's calculate number of participants per year for each games. First we need
 to group the data and count records within each group:
 
-```{r, purl=FALSE}
-yearly_counts <- olympics %>%
-  count(year, genus)
+```r
+yearly_counts <- olympics %>% count(year, season)
 ```
 
 Timelapse data can be visualized as a line plot with years on the x-axis and
 counts on the y-axis:
 
-```{r first-time-series, purl=FALSE}
+```r
 ggplot(data = yearly_counts, aes(x = year, y = n)) +
      geom_line()
 ```
 
-Unfortunately, this does not work because we plotted data for all the genera
-together. We need to tell ggplot to draw a line for each genus by modifying
-the aesthetic function to include `group = genus`:
+Unfortunately, this does not work well because our data is quite sparse, datapoints only ever 2 or 4 years.
+Let's instead use a box plot
 
-```{r time-series-by-species, purl=FALSE}
-ggplot(data = yearly_counts, aes(x = year, y = n, group = genus)) +
-    geom_line()
+```r
+ggplot(data = yearly_counts, aes(x = year, y = n)) +
+     geom_col()
 ```
 
-We will be able to distinguish genera in the plot if we add colors (using
-`color` also automatically groups the data):
+We can't use `geom_box()` here, instead we should use `geom_col()` as our data is already aggregated.
 
-```{r time-series-with-colors, purl=FALSE}
-ggplot(data = yearly_counts, aes(x = year, y = n, color = genus)) +
-    geom_line()
+We need to tell ggplot to draw a line for each season by modifying
+the aesthetic function to include `group = season`:
+
+```r
+ggplot(data = yearly_counts, aes(x = year, y = n, group = season)) +
+    geom_col()
+```
+
+We will be able to distinguish season in the plot if we add colors (using
+`color` or `fill` also automatically groups the data:
+
+```r
+ggplot(data = yearly_counts, aes(x = year, y = n, fill = season)) +
+    geom_col()
+```
+
+If you want the histograms to be side-by-side, we can do that with the "dodge" positioning:
+
+```r
+ggplot(data = yearly_counts, aes(x = year, y = n, fill = season)) +
+    geom_col(position = "dodge")
 ```
 
 ## Integrating the pipe operator with ggplot2
@@ -509,19 +517,19 @@ We can also use the pipe operator to pass the `data` argument to the
 `ggplot()` function. The hard part is to remember that to build your ggplot,
 you need to use `+` and not `%>%`.
 
-```{r integrating-the-pipe, purl=FALSE}
+```r
 yearly_counts %>%
-    ggplot(mapping = aes(x = year, y = n, color = genus)) +
-    geom_line()
+    ggplot(aes(x = year, y = n, fill = season)) +
+    geom_col()
 ```
 
 The pipe operator can also be used to link data manipulation with consequent data visualization.
 
-```{r pipes-and-manipulation, purl=FALSE}
+```r
 yearly_counts_graph <- olympics %>%
-    count(year, genus) %>%
-    ggplot(mapping = aes(x = year, y = n, color = genus)) +
-    geom_line()
+    count(year, season) %>%
+    ggplot(mapping = aes(x = year, y = n, fill = season)) +
+    geom_col()
 
 yearly_counts_graph
 ```
@@ -530,63 +538,60 @@ yearly_counts_graph
 
 `ggplot` has a special technique called *faceting* that allows the user to split
 one plot into multiple plots based on a factor included in the dataset. We will
-use it to make a time series plot for each genus:
+use it to make a time series plot for each season separately:
 
-```{r first-facet, purl=FALSE}
-ggplot(data = yearly_counts, aes(x = year, y = n)) +
-    geom_line() +
-    facet_wrap(facets = vars(genus))
+```r
+yearly_counts %>%
+    ggplot(aes(x = year, y = n, fill = season)) +
+    geom_col() + facet_wrap(facets=vars(season))
 ```
 
-Now we would like to split the line in each plot by the sex of each individual
-measured. To do that we need to make counts in the data frame grouped by `year`,
-`genus`, and `sex`:
+Now we would like to split the line in each plot by the sex of each individual, sport, and their medal placement.
+To do that we need to make counts in the data frame grouped by `year`, `season`, `sport`, `medal`, and `noc`.
 
-```{r, purl=FALSE}
- yearly_sex_counts <- olympics %>%
-                      count(year, genus, sex)
+```r
+year_detail_counts <- olympics_small %>%
+                      count(year, season, sport, medal, noc)
 ```
 
-We can now make the faceted plot by splitting further by sex using `color`
-(within a single plot):
+We can now make the faceted plot by splitting further by medal using `color`
+(within a single plot), and per NOC:
 
-```{r facet-by-genus-and-sex, purl=FALSE}
-ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal)) +
   geom_line() +
-  facet_wrap(facets =  vars(genus))
+  facet_wrap(facets =  vars(noc))
 ```
 
-We can also facet both by sex and genus:
+We can also facet both by NOC and sport:
 
-```{r average-weight-time-facet-both, purl=FALSE, fig.width=9.5}
-ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal)) +
   geom_line() +
-  facet_grid(rows = vars(sex), cols =  vars(genus))
+  facet_grid(rows = vars(noc), cols =  vars(sport))
 ```
 
 You can also organise the panels only by rows (or only by columns):
 
-```{r average-weight-time-facet-sex-rows, purl=FALSE, fig.height=8.5, fig.width=8}
+```r
 # One column, facet by rows
-ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal)) +
   geom_line() +
-  facet_grid(rows = vars(genus))
+  facet_grid(rows = vars(noc))
 ```
 
-```{r average-weight-time-facet-sex-columns, purl=FALSE, fig.width=9.5, fig.height=5}
+```r
 # One row, facet by column
-ggplot(data = yearly_sex_counts,
-       mapping = aes(x = year, y = n, color = sex)) +
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal)) +
   geom_line() +
-  facet_grid(cols = vars(genus))
+  facet_grid(cols = vars(noc))
 ```
 
-**Note:**
-`ggplot2` before version 3.0.0 used formulas to specify how plots are faceted.
-If you encounter `facet_grid`/`wrap(...)` code containing `~`, please read
-[https://ggplot2.tidyverse.org/news/#tidy-evaluation](https://ggplot2.tidyverse.org/news/#tidy-evaluation).
+> <tip-title>facet_grid/wrap with ~</tip-title>
+> `ggplot2` before version 3.0.0 used formulas to specify how plots are faceted.
+> If you encounter `facet_grid`/`wrap(...)` code containing `~`, please read
+> [https://ggplot2.tidyverse.org/news/#tidy-evaluation](https://ggplot2.tidyverse.org/news/#tidy-evaluation).
+{: .tip}
 
 ## `ggplot2` themes
 
@@ -598,12 +603,11 @@ available that change the overall appearance of the graph without much effort.
 For example, we can change our previous graph to have a simpler white background
 using the `theme_bw()` function:
 
-```{r facet-by-species-and-sex-white-bg, purl=FALSE}
- ggplot(data = yearly_sex_counts,
-        mapping = aes(x = year, y = n, color = sex)) +
-     geom_line() +
-     facet_wrap(vars(genus)) +
-     theme_bw()
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal))  +
+    geom_line() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
+    theme_bw()
 ```
 
 In addition to `theme_bw()`, which changes the plot background to white, `ggplot2`
@@ -617,36 +621,18 @@ The
 [ggthemes](https://jrnold.github.io/ggthemes/reference/index.html) package
 provides a wide variety of options.
 
-:::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge
-
-Use what you just learned to create a plot that depicts how the average weight
-of each species changes through the years.
-
-:::::::: solution
-
-```{r average-weight-time-series, answer=TRUE, purl=FALSE}
-yearly_weight <- olympics %>%
-                group_by(year, species_id) %>%
-                 summarize(avg_weight = mean(weight))
-ggplot(data = yearly_weight, mapping = aes(x=year, y=avg_weight)) +
-   geom_line() +
-   facet_wrap(vars(species_id)) +
-   theme_bw()
-```
-
-:::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
-```{r, eval=FALSE, purl=TRUE, echo=FALSE}
-### Plotting time series challenge:
-##
-##  Use what you just learned to create a plot that depicts how the
-##  average weight of each species changes through the years.
-
-```
+> <question-title>Challenge</question-title>
+> Use what you just learned to create a plot the relationship between height and weight,
+> of participants, broken down by NOC and Sport.
+> > <solution-title></solution-title>
+> > ```r
+> > ggplot(data = olympics_small, mapping = aes(x = height, y = weight, color = medal)) +
+> >     geom_point() +
+> >     facet_grid(rows = vars(noc), cols = vars(sport))
+> > ```
+> {: .solution}
+{: .question}
 
 ## Customization
 
@@ -656,12 +642,12 @@ think of ways you could improve the plot.
 Now, let's change names of axes to something more informative than 'year'
 and 'n' and add a title to the figure:
 
-```{r number-species-year-with-right-labels, purl=FALSE}
-ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex)) +
-    geom_line() +
-    facet_wrap(vars(genus)) +
-    labs(title = "Observed genera through time",
-         x = "Year of observation",
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal))  +
+    geom_col() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
+    labs(title = "Participants and medals over the years",
+         x = "Year",
          y = "Number of individuals") +
     theme_bw()
 ```
@@ -669,14 +655,14 @@ ggplot(data = yearly_sex_counts, aes(x = year, y = n, color = sex)) +
 The axes have more informative names, but their readability can be improved by
 increasing the font size. This can be done with the generic `theme()` function:
 
-```{r number-species-year-with-right-labels-xfont-size, purl=FALSE}
-ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
-    geom_line() +
-    facet_wrap(vars(genus)) +
-    labs(title = "Observed genera through time",
-        x = "Year of observation",
-        y = "Number of individuals") +
-    theme_bw() +
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal))  +
+    geom_col() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
+    labs(title = "Participants and medals over the years",
+         x = "Year",
+         y = "Number of individuals") +
+    theme_bw()
     theme(text=element_text(size = 16))
 ```
 
@@ -692,14 +678,14 @@ angle, or experiment to find the appropriate angle for diagonally oriented
 labels. We can also modify the facet label text (`strip.text`) to italicize the genus
 names:
 
-```{r number-species-year-with-theme, purl=FALSE}
-ggplot(data = yearly_sex_counts, mapping = aes(x = year, y = n, color = sex)) +
-    geom_line() +
-    facet_wrap(vars(genus)) +
-    labs(title = "Observed genera through time",
-        x = "Year of observation",
-        y = "Number of individuals") +
-    theme_bw() +
+```r
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal))  +
+    geom_col() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
+    labs(title = "Participants and medals over the years",
+         x = "Year",
+         y = "Number of individuals") +
+    theme_bw()
     theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
                         axis.text.y = element_text(colour = "grey20", size = 12),
                         strip.text = element_text(face = "italic"),
@@ -716,28 +702,31 @@ grey_theme <- theme(axis.text.x = element_text(colour="grey20", size = 12,
                     axis.text.y = element_text(colour = "grey20", size = 12),
                     text=element_text(size = 16))
 
-ggplot(olympics, aes(x = species_id, y = hindfoot_length)) +
-    geom_boxplot() +
+ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal))  +
+    geom_col() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
     grey_theme
 ```
 
-:::::::::::::::::::::::::::::::::::::::  challenge
 
-### Challenge
+> <question-title>Challenge</question-title>
+>
+> With all of this information in hand, please take another five minutes to either
+> improve one of the plots generated in this exercise or create a beautiful graph
+> of your own. Use the RStudio [`ggplot2` cheat sheet](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf)
+> for inspiration.
+> 
+> Here are some ideas:
+> 
+> - See if you can change the plot type to another plot
+> - Can you find a way to change the name of the legend? What about its labels?
+> - Try using a different color palette (see
+>   [https://r-graphics.org/chapter-colors](https://r-graphics.org/chapter-colors)).
+> > <solution-title></solution-title>
+> > This optional exercise currently lacks solutions. If you have them, please feel free to contribute suggestions here :)
+> {: .solution}
+{: .question}
 
-With all of this information in hand, please take another five minutes to either
-improve one of the plots generated in this exercise or create a beautiful graph
-of your own. Use the RStudio [`ggplot2` cheat sheet](https://posit.co/wp-content/uploads/2022/10/data-visualization-1.pdf)
-for inspiration.
-
-Here are some ideas:
-
-- See if you can change the thickness of the lines.
-- Can you find a way to change the name of the legend? What about its labels?
-- Try using a different color palette (see
-  [https://r-graphics.org/chapter-colors](https://r-graphics.org/chapter-colors)).
-
-::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## Arranging plots
 
@@ -748,7 +737,7 @@ package allows us to combine separate ggplots into a single figure while keeping
 everything aligned properly. Like most R packages, we can install `patchwork`
 from CRAN, the R package repository:
 
-```{r patchwork-install, eval=FALSE}
+```r
 install.packages("patchwork")
 ```
 
@@ -756,19 +745,20 @@ After you have loaded the `patchwork` package you can use `+` to place plots
 next to each other, `/` to arrange them vertically, and `plot_layout()` to
 determine how much space each plot uses:
 
-```{r patchwork-example, message=FALSE, purl=FALSE, fig.width=10}
+```r
 library(patchwork)
 
-plot_weight <- ggplot(data = olympics, aes(x = species_id, y = weight)) +
+plot_weight <- olympics_small %>% ggplot(aes(x=noc, y=weight)) +
   geom_boxplot() +
-  labs(x = "Species", y = expression(log[10](Weight))) +
+  labs(x = "NOC", y = expression(log[10](Weight))) +
   scale_y_log10()
 
-plot_count <- ggplot(data = yearly_counts, aes(x = year, y = n, color = genus)) +
-  geom_line() +
-  labs(x = "Year", y = "Abundance")
+plot_height <- olympics_small %>% ggplot(aes(x=noc, y=height)) +
+  geom_boxplot() +
+  labs(x = "NOC", y = expression(log[10](Height))) +
+  scale_y_log10()
 
-plot_weight / plot_count + plot_layout(heights = c(3, 2))
+plot_weight / plot_height + plot_layout(heights = c(3, 2))
 ```
 
 You can also use parentheses `()` to create more complex layouts. There are
@@ -787,19 +777,18 @@ Instead, use the `ggsave()` function, which allows you to easily change the
 dimension and resolution of your plot by adjusting the appropriate arguments
 (`width`, `height` and `dpi`):
 
-```{r ggsave-example, eval=FALSE, purl=FALSE}
-my_plot <- ggplot(data = yearly_sex_counts,
-                  aes(x = year, y = n, color = sex)) +
-    geom_line() +
-    facet_wrap(vars(genus)) +
-    labs(title = "Observed genera through time",
-        x = "Year of observation",
-        y = "Number of individuals") +
-    theme_bw() +
-    theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90,
-                                     hjust = 0.5, vjust = 0.5),
-          axis.text.y = element_text(colour = "grey20", size = 12),
-          text = element_text(size = 16))
+```r
+my_plot <- year_detail_counts %>% ggplot(aes(x = year, y = n, fill = medal))  +
+    geom_col() +
+    facet_grid(rows = vars(noc), cols =  vars(sport)) +
+    labs(title = "Participants and medals over the years",
+         x = "Year",
+         y = "Number of individuals") +
+    theme_bw()
+    theme(axis.text.x = element_text(colour = "grey20", size = 12, angle = 90, hjust = 0.5, vjust = 0.5),
+                        axis.text.y = element_text(colour = "grey20", size = 12),
+                        strip.text = element_text(face = "italic"),
+                        text = element_text(size = 16))
 
 ggsave("name_of_file.png", my_plot, width = 15, height = 10)
 
@@ -811,7 +800,7 @@ ggsave("plot_combined.png", plot_combined, width = 10, dpi = 300)
 Note: The parameters `width` and `height` also determine the font size in the
 saved plot.
 
-```{r final-challenge, eval=FALSE, purl=TRUE, echo=FALSE}
+```r
 ### Final plotting challenge:
 ##  With all of this information in hand, please take another five
 ##  minutes to either improve one of the plots generated in this
