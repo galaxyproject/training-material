@@ -427,9 +427,66 @@ To assess the quality of our reads, we use a tool called [FASTQC](https://www.bi
 >    - {% icon param-file %} *"Adapter list"*: `adapters`
 >
 > 2. View {% icon galaxy-eye %} the HTML output of FASTQC for one of the files
+>
+>
+>    > <question-title> </question-title>
+>    >
+>    > 1. What stands out in the graphs?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. Of the raw data we see that:
+>    > >    - Some reads have bad 3' ends.
+>    > >    - Some reads have adapter sequences in them.
+>    > >
+>    > >    We can also notice that the sequence content is 25% for each base type. Whicch is not what we expect for WGS data (GC content at 40%).
+>    > >    In our case this normal because the selected region is in a coding region which are expected to be at 50%.
+>    > >
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
-TODO: set both collections to fastqsanger
+
+## Quality encoding
+
+> <question-title> Quality Encoding </question-title>
+>
+> We saw that there are different encoding schemes possible for the FASTQ format.
+>
+> 1. Which encoding do we use in our data? (Hint: check FASTQC HTML output)
+> 2. How does FASTQC know this?
+> 3. How reliable is this?
+> 4. Why is it important to know the encoding scheme used in your data?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Our data uses Illumina 1.5 quality encoding (you can see the encoding in the table at the top of FASTQC's HTML output)
+> > 2. Recall the image indicating the encoding scheme:
+> >    ![comparisonFASTQ quality encoding schemes]({% link topics/sequence-analysis/images/fastq-quality-encoding.png %})
+> >    Some characters are unique to one encoding scheme, and others can be used to rule out certain encoding schemes.
+> >    For example, if a quality score of `~` appears in your dataset, it must be PacBio. If a quality score of `+` appears, you know it cannot be
+> >    Solexa, Illumina 1.3 or Illumina 1.5. This is the method FASTQC uses to guess your encoding scheme. But this is not always possible (for example, theoretically,
+> >    if all your quality scores are `I`, we cannot know which encoding scheme was used). The more reads you have in your file, the more likely it is we can determine
+> >    the quality encoding in this manner.
+> > 3. It is *always* better to check with your sequencing facility which encoding is used. In Galaxy we can set the encoding scheme on our dataset
+> >    so that this information is passed on to tools that need it. If you really do not know the encoding for your data, you can use the value determined by FASTQC.
+> > 4. Setting the wrong encoding scheme can lead to bad calls being treated as high quality calls and vice versa, and this can severely impact your results,
+> >    so always make sure it is set correctly.  In practice, for new datasets, the encoding scheme for short reads will almost always be Sanger, but if you are working with older data, be careful to check this!
+> {: .solution}
+{: .question}
+
+In Galaxy we can set the FASTQ encoding scheme as metadata on our dataset, Galaxy will then pass this information on to any tools that need it.
+This prevents mistakes, so let's do it now:
+
+> <hands-on-title></hands-on-title>
+>
+> - Set the datatype of your `Normal Samples` collection to `fastqcillumina.gz`
+> - Do the same for your `Tumor Samples` collection
+{: .hands_on}
+
+
+
+# Trimming
 
 
 
