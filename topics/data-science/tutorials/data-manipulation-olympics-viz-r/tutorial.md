@@ -32,6 +32,10 @@ contributions:
 level: Introductory
 notebook:
   language: R
+  packages:
+  - tidyverse
+  - patchwork
+  - hexbin
 
 subtopic: olympics
 ---
@@ -94,11 +98,11 @@ library(tidyverse)
 
 Before we can do any visualisation, we will need some data. Let's download our table with Olympics results now.
 
-```R
+```r
 olympics <- read_tsv("{{page.zenodo_link}}/files/olympics.tsv")
 ```
 
-```bash
+```r
 View(olympics)
 ```
 
@@ -249,8 +253,8 @@ height_plot +
   geom_point()
 
 # This will not add the new layer and will return an error message
-height_plot
-  + geom_point()
+# height_plot
+#   + geom_point()
 ```
 
 > <question-title>Challenge (optional)</question-title>
@@ -265,14 +269,14 @@ height_plot
 > from CRAN:
 > 
 > ```r
-> install.packages("hexbin")
+> # install.packages("hexbin")
 > library(hexbin)
 > ```
 > 
 > Then use the `geom_hex()` function:
 > 
 > ```r
-> surveys_plot +
+> height_plot +
 >  geom_hex()
 > ```
 > 
@@ -334,7 +338,7 @@ ggplot(olympics_small, aes(x=age, y=sport)) +
 
 Or to color each species in the plot differently, you could use a vector as an input to the argument **color**. `ggplot2` will provide a different color corresponding to different values in the vector. Here is an example where we color with **`species_id`**:
 
-```{r color-by-species-1, purl=FALSE}
+```r
 ggplot(olympics_small, aes(x=age, y=sport)) +
     geom_point(alpha = 0.1, aes(color = sex))
 ```
@@ -695,7 +699,7 @@ ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal)) 
 If you like the changes you created better than the default theme, you can save
 them as an object to be able to easily apply them to other plots you may create:
 
-```{r number-species-year-with-right-labels-xfont-orientation, purl=FALSE}
+```r
 grey_theme <- theme(axis.text.x = element_text(colour="grey20", size = 12,
                                                angle = 90, hjust = 0.5,
                                                vjust = 0.5),
@@ -738,7 +742,7 @@ everything aligned properly. Like most R packages, we can install `patchwork`
 from CRAN, the R package repository:
 
 ```r
-install.packages("patchwork")
+# install.packages("patchwork")
 ```
 
 After you have loaded the `patchwork` package you can use `+` to place plots

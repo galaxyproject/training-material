@@ -6,6 +6,12 @@ require 'fileutils'
 require 'yaml'
 require 'base64'
 
+class Hash
+  def fetch2(key, default)
+    self.fetch(key, default) || default
+  end
+end
+
 # Generate Notebooks from Markdown
 module GTNNotebooks
   COLORS = {
@@ -181,7 +187,7 @@ module GTNNotebooks
     folks = if metadata.key?('contributors')
               metadata['contributors']
             else
-              metadata['contributions'].map { |_k, v| v }.flatten
+              metadata['contributions']['authorship']
             end
 
     contributors = nil
@@ -209,11 +215,11 @@ module GTNNotebooks
       "\n",
       "**Objectives**\n",
       "\n"
-    ] + metadata['questions'].map { |q| "- #{q}\n" } + [
+    ] + metadata.fetch2('questions', []).map { |q| "- #{q}\n" } + [
       "\n",
       "**Objectives**\n",
       "\n"
-    ] + metadata['objectives'].map { |q| "- #{q}\n" } + [
+    ] + metadata.fetch2('objectives', []).map { |q| "- #{q}\n" } + [
       "\n",
       "**Time Estimation: #{metadata['time_estimation']}**\n",
       "\n",
@@ -327,6 +333,12 @@ module GTNNotebooks
     # Re-run a second time to catch singly-nested Q&A?
     content = group_doc_by_first_char(content)
 
+    # Replace zenodo links, the only replacement we do
+    if !page_data['zenodo_link'].nil?
+      puts "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
+      content.gsub!(/{{\s*page.zenodo_link\s*}}/, page_data['zenodo_link'])
+    end
+
     ICONS.each do |key, val|
       content.gsub!(/{% icon #{key} %}/, val)
     end
@@ -376,9 +388,9 @@ module GTNNotebooks
 
     final_content = [
       "# Introduction\n",
-      content.gsub(/```r/, '```{r}'),
+      content.gsub(/```[Rr]/, '```{r}'),
       "# Key Points\n"
-    ] + page_data['key_points'].map { |k| "- #{k}" } + [
+    ] + page_data.fetch2('key_points', []).map { |k| "- #{k}" } + [
       "\n# Congratulations on successfully completing this tutorial!\n",
       'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/' \
       "training-material#{page_url}#feedback) and check there for further resources!\n"
@@ -424,7 +436,7 @@ module GTNNotebooks
       'metadata' => { 'editable' => false, 'collapsed' => false },
       'source' => [
         "# Key Points\n\n"
-      ] + data['key_points'].map { |k| "- #{k}\n" } + [
+      ] + data.fetch2('key_points', []).map { |k| "- #{k}\n" } + [
         "\n# Congratulations on successfully completing this tutorial!\n\n",
         'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material' \
         "#{url}#feedback) and check there for further resources!\n"
