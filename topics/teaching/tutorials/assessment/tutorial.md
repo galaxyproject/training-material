@@ -67,15 +67,12 @@ and different ways that we can categorise them:
 
 ![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png)
 
-<!-- 
-> <hands-on-title>Diagnostic Assessment - Break-out room discussion  - *⏰ 15 min*</hands-on-title>
+> <hands-on-title>Diagnostic Assessment - {% icon time %} 15 min - Groups of 4</hands-on-title>
 >
-> - Split into groups of 4, depending on the number of participants.
-> - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
-> - Write it in a notebook and discuss with the rest of the group.
-{: .hands_on}-->
+> - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it
+{: .hands_on}
 
-{% include _includes/quiz.html id="diagnostic_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="diagnostic_assessment.yaml" %}-->
 
 ## Formative vs summative assessment
 
@@ -114,19 +111,15 @@ Formative assessment collect feedback (information) from learners' on their lear
 - **Frequent mistakes**: which types of mistakes need special attention
 - **Ability to perform a task**
 
-<!-- 
-> <hands-on-title>Collecting formative assessment - Break-out room discussion  - *⏰ 10 min*</hands-on-title>
+> <hands-on-title>Collecting formative assessment - {% icon time %} 10 min - Groups of 4</hands-on-title>
 >
-> - Split into groups of 4, depending on the number of participants.
+> 1. Find an example on how to collect information on **learners' mental models**
+> 2. Find an example on how to collect information on **learners' goals and objectives**
+> 3. Find an example on how to collect information on **learners' frequent mistakes**
 >
-> - Discuss how you could collect information on learners’
->	* mental models
->   * goals and objectives
->   * frequent mistakes
-> - For each, write an example.
-{: .hands_on} -->
+{: .hands_on}
 
-{% include _includes/quiz.html id="formative_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="formative_assessment.yaml" %}-->
 
 It should be highlighted that the **best practice** for teaching is to:
 - Constantly **monitor** what is happening to students' learning
@@ -209,21 +202,30 @@ Many group activities are possible
 
     Tools like Google docs, Etherpad or HackMD could be used
 
-{% include _includes/quiz.html id="integrate_formative_assessment.yaml" %}
+> <hands-on-title>How to integrate the result of formative assessment / feedback in your course? - {% icon time %} 5 min - Silent reflection</hands-on-title>
+>
+> 1. In this session, how did we assess your learning?
+> 2. Choose one of the techniques to collect feedback, and describe in the how you can integrate the result in your lesson, on the fly
+>
+{: .hands_on}
+
+<!--{% include _includes/quiz.html id="integrate_formative_assessment.yaml" %}-->
 
 ## How frequent should be formative feedback
 
-{% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}
+<!--{% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}-->
 
-<!-- 
-> <hands-on-title>Self-reflect  (5 min)</hands-on-title>
+> <hands-on-title>How frequent should formative feedback be? - {% icon time %} 5 min - Self-reflection</hands-on-title>
 >
-> - Think about this session: how many feedback opportunities have you had so far?
+> - In this session, how many feedback opportunities have you had so far?
 >
-> > <tip-title>Get feedback often</tip-title>
-> > In this tutorial so far, there were at least 3 feedback opportunities
-> {: .tip}
-{: .hands_on} -->
+>   > <solution-title>Get feedback often</solution-title>
+>    > In this tutorial so far, there were at least 3 feedback opportunities
+>    {: .solution}
+> 
+> - How frequent do you think formative feedback should be?
+>
+{: .hands_on}
 
 ![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/AttentionCurve.jpg "Attention Curve")
 
@@ -232,6 +234,13 @@ Formative assessment should be frequent: ideally **every 5 min**, at least every
 # Dealing with feedback
 
 Feedback is hard.
+
+> <hands-on-title>How to deal with feedback - discuss experiences  - {% icon time %} 15 min - Groups of 4</hands-on-title>
+>
+> - Share one or two experiences that you have had in either offering or receiving feedback.
+> - Share your strategy in dealing with this feedback. What were the challenges, and what worked?
+> - Write it in the shared notes and discuss with the rest of the group.
+{: .hands_on}
 
 ![A cartoon showing that a single negative feedback among a lot of positive can still be the only one that one remembers eventually.](images/gettingFeedback.jpg "Getting feedback")
 

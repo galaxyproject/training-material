@@ -99,7 +99,7 @@ Clicking on collection will expand it to show four pairs it contains (panel **B*
 
 # Processing data organized as a collection
 
-By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
+By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
 
 ```
 https://zenodo.org/record/5119008/files/chrM.fa.gz
