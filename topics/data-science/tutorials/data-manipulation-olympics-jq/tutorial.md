@@ -491,10 +491,10 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > >
 > > - Column 17 contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
-> > - Expand the output or use the tool {% tool [Line/Word/Character count]({{version_wc}}) %} to see the number of lines in the file
 > > - Don't forget that the output (and line count) may include the header line
 > > - Do not use quotes on number columns (e.g. year)
 > > - You may need parentheses for complex conditions
+> > - You may want to `[ ... query ...] | length` to get a nice length
 > >
 > {: .solution}
 >
@@ -504,7 +504,7 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > >  2. 24,633  (Expression: `select(.medal == "Gold" or .medal == "Silver" or .medal == "Bronze")`, or `select(.medal != null)`)
 > >  3. 131     (Expression: `select(.medal == "Gold" and .year == 2018)` (note: do not use quotes around `2018`, as it is a numerical value))
 > >  4. 8,086   (Expression: `select(.medal != null and .height >= 170 and .height <=180)`)
-> >  5. 812     (Expression: `select(.medal != null and (.height < 160 and .height > 190))` (note: parentheses are important here))
+> >  5. 2,333   (Expression: `select(.medal != null and (.height < 160 or .height > 190))` (note: parentheses are important here))
 > >
 > > Note: these numbers are found by determining the number of lines in the file after each filtering step, and subtracting 1 for the header line.
 > >
