@@ -40,19 +40,13 @@ notebook:
 subtopic: olympics
 ---
 
+In this tutorial, you will learn how to produce scatter plots, boxplots, and time series plots using ggplot. You will also learn how to set universal plot settings, modify the aesthetics of an existing ggplot plots (including axis labels and color), and learn how to facet in ggplot.
 
-<!--
-Note to contributors: feel free to add sections here to include additional data visualisation options.
-Make sure each section is independent of each other, i.e. each section should start with the olympics.tsv file.
-Also make sure to include many exercises (with answers) for your section!
--->
-
-
-# Introduction
-
-
-todo
-
+> <comment-title></comment-title>
+>
+> This tutorial is significantly based on [Data Carpentry](https://datacarpentry.org) lesson ["Data visualization with ggplot2"](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html).
+>
+{: .comment}
 
 > <agenda-title></agenda-title>
 >
@@ -64,14 +58,6 @@ todo
 {: .agenda}
 
 
-# Cheatsheet
-
-Here is an overview table of the different common visualisations used in this tutorial
-
-todo
-
-In this tutorial, these functions are explained in more detail, and we provide some exercises for you to practice.
-
 # Background
 
 In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1896 until Tokyo in 2020. The objective is to familiarize you with a large number of the most important data visualisation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
@@ -79,12 +65,6 @@ In this tutorial, we will use as our dataset a table with results from the Olymp
 ![image of olympic rings, logo and two athletes around the words "Data Analysis Olympics"](./images/cover.jpg)
 
 We will show you many of these commonly needed visualisation operations, and some examples of how to perform them in R. We also provide many exercises so that you can train your skills and become a data visualisation Olympian!
-
-> <comment-title></comment-title>
->
-> This tutorial is significantly based on [Data Carpentry](https://datacarpentry.org) lesson ["Data visualization with ggplot2"](https://datacarpentry.org/R-ecology-lesson/04-visualization-ggplot2.html).
->
-{: .comment}
 
 ## Data Visualization with ggplot2
 
