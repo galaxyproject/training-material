@@ -208,7 +208,7 @@ height_plot +
   geom_point()
 ```
 
-**Notes**
+### Notes
 
 - Anything you put in the `ggplot()` function can be seen by any geom layers
   that you add (i.e., these are universal plot settings). This includes the x-
