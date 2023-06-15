@@ -90,7 +90,7 @@ In this tutorial, these functions are explained in more detail, and we provide s
 In this tutorial, we will use as our dataset a table with results from the Olympics, from the games in Athens in 1896 until Tokyo in 2020. The objective is to familiarize you with a large number of the most important data manipulation tools in Galaxy. Much like the Olympics, there are many different disciplines (types of operations), and for each operation there are often multiple techniques (tools) available to athletes (data analysts, you) that are great for achieving the goal.
 
 
-![image of olympic rings, logo and two athletes around the words "Data Analysis Olympics"](./images/cover.jpg)
+![image of olympic rings, logo and two athletes around the words "Data Analysis Olympics"]({% link topics/introduction/tutorials/data-manipulation-olympics/images/cover.jpg %})
 
 
 We will show you many of these commonly needed data manipulation operations, and some examples of how to perform them in Galaxy. We also provide many exercises so that you can train your skills and become a data manipulation Olympian!
