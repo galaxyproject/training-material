@@ -344,12 +344,12 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > 2. What is the shortest?
 > 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
-> > > <tip-title>Removing null values</tip-title>
-> > > This will be covered more during the Filtering section, but for now simply use this filter:
-> > > ```bash
-> > > cat olympics.json | jq '[.[] | select(.height != null)] | ...your sort_by here...'
-> > > ```
-> > {: .tip}
+> > <tip-title>Removing null values</tip-title>
+> > This will be covered more during the Filtering section, but for now simply use this filter:
+> > ```bash
+> > cat olympics.json | jq '[.[] | select(.height != null)] | ...your sort_by here...'
+> > ```
+> {: .tip}
 >
 > > <solution-title>Hints</solution-title>
 > >
@@ -514,7 +514,7 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 
 # Counting
 
-A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count. The tool {% tool [**Count** occurrences of each record]({{version_count}}) %} does exactly this.
+A common operation we might want to perform on tables of data, is simple counting. How many times does a certain value appear? For our dataset for instance, we might want to know how many countries participated in each Olympics, how many women, etc; any column that has categorical data that we can count.
 
 Let's start by simply counting how many different Olympic Games we have in our dataset, and how many times it appears (so how many participations there were each year)
 
@@ -714,227 +714,6 @@ Ok, let's practice!
 > >
 > {: .solution}
 {: .question}
-
-
-<!--
-# Grouping (TODO)
-
-Often we may want to group rows based on a value in a column, and perform some operation on the resulting rows. For example we would like to group the olympics data by one value (e.g. year, country, sport), and determine some value for each group (e.g. number of medals won, average age of athletes, etc).
-
-In the [counting](#counting) section of this tutorial we show how to get answers that require a count (e.g. number of medals won), but sometimes we want to do something more complex, like calculating the average height of athletes in a group, say per country or per sport. This section will show some example of these types of questions.
-
-We can use the {% tool [Datamash]({{version_datamash}}) %} tool for this purpose.
-
-> <hands-on-title>Tallest athlete per sport</hands-on-title>
->
-> We would like to answer the following question: *How tall was the tallest athlete of each sport?*
->
-> 1. Open the {% tool [Datamash]({{version_datamash}}) %} tool and read the help section at the bottom
->
->    > <question-title></question-title>
->    >
->    > Which settings do you think we need to provide to answer our question?
->    >
->    > > <solution-title>Answer</solution-title>
->    > >
->    > > - *"Group by fields"*: We want to group by sport (Column 15).
->    > > - *"Sort"*: `Yes`. This may not be obvious, but because our file is currently not sorted by our chosen group (sport), we need to tell the tool to do this.
->    > > - *"Skip NA or NaN values"*: since we do have NA values for athletes for whom height data is unknown, we should set this to `Yes`
->    > > - Our file has a header line, so we should indicate this as well
->    > > - *"Operation"*: we want to determine the **Maximum** height (Column 7)
->    > >
->    > {: .solution}
->    {: .question}
->
-> 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
->    - {% icon param-text %} *"Group by fields"*: `15`
->    - {% icon param-toggle %} *"Sort input"*: `yes`
->    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
->    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
->    - *"Operation to perform on each group"*:
->      - {% icon param-select %} *"Type"*: `Maximum`
->      - {% icon param-select %} *"On Column"*: `Column: 7`
->
-> 3. {% icon galaxy-eye %} **View** the results.
->
->    > <question-title></question-title>
->    >
->    > 1. How tall was the tallest athlete in basketball? And what about karate?
->    > 2. Why do some sports have a value of `inf`?
->    >
->    > > <solution-title>Answer</solution-title>
->    > >
->    > > 1. Basketball's tallest athlete was 192cm. For Karate it is 163.
->    > > 2. Our dataset had quite a number of `NA` (unknown) values in the height column, especially for the earlier Olympics. For sports that had only NA values, there is no maximum so the tool outputs `inf` instead.
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
-
-
-## Grouping on multiple columns
-
-You may have noticed that we could also provide multiple columns to group on. If we do this, we can compute values for combinations of groups, such as sex and sport, to find e.g. the tallest woman in basketball or the shortest man per Olympics. There are also many more options for the computation we perform, so perhaps we are more interested not in the tallest athlete, but the average height. Let's perform some of these slightly more advanced queries now.
-
-
-> <hands-on-title>Average height of men and women per sport</hands-on-title>
->
-> The question we would like to answer here, is what is the average height for men and women per sport?
->
-> 1.  Open the {% tool [Datamash]({{version_datamash}}) %} tool
->     - Which parameters do you think we need?
->     - Refer to the help section at the bottom of the tool page if you need more information
->
-> 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
->    - {% icon param-text %} *"Group by fields"*: `15,3` (The sports column, and the sex column)
->    - {% icon param-toggle %} *"Sort input"*: `yes`
->    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
->    - {% icon param-toggle %} *"Print header line"*: `yes`
->    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
->    - *"Operation to perform on each group"*:
->      - {% icon param-select %} *"Type"*: `Mean`
->      - {% icon param-select %} *"On Column"*: `Column: 7`
->
-> 3. {% icon galaxy-eye %} **View** the results.
->    - Notice the header line in this output that we requested with the *"Print header line parameter"*. Adding this line will help you remember which columns you grouped on and which computation you performed. In our case it was obvious, but if you have a dataset with multiple columns with similar values, this can be useful
->    - See if you can answer the following questions based on the output file.
->
->    > <question-title></question-title>
->    >
->    > 1. What is the average height of women participating in archery?
->    > 2. What is the average height of men participating in [ballooning](https://en.wikipedia.org/wiki/Ballooning_at_the_1900_Summer_Olympics)?
->    > 3. Why do some values have `nan` instead of a height?
->    > 4. Why do some sports not have a value for one of the sexes?
->    > 5. Can you find a sport where women were taller than the men? (Hint: it starts with the letter A)
->    >
->    > > <solution-title>Answer</solution-title>
->    > >
->    > > 1. 167.25677031093 cm
->    > > 2. 170 cm
->    > > 3. If none of the rows in the group had height data available, it will output `nan` (not a number) instead. This is most common for sports that were only featured a few times in the early years of the Olympics.
->    > > 4. Sports such as artistic swimming only exist for women, so no M appears in the data for that group, so there simply is no row for the mean height of men doing artistic swimming in our output.
->    > > 5. [Art Competitions](https://en.wikipedia.org/wiki/Art_competitions_at_the_Summer_Olympics)
->    > >
->    > > If all went well, your output file should look something like:
->    > >
->    > > ```
->    > > GroupBy(sport)	     GroupBy(sex)  mean(height)
->    > > Aeronautics         M             nan
->    > > Alpine Skiing       F             167.38324708926
->    > > Alpine Skiing       M             178.18747142204
->    > > Alpinism            M             nan
->    > > Archery             F             167.25677031093
->    > > Archery             M             178.5865470852
->    > > Art Competitions    F             175.33333333333
->    > > Art Competitions    M             173.97260273973
->    > > Artistic Gymnastics F             156.15316901408
->    > > ```
->    > {: .solution}
->    {: .question}
->
-{: .hands_on}
-
-
-## Exercises
-
-> <question-title>Exercise: Grouping and computing</question-title>
->
-> 1. How tall is the shortest woman Badminton player to win a gold medal?
-> 2. What is the average height and standard deviation of athletes from Denmark (DEN) in the 1964 Olympics?
-> 3. Can you determine how heavy the heaviest tennis player in the 2020 Olympics is? Why not?
->
-> > <solution-title>Hints</solution-title>
-> >
-> > 1. We need to group on 3 columns: medals, sport and sex (note: the order you provide the columns determines the order they are listed in in the output)
-> > 2. We need to group on 2 columns: country (team) and year, then compute 2 things: the average (mean) and population standard deviation over column 7 (height).
-> >    (explanation of [sample vs population standard deviation](https://www.statology.org/population-vs-sample-standard-deviation/))
-> > 3. You should get an error message here, try to read it carefully to find out why it didn't work, and how we might be able to fix it (Tip: [troubleshooting errors HOWTO]({% link faqs/galaxy/analysis_troubleshooting.md %}))
-> >
-> > TIP: You can use CTRL+F in your browser to search for values in the file (e.g. "Badminton")
-> {: .solution}
->
-> > <solution-title>Answers</solution-title>
-> >
-> >  1. 161 cm.
-> >  2. mean height: 175.91304347826, standard deviation: 7.0335410308672`
-> >  3. We get an error message saying: `datamash: invalid numeric value in line 2434 field 8: '63-67'`. So from this we see that our weight column is not always a
-> >     single number, but sometimes a range, such as `63-67` (kg), e.g. for sports with weight classes such as boxing. Datamash does not know how to
-> >     handle such values, and will therefore fail. If we want to do this computation, we will have to clean up our data first (e.g. by replacing each
-> >     range by its upper or lower value. We will do this in the [final exercise section](#exercises-putting-it-all-together) of this tutorial)
-> >
-> {: .solution}
->
-> > <solution-title>Full Solutions</solution-title>
-> >
-> > 1. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
-> >    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
-> >    - {% icon param-text %} *"Group by fields"*: `17,15,3` (The medal, sports, and the sex columns)
-> >    - {% icon param-toggle %} *"Sort input"*: `yes`
-> >    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
-> >    - {% icon param-toggle %} *"Print header line"*: `yes`
-> >    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
-> >    - *"Operation to perform on each group"*:
-> >      - {% icon param-select %} *"Type"*: `Minimum`
-> >      - {% icon param-select %} *"On Column"*: `Column: 7`
-> >
-> >    This will give an output like below, scroll down to find the gold medalists, then badminton, then F (if you used a different order in the Group by fields parameter, this file may look a bit different, but will still provide the same information)
-> >
-> >    ```
-> >    GroupBy(medal)	GroupBy(sport)	GroupBy(sex)	min(height)
-> >    Bronze	Alpine Skiing	F	156
-> >    Bronze	Alpine Skiing	M	167
-> >    Bronze	Archery	F	155
-> >    Bronze	Archery	M	166
-> >    Bronze	Art Competitions	F	-inf
-> >    Bronze	Art Competitions	M	172
-> >    Bronze	Artistic Gymnastics	F	136
-> >    ...
-> >    ```
-> >
-> > 2. {% tool [Datamash]({{version_datamash}}) %} with the following parameters:
-> >    - {% icon param-file %} *"Input tabular dataset"*: `olympics.tsv`
-> >    - {% icon param-text %} *"Group by fields"*: `12,9` (year and team columns)
-> >    - {% icon param-toggle %} *"Sort input"*: `yes`
-> >    - {% icon param-toggle %} *"Input file has a header line"*: `yes`
-> >    - {% icon param-toggle %} *"Print header line"*: `yes`
-> >    - {% icon param-toggle %} *"Skip NA or NaN values"*: `yes`
-> >    - *"Operation to perform on each group"*:
-> >      - {% icon param-select %} *"Type"*: `Mean`
-> >      - {% icon param-select %} *"On Column"*: `Column: 7`
-> >    - {% icon param-repeat %} *"Insert Operation to perform on each group"*:
-> >      - {% icon param-select %} *"Type"*: `Population Standard deviation`
-> >      - {% icon param-select %} *"On Column"*: `Column: 7`
-> >
-> >    This will give an output like below:
-> >
-> >    ```
-> >    GroupBy(year)	GroupBy(team)	mean(height)	pstdev(height)
-> >    1896	Australia	nan	nan
-> >    1896	Austria	nan	nan
-> >    1896	Belgium	nan	nan
-> >    1896	Bulgaria	nan	nan
-> >    1896	Denmark	nan	nan
-> >    1896	France	167.62962962963	4.6836844324555
-> >    ...
-> >    ```
-> >
-> > 3. Any calculations you run which try to compute anything over the weight column (Column 8) will fail. Please see the [final exercise section](#exercises-putting-it-all-together) for the solution
-> >    to this question, in which we will first clean up the data in the weight column using the Find and Replace operation.
-> >
-> >    This type of situation occurs quite frequently, where you data does not fit with your expectations or assumptions, and you may have to perform additional data
-> >    manipulation steps to clean up your data. It is very useful to know how to read the error messages of tools. Depending on the tool, the error messages may or may
-> >    not be very informative, but in many cases it can give you a clue as to why it failed, which sometimes can be fixed by you. If you think it is a problem with the
-> >    tool itself, please submit a bug report, and the tool authors will be able to have a look at it. More information about troubleshooting and reporting errors can
-> >    be found in [this FAQ]({% link faqs/galaxy/analysis_troubleshooting.md %})
-> >
-> >
-> {: .solution}
->
-{: .question}
-
--->
 
 # Computing
 
