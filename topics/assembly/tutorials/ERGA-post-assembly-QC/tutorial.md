@@ -34,6 +34,7 @@ Reference genomes provide a baseline for understanding genetic diversity within 
 
 Genome post-assembly quality control (GPAQC) is a crucial step for evaluating the accuracy and completeness of newly assembled genomes. This involves assessing the contiguity, completeness, accuracy, and consistency of the genome assembly using various bioinformatic tools and methods ({% cite Koren2017 %}, {% cite Hunt2015 %}, {% cite Mikheenko2015 %}, {% cite Vaser2017 %}, {% cite Zimin2017 %}). GPAQC aims to ensure that genomic data is reliable and useful for downstream analyses such as annotation, comparative genomics, and functional studies.
 
+<!--
 Several metrics can be used to evaluate the quality of a genome assembly. Some commonly used metrics are:
 
 1. Genome completeness: the fraction of the expected genes that are present and complete in the assembly.
@@ -42,8 +43,9 @@ Several metrics can be used to evaluate the quality of a genome assembly. Some c
 4. Contamination rate: Contamination occurs when foreign DNA sequences are introduced into the assembly, which can skew downstream analyses.
 
 These metrics can help researchers to evaluate the quality of their eukaryotic genome assemblies and identify potential issues that may impact downstream analyses.
+-->
 
-In this tutorial you will learn how to implement the ERGA post-assembly quality control pipeline, and how to interpretate the potential outcomes.
+In this tutorial you will learn how to implement the ERGA GPAQC pipeline, and how to interpretate the potential outcomes.
 
 
 > <agenda-title></agenda-title>
@@ -93,7 +95,7 @@ As a first step we will get the data from Zenodo.
 > 1. Create a new history for allocating temporally all the datasets. This history can be named as `Datasets history`
 >
 >
-> 2. Import the Pacbio HiFi files from [Zenodo]({{ page.zenodo_link_1 }}), [Zenodo]({{ page.zenodo_link_2 }}), [Zenodo]({{ page.zenodo_link_3 }}), [Zenodo]({{ page.zenodo_link_4 }}), [Zenodo]({{ page.zenodo_link_5 }}) and [Zenodo]({{ page.zenodo_link_6 }})
+> 2. Import the Pacbio HiFi files from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -182,14 +184,14 @@ Once all the datasets have been copied to their correspondent history, we should
 
 # Genome assembly overview with BlobToolKit
 
-BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
+**BlobToolKit** is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
 
 In this tutorial, we will use BlobToolKit in order to integrate the following data:
 
-- Read coverage data: BlobToolKit can use read coverage information to identify potential errors or gaps in the genome assembly. By comparing the depth of coverage across the genome, it can highlight regions that may be overrepresented or underrepresented, which can indicate potential issues with the assembly.
-- Taxonomic annotations: BlobToolKit can use taxonomic information to identify potential contaminants or foreign DNA in the genome assembly. It does this by comparing the taxonomic profile of the genome assembly to a reference database of known organisms.
-- Sequence similarity data: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.
-- BUSCO reports: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.
+- **Read coverage data**: BlobToolKit can use read coverage information to identify potential errors or gaps in the genome assembly. By comparing the depth of coverage across the genome, it can highlight regions that may be overrepresented or underrepresented, which can indicate potential issues with the assembly.
+- **Taxonomic annotations**: BlobToolKit can use taxonomic information to identify potential contaminants or foreign DNA in the genome assembly. It does this by comparing the taxonomic profile of the genome assembly to a reference database of known organisms.
+- **Sequence similarity data**: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.
+- **BUSCO reports**: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.
 
 > <comment-title>Why should we evaluate contaminants?</comment-title>
 >
@@ -203,7 +205,7 @@ In the next steps, we will generate the data required for generating the visuali
 
 Read coverage is an essential metric for evaluating the quality of genome assemblies, and it provides valuable information for identifying regions of high and low quality, detecting misassemblies, and identifying potential contaminants. Thus, for example, unexpected regions of low coverage suggests potential errors, such as misassemblies, gaps, or low complexity regions ({% cite Koren2017 %}).
 
-In this tutorial we will use HISAT2 for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.
+In this tutorial we will use **HISAT2** for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.
 
 > <comment-title>How is coverage information encoded in the BAM file?</comment-title>
 >
@@ -214,21 +216,23 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 > <hands-on-title>Generate BAM file with HISAT2</hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReniformis_Pacbio`
 >
 >
 > 2. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Source for the reference genome"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select the reference genome"*: `CReformitis_assembly`
 >    - *"Is this a single or paired library"*: `Single-end`
->        - {% icon param-file %} *"FASTA/Q file"*: `output` (output of **Collapse Collection** {% icon tool %})
+>        - {% icon param-file %} *"FASTA/Q file"*: output of **Collapse Collection** {% icon tool %}
+>
+> 3. Repeat the prevous steps with the datasets from the two remanining species.
 >
 {: .hands_on}
 
 
 ## Generate sequence similarity data with DIAMOND
 
-DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy ({% cite Buchfink2014 %}).
+**DIAMOND** is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy ({% cite Buchfink2014 %}).
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -237,9 +241,9 @@ DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm co
 >        - *"Allow for frameshifts?"*: `yes`
 >            - *"restrict hit culling to overlapping query ranges"*: `Yes`
 >            - *"frame shift penalty"*: `15`
->    - {% icon param-file %} *"Input query file in FASTA or FASTQ format"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Input query file in FASTA or FASTQ format"*: `CReformitis_assembly`
 >    - *"Will you select a reference database from your history or use a built-in index?"*: `Use one from the history`
->        - {% icon param-file %} *"Select the reference database"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Select the reference database"*: `Diamond_db`
 >    - *"Restrict search taxonomically?"*: `No`
 >    - *"Sensitivity Mode"*: `Fast (--fast)`
 >        - *"Block size in billions of sequence letters to be processed at a time"*: `10.0`
@@ -247,35 +251,39 @@ DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm co
 >    - *"Method to restrict the number of hits?"*: `Maximum number of target sequences`
 >    - In *"Output options"*:
 >        - *"Format of output file"*: `BLAST tabular`
->            - *"Tabular fields"*: ``
+>            - *"Tabular fields"*: `Query Seq-id`,`Subject Seq -id`, `Start of alignment in query`, `End of alignment in query`, `Expected value`, `Bit score` and `Unique Subject Taxonomy ID(s), separated by a ',' (in numerical order)` 
+>
+> 2. Repeat the prevous steps with the datasets from the two remanining species.
 >
 {: .hands_on}
 
 
 ## Generate **BUSCO** report
 
-BUSCO (Benchmarking Universal Single-Copy Orthologs) is a tool used for quantitative assessment of genome assembly, gene set, and transcriptome completeness. It is based on evolutionarily informed expectations of gene content derived from near-universal single-copy orthologs ({% cite Simo2015 %})
+**BUSCO** (Benchmarking Universal Single-Copy Orthologs) is a tool used for quantitative assessment of genome assembly, gene set, and transcriptome completeness. It is based on evolutionarily informed expectations of gene content derived from near-universal single-copy orthologs ({% cite Simo2015 %})
 
 > <comment-title> Orthologs </comment-title>
 >
-> Orthologs are genes in different species which have usually the same function and have evolved from a common ancestral gene. They are important for new genome assemblies in order to predict gene functions and help with gene annotation. ({% cite Gennarelli2010 %}).
+> Orthologs are genes in different species which have usually the same function and have evolved from a common ancestral gene. They are important for new genome assemblies in order to predict gene functions and help with gene annotation ({% cite Gennarelli2010 %}).
 >
 {: .comment}
 
 > <hands-on-title> Estimate single copy gene representation completeness </hands-on-title>
 >
-> {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `outfile` (output of **Replace** {% icon tool %})
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Auto-detect`
->    - *"Which outputs should be generated"*: ``
+>    - *"Which outputs should be generated"*: `Short summary text`
 >
 >
 >    > <details-title> Additional information </details-title>
 >    >
 >    > BUSCO sets represent 3023 genes for vertebrates, 2675 for arthropods, 843 for metazoans, 1438 for fungi and 429 for eukaryotes. An intuitive metric is provided 	in BUSCO notation - C:complete[D:dublicated], F:fragmented, M:missing, n:number of genes used.
 >    {: .details}
+>
+> 2. Repeat the prevous steps with the datasets from the two remanining species.
 >
 {: .hands_on}
 
@@ -296,34 +304,36 @@ BUSCO (Benchmarking Universal Single-Copy Orthologs) is a tool used for quantita
 
 ## Generate interactive plots with **BlobToolKit**
 
-BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data. 
+**BlobToolKit** is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data. 
 
-To work with BlobToolKit we need to create a new dataset structure called BlobDir. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
-To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a Metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory. ({% cite Challis2020 %})
+To work with BlobToolKit we need to create a new dataset structure called **BlobDir**. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
+
+To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory ({% cite Challis2020 %}).
 
 > <hands-on-title> Creating the BlobDir dataset </hands-on-title>
 >
 > 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
 >    - *"Select mode"*: `Create a BlobToolKit dataset`
->        - {% icon param-file %} *"Genome assembly file"*: `output` (Input dataset)
->        - {% icon param-file %} *"Metadata file"*: `output` (Input dataset)
->        - *"NCBI taxonomy ID"*: `{'id': 2, 'output_name': 'output'}`
->        - {% icon param-file %} *"NCBI taxdump directory"*: `output` (Input dataset)
->
+>        - {% icon param-file %} *"Genome assembly file"*: `CReformitis_assembly`
+>        - {% icon param-file %} *"Metadata file"*: `CReformitis_metadata`
+>        - *"NCBI taxonomy ID"*: `121349`
+>        - {% icon param-file %} *"NCBI taxdump directory"*: `Taxonomy_Data`
 >
 >
 > 2. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
 >    - *"Select mode"*: `Add data to a BlobToolKit dataset`
->        - {% icon param-file %} *"Blobdir.tgz file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
->        - {% icon param-file %} *"BUSCO full table file"*: `busco_table` (output of **Busco** {% icon tool %})
->        - *"BLAST/Diamond hits"*: `Disabled`
->        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: `output_alignments` (output of **HISAT2** {% icon tool %})
->        - *"Genetic text file"*: `Disabled`
+>        - {% icon param-file %} *"Blobdir.tgz file"*: output of **BlobToolKit** {% icon tool %}
+>        - {% icon param-file %} *"BUSCO full table file"*: `Full table` (output of **Busco** {% icon tool %})
+>        - *"BLAST/Diamond hits"*: `Enabled`
+>           - *"BLAST/Diamond hits dataset"*: output of **Diamond** {% icon tool %}
+>        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **HISAT2** {% icon tool %}
 >
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
->    - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
+>    - {% icon param-file %} *"Blobdir file"*: output of **BlobToolKit** {% icon tool %}
 >
 > 4. Click on the {% icon galaxy-eye %} (eye) icon and inspect the output of **Interactive BlobToolKit**.
+>
+> 5. Repeat the prevous steps with the datasets from the two remanining species.
 >
 {: .hands_on}
 
@@ -331,7 +341,9 @@ Now, we will evaluate three of plots that we can find in the Blobtoolkit interac
 
 ![Figure 5: BlobToolKit snail plot](../../images/post-assembly-QC/Blobdir.snail.c.png "Chondrosia reniformis snail plot summary. The grey line represents the assembly scaffolds, where the distance to the center of the circle indicates the length of the scaffolds. A scale line in the center of the circle helps to gauge the length. Longest contig: The red line in the plot indicates the longest contig in the assembly. N50 and N90: The dark orange and light orange lines represent the scaffolds contained in the N50 and N90 metrics, respectively. GC/AT content: The outer light and dark blue lines represent the GC and AT content, respectively. In an ideal assembly, the line between the two colors should be consistent, without much fluctuation. Gaps: Gaps in the assembly, if present, are denoted by the percent N in the bottom right of the image.")
 
-The main plot is divided into 1,000 size-ordered bins around the circumference with each bin representing 0.1% of the 117,390,217 bp assembly. The distribution of sequence lengths is shown in dark grey with the plot radius scaled to the longest sequence present in the assembly (10,413,042 bp, shown in red). Orange and pale-orange arcs show the N50 and N90 sequence lengths (8,459,200 and 6,903,244 bp), respectively. The pale grey spiral shows the cumulative sequence count on a log scale with white scale lines showing successive orders of magnitude. The blue and pale-blue area around the outside of the plot shows the distribution of GC, AT and N percentages in the same bins as the inner plot. A summary of complete, fragmented, duplicated and missing BUSCO genes in the eukaryota_odb10 set is shown in the top right.
+The main plot is divided into 1,000 size-ordered bins around the circumference with each bin representing 0.1% of the 117,390,217 bp assembly. The **distribution of sequence lengths is shown in dark grey** with the plot radius scaled to the longest sequence present in the assembly (10,413,042 bp, shown in red). 
+
+**Orange and pale-orange arcs show the N50 and N90 sequence lengths** (8,459,200 and 6,903,244 bp), respectively. The **pale grey spiral shows the cumulative sequence count on a log scale** with white scale lines showing successive orders of magnitude. The **blue and pale-blue area around the outside of the plot shows the distribution of GC, AT and N percentages** in the same bins as the inner plot. A summary of complete, fragmented, duplicated and missing BUSCO genes in the eukaryota_odb10 set is shown in the top right.
 
 > <question-title>Snailplot question</question-title>
 >
@@ -352,7 +364,7 @@ Now, we are going to analyze the blob plot corresponding to *Erythrolamprus regi
 
 ![Figure 7: BlobToolKit circle plot](../../images/post-assembly-QC/Blobdir.blob.circle.png "Blob plot of base coverage in input against GC proportion for sequences in *E. reginate assembly*. Sequences are coloured by phylum. Circles are sized in proportion to sequence length . Histograms show the distribution of sequence length sum along each axis")
 
-The blob plot is a two-dimensional scatter plot that helps in visualizing and analyzing genomic data for quality control, contaminant detection, and filtering. In the circle plot, each sequence is represented by a circle, with its diameter proportional to the sequence length. Circles are colored based on their taxonomic affiliation, and their positions on the X and Y axes are determined by their GC content and coverage, respectively. GC content is the proportion of G and C bases in the sequence, which can differ substantially between genomes. Coverage, on the other hand, is a measure of the number of times a particular sequence has been read during the sequencing process. The plot also includes coverage and GC histograms for each taxonomic group, weighted by the total span (cumulative length) of sequences occupying each bin.
+The blob plot is a two-dimensional scatter plot that helps in visualizing and analyzing genomic data for quality control, contaminant detection, and filtering. In the circle plot, **each sequence is represented by a circle**, with its diameter proportional to the sequence length. Circles are colored based on their taxonomic affiliation, and their positions on the X and Y axes are determined by their GC content and coverage, respectively. GC content is the proportion of G and C bases in the sequence, which can differ substantially between genomes. Coverage, on the other hand, is a measure of the number of times a particular sequence has been read during the sequencing process. The plot also includes coverage and GC histograms for each taxonomic group, weighted by the total span (cumulative length) of sequences occupying each bin.
 
 > <comment-title>Pre-curated assembly evaluation</comment-title>
 >
@@ -366,7 +378,7 @@ The blob plot is a two-dimensional scatter plot that helps in visualizing and an
 
 > <question-title>Blob plot question</question-title>
 >
-> Does significant contamination exist in the *Eschrichtius robustus* and *Chondrosia reniformis* assemblies?
+> Does exist significant contamination in the *Eschrichtius robustus* and *Chondrosia reniformis* assemblies?
 >
 > > <solution-title></solution-title>
 > >
@@ -379,9 +391,9 @@ The blob plot is a two-dimensional scatter plot that helps in visualizing and an
 >
 {: .question}
 
-Finally, let's have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the contribution of the contigs from contaminated reads to the final assembly. In that case, first we will evaluate all sequences together, and then we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let's start with the accumulative plot corresponding to all sequences (fig. 10).
+Finally, let's have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the **contribution of the contigs from contaminated reads to the final assembly**. In that case, first we will evaluate all sequences together, and then we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let's start with the accumulative plot corresponding to all sequences (fig. 10).
 
-In this kind of plot, the x-axis represent the number of contigs (sorted by species and length), and the y-axis correspond to the cumulative length in nucleotides. The gray line shows the cumulative length of all sequences. As we can appreciate, most sequences corespond to the taxa chordata (1.9Gb, distributed along 151 contigs). In addition, we can see that the final assembly includes 174 contigs corresponding to different taxa, or not classified at all. In order to be able to analyze the contribution of those sequences, we will filter the contigs corresponding to the chordata.
+In this kind of plot, **the x-axis represent the number of contigs** (sorted by species and length), and **the y-axis correspond to the cumulative length in nucleotides**. The gray line shows the cumulative length of all sequences. As we can appreciate, most sequences corespond to the taxa chordata (1.9Gb, distributed along 151 contigs). In addition, we can see that the final assembly includes 174 contigs corresponding to different taxa, or not classified at all. In order to be able to analyze the contribution of those sequences, we will filter the contigs corresponding to the chordata.
 
 ![Figure 10: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative.png "Cumulative sequence length for assembly Blobdir. The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule. Plot axes are scaled to the filtered assembly.")
 
@@ -391,9 +403,11 @@ In this kind of plot, the x-axis represent the number of contigs (sorted by spec
 >
 {: .comment}
 
+By hidding the contings corresponding to chordata, we can have a detailed view of the contributions of each contaminant (fig. 11).
+
 ![Figure 11: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative_filtered.png " The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule and are stacked by cumulative value on the x-axis to show the proportion of each phylum in the overall assembly. The assembly has been filtered to exclude sequences with phylum matches Chordata. Plot axes are scaled to the filtered assembly.")
 
-In figure 11 we can appreciate clearly the relative contribution of each contaminant with respect to the total contamination. 
+ In figure 11 we can appreciate clearly the relative contribution of each contaminant with respect to the total contamination. 
 
 
 # K-mer based genome profiling and evaluation
@@ -409,9 +423,9 @@ k-mers can be utilized to infer genome characteristics such as length and hetero
 
 ## Generating k-mer profile with **Meryl**
 
-DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools, exactly like in Meryl. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
+DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools, exactly like in **Meryl**. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
 
-Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-scale genomic datasets. Meryl uses a sorting-based approach that sorts the k-mers in lexicographical order.
+Meryl is a powerful tool for counting k-mers in large-scale genomic datasets. It uses a sorting-based approach that sorts the k-mers in lexicographical order.
 
 > <hands-on-title> Generating k-mer profile </hands-on-title>
 >
@@ -431,25 +445,26 @@ Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-sca
 > 2. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
 >    - *"Operation type selector"*: `Operations on sets of k-mers`
 >        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
->        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - {% icon param-file %} *"Input meryldb"*: previous output of **Meryl** {% icon tool %}
 >
 > 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} a third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
->        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - {% icon param-file %} *"Input meryldb"*: previous output of **Meryl** {% icon tool %}
 >
+> 4. Rename the output as `Histogram dataset`
 >
 {: .hands_on}
 
 
 ## K-mer profile analysis with **GenomeScope**
 
-Genomescope is used for analysing genomes with the help of k-mer profile analysis. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data. ({% cite Vurture2017 %})
+**Genomescope** is used for analysing genomes with the help of k-mer profile analysis. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data. ({% cite Vurture2017 %})
 
 > <hands-on-title> Generate plots for analysis </hands-on-title>
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
->    - *"Ploidy for model to use"*: `{'2' for C. reniformis and E. robustus, '3' for E. reginae}`
+>    - {% icon param-file %} *"Input histogram file"*: `Histogram dataset`
+>    - *"Ploidy for model to use"*: `2` for *C. reniformis* and *E. robustus*, `3` for *E. reginae*.
 >
 >
 >    > <comment-title> Plots </comment-title>
@@ -461,7 +476,7 @@ Genomescope is used for analysing genomes with the help of k-mer profile analysi
 
 ![Figure 12: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile (k:21) of Chondrosia reniformis, diploid (p:2). The plot includes estimations about the genome length (len:124,167,659bp), unique sequences (uniq:61.5%), homozygous portion (aa: 98.7%), heterozygous portions (ab:1.32%), mean k-mer coverage for heterozygous bases (kcov:35.4), read error rate (err:0.752%) and average rate of read duplications (dup:0.378).")
 
-Figure 12 corresponds to the k-mer profile of the Sponge (Chondrosia reniformis). Presumably, the large gene number in the sponge genome is due to regional gene duplication; so far evidence for a transposition in sponges has been presented. Data indicate that only 0.25 % of the total sponge genome comprises CA/TG microsatellites, and until now also no SINEs/transposable elements have been identified. The estimated genome size around 124,Mbp is relatively close to Chondrosia reniformis genome size (117,39Mbp). 
+Figure 12 corresponds to the k-mer profile of the sponge (*Chondrosia reniformis*). Presumably, the large gene number in the sponge genome is due to regional gene duplication; so far evidence for a transposition in sponges has been presented. Data indicate that only 0.25 % of the total sponge genome comprises CA/TG microsatellites, and until now also no SINEs/transposable elements have been identified. The estimated genome size around 124,Mbp is relatively close to *Chondrosia reniformis* genome size (117,39Mbp). 
 
 > <question-title>Genome profile question</question-title>
 >
