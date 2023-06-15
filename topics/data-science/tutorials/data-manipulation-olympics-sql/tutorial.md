@@ -200,13 +200,13 @@ So let's sort our file in chronological order, based on the year of the Olympic 
 {: .question}
 
 ```sql
-SELECT * FROM olympics ORDER BY year;
+SELECT * FROM olympics ORDER BY year LIMIT 30;
 ```
 
 If we wanted to do it in reverse, we could just use `order by year desc`
 
 ```sql
-SELECT * FROM olympics ORDER BY year DESC;
+SELECT * FROM olympics ORDER BY year DESC LIMIT 30;
 ```
 
 > <question-title></question-title>
@@ -232,8 +232,8 @@ So we want to sort twice, first by year, an then within each year, we sort again
 
 We will sort the file in chronological order based on the year of the Olympic games
 
-```bash
-SELECT * FROM olympics ORDER BY year, name;
+```sql
+SELECT * FROM olympics ORDER BY year, name LIMIT 30;
 ```
 
 > <question-title></question-title>
@@ -358,7 +358,7 @@ We'll be using the `WHERE` filter to select entries matching specific conditions
 
 Ok, great, now that you've got the hang of writing expressions for this tool, let's create a file with only Winter Olympics. Make sure it is contained in an array, in case we want to do further sorting.
 
-```bash
+```sql
 CREATE TABLE winter AS SELECT * FROM olympics WHERE season = 'Winter'
 ```
 
@@ -376,7 +376,7 @@ CREATE TABLE winter AS SELECT * FROM olympics WHERE season = 'Winter'
 
 **Repeat** the step for the Summer Olympics
 
-```bash
+```sql
 CREATE TABLE summer AS SELECT * FROM olympics WHERE season = 'Summer'
 ```
 
@@ -417,7 +417,6 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > >
 > > - Column 17 contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
-> > - Expand the output or use the tool {% tool [Line/Word/Character count]({{version_wc}}) %} to see the number of lines in the file
 > > - Don't forget that the output (and line count) may include the header line
 > > - Do not use quotes on number columns (e.g. year)
 > > - You may need parentheses for complex conditions
@@ -526,13 +525,13 @@ select games, count(sport) as sports from olympics group by games;
 
 But those results still aren't distinct, those numbers are far too high. So let's use distinct:
 
-```bash
+```sql
 select games, count(distinct sport) as sports from olympics group by games;
 ```
 
 We're almost there! Let's sort this
 
-```bash
+```sql
 select games, count(distinct sport) as sports from olympics group by games order by sports asc;
 ```
 
@@ -692,8 +691,8 @@ Sometimes we want to use the data in our column to compute a new value, and add 
 
 As an example, let's calculate the age of each athlete at the time of participation, and add this as a new column to our dataset.
 
-```bash
-select year - birth_year as age, games from olympics;
+```sql
+select year - birth_year as age, games from olympics LIMIT 30;
 ```
 
 If we want to save that result to make it easier to query, then we have a couple options.
@@ -806,7 +805,7 @@ Let's standardize this by replacing occurrences of `Athina` with `Athens`.
 Let's start by filtering out the old spelling:
 
 ```sql
-select city from olympics where city = 'Athina';
+select * from olympics where city = 'Athina' limit 30;
 ```
 
 Let's try replacing it:
@@ -910,7 +909,7 @@ Let's say we would like to create a list of all unique athletes (id and name).
 First we will just select the `athlete_id` and `name` columns from our dataset
 
 ```sql
-select name, athlete_id from olympics
+select name, athlete_id from olympics LIMIT 30
 ```
 
 > <question-title></question-title>
@@ -927,7 +926,7 @@ select name, athlete_id from olympics
 Now let's remove those duplicates.
 
 ```sql
-select distinct name, athlete_id from olympics
+select distinct name, athlete_id from olympics limit 30
 ```
 
 > <question-title></question-title>
@@ -937,7 +936,7 @@ select distinct name, athlete_id from olympics
 > > <solution-title>Answer</solution-title>
 > > 94,733
 > >
-> > ```bash
+> > ```sql
 > > select count(distinct athlete_id) from olympics;
 > > ```
 > >
@@ -969,8 +968,8 @@ We would now like to take our Olympics dataset as the basis, and add columns to 
 
 We can use the join commands.
 
-```bash
-select * from olympics left join contries on olympics.noc = countries.NOC
+```sql
+select * from olympics left join countries on olympics.noc = countries.NOC LIMIT 30
 ```
 
 > <question-title></question-title>
@@ -1012,11 +1011,14 @@ View the table `olympics_2022`, does it have the same structure as our original 
 Since this new dataset has the exact same structure (number and order of columns), we can simple add the lines from this file to the end of our existing `olympic` table.
 For this, we'll need to use the `union all` which takes two separate sql queries and unifies the results.
 
-```bash
+```sql
 select * from olympics
 union all
-select * from olympics_2022:
+select * from olympics_2022
+LIMIT 30;
 ```
+
+(Note: We are limiting the outputs to ensure your browser does not crash loading all of the data.)
 
 Now this only works so simply because our two datasets had the same structure. If your data comes from different sources, you may have to do some additional data manipulation before you can union, e.g. to make sure the columns match, or how each file deals with missing data (empty cells, `NA`, `NaN` or something else).
 
@@ -1058,25 +1060,25 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > > 1. First we filter out the NA values from the height column:
 > >
-> >    ```bash
+> >    ```sql
 > >    select * from olympics where height is not null
 > >    ```
 > >
 > >    Then we can sort by height, in ascending order to get the shortest athletes on top:
 > >
-> >    ```bash
+> >    ```sql
 > >    select * from olympics where height is not null order by height desc limit 10;
 > >    ```
 > >
 > > 2. We can take the output from the first exercise, and filter for only Winter Olympics:
 > >
-> >    ```bash
+> >    ```sql
 > >    select * from olympics where height is not null and season = 'Winter' order by height desc limit 10;
 > >    ```
 > >
 > > 3. First we filter out the NA values from the weight column:
 > >
-> >    ```bash
+> >    ```sql
 > >    select * from olympics where weight is not null and games = '2020 Summer Olympics' order by weight asc limit 10;
 > >    ```
 > >
