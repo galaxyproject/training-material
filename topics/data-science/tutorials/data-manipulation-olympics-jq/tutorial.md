@@ -847,7 +847,7 @@ We can access just the .city and try out our gsub next:
 jq '.[] | select(.city == "Athina") | .city | gsub("Athina"; "Athens")' < olympics.json
 ```
 
-Looks good! Let's use the technique we learned in [Computing](#Computing) to update the key with a new key.
+Looks good! Let's use the technique we learned in [Computing](#computing) to update the key with a new key.
 
 ```bash
 jq '.[] | select(.city == "Athina") | . += {"city": (.city | gsub("Athina"; "Athens"))}' < olympics.json
