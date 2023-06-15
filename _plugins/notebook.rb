@@ -6,9 +6,10 @@ require 'fileutils'
 require 'yaml'
 require 'base64'
 
+# Monkey patching hash
 class Hash
   def fetch2(key, default)
-    self.fetch(key, default) || default
+    fetch(key, default) || default
   end
 end
 

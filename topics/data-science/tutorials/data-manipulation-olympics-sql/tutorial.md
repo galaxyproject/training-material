@@ -259,7 +259,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > > <solution-title>Answer</solution-title>
 > >
 > > `Žolt Peto` who competed in table tennis at the 2020 Summer Olympics in Tokyo.
-> > <br>
+> >
 > > We do this by repeating the previous sort (on year and then name), but changing the order to *descending* for both, to get the answer to the top of the file.
 > >
 > {: .solution}
@@ -272,12 +272,12 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > 2. What is the shortest?
 > 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
-> > > <tip-title>Removing null values</tip-title>
-> > > This will be covered more during the Filtering section, but for now simply use this filter:
-> > > ```sql
-> > > SELECT * from olympics where height is not null ... ;
-> > > ```
-> > {: .tip}
+> > <tip-title>Removing null values</tip-title>
+> > This will be covered more during the Filtering section, but for now simply use this filter:
+> > ```sql
+> > SELECT * from olympics where height is not null ... ;
+> > ```
+> {: .tip}
 >
 > > <solution-title>Hints</solution-title>
 > >
