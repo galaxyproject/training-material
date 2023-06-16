@@ -322,7 +322,14 @@ module Jekyll
     end
 
     def topic_name_from_page(page, site)
-      site.data[page['topic_name']]['title']
+      if page.key? 'topic_name'
+        return site.data[page['topic_name']]['title']
+      else
+        if page['path'] =~ /faqs/
+          return 'FAQs'
+        end
+        Jekyll.logger.warn "No topic_name for #{page['path']}"
+      end
     end
 
     ##
