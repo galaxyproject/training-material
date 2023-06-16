@@ -67,19 +67,19 @@ Galaxy has a large collection of tools to perform such basic data manipulation t
 
 Here is an overview table of the different data manipulations in this tutorial, with links to the tools in Galaxy.
 
-| Operation              | Description                        | Galaxy Tool    |
-|------------------------|------------------------------------|----------------|
-| Compute on rows        | to derive new column values from existing ones | `SELECT x * 2 FROM y` |
-| Concatenate datasets   | one after the other                | `SELECT * FROM x; union all; SELECT * FROM y` |
-| Counting               | Count occurrences of values in a column   | ` SELECT count(x) FROM y where x = 'value'` |
-| Cut Columns            | By header name                     | `SELECT x, y, z FROM a`|
-| Filter                 | Remove rows based on values in one or more columns | `... WHERE x = 'value'`|
-| Find and Replace       | in a specific column               | `REPLACE()`, `regexp_replace` in postgresql|
-| Group on a column      | And perform simple operations (count, mean, min, max etc) | `... GROUP BY x ...` |
-| Join two Datasets      | side by side on a specified field  | `SELECT * FROM x, y JOIN x.id = y.id` |
-| Select First lines     | Good for finding top 10s or saving header lines | `... LIMIT 10` |
-| Sort on a column       | Change the order of the rows based on values in one or more columns | `... ORDER BY x ASC` |
-| Unique                 | Remove duplicate rows              | `SELECT DISTINCT x FROM y` |
+| Operation                | Description                                                         | Galaxy Tool                                   |
+| ------------------------ | ------------------------------------------------------------------- | --------------------------------------------- |
+| Compute on rows          | to derive new column values from existing ones                      | `SELECT x * 2 FROM y`                         |
+| Concatenate datasets     | one after the other                                                 | `SELECT * FROM x; union all; SELECT * FROM y` |
+| Counting                 | Count occurrences of values in a column                             | `SELECT count(x) FROM y where x = 'value'`    |
+| Cut Columns              | By header name                                                      | `SELECT x, y, z FROM a`                       |
+| Filter                   | Remove rows based on values in one or more columns                  | `... WHERE x = 'value'`                       |
+| Find and Replace         | in a specific column                                                | `REPLACE()`, `regexp_replace` in postgresql   |
+| Group on a column        | And perform simple operations (count, mean, min, max etc)           | `... GROUP BY x ...`                          |
+| Join two Datasets        | side by side on a specified field                                   | `SELECT * FROM x, y JOIN x.id = y.id`         |
+| Select First lines       | Good for finding top 10s or saving header lines                     | `... LIMIT 10`                                |
+| Sort on a column         | Change the order of the rows based on values in one or more columns | `... ORDER BY x ASC`                          |
+| Unique                   | Remove duplicate rows                                               | `SELECT DISTINCT x FROM y`                    |
 
 
 In this tutorial, these functions are explained in more detail, and we provide some exercises for you to practice.
