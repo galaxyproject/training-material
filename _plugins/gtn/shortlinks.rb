@@ -51,7 +51,14 @@ module Gtn
       end
 
       # Discover FAQs
-      Dir.glob('faqs/**/*.md').each do |tutorial|
+      all_faqs = Dir.glob('faqs/**/*.md') + Dir.glob('topics/*/faqs/**/*.md') + Dir.glob('topics/*/tutorials/*/faqs/*.md')
+      # Remove symlinked files
+      all_faqs = all_faqs.reject { |x| File.symlink?(x) }
+      # Reject indexes, readme, etc.
+      all_faqs = all_faqs.reject { |x| x =~ /index.md$/ }
+      all_faqs = all_faqs.reject { |x| x =~ /README.md$/ }
+
+      all_faqs.each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
