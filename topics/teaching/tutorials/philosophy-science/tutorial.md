@@ -16,8 +16,6 @@ contributions:
     - gallardoalba
 ---
 
-If we were to describe the philosophical foundations of the Galaxy Project, we would have to talk about transparent and accessible knowledge and reproducibility, and the need to build a community based on honesty, equity, and accountability. Likewise, such conception should include the pretension of contributing to scientific knowledge from a humanistic perspective, allowing as many people as possible to participate, regardless of their economic resources.
-
 # Introduction
 
 One of the first questions we must clarify before beginning our analysis is: what is the origin of the term Science? It stems from the Latin scientia, which can be translated as “knowledge”. In turn, the Latin term derives from the Greek *skizein*, which means to “separate or divide”. The German equivalent, *Wissenschaft*, has a broader application compared with the English term, since it also includes humanities (such as philosophical investigations), and refers to knowledge in general. Its root (*Wissen*) is probably related to *vid* (Sanskrit: विद्), which can be translated as knowledge in the sense of “wisdom”  ({% cite Kluge2011 %}). Thus, synthesizing both conceptions, we could consider that Science requires dividing an object of analysis, and understanding its parts and connections, in order to generate knowledge. 
