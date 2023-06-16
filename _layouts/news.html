@@ -23,15 +23,20 @@ layout: page
 {% include _includes/contributors-line.html page=page %}
 
 {% for tag in page.tags %}
-<button class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="{{tag}}">{{ tag  }}</button>
+<span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
 {% endfor %}
 
 <hr/>
 
 <div class="row">
   <div class="col-md-8">
-    <p class="text-muted">
-      Posted on: {{ page.date | date: "%-d %B %Y" }}
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: {{ page.date | date: "%-d %B %Y" }}</span>
+      <span>
+        {% if page.short_id %}
+        {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+        {% endif %}
+      </span>
     </p>
 
     {{content}}
