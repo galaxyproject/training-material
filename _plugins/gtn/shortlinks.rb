@@ -70,6 +70,22 @@ module Gtn
           current_mapping['id'][short_code] = html_path
         end
       end
+
+      # Discover news
+      Dir.glob('news/_posts/*.md').each do |material|
+        html_path = "/#{material}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == 'N' }.length.to_s.rjust(5, '0')
+          short_code = "N#{short_code_number}"
+          puts "Discovered news #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+
       current_mapping
     end
   end
