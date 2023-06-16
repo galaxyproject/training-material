@@ -318,6 +318,10 @@ module Jekyll
         'Slides'
       elsif layout =~ /tutorial_hands_on/
         'Hands-on'
+      elsif layout == 'faq'
+        'FAQs'
+      elsif layout == 'news'
+        'News'
       end
     end
 
