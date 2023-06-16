@@ -409,13 +409,13 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 {: .question}
 
 
-> <question-title>Exercise: sort by height</question-title>
+> <question-title noprefix>Exercise: sort by height</question-title>
 >
 > 1. What is the height of the tallest competing athlete? Which athlete(s) are of this height?
 > 2. What is the shortest?
 > 3. Who was the tallest athlete from the most recent Olympics? How tall were they?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Height is listed in column 7. Since this is a simple number (no scientific notation), we can use *fast numerical sort*,
 > >    and because we want the tallest on top, we will need to sort in *descending* (decreasing) order.
@@ -424,7 +424,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. Adam Sandurski from Poland is the tallest athlete in the file, at 214 cm tall.
 > >  2. Here we don't get a clear answer. That is because not all athletes have height data available, and blank fields (`NA`) are being sorted to the top. We can filter out rows with missing data to get our answer (see [Filter](#filtering) section to learn how to do this). For now we cannot answer this question with just the sort tool. Some times multiple tools are required to perform such tasks. The [exercise section at the end of this tutorial](#exercises-putting-it-all-together) has many exercises that require a combination of different tools.
@@ -432,7 +432,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > >
 > > 1. {% tool [Sort - data in ascending or descending order]({{version_sort}}) %} with the following parameters:
 > >   - {% icon param-file %} *"Sort Query"*: `olympics.tsv`

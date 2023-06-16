@@ -28,19 +28,21 @@ module Jekyll
       lang = page['lang'] || 'en'
 
       # Interim solution, fancier box titles
-      page.content = page.content.gsub(%r{<(#{Gtn::Boxify.box_classes})-title>(.*?)</\s*\1-title\s*>}) do
-        box_type = ::Regexp.last_match(1)
-        title = ::Regexp.last_match(2)
+      page.content = page.content.gsub(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title( ?(?<noprefix>noprefix))>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
+        m = ::Regexp.last_match
+        box_type = m[:boxclass]
+        title = m[:title]
+        noprefix = m[:noprefix]
         if page.data['citation_target'] == 'jupyter'
           title = Gtn::Boxify.safe_title(title)
-          title = Gtn::Boxify.format_box_title(title, box_type, lang)
+          title = Gtn::Boxify.format_box_title(title, box_type, lang, noprefix: noprefix)
           icon = Gtn::Boxify.get_icon(box_type, emoji: true)
           box = "<div class=\"box-title\" aria-description=\"#{box_type} box: " \
                 "#{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
           box.gsub!(/\\&quot/, '&quot')
           box.gsub!(/([^\\])"/, '\1\\"')
         else
-          _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path)
+          _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path, noprefix: noprefix)
         end
 
         box
