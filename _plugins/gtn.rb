@@ -314,13 +314,14 @@ module Jekyll
     end
 
     def layout_to_human(layout)
-      if layout =~ /slides/
+      case layout
+      when /slides/
         'Slides'
-      elsif layout =~ /tutorial_hands_on/
+      when /tutorial_hands_on/
         'Hands-on'
-      elsif layout == 'faq'
+      when 'faq'
         'FAQs'
-      elsif layout == 'news'
+      when 'news'
         'News'
       end
     end

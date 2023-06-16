@@ -51,12 +51,13 @@ module Gtn
       end
 
       # Discover FAQs
-      all_faqs = Dir.glob('faqs/**/*.md') + Dir.glob('topics/*/faqs/**/*.md') + Dir.glob('topics/*/tutorials/*/faqs/*.md')
+      all_faqs = Dir.glob('faqs/**/*.md') + Dir.glob('topics/*/faqs/**/*.md') + \
+                 Dir.glob('topics/*/tutorials/*/faqs/*.md')
       # Remove symlinked files
       all_faqs = all_faqs.reject { |x| File.symlink?(x) }
       # Reject indexes, readme, etc.
-      all_faqs = all_faqs.reject { |x| x =~ /index.md$/ }
-      all_faqs = all_faqs.reject { |x| x =~ /README.md$/ }
+      all_faqs = all_faqs.grep_v(/index.md$/)
+      all_faqs = all_faqs.grep_v(/README.md$/)
 
       all_faqs.each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
