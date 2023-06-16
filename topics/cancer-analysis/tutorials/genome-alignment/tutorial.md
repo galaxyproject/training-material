@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Genome Alignment"
+title: Cancer Genome Alignment
 questions:
 objectives:
 key_points:
@@ -135,7 +135,7 @@ TODO: a CYOA step that uses the rule-based uploader?
 >
 >    {% snippet faqs/galaxy/datasets_create_new_file.md name="adapters.fa" %}
 >
->    > <question-title> </question-title>
+>    > <question-title> Sequence Adapters </question-title>
 >    >
 >    > 1. Why are there two adapter sequences?
 >    >
@@ -270,36 +270,37 @@ These collections will let us perform analysis on all the files in the collectio
 >    - Click on **All 38 selected** at the top of your history
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
->    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
->    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
->    should be `pair1` and `pair2`.
->
-> 4. Change **_1** to **pair1** in the top left text box. Do the same for the other side
+> 5. Change the default pairing indicator from **_1** to **pair1** in the top left text box. Do the same for the other side
 >    - You should see suggested pairing in the center
 >
-> 5. Click on **Auto-pair** to create the suggested pairs.
+> 6. Click on **Auto-pair** to create the suggested pairs.
 >    - or you can click on "Pair these datasets" manually for all the pairs that look valid
 >
 >    You should now see the list of pairs that will be by Galaxy:
 >    ![List of datasets after pairing](images/collection-tumor.png)
 >
-> 6. **Name the pairs**
+> 7. **Name the pairs**
 >    - The middle segment is the name for each pair.
 >    - You can edit these names by clicking on them if you ever need to, but we will keep the automatic names
 >
-> 7. **Name your collection** at the bottom right of the screen
+> 8. **Name your collection** at the bottom right of the screen
 >    - Name your collection **Tumor Samples**
 >
-> 8. Click the **Create Collection** button.
+> 9. Click the **Create Collection** button.
 >    - A new dataset collection item will now appear in your history
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
-> 9. Show your full history again by clicking on the **"x"** icon in the search bar at the top of your history to clear your filter
+> 10. Show your full history again by clicking on the **"x"** icon in the search bar at the top of your history to clear your filter
 >    - You should see the tumor files have been moved to the new tumor collection, and the normal FASTQ files still separately. We will pair these next.
+>
 {: .hands_on}
 
 Have a look at the collection in your history
+
+
+AGATCGGAAGAGC
+
 
 > <question-title> </question-title>
 >
@@ -312,12 +313,28 @@ Have a look at the collection in your history
 > {: .solution}
 {: .question}
 
-Now we repeat the process for the normal files:
+Now we repeat the process for the tumour files:
 
-> <hands-on-title>Creating a paired collection for the normal samples</hands-on-title>
+> <hands-on-title>Creating a paired collection for the nomal samples</hands-on-title>
 >
 > 1. Repeat the steps from the previous hands-on box, but for the normal samples
 >    - name your collection **Normal Samples**
+>
+>    > <question-title> Auto-suggested pairs</question-title>
+>    >
+>    > 1. For this collection, Galaxy will auto-sugges 2 pairs. Are these correct? Why (not)?
+>    >
+>    >    ![suggested pairs](images/collection_suggested_pairing.png)
+>    >
+>    > > <solution-title></solution-title>
+>    > > 1. These are INCORRECT PAIRS. Looking closely, you can see it matched the forward reads (`pair1` of sample `runA81DF6ABXX_1` with the forward reads of `runA81DF6ABXX_2`).
+>    > >    This is because the run names contained `_1` and `_2` but these are not pairing indicators. Howver, many sequencing files use these as pairing indicators and it is
+>    > >    what Galaxy searches for by default. We must **UNPAIR** these before proceeding.
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>    - **Important!** Unpair the suggested pairs by clicking on **Unpair All** in the bottom half of the box before you create the pairs.
 >
 >    > <question-title> </question-title>
 >    >
@@ -424,7 +441,7 @@ To assess the quality of our reads, we use a tool called [FASTQC](https://www.bi
 >
 > 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.73%2Bgalaxy0&version=0.73 galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"Raw read data from your current history"*: `Normal Samples`
->    - {% icon param-file %} *"Adapter list"*: `adapters`
+>    - {% icon param-file %} *"Adapter list"*: `adapters.fa (as collection)`
 >
 > 2. View {% icon galaxy-eye %} the HTML output of FASTQC for one of the files
 >
@@ -437,10 +454,14 @@ To assess the quality of our reads, we use a tool called [FASTQC](https://www.bi
 >    > >
 >    > > 1. Of the raw data we see that:
 >    > >    - Some reads have bad 3' ends.
->    > >    - Some reads have adapter sequences in them.
+>    > >      <!-- - Some reads have adapter sequences in them.  TODO: not detecting adapters, check data or remove mention? -->
 >    > >
->    > >    We can also notice that the sequence content is 25% for each base type. Whicch is not what we expect for WGS data (GC content at 40%).
->    > >    In our case this normal because the selected region is in a coding region which are expected to be at 50%.
+>    > >      ![quality graph from FastQC](images/fastqc_before_trimming.png)
+>    > >
+>    > >    - We didn't have many adapter sequences in our data (yay!)
+>    > >    - We can also notice that the sequence content is 25% for each base type. Which is not what we expect for WGS data (GC content at 40%).
+>    > >      In our case this normal because the selected region is in a coding region which are expected to be at 50%.
+>    > >      ![quality graph from FastQC](images/fastqc_before_trimming.png)
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -475,34 +496,301 @@ To assess the quality of our reads, we use a tool called [FASTQC](https://www.bi
 > {: .solution}
 {: .question}
 
-In Galaxy we can set the FASTQ encoding scheme as metadata on our dataset, Galaxy will then pass this information on to any tools that need it.
-This prevents mistakes, so let's do it now:
+In Galaxy we can set the FASTQ encoding scheme as metadata on our dataset, Galaxy will then pass this information on to any tools that need it. This protects you from mistakes in downstream analysis, so let's do it now:
 
 > <hands-on-title></hands-on-title>
 >
-> - Set the datatype of your `Normal Samples` collection to `fastqcillumina.gz`
+> - Set the datatype of your `Normal Samples` collection to `fastqillumina.gz`
+>
+>   {% snippet faqs/galaxy/collections_change_datatype.md datatype="fastqillumina.gz "%}
+>
 > - Do the same for your `Tumor Samples` collection
+>
 {: .hands_on}
 
+Subsequent tools that use the quality scores, for example the trimming and alignments steps, will know the encoding scheme of our data, so we don't have to tell them again,
+and can't accidentally provide the wrong value.
 
 
-# Trimming
+# Data Trimming & Cleaning
+
+Since adapter are not part of the genome they should be removed. We can also perform several other data cleaning steps at this stage,
+such as removal of low-quality reads, trimming of the low-quality bases at the end of reads, etc. To do that we will a tool called
+**Trim Galore!** {% icon tool %}.
+
+Because Trim Galore expects FASTQ files with the Sanger quality encoding, we will first convert our quality scores
+from Illumina1.5 (Phred+64) to Sanger (Phred+33). We do this with a tool call **FastQ Groomer** {% icon tool %}
+
+<!-- NOTE: using trim galore rather than trimmomatic as in original tutorial due to technical reasons
+(adapters not detected, problems autodetecting quality score and tool not picking up encoding setting) -->
+
+
+> <hands-on-title> Data Trimming </hands-on-title>
+>
+> 1. {% tool [FASTQ Groomer](toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastq_groomer%2Ffastq_groomer%2F1.1.5&version=1.1.5) %} with the following paramters
+>    - *"File to groom "*: `Normal Collection`
+>    - *"Input FASTQ quality scores type"*: `Illumina 1.3-1.7`
+>
+> 2. Repeat **FASTQ Groomer** {% icon tool %} for the Tumor collection
+>
+> 3. {% tool [Trim Galore!](toolshed.g2.bx.psu.edu%2Frepos%2Fbgruening%2Ftrim_galore%2Ftrim_galore%2F0.6.7%2Bgalaxy0&version=0.6.7 galaxy0) %} with the following parameters
+>    - {% icon param-select %} *"Is this library paired- or single-end?"*: `Paired Collection`
+>    - {% icon param-collection %} *"Select a paired collection"*: `Normal Samples`
+>    - {% icon param-select %} *"Adapter sequence to be trimmed"*: `User define adapter sequence`
+>      - {% icon param-text %} *"Adapter sequence to be trimmed off"*: `TACACTCTTTCCCTACACGACGCTCTTCCGATCT`
+>      - {% icon param-text %} *"Adapter sequence to be trimmed off read 2"*: `GTGACTGGAGTTCAGACGTGTGCTCTTCCGATCT`
+>    - {% icon param-select %} *"Advanced settings"*: `Full parameter list`
+>      - {% icon param-text %} *"Trim low-quality ends from reads in addition to adapter removal (Enter phred quality score threshold)"*: `30`
+>      - {% icon param-text %} *"Overlap with adapter sequence required to trim a sequence"*: `5`
+>      - {% icon param-text %} *"Discard reads that became shorter than length N"*: `50`
+>      - {% icon param-toggle %} *"Generate a report file?"*: `Yes`
+>
+> 4. Repeat Trim Galore step for the Tumor collection
+>
+> 4. View {% icon galaxy-eye %} one of the **report** output files.
+>
+>  > <question-title> Trimmed Data </question-title>
+>  >
+>  > 1. How many reads had adapters?
+>  > 2. How many bases were quality trimmed?
+>  > 3. How many reads were trimmed because the were too short after trimming?
+>  >
+>  > > <solution-title></solution-title>
+>  > > Opening the report file, you will see a summary section like this:
+>  > >
+>  > > ```
+>  > > === Summary ===
+>  > >
+>  > > Total reads processed:                   4,003
+>  > > Reads with adapters:                         1 (0.0%)
+>  > > Reads written (passing filters):         4,003 (100.0%)
+>  > >
+>  > > Total basepairs processed:       402,980 bp
+>  > > Quality-trimmed:                  27,473 bp (6.8%)
+>  > > Total written (filtered):        375,502 bp (93.2%)
+>  > >
+>  > > ```
+>  > > In this example output, one read was found to have an adapter, and 6.8% of bases were trimmed due to quality.
+>  > > None of this trimming caused any of the reads to become shorter than 50bp, becase all of the 4003 reads were
+>  > > written to the output file.
+>  > >
+>  > {: .solution}
+>  {: .question}
+{: .hands_on}
+
+Note that if you do not know which adapter sequences were used to sequence your data, many tools including Trim Galore!
+and FastQC will search for adapters of some of the most popular sequencing platforms. However, if you know your adapters,
+it is always best to provide them to these tools.
+
+After all this trimming let's see if it made a noticable difference in our quality, by running **FastQC** {% icon tool %} again
+
+
+> <hands-on-title> Assess quality of reads after trimming </hands-on-title>
+>
+> 1. {% tool [FASTQC](toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Ffastqc%2Ffastqc%2F0.73%2Bgalaxy0&version=0.73 galaxy0) %} with the following parameters
+>    - {% icon param-files %} *"Raw read data from your current history"*: output from **Trim Galaore** on the normal dataset
+>
+> 2. Enable the **Galaxy Window Manager** {% icon galaxy-scratchbook %} on the top bar
+>    - View {% icon galaxy-eye %} one of the FASTQC Webpage outputs
+>    - View {% icon galaxy-eye %} the FASTQC output from **before the trimming step** for the same FASTQ
+>    - The two reports should appear as window over Galaxy, drag them around so that you can easily compare the two
+>
+>    > <question-title> </question-title>
+>    >
+>    > 1. Has the quality improved?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. Of the raw data we see that:
+>    > >    - We can clearly tell that the quality at the ends of the reads has improved.
+>    > >
+>    > >      ![quality graph from FastQC](images/fastqc_side_by_side.png)
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+> 3. Disable the Galaxy Window Manage by clicking on the {% icon galaxy-scratchbook %} icon again
+>
+{: .hands_on}
 
 
 
 # Alignment
 
-BWA Mem -- remember to set read groups
+
+## Alignment with bwa-mem
 
 
---------------------
+The raw reads are now cleaned up of artefacts we can align each lane separatly.
+
+> <question-title> Lane FASTQs </question-title>
+>
+> 1. Why should this be done separately?
+> 2. Why is it important to set Read Group information?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. For speed, you can align each lane in parallel, and also to set individual Read Group tags and track where the reads come from. <!-- TODO: SH: is it really still faster? surely tools nowadays are parallelized even if you merge lanes beforehand -->
+> > 2. Many tools require it (not the best reason). To help differentiate lanes of sequencing in the final BAM. When generating metrics, many tools can use this information to generate Read Group specific metrics <!-- TODO SH: none of this explains *why* we should care about differentiating between lanes? -->
+> >
+> {: .solution}
+{: .question}
+
+
+Ok, let's perform our read alignment step!
+
+> <hands-on-title> Read Alignment </hands-on-title>
+>
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fbwa%2Fbwa_mem%2F0.7.17.2&version=0.7.17.2) %} with the following parameters
+>    - {% icon param-select %} *"Using reference genome"*: `Human (Homo Sapiens): hg19 Full`
+>    - {% icon param-select %} *"Single or Paired-end reads?"*: `Paired collection`
+>    - {% icon param-collection %} *"Select a paired collection"*: Trim Galore output for the Normal Samples
+>    - {% icon param-select %} *"Set read groups information?"*: `Set read groups (SAM/BAM specification)`
+>      - {% icon param-toggle %} *"Auto-assign"*: `Yes`
+>
+> 2. Repeat this for the tumor samples
+>
+{: .hands_on}
+
+
+
+## Lane Merging
+
+We now have alignments for each of the sequences lanes:
+
+- This is not practical in it’s current form.
+- What we wan’t to do now is merge the results into one BAM.
+
+Since we identified the reads in the BAM with read groups, even after the merging them into a single file,
+we can still identify the origin of each read.
+
+
+> <hands-on-title> Lane Merging </hands-on-title>
+>
+> 1. {% tool [Samtools Merge](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fsamtools_merge%2Fsamtools_merge%2F1.15.1%2Bgalaxy0&version=1.15.1 galaxy0) %} with the following parameters
+>   - {% icon param-collection %} *"Alignments in BAM format"*: the output of BWA-MEM for the Normal collection
+>   - {% icon param-toggle %} *"Make @RG headers unique"*: `Yes`
+>
+> 2. **View** {% icon galaxy-eye %} the output and view the SAM header
+>
+>  > <question-title> </question-title>
+>  >
+>  > 1. How many Read Groups do you see in the header?
+>  >
+>  > > <solution-title></solution-title>
+>  > >
+>  > > 1. You should see lines like: `@RG ID:run62DPDAAXX_8-normal.64..fastq PL:ILLUMINA`, one for each pair (lane) in your input data.
+>  > >
+>  > {: .solution}
+>  {: .question}
+>
+> 3. Repeat this step for the Tumor collection
+>
+{: .hands_on}
+
+
+## SAM/BAM exploration
+
+Let’s spend some time to explore our BAM files.
+
+### Alignment stats
+
+If we want some summary information about our alignment, we can use **Samtools Stats** {% icon tool %}
+
+> <hands-on-title> Alignment statistics </hands-on-title>
+>
+> 1. {% tool [Samtools stats](toolshed.g2.bx.psu.edu%2Frepos%2Fdevteam%2Fsamtools_stats%2Fsamtools_stats%2F2.0.4&version=2.0.4) %} with the following parameters
+>   - {% icon param-collection %} *"BAM file"*: the output of **Samtools Merge** {% icon tool %} for the Normal collection
+>
+> 2. **View** {% icon galaxy-eye %} the output and view the SAM header
+>
+>  > <question-title> </question-title>
+>  >
+>  > 1. How many unmapped reads were there? How many mapped reads?
+>  >
+>  > > <solution-title></solution-title>
+>  > >
+>  > > 1. we have 20 unmapped reads, and 169370 mapped reads
+>  > >
+>  > {: .solution}
+>  {: .question}
+>
+{: .hands_on}
+
+
+### FLAG column
+
+- A full description of the flags can be found in the [SAM specification](http://samtools.sourceforge.net/SAM1.pdf)
+- You can try using picards [explain flag site](http://broadinstitute.github.io/picard/explain-flags.html
+) to understand what is going on with your reads
+
+Here you can see an example BAM/SAM file, the flag is the 2nd column
+
+```
+HISEQ9_0205:4:2206:6180:149732#TGGGGG 	113 	chr10 	1479374 	60 	84M17S 	chr9 	130579391 	0 	CATTTTATATGAATTTGTCTTCCAAAAATAATTTGGTATANATATATATACATACACTCACACACATATATATACACCCACACATATATACACACACACAT 	@AA@3EDEDAACA>@CCBDCDD>EGHGIIGFHGHCIFB7-#IHFEGHF?00CDGB00*DGGCF<IIDGGIHFGC@13+EGGHIDBA>?ADHHFDDADD@@@ 	NM:i:4 MD:Z:40C9T6A19A6 MC:Z:71M AS:i:67 XS:i:38 RG:Z:runBD06UFACXX_4-normal.64..fastq
+HISEQ9_0205:4:1107:2134:169612#TCCCCA 	161 	chr10 	3351041 	60 	101M 	chr9 	130396494 	0 	GGAACTGTCTGAAACAGCCTGGGCTCTTTTCTTTCTCCTAGAACAGGGTGTCCTGCGTTGCTTTGGCTCAGTGAGCCCAATTCCCCAGGGTATAAAACCCA 	CCCFFFFFHHGHHJIIJIJJIJJJJJJJJJIIIJGGIIHIIIJIEGIJ?D@FFHGIJHIJJGJJIHHHHDFDFEEFEDDDDDDDDDDBDD5?CDFEDDBBB 	NM:i:0 MD:Z:101 MC:Z:100M AS:i:101 XS:i:0 RG:Z:runBD06UFACXX_4-normal.64..fastq
+HISEQ9_0205:5:2108:4263:26908#CGGGGG 	129 	chr10 	3457024 	60 	101M 	chr9 	130271327 	0 	AGCCAGCTGGCCAAGGTCAAATCGTCCCTCCATGCGATTCCTCCCTTCTTCTGAACAGGCTCTTCCTGCGGCCTGTGTCAGCCGAGGCAGAGAGCGACAGA 	C@@FFFFFGHHHDCGFIIG>DAFEEBB?EGHFEGB?1BG>BGFHIJI;FFFGEHE@@GICHDGHC>?>A8?BBBDDCCACCCCD85>@BB?B?BAB.9<@? 	NM:i:2 MD:Z:23A49C27 MC:Z:101M AS:i:91 XS:i:20 RG:Z:runBD06UFACXX_5-normal.64..fastq
+GA12-EAS1659_0014_FC:8:54:5454:10301#0 	2131 	chr10 	6503063 	27 	54H47M 	chr9 	130599612 	0 	ATCCATCCATCCATCCATCCATCCATCCACATCCATCCATTCATCCA 	DBBB@:DFE4DFEAFEB<FDBAFEEAFFAFEADFD?FFHHHHHHHHH 	NM:i:0 MD:Z:47 MC:Z:101M AS:i:47 XS:i:25 SA:Z:chr9,130600025,-,71M30S,27,0; RG:Z:run62DPDAAXX_8-normal.64..fastq
+HISEQ7_0068:2:2304:15679:49109#CCCCGC 	2195 	chr10 	6503063 	0 	39H40M 	chr9 	130599825 	0 	ATCCATCCATCCATCCAACCATCCATCCACATCCATCCAT 	*9GFC9GD@EHF?3EC3+E<<ADF@FGC<FAHDDDBD@@7 	NM:i:1 MD:Z:17T22 MC:Z:101M AS:i:35 XS:i:24 SA:Z:chr9,130600040,-,58M21S,0,0; RG:Z:runBC04D4ACXX_2-normal.64..fastq
+HISEQ9_0205:5:2208:6846:184698#GGGGGT 	2195 	chr10 	6503063 	24 	53H48M 	chr9 	130599604 	0 	ATCCATCCATCCATCCATCCATCCATCCACATCCATCCATTCATCCAA 	F;DF>EDD?CEH?9HD<CGFE;GCCDHHBGIGGIEHHHHDFFFDD@@@ 	NM:i:1 MD:Z:47T0 MC:Z:101M AS:i:47 XS:i:21 SA:Z:chr9,130600026,-,70M31S,24,0; RG:Z:runBD06UFACXX_5-normal.64..fastq
+
+```
+
+
+> <question-title> FLAG column </question-title>
+>
+> 1. What do the flags of the first 4 reads mean? Hint: use the [flag explainer](http://broadinstitute.github.io/picard/explain-flags.html)
+> 2. Why the pairing information is important
+>
+> > <solution-title></solution-title>
+> > 1. Flag 113: read is paired, read on reverse strand, mate on reverse strand, first in pair
+> >    Flag 161: read is paired, mate on the reverse strand, second in pair
+> >    Flag 129: read is paired, second in pair
+> >    Flag 2131: read paired, read mapped in proper pair, read reverse strand, first in pair, supplementary alignment
+> >
+> > 2. Suppose the first read in a pair is aligned at 2 different locations. Neither of these locations shows a perfect alignment which could be considered the primary alignment.
+> >    The best alignment is then determined because of the presence of the mate at the expected distance from the first read in the pair location.
+> >
+> {: .solution}
+{: .question}
+
+
+### SAM/BAM CIGAR string
+
+Another useful bit of information in the SAM is the CIGAR string. It’s the 6th column in the file.
+
+Another useful bit of information in the SAM is the CIGAR string. It’s the 6th column in the file.
+
+This column explains how the alignment was achieved.
+
+    M == base aligns *but doesn't have to be a match*. A SNP will have an M even if it disagrees with the reference.
+    I == Insertion
+    D == Deletion
+    S == soft-clips. These are handy to find un removed adapters, viral insertions, etc.
+
+An in depth explanation of the CIGAR can be found here
+
+The exact details of the cigar string can be found in the SAM spec as well.
+
+We won’t go into too much detail at this point since we want to concentrate on cancer specific issues now.
+
+
+
+---------------------------
 
 > <hands-on-title></hands-on-title>
 >
 > -  {% tool [](toolshed.g2.bx.psu.edu/...) %} with the following parameters
 >   - {% icon param-select %} *"parameter name"*: `parameter value`
 >
+>  > <question-title> </question-title>
+>  >
+>  > > <solution-title></solution-title>
+>  > >
+>  > {: .solution}
+>  {: .question}
 {: .hands_on}
+
 
 > <question-title> </question-title>
 >
@@ -510,5 +798,4 @@ BWA Mem -- remember to set read groups
 > >
 > {: .solution}
 {: .question}
-
 
