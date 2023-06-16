@@ -139,7 +139,7 @@ module Gtn
     def self.format_box_title(title, box_type, lang = 'en', noprefix: false)
       lang = 'en' if (lang == '') || lang.nil?
       title_fmted = (!title.nil? && title.length.positive? ? ": #{title}" : '')
-      if noprefix and ! title.nil?
+      if noprefix && !title.nil?
         title
       else
         "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"

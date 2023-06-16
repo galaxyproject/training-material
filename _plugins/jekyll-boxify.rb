@@ -28,7 +28,9 @@ module Jekyll
       lang = page['lang'] || 'en'
 
       # Interim solution, fancier box titles
+      # rubocop:disable Layout/LineLength
       page.content = page.content.gsub(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title( ?(?<noprefix>noprefix))>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
+        # rubocop:enable Layout/LineLength
         m = ::Regexp.last_match
         box_type = m[:boxclass]
         title = m[:title]
