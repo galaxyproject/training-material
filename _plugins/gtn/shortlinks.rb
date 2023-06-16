@@ -73,7 +73,8 @@ module Gtn
 
       # Discover news
       Dir.glob('news/_posts/*.md').each do |material|
-        html_path = "/#{material}"
+        m = material.match(%r{news/_posts/(?<year>\d\d\d\d)-(?<month>\d\d)-(?<day>\d\d)-(?<title>.*)\.md})
+        html_path = "/news/#{m[:year]}/#{m[:month]}/#{m[:day]}/#{m[:title]}.html"
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
@@ -84,7 +85,6 @@ module Gtn
           current_mapping['id'][short_code] = html_path
         end
       end
-
 
       current_mapping
     end
