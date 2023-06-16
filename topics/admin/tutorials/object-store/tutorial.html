@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Distributed Object Storage">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -310,7 +310,7 @@ Sentry.init({
       "name": "storage"
     }
   ],
-  "abstract": "> <div class=\"box-title warning-title\" id=\"warning-switching-object-store-types-will-cause-issues\"><i class=\"fas fa-exclamation-triangle\" aria-hidden=\"true\" ></i> Warning: switching object store types will cause issues</div>"
+  "abstract": "> <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>"
 }
         </script>
         
@@ -451,7 +451,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -488,14 +488,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Distributed Object Storage</h1>
@@ -860,7 +853,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: switching object store types will cause issues</div>
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
   <p>Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.</p>
 </blockquote>
 
@@ -890,7 +883,7 @@ Sentry.init({
 <p>First, note that your Galaxy datasets have been created thus far in the directory <code class="language-plaintext highlighter-rouge">/data</code>, due to <code class="language-plaintext highlighter-rouge">galaxy_config: galaxy: file_path</code>. In some cases, we run out of storage in a particular location. Galaxy allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-hierarchical-storage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding Hierarchical Storage</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-hierarchical-storage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding Hierarchical Storage</div>
 
   <ol>
     <li>
@@ -948,12 +941,12 @@ Sentry.init({
       <p>Run a couple of jobs after Galaxy has restarted.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Where is the data now stored?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>You should see <code class="language-plaintext highlighter-rouge">/data2</code> in the <code class="language-plaintext highlighter-rouge">Full Path</code>, if not, something went wrong. Check that your “order” is correct</p>
 
@@ -970,7 +963,7 @@ Sentry.init({
 <p>Rather than searching a hierarchy of object stores until the dataset is found, Galaxy can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows Galaxy to write to more than one object store for new datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-distributed-object-store"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Distributed Object Store</div>
+  <div class="box-title hands-on-title" id="hands-on-distributed-object-store"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Distributed Object Store</div>
 
   <ol>
     <li>
@@ -1004,14 +997,14 @@ Sentry.init({
 <p>Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-documentation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-documentation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>More information can be found in the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/object_store_conf.xml.sample">sample file</a>.</p>
 
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-can-i-distribute-objects-based-on-the-user"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-distribute-objects-based-on-the-user" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Can I distribute objects based on the user?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-can-i-distribute-objects-based-on-the-user"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-distribute-objects-based-on-the-user" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Can I distribute objects based on the user?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Yes! You must write your own dynamic job handler code to handle this.
 See <a href="https://github.com/galaxyproject/galaxy/pull/6552">PR#6552</a> and <a href="https://github.com/galaxyproject/galaxy/pull/10233">PR#10233</a></p>
@@ -1023,7 +1016,7 @@ some example code, and we can include this as a training module for everyone.</p
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: switching object store types will cause issues</div>
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-2"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: switching object store types will cause issues</div>
   <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
@@ -1047,7 +1040,7 @@ some example code, and we can include this as a training module for everyone.</p
 <p>we will set up a local S3-compatible object store, and then talk to the API of this service.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-an-s3-compatible-object-store"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up an S3-compatible Object Store</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-an-s3-compatible-object-store"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up an S3-compatible Object Store</div>
 
   <ol>
     <li>
@@ -1135,14 +1128,14 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, Gal
 <p>This tutorial will help you setup the connection between Galaxy and Dropbox, allowing your users to add their account details and then access their Dropbox data within Galaxy</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure Galaxy to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure Galaxy to access the Dropbox service</div>
 
   <ol>
     <li>
       <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/galaxy/config</code> next to your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p templates/galaxy/config
 </code></pre></div>        </div>
       </blockquote>
@@ -1204,13 +1197,13 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, Gal
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Output</div>
+          <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Output</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUNNING HANDLER [restart galaxy] ****************************************
 changed: [gat-88.training.galaxyproject.eu]
@@ -1225,7 +1218,7 @@ changed: [gat-88.training.galaxyproject.eu]
 <p>Now we are ready to configure a Galaxy’s user account to upload dataset from Dropbox to the Galaxy server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure Galaxy to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure Galaxy to access the Dropbox service</div>
 
   <ol>
     <li>
@@ -1399,7 +1392,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

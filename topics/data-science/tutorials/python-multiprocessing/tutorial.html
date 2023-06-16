@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Python - Multiprocessing">
         <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -203,7 +203,7 @@ Sentry.init({
       "name": "jupyter-notebook"
     }
   ],
-  "abstract": "> <div class=\"box-title agenda-title\" id=\"agenda\">Agenda</div>"
+  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
 }
         </script>
         
@@ -344,7 +344,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -381,14 +381,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-data-science">
     <h1 data-toc-skip>Python - Multiprocessing</h1>
@@ -604,7 +597,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -663,12 +656,12 @@ function to send inputs multiply to the specified function <code class="language
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What did you see here?</p>
 
   <p>Was it clear and easy to read?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>It prints four timestamps immediately, all around the same time. Then one second later it prints 4 more, and one second later, a final four.
 Our Pool of 4 processes processes the function the maximal amount of times possible concurrently. Once each of those functions returns, then it can move on to processing the next tasks.
 This is precisely the situation of e.g. 4 queues at the grocery; as soon as one customer is processed, they immediately begin on the next, until no more remain.</p>
@@ -758,10 +751,10 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>If however this were a more complicated task (e.g. calculating a large number, machine learning, etc.), then we might wish to set our pool size to the number of CPUs - 1, as each process will potentially consume it’s CPU allocation completely, and we wish to have some left over for the managing program and any other work going on, on the system.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Try changing the pool size and see what effect it has on runtime. Start from a value of 1, and go up to 5, the number of servers in our list.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Given the small sample size (5 servers), and the variability of response times (in local testing between 3-8 seconds for the single-pool version), you can see varying results but <em>generally</em> it should decrease as the pool size increases. However, sometimes you will see the Pool=5 version take the same or longer than Pool=4.</p>
 
     <p>Especially in the case that 1 server (or 1 request one time) dominates the request time, this can “hide” the improvements as the others complete quickly on the remaining N-1 processes.</p>
@@ -820,7 +813,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>This is a bit more complicated to write, but again, if you’re not blocking on CPU resources, then this is potentially approximately as effecient as thread pools.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What result did you get? Was it slower, faster, or about the same as processes?</p>
 </blockquote>
 
@@ -1015,7 +1008,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

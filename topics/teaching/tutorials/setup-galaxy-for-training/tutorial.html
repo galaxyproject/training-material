@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Set up a Galaxy for Training">
         <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics co...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -358,7 +358,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -395,14 +395,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-teaching">
     <h1 data-toc-skip>Set up a Galaxy for Training</h1>
@@ -494,7 +487,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-requirements"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Requirements</div>
+  <div class="box-title comment-title" id="comment-requirements"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements</div>
   <p>For more information about how to create these files, please see our module on <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">specifying the technical requirements for your tutorial</a>.</p>
 </blockquote>
 
@@ -535,7 +528,7 @@ Sentry.init({
 <p>To setup a Galaxy server locally, we will first clone the Galaxy github repository, make a few small edits to the <code class="language-plaintext highlighter-rouge">galaxy.yaml</code> configuration file, and then start the server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-a-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setup a local Galaxy instance</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-a-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setup a local Galaxy instance</div>
 
   <ol>
     <li>Clone the github repository
@@ -575,7 +568,7 @@ serving on http://localhost:8080
 <p>In order to install the tutorial requirements, we will need the API key of an admin user.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtain-galaxy-api-key"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtain Galaxy API key</div>
+  <div class="box-title hands-on-title" id="hands-on-obtain-galaxy-api-key"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtain Galaxy API key</div>
 
   <ol>
     <li>Register an account on Galaxy using the email address you added to the <code class="language-plaintext highlighter-rouge">config/galaxy.yml</code> file
@@ -598,7 +591,7 @@ serving on http://localhost:8080
 <p>To install to training requirements to our Galaxy, we will use Ephemeris, let’s install it now:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-ephemeris"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install Ephemeris</div>
+  <div class="box-title hands-on-title" id="hands-on-install-ephemeris"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install Ephemeris</div>
 
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># optional: create a virtual environment</span>
 virtualenv .venv<span class="p">;</span> <span class="nb">.</span> .venv/bin/activate
@@ -615,7 +608,7 @@ pip <span class="nb">install </span>ephemeris
 <p>In this example we will install the requirements for the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><em>Reference-based RNASeq</em></a> tutorial to the Galaxy instance running on localhost.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-a-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install a tutorial</div>
+  <div class="box-title hands-on-title" id="hands-on-install-a-tutorial"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install a tutorial</div>
 
   <ol>
     <li>If you have not done so yet, clone the training material github repo:
@@ -638,7 +631,7 @@ pip <span class="nb">install </span>ephemeris
 <p>The only thing the script cannot currently automate is the installation of the interactive tours. We will now do this manually by copying the contents of the <code class="language-plaintext highlighter-rouge">tours</code> folder to our Galaxy instance, in the folder <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/config/plugins/tours</code></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-the-interactive-tours"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install the interactive Tours</div>
+  <div class="box-title hands-on-title" id="hands-on-install-the-interactive-tours"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install the interactive Tours</div>
 
   <ol>
     <li>Copy the <code class="language-plaintext highlighter-rouge">tour.yaml</code> file from the training materials repo to Galaxy
@@ -857,7 +850,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

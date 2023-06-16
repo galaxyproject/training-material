@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Server Maintenance: Cleanup, Backup, and Restoration">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -447,7 +447,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -484,14 +484,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Server Maintenance: Cleanup, Backup, and Restoration</h1>
@@ -837,7 +830,7 @@ then files Galaxy creates itself. Both of these can be cleaned to save space.</p
 tutorial</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-gxadmin-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing gxadmin with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-gxadmin-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing gxadmin with Ansible</div>
 
   <ol>
     <li>
@@ -859,7 +852,7 @@ tutorial</a>.</p>
       <p>Install the role with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -903,7 +896,7 @@ tutorial</a>.</p>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -919,7 +912,7 @@ tutorial</a>.</p>
 <p>Before we begin backing up our Galaxy data, let’s set up automated cleanups to ensure we backup the minimal required set of data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-postgresql-backups"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring PostgreSQL Backups</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-postgresql-backups"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring PostgreSQL Backups</div>
 
   <ol>
     <li>
@@ -963,7 +956,7 @@ tutorial</a>.</p>
     </li>
     <li>
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1013,7 +1006,7 @@ important, then consider backing these up as well.</li>
 <p>We’re setting a couple of variables to control the automatic backups, they’ll be placed in the <code class="language-plaintext highlighter-rouge">/data/backups</code> folder next to our user uploaded Galaxy data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-postgresql-backups-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring PostgreSQL Backups</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-postgresql-backups-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring PostgreSQL Backups</div>
 
   <ol>
     <li>
@@ -1059,7 +1052,7 @@ important, then consider backing these up as well.</li>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-this-isn-t-a-backup-strategy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-isn-t-a-backup-strategy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: This isn't a backup strategy!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-this-isn-t-a-backup-strategy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-isn-t-a-backup-strategy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: This isn't a backup strategy!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>People who, let’s say, care strongly about backups will often insist that you need to version files. This is of course unnecessary in the Galaxy case as files are essentially Write Once Read Many (WORM)s, which is a really good file storage practice. Files can get removed so it isn’t a true <abbr title="Write Once Read Many">WORM</abbr> strategy that you’d use for e.g. audit logs, but it is close.
 That said, since files never get changed, keeping multiple versions is unnecesary.</p>
 
@@ -1314,7 +1307,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

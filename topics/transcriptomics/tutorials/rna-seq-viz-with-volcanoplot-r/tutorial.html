@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Visualization of RNA-Seq results with Volcano Plot in R">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -494,7 +494,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -531,14 +531,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>Visualization of RNA-Seq results with Volcano Plot in R</h1>
@@ -753,6 +746,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> R basics in Galaxy:
                             
@@ -808,7 +805,15 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -1260,7 +1265,7 @@ Sentry.init({
 <h2 id="import-data">Import data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1319,7 +1324,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>We will create a volcano plot colouring all significant genes. We will call genes significant here if they have FDR &lt; 0.01 and a log2 fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset. We will also label the top 10 most significant genes with their gene names. We will select to output the Rscript file which we will then use to edit the plot in R.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a Volcano plot</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a Volcano plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Volcano Plot tool" aria-role="link"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span> to create a volcano plot
@@ -1358,7 +1363,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>We’ll import the differentially expressed results input file and the RScript into R.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using datasets from Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using datasets from Galaxy</div>
 
   <ol>
     <li>
@@ -1392,7 +1397,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>The first few lines from <code class="language-plaintext highlighter-rouge"># Galaxy settings start</code> to <code class="language-plaintext highlighter-rouge"># Galaxy settings end</code> are settings needed to run the Volcano plot tool in Galaxy. We don’t need them to run the script in R so we will delete them. If we don’t delete the error handling line, the R session will crash if we encounter any error in the code. It’s ok as it will resume again where we were but better to not have this happen.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-delete-unneeded-lines"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Delete unneeded lines</div>
+  <div class="box-title hands-on-title" id="hands-on-delete-unneeded-lines"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Delete unneeded lines</div>
 
   <p>Delete these lines from the top of the script.</p>
 
@@ -1420,7 +1425,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 So we just need to install the <code class="language-plaintext highlighter-rouge">ggrepel</code> package.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-package"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install package</div>
+  <div class="box-title hands-on-title" id="hands-on-install-package"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install package</div>
 
   <p>Either click on “Install” in the yellow warning banner if present, or in the Console type</p>
 
@@ -1432,7 +1437,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We need to change the path of the differentially expressed file in the script. The path in the script is <code class="language-plaintext highlighter-rouge">/data/dnb03/galaxy_db/files/4/6/c/dataset_46c498bc-060e-492f-9b42-51908a55e354.dat</code>. This is a temporary location where the Galaxy Volcano plot tool copied the input file in order to use it, the file no longer exists there. Your path will be different. In the script change this path to <code class="language-plaintext highlighter-rouge">de-results.tsv</code> like below.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-script"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run script</div>
+  <div class="box-title hands-on-title" id="hands-on-run-script"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run script</div>
 
   <ol>
     <li>
@@ -1449,7 +1454,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
       <p>Highlight the code in the script and run</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-highlight-all-code-and-run-shortcuts"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-highlight-all-code-and-run-shortcuts" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Highlight all code and run shortcuts<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-highlight-all-code-and-run-shortcuts"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-highlight-all-code-and-run-shortcuts" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Highlight all code and run shortcuts<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <ul>
           <li>To highlight all code type <kbd>CTRL</kbd>+<kbd>a</kbd> (or <kbd>CMD</kbd>+<kbd>a</kbd>)</li>
           <li>To run type <kbd>CTRL</kbd>+<kbd>Enter</kbd> (or <kbd>CMD</kbd>+<kbd>Enter</kbd>)</li>
@@ -1465,7 +1470,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We’ll delete the lines below that save the plot to a PDF file. The plots will then be produced in the Plots pane so we can more easily see the different plots we’re going to make, without having to keep opening the PDF file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-produce-plots-in-plots-pane"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Produce plots in Plots pane</div>
+  <div class="box-title hands-on-title" id="hands-on-produce-plots-in-plots-pane"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Produce plots in Plots pane</div>
 
   <ol>
     <li>
@@ -1496,7 +1501,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We’ll demonstate how you can change the colours. We’ll change the colour of the downregulated genes from cornflowerblue to purple. We’ll change the upregulated genes from firebrick to orange.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-change-colours"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Change colours</div>
+  <div class="box-title hands-on-title" id="hands-on-change-colours"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change colours</div>
 
   <ol>
     <li>
@@ -1519,7 +1524,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-r-colours"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-r-colours" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: R colours<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-r-colours"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-r-colours" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: R colours<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you want to use other colours you can see the built-in R colours with their names in <a href="https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf">this cheatsheet</a>.</p>
 
@@ -1530,7 +1535,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We’ll make the points a bit smaller. We’ll change to 0.5.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-change-points-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Change points size</div>
+  <div class="box-title hands-on-title" id="hands-on-change-points-size"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change points size</div>
 
   <ol>
     <li>
@@ -1553,12 +1558,12 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How could we change the transparency of the points?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We could use <code class="language-plaintext highlighter-rouge">alpha =</code>. For example</p>
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">geom_point</span><span class="p">(</span><span class="n">aes</span><span class="p">(</span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sig</span><span class="p">),</span><span class="w"> </span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
@@ -1572,7 +1577,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We’ll make the font size of the labels a bit smaller.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-change-labels-text-size"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Change labels text size</div>
+  <div class="box-title hands-on-title" id="hands-on-change-labels-text-size"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change labels text size</div>
 
   <ol>
     <li>
@@ -1595,12 +1600,12 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How could we change the number of genes labelled from 10 to 20?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We could change the 10 to 20 here</p>
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">top</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">slice_min</span><span class="p">(</span><span class="n">results</span><span class="p">,</span><span class="w"> </span><span class="n">order_by</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pvalue</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span><span class="w">
@@ -1614,7 +1619,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>We can change the categories of points we’re colouring in the plot. For example, instead of using separate categories for upregulated, downregulated we could just use a single category for significant.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-change-categories"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Change categories</div>
+  <div class="box-title hands-on-title" id="hands-on-change-categories"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change categories</div>
 
   <ol>
     <li>
@@ -1665,12 +1670,12 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How would you remove the legend from the plot? You can use Google.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>If you Google <code class="language-plaintext highlighter-rouge">remove legend ggplot2</code> you may find a few ways it can be done. One way is</p>
 
@@ -1683,7 +1688,7 @@ So we just need to install the <code class="language-plaintext highlighter-rouge
 <p>You can save the edited script by clicking the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> icon at the top of the script in RStudio or through File &gt; Save. You can download from Galaxy RStudio from the Files pane by ticking the box beside the script name, then More &gt; Export &gt; Download.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-more-plot-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-plot-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: More plot options<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-more-plot-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-plot-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: More plot options<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you enter values in the Volcano Plot Galaxy tool form for Plot options, such as plot title, x and y axis labels or limits, they’ll be output in the script. This is one way you could see how to customise these options in the plot.</p>
 
@@ -1855,7 +1860,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

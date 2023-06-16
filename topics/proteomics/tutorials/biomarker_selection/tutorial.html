@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Biomarker candidate identification">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -427,7 +427,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -464,14 +464,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Biomarker candidate identification</h1>
@@ -718,7 +711,7 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA) (Publication: <span class="citation"><a href="#Uhln2005">Uhlén <i>et al.</i> 2005</a></span>)</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry</div>
 
   <ol>
     <li>
@@ -751,7 +744,7 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <p>We will now rerun the same tool but to select transcripts according to their expression profile.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build tissue-specific expression dataset based on RNAseq</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build tissue-specific expression dataset based on RNAseq</div>
 
   <ol>
     <li><strong>Build tissue-specific expression dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -776,7 +769,7 @@ To do so, a filter is applied on the expression value provided by HPA and measur
 In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-on-expression-value-criterion"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter on expression value criterion</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-on-expression-value-criterion"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter on expression value criterion</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -804,13 +797,13 @@ In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>How many lines are there in the file of heart transcripts
 with a TPM value &gt;10 ?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>5257 lines.</p>
     </blockquote>
   </blockquote>
@@ -822,7 +815,7 @@ with a TPM value &gt;10 ?</p>
 <p>We want now to select candidate biomarkers that are expressed in the heart muscle according to <strong>both</strong> IHC and RNA-seq data, using the Jvenn tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-venn-diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Venn diagram</div>
+  <div class="box-title hands-on-title" id="hands-on-venn-diagram"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Venn diagram</div>
 
   <ol>
     <li><strong>Venn diagram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -859,10 +852,10 @@ with a TPM value &gt;10 ?</p>
       <p><img src="../../images/biomarker-selection/jVenn_chart-tuto2.png" alt="Venn diagram output. " width="500" height="695" loading="lazy" /></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>How many IDs are common to both IHC and RNA-seq data?</p>
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>931 candidate biomarkers are detected by both IHC and RNA-seq data.</p>
         </blockquote>
       </blockquote>
@@ -874,7 +867,7 @@ with a TPM value &gt;10 ?</p>
 rest of our pipeline.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtain-list-of-candidate-biomarkers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtain list of candidate biomarkers</div>
+  <div class="box-title hands-on-title" id="hands-on-obtain-list-of-candidate-biomarkers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtain list of candidate biomarkers</div>
 
   <ol>
     <li><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -929,7 +922,7 @@ rest of our pipeline.</p>
 highly specific to the heart using additional expression data (still from HPA).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-expression-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add expression data</div>
+  <div class="box-title hands-on-title" id="hands-on-add-expression-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add expression data</div>
 
   <ol>
     <li><strong>Add expression data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -970,7 +963,7 @@ highly specific to the heart using additional expression data (still from HPA).<
 <em>“RNA tissue category”</em> criterion.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter by keywords and/or numerical value</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter by keywords and/or numerical value</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1033,7 +1026,7 @@ Thus we will retrieve protein features from neXtProt to retrieve those informati
 candidates to their corresponding UniProt accession number. The tool <strong>ID Converter</strong> is what we need to do so.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-id-converter"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: ID Converter</div>
+  <div class="box-title hands-on-title" id="hands-on-id-converter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: ID Converter</div>
 
   <ol>
     <li><strong>ID Converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1072,7 +1065,7 @@ according to the version number of Uniprot.</p>
 For this purpose, we use the <strong>Add protein features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> ProteoRE tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-protein-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add protein features</div>
+  <div class="box-title hands-on-title" id="hands-on-add-protein-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add protein features</div>
 
   <ol>
     <li><strong>Add protein features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1113,7 +1106,7 @@ were added (at the end). These columns present TMDomains, Subcell Location and D
 no transmembrane domains by running the Filter by keywords and/or numerical value tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter by keywords and/or numerical value</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter by keywords and/or numerical value</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1171,7 +1164,7 @@ LS MS/MS experiments.</p>
 <h1 id="check-for-previous-detection-by-lc-msms-experiments">Check for previous detection by LC-MS/MS experiments</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-ms-ms-observations-in-tissue-fluid"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get MS/MS observations in tissue/fluid</div>
+  <div class="box-title hands-on-title" id="hands-on-get-ms-ms-observations-in-tissue-fluid"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get MS/MS observations in tissue/fluid</div>
 
   <ol>
     <li><strong>Get MS/MS observations in tissue/fluid</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1202,7 +1195,7 @@ were added with the info of number of times peptides were seen by MS/MS.</p>
 <p>Let’s now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-for-proteins-seen-in-the-plasma"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter for proteins seen in the plasma</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-for-proteins-seen-in-the-plasma"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter for proteins seen in the plasma</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1458,7 +1451,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

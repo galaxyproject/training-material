@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: RAD-Seq de-novo data analysis">
         <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -375,7 +375,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -412,14 +412,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-ecology">
     <h1 data-toc-skip>RAD-Seq de-novo data analysis</h1>
@@ -678,7 +671,7 @@ Sentry.init({
 <p>We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the reads directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from <a href="https://zenodo.org/record/1134547#.WkugUjfjJXI">Zenodo</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -722,7 +715,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 <p>For demultiplexing, we use the Process Radtags tool from <a href="https://www.g3journal.org/content/1/3/171.full">STACKS</a> .</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-demultiplexing-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Demultiplexing reads</div>
+  <div class="box-title hands-on-title" id="hands-on-demultiplexing-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Demultiplexing reads</div>
 
   <ol>
     <li><strong>Process Radtags</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to demultiplex the reads:
@@ -737,7 +730,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many reads where on the original dataset?</li>
@@ -747,7 +740,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The informations can be found in the results log file:</p>
 
           <ol>
@@ -781,7 +774,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <p>You can use the <code class="language-plaintext highlighter-rouge">Charts</code> functionality through the Visualize button reachable on the <code class="language-plaintext highlighter-rouge">Radtags logs</code> file you just generated.</p>
 
@@ -825,21 +818,21 @@ Score20		2980543		5158988		626265			129493			8895289
 <p>For quality control, we use similar tools as described in <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">NGS-QC tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control</div>
 
   <ol>
     <li>
       <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run FastQC on FastQ files to control the quality of the reads. Warning! Don’t forget you are working on data collections….</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What is the read length?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The read length is 32 bp</p>
         </blockquote>
       </blockquote>
@@ -857,13 +850,13 @@ Score20		2980543		5158988		626265			129493			8895289
 <p>Run <code class="language-plaintext highlighter-rouge">Stacks: De novo map</code> Galaxy tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Information on denovo_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-stacks-de-novo-map"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Stacks: De novo map</div>
+  <div class="box-title hands-on-title" id="hands-on-stacks-de-novo-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Stacks: De novo map</div>
 
   <ol>
     <li>
@@ -912,7 +905,7 @@ sample_GGCC	2
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-data-formatting"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Data formatting</div>
+    <div class="box-title comment-title" id="comment-data-formatting"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Data formatting</div>
 
     <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use Galaxy tools like <code class="language-plaintext highlighter-rouge">Replace Text</code> (for example to replace <code class="language-plaintext highlighter-rouge">Rabbit Slough</code> by a population number like <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">Add column</code> (for example to add <code class="language-plaintext highlighter-rouge">sample_</code>) or <code class="language-plaintext highlighter-rouge">Cut columns from a table</code> (to put the new <code class="language-plaintext highlighter-rouge">sample_</code> column af the first place) and finally <code class="language-plaintext highlighter-rouge">Regex replace</code> (replacing <code class="language-plaintext highlighter-rouge">(sample_)\t</code> by <code class="language-plaintext highlighter-rouge">\1</code>) to generate it…</p>
   </blockquote>
@@ -922,7 +915,7 @@ sample_GGCC	2
 <h1 id="calculate-population-genomics-statistics">Calculate population genomics statistics</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculate-population-genomics-statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculate population genomics statistics</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-population-genomics-statistics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate population genomics statistics</div>
 
   <ol>
     <li><strong>Stacks: populations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -947,7 +940,7 @@ sample_GGCC	2
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What is the maximum value of FST’ at any SNP? Don’t hesitate to look at the <a href="http://catchenlab.life.illinois.edu/stacks/manual/#files">STACKS manual</a> to find where this parameter is</li>
@@ -956,7 +949,7 @@ sample_GGCC	2
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>1</li>
         <li>FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1</li>
@@ -1138,7 +1131,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

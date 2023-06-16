@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Advanced Python">
         <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -427,7 +427,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -464,14 +464,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-data-science">
     <h1 data-toc-skip>Advanced Python</h1>
@@ -537,6 +530,12 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -768,7 +767,7 @@ Sentry.init({
                 <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">usegalaxy.eu</a> and <a href="https://usegalaxy.org/">usegalaxy.org</a> sites.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
 
   <p>Adaptations have been made to make this work better in a GTN/Galaxy environment.</p>
@@ -928,12 +927,12 @@ An index like [25, 35] selects a single element of an array, but we can select w
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-and-stacking-arrays"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting and stacking arrays</div>
+  <div class="box-title question-title" id="question-selecting-and-stacking-arrays"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting and stacking arrays</div>
 
   <p>Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means <code class="language-plaintext highlighter-rouge">A[:, 0]</code> is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, <code class="language-plaintext highlighter-rouge">A[:, :1]</code> returns a two dimensional array with one singleton dimension (i.e. a column vector).</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D = np.hstack((A[:, :1], A[:, -1:]))
@@ -945,13 +944,13 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-with-conditionals"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting with conditionals</div>
+  <div class="box-title question-title" id="question-selecting-with-conditionals"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
 
   <p>Given the followind array <code class="language-plaintext highlighter-rouge">A</code>, keep only the elements that are lower that <code class="language-plaintext highlighter-rouge">0.05</code>.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = A[A&lt;0.05]
 </code></pre></div>    </div>
@@ -1024,14 +1023,14 @@ print(D)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-using-pd-head-and-pd-tail"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Using pd.head and pd.tail</div>
+  <div class="box-title question-title" id="question-using-pd-head-and-pd-tail"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Using pd.head and pd.tail</div>
 
   <p>After reading the data, use <code class="language-plaintext highlighter-rouge">help(data.head)</code> and <code class="language-plaintext highlighter-rouge">help(data.tail)</code> to find out what <code class="language-plaintext highlighter-rouge">DataFrame.head</code> and <code class="language-plaintext highlighter-rouge">DataFrame.tail</code> do.
 	a. What method call will display the first three rows of the data?
 	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. We can check out the first five rows of the data by executing <code class="language-plaintext highlighter-rouge">data.head()</code> (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter <code class="language-plaintext highlighter-rouge">n</code> in our call to <code class="language-plaintext highlighter-rouge">data.head()</code>. To view the first three rows, execute:</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.head(n=3)
@@ -1124,12 +1123,12 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-saving-in-a-csv-file"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Saving in a csv file</div>
+  <div class="box-title question-title" id="question-saving-in-a-csv-file"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Saving in a csv file</div>
 
   <p>As well as the <code class="language-plaintext highlighter-rouge">read_csv</code> function for reading data from a file, Pandas provides a <code class="language-plaintext highlighter-rouge">to_csv</code> function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called <code class="language-plaintext highlighter-rouge">processed.csv</code>. You can use <code class="language-plaintext highlighter-rouge">help</code> to get information on how to use <code class="language-plaintext highlighter-rouge">to_csv</code>.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.to_csv('processed.csv')
 </code></pre></div>    </div>
@@ -1216,7 +1215,7 @@ print(D)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-manipulating-dataframes"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Manipulating dataframes</div>
+  <div class="box-title question-title" id="question-manipulating-dataframes"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Manipulating dataframes</div>
 
   <p>Explain what each line in the following short program does: what is in first, second, etc.?</p>
 
@@ -1227,7 +1226,7 @@ fourth = third.drop('StdErr', axis = 1)
 fourth.to_csv('result.csv')
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Let’s go through this piece of code line by line.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1258,7 +1257,7 @@ fourth.to_csv('result.csv')
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-min-max-indexes"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Finding min-max indexes</div>
+  <div class="box-title question-title" id="question-finding-min-max-indexes"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding min-max indexes</div>
 
   <p>Explain in simple terms what <code class="language-plaintext highlighter-rouge">idxmin</code> and <code class="language-plaintext highlighter-rouge">idxmax</code> do in the short program below. When would you use these methods?</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1268,7 +1267,7 @@ print(data['Base mean'].idxmax())
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">idxmin</code> will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.</p>
 
@@ -1282,7 +1281,7 @@ FBgn0026562</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-with-conditionals-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Selecting with conditionals</div>
+  <div class="box-title question-title" id="question-selecting-with-conditionals-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
 
   <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an expression to select each of the following:
 a. P-value of each gene
@@ -1290,7 +1289,7 @@ b. all the information of gene <code class="language-plaintext highlighter-rouge
 c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. <code class="language-plaintext highlighter-rouge">data['P-value']</code>
 b.<code class="language-plaintext highlighter-rouge">data.loc['FBgn0039178', :]</code>
@@ -1318,12 +1317,12 @@ c. <code class="language-plaintext highlighter-rouge">data[data['Chromosome'] ==
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-the-max-of-each-group"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Finding the max of each group</div>
+  <div class="box-title question-title" id="question-finding-the-max-of-each-group"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding the max of each group</div>
 
   <p>Using the same dataset, try to find the longest genes in each chromosome.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data['Gene Length'] = data['End'] - data['Start']
 data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
@@ -1333,12 +1332,12 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-grouping-with-multiple-variables"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Grouping with multiple variables</div>
+  <div class="box-title question-title" id="question-grouping-with-multiple-variables"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Grouping with multiple variables</div>
 
   <p>Using the same dataset, try to find how many genes are found on each strand of each chromosome.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can group the data according to more than one column.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.groupby(['Chromosome', 'Strand']).size()
@@ -1516,7 +1515,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Galaxy Monitoring with gxadmin">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -345,7 +345,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -382,14 +382,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Galaxy Monitoring with gxadmin</h1>
@@ -575,7 +568,7 @@ Sentry.init({
 <p>It’s simple to install gxadmin. Here’s how you do it, if you haven’t done it already.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-gxadmin-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing gxadmin with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-gxadmin-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing gxadmin with Ansible</div>
 
   <ol>
     <li>
@@ -600,7 +593,7 @@ Sentry.init({
       <p>Install the role with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -622,7 +615,7 @@ Sentry.init({
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -634,20 +627,20 @@ Sentry.init({
 <p>With that, <code class="language-plaintext highlighter-rouge">gxadmin</code> should be installed! Now, test it out:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-test-out-gxadmin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Test out gxadmin</div>
+  <div class="box-title hands-on-title" id="hands-on-test-out-gxadmin"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Test out gxadmin</div>
 
   <ol>
     <li>
       <p>Run <code class="language-plaintext highlighter-rouge">gxadmin</code> as the galaxy user and list recently registered users:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-u</span> galaxy gxadmin query latest-users
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nb">id</span> |          create_time          | disk_usage | username |       email        | <span class="nb">groups</span> | active
 <span class="nt">----</span>+-------------------------------+------------+----------+--------------------+--------+--------
   1 | 2021-06-09 12:25:59.299651+00 | 218 kB     | admin    | admin@example.org  |        | f
@@ -730,13 +723,13 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 <p><strong>@slugger70’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query old-histories</code>. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query old-histories
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+  <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
 
   <table>
     <thead>
@@ -827,7 +820,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 <p><strong>@natefoo’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query job-inputs</code>. He contributed this function which helps him debug jobs which are not running and should be.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query job-inputs 5 # Or another job ID
 </code></pre></div>  </div>
 </blockquote>
@@ -886,7 +879,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 <p><strong>@bgruening’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> let’s us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven’t registered for <a href="https://galaxyproject.eu/tiaas">training infrastructure as a service</a> which helps us coordinate infrastructure for them so they don’t have bad experiences.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query latest-users
 </code></pre></div>  </div>
 </blockquote>
@@ -955,13 +948,13 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 <p><strong>@hexylena’s favourite</strong> <code class="language-plaintext highlighter-rouge">gxadmin report job-info</code>. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin report job-info 1
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Galaxy Job 5132146
 
 Property      | Value
@@ -1029,7 +1022,7 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
 <p><strong>@cat-bro</strong> contributed the ‘jobs’ query: <code class="language-plaintext highlighter-rouge">gxadmin query jobs</code> lets you list jobs that have been run on your Galaxy. It’s a <strong>lot</strong> more flexible than <code class="language-plaintext highlighter-rouge">queue-overview</code> and we suggest using it instead, in most places. E.g. to find <code class="language-plaintext highlighter-rouge">circos</code> jobs that were recently run:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query jobs --limit 2  --tool circos
 </code></pre></div>  </div>
 </blockquote>
@@ -1077,7 +1070,7 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
 <p>or to see recent jobs from a specific user (e.g. to help answer their email queries when they just send you a screenshot rather than a proper bug report)</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query jobs --limit 2 --user helena-rasche --terminal
 </code></pre></div>  </div>
 </blockquote>
@@ -1129,7 +1122,7 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
 <p>So running <code class="language-plaintext highlighter-rouge">gxadmin query queue-overview</code> normally shows something like:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin query queue-overview
 </code></pre></div>  </div>
 </blockquote>
@@ -1225,13 +1218,13 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
 <p>The <code class="language-plaintext highlighter-rouge">gxadmin iquery queue-overview</code> is run by our Telegraf monitor on a regular basis, allowing us to consume the data:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input</div>
+  <div class="box-title code-in-title" id="code-in-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gxadmin iquery queue-overview
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>queue-overview,tool_id=toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0,tool_version=0.4.6.0,state=running,handler=handler_main_4,destination_id=12cores_180G_special,job_runner_name=condor count=1
 queue-overview,tool_id=toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0,tool_version=0.4.6.0,state=running,handler=handler_main_5,destination_id=12cores_180G_special,job_runner_name=condor count=1
 queue-overview,tool_id=toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0,tool_version=1.1.0.46-0,state=running,handler=handler_main_3,destination_id=12cores_12G,job_runner_name=condor count=1
@@ -1264,7 +1257,7 @@ gxadmin iquery workflow-invocation-status
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-which-queries-support-iquery"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-queries-support-iquery" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Which queries support iquery?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-which-queries-support-iquery"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-queries-support-iquery" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Which queries support iquery?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This data is not currently exposed, so, just try the queries. But it’s easy to add influx support when missing! <a href="https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54">Here is an example</a>, we set the variables in a function:</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fields="count=1"
@@ -1446,7 +1439,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

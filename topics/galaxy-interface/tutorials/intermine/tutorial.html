@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: InterMine integration with Galaxy">
         <meta property="og:description" content="A collection of microtutorials explaining various feature...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -354,7 +354,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -391,14 +391,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-galaxy-interface">
     <h1 data-toc-skip>InterMine integration with Galaxy</h1>
@@ -575,7 +568,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
 <h1 id="import-data-from-intermine">Import data from InterMine</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import</div>
+  <div class="box-title hands-on-title" id="hands-on-import"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import</div>
   <p>Search Galaxy for <code class="language-plaintext highlighter-rouge">InterMine</code> (not case sensitive; <code class="language-plaintext highlighter-rouge">intermine</code> is fine too), and click on <strong>InterMine Server</strong> under <strong>Get Data</strong>.</p>
 
   <ol>
@@ -594,7 +587,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
       <p>Click on the <strong>Send to Galaxy</strong> button on the bottom right of the pop-up window.</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-enable-popups"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enable-popups" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Enable popups<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-enable-popups"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enable-popups" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Enable popups<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>If you get an error when you click on the <strong>Send to Galaxy</strong> button, please make sure to allow popups and try again.</p>
       </blockquote>
@@ -609,7 +602,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -643,12 +636,12 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
 <p>The dataset contains the secondary identifier and the symbol of the <em>Drosophila melanogaster</em> genes and their location on the chromosome 4</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Do the data contain the type, e.g <code class="language-plaintext highlighter-rouge">Protein</code> or <code class="language-plaintext highlighter-rouge">Gene</code>?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>No, they don’t. So we have to specify it, when we create the InterMine Interchange file</p>
 
@@ -661,7 +654,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
 <p>We will use <strong>Create InterMine Interchange Dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in order to generate an intermediate file which will be used to send the identifiers (e.g. gene identifiers) to InterMine. This file requires the identifier’s type (e.g. <code class="language-plaintext highlighter-rouge">Gene</code>), the identifier (e.g <code class="language-plaintext highlighter-rouge">WBGene00007063</code>) and, optionally, the organims’s name.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-intermine-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate InterMine file</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-intermine-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate InterMine file</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1" title="Create InterMine Interchange dateset tool" aria-role="link"><strong>Create InterMine Interchange dateset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1</span></span> with the following parameters:
@@ -673,7 +666,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
         <ul>
           <li>In this example, because the <code class="language-plaintext highlighter-rouge">GenesLocatedOnChromosome4</code> dataset does not contain the type we have to specify it, in the <em>“Feature Type”</em></li>
           <li><em>“Feature Type”</em>: this is type of the identifiers you are exporting to InterMine, in this example <code class="language-plaintext highlighter-rouge">Gene</code>. It must be a class in the InterMine data model.</li>
@@ -694,7 +687,7 @@ it’s possible to export a list of identifiers from Galaxy into any InterMine i
 <p>Once the generation of the interchange dataset has been completed, open the green box related to <strong>Create InterMine Interchange on data</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-send-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Send data</div>
+  <div class="box-title hands-on-title" id="hands-on-send-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Send data</div>
 
   <ol>
     <li>Click on view intermine at <strong>Registry</strong> to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.</li>
@@ -860,7 +853,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

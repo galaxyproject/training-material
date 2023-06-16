@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Protein target prediction of a bioactive ligand with Alig...">
         <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -378,7 +378,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -415,14 +415,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxycomputationalchemistry/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-computational-chemistry">
     <h1 data-toc-skip>Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</h1>
@@ -653,7 +646,7 @@ Sentry.init({
 <p>In this tutorial, you will perform pharmacophore-based target prediction of a bioactive ligand known as staurosporine (Figure 2) with the ePharmaLib subset representing <em>Plasmodium falciparum</em> protein targets (138 pharmacophore models) and the open-source pharmacophore alignment program <a href="https://anaconda.org/bioconda/align_it">Align-it</a>, formerly known as PHARAO (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pharmacology-of-staurosporine"><button class="gtn-boxify-button details" type="button" aria-controls="details-pharmacology-of-staurosporine" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Pharmacology of staurosporine<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pharmacology-of-staurosporine"><button class="gtn-boxify-button details" type="button" aria-controls="details-pharmacology-of-staurosporine" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Pharmacology of staurosporine<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Staurosporine (PDB hetID: <a href="https://www.rcsb.org/ligand/STU">STU</a>) is an indolocarbazole secondary metabolite isolated from several bacteria of the genus Streptomyces. It displays diverse biological activities such as anticancer and antiparasitic activities (<span class="citation"><a href="#Nakano2009">Nakano and Ōmura 2009</a></span>).</p>
 </blockquote>
@@ -695,7 +688,7 @@ Sentry.init({
 <p>As a first step, we create a new history for the analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-1-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 1: Create history</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-1-create-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 1: Create history</div>
 
   <ol>
     <li>
@@ -725,7 +718,7 @@ Sentry.init({
 <p>Firstly, we will retrieve the concatenated ePharmaLib subset representing <em>P. falciparum</em> protein targets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-2-upload-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 2: Upload ePharmaLib</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-2-upload-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 2: Upload ePharmaLib</div>
 
   <ol>
     <li>
@@ -736,7 +729,7 @@ Sentry.init({
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-epharmalib-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: ePharmaLib versions</div>
+        <div class="box-title comment-title" id="comment-epharmalib-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: ePharmaLib versions</div>
 
         <p>Two versions of the ePharmaLib (PHAR &amp; PHYPO formats) have been created for use with the pharmacophore alignment programs <a href="https://anaconda.org/bioconda/align_it">Align-it</a> and <a href="https://www.schrodinger.com/products/phase">Phase</a>, respectively. Both versions can be broken down into small datasets. e.g. for human targets. They are freely available at <a href="https://zenodo.org">Zenodo</a> under the link:
 	<code class="language-plaintext highlighter-rouge">
@@ -755,7 +748,7 @@ Sentry.init({
       <p>You can view the contents of the downloaded PHAR file by pressing the <strong>eye icon</strong> (View data) for this dataset.</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-what-is-a-phar-file"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-a-phar-file" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is a PHAR file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-what-is-a-phar-file"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-a-phar-file" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What is a PHAR file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>A PHAR file is essentially a series of lines containing the three-dimensional coordinates of pharmacophoric features and excluded spheres. The first column specifies a feature type (e.g. HACC is a hydrogen bond acceptor). Subsequent columns specify the position of the feature center in a three-dimensional space. Individual pharmacophores are separated by lines containing four dollar signs (<code class="language-plaintext highlighter-rouge">$$$$</code>). The pharmacophores of the ePharmaLib dataset were labeled according to the following three-component code <em>PDBID-hetID-UniprotEntryName</em>.</p>
       </blockquote>
@@ -768,14 +761,14 @@ Sentry.init({
 <p>In this step, we will manually create an SMI file containing the SMILES of staurosporine.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-what-are-smiles-and-the-smi-file-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-are-smiles-and-the-smi-file-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What are SMILES and the SMI file format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-what-are-smiles-and-the-smi-file-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-are-smiles-and-the-smi-file-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What are SMILES and the SMI file format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The simplified molecular-input line-entry system (SMILES) is a string notation for describing the 2D chemical structure of a compound. It only states the atoms present in a compound and the connectivity between them. As an example, the SMILES string of acetone is <code class="language-plaintext highlighter-rouge">CC(=O)C</code>. SMILES strings can be imported by most molecule editors and converted into either two-dimensional structural drawings or three-dimensional models of the compounds, and vice versa. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-3-create-an-smi-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 3: Create an SMI file</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-3-create-an-smi-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 3: Create an SMI file</div>
 
   <ol>
     <li>
@@ -791,7 +784,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-smiles-generation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-smiles-generation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: SMILES generation<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-smiles-generation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-smiles-generation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: SMILES generation<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>A SMILES string can automatically be generated from a ligand name or 2D structure with a desktop molecule editor such <a href="https://perkinelmerinformatics.com/products/research/chemdraw/">ChemDraw®</a> and <a href="https://chemaxon.com/products/marvin">Marvin®</a>, or with web-based molecule editors such as <a href="https://pubchem.ncbi.nlm.nih.gov//edit3/index.html">PubChem Sketcher</a> and <a href="https://chemdrawdirect.perkinelmer.cloud/js/sample/index.html">ChemDraw® JS</a>. Moreover, the pre-computed SMILES strings of a large number of bioactive compounds can be retrieved from chemical databases such as <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>. e.g.</p>
 
@@ -803,12 +796,12 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why do we specifically use a so-called isomeric SMILES string?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Staurosporine is a chiral molecule possessing four chiral centers. The SMILES notation allows the specification of configuration at tetrahedral centers and double bond geometry, by marking atoms with <code class="language-plaintext highlighter-rouge">@</code> or <code class="language-plaintext highlighter-rouge">@@</code>. These are structural features that cannot be specified by connectivity alone, and therefore SMILES which encode this information are termed isomeric SMILES. A notable feature of these rules is that they allow rigorous partial specification of chirality.</p>
 
@@ -825,7 +818,7 @@ Sentry.init({
 <p>More often than not, the bioactive form of a compound is its predominant form at physiological pH (7.4). In this step, we predict the most probable ionization state(s) of the query ligand at pH 7.4 with the cheminformatics toolkit OpenBabel (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-4-add-hydrogen-atoms"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 4: Add hydrogen atoms</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-4-add-hydrogen-atoms"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 4: Add hydrogen atoms</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1" title="Add hydrogen atoms tool" aria-role="link"><strong>Add hydrogen atoms</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_addh/openbabel_addh/3.1.1+galaxy1</span></span> with the following parameters:
@@ -846,12 +839,12 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Nitrogen-containing functional groups are known to be basic. Which of them present in staurosporine (Figure 2) do you expect to be protonated at pH 7.4, and which not? And why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Only the secondary N-methylamino group will be protonated because indoles, much like aromatic amides, are typically not basic.</p>
 
@@ -864,7 +857,7 @@ Sentry.init({
 <p>The ePharmaLib subset representing <em>P. falciparum</em> protein targets (<em>ePharmaLib_PHARAO_plasmodium.phar</em>) is a concatenated file containing 148 individual pharmacophore files. To speed up our analysis, it is preferable to split the dataset into individual files in order to perform several pharmacophore alignments in parallel, using Galaxy’s collection functionality.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-5-splitting-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 5: Splitting ePharmaLib</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-5-splitting-epharmalib"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 5: Splitting ePharmaLib</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0" title="Split file tool" aria-role="link"><strong>Split file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0</span></span> with the following parameters:
@@ -901,7 +894,7 @@ Sentry.init({
 <p>To reduce the calculation time, the Align-it (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>) tool performs rigid alignment rather than flexible alignment. Conformational flexibility of the ligand is accounted for by introducing a preliminary step, in which a set of energy-minimized conformers for the query ligand are generated with the RDConf (<span class="citation"><a href="#rdconf">Koes</a></span>) tool (using the RDKit (<span class="citation"><a href="#landrum2013rdkit">Landrum and others 2013</a></span>) toolkit).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-6-low-energy-ligand-conformer-search"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 6: Low-energy ligand conformer search</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-6-low-energy-ligand-conformer-search"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 6: Low-energy ligand conformer search</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0" title="RDConf: Low-energy ligand conformer search tool" aria-role="link"><strong>RDConf: Low-energy ligand conformer search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/rdconf/rdconf/2020.03.4+galaxy0</span></span> with the following parameters:
@@ -918,7 +911,7 @@ Sentry.init({
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-rdconf"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: RDConf</div>
+        <div class="box-title comment-title" id="comment-rdconf"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: RDConf</div>
 
         <p>It is recommended to use the default settings, except for the number of conformers which should be changed to 100. As a rule of thumb, a threshold of 100 conformers appropriately represents the conformational flexibility of a compound with less than 10 rotatable bonds. The output SDF (structure data file) format encodes three-dimensional atomic coordinates of each conformer, separated by lines containing four dollar signs (<code class="language-plaintext highlighter-rouge">$$$$</code>).</p>
       </blockquote>
@@ -928,12 +921,12 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Have a look at the contents of the created collection <code class="language-plaintext highlighter-rouge">staurosporine_3D_conformers</code>. Why were less than 100 conformers were generated for staurosporine?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Staurosporine is a fused 8-ring system with only two rotatable bonds, due to its planar aromatic 5-ring indolocarbozole scaffold which confers a high structural rigidity upon the compound, i.e. it exists in relatively few energetically distinct 3D conformations.</p>
 
@@ -946,7 +939,7 @@ Sentry.init({
 <p>In this step, the ligand conformer dataset (SDF format) is converted on-the-fly to a pharmacophore dataset (PHAR format) and simultaneously aligned to the individual pharmacophores of the ePharmaLib dataset in a batch mode with Align-it (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>). The pharmacophoric alignments and thus the predicted targets are ranked in terms of a scoring metric: <code class="language-plaintext highlighter-rouge">Tversky index</code> = [0,1]. The higher the Tversky index, the higher the likelihood of the predicted protein–ligand interaction.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-7-pharmacophore-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 7: Pharmacophore alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-7-pharmacophore-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 7: Pharmacophore alignment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0" title="Pharmacophore alignment tool" aria-role="link"><strong>Pharmacophore alignment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/align_it/ctb_alignit/1.0.4+galaxy0</span></span> with the following parameters:
@@ -973,7 +966,7 @@ Sentry.init({
 <p>The alignment score of the best ranked ligand conformer aligned against each ePharmaLib pharmacophore is stored in an individual file. In total, this job generates a collection of 138 output files which should be concatenated in a single file, for a better overview of the predictions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-8-concatenating-the-scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 8: Concatenating the scores</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-8-concatenating-the-scores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 8: Concatenating the scores</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span> with the following parameters:
@@ -1014,7 +1007,7 @@ column    Content
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hands-on-9-sort-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands-on 9: Sort Dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-hands-on-9-sort-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands-on 9: Sort Dataset</div>
 
   <ol>
     <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> with the following parameters:
@@ -1038,12 +1031,12 @@ column    Content
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why was a perfect pharmacophore alignment (Tversky index =  1) not achieved for the top-ranked protein target for which the cocrystallized ligand is staurosporine (<em>STU</em>)?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>A perfect pharmacophore alignment because a computational conformer generator (here RDConf in Hands-on 6) is unlikely to be able to reproduce a crystallographic (native) ligand pose with 100% accuracy.</p>
 
@@ -1056,7 +1049,7 @@ column    Content
 <p>For pharmacophore-based protein target prediction, you can choose to use Galaxy tools separately and in succession as described above, or alternatively use the one-step Zauberkugel workflow as described below (Figure 3).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-the-zauberkugel-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the Zauberkugel workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-zauberkugel-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the Zauberkugel workflow</div>
 
   <p>Upload the Zauberkugel workflow from the following URL:</p>
 
@@ -1270,7 +1263,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

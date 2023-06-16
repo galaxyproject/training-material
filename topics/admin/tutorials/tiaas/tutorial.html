@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Training Infrastructure as a Service (TIaaS)">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -510,7 +510,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -547,14 +547,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Training Infrastructure as a Service (TIaaS)</h1>
@@ -1301,7 +1294,7 @@ resources, thus reducing queue times on the day of the training.</p>
 <h1 id="setting-up-tiaas">Setting up TIaaS</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-tiaas"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setup TIaaS</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-tiaas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setup TIaaS</div>
 
   <ol>
     <li>
@@ -1322,7 +1315,7 @@ resources, thus reducing queue times on the day of the training.</p>
       <p>And run the install step:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1393,7 +1386,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why does TIaaS get `DELETE` privileges on Galaxy's Database?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Why does TIaaS get `DELETE` privileges on Galaxy's Database?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The <code class="language-plaintext highlighter-rouge">DELETE</code> privilege is limited in scope to one table: <code class="language-plaintext highlighter-rouge">group_role_association</code>. This allows TIaaS to
 disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 users who participated in a training return to using normal (non-training) resources after the training ends.</p>
@@ -1405,7 +1398,7 @@ to perform this process every night at midnight. You can control when this runs 
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-running-the-playbook-from-scratch"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-the-playbook-from-scratch" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running the playbook from scratch<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-running-the-playbook-from-scratch"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-the-playbook-from-scratch" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Running the playbook from scratch<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>This is one of the few statements we’ve provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we’ve provided above depend on the Galaxy tables existing in that database. If those tables aren’t there, it will fail. If you do someday run this from scratch, you’ll find that you need to comment out those roles.</p>
       </blockquote>
     </li>
@@ -1444,7 +1437,7 @@ to perform this process every night at midnight. You can control when this runs 
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1505,7 +1498,7 @@ to perform this process every night at midnight. You can control when this runs 
 <p>Let’s see it in action!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-using-tiaas"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using TIaaS</div>
+  <div class="box-title hands-on-title" id="hands-on-using-tiaas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using TIaaS</div>
 
   <ol>
     <li><strong>Create a new TIaaS request</strong>
@@ -1584,7 +1577,7 @@ to perform this process every night at midnight. You can control when this runs 
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note-gdpr-assistance"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note: GDPR assistance</div>
+  <div class="box-title comment-title" id="comment-note-gdpr-assistance"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note: GDPR assistance</div>
 
   <p>Since this setup tracks additional personal information (submitter name &amp; email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.</p>
 
@@ -1604,7 +1597,7 @@ to perform this process every night at midnight. You can control when this runs 
 <p>In order to achieve this, we first need some way to sort the jobs of the training users into these private queues, while letting the other jobs continue on. So let’s create a <em>traffic controller</em> to figure out where jobs belong.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-writing-a-dynamic-job-destination"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Writing a dynamic job destination</div>
+  <div class="box-title hands-on-title" id="hands-on-writing-a-dynamic-job-destination"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Writing a dynamic job destination</div>
 
   <ol>
     <li>
@@ -1655,7 +1648,7 @@ to perform this process every night at midnight. You can control when this runs 
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1849,7 +1842,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

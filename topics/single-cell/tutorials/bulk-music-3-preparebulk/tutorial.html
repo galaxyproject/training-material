@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Creating the bulk RNA-seq dataset for deconvolution">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -420,7 +420,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -457,14 +457,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Creating the bulk RNA-seq dataset for deconvolution</h1>
@@ -805,7 +798,7 @@ Sentry.init({
 <p>We explored the <a href="https://www.ebi.ac.uk/gxa/experiments">expression atlas</a>, browsing experiments in order to find the bulk RNA-seq pancreas dataset (<span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span>). You can <a href="https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results">explore this dataset here</a> using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference Expression Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our scRNA-seq reference from, so we should get quite accurate results given the same lab made both datasets!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -850,7 +843,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-unnecessary-columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Remove unnecessary columns</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-unnecessary-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Remove unnecessary columns</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="link"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span> with the following parameters:
@@ -865,7 +858,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!</p>
       </blockquote>
@@ -877,12 +870,12 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now let’s take care of the excessively wordy header titles - and note that oftentimes various programmes struggle with titles or cells that have any spaces ` ` in them, so removing those now often saves hassle later.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>You might also remember in the MuSiC tutorial that we can analyse numeric parameters in the metadata (in that case, hbac1c content). Reformatting to ensure numerical values in these columns (i.e. taking the ` years` out of an age cell) is helpful then too.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fixing-titles"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Fixing titles</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-titles"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Fixing titles</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2" title="Regex Find And Replace tool" aria-role="link"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2</span></span> with the following parameters:
@@ -950,7 +943,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Let’s upload the dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data upload</div>
 
   <ol>
     <li>
@@ -986,7 +979,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> your raw counts file in the Galaxy history.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Are samples in the rows or columns?</li>
@@ -1007,7 +1000,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>While it’s awesome that there’s a gene name column, unfortunately the gene names will be duplicated - different ENS IDs can refer to the same Gene Name. This going to be a problem later. So we need to get this in a format to collapse the ENS IDs, just as we did previously in the scRNA-seq data reference preparation. Sadly, we’ll start by removing the column of gene names to prepare for the ENS ID collapse.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-gene-names-column"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Remove gene names column</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-gene-names-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Remove gene names column</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0" title="Remove columns tool" aria-role="link"><strong>Remove columns</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0</span></span> with the following parameters:
@@ -1031,7 +1024,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now that your data is in a format of having a rows of ENS IDs and samples as columns, you can apply the handy ENS ID collapsing workflow as we did in the scRNA-seq reference. If you have already imported this workflow during the first tutorial, then you can use it again now.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Convert from Ensembl to GeneSymbol using workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Convert from Ensembl to GeneSymbol using workflow</div>
 
   <ol>
     <li>
@@ -1067,7 +1060,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we will create the two objects we actually need - one for healthy and one for diseased.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-combined-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Creating the combined object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-combined-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Creating the combined object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4" title="Construct Expression Set Object tool" aria-role="link"><strong>Construct Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1082,7 +1075,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many genes are in your object?</li>
@@ -1106,7 +1099,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-disease-only-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Creating the disease-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-disease-only-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Creating the disease-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Manipulate Expression Set Object tool" aria-role="link"><strong>Manipulate Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1141,7 +1134,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>You can either re-run this tool or set it up again to create the healthy-only object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-healthy-only-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Creating the healthy-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-healthy-only-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Creating the healthy-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Manipulate Expression Set Object tool" aria-role="link"><strong>Manipulate Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1474,7 +1467,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

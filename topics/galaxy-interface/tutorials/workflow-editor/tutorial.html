@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Creating, Editing and Importing Galaxy Workflows">
         <meta property="og:description" content="A collection of microtutorials explaining various feature...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -335,7 +335,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -372,14 +372,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-galaxy-interface">
     <h1 data-toc-skip>Creating, Editing and Importing Galaxy Workflows</h1>
@@ -539,7 +532,7 @@ Sentry.init({
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-create-workflows-from-existing-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-workflows-from-existing-histories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Create workflows from existing histories<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-create-workflows-from-existing-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-workflows-from-existing-histories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Create workflows from existing histories<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p><a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">Read about extracting workflows from histories in this tutorial</a>.</p>
 
 </blockquote>
@@ -570,7 +563,7 @@ currently workflow inputs, tools, and workflows.</p>
 <h2 id="creating-a-new-workflow">Creating a new workflow</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a new workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a new workflow</div>
 
   <ul>
     <li>Click on <strong>Workflow</strong> in the top panel of the Galaxy page</li>
@@ -596,7 +589,7 @@ the editor.</p>
 add more advanced features.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-insert-a-dataset-input"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Insert a dataset input</div>
+  <div class="box-title hands-on-title" id="hands-on-insert-a-dataset-input"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Insert a dataset input</div>
 
   <ol>
     <li>Expand the “Inputs” section in the tool panel and click on “Input dataset” to create a new dataset input</li>
@@ -608,7 +601,7 @@ add more advanced features.</p>
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-optional-input-datasets-formats"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Optional Input Datasets &amp; Formats</div>
+    <div class="box-title comment-title" id="comment-optional-input-datasets-amp-formats"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Optional Input Datasets &amp; Formats</div>
     <p>Tools may have optional dataset inputs. If your workflow should use
 optional datasets, you can set <strong>Optional</strong> to <code class="language-plaintext highlighter-rouge">Yes</code>. Doing this allows you
 to connect such an input only to Tool inputs that are optional. You can
@@ -618,7 +611,7 @@ This serves as documentation and prevents selection of incompatible datasets.</p
 
 </blockquote>
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-input-modules"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Input modules</div>
+  <div class="box-title comment-title" id="comment-input-modules"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Input modules</div>
   <p>There are 3 input types, “Input dataset”, “Input dataset
 collection” and “Simple inputs used for workflow logic”. Insert an input
 dataset or dataset collection for each possible input to your workflow.
@@ -631,7 +624,7 @@ for a detailed description of how to use these.</p>
 <p>We’re now ready to add a first tool and connect it to our input dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-b-tac-reverse-a-file-reverse-cat-b-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add <b>tac reverse a file (reverse cat)</b> to your workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-add-b-tac-reverse-a-file-reverse-cat-b-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add <b>tac reverse a file (reverse cat)</b> to your workflow</div>
 
   <ol>
     <li>Find <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the tool panel and click on it</li>
@@ -649,7 +642,7 @@ for a detailed description of how to use these.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tip-workflow-connections"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Tip: Workflow connections</div>
+  <div class="box-title comment-title" id="comment-tip-workflow-connections"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tip: Workflow connections</div>
   <p>Connections can be made by clicking on an output terminal and dragging the
 cursor to an input terminal. Input terminals that are compatible with the
 current output are highlighted in green, while input terminals that can’t
@@ -666,7 +659,7 @@ the step must be disconnected. Connections can be removed by hovering over an
 input terminal and clicking.</p>
 </blockquote>
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-steps-can-be-labeled"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Steps can be labeled</div>
+  <div class="box-title comment-title" id="comment-steps-can-be-labeled"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Steps can be labeled</div>
   <p>The default label is the tool name, but it is often useful to label a step with
 what it does, especially if a tool is used multiple times in a workflow. A
 click on a step will open the step’s settings on the right side. Any label
@@ -681,7 +674,7 @@ just mention the tool and parameters to insert, since the procedure is always
 the same.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-b-select-first-lines-from-a-dataset-b-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add <b>Select first lines from a dataset</b> to your workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-add-b-select-first-lines-from-a-dataset-b-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add <b>Select first lines from a dataset</b> to your workflow</div>
 
   <ol>
     <li><strong>Select first lines from a dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
@@ -700,7 +693,7 @@ then output the first line of the resulting dataset. Now we’re ready to upload
 a test dataset and run our workflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running the workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running the workflow</div>
 
   <ol>
     <li>Return to the analysis page by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <em>Analyze Data</em> on older versions of Galaxy) on the top</li>
@@ -742,7 +735,7 @@ groups of datasets and we can label and rename outputs.</p>
 <p>We will now add tags to step outputs and label one of the 2 output datasets.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-configuring-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Configuring Outputs</div>
+  <div class="box-title comment-title" id="comment-configuring-outputs"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Configuring Outputs</div>
   <p>Open a step and scroll to the “Configure Output:” section on the right side of
 the editor. Here you can set a Label. Outputs with a label can be used as
 outputs in a subworkflow. You will also be able to set an output name for the
@@ -753,7 +746,7 @@ to change a text output to tabular or gff/bed for instance.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-editing-our-simple-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Editing our simple workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-editing-our-simple-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Editing our simple workflow</div>
 
   <ol>
     <li>Open our simple workflow in the Workflow Editor</li>
@@ -781,7 +774,7 @@ to change a text output to tabular or gff/bed for instance.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running the workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running the workflow</div>
 
   <ol>
     <li>Return to the analysis page by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <em>Analyze Data</em> on older versions of Galaxy) on the top</li>
@@ -821,7 +814,7 @@ and update closely related workflows.</p>
 of each workflow together.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-embedding-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Embedding a workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-embedding-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Embedding a workflow</div>
 
   <ol>
     <li>Create a new, empty workflow</li>
@@ -855,7 +848,7 @@ of each workflow together.</p>
 re-useable steps in real world scenarios.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-workflow-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Workflow versions</div>
+  <div class="box-title comment-title" id="comment-workflow-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Workflow versions</div>
   <p>Every time a workflow is saved a new version is created, so that you can go
 back and forth between new and old versions of a workflow. Click on the pencil
 symbol to bring up the workflow attributes. You can freely select different
@@ -864,14 +857,14 @@ will become the newest version.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-importing-workflows"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Importing workflows</div>
+  <div class="box-title comment-title" id="comment-importing-workflows"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Importing workflows</div>
 
   <p>Workflows can be imported via URL, through <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Workflows</code> or
 from a local file on your computer.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-managing-tool-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Managing tool versions</div>
+  <div class="box-title comment-title" id="comment-managing-tool-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Managing tool versions</div>
 
   <p>Versions of a tool in a workflow can be changed by clicking on a tool step in
 the center panel and on the right side clicking on <code class="language-plaintext highlighter-rouge">Select another tool
@@ -1039,7 +1032,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

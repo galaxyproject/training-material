@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Rule Based Uploader: Advanced">
         <meta property="og:description" content="A collection of microtutorials explaining various feature...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -397,7 +397,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -434,14 +434,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-galaxy-interface">
     <h1 data-toc-skip>Rule Based Uploader: Advanced</h1>
@@ -691,7 +684,7 @@ Sentry.init({
 <p>In order to make this data useful for the Rule Builder, we need to turn these accessoin IDs into URLs.</p>
 
 <blockquote class="hands_on" id="example-3-metadata">
-  <div class="box-title hands-on-title" id="hands-on-turn-uniprot-accession-ids-into-urls"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Turn Uniprot Accession IDs into URLs</div>
+  <div class="box-title hands-on-title" id="hands-on-turn-uniprot-accession-ids-into-urls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Turn Uniprot Accession IDs into URLs</div>
 
   <ol>
     <li>Open <a href="https://www.uniprot.org/uniprot/E7C0H6">Uniprot</a></li>
@@ -715,7 +708,7 @@ Sentry.init({
 <p>We will use this information to build a collection of FASTA files from our query.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-collection-from-uniprot-accession-ids"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build Collection from Uniprot Accession IDs</div>
+  <div class="box-title hands-on-title" id="hands-on-build-collection-from-uniprot-accession-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build Collection from Uniprot Accession IDs</div>
 
   <ol>
     <li>Open the Rule Builder
@@ -787,7 +780,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-regular-expression-explained"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Regular expression explained</div>
+        <div class="box-title comment-title" id="comment-regular-expression-explained"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regular expression explained</div>
         <p>In this regular expression, <code class="language-plaintext highlighter-rouge">.*</code> will capture the entire accession ID.</p>
 
         <p>In the replacement expression, <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code>, the <code class="language-plaintext highlighter-rouge">\0</code> will be replaced by the captured
@@ -814,7 +807,7 @@ regular expression (the accession ID) in the resulting column values.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-json-rule-definitions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: JSON Rule Definitions</div>
+        <div class="box-title comment-title" id="comment-json-rule-definitions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: JSON Rule Definitions</div>
         <p>This example is ready to go, but before clicking “Build” it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.</p>
 
         <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png" alt="screenshot. " loading="lazy" /></p>
@@ -833,7 +826,7 @@ regular expression (the accession ID) in the resulting column values.</p>
 <p>For this example we will re-use the metadata from the <a href="#example-3-metadata">previous example</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-a-matched-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build a matched collection</div>
+  <div class="box-title hands-on-title" id="hands-on-build-a-matched-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build a matched collection</div>
 
   <ol>
     <li><strong>Open</strong> the Rule Builder
@@ -862,7 +855,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
 <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png" alt="screenshot. " loading="lazy" /></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-json-editor"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: JSON Editor</div>
+        <div class="box-title comment-title" id="comment-json-editor"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: JSON Editor</div>
 
         <p>Another way to do this is to open the JSON Editor, by clicking the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you’re working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error.</p>
       </blockquote>
@@ -976,7 +969,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
 <p>So use either the SRA exporter tool or download the CSV file with fake URLs. If you download the data from the SRA exporter tool, select only the first 12 columns from the data (up to the column labeled “Library Name”) and copy the resulting data to your clipboard.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-building-nested-lists"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Building Nested Lists</div>
+  <div class="box-title hands-on-title" id="hands-on-building-nested-lists"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Building Nested Lists</div>
 
   <ol>
     <li>Open the Rule Builder
@@ -987,7 +980,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       </ul>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-show-table"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-show-table" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Show Table<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-show-table"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-show-table" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Show Table<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>Below is the table with pre-downloaded example data mentioned above:</p>
 
@@ -1092,7 +1085,7 @@ SRR5363715	2017-03-21 11:26:06	2017-03-21 10:59:33	712060	142833136	702138	200	5
           <p>Strip the header row</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code></p>
             <ul>
               <li>Filter first Row</li>
@@ -1123,7 +1116,7 @@ as an identifier for grouping the datasets. To do this, use the regex column add
 <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png" alt="screenshot. " loading="lazy" /></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-regular-expression-explained-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Regular expression explained</div>
+        <div class="box-title comment-title" id="comment-regular-expression-explained-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regular expression explained</div>
         <p>In this regular expression, <code class="language-plaintext highlighter-rouge">\d</code> means any digit, so <code class="language-plaintext highlighter-rouge">[^...]</code> means match anything that is not inside the brackets.
 So together <code class="language-plaintext highlighter-rouge">[^\d]+</code> means match one or more, non digits at the start of the column and the <code class="language-plaintext highlighter-rouge">()</code> around that means capture
 them into a group. We’ve add <code class="language-plaintext highlighter-rouge">\d+</code> at the end of the expression but it isn’t grouped so we are effectively ignoring the
@@ -1141,7 +1134,7 @@ first column <code class="language-plaintext highlighter-rouge">A</code> for the
           <p>Select column <code class="language-plaintext highlighter-rouge">A</code></p>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-re-ordering-columns"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Re-ordering columns</div>
+            <div class="box-title comment-title" id="comment-re-ordering-columns"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Re-ordering columns</div>
             <p>If you make a mistake in the order you select columns in you can simple use the up and down arrows to re-arrange the list</p>
           </blockquote>
         </li>
@@ -1175,7 +1168,7 @@ will be the same as those used by the <a href="https://bioconductor.org/packages
 from the <a href="https://bioconductor.org/packages/release/data/experiment/html/pasilla.html">Pasilla Bioconductor Package</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-applying-rules-to-existing-collections"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Applying Rules to Existing Collections</div>
+  <div class="box-title hands-on-title" id="hands-on-applying-rules-to-existing-collections"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Applying Rules to Existing Collections</div>
 
   <ol>
     <li>Open the Rule Builder
@@ -1248,7 +1241,7 @@ then “single” and “paired” sublists of that. This rule is found under th
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-regular-expression-explained-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Regular expression explained</div>
+        <div class="box-title comment-title" id="comment-regular-expression-explained-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regular expression explained</div>
         <p>Here <code class="language-plaintext highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
  The parentheses around <code class="language-plaintext highlighter-rouge">.*</code> means form a “group” from whatever is matched.
  The <code class="language-plaintext highlighter-rouge">_</code> describes the literal <code class="language-plaintext highlighter-rouge">_</code> values in the identifier we are matching. The result is that
@@ -1502,7 +1495,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

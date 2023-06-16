@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Creating the single-cell RNA-seq reference dataset for de...">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -405,7 +405,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -442,14 +442,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Creating the single-cell RNA-seq reference dataset for deconvolution</h1>
@@ -740,7 +733,7 @@ Sentry.init({
 <p>Galaxy has a specific tool for ingesting data from the Single cell expression atlas, so there are no uploads for this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-retrieval"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data retrieval</div>
+  <div class="box-title hands-on-title" id="hands-on-data-retrieval"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data retrieval</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="EBI SCXA Data Retrieval tool" aria-role="link"><strong>EBI SCXA Data Retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2</span></span> with the following parameters:
@@ -765,7 +758,7 @@ Sentry.init({
 <p>This tool will retrieve four files: a barcodes list, a genes list, an experimental design file, and a matrix market format (where columns refer to genes, cells, and quantities). We (mostly) only need the experimental design file, but keep in mind this will have data on all the cells reported by the authors.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many cells are in the sample?</li>
@@ -788,7 +781,7 @@ Sentry.init({
 <p>Let’s get rid of a bunch of repetitive columns in the metadata we don’t need. You can find out what each column is by inspecting the dataset <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> in the history window.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cutting-necessary-metadata-columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cutting necessary metadata columns</div>
+  <div class="box-title hands-on-title" id="hands-on-cutting-necessary-metadata-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cutting necessary metadata columns</div>
 
   <ol>
     <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:
@@ -808,7 +801,7 @@ Sentry.init({
 <p>Now, there might be a better way to do this in Galaxy (or you might consider downloading the file locally and changing it in a spreadsheet application or something), but this is what will work to reformat all that annoying text.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-reformatting-the-metadata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reformatting the metadata</div>
+  <div class="box-title hands-on-title" id="hands-on-reformatting-the-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reformatting the metadata</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2" title="Regex Find And Replace tool" aria-role="link"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2</span></span> with the following parameters:
@@ -908,7 +901,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>What’s with the <code class="language-plaintext highlighter-rouge">\</code> everywhere? That’s because the <code class="language-plaintext highlighter-rouge">[]</code> symbols usually call the code to do something, rather than just read it as a normal character. the <code class="language-plaintext highlighter-rouge">\</code> prevents this.</p>
       </blockquote>
@@ -929,7 +922,7 @@ Sentry.init({
 <h2 id="prepare-the-barcodes-file">Prepare the barcodes file</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-a-header"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding a header</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-a-header"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding a header</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Add line to file tool" aria-role="link"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span> with the following parameters:
@@ -946,7 +939,7 @@ Sentry.init({
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>This is an annoying step we have to do to get the right format, otherwise future steps won’t work.</p>
       </blockquote>
@@ -958,7 +951,7 @@ Sentry.init({
 <h2 id="use-the-barcodes-list-to-filter-out-cells-in-the-experimental-design-file">Use the barcodes list to filter out cells in the experimental design file</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-joining-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Joining datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-joining-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Joining datasets</div>
 
   <ol>
     <li><span class="tool" data-tool="join1" title="Join two Datasets tool" aria-role="link"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span> with the following parameters:
@@ -970,7 +963,7 @@ Sentry.init({
         <li><em>“Fill empty columns”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <blockquote>
-            <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+            <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
             <p>Make sure that you join the files in the same order as above - put the output of Add line to file in first - otherwise your columns will be in a different order for the next step. Everything will still work, but you would need to change the number of the column you remove using Advanced Cut.</p>
           </blockquote>
@@ -981,7 +974,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many cells are now in your table?</li>
@@ -1000,7 +993,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-duplicate-columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove duplicate columns</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicate-columns"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicate columns</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="link"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span> with the following parameters:
@@ -1015,7 +1008,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!</p>
       </blockquote>
@@ -1036,7 +1029,7 @@ Sentry.init({
 <h2 id="reformat-the-matrix">Reformat the matrix</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0" title="Scanpy Read10x tool" aria-role="link"><strong>Scanpy Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1061,7 +1054,7 @@ Sentry.init({
 <p>Now your precious matrix is stored in the 10x AnnData object. Let’s retrieve it!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect the matrix</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the matrix</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1</span></span> with the following parameters:
@@ -1075,7 +1068,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which are currently the rows in your matrix, cells or genes?</li>
@@ -1092,7 +1085,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Transpose the matrix</div>
+  <div class="box-title hands-on-title" id="hands-on-transpose-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transpose the matrix</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Transpose tool" aria-role="link"><strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2</span></span> with the following parameters:
@@ -1105,7 +1098,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many genes are in your sample?</li>
@@ -1130,7 +1123,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensid_collapse.png" alt="First table shows 4 rows with different ENS IDs and a second column with geney symbols and some overlap. Arrow pointing to second table shows 3 rows having collapsed the overlap." width="1597" height="431" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Collapsing ENS IDs</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert from Ensembl to GeneSymbol using workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert from Ensembl to GeneSymbol using workflow</div>
 
   <ol>
     <li>
@@ -1164,7 +1157,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 <p>We’re nearly there! We have three more tasks to do: first, we need to create the expression set object with all the phenotypes combined. Then, we also want to create two separate objects - one for healthy and one for diseased as references.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-combined-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the combined object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-combined-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the combined object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4" title="Construct Expression Set Object tool" aria-role="link"><strong>Construct Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1182,7 +1175,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many genes are in your sample now?</li>
@@ -1199,7 +1192,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-disease-only-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the disease-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-disease-only-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the disease-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Manipulate Expression Set Object tool" aria-role="link"><strong>Manipulate Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1237,7 +1230,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 <p>You can either re-run this tool or set it up again to create the healthy-only object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-healthy-only-object"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the healthy-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-healthy-only-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the healthy-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Manipulate Expression Set Object tool" aria-role="link"><strong>Manipulate Expression Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4</span></span> with the following parameters:
@@ -1273,7 +1266,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why are you making a healthy-only and diseased-only reference objects?</li>
@@ -1619,7 +1612,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

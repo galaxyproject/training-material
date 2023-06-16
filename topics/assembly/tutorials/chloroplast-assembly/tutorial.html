@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Chloroplast genome assembly">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -393,7 +393,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -430,14 +430,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-assembly">
     <h1 data-toc-skip>Chloroplast genome assembly</h1>
@@ -775,7 +768,7 @@ Sentry.init({
 <p>Let’s start with uploading the data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import the data</div>
+  <div class="box-title hands-on-title" id="hands-on-import-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the data</div>
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name</p>
@@ -816,7 +809,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>We will look at the quality of the nanopore reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-read-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check read quality</div>
+  <div class="box-title hands-on-title" id="hands-on-check-read-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check read quality</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Nanoplot tool" aria-role="link"><strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1</span></span>:
@@ -836,11 +829,11 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What summary statistics would be useful to look at?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>This will depend on the aim of your analysis, but usually:</p>
     <ul>
       <li><strong>Sequencing depth</strong> (the number of reads covering each base position; also called “coverage”). Higher depth is usually better, but at very high depths it may be better to subsample the reads, as errors can swamp the assembly graph.</li>
@@ -864,7 +857,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>We will assemble the long nanopore reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assemble-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assemble reads</div>
+  <div class="box-title hands-on-title" id="hands-on-assemble-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assemble reads</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0" title="Flye tool" aria-role="link"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0</span></span>:
       <ul>
@@ -892,7 +885,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-view-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: View the assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-view-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: View the assembly</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1" title="Bandage Info tool" aria-role="link"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1</span></span>
       <ul>
@@ -917,16 +910,16 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p><em>Note: a newer version of the Flye assembly tool now resolves this assembly into a single circle.</em></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What is your interpretation of this assembly graph?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>One interpretation is that this represents the typical circular chloroplast structure: There is a long single-copy region (the node of around 78,000 bp), connected to the inverted repeat (a node of around 28,000 bp), connected to the short single-copy region (of around 11,000 bp). In the graph, each end loop is a single-copy region (either long or short) and the centre bar is the collapsed inverted repeat which should have about twice the sequencing depth.</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-further-learning"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Further Learning</div>
+  <div class="box-title comment-title" id="comment-further-learning"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Further Learning</div>
   <ul>
     <li>Repeat the Flye assembly with different parameters, and/or a filtered read set.</li>
     <li>You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the ‘Versions’ button at the top to change.</li>
@@ -941,7 +934,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>First, we will map the short reads to the assembly and create an alignment file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Map reads</div>
+  <div class="box-title hands-on-title" id="hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map reads</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span>:
       <ul>
@@ -965,7 +958,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>Next, we will compare the short reads to the assembly, and create a polished (corrected) assembly file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-polish"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Polish</div>
+  <div class="box-title hands-on-title" id="hands-on-polish"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Polish</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1" title="pilon tool" aria-role="link"><strong>pilon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1</span></span>:
       <ul>
@@ -996,10 +989,10 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>How does the polished assembly compare to the unpolished assembly?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>This will depend on the settings, but as an example: your polished assembly might be about 10-15 Kbp longer. Nanopore reads can have homopolymer deletions - a run of AAAA may be interpreted as AAA - so the more accurate illumina reads may correct these parts of the long-read assembly. In the changes file, there may be a lot of cases showing a supposed deletion (represented by a dot) being corrected to a base.</p>
   </blockquote>
 </blockquote>
@@ -1019,7 +1012,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-with-prokka"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotate with Prokka</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-with-prokka"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate with Prokka</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Prokka tool" aria-role="link"><strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0</span></span> with the following parameters (leave everything else unchanged)
@@ -1045,7 +1038,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-with-geseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotate with GeSeq</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-with-geseq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate with GeSeq</div>
   <ul>
     <li>Download <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code> to your computer (click on the file in your history; then click on the disk icon).</li>
     <li>In a new browser tab, go to <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a> where we will use the GeSeq tool (<span class="citation"><a href="#Tillich_2017">Tillich <i>et al.</i> 2017</a></span>) to annotate our sequence.</li>
@@ -1058,7 +1051,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>Now make a JBrowse file to view the annotations (the GFF3 file - produced from either Prokka or GeSeq) under the assembly (the polished-assembly.fasta file).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-view-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: View annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-view-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: View annotations</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="JBrowse genome browser tool" aria-role="link"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3</span></span>:
       <ul>
@@ -1110,7 +1103,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <p>We will look at the original sequencing reads mapped to the genome assembly. In this tutorial, we will import very cut-down read sets so that they are easier to view.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-cut-down-read-sets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import cut-down read sets</div>
+  <div class="box-title hands-on-title" id="hands-on-import-cut-down-read-sets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import cut-down read sets</div>
   <ol>
     <li><span class="tool" data-tool="upload1" title="Import tool" aria-role="link"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> from <a href="https://zenodo.org/record/3567224">Zenodo</a> or a data library (ask your instructor):
       <ul>
@@ -1127,7 +1120,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-the-reads-to-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Map the reads to the assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-map-the-reads-to-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map the reads to the assembly</div>
   <ul>
     <li>Map the Illumina reads (the new “tiny” dataset) to the <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code>, the same way we did before, using bwa mem.</li>
     <li>This creates one output file: re-name it <code class="language-plaintext highlighter-rouge">illumina-tiny.bam</code></li>
@@ -1137,7 +1130,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualise-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualise mapped reads</div>
+  <div class="box-title hands-on-title" id="hands-on-visualise-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise mapped reads</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="JBrowse genome browser tool" aria-role="link"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3</span></span>:
       <ul>
@@ -1194,7 +1187,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What are the differences between the nanopore and the illumina reads?</li>
@@ -1202,7 +1195,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Nanopore reads are longer and have a higher error rate.</li>
       <li>There may be lots of reasons for varying read coverage. Some possibilities: In areas of high read coverage: this region may be a collapsed repeat. In areas of low or no coverage: this region may be difficult to sequence; or, this region may be a misassembly.</li>
@@ -1221,7 +1214,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
 <p>We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, <em>Eucalyptus pauciflora</em>. This data is from <span class="citation"><a href="#Wang_etal_2018">Wang <i>et al.</i> 2018</a></span>. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assembly-and-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assembly and annotation</div>
+  <div class="box-title hands-on-title" id="hands-on-assembly-and-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly and annotation</div>
   <ul>
     <li>Get data: at this <a href="https://doi.org/10.5281/zenodo.3600662">Zenodo link</a>, then upload to Galaxy.</li>
     <li>Check reads: Run Nanoplot on the nanopore reads.</li>
@@ -1460,7 +1453,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

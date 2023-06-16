@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Sentinel 2 biodiversity">
         <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -385,7 +385,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -422,14 +422,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-ecology">
     <h1 data-toc-skip>Sentinel 2 biodiversity</h1>
@@ -659,7 +652,7 @@ Sentry.init({
 <p>So, we will compute biodiversity and spectral indices mainly using reflectance information.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-definition-of-reflectance"><button class="gtn-boxify-button details" type="button" aria-controls="details-definition-of-reflectance" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Definition of reflectance<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-definition-of-reflectance"><button class="gtn-boxify-button details" type="button" aria-controls="details-definition-of-reflectance" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Definition of reflectance<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The reflectance is a proportion on reflected light on an area. It’s the ratio between the electromagnetic incident wave on the area and the reflected wave. It’s often a percentage between reflected intensity and incident intensity assumed as energy quantity.</p>
 
@@ -689,7 +682,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-details-about-spectral-indices"><button class="gtn-boxify-button details" type="button" aria-controls="details-details-about-spectral-indices" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Details about spectral indices<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-details-about-spectral-indices"><button class="gtn-boxify-button details" type="button" aria-controls="details-details-about-spectral-indices" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Details about spectral indices<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Spectral indices are used to highlight particular features or properties of the earth’s surface, e.g. vegetation, soil, water. They are developed on the basis of the spectral properties of the object of interest.</p>
 
@@ -729,7 +722,7 @@ Spectral indices dedicated to vegetation analysis are developed on the basis tha
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-it-can-take-a-bit-of-time"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: It can take a bit of time</div>
+  <div class="box-title warning-title" id="warning-it-can-take-a-bit-of-time"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: It can take a bit of time</div>
   <p>As your processing heavy data some of the steps can take some time. Notably, the step <strong>Create Biodiversity maps</strong> can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the <strong>pre-processing</strong> part is done all the steps can be done separately. Thus, no need for you to wait the end of each tool before running another one.</p>
 </blockquote>
 
@@ -738,7 +731,7 @@ Spectral indices dedicated to vegetation analysis are developed on the basis tha
 <p>This first step consist of downloading and properly prepare the data to use it in Sentinel 2 toolsuite.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -783,7 +776,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
 <h2 id="preprocessing-sentinel-2-data">Preprocessing sentinel 2 data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-preprocess"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Preprocess</div>
+  <div class="box-title hands-on-title" id="hands-on-preprocess"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Preprocess</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1" title="Preprocessing sentinel 2 data tool" aria-role="link"><strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1</span></span> with the following parameters:
@@ -796,7 +789,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
       <p>Click on <strong>Execute</strong></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The interesting output is the ENVI image format which is a binary raster file with an accompanying header file. The data are stored as a binary stream of bytes in a BIL file without extension and the metadata are stored in the .hdr file. These data are in the output <strong>Reflectance</strong>. You can directly use the output <strong>Reflectance</strong> for the rest of the analysis.</p>
       </blockquote>
@@ -808,14 +801,14 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
 <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/remote_sensing/preproc.png" alt="Preprocessing outputs 3 of them : the cloud mask folder, the reflectance folder and a file with the mission source. " width="288" height="337" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Preprocessing outputs</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What are the files you are interested in for the following tools ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The 2 files in the <strong>Reflectance</strong> folder that finish by “_Refl” and “_Refl.hdr”</li>
@@ -870,7 +863,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <h2 id="compute-a-pca">Compute a PCA</h2>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Principal components analysis for remote sensing data</div>
+    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Principal components analysis for remote sensing data</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="link"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span> with the following parameters:
@@ -884,7 +877,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </ul>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
 
@@ -897,7 +890,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
               <p>Press <strong>Save</strong></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
                 <p>Do the same for the raster header with the datatype hdr</p>
               </blockquote>
@@ -913,7 +906,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <h2 id="compute-biodiversity-indices">Compute biodiversity indices</h2>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-global-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Biodiversity indicators for global remote sensing data</div>
+    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-global-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Biodiversity indicators for global remote sensing data</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1" title="Compute biodiversity indices tool" aria-role="link"><strong>Compute biodiversity indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1</span></span> with the following parameters:
@@ -927,7 +920,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </ul>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
 
@@ -940,7 +933,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
               <p>Press <strong>Save</strong></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
                 <p>Do the same for the raster header with the datatype hdr</p>
               </blockquote>
@@ -950,7 +943,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </blockquote>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-you-can-use-the-output-of-compute-a-pca"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-can-use-the-output-of-compute-a-pca" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: You can use the output of **Compute a PCA**<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-you-can-use-the-output-of-compute-a-pca"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-can-use-the-output-of-compute-a-pca" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: You can use the output of **Compute a PCA**<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ul>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘Your already have the files in ENVI BIL format’</li>
@@ -973,14 +966,14 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <p>These 2 pictures are only exemple it is normal if you don’t have exactly the same output.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many biodiversity indicators do you have ?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>You should have 7 of them (Shannon, Renyi, Prao, Pielou, Hill, CRE, Berger-Parker). If you have only 5 of them, no problem, it just means you data are too small to compute CRE and Pielou but you can still continue your analysis.</li>
@@ -999,7 +992,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <h2 id="compute-a-pca-1">Compute a PCA</h2>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Principal components analysis for remote sensing data</div>
+    <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Principal components analysis for remote sensing data</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="link"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span> with the following parameters:
@@ -1013,7 +1006,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </ul>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
 
@@ -1026,7 +1019,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
               <p>Press <strong>Save</strong></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
                 <p>Do the same for the raster header with the datatype hdr</p>
               </blockquote>
@@ -1042,7 +1035,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <h2 id="create-biodiversity-maps">Create Biodiversity maps</h2>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-canopy-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Biodiversity indicators for canopy remote sensing data</div>
+    <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-canopy-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Biodiversity indicators for canopy remote sensing data</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1" title="Mapping diversity tool" aria-role="link"><strong>Mapping diversity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1</span></span> with the following parameters:
@@ -1056,7 +1049,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </ul>
 
         <blockquote class="tip">
-          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
 
@@ -1069,7 +1062,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
               <p>Press <strong>Save</strong></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
                 <p>Do the same for the raster header with the datatype hdr</p>
               </blockquote>
@@ -1088,7 +1081,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <h2 id="processing-remote-sensing-data">Processing remote sensing data</h2>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-comparing-biodiversity-indicators-for-canopy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Comparing biodiversity indicators for canopy</div>
+    <div class="box-title hands-on-title" id="hands-on-comparing-biodiversity-indicators-for-canopy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Comparing biodiversity indicators for canopy</div>
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1" title="Comparing remote sensing data tool" aria-role="link"><strong>Comparing remote sensing data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1</span></span> with the following parameters:
         <ul>
@@ -1101,13 +1094,13 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
         </ul>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-shapefiles"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shapefiles</div>
+          <div class="box-title comment-title" id="comment-shapefiles"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shapefiles</div>
 
           <p>Here you must provide your folder of shapefiles (at least 2 in order to have the beta diversity).</p>
         </blockquote>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-check-datatype-if-you-use-your-own-envi-bil-files"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Check datatype if you use your own ENVI BIL files</div>
+          <div class="box-title comment-title" id="comment-check-datatype-if-you-use-your-own-envi-bil-files"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Check datatype if you use your own ENVI BIL files</div>
 
           <p>Same as the compute spectral indices make sure you have the right datatypes bil and hdr.</p>
         </blockquote>
@@ -1120,7 +1113,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/remote_sensing/braycu.png" alt="Bray curtis table for the types of vegetation. " width="774" height="199" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Bray curtis table</figcaption></figure>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What kind of data do you need to use these tools ?</li>
@@ -1129,7 +1122,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>This analisys is for data on forest, it’s a canopy study.</li>
@@ -1147,7 +1140,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
 <h1 id="spectral-indices">Spectral indices</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-compute-spectral-indices"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Compute spectral indices</div>
+  <div class="box-title hands-on-title" id="hands-on-compute-spectral-indices"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute spectral indices</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1" title="Compute spectral indices tool" aria-role="link"><strong>Compute spectral indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1</span></span> with the following parameters:
@@ -1164,7 +1157,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-if-you-want-to-use-your-own-files-envi-bil-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-want-to-use-your-own-files-envi-bil-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you want to use your own files ENVI BIL<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>Check that the “Input raster” datatype is bil and that “Input raster header” datatype is hdr</p>
 
@@ -1177,7 +1170,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
             <p>Press <strong>Save</strong></p>
 
             <blockquote class="comment">
-              <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+              <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
               <p>Do the same for the raster header with the datatype hdr</p>
             </blockquote>
@@ -1187,7 +1180,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>You can choose whichever indice you want</p>
 
@@ -1200,7 +1193,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
 <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/remote_sensing/ndvi.png" alt="A tabular with columns for the NDVI index, the longitude and the latitude. " width="1275" height="313" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Normalized different vegetation index</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-spectral-indices-and-essential-biodiversity-variables"><button class="gtn-boxify-button details" type="button" aria-controls="details-spectral-indices-and-essential-biodiversity-variables" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Spectral indices and Essential Biodiversity Variables<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-spectral-indices-and-essential-biodiversity-variables"><button class="gtn-boxify-button details" type="button" aria-controls="details-spectral-indices-and-essential-biodiversity-variables" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Spectral indices and Essential Biodiversity Variables<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Remotely sensed diversity is consistent with most of the essential spatially constrained biodiversity variables proposed by Skidmore et al. (2015). This highlights the need for increased dialogue and collaboration between the biodiversity monitoring community and the remote sensing community to make satellite remote sensing a tool of choice for conservation. Increased dialogue is also essential within the biodiversity monitoring community to achieve this. From this point of view multiple Satellite Remote Sensing EBV (SRS EBV) were created.
 Some of the indices proposed here will allow you to compute  SRS EBV.
@@ -1210,14 +1203,14 @@ For instance it allows you to compute one of GEO BON EBV <a href="https://portal
 <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/remote_sensing/ccci.png" alt="A tabular showing the Canopy Chlorophyl Content index according to the longitude and latitude. " width="1417" height="1181" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Canopy Chlorophyl Content index tabular</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What’s the difference between biodiversity indicators and spectral indices ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Biodiversity indicators give us informations on the heterogeneity of the landscape whereas spectral indices inform us on the well being of the vegetation.</li>
@@ -1232,14 +1225,14 @@ For instance it allows you to compute one of GEO BON EBV <a href="https://portal
 <p>You are now all set to use your remote sensing data in order to do a biodiversity analysis. Before you go on one last reflexion.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Should remote sensing replace in-situ data ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>NO ! remote sensing and in-situ data should come and complete one another to have the most complete view of the state of biodiversity.</li>
@@ -1442,7 +1435,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

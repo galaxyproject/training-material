@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Inferring Trajectories using Monocle3 (R)">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -411,7 +411,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -448,14 +448,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Inferring Trajectories using Monocle3 (R)</h1>
@@ -884,7 +877,7 @@ Sentry.init({
 </span></code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-uploading-files-from-your-computer-is-also-an-option"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uploading-files-from-your-computer-is-also-an-option" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Uploading files from your computer is also an option!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-uploading-files-from-your-computer-is-also-an-option"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uploading-files-from-your-computer-is-also-an-option" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Uploading files from your computer is also an option!<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate a cds file from them instead. For example, if you first downloaded the files from Galaxy, your files will have the <code class="language-plaintext highlighter-rouge">.tabular</code> extension. In this case, we will use the <code class="language-plaintext highlighter-rouge">read.delim()</code> function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing <code class="language-plaintext highlighter-rouge">Copy path</code>. The second argument, <code class="language-plaintext highlighter-rouge">row.names=1</code> takes the column number of the data file from which to take the row names.</p>
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># read in the files</span><span class="w">
@@ -894,12 +887,12 @@ Sentry.init({
 </span></code></pre></div>  </div>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>Why should we set <code class="language-plaintext highlighter-rouge">row.names=1</code>?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>This allows us to ensure that the expression value matrix has the same number of columns as the <code class="language-plaintext highlighter-rouge">cell_metadata</code> has rows and the same number of rows as the <code class="language-plaintext highlighter-rouge">gene_metadata</code> has rows. Importantly, the row names of the <code class="language-plaintext highlighter-rouge">cell_metadata</code> object should match the column names of the expression matrix and the row names of the <code class="language-plaintext highlighter-rouge">gene_metadata</code> object should match the row names of the expression matrix.</p>
 
@@ -909,7 +902,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-reading-in-the-files-for-rstudio-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reading-in-the-files-for-rstudio-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Reading in the files for RStudio users<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-reading-in-the-files-for-rstudio-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reading-in-the-files-for-rstudio-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Reading in the files for RStudio users<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you are working in RStudio Cloud, you have to click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded data files to upload. You should now see all three files in this window. You might want to rename the files to make their names shorter.</p>
 
@@ -964,7 +957,7 @@ expression_path &lt;- file.choose()
 <p>We are now ready to process our data!</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-format-conversion"><button class="gtn-boxify-button details" type="button" aria-controls="details-format-conversion" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Format conversion<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-format-conversion"><button class="gtn-boxify-button details" type="button" aria-controls="details-format-conversion" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Format conversion<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Since Monocle’s CDS object is analogous to Python’s AnnData, why don’t we use some kind of conversion between those two formats? There is indeed a package called <code class="language-plaintext highlighter-rouge">sceasy</code> that helps easy conversion of different single-cell data formats to each other. However, when we tested this conversion on our dataset and then used Monocle to plot the expression of genes, the plots were not correct – the expression was shown to be identical throughout the sample. For comparison, Seurat did well when plotting gene expression of the same converted object! Although conversion functions are very handy, you have to be aware that their output might be interpreted differently by certain packages. Therefore, to make sure that the analysis is reliable, we decided to generate CDS object directly using Monocle’s function.</p>
   <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy-monocle/monocle_seurat.png" alt="Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool. Gene expression in Monocle plots is identical throughout the sample, while the expression of the same genes plotted by Seurat is noticeable only in specific clusters." width="866" height="839" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool.</figcaption></figure>
@@ -973,7 +966,7 @@ expression_path &lt;- file.choose()
 
 <h1 id="additional-step-adding-genes-symbols-based-on-their-ids">Additional step: adding genes symbols based on their IDs</h1>
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-additional-step"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Additional step</div>
+  <div class="box-title warning-title" id="warning-additional-step"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Additional step</div>
   <p>This step is not necessary for the dataset we are working on but some users might find it helpful when analysing their own data.</p>
 
 </blockquote>
@@ -1035,7 +1028,7 @@ But what if we didn’t have the genes symbols in our CDS object and wanted to a
 </span></code></pre></div></div>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-ensembl-connection-problems"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Ensembl connection problems</div>
+  <div class="box-title warning-title" id="warning-ensembl-connection-problems"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Ensembl connection problems</div>
   <p>Sometimes you may encounter some connection issues with Ensembl. To improve performance Ensembl provides several mirrors of their site distributed around the globe. When you use the default settings for useEnsembl() your queries will be directed to your closest mirror geographically. In theory this should give you the best performance, however this is not always the case in practice. For example, if the nearest mirror is experiencing many queries from other users it may perform poorly for you. In such cases, the other mirrors should be chosen automatically.</p>
 
 </blockquote>
@@ -1093,12 +1086,12 @@ First, let’s check how our dataset looks in terms of batch effects. We can do 
 <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy-monocle/batch_correction.png" alt="Left image showing dataset before batch correction: upper and lower right branches mostly consist of N705 and N706. Right image showing the dataset after batch correction: the cells from all the samples are evenly spread throughout the whole dataset." width="1383" height="590" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Comparison of the dataset before and after batch correction.</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Does your plot look the same as the one in the Figure?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Your plot might be slightly different to the one shown in the Figure but this is fine, as long as you see analogical patterns. Some libraries that you’re using might have been updated, giving non-identical output. However, the principle behind the analysis is still the same, so you can peacefully follow the tutorial. Just keep your eyes open and… THINK!</p>
 
@@ -1111,7 +1104,7 @@ First, let’s check how our dataset looks in terms of batch effects. We can do 
 <p>Now we can move to the next step and perform dimensionality reduction.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-plotting-labels-vs-legend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-labels-vs-legend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Plotting: labels vs legend<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-plotting-labels-vs-legend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-labels-vs-legend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Plotting: labels vs legend<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>When creating graphs, we sometimes use labels and sometimes just a legend. You can choose whichever you think makes the data clear and readable.</p>
 
@@ -1126,7 +1119,7 @@ Monocle uses a technique called “community detection” (<span class="citation
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from <span class="citation"><a href="#Wolf_2019">Wolf <i>et al.</i> 2019</a></span>, introduced as part of their <a href="https://github.com/theislab/paga">PAGA</a> algorithm.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Clusters vs partitions<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Clusters vs partitions<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene expression. The relationships between different clusters are analysed to identify possible trajectories.</p>
 
@@ -1172,12 +1165,12 @@ Monocle also divides the cells into larger, more well separated groups called pa
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Have the clusters change after changing the partition q-value?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It might be the case that after changing partition q-value, you will notice that additional clusters appeared. In that situation, you might either play around the <code class="language-plaintext highlighter-rouge">resolution</code> and <code class="language-plaintext highlighter-rouge">partition_qval</code> values, go forward with the current clustering (adjusting the parameters accordingly), or check the other method of assigning cells to one partition given below.</p>
 
@@ -1189,7 +1182,7 @@ Monocle also divides the cells into larger, more well separated groups called pa
 
 <h2 id="additional-step-assigning-cells-to-one-partition">Additional step: assigning cells to one partition</h2>
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-additional-step-1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Additional step</div>
+  <div class="box-title warning-title" id="warning-additional-step-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Additional step</div>
   <p>This step is not necessary for the dataset we are working on but some users might find it helpful when analysing their own data.</p>
 
 </blockquote>
@@ -1220,7 +1213,7 @@ Monocle also divides the cells into larger, more well separated groups called pa
 <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy-monocle/partitions_compare.png" alt="Left image showing the dataset divided into 4 partitions. Right image showing all cells assigned to one partition." width="1383" height="590" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> The result of the manual assignment of all the cells to one partition.</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-and-operators"><button class="gtn-boxify-button details" type="button" aria-controls="details-and-operators" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: @ and $ operators<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-and-operators"><button class="gtn-boxify-button details" type="button" aria-controls="details-and-operators" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: @ and $ operators<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>As you saw above, we used <code class="language-plaintext highlighter-rouge">@</code> and <code class="language-plaintext highlighter-rouge">$</code> operators to navigate in CDS object. What is the difference between them? <code class="language-plaintext highlighter-rouge">$</code> operator is used to access one variable/column, while <code class="language-plaintext highlighter-rouge">@</code> extracts the contents of a slot in an object with a formal (S4) class structure. If you use <code class="language-plaintext highlighter-rouge">View()</code> function on our CDS object, you will see the elements of type “S4” that you can access using <code class="language-plaintext highlighter-rouge">@</code> operator. The suggestion list of elements that can be accessed should also pop up as you type the name of the object followed by the corresponding operator.</p>
 
@@ -1275,11 +1268,11 @@ Monocle also divides the cells into larger, more well separated groups called pa
 <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy-monocle/genes.png" alt="7 graphs, each showing expression of one of the genes in the corresponding clusters: 'Il2ra' – cluster 4; 'Cd8b1' and 'Cd8a' – clusters 1,6,2; 'Cd4' – high expression in cluster 5; 'Itm2a' – cluster 3; 'Aif1' – barely anything, no specific cluster assigned; 'Hba-a1' - throughout the entire sample in low numbers." width="700" height="540" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Expression of the reference marker genes across analysed sample.</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-genes-cell-types-and-clusters"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Genes, cell types and clusters</div>
+  <div class="box-title question-title" id="question-genes-cell-types-and-clusters"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genes, cell types and clusters</div>
   <p>Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorials, how would you assign the clusters?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.</p>
     <ul>
@@ -1330,12 +1323,12 @@ We will use Monocle’s function <code class="language-plaintext highlighter-rou
 <p>You can group the cells by any categorical variable in <code class="language-plaintext highlighter-rouge">colData(cds_clustered)</code>. The parameter <code class="language-plaintext highlighter-rouge">reference_cells</code> is used to accelerate the marker significance test at some cost in sensitivity. It works by randomly selecting a specified number of cells and performing the marker significance test against a chosen set of cells. If your dataset is not massively big, you might skip this parameter as it wouldn’t help much.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What are the variables stored in <code class="language-plaintext highlighter-rouge">marker_test</code> data frame and what do they mean?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Those are 10 variables that you can check easily either using colnames(marker_test) or <code class="language-plaintext highlighter-rouge">View(marker_test)</code> which will also display all the corresponding values.</p>
     <ul>
@@ -1377,7 +1370,7 @@ We will use Monocle’s function <code class="language-plaintext highlighter-rou
 </span></code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-unexpectedly-too-many-genes-on-y-axis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-unexpectedly-too-many-genes-on-y-axis" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Unexpectedly too many genes on y-axis?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-unexpectedly-too-many-genes-on-y-axis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-unexpectedly-too-many-genes-on-y-axis" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Unexpectedly too many genes on y-axis?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you notice that on your dot plot any cluster has more genes than you specified (here we set one gene per cluster <code class="language-plaintext highlighter-rouge">top_n(1, pseudo_R2)</code>), go back to the code and create a new cell, right after assigning <code class="language-plaintext highlighter-rouge">top_specific_markers</code> object and just before <code class="language-plaintext highlighter-rouge">top_marker_names</code>. In the new cell, paste and execute the following:</p>
 
@@ -1424,13 +1417,13 @@ This problem may arise when several genes in one cluster have the same values of
 <p>A new file should appear in the ‘Files’ window. If you click on it, you will see the cell types and their corresponding marker genes, satisfying your chosen conditions.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-marker-genes-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-marker-genes-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Marker genes file<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-marker-genes-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-marker-genes-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Marker genes file<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Note that you can use the above block of code to generate file with the marker genes for unannotated CDS object to help you identify and check specifically expressed genes – you’d only have to change <code class="language-plaintext highlighter-rouge">group_cells_by</code> parameter from “cell_type” to “cluster”.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you are working in RStudio locally, you might want to try a great function <code class="language-plaintext highlighter-rouge">choose_cells()</code>, which allows you to make a subset of the CDS object containing only cells of interest to investigate certain clusters more in-depth. It only works in interactive mode, so can be only used locally - when you call it, then a pop-up window will appear where you can choose cells to subset.</p>
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># create a CDS subset</span><span class="w">
@@ -1522,7 +1515,7 @@ There are a couple of ways to specify the root cells:</p>
 </span></code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you are working in RStudio locally, you can use <code class="language-plaintext highlighter-rouge">order_cells()</code> function in the interactive mode. The pop-up window should appear and then you can simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.</p>
 
@@ -1651,12 +1644,12 @@ For example <code class="language-plaintext highlighter-rouge">plot_genes_violin
 <p>You can also visualise the modules using <code class="language-plaintext highlighter-rouge">plot_cells()</code> function. We’ve chosen some modules to see how the differences on a heatmap correlate with the expression shown on our starting plot.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which modules to plot?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>This is totally up to you! It might be the case that you got different numbering of modules, so then using the numbers specified in the code below won’t make much sense. Just look at your heatmap, compare the differences between modules and think which ones would be the most interesing to visualise.</p>
 
@@ -1740,7 +1733,7 @@ Essentially the workflow is the same as we followed in two dimensions. The cruci
 <p>Congratulations! You’ve made it through Jupyter!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Closing JupyterLab</div>
+  <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Closing JupyterLab</div>
   <ol>
     <li>Click <strong>User</strong>: <strong>Active Interactive Tools</strong></li>
     <li>Tick the box of your Jupyter Interactive Tool, and click <strong>Stop</strong></li>
@@ -1941,7 +1934,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Running Jobs on Remote Resources with Pulsar">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -601,7 +601,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -638,14 +638,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Running Jobs on Remote Resources with Pulsar</h1>
@@ -1441,7 +1434,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-this-is-not-intended-as-a-standalone-pulsar-guide"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-is-not-intended-as-a-standalone-pulsar-guide" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: This is NOT intended as a standalone Pulsar guide<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-this-is-not-intended-as-a-standalone-pulsar-guide"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-this-is-not-intended-as-a-standalone-pulsar-guide" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: This is NOT intended as a standalone Pulsar guide<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.</p>
 </blockquote>
 
@@ -1473,7 +1466,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-other-file-transport-methods-for-pulsar"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-file-transport-methods-for-pulsar" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Other file transport methods for Pulsar<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-other-file-transport-methods-for-pulsar"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-file-transport-methods-for-pulsar" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Other file transport methods for Pulsar<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Pulsar can use a variety of file transport methods including:</p>
   <ul>
@@ -1496,7 +1489,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why are we using Pulsar in MQ mode here and not the RESTful interface?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-using-pulsar-in-mq-mode-here-and-not-the-restful-interface" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Why are we using Pulsar in MQ mode here and not the RESTful interface?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We are teaching you to install Pulsar and configure it in MQ mode in this tutorial. Configuring Pulsar in RESTful mode is also possible and is quite useful in certain situations. However, in the most common situation MQ mode is preferable for a number of reasons:</p>
   <ul>
     <li>When running Pulsar in RESTful mode, all of the job control and data transfer is controlled by the Galaxy server usually using http transfers. This can place a limit on the size of files that can be transferred without constant configuring of the webserver.</li>
@@ -1518,7 +1511,7 @@ Sentry.init({
 <p>Firstly we will add and configure another <em>role</em> to our Galaxy playbook - a community role which runs RabbitMQ in docker and configures it. In order to have docker installed automatically, we use geelingguy’s docker role, which luckly needs no configuration changes. Additionally we will use the Galaxy community role for deploying Pulsar</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-the-ansible-roles"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install the Ansible roles</div>
+  <div class="box-title hands-on-title" id="hands-on-install-the-ansible-roles"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install the Ansible roles</div>
 
   <ol>
     <li>
@@ -1548,7 +1541,7 @@ Sentry.init({
       <p>Now install it with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1580,7 +1573,7 @@ Sentry.init({
 <p>Notice the variable we used instead of directly placing the password there. It will be read from vault instead.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-tagging-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tagging-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Tagging users<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-tagging-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tagging-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Tagging users<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a <em>administrator</em> tag. These tags allow you to grant permissions to every user with a specific tag.</p>
 </blockquote>
 
@@ -1589,7 +1582,7 @@ Sentry.init({
 <p>We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-port-accessibility-is-important"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-port-accessibility-is-important" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Port accessibility is important!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-port-accessibility-is-important"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-port-accessibility-is-important" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Port accessibility is important!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Additionally, RabbitMQ provides a management interface for us, where we can see e.g. queues, connections and statistics.</p>
 
   <table>
@@ -1623,14 +1616,14 @@ Sentry.init({
 <h3 id="add-rabbitmq-configuration-to-galaxy-vm">Add RabbitMQ configuration to Galaxy VM.</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-rabbitmq-settings-to-galaxy-vm-groupvars-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.</div>
+  <div class="box-title hands-on-title" id="hands-on-add-rabbitmq-settings-to-galaxy-vm-groupvars-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.</div>
 
   <ol>
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and define some random passwords:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1744,7 +1737,7 @@ Sentry.init({
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-rabbitmq-installation-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rabbitmq-installation-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: RabbitMQ installation errors?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-rabbitmq-installation-errors"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rabbitmq-installation-errors" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: RabbitMQ installation errors?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of <code class="language-plaintext highlighter-rouge">rabbitmq_version:</code> in the configuration above. <a href="https://www.rabbitmq.com/which-erlang.html">Information on the RabbitMQ Erlag version requirements.</a></p>
       </blockquote>
     </li>
@@ -1766,7 +1759,7 @@ Sentry.init({
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-is-this-at-the-end"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-is-this-at-the-end" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why is this at the end?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-is-this-at-the-end"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-is-this-at-the-end" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Why is this at the end?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.</p>
 
         <p>Here are the dependencies between the roles:</p>
@@ -1815,7 +1808,7 @@ Sentry.init({
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1824,13 +1817,13 @@ Sentry.init({
       <p>The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it’s running now:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">CONTAINER</span> <span class="err">ID</span>   <span class="err">IMAGE</span>             <span class="err">COMMAND</span>                  <span class="err">CREATED</span>        <span class="err">STATUS</span>       <span class="err">PORTS</span>                                                                                              <span class="err">NAMES</span>
 <span class="err">d0d69d035768</span>   <span class="err">rabbitmq:3.9.11</span>   <span class="err">"docker-entrypoint.s…"</span>   <span class="err">6</span> <span class="err">months</span> <span class="err">ago</span>   <span class="err">Up</span> <span class="err">5</span> <span class="err">hours</span>   <span class="err">4369/tcp,</span> <span class="err">0.0.0.0:5671-&gt;5671/tcp,</span> <span class="err">5672/tcp,</span> <span class="err">15691-15692/tcp,</span> <span class="err">25672/tcp,</span> <span class="err">0.0.0.0:15672-&gt;15672/tcp</span>   <span class="err">rabbit_hole</span>
@@ -1846,13 +1839,13 @@ file, it falls back to the default configuration (listens <em>without</em> ssl o
 <code class="language-plaintext highlighter-rouge">tcp/5672</code>) so be sure to check that everything is OK before continuing.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec </span>rabbit_hole rabbitmq-diagnostics status
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">...</span>
 
@@ -1870,7 +1863,7 @@ file, it falls back to the default configuration (listens <em>without</em> ssl o
       <p>Since we enabled metrics, let’s check if the api works:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <p>Make sure to replace &lt;password&gt; with the one from your vault.
 If you don’t have jq installed, just leave that part with the pipe out, it just makes it prettier.</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">--silent</span> <span class="nt">-s</span> <span class="nt">-u</span> admin:&lt;password&gt; http://localhost:15672/api/whoami | jq
@@ -1878,7 +1871,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -1894,14 +1887,14 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>But wait! There are more ways it can go wrong. To be extra sure, run a quick <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:5672
 </code></pre></div>        </div>
         <p>(the non-encrypted port)</p>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -1918,13 +1911,13 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl <span class="nt">-k</span> <span class="nt">--http0</span>.9 https://localhost:5671 <span class="nt">--output</span> - <span class="o">&amp;&amp;</span> <span class="nb">printf</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out-bash-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
         <p>This should report the following response:</p>
 
@@ -1947,7 +1940,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>By this point you should have a functional RabbitMQ! Let’s check out the dashboard:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-accessing-the-rabbitmq-dashboard"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Accessing the RabbitMQ Dashboard</div>
+  <div class="box-title hands-on-title" id="hands-on-accessing-the-rabbitmq-dashboard"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Accessing the RabbitMQ Dashboard</div>
 
   <ol>
     <li>
@@ -1977,7 +1970,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2068,7 +2061,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-pulsar-group-variables"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure pulsar group variables</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-pulsar-group-variables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure pulsar group variables</div>
 
   <ol>
     <li>
@@ -2132,7 +2125,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </code></pre></div>      </div>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-running-non-conda-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-running-non-conda-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Running non-conda tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-running-non-conda-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-running-non-conda-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Running non-conda tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If the tool you want to run on Pulsar doesn’t have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the <a href="https://pulsar.readthedocs.io/en/latest/">Pulsar documentation</a> for details.</p>
       </blockquote>
     </li>
@@ -2159,7 +2152,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>We need to include a couple of pre-tasks to install virtualenv, git, etc.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating the playbook</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating the playbook</div>
 
   <ol>
     <li>
@@ -2199,14 +2192,14 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run the Playbook</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-playbook"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run the Playbook</div>
 
   <ol>
     <li>
       <p>Run the playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2214,7 +2207,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-connection-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-connection-issues" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Connection issues?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-connection-issues"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-connection-issues" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Connection issues?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If your remote pulsar machine uses a different key, you may need to supply the <code class="language-plaintext highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="language-plaintext highlighter-rouge">--private-key key.pem</code> option.</p>
       </blockquote>
     </li>
@@ -2247,7 +2240,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on Pulsar.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure Galaxy</div>
 
   <ol>
     <li>
@@ -2343,7 +2336,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
       <p>Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -2362,7 +2355,7 @@ If you don’t have jq installed, just leave that part with the pipe out, it jus
 <p>Now we will upload a small set of data to run bwa-mem with.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-testing-the-pulsar-destination"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Testing the Pulsar destination</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-the-pulsar-destination"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Testing the Pulsar destination</div>
 
   <ol>
     <li>
@@ -2640,7 +2633,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

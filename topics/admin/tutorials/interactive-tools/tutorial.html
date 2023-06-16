@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Galaxy Interactive Tools">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -379,7 +379,7 @@ Sentry.init({
       "name": "interactive-tools"
     }
   ],
-  "abstract": "> <div class=\"box-title warning-title\" id=\"warning-evolving-topic-not-updated-for-23-0-gravity\"><i class=\"fas fa-exclamation-triangle\" aria-hidden=\"true\" ></i> Warning: Evolving Topic, Not Updated for 23.0 + Gravity</div>"
+  "abstract": "> <div class="box-title warning-title" id="warning-evolving-topic-not-updated-for-23-0-gravity"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Evolving Topic, Not Updated for 23.0 + Gravity</div>"
 }
         </script>
         
@@ -520,7 +520,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -557,14 +557,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Galaxy Interactive Tools</h1>
@@ -1186,7 +1179,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-evolving-topic-not-updated-for-23-0-gravity"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Evolving Topic, Not Updated for 23.0 + Gravity</div>
+  <div class="box-title warning-title" id="warning-evolving-topic-not-updated-for-23-0-gravity-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Evolving Topic, Not Updated for 23.0 + Gravity</div>
   <p>Galaxy Interactive Tools are a <strong>new feature</strong> and there are some rough edges. Work to improve the experience of deploying and using them is ongoing.</p>
 </blockquote>
 
@@ -1195,7 +1188,7 @@ Sentry.init({
 <p>Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is <a href="https://jupyter.org/">Jupyter Notebook</a>. Galaxy Interactive Tools are similar in purpose to <a href="https://docs.galaxyproject.org/en/release_19.09/admin/special_topics/interactive_environments.html">Galaxy Interactive Environments</a> (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy’s job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-before-you-continue"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Before You Continue</div>
+  <div class="box-title warning-title" id="warning-before-you-continue"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Before You Continue</div>
   <p>If you are <em>not</em> completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training">Galaxy Admin Training</a> course, <strong>you will need a wildcard DNS record for your Galaxy server and a method for obtaining a wildcard SSL certificate for your Galaxy server</strong>.</p>
 
   <p><br /></p>
@@ -1247,12 +1240,12 @@ Sentry.init({
 <p>If the terms “Ansible,” “role,” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a>.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-uses-ansible"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Uses Ansible!</div>
+  <div class="box-title warning-title" id="warning-uses-ansible"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Uses Ansible!</div>
   <p>This section of the tutorial builds upon the work in the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, please ensure that you have completed that tutorial first.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Ansible Best Practices</div>
+  <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Ansible Best Practices</div>
   <p>If you’ve set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge">galaxyservers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>. Although for the purposes of this tutorial, the Galaxy server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge">galaxyservers</code> group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.</p>
 </blockquote>
 
@@ -1261,7 +1254,7 @@ Sentry.init({
 <p>We will use several Ansible roles for this tutorial. In order to avoid repetetively adding them to <code class="language-plaintext highlighter-rouge">requirements.yml</code> and installing them, we can simply install them all before getting started. Each role will be discussed in further detail later in the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-new-ansible-roles"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing New Ansible Roles</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-new-ansible-roles"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing New Ansible Roles</div>
 
   <ol>
     <li>
@@ -1287,12 +1280,12 @@ Sentry.init({
 <p>Currently, Galaxy Interactive Tools must be run in Docker containers. It may be possible to run them in Singularity or other types of containers in the future. Thus, the first step is ensuring that the <em>nodes</em> where Galaxy will run have Docker installed. Both the Galaxy Project and Galaxy Project EU organizations have their own docker roles, but these are not published to Ansible Galaxy because they were mostly developed for internal purposes. For now, we will use the <a href="https://galaxy.ansible.com/geerlingguy/docker">docker role</a> by the prolific Ansible Galaxy publisher, <a href="https://galaxy.ansible.com/geerlingguy">Jeff Geerling (geerlingguy)</a>. Have a look at the geerlingguy.docker <a href="https://github.com/geerlingguy/ansible-role-docker/blob/master/README.md">README</a> and <a href="https://github.com/geerlingguy/ansible-role-docker/blob/master/defaults/main.yml">defaults/main.yml</a> to get an understanding of what variables are used to control the role.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What variables might be relevant to using this role?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The <code class="language-plaintext highlighter-rouge">docker_users</code> variable (a <em>list</em>) controls which users are able to interact with the Docker daemon, which our Galaxy user will need to do. Additionally, Docker Compose is configured by default, which we do not need, so it can be disabled with <code class="language-plaintext highlighter-rouge">docker_install_compose: false</code>.</p>
 
@@ -1301,7 +1294,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-docker-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Docker with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-docker-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Docker with Ansible</div>
 
   <ol>
     <li>
@@ -1340,12 +1333,12 @@ Sentry.init({
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Why is <code class="language-plaintext highlighter-rouge">"{{ galaxy_user.name }}"</code> specified instead of just the user <code class="language-plaintext highlighter-rouge">galaxy</code>?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Duplicating values is never a good idea. If we needed to change the Galaxy user down the line or wanted to reuse this playbook on another host where the Galaxy username was different, we would have to change the value in multiple locations.</p>
 
         </blockquote>
@@ -1396,7 +1389,7 @@ Sentry.init({
 <p>The GIE Proxy is written in <a href="https://nodejs.org/">Node.js</a> and requires some configuration. Thankfully there is an Ansible role, <a href="https://galaxy.ansible.com/usegalaxy_eu/gie_proxy">usegalaxy_eu.gie_proxy</a>, that can install the proxy and its dependencies, and configure it for you. As usual, have a look through the <a href="https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/README.md">README</a> and <a href="https://github.com/usegalaxy-eu/ansible-gie-proxy/blob/master/defaults/main.yml">defaults</a> to investigate which variables you might need to set before continuing.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-the-proxy-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing the Proxy with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-the-proxy-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing the Proxy with Ansible</div>
 
   <ol>
     <li>
@@ -1492,12 +1485,12 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What did running the playbook change?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>A new Python venv was created at <code class="language-plaintext highlighter-rouge">/srv/galaxy/gie-proxy/venv</code></li>
@@ -1521,7 +1514,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </span></code></pre></div></div>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
 
   <p>You can ignore errors about failing to read the sessions map file for now - Galaxy will create it when it’s needed.</p>
 
@@ -1532,7 +1525,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>As explained in the previous section, we will proxy the Interactive Tools Proxy with nginx so that it can serve requests on the standard HTTPS port, 443. Because we’ve configured nginx with Ansible, this is relatively simple.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-the-proxy-with-ansible-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing the Proxy with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-the-proxy-with-ansible-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing the Proxy with Ansible</div>
 
   <ol>
     <li>
@@ -1596,7 +1589,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>As we use Let’s Encrypt in staging mode, the wildcard certificates generated with either option 1 or 2 will still be invalid, and you will still see a warning in your web browser when accessing an Interactive Tool. If this warning is not a problem for you, you can just skip this section of the tutorial, and move on to “Enabling Interactive Tools in Galaxy”.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-requesting-a-wildcard-certificate-with-certbot-using-ansible-option-1-rfc2136"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 1 (rfc2136)</div>
+  <div class="box-title hands-on-title" id="hands-on-requesting-a-wildcard-certificate-with-certbot-using-ansible-option-1-rfc2136"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 1 (rfc2136)</div>
 
   <p>This method uses a DNS provider hosted by the Galaxy Project.</p>
 
@@ -1676,12 +1669,12 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the <code class="language-plaintext highlighter-rouge">-e</code> flag to <code class="language-plaintext highlighter-rouge">ansible-playbook</code> and why did we use it?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>As per <code class="language-plaintext highlighter-rouge">ansible-playbook --help</code>:</p>
 
@@ -1703,7 +1696,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-requesting-a-wildcard-certificate-with-certbot-using-ansible-option-2-route53"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 2 (route53)</div>
+  <div class="box-title hands-on-title" id="hands-on-requesting-a-wildcard-certificate-with-certbot-using-ansible-option-2-route53"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 2 (route53)</div>
 
   <p>This method uses route53, the Amazon Web Services DNS provider. To manage connection to AWS, we will first install a specific role.</p>
 
@@ -1816,12 +1809,12 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the <code class="language-plaintext highlighter-rouge">-e</code> flag to <code class="language-plaintext highlighter-rouge">ansible-playbook</code> and why did we use it?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>As per <code class="language-plaintext highlighter-rouge">ansible-playbook --help</code>:</p>
 
@@ -1849,7 +1842,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>A few Interactive Tool wrappers are provided with Galaxy, but they are <a href="https://github.com/galaxyproject/galaxy/blob/9d788cb144a18570e7e5e948ac1f7bc04fec4e75/lib/galaxy/config/sample/tool_conf.xml.sample#L126">commented out in Galaxy’s default tool config file</a>. As a result, we need to instruct the <a href="https://github.com/galaxyproject/ansible-galaxy">galaxyproject.galaxy role</a> to install a tool panel configuration file containing at least one of these tools in order to try them out. For the purposes of this tutorial, a good choice is the <a href="https://ethercalc.net/">EtherCalc</a> GxIT, because it has a relatively small <a href="https://hub.docker.com/r/shiltemann/ethercalc-galaxy-ie">Docker image</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-enabling-interactive-tools-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Enabling Interactive Tools in Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-enabling-interactive-tools-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Enabling Interactive Tools in Galaxy</div>
 
   <ol>
     <li>
@@ -1882,7 +1875,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </code></pre></div>      </div>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-note-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+        <div class="box-title comment-title" id="comment-note-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
         <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code> file, as well as defined <code class="language-plaintext highlighter-rouge">galaxy_config_templates</code> and set the <code class="language-plaintext highlighter-rouge">job_config_file</code> option in <code class="language-plaintext highlighter-rouge">galaxy_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
       </blockquote>
     </li>
@@ -1961,7 +1954,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>You should now be ready to run an Interactive Tool in Galaxy!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-an-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running an Interactive Tool</div>
+  <div class="box-title hands-on-title" id="hands-on-running-an-interactive-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running an Interactive Tool</div>
 
   <ol>
     <li>Ensure that you are logged in to your Galaxy server by checking the <strong>User</strong> menu in the masthead.</li>
@@ -2021,7 +2014,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>Because we want to maintain dataset privacy, Pulsar is the better choice here. And in fact, we don’t even need to set up a Pulsar server: because we only need Pulsar’s input staging and isolation features, we can use <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L106">Embedded Pulsar</a>, which runs a Pulsar server within the Galaxy application to perform these tasks. Embedded Pulsar can even interface with your distributed resource manager (aka cluster scheduler) of choice, as long as your Galaxy server and cluster both have access to a common filesystem (otherwise, you will need to use Pulsar in standalone mode; see the <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">Running Jobs on Remote Resources with Pulsar</a> tutorial).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-interactive-tools-with-embedded-pulsar"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running Interactive Tools with Embedded Pulsar</div>
+  <div class="box-title hands-on-title" id="hands-on-running-interactive-tools-with-embedded-pulsar"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running Interactive Tools with Embedded Pulsar</div>
 
   <ol>
     <li>
@@ -2066,14 +2059,14 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-ansible-best-practices"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ansible-best-practices" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Ansible Best Practices<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-ansible-best-practices"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ansible-best-practices" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Ansible Best Practices<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>We have used a bit of bad practice here: hardcoding the Pulsar config file path in to the job config file. At this point, we should convert the job config file to a template (in the same manner as the Pulsar config template). The reason we don’t do it in this tutorial is to maintain compatibility with other tutorials, but you may do so by following the same pattern as is used for the Pulsar config template.</p>
       </blockquote>
 
       <p>Next, <strong>modify</strong> the <code class="language-plaintext highlighter-rouge">interactive_local</code> destination to use the new runner and set the new parameter <code class="language-plaintext highlighter-rouge">container_monitor_result</code> to <code class="language-plaintext highlighter-rouge">callback</code> (explained in more detail in the next step):</p>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-untrusted-ssl-certificates"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Untrusted SSL Certificates</div>
+        <div class="box-title warning-title" id="warning-untrusted-ssl-certificates"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Untrusted SSL Certificates</div>
         <p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training">Galaxy Admin Training</a> course, you will also need the <code class="language-plaintext highlighter-rouge">&lt;env&gt;</code> setting shown below to prevent problems with the untrusted SSL certificates in use during the course. Galaxy servers with valid SSL certificates <em>do not need this option</em>.</p>
       </blockquote>
 
@@ -2100,7 +2093,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
       <p>Open your <code class="language-plaintext highlighter-rouge">galaxyservers</code> group variables file and instruct <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> to install the Pulsar configuration file:</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-note-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+        <div class="box-title comment-title" id="comment-note-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
         <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already defined <code class="language-plaintext highlighter-rouge">galaxy_config_templates</code>. If this is the case, be sure to <strong>merge the changes in this step with your existing playbook</strong>.</p>
       </blockquote>
 
@@ -2118,7 +2111,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 </code></pre></div>      </div>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-detail-infrastructure-url-callback"><button class="gtn-boxify-button details" type="button" aria-controls="details-detail-infrastructure-url-callback" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Detail: Infrastructure URL/Callback<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-detail-infrastructure-url-callback"><button class="gtn-boxify-button details" type="button" aria-controls="details-detail-infrastructure-url-callback" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Detail: Infrastructure URL/Callback<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Galaxy must be made aware of the randomly selected port Docker has assigned after the GxIT begins operating, in order to update the proxy map. By default, this is done by writing a JSON file in the job directory. This method does not work with Pulsar since Pulsar uses a different job directory from the Galaxy job directory. As a result, Pulsar jobs use the <code class="language-plaintext highlighter-rouge">callback</code> method configured in the previous step to make a request to Galaxy’s API, the URL for which is set in <code class="language-plaintext highlighter-rouge">galaxy_infrastructure_url</code>.</p>
       </blockquote>
     </li>
@@ -2135,12 +2128,12 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 <p>Once the playbook run is complete and your Galaxy server has restarted, run the EtherCalc Interactive Tool again.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Once EtherCalc is running, check the mounts of its container. What do you observe?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="si">$(</span>docker ps <span class="nt">-q</span><span class="si">)</span> | jq <span class="s1">'.[0].HostConfig.Binds'</span>
 <span class="go">[
@@ -2323,7 +2316,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

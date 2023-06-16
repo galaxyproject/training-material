@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Statistical analysis of DIA data">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -413,7 +413,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -450,14 +450,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Statistical analysis of DIA data</h1>
@@ -877,7 +870,7 @@ Sentry.init({
 
 <h2 id="get-data">Get data</h2>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -912,7 +905,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 <h1 id="statistical-analysis-with-msstats">Statistical analysis with <strong>MSstats</strong></h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-performing-statistical-analysis-using-b-msstats-b-and-the-tabular-output-from-b-pyprophet-export-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Performing statistical analysis using <b>MSstats</b> and the tabular output from <b>PyProphet export</b></div>
+  <div class="box-title hands-on-title" id="hands-on-performing-statistical-analysis-using-b-msstats-b-and-the-tabular-output-from-b-pyprophet-export-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Performing statistical analysis using <b>MSstats</b> and the tabular output from <b>PyProphet export</b></div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="link"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0</span></span> with the following parameters:
@@ -931,7 +924,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-data-process-and-group-comparison"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: data Process and group comparison</div>
+        <div class="box-title comment-title" id="comment-data-process-and-group-comparison"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: data Process and group comparison</div>
         <p>During the data process step the peptide intensities are normalized and protein inference is performed. Using a predefined comparison matrix multiple comparisons can be performed.</p>
       </blockquote>
     </li>
@@ -940,7 +933,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many lines does the PyPyprophet_export.tabular file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?</li>
@@ -948,7 +941,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The PyPyprophet_export.tabular has appr. 230.000 lines whereas the ProcessedData has over 1 mio lines and is in the so called long format. Here every individual transition (single m/z value) is reported per row.</li>
@@ -960,7 +953,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In case the <strong>MSstats</strong> run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
   <ol>
@@ -974,7 +967,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 <h2 id="detailed-investigation-of-ecoli-identifications-and-quantifications">Detailed investigation of Ecoli identifications and quantifications</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</div>
+  <div class="box-title hands-on-title" id="hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="link"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
@@ -1000,7 +993,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-extracting-ecoli-information"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Extracting Ecoli information</div>
+        <div class="box-title comment-title" id="comment-extracting-ecoli-information"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Extracting Ecoli information</div>
         <p>First we only select rows containing specific terms such as “Ecoli” from the complete ComparisonResults file. Afterwards, the table is filtered to containg only proteins with valid statistical information (e.g. p-value). Using the log2 Fold change values from all remaining Ecoli proteins we can observe the distribution of log2FC values from the comparison of the two Spike-in conditions.</p>
       </blockquote>
     </li>
@@ -1009,7 +1002,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed?</li>
@@ -1017,7 +1010,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>In total, over 800 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions.</li>
@@ -1031,7 +1024,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 <h1 id="statistical-analysis-with-msstats-1">Statistical analysis with <strong>MSstats</strong></h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-performing-statistical-analysis-using-b-msstats-b-and-the-msstats-input-from-b-pyprophet-export-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Performing statistical analysis using <b>MSstats</b> and the msstats_input from <b>PyProphet export</b></div>
+  <div class="box-title hands-on-title" id="hands-on-performing-statistical-analysis-using-b-msstats-b-and-the-msstats-input-from-b-pyprophet-export-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Performing statistical analysis using <b>MSstats</b> and the msstats_input from <b>PyProphet export</b></div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="link"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0</span></span> with the following parameters:
@@ -1045,7 +1038,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-msstats-input-format"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: MSstats input format</div>
+        <div class="box-title comment-title" id="comment-msstats-input-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: MSstats input format</div>
         <p>For the statistical analysis using MSstats the input must be in the long format, containing all relevant information in 10 predefined columns. The conversion of the <strong>PyProphet export</strong> output can either be done using <strong>MSstats</strong> (as we did above), or during the <strong>Pyprophet export</strong> step by using another R package called swath2stats (<span class="citation"><a href="#Blattmann2016">Blattmann <i>et al.</i> 2016</a></span>). Prior to the conversion the data can be processed and filtered using the swath2stats functionalities.</p>
       </blockquote>
     </li>
@@ -1054,7 +1047,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many lines does the <code class="language-plaintext highlighter-rouge">PyProphet_msstats_input.tabular</code> file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?</li>
@@ -1062,7 +1055,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The <code class="language-plaintext highlighter-rouge">PyProphet_msstats_input.tabular</code> has over 870.000 lines and the ProcessedData has over 1 mio lines. Here both files are in the long format, in which every transition is reported per row.</li>
@@ -1074,7 +1067,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In case the <strong>MSstats</strong> run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
   <ol>
@@ -1088,7 +1081,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 <h2 id="detailed-investigation-of-ecoli-identifications-and-quantifications-1">Detailed investigation of Ecoli identifications and quantifications</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</div>
+  <div class="box-title hands-on-title" id="hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="link"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
@@ -1118,7 +1111,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed? Are there any differences compared to the selected and filtered results from the previous <strong>MSstats</strong> step?</li>
@@ -1126,7 +1119,7 @@ https://zenodo.org/record/4307758/files/PyProphet_msstats_input.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>In total, over 600 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions. Here we identify 200 Ecoli proteins less than before, however, the number of proteins for which a p-value was calculated differs only slightly.</li>
@@ -1316,7 +1309,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

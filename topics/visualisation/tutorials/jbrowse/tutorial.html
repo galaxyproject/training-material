@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Genomic Data Visualisation with JBrowse">
         <meta property="og:description" content="Training material for data visualisation in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -402,7 +402,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -439,14 +439,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-visualisation">
     <h1 data-toc-skip>Genomic Data Visualisation with JBrowse</h1>
@@ -639,7 +632,7 @@ and HTML5, with optional run-once data formatting tools written in Perl.</p>
 <h1 id="data-upload">Data Upload</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-getting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Getting the data</div>
+  <div class="box-title hands-on-title" id="hands-on-getting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Getting the data</div>
 
   <ol>
     <li>
@@ -679,7 +672,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 <p>We will start by adding a couple of gene call tracks. In our case these are genes and gene predictions, but they don’t have to be. In the general case this can be any interesting region from an analysis, where a tool has pointed out some region for further inspection for some reason, then this data can be visualised with the “gene” track type.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-the-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build the JBrowse</div>
+  <div class="box-title hands-on-title" id="hands-on-build-the-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build the JBrowse</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0</span></span> with the following parameters:
@@ -723,7 +716,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
       <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse-gff-track.png" alt="Screenshot of JBrowse. " width="1202" height="311" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of JBrowse</figcaption></figure>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-error-reading-from-name-store"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-error-reading-from-name-store" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Error reading from name store<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-error-reading-from-name-store"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-error-reading-from-name-store" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Error reading from name store<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p><img src="../../images/jbrowse/error.png" alt="error message. " width="261" height="143" loading="lazy" /></p>
 
         <p>If you see this error message, click OK, this is a known bug.</p>
@@ -742,7 +735,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-naming-tracks"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-naming-tracks" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Naming Tracks<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-naming-tracks"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-naming-tracks" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Naming Tracks<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>The JBrowse tool takes track names directly from file names</li>
@@ -756,7 +749,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
 <p>All of the track types in the JBrowse tool support a wide array of features. We’ve only looked at a simple track with default options, however there are more tools available to us to help create user-friendly JBrowse instances that can embed rich data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-a-jbrowse-for-viewing-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build a JBrowse for viewing Genes</div>
+  <div class="box-title hands-on-title" id="hands-on-build-a-jbrowse-for-viewing-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build a JBrowse for viewing Genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0</span></span> with the following parameters:
@@ -808,7 +801,7 @@ https://zenodo.org/record/3591856/files/variants.vcf
                               <p>In <em>“JBrowse Contextual Menu options [Advanced]”</em>:</p>
 
                               <blockquote class="tip">
-                                <div class="box-title tip-title" id="tip-contextual-menus"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contextual-menus" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Contextual Menus<span class="fold-unfold fa fa-minus-square"></span></button></div>
+                                <div class="box-title tip-title" id="tip-contextual-menus"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contextual-menus" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Contextual Menus<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
                                 <p>We’re going to add a “Contextual Menu” which deserves a little explanation first. In JBrowse
 terminology the right click menu of some features is called the contextual menus. You can customize
@@ -882,7 +875,7 @@ directly in your templating</p>
 <p>Next we will add a sequencing dataset, a BAM file which maps some sequencing reads against various locations along the genome. JBrowse helpfully highlights which reads have mapping issues, and any changes in bases between the reads and the genome. We “Autogenerate a SNP track”, which produces an extra track we can enable in JBrowse. This track reads the same BAM file used for visualising reads, and then produces a SNP and coverage visualisation. <strong>NB</strong>: This only works for small BAM files, if your files are large (&gt;200 Mb), then you should consider generating these coverage and SNP tracks by other means (e.g. <code class="language-plaintext highlighter-rouge">bamCoverage</code> and <code class="language-plaintext highlighter-rouge">FreeBayes</code> or similar tools) as it will be significantly faster. You can learn more about generating these files in <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">the Mapping tutorial</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0</span></span> with the following parameters:
@@ -991,7 +984,7 @@ directly in your templating</p>
 <p>The best way to accomplish this is through the <code class="language-plaintext highlighter-rouge">gffread</code> tool which can cleanup a gff3 file, and export various features, optionally translating them. With these outputs, the cleaned features and <code class="language-plaintext highlighter-rouge">fasta</code> formatted sequences, you can Blast the sequences, and then supply the resulting Blast XML outputs in addition to the cleaned features, allowing a script to re-associate these Blast results to their original locations along the genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-building-a-jbrowse-for-blast-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Building a JBrowse for Blast results</div>
+  <div class="box-title hands-on-title" id="hands-on-building-a-jbrowse-for-blast-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Building a JBrowse for Blast results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0</span></span> with the following parameters:
@@ -1214,7 +1207,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Refining Genome Annotations with Apollo (prokaryotes)">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -355,7 +355,7 @@ Sentry.init({
       "name": "prokaryote"
     }
   ],
-  "abstract": "> <div class=\"box-title warning-title\" id=\"warning-only-works-on-usegalaxy-eu\"><i class=\"fas fa-exclamation-triangle\" aria-hidden=\"true\" ></i> Warning: Only works on UseGalaxy.eu</div>"
+  "abstract": "> <div class="box-title warning-title" id="warning-only-works-on-usegalaxy-eu"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Only works on UseGalaxy.eu</div>"
 }
         </script>
         
@@ -496,7 +496,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -533,14 +533,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxy-genome-annotation/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-genome-annotation">
     <h1 data-toc-skip>Refining Genome Annotations with Apollo (prokaryotes)</h1>
@@ -941,7 +934,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-only-works-on-usegalaxy-eu"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Only works on UseGalaxy.eu</div>
+  <div class="box-title warning-title" id="warning-only-works-on-usegalaxy-eu-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Only works on UseGalaxy.eu</div>
   <p>Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.</p>
 </blockquote>
 
@@ -1004,7 +997,7 @@ Sentry.init({
 <p>In this tutorial we have obtained some data from NCBI related to <a href="https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655"><em>Escherichia coli K12 str. MG1655</em></a>, and we will visualise this data and use it to make some annotations in order to familiarise you with the process.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-real-data-unreal-circumstances"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Real Data: Unreal Circumstances</div>
+  <div class="box-title comment-title" id="comment-real-data-unreal-circumstances"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Real Data: Unreal Circumstances</div>
   <p>While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on <em>E. coli K12</em>, this is not necessarily the data <em>you</em> might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.</p>
 </blockquote>
 
@@ -1016,7 +1009,7 @@ Sentry.init({
 <!-- Schizosaccharomyces pombe: https://usegalaxy.eu/u/abretaud/h/apollo-eukaryote-data -->
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1102,7 +1095,7 @@ https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927
 <p>In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that are covered in other tutorials. When you’ve completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-why-bother"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-bother" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why bother?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-why-bother"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-bother" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Why bother?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
 Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.</p>
@@ -1115,13 +1108,13 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>Let’s begin by building a JBrowse instance with all the data we have for this genome.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-reduced-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Reduced data</div>
+  <div class="box-title comment-title" id="comment-reduced-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Reduced data</div>
 
   <p>To reduce the size of the data, in this tutorial we will only work on a portion of the <em>Escherichia coli K12 str. MG1655</em> genome.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1</span></span> with the following parameters:
@@ -1268,7 +1261,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-jbrowse-is-highly-configurable"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: JBrowse is highly configurable</div>
+        <div class="box-title comment-title" id="comment-jbrowse-is-highly-configurable"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: JBrowse is highly configurable</div>
 
         <p>JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.</p>
 
@@ -1287,7 +1280,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-to-apollo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import to Apollo</div>
+  <div class="box-title hands-on-title" id="hands-on-import-to-apollo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import to Apollo</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5" title="Create or Update Organism tool" aria-role="link"><strong>Create or Update Organism</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5</span></span> with the following parameters:
@@ -1340,7 +1333,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>Let’s start by looking at the tracks available to us, and then turning on the gene call tracks so we can start exploring our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-the-gene-calls"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualize the Gene Calls</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-gene-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize the Gene Calls</div>
 
   <ol>
     <li>
@@ -1377,14 +1370,14 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>With the selected track, if you look along the genome, you will see many genes that were predicted by Augustus. Each of them as an unique name assigned by Augustus (e.g. <code class="language-plaintext highlighter-rouge">NC_000913.3.g7.t1</code>, which means <code class="language-plaintext highlighter-rouge">the 7th gene on the NC_000913.3 chromosome</code>). If you right click on gene, an select <code class="language-plaintext highlighter-rouge">View details</code>, you can get access to the coding sequence (CDS).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-gene-colors"><button class="gtn-boxify-button details" type="button" aria-controls="details-gene-colors" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Gene colors<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-gene-colors"><button class="gtn-boxify-button details" type="button" aria-controls="details-gene-colors" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Gene colors<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.</p>
 </blockquote>
 
 <p>What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-display-blastp-vs-swissport-track"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Display blastp vs swissport track</div>
+  <div class="box-title hands-on-title" id="hands-on-display-blastp-vs-swissport-track"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Display blastp vs swissport track</div>
 
   <ol>
     <li>
@@ -1428,7 +1421,7 @@ Therefore, it is necessary to both visually inspect the results and manually fix
 <p>From the blast results, we know that this gene is similar to a Swissprot protein, named <code class="language-plaintext highlighter-rouge">Putative uncharacterized protein YabP</code>. Let’s write this in the <strong>Name</strong> field (type it manually and select it from the drop down list), and <code class="language-plaintext highlighter-rouge">YabP</code> in the <strong>Symbol</strong> field.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-naming-genes"><button class="gtn-boxify-button details" type="button" aria-controls="details-naming-genes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Naming genes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-naming-genes"><button class="gtn-boxify-button details" type="button" aria-controls="details-naming-genes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Naming genes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Giving a proper name to a gene is not always easy. Should it include “Putative” or not? What if multiple names can apply? Should it be lowercase or uppercase?
 The important thing is to always use the same naming rules when working on a full annotation, and to agree on these rules with other collaborators.
@@ -1444,7 +1437,7 @@ Usually, big annotation consortiums have naming guidelines that you are supposed
 <p>You can do the same for the other gene you created, which is similar to <code class="language-plaintext highlighter-rouge">Uncharacterized protein YabQ</code> according to Blastp vs Swissprot.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-saving-your-work"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Saving your work</div>
+  <div class="box-title comment-title" id="comment-saving-your-work"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Saving your work</div>
 
   <p>You do not need to do anything specific to <em>Save</em> your work in Apollo. Just like Google Docs, each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.</p>
 </blockquote>
@@ -1472,7 +1465,7 @@ Usually, big annotation consortiums have naming guidelines that you are supposed
 <p>If you look at the details of the blast hits, you will notice an identifier looking like that: <code class="language-plaintext highlighter-rouge">gi|11387170|sp|P57289.1|</code>. In this identifier, <code class="language-plaintext highlighter-rouge">P57289</code> is the id of an <a href="https://www.uniprot.org/uniprot/P57289">UniProt record</a>. Navigate to this UniProt page and you’ll find a lot more details about the protein which was found to be very similar to the gene we are currently annotating. In particular, you can see that 3 <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> terms are associated with it, in the <strong>GO - Molecular function</strong> and <strong>GO - Biological process</strong> sections. Let’s add these terms to our gene with Apollo.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-gene-ontology-go-consortium"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Gene Ontology (GO) Consortium</div>
+  <div class="box-title comment-title" id="comment-gene-ontology-go-consortium"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Gene Ontology (GO) Consortium</div>
 
   <p>The <a href="http://www.geneontology.org/">Gene Ontology Consortium</a> provides with its Ontology a framework for the model of biology.
 The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:</p>
@@ -1507,7 +1500,7 @@ The GO defines concepts/classes used to describe gene function, and relationship
 <p>In this tutorial we are lucky as we are studying a very well known reference organism. It means we have a <a href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&amp;id=511145&amp;lvl=3&amp;lin=f&amp;keep=1&amp;srchmode=1&amp;unlock">very good quality reference annotation</a> provided by NCBI. You can display it in Apollo by enabling the corresponding track:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-display-ncbi-annotation-track"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Display NCBI annotation track</div>
+  <div class="box-title hands-on-title" id="hands-on-display-ncbi-annotation-track"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Display NCBI annotation track</div>
 
   <ol>
     <li>
@@ -1871,7 +1864,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Using dataset collections">
         <meta property="og:description" content="A collection of microtutorials explaining various feature...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -335,7 +335,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -372,14 +372,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-galaxy-interface">
     <h1 data-toc-skip>Using dataset collections</h1>
@@ -565,7 +558,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-set-format-to-fastqsanger-gz"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Set format to `fastqsanger.gz`</div>
+  <div class="box-title hands-on-title" id="hands-on-set-format-to-fastqsanger-gz"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set format to `fastqsanger.gz`</div>
   <p>The above datasets are in <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> format. It is necessary to explicitly set format in Galaxy. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format. There is a variety of <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq format flavors</a> and it is difficult to guess them automatically.</p>
 
   <!--SNIPPET-->
@@ -622,7 +615,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-set-format-to-fasta-gz"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Set format to `fasta.gz`</div>
+  <div class="box-title hands-on-title" id="hands-on-set-format-to-fasta-gz"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set format to `fasta.gz`</div>
   <p>The above dataset is in <code class="language-plaintext highlighter-rouge">fasta.gz</code> format. The <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> <strong>Tip</strong> section below explains how to upload these data and set the correct format.</p>
 
   <!--SNIPPET-->
@@ -635,7 +628,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 <p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial. (You can find the tool by typing <code class="language-plaintext highlighter-rouge">BWA MEM</code> in the search box at the top left corner of Galaxy interface).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Map sequencing reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-map-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map sequencing reads to reference genome</div>
 
   <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span> with the following parameters:</p>
   <ul>
@@ -676,7 +669,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 <p>After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool <code class="language-plaintext highlighter-rouge">lofreq</code> will take a collection of BAM datasets (the one produced by <code class="language-plaintext highlighter-rouge">BWA-MEM</code>), identify differences between reads and the reference, and output these differences as a collection of <a href="https://en.wikipedia.org/wiki/Variant_Call_Format">VCF</a> datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Call variants</div>
+  <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call variants</div>
 
   <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Call variants tool" aria-role="link"><strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1</span></span> with the following parameters:</p>
   <ul>
@@ -709,7 +702,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 <p>We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with <code class="language-plaintext highlighter-rouge">SNPSift</code>: a tool specifically designed for manipulation of tab-delimited data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create table of variants</div>
+  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create table of variants</div>
 
   <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="SnpSift Extract Fields tool" aria-role="link"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0</span></span> with the following parameters:</p>
   <ul>
@@ -741,7 +734,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-collapse-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Collapse a collection</div>
+  <div class="box-title hands-on-title" id="hands-on-collapse-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Collapse a collection</div>
 
   <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span> with the following parameters:</p>
   <ul>
@@ -768,7 +761,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 <p>You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-a-collection-with-two-items"><i class="far fa-keyboard" aria-hidden="true"></i> Input: A collection with two items</div>
+  <div class="box-title code-in-title" id="code-in-a-collection-with-two-items"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: A collection with two items</div>
   <p>A collection element named <code class="language-plaintext highlighter-rouge">M117-bl.fq</code></p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chrM   152 T C  3707.0 1242 0.99 0 2,2,540,697
@@ -799,7 +792,7 @@ chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 <p>We will have a single dataset as the output:</p>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-a-single-dataset"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: A single dataset</div>
+  <div class="box-title code-out-title" id="code-out-a-single-dataset"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: A single dataset</div>
 
   <p>then the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> will produce this:</p>
 
@@ -1035,7 +1028,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 <p>More about tags</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-more-about-tags"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-about-tags" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: More about tags<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-more-about-tags"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-about-tags" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: More about tags<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. <strong>Simple</strong> tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. <strong>Name</strong> tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, <strong>group</strong> tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as “treatment” and “control”.</p>
 
   <p>To learn mote about tags go to <a href="https://training.galaxyproject.org/training-material/search?query=tags">training site</a>.</p>
@@ -1403,7 +1396,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

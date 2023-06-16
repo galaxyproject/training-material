@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Genome Annotation">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -386,7 +386,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -423,14 +423,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxy-genome-annotation/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-genome-annotation">
     <h1 data-toc-skip>Genome Annotation</h1>
@@ -699,7 +692,7 @@ It consists of three main steps:</p>
 <p>First we want to get some general information about our sequence.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sequence-composition"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Sequence composition</div>
+  <div class="box-title hands-on-title" id="hands-on-sequence-composition"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Sequence composition</div>
 
   <ol>
     <li>Count the number of bases in your sequence (<strong>compute sequence length</strong>)</li>
@@ -716,7 +709,7 @@ It consists of three main steps:</p>
 <p>At first you need to identify those structures of the genome which code for proteins. This step of annotation is called “structural annotation”. It contains the identification and location of open reading frames (ORFs), identification of gene structures and coding regions, and the location of regulatory motifs. Galaxy contains several tools for the structural annotation. Tools for gene prediction are <strong>Augustus</strong> (for eukaryotes and prokaryotes) and <strong>glimmer3</strong> (only for prokaryotes).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-gene-prediction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Gene prediction</div>
+  <div class="box-title hands-on-title" id="hands-on-gene-prediction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Gene prediction</div>
 
   <p>We use <strong>Augustus</strong> for gene prediction.</p>
   <ol>
@@ -730,12 +723,12 @@ It consists of three main steps:</p>
   <p>Augustus will provide three output files: <em>gff3</em>, <em>coding sequences</em> (CDS) and <em>protein sequences</em>.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>How many genes are predicted?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Check the output: <a href="../../images/augustus_out.png">augustus_output</a></p>
     </blockquote>
   </blockquote>
@@ -743,7 +736,7 @@ It consists of three main steps:</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trna-and-tmrna-prediction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: tRNA and tmRNA Prediction</div>
+  <div class="box-title hands-on-title" id="hands-on-trna-and-tmrna-prediction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: tRNA and tmRNA Prediction</div>
 
   <p>Use <strong>Aragorn</strong> for tRNA and tmRNA prediction.</p>
   <ol>
@@ -752,7 +745,7 @@ It consists of three main steps:</p>
       <p>Select the topology of your genome (circular or linear).</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Are there tRNAs or tmRNAs in the sequence?</p>
 
@@ -763,7 +756,7 @@ It consists of three main steps:</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-aragorn-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-aragorn-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Aragorn in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-aragorn-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-aragorn-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Aragorn in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>read more about <strong>Aragorn</strong> <a href="https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html">here</a>.</p>
 </blockquote>
@@ -785,7 +778,7 @@ It consists of three main steps:</p>
 <p>For similarity searches we use <em>NCBI BLAST+ blastp</em> to find similar proteins in a protein database.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-similarity-search"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Similarity search</div>
+  <div class="box-title hands-on-title" id="hands-on-similarity-search"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Similarity search</div>
 
   <ol>
     <li><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> As input file, select the protein sequences from Augustus.</li>
@@ -799,7 +792,7 @@ It consists of three main steps:</p>
       <p>Parsing the xml output (<strong>Parse blast XML output</strong>) results in changing the format style into tabular.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What information do you see in the BLAST output?</p>
 
@@ -813,7 +806,7 @@ It consists of three main steps:</p>
       <p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Therefore apply the tool <strong>BLAST top hit descriptions</strong> with <em>number of descriptions =1</em> on the xml output file.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>For how many proteins we do not get a BLAST hit?</p>
 
@@ -825,12 +818,12 @@ It consists of three main steps:</p>
       <p><img src="../../images/selectlines.png" alt="Select lines that match an expression tool interface and parameters" width="50%" /></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-results-file"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Results file</div>
+        <div class="box-title comment-title" id="comment-results-file"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Results file</div>
         <p>The result file will contain all proteins which do not have an entry in the second column and therefore have no similar protein in the SwissProt database.</p>
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-obtaining-unannotated-proteins-for-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Obtaining unannotated proteins for analysis</div>
+        <div class="box-title comment-title" id="comment-obtaining-unannotated-proteins-for-analysis"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Obtaining unannotated proteins for analysis</div>
         <p>For functional description of those proteins we want to search for motifs or domains which may classify them more. To get a protein sequence FASTA file with only the not annotated proteins, use the tool <strong>Filter sequences by ID from a tabular file</strong> and select for <em>Sequence file to filter on the identifiers</em> [Augustus protein sequences] and for <em>Tabular file containing sequence identifiers</em> the protein file with not annotated sequences. The output file is a FASTA file with only those sequences without description.</p>
       </blockquote>
     </li>
@@ -862,7 +855,7 @@ It consists of three main steps:</p>
 <p><img src="../../images/blast_database.png" alt="BLAST databases. " width="734" height="695" loading="lazy" /></p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-organism-not-available-in-a-blast-database"><button class="gtn-boxify-button details" type="button" aria-controls="details-organism-not-available-in-a-blast-database" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Organism not available in a BLAST database<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-organism-not-available-in-a-blast-database"><button class="gtn-boxify-button details" type="button" aria-controls="details-organism-not-available-in-a-blast-database" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Organism not available in a BLAST database<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you have an organism which is not available in a BLAST database, you can use its genome sequence in FASTA file for BLAST searches “sequence file against sequence file”. If you need to search in these sequences on a regularly basis, you can create a own BLAST database from the sequences of the organism. The advantage of having a own database for your organism is the duration of the BLAST search which speeds up a lot.</p>
 </blockquote>
@@ -870,7 +863,7 @@ It consists of three main steps:</p>
 <p><strong>NCBI BLAST+ makeblastdb</strong> creates a BLAST database from your own FASTA sequence file. Molecule type of input is protein or nucleotide.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-reading-about-blast-tools-in-galaxy"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-about-blast-tools-in-galaxy" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further Reading about BLAST Tools in Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-reading-about-blast-tools-in-galaxy"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-about-blast-tools-in-galaxy" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further Reading about BLAST Tools in Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Cock et al. (2015): <a href="http://biorxiv.org/content/early/2015/05/04/014043.full-text.pdf+html">NCBI BLAST+ integrated into Galaxy</a></p>
 
@@ -884,7 +877,7 @@ It consists of three main steps:</p>
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-vsearch-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-vsearch-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `vsearch` in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-vsearch-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-vsearch-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: `vsearch` in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Documentation for vsearch see <a href="https://github.com/torognes/vsearch">here</a>.</p>
 </blockquote>
@@ -894,7 +887,7 @@ It consists of three main steps:</p>
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-diamond-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-diamond-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Diamond in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-diamond-in-depth"><button class="gtn-boxify-button details" type="button" aria-controls="details-diamond-in-depth" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Diamond in depth<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p><a href="https://www.nature.com/nmeth/journal/v12/n1/abs/nmeth.3176.html">Buchfink et al. (2015): Fast and sensitive protein alignment using Diamond.</a></p>
 </blockquote>
@@ -908,14 +901,14 @@ It consists of three main steps:</p>
 <p>For identification of gene clusters, <strong>antiSMASH</strong> is used. The tool uses genbank file as input files and predicts gene clusters. Output files are a html visualization and the gene cluster proteins.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-antismash-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: antiSMASH analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-antismash-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: antiSMASH analysis</div>
 
   <p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> Import this <a href="../../input_data/Streptomyces_coelicolor_part.genbank">dataset</a> into your Galaxy history and run <strong>antiSMASH</strong> to detect gene clusters. The genbank file contains a part of the <em>Streptomyces coelicolor</em> genome sequence.</p>
 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which gene clusters are identified?</p>
 
@@ -1070,7 +1063,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

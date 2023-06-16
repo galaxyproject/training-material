@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: MaxQuant and MSstats for the analysis of label-free data">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -398,7 +398,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -435,14 +435,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>MaxQuant and MSstats for the analysis of label-free data</h1>
@@ -804,7 +797,7 @@ The training dataset consists of a skin cancer cohort of 19 patients, which is a
 <p>The annotation file, group comparison file and FASTA file for this training is deposited at <a href="https://zenodo.org/record/4896554">Zenodo</a>. It is of course possible to use another FASTA file with human proteome sequences, but to ensure that the results are compatible we recommend to use the provided FASTA file. MaxQuant not only adds known contaminants to the FASTA file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the FASTA file is not allowed to have decoy entries. To learn more about FASTA files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling tutorial</a>. The raw data is available via the <a href="https://www.ebi.ac.uk/pride/archive/projects/PXD006914">PRIDE repository</a>. As this is a real life study, the raw data sizes are large and computation time in MaxQuant is long. To save time and storage capacity, you can skip downloading the raw data and the MaxQuant run and instead continue with the MaxQuant outputs which we provide later on. In this case skip the data upload steps 5-8 which are only necessary for the MaxQuant run.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -887,7 +880,7 @@ ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSC
 <p>The run time of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780">PTXQC functionality</a> that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-optional-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Optional: MaxQuant analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-optional-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional: MaxQuant analysis</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="MaxQuant tool" aria-role="link"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3</span></span> with the following parameters:
@@ -920,7 +913,7 @@ ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSC
 <p>Because the MaxQuant run takes really long, we recommend to download the MaxQuant results from Zenodo and continue with the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-load-maxquant-results-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Load MaxQuant results from Zenodo</div>
+  <div class="box-title hands-on-title" id="hands-on-load-maxquant-results-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Load MaxQuant results from Zenodo</div>
 
   <ol>
     <li>
@@ -935,7 +928,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many proteins and features were identified in total?</li>
@@ -944,7 +937,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>2622 protein groups and ~240000 features were found in total (number of lines of protein group and evidence files)</li>
@@ -963,7 +956,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 <p>We use the modified MaxQuant protein groups and evidence files as input in MSstats. In addition, an annotation file that describes the experimental design and a comparison matrix is needed. Please start the MSstats run first and while it is running you can find more details on its parameters below.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-msstats-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: MSstats Analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-msstats-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSstats Analysis</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="link"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
@@ -1051,7 +1044,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many proteins were removed as potential non human contaminants?</li>
@@ -1059,7 +1052,7 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>28 (2622 lines in protein group file minus 2594 lines after select)</li>
@@ -1078,7 +1071,7 @@ Proteomic data analysis requires statistical approaches that reduce bias and ine
 <p>MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments. A wrong setup of the annotation file is the most common source of errors in MSstats, thus we collected more information in the box below to allow you to adjust the annotation file when analyzing your own experiments.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-generating-the-msstats-annotation-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-the-msstats-annotation-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Generating the MSstats annotation file<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-generating-the-msstats-annotation-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-the-msstats-annotation-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Generating the MSstats annotation file<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For label-free MaxQuant data, the annotation file should have 5 columns with exactly these headers: Raw.file, Condition, BioReplicate, Run; IsotopeLabelType</p>
   <ol>
@@ -1094,7 +1087,7 @@ Proteomic data analysis requires statistical approaches that reduce bias and ine
 <p>MSstats will compare all conditions that are indicated in the comparison matrix. The comparison matrix has to be setup correctly to avoid errors and wrong statistical modelling. It contains a first column that gives the comparisons a name and one column per condition. This matrix is filled with 1 and -1 to specify the conditions that are compared in each comparison and with 0 for conditions that are not part of the comparison.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-generating-the-msstats-comparison-matrix"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-the-msstats-comparison-matrix" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Generating the MSstats comparison matrix<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-generating-the-msstats-comparison-matrix"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-the-msstats-comparison-matrix" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Generating the MSstats comparison matrix<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ol>
     <li>The first column of the comparison matrix contains the names of the comparisons and should have ‘names’ as header. These names will be used in all MSstats output files, therefore it is important that the names are meaningful and reflect the actual comparison (see below)</li>
@@ -1132,7 +1125,7 @@ The volcano plot plots the statistical result as transformed p-values vs. the lo
 We’ll count and visualize the number of features per run and calculate the distribution of proteins per sample.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-follow-up-on-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Follow up on MSstats results</div>
+  <div class="box-title hands-on-title" id="hands-on-follow-up-on-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Follow up on MSstats results</div>
 
   <ol>
     <li><span class="tool" data-tool="Summary_Statistics1" title="Summary Statistics tool" aria-role="link"><strong>Summary Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Summary_Statistics1</span></span> with the following parameters:
@@ -1173,7 +1166,7 @@ We’ll count and visualize the number of features per run and calculate the dis
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which sample has the lowest amount of proteins after protein summarization?</li>
@@ -1181,7 +1174,7 @@ We’ll count and visualize the number of features per run and calculate the dis
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>RDEB cSCC4</li>
@@ -1204,7 +1197,7 @@ The Sample Quantification Matrix Table contains the summarized intensities per p
 In order to make its IDs compatible with the ones from the comparison result at a later step, we keep only the Uniprot ID as well.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering MSstats results</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-msstats-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering MSstats results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Replace Text tool" aria-role="link"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span> with the following parameters:
@@ -1259,7 +1252,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why do we filter for the adjusted p-value?</li>
@@ -1267,7 +1260,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Adjusted p-values control for the multiplicity of testing. Since we fit a separate model, and conduct a separate comparison for each protein, the number of tests equals the number of comparisons. A 0.05 cutoff of an adjusted p-value controls the False Discovery Rate in the collection of tests over all the proteins at 5%. Since they account for the multiplicity, adjusted p-values are more conservative (i.e. it is more difficult to detect a change).</li>
@@ -1283,7 +1276,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 <p>For each condition we select only the significant proteins, which are proteins with a p-value above 0 and below 0.05. Proteins with a p-value of 0 are missing in one condition and are therfore discarded in the next steps. We’ll keep only the column with the Uniprot ID and extract the average protein intensities per sample from the sample quantification matrix file and vizualize them at heatmap. We do the exact same steps for both conditions, therefore, each time you start a tool (except for the replace step) you can use the multiple input file to start the step for the metastasized and rdeb files at the same time.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-differentially-abundant-proteins"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: filter differentially abundant proteins</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-differentially-abundant-proteins"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: filter differentially abundant proteins</div>
 
   <ol>
     <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with the following parameters:
@@ -1370,14 +1363,14 @@ In order to make its IDs compatible with the ones from the comparison result at 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many proteins are differentially abundant?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>85 are upregulated in metastasized cSCC and 12 are upregulated in RDEB cSCC (number of lines minus 1 in the first filtering step per condition).</li>
@@ -1392,7 +1385,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 <p>In addition we retrieve for each Uniprot ID the corresponding protein names from uniprot to allow an easier interpretation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-msstats-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: MSstats visualizations</div>
+  <div class="box-title hands-on-title" id="hands-on-msstats-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSstats visualizations</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" aria-role="link"><strong>UniProt ID mapping and retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2</span></span> with the following parameters:
@@ -1631,7 +1624,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Infinium Human Methylation BeadChip">
         <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -299,7 +299,7 @@ Sentry.init({
   "mentions": [
 
   ],
-  "abstract": "> <div class=\"box-title agenda-title\" id=\"agenda\">Agenda</div>"
+  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
 }
         </script>
         
@@ -440,7 +440,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -477,14 +477,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-epigenetics">
     <h1 data-toc-skip>Infinium Human Methylation BeadChip</h1>
@@ -749,7 +742,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
   <p>In this tutorial we will do:</p>
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
@@ -821,7 +814,7 @@ Datasets include the Infinium Human Methylation BeadChip array performed in mela
 <p>The first step of the Infinium Human Methylation BeadChip array analysis is raw methylation data loading (intensity information files for each two colour micro array)</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-loading"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data Loading</div>
+  <div class="box-title hands-on-title" id="hands-on-data-loading"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data Loading</div>
 
   <ol>
     <li>
@@ -844,7 +837,7 @@ Datasets include the Infinium Human Methylation BeadChip array performed in mela
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-list-of-zenodo-urls"><button class="gtn-boxify-button details" type="button" aria-controls="details-list-of-zenodo-urls" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-list-of-zenodo-urls"><button class="gtn-boxify-button details" type="button" aria-controls="details-list-of-zenodo-urls" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1251211/files/GSM1588704_8795207135_R01C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Red.idat
 https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Red.idat
@@ -881,14 +874,14 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
 <p><img src="../../images/quality_control.png" alt="quality_control. " width="480" height="480" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-preprocessing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Preprocessing</div>
+  <div class="box-title hands-on-title" id="hands-on-preprocessing"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Preprocessing</div>
   <p>Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and disrupt downstream analysis of results.  <span class="citation"><a href="#Hansen">Aryee <i>et al.</i> 2014</a></span> It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting <strong>(Optional) Preprocessing Method</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.
 <img src="../../images/2idat_preprocessing.png" alt="idat_preprocessing. " width="802" height="212" loading="lazy" /></p>
 
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-normalisation-of-the-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Normalisation of the data</div>
+  <div class="box-title comment-title" id="comment-normalisation-of-the-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Normalisation of the data</div>
   <p>If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at <span class="citation"><a href="#Hansen">Aryee <i>et al.</i> 2014</a></span>.</p>
 
 </blockquote>
@@ -897,14 +890,14 @@ https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
 
 <p>The main goal of the <strong>Infinium Human Methylation BeadChip</strong> analysis is to simplify the way differentially methylated loci sites are detected. The <strong>Infinium Human Methylation BeadChip</strong> pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.</p>
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-phenotype-table"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Phenotype table</div>
+  <div class="box-title comment-title" id="comment-phenotype-table"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Phenotype table</div>
   <p>Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.</p>
 </blockquote>
 
 <p>However, for the purpose of this tutorial we would like you to upload phenotype table from <a href="https://zenodo.org/record/1251211#.WwREQ1Mvz-Y">Zenodo</a> repository.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-phenotypetable-txt-from-zenodo-https-zenodo-org-record-1251211-wwreq1mvz-y-or-data-library"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</div>
+  <div class="box-title hands-on-title" id="hands-on-import-phenotypetable-txt-from-zenodo-https-zenodo-org-record-1251211-wwreq1mvz-y-or-data-library"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/1251211/files/phenotypeTable.txt
 </code></pre></div>  </div>
   <p><img src="../../images/3parameters.png" alt="pheno table. " width="804" height="349" loading="lazy" />
@@ -966,10 +959,10 @@ This will launch UCSC Genome Browser with your Custom Track</p>
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/ucsc.png" alt="Display at UCSC. " width="1440" height="803" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> UCSC genome track showing differentialy methylated regions located on chromosome 6</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>How do we define phenotype covariate?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions</p>
   </blockquote>
 </blockquote>
@@ -979,7 +972,7 @@ This will launch UCSC Genome Browser with your Custom Track</p>
 <p>In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function descriptions, and relationships between these concepts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-differentially-methylated-position"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Annotate Differentially Methylated Position</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-differentially-methylated-position"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Annotate Differentially Methylated Position</div>
   <ol>
     <li>Run <strong>chipeakanno annopeaks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>on the output of minfi_dmp with the following parameters
       <ul>
@@ -1221,7 +1214,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

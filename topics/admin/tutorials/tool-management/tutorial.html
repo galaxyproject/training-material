@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Galaxy Tool Management with Ephemeris">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -389,7 +389,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -426,14 +426,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Galaxy Tool Management with Ephemeris</h1>
@@ -636,7 +629,7 @@ Sentry.init({
 <p>To run this tutorial, you will need to <a href="https://ephemeris.readthedocs.io/en/latest/installation.html">install Ephemeris</a>. You would normally install it on your workstation, but during training courses we recommend to install it on the same virtual machine used for the Galaxy server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-ephemeris-in-a-python-virtual-environment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Ephemeris in a Python virtual environment</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-ephemeris-in-a-python-virtual-environment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Ephemeris in a Python virtual environment</div>
 
   <ol>
     <li>Install the Python <code class="language-plaintext highlighter-rouge">venv</code> package if it is not already available. On Ubuntu this can be done with <code class="language-plaintext highlighter-rouge">sudo apt install python3-venv</code></li>
@@ -677,14 +670,14 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 <p>Ephemeris can take care of this process. Let’s practice this on a real workflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extracting-a-list-of-tools-from-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting a list of tools from a workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-a-list-of-tools-from-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting a list of tools from a workflow</div>
 
   <ol>
     <li>
       <p>Download the mapping workflow:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga
 </code></pre></div>        </div>
       </blockquote>
@@ -693,13 +686,13 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html"><code class="language-plaintext highlighter-rouge">workflow-to-tools</code></a> command to extract the tool list from this workflow into a file named <code class="language-plaintext highlighter-rouge">workflow_tools.yml</code> in the folder <code class="language-plaintext highlighter-rouge">tools</code>.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>What did your command look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <blockquote class="code-in">
-            <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+            <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
             <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>workflow-to-tools <span class="nt">-w</span> mapping.ga <span class="nt">-o</span> tools/workflow_tools.yml <span class="nt">-l</span> Mapping
 </code></pre></div>            </div>
 
@@ -778,18 +771,18 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 <p>There are two ways to install tools, depending on how you specify the tools to install:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-a-single-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing a single tool</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-a-single-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing a single tool</div>
 
   <ol>
     <li>
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install the tool <code class="language-plaintext highlighter-rouge">bwa</code>, owned by <code class="language-plaintext highlighter-rouge">devteam</code> into a section named <code class="language-plaintext highlighter-rouge">Mapping</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>What did your command look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bwa <span class="nt">--owner</span> devteam <span class="nt">--section_label</span> Mapping
@@ -802,7 +795,7 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-certificate-issues-gat-uncommon"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-certificate-issues-gat-uncommon" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Certificate issues (GAT, uncommon)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-certificate-issues-gat-uncommon"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-certificate-issues-gat-uncommon" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Certificate issues (GAT, uncommon)<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If your Galaxy instance is served via the HTTPS protocol (as it should be!), ephemeris will use the <a href="https://requests.readthedocs.io">requests</a> Python library to encrypt the communication with Galaxy. Therefore, if your Galaxy uses a self-signed SSL certificate, <code class="language-plaintext highlighter-rouge">shed-tools</code> may fail with a <code class="language-plaintext highlighter-rouge">CERTIFICATE_VERIFY_FAILED</code> error.</p>
 
@@ -821,7 +814,7 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 For that, you can install from a YAML file:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-tools-from-a-tool-list"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing tools from a tool list</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-tools-from-a-tool-list"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing tools from a tool list</div>
 
   <ol>
     <li>
@@ -831,11 +824,11 @@ For that, you can install from a YAML file:</p>
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install all of the tools from the <code class="language-plaintext highlighter-rouge">workflow_tools.yml</code> file on your Galaxy.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>What did your command look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">-t</span> workflow_tools.yml
@@ -863,12 +856,12 @@ For that, you can install from a YAML file:</p>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-can-i-install-tools-without-restarting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-install-tools-without-restarting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Can I install tools without restarting?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-can-i-install-tools-without-restarting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-install-tools-without-restarting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Can I install tools without restarting?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Yes. The default tool config (<code class="language-plaintext highlighter-rouge">config/tool_conf.xml.sample</code>, copy to <code class="language-plaintext highlighter-rouge">config/tool_conf.xml</code> to modify) has an option, <code class="language-plaintext highlighter-rouge">monitor="true"</code> set in the root <code class="language-plaintext highlighter-rouge">&lt;toolbox&gt;</code> tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-can-i-install-tools-without-a-toolshed"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-install-tools-without-a-toolshed" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Can I install tools without a ToolShed?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-can-i-install-tools-without-a-toolshed"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-install-tools-without-a-toolshed" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Can I install tools without a ToolShed?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Yes. The <code class="language-plaintext highlighter-rouge">galaxy_local_tools</code> option for the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> Ansible role can be used to install local tools, or you can manage them in another way that fits your workflow better. UseGalaxy.eu, for example, maintains a repository of tools that are not installed from the ToolShed to aid their local developers. This is deployed to the server using the <code class="language-plaintext highlighter-rouge">git</code> module, rather than the Galaxy Ansible role.</p>
 </blockquote>
 
@@ -877,18 +870,18 @@ For that, you can install from a YAML file:</p>
 <p>Having the tools installed is a good first step, but your users will expect that they actually work as well. You can use Ephemeris to automatically test all of the installed tools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-test-the-installed-tools"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Test the installed tools</div>
+  <div class="box-title hands-on-title" id="hands-on-test-the-installed-tools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Test the installed tools</div>
 
   <ol>
     <li>
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html#test"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">bamtools_filter</code> tool on your Galaxy.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>What did your command look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">test</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bamtools_filter <span class="nt">--owner</span> devteam
@@ -905,7 +898,7 @@ For that, you can install from a YAML file:</p>
 <p>This can give you some more confidence that things are working correctly. Oftentimes, users provide workflows for biological domains that we are not familiar with, so knowing how we can test these tools is impossible for us as admins. Leveraging the built-in tool test cases can give you reassurance that things are functional before you inform your users of the new tools.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-tool-test-reports"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tool-test-reports" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Tool test reports<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-tool-test-reports"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tool-test-reports" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Tool test reports<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The ephemeris <code class="language-plaintext highlighter-rouge">shed-tools test</code> command produces an output file <code class="language-plaintext highlighter-rouge">tool_test_output.json</code> with information about the test jobs that have run. Galaxyproject’s <a href="https://github.com/galaxyproject/planemo">Planemo</a> can be used to generate <a href="https://planemo.readthedocs.io/en/latest/commands/test_reports.html?highlight=test_reports#test-reports-command">test reports</a> from tool_test_output.json in HTML and other formats.</p>
 </blockquote>
 
@@ -914,22 +907,22 @@ For that, you can install from a YAML file:</p>
 <p>Sometimes a user might ask you to install all the tools they were previously using on another Galaxy instance. Ephemeris can produce a <code class="language-plaintext highlighter-rouge">tool_list.yaml</code> file for all the tools installed on a server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtain-usegalaxy-eu-s-tool-list"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtain UseGalaxy.eu's tool list</div>
+  <div class="box-title hands-on-title" id="hands-on-obtain-usegalaxy-eu-s-tool-list"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtain UseGalaxy.eu's tool list</div>
 
   <ol>
     <li>
       <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/get-tool-list.html"><code class="language-plaintext highlighter-rouge">get-tool-list</code></a> command to obtain the full set of tools installed on UseGalaxy.eu</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <p>What did your command look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>This command does not require authentication and can be used to obtain the tool list from any public Galaxy server:</p>
 
           <blockquote class="code-in">
-            <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+            <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
             <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>get-tool-list <span class="nt">-g</span> <span class="s2">"https://usegalaxy.eu"</span> <span class="nt">-o</span> <span class="s2">"eu_tool_list.yaml"</span>
 </code></pre></div>            </div>
           </blockquote>
@@ -945,12 +938,12 @@ For that, you can install from a YAML file:</p>
 <p>We will not install all the tools from the EU Galaxy server as that server likely has more tools than any other Galaxy instance, but it is useful as an example of how you can use Ephemeris to facilitate the mirroring of another Galaxy instance.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-non-shed-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-non-shed-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Non-shed tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-non-shed-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-non-shed-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Non-shed tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The output of <code class="language-plaintext highlighter-rouge">get-tool-list</code> only includes ToolShed tools, not local non-TS tools.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-but-how-many-tools-is-it-really"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-but-how-many-tools-is-it-really" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: But how many tools is it really?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-but-how-many-tools-is-it-really"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-but-how-many-tools-is-it-really" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: But how many tools is it really?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you’ve seen the <a href="https://usegalaxy.eu/tools/view">European Galaxy tools view</a> (this is available on any galaxy! Just access <code class="language-plaintext highlighter-rouge">/tools/view</code>)
 you’ll notice they report somewhere over 2700 tools, however the <code class="language-plaintext highlighter-rouge">get-tool-list</code> output lists significantly fewer tools.</p>
 
@@ -976,28 +969,28 @@ you’ll notice they report somewhere over 2700 tools, however the <code class="
 <p>If running ephemeris directly is not your preference, there is an Ansible <a href="https://github.com/galaxyproject/ansible-galaxy-tools">role</a> and a sample <a href="https://github.com/afgane/galaxy-tools-playbook">playbook</a> that can help automate some tasks.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-if-environments-are-not-working"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-environments-are-not-working" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What if environments are not working<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-if-environments-are-not-working"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-environments-are-not-working" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What if environments are not working<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>It sometimes happens in Galaxy, that one environment isn’t working anymore. It mostly happens from the start when it does happen. You can remove the environment on disk, or use the “Manage Dependencies” interface, select the environment, and delete it. Then re-install the dependency through the same Manage Dependencies interface.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-can-you-install-multiple-tools-simultaneously"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-you-install-multiple-tools-simultaneously" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Can you install multiple tools simultaneously?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-can-you-install-multiple-tools-simultaneously"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-you-install-multiple-tools-simultaneously" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Can you install multiple tools simultaneously?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. With conda this is not recommended either, as this can corrupt conda environments. A solution for this is how <a href="https://github.com/usegalaxy-eu/usegalaxy-eu-tools">UseGalaxy.eu does it</a>, where they keep the full list of tools they want to install, and then a CI server (Jenkins) installs them. In this way they can enforce that only a single install process is running at any time.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-certificate-issues-gat-only"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-certificate-issues-gat-only" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Certificate Issues (GAT Only)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-certificate-issues-gat-only"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-certificate-issues-gat-only" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Certificate Issues (GAT Only)<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If a student is running <code class="language-plaintext highlighter-rouge">shed-tools</code> on the VM, then it should work without certificate issues, because we installed the Fake LE X1 CA certificate, meaning that to your VM, the certificate chain is valid.
 We cannot (and would not recommend) setting that certificate on your local machine. That is the first way that comes to mind, that running an ephemeris command could generate that error.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-uninstalling-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uninstalling-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Uninstalling tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-uninstalling-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uninstalling-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Uninstalling tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>While there is a function to accomplish this in <a href="https://github.com/galaxyproject/bioblend">BioBlend</a>, it has not been <a href="https://github.com/galaxyproject/ephemeris/issues/83">included in Ephemeris yet.</a> If you’re looking for a way to contribute to Galaxy, this would be great :)</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-quot-recommended-way-quot-to-install-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-quot-recommended-way-quot-to-install-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: &quot;Recommended way&quot; to install tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-quot-recommended-way-quot-to-install-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-quot-recommended-way-quot-to-install-tools" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: &quot;Recommended way&quot; to install tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>There is no one recommended way. Different people like to do different things. Some of us install things through the GUI still, some of us use ephemeris just for the automation.</p>
 
   <p>EU and others try and force all tool installation to go through ephemeris to make sure that rebuilding a server in case of disaster is easy. Anything not managed through their files will be lost.</p>
@@ -1012,7 +1005,7 @@ We cannot (and would not recommend) setting that certificate on your local machi
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-tools-not-showing-up-refresh-the-toolbox"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tools-not-showing-up-refresh-the-toolbox" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Tools not showing up? Refresh the toolbox!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-tools-not-showing-up-refresh-the-toolbox"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tools-not-showing-up-refresh-the-toolbox" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Tools not showing up? Refresh the toolbox!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:</p>
 
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">curl -X PUT https://galaxy.example.org/api/configuration/toolbox -H "x-api-key: $</span>GALAXY_API_KEY<span class="s2">"
@@ -1188,7 +1181,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

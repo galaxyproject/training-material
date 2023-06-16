@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Visualization of RNA-Seq results with heatmap2">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -416,7 +416,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -453,14 +453,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>Visualization of RNA-Seq results with heatmap2</h1>
@@ -792,7 +785,7 @@ Sentry.init({
 <h2 id="import-data">Import data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -861,7 +854,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <h2 id="extract-all-significant-genes">Extract all significant genes</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-significant-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the significant genes</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-significant-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the significant genes</div>
 
   <ol>
     <li><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract genes with adj P &lt; 0.01:
@@ -887,7 +880,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>This gives us a file with all the significant genes, the genes that pass our thresholds for statistical and biological significance. As we can see there are many genes (~1,610), too many to plot in one heatmap, so we’ll select the top 20 by P value.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-top-significant-genes-by-p-value"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the top significant genes by P value</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-top-significant-genes-by-p-value"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the top significant genes by P value</div>
 
   <ol>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to sort by P value:
@@ -918,7 +911,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts. " width="2238" height="520" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Normalized counts</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-for-the-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the normalized counts for the top genes</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-for-the-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the normalized counts for the top genes</div>
   <ol>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to join on the ENTREZID column:
       <ul>
@@ -950,7 +943,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <h2 id="create-heatmap-of-top-genes">Create heatmap of top genes</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the heatmap of top genes</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the heatmap of top genes</div>
 
   <ol>
     <li><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -971,7 +964,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" alt="Heatmap of top DE genes. " width="690" height="723" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Heatmap of top DE genes</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>Why do we not use clustering here?</li>
     <li>Why do we scale the rows (genes)? Try rerunning heatmap2 changing the <em>“Data scaling”</em> parameter to <code class="language-plaintext highlighter-rouge">Do not scale my data</code>.</li>
@@ -980,7 +973,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
       <p>How could we make a heatmap of the top 10 most upregulated and top 10 most downregulated significant genes?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <ol>
           <li>We don’t use clustering here as we want to keep the genes in the order we input (ordered by P value).</li>
           <li>We scale the genes as otherwise large expression values from highly expressed genes would dominate the plot, see below.
@@ -1013,7 +1006,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <h2 id="extract-normalized-counts-for-custom-genes">Extract normalized counts for custom genes</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-for-the-genes-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the normalized counts for the genes of interest</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-for-the-genes-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the normalized counts for the genes of interest</div>
 
   <ol>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1053,7 +1046,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <h2 id="create-heatmap-of-custom-genes-1">Create heatmap of custom genes</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-custom-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the heatmap of custom genes</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-custom-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the heatmap of custom genes</div>
 
   <ol>
     <li><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1074,12 +1067,12 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap_regenerated.png" alt="Fu heatmap regenerated. " width="678" height="706" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Fu heatmap regenerated</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How does the heatmap compare to the one from the Fu paper Fig 6 (above)?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The heatmap looks similar to the heatmap in the paper.</p>
 
@@ -1254,7 +1247,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Basics of using Git from the Command Line">
         <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -217,7 +217,7 @@ Sentry.init({
   "mentions": [
 
   ],
-  "abstract": "> <div class=\"box-title comment-title\" id=\"comment-source\"><i class=\"far fa-comment-dots\" aria-hidden=\"true\" ></i> Comment: Source</div>"
+  "abstract": "> <div class="box-title comment-title" id="comment-source"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Source</div>"
 }
         </script>
         
@@ -358,7 +358,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -395,14 +395,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-data-science">
     <h1 data-toc-skip>Basics of using Git from the Command Line</h1>
@@ -511,6 +504,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> CLI basics:
                             
@@ -520,6 +517,8 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -620,7 +619,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-source"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Source</div>
+  <div class="box-title comment-title" id="comment-source-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Source</div>
   <p>This tutorial contains text from <a href="https://github.com/rdadolf/git-tutorial/">this tutorial</a> by Robert Adolf (<a href="https://github.com/rdadolf">@rdadolf</a>), which is licensed CC-BY.</p>
 </blockquote>
 
@@ -668,13 +667,13 @@ Sentry.init({
 <p>Let’s create a new repository.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-repository"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a Repository</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-repository"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a Repository</div>
   <ol>
     <li>
       <p>Make a new directory where you will store your files, and navigate into it.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>git-tutorial<span class="p">;</span> <span class="nb">cd </span>git-tutorial<span class="p">;</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -683,13 +682,13 @@ Sentry.init({
       <p>Create or “initialise” the <code class="language-plaintext highlighter-rouge">git</code> repository with the <code class="language-plaintext highlighter-rouge">git init</code> command.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initialized empty Git repository <span class="k">in</span> /tmp/project/.git/
 </code></pre></div>        </div>
       </blockquote>
@@ -701,19 +700,19 @@ Sentry.init({
 <p>This has created a folder <code class="language-plaintext highlighter-rouge">.git</code> in your project directory, here is where <code class="language-plaintext highlighter-rouge">git</code> stores all of it’s data that it needs to track repository changes over time. It’s not terribly interesting yet though!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-what-s-the-status"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: What's the status</div>
+  <div class="box-title hands-on-title" id="hands-on-what-s-the-status"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: What's the status</div>
   <ol>
     <li>
       <p>You can always check the status of a repository with <code class="language-plaintext highlighter-rouge">git status</code></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch main
 
 No commits yet
@@ -732,13 +731,13 @@ nothing to commit <span class="o">(</span>create/copy files and use <span class=
 <p>Let’s add our first file, often a (pretty empty) readme file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-what-s-the-status-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: What's the status</div>
+  <div class="box-title hands-on-title" id="hands-on-what-s-the-status-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: What's the status</div>
   <ol>
     <li>
       <p>Create a new file, <code class="language-plaintext highlighter-rouge">readme.md</code> with some basic content</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"My Project"</span> <span class="o">&gt;</span> readme.md
 </code></pre></div>        </div>
       </blockquote>
@@ -747,7 +746,7 @@ nothing to commit <span class="o">(</span>create/copy files and use <span class=
       <p>Add a file with <code class="language-plaintext highlighter-rouge">git add</code>. This adds it to git’s staging area to be committed.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add readme.md
 </code></pre></div>        </div>
       </blockquote>
@@ -756,7 +755,7 @@ nothing to commit <span class="o">(</span>create/copy files and use <span class=
       <p>Commit the file! This will add it to git’s log.</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-what-makes-a-good-commit-message"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-makes-a-good-commit-message" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What makes a good commit message?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-what-makes-a-good-commit-message"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-makes-a-good-commit-message" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What makes a good commit message?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>It depends a lot on the community, some have specific style guides they enforce, some don’t, but in general</p>
         <ul>
           <li>Keep the description short (&lt;72 chars) and descriptive.</li>
@@ -770,13 +769,13 @@ Even your author is <a href="https://github.com/galaxyproject/gxadmin/commit/568
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git commit <span class="nt">-m</span> <span class="s2">"Add readme"</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>main <span class="o">(</span>root-commit<span class="o">)</span> f5ec14f] Add readme
  1 file changed, 1 insertion<span class="o">(</span>+<span class="o">)</span>
  create mode 100644 readme.md
@@ -786,10 +785,10 @@ Even your author is <a href="https://github.com/galaxyproject/gxadmin/commit/568
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-is-there-anything-left-to-do-check-the-status"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is there anything left to do? Check the status</div>
+    <div class="box-title question-title" id="question-is-there-anything-left-to-do-check-the-status"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Is there anything left to do? Check the status</div>
     <p>Check <code class="language-plaintext highlighter-rouge">git status</code> to see if there’s anything else left to resolve.</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>git status
 <span class="go">On branch main
 nothing to commit, working tree clean
@@ -811,14 +810,14 @@ nothing to commit, working tree clean
 <h3 id="exercise-make-some-more-commits">Exercise: Make some more commits</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-make-some-more-commits"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Make some more commits</div>
+  <div class="box-title hands-on-title" id="hands-on-make-some-more-commits"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Make some more commits</div>
 
   <ol>
     <li>
       <p>Add your name to the <code class="language-plaintext highlighter-rouge">readme.md</code> and commit your changes.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"Author: hexylena"</span> <span class="o">&gt;&gt;</span> readme.md
 git add readme.md
 git commit <span class="nt">-m</span> <span class="s1">'Add author name'</span>
@@ -829,7 +828,7 @@ git commit <span class="nt">-m</span> <span class="s1">'Add author name'</span>
       <p>Make up a project description, add it to the readme, and commit.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"This project enables stakeholders to experience synergistic effects and increase link up opportunities to improve quarterly and YOY ROI.</span><span class="se">\n</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> readme.md
 git add readme.md
 git commit <span class="nt">-m</span> <span class="s1">'Add project description'</span>
@@ -840,7 +839,7 @@ git commit <span class="nt">-m</span> <span class="s1">'Add project description'
       <p><a href="https://spdx.org/licenses/">Pick a license</a> for your project, and mention it in the <code class="language-plaintext highlighter-rouge">readme.md</code>, and commit.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"# License</span><span class="se">\n</span><span class="s2">AGPL-3.0"</span> <span class="o">&gt;&gt;</span> readme.md
 git add readme.md
 git commit <span class="nt">-m</span> <span class="s1">'Add project license'</span>
@@ -858,19 +857,19 @@ git commit <span class="nt">-m</span> <span class="s1">'Add project license'</sp
 <p>One of the most helpful things about git is that, if you have written good commit messages, you can tell what you did and when!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-the-receipts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the Receipts</div>
+  <div class="box-title hands-on-title" id="hands-on-check-the-receipts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the Receipts</div>
   <ol>
     <li>
       <p>Check the <code class="language-plaintext highlighter-rouge">log</code> with <code class="language-plaintext highlighter-rouge">git log</code>. Notice that you can see each commit in reverse chronological order (newest at top), who made the commit, when, and what the commit message was.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commit 5d05eb3ec22fd49282b585c60ef8f983d68c2fd7
 Author: Helena Rasche &lt;hxr@hx42.org&gt;
 Date:   Mon Jun 13 12:13:21 2022 +0200
@@ -904,7 +903,7 @@ Date:   Mon Jun 13 11:59:23 2022 +0200
 <p>The output of <code class="language-plaintext highlighter-rouge">git log</code> is a great way to help you remember what you were doing.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-git-log-p"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: `git log -p`</div>
+  <div class="box-title hands-on-title" id="hands-on-git-log-p"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: `git log -p`</div>
   <ol>
     <li>Use <code class="language-plaintext highlighter-rouge">git log -p</code> to see the log, along with which lines were changed in each commit.</li>
   </ol>
@@ -913,13 +912,13 @@ Date:   Mon Jun 13 11:59:23 2022 +0200
 <p>But currently this log is pretty boring, so let’s replace a line and see how that looks.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-replace-a-line"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Replace a line</div>
+  <div class="box-title hands-on-title" id="hands-on-replace-a-line"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Replace a line</div>
   <ol>
     <li>
       <p>Update your project description in the <code class="language-plaintext highlighter-rouge">readme.md</code>, you’ve been told you need to support completely different features.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> s<span class="s1">'/enables.*ROI/creates baking recipes/g'</span> readme.md
 git add readme.md
 git commit <span class="nt">-m</span> <span class="s1">'Update project description'</span>
@@ -930,7 +929,7 @@ git commit <span class="nt">-m</span> <span class="s1">'Update project descripti
       <p>Check what happened with the <code class="language-plaintext highlighter-rouge">git log -p</code>:</p>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Output</div>
+        <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-p</span>
 commit 416a121dfcda14de0c2cb181f298b2c08950475f <span class="o">(</span>HEAD -&gt; main<span class="o">)</span>
 Author: Helena Rasche &lt;hxr@hx42.org&gt;
@@ -969,13 +968,13 @@ index befc0c9..3b8899e 100644
 <p>If you want to know who changed a specific line of a file, you can use <code class="language-plaintext highlighter-rouge">git blame</code> to find out it was probably your fault (as most of us experience when we check the logs.)</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git blame readme.md
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-output-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+  <div class="box-title code-in-title" id="code-in-output-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>^f5ec14f <span class="o">(</span>Helena Rasche 2022-06-13 11:59:23 +0200 1<span class="o">)</span> My Project
 10355c01 <span class="o">(</span>Helena Rasche 2022-06-13 12:13:11 +0200 2<span class="o">)</span> Author: hexylena
 416a121d <span class="o">(</span>Helena Rasche 2022-06-13 12:18:00 +0200 3<span class="o">)</span> This project creates baking recipes.
@@ -1006,20 +1005,20 @@ index befc0c9..3b8899e 100644
 <p>This is especially relevant for any project that is shared with others, has a public view, or a deployed version of the code. There you don’t want to affect anyone else using the project, or you don’t want to affect the production deployment, until you’re done making your changes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-branch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a new branch</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-branch"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a new branch</div>
 
   <ol>
     <li>
       <p><code class="language-plaintext highlighter-rouge">git switch -c &lt;branch&gt;</code> is the command used to create a new branch and switch to it.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-12"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch <span class="nt">-c</span> <span class="nb">test</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Switched to a new branch <span class="s1">'test'</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -1031,20 +1030,20 @@ index befc0c9..3b8899e 100644
 <p>If you look around, you’ll notice everything looks exactly the same! But in fact we are now on a different branch:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-see-available-branches"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: See available branches</div>
+  <div class="box-title hands-on-title" id="hands-on-see-available-branches"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: See available branches</div>
 
   <ol>
     <li>
       <p><code class="language-plaintext highlighter-rouge">git branch</code> lists our available branches, and puts an asterisk next to the one we’re currently on.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-13"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-13"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <p>```bash
   main</p>
         <ul>
@@ -1060,13 +1059,13 @@ index befc0c9..3b8899e 100644
 <p>We’re now on the <code class="language-plaintext highlighter-rouge">test</code> branch, so let’s make a commit.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-a-new-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add a new file</div>
+  <div class="box-title hands-on-title" id="hands-on-add-a-new-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add a new file</div>
   <ol>
     <li>
       <p>Add a new file, let’s call it <code class="language-plaintext highlighter-rouge">docs.md</code>. Write something into it, it doesn’t matter much what.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-14"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-14"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"# Project Documentation"</span> <span class="o">&gt;</span> docs.md
 </code></pre></div>        </div>
       </blockquote>
@@ -1075,7 +1074,7 @@ index befc0c9..3b8899e 100644
       <p>Add it, commit it.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-15"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-15"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add docs.md
 git commit <span class="nt">-m</span> <span class="s2">"Added documentation"</span>
 </code></pre></div>        </div>
@@ -1088,39 +1087,39 @@ git commit <span class="nt">-m</span> <span class="s2">"Added documentation"</sp
 <p>This file now only exists on the testing branch.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-try-switching-branches"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Try Switching Branches</div>
+  <div class="box-title hands-on-title" id="hands-on-try-switching-branches"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Try Switching Branches</div>
   <ol>
     <li>
       <p>Try switching back and forth between the <code class="language-plaintext highlighter-rouge">main</code> and <code class="language-plaintext highlighter-rouge">test</code> branches, and check what’s available on each!</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-16"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-16"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-17"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-17"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch main
 <span class="nb">ls</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">readme.md
 </span></code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-18"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-18"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch <span class="nb">test
 ls</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">docs.md   readme.md
 </span></code></pre></div>        </div>
       </blockquote>
@@ -1138,20 +1137,20 @@ ls</span>
 <p>First, let’s compare the two branches, to see what changed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-replacing-argv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Replacing argv.</div>
+  <div class="box-title hands-on-title" id="hands-on-replacing-argv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Replacing argv.</div>
 
   <ol>
     <li>
       <p>Compare your current branch against the <code class="language-plaintext highlighter-rouge">main</code> branch with <code class="language-plaintext highlighter-rouge">git diff main</code></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-19"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-19"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff main
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>diff <span class="nt">--git</span> a/docs.md b/docs.md
 new file mode 100644
 index 0000000..384aaaa
@@ -1169,13 +1168,13 @@ index 0000000..384aaaa
 <p>We can see the output shows all of our changes compared to the main branch and it looks like what we want, so, let’s merge it in.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merge-the-test-branch-into-main"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merge the `test` branch into `main`</div>
+  <div class="box-title hands-on-title" id="hands-on-merge-the-test-branch-into-main"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merge the `test` branch into `main`</div>
   <ol>
     <li>
       <p>Switch to the main branch</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-20"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-20"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git switch main
 </code></pre></div>        </div>
       </blockquote>
@@ -1184,13 +1183,13 @@ index 0000000..384aaaa
       <p>Merge in the test branch</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-21"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-21"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge <span class="nb">test</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-output-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Output</div>
+        <div class="box-title code-in-title" id="code-in-output-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Updating 416a121..9a3387d
 Fast-forward
  docs.md | 1 +
@@ -1206,7 +1205,7 @@ Fast-forward
 <p>This has merged all of the changes you made on the <code class="language-plaintext highlighter-rouge">test</code> branch into the <code class="language-plaintext highlighter-rouge">main</code> branch.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-the-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the history</div>
+  <div class="box-title hands-on-title" id="hands-on-check-the-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the history</div>
   <ol>
     <li>Check <code class="language-plaintext highlighter-rouge">git log -p</code> again to see the history.</li>
   </ol>
@@ -1217,14 +1216,14 @@ Fast-forward
 <p>Oh no, you’ve decided you liked your original project description better. Let’s find that commit and revert it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-find-and-revert-the-bad-commit"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Find and revert the bad commit</div>
+  <div class="box-title hands-on-title" id="hands-on-find-and-revert-the-bad-commit"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find and revert the bad commit</div>
 
   <ol>
     <li>
       <p>Find the commit you want to revert, e.g. with <code class="language-plaintext highlighter-rouge">git log</code>, find the one named “Update project description” (or similar.)</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-22"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-22"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
 </code></pre></div>        </div>
       </blockquote>
@@ -1233,7 +1232,7 @@ Fast-forward
       <p>We can use the <code class="language-plaintext highlighter-rouge">git revert</code> command to undo this commit.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-23"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-23"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git revert 416a121dfcda14de0c2cb181f298b2c08950475f
 </code></pre></div>        </div>
       </blockquote>
@@ -1415,7 +1414,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

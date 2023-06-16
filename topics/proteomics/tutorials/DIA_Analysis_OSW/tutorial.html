@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: DIA Analysis using OpenSwathWorkflow">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -398,7 +398,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -435,14 +435,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>DIA Analysis using OpenSwathWorkflow</h1>
@@ -790,7 +783,7 @@ However, the resulting MS2 spectra contain fragments from multiple peptides and 
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -839,7 +832,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
 <h1 id="raw-file-conversion-with-msconvert">raw File conversion with <strong>msconvert</strong></h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-converting-vendor-specific-raw-to-open-mzml-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Converting vendor specific raw to open mzML format</div>
+  <div class="box-title hands-on-title" id="hands-on-converting-vendor-specific-raw-to-open-mzml-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting vendor specific raw to open mzML format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="msconvert tool" aria-role="link"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1</span></span> with the following parameters:
@@ -871,7 +864,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-demultiplexing"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Demultiplexing</div>
+        <div class="box-title comment-title" id="comment-demultiplexing"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Demultiplexing</div>
         <p>Demultiplexing is needed when the MS2 m/z windows of consecutive scan cycles are overlapping e.g. for the staggered approach (50% shift between the cycles).</p>
       </blockquote>
     </li>
@@ -882,7 +875,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
 <h1 id="dia-analysis-using-openswathworkflow">DIA analysis using <strong>OpenSwathWorkflow</strong></h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-dia-analysis-using-openswathworkflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: DIA analysis using OpenSwathWorkflow</div>
+  <div class="box-title hands-on-title" id="hands-on-dia-analysis-using-openswathworkflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: DIA analysis using OpenSwathWorkflow</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0" title="OpenSwathWorkflow tool" aria-role="link"><strong>OpenSwathWorkflow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathworkflow/OpenSwathWorkflow/2.6+galaxy0</span></span> with the following parameters:
@@ -926,7 +919,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-mass-tolerances-and-quot-minimal-number-of-bins-required-to-be-covered-quot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Mass tolerances and &quot;Minimal number of bins required to be covered&quot;</div>
+        <div class="box-title comment-title" id="comment-mass-tolerances-and-quot-minimal-number-of-bins-required-to-be-covered-quot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Mass tolerances and &quot;Minimal number of bins required to be covered&quot;</div>
         <p>Here we analyze data acquired on a QExactive Plus MS instrument which uses an Orbitrap and generates high resolution data. Therefore, we allow for 10 ppm mass tolerance for both the MS1 and the MS2 level. If larger mass deviation are expected the mass tolerances can be adjusted. Other instrumentation (such as TOF devices) might require larger mass tolerances for improved peptide identification. Furthermore, here we require at least 7 of the iRT peptides to be found in each of the DIA measurements. This number can be set to lower values if for some reasons fewer iRT peptides were found in some of the measurements. In case only a few iRT peptides are identified in the DIA measurements, the mass tolerance for the iRT extraction can be increased to 20 ppm. We than recommend to increase the extraction window for the MS2 level to 20 ppm. For more information see also <a href="http://openswath.org/en/latest/docs/openswath.html">OpenSwathWorkflow</a>.</p>
       </blockquote>
     </li>
@@ -937,7 +930,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
 <h2 id="combining-osw-results-using-pyprophet-merge">Combining osw results using <strong>PyProphet merge</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combining-the-individual-osw-results-with-pyprophet-merge"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combining the individual osw results with pyprophet merge</div>
+  <div class="box-title hands-on-title" id="hands-on-combining-the-individual-osw-results-with-pyprophet-merge"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combining the individual osw results with pyprophet merge</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0" title="PyProphet merge tool" aria-role="link"><strong>PyProphet merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_merge/pyprophet_merge/2.1.4.0</span></span> with the following parameters:
@@ -953,7 +946,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
 <h1 id="fdr-estimation-using-pyprophet-score">FDR estimation using <strong>PyProphet score</strong></h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-semi-supervised-learning-and-scoring-of-openswathworkflow-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Semi-supervised learning and scoring of OpenSwathWorkflow results</div>
+  <div class="box-title hands-on-title" id="hands-on-semi-supervised-learning-and-scoring-of-openswathworkflow-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Semi-supervised learning and scoring of OpenSwathWorkflow results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2" title="PyProphet score tool" aria-role="link"><strong>PyProphet score</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_score/pyprophet_score/2.1.4.2</span></span> with the following parameters:
@@ -963,7 +956,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-fdr-scoring-using-pyprophet-score"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: FDR scoring using pyprophet score</div>
+        <div class="box-title comment-title" id="comment-fdr-scoring-using-pyprophet-score"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: FDR scoring using pyprophet score</div>
         <p>During this step q-values corresponding to the FDR of peak identification is estimated with pyprophet. Typically this is the most time consuming step due to the involved maschine learning processes. To decrease the input size one can use <strong>PyProphet subsample</strong> to randomly select subsets of the identifications from each run in the merged.osw (<strong>PyProphet merge</strong> output). In this case, the FDR estimation needs to be applied on the full merged.osw afterwards using the scored subsample.osw in the <em>“Apply PyProphet score weights file (osw format) instead of semi-supervised learning.”</em> section of <strong>PyProphet score</strong>. The generated report.pdf is helpful to identify potential errors as well as get first insights on the quality of the identifications.</p>
       </blockquote>
     </li>
@@ -972,7 +965,7 @@ https://zenodo.org/record/4307762/files/Sample8.raw
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Continue with results from Zenodo<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In case the pyprophet score run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
   <ol>
@@ -985,7 +978,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Does the distribution of target identifications differ from the decoy distribution?</li>
@@ -993,7 +986,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positiv d-score values.</li>
@@ -1007,7 +1000,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 <h2 id="apply-scores-with-pyprophet-peptide">Apply scores with <strong>PyProphet peptide</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conduct-peptide-inference-in-experiment-wide-and-global-context"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conduct peptide inference in experiment-wide and global context</div>
+  <div class="box-title hands-on-title" id="hands-on-conduct-peptide-inference-in-experiment-wide-and-global-context"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Conduct peptide inference in experiment-wide and global context</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0" title="PyProphet peptide tool" aria-role="link"><strong>PyProphet peptide</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_peptide/pyprophet_peptide/2.1.4.0</span></span> with the following parameters:
@@ -1029,7 +1022,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 <h2 id="apply-scores-with-pyprophet-protein">Apply scores with <strong>PyProphet protein</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conduct-protein-inference-in-experiment-wide-and-global-context"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conduct protein inference in experiment-wide and global context</div>
+  <div class="box-title hands-on-title" id="hands-on-conduct-protein-inference-in-experiment-wide-and-global-context"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Conduct protein inference in experiment-wide and global context</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0" title="PyProphet protein tool" aria-role="link"><strong>PyProphet protein</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_protein/pyprophet_protein/2.1.4.0</span></span> with the following parameters:
@@ -1049,7 +1042,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How does the score distribution differ between the peptide and the protein inference (in global context)?</li>
@@ -1057,7 +1050,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The d-score distribution and the ROC curve for the protein inference shows better target decoy discriminatory ability than for the peptide inference.</li>
@@ -1071,7 +1064,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 <h2 id="exporting-the-results-with-pyprophet-export">Exporting the results with <strong>PyProphet export</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exporting-pyprophet-scored-osw-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exporting pyprophet scored OSW results</div>
+  <div class="box-title hands-on-title" id="hands-on-exporting-pyprophet-scored-osw-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exporting pyprophet scored OSW results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1" title="PyProphet export tool" aria-role="link"><strong>PyProphet export</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/pyprophet_export/pyprophet_export/2.1.4.1</span></span> with the following parameters:
@@ -1086,7 +1079,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-pyprophet-export-and-the-swath2stats-functionality"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: PyProphet export and the swath2stats functionality</div>
+        <div class="box-title comment-title" id="comment-pyprophet-export-and-the-swath2stats-functionality"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: PyProphet export and the swath2stats functionality</div>
         <p>All previous FDR scoring steps using <strong>PyProphet peptide</strong> and <strong>PyProphet protein</strong> are integrated in the respective <code class="language-plaintext highlighter-rouge">.osw</code> output. Therefore, the latest <code class="language-plaintext highlighter-rouge">protein.osw</code> can be used for the export step. If peptide and protein FDR scoring was performed in the global context, the exported results will be filtered to 1% FDR by default. For more information see also <a href="http://openswath.org/en/latest/docs/pyprophet.html">PyProphet</a>. Utilizing the swath2stats functionality generates a summary as well as a peptide and protein expression matrix. In addition to the non-processed pyprophet tabular output a refined tabular is generated using the specified criteria. The refined tabular <code class="language-plaintext highlighter-rouge">msstats_input.tabular</code> is dircetly compatable with <strong>MSstats</strong> for statistical analysis. The integration of swath2stats also allows to adjust the processing by applying different FFT and FDR settings as well as specifying a minimum number of peptides per protein. For more information see also <a href="https://bioconductor.org/packages/release/bioc/html/SWATH2stats.html">Swath2stats</a>.</p>
       </blockquote>
     </li>
@@ -1095,7 +1088,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many different peptides and proteins were identified and quatified?</li>
@@ -1103,7 +1096,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>In total, over 27,300 peptides and over 5,100 proteins were identified and quantified in the DIA measurements.</li>
@@ -1115,7 +1108,7 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-analysis-of-ecoli-spike-in"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Analysis of Ecoli Spike-in</div>
+  <div class="box-title hands-on-title" id="hands-on-analysis-of-ecoli-spike-in"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysis of Ecoli Spike-in</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression  tool" aria-role="link"><strong>Select lines that match an expression </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
@@ -1130,14 +1123,14 @@ https://zenodo.org/record/4307762/files/PyProphet_score.osw
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>How many Ecoli proteins were identified and quantified in the six DIA measurements?</li>
     <li>Can you guess which Spike-in contains higher amounts of Ecoli peptides?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Over 800 Ecoli proteins were identified and quantified in the six DIA measurements.</li>
       <li>It seems that the samples in Spike_in_2 contained higher amounts of Ecoli peptides than the samples in Spike_in_1.</li>
@@ -1354,7 +1347,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

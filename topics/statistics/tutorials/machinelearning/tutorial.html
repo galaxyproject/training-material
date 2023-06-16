@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Basics of machine learning">
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -354,7 +354,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -391,14 +391,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-statistics">
     <h1 data-toc-skip>Basics of machine learning</h1>
@@ -678,7 +671,7 @@ Sentry.init({
 <p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/pmlb/tree/master/datasets/breast_w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer and <code class="language-plaintext highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -720,7 +713,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="language-plaintext highlighter-rouge">breast-w_train</code> dataset. The classifier learns a mapping between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can be thrown away. We will use the <code class="language-plaintext highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="language-plaintext highlighter-rouge">SVC</code> and <code class="language-plaintext highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a mapping between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-train-a-classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Train a classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-train-a-classifier"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Train a classifier</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1" title="Support vector machines (SVMs) for classification tool" aria-role="link"><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1</span></span> with the following parameters to train:</p>
   <ul>
@@ -746,7 +739,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>The previous step produced a trained model (a zip archive) which we will now use to predict classes for the test data (<code class="language-plaintext highlighter-rouge">breast-w_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-predict-using-a-trained-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Predict using a trained model</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-using-a-trained-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Predict using a trained model</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1" title="Support vector machines (SVMs) for classification tool" aria-role="link"><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.1</span></span> with the following parameters:</p>
   <ul>
@@ -766,7 +759,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>The last column of the predicted dataset shows the category of each row. A row either got <code class="language-plaintext highlighter-rouge">0</code> (no breast cancer) or <code class="language-plaintext highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-see-the-predicted-column"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: See the predicted column</div>
+  <div class="box-title hands-on-title" id="hands-on-see-the-predicted-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: See the predicted column</div>
   <ol>
     <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the dataset created by the previous step.</li>
     <li>The last column of the table shows the predicted category (<code class="language-plaintext highlighter-rouge">target</code>) for each row.</li>
@@ -775,7 +768,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-additional-ml-resources"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-ml-resources" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Additional ML resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-additional-ml-resources"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-ml-resources" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Additional ML resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Read more about <a href="http://scikit-learn.org/stable/">machine learning using scikit-learn</a>.</p>
 </blockquote>
@@ -951,7 +944,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

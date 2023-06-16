@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Variant Calling Workflow">
         <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -435,7 +435,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -472,14 +472,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-data-science">
     <h1 data-toc-skip>Variant Calling Workflow</h1>
@@ -563,7 +556,7 @@ Sentry.init({
 <p>The whole proccess is designed to be run in RStudio as an Interactive Tool, directly in Galaxy.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a> lesson</p>
 
@@ -592,7 +585,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-software-to-use"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Software to use</div>
+  <div class="box-title hands-on-title" id="hands-on-software-to-use"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Software to use</div>
 
   <p>The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 We go to “Tools” and pick the “Shell…” option and we are good to go. Our workspace is the left, terminal window that just opened.</p>
@@ -600,7 +593,7 @@ We go to “Tools” and pick the “Shell…” option and we are good to go. O
   <p>Fortunately, <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> name_of_your_env bwa samtools bcftools
 <span class="nv">$ </span>conda activate name_of_your_env
 </code></pre></div>    </div>
@@ -671,7 +664,7 @@ sequences against a large reference genome.</p>
 <h1 id="setting-up">Setting up</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-download-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download Genome</div>
+  <div class="box-title hands-on-title" id="hands-on-download-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download Genome</div>
 
   <p>First we download the reference genome for <em>E. coli</em> REL606. Although we could copy or move the file with <code class="language-plaintext highlighter-rouge">cp</code> or <code class="language-plaintext highlighter-rouge">mv</code>, most genomics workflows begin with a download step, so we will practice that here.</p>
 
@@ -685,13 +678,13 @@ sequences against a large reference genome.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>We saved this file as <code class="language-plaintext highlighter-rouge">data/ref_genome/ecoli_rel606.fasta.gz</code> and then decompressed it.
 What is the real name of the genome?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">head </span>data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>      </div>
@@ -704,7 +697,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   <p>We will also download a set of trimmed FASTQ files to work with that will enable us to run our variant calling workflow quite quickly.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-getting-easy-to-work-fastq-files"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Getting easy-to-work FASTQ files</div>
+    <div class="box-title code-in-title" id="code-in-getting-easy-to-work-fastq-files"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Getting easy-to-work FASTQ files</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-L</span> <span class="nt">-o</span> sub.tar.gz https://ndownloader.figshare.com/files/14418248
 <span class="nv">$ </span><span class="nb">tar </span>xvf sub.tar.gz
 <span class="nv">$ </span><span class="nb">mv </span>sub/ ~/dc_workshop/data/trimmed_fastq_small
@@ -714,18 +707,18 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   <p>You will also need to create directories for the results that will be generated as part of this workflow. We can do this in a single line of code, because <code class="language-plaintext highlighter-rouge">mkdir</code> can accept multiple new directory names as input.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-create-result-directories"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Create result directories</div>
+    <div class="box-title code-in-title" id="code-in-create-result-directories"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Create result directories</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> results/sam results/bam results/bcf results/vcf
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Index the reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Index the reference genome</div>
   <p>Our first step is to index the reference genome for use by BWA. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-indexing-with-bwa"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Indexing with `bwa`</div>
+    <div class="box-title code-in-title" id="code-in-indexing-with-bwa"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Indexing with `bwa`</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bwa index data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>    </div>
   </blockquote>
@@ -733,7 +726,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
   <p>While the index is created, you will see output that looks something like this:</p>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[bwa_index] Pack FASTA... 0.04 sec
 [bwa_index] Construct BWT for the packed sequence...
 [bwa_index] 1.05 seconds elapse.
@@ -749,7 +742,7 @@ Keep this chromosome name (<code class="language-plaintext highlighter-rouge">CP
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Align reads to reference genome</div>
 
   <p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
 aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
@@ -769,13 +762,13 @@ samples in our dataset (<code class="language-plaintext highlighter-rouge">SRR25
 iterating this whole process on all of our sample files.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-aligning-with-bwa"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Aligning with bwa</div>
+    <div class="box-title code-in-title" id="code-in-aligning-with-bwa"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Aligning with bwa</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq <span class="o">&gt;</span> results/sam/SRR2584866.aligned.sam
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[M::bwa_idx_load_from_disk] read 0 ALT contigs
 [M::process] read 77446 sequences (10000033 bp)...
 [M::process] read 77296 sequences (10000182 bp)...
@@ -814,16 +807,16 @@ displayed below with the different fields highlighted.</p>
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sam-to-bam"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SAM to BAM</div>
+  <div class="box-title hands-on-title" id="hands-on-sam-to-bam"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: SAM to BAM</div>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: bash</div>
+    <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: bash</div>
     <p>We will convert the SAM file to BAM format using the <code class="language-plaintext highlighter-rouge">samtools</code> program with the <code class="language-plaintext highlighter-rouge">view</code> command and tell this command that the input is in SAM format (<code class="language-plaintext highlighter-rouge">-S</code>) and to output BAM format (<code class="language-plaintext highlighter-rouge">-b</code>):</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools view <span class="nt">-S</span> <span class="nt">-b</span> results/sam/SRR2584866.aligned.sam <span class="o">&gt;</span> results/bam/SRR2584866.aligned.bam
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[samopen] SAM header is present: 1 sequences.
 </code></pre></div>    </div>
   </blockquote>
@@ -831,18 +824,18 @@ displayed below with the different fields highlighted.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Sort BAM file by coordinates</div>
+  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Sort BAM file by coordinates</div>
 
   <p>Next we sort the BAM file using the <code class="language-plaintext highlighter-rouge">sort</code> command from <code class="language-plaintext highlighter-rouge">samtools</code>. <code class="language-plaintext highlighter-rouge">-o</code> tells the command where to write the output.</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-sort-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `sort` command</div>
+    <div class="box-title code-in-title" id="code-in-sort-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: `sort` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools <span class="nb">sort</span> <span class="nt">-o</span> results/bam/SRR2584866.aligned.sorted.bam results/bam/SRR2584866.aligned.bam
 </code></pre></div>    </div>
   </blockquote>
 
   <p>Our files are pretty small, so we will not see this output. If you run the workflow with larger files, you will see something like this:</p>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[bam_sort_core] merging from 2 files...
 </code></pre></div>    </div>
@@ -853,7 +846,7 @@ displayed below with the different fields highlighted.</p>
   <p>You can use samtools to learn more about this bam file as well.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-flagstat-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `flagstat` command</div>
+    <div class="box-title code-in-title" id="code-in-flagstat-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: `flagstat` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>samtools flagstat results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
   </blockquote>
@@ -861,7 +854,7 @@ displayed below with the different fields highlighted.</p>
   <p>This will give you the following statistics about your sorted bam file:</p>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>351169 + 0 in total (QC-passed reads + QC-failed reads)
 0 + 0 secondary
 1169 + 0 supplementary
@@ -892,19 +885,19 @@ variants.</p>
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-1-calculate-the-read-coverage-of-positions-in-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 1: Calculate the read coverage of positions in the genome</div>
+  <div class="box-title hands-on-title" id="hands-on-step-1-calculate-the-read-coverage-of-positions-in-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Step 1: Calculate the read coverage of positions in the genome</div>
 
   <p>Do the first pass on variant calling by counting read coverage with
 <a href="https://samtools.github.io/bcftools/bcftools.html">bcftools</a>. We will
 use the command <code class="language-plaintext highlighter-rouge">mpileup</code>. The flag <code class="language-plaintext highlighter-rouge">-O b</code> tells bcftools to generate a
 bcf format output file, <code class="language-plaintext highlighter-rouge">-o</code> specifies where to write the output file, and <code class="language-plaintext highlighter-rouge">-f</code> flags the path to the reference genome:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-mpileup-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `mpileup` command</div>
+    <div class="box-title code-in-title" id="code-in-mpileup-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: `mpileup` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bcftools mpileup <span class="nt">-O</span> b <span class="nt">-o</span> results/bcf/SRR2584866_raw.bcf <span class="nt">-f</span> data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-5"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-5"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[mpileup] 1 samples in 1 input files
 </code></pre></div>    </div>
   </blockquote>
@@ -914,11 +907,11 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-2-detect-the-single-nucleotide-variants-snvs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 2: Detect the single nucleotide variants (SNVs</div>
+  <div class="box-title hands-on-title" id="hands-on-step-2-detect-the-single-nucleotide-variants-snvs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Step 2: Detect the single nucleotide variants (SNVs</div>
 
   <p>Identify SNVs using bcftools <code class="language-plaintext highlighter-rouge">call</code>. We have to specify ploidy with the flag <code class="language-plaintext highlighter-rouge">--ploidy</code>, which is one for the haploid <em>E. coli</em>. <code class="language-plaintext highlighter-rouge">-m</code> allows for multiallelic and rare-variant calling, <code class="language-plaintext highlighter-rouge">-v</code> tells the program to output variant sites only (not every site in the genome), and <code class="language-plaintext highlighter-rouge">-o</code> specifies where to write the output file:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-call-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `call` command</div>
+    <div class="box-title code-in-title" id="code-in-call-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: `call` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>bcftools call <span class="nt">--ploidy</span> 1 <span class="nt">-m</span> <span class="nt">-v</span> <span class="nt">-o</span> results/vcf/SRR2584866_variants.vcf results/bcf/SRR2584866_raw.bcf
 </code></pre></div>    </div>
   </blockquote>
@@ -926,11 +919,11 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Step 3: Filter and report the SNV variants in variant calling format (VCF</div>
+  <div class="box-title hands-on-title" id="hands-on-step-3-filter-and-report-the-snv-variants-in-variant-calling-format-vcf"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Step 3: Filter and report the SNV variants in variant calling format (VCF</div>
 
   <p>Filter the SNVs for the final output in VCF format, using <code class="language-plaintext highlighter-rouge">vcfutils.pl</code>:</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-filtering-with-vcfutils-pl-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Filtering with `vcfutils.pl` command</div>
+    <div class="box-title code-in-title" id="code-in-filtering-with-vcfutils-pl-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Filtering with `vcfutils.pl` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vcfutils.pl varFilter results/vcf/SRR2584866_variants.vcf  <span class="o">&gt;</span> results/vcf/SRR2584866_final_variants.vcf
 </code></pre></div>    </div>
   </blockquote>
@@ -938,7 +931,7 @@ bcf format output file, <code class="language-plaintext highlighter-rouge">-o</c
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-explore-the-vcf-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Explore the VCF format:</div>
+  <div class="box-title hands-on-title" id="hands-on-explore-the-vcf-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Explore the VCF format:</div>
 
   <blockquote class="code-in">
     <p><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span></p>
@@ -1102,12 +1095,12 @@ However, in reality we need to filter on multiple other metrics.</p>
 to learn more about the VCF file format.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Use the <code class="language-plaintext highlighter-rouge">grep</code> and <code class="language-plaintext highlighter-rouge">wc</code> commands you have learned to assess how many variants are in the vcf file.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <blockquote class="code-in">
       <p><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span></p>
@@ -1125,7 +1118,7 @@ to learn more about the VCF file format.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assess-the-alignment-visualization-optional-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assess the alignment (visualization) - optional step</div>
+  <div class="box-title hands-on-title" id="hands-on-assess-the-alignment-visualization-optional-step"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assess the alignment (visualization) - optional step</div>
 
   <p>It is often instructive to look at your data in a genome browser. Visualization will allow you to get a “feel” for
 the data, as well as detecting abnormalities and problems. Also, exploring the data in such a way may give you
@@ -1135,7 +1128,7 @@ Institute’s Integrative Genomics Viewer (IGV) which requires
 software installation and transfer of files.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-in-order-for-us-to-visualize-the-alignment-files-we-will-need-to-index-the-bam-file-using-samtools"><i class="far fa-keyboard" aria-hidden="true"></i> Input:  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</div>
+    <div class="box-title code-in-title" id="code-in-in-order-for-us-to-visualize-the-alignment-files-we-will-need-to-index-the-bam-file-using-samtools"><i class="far fa-keyboard" aria-hidden="true" ></i> Input:  In order for us to visualize the alignment files, we will need to index the BAM file using `samtools`:</div>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools index results/bam/SRR2584866.aligned.sorted.bam
 </code></pre></div>    </div>
@@ -1150,14 +1143,14 @@ It uses different colors to display mapping quality or base quality, subjected t
   <p>In order to visualize our mapped reads, we use <code class="language-plaintext highlighter-rouge">tview</code>, giving it the sorted bam file and the reference file:</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-visualize-with-tview"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Visualize with `tview`</div>
+    <div class="box-title code-in-title" id="code-in-visualize-with-tview"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Visualize with `tview`</div>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools tview results/bam/SRR2584866.aligned.sorted.bam data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-6"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-6"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1         11        21        31        41        51        61        71        81        91        101       111       121
 AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGCTTCTGAACTGGTTACCTGCCGTGAGTAAATTAAAATTTTATTGACTTAGGTCACTAAATAC
 ..................................................................................................................................
@@ -1197,13 +1190,13 @@ this box, type the name of the “chromosome” followed by a colon and the posi
 (e.g. for this sample, type <code class="language-plaintext highlighter-rouge">CP000819.1:50</code> to view the 50th base. Type <code class="language-plaintext highlighter-rouge">Ctrl^C</code> or <code class="language-plaintext highlighter-rouge">q</code> to exit <code class="language-plaintext highlighter-rouge">tview</code>.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>Visualize the alignment of the reads for our <code class="language-plaintext highlighter-rouge">SRR2584866</code> sample. What variant is present at
 position 4377265? What is the canonical nucleotide in that position?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools tview ~/dc_workshop/results/bam/SRR2584866.aligned.sorted.bam ~/dc_workshop/data/ref_genome/ecoli_rel606.fasta
 </code></pre></div>      </div>
@@ -1256,7 +1249,7 @@ Use <a href="http://software.broadinstitute.org/software/igv/AlignmentData">this
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-bwa-alignment-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-bwa-alignment-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: BWA alignment options<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-bwa-alignment-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-bwa-alignment-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: BWA alignment options<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>BWA consists of three algorithms: BWA-backtrack, BWA-SW and BWA-MEM. The first algorithm is designed for Illumina sequence
 reads up to 100bp, while the other two are for sequences ranging from 70bp to 1Mbp. BWA-MEM and BWA-SW share similar features such
 as long-read support and split alignment, but BWA-MEM, which is the latest, is generally recommended for high-quality queries as it
@@ -1420,7 +1413,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

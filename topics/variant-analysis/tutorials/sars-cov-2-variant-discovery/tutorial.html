@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mutation calling, viral genome reconstruction and lineage...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -481,7 +481,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -518,14 +518,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</h1>
@@ -1049,7 +1042,7 @@ It is a subset (16 samples) of the first sequencing data reported from South Afr
 This data has been Illumina paired-end sequenced after amplification with the ARTIC v4 set of tiled-amplicon primers.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-bringing-your-own-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Bringing your own data</div>
+  <div class="box-title comment-title" id="comment-bringing-your-own-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Bringing your own data</div>
   <p>Alternatively, you can also follow this tutorial using your own SARS-CoV-2 sequencing data (you need at least two samples) as long as it is of one of the following types:</p>
 
   <ul>
@@ -1068,7 +1061,7 @@ This data has been Illumina paired-end sequenced after amplification with the AR
 <p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
@@ -1092,7 +1085,7 @@ This data has been Illumina paired-end sequenced after amplification with the AR
 <h2 id="get-sequencing-data">Get sequencing data</h2>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-importing-your-own-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Importing your own data</div>
+  <div class="box-title comment-title" id="comment-importing-your-own-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Importing your own data</div>
   <p>If you are going to use your own sequencing data, there are several possibilities to upload the data depending on how many datasets you have and what their origin is:</p>
 
   <ul>
@@ -1108,7 +1101,7 @@ This data has been Illumina paired-end sequenced after amplification with the AR
       <p>In all of these cases you will also have to organize the imported data into a dataset collection like explained in detail for the suggested example data.</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-data-logistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-logistics" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Data logistics<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-data-logistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-logistics" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Data logistics<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>A detailed explanation of all of the above-mentioned options for getting your data into Galaxy and organizing it in your history is beyond the scope of this tutorial.
 If you are struggling with getting your own data set up like shown for the example data in this section, please:</p>
@@ -1124,7 +1117,7 @@ If you are struggling with getting your own data set up like shown for the examp
       <p>Alternatively, if your data is available from <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI’s Sequence Read Archive (SRA)</a>, you can import it with the help of a dedicated tool, which will organize the data into collections for you.</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-getting-data-from-sra"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-data-from-sra" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Getting data from SRA<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-getting-data-from-sra"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-data-from-sra" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Getting data from SRA<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The simpler <a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">SARS-CoV-2 sequencing data analysis tutorial</a> uses and explains this alternative way of importing.</p>
 
@@ -1136,7 +1129,7 @@ If you are struggling with getting your own data set up like shown for the examp
 <p>For the suggested batch of early Omicron data we suggest downloading it via URLs from the <a href="https://www.ebi.ac.uk/ena/browser/home">European Nucleotide Archive (ENA)</a>. In case your Galaxy server offers that same data through a shared data library, this represents a faster (data is already on the server) alternative, so we offer instructions for this scenario as well.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-the-sequencing-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import the sequencing data</div>
+  <div class="box-title hands-on-title" id="hands-on-import-the-sequencing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the sequencing data</div>
 
   <ul>
     <li>
@@ -1234,7 +1227,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-reference-sequence-and-feature-mappings"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get reference sequence and feature mappings</div>
+  <div class="box-title hands-on-title" id="hands-on-get-reference-sequence-and-feature-mappings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get reference sequence and feature mappings</div>
 
   <ol>
     <li>
@@ -1330,7 +1323,7 @@ GU280_gp11        orf10
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info"><button class="gtn-boxify-button details" type="button" aria-controls="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info"><button class="gtn-boxify-button details" type="button" aria-controls="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The instructions below assume that you are going to analyze viral samples amplified using <strong>version 4 of the ARTIC network’s SARS-CoV-2 set of primers</strong>, which is the case for the suggested Omicron batch of data.</p>
 
@@ -1346,7 +1339,7 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-primer-scheme-and-amplicon-info"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get primer scheme and amplicon info</div>
+  <div class="box-title hands-on-title" id="hands-on-get-primer-scheme-and-amplicon-info"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get primer scheme and amplicon info</div>
 
   <ol>
     <li>
@@ -1435,7 +1428,7 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
 <p>Four flavors of this workflow are available that are optimized for different types of input data so your first task is to obtain the correct workflow for your type of input data.</p>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-import-the-workflow-for-your-data-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import the workflow for your data into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-import-the-workflow-for-your-data-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the workflow for your data into Galaxy</div>
 
   <p>All workflows developed as part of the Galaxy Covid-19 project can be retrieved via either of the two popular workflow registries <a href="https://dockstore.org/">Dockstore</a> and <a href="https://workflowhub.eu/">WorkflowHub</a>, the choice is up to you, and Galaxy makes this process really easy for you.</p>
 
@@ -1484,7 +1477,7 @@ This would be:</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: About the workflows<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: About the workflows<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Differences between the four different <em>variation analysis</em> workflow flavors are as follows:</p>
   <ul>
@@ -1539,7 +1532,7 @@ In addition, the tiled-amplicon data analysis workflows handle primer trimming a
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-sequencing-data-to-annotated-mutations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From sequencing data to annotated mutations</div>
+  <div class="box-title hands-on-title" id="hands-on-from-sequencing-data-to-annotated-mutations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From sequencing data to annotated mutations</div>
 
   <div class="tiled-amplicon-Illumina-paired-end">
 
@@ -1612,7 +1605,7 @@ The <a href="https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html">A
   </div>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <!--SNIPPET-->
     <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul>
@@ -1632,14 +1625,14 @@ Here, however, we only want to do one analysis of our batch of data so we are fi
 <p>If you are following along with the suggested batch of samples, we also have prepared a simple question for you.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>There are at least three problematic samples in the batch. What are their identifiers and what is the issue with them?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1661,7 +1654,7 @@ For the other three we may hope for some results, but we should not expect those
 <p>The main output of the first workflow is a collection with annotated mutation calls per sample. This collection will serve as input to the <em>reporting</em> workflow.</p>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-import-the-variant-analysis-reporting-workflow-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import the variant analysis reporting workflow into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-import-the-variant-analysis-reporting-workflow-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the variant analysis reporting workflow into Galaxy</div>
 
   <p>Just like the variation analysis workflows before, also the <em>reporting workflow</em> developed by the Galaxy Covid-19 project can be retrieved from <em>Dockstore</em> or <em>WorkflowHub</em>:</p>
 
@@ -1675,7 +1668,7 @@ For the other three we may hope for some results, but we should not expect those
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-mutations-per-sample-to-reports-and-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From mutations per sample to reports and visualizations</div>
+  <div class="box-title hands-on-title" id="hands-on-from-mutations-per-sample-to-reports-and-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From mutations per sample to reports and visualizations</div>
 
   <ol>
     <li>
@@ -1709,7 +1702,7 @@ For the other three we may hope for some results, but we should not expect those
       <p>The collection with variation data in VCF format; output of the previous workflow</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Use the right collection of annotated variants!</div>
+        <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Use the right collection of annotated variants!</div>
         <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
         <div class="tiled-amplicon-Illumina-paired-end">
@@ -1761,7 +1754,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
     <p>This report is meant as a faster and more legible way for studying the collection of per-sample mutations in VCF format directly.</p>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-structure-of-the-by-sample-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-by-sample-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Structure of the by-sample mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-structure-of-the-by-sample-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-by-sample-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Structure of the by-sample mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <table>
         <thead>
@@ -1893,7 +1886,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
     <p>This table aggregates the information about each mutation <em>across</em> samples. It is much more concise than the by-sample report at only a small amount of information loss.</p>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-structure-of-the-across-samples-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-across-samples-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Structure of the across-samples mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-structure-of-the-across-samples-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-across-samples-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Structure of the across-samples mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <table>
         <thead>
@@ -2006,7 +1999,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
 <p>If you are working with your own data, we encourage you to just explore these three outputs on your own. If you are following along with the suggested batch of example data, then we have some guidance and questions prepared for you:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-some-results-exploration-and-questions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Some results exploration and questions</div>
+  <div class="box-title question-title" id="question-some-results-exploration-and-questions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Some results exploration and questions</div>
 
   <p>The variant frequency plot shows a large main cluster of samples (in the middle of the plot) flanked by two smaller ones.
 The small cluster at the bottom of the plot consists of only two samples, the cluster at the top of three samples.</p>
@@ -2028,7 +2021,7 @@ The small cluster at the bottom of the plot consists of only two samples, the cl
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The two samples forming the smallest cluster, <strong>SRR17054502</strong> and <strong>SRR17054506</strong>, and two of the samples in the three-samples cluster, <strong>SRR17054505</strong> and <strong>SRR17054508</strong>, are exactly the four samples we observed as having particularly low coverage in the <strong>Preprocessing and mapping reports</strong> before.</li>
       <li>
@@ -2082,7 +2075,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
 </ul>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-import-the-consensus-construction-workflow-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import the consensus construction workflow into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-import-the-consensus-construction-workflow-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the consensus construction workflow into Galaxy</div>
 
   <p>Just like all workflows before, also the <em>consensus construction workflow</em> developed by the Galaxy Covid-19 project can be retrieved from <em>Dockstore</em> or <em>WorkflowHub</em>:</p>
 
@@ -2098,7 +2091,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
 <p>The workflow takes the collection of called variants (one VCF dataset per input sample, same collection as used as input for the <em>reporting</em> workflow) and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage). Both collections have been generated by the <em>variation analysis</em> workflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-mutations-per-sample-to-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From mutations per sample to consensus sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-from-mutations-per-sample-to-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From mutations per sample to consensus sequences</div>
 
   <ol>
     <li>
@@ -2132,7 +2125,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
       <p>The collection with variation data in VCF format; output of the first workflow</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Use the right collection of annotated variants!</div>
+        <div class="box-title comment-title" id="comment-use-the-right-collection-of-annotated-variants-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Use the right collection of annotated variants!</div>
         <p>The variation analysis workflow should have generated <em>two</em> collections of annotated variants - one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants</code>, the other one called <code class="language-plaintext highlighter-rouge">Final (SnpEff-) annotated variants with strand-bias soft filter applied</code>.</p>
 
         <div class="tiled-amplicon-Illumina-paired-end">
@@ -2184,7 +2177,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
 <p>Since these Ns are hard to discover by just scrolling through a consensus sequence fasta dataset, it is a good idea to have their positions reported explicitly.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-reporting-masked-positions-in-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reporting masked positions in consensus sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-reporting-masked-positions-in-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reporting masked positions in consensus sequences</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="link"><strong>Fasta regular expression finder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0</span></span> with the following parameters:
@@ -2218,7 +2211,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
 <p>If you are following along with the suggested batch of input sequences, you can now correlate our previous observations with this newly produced collection.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+  <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
   <ol>
     <li>
@@ -2236,7 +2229,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2264,7 +2257,7 @@ This means there is no objective basis for thinking that these samples represent
 <p>Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence to its most likely lineage from the PANGO nomenclature system.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-pangolin"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From consensus sequences to clade assignments using Pangolin</div>
+  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-pangolin"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From consensus sequences to clade assignments using Pangolin</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0" title="Pangolin tool" aria-role="link"><strong>Pangolin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0</span></span> with the following parameters:
@@ -2282,7 +2275,7 @@ This means there is no objective basis for thinking that these samples represent
 <p>With a larger number of samples we might actually want to create an observed lineage summary report. Lets see if you can generate such a report:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Can you configure the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> to produce a three-column lineage summary from the pangolin output, in which each line lists:</p>
   <ul>
@@ -2292,7 +2285,7 @@ This means there is no objective basis for thinking that these samples represent
   </ul>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> like this:</p>
     <ul>
@@ -2332,7 +2325,7 @@ This means there is no objective basis for thinking that these samples represent
 <p>If you are working with the suggested batch of data, here are some specific follow-up questions for you:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+  <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
   <ol>
     <li>
@@ -2348,7 +2341,7 @@ What is that lineage?</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2392,7 +2385,7 @@ Several possibilities exist:</p>
 <p>Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-nextclade"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: From consensus sequences to clade assignments using Nextclade</div>
+  <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-nextclade"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From consensus sequences to clade assignments using Nextclade</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0" title="Nextclade tool" aria-role="link"><strong>Nextclade</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0</span></span> with the following parameters:
@@ -2418,14 +2411,14 @@ Several possibilities exist:</p>
 <p>Let’s use <strong>Datamash</strong> again to obtain a lineage summary report from the Nextclade results comparable to the one we created for pangolin, but including the additional lineage/clade identifiers available with Nextclade.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Can you configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> to produce a report summarizing the Nextclade results by <code class="language-plaintext highlighter-rouge">Nextclade_pango</code> (column 3 of Nextclade’s output) for direct comparison to the pangolin results summary?</p>
 
   <p>This report should include the corresponding info from the <code class="language-plaintext highlighter-rouge">clade</code> column (column 2, which is Nextclade’s native classification system) and from the <code class="language-plaintext highlighter-rouge">clade_who</code> (column 6), together with the sample counts and identifiers as previously calculated from pangolin’s output.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> like this:</p>
     <ul>
@@ -2466,12 +2459,12 @@ Several possibilities exist:</p>
 If you are following along with the suggested batch of data, here’s a question about the detailed differences.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which samples have been assigned differently by pangolin and Nextclade, and why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><strong>SRR17054508</strong>, one of the two samples left unassigned by pangolin is assigned to BA.1 by Nextclade.</p>
 
@@ -2684,7 +2677,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

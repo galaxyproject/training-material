@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Pox virus genome analysis from tiled-amplicon sequencing ...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -477,7 +477,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -514,14 +514,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Pox virus genome analysis from tiled-amplicon sequencing data</h1>
@@ -937,7 +930,7 @@ ITRs with a length of just 700 bases (reviewed in <span class="citation"><a href
 <p>This tutorial demonstrates how such data can be analyzed correctly with Galaxy.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-advanced-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Advanced tutorial</div>
+  <div class="box-title comment-title" id="comment-advanced-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Advanced tutorial</div>
   <p>This tutorial demonstrates a very close to real-world analysis of viral sequencing data with Galaxy<sup id="fnref:prior_work" role="doc-noteref"><a href="#fn:prior_work" class="footnote" rel="footnote">1</a></sup>.
 As such, it avoids many simplifications that are often made in training material to ease understanding.
 On the technical side, in particular, it makes use of many different Galaxy features and often assumes more than just basic familiarity with them.
@@ -1016,7 +1009,7 @@ Likewise, we will use a 5’-masked genome for the mapping of the “pool 2” r
 <p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
@@ -1056,7 +1049,7 @@ Likewise, we will use a 5’-masked genome for the mapping of the “pool 2” r
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-choice-of-samples"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Choice of samples</div>
+  <div class="box-title comment-title" id="comment-choice-of-samples"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Choice of samples</div>
   <p>An in-depth analysis (<span class="citation"><a href="#Vandenbussche2022">Vandenbussche <i>et al.</i> 2022</a></span>) of the samples from BioProject PRJNA746718 has revealed that their genomes are the result of recombination between at least two different parent strains.
 So not only are these samples sequenced following our wet lab protocol of choice, but there is also some prior knowledge about their (rather interesting) biology.
 This gives us the opportunity to evaluate the correctness of our analysis by comparing the results we will generate in this tutorial to the published findings.</p>
@@ -1082,7 +1075,7 @@ This gives us the opportunity to evaluate the correctness of our analysis by com
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
 
   <ol>
     <li>
@@ -1313,7 +1306,7 @@ Likewise, for the “pool2” read mapping, we would like to use a reference ver
 <p>As this is a complex task that would take a considerable amount of time to perform step-by-step via manual tool runs, we are providing a pre-built workflow for you that you only need to import and run on the input data in your history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-and-run-the-reference-masking-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import and run the reference masking workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-import-and-run-the-reference-masking-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import and run the reference masking workflow</div>
 
   <ol>
     <li>Go to the training material <a href="workflows/">page for this workflow</a> and use one of the options listed there to import the workflow into your account on your Galaxy server.</li>
@@ -1362,7 +1355,7 @@ Likewise, for the “pool2” read mapping, we would like to use a reference ver
       </ol>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Inspect the two result datasets created by the tool and compare the regions of Ns reported in them to the primer scheme.
 Did the correct regions get masked?</p>
@@ -1370,7 +1363,7 @@ Did the correct regions get masked?</p>
         <p>Tip: Galaxy’s <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for comparing multiple datasets.</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The masked reference for mapping of pool1 has Ns from 80,202 - 150,773.
 The 3’-most primer contained in pool1, CaPV-V1_12_RIGHT, has its binding site listed as 80,176 - 80,202.
@@ -1397,7 +1390,7 @@ Also note that amplicon 12 is contained in both pools and the masking takes this
 <p>The tool <strong>fastp</strong> lets us perform these tasks and obtain a nice quality report for our reads before and after processing in one go, but many other options exist to perform sequenced reads quality control and trimming/filtering in Galaxy, and the dedicated tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> introduces more of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: QC and read trimming/filtering with fastp</div>
+  <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC and read trimming/filtering with fastp</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="link"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</span></span> on the collection of <strong>pool1</strong> reads
@@ -1416,7 +1409,7 @@ Also note that amplicon 12 is contained in both pools and the masking takes this
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-fastp-default-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastp-default-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: fastp default settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-fastp-default-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastp-default-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: fastp default settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>fastp comes with basic default settings for some of its many parameters.
 In particular, with no explicit parameter specifications, the tool will still remove reads that</p>
@@ -1440,7 +1433,7 @@ quality standards that are good enough for many (including training) purposes.</
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>Inspect</strong> the reports for both samples and try to answer the following questions:</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>After filtering, which of the two samples has more reads retained?</li>
@@ -1448,7 +1441,7 @@ quality standards that are good enough for many (including training) purposes.</
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Sample 20L81 has more reads retained (947,000) than 20L70 (856,000).</li>
@@ -1478,14 +1471,14 @@ quality standards that are good enough for many (including training) purposes.</
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
         <ol>
           <li>Are the results for the pool 2 sequences similar to those of pool 1?</li>
           <li>What’s your overall conclusion regarding the quality of the sequences and the effect of filtering?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Results are rather similar although for pool2 the metrics for the two samples are even more similar than for poo1, and it is now 20L70, which has a bit more reads retained after filtering.</li>
@@ -1504,7 +1497,7 @@ quality standards that are good enough for many (including training) purposes.</
 <p>We are now ready to map each pool of each sample to the corresponding masked reference. We will use the tool BWA-MEM with essentially default settings for this purpose. As shown in figure 1, however, we want to merge the mapping results afterwards, but still be able to tell mapped reads from pool 1 and pool 2 apart. To this end, we need to tag reads with <code class="language-plaintext highlighter-rouge">pool1</code> and <code class="language-plaintext highlighter-rouge">pool2</code> read group identifiers, respectively, at the mapping step. Just because a sample has pool1 and pool2 reads it is still just one sample though, and we are going to express that fact through a common sample name (which we let BWA-MEM autodetect as the name of the collection elements).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read mapping and quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read mapping and quality control</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span> for <strong>pool1</strong> data
@@ -1577,7 +1570,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
 <p>We can do the necessary restructuring in two steps, then pass the result to <strong>samtools merge</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-reorganize-the-data-and-merge-across-pools-within-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reorganize the data and merge across pools within samples</div>
+  <div class="box-title hands-on-title" id="hands-on-reorganize-the-data-and-merge-across-pools-within-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reorganize the data and merge across pools within samples</div>
 
   <ol>
     <li><span class="tool" data-tool="__ZIP_COLLECTION__" title="Zip collections tool" aria-role="link"><strong>Zip collections</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>ZIP_COLLECTION</strong></span></span> with the following parameters
@@ -1646,7 +1639,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Now lets confirm that things have worked as expected:</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>What are the datasets inside the <strong>Samtools merge</strong> collection?</li>
@@ -1654,7 +1647,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The collection consists of two BAM datasets, one for sample 20L81 and one for 20L70.</li>
@@ -1691,7 +1684,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
 <p>Next, we will run <strong>ivar trim</strong> on the retained reads. This tool can detect primer sequences at the ends of the mapped reads that represent the tiled amplicon primers used during preparation of the samples for sequencing, and will mask them so that they will not be considered during generation of the consensus sequence.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-primer-trimming"><button class="gtn-boxify-button details" type="button" aria-controls="details-primer-trimming" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Primer trimming<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-primer-trimming"><button class="gtn-boxify-button details" type="button" aria-controls="details-primer-trimming" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Primer trimming<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The primers used for the tiled-amplicon generation will get incorporated physically at the start and end of each amplicon. These ends, therefor, do <em>not</em> represent amplified sequence from the sample genome, but merely reflect the primer sequences. Consequently, the amplicon ends will never capture any mutations in the genome region they cover, and we cannot meaningfully use them for building a consensus sequence for the sample.</p>
 
@@ -1702,7 +1695,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
 <p>Finally, we will use <strong>Qualimap BamQC</strong> to generate a quality report on the trimmed and filtered mapped reads, which we’ll inspect to judge whether read mapping worked well enough for consensus generation purposes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapped-reads-filtering-and-trimming-and-quality-control-for-mappings"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Mapped reads filtering and trimming and quality control for mappings</div>
+  <div class="box-title hands-on-title" id="hands-on-mapped-reads-filtering-and-trimming-and-quality-control-for-mappings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapped reads filtering and trimming and quality control for mappings</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="link"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0</span></span> for filtering the mapped reads
@@ -1750,7 +1743,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Study the report generated with QualiMap</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>What is the mean coverage for each of the samples across the entire genome?</li>
@@ -1759,7 +1752,7 @@ When we do this, Galaxy will recognize that the tool cannot handle this, but tha
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Mean coverage for sample 20L81 is 2,073, for 20L70 it is 2,155.</li>
@@ -1800,7 +1793,7 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
 <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> All of the above limits for consensus base calling are arbitrary to some degree, and depend somewhat on the quality of the sequencing data. With very high overall coverage, for example, it is possible to increase the coverage threshold, but if you increase that threshold too much, you may end up with a consensus sequence consisting mostly of Ns.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-consensus-building"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Consensus building</div>
+  <div class="box-title hands-on-title" id="hands-on-consensus-building"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Consensus building</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0" title="ivar consensus tool" aria-role="link"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0</span></span>
@@ -1815,12 +1808,12 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Inspect the consensus sequences generated for the two samples</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Does everything look ok? What about those leading and trailing Ns in the sequences?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answer-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answer-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Certainly both sequences start and end with stretches of Ns.</p>
 
@@ -1844,7 +1837,7 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
 <p>Luckily, there is a tool to help us, and we have even used it before to check the masking of the reference genome!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-consensus-sequences-for-unresolved-bases"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check consensus sequences for unresolved bases</div>
+  <div class="box-title hands-on-title" id="hands-on-check-consensus-sequences-for-unresolved-bases"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check consensus sequences for unresolved bases</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="link"><strong>Fasta regular expression finder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0</span></span>
@@ -1867,12 +1860,12 @@ The “Coverage Histogram” plot also reveals that the coverage distribution fo
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Inspect the output of the tool for both samples and compare it to the primer scheme</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Has consensus building worked well?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answer-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answer-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The tool reports only two stretches consisting of Ns at both ends of the genome, and their positions are exactly identical between the samples. There are no interior Ns, nor other ambiguity characters.</p>
 
@@ -1920,7 +1913,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
 <p>This leaves us with the tasks of obtaining the sequence for parent P1 (accession number: KX764644) and of combining this sequence, our reference and our two consensus sequences into an MSA.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-multiple-sequence-alignment-between-samples-and-two-lsdv-references"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Build multiple-sequence alignment between samples and two LSDV references</div>
+  <div class="box-title hands-on-title" id="hands-on-build-multiple-sequence-alignment-between-samples-and-two-lsdv-references"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build multiple-sequence alignment between samples and two LSDV references</div>
 
   <ol>
     <li>
@@ -2003,7 +1996,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
 <p>For a rather long MSA like this one, the second approach may be faster, but the visual one may still be easier to understand. So lets go through both of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-the-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualize the multiple-sequence alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-multiple-sequence-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize the multiple-sequence alignment</div>
 
   <ol>
     <li>Visualize the multiple-sequence alignment
@@ -2025,7 +2018,7 @@ and on these shorter sequences the binding site of the 3’-most primer would be
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-list-of-snvs-between-aligned-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate list of SNVs between aligned sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-list-of-snvs-between-aligned-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate list of SNVs between aligned sequences</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ucsc_fatovcf/fatovcf/426+galaxy0" title="faToVcf tool" aria-role="link"><strong>faToVcf</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ucsc_fatovcf/fatovcf/426+galaxy0</span></span>
@@ -2060,12 +2053,12 @@ and on these shorter sequences the binding site of the 3’-most primer would be
       <p>With this information now scroll through the file and compare what’s listed to the published figure.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Does the data fit the figure?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answer-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answer-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The output of faToVcf starts with lines that have dots in the columns for the two consensus sequences.
 These correspond to the leading Ns in those sequences.</p>
@@ -2093,7 +2086,7 @@ To have those listed, you would have to run the tool again with AF325528.1 as th
 <p>Instead of downloading the Genbank sequences into Galaxy and running yet another alignment job, we will take a shortcut this time and just do a BLAST of our consensus sequences using the public NCBI BLAST service:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-ncbi-blast-of-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: NCBI BLAST of consensus sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-ncbi-blast-of-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: NCBI BLAST of consensus sequences</div>
 
   <ol>
     <li>Click on the collection of generated consensus sequences in your history; output of <strong>ivar consensus</strong></li>
@@ -2124,7 +2117,7 @@ The MZ577076.1 Genbank sequence is reported to have a length of 150,664 bases so
 <p>So if our 20L70 consensus is identical to the published 20L70 sequence, it should also be identical to our 20L81 sequence. One way to confirm the identity of two sequences is to calculate checksums for both of them and see if they match. Obtaining a checksum of an entire dataset is possible in Galaxy with the tool <strong>Secure Hash / Message Digest</strong>, but makes limited sense when the goal is to compare FASTA sequences as these will typically differ in the sequence title line, can have different line breaks structure in the sequence part, or differ in case of any number of bases. That’s why a specialized tool is needed that only compares the sequences themselves.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-checking-two-sequences-for-identity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Checking two sequences for identity</div>
+  <div class="box-title hands-on-title" id="hands-on-checking-two-sequences-for-identity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Checking two sequences for identity</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1" title="MiModD File Information tool" aria-role="link"><strong>MiModD File Information</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1</span></span>
@@ -2406,7 +2399,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

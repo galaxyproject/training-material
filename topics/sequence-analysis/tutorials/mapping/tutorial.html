@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mapping">
         <meta property="og:description" content="Analyses of sequences">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -432,7 +432,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -469,14 +469,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-sequence-analysis">
     <h1 data-toc-skip>Mapping</h1>
@@ -828,7 +821,7 @@ Sentry.init({
 <h1 id="prepare-the-data">Prepare the data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -885,7 +878,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 <p>We need a reference genome to map the reads on.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is a reference genome?</li>
@@ -894,7 +887,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
       <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
@@ -906,7 +899,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 <p>Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use <a href="http://bowtie-bio.sourceforge.net/bowtie2/">Bowtie2</a>, a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Mapping with Bowtie2</div>
+  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapping with Bowtie2</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Bowtie2 tool" aria-role="link"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0</span></span> with the following parameters
       <ul>
@@ -938,7 +931,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
       <p>Inspect the <code class="language-plaintext highlighter-rouge">mapping stats</code> file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What information is provided here?</li>
@@ -948,7 +941,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.</li>
             <li>~90% reads have been aligned exactly 1 time</li>
@@ -1083,7 +1076,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1091,7 +1084,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
@@ -1102,7 +1095,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 <p>The BAM file includes a lot of information about each read, particularly the quality of mapping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summary-of-mapping-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Summary of mapping quality</div>
+  <div class="box-title hands-on-title" id="hands-on-summary-of-mapping-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Summary of mapping quality</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2" title="Samtools Stats tool" aria-role="link"><strong>Samtools Stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2</span></span> with the following parameters
       <ul>
@@ -1118,7 +1111,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
       <p>Inspect the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <code class="language-plaintext highlighter-rouge">Stats</code> file</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What is the proportion of mismatches in the mapped reads when aligned to the reference genome?</li>
@@ -1129,7 +1122,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.</li>
             <li>The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.</li>
@@ -1657,7 +1650,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Avian influenza viral strain analysis from gene segment s...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -419,7 +419,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -456,14 +456,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Avian influenza viral strain analysis from gene segment sequencing data</h1>
@@ -786,7 +779,7 @@ If you want to learn how you can create a Galaxy collection from your own refere
 <p>Instead, to save some time, you can copy an existing shared history on Galaxy Europe.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
@@ -806,7 +799,7 @@ If you want to learn how you can create a Galaxy collection from your own refere
 <h2 id="get-the-sequencing-data">Get the sequencing data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
 
   <ol>
     <li>
@@ -839,7 +832,7 @@ https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ex
 <h2 id="inspect-the-reference-data">Inspect the reference data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-what-is-in-the-reference-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: What is in the reference collection?</div>
+  <div class="box-title hands-on-title" id="hands-on-what-is-in-the-reference-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: What is in the reference collection?</div>
 
   <ol>
     <li>Step inside the imported reference collection by clicking on it.</li>
@@ -850,7 +843,7 @@ https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ex
       <p>You can then scroll through the data and use your browser’s search function to look for particular sequences.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>How many elements are in the collection? What do they represent?</li>
@@ -860,7 +853,7 @@ https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ex
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The collection consists of eight elements and each element provides reference sequences for one genome segment.</li>
@@ -887,7 +880,7 @@ https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ex
 <p>The tool <strong>fastp</strong> lets us perform these tasks and obtain a nice quality report for our reads before and after processing in one go, but many other options exist to perform sequenced reads quality control and trimming/filtering in Galaxy and the dedicated tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> introduces more of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: QC and read trimming/filtering with fastp</div>
+  <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC and read trimming/filtering with fastp</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="link"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</span></span>
@@ -909,7 +902,7 @@ https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ex
       </ul>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-fastp-default-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastp-default-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: fastp default settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-fastp-default-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastp-default-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: fastp default settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>fastp comes with basic default settings for some of its many parameters.
 In particular, with no explicit parameter specifications, the tool will still remove reads that</p>
@@ -933,7 +926,7 @@ quality standards that are good enough for many (including training) purposes.</
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>Inspect</strong> the report and try to answer the following questions:</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>Which set of reads (forward or reverse reads) did profit most quality-wise from our low-quality base trimming?</li>
@@ -942,7 +935,7 @@ quality standards that are good enough for many (including training) purposes.</
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The forward reads were of worse quality in particular near their 3’-ends than the reverse reads and, consequently, were affected more strongly by trimming (see the different “quality” plots in the report).</li>
@@ -971,7 +964,7 @@ Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> an
 <p>To identify the best matching reference segments, we are going to run the tool <strong>VAPOR</strong> asking it to report the stats for any hits it identifies.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-best-matching-reference-segment-scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring best-matching reference segment scores</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-best-matching-reference-segment-scores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exploring best-matching reference segment scores</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3" title="VAPOR tool" aria-role="link"><strong>VAPOR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3</span></span>
@@ -993,7 +986,7 @@ Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> an
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Explore the output collection produced by the tool</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>Is there a difference between the results for segment 4 (encoding HA), segment 6 (encoding NA) and those for the remaining segments?</li>
@@ -1001,7 +994,7 @@ Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> an
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The values for <code class="language-plaintext highlighter-rouge">% of query bases in reads</code> and for <code class="language-plaintext highlighter-rouge">Total score</code> are drastically lower for the HA and somewhat lower for the NA segment than for any of the other segments. This could be due to the structure of the collection of references we have used, but also fits very well with the higher selection pressure on NA and, in particular on HA, as the main antigenic proteins of the virus, which leads to higher variability in these segments than in the others.</li>
@@ -1022,7 +1015,7 @@ Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> an
 <p>Now that we have established that things <em>may</em> make sense, we can use the output of <strong>VAPOR</strong> to extract the actual sequence of the top hit for each reference segment. We then concatenate these best matches into a hybrid reference genome for mapping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-sequences-of-top-hits-identified-by-vapor"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining sequences of top hits identified by VAPOR</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-sequences-of-top-hits-identified-by-vapor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining sequences of top hits identified by VAPOR</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" aria-role="link"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span> to extract just the name of the sequence from each line of VAPOR’s output
@@ -1066,7 +1059,7 @@ Inside the <em>Filter Options</em> inspect <em>Quality filtering options</em> an
 <p>If things went well, the hybrid reference we just obtained should be close enough across all segments to our sample to allow successful mapping of reads. Before we start the mapping we may want to truncate the segment names in our hybrid reference genome though because currently these names still reflect the full origin of the segment sequences, but from now on we are fine with just the segment ID. We can use the <strong>Replace</strong> tool from before again to truncate the names.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-shortening-sequence-titles"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Shortening sequence titles</div>
+  <div class="box-title hands-on-title" id="hands-on-shortening-sequence-titles"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Shortening sequence titles</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace parts of text tool" aria-role="link"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
@@ -1101,7 +1094,7 @@ It is an important intermediate result, to which we will need to return later, a
 <p>Having polished the titles of the segments in our hybrid reference genome we are finally ready for mapping, which we will carry out with <strong>BWA-MEM</strong>, clean up a bit with <strong>Samtools view</strong> and produce a quality report for with <strong>QualiMap BamQC</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read mapping and quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read mapping and quality control</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>
@@ -1139,7 +1132,7 @@ It is an important intermediate result, to which we will need to return later, a
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Study the report generated with QualiMap</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Questions</div>
+        <div class="box-title question-title" id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Questions</div>
 
         <ol>
           <li>What is the coverage of each segment by the sequenced reads, and is it uniform?</li>
@@ -1147,7 +1140,7 @@ It is an important intermediate result, to which we will need to return later, a
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Coverage is rather different for the different segments. Looking at “Mean coverage” and its “Standard deviation” in the “Chromosome stats” table and at the “Coverage across reference” plot, coverage of the HA segment seems to be most critical since it approaches zero in some regions.</li>
@@ -1170,7 +1163,7 @@ It is an important intermediate result, to which we will need to return later, a
 <p>Unfortunately, the tool we are going to use for this, <strong>ivar consensus</strong>, is not capable of working with more than one reference name at a time, but because this is influenza data we have mappings to 8 different segments described in our data. So we need to take a little detour and split the mapped reads data into a collection of datasets each containing the mappings for just one segment first again, then perform the consensus construction for all of them in parallel.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-splitting-mapped-reads-by-genome-segment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Splitting mapped reads by genome segment</div>
+  <div class="box-title hands-on-title" id="hands-on-splitting-mapped-reads-by-genome-segment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Splitting mapped reads by genome segment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1" title="Split BAM by Reference tool" aria-role="link"><strong>Split BAM by Reference</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1</span></span>
@@ -1185,7 +1178,7 @@ It is an important intermediate result, to which we will need to return later, a
 <p>The output from this step has the desired collection structure, but the names of the collection elements are not the nicest. Ideally, we would just reuse the segment names, which are already provided in our mapping reference genome. So lets extract these names again and use them as new element labels</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-relabeling-collection-elements"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Relabeling collection elements</div>
+  <div class="box-title hands-on-title" id="hands-on-relabeling-collection-elements"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Relabeling collection elements</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>
@@ -1239,7 +1232,7 @@ It is an important intermediate result, to which we will need to return later, a
 <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> All of the above limits for consensus base calling are arbitrary to some degree, and depend somewhat on the quality of the sequencing data. With very high overall coverage, for example, it is possible to increase the coverage threshold, but if you increase that threshold too much, you may end up with a consensus sequence consisting mostly of Ns.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-per-segment-consensus-construction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Per-segment consensus construction</div>
+  <div class="box-title hands-on-title" id="hands-on-per-segment-consensus-construction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Per-segment consensus construction</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0" title="ivar consensus tool" aria-role="link"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0</span></span>
@@ -1271,12 +1264,12 @@ the names just providing a bit too much detail for our purpose.</p>
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Inspect each consensus sequence generated for the different segments</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Does everything look ok?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answer<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>As expected from the findings so far, the consensus sequence for the HA segment has stretches of Ns in it, which likely reflect the mapping issues and associated loss of coverage caused by our insufficiently sized collection of references.</p>
 
@@ -1293,7 +1286,7 @@ the names just providing a bit too much detail for our purpose.</p>
 To do so, we are going to combine the reference sequences of all segments with their corresponding consensus sequence into one multi-sequence fasta dataset per segment. Then we build a multiple sequence alignment (MSA) from the sequences of each segment, and use these alignments to generate phylogenetic trees, again one per segment. We are going to use two rather standard tools, <strong>MAFFT</strong> and <strong>IQTree</strong>, for generating MSAs and trees, respectively.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-phylogeny"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring phylogeny</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-phylogeny"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exploring phylogeny</div>
 
   <ol>
     <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span>
@@ -1335,12 +1328,12 @@ To do so, we are going to combine the reference sequences of all segments with t
       <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Explore each of the final trees produced by IQTree for the different segments</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What are your conclusions about the sample in general and its HA and NA segments in particular?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-answers-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-answers-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Answers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ul>
             <li>For most of its segments the sample resembles relatively recent (from the last decade) Eurasian reference sequences.</li>
@@ -1587,7 +1580,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

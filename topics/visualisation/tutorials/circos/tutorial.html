@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Visualisation with Circos">
         <meta property="og:description" content="Training material for data visualisation in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -404,7 +404,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -441,14 +441,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-visualisation">
     <h1 data-toc-skip>Visualisation with Circos</h1>
@@ -712,7 +705,7 @@ Sentry.init({
 <p>Circos is an extremely flexible but also very complex tool. The Galaxy Circos tool covers the most commonly used Circos features, but in order to avoid becoming too complex, it does not expose every single configuration option available in Circos. However, the Galaxy Circos tool allows you to download the full set of configuration files it uses, allowing you to manually tweak the plot further.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-circos-tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Circos tutorials</div>
+  <div class="box-title comment-title" id="comment-circos-tutorials"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Circos tutorials</div>
 
   <p>To learn more about using Circos outside of Galaxy (e.g. for tweaking the
 Circos configuration output by the Galaxy tool), there are a wide range
@@ -918,7 +911,7 @@ of tutorials available from the <a href="http://circos.ca">Circos website</a></p
 <h2 id="data-upload">Data upload</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
@@ -957,7 +950,7 @@ https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 <p>As the first step to this Circos plot, let’s configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Set ideogram configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set ideogram configuration</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="link"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12</span></span> visualizes data in a circular layout with the following parameters:
@@ -1009,7 +1002,7 @@ https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 <p>We will use this as the basis for our plot, and add data tracks one at a time.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-advanced-info-defining-your-karyotype-file"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Advanced info: defining your karyotype file</div>
+  <div class="box-title comment-title" id="comment-advanced-info-defining-your-karyotype-file"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Advanced info: defining your karyotype file</div>
 
   <p>Since our data uses <code class="language-plaintext highlighter-rouge">hg18</code> reference genome, we supply a corresponding karyotype file:</p>
 
@@ -1052,14 +1045,14 @@ There are other parameters we can use to draw only a subset of the data (e.g. ju
   <p>More information about this format (including karyotype definitions for several species) can be found on the <a href="http://circos.ca/documentation/tutorials/ideograms/karyotypes/">Circos website</a></p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Why didn’t we use the <code class="language-plaintext highlighter-rouge">hg18</code> built-in genome (using the <code class="language-plaintext highlighter-rouge">Locally Cached</code> option)?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>
@@ -1081,7 +1074,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 <p>The first data track we will configure, will be the structural variants (SVs) using the <em>link</em> track type in Circos. We will colour the links differently depending on whether the SVs are intrachromosomal (within a single chromosome) or interchromosomal (between different chromosomes).</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-structural-variants"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Structural Variants</div>
+  <div class="box-title comment-title" id="comment-background-structural-variants"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Structural Variants</div>
 
   <p>Structural variants (SVs) are large-scale genomic rearrangements. SVs involve large segments of DNA (&gt;50 bp) that are deleted, duplicated, translocated or inverted.</p>
 
@@ -1133,7 +1126,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-input-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare input data</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-input-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare input data</div>
 
   <ol>
     <li><span class="tool" data-tool="Grep1" title="Select tool" aria-role="link"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> lines that match an expression with the following parameters:
@@ -1159,7 +1152,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 <p>Given that Circos is a very complex with dozens of parameters to set, we re-run previous circos runs to build on the existing configuration we have done, without losing the progress and having to re-specify parameters every time.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-circos-link-track-for-svs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add Circos link track for SVs</div>
+  <div class="box-title hands-on-title" id="hands-on-add-circos-link-track-for-svs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Circos link track for SVs</div>
 
   <ol>
     <li>
@@ -1227,7 +1220,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
 <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cancer_svs1.png" alt="The plot with an SV track. " width="3000" height="3000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> SVs on the VCaP cell line. Red lines indicate <i>interchromosomal</i> SVs, where pieces originating from different chromosomes have fused together. Black lines show breaks withing in single chromosome.</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Are there more interchromosomal or intrachromosomal SVs?</li>
@@ -1235,7 +1228,7 @@ The full definition of <code class="language-plaintext highlighter-rouge">hg18</
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Interchromosomal SVs (between different chromosomes) are coloured red in this
@@ -1250,7 +1243,7 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
 <p>We see from this image that chromosome 5 has an unusually large number of SVs, let’s look at that chromosome more closely, by limiting the chromosomes Circos should draw:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-only-chromosome-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot only Chromosome 5</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-only-chromosome-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot only Chromosome 5</div>
 
   <ol>
     <li>
@@ -1276,7 +1269,7 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
 <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/circos/cancer_svs_chr5.png" alt="Circos plot of chromosome 5 SVs. " width="3000" height="3000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Chromosome 5 of the VCaP cancer cell line. The <a href="https://en.wikipedia.org/wiki/Locus_(genetics)">q arm</a> of this chromosome appears to be affected by an unusually large number of SVs</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Are there indeed significantly more SVs on chromosome 5 than on the other chromosomes? (hint: plot some of the other chromosomes as well)</li>
@@ -1284,7 +1277,7 @@ at a glance that there are more intrachromosomal SVs (black) than interchromosom
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1305,7 +1298,7 @@ This could be caused by a phenomenon known as <em>chromothripsis</em> (see next 
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-chromothripsis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Chromothripsis</div>
+  <div class="box-title comment-title" id="comment-background-chromothripsis"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Chromothripsis</div>
 
   <p><strong>Chromothripsis</strong> is a phenomenon whereby (part of) a chromosome is shattered in a single catastrophic event, and subsequently imprecisely stitched
 together by the cell’s repair mechanisms. This leads to a huge number of SV junctions.</p>
@@ -1333,7 +1326,7 @@ together by the cell’s repair mechanisms. This leads to a huge number of SV ju
 <p>Next, we will create a track displaying copy number. This data comes from Affymetrix SNP arrays.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-copy-number-variation-cnv"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Copy Number Variation (CNV)</div>
+  <div class="box-title comment-title" id="comment-background-copy-number-variation-cnv"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Copy Number Variation (CNV)</div>
 
   <p>The human genome is a <em>diploid</em> genome, meaning there are 2 copies of each chromosome, one paternal, and one maternal. This means that for any given gene, humans have two different copies of it in our genome.</p>
 
@@ -1349,7 +1342,7 @@ the normal variation within the human population. In highly rearranged genomes s
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-dna-microarrays"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: DNA Microarrays</div>
+  <div class="box-title comment-title" id="comment-background-dna-microarrays"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: DNA Microarrays</div>
 
   <p><strong>Microarrays</strong> are used to measure the expression levels of large number of genes simultaneously, or to genotype multiple regions of a genome. In this example in our tutorial, we have data from a <strong>SNP array</strong>. This type of microarray detects the presence and proportion (homozyogous/heterozygous) of a
 wide range of SNPs (Single Nucleotide Polymorphisms) known to exist within the population. A set of <strong>probes</strong> targeting positions of a large number of known SNPs
@@ -1380,7 +1373,7 @@ chr1	72017	72017	-0.1353417	0
 <p>This is pretty close to the format expected by Circos for 2D data tracks (<code class="language-plaintext highlighter-rouge">chr - start - end - value</code>), all we need to do to prepare this file is remove the first header line, and remove column 5. Furthermore, because this file is quite large, we do a subsampling down to 25000 lines; this is enough to get a genome-level overview of the data, but small enough that Circos will complete plotting quickly.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-cnv-input-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare CNV input file</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-cnv-input-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare CNV input file</div>
 
   <ol>
     <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="link"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span> of a file with the following parameters:
@@ -1409,7 +1402,7 @@ chr1	72017	72017	-0.1353417	0
 <p>Now that our file is prepared, we can add a track to our Circos image. We will create a scatterplot, and colour each data point depending on copy number state (green=gain, red=loss)</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-copy-number-track-to-circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add Copy Number track to Circos</div>
+  <div class="box-title hands-on-title" id="hands-on-add-copy-number-track-to-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Copy Number track to Circos</div>
 
   <ol>
     <li>
@@ -1451,7 +1444,7 @@ chr1	72017	72017	-0.1353417	0
       <p><strong>Examine</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting plot</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Examine the resulting plot, what do you see?</li>
@@ -1459,7 +1452,7 @@ chr1	72017	72017	-0.1353417	0
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1502,7 +1495,7 @@ all at once, rather, you build it up step by step and frequently check the outpu
 <p>Now that we are happy with the placement of our track, let’s tweak it a bit more. Let’s colour positions showing a significant copy number loss (&lt; <code class="language-plaintext highlighter-rouge">-0.15</code>) red, and positions with a copy number gain (&gt; <code class="language-plaintext highlighter-rouge">0.15</code>) green, leaving everything inbetween gray (expected copy number):</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-colour-data-points-by-copy-number-state"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Colour data points by copy number state</div>
+  <div class="box-title hands-on-title" id="hands-on-colour-data-points-by-copy-number-state"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Colour data points by copy number state</div>
 
   <ol>
     <li>
@@ -1589,7 +1582,7 @@ all at once, rather, you build it up step by step and frequently check the outpu
 We can do this as follows:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-plot-axes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add plot axes</div>
+  <div class="box-title hands-on-title" id="hands-on-add-plot-axes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add plot axes</div>
 
   <ol>
     <li>
@@ -1631,7 +1624,7 @@ We can do this as follows:</p>
 <p>Next, we will visualize the B-allele frequency (also known as minor allele frequency)</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-b-allele-frequency-baf"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: B-allele Frequency (BAF)</div>
+  <div class="box-title comment-title" id="comment-background-b-allele-frequency-baf"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: B-allele Frequency (BAF)</div>
 
   <p>The B-allele frequency is closely related to copy number. There are many nuances to the measurement of B-allele frequency,
 but roughly speaking it indicates the frequency (ratio) of the non-reference allele of the SNP within the sample</p>
@@ -1672,7 +1665,7 @@ chr1	110905	110905	0.9918569
 <p>We will make another scatterplot, so our data should be in the same format as the copynumber track: <code class="language-plaintext highlighter-rouge">chr - start - end - value</code>. Luckily, this data is already in the correct format, all we have to do is remove the header line! We will also subset the data again by selecting lines randomly from the file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-b-allele-frequency-table"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the B-allele frequency table</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-b-allele-frequency-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the B-allele frequency table</div>
 
   <ol>
     <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="link"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span> with the following parameters:
@@ -1696,7 +1689,7 @@ chr1	110905	110905	0.9918569
 <p>Now are data is ready to be plotted in Circos. We will plot this track directly inside the CNV track, which means we will have to change the radius of the SV link track again as well.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-b-allele-frequency-track-to-circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add B-allele Frequency track to Circos</div>
+  <div class="box-title hands-on-title" id="hands-on-add-b-allele-frequency-track-to-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add B-allele Frequency track to Circos</div>
 
   <ol>
     <li>
@@ -1768,7 +1761,7 @@ chr1	110905	110905	0.9918569
 <p>Great! we can see our B-allele frequency plot track added.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Look at the B-allele frequency track, try to identify chromosome(s) having a copy number of:
@@ -1784,7 +1777,7 @@ chr1	110905	110905	0.9918569
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Compare the B-allele frequency plot to the expected plot shown above for the different copynumber states.
@@ -1805,7 +1798,7 @@ chr1	110905	110905	0.9918569
 There is a parameter of the link track type called <em>Bezier</em>, which controls how tightly the links arc (i.e. how close to the center they reach. By playing around with this parameter, we can fine a more pleasing</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-change-bezier-radius"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Change Bezier radius</div>
+  <div class="box-title hands-on-title" id="hands-on-change-bezier-radius"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Change Bezier radius</div>
 
   <ol>
     <li>
@@ -1834,7 +1827,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 <p>Another thing you may have noticed, is that in the original image we showed at the start of this section, the red links (interchromosomal SVs) were displayed as a completely different track. To do this, instead of creating a single track with a rule to change the colour of a subset of the data, we can make 2 separate tracks, with rules to only plot a subset of the data.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-split-sv-track-into-two"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise: Split SV track into two</div>
+  <div class="box-title question-title" id="question-exercise-split-sv-track-into-two"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise: Split SV track into two</div>
 
   <ol>
     <li>Try to split the link track in two so that it matches the original image. This may take some trial and error. The full configuration is shown in the answer box below, but we provede some hints if you want to try it yourself first:
@@ -1858,12 +1851,12 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
   <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/circos/vcap.png" alt="VCaP cancer Circos plot. " width="3000" height="3000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> The original image from the paper. Try to make the two link tracks look like this</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The full configuration  of the two link tracks is:</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-hands-on-two-link-tracks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands on: Two link tracks</div>
+      <div class="box-title hands-on-title" id="hands-on-hands-on-two-link-tracks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands on: Two link tracks</div>
 
       <ol>
         <li>
@@ -1985,7 +1978,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/circos/presidential_debate_nyt.png" alt="Original plot from the NYT article. " width="900" height="660" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Plot showing how many times each presidential candidate mentioned each other candidate in the debates leading up to the 2008 US presidential election.</figcaption></figure>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
 
   <p>This tutorial is based on one of the <a href="http://circos.ca/documentation/tutorials/recipes/naming_names/">tutorials on the Circos website</a>.</p>
 
@@ -2000,7 +1993,7 @@ There is a parameter of the link track type called <em>Bezier</em>, which contro
 <p>First, let’s get the data we need for this plot:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
@@ -2053,7 +2046,7 @@ The last column indicates the party of each candidate (democratic or republican)
 <p>Let’s start by creating the ideogram for our plot:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Set ideogram configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-set-ideogram-configuration-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set ideogram configuration</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="link"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12</span></span> with the following parameters:
@@ -2117,7 +2110,7 @@ richardson  251  750    stroke_thickness=5,stroke_color=white
 <p>Now, let’s use this file to create our highlights track</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-highlights-track-to-circos-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add Highlights track to Circos Plot</div>
+  <div class="box-title hands-on-title" id="hands-on-add-highlights-track-to-circos-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Highlights track to Circos Plot</div>
 
   <ol>
     <li>
@@ -2195,7 +2188,7 @@ huckabee	525	525	clinton	750	750
 <p>Let’s add it to our plot:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-highlights-track-to-circos-plot-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add Highlights track to Circos Plot</div>
+  <div class="box-title hands-on-title" id="hands-on-add-highlights-track-to-circos-plot-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Highlights track to Circos Plot</div>
 
   <ol>
     <li>
@@ -2229,7 +2222,7 @@ huckabee	525	525	clinton	750	750
 <p><img src="../../images/circos/debate_links.png" alt="Debate plot with link track. " width="3000" height="3000" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-focus-on-a-single"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise: Focus on a single</div>
+  <div class="box-title question-title" id="question-exercise-focus-on-a-single"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise: Focus on a single</div>
 
   <ol>
     <li>As an exercise, try to add rules to the link track to colour the links red or blue depending on party of the person who spoke (<code class="language-plaintext highlighter-rouge">from_chromosom</code>)
@@ -2244,12 +2237,12 @@ huckabee	525	525	clinton	750	750
   <figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/circos/presidential_debate_plot.png" alt="Debate plot with coloured links. " width="3000" height="3000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Try to make the link track look like this</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The full configuration  of the rules for the link tracks is:</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-hands-on-two-link-tracks-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Hands on: Two link tracks</div>
+      <div class="box-title hands-on-title" id="hands-on-hands-on-two-link-tracks-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Hands on: Two link tracks</div>
 
       <ol>
         <li>
@@ -2322,7 +2315,7 @@ huckabee	525	525	clinton	750	750
 <h2 id="get-data-1">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -2353,12 +2346,12 @@ https://zenodo.org/record/4494146/files/highlights.tab
 <p>We will now create the plot all at once. Normally, this would be a more iterative step-by-step process. The previous examples show how this stepwise approach is normally used, here we just give you all the configuration to create this plot all at once.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-interface-complexity"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-interface-complexity" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Interface Complexity<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-interface-complexity"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-interface-complexity" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Interface Complexity<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The interface looks deceptively simple when all of the sections are collapsed, but as you start adding tracks it can be easy to get lost and become overwhelmed, so just go slowly. Do not worry if your plot does not look exactly like the expected output.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Circos</div>
+  <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Circos</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12" title="Circos tool" aria-role="link"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy12</span></span> with the following parameters:
@@ -2834,7 +2827,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

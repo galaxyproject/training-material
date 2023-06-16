@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Exome sequencing data analysis for diagnosing a genetic d...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -510,7 +510,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -547,14 +547,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Exome sequencing data analysis for diagnosing a genetic disease</h1>
@@ -865,7 +858,7 @@ indicates that the costs of exome sequencing may actually not be higher even
 today than the costs of conventional genetic testing (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5589982/">Vissers et al., 2017</a>).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-exome-sequencing-i-vs-i-whole-genome-sequencing"><button class="gtn-boxify-button details" type="button" aria-controls="details-exome-sequencing-i-vs-i-whole-genome-sequencing" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Exome sequencing <i>vs</i> whole-genome sequencing<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-exome-sequencing-i-vs-i-whole-genome-sequencing"><button class="gtn-boxify-button details" type="button" aria-controls="details-exome-sequencing-i-vs-i-whole-genome-sequencing" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Exome sequencing <i>vs</i> whole-genome sequencing<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In principle, the steps illustrated in this tutorial are suitable also for
 the analysis of whole-genome sequencing (WGS) data. At comparable mean
@@ -900,7 +893,7 @@ scheme compatible with the observed inheritance pattern of the disease, or to
 detect possibly causative <em>de-novo</em> mutations or <em>loss-of-heterozygosity</em> (LOH) events.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-related-tutorials"><button class="gtn-boxify-button details" type="button" aria-controls="details-related-tutorials" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Related tutorials<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-related-tutorials"><button class="gtn-boxify-button details" type="button" aria-controls="details-related-tutorials" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Related tutorials<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This tutorial focuses on the practical aspects of analyzing real-world
 patient data. If you are more interested in the theoretical aspects of
@@ -983,7 +976,7 @@ tutorials.</p>
 data for either analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1001,7 +994,7 @@ data for either analysis.</p>
       <p>Obtain the raw sequencing data</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-starting-from-raw-sequencing-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Starting from raw sequencing data</div>
+        <div class="box-title comment-title" id="comment-starting-from-raw-sequencing-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Starting from raw sequencing data</div>
         <p>In this and the following steps you will obtain the original unmapped
 sequencing data and prepare for a full analysis including the mapping of
 the sequenced reads.</p>
@@ -1048,7 +1041,7 @@ an analysis including reads mapping. You should now
     </li>
     <li>Obtain the premapped sequencing data
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-alternative-entry-point-premapped-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Alternative entry point: Premapped data</div>
+        <div class="box-title comment-title" id="comment-alternative-entry-point-premapped-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Alternative entry point: Premapped data</div>
         <p>Skip this and the following two steps if you already obtained and
 prepared the original unmapped seuencing data and are planning to
 perform the mapping step yourself.</p>
@@ -1093,7 +1086,7 @@ to <code class="language-plaintext highlighter-rouge">hg19</code>.</p>
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-why-specify-genome-versions"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-specify-genome-versions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why specify genome versions<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-why-specify-genome-versions"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-specify-genome-versions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Why specify genome versions<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>When you are starting with sequencing data that has already been mapped
 to a particular genome version (human hg19 in this case), it is good
 practice to attach this information as metadata to the datasets.</p>
@@ -1142,7 +1135,7 @@ but you can choose them as you like.</p>
       <p>Obtain the reference genome</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-shortcut"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shortcut</div>
+        <div class="box-title comment-title" id="comment-shortcut"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shortcut</div>
         <p>You can skip this step if the Galaxy server you are working on offers
 a <code class="language-plaintext highlighter-rouge">hg19</code> version of the human reference genome with prebuilt indexes for
 <em>bwa-mem</em> (only necessary if starting from unmapped original sequencing
@@ -1198,7 +1191,7 @@ of NGS data quality control, you may want to have a look at the dedicated
 tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality control</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control of the input datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
   <ol>
     <li>Run <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each of your six fastq datasets
       <ul>
@@ -1233,7 +1226,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
       <p>Inspect the <em>Webpage</em> output produced by the tool</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Based on the report, do you think preprocessing of the reads
@@ -1243,7 +1236,7 @@ should you be worried?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Sequence quality is quite good overall. If anything you might
@@ -1289,7 +1282,7 @@ NGS reads datasets to the human reference genome. We recommend you to follow
 the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping tutorial</a>, if you need a general introduction to read mapping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read Mapping</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read Mapping</div>
   <ol>
     <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the reads from the <strong>father</strong> sample to the reference genome
       <ul>
@@ -1299,7 +1292,7 @@ the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/map
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> chr8 sequence as a fasta dataset into
 your history instead:</p>
             <ul>
@@ -1321,7 +1314,7 @@ reverse reads (R2) dataset of the <strong>father</strong> sample</li>
           </ul>
 
           <blockquote class="tip">
-            <div class="box-title tip-title" id="tip-no-fastq-datasets-selectable"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-no-fastq-datasets-selectable" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: No FASTQ datasets selectable?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-no-fastq-datasets-selectable"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-no-fastq-datasets-selectable" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: No FASTQ datasets selectable?<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>Please confirm that the problematic datasets declare <em>format</em>:
 <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>.</p>
 
@@ -1352,7 +1345,7 @@ by clicking on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span cla
       </ul>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-read-group-ids-and-sample-names-choose-but-choose-wisely"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Read group IDs and sample names - choose, but choose wisely</div>
+        <div class="box-title warning-title" id="warning-read-group-ids-and-sample-names-choose-but-choose-wisely"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Read group IDs and sample names - choose, but choose wisely</div>
         <p>In general, you are free to choose ID and SM values to your liking, but
 …</p>
 
@@ -1445,7 +1438,7 @@ is good practice though to perform various postprocessing steps on the mapped
 reads before passing them to a variant caller.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-shortcut-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shortcut</div>
+  <div class="box-title comment-title" id="comment-shortcut-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shortcut</div>
   <p>If you are in a hurry, you may skip the postprocessing steps and continue
 with your mapped reads datasets and the <em>Variant Calling</em> section. Make sure
 though you come back here, or read about mapped reads postprocessing
@@ -1480,7 +1473,7 @@ amplified more efficiently than the others).</p>
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-more-postprocessing-steps"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More postprocessing steps</div>
+  <div class="box-title comment-title" id="comment-more-postprocessing-steps"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More postprocessing steps</div>
   <p>The <a href="../somatic-variants/tutorial.html">Somatic variant calling tutorial</a>
 provides an example of a much more complex mapped reads postprocessing
 pipeline that may be required for optimal performance of other variant
@@ -1492,7 +1485,7 @@ callers.</p>
 <p>To produce new filtered BAM datasets with only mapped reads the mate of which is also mapped:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-for-read-pair-mapping-status"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering for read pair mapping status</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-for-read-pair-mapping-status"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering for read pair mapping status</div>
 
   <ol>
     <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following
@@ -1521,7 +1514,7 @@ Do not select anything here!</li>
 <p>This will result in three new datasets, one for each sample in the analysis.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-than-one-way-to-filter"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-than-one-way-to-filter" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More than one way to filter<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-than-one-way-to-filter"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-than-one-way-to-filter" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More than one way to filter<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Instead of the above filter conditions we could also have exploited the
 <em>Read is mapped in a proper pair</em> flag bit.</p>
 
@@ -1560,7 +1553,7 @@ detect structural variants in this tutorial) instead of just filtering for
 mapped reads with a mapped mate, you could run the alternative:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+    <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
     <ol>
       <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
@@ -1592,7 +1585,7 @@ mapped reads with a mapped mate, you could run the alternative:</p>
 <h2 id="removing-duplicate-reads">Removing duplicate reads</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove duplicates</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
 
   <ol>
     <li><strong>RmDup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1635,7 +1628,7 @@ substitution events) smaller than the length of a short-read sequencing
 alignment.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating FreeBayes calls</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating FreeBayes calls</div>
 
   <ol>
     <li>Run <strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
@@ -1652,7 +1645,7 @@ datasets of the family trio; the outputs of <strong>RmDup</strong></li>
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> chr8 sequence as a fasta dataset
 into your history instead:</p>
             <ul>
@@ -1695,7 +1688,7 @@ genotype calls</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-optional-hands-on-inspect-the-vcf-output-produced-by-freebayes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Optional hands-on: Inspect the VCF output produced by FreeBayes</div>
+  <div class="box-title hands-on-title" id="hands-on-optional-hands-on-inspect-the-vcf-output-produced-by-freebayes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional hands-on: Inspect the VCF output produced by FreeBayes</div>
 
   <ol>
     <li>Display the VCF dataset:
@@ -1710,7 +1703,7 @@ it complicated to  understand.</p>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Can you locate at least some of the above-listed information in the
 dataset?</p>
@@ -1725,7 +1718,7 @@ homozygous variant states, respectively.</li>
         </ul>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ul>
             <li>
@@ -1789,7 +1782,7 @@ of one specific variant allele further on.</p>
 because this is how known indels are stored in public annotation databases.</p>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-indel-normalization"><button class="gtn-boxify-button details" type="button" aria-controls="details-indel-normalization" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Indel normalization<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-indel-normalization"><button class="gtn-boxify-button details" type="button" aria-controls="details-indel-normalization" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Indel normalization<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Indel normalization is a surprisingly complex topic, which is explained
 really well and in detail in
 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4481842/">Tan et al., 2015</a>.
@@ -1806,7 +1799,7 @@ an indel, only one of which is the <em>normalized</em> form:</p>
 standards in some other, less important respects is <strong>bcftools norm</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-post-processing-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Post-processing FreeBayes calls</div>
+  <div class="box-title hands-on-title" id="hands-on-post-processing-freebayes-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Post-processing FreeBayes calls</div>
 
   <ol>
     <li><strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1818,7 +1811,7 @@ standards in some other, less important respects is <strong>bcftools norm</stron
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> chr8 sequence as a fasta dataset
 into your history instead:</p>
             <ul>
@@ -1917,7 +1910,7 @@ used to annotate any list of human variants conveniently, without the need for
 separate downloads and conversion between different annotation data formats.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-custom-annotations-and-gemini"><button class="gtn-boxify-button details" type="button" aria-controls="details-custom-annotations-and-gemini" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Custom annotations and GEMINI<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-custom-annotations-and-gemini"><button class="gtn-boxify-button details" type="button" aria-controls="details-custom-annotations-and-gemini" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Custom annotations and GEMINI<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Beyond its bundled annotation data, GEMINI also provides (limited) support
 for using custom annotations.
 The <a href="../somatic-variants/tutorial.html">Somatic variant calling tutorial</a>
@@ -1939,13 +1932,13 @@ phenotypes. This is done through a so-called <strong>pedigree file</strong> in P
 which is rather simple to generate manually.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtain-snpeff-genome-and-gemini-pedigree-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtain SnpEff genome and GEMINI pedigree files</div>
+  <div class="box-title hands-on-title" id="hands-on-obtain-snpeff-genome-and-gemini-pedigree-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtain SnpEff genome and GEMINI pedigree files</div>
   <ol>
     <li>
       <p>Download <strong>SnpEff functional genomic annotations</strong></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-shortcut-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shortcut</div>
+        <div class="box-title comment-title" id="comment-shortcut-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shortcut</div>
         <p>You can skip this step if the Galaxy server you are working on offers
 <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
 check the <strong>Genome source</strong> select list of the <strong>SnpEff eff</strong>
@@ -1971,7 +1964,7 @@ FAM           proband  father         mother         1      2
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-remember-those-sample-names"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Remember those sample names</div>
+        <div class="box-title warning-title" id="warning-remember-those-sample-names"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Remember those sample names</div>
 
         <p>The above content of the pedigree dataset assumes you chose <code class="language-plaintext highlighter-rouge">father</code>,
 <code class="language-plaintext highlighter-rouge">mother</code>, <code class="language-plaintext highlighter-rouge">proband</code> as the sample names at the read mapping step
@@ -1988,7 +1981,7 @@ the pedigree dataset accordingly!</p>
       </blockquote>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-more-on-ped-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-on-ped-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More on PED files<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-more-on-ped-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-on-ped-files" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More on PED files<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The PED format is explained in the help section of <strong>GEMINI load</strong>
 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
@@ -2007,7 +2000,7 @@ knows how to parse SnpEff-annotated VCFs, while GEMINI output cannot be used
 with SnpEff.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-annotations-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding annotations with SnpEff</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-annotations-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding annotations with SnpEff</div>
   <ol>
     <li><strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
@@ -2021,7 +2014,7 @@ output of <strong>bcftools norm</strong> <i class="fas fa-wrench" aria-hidden="t
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` SnpEff genome database</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` SnpEff genome database</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> SnpEff genome database into your
 history instead:</p>
             <ul>
@@ -2047,7 +2040,7 @@ a VCF like the input, but with annotations of variant effects added to the INFO
 column.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-optional-hands-on-inspect-the-summary-stats-output-produced-by-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Optional hands-on: Inspect the Summary Stats output produced by SnpEff</div>
+  <div class="box-title hands-on-title" id="hands-on-optional-hands-on-inspect-the-summary-stats-output-produced-by-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional hands-on: Inspect the Summary Stats output produced by SnpEff</div>
 
   <ol>
     <li>Display the dataset:
@@ -2057,14 +2050,14 @@ by SnpEff to display its contents.</li>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>One section in the report is <strong>Number of effects by type and region</strong>.
 Given that you are analyzing exome data, what is the most surprising
 aspect in this section? Do you have an idea how to explain it?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>According to the report, intronic variants make up 50% of all
 variants detected!</p>
@@ -2098,7 +2091,7 @@ addition, that same tool can be used to incorporate sample pedigree info into
 the database.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-gemini-database-from-a-variants-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a GEMINI database from a variants dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-gemini-database-from-a-variants-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a GEMINI database from a variants dataset</div>
 
   <ol>
     <li><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -2150,7 +2143,7 @@ flexible and highly efficient queries, which will greatly simplify our actual
 task to identify the variant responsible for the child’s disease!</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-the-gemini-suite-of-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-the-gemini-suite-of-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: The GEMINI suite of tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-the-gemini-suite-of-tools"><button class="gtn-boxify-button details" type="button" aria-controls="details-the-gemini-suite-of-tools" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: The GEMINI suite of tools<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For a beginner, the sheer number of GEMINI tools may be a bit daunting and
 give the impression that this framework adds a lot of complexity.
@@ -2199,7 +2192,7 @@ consanguineous, but both of them do not suffer from the disease. This
 information allows us to make some assumptions about the inheritance pattern of the causative variant.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which inheritance patterns are in line with the phenotypic observations
 for the family trio?</p>
@@ -2220,7 +2213,7 @@ inheritance patterns:</p>
   <p>Think about which of these might apply to the causative variant.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ul>
       <li>Since both parents are unaffected the variant cannot be dominant and
 inherited.</li>
@@ -2260,7 +2253,7 @@ variants. Feel free to run analogous queries for other types of variants that
 you think could plausibly be causative for the child’s disease.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-finding-and-reporting-plausible-causative-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Finding and reporting plausible causative variants</div>
+  <div class="box-title hands-on-title" id="hands-on-finding-and-reporting-plausible-causative-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding and reporting plausible causative variants</div>
   <ol>
     <li><strong>GEMINI inheritance pattern</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
@@ -2321,7 +2314,7 @@ clinvar_disease_name, clinvar_gene_phenotype, rs_ids</code></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-variant-i-vs-i-gene-centric-clinvar-information"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Variant- <i>vs</i> gene-centric ClinVar information</div>
+        <div class="box-title comment-title" id="comment-variant-i-vs-i-gene-centric-clinvar-information"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Variant- <i>vs</i> gene-centric ClinVar information</div>
         <p>Most annotation data offered by GEMINI is variant-centric, <em>i.e.</em>,
 annotations reported for a variant are specific to this exact variant.
 A few annotation sources, however, also provide gene-centric
@@ -2343,14 +2336,14 @@ variant may not have been clinically observed or been reported before.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>From the GEMINI reports you generated, can you identify the most likely
 candidate variant responsible for the child’s disease?</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-gemini-usage-examples"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-gemini-usage-examples" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More GEMINI usage examples<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-gemini-usage-examples"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-gemini-usage-examples" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More GEMINI usage examples<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>While only demonstrating command line use of GEMINI, the following tutorial
 slides may give you additional ideas for variant queries and filters:</p>
@@ -2589,7 +2582,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

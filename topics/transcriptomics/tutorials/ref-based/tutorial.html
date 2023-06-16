@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -71,7 +71,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Reference-based RNA-Seq data analysis">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -655,7 +655,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -692,14 +692,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>Reference-based RNA-Seq data analysis</h1>
@@ -1095,7 +1088,7 @@ Sentry.init({
 <p>Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-full-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Full data</div>
+  <div class="box-title comment-title" id="comment-full-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Full data</div>
 
   <p>The original data are available at NCBI Gene Expression Omnibus (GEO) under accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508">GSE18508</a>. The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.</p>
 </blockquote>
@@ -1143,7 +1136,7 @@ Sentry.init({
 <p>In the second part of the tutorial, read counts of all 7 samples are used to identify and visualize the DE genes, gene families and molecular pathways due to the depletion of the <em>PS</em> gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1174,7 +1167,7 @@ https://zenodo.org/record/6457007/files/GSM461180_2.fastqsanger
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.</p>
 
@@ -1207,7 +1200,7 @@ https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How are the DNA sequences stored?</li>
@@ -1215,7 +1208,7 @@ https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The DNA sequences are stored in a FASTQ file, in the second line of every 4-line group.</li>
       <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
@@ -1235,14 +1228,14 @@ https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
 We will first need to transform our the list of pairs to a simple list.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-what-does-this-mean-exactly"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-does-this-mean-exactly" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What does this mean exactly?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-what-does-this-mean-exactly"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-does-this-mean-exactly" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What does this mean exactly?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The current situation is on top and the <strong>Flatten collection</strong> tool will transform it to the situation displayed on bottom:</p>
   <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/flatten.png" alt="Flatten. " width="816" height="756" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Flatten the list of pairs to list</figcaption></figure>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control</div>
 
   <ol>
     <li><span class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" aria-role="link"><strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>FLATTEN</strong></span></span> with the following parameters convert the list of pairs into a simple list:
@@ -1263,12 +1256,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
       <p>Inspect the webpage output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> sample (forward and reverse)</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the read length?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The read length of both mates is 37 bp.</p>
 
@@ -1307,7 +1300,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
       <p>Inspect the webpage output from MultiQC for each FASTQ</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What do you think of the quality of the sequences?</li>
@@ -1315,7 +1308,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1367,12 +1360,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>We should trim the reads to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the reads of overall bad quality.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What is the relation between <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_forward</code> and <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_reverse</code> ?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The data has been sequenced using paired-end sequencing.</p>
 
     <p>The paired-end sequencing is based on the idea that the initial DNA fragments (longer than the actual read length) is sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both reads is known. Thus, it can be used as an additional piece of information to improve the read mapping.</p>
@@ -1403,7 +1396,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trimming-fastqs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Trimming FASTQs</div>
+  <div class="box-title hands-on-title" id="hands-on-trimming-fastqs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trimming FASTQs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1" title="Cutadapt tool" aria-role="link"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1</span></span> with the following parameters to trim low quality sequences:
@@ -1430,12 +1423,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
           <blockquote class="question">
 
-            <div class="box-title question-title" id="question-34"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+            <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
             <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
 
             <blockquote class="solution">
-              <div class="box-title solution-title" id="solution-34"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-34" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
               <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two reads became shorter than the set length cutoff. Reads of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
 
@@ -1462,7 +1455,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
@@ -1470,7 +1463,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>147,810 (1.4%) reads were too short for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and 1,101,875 (9%) for <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>.
@@ -1489,7 +1482,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>To make sense of the reads, we need to first figure out where the sequences originated from in the genome, so we can then determine to which genes they belong. When a reference genome for the organism is available, this process is known as aligning or “mapping” the reads to the reference. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">training</a>.</p>
 </blockquote>
@@ -1497,7 +1490,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should therefore map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is a reference genome?</li>
@@ -1506,7 +1499,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-35"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-35" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
       <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
@@ -1524,7 +1517,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/splice_aware_alignment.png" alt="Splice-aware alignment. " width="800" height="384" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-details-on-the-different-spliced-mappers"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-the-different-spliced-mappers" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More details on the different spliced mappers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-details-on-the-different-spliced-mappers"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-the-different-spliced-mappers" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More details on the different spliced mappers<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Several spliced mappers have been developed over the past years to process the explosion of RNA-Seq data.</p>
 
@@ -1557,7 +1550,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>We will map our reads to the <em>Drosophila melanogaster</em> genome using <strong>STAR</strong> (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-spliced-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Spliced mapping</div>
+  <div class="box-title hands-on-title" id="hands-on-spliced-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Spliced mapping</div>
 
   <ol>
     <li>
@@ -1572,7 +1565,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
       </ol>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-how-to-get-annotation-file"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How to get annotation file?</div>
+        <div class="box-title comment-title" id="comment-how-to-get-annotation-file"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How to get annotation file?</div>
 
         <p>Annotation files from model organisms may be available on the Shared Data library (the path to them will change from one Galaxy server to the other). You could also retrieve the annotation file from UCSC (using <strong>UCSC Main</strong> tool).</p>
 
@@ -1640,7 +1633,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What percentage of reads are mapped exactly once for both samples?</li>
@@ -1648,7 +1641,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>More than 83% for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> and 79% for <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code>. We can proceed with the analysis since only percentages below 70% should be investigated for potential contamination.</li>
@@ -1771,7 +1764,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-36"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1779,7 +1772,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-36"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-36" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
@@ -1792,7 +1785,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>The BAM file contains information for all our reads, making it difficult to inspect and explore in text format. A powerful tool to visualize the content of BAM files is the Integrative Genomics Viewer (<strong>IGV</strong>, <span class="citation"><a href="#robinson2011integrative">Robinson <i>et al.</i> 2011</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspection-of-mapping-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspection of mapping results</div>
+  <div class="box-title hands-on-title" id="hands-on-inspection-of-mapping-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspection of mapping results</div>
 
   <ol>
     <li>Install <a href="https://software.broadinstitute.org/software/igv/download"><strong>IGV</strong></a> (if not already installed)</li>
@@ -1802,7 +1795,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
     <li>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualize icon in the <code class="language-plaintext highlighter-rouge">GSM461177</code> file block.</li>
     <li>In the center panel click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV (local, D. melanogaster (dm6))</code>to load the reads into the IGV browser
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>In order for this step to work, you will need to have either IGV or <a href="https://www.java.com/en/download/faq/java_webstart.xml">Java Web Start</a>
 installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.</p>
@@ -1815,7 +1808,7 @@ installed on your machine. However, the questions in this section can also be an
       <p><strong>IGV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Zoom to <code class="language-plaintext highlighter-rouge">chr4:540,000-560,000</code> (Chromosome 4 between 540 kb to 560 kb)</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/junction_igv_screenshot.png" alt="Screenshot of the IGV view on Chromosome 4. " width="954" height="618" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Screenshot of IGV on Chromosome 4</figcaption></figure>
 
@@ -1825,7 +1818,7 @@ installed on your machine. However, the questions in this section can also be an
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The coverage plot: the sum of mapped reads at each position</li>
@@ -1839,7 +1832,7 @@ installed on your machine. However, the questions in this section can also be an
       <p><strong>IGV</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Inspect the splice junctions using a <strong>Sashimi plot</strong></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-creation-of-a-sashimi-plot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Creation of a Sashimi plot</div>
+        <div class="box-title comment-title" id="comment-creation-of-a-sashimi-plot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Creation of a Sashimi plot</div>
 
         <ul>
           <li>Right click on the BAM file (in IGV)</li>
@@ -1849,7 +1842,7 @@ installed on your machine. However, the questions in this section can also be an
       </blockquote>
       <blockquote class="question">
 
-        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/star_igv_sashimi.png" alt="Screenshot of a Sashimi plot of Chromosome 4. " width="1086" height="445" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Screenshot of a Sashimi plot of Chromosome 4</figcaption></figure>
 
@@ -1860,7 +1853,7 @@ installed on your machine. However, the questions in this section can also be an
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The coverage for each alignment track is plotted as a red bar graph. Arcs represent observed splice junctions, <em>i.e.</em>, reads spanning introns.</li>
@@ -1872,7 +1865,7 @@ installed on your machine. However, the questions in this section can also be an
       </blockquote>
       <blockquote class="comment">
 
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Check the <a href="https://software.broadinstitute.org/software/igv/Sashimi">IGV documentation on Sashimi plots</a> to find some clues</p>
       </blockquote>
@@ -1882,7 +1875,7 @@ installed on your machine. However, the questions in this section can also be an
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-check-for-the-quality-of-the-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-check-for-the-quality-of-the-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further check for the quality of the data<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-check-for-the-quality-of-the-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-check-for-the-quality-of-the-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further check for the quality of the data<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The quality of the data and mapping can be checked further, e.g. by inspecting read duplication level, number of reads mapped to each chromosome, gene body coverage, and read distribution across features.</p>
 
@@ -1899,7 +1892,7 @@ installed on your machine. However, the questions in this section can also be an
   <p><strong>MarkDuplicates</strong> from <a href="http://broadinstitute.github.io/picard/">Picard suite</a> examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping to the same location (based on the start position of the mapping).</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check duplicate reads</div>
+    <div class="box-title hands-on-title" id="hands-on-check-duplicate-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check duplicate reads</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4" title="MarkDuplicates tool" aria-role="link"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4</span></span> with the following parameters:
@@ -1934,12 +1927,12 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <p>What are the percentages of duplicate reads for each sample?</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>The sample <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> has 25.9% of duplicated reads while <code class="language-plaintext highlighter-rouge">GSM461180_treat_paired</code> has 27.8%.</p>
           </blockquote>
@@ -1955,7 +1948,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>To assess the sample quality (e.g. excess of mitochondrial contamination), we can check the sex of samples, or to see if any chromosomes have highly expressed genes, we can check the numbers of reads mapped to each chromosome using <strong>IdxStats</strong> from the <strong>Samtools</strong> suite.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the number of reads mapped to each chromosome</div>
+    <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the number of reads mapped to each chromosome</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4" title="Samtools idxstats tool" aria-role="link"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4</span></span> with the following parameters:
@@ -1993,7 +1986,7 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <p><img src="../../images/ref-based/samtools-idxstats-mapped-reads-plot.png" alt="Samtools idxstats. " width="1200" height="800" loading="lazy" /></p>
 
@@ -2004,7 +1997,7 @@ installed on your machine. However, the questions in this section can also be an
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>The genome of <em>Drosophila</em> has 4 pairs of chromosomes: X/Y, 2, 3, and 4.</li>
@@ -2026,7 +2019,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>The different regions of a gene make up the gene body. It is important to check if read coverage is uniform across the gene body. For example, a bias towards the 5’ end of genes could indicate degradation of the RNA. Alternatively, a 3’ bias could indicate that the data is from a 3’ assay. To assess this, we can use the <strong>Gene Body Coverage</strong> tool from the RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tool suite. This tool scales all transcripts to 100 nucleotides (using a provided annotation file) and calculates the number of reads covering each (scaled) nucleotide position. As this tool is really slow, we will compute the coverage only on 200,000 random reads.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check gene body coverage</div>
+    <div class="box-title hands-on-title" id="hands-on-check-gene-body-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check gene body coverage</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Samtools view tool" aria-role="link"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0</span></span> with the following parameters:
@@ -2099,14 +2092,14 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <p><img src="../../images/ref-based/rseqc_gene_body_coverage_plot.png" alt="Gene body coverage. " width="1200" height="800" loading="lazy" /></p>
 
           <p>How are the coverage across gene bodies? Are the samples biased in 3’ or 5’?</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>For both samples there is a pretty even coverage from 5’ to 3’ ends (despite some noise in the middle). So no obvious bias in both samples.</p>
           </blockquote>
@@ -2122,7 +2115,7 @@ installed on your machine. However, the questions in this section can also be an
   <p>Here we will use the <strong>Read Distribution</strong> tool from the RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tool suite, which uses the annotation file to identify the position of the different gene features.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the number of reads mapped to each chromosome</div>
+    <div class="box-title hands-on-title" id="hands-on-check-the-number-of-reads-mapped-to-each-chromosome-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the number of reads mapped to each chromosome</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2" title="Read Distribution tool" aria-role="link"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2</span></span> with the following parameters:
@@ -2161,14 +2154,14 @@ installed on your machine. However, the questions in this section can also be an
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <p><img src="../../images/ref-based/rseqc_read_distribution_plot.png" alt="Read Distribution. " width="1200" height="800" loading="lazy" /></p>
 
           <p>What do you think of the read distribution?</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>Most of the reads are mapped to exons (&gt;80%), only ~2% to introns and ~5% to intergenic regions, which is what we expect. It confirms that our data are RNA-Seq data and that mapping was successful.</p>
           </blockquote>
@@ -2183,7 +2176,7 @@ installed on your machine. However, the questions in this section can also be an
 <p>After the mapping, we now have the information on where the reads are located on the reference genome and how well they were mapped. The next step in RNA-Seq data analysis is quantification of the number of reads mapped to genomic features (genes, transcripts, exons, …).</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>The quantification depends on both the reference genome (the FASTA file) and its associated annotations (the GTF file). It is extremely important to use an annotation file that corresponds to the same version of the reference genome you used for the mapping (e.g. <code class="language-plaintext highlighter-rouge">dm6</code> here), as the chromosomal coordinates of genes are usually different amongst different reference genome versions.</p>
 </blockquote>
@@ -2197,7 +2190,7 @@ installed on your machine. However, the questions in this section can also be an
 <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/gene_counting.png" alt="Counting the number of reads per annotated gene. " width="981" height="142" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Counting the number of reads per annotated gene</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>In the previous image,</p>
 
@@ -2207,7 +2200,7 @@ installed on your machine. However, the questions in this section can also be an
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2269,7 +2262,7 @@ installed on your machine. However, the questions in this section can also be an
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-details-about-strandness"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-strandness" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More details about strandness<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-details-about-strandness"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-strandness" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More details about strandness<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/dna_rna.png" alt="Relationship between DNA and RNA orientation. " width="1200" height="630" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> Relationship between DNA and RNA orientation</figcaption></figure>
 
@@ -2293,14 +2286,14 @@ installed on your machine. However, the questions in this section can also be an
     <p>We can do a visual inspection of read strands on IGV (for Paired-end dataset it is less easy than with single read and when you have a lot of samples, this can be painful).</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-igv-for-a-paired-end-library"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with IGV for a paired-end library</div>
+      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-igv-for-a-paired-end-library"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate strandness with IGV for a paired-end library</div>
 
       <ol>
         <li>
           <p>Go back to your IGV session with the <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> BAM opened.</p>
 
           <blockquote class="tip">
-            <div class="box-title tip-title" id="tip-if-you-don-t-have-it"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-don-t-have-it" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: If you don't have it<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-if-you-don-t-have-it"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-you-don-t-have-it" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: If you don't have it<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>No problem, you just need to redo the previous steps:</p>
 
@@ -2326,7 +2319,7 @@ installed on your machine. However, the questions in this section can also be an
     </blockquote>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <figure id="figure-25" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/group_strand_igv_screenshot.png" alt="Screenshot of the IGV view on ps. " width="1893" height="823" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 25</strong>:</span> Screenshot of IGV on ps</figcaption></figure>
 
@@ -2336,7 +2329,7 @@ installed on your machine. However, the questions in this section can also be an
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>Yes we see the same number of reads on both groups.</li>
@@ -2344,7 +2337,7 @@ installed on your machine. However, the questions in this section can also be an
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How would it be if the library was stranded?</div>
 
           <figure id="figure-26" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/group_strand_igv_screenshot_RSvsUS.png" alt="Screenshot of the IGV for stranded vs non-stranded. " width="934" height="891" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 26</strong>:</span> Screenshot of IGV for non-stranded (top) vs. reverse strand-specific (bottom)</figcaption></figure>
 
@@ -2357,7 +2350,7 @@ installed on your machine. However, the questions in this section can also be an
     <p>Alternatively, instead of using the BAM you can use the stranded coverage generated by <strong>STAR</strong>. Using <strong>pyGenomeTracks</strong> we will be able to visualize the coverage on each strand for each sample. This tool has a lot of parameters to customize your plots.</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with pyGenometracks from STAR coverage</div>
+      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate strandness with pyGenometracks from STAR coverage</div>
 
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool" aria-role="link"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1</span></span>:
@@ -2412,7 +2405,7 @@ installed on your machine. However, the questions in this section can also be an
     </blockquote>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <figure id="figure-27" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/pyGenomeTracks.png" alt="pyGenomeTracks. " width="1133" height="512" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 27</strong>:</span> STAR coverage for strand 1 in blue and strand 2 in red</figcaption></figure>
 
@@ -2423,7 +2416,7 @@ installed on your machine. However, the questions in this section can also be an
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>We see 3 transcripts called Thd1-RC, Thd1-RB and Thd1-RA of the gene Thd1. The gene is on the reverse strand.</li>
@@ -2432,7 +2425,7 @@ installed on your machine. However, the questions in this section can also be an
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How would it be if the library was stranded?</div>
 
           <figure id="figure-28" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/pyGenomeTracks_USvsRS.png" alt="pyGenomeTracks USvsRS. " width="1133" height="704" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 28</strong>:</span> STAR coverage for strand 1 in blue and strand 2 in red for unstranded and reverse stranded library</figcaption></figure>
           <p>Note that the coverage on the strand 1 is very low for the stranded_PE sample while the gene is forward.
@@ -2447,7 +2440,7 @@ On the contrary for unstranded_PE the scale is comparable for both strand.</p>
     <p>You can use the output of <strong>STAR</strong> with the counts. Indeed as explained before, <strong>STAR</strong> evaluates the number of reads on genes for the three possible scenarios: unstranded library, stranded forward or stranded reverse. The condition which attributes more reads to gene must be the condition which matches your library.</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-star-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate strandness with STAR counts</div>
+      <div class="box-title hands-on-title" id="hands-on-estimate-strandness-with-star-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate strandness with STAR counts</div>
 
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> to aggregate the STAR counts with the following parameters:
@@ -2484,7 +2477,7 @@ On the contrary for unstranded_PE the scale is comparable for both strand.</p>
     </blockquote>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>What percentage of reads are asigned to genes if the library is unstranded/same stranded/reverse stranded?</li>
@@ -2492,7 +2485,7 @@ On the contrary for unstranded_PE the scale is comparable for both strand.</p>
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <figure id="figure-29" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/star_gene_counts_unstranded.png" alt="STAR Gene counts unstranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 29</strong>:</span> Gene counts unstranded</figcaption></figure>
         <figure id="figure-30" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/star_gene_counts_same.png" alt="STAR Gene counts same stranded. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 30</strong>:</span> Gene counts same stranded</figcaption></figure>
@@ -2504,7 +2497,7 @@ On the contrary for unstranded_PE the scale is comparable for both strand.</p>
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How would it be if the library was stranded?</div>
 
           <figure id="figure-32" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/star_gene_counts_unstranded_USvsRS.png" alt="STAR Gene counts unstranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 32</strong>:</span> Gene counts unstranded for unstranded and reverse stranded library</figcaption></figure>
           <figure id="figure-33" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/star_gene_counts_same_USvsRS.png" alt="STAR Gene counts same stranded USvsRS. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 33</strong>:</span> Gene counts same stranded for unstranded and reverse stranded library</figcaption></figure>
@@ -2522,7 +2515,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
     <p>This tool takes the BAM files from the mapping, selects a subsample of the reads and compares their genome coordinates and strands with those of the reference gene model (from an annotation file). Based on the strand of the genes, it can gauge whether sequencing is strand-specific, and if so, how reads are stranded (forward or reverse).</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-determining-the-library-strandness-using-infer-experiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Determining the library strandness using Infer Experiment</div>
+      <div class="box-title hands-on-title" id="hands-on-determining-the-library-strandness-using-infer-experiment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determining the library strandness using Infer Experiment</div>
 
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="link"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span> to convert the GTF file to BED:
@@ -2567,7 +2560,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
     <p>If the two “Fraction of reads explained by” numbers are close to each other, we conclude that the library is not a strand-specific dataset (or unstranded).</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>What are the “Fraction of the reads explained by” results for <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code>?</li>
@@ -2575,7 +2568,7 @@ The numbers are comparable between unstranded and reverse stranded because reall
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
@@ -2599,7 +2592,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.4360
         </ol>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How would it be if the library was stranded?</div>
+          <div class="box-title comment-title" id="comment-how-would-it-be-if-the-library-was-stranded-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How would it be if the library was stranded?</div>
 
           <p>Still taking the 2 BAM as example, We get for the unstranded:</p>
 
@@ -2624,7 +2617,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 </ol>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-strandness-and-software-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-strandness-and-software-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Strandness and software settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-strandness-and-software-settings"><button class="gtn-boxify-button details" type="button" aria-controls="details-strandness-and-software-settings" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Strandness and software settings<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>As it is sometimes quite difficult to find out which settings correspond to those of other programs, the following table might be helpful to identify the library type:</p>
 
@@ -2725,7 +2718,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>As you chose to use the featureCounts flavor of the tutorial, we now run <strong>featureCounts</strong> to count the number of reads per annotated gene.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-annotated-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Counting the number of reads per annotated gene</div>
+    <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-annotated-gene"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Counting the number of reads per annotated gene</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1" title="featureCounts tool" aria-role="link"><strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1</span></span> with the following parameters to count the number of reads per gene:
@@ -2767,7 +2760,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many reads have been assigned to a gene?</li>
@@ -2775,7 +2768,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>
@@ -2807,7 +2800,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>As written above, during mapping, <strong>STAR</strong> counted reads for each gene provided in the gene annotation file (this was achieved by the option <code class="language-plaintext highlighter-rouge">Per gene read counts (GeneCounts)</code>). However, this output provides some statistics at the beginning and the counts for each gene depending on the library (unstranded is column 2, stranded forward is column 3 and stranded reverse is column 4).</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-inspect-star-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect STAR output</div>
+    <div class="box-title hands-on-title" id="hands-on-inspect-star-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect STAR output</div>
 
     <ol>
       <li>Inspect the counts from <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired</code> in the collection <code class="language-plaintext highlighter-rouge">RNA STAR on collection N: reads per gene</code></li>
@@ -2815,7 +2808,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   </blockquote>
   <blockquote class="question">
 
-    <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many reads are unmapped/multi-mapped?</li>
@@ -2825,7 +2818,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>There are 1,190,029 unmapped reads and 571,324 multi-mapped reads.</li>
@@ -2848,7 +2841,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>We will reformat the output of <strong>STAR</strong> to be similar to the output of <strong>featureCounts</strong> (or other counting softwares) which is only 2 columns, one with IDs and the other one with counts.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-reformatting-star-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Reformatting STAR output</div>
+    <div class="box-title hands-on-title" id="hands-on-reformatting-star-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reformatting STAR output</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0" title="Select last tool" aria-role="link"><strong>Select last</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0</span></span> lines from a dataset (tail) to remove the first 4 lines with the following parameters:
@@ -2872,7 +2865,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
   <p>Later on the tutorial we will need to get the size of each gene. This is one of the output of <strong>FeatureCounts</strong> but we can also obtain it directly from the gene annotation file. As this is quite long, we recommand to launch it now.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-getting-gene-length"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Getting gene length</div>
+    <div class="box-title hands-on-title" id="hands-on-getting-gene-length"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Getting gene length</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2" title="Gene length and GC content tool" aria-role="link"><strong>Gene length and GC content</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2</span></span> with the following parameters:
@@ -2886,7 +2879,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
         </ul>
 
         <blockquote class="warning">
-          <div class="box-title warning-title" id="warning-check-the-version-of-the-tool-below"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Check the version of the tool below</div>
+          <div class="box-title warning-title" id="warning-check-the-version-of-the-tool-below"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Check the version of the tool below</div>
 
           <p>This will only work with version 0.1.2 or above</p>
 
@@ -2902,12 +2895,12 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 </div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-17"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-22"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which feature has the most counts for both samples? (Hint: Use the Sort tool)</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-22"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-22" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>To display the most abundantly detected feature, we need to sort the table of counts. This can be done using the following:</p>
 
@@ -2938,7 +2931,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
         <p>Comparing different output files is easier if we can view more than one dataset simultaneously. The Scratchbook function allows us to build up a collection of datasets that will be shown on the screen together.</p>
 
         <blockquote class="notranslate hands_on">
-          <div class="box-title hands-on-title" id="hands-on-optional-view-the-sorted-counts-using-the-scratchbook"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: (Optional) View the sorted counts using the Scratchbook</div>
+          <div class="box-title hands-on-title" id="hands-on-optional-view-the-sorted-counts-using-the-scratchbook"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: (Optional) View the sorted counts using the Scratchbook</div>
 
           <ol>
             <li>
@@ -2976,7 +2969,7 @@ Fraction of reads explained by "1+-,1-+,2++,2--": 0.9435
 <p>Here we counted reads mapped to genes for two samples. It is really interesting to redo the same procedure on the other datasets, especially to check how parameters differ given the different type of data (single-end versus paired-end).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-optional-re-run-on-the-other-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: (Optional) Re-run on the other datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-optional-re-run-on-the-other-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: (Optional) Re-run on the other datasets</div>
 
   <p>You can do the same process on the other sequence files available on <a href="https://zenodo.org/record/6457007">Zenodo</a> and on the data library.</p>
 
@@ -3017,7 +3010,7 @@ https://zenodo.org/record/6457007/files/GSM461182.fastqsanger
 <p>To be able to identify differential gene expression induced by PS depletion, all datasets (3 treated and 4 untreated) must be analyzed following the same procedure. To save time, we have run the previous steps for you. We then obtain 7 files with the counts for each gene of <em>Drosophila</em> for each sample.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-all-count-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import all count files</div>
+  <div class="box-title hands-on-title" id="hands-on-import-all-count-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import all count files</div>
 
   <ol>
     <li>Create a new empty history</li>
@@ -3115,7 +3108,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>To compare samples or gene expressions, the gene counts need to be normalized. We could use TPM (Transcripts Per Kilobase Million).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-rpkm-fpkm-and-tpm"><button class="gtn-boxify-button details" type="button" aria-controls="details-rpkm-fpkm-and-tpm" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: RPKM, FPKM and TPM?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-rpkm-fpkm-and-tpm"><button class="gtn-boxify-button details" type="button" aria-controls="details-rpkm-fpkm-and-tpm" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: RPKM, FPKM and TPM?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>These three metrics are used to normalize count tables for:</p>
 
@@ -3580,7 +3573,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong></a> (<span class="citation"><a href="#love2014moderated">Love <i>et al.</i> 2014</a></span>) is a great tool for dealing with RNA-seq data and running Differential Gene Expression (DGE) analysis. It takes read count files from different samples, combines them into a big table (with genes in the rows and samples in the columns) and applies normalization for <strong>sequencing depth</strong> and <strong>library composition</strong>. We do not need to account for gene length normalization does because we are comparing the counts between sample groups for the same gene.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-normalization-in-deseq2"><button class="gtn-boxify-button details" type="button" aria-controls="details-normalization-in-deseq2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Normalization in DESeq2<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-normalization-in-deseq2"><button class="gtn-boxify-button details" type="button" aria-controls="details-normalization-in-deseq2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Normalization in DESeq2<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Let’s take an example to illustrate how DESeq2 scales the different samples:</p>
 
@@ -3850,7 +3843,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>This expression analysis is estimated from read counts and attempts are made to correct for variability in measurements using replicates, that are absolutely essential for accurate results. For your own analysis, we advise you to use at least 3, but preferably 5 biological replicates per condition. It is possible to have different numbers of replicates per condition.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-technical-vs-biological-replicates"><button class="gtn-boxify-button details" type="button" aria-controls="details-technical-vs-biological-replicates" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Technical vs biological replicates<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-technical-vs-biological-replicates"><button class="gtn-boxify-button details" type="button" aria-controls="details-technical-vs-biological-replicates" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Technical vs biological replicates<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>A technical replicate is an experiment which is performed once but measured several times (e.g. multiple sequencing of the same library). A biological replicate is an experiment performed (and also measured) several times.</p>
 
@@ -3871,7 +3864,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>Here, treatment is the primary factor that we are interested in. The sequencing type is further information we know about the data that might affect the analysis. Multi-factor analysis allows us to assess the effect of the treatment, while taking the sequencing type into account too.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc…</p>
 </blockquote>
@@ -3879,7 +3872,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use tags on our collection of counts to easily select all samples belonging to the same category. For more information about alternative ways to set group tags, please see <a href="/training-material/topics/galaxy-interface/tutorials/group-tags/tutorial.html">this tutorial</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-tags-to-your-collection-for-each-of-these-factors"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add tags to your collection for each of these factors</div>
+  <div class="box-title hands-on-title" id="hands-on-add-tags-to-your-collection-for-each-of-these-factors"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add tags to your collection for each of these factors</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="link"><strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2</span></span> with the following parameters:
@@ -3923,7 +3916,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
       <p>Inspect the new collection</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-you-cannot-see-the-changes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-cannot-see-the-changes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: You cannot see the changes?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-you-cannot-see-the-changes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-cannot-see-the-changes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: You cannot see the changes?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You may not see it at first glance as the names are the same. However if you click on one and click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Edit dataset tags</strong>, you should see 2 tags which start with ‘group:’. This keyword will allow to use these tags in DESeq2.</p>
 
@@ -3936,7 +3929,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>We can now run DESeq2:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-determine-differentially-expressed-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Determine differentially expressed features</div>
+  <div class="box-title hands-on-title" id="hands-on-determine-differentially-expressed-features"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determine differentially expressed features</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2" title="DESeq2 tool" aria-role="link"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2</span></span> with the following parameters:
@@ -4017,7 +4010,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
         <p>A plot of the first 2 dimensions from a principal component analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>), run on the normalized counts of the samples</p>
 
         <blockquote class="details">
-          <div class="box-title details-title" id="details-what-is-a-pca"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-a-pca" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is a PCA?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title details-title" id="details-what-is-a-pca"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-a-pca" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What is a PCA?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Let’s imagine we have some beer bottles standing here on the table. We can describe each beer by its colour, its foam, by how strong it is, and so on. We can compose a whole list of different characteristics of each beer in a beer shop. But many of them will measure related properties and so will be redundant. If so, we should be able to summarize each beer with fewer characteristics. This is what PCA or principal component analysis does.</p>
 
@@ -4034,7 +4027,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
         <p>It shows the samples in the 2D plane spanned by their first two principal components. Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-18"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-23"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <figure id="figure-40" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/deseq2_pca.png" alt="DESeq PCA. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 40</strong>:</span> Principal component plot of the samples</figcaption></figure>
 
@@ -4045,7 +4038,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-23"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-23" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>The first dimension is separating the treated samples from the untreated sample.</li>
@@ -4061,14 +4054,14 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
         <p>The heatmap gives an overview of similarities and dissimilarities between samples: the color represents the distance between the samples. Dark blue means shorter distance, i.e. closer samples given the normalized counts.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-19"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-24"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <figure id="figure-41" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/deseq2_sample_sample_distance_heatmap.png" alt="Heatmap of the sample-to-sample distances. " width="1050" height="1050" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 41</strong>:</span> Heatmap of the sample-to-sample distances</figcaption></figure>
 
           <p>How are the samples grouped?</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-24"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-24" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <p>They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.</p>
 
@@ -4108,7 +4101,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
     </ol>
 
     <blockquote class="tip">
-      <div class="box-title tip-title" id="tip-what-are-p-values-and-what-are-they-used-for"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-are-p-values-and-what-are-they-used-for" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What are p-values and what are they used for?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-what-are-p-values-and-what-are-they-used-for"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-are-p-values-and-what-are-they-used-for" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What are p-values and what are they used for?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>The p-value is a measure often used to determine whether or not a particular observation possesses statistical significance. Strictly speaking, the p-value is the probability that the data could have arisen randomly, assuming that the null hypothesis is correct. In the concrete case of RNA-Seq, the null hypothesis is that there is no differential gene expression. So a p-value of 0.13 for a particular gene indicates that, for that gene, assuming it is not differentially expressed, there is a 13% chance that any apparent differential expression could simply be produced by random variation in the experimental data.</p>
 
@@ -4122,7 +4115,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
 <p>For more information about <strong>DESeq2</strong> and its outputs, you can have a look at the <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><strong>DESeq2</strong> documentation</a>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Is the FBgn0003360 gene differentially expressed because of the treatment? If yes, how much?</li>
@@ -4132,7 +4125,7 @@ https://zenodo.org/record/6457007/files/GSM461182_untreat_single_featureCounts.c
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-20"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-20" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-25"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-25" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -4168,7 +4161,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>The ID for each gene is something like FBgn0003360, which is an ID from the corresponding database, here Flybase (<span class="citation"><a href="#thurmond2018flybase">Thurmond <i>et al.</i> 2018</a></span>). These IDs are unique but sometimes we prefer to have the gene names, even if they may not reference an unique gene (e.g. duplicated after re-annotation). But gene names may hint already to a function or they help you to search for desired candidates. We would also like to display the location of these genes within the genome. We can extract such information from the annotation file which we used for mapping and counting.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotation-of-the-deseq2-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotation of the DESeq2 results</div>
+  <div class="box-title hands-on-title" id="hands-on-annotation-of-the-deseq2-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotation of the DESeq2 results</div>
 
   <ol>
     <li>
@@ -4208,7 +4201,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-26"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Where is the most over-expressed gene located?</li>
@@ -4217,7 +4210,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-21"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-21" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-26"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-26" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>FBgn0025111 (the top-ranked gene with the highest positive log2FC value) is located on the reverse strand of chromosome X, between 10,778,953 bp and 10,786,907 bp.</li>
@@ -4230,7 +4223,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>The annotated table contains no column names, which makes it difficult to read. We would like to add them before going further.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-column-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add column names</div>
+  <div class="box-title hands-on-title" id="hands-on-add-column-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add column names</div>
 
   <ol>
     <li>
@@ -4266,7 +4259,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>Now we would like to extract the most differentially expressed genes due to the treatment with a fold change &gt; 2 (or &lt; 1/2).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the most differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the most differentially expressed genes</div>
 
   <ol>
     <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value below 0.05) between treated and untreated samples:
@@ -4280,12 +4273,12 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value</code>.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-22"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>How many genes have a significant change in gene expression between these conditions?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-22"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-22" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-27"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-27" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>We get 966 (967 lines including a header) genes (4.04%) with a significant change in gene expression between treated and untreated samples.</p>
 
@@ -4293,7 +4286,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </blockquote>
       <blockquote class="comment">
 
-        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The file with the independently filtered results can be used for further downstream analysis as it excludes genes with only a few read counts, as these genes will not be considered as significantly differentially expressed.</p>
       </blockquote>
@@ -4311,7 +4304,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       <p>Rename the output <code class="language-plaintext highlighter-rouge">Genes with significant adj p-value &amp; abs(log2(FC)) &gt; 1</code>.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-23"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many genes have been conserved?</li>
@@ -4319,7 +4312,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-23"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-23" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-28"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-28" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>114, or 11.79% of the significantly differentially expressed genes.</li>
@@ -4346,7 +4339,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-advanced-tutorials-on-visualization"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Advanced tutorials on visualization</div>
+  <div class="box-title comment-title" id="comment-advanced-tutorials-on-visualization"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Advanced tutorials on visualization</div>
 
   <p>In this tutorial, we will quickly explain some possible visualization. For more details, please have a look in the extra tutorials on visualization of RNA-Seq results:</p>
 
@@ -4362,7 +4355,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>To extract the normalized counts for the interesting genes, we join the normalized count table generated by DESeq2 with the table we just generated. We will then keep only the columns corresponding to the normalized counts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the normalized counts of the most differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-normalized-counts-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the normalized counts of the most differentially expressed genes</div>
 
   <ol>
     <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="link"><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span> with the following parameters:
@@ -4392,7 +4385,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>We now have a table with 114 lines (the 113 most differentially expressed genes and a header) and the normalized counts for these genes across the 7 samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-heatmap-of-the-normalized-counts-of-these-genes-for-the-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the heatmap of the normalized counts of these genes for the samples</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" aria-role="link"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0</span></span> to plot the heatmap:
@@ -4413,7 +4406,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <figure id="figure-42" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/heatmap2_normalized_counts.png" alt="Heatmap with the normalized counts for the most differentially expressed genes. " width="504" height="504" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 42</strong>:</span> Normalized counts for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-24"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-29"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What does the X-axis of the heatmap represent? What about the Y axis?</li>
@@ -4424,7 +4417,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-24"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-24" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-29"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-29" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.</li>
@@ -4445,7 +4438,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>The Z-score \(z_{i,j}\) for a gene \(i\) in a sample \(j\) given the normalized count \(x_{i,j}\) is computed as \(z_{i,j} = \frac{x_{i,j}- \overline{x_i}}{s_i}\) with \(\overline{x_i}\) the mean and \(s_i\) the standard deviation of the normalized counts for the gene \(i\) over all samples.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-compute-the-z-score-for-all-genes"><button class="gtn-boxify-button details" type="button" aria-controls="details-compute-the-z-score-for-all-genes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Compute the Z-score for all genes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-compute-the-z-score-for-all-genes"><button class="gtn-boxify-button details" type="button" aria-controls="details-compute-the-z-score-for-all-genes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Compute the Z-score for all genes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>We often need the Z-score for some visualisations. To compute the Z-score, we break the process into 2 steps:</p>
 
@@ -4455,7 +4448,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-compute-the-z-score-of-all-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Compute the Z-score of all genes</div>
+    <div class="box-title hands-on-title" id="hands-on-compute-the-z-score-of-all-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute the Z-score of all genes</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0" title="Table Compute tool" aria-role="link"><strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0</span></span> with the following parameters to &gt;  first substract the mean values per row
@@ -4513,7 +4506,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   <p>We now have a table with the Z-score for all genes in the 7 samples.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-30"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What is the range for the Z-score?</li>
@@ -4523,7 +4516,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-25"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-25" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-30"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-30" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>The Z-score ranges from -3 standard deviations up to +3 standard deviations. It can be placed on a normal distribution curve: -3 being the far left of the normal distribution curve and +3 the far right of the normal distribution curve</li>
@@ -4550,7 +4543,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <figure id="figure-43" style="max-width: 90%; margin:auto;"><img src="../../images/ref-based/z-score-heatmap.png" alt="Heatmap with the Z-score counts for the most differentially expressed genes. " width="504" height="504" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 43</strong>:</span> Z-scores for the most differentially expressed genes</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-z-score-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the Z-score of the most differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-z-score-of-the-most-differentially-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the Z-score of the most differentially expressed genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0" title="heatmap2 tool" aria-role="link"><strong>heatmap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0</span></span> to plot the heatmap:
@@ -4589,7 +4582,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-first-dataset-for-goseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the first dataset for goseq</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-first-dataset-for-goseq"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the first dataset for goseq</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0" title="Compute tool" aria-role="link"><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0</span></span> on rows with the following parameters:
@@ -4632,7 +4625,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>We just generated the first input for <strong>goseq</strong>. As second input for <strong>goseq</strong> we need the gene lengths. We can use here the gene lengths generated by <strong>featureCounts</strong>  or <strong>Gene length and GC content</strong> and format the gene IDs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-gene-length-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the gene length file</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-gene-length-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the gene length file</div>
 
   <div class="featureCounts">
     <ol>
@@ -4686,7 +4679,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>We have now the two required input files for goseq.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-perform-go-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Perform GO analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-go-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform GO analysis</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" aria-role="link"><strong>goseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0</span></span> with
@@ -4733,7 +4726,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-26"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>How many GO terms are over-represented with an adjusted P-value &lt; 0.05? How many are under-represented?</li>
@@ -4741,7 +4734,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-26"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-26" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-31"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-31" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>
@@ -4763,14 +4756,14 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A graph with the top 10 over-represented GO terms</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <p><img src="../../images/ref-based/top_over-represented_go_terms.png" alt="Top over-represented GO terms. " width="504" height="504" loading="lazy" /></p>
 
       <p>What is the x-axis? How is it computed?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-27"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-27" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-32"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-32" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The x-axis is the percentage of genes in the category that have been identified as differentially expressed: \(100 \times \frac{numDEInCat}{numInCat}\)</p>
 
@@ -4783,7 +4776,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-advanced-tutorial-on-enrichment-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Advanced tutorial on enrichment analysis</div>
+  <div class="box-title comment-title" id="comment-advanced-tutorial-on-enrichment-analysis"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Advanced tutorial on enrichment analysis</div>
 
   <p>In this tutorial, we covered GO enrichment analysis with <strong>goseq</strong>. To learn other methods and tools for gene set enrichment analysis, please have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">“RNA-Seq genes to pathways”</a> tutorial.</p>
 </blockquote>
@@ -4797,7 +4790,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p><img src="../../images/ref-based/dme00010_empty.png" alt="dme00010 KEGG pathway. " width="494" height="707" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-perform-kegg-pathway-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Perform KEGG pathway analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-kegg-pathway-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform KEGG pathway analysis</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0" title="goseq tool" aria-role="link"><strong>goseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0</span></span> with
@@ -4830,7 +4823,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
     <p>A large table with the KEGG terms and some statistics</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-28"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>How many KEGG pathways terms have been identified?</li>
@@ -4840,7 +4833,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-28"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-28" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-33"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-33" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>The file has 128 lines including an header, so 127 KEGG pathways have been identified.</li>
@@ -4877,7 +4870,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p>Here we would like to visualize the 2 KEGG pathways: the over-represented <code class="language-plaintext highlighter-rouge">00010</code> (Glycolysis / Gluconeogenesis) and the most under-represented (yet not significantly) <code class="language-plaintext highlighter-rouge">03040</code> (Spliceosome). We would like the gene nodes to be colored by Log2 Fold Change for the differentially expressed genes because of the treatment.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-overlay-log2fc-on-kegg-pathway"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Overlay log2FC on KEGG pathway</div>
+  <div class="box-title hands-on-title" id="hands-on-overlay-log2fc-on-kegg-pathway"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Overlay log2FC on KEGG pathway</div>
 
   <ol>
     <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table with the following parameters:
@@ -4933,7 +4926,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
 <p><strong>Pathview</strong> generates a collection with the KEGG visualization: one file per pathway.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-29"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-34"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p><code class="language-plaintext highlighter-rouge">dme00010</code> KEGG pathway from <strong>Pathview</strong></p>
 
@@ -4945,7 +4938,7 @@ correction for the variability due to the 2nd factor. In our current case, treat
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-29"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-29" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-34"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-34" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The colored boxes are genes in the pathway that are differentially expressed</li>
@@ -5485,7 +5478,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

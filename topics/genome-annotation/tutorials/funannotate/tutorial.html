@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Genome annotation with Funannotate">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -374,7 +374,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -411,14 +411,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxy-genome-annotation/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-genome-annotation">
     <h1 data-toc-skip>Genome annotation with Funannotate</h1>
@@ -845,7 +838,7 @@ Sentry.init({
 <p>Funannotate will take into account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -889,7 +882,7 @@ https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/alternate_anno
 <p>To make use of this RNASeq data, we need to map it on the genome. We will use <strong>RNA star</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="RNA STAR tool" aria-role="link"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0</span></span> with the following parameters:
@@ -915,7 +908,7 @@ https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/alternate_anno
 <p>We select <code class="language-plaintext highlighter-rouge">11</code> for the <em>“Length of the SA pre-indexing string”</em> parameter as it is the recommended value for a small genome of this size. If you select 14 (the default value), STAR will advise you to use <code class="language-plaintext highlighter-rouge">11</code> instead in its logs.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What if I want to use multiple RNASeq libraries</div>
+  <div class="box-title comment-title" id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What if I want to use multiple RNASeq libraries</div>
 
   <p>To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSamFiles tool" aria-role="link"><strong>MergeSamFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1</span></span> tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
 </blockquote>
@@ -923,12 +916,12 @@ https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/alternate_anno
 <p>Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge">RNA STAR</code>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with this tutorial?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Look for <code class="language-plaintext highlighter-rouge">Uniquely mapped reads %</code>: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly reads properly mapping.
 Anyway, with real data, you expect to have a vast majority of reads mapping uniquely on the genome. If it’s not the case, check that you’re using the correct RNASeq files, with the correct genome sequence.</p>
@@ -948,7 +941,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1" title="Funannotate predict annotation tool" aria-role="link"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy1</span></span> with the following parameters:
@@ -986,7 +979,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-on-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: on parameters</div>
+  <div class="box-title comment-title" id="comment-on-parameters"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: on parameters</div>
 
   <ul>
     <li>For <em>“Select protein evidences”</em> we select <code class="language-plaintext highlighter-rouge">Custom protein sequences</code> to reduce the computing time, but for real data analysis, you should select the default value: <code class="language-plaintext highlighter-rouge">Use UniProtKb/SwissProt (from selected Funannotate database)</code>.</li>
@@ -996,7 +989,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-don-t-wait"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Don't wait</div>
+  <div class="box-title comment-title" id="comment-don-t-wait"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Don't wait</div>
 
   <p>This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.</p>
 </blockquote>
@@ -1030,7 +1023,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p><strong>EggNOG Mapper</strong> compares each protein sequence of the annotation to a huge set of ortholog groups from the <a href="http://eggnog5.embl.de">EggNOG database</a>. In this database, each ortholog group is associated with functional annotation like <a href="http://www.geneontology.org/">Gene Ontology (GO)</a> terms or <a href="https://www.genome.jp/kegg/pathway.html">KEGG pathways</a>. When the protein sequence of a new gene is found to be very similar to one of these ortholog groups, the corresponding functional annotation is transfered to this new gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3" title="eggNOG Mapper tool" aria-role="link"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3</span></span> with the following parameters:
@@ -1061,7 +1054,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p><strong>InterProScan</strong> itself runs multiple applications to search for the signatures in the protein sequences. It is possible to select exactly which ones we want to use when launching the analysis (by default all will be run).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3" title="InterProScan tool" aria-role="link"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3</span></span> with the following parameters:
@@ -1110,7 +1103,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>If you plan to submit the final genome sequence and annotation to NCBI, there are a few steps to follow.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-please-do-not-submit-this-genome-to-ncbi"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Please do not submit this genome to NCBI!</div>
+  <div class="box-title warning-title" id="warning-please-do-not-submit-this-genome-to-ncbi"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Please do not submit this genome to NCBI!</div>
   <p>In this tutorial we will <strong>not</strong> perform a real submission, as we don’t want to duplicate the annotation in Genbank every time someone follows this tutorial!</p>
 
   <p>But here’s a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for <a href="https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/">genome and annotation submission</a>.</p>
@@ -1135,7 +1128,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>Now we have a structural annotation, and the results of both <strong>EggNOG Mapper</strong> and <strong>InterProScan</strong>. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural <em>and</em> the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1" title="Funannotate functional tool" aria-role="link"><strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy1</span></span> with the following parameters:
@@ -1175,7 +1168,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>We now have a complete annotation, including functional annotation, but it’s time to evaluate the quality of this annotation. <a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0" title="Busco tool" aria-role="link"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0</span></span> with the following parameters:
@@ -1199,12 +1192,12 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.</p>
 
@@ -1220,7 +1213,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1</span></span> with the following parameters:
@@ -1296,7 +1289,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>Let’s run <strong>AEGeAn ParsEval</strong> first: it compares two annotations in GFF3 format.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="AEGeAn ParsEval tool" aria-role="link"><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0</span></span> with the following parameters:
@@ -1315,7 +1308,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p>The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the <code class="language-plaintext highlighter-rouge">(+)</code> links, or on the scaffold names, you can see the results more in detail, even at the gene level.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Display the report</li>
@@ -1326,12 +1319,12 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What can you tell from the comparison at this gene locus?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You should see something like this:</p>
 
@@ -1349,7 +1342,7 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 <p><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is another tool to compare several annotations. It uses genbank files, as generated by <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1" title="Funannotate compare tool" aria-role="link"><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy1</span></span> with the following parameters:
@@ -1373,12 +1366,12 @@ Anyway, with real data, you expect to have a vast majority of reads mapping uniq
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What can you tell from this report?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The alternate annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alternate annotation have a lower quality than the one you performed.</p>
   </blockquote>
@@ -1659,7 +1652,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

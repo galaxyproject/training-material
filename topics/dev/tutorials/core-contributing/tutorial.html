@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Contributing a New Feature to Galaxy Core">
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -412,7 +412,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -449,14 +449,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/dev'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-dev">
     <h1 data-toc-skip>Contributing a New Feature to Galaxy Core</h1>
@@ -806,7 +799,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setup your local Galaxy instance</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setup your local Galaxy instance</div>
 
   <ol>
     <li>Use GitHub UI to fork Galaxy’s repository at <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code>.</li>
@@ -814,7 +807,7 @@ Sentry.init({
       <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/&lt;your-username&gt;/galaxy GALAXY_ROOT
 <span class="nb">cd </span>GALAXY_ROOT
 </code></pre></div>        </div>
@@ -824,7 +817,7 @@ Sentry.init({
       <p>Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bash scripts/common_startup.sh <span class="nt">--dev-wheels</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -835,7 +828,7 @@ Sentry.init({
       <p>Activate your new virtual environment:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">.</span> .venv/bin/activate
 </code></pre></div>        </div>
       </blockquote>
@@ -846,7 +839,7 @@ Sentry.init({
       <p>Finally, let’s create a new branch for your edits:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> my-feature
 </code></pre></div>        </div>
       </blockquote>
@@ -855,13 +848,13 @@ Sentry.init({
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+          <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  dev
 <span class="k">*</span> my-feature
 </code></pre></div>          </div>
@@ -880,7 +873,7 @@ schema, which cannot be applied to a database that has not been initialized.</p>
 for the first time):</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh run.sh
 </code></pre></div>        </div>
       </blockquote>
@@ -888,7 +881,7 @@ for the first time):</p>
       <p>or you may run the following script (faster):</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh create_db.sh
 </code></pre></div>        </div>
       </blockquote>
@@ -917,7 +910,7 @@ for the first time):</p>
 <p>Associations between objects are usually defined with the <code class="language-plaintext highlighter-rouge">relationship</code> construct. For example, the <code class="language-plaintext highlighter-rouge">UserAddress</code> model has an association with the <code class="language-plaintext highlighter-rouge">User</code> model and is defined with the <code class="language-plaintext highlighter-rouge">relationship</code> construct as the <code class="language-plaintext highlighter-rouge">user</code> attribute.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-about-mapping"><i class="far fa-question-circle" aria-hidden="true"></i> Question: about Mapping</div>
+  <div class="box-title question-title" id="question-about-mapping"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: about Mapping</div>
 
   <ol>
     <li>What should be the SQLAlchemy model named corresponding to the table <code class="language-plaintext highlighter-rouge">user_favorite_extension</code> based on <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/__init__.py">other examples</a>?</li>
@@ -926,7 +919,7 @@ for the first time):</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li><code class="language-plaintext highlighter-rouge">UserFavoriteExtension</code></li>
       <li><code class="language-plaintext highlighter-rouge">galaxy_user</code></li>
@@ -1029,12 +1022,12 @@ for the first time):</p>
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-about-generating-a-revision-template"><i class="far fa-question-circle" aria-hidden="true"></i> Question:  about generating a revision template</div>
+  <div class="box-title question-title" id="question-about-generating-a-revision-template"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  about generating a revision template</div>
 
   <p>What command should you run to generate a revision template?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh run_alembic.sh revision <span class="nt">--head</span><span class="o">=</span>gxy@head <span class="nt">-m</span> <span class="s2">"Add user_favorite_extentions table"</span>
 </code></pre></div>    </div>
     <p>The title of the revision is an example only.</p>
@@ -1093,12 +1086,12 @@ do that here.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-about-running-the-migration"><i class="far fa-question-circle" aria-hidden="true"></i> Question: about running the migration</div>
+  <div class="box-title question-title" id="question-about-running-the-migration"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: about running the migration</div>
 
   <p>What command should you run to upgrade your database to include the new table?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sh manage_db.sh upgrade
 </code></pre></div>    </div>
   </blockquote>
@@ -1238,7 +1231,7 @@ for the current user.</p>
 <p>Verify this test fails when running stand-alone.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -1382,7 +1375,7 @@ implement <code class="language-plaintext highlighter-rouge">get_favorite_extens
 with <code class="language-plaintext highlighter-rouge">add_favorite_extension</code> before finishing with <code class="language-plaintext highlighter-rouge">delete_favorite_extension</code>.</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run_tests.sh <span class="nt">-api</span> lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 </code></pre></div>  </div>
 </blockquote>
@@ -1879,7 +1872,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

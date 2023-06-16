@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mapping and molecular identification of phenotype-causing...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -416,7 +416,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -453,14 +453,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Mapping and molecular identification of phenotype-causing mutations</h1>
@@ -794,7 +787,7 @@ analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further reading<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further reading<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The MiModD documentation has its own chapter on supported
 <a href="http://mimodd.readthedocs.io/en/latest/nacreousmap.html">mapping-by-sequencing schemes</a>
 not covered here.</p>
@@ -856,7 +849,7 @@ line, rather than mapping strain variant alleles.</p>
 in a late-flowering mutant line of <em>Arabidopsis thaliana</em>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p><strong>MiModD</strong> was developed as a successor of the older and now unmaintained
 <em>CloudMap</em> suite of tools, but also uses some key concepts first implemented
 in the command line package <em>SHOREmap</em>.
@@ -890,10 +883,10 @@ TAIR10) so the two datasets take the form of BAM files with the mapping results
 if you do not know what this means).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-and-preprocessing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload and preprocessing</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-preprocessing"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload and preprocessing</div>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>This section assumes that you already know</p>
 
     <ul>
@@ -928,7 +921,7 @@ and
       <p>Import the reference genome</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-tair10-version"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: TAIR10 Version</div>
+        <div class="box-title comment-title" id="comment-tair10-version"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: TAIR10 Version</div>
         <p>This step is only necessary if the TAIR10 version of the <em>A. thaliana</em>
 genome is not available as a built-in genome on your Galaxy server.</p>
       </blockquote>
@@ -988,7 +981,7 @@ the <strong>MiModD Extract Variant Sites</strong> tool to extract sites, for whi
 one sample appears to have a non-wt genotype, and report them in VCF format.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-variant-calling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Variant Calling</div>
+  <div class="box-title hands-on-title" id="hands-on-variant-calling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Variant Calling</div>
 
   <ol>
     <li>Use <strong>MiModD Variant Calling</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to generate combined
@@ -1017,7 +1010,7 @@ step.</li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Approximately how many variants were extracted?</li>
@@ -1025,7 +1018,7 @@ step.</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>You can click on the extracted variants dataset in your history to
 get more details about it. You should see that the file has an
@@ -1063,7 +1056,7 @@ identify these markers and look for linkage between them and the causative
 mutation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-linkage-analysis-with-one-set-of-parentally-contributed-markers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Linkage Analysis with one set of parentally contributed markers</div>
+  <div class="box-title hands-on-title" id="hands-on-linkage-analysis-with-one-set-of-parentally-contributed-markers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Linkage Analysis with one set of parentally contributed markers</div>
 
   <p>In the <strong>MiModD NacreousMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> interface, set</p>
   <ul>
@@ -1077,7 +1070,7 @@ variants VCF dataset obtained in the previous step.</li>
 in this two-sample there is no such sample.</li>
     <li>As the <strong>name of the unrelated parent sample</strong> specify <code class="language-plaintext highlighter-rouge">Ler</code>.
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-sample-roles"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Sample roles</div>
+        <div class="box-title comment-title" id="comment-sample-roles"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Sample roles</div>
         <p>In <code class="language-plaintext highlighter-rouge">Variant Allele Frequency Mapping</code> mode the tool requires:</p>
         <ul>
           <li>a <strong>mapping sample</strong>, which corresponds to the recombinant pool, from
@@ -1108,7 +1101,7 @@ chromosome in the <em>A. thaliana</em> genome, one with graphical representation
 of the data.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Have a look at the linkage plots dataset generated by the tool run. In
@@ -1120,7 +1113,7 @@ that the tool printed?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>The plots suggest that the causative variant is likely to be found
 in the region from 18,000,000 to 19,000,000 on chr2.</li>
@@ -1171,7 +1164,7 @@ homozygous for it.</p>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-variant-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Variant Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-variant-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Variant Filtering</div>
 
   <p>With the above information, we can run <strong>MiModD VCF Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
 to obtain a new VCF dataset with only those variants from the originally
@@ -1209,7 +1202,7 @@ has a homozygous wt genotype.</p>
 interval.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-sample-and-chromosome-names"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Sample and chromosome names</div>
+        <div class="box-title comment-title" id="comment-sample-and-chromosome-names"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Sample and chromosome names</div>
         <p>This is the second time in this tutorial that we ask you to type sample
 or chromosome names exactly as they appear in a dataset, and so you
 may have started wondering how you are supposed to keep track of which
@@ -1229,7 +1222,7 @@ tool can handle datasets in vcf, bcf, sam, bam and fasta format).</p>
 filters.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many variants passed the filters?</li>
@@ -1238,7 +1231,7 @@ not have any mapping information?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>If you used the suggested mapping interval of 1Mb on chr2, you
 should have retained 5 variants. Filtering is a really powerful way to
@@ -1261,7 +1254,7 @@ level. Hence, we can prioritize our candidate variants after annotating them
 with predicted functional effects.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-variant-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Variant Annotation</div>
+  <div class="box-title hands-on-title" id="hands-on-variant-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Variant Annotation</div>
 
   <p>To annotate our variants we are going to use <strong>SnpEff</strong> with its
 <code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code> genome database as the source of functional genomic
@@ -1274,7 +1267,7 @@ annotations, then generate a human-friendly variant report with the
 <code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code>.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-snpeff-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: SnpEff versions</div>
+        <div class="box-title comment-title" id="comment-snpeff-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: SnpEff versions</div>
         <p>SnpEff genome databases can only be used with the specific <code class="language-plaintext highlighter-rouge">major.minor</code>
 version of SnpEff they were built for.
 Make sure you are using matching versions (e.g., <code class="language-plaintext highlighter-rouge">4.3</code> - differences
@@ -1323,7 +1316,7 @@ with species-specific database and genome browser links.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
         <p>Variant reports in html format are meant to be used on relatively small
 lists of candidate variants like in this example. If the input VCF
 contains &gt; 1000 variants, the relatively large size of the reports and
@@ -1336,7 +1329,7 @@ format although the output will then lack those convenient hyperlinks.</p>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>The published confirmed mutations in the mutant line are <em>chr2:18,774,111
 C→T</em> and <em>chr2:18,808,927 C→T</em>. The latter was shown through follow-up
@@ -1350,7 +1343,7 @@ relate to the phenotype of our mutant line?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>The C→T transition at 18,774,111 results in a premature
 translational stop for the transcript AT2G45550.1. The C→T transition
@@ -1578,7 +1571,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

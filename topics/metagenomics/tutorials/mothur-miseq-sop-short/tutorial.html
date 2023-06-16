@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: 16S Microbial Analysis with mothur (short)">
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -404,7 +404,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -441,14 +441,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-metagenomics">
     <h1 data-toc-skip>16S Microbial Analysis with mothur (short)</h1>
@@ -718,7 +711,7 @@ Sentry.init({
 <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure (SOP) for MiSeq data</a>, developed by the <a href="http://www.schlosslab.org/">Schloss lab</a>, the creators of the mothur software package <span class="citation"><a href="#Schloss2009">Schloss <i>et al.</i> 2009</a></span>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note-two-versions-of-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note: Two versions of this tutorial</div>
+  <div class="box-title comment-title" id="comment-note-two-versions-of-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note: Two versions of this tutorial</div>
 
   <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
 
@@ -783,7 +776,7 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 <p>In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: The 16S ribosomal RNA gene</div>
+  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: The 16S ribosomal RNA gene</div>
   <p><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene. " width="1374" height="927" loading="lazy" /> <br /><br /></p>
 
   <p>The 16S rRNA gene has several properties that make it ideally suited for our purposes</p>
@@ -823,7 +816,7 @@ additionally sequenced a mock community with a known composition (genomic DNA fr
 for this mock sample are contained in the file <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-dataset-naming-scheme"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Dataset naming scheme</div>
+  <div class="box-title comment-title" id="comment-dataset-naming-scheme"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Dataset naming scheme</div>
   <p>For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
@@ -843,7 +836,7 @@ in this document differ slightly from the description on their website -->
 <p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI. " loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
@@ -860,7 +853,7 @@ in this document differ slightly from the description on their website -->
 using the URLs listed in the box below (click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> to expand):</p>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-list-of-zenodo-urls"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-list-of-zenodo-urls"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
@@ -927,7 +920,7 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       </ul>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-list-of-zenodo-urls-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-list-of-zenodo-urls-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-list-of-zenodo-urls-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: List of Zenodo URLs<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
@@ -948,7 +941,7 @@ which will differ only by <code class="language-plaintext highlighter-rouge">_R1
 convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-organizing-our-data-into-a-paired-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Organizing our data into a paired collection</div>
+  <div class="box-title hands-on-title" id="hands-on-organizing-our-data-into-a-paired-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Organizing our data into a paired collection</div>
 
   <ol>
     <li>
@@ -1029,7 +1022,7 @@ the consensus base call. A new quality score is derived by combining the two ori
 the reads for all the overlapping positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combine forward and reverse reads into contigs</div>
+  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combine forward and reverse reads into contigs</div>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Make.contigs tool" aria-role="link"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span> with the following parameters</li>
@@ -1071,7 +1064,7 @@ Finally we count how often each of the unique sequences occurs in the given samp
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-perform-data-cleaning"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Perform data cleaning</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-data-cleaning"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform data cleaning</div>
 
   <ol>
     <li>
@@ -1097,7 +1090,7 @@ Finally we count how often each of the unique sequences occurs in the given samp
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many sequences were removed in the screening step?</li>
@@ -1105,7 +1098,7 @@ Finally we count how often each of the unique sequences occurs in the given samp
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>
           <p>The screening removed <strong>23,488</strong> sequences.</p>
@@ -1137,7 +1130,7 @@ M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
 the number of duplicates of this sequence observed in each sample.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-representative-sequences-vs-total-sequences"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Representative sequences vs Total sequences</div>
+  <div class="box-title comment-title" id="comment-representative-sequences-vs-total-sequences"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Representative sequences vs Total sequences</div>
   <p>From now on, we will only work with the set of <em>unique sequences</em>, but it’s important to remember that these represent a larger
 number of <em>total sequences</em>, which we keep track of in the <em>count table</em>.</p>
 
@@ -1159,7 +1152,7 @@ with the most common k-mers and the unique sequence a standard global sequence a
 (using the Needleman-Wunsch algorithm).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-align-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Align sequences</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Align.seqs tool" aria-role="link"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span> with the following parameters
@@ -1170,12 +1163,12 @@ with the most common k-mers and the unique sequence a standard global sequence a
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Have a look at the alignment output, what do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="language-plaintext highlighter-rouge">.</code> characters below it.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
 ............................................................................
@@ -1260,7 +1253,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-clean-aligned-sequences-and-chimera-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Clean Aligned sequences and Chimera Removal</div>
+  <div class="box-title hands-on-title" id="hands-on-clean-aligned-sequences-and-chimera-removal"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean Aligned sequences and Chimera Removal</div>
 
   <ol>
     <li>
@@ -1285,7 +1278,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many chimeric sequences were detected?</li>
@@ -1293,7 +1286,7 @@ this chimera removal using the <code class="language-plaintext highlighter-rouge
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>
@@ -1371,7 +1364,7 @@ that have survived all the cleaning steps up to this point. We are generally not
 and want to remove them from our dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-non-bacterial-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Taxonomic Classification and removal of non-bacterial sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-non-bacterial-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Taxonomic Classification and removal of non-bacterial sequences</div>
 
   <ol>
     <li>
@@ -1398,12 +1391,12 @@ and want to remove them from our dataset.</p>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>How many non-bacterial sequences were removed? Determine both the number of <em>representative sequences</em> and <em>total sequences</em> removed.</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>There were <strong>20 representative sequences</strong> removed, representing <strong>162 total sequences</strong>.
 This can be determined by looking at the summary.seqs log outputs before the <strong>Remove.lineage</strong> step (after chimera removal), and after.</p>
     </blockquote>
@@ -1418,7 +1411,7 @@ our sequencing and bioinformatics pipeline is.</p>
 <p><a href="../mothur-miseq-sop/tutorial.html#optional-calculate-error-rates-based-on-our-mock-community"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to extended tutorial</a></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-skipping-the-mock-community-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Skipping the mock community analysis</div>
+  <div class="box-title comment-title" id="comment-skipping-the-mock-community-analysis"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Skipping the mock community analysis</div>
 
   <p>The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to <a href="#otu-clustering">the next section</a>
 where we will cluster our sequences into OTUs, classify them and perform some visualisations.
@@ -1432,7 +1425,7 @@ of which you know the exact composition and is something we recommend to do, bec
 accurate your sequencing and analysis protocol is.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-mock-communities"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Mock communities</div>
+  <div class="box-title comment-title" id="comment-background-mock-communities"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Mock communities</div>
 
   <p><strong>What is a mock community?</strong></p>
 
@@ -1478,7 +1471,7 @@ exactly what we would expect the analysis to produce as a result.</p>
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-mock-sample-from-our-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: extract mock sample from our dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-mock-sample-from-our-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: extract mock sample from our dataset</div>
 
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Get.groups tool" aria-role="link"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span> with the following parameters
@@ -1505,7 +1498,7 @@ Selected 4046 sequences from your count file
 the reads from our mock sample back to their known sequences, to see how many fail to match.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assess-error-rates-based-on-a-mock-community"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assess error rates based on a mock community</div>
+  <div class="box-title hands-on-title" id="hands-on-assess-error-rates-based-on-a-mock-community"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assess error rates based on a mock community</div>
   <ul>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Seq.error tool" aria-role="link"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span> with the following parameters
       <ul>
@@ -1563,7 +1556,7 @@ separation.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-mock-sequences-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster mock sequences into OTUs</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-mock-sequences-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster mock sequences into OTUs</div>
 
   <ol>
     <li>
@@ -1588,11 +1581,11 @@ separation.</p>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>How many OTUs were identified in our mock community?</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Answer: <strong>34</strong></p>
 
       <p>This can be determined by opening the shared file or OTU list and looking at the header line. You will see a column for each OTU</p>
@@ -1673,7 +1666,7 @@ separation.</p>
 <p>We will now repeat the OTU clustering we performed on our mock community for our real datasets. We use a slightly different workflow because these tools are faster for larger datasets. We will also normalize our data by subsampling to the level of the sample with the lowest number of sequences in it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster our data into OTUs</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster our data into OTUs</div>
 
   <ol>
     <li>
@@ -1719,12 +1712,12 @@ Otu0013	1856	Bacteria(100);Firmicutes(100);Bacilli(100);Lactobacillales(100);Lac
 sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/wiki/Alistipes">Alistipes</a></em>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which samples contained sequences belonging to an OTU classified as Staphylococcus?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Examine the <code class="language-plaintext highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
     <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
@@ -1744,7 +1737,7 @@ or between samples (beta diversity). However, diversity is not a physical quanti
 and many different metrics have been proposed to quantify diversity by <span class="citation"><a href="#Finotello2016">Finotello <i>et al.</i> 2016</a></span>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-species-diversity"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background: Species Diversity</div>
+  <div class="box-title comment-title" id="comment-background-species-diversity"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: Species Diversity</div>
 
   <p>Species diversity consists of three components: species richness, taxonomic or phylogenetic diversity and species evenness.</p>
 
@@ -1762,7 +1755,7 @@ smithwilson, heip bergerparker, boney, efron, shen, solow, bootstrap, qstat, cov
 ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison of several different diversity metrics is discussed in <span class="citation"><a href="#BonillaRosso2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <p>To understand the difference between richness and evenness, consider the following example:</p>
 
     <p><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness. " width="1400" height="1053" loading="lazy" /></p>
@@ -1773,7 +1766,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>Both communities have 4 different species, so they have same richness.</li>
         <li>Community B is more even, because each species has the same abundance.</li>
@@ -1821,7 +1814,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 <p>We will use a plotting tool to visualize the rarefaction curves, and use <strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to calculate a number of different alpha diversity metrics on all our samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-alpha-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Alpha Diversity</div>
+  <div class="box-title hands-on-title" id="hands-on-alpha-diversity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Alpha Diversity</div>
 
   <ol>
     <li>
@@ -1906,7 +1899,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-beta-diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Beta Diversity</div>
+  <div class="box-title hands-on-title" id="hands-on-beta-diversity"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Beta Diversity</div>
 
   <ol>
     <li>
@@ -1969,7 +1962,7 @@ of the others.</p>
 <p>A tool we can use to visualize the composition of our community, is <a href="https://github.com/marbl/Krona/wiki">Krona</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-krona"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Krona</div>
+  <div class="box-title hands-on-title" id="hands-on-krona"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Krona</div>
 
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
 
@@ -1994,12 +1987,12 @@ innermost ring labeled “Bacteroidetes” below:</p>
 <iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/krona.png" alt="Krona. " loading="lazy" /> </iframe>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-16"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What percentage of your sample was labelled <code class="language-plaintext highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Explore the Krona plot, double click on Firmicutes, here you should see Lactobacillus
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
@@ -2020,7 +2013,7 @@ about the groups. But luckily we can get <strong>Classify.otu</strong> <i class=
 taxonomy files. In the following exercise, we will create a Krona plot with per-sample subplots.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-per-sample-plots"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise: per-sample plots</div>
+  <div class="box-title question-title" id="question-exercise-per-sample-plots"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise: per-sample plots</div>
 
   <p>Try to create per-sample Krona plots. An few hints are given below, and the full answer
 is given in the solution box. <br /></p>
@@ -2036,7 +2029,7 @@ is given in the solution box. <br /></p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: Full Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: Full Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Find the previous run of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in your history
@@ -2437,7 +2430,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

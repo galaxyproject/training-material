@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Reference Data with CVMFS">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -427,7 +427,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -464,14 +464,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Reference Data with CVMFS</h1>
@@ -1074,7 +1067,7 @@ requirements.yml and then add it to our Ansible.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-cvmfs-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing CVMFS with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-cvmfs-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing CVMFS with Ansible</div>
 
   <ol>
     <li>
@@ -1115,7 +1108,7 @@ Edit requirements.yml and we need to add this to the bottom of that file. Copy. 
       <p>Install the role with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" data-ref="req-install" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1190,7 +1183,7 @@ local machine and the quota limit is the maximum size of that cache.</p>
       <p>But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting <code class="language-plaintext highlighter-rouge">galaxy_cvmfs_repos_enabled</code> to <code class="language-plaintext highlighter-rouge">config-repo</code>. We will also set the <code class="language-plaintext highlighter-rouge">cvmfs_quota_limit</code> to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-what-is-a-good-size-for-this"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-good-size-for-this" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What is a good size for this?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-what-is-a-good-size-for-this"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-good-size-for-this" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What is a good size for this?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don’t need such a large cache.</p>
       </blockquote>
 
@@ -1244,7 +1237,7 @@ disk of these machines. So I’ll save that.</p>
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-all-yml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-all-yml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why all.yml?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-all-yml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-all-yml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Why all.yml?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>We’ve integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.</p>
       </blockquote>
     </li>
@@ -1275,7 +1268,7 @@ And that’s pretty much it.</p>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" data-ref="run-pb1" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1348,7 +1341,7 @@ tell Galaxy to look at all of this data and use it as its reference data.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring CVMFS</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exploring CVMFS</div>
 
   <ol>
     <li>
@@ -1358,12 +1351,12 @@ tell Galaxy to look at all of this data and use it as its reference data.</p>
       <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/</code> and list the files in that folder</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You should see nothing, as CVMFS uses <code class="language-plaintext highlighter-rouge">autofs</code> in order to mount paths only upon request.</p>
 
         </blockquote>
@@ -1374,7 +1367,7 @@ tell Galaxy to look at all of this data and use it as its reference data.</p>
       <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.galaxyproject.org/</code>.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /cvmfs/data.galaxyproject.org/
 ls
 ls byhand
@@ -1383,12 +1376,12 @@ ls managed
       </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see now?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You’ll see <code class="language-plaintext highlighter-rouge">.loc</code> files, genomes and indices.
 AutoFS only mounts the files when they’re accessed, so it appears like there is no folder there.</p>
         </blockquote>
@@ -1485,7 +1478,7 @@ able to use all of the data contained within this repository.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-galaxy-to-use-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring Galaxy to use CVMFS</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-galaxy-to-use-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring Galaxy to use CVMFS</div>
 
   <ol>
     <li>
@@ -1522,7 +1515,7 @@ one. Right, so we save this file.</p>
       <p>Re-run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" data-ref="pb-run2" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1611,12 +1604,12 @@ having no options available, you can see here we’ve got the Bee genome.</p>
 <h1 id="common-production-questions">Common Production Questions</h1>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-for-the-most-used-datasets-for-ex-hg38-could-we-have-a-local-copy-or-would-that-be-irrelevant"><i class="far fa-question-circle" aria-hidden="true"></i> Question: For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?</div>
+  <div class="box-title question-title" id="question-for-the-most-used-datasets-for-ex-hg38-could-we-have-a-local-copy-or-would-that-be-irrelevant"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?</div>
   <p>This would be irrelevant, the most used datasets will stay in the cache. CVMFS uses a Least Recently Used (LRU) cache (see their <a href="https://cvmfs.readthedocs.io/en/latest/cpt-details.html#disk-cache">docs</a>), so whenever it runs out of space, it will remove the least recently used file. If you have a file that is very commonly used, it will remain in the cache.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-could-you-explain-how-to-calculate-a-good-cache-space"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Could you explain how to calculate a good cache space?</div>
+  <div class="box-title question-title" id="question-could-you-explain-how-to-calculate-a-good-cache-space"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Could you explain how to calculate a good cache space?</div>
   <p>Here are two approaches, there are others:</p>
   <ol>
     <li>Allocate some cache, see how it is, make it larger if it is fully used + users complain of speed.</li>
@@ -1627,25 +1620,25 @@ having no options available, you can see here we’ve got the Bee genome.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-if-i-use-a-cluster-will-i-need-to-configure-this-fs-in-each-node-given-that-the-folder-is-at-directly"><i class="far fa-question-circle" aria-hidden="true"></i> Question: If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?</div>
+  <div class="box-title question-title" id="question-if-i-use-a-cluster-will-i-need-to-configure-this-fs-in-each-node-given-that-the-folder-is-at-directly"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?</div>
   <p>Yes. Often admins with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site uses.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-debugging-failed-mounting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-debugging-failed-mounting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Debugging failed mounting<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-debugging-failed-mounting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-debugging-failed-mounting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Debugging failed mounting<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Are you having issues mounting your CVMFS mount? Is it giving strange errors like “Endpoint not connected”
 Try running this command as root:</p>
 
   <blockquote class="code-2col">
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+      <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
       <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">/usr/bin/cvmfs2 -d -o rw,system_mount,fsname=cvmfs2,allow_other,grab_mountpoint singularity.galaxyproject.org /mnt
 </span></code></pre></div>      </div>
     </blockquote>
 
     <blockquote class="code-out">
-      <div class="box-title code-out-title" id="code-out-consolue"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Consolue</div>
+      <div class="box-title code-out-title" id="code-out-consolue"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Consolue</div>
       <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Debug: using library /usr/lib/libcvmfs_fuse3_stub.so
 CernVM-FS: running in debug mode
 CernVM-FS: loading Fuse module... (cvmfs) Parsing config file /etc/cvmfs/default.conf    [07-21-2022 11:11:20 UTC]
@@ -1884,7 +1877,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

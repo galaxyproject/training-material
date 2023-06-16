@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Galaxy Database schema">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -358,7 +358,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -395,14 +395,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Galaxy Database schema</h1>
@@ -622,7 +615,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h2 id="start-docker-and-galaxy">Start Docker and Galaxy</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Start the Galaxy Docker Image -  this time as an interactive session</li>
@@ -649,7 +642,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h2 id="important-tables">Important tables</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Connect to the PostgreSQL database (change to user galaxy first)</li>
@@ -672,7 +665,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-galaxy_user">Table “galaxy_user”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -681,7 +674,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <p>As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">galaxy_user</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -690,7 +683,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-job">Table “job”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -699,7 +692,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <p>Run a few jobs on the galaxy website (e.g <em>upload file</em> a simple table and <em>add column</em> with ‘Iterate’ no and yes) and check the database again:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job</span> <span class="err">\</span><span class="n">x</span><span class="err">\</span><span class="k">g</span><span class="err">\</span><span class="n">x</span>
 </code></pre></div>  </div>
@@ -708,7 +701,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-job_parameter">Table “job_parameter”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">job_parameter</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -717,7 +710,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-history">Table “history”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -728,7 +721,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-dataset">Table “dataset”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">dataset</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -737,7 +730,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <h3 id="table-history_dataset_association">Table “history_dataset_association”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-9"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">history_dataset_association</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -756,7 +749,7 @@ PostgreSQL supports comments to table definitions, but there are none shown in t
 <p>You can add the numbers per month from the reports, or:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-10"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-10"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">j</span><span class="p">.</span><span class="n">id</span><span class="p">,</span> <span class="n">j</span><span class="p">.</span><span class="n">create_time</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span> <span class="k">limit</span> <span class="mi">5</span><span class="p">;</span>
 </code></pre></div>  </div>
 
@@ -795,7 +788,7 @@ all the users who have used the broken version, without alerting users who never
 <p>The following example is from the development server at the FMI</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-11"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-11"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="k">distinct</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">tool_version</span><span class="p">)</span> <span class="k">from</span> <span class="n">job</span> <span class="n">j</span>
           <span class="k">where</span> <span class="n">j</span><span class="p">.</span><span class="n">tool_id</span> <span class="o">=</span> <span class="s1">'qAlign'</span><span class="p">;</span>
 </code></pre></div>  </div>
@@ -815,7 +808,7 @@ all the users who have used the broken version, without alerting users who never
 <h2 id="all-users-running-a-job-using-a-certain-parameter">All users running a job using a certain parameter</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-12"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-12"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="k">select</span> <span class="n">jp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">jp</span><span class="p">.</span><span class="n">value</span>  <span class="k">from</span> <span class="n">job_parameter</span> <span class="n">jp</span>
           <span class="k">where</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">'iterate'</span><span class="nv">`
@@ -834,7 +827,7 @@ all the users who have used the broken version, without alerting users who never
 <h2 id="close-postgresql-client-and-quit-docker">Close PostgreSQL client and quit docker</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-13"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-13"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
   <p>Close the PostgreSQL client</p>
 
   <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      <span class="err">\</span><span class="n">q</span>
@@ -865,7 +858,7 @@ https://docs.google.com/presentation/d/1l4DD0IaJjuvk1zAT1Sjv26bLyrSOg3VUm7rD-TQl
 <p>To run SchemaSpy in your container you’ll need to get it, and also install some required software packages.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-schema-spy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Schema Spy</div>
+  <div class="box-title hands-on-title" id="hands-on-schema-spy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Schema Spy</div>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  wget https://github.com/schemaspy/schemaspy/releases/download/v6.1.0/schemaspy-6.1.0.jar
   apt-get update
   apt-get <span class="nb">install </span>libpostgresql-jdbc-java
@@ -1035,7 +1028,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

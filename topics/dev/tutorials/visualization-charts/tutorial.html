@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: JavaScript plugins">
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -431,7 +431,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -468,14 +468,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/dev'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-dev">
     <h1 data-toc-skip>JavaScript plugins</h1>
@@ -662,7 +655,7 @@ available for the visualization of <code class="language-plaintext highlighter-r
 <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-background-what-is-the-pdb-protein-data-bank-file-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-file-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Background: What is the PDB (Protein Data Bank) file format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-background-what-is-the-pdb-protein-data-bank-file-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-file-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Background: What is the PDB (Protein Data Bank) file format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The <code class="language-plaintext highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (<a href="https://www.rcsb.org">https://www.rcsb.org</a>). Proteins are usually labeled by a four-letter code.
 Here is an example of a <code class="language-plaintext highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
@@ -714,7 +707,7 @@ continue by visiting the protein viewer developer site at
 with the plugin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>
@@ -754,7 +747,7 @@ thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the
 directory structure for the new visualization plugin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Clone an instance of <em>Galaxy</em> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT</code>:
@@ -799,7 +792,7 @@ be in the <code class="language-plaintext highlighter-rouge">png</code>-file for
 <p><img src="../../files/charts-plugins/pdb/logo.png" alt="Logo. " width="120" height="120" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>
@@ -820,7 +813,7 @@ their visualization. Throughout this tutorial we are going to gradually augment
 this file but for now we keep it simple.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>
@@ -851,7 +844,7 @@ your plugin with its new logo in the list there.</p>
 <h3 id="assign-a-new-datatype-to-your-visualization">Assign a new datatype to your visualization</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>
@@ -892,7 +885,7 @@ a working example or documentation. Fortunately the <em>PV-Viewer</em> comes wit
 Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploring-the-pv-viewer"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploring the PV-Viewer</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-the-pv-viewer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exploring the PV-Viewer</div>
 
   <ol>
     <li>
@@ -911,7 +904,7 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
 <p>Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  <code class="language-plaintext highlighter-rouge">script.js</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Access your visualization’s <code class="language-plaintext highlighter-rouge">myviz/src</code> directory.
@@ -964,7 +957,7 @@ your <code class="language-plaintext highlighter-rouge">myviz</code> plugin dire
 instance, just make sure to properly refresh your browser.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-6"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Navigate to your visualization’s root directory:
@@ -996,7 +989,7 @@ instance, just make sure to properly refresh your browser.</p>
 <p>In this section we will select a <code class="language-plaintext highlighter-rouge">PDB</code>-file from the Protein Data Bank and visualize it with our new plugin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-7"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>
@@ -1044,7 +1037,7 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
 <p>More information on parameters can be found in the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">wiki</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-8"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li>Add the following block into the <code class="language-plaintext highlighter-rouge">myviz.xml</code> file:
@@ -1258,7 +1251,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Identification of somatic and germline variants from tumo...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -416,7 +416,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -453,14 +453,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Identification of somatic and germline variants from tumor and normal sample pairs</h1>
@@ -840,7 +833,7 @@ downsampled though to include only the reads from human chromosomes 5, 12 and
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -927,7 +920,7 @@ human chromosomes 5, 12 and 17:</p>
       <p>Make sure you specify the datatype as <code class="language-plaintext highlighter-rouge">fasta</code> in the import dialog.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-shortcut"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shortcut</div>
+        <div class="box-title comment-title" id="comment-shortcut"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shortcut</div>
         <p>You can skip this step if the Galaxy server you are working on offers
 a <code class="language-plaintext highlighter-rouge">hg19</code> version of the human reference genome with prebuilt indexes for
 <em>bwa-mem</em> <strong>and</strong> <em>samtools</em> (ask your instructor, or check the tools
@@ -963,7 +956,7 @@ human reference genome because knowing the genomic positions that the bases of
 a read provide evidence for is, of course, a prerequisite for variant calling.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-more-on-quality-control-and-mapping"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More on quality control and mapping</div>
+  <div class="box-title comment-title" id="comment-more-on-quality-control-and-mapping"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More on quality control and mapping</div>
   <p>If you would like to explore the topics of quality control and read mapping
 in detail, you should take a look at the separate
 <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a>
@@ -976,7 +969,7 @@ control and read mapping of our particular datasets.</p>
 <h2 id="quality-control">Quality control</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control of the input datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> on each of your four fastq datasets
       <ul>
@@ -1011,7 +1004,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
       <p>Inspect the <em>Webpage</em> output produced by the tool</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What do you think of the base qualities of the sequences?</li>
@@ -1020,7 +1013,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1060,7 +1053,7 @@ quality already, we will apply read trimming and filtering to see if we can
 improve things still a bit, but also to demonstrate the general concept.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-normal-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read trimming and filtering of the normal tissue reads</div>
+  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-normal-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering of the normal tissue reads</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5</span></span> to trim and filter the normal tissue reads
       <ul>
@@ -1157,7 +1150,7 @@ your history more compact.</li>
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-on-handling-unpaired-reads-in-paired-end-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-on-handling-unpaired-reads-in-paired-end-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More on handling unpaired reads in paired-end data<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-on-handling-unpaired-reads-in-paired-end-data"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-on-handling-unpaired-reads-in-paired-end-data" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More on handling unpaired reads in paired-end data<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Splitting out potential unpaired reads into separate datasets like this
 is important because read mappers, typically, expect reads in forward
 and reverse input datasets to be arranged in proper pairs, and reads
@@ -1167,7 +1160,7 @@ always make sure you use Trimmomatic in paired-end mode, too!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-tumor-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read trimming and filtering of the tumor tissue reads</div>
+  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-tumor-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering of the tumor tissue reads</div>
   <ol>
     <li>
       <p>Trim and filter the <strong>tumor tissue</strong> reads following the same steps as above, just change the two input datasets to treat the tumor tissue reads with identical settings.</p>
@@ -1179,17 +1172,17 @@ always make sure you use Trimmomatic in paired-end mode, too!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exercise: Quality control of the polished datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exercise: Quality control of the polished datasets</div>
   <p>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0</span></span> like before,
 but using the four trimmed datasets produced by Trimmomatic as input.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>How did read trimming affect the quality reports?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>As expected, trimming the relatively high-quality raw reads did not
 have any substantial impact on average. A small fraction of successful
@@ -1202,7 +1195,7 @@ adapter removal is visible though.</p>
 <h2 id="read-mapping">Read Mapping</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read Mapping</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read Mapping</div>
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span> to map the reads from the <strong>normal tissue</strong> sample to the reference genome
       <ul>
@@ -1212,7 +1205,7 @@ adapter removal is visible though.</p>
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
@@ -1253,7 +1246,7 @@ from the original name of the normal tissue input files)</li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-more-on-read-group-identifiers-and-sample-names"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More on read group identifiers and sample names</div>
+        <div class="box-title comment-title" id="comment-more-on-read-group-identifiers-and-sample-names"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More on read group identifiers and sample names</div>
         <p>In general, you are free to choose ID and SM values to your liking,
 but the ID should unambiguously identify the sequencing run that
 produced the reads, while the SM value should identify the
@@ -1313,7 +1306,7 @@ been mapped to the reference successfully, have a minimal mapping quality of 1,
 and for which the mate read has also been mapped:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-for-mapping-status-and-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering for mapping status and quality</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-for-mapping-status-and-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering for mapping status and quality</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="link"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span> with the following parameters:
@@ -1386,7 +1379,7 @@ early step.</p>
 <p>This will result in two new datasets, one for each of the normal and tumor data.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-tools-for-filtering-bam-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-tools-for-filtering-bam-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Tools for filtering BAM datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-tools-for-filtering-bam-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-tools-for-filtering-bam-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Tools for filtering BAM datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The related tutorial on variant detection from exome-seq data, demonstrates
 nearly identical filtering of BAM datasets using the tool <strong>Filter BAM
 datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
@@ -1403,7 +1396,7 @@ Galaxy with one of these two tools.</p>
 <h2 id="removing-duplicate-reads">Removing duplicate reads</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove duplicates</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1" title="RmDup tool" aria-role="link"><strong>RmDup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1</span></span> with the following parameters:
@@ -1427,7 +1420,7 @@ tumor data.</p>
 <h2 id="left-align-reads-around-indels">Left-align reads around indels</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-left-align"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Left-align</div>
+  <div class="box-title hands-on-title" id="hands-on-left-align"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Left-align</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" aria-role="link"><strong>BamLeftAlign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1</span></span> with the following parameters:
@@ -1447,7 +1440,7 @@ named choice)</li>
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+    <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
     <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
     <ul>
@@ -1465,7 +1458,7 @@ history instead:</p>
 <h2 id="recalibrate-read-mapping-qualities">Recalibrate read mapping qualities</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-recalibrate-read-quality-scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Recalibrate read quality scores</div>
+  <div class="box-title hands-on-title" id="hands-on-recalibrate-read-quality-scores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Recalibrate read quality scores</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2" title="CalMD tool" aria-role="link"><strong>CalMD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2</span></span> with the following parameters:
@@ -1479,7 +1472,7 @@ datasets from the normal and the tumor tissue data; the outputs of
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
@@ -1502,7 +1495,7 @@ are too severe for <em>VarScan</em> to retain good sensitivity. We are sticking
 with this practice in this tutorial.</p>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-adjusted-base-quality-scores"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using adjusted base quality scores</div>
+            <div class="box-title comment-title" id="comment-using-adjusted-base-quality-scores"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using adjusted base quality scores</div>
             <p>If, for your own data, you would like to experiment with adjusted base
 quality scores, it is important to understand that <em>VarScan somatic</em> will
 only make use of the adjusted scores if they are incorporated directly into
@@ -1559,7 +1552,7 @@ particularly good mapping score, but a really poor one.
 To remove such reads from the data:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-eliminating-reads-with-undefined-mapping-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Eliminating reads with undefined mapping quality</div>
+  <div class="box-title hands-on-title" id="hands-on-eliminating-reads-with-undefined-mapping-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Eliminating reads with undefined mapping quality</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="link"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span> with the following parameters:
@@ -1608,7 +1601,7 @@ those obtained from biopsies</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-variant-calling-and-classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Variant calling and classification</div>
+  <div class="box-title hands-on-title" id="hands-on-variant-calling-and-classification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Variant calling and classification</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6" title="VarScan somatic tool" aria-role="link"><strong>VarScan somatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6</span></span> with the following parameters:
@@ -1620,7 +1613,7 @@ genome?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
@@ -1700,7 +1693,7 @@ license.</p>
 <h2 id="get-data-1">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1735,7 +1728,7 @@ the shared data library.</p>
       <p>Download <strong>SnpEff functional genomic annotations</strong></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-shortcut-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Shortcut</div>
+        <div class="box-title comment-title" id="comment-shortcut-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Shortcut</div>
         <p>You can skip this step if the Galaxy server you are working on offers
 <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
 check the <strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool under <strong>Genome source</strong> to
@@ -1767,7 +1760,7 @@ Such functional genomic annotations can be added to a VCF dataset of variants
 with <em>SnpEff</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-annotations-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding annotations with SnpEff</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-annotations-with-snpeff"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding annotations with SnpEff</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1" title="SnpEff eff tool" aria-role="link"><strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1</span></span> with the following parameters:
       <ul>
@@ -1781,7 +1774,7 @@ output of <strong>VarScan somatic</strong> <i class="fas fa-wrench" aria-hidden=
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` SnpEff genome database</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` SnpEff genome database</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> SnpEff genome database into your
 history instead:</p>
             <ul>
@@ -1812,7 +1805,7 @@ handled more efficiently than a VCF dataset. We will use the <em>GEMINI</em> too
 suite for this task and for all further work with the variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-gemini-database-from-a-variants-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Creating a GEMINI database from a variants dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-gemini-database-from-a-variants-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Creating a GEMINI database from a variants dataset</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="link"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span> with the following parameters:
       <ul>
@@ -1902,7 +1895,7 @@ dataset and we are going to extract them from there and add them to the
 <em>GEMINI</em> database.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-handling-of-the-vcf-info-field-by-gemini-load"><button class="gtn-boxify-button details" type="button" aria-controls="details-handling-of-the-vcf-info-field-by-gemini-load" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Handling of the VCF INFO field by GEMINI load<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-handling-of-the-vcf-info-field-by-gemini-load"><button class="gtn-boxify-button details" type="button" aria-controls="details-handling-of-the-vcf-info-field-by-gemini-load" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Handling of the VCF INFO field by GEMINI load<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you paid close attention to how we generated the GEMINI database, you
 might remember that, under <em>“Load the following optional content into the
 database”</em>, we checked the option <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“variant INFO
@@ -1923,7 +1916,7 @@ explicitly if they are supposed to be used for filtering and querying.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-making-variant-call-statistics-accessible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Making variant call statistics accessible</div>
+  <div class="box-title hands-on-title" id="hands-on-making-variant-call-statistics-accessible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Making variant call statistics accessible</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2" title="GEMINI annotate tool" aria-role="link"><strong>GEMINI annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2</span></span>:
       <ul>
@@ -2013,7 +2006,7 @@ Hence, we only need to extract some additional information of interest.</p>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-further-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding further annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-further-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding further annotations</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2" title="GEMINI annotate tool" aria-role="link"><strong>GEMINI annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2</span></span> to add further annotations from <strong>dbSNP</strong>
       <ul>
@@ -2171,7 +2164,7 @@ retrieve</li>
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-gemini-query-language"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The GEMINI query language</div>
+  <div class="box-title comment-title" id="comment-the-gemini-query-language"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The GEMINI query language</div>
   <p>GEMINI queries are extremely flexible, enabling users to express many
 different ideas to explore the variant space, and as such, the complete
 query syntax can be a bit overwhelming for beginners.</p>
@@ -2200,7 +2193,7 @@ tumor sample</li>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-querying-the-gemini-database-for-somatic-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Querying the GEMINI database for somatic variants</div>
+  <div class="box-title hands-on-title" id="hands-on-querying-the-gemini-database-for-somatic-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Querying the GEMINI database for somatic variants</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1" title="GEMINI query tool" aria-role="link"><strong>GEMINI query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1</span></span> with:
       <ul>
@@ -2265,7 +2258,7 @@ a <code class="language-plaintext highlighter-rouge">tabular</code> variant repo
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-how-am-i-supposed-to-know-these-column-names"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How am I supposed to know these column names?</div>
+  <div class="box-title comment-title" id="comment-how-am-i-supposed-to-know-these-column-names"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How am I supposed to know these column names?</div>
   <p>Obviously, you need to know the names of the columns (in the tables of the
 GEMINI database) to include them in the report, but how are you supposed to
 know them?</p>
@@ -2289,7 +2282,7 @@ and their columns</code></li>
 <p>What about more sophisticated filtering?</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-more-complex-filter-criteria"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: More complex filter criteria</div>
+  <div class="box-title hands-on-title" id="hands-on-more-complex-filter-criteria"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: More complex filter criteria</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1" title="GEMINI query tool" aria-role="link"><strong>GEMINI query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1</span></span> with the exact same settings as before, but:
       <ul>
@@ -2303,7 +2296,7 @@ and their columns</code></li>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-sql-keywords"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: SQL keywords</div>
+  <div class="box-title comment-title" id="comment-sql-keywords"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: SQL keywords</div>
   <p>In the condition above, SQL keywords are given in uppercase. This is not a
 requirement, but it makes it easier to understand the syntax.</p>
 
@@ -2320,7 +2313,7 @@ Before we focus on the content of the report, however, we could enhance the
 report format a bit more.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sql-based-output-formatting"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SQL-based output formatting</div>
+  <div class="box-title hands-on-title" id="hands-on-sql-based-output-formatting"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: SQL-based output formatting</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1" title="GEMINI query tool" aria-role="link"><strong>GEMINI query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1</span></span> with the exact same settings as in the
 last example, but:
@@ -2350,12 +2343,12 @@ demonstrates the use of the <code class="language-plaintext highlighter-rouge">A
 output.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Compare the new report to the previous one to see what has changed.</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-limitations-of-genotype-column-queries"><button class="gtn-boxify-button details" type="button" aria-controls="details-limitations-of-genotype-column-queries" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Limitations of genotype column queries<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-limitations-of-genotype-column-queries"><button class="gtn-boxify-button details" type="button" aria-controls="details-limitations-of-genotype-column-queries" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Limitations of genotype column queries<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>In case you are wondering why the above query does not use rounding on
 the alternate allele frequencies of the samples, <em>i.e.</em>, on
 <code class="language-plaintext highlighter-rouge">gt_alt_freqs.TUMOR</code> and <code class="language-plaintext highlighter-rouge">gt_alt_freqs.NORMAL</code>, or why it does not rename
@@ -2393,7 +2386,7 @@ with the <code class="language-plaintext highlighter-rouge">Basic query construc
 advanced mode for composing the query.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-turning-query-results-into-gene-centered-reports"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Turning query results into gene-centered reports</div>
+  <div class="box-title hands-on-title" id="hands-on-turning-query-results-into-gene-centered-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Turning query results into gene-centered reports</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1" title="GEMINI query tool" aria-role="link"><strong>GEMINI query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1</span></span> in advanced mode by choosing
       <ul>
@@ -2406,7 +2399,7 @@ advanced mode for composing the query.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-elements-of-the-sql-query"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Elements of the SQL query</div>
+        <div class="box-title comment-title" id="comment-elements-of-the-sql-query"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Elements of the SQL query</div>
         <p>In this full SQL query, the part between <code class="language-plaintext highlighter-rouge">SELECT</code> and <code class="language-plaintext highlighter-rouge">FROM</code> states which
 columns from which database tables we wish to retrieve, while the part
 between <code class="language-plaintext highlighter-rouge">FROM</code> and <code class="language-plaintext highlighter-rouge">WHERE</code> specifies the database tables that need to be
@@ -2457,7 +2450,7 @@ unwanted columns, while <em>rearranging</em> the remaining ones.</p>
 <p><strong>Step 1</strong> consists of three separate <em>join</em> operations that sequentially pull in the annotations found in the three gene-based tabular datasets that you imported in the <em>Get Data</em> step of this section.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-join"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Join</div>
+  <div class="box-title hands-on-title" id="hands-on-join"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Join</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1" title="Join two files tool" aria-role="link"><strong>Join two files</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1</span></span> to add <strong>UniProt cancer genes</strong> information
@@ -2538,7 +2531,7 @@ added to the report, nor could we exclude columns.</p>
 issues and rearrange to get a fully annotated gene report.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rearrange-to-get-a-fully-annotated-gene-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Rearrange to get a fully annotated gene report</div>
+  <div class="box-title hands-on-title" id="hands-on-rearrange-to-get-a-fully-annotated-gene-report"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rearrange to get a fully annotated gene report</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2" title="Column arrange by header name tool" aria-role="link"><strong>Column arrange by header name</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2</span></span> configured like
 this:
@@ -2625,7 +2618,7 @@ this:
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-alternative-tool-suggestion"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Alternative tool suggestion</div>
+    <div class="box-title comment-title" id="comment-alternative-tool-suggestion"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Alternative tool suggestion</div>
     <p>If your Galaxy server does not offer the <em>Column arrange</em> tool, it will
 almost certainly offer <strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>,
 which can be used as a drop-in replacement.
@@ -2894,7 +2887,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

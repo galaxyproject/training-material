@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Protein-ligand docking">
         <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -354,7 +354,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -391,14 +391,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxycomputationalchemistry/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-computational-chemistry">
     <h1 data-toc-skip>Protein-ligand docking</h1>
@@ -604,7 +597,7 @@ Sentry.init({
 <p>In this tutorial, you will perform docking of ligands into the N-terminus of Hsp90 (heat shock protein 90). The tools used for docking are based on the open-source software <a href="http://vina.scripps.edu/">AutoDock Vina</a> (<span class="citation"><a href="#Trott2009">Trott and Olson 2009</a></span>).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-biological-background"><button class="gtn-boxify-button details" type="button" aria-controls="details-biological-background" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Biological background<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-biological-background"><button class="gtn-boxify-button details" type="button" aria-controls="details-biological-background" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Biological background<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases. The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle.</p>
 
@@ -643,7 +636,7 @@ Sentry.init({
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -667,7 +660,7 @@ Sentry.init({
 <p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="language-plaintext highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="language-plaintext highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>).</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-what-is-grep"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-grep" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What is grep?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-what-is-grep"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-is-grep" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What is grep?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Grep is a command-line tool for searching text files for lines which match a search query.</p>
 
@@ -676,7 +669,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-separate-protein-and-ligand"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Separate protein and ligand</div>
+  <div class="box-title hands-on-title" id="hands-on-separate-protein-and-ligand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Separate protein and ligand</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles (grep) tool" aria-role="link"><strong>Search in textfiles (grep)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
@@ -723,7 +716,7 @@ Sentry.init({
 <p>In this step we will create a compound library, using data from the ChEMBL database.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-what-chemical-databases-are-available"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-chemical-databases-are-available" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What chemical databases are available?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-what-chemical-databases-are-available"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-chemical-databases-are-available" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What chemical databases are available?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Multiple databases are available online which provide access to chemical information, e.g. chemical structures, reactions, or literature. In this tutorial, we use a tool which searches the <a href="https://www.ebi.ac.uk/chembl/">ChEMBL</a> database. There are also Galaxy tools available for downloading data from <a href="https://pubchem.ncbi.nlm.nih.gov/">PubChem</a>.</p>
 
@@ -734,7 +727,7 @@ Sentry.init({
 <p>We will generate our compound library by searching ChEMBL for compounds which have a similar structure to the ligand in the PDB file we downloaded in the first step. There is a Galaxy tool for accessing ChEMBL which requires data input in SMILES format; thus, the first step is to convert the ‘Ligand’ PDB file to a SMILES file. Then the search is performed, returning a SMILES file. For docking, we would like to convert to SDF format, which we can do once again using the ‘Compound conversion’ tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-compound-library"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate compound library</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-compound-library"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate compound library</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="link"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span> with the following parameters:
@@ -756,12 +749,12 @@ Sentry.init({
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Why are compounds filtered for Lipinski’s Rule of Five?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Lipinski’s rule of five is an empirical rule which can be used to determine the ‘druglikeness’ of a molecule. The rule consists of four criteria which relate to the pharmacokinetics of the molecule. The rule is discussed in (<span class="citation"><a href="#Lipinski2004">Lipinski 2004</a></span>), or you can also read more on <a href="https://en.wikipedia.org/wiki/Lipinski%27s_rule_of_five">Wikipedia</a>.</p>
         </blockquote>
       </blockquote>
@@ -781,7 +774,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-problems-using-the-chembl-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-problems-using-the-chembl-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Problems using the ChEMBL tool?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-problems-using-the-chembl-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-problems-using-the-chembl-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Problems using the ChEMBL tool?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>A number of users encounter issues with the ChEMBL tool - sometimes the tool fails, or the output is returned successfully but is empty. If this happens to you, try the following:</p>
   <ol>
     <li>Rerun the tool - if a transient error on the ChEMBL server was at fault, this might be enough to fix it.</li>
@@ -844,7 +837,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the ‘Natural product likeness calculator’ and ‘Drug-likeness’ tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-generating-a-compound-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-a-compound-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Generating a compound library<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-generating-a-compound-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-generating-a-compound-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Generating a compound library<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you try using this tutorial using your own data, you might encounter some issues. Important things to remember:</p>
   <ul>
     <li>If you encounter an error, check the SMILES file only has a single column. Additional columns can be removed using the ‘Cut’ tool.</li>
@@ -854,7 +847,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-what-are-smiles-and-sdf-formats"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-are-smiles-and-sdf-formats" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: What are SMILES and SDF formats?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-what-are-smiles-and-sdf-formats"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-are-smiles-and-sdf-formats" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: What are SMILES and SDF formats?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is <code class="language-plaintext highlighter-rouge">c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O</code>. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>. A more comprehensive alternative to the SMILES system is the International Chemical Identifier (InChI).</p>
 
@@ -872,7 +865,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>Further, docking requires the coordinates of a binding site to be defined. Effectively, this defines a ‘box’ in which the docking software attempts to define an optimal binding site. In this case, we already know the location of the binding site, since the downloaded PDB structure contained a bound ligand. There is a tool in Galaxy which can be used to automatically create a configuration file for docking when ligand coordinates are already known.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-pdbqt-and-config-files-for-docking"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate PDBQT and config files for docking</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-pdbqt-and-config-files-for-docking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate PDBQT and config files for docking</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_receptor/prepare_receptor/1.5.7+galaxy0" title="Prepare receptor tool" aria-role="link"><strong>Prepare receptor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina_prepare_receptor/prepare_receptor/1.5.7+galaxy0</span></span> with the following parameters:
@@ -906,11 +899,11 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>Perhaps you are interested in a system which does not have a ligand within the binding site (an apoprotein). In this case you need to run the fpocket tool to identify potential binding sites in the protein structure - take a look at the following (optional) section.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-how-to-find-the-binding-site-of-an-apoprotein"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-to-find-the-binding-site-of-an-apoprotein" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: How to find the binding site of an apoprotein?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-how-to-find-the-binding-site-of-an-apoprotein"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-to-find-the-binding-site-of-an-apoprotein" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: How to find the binding site of an apoprotein?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If the structure contains no ligand in complex with the protein (i.e. apoprotein), there is an additional step of identifying the binding site. Software is available for automatic detection of pockets which may be promising candidates for ligand binding sites. For example, let’s try out the fpocket tool (<span class="citation"><a href="#LeGuilloux2009">Le Guilloux <i>et al.</i> 2009</a></span>) on the Hsp90 structure, imagining we don’t have access to the file containing the ligand coordinates.</p>
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-finding-binding-sites-using-fpocket"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Finding binding sites using fpocket</div>
+    <div class="box-title hands-on-title" id="hands-on-finding-binding-sites-using-fpocket"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding binding sites using fpocket</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/fpocket/fpocket/3.1.4.2+galaxy0" title="fpocket tool" aria-role="link"><strong>fpocket</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/fpocket/fpocket/3.1.4.2+galaxy0</span></span> with the following parameters:
@@ -945,7 +938,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>Now that the protein and the ligand library have been correctly prepared and formatted, docking can be performed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-perform-docking"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Perform docking</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-docking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Perform docking</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.1.2+galaxy0" title="Docking tool" aria-role="link"><strong>Docking</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/autodock_vina/docking/1.1.2+galaxy0</span></span> with the following parameters:
@@ -974,7 +967,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>It can be useful to visualize the compounds generated. There is a tool available for this in Galaxy based on OpenBabel.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-chemical-structures"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization of chemical structures</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-chemical-structures"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization of chemical structures</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0" title="Visualisation tool" aria-role="link"><strong>Visualisation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_svg_depiction/openbabel_svg_depiction/3.1.1+galaxy0</span></span> with the following parameters:
@@ -1003,7 +996,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>Before clustering, let’s label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule. The <code class="language-plaintext highlighter-rouge">Ligand SMILES</code> file is also labelled something like <code class="language-plaintext highlighter-rouge">/data/dnb02/galaxy_db/files/010/406/dataset_10406067.dat</code> (the exact name will vary) and we would like to give it a more useful name. When labelling is complete, we can concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculate-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculate molecular fingerprints</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate molecular fingerprints</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Replace tool" aria-role="link"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span> with the following parameters:
       <ul>
@@ -1034,7 +1027,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Image showing a Fingerprinting System. " width="978" height="728" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster molecules using molecular fingerprints</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster molecules using molecular fingerprints</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5" title="Taylor-Butina clustering tool" aria-role="link"><strong>Taylor-Butina clustering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/chemfp/ctb_chemfp_butina_clustering/1.5</span></span> with the following parameters:
       <ul>
@@ -1058,7 +1051,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering. " width="640" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-investigation-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-investigation-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>
@@ -1076,7 +1069,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>From our collection of SD-files, we first extract all stored values into tabular format and then combine the files together to create a single tabular file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-process-sd-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Process SD-files</div>
+  <div class="box-title hands-on-title" id="hands-on-process-sd-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Process SD-files</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0" title="Extract values from an SD-file tool" aria-role="link"><strong>Extract values from an SD-file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sdf_to_tab/sdf_to_tab/2020.03.4+galaxy0</span></span> with the following parameters:
@@ -1113,7 +1106,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 <p>We now have a tabular file available which contains all poses calculated for all ligands docked, together with scores and RMSD values for the deviation of each pose from the optimum. We also have PDB files for some of the docking poses which can be inspected using the NGLViewer visualization embedded in Galaxy.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-further-investigation-optional-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-investigation-optional-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>There are visualizations available in Galaxy for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:</p>
 
@@ -1399,7 +1392,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

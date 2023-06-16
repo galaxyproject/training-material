@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Calling variants in non-diploid systems">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -441,7 +441,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -478,14 +478,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Calling variants in non-diploid systems</h1>
@@ -826,7 +819,7 @@ Sentry.init({
 <p>For this tutorial we have prepared a subset of data previously by our group (<span class="citation"><a href="#Rebolledo-Jaramillo2014">Rebolledo-Jaramillo <i>et al.</i> 2014</a></span>). Let’s import these data into Galaxy. They are available from <a href="https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7">this Galaxy Library</a> or via <a href="https://zenodo.org/record/582600">Zenodo</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
 
   <ol>
     <li>
@@ -866,7 +859,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 <p>Before proceeding with the analysis, we need to find out how good the data actually is. For this will use <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assess-quality-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assess quality of data</div>
+  <div class="box-title hands-on-title" id="hands-on-assess-quality-of-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assess quality of data</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> on each of the four FASTQ datasets with the following parameters:
@@ -891,7 +884,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 <p>Our reads are long (250 bp) so we will use BWA-MEM (<span class="citation"><a href="#Li2013">Li 2013</a></span>) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Map reads</div>
+  <div class="box-title hands-on-title" id="hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Map reads</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span> to map the reads to the reference genome with the following parameters:
@@ -922,7 +915,7 @@ https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-more-about-selecting-datasets"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More about selecting datasets</div>
+  <div class="box-title comment-title" id="comment-more-about-selecting-datasets"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More about selecting datasets</div>
 
   <p>By selecting datasets 1 and 3 as <strong>Select the first set of reads</strong> and datasets 2 and 4 as <strong>Select the second set of reads</strong>, Galaxy will automatically launch two BWA-MEM jobs using datasets 1,2 and 3,4 generating two resulting BAM files.
 By setting <strong>Set read groups information</strong> to <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specifications)</code> and clicking <strong>Auto-assign</strong> we will ensure that the reads in the resulting BAM dataset are properly set.</p>
@@ -935,7 +928,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
 <p>Because we have set read groups, we can now merge the two BAM dataset into one. This is because read groups label each read as belonging to either <em>mother</em> or <em>child</em>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merge-multiple-datasets-into-one"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merge multiple datasets into one</div>
+  <div class="box-title hands-on-title" id="hands-on-merge-multiple-datasets-into-one"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merge multiple datasets into one</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="MergeSAMFiles tool" aria-role="link"><strong>MergeSAMFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1</span></span> to merge the BAM datasets with the following parameters:
@@ -955,7 +948,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
 <p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <strong>MarkDuplicates</strong> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package which is designed to identify both PCR and optical duplicates.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-about-markduplicates"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-about-markduplicates" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More about MarkDuplicates<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-about-markduplicates"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-about-markduplicates" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More about MarkDuplicates<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Duplicates are identified as read pairs having identical 5’ positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see <code class="language-plaintext highlighter-rouge">BARCODE_TAG</code> option). Optical, or more broadly sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from biochemical processes during clonal amplification and sequencing; they are identified using the <code class="language-plaintext highlighter-rouge">READ_NAME_REGEX</code> and the <code class="language-plaintext highlighter-rouge">OPTICAL_DUPLICATE_PIXEL_DISTANCE</code> options. The tool’s main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see <code class="language-plaintext highlighter-rouge">REMOVE_DUPLICATE</code> and <code class="language-plaintext highlighter-rouge">REMOVE_SEQUENCING_DUPLICATES</code>), and optionally marked with a duplicate type in the ‘DT’ optional attribute. In addition, it also outputs a metrics file containing the numbers of <code class="language-plaintext highlighter-rouge">READ_PAIRS_EXAMINED</code>, <code class="language-plaintext highlighter-rouge">SECONDARY_OR_SUPPLEMENTARY_RDS</code>, <code class="language-plaintext highlighter-rouge">UNMAPPED_READS</code>, <code class="language-plaintext highlighter-rouge">UNPAIRED_READS</code>, <code class="language-plaintext highlighter-rouge">UNPAIRED_READ DUPLICATES</code>, <code class="language-plaintext highlighter-rouge">READ_PAIR_DUPLICATES</code>, and <code class="language-plaintext highlighter-rouge">READ_PAIR_OPTICAL_DUPLICATES</code>.</p>
 
@@ -963,7 +956,7 @@ By setting <strong>Set read groups information</strong> to <code class="language
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-de-duplicate-mapped-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: De-duplicate mapped data</div>
+  <div class="box-title hands-on-title" id="hands-on-de-duplicate-mapped-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: De-duplicate mapped data</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" aria-role="link"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span> to de-duplicate the merged BAM datasets with the following parameters:
@@ -1000,14 +993,14 @@ raw_mother-ds-	95	54973	1951	95	89	4712	2	0.08645	302188
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What percent of read duplication are found in each read group (child and mother)?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The two datasets have ~6% and ~9% duplicates for child and mother, respectively.</li>
@@ -1041,7 +1034,7 @@ GGG--CACACAGGG            Alt: G
 <p>The last of these is <em>left-aligned</em>. In this case gaps (represented by dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see <span class="citation"><a href="#Tan2015">Tan <i>et al.</i> 2015</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-left-align-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Left-align indels</div>
+  <div class="box-title hands-on-title" id="hands-on-left-align-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Left-align indels</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" aria-role="link"><strong>BamLeftAlign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1</span></span> to perform left alignment with the following parameters:
@@ -1061,7 +1054,7 @@ GGG--CACACAGGG            Alt: G
 <p>Remember that we are trying to call variants in mitochondrial genome. Let focus only on the reads derived from mitochondria genome by filtering everything else out.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-bam-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter BAM data</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-bam-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter BAM data</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="link"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span> with the following parameters:
@@ -1108,7 +1101,7 @@ GGG--CACACAGGG            Alt: G
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-filtering-reads"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Filtering reads</div>
+        <div class="box-title comment-title" id="comment-filtering-reads"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Filtering reads</div>
         <p>Further explanation of the filters used:</p>
         <ul>
           <li><em>mapQuality</em> is set to ≥20. Mapping quality reflects the probability that the read is placed incorrectly using <a href="https://en.wikipedia.org/wiki/Phred_quality_score">phred scale</a>. Thus 20 is 1/100 or 1% chance that the read is incorrectly mapped. By setting this parameter to ≥20, we will keep all reads that have 1% or less probability of being mapped incorrectly.</li>
@@ -1126,7 +1119,7 @@ GGG--CACACAGGG            Alt: G
 <p>FreeBayes is widely used for calling variants in diploid systems. However, it can also be used for calling variants in pooled samples where the number of samples is not known. This is the exact scenario we have here: in our sample we have multiple mitochondrial (or bacterial or viral) genomes, but we do not know exactly how many. Thus we will use the <code class="language-plaintext highlighter-rouge">--pooled-continuous</code> option of FreeBayes to generate frequency-based variant calls as well as some other options highlighted below.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calling-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calling variants</div>
+  <div class="box-title hands-on-title" id="hands-on-calling-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calling variants</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1" title="FreeBayes tool" aria-role="link"><strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.1</span></span> to call variants with the following parameters:
@@ -1157,7 +1150,7 @@ GGG--CACACAGGG            Alt: G
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-population-model-options"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Population model options</div>
+        <div class="box-title comment-title" id="comment-population-model-options"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Population model options</div>
         <p>The “Population model options” are one of the most important parameter choices to make when calling variants in non-diploid systems.</p>
       </blockquote>
 
@@ -1173,7 +1166,7 @@ GGG--CACACAGGG            Alt: G
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-allelic-scope-options"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Allelic scope options</div>
+        <div class="box-title comment-title" id="comment-allelic-scope-options"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Allelic scope options</div>
         <p>Mitochondria has a number of low complexity regions (mononucleotide repeats). Setting the allelic scope parameters as described above will decrease noise from these regions.</p>
       </blockquote>
 
@@ -1187,7 +1180,7 @@ GGG--CACACAGGG            Alt: G
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-filter-options"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Filter options</div>
+        <div class="box-title comment-title" id="comment-filter-options"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Filter options</div>
         <p>Setting <em>Exclude alignments from analysis if they have a mapping quality less than</em> to <code class="language-plaintext highlighter-rouge">20</code> (phred score of 20) will make FreeBayes only consider reliably aligned reads.
 Setting <em>Exclude alleles from analysis if their supporting base quality less than</em> to <code class="language-plaintext highlighter-rouge">30</code> (phred score of 30) will make FreeBayes only consider high quality bases.</p>
       </blockquote>
@@ -1244,7 +1237,7 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-vcf-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering VCF data</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-vcf-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering VCF data</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3" title="VCFfilter tool" aria-role="link"><strong>VCFfilter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3</span></span> to filter the variants with the following parameters:
@@ -1291,7 +1284,7 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-vcf-filter-options"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: VCF filter options</div>
+        <div class="box-title comment-title" id="comment-vcf-filter-options"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: VCF filter options</div>
         <p>Filtering FreeBayes VCF for strand bias (<code class="language-plaintext highlighter-rouge">SPR</code> and <code class="language-plaintext highlighter-rouge">SAP</code>), placement bias (<code class="language-plaintext highlighter-rouge">EPP</code>), variant quality (<code class="language-plaintext highlighter-rouge">QUAL</code>), and depth of coverage (<code class="language-plaintext highlighter-rouge">DP</code>).</p>
       </blockquote>
     </li>
@@ -1299,14 +1292,14 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many variants remain after filtering the VCF?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Two variants remain after filtering the VCF (your results might be different depending on the input and references you use):
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
@@ -1327,7 +1320,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 <p>VCF.IOBIO can be invoked by expanding a VCF dataset in Galaxy’s history by clicking on it:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-display-data-in-vcf-iobio"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Display data in VCF.IOBIO</div>
+  <div class="box-title hands-on-title" id="hands-on-display-data-in-vcf-iobio"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Display data in VCF.IOBIO</div>
 
   <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/mt_vcf_dataset_expanded.png" alt="Expanded output. " width="576" height="648" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> At the bottom there is a link 'display at vcf.iobio'. Clicking on this link will start indexing of VCF datasets, which is required to display them.</figcaption></figure>
 
@@ -1339,7 +1332,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 <p>Similarly to VCF.IOBIO expanding a history item representing a VCF dataset will reveal an IGV link:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-display-data-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Display data in IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-display-data-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Display data in IGV</div>
 
   <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/mt_vcf_dataset_expanded.png" alt="VCFfilter output expanded. " width="576" height="648" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> At the bottom there is a link 'display at IGV: local Human hg38'.</figcaption></figure>
 
@@ -1357,7 +1350,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 <p>Visualizing VCF datasets is a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-vcf-to-tab-delimited-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert VCF to tab-delimited data</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-vcf-to-tab-delimited-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert VCF to tab-delimited data</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0" title="VCFtoTab-delimited tool" aria-role="link"><strong>VCFtoTab-delimited</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/vcf2tsv/vcf2tsv/1.0.0_rc1+galaxy0</span></span> to filter the variants with the following parameters:
@@ -1372,7 +1365,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why are there four rows in the VCFtoTab-delimited <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output when the input VCF had only two rows?</li>
@@ -1380,7 +1373,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Since <em>“Report data per sample”</em> was set to <code class="language-plaintext highlighter-rouge">Yes</code>, VCFtoTab-delimited <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> produced two rows for each of the two variants, one row per sample (child and mother).</li>
@@ -1403,7 +1396,7 @@ chrM	5539	.	A	G	3281.62	.	AB=0;ABP=0;AC=1;AF=0.5;AN=2;AO=379;CIGAR=1X;DP=787;DPB
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cut-columns-from-a-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cut columns from a file</div>
+  <div class="box-title hands-on-title" id="hands-on-cut-columns-from-a-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cut columns from a file</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> to select specific columns with the following parameters:
@@ -1435,14 +1428,14 @@ Child   341    694
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What do you notice about the relative frequencies of the <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">G</code> alleles between mother and child?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The <em>major</em> allele in the mother (<code class="language-plaintext highlighter-rouge">A</code>) becomes the <em>minor</em> allele in the child – a remarkable frequency change due to mitochondrial bottleneck!</li>
@@ -1683,7 +1676,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

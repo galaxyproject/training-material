@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Deploying Tailscale/Headscale for private mesh networking">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -374,7 +374,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -411,14 +411,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Deploying Tailscale/Headscale for private mesh networking</h1>
@@ -781,7 +774,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuration-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuration files</div>
+  <div class="box-title hands-on-title" id="hands-on-configuration-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuration files</div>
 
   <ol>
     <li>
@@ -804,13 +797,13 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+          <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
           <p>Your hostname is probably different:</p>
           <div class="Headscale">
@@ -850,7 +843,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 <div class="Headscale">
 
   <blockquote class="details">
-    <div class="box-title details-title" id="details-consider-using-tailscale"><button class="gtn-boxify-button details" type="button" aria-controls="details-consider-using-tailscale" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Consider using Tailscale<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title details-title" id="details-consider-using-tailscale"><button class="gtn-boxify-button details" type="button" aria-controls="details-consider-using-tailscale" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Consider using Tailscale<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won’t have to be responsible for. If you can get your institution to pay for it, or grant money covering it, it’s <strong>probably worth it</strong>. They add many new features often, and things like the mobile apps only work with their service. Tailscale is free for personal use (i.e. to test things out) and offers a free plan for open source projects that you may qualify for.</p>
 
     <p>For a training event obviously we want something free and quick to setup and destroy, so, we’re using <a href="https://github.com/juanfont/headscale">Headscale</a> since it’s free and we’re just going to destroy it immediately, and no one will accidentally get billed ;)</p>
@@ -859,14 +852,14 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
   </blockquote>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-installing-headscale"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Headscale</div>
+    <div class="box-title hands-on-title" id="hands-on-installing-headscale"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Headscale</div>
 
     <ol>
       <li>
         <p>Install the role</p>
 
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles ckstevenson.headscale
 </code></pre></div>          </div>
         </blockquote>
@@ -900,7 +893,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
         <p>Run the playbook:</p>
 
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook headscale.yml
 </code></pre></div>          </div>
         </blockquote>
@@ -915,14 +908,14 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 <p>Now we can setup the nodes</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-the-nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure the nodes</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-the-nodes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure the nodes</div>
 
   <ol>
     <li>
       <p>Install the role</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles artis3n.tailscale
 </code></pre></div>        </div>
       </blockquote>
@@ -984,7 +977,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook tail.yml <span class="nt">-e</span> <span class="nv">tailscale_authkey</span><span class="o">=</span>YOUR_CODE
 </code></pre></div>        </div>
 
@@ -1007,7 +1000,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-exit-nodes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-exit-nodes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Exit Nodes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-exit-nodes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-exit-nodes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Exit Nodes<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We’ve configured <code class="language-plaintext highlighter-rouge">--advertise-exit-node</code>, which means you can direct ALL of your traffic to use one of your tailscale endpoints as an exit node, just run <code class="language-plaintext highlighter-rouge">tailscale up --exit-node=...</code></p>
 
   <p>Note that:</p>
@@ -1180,7 +1173,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Data Libraries">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -461,7 +461,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -498,14 +498,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Data Libraries</h1>
@@ -1058,7 +1051,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 <p>Before we can import local data, we need to configure Galaxy to permit this. Additionally we will setup an example data library which we can use for demonstrative purposes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-data-libraries"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up Data Libraries</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-data-libraries"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up Data Libraries</div>
 
   <ol>
     <li>
@@ -1110,7 +1103,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1125,13 +1118,13 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+    <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tree /libraries
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+    <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/libraries/
 ├── admin
 │   └── admin-wildtype.fna
@@ -1149,7 +1142,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-admin-example-org"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-admin-example-org" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: admin@example.org<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-admin-example-org"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-admin-example-org" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: admin@example.org<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Note that in the user directories, admin@example.com and example.org are used, if you’ve used a different email address for <em>your</em> admin user, you’ll need to copy one of these directories.</p>
 </blockquote>
 
@@ -1181,7 +1174,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 <p>This will enable the option for everyone, any unprivileged user with a folder in the <code class="language-plaintext highlighter-rouge">user_library_import_dir</code> directory <em>and</em> permissions on a data library can import things from their import directory.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-do-you-not-see-a-directory-here"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-not-see-a-directory-here" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Do you not see a directory here?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-do-you-not-see-a-directory-here"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-not-see-a-directory-here" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Do you not see a directory here?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We pre-created a directory for someone registered as <code class="language-plaintext highlighter-rouge">admin@example.org</code>, but if you are logged in with an account registered with a different email, you’ll see nothing.</p>
 
   <p>You can fix this by going into /libraries/user and <code class="language-plaintext highlighter-rouge">cp -Rv admin@example.org whatever-email-you-used</code>
@@ -1202,13 +1195,13 @@ Then it should appear in Galaxy.</p>
 We’ve included this file in the example data libraries repository we cloned at the beginning:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /libraries/example-library.yaml
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+  <div class="box-title code-out-title" id="code-out-bash-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
   <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">destination</span><span class="pi">:</span>
   <span class="na">type</span><span class="pi">:</span> <span class="s">library</span>
@@ -1241,20 +1234,20 @@ We’ve included this file in the example data libraries repository we cloned at
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-importing-data-library-yaml"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: importing data library yaml.</div>
+  <div class="box-title hands-on-title" id="hands-on-importing-data-library-yaml"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: importing data library yaml.</div>
 
   <ol>
     <li>
       <p>re-activate the virtualenv you created for the <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">ephemeris tool management tutorial</a>.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: input: bash</div>
+        <div class="box-title code-in-title" id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: input: bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ~/ephemeris_venv/bin/activate
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-missing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-missing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: missing?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-missing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-missing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: missing?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>then you might need to re-run the steps:</p>
 
@@ -1268,13 +1261,13 @@ pip <span class="nb">install </span>ephemeris
       <p>we’ll use the <code class="language-plaintext highlighter-rouge">setup-data-libraries</code> command to install the data in this yaml file into a library in our galaxy.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: input: bash</div>
+        <div class="box-title code-in-title" id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: input: bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setup-data-libraries <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--training</span> <span class="nt">-i</span> /libraries/example-library.yaml <span class="nt">--legacy</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: output</div>
+        <div class="box-title code-out-title" id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library name: mouse sequencing project
 </code></pre></div>        </div>
       </blockquote>
@@ -1496,7 +1489,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

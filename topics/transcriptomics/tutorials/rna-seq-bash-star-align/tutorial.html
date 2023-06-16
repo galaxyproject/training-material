@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: RNA-seq Alignment with STAR">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -416,7 +416,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -453,14 +453,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>RNA-seq Alignment with STAR</h1>
@@ -763,7 +756,7 @@ Sentry.init({
 <p>Each sample constitutes a separate biological replicate of the corresponding condition (treated or untreated). Moreover, two of the treated and two of the untreated samples are from a paired-end sequencing assay, while the remaining samples are from a single-end sequencing experiment.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-full-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Full data</div>
+  <div class="box-title comment-title" id="comment-full-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Full data</div>
 
   <p>The original data are available at NCBI Gene Expression Omnibus (GEO) under accession number <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE18508">GSE18508</a>. The raw RNA-Seq reads have been extracted from the Sequence Read Archive (SRA) files and converted into FASTQ files.</p>
 </blockquote>
@@ -788,7 +781,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>This tutorial is significantly based on Galaxy’s <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based RNA-Seq data analysis”</a> tutorial.</p>
 
@@ -800,7 +793,7 @@ Sentry.init({
 The “Data Upload” process is the only one in this tutorial that takes place directly into Galaxy’s interface.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <p>Import the FASTQ file pairs from <a href="https://zenodo.org/record/6457007">Zenodo</a> or a data library:</p>
   <ul>
@@ -819,7 +812,7 @@ The “Data Upload” process is the only one in this tutorial that takes place 
   <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-data-from-a-data-library"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:&lt;/p&gt;   &lt;ol&gt;   &lt;li&gt;Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong>&lt;/li&gt;   &lt;li&gt;Navigate to  the correct folder as indicated by your instructor.     &lt;ul&gt;       &lt;li&gt;On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Select the desired files&lt;/li&gt;   &lt;li&gt;Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;In the pop-up window, choose&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;<em>“Select history”</em>: the history you want to import the data to (or create a new one)&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click on <strong>Import</strong>&lt;/li&gt; &lt;/ol&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+    <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
     <p>Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.</p>
 
@@ -872,7 +865,7 @@ https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-software-to-use"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Software to use</div>
+  <div class="box-title hands-on-title" id="hands-on-software-to-use"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Software to use</div>
 
   <p>The R Console and other interactive tools like RStudio are great for prototyping code and exploring data, but sooner or later we will want to use our program in a pipeline or run it in a shell script to process thousands of data files. This is one of those cases and, in order to do that, we will use the terminal provided by the RStudio itself.
 We go to “Tools” and pick the “Shell…” option and we are good to go. Our workspace is the left, terminal window that just opened.</p>
@@ -880,7 +873,7 @@ We go to “Tools” and pick the “Shell…” option and we are good to go. O
   <p>Fortunately, <a href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> is already installed. Miniconda is a package manager that simplifies the installation processes. We can and will use it to install every essential package for our tutorial. However, it is of critical importance that we do that in an new environment within our existing base and install our packages in said environment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>conda create <span class="nt">-n</span> name_of_your_env fastqc cutadapt star samtools subread
 <span class="nv">$ </span>conda activate name_of_your_env
 </code></pre></div>    </div>
@@ -943,9 +936,9 @@ We go to “Tools” and pick the “Shell…” option and we are good to go. O
 Fortunately, this step is pretty simple with Galaxy:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get Data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get Data</div>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-the-gx-get-function"><i class="far fa-keyboard" aria-hidden="true"></i> Input:  The gx_get() Function</div>
+    <div class="box-title code-in-title" id="code-in-the-gx-get-function"><i class="far fa-keyboard" aria-hidden="true" ></i> Input:  The gx_get() Function</div>
     <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gx_get</span><span class="p">(</span><span class="n">number_of_file_you_want_to_import_as_given_in_Galaxy_History</span><span class="p">)</span><span class="w">
 </span></code></pre></div>    </div>
   </blockquote>
@@ -960,12 +953,12 @@ Fortunately, this step is pretty simple with Galaxy:</p>
 <p>Sequence quality control is therefore an essential first step in your analysis. We will use similar tools as described in the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> to create a report of sequence quality and <a href="https://cutadapt.readthedocs.io/en/stable/guide.html">Cutadapt</a> (<span class="citation"><a href="#marcel2011cutadapt">Marcel 2011</a></span>) to improve the quality of sequences via trimming and filtering.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: FastQC</div>
+  <div class="box-title hands-on-title" id="hands-on-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: FastQC</div>
 
   <p>When using fastqc to check the quality of our reads, it would be nice to have a folder where our results will be saved. From there we can access them and assess the quality of the reads given.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>qualityRaw
 <span class="nv">$ </span>fastqc /import/number_of_dataset_1_as_described_above <span class="nt">-o</span> qualityRaw/
 <span class="nv">$ </span>fastqc /import/number_of_dataset_2_as_described_above <span class="nt">-o</span> qualityRaw/
@@ -977,12 +970,12 @@ Fortunately, this step is pretty simple with Galaxy:</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cutadapt</div>
+  <div class="box-title hands-on-title" id="hands-on-cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cutadapt</div>
 
   <p>Now, it would be a good idea to trim the reads in order to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends and also remove the reads of overall bad quality. We can also use this opportunity to restore the trimmed files names to make our job easier down the road.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>trimmedData
 <span class="nv">$ </span>cutadapt /import/2 /import/3_reverse_file_of_2 <span class="nt">-o</span> /trimmedData/GSM461177_R1 <span class="nt">-p</span> /trimmedData/GSM461177_R2
 </code></pre></div>    </div>
@@ -992,12 +985,12 @@ Fortunately, this step is pretty simple with Galaxy:</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fastqc-on-trimmed-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: FastQC on trimmed data</div>
+  <div class="box-title hands-on-title" id="hands-on-fastqc-on-trimmed-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: FastQC on trimmed data</div>
 
   <p>A second quality check can take place, same as before, only this time applied on the trimmed data files located in the <strong>trimmedData</strong> folder.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-environment-and-packages-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Environment and Packages</div>
+    <div class="box-title code-in-title" id="code-in-environment-and-packages-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Environment and Packages</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>qualityTrimmed
 <span class="nv">$ </span>fastqc /trimmedData/GSM641177_R1 <span class="nt">-o</span> qualityRaw/
 <span class="nv">$ </span>fastqc /trimmedData/GSM641177_R2 <span class="nt">-o</span> qualityRaw/
@@ -1026,11 +1019,11 @@ Fortunately, this step is pretty simple with Galaxy:</p>
 <h1 id="setting-up">Setting up</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Index the reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-index-the-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Index the reference genome</div>
   <p>Our first step is to index the reference genome for use by STAR. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. Indexing the reference only has to be run once. The only reason you would want to create a new index is if you are working with a different reference genome or you are using a different tool for alignment.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-indexing-with-star"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Indexing with `STAR`</div>
+    <div class="box-title code-in-title" id="code-in-indexing-with-star"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Indexing with `STAR`</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>index
 <span class="nv">$ </span>STAR <span class="nt">--runThreadN</span> 16 <span class="nt">--runMode</span> genomeGenerate <span class="nt">--genomeDir</span> ~/index <span class="nt">--genomeFastaFiles</span> /import/14 <span class="nt">--sjdbGTFfile</span> /import/15 <span class="nt">--sjdbOverhang</span> 100 <span class="nt">--genomeSAindexNbases</span> 12
 </code></pre></div>    </div>
@@ -1039,7 +1032,7 @@ Fortunately, this step is pretty simple with Galaxy:</p>
   <p>While the index is created and saved in the <strong>index</strong> folder, you will see output that looks something like this:</p>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STAR version: 2.7.10b   compiled: 2022-11-01T09:53:26-04:00 :/home/dobin/data/STAR/STARcode
 STAR.master/source
 Date Time ..... started STAR run
@@ -1053,7 +1046,7 @@ Date Time ... sorting Suffix Array chunks and saving them to disk...
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-align-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Align reads to reference genome</div>
 
   <p>The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an aligner. We will use the STAR algorithm as said.</p>
 
@@ -1072,13 +1065,13 @@ samples in our dataset (GSM461177). After that, we will be
 iterating the following process on the second pair of our sample files (GSM461180).</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-aligning-with-star"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Aligning with STAR</div>
+    <div class="box-title code-in-title" id="code-in-aligning-with-star"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Aligning with STAR</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>STAR <span class="nt">--genomeDir</span> ~/index <span class="nt">--runThreadN</span> 16 <span class="nt">--</span> readFilesIn /trimmedData/GSM461177_R1 /trimmedData/GSM461177_R2 <span class="nt">--outFileNamePrefix</span> GSM461177
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Date Time ..... started STAR run
 Date Time ..... loading genome
 Date Time ..... started mapping
@@ -1111,16 +1104,16 @@ displayed below with the different fields highlighted.</p>
 <p>Image from <a href="https://datacarpentry.org/wrangling-genomics/">“Data Wrangling and Processing for Genomics”</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sam-to-bam"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SAM to BAM</div>
+  <div class="box-title hands-on-title" id="hands-on-sam-to-bam"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: SAM to BAM</div>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: bash</div>
+    <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: bash</div>
     <p>We will convert the SAM file to BAM format using the <code class="language-plaintext highlighter-rouge">samtools</code> program with the <code class="language-plaintext highlighter-rouge">view</code> command and tell this command that the input is in SAM format (<code class="language-plaintext highlighter-rouge">-S</code>) and to output BAM format (<code class="language-plaintext highlighter-rouge">-b</code>). We will start with the first sample (GSM461177) and repeat the process with the second (GSM461180):</p>
 
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools view <span class="nt">-S</span> <span class="nt">-b</span> GSM461177Aligned.out.sam <span class="o">&gt;</span> GSM461177Aligned.out.bam
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[samopen] SAM header is present: 1 sequences.
 </code></pre></div>    </div>
   </blockquote>
@@ -1128,18 +1121,18 @@ displayed below with the different fields highlighted.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Sort BAM file by coordinates</div>
+  <div class="box-title hands-on-title" id="hands-on-sort-bam-file-by-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Sort BAM file by coordinates</div>
 
   <p>Next we sort the BAM file using the <code class="language-plaintext highlighter-rouge">sort</code> command from <code class="language-plaintext highlighter-rouge">samtools</code>. <code class="language-plaintext highlighter-rouge">-o</code> tells the command where to write the output.</p>
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-sort-command"><i class="far fa-keyboard" aria-hidden="true"></i> Input: `sort` command</div>
+    <div class="box-title code-in-title" id="code-in-sort-command"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: `sort` command</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>samtools <span class="nb">sort</span> <span class="nt">-o</span> GSM461177Aligned.out.sorted.bam GSM461177Aligned.out.bam
 </code></pre></div>    </div>
   </blockquote>
 
   <p>Our files are pretty small, so we will not see this output. If you run the workflow with larger files, you will see something like this:</p>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[bam_sort_core] merging from 2 files...
 </code></pre></div>    </div>
@@ -1160,12 +1153,12 @@ displayed below with the different fields highlighted.</p>
 <p>For the final step of this tutorial we will use featureCounts to count the number of reads per annotated gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-featurecounts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: FeatureCounts</div>
+  <div class="box-title hands-on-title" id="hands-on-featurecounts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: FeatureCounts</div>
 
   <p>The main output of featureCounts is a table with the counts, i.e. the number of reads (or fragments in the case of paired-end reads) mapped to each gene (in rows, with their ID in the first column) in the provided annotation. FeatureCount generates also the feature length output datasets. Keep in mind that the “/import/7/” corresponds to <em>D. melanogaster’s</em> gene annotation file we imported in RStudio way back.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-featurecounts"><i class="far fa-keyboard" aria-hidden="true"></i> Input: featureCounts</div>
+    <div class="box-title code-in-title" id="code-in-featurecounts"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: featureCounts</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>featureCounts <span class="nt">-a</span> /import/7 <span class="nt">-T</span> 8 <span class="nt">-o</span> featurecounts.txt <span class="nt">-p</span> GSM461177Aligned.out.sorted.bam GSM461180Aligned.out.sorted.bam
 </code></pre></div>    </div>
   </blockquote>
@@ -1345,7 +1338,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Network analysis with Heinz">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -421,7 +421,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -458,14 +458,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>Network analysis with Heinz</h1>
@@ -809,7 +802,7 @@ material. In this tutorial, we start with the interpreted data, which are KO
 available from Zenodo.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-background-what-is-ko-count"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-ko-count" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Background: What is KO count?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-background-what-is-ko-count"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-ko-count" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Background: What is KO count?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 It is a term specific to <a href="https://www.genome.jp/kegg/">KEGG</a> database. It is a group concept, similar to the concept “pathway”, which
@@ -827,7 +820,7 @@ a caries-negative (health) oral profile. Each of the 36 samples was sequenced, p
 into KO counts. We will use these count data as the starting point to perform the network analysis.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-dataset-details"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Dataset details</div>
+  <div class="box-title comment-title" id="comment-dataset-details"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Dataset details</div>
   <p>The count data of the 36 samples are separated into 36 files, organized into two groups:
 ‘CP’ (caries-positive) and ‘CN’ (caries-negative).</p>
 </blockquote>
@@ -837,7 +830,7 @@ into KO counts. We will use these count data as the starting point to perform th
 <p>After knowing what our input data are like, let’s get them into Galaxy history:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
@@ -858,7 +851,7 @@ into KO counts. We will use these count data as the starting point to perform th
         <li>Click on the <strong>Paste/Fetch data</strong> button</li>
         <li>Copy the Zenodo links for the Disease Datasets
           <blockquote class="details">
-            <div class="box-title details-title" id="details-view-list-of-zenodo-urls-for-dental-caries-dataset-disease-cp"><button class="gtn-boxify-button details" type="button" aria-controls="details-view-list-of-zenodo-urls-for-dental-caries-dataset-disease-cp" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: View list of Zenodo URLs for Dental Caries Dataset (Disease, CP)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title details-title" id="details-view-list-of-zenodo-urls-for-dental-caries-dataset-disease-cp"><button class="gtn-boxify-button details" type="button" aria-controls="details-view-list-of-zenodo-urls-for-dental-caries-dataset-disease-cp" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: View list of Zenodo URLs for Dental Caries Dataset (Disease, CP)<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1344105/files/2241_CP_DZ_PairTo_2242.txt
 https://zenodo.org/record/1344105/files/2126_CP_MZ_PairTo_2125.txt
 https://zenodo.org/record/1344105/files/2991_CP_DZ_PairTo_2992.txt
@@ -891,7 +884,7 @@ https://zenodo.org/record/1344105/files/2242_CP_DZ_PairTo_2241.txt
       <ul>
         <li>Repeat the previous steps with the samples from healthy individuals:
           <blockquote class="details">
-            <div class="box-title details-title" id="details-view-list-of-zenodo-urls-for-dental-caries-dataset-healthy-cn"><button class="gtn-boxify-button details" type="button" aria-controls="details-view-list-of-zenodo-urls-for-dental-caries-dataset-healthy-cn" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title details-title" id="details-view-list-of-zenodo-urls-for-dental-caries-dataset-healthy-cn"><button class="gtn-boxify-button details" type="button" aria-controls="details-view-list-of-zenodo-urls-for-dental-caries-dataset-healthy-cn" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)<span class="fold-unfold fa fa-minus-square"></span></button></div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
 https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
 https://zenodo.org/record/1344105/files/2191_CN_MZ_PairTo_2192.txt
@@ -916,7 +909,7 @@ https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many samples do you have in our disease collection (CP)? How many healthy samples (CN)?</li>
@@ -924,7 +917,7 @@ https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>You should have 19 samples in the disease collection (CP), and 17 in the negative collection (CN).</li>
@@ -939,14 +932,14 @@ https://zenodo.org/record/1344105/files/3307_CN_DZ_PairTo_3306.txt
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-creating-a-collection-from-files-already-in-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-collection-from-files-already-in-your-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a collection from files already in your history<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-creating-a-collection-from-files-already-in-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-collection-from-files-already-in-your-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Creating a collection from files already in your history<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p><em>Dataset collections</em> enables us to easily run tools on multiple datasets at once, you probably
 have done that in the file upload menu using the <code class="language-plaintext highlighter-rouge">Collection</code> tab. If not, you can still create
 <em>dataset collections</em> manually.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-manually-organizing-our-data-into-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Manually organizing our data into a collection</div>
+    <div class="box-title hands-on-title" id="hands-on-manually-organizing-our-data-into-a-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Manually organizing our data into a collection</div>
 
     <p>If you have all the datasets in the history, but they are not organized into a collection yet,
 you can follow these steps to create a collection:</p>
@@ -975,7 +968,7 @@ you can follow these steps to create a collection:</p>
 <h2 id="what-is-differential-expression-analysis">What is differential expression analysis?</h2>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-definition"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A definition</div>
+  <div class="box-title comment-title" id="comment-a-definition"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A definition</div>
 
   <p>The definition of differential expression analysis given by
 <a href="https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene">EBI</a>
@@ -1002,7 +995,7 @@ may look up the pros and cons of each tool. Here we use DESeq2.</p>
 <p>After learning about differential expression analysis, let’s get some hands-on experience.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-dea-via-deseq2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: DEA via DESeq2</div>
+  <div class="box-title hands-on-title" id="hands-on-dea-via-deseq2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: DEA via DESeq2</div>
 
   <ul>
     <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1047,7 +1040,7 @@ modeled by a uniform distribution. With this knowledge, we can fit these p-value
 <p><img src="../../images/transcriptomics_images/bum.jpeg" alt="p-values are fitted to a mixture model. " width="1280" height="1138" loading="lazy" /></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-why-do-we-need-a-mixture-model"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Why do we need a mixture model?</div>
+  <div class="box-title comment-title" id="comment-why-do-we-need-a-mixture-model"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why do we need a mixture model?</div>
 
   <p>To avoid making this tutorial sound like a math class, let’s focus on the philosophy of using a statistical model.
 In the graph above, we have visualized the p-values; those bins have some shapes; by viewing the figure, it
@@ -1062,7 +1055,7 @@ which computers can understand easily.</p>
 <strong>Fit a BUM model</strong>, that’s a file that only contains p-values.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-p-values-from-deseq2-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: extract p-values from DESeq2 output</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-p-values-from-deseq2-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: extract p-values from DESeq2 output</div>
 
   <ul>
     <li><strong>cut</strong> columns from a table <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1079,7 +1072,7 @@ which computers can understand easily.</p>
 <p>Now we can <strong>Fit a BUM model</strong>:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-fit-the-bum-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: fit the BUM model</div>
+  <div class="box-title hands-on-title" id="hands-on-fit-the-bum-model"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: fit the BUM model</div>
 
   <ul>
     <li><strong>Fit a BUM model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1114,7 +1107,7 @@ NPTX1	CIAO1
 <p>Upload this edge file (hereafter we call it edge file) into the Galaxy instance.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-edge-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload edge file</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-edge-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload edge file</div>
 
   <ol>
     <li><strong>Upload the edge file from Zenodo</strong>
@@ -1137,7 +1130,7 @@ NPTX1	CIAO1
 we obtained; meanwhile, we also need to specify an FDR value as input.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-is-an-fdr-value"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is an FDR value?</div>
+  <div class="box-title comment-title" id="comment-what-is-an-fdr-value"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is an FDR value?</div>
 
   <p>FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors
 in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail
@@ -1151,12 +1144,12 @@ in <a href="https://en.wikipedia.org/wiki/False_discovery_rate">Wikipedia</a>.</
 <strong>Calculate a Heinz score</strong>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What is the requirement of the input data format for <strong>Calculate a Heinz score</strong>?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the user interface of the tool “Calculate a Heinz score”, we see that “A node file with p-values” is needed.
 It should contain two columns delimited by tab, one is KO ID; the other, p-value.</p>
@@ -1165,7 +1158,7 @@ It should contain two columns delimited by tab, one is KO ID; the other, p-value
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-geneid-and-p-values-from-deseq2-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: extract geneID and p-values from DESeq2 output</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-geneid-and-p-values-from-deseq2-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: extract geneID and p-values from DESeq2 output</div>
 
   <ul>
     <li><strong>cut</strong> columns from a table <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1180,7 +1173,7 @@ It should contain two columns delimited by tab, one is KO ID; the other, p-value
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculate-heinz-scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: calculate Heinz scores</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-heinz-scores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: calculate Heinz scores</div>
 
   <ul>
     <li><strong>Calculate a Heinz score</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1195,7 +1188,7 @@ It should contain two columns delimited by tab, one is KO ID; the other, p-value
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-is-the-heinz-score"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is the Heinz score?</div>
+  <div class="box-title comment-title" id="comment-what-is-the-heinz-score"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is the Heinz score?</div>
 
   <p>To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
 and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz score is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have many false positive (those regarded as significant are actually not) on the one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be exhausting to analyze. Therefore, we need to pick up an FDR value properly.</p>
@@ -1207,7 +1200,7 @@ and any KO whose p-value is below this threshold is regarded as significant, whi
 <p>After getting Heinz scores, let’s run Heinz program to find the optimal subnetwork from the background network which we mentioned earlier.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-pinpoint-the-optimal-subnetwork"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: pinpoint the optimal subnetwork</div>
+  <div class="box-title hands-on-title" id="hands-on-pinpoint-the-optimal-subnetwork"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: pinpoint the optimal subnetwork</div>
 
   <ul>
     <li><strong>Identify optimal scoring subnetwork</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1223,7 +1216,7 @@ and any KO whose p-value is below this threshold is regarded as significant, whi
 <p>It usually takes a few minutes to get the result, but mind you, for some tasks, it might take a few hours to get a result in practice.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-running-time-of-the-program"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The running time of the program</div>
+  <div class="box-title comment-title" id="comment-the-running-time-of-the-program"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The running time of the program</div>
 
   <ul>
     <li>Graph problem is way more complicated than we thought.</li>
@@ -1238,7 +1231,7 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 <p>The result we got from the last step is not very human-readable, is it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-the-optimal-subnetwork"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: visualize the optimal subnetwork</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-the-optimal-subnetwork"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: visualize the optimal subnetwork</div>
 
   <ul>
     <li><strong>Visualize</strong> the optimal scoring subnetwork <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1255,12 +1248,12 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 <p><img src="../../images/transcriptomics_images/Heinz_visualisation.png" alt="p-values are fitted to a mixture model. " width="860" height="1414" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>According to the figure above, Why are some shapes are round, others square?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Round shape corresponds to positive Heinz score; square shape corresponds to negative Heinz score.</p>
 
@@ -1278,7 +1271,7 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 <p>Let’s assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-heinz-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract the Heinz workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-heinz-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract the Heinz workflow</div>
 
   <ol>
     <li>
@@ -1492,7 +1485,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

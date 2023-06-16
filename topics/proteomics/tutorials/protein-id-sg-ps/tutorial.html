@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Peptide and Protein ID using SearchGUI and PeptideShaker">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -385,7 +385,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -422,14 +422,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Peptide and Protein ID using SearchGUI and PeptideShaker</h1>
@@ -686,7 +679,7 @@ Machine vendors offer algorithms to extract peaks from profile raw data. This is
 If your data were generated on a low resolution mass spectrometer, use <strong><em>PeakPickerWavelet</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> instead.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-file-conversion-and-peak-picking"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: File Conversion and Peak Picking</div>
+  <div class="box-title hands-on-title" id="hands-on-file-conversion-and-peak-picking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: File Conversion and Peak Picking</div>
 
   <p>We provide the <a href="https://zenodo.org/record/796184">input data</a> in the original <code class="language-plaintext highlighter-rouge">raw</code> format and also already converted to <code class="language-plaintext highlighter-rouge">MGF</code> and <code class="language-plaintext highlighter-rouge">mzML</code> file formats. If <strong><em>msconvert</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> does not run on your Galaxy instance, please download the preconverted <code class="language-plaintext highlighter-rouge">mzML</code> as an input.</p>
 
@@ -706,7 +699,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-local-use-of-msconvert"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Local Use of MSConvert</div>
+    <div class="box-title comment-title" id="comment-local-use-of-msconvert"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Local Use of MSConvert</div>
     <p>The vendor libraries used by msconvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If <strong><em>msconvert</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find <a href="https://compomics.com/bioinformatics-for-proteomics/identification/">a detailed description of the necessary steps</a> (“Peak List Generation”). Afterwards, upload the resulting mzML file to your Galaxy history.</p>
   </blockquote>
 </blockquote>
@@ -719,7 +712,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
 <p>In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant in most eukaryotic organisms. Thus, not every peptide can be assigned to only one protein. Luckily, the <strong><em>Peptide Shaker</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> already takes care of protein inference and even gives us some information on validity of the protein identifications. We will discuss validation in a <a href="#evaluation-of-peptide-and-protein-ids">later step</a> of this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-peptide-and-protein-identification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Peptide and Protein Identification</div>
+  <div class="box-title hands-on-title" id="hands-on-peptide-and-protein-identification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Peptide and Protein Identification</div>
 
   <ol>
     <li>Copy the prepared protein database from the tutorial <a href="../database-handling/tutorial.html">Database Handling</a> into your current history by using the multiple history view or upload the <a href="https://zenodo.org/record/892005/files/Human_database_%28cRAP_and_Mycoplasma_added%29.fasta">ready-made database from Zenodo</a>.</li>
@@ -728,7 +721,7 @@ If your data were generated on a low resolution mass spectrometer, use <strong><
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-search-gui-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Search GUI Parameters</div>
+    <div class="box-title comment-title" id="comment-search-gui-parameters"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Search GUI Parameters</div>
     <p>We ran <strong><em>Search GUI</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with default settings. When you are processing files of a different experiment, you may need to adjust some of the parameters.
 <strong>Search GUI</strong> bundles numerous peptide search engines for matching MS/MS to peptide sequences within a database. In practice, using 2-3 different search engines offers high confidence while keeping analysis time reasonable. In our hands, X! tandem, MS-GF+, OMSSA and Comet search algorithms offer good results.
 The <strong><code class="language-plaintext highlighter-rouge">Precursor Options</code></strong> have to be adjusted to the mass spectrometer which was used to generate the files. The default settings fit a  high resolution Orbitrap instrument.
@@ -736,7 +729,7 @@ In the <strong><code class="language-plaintext highlighter-rouge">Advanced Optio
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-peptideshaker-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: PeptideShaker Outputs</div>
+    <div class="box-title comment-title" id="comment-peptideshaker-outputs"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: PeptideShaker Outputs</div>
     <p>Peptide Shaker offers a variety of outputs.
 The <code class="language-plaintext highlighter-rouge">Zip File for import to Desktop App</code> can be downloaded to view and evaluate the search results in the Peptide Shaker viewer (<a href="https://compomics.github.io/projects/peptide-shaker.html">Download</a>).
 The several <code class="language-plaintext highlighter-rouge">Reports</code> contain tabular, human-readable information.
@@ -745,14 +738,14 @@ The <code class="language-plaintext highlighter-rouge">Certificate of Analysis</
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <ol>
       <li>How many peptides were identified? How many proteins?</li>
       <li>How many peptides with oxidized methionine were identified?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>You should have identified 3,325 peptides and 1,170 proteins.</li>
         <li>328 peptides contain an oxidized methionine (MeO). To get to this number, you can use <strong><em>Select</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Report and search for either “Oxidation of M” or “M&lt;ox&gt;”.</li>
@@ -765,7 +758,7 @@ The <code class="language-plaintext highlighter-rouge">Certificate of Analysis</
 <p>The FASTA database used for the peptide to spectrum matching contained some entries that were not expected to stem from the HeLa cell lysate, but are common contaminations in LC-MS/MS samples. The main reason to add those is to avoid misidentification of the spectra to other proteins. However, it also enables you to check for contaminations in your samples. <strong>CAVE:</strong> in human samples, many proteins that are common contaminants may also stem from the real sample. The real source of such human proteins might require advanced investigation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-analysis-of-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Analysis of Contaminants</div>
+  <div class="box-title hands-on-title" id="hands-on-analysis-of-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Analysis of Contaminants</div>
 
   <ol>
     <li>Run <strong><em>Select</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Shaker Protein Report to select all lines that match the pattern “CONTAMINANT”.</li>
@@ -773,7 +766,7 @@ The <code class="language-plaintext highlighter-rouge">Certificate of Analysis</
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <ol>
       <li>Which contaminants did you identify? Where do these contaminations come from?</li>
       <li>What other sources of contaminants exist?</li>
@@ -782,7 +775,7 @@ The <code class="language-plaintext highlighter-rouge">Certificate of Analysis</
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>TRY_BOVIN is bovine trypsin. It was used to degrade the proteins to peptides. ALBU_BOVIN is bovine serum albumin. It is added to cell culture medium in high amounts.</li>
         <li>Contaminants often stem from the experimenter, these are typically keratins or other high-abundant human proteins. Basically any protein present in the room of the mass spectrometer might get into the ion source, if it is airborne. As an example, sheep keratins are sometimes found in proteomic samples, stemming from clothing made of sheep wool.</li>
@@ -804,21 +797,21 @@ False positives are expected to be randomly assigned to peptides in the FASTA da
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-evaluation-of-peptide-and-protein-ids"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Evaluation of Peptide and Protein IDs</div>
+  <div class="box-title hands-on-title" id="hands-on-evaluation-of-peptide-and-protein-ids"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Evaluation of Peptide and Protein IDs</div>
 
   <ol>
     <li>Remove all “Doubtful” proteins from your protein list by running <strong><em>Select</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the Peptide Shaker Protein Report. Select only those lines that <strong>do not</strong> match the pattern “Doubtful”.</li>
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <ol>
       <li>How to exclude mycoplasma proteins?</li>
       <li>How many “Confident” non-contaminant proteins were identified?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>Add another <strong><em>Select</em></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> matching the pattern “HUMAN”.</li>
         <li>You should have identified 582 human non-contaminant proteins that were validated to be “Confident”.</li>
@@ -1008,7 +1001,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

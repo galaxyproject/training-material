@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Tree thinking for tuberculosis evolution and epidemiology">
         <meta property="og:description" content="phylogenetics">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -439,7 +439,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -476,14 +476,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-evolution">
     <h1 data-toc-skip>Tree thinking for tuberculosis evolution and epidemiology</h1>
@@ -827,7 +820,7 @@ Sentry.init({
 <p>Below are two phylogenies of the <em>Mycobacterium tuberculosis</em> complex (MTBC) to illustrate some basic vocabulary and concepts.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-need-a-more-thorough-introduction-to-the-topic"><button class="gtn-boxify-button details" type="button" aria-controls="details-need-a-more-thorough-introduction-to-the-topic" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Need a more thorough introduction to the topic?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-need-a-more-thorough-introduction-to-the-topic"><button class="gtn-boxify-button details" type="button" aria-controls="details-need-a-more-thorough-introduction-to-the-topic" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Need a more thorough introduction to the topic?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If the following discussion sounds a bit too esoteric, you might be interested in a more thorough introduction to the topic of phylogeny like provided, for example, by the <a href="https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/">introduction to phylogenetics</a> from the <a href="https://www.ebi.ac.uk/training/on-demand?facets=type:Online%20tutorial">EMBL-EBI collection of online tutorials</a>.</p>
 
@@ -854,7 +847,7 @@ Sentry.init({
 <p>As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Figure 2 shows a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 (<span class="citation"><a href="#Eldholm2016">Eldholm <i>et al.</i> 2016</a></span>). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-phylogenetics-with-i-mycobacterium-tuberculosis-i"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Phylogenetics with <i>Mycobacterium tuberculosis</i></div>
+  <div class="box-title comment-title" id="comment-phylogenetics-with-i-mycobacterium-tuberculosis-i"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Phylogenetics with <i>Mycobacterium tuberculosis</i></div>
 
   <p>Phylogenetics with MTB has some particularities rarely encountered with other organisms.</p>
 
@@ -890,7 +883,7 @@ Sentry.init({
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-recommended-tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Recommended tutorials</div>
+  <div class="box-title comment-title" id="comment-recommended-tutorials"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Recommended tutorials</div>
 
   <p>Steps 1 and 2 are explained in detail in the tutorial <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">MTB variant analysis</a>.
 Steps 3 - 5 are conducted for the exact same 20 samples used here in the <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">tutorial on transmission clusters</a>.</p>
@@ -909,7 +902,7 @@ Each row in the alignment represents a different strain, each column a position 
 <p>Near the end of this tutorial, we will show and discuss ways to correct for this.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-alternative-approach-genome-assembly"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The alternative approach: genome assembly</div>
+  <div class="box-title comment-title" id="comment-the-alternative-approach-genome-assembly"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The alternative approach: genome assembly</div>
 
   <p>A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous <a href="https://training.galaxyproject.org/training-material/topics/assembly">Galaxy tutorials</a> on this topic), b) annotate genes, c) extract genes present in all strains (the “core” genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. <span class="citation"><a href="#Zhou2021">Zhou <i>et al.</i> 2021</a></span>).</p>
 
@@ -963,7 +956,7 @@ Each row in the alignment represents a different strain, each column a position 
 <p>If you are not interested in that other tutorial, here are the instructions for setting up a history for the analysis here, and for obtaining a copy of the SNP alignment from <a href="https://zenodo.org/record/6010176">Zenodo</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-history-and-prepare-the-input-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a new history and prepare the input data</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-history-and-prepare-the-input-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a new history and prepare the input data</div>
 
   <ol>
     <li>
@@ -1039,7 +1032,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>An aspect we ignore in this tutorial is the uncertainty involved in phylogenetic inference. While RAxML will deliver a single tree, not all aspects of this tree are equally well supported by the data. This uncertainty can be quantified through <strong>bootstrapping</strong>, a procedure where a large number of trees are estimated from random samples of the original data. If a certain split in the original tree is present in all the bootstrapped trees, then we can be confident about this split. Published phylogenies should always include a measure of uncertainty, while for this tutorial you will have to believe me that we are looking at a solid phylogeny…</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-estimate-a-phylogeny-for-20-mtbc-strains"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Estimate a phylogeny for 20 MTBC strains</div>
+  <div class="box-title hands-on-title" id="hands-on-estimate-a-phylogeny-for-20-mtbc-strains"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Estimate a phylogeny for 20 MTBC strains</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.12+galaxy0" title="Phyogenetic reconstruction with RAxML tool" aria-role="link"><strong>Phyogenetic reconstruction with RAxML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.12+galaxy0</span></span> with the following parameters:
@@ -1067,14 +1060,14 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>We will use R to plot and manipulate the phylogeny obtained from RAxML. We will provide you with the exact code to produce the figures we need, and, conveniently, you can run this code from an RStudio session that you can start as an interactive tool inside Galaxy.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-can-i-use-my-own-coding-environment"><button class="gtn-boxify-button details" type="button" aria-controls="details-can-i-use-my-own-coding-environment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Can I use my own coding environment?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-can-i-use-my-own-coding-environment"><button class="gtn-boxify-button details" type="button" aria-controls="details-can-i-use-my-own-coding-environment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Can I use my own coding environment?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you have worked with R or RStudio previously, feel free to use any kind of coding environment for exploring and manipulating the RAxML tree we have produced - just download it from your history and import it into any R session you have access to.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-starting-an-rstudio-session-and-setting-things-up"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Starting an RStudio session and setting things up</div>
+  <div class="box-title hands-on-title" id="hands-on-starting-an-rstudio-session-and-setting-things-up"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Starting an RStudio session and setting things up</div>
 
   <ol>
     <li>
@@ -1124,14 +1117,14 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>As a first step we would like to parse the tree information from the imported dataset and plot the tree.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>If you are experienced with R, you are encouraged also to start playing with all the code from here on, to modify it, and to explore the numerous phylogenetics packages and functions available in R.</p>
 
 </blockquote>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-parse-the-tree-and-plot-it"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Parse the tree and plot it</div>
+  <div class="box-title hands-on-title" id="hands-on-parse-the-tree-and-plot-it"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Parse the tree and plot it</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Parse the tree</span><span class="w">
 </span><span class="n">tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.tree</span><span class="p">(</span><span class="n">treefile</span><span class="p">)</span><span class="w">
@@ -1140,14 +1133,14 @@ The above replacement operation, drops these unnecessary endings, which we would
 </span></code></pre></div>  </div>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Take a look at the tree generated by RAxML. Is it rooted or unrooted? What is the strain far apart from all other strains?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: 1<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: 1<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p><img src="./images/tree_unrooted.svg" alt="Unrooted tree. " width="449" height="234" loading="lazy" /></p>
 
@@ -1164,7 +1157,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>To make the phylogeny more interpretable, we will now root the tree using the <em>M. canettii</em> strain as the outgroup, then exclude that strain, such that patterns <em>within</em> the MTBC become clearer.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-root-the-tree-and-drop-its-outgroup"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Root the tree and drop its outgroup</div>
+  <div class="box-title hands-on-title" id="hands-on-root-the-tree-and-drop-its-outgroup"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Root the tree and drop its outgroup</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Root the tree</span><span class="w">
 </span><span class="n">tree_rooted</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">root</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span><span class="w"> </span><span class="s2">"ERR313115"</span><span class="p">)</span><span class="w">
@@ -1185,7 +1178,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>A first piece of information we now want to add to the phylogeny is to which lineage the strains belong. This will allow us to assess whether our tree is consistent with the known phylogeny of the MTBC, shown in Figure 1A, and to visualize which lineages are present in our sample. The information to which lineage a strain belongs can be found in the output of TB-profiler, as explained in the <a href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html">tutorial on TB variant analysis</a>.</p>
 
 <blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-generate-a-tree-with-lineage-labels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate a tree with lineage labels</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-tree-with-lineage-labels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a tree with lineage labels</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Assign lineages to samples, as identified by TB-profiler</span><span class="w">
 
@@ -1238,12 +1231,12 @@ The above replacement operation, drops these unnecessary endings, which we would
 </span></code></pre></div>  </div>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>Looking at the different lineages present in the tree, does our phylogeny make sense? Or asked differently: does our phylogeny show the same branching patterns between lineages as the established phylogeny in Fig. 1A?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution: 2<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: 2<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p><img src="./images/tree_rooted_lineages.svg" alt="Colored lineages. " width="473" height="286" loading="lazy" /></p>
 
@@ -1256,12 +1249,12 @@ The above replacement operation, drops these unnecessary endings, which we would
 <h2 id="first-round-of-exercises">First round of exercises</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise 1</div>
+  <div class="box-title question-title" id="question-exercise-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 1</div>
 
   <p>An important part of bioinformatics consists in trying to find out whether a surprising observation has biological significance — or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, which should be present in your Galaxy history if you’ve followed the previous tutorial. Compare them with “normal” strains. Do you notice something?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The VCF files hold an important hint to explain our puzzling observation: ERR1203059.vcf contains not a single SNP, ERR5987300.vcf only 81 SNPs. By contrast, the other strains have between 750 and 1250 SNPs. What happened here? To find out, we would have to take a closer look at the steps leading from BAM to VCF files. One possibility is that the sequencing depth for these samples was so low that most SNPs were filtered out because they did not pass the quality filtering.</p>
 
@@ -1270,7 +1263,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise 2</div>
+  <div class="box-title question-title" id="question-exercise-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 2</div>
 
   <p>In the <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">tutorial on transmission clusters</a> two clusters of samples got identified and are reproduced below. How do these clusters show up in the phylogenetic tree? What additional information does the tree contain?</p>
 
@@ -1318,7 +1311,7 @@ The above replacement operation, drops these unnecessary endings, which we would
   </table>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Clusters 10 and 12 appear as clades of closely related strains in the phylogeny: cluster 12 being part of lineage 2, cluster 10 of lineage 4. The phylogeny additionally reveals that cluster 12 is part of a larger clade of rather closely related lineage 2 strains. While clustering with a fixed SNP threshold produces a binary outcome (clustered/unclustered), the phylogeny reveals the gradual nature of relatedness. With a more permissive SNP threshold for clustering, or a different pipeline to call SNPs, we might well identify a larger cluster of L2 strains.</p>
 
@@ -1333,7 +1326,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p>For our 20 samples, a trait you previously identified (if you have been doing the <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">tutorial on transmission clusters</a>, is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-a-tree-with-dr-profiles-as-labels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate a tree with DR profiles as labels</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-tree-with-dr-profiles-as-labels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate a tree with DR profiles as labels</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Same as before, but with DR profiles instead of lineages</span><span class="w">
 
@@ -1383,12 +1376,12 @@ The above replacement operation, drops these unnecessary endings, which we would
 <h2 id="exercises-continued">Exercises continued</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise 3</div>
+  <div class="box-title question-title" id="question-exercise-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 3</div>
 
   <p>In the previous tutorial on clustering, you have come across the hypothesis that unclustered cases of DR represent <em>de novo</em> evolution of DR, while clustered cases of DR represent instances of DR transmission. Looking at lineage 2 in the phylogeny above, does this hypothesis hold? How many times would MDR have evolved independently in lineage 2? Is there an alternative explanation for the prevalence of MDR in lineage 2?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><img src="./images/tree_rooted_dr.svg" alt="Colored DR profiles. " width="490" height="286" loading="lazy" /></p>
 
@@ -1418,7 +1411,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rescale-branches"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Rescale branches</div>
+  <div class="box-title hands-on-title" id="hands-on-rescale-branches"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rescale branches</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Rescale branch lengths (here called edge lenghts)</span><span class="w">
 </span><span class="n">genome_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4411532</span><span class="w">
@@ -1444,7 +1437,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <p><img src="./images/tree_rescaled.svg" alt="Rescaled phylogeny. " width="436" height="300" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-outliers-perform-dates-estimation-and-plot-with-time-scale"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove outliers, perform dates estimation and plot with time-scale</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-outliers-perform-dates-estimation-and-plot-with-time-scale"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove outliers, perform dates estimation and plot with time-scale</div>
 
   <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Let's also remove the two outlier strains, they would cause troubles and are anyway useless</span><span class="w">
 </span><span class="n">tree_rescaled</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">drop.tip</span><span class="p">(</span><span class="n">tree_rescaled</span><span class="p">,</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s2">"ERR1203059"</span><span class="p">,</span><span class="w"> </span><span class="s2">"ERR5987300"</span><span class="p">))</span><span class="w">
@@ -1474,7 +1467,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 <h2 id="final-exercise">Final exercise</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-exercise-4-advanced"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Exercise 4 (advanced)</div>
+  <div class="box-title question-title" id="question-exercise-4-advanced"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Exercise 4 (advanced)</div>
 
   <ol>
     <li>
@@ -1486,7 +1479,7 @@ The above replacement operation, drops these unnecessary endings, which we would
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1684,7 +1677,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

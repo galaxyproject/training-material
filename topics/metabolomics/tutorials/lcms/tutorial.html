@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mass spectrometry: LC-MS analysis">
         <meta property="og:description" content="Training material to analyse Mass spectrometry data in Ga...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -442,7 +442,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -479,14 +479,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-metabolomics">
     <h1 data-toc-skip>Mass spectrometry: LC-MS analysis</h1>
@@ -812,7 +805,7 @@ pre-processing in parallel, since the initial actions in the extraction process 
 having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-the-mzxml-with-b-get-data-b"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload the mzXML with <b>Get data</b></div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-the-mzxml-with-b-get-data-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload the mzXML with <b>Get data</b></div>
 
   <ol>
     <li>
@@ -870,7 +863,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 <p><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first XCMS step.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-msnbase-readmsdata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: MSnbase readMSData</div>
+  <div class="box-title hands-on-title" id="hands-on-msnbase-readmsdata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSnbase readMSData</div>
 
   <ol>
     <li><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -885,12 +878,12 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>What do you get as output?</p>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>A <strong>Dataset collection</strong> containing 9 dataset.</li>
@@ -937,7 +930,7 @@ Note that you can either:</p>
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Optional: Generate the right template with <b>xcms get a sampleMetadata file</b><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Optional: Generate the right template with <b>xcms get a sampleMetadata file</b><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information. Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:</p>
 
@@ -947,7 +940,7 @@ Note that you can either:</p>
   </ol>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-xcms-get-a-samplemetadata-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms get a sampleMetadata file</div>
+    <div class="box-title hands-on-title" id="hands-on-xcms-get-a-samplemetadata-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms get a sampleMetadata file</div>
 
     <ol>
       <li><strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -973,7 +966,7 @@ software you find appropriate to construct your table, as long as you save your 
 use a spreadsheet software such as Microsoft Excel or LibreOffice.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-important-save-your-table-in-the-correct-format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Important: Save your table in the correct format</div>
+  <div class="box-title warning-title" id="warning-important-save-your-table-in-the-correct-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Important: Save your table in the correct format</div>
 
   <p>The file has to be a <code class="language-plaintext highlighter-rouge">.txt</code>or a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
 If you use a spreadsheet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
@@ -982,7 +975,7 @@ If you use a spreadsheet software, be sure to change the default format to <stro
 <p>Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For this tutorial, we already provide the <em>sampleMetadata</em> file, so you only have to upload it to Galaxy. Below we
 explain how we filled this file from the template we generated in Galaxy.</p>
@@ -1238,7 +1231,7 @@ be uploaded into Galaxy.</p>
 <h4 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h4>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-the-samplemetada"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the sampleMetada</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-samplemetada"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the sampleMetada</div>
 
   <ol>
     <li>Import the <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> file from Zenodo or from a shared data library (ask your instructor)
@@ -1263,7 +1256,7 @@ be uploaded into Galaxy.</p>
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Here we provided the sampleMetadata file so we know that the upload led to a ‘tabular’ file. But from experience we also know that
 it can happen that, when uploading a sampleMetadata table, a user obtains other inappropriate types of data. This is generally due to the file
@@ -1284,7 +1277,7 @@ right away if you happen to get one of these obvious issues.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many columns should I have in my sampleMetadata file?</li>
@@ -1292,7 +1285,7 @@ right away if you happen to get one of these obvious issues.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
@@ -1321,7 +1314,7 @@ The tool automatically takes the second column as colour groups when a file is p
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms plot chromatogram</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms plot chromatogram</div>
 
   <ol>
     <li><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1335,7 +1328,7 @@ The tool automatically takes the second column as colour groups when a file is p
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>If you use this tool at a later step of XCMS workflow while having provided, in the Merger step (see further in this tutorial), a sampleMetadata with a second column containing groups,
 you will get colouring according to these groups even without providing a sampleMetadata file as a ‘plot chromatogram’ parameter.</p>
@@ -1362,7 +1355,7 @@ other side, the <strong>centWave</strong> algorithm (<span class="citation"><a h
 data in centroid mode. In this tutorial, you will practice using the centWave algorithm.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-how-the-centwave-algorithm-works"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How the centWave algorithm works</div>
+  <div class="box-title comment-title" id="comment-how-the-centwave-algorithm-works"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How the centWave algorithm works</div>
 
   <p>Remember that these steps are performed for each of your data files independently.</p>
   <ul>
@@ -1381,7 +1374,7 @@ pre-processing.</p>
 <p>Let’s try performing the peakpicking step with the <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-xcmsset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms findChromPeaks (xcmsSet)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-xcmsset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms findChromPeaks (xcmsSet)</div>
 
   <ol>
     <li><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1405,7 +1398,7 @@ pre-processing.</p>
   <p>You can leave the other parameters with their default values.</p>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+    <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
     <p>Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
 rid of ions that you don’t want to consider. For example, you can use <em>Spectra Filters</em> allowing you to discard some RT or M/z
@@ -1435,7 +1428,7 @@ at this step that you need to provide the needed information if you want distinc
 the Merger tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-merger"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms findChromPeaks Merger</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-merger"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms findChromPeaks Merger</div>
 
   <ol>
     <li><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1472,7 +1465,7 @@ on the resulting matrix. It must be chosen according to the quality of the chrom
 than a given number of samples. Either a percentage of the total number of samples or an absolute value of samples can be given. This is defined by the user.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-groupchrompeaks-group"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms groupChromPeaks (group)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-groupchrompeaks-group"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms groupChromPeaks (group)</div>
 
   <ol>
     <li><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1501,7 +1494,7 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
 <p><img src="../../images/lcms_group_9samp.png" alt="plotChromPeakDensity.pdf. " width="1228" height="631" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Look at the <code class="language-plaintext highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
@@ -1509,7 +1502,7 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
@@ -1546,7 +1539,7 @@ peaks’ parameter to put them aside.</p>
 <p>The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-adjustrtime-retcor"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms adjustRtime (retcor)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-adjustrtime-retcor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms adjustRtime (retcor)</div>
 
   <ol>
     <li><strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1564,7 +1557,7 @@ peaks’ parameter to put them aside.</p>
   <p>You can leave the other parameters to default values.</p>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+    <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
     <p>If you have a very large number of samples (<em>e.g.</em> a thousand), it might be impossible to find peaks that are present in 100% of your samples.
 If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
@@ -1578,13 +1571,13 @@ time correction. A special attention should also be given to this parameter when
 It also allows you to check whether the well behaved peaks were distributed homogeneously along the chromatogram.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Check the impact of RT correction using 'xcms plot chromatogram'<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Check the impact of RT correction using 'xcms plot chromatogram'<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Apart from the plots generated by the adjustRtime tool, you can check the impact of the retention time
 correction by comparing the chromatogram you obtained previously to a new one generated after correction.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms plot chromatogram</div>
+    <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms plot chromatogram</div>
 
     <ol>
       <li><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1593,7 +1586,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
         </ul>
 
         <blockquote class="comment">
-          <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+          <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
           <p>As in the previous ‘plot chromatogram’, you can use your completed sampleMetadata file to get colours.</p>
         </blockquote>
@@ -1613,7 +1606,7 @@ since retention times are supposed to be less variable inside a same peak group 
 lower a little the bandwidth parameter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-second-xcms-groupchrompeaks-group"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: second 'xcms groupChromPeaks (group)'</div>
+  <div class="box-title hands-on-title" id="hands-on-second-xcms-groupchrompeaks-group"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: second 'xcms groupChromPeaks (group)'</div>
 
   <ol>
     <li><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1635,7 +1628,7 @@ lower a little the bandwidth parameter.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
 you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
@@ -1650,7 +1643,7 @@ set the ‘Get the Peak List’ option to <code class="language-plaintext highli
 last adjustRtime step and thus your last grouping step, you will obtain your final peak list (<em>i.e.</em> final list of ions).</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many ions did you obtained with the final grouping step?</li>
@@ -1659,7 +1652,7 @@ sample. What do you notice when looking at the intensity of the first ion regard
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The final grouping step led to 5815 ions.</li>
@@ -1678,7 +1671,7 @@ step.</p>
 <p>To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is called <em>fillChromPeaks</em>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Before performing the ‘fillChromPeaks’ step, it is highly recommended to first have a look at your data concerning the distribution
 of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
@@ -1695,7 +1688,7 @@ an overview of it using the <strong>Intensity Check</strong> <i class="fas fa-wr
 chromatographic peak for this ion was identified.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-xcms-fillchrompeaks-fillpeaks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: xcms fillChromPeaks (fillPeaks)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-fillchrompeaks-fillpeaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: xcms fillChromPeaks (fillPeaks)</div>
 
   <ol>
     <li><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1710,7 +1703,7 @@ chromatographic peak for this ion was identified.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The <em>“Reported intensity values”</em> parameter is important here. It defines how the intensity will be computed. You have three choices:</p>
         <ul>
@@ -1758,7 +1751,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-camera-annotate"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: CAMERA.annotate</div>
+  <div class="box-title hands-on-title" id="hands-on-camera-annotate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: CAMERA.annotate</div>
 
   <ol>
     <li><strong>CAMERA.annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1779,7 +1772,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-8"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-8"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
 In particular, the <strong>Mode</strong> parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).</p>
@@ -1811,7 +1804,7 @@ corresponding information in your variableMetadata file for later use.</p>
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-9"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-9"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
 It can also generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
@@ -1828,7 +1821,7 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-copying-the-3-tables-into-a-new-history-and-renaming-them"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Copying the 3 tables into a new history and renaming them</div>
+  <div class="box-title hands-on-title" id="hands-on-copying-the-3-tables-into-a-new-history-and-renaming-them"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Copying the 3 tables into a new history and renaming them</div>
 
   <ol>
     <li>
@@ -1869,7 +1862,7 @@ difficulties in revealing investigated effects. Identifying such variability can
 </ul>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-10"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-10"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>To get a little more information regarding data processing, do not hesitate to visit the usemetabo.oc platform:
 <a href="https://usemetabo.org/courses/w4mlc-ms-processing">Link to LC-MS processing step</a></p>
 </blockquote>
@@ -1882,7 +1875,7 @@ analysis. One of the most commonly used method is the <strong>Principal Componen
 over useful information using the <strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-using-b-quality-metrics-b-to-get-an-overview-of-your-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using <b>Quality Metrics</b> to get an overview of your data</div>
+  <div class="box-title hands-on-title" id="hands-on-using-b-quality-metrics-b-to-get-an-overview-of-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using <b>Quality Metrics</b> to get an overview of your data</div>
 
   <ol>
     <li><strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1910,7 +1903,7 @@ It provides a variety of useful information:</p>
 <p><img src="../../images/lcms_QM_9samp_raw.png" alt="Quality_Metrics_figure.pdf. " width="1304" height="829" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-cross-referencing-information"><i class="far fa-question-circle" aria-hidden="true"></i> Question: cross-referencing information</div>
+  <div class="box-title question-title" id="question-cross-referencing-information"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: cross-referencing information</div>
 
   <p>Look at the ‘Quality_Metrics_figure.pdf’ file.</p>
   <ol>
@@ -1923,7 +1916,7 @@ Can this observation help you understand the CV results you just looked at?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>You can read on the plot that <em>pool CV &lt; 30%: 26%</em>, meaning that the pool values are stable only for a quarter of the ions
@@ -1959,7 +1952,7 @@ rid of these unwanted variabilities.</p>
 to get rid of it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-normalisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data normalisation</div>
+  <div class="box-title hands-on-title" id="hands-on-data-normalisation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data normalisation</div>
 
   <ol>
     <li><strong>Batch_correction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1975,7 +1968,7 @@ to get rid of it.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-11"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-11"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
         <p>The choice of type of regression model to use depends on several parameters.
 In this case-study, since we only have 3 pools, there are only two possible choices: <em>linear</em> or <em>all loess sample</em>
 When possible, we recommend to use pools to correct the signal drift, that is why we chose to run the tool with <em>linear</em>.</p>
@@ -2014,7 +2007,7 @@ whatever the pool CV value, it will be lower than the corresponding sample CV va
 by biological variability. Thus, we can filter the ions that do not respect this particular condition.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cv-calculation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: CV calculation</div>
+  <div class="box-title hands-on-title" id="hands-on-cv-calculation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: CV calculation</div>
 
   <ol>
     <li><strong>Quality Metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2025,7 +2018,7 @@ by biological variability. Thus, we can filter the ions that do not respect this
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-12"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-12"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Do not forget you need to use this tool again, since this time indicators will be computed on normalised intensities.
 What we are going to use this time is the tabular output, but while you are at it you can always check the pdf file.</p>
@@ -2039,7 +2032,7 @@ What we are going to use this time is the tabular output, but while you are at i
 your data using the <strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-data-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data filtering</div>
 
   <ol>
     <li><strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2086,7 +2079,7 @@ your data using the <strong>Generic_Filter</strong> <i class="fas fa-wrench" ari
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-13"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-13"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>You can see here that you can take the opportunity of this filtering step to get rid of the pools. Indeed, next step is
 statistical analysis, and you do not need the pools anymore since they do not participate in the scientific design of the study.</p>
@@ -2097,7 +2090,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What does the <em>0.3</em> threshold mean in the hands-on exercise you just executed?</li>
@@ -2106,7 +2099,7 @@ statistical analysis, and you do not need the pools anymore since they do not pa
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The <em>0.3</em> value corresponds to the maximum value kept in the dataset (‘Interval of values to remove: <em>upper</em>’) regarding the
@@ -2148,7 +2141,7 @@ statistical analysis performed on LC-MS data, you can take a few minutes to watc
 and the ions that we have in our dataset. For this calculation we can use the <strong>Univariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-statistical-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Statistical analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-statistical-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Statistical analysis</div>
 
   <ol>
     <li><strong>Univariate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2162,7 +2155,7 @@ and the ions that we have in our dataset. For this calculation we can use the <s
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-14"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-14"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>In this tutorial, we chose to perform the analysis without multiple testing correction. This choice is not
 based on a relevant statistical strategy (which would more likely be to <em>use</em> multiple testing correction). It is based on
@@ -2180,12 +2173,12 @@ regarding statistical indices.</p>
 p-values and statistical indicators). ‘Significant’ results are illustrated by graphics in the <em>Univariate_figure.pdf</em> file.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How many <em>significant</em> variables were found?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The tool found that 61 variables have a correlation coefficient significantly different from 0.</p>
 
@@ -2209,7 +2202,7 @@ absolute value above 0.9.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-variable-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Variable filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-variable-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Variable filtering</div>
 
   <ol>
     <li><strong>Generic_Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2284,7 +2277,7 @@ bank HMDB (The Human Metabolome Database). Let’s try requesting directly into 
 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotating-the-data-using-the-hmdb"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotating the data using the HMDB</div>
+  <div class="box-title hands-on-title" id="hands-on-annotating-the-data-using-the-hmdb"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the data using the HMDB</div>
 
   <ol>
     <li><strong>HMDB MS search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2312,7 +2305,7 @@ On the opposite, if the value provided is too high, you may end with a huge numb
 review to identify relevant proposed annotation.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-15"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-15"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
 For now, Galaxy4Metabolomics stops here but we have various perspectives of additional tools for the future (a little bit of
 <a href="https://metexplore.toulouse.inra.fr/index.html/">MetExplore</a> for example?).</p>
@@ -2557,7 +2550,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

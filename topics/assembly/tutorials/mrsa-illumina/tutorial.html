@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Genome Assembly of MRSA using Illumina MiSeq Data">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -399,7 +399,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -436,14 +436,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-assembly">
     <h1 data-toc-skip>Genome Assembly of MRSA using Illumina MiSeq Data</h1>
@@ -781,7 +774,7 @@ Nanopore Technologies sequencing have much longer variable lengths.</p>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -825,7 +818,7 @@ https://zenodo.org/record/4534098/files/DRR187559_2.fastqsanger.bz2
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the renamed file</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What are the 4 main features of each read in a fastq file.</li>
@@ -833,7 +826,7 @@ https://zenodo.org/record/4534098/files/DRR187559_2.fastqsanger.bz2
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>
               <p>The following:</p>
@@ -880,7 +873,7 @@ reads include:</p>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-qc-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: QC &amp; Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-qc-amp-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: QC &amp; Filtering</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> with the following parameters:
@@ -932,7 +925,7 @@ which are at least 30 bases long, anything shorter will complicate the assembly
 and we will drop.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-the-data-quality-of-the-trimmed-reads-and-comparing-to-the-input-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-the-data-quality-of-the-trimmed-reads-and-comparing-to-the-input-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1</span></span>  with the following parameters:
@@ -1038,7 +1031,7 @@ and we will drop.</p>
 <p>MultiQC is a tool to combine multiple outputs in one clear and easy to read overview. It generates plots to easily visualize the different quality statistics of all your fastq files.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Looking at your <code class="language-plaintext highlighter-rouge">MultiQC on data ....: Webpage</code> output, answer the following questions:</p>
 
@@ -1051,7 +1044,7 @@ and we will drop.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>There were slight decreases in duplicate reads (19.8% →  18%, 21.2% →  20.5%)</li>
@@ -1078,7 +1071,7 @@ improved to work faster and only for smaller (bacterial) genomes.</p>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assembly-using-shovill"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assembly using Shovill</div>
+  <div class="box-title hands-on-title" id="hands-on-assembly-using-shovill"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly using Shovill</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0" title="Shovill tool" aria-role="link"><strong>Shovill</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/shovill/shovill/1.1.0+galaxy0</span></span> with the following parameters:
@@ -1101,14 +1094,14 @@ improved to work faster and only for smaller (bacterial) genomes.</p>
       <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">Contigs</code> file:</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
         <ol>
           <li>How big is the first contig?</li>
           <li>What is the coverage of your biggest (first) contig?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Both of these can be found in the header line of the Contigs produced by Shovill</p>
 
           <p><em>NOTE: The results can differ from this example, because Shovill can differ a bit per assembly</em></p>
@@ -1136,7 +1129,7 @@ improved to work faster and only for smaller (bacterial) genomes.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>First read <a href="https://github.com/rrwick/Bandage/wiki/Simple-example">this page in the Bandage wiki</a> to help understand what the graph means.</p>
 
   <ol>
@@ -1144,7 +1137,7 @@ improved to work faster and only for smaller (bacterial) genomes.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>This is a very messy assembly, with a lot of potential paths through the sequence. We cannot feel confident in the output .fasta file (as it is much smaller than the expected 2.9Mbp). In real life we might consider doing a hybrid assembly with Nanopore or other long read data to help resolve these issues.</li>
@@ -1163,7 +1156,7 @@ stands for QUality ASsessment Tool. With later updates gene annotation
 also possible with QUAST.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-of-assembly-using-quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality Control of assembly using Quast</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-of-assembly-using-quast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control of assembly using Quast</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1" title="Quast tool" aria-role="link"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1</span></span> with the following parameters:
@@ -1192,14 +1185,14 @@ sequence made by combining all separate reads in the assembly</p>
 <p>This fasta file contains 32 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is you GC content?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The GC content for our assembly was 32.77% (for comparison <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/">MRSA Isolate HC1335 Strain</a> GC% is 32.89%). This means the length and GC% of the assembly could be good!</li>
@@ -1213,7 +1206,7 @@ sequence made by combining all separate reads in the assembly</p>
 <p>Because we are working with a MRSA we are curious to see which resistance genes are located on the genome or on the plasmid. To determine whether the contigs contain antimicrobial resistance (AMR) genes <a href="https://github.com/phac-nml/staramr">staramr</a> can be used  <strong>Staramr</strong> scans bacterial genome contigs against both the <strong>ResFinder</strong> (<span class="citation"><a href="#Zankari2012">Zankari <i>et al.</i> 2012</a></span>), <strong>PointFinder</strong> (<span class="citation"><a href="#Zankari2017">Zankari <i>et al.</i> 2017</a></span>), and <strong>PlasmidFinder</strong> (<span class="citation"><a href="#Carattoli2014">Carattoli <i>et al.</i> 2014</a></span>) databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-staramr"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run staramr</div>
+  <div class="box-title hands-on-title" id="hands-on-run-staramr"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run staramr</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2" title="staramr tool" aria-role="link"><strong>staramr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2</span></span> with the following parameters:
@@ -1285,7 +1278,7 @@ sequence made by combining all separate reads in the assembly</p>
 it is logical to find the resistance gene in a specific bacteria.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>To what family does <a href="https://card.mcmaster.ca/ontology/36911">mecA</a> belong?</li>
@@ -1294,7 +1287,7 @@ it is logical to find the resistance gene in a specific bacteria.</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><a href="https://card.mcmaster.ca/ontology/37589">Methicillin resistant PBP2</a></li>
@@ -1319,7 +1312,7 @@ In this case you will use your assembly as your reference and the output
 from prokka as an information track.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotating the Genome</div>
+  <div class="box-title hands-on-title" id="hands-on-annotating-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating the Genome</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Prokka tool" aria-role="link"><strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0</span></span> with the following parameters:
@@ -1832,7 +1825,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

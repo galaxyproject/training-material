@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Monitoring Galaxy and Pulsar with Sentry">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -431,7 +431,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -468,14 +468,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Monitoring Galaxy and Pulsar with Sentry</h1>
@@ -1005,7 +998,7 @@ Sentry.init({
 <p>To proceed from here it is expected that:</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Requirements for Running This Tutorial</div>
+  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements for Running This Tutorial</div>
 
   <ol>
     <li>You have set up a working Galaxy instance as described in the <a href="../ansible-galaxy/tutorial.html">ansible-galaxy</a> tutorial.</li>
@@ -1018,7 +1011,7 @@ Sentry.init({
 <p>First we need to add our new Ansible role to <code class="language-plaintext highlighter-rouge">requirements.yml</code>:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-set-up-sentry-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Set up Sentry with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-set-up-sentry-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Set up Sentry with Ansible</div>
 
   <ol>
     <li>
@@ -1044,7 +1037,7 @@ Sentry.init({
       <p>Install the roles with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" data-ref="req-install" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1105,7 +1098,7 @@ Sentry.init({
       <p>We will add an associated admin password to the vault, do that now:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1221,7 +1214,7 @@ Sentry.init({
       <p>Run the sentry playbook to deploy sentry and the galaxy playbook to update the nginx configuration.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook sentry.yml galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1234,7 +1227,7 @@ Sentry.init({
       <p>We will add the galaxy project dsn to the vault. Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and add the sentry dsn.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1268,7 +1261,7 @@ We will also enable sending performance metrics to Sentry by setting the <code c
   </ol>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+    <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
     <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>    </div>
   </blockquote>
@@ -1281,7 +1274,7 @@ We will also enable sending performance metrics to Sentry by setting the <code c
 Just visit: <a href="https://my.gat.galaxy.training/?path=/error">/error</a></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-open-the-galaxy-project-in-sentry"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Open the Galaxy Project in Sentry</div>
+  <div class="box-title hands-on-title" id="hands-on-open-the-galaxy-project-in-sentry"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Open the Galaxy Project in Sentry</div>
   <ol>
     <li>Go to your Sentry instance and click on issues. You should see a couple of issues,
 one them should be the “Fake error” exception we generated by visiting https://galaxy.example.org/error.</li>
@@ -1293,7 +1286,7 @@ one them should be the “Fake error” exception we generated by visiting https
 <p>In addition to sending logging errors to Sentry you can also collect failing tool runs in Sentry. For this we will set up the error reporting configuration file and reference it in galaxy.yml. The <code class="language-plaintext highlighter-rouge">user_submission</code> parameter controls whether all reports will be collected in Sentry (when set to <code class="language-plaintext highlighter-rouge">false</code>) or only those that have been reported manually (when set to <code class="language-plaintext highlighter-rouge">true</code>). For testing purposes we’ll also add a tool that will fail running so we can test that submitting tool errors to Sentry works as expected.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-update-galaxy-config-to-send-tool-error-reports"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Update Galaxy config to send tool error reports</div>
+  <div class="box-title hands-on-title" id="hands-on-update-galaxy-config-to-send-tool-error-reports"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Update Galaxy config to send tool error reports</div>
 
   <ol>
     <li>
@@ -1418,7 +1411,7 @@ one them should be the “Fake error” exception we generated by visiting https
       <p>Run the galaxy playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1432,7 +1425,7 @@ one them should be the “Fake error” exception we generated by visiting https
 <p>To generate a tool error, run the job properties testing tool and set the <code class="language-plaintext highlighter-rouge">failbool</code> parameter to true.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-open-the-galaxy-project-in-sentry-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Open the Galaxy Project in Sentry</div>
+  <div class="box-title hands-on-title" id="hands-on-open-the-galaxy-project-in-sentry-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Open the Galaxy Project in Sentry</div>
   <ol>
     <li>Go to your Sentry instance and click on issues. You should see an issue for the tool run error.</li>
   </ol>
@@ -1443,14 +1436,14 @@ one them should be the “Fake error” exception we generated by visiting https
 <p>It is also possible to report errors from the Pulsar server. You can either use the Galaxy project we created before in Sentry, or we can create a new project for Pulsar. We recommend creating a separate Pulsar project. Since the Pulsar server runs on a remote VM for this to work you need a valid certificate for the Sentry domain and you cannot use localhost.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-sentry-connection-to-pulsar"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add Sentry connection to Pulsar</div>
+  <div class="box-title hands-on-title" id="hands-on-add-sentry-connection-to-pulsar"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Sentry connection to Pulsar</div>
   <ol>
     <li>Create a new dsn by creating a new pulsar project in Sentry.</li>
     <li>
       <p>We will add the project dsn to the vault. Edit your <code class="language-plaintext highlighter-rouge">group_vars/secret.yml</code> and add the sentry dsn.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-vault edit group_vars/secret.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1478,7 +1471,7 @@ one them should be the “Fake error” exception we generated by visiting https
       <p>Run the pulsar playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1641,7 +1634,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

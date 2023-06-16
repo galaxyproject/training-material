@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: How to reproduce published Galaxy analyses">
         <meta property="og:description" content="Galaxy is a scientific workflow, data integration, and da...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -358,7 +358,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -395,14 +395,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-introduction">
     <h1 data-toc-skip>How to reproduce published Galaxy analyses</h1>
@@ -657,7 +650,7 @@ Sentry.init({
 <p>Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: <a href="https://usegalaxy.org">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au">usegalaxy.org.au</a>. To learn more about the different Galaxy servers visit the <a href="/training-material/topics/introduction/tutorials/options-for-using-galaxy/slides.html#1">slides: options for using Galaxy</a>. The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-log-in-or-register"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Log in or register</div>
+  <div class="box-title hands-on-title" id="hands-on-log-in-or-register"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in or register</div>
   <ol>
     <li>Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)</li>
     <li>Browse to the <a href="https://usegalaxy.eu/">Galaxy Europe instance</a> (recommended) or to a Galaxy instance of your choosing</li>
@@ -686,7 +679,7 @@ Sentry.init({
 <p>Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained <a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">in the interface slides</a>. To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create history</div>
+  <div class="box-title hands-on-title" id="hands-on-create-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create history</div>
 
   <ol>
     <li>
@@ -708,14 +701,14 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-about-the-dataset"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Background about the dataset</div>
+  <div class="box-title comment-title" id="comment-background-about-the-dataset"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background about the dataset</div>
   <p>The Iris flower data set, also known as Fisher’s or Anderson’s Iris data set, is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<span class="citation"><a href="#Fisher1936">Fisher 1936</a></span>).
 Each row of the table represents an iris flower sample, describing its species and the dimensions in centimeters of its botanical parts, the sepals and petals.
 You can find more detailed information about this dataset on its dedicated <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia page</a>.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -770,7 +763,7 @@ This will help you make sense of your history.</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-with-different-types-of-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-different-types-of-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working with different types of datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-with-different-types-of-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-with-different-types-of-datasets" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working with different types of datasets<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Some input datasets might need more specialized treatment than explained here.
 A few data types contain more than one subfile. These are uploaded via the composite data function, which is a new tab on the right of regular upload. Then at the bottom set “composite type” to your file format. For each subfile a select box will appear with a description next to it, about which subfile has to be selected where.
 Some workflows require input files as dataset collections, in such cases “Input dataset collection” are shown as input when editing or viewing the workflow in the workflow menu. Collections contain several single dataset of the same type tied together. In case a workflow input requires a collection, you’ll need to build a collection out of your files after uploading them.
@@ -796,7 +789,7 @@ Some workflows require input files as dataset collections, in such cases “Inpu
 <p>This tutorial follows option 1, but options 2 and 3 are no more difficult</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-how-to-run-workflows-via-options-2-and-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-run-workflows-via-options-2-and-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: How to run workflows via options 2 and 3<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-how-to-run-workflows-via-options-2-and-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-run-workflows-via-options-2-and-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: How to run workflows via options 2 and 3<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This is not part of the training, but information in case you received a workflow of interest via way 2) or 3).</p>
 
   <p><strong>Link from a personal Galaxy</strong>:
@@ -818,7 +811,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-and-run-workflow-available-as-ga-file-or-link"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import and run workflow available as .ga file or link</div>
+  <div class="box-title hands-on-title" id="hands-on-import-and-run-workflow-available-as-ga-file-or-link"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import and run workflow available as .ga file or link</div>
 
   <ol>
     <li>
@@ -840,12 +833,12 @@ In WorkflowHub there is an option to directly run a workflow.</p>
       <p><strong>Run</strong> the workflow by clicking on <code class="language-plaintext highlighter-rouge">run workflow</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>How many history items do you have after running the workflow?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>12, out of which 4 are shown and 8 hidden (at top of history right ander the history name)</p>
         </blockquote>
@@ -856,7 +849,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-hidden-datasets-in-history"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Hidden datasets in history</div>
+  <div class="box-title comment-title" id="comment-hidden-datasets-in-history"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Hidden datasets in history</div>
   <p>Some workflow outputs might be considered as not very important intermediate results and are thus marked as getting hidden in the analysis history after they turned green. This makes the history easier to navigate through the main results which are visible in the history. Hidden datasets can be made visible individually by clicking on the eye with a slash on top of the history and then clicking “Unhide” for the individual datasets. To unhide many dataset at once, click <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> “Select Items” at the top left of the history; then select all hidden datasets that you would like to unhide, then click “For n of N selected” and then “Unhide”.</p>
 </blockquote>
 
@@ -867,7 +860,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-tool-stays-grey"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The tool stays grey</div>
+  <div class="box-title comment-title" id="comment-the-tool-stays-grey"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The tool stays grey</div>
   <p>This scenario will likely not happen with this training analysis, but might happen with a real workflow. The tool runs are scheduled on the computing infrastructures according to their consumption of cores and memory. Thus, tools that are assigned lots of cores and/or memory need to wait until an appropriate computing spot is available. Several Galaxy server display the current computational load which gives you an idea how busy it currently is.</p>
 </blockquote>
 
@@ -878,7 +871,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 <p>Each history item represents one file or dataset, except when collections are used. History items are numbered, duplicates are not possible because any type of dataset manipulation will automatically generate a separate dataset in the history. Some tools produce several output files and therefore the number of history items can be larger than the number of steps in a workflow. Dataset names in the analysis history are not relevant for the tool run, therefore they can be adjusted in order to make the history easier to understand. The default name of a history item is composed of the tool name that was run and the history item number(s) of the input file(s), e.g. ‘Unique on data 5’</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspect-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspect history</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect history</div>
 
   <ol>
     <li>
@@ -898,7 +891,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
       <p><strong>Track</strong> how the <code class="language-plaintext highlighter-rouge">Datamash</code> results where obtained by clicking on the <code class="language-plaintext highlighter-rouge">Datamash</code> item in the history and then on its <code class="language-plaintext highlighter-rouge">i</code> icon (view details). The performed operations can be found in the section <code class="language-plaintext highlighter-rouge">Tool parameters</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What are the different Iris species?</li>
@@ -908,7 +901,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>The 3 different Iris species are:
@@ -943,7 +936,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 <p>Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on <a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using Workflow Parameters</a>) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the <code class="language-plaintext highlighter-rouge">re-run</code> option.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-manipulate-the-analysis-steps"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Manipulate the analysis steps</div>
+  <div class="box-title hands-on-title" id="hands-on-manipulate-the-analysis-steps"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Manipulate the analysis steps</div>
 
   <ol>
     <li>
@@ -967,7 +960,7 @@ In WorkflowHub there is an option to directly run a workflow.</p>
 <p>Often not only workflows and raw data are published, but also the full Galaxy histories. These histories can either be inspected via their provided link, or imported in order to enable manipulating them in your own Galaxy account.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-importing-a-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a history</div>
+  <div class="box-title hands-on-title" id="hands-on-importing-a-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Importing a history</div>
 
   <ol>
     <li>
@@ -989,7 +982,7 @@ The original dataset consists of 53940 specimen of diamonds, for which it lists 
 For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained. The same workflow as before was used to re-analysis this second dataset and create the analysis history, which highlights the re-usability of workflows across inputs.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-4-cs-of-diamond-grading"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The 4 Cs of diamond grading</div>
+  <div class="box-title comment-title" id="comment-the-4-cs-of-diamond-grading"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The 4 Cs of diamond grading</div>
   <p>According to the <a href="https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg">GIA’s (Gemological Institute of America) diamond grading system</a></p>
   <ul>
     <li><strong>Carat</strong> refers to the weight of the diamond when measured on a scale</li>
@@ -1000,7 +993,7 @@ For this training, we have created a simpler dataset from the original, in which
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What are the different Cut categories?</li>
@@ -1009,7 +1002,7 @@ For this training, we have created a simpler dataset from the original, in which
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The 5 different Cut categories are:
@@ -1216,7 +1209,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

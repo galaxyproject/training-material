@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Setting up molecular systems">
         <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -274,7 +274,7 @@ Sentry.init({
   "mentions": [
 
   ],
-  "abstract": "> <div class=\"box-title comment-title\" id=\"comment-audience\"><i class=\"far fa-comment-dots\" aria-hidden=\"true\" ></i> Comment: Audience</div>"
+  "abstract": "> <div class="box-title comment-title" id="comment-audience"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Audience</div>"
 }
         </script>
         
@@ -415,7 +415,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -452,14 +452,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxycomputationalchemistry/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-computational-chemistry">
     <h1 data-toc-skip>Setting up molecular systems</h1>
@@ -713,7 +706,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-audience"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Audience</div>
+  <div class="box-title comment-title" id="comment-audience-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Audience</div>
   <p>This tutorial is intended for those who are new to the computational chemistry tools in Galaxy.</p>
 </blockquote>
 
@@ -751,7 +744,7 @@ Sentry.init({
 <p>In this section we’ll access the PDB, download the correct structure, import it and view in Galaxy.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-background-what-is-the-pdb-protein-data-bank-and-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-and-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Background: What is the PDB (Protein Data Bank) and format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-background-what-is-the-pdb-protein-data-bank-and-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-and-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Background: What is the PDB (Protein Data Bank) and format?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=7CEL">7CEL</a>).</p>
 
@@ -764,7 +757,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-background-why-choose-a-cellulase"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-why-choose-a-cellulase" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Background: Why choose a cellulase?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-background-why-choose-a-cellulase"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-why-choose-a-cellulase" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Background: Why choose a cellulase?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Using enzymes to break down abundant cellulose into disaccharide units (cellobiose) is a method to optimise the
 biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</i> 2011</a></span></p>
@@ -783,7 +776,7 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 
 <p>The 7CEL <a href="https://files.rcsb.org/download/7CEL.pdb">PDB</a> does not include a complete 8 unit substrate and some modelling is required. The correctly modelled substrate is provided for this tutorial.</p>
 <blockquote class="details">
-  <div class="box-title details-title" id="details-more-details-about-the-modelling-done"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-modelling-done" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: More details about the modelling done<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-details-about-the-modelling-done"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-about-the-modelling-done" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: More details about the modelling done<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>VMD (visualisation software) was used for atomic placement and CHARMM was used for energy minimisation.</li>
     <li>The PDB structure contains a mutation at position 217 (glumatate to glutamine). Our structure reverses this.</li>
@@ -793,7 +786,7 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -833,7 +826,7 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 <p>It is convenient to set up the molecular system outside Galaxy using a tool such as CHARMM-GUI. Alternative methods are possible - see the <a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html">GROMACS tutorial</a> for an example. <span class="citation"><a href="#jo17">Jo <i>et al.</i> 2016</a></span></p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-viewing-figures"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-viewing-figures" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Viewing figures<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-viewing-figures"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-viewing-figures" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Viewing figures<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>Some of the figures are screenshots and it may be difficult to make out details</li>
     <li>Right-click on the image and choose ‘Open image in new tab’ to view</li>
@@ -851,7 +844,7 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 <p><a href="http://www.charmm-gui.org/?doc=input/pdbreader">Navigate to CHARMM-GUI</a> and use the Input Generator, specifically the PDB Reader tool and upload the Cellulase PDB file. Press ‘Next Step: Select Model/Chain’ in the bottom right corner.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-the-pdb-to-charmm-gui"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the PDB to CHARMM-GUI</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-pdb-to-charmm-gui"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the PDB to CHARMM-GUI</div>
 
   <ol>
     <li>Retrieve the modelled PDB structure from <a href="https://doi.org/10.5281/zenodo.2600690">Zenodo</a>.</li>
@@ -863,34 +856,34 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 <h3 id="select-both-protein-and-ligand-models">Select both protein and ligand models</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-pdb-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate PDB file</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-pdb-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate PDB file</div>
   <p>Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press ‘Next Step: Generate PDB’ in the bottom right corner.</p>
   <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-modelchain.png" alt="Snapshot of CHARMM-GUI model section. " width="2555" height="864" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Select both ligand and protein models in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <h3 id="manipulate-the-system">Manipulate the system</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-make-necessary-modifications"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Make necessary modifications</div>
+  <div class="box-title hands-on-title" id="hands-on-make-necessary-modifications"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Make necessary modifications</div>
   <p>Rename the hetero chain to BGLC and add ten disulfide bonds to the protein, as shown in the figure. Then press ‘Next Step: Generate PDB’ in the bottom right corner.</p>
   <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-manipulate.png" alt="Snapshot of CHARMM-GUI renaming section. " width="2143" height="1373" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Rename the chains in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <h3 id="download-the-output">Download the output</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-download-charmm-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Download CHARMM output</div>
+  <div class="box-title hands-on-title" id="hands-on-download-charmm-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Download CHARMM output</div>
   <p>The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.</p>
   <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-charmmoutput.png" alt="Snapshot of CHARMM-GUI CHARMM output section. " width="2560" height="1215" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> CHARMM output from CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-is-a-tgz-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-tgz-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What is a .tgz file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-is-a-tgz-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-tgz-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What is a .tgz file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This is a compressed file which contains all the output files created by the CHARMM-GUI. To access them, the .tgz file needs to be decompressed. There should be a tool available on your operating system for this. If you prefer to use the command line, tar will work fine on Linux or Mac <code class="language-plaintext highlighter-rouge">tar -zxvf example.tgz</code>. On Windows use <a href="https://www.7-zip.org/download.html">7zip</a>, or download Git for windows and use Git Bash.</p>
 </blockquote>
 
 <h3 id="upload-to-galaxy">Upload to Galaxy</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-files-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload files to Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-files-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload files to Galaxy</div>
   <p>Upload the step1_pdbreader.psf and step1_pdbreader.crd files to your Galaxy instance and run the system setup tool.</p>
 </blockquote>
 
@@ -899,7 +892,7 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 <h3 id="upload-the-pdb-to-charmm-gui-1">Upload the PDB to CHARMM-GUI</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-the-pdb-to-charmm-gui-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the PDB to CHARMM-GUI</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-pdb-to-charmm-gui-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the PDB to CHARMM-GUI</div>
   <p>Retrieve the modelled PDB structure from <a href="https://doi.org/10.5281/zenodo.2600690">Zenodo</a>.
 <a href="http://www.charmm-gui.org/?doc=input/mdsetup">Navigate to CHARMM-GUI</a> and use the Input Generator, specifically the Solution Builder tool. Upload the PDB file, selecting ‘CHARMM’ as the file format. Press ‘Next Step: Select Model/Chain’ in the bottom right corner.</p>
   <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-mdsimulator-solution-builder.png" alt="Snapshot of CHARMM-GUI Solution Builder tool . " width="1901" height="962" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The CHARMM-GUI Solution Builder tool</figcaption></figure>
@@ -907,32 +900,32 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 
 <h3 id="select-both-protein-and-ligand-models-1">Select both protein and ligand models</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-pdb-file-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate PDB file</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-pdb-file-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate PDB file</div>
   <p>Two model chains are presented for selection: the protein (PROA) and the hetero residue, which is the ligand or glycan in this case (HETA). Select both, and press ‘Next Step: Generate PDB’ in the bottom right corner.</p>
   <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-modelchain.png" alt="Snapshot of CHARMM-GUI model section. " width="2555" height="864" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Select both ligand and protein models in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <h3 id="manipulate-the-system-1">Manipulate the system</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-make-necessary-modifications-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Make necessary modifications</div>
+  <div class="box-title hands-on-title" id="hands-on-make-necessary-modifications-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Make necessary modifications</div>
   <p>Rename the hetero chain to BGLC and add disulfide bonds.Press ‘Next Step: Generate PDB’ in the bottom right corner.</p>
   <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-manipulate.png" alt="Snapshot of CHARMM-GUI renaming section. " width="2143" height="1373" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Rename the chains in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <h3 id="set-up-the-waterbox-and-add-ions">Set up the waterbox and add ions</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-solvate-the-protein"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Solvate the protein</div>
+  <div class="box-title hands-on-title" id="hands-on-solvate-the-protein"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Solvate the protein</div>
   <p>Set up a waterbox. Use a size of 10 angstroms and choose a cubic box (‘rectangular’ option).</p>
   <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmm-gui-waterbox-from-solution-builder.png" alt="Snapshot of CHARMM-GUI waterbox section. " width="1905" height="864" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Setting up a waterbox in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why is 10 angstrom a fair choice for the buffer?  Why choose 0.15M NaCl?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Under periodic boundary conditions, we need to ensure the protein can never interact with its periodic image, otherwise artefacts are introduced. Allowing 10 angstroms between the protein and the box edge ensures the two images will always be at minimum 20 angstroms apart, which is sufficient.</p>
 
     <p>Some of the residues on the protein surface are charged and counter-ions need to be present nearby to neutralise them. Failure to explicitly model salt ions may destabilise the protein.</p>
@@ -942,20 +935,20 @@ biofuel process. <span class="citation"><a href="#barnett11">Barnett <i>et al.</
 <h3 id="generate-the-fft-automatically">Generate the FFT automatically</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-the-fft"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate the FFT</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-the-fft"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate the FFT</div>
   <p>Particle Mesh Ewald (PME) summation is the method being used to calculate long-range interactions in this system. To improve the computational time a Fast Fourier Transform (FFT) is used. A detailed discussion of FFT will not be presented here; there are many articles on the subject. Try <a href="https://en.wikipedia.org/wiki/Ewald_summation">Wikipedia</a> and <span class="citation"><a href="#Toukmaji_1996">Toukmaji and Board 1996</a></span>.</p>
   <figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-fft.png" alt="Snapshot of CHARMM-GUI FFT section. " width="2555" height="1189" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Setting up a FFT in CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <h3 id="download-the-output-1">Download the output</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-solvate-the-protein-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Solvate the protein</div>
+  <div class="box-title hands-on-title" id="hands-on-solvate-the-protein-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Solvate the protein</div>
   <p>The output is a .tgz file (a tarball or zipped tarball). Inside the archive you will see all inputs and outputs from CHARMM-GUI.</p>
   <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/charmmgui-namdoutput.png" alt="Snapshot of CHARMM-GUI NAMD output section. " width="2560" height="1161" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> NAMD output from CHARMM-GUI</figcaption></figure>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-is-a-tgz-file-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-tgz-file-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What is a .tgz file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-is-a-tgz-file-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-a-tgz-file-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What is a .tgz file?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This is a compressed file and needs to be uncompressed using the correct tool.
 On Linux or Mac: tar will work fine <code class="language-plaintext highlighter-rouge">tar -zxvf example.tgz</code>.
@@ -964,7 +957,7 @@ On Windows use <a href="https://www.7-zip.org/download.html">7zip</a> or downloa
 
 <h3 id="upload-to-galaxy-1">Upload to Galaxy</h3>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-files-to-galaxy-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload files to Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-files-to-galaxy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload files to Galaxy</div>
   <p>Upload the following files to your Galaxy instance and ensure the correct datatype is selected:</p>
   <ul>
     <li>step3_pbcsetup.psf -&gt; xplor psf input (psf format)</li>
@@ -1196,7 +1189,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Virtual screening of the SARS-CoV-2 main protease with rx...">
         <meta property="og:description" content="Modelling, simulation and analysis of biomolecular systems">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -376,7 +376,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -413,14 +413,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxycomputationalchemistry/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-computational-chemistry">
     <h1 data-toc-skip>Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring</h1>
@@ -736,7 +729,7 @@ Sentry.init({
 </ol>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-differences-with-the-original-study"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-differences-with-the-original-study"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Of the initial 55 fragment hits, 17 were chosen for further study. From these, 41,587 compounds were generated using the Fragalysis fragment network for further study. The 100 compounds used in the tutorial are taken from this list.</p>
 
@@ -759,7 +752,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -791,7 +784,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>Before docking, the candidate ligands need to be prepared for docking with the following steps: 1) charge enumeration, 2) generation of three-dimensional structures, and 3) splitting the SD-file into a collection.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-differences-with-the-original-study-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-differences-with-the-original-study-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This stage is carried out as described here, except of course with the full set of 42,000 compounds. See <a href="https://covid19.galaxyproject.org/cheminformatics/1-DockingPrep/">the docking prep workflow</a> for more details.</p>
 </blockquote>
@@ -801,7 +794,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>Many of the compounds may contain functional groups which can exist in multiple charge states, and this will affect the quality of binding to the receptor dramatically. Therefore, we perform ‘charge enumeration’, which means that we generate all charge forms of the compounds within a certain pH range.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-charge-enumeration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Charge enumeration</div>
+  <div class="box-title hands-on-title" id="hands-on-charge-enumeration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Charge enumeration</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0" title="Enumerate charges tool" aria-role="link"><strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0</span></span> with the following parameters:
@@ -815,7 +808,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
       <p>Rename the output file <code class="language-plaintext highlighter-rouge">Enumerated candidates SMILES</code>.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The <strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the Dimorphite-DL program. (<span class="citation"><a href="#Ropp2019">Ropp <i>et al.</i> 2019</a></span>)</p>
       </blockquote>
@@ -833,7 +826,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>If you are not familiar with SMILES and SDF formats, consult the introductory <a href="../cheminformatics/tutorial.html">protein-ligand docking tutorial</a> for more details.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-to-sdf-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert to SDF format</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-to-sdf-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert to SDF format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="link"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span> with the following parameters:
@@ -850,7 +843,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
       <p>Rename the output file <code class="language-plaintext highlighter-rouge">Enumerated candidates SDF</code>.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The <strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool is based on the OpenBabel toolkit. (<span class="citation"><a href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a></span>)</p>
       </blockquote>
@@ -864,12 +857,12 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>The next stage is to split the SD-file with the candidate ligands into a set of smaller SD-files.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why is splitting the file necessary?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The rxDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple Galaxy jobs in parallel, so it completes faster.</p>
 
@@ -879,7 +872,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-split-the-sd-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Split the SD-files</div>
+  <div class="box-title hands-on-title" id="hands-on-split-the-sd-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Split the SD-files</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0" title="Split file to dataset collection tool" aria-role="link"><strong>Split file to dataset collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0</span></span> with the following parameters:
@@ -906,7 +899,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>The active site also needs to be prepared for docking, using the following steps: 1) conversion to MOL2 format, and 2) generation of the active site using the <strong>rbcavity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-differences-with-the-original-study-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-differences-with-the-original-study-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This stage was carried out as described here. However, it was repeated for each of the fragment hit structures, not just the <code class="language-plaintext highlighter-rouge">Mpro-x0195_0_apo-desolv.pdb</code> file used here. See <a href="https://covid19.galaxyproject.org/cheminformatics/2-ActiveSitePrep/">the active site prep workflow</a> for more details.</p>
 </blockquote>
@@ -916,7 +909,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>The receptor file we are using is in PDB format, but the rxDock tool we use for docking requires an input in MOL2 format. Therefore, we first convert the file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conversion-to-mol2-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conversion to MOL2 format</div>
+  <div class="box-title hands-on-title" id="hands-on-conversion-to-mol2-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Conversion to MOL2 format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Compound conversion tool" aria-role="link"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span> with the following parameters:
@@ -935,12 +928,12 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>For docking with rxDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a ‘Frankenstein ligand’ which possesses the properties of all the fragments. A very simple Galaxy tool is available for this.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What is a ‘Frankenstein ligand’ and why do we need it?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The Frankenstein ligand combines the atoms of all the fragments and therefore occupies the entire space of the binding site. Therefore, it is the best choice for cavity definition. See the <a href="https://www.informaticsmatters.com/blog/2018/11/23/cavities-and-frankenstein-molecules.html">information provided by InformaticsMatters</a> for more details.</p>
 
@@ -949,7 +942,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-frankenstein-ligand"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate Frankenstein ligand</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-frankenstein-ligand"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate Frankenstein ligand</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0" title="Create Frankenstein ligand tool" aria-role="link"><strong>Create Frankenstein ligand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0</span></span> with the following parameters:
@@ -967,7 +960,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>The active site can now be generated using the <strong>rbcavity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the Frankenstein ligand as the reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-active-site-preparation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Active site preparation</div>
+  <div class="box-title hands-on-title" id="hands-on-active-site-preparation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Active site preparation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5" title="rxDock cavity definition tool" aria-role="link"><strong>rxDock cavity definition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5</span></span> with the following parameters:
@@ -984,7 +977,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
     </li>
     <li>Rename the output file <code class="language-plaintext highlighter-rouge">Active site</code>.
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The meanings of these parameters are too complex to go into in this tutorial. If you are interested, see the <a href="http://rdock.sourceforge.net/wp-content/uploads/2015/08/rDock_User_Guide.pdf">rDock documentation</a> for more details.</p>
       </blockquote>
@@ -998,7 +991,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 <p>Docking and scoring are now performed, using the following steps: 1) docking using rxDock, 2) recombining the results into a single SDF file, 3) TransFS scoring, and 4) SuCOS scoring.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-differences-with-the-original-study-3"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-3" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-differences-with-the-original-study-3"><button class="gtn-boxify-button details" type="button" aria-controls="details-differences-with-the-original-study-3" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Differences with the original study<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>This section in the original study differed from this tutorial in the following ways:</p>
   <ol>
@@ -1013,7 +1006,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">the D
 <h2 id="docking-with-rxdock">Docking with rxDock</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-docking"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Docking</div>
+  <div class="box-title hands-on-title" id="hands-on-docking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Docking</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5" title="rxDock docking tool" aria-role="link"><strong>rxDock docking</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5</span></span> with the following parameters:
@@ -1026,7 +1019,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">the D
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>For more information about docking, check out the <a href="../cheminformatics/tutorial.html">introductory tutorial</a>. It uses a different tool, AutoDock Vina, rather than rxDock, but the general principles are the same.</p>
       </blockquote>
@@ -1040,7 +1033,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">the D
 <p>Having created a collection to parallelize the docking procedure, we can now recombine the results to a single file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-collapse-collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Collapse collection</div>
+  <div class="box-title hands-on-title" id="hands-on-collapse-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Collapse collection</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span> with the following parameters:
@@ -1062,7 +1055,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">the D
 <p>The TransFS scoring returns a value (saved as <code class="language-plaintext highlighter-rouge">&lt;TransFSScore&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-transfs-scoring"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: TransFS scoring</div>
+  <div class="box-title hands-on-title" id="hands-on-transfs-scoring"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: TransFS scoring</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0" title="XChem TransFS pose scoring tool" aria-role="link"><strong>XChem TransFS pose scoring</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0</span></span> with the following parameters:
@@ -1083,7 +1076,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">the D
 <p>SuCOS scoring returns a value (saved as <code class="language-plaintext highlighter-rouge">&lt;Max_SuCOS_Score&gt;</code> in the SDF file) between 0 (poor) and 1 (good).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sucos-scoring"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SuCOS scoring</div>
+  <div class="box-title hands-on-title" id="hands-on-sucos-scoring"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: SuCOS scoring</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0" title="Max SuCOS score tool" aria-role="link"><strong>Max SuCOS score</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0</span></span> with the following parameters:
@@ -1351,7 +1344,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

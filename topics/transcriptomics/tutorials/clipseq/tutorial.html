@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: CLIP-Seq data analysis from pre-processing to motif detec...">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -462,7 +462,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -499,14 +499,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>CLIP-Seq data analysis from pre-processing to motif detection</h1>
@@ -893,7 +886,7 @@ Sentry.init({
 <h2 id="step-1-get-data">Step 1: Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
   <ol>
     <li>
       <p>Create and name a new history for this tutorial.</p>
@@ -932,14 +925,14 @@ https://zenodo.org/record/2579279/files/RBFOX2-204-INPUT_S2_R2.fastq
 <h2 id="report-with-fastqc">Report with <strong>FastQC</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control with FastQC</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control with FastQC</div>
 
   <ol>
     <li>
       <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run the tool <strong>FastQC</strong> on each FASTQ file to assess the quality of the raw data. An explanation of the results can be found on the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC web page</a>.</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-running-a-tool-on-multiple-data-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-tool-on-multiple-data-files" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a tool on multiple data files<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-running-a-tool-on-multiple-data-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-tool-on-multiple-data-files" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Running a tool on multiple data files<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You can run this tool - and many other tools - on all the FASTQ files at once!
 To do this, first select the “Multiple datasets” icon (two stacked pages) under the “Input FASTQ file” heading in the <strong>FASTQC</strong> Tool Form, then shift+click to select multiple FASTQ files.</p>
@@ -953,7 +946,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_duplication_level_1.png" alt="fastqbefore. " width="800" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sequence duplication levels <b>before</b> de-duplication; The y-axis represents the portion of reads with the specific duplication level. An exact sequence match is needed to detect a duplicated read. The blue line shows the duplication level distribution of the full sequence set. The red line depicts an ideal curve after a de-duplication step (duplicates are filtered out).</figcaption></figure>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Has our data high sequence duplication levels?</li>
@@ -962,7 +955,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>Yes, ideally we would see a blue line with one high peak in a duplication of one, everything else should be zero.</li>
         <li>Spikes in the red line come from different duplication levels in the original data (blue line).</li>
@@ -984,7 +977,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <p>In this task we are going to remove two 3’ and two 5’ adapters from the reads (Note: The eCLIP protocol uses more adapter sequences, for more information take a look in the original publication <span class="citation"><a href="#VanNostrand2016">Nostrand <i>et al.</i> 2016</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adapter-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adapter Removal</div>
+  <div class="box-title hands-on-title" id="hands-on-adapter-removal"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adapter Removal</div>
 
   <p><strong>Cutadapt (v. 4.0)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1110,12 +1103,12 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   </ul>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-why-do-we-remove-5-bp-from-the-first-read"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Why do we remove 5 bp from the first read?</div>
+    <div class="box-title comment-title" id="comment-why-do-we-remove-5-bp-from-the-first-read"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why do we remove 5 bp from the first read?</div>
     <p>In eCLIP it can happen that the sequencing goes over the first read into the UMI, which is at the 3’ end of the first read. The UMI is 5 bp long in our data. To make sure our first read in the read pair does not contain the UMI, we simply remove the last 5 bp from it. The UMI that we actually need for the de-duplication is located on the 5’ end of our second read in the read pair.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Do the same thing for the input control data set.</div>
+    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Do the same thing for the input control data set.</div>
 
     <p>If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or <em>vice verca</em>.</p>
   </blockquote>
@@ -1127,7 +1120,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <p>In this task we are going to remove the UMI at the 5’ end of the second read. We are then going to use the removed UMIs later on to de-duplicate our read library and account for PCR duplicates.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-umi-removal"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: UMI Removal</div>
+  <div class="box-title hands-on-title" id="hands-on-umi-removal"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: UMI Removal</div>
 
   <ol>
     <li><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1147,19 +1140,19 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Do the same thing for the input control data set.</div>
+    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Do the same thing for the input control data set.</div>
 
     <p>If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or <em>vice verca</em>.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <ol>
       <li>What is the meaning of the barcode pattern?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>The symbol “N” defines our UMI. The symbol “X” are nucleotides that we would reattach to our read. It is important to note, that the UMI can be encompassed by an in-line barcode, that is why we need two distinct symbols “N” and “X”.</li>
       </ol>
@@ -1175,7 +1168,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <h2 id="aligning-with-rna-star">Aligning with <strong>RNA STAR</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Alignment</div>
 
   <ol>
     <li><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1215,32 +1208,32 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-note-we-have-switched-r1-and-r2-as-forward-and-reverse-reads"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note: We have switched R1 and R2 as forward and reverse reads!</div>
+    <div class="box-title comment-title" id="comment-note-we-have-switched-r1-and-r2-as-forward-and-reverse-reads"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note: We have switched R1 and R2 as forward and reverse reads!</div>
 
     <p>We need to do that because the eCLIP read library is organised in a way such that the first mate (R1) is in reverse and the second mate (R2) in forward orientation.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-soft-clipping-vs-hard-clipping"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Soft-Clipping vs Hard-Clipping</div>
+    <div class="box-title comment-title" id="comment-soft-clipping-vs-hard-clipping"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Soft-Clipping vs Hard-Clipping</div>
 
     <p>Clipping is a way to deal with low quality bases during the alignment step. In <strong>Soft-Clipping</strong> the bases at the 5’ and 3’ end of the read are not part of the alignment. In <strong>Hard-Clipping</strong> the bases at the 5’ and 3’ end of the read are not part of the alignment <strong>and</strong> will be completely removed from the read sequence in the BAM file.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Do the same thing for the input control data set.</div>
+    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Do the same thing for the input control data set.</div>
 
     <p>If you processed the RBFOX2 FASTQ dataset then do the same thing for the input control dataset or <em>vice verca</em>.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Can you think of a reason why we disabled the soft-clipping?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>In eCLIP the cross linking position should be at the beginning of the second read. If we would enable soft-clipping, we would add potential bases with low quality at the end of our second reads that would blur our cross linking position and we would lose precision to detect potential binding regions of RBFOX2.</li>
@@ -1257,7 +1250,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <h2 id="de-duplication-with-umi-tools-deduplicate">De-duplication with <strong>UMI-tools deduplicate</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-de-duplication"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: De-Duplication</div>
+  <div class="box-title hands-on-title" id="hands-on-de-duplication"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: De-Duplication</div>
 
   <ol>
     <li><strong>UMI-tools deduplicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1273,19 +1266,19 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-what-is-the-purpose-of-the-method-we-have-chosen-for-the-de-duplication"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is the purpose of the method we have chosen for the de-duplication?</div>
+    <div class="box-title comment-title" id="comment-what-is-the-purpose-of-the-method-we-have-chosen-for-the-de-duplication"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is the purpose of the method we have chosen for the de-duplication?</div>
 
     <p><code class="language-plaintext highlighter-rouge">UMI-tools deduplication</code> has several methods. The method we have picked is called the  <strong>adjacency</strong> method. For detailed information have a look at method descriptions of UMI-tools <span class="citation"><a href="#Smith2017">Smith <i>et al.</i> 2017</a></span>. For a brief explanation: the method fuses reads together when they have the same coordinates and the same UMI. However, sequencing errors can occur in the UMI. Thus, in the <strong>adjacency</strong> method we fuse also UMIs that differ in a maximal number of characters and where we identify a lot of copies, i.e., the method creates clusters of nodes, a node for each individual UMI, and fuses these nodes based on the <a href="https://en.wikipedia.org/wiki/Hamming_distance">hamming distance</a> and read counts.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Do the same thing for the input control data set.</div>
+    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Do the same thing for the input control data set.</div>
 
     <p>If you processed the RBFOX2 bam file then do the same thing for the input control bam or <em>vice verca</em>.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Why are we doing the de-duplication after the read mapping?</li>
@@ -1293,7 +1286,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>Because we need the coordinates of the reads to see if some reads have the same coordinates and the same UMI.</li>
@@ -1307,7 +1300,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <h2 id="quality-check-of-the-de-duplication-with-fastqc">Quality check of the de-duplication with <strong>FastQC</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-de-duplication-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: De-duplication quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-de-duplication-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: De-duplication quality control</div>
 
   <ol>
     <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1320,7 +1313,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_duplication_level_2.png" alt="fastqafter. " width="800" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Sequence duplication levels <b>after</b> de-duplication.</figcaption></figure>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What can you see, if you compare the duplication levels to our first quality control in step two?</li>
@@ -1328,7 +1321,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>We have reduced the duplication levels.</li>
@@ -1346,7 +1339,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 <h2 id="check-the-read-coverage-with-plotfingerprint">Check the read coverage with <strong>plotFingerprint</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-the-read-coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check the read coverage</div>
+  <div class="box-title hands-on-title" id="hands-on-check-the-read-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check the read coverage</div>
 
   <ol>
     <li><strong>plotFingerprint</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1363,13 +1356,13 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
   <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_fingerprint.png" alt="fingerprint. " width="640" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Graph of IP strength from <b>plotFingerprint</b>. The y-axis represents the fraction of the total number of reads. `plotFingerprint` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The x-axis therefore orders the bins from lowest coverage to highest coverage. The plot here is too idealistic which is because of our small data set.</figcaption></figure>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-what-does-this-graph-represent-especially-for-clip-seq-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What does this graph represent, especially for CLIP-Seq data?</div>
+    <div class="box-title comment-title" id="comment-what-does-this-graph-represent-especially-for-clip-seq-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What does this graph represent, especially for CLIP-Seq data?</div>
 
     <p>It shows us how good the CLIP Signal compared to the control signal is. Now be careful, CLIP-Seq experiments involve either a total RNA control or a negative control with another protein that unspecifically binds RNA (e.g., IgG). An ideal total RNA control (input control) like ours with perfect uniform distribution of reads along the genome/transcriptome (i.e. without enrichments) and infinite sequencing coverage should generate a straighter, diagonal line. On the other hand, a very specific and strong CLIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank. Yet, a negative control often has the same sharp slope at the end as a CLIP experiment but often depicts a straighter, diagonal line in the beginning like the input control.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How do (or should) input datasets differ from CLIP datasets?</li>
@@ -1377,7 +1370,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>We expect that the control (input) has a different, more straighter, diagonal slope than the CLIP experiment.</li>
@@ -1396,7 +1389,7 @@ To do this, first select the “Multiple datasets” icon (two stacked pages) un
 We are therefore going to further check the correlation between our control and CLIP experiment.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing correlation between samples</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing correlation between samples</div>
 
   <ol>
     <li><strong>multiBamSummary</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1422,7 +1415,7 @@ We are therefore going to further check the correlation between our control and 
   <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_correlation.png" alt="correlation. " width="1100" height="950" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Heatmap of correlation matrix generated by <b>plotCorrelation</b>. The y-axis shows you on the left site the histogram of the clustering. The colored scale depicts the correlation value. Like  `plotFingerprint`, `multiBamSummary` randomly samples genome regions (bins) of a specified length and sums the per-base coverage that overlap with those regions. The correlation between these bins is then calculated for each pair of samples. An ideal plot would result in two disparate clusters: one for the biological replicates of your CLIP-Seq experiment and one for the replicates of your control. A bad plot would happen if your control and CLIP-Seq experiment end up in one cluster, which means that they are closely related and something went wrong in the laboratory.</figcaption></figure>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Why do we want to skip zeros in plotCorrelation?</li>
@@ -1431,7 +1424,7 @@ We are therefore going to further check the correlation between our control and 
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.</li>
@@ -1450,7 +1443,7 @@ We are therefore going to further check the correlation between our control and 
 <h2 id="peak-calling-with-peakachu">Peak calling with <strong>PEAKachu</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-peak-calling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Peak calling</div>
+  <div class="box-title hands-on-title" id="hands-on-peak-calling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Peak calling</div>
 
   <ol>
     <li><strong>PEAKachu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1475,19 +1468,19 @@ We are therefore going to further check the correlation between our control and 
   <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_ma_plot.png" alt="ma. " width="3840" height="2880" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> MA plot of <b>PEAKachu</b>.  MA stands for M (log ratio) and A (mean average). It shows you the general trend of the log2 fold-change in dependence of the average mean of the expression rate of the peaks. Points in a straight, diagonal line symbolise the behavior of the logarithm which is often visible for low expressed peaks, because one read can change the fold-change quite drastically. The blue lines depict the normalisation constants. Read dots are significant peaks. It is hard to tell what a good MA plot would look like. Even a small number of significant peaks can be enough, depending on the biological question you ask.</figcaption></figure>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-adjusted-p-value-threshold"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Adjusted p-value Threshold</div>
+    <div class="box-title comment-title" id="comment-adjusted-p-value-threshold"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Adjusted p-value Threshold</div>
 
     <p>P-values are calculated by DESeq2. A low p-value represent a significantly enriched binding region. Since we are doing thousands of independent hypothesis testings, we have to correct for significant p-values that happen just by chance. DESeq2 uses the Benjamini-Hochberg procedure as a correction. For more information read <a href="http://www.biostathandbook.com/multiplecomparisons.html">this handbook</a>.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-fold-change-threshold"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Fold-Change Threshold</div>
+    <div class="box-title comment-title" id="comment-fold-change-threshold"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Fold-Change Threshold</div>
 
     <p>The fold-change is calculated by DESeq2 and is actually a log2 fold-change. Because we want significantly enriched binding regions, we basically search for peaks that are at least four times higher in our CLIP experiment than in our control.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What happens if we decrease or increase the log2 fold-change threshold of 2.0?</li>
@@ -1496,7 +1489,7 @@ We are therefore going to further check the correlation between our control and 
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>If we would <strong>decrease</strong> the log2 fold-change threshold then we would get more peaks. However, we would also increase the number of false positives, i.e., peaks that are <strong>not</strong> significantly enriched.<br />
@@ -1519,7 +1512,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <p>Lets first find out which sequence motifs RBFOX2 might preferentially bind to.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-motif-detection"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Motif detection</div>
+  <div class="box-title hands-on-title" id="hands-on-motif-detection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Motif detection</div>
 
   <ol>
     <li><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1589,25 +1582,25 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_motif.png" alt="motif. " width="161" height="90" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Plot of a sequence motif. The x-axis of the sequence plots represents the nucleotide position of the motif. The y-axis stands for the total information (uncertainty) of each position and thus stands for the probability that the nucleotide at a certain position is the specific letter (for DNA: T,C,G,A). Bigger letters stand for a higher probability. For more information read [this Wikipedia article](https://en.wikipedia.org/wiki/Sequence_logo).</figcaption></figure>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-meme-and-dreme"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: MEME and DREME</div>
+    <div class="box-title comment-title" id="comment-meme-and-dreme"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: MEME and DREME</div>
 
     <p><strong>MEME</strong> and <strong>DREME</strong> are two motif finding tools that MEME-ChIP uses. More information about theses tools can be found on <a href="http://meme-suite.org/">meme-suite.org</a>.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-what-is-the-purpose-of-slopbed"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is the purpose of SlopBED?</div>
+    <div class="box-title comment-title" id="comment-what-is-the-purpose-of-slopbed"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is the purpose of SlopBED?</div>
 
     <p><strong>PEAKachu</strong> might underestimate the length of the binding regions, because the actually protein-RNA-binding concentrates on the cross linking site that is one nucleotide long. Thus, we extend the peaks from <strong>PEAKachu</strong> by 20 bp at each site. A true conserved binding motif will not be affected by it, if we make the region to wide.</p>
   </blockquote>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-what-is-the-meaning-of-the-e-value"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What is the meaning of the E-value?</div>
+    <div class="box-title comment-title" id="comment-what-is-the-meaning-of-the-e-value"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What is the meaning of the E-value?</div>
 
     <p>The E-value represents the expected number of times we would find our sequence motif in a database (peak file), just by chance. This means, that a small E-value correspond to a very significant motif, because the expected number we would find that motif in our peak file just by chance is very low. Other sequences like repeats will have a high E-value on the other hand.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>Click on the link under the column <strong>Discovery/​Enrichment Program</strong> for two of the motifs one from <strong>MEME</strong> and one from <strong>DREME</strong>. What is the site-count for the most significant motif? How many sequences have we checked for <strong>MEME</strong> and for <strong>DREME</strong>? What is the fraction of sequences that covered that motif? (MEME-ChIP version 4.11.2)</li>
@@ -1615,7 +1608,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>For the result with MEME-ChIP version 4.11.2: <strong>MEME</strong> site count = 37, total sequences = 100, fraction = 37%; <strong>DREME</strong> site count = 103, total sequences = 247, fraction = 41.7%.</li>
@@ -1631,7 +1624,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <p>Lets move to the next step and find out where these motifs might come from, i.e., which kind of RNAs RBFOX2 preferentially bind to. For that we will use the <code class="language-plaintext highlighter-rouge">RNA Centric Annotation System</code>. Run the tool and then try to answer the subsequent questions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-functional-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Functional analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-functional-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Functional analysis</div>
 
   <ol>
     <li><strong>RNA Centric Annotation System (v. 1.5.4)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1650,7 +1643,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What is the main target region of RBFOX2 (e.g., cds, exon, 5’ UTR)? Does this confirm the literature.</li>
@@ -1659,7 +1652,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>Introns and transcripts. Yes.</li>
@@ -1680,7 +1673,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <p>We will first generate coverage files that gives us a better visualization for our read coverage along the genome. SAM or BAM files can be used too, but they are often to big and harder to handle, if you try to inspect the read coverage. Therefore we are going to generate a bigWig (binary form of a BedGraph) file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
     <li><strong>Extract alignment ends</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1711,7 +1704,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Do the Same thing for the input control data set.</div>
+    <div class="box-title comment-title" id="comment-do-the-same-thing-for-the-input-control-data-set-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Do the Same thing for the input control data set.</div>
 
     <p>If you processed the RBFOX2 bam dataset then do the same thing for the input control dataset or <em>vice verca</em>.</p>
   </blockquote>
@@ -1725,7 +1718,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <p><strong>Try to answer the questions for this hands-on.</strong> It will give you an idea why it would be wise to inspect the read coverage of the peaks.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-igv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: IGV</div>
 
   <ol>
     <li>Open IGV on your local computer.</li>
@@ -1742,7 +1735,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
   <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/clipseq_peak_igv.png" alt="igv_peak. " width="1278" height="396" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Inspection of a peak in IGV.</figcaption></figure>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>What are the ideal conditions that PEAKachu <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> will call a peak.</li>
@@ -1751,7 +1744,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>High read coverage in the region for the CLIP experiment and low read coverage in the region for the input control.</li>
@@ -1772,7 +1765,7 @@ If we would <strong>increase</strong> the log2 fold-change threshold, then we wo
 <p>In order to use the workflow linked to this tutorial, you have to create two lists of dataset pairs; one for you control and one for your CLIP experiment.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-creating-a-list-of-dataset-pairs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-list-of-dataset-pairs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a list of dataset pairs.<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-creating-a-list-of-dataset-pairs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-list-of-dataset-pairs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Creating a list of dataset pairs.<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>Click on the check box icon in the history.</li>
@@ -2042,7 +2035,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

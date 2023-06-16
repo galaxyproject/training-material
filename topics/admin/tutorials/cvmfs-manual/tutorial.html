@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Reference Data with CVMFS without Ansible">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -358,7 +358,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -395,14 +395,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Reference Data with CVMFS without Ansible</h1>
@@ -570,14 +563,14 @@ Sentry.init({
 <h1 id="cvmfs-and-galaxy-without-ansible">CVMFS and Galaxy without Ansible</h1>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-manual-version-of-ansible-commands"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Manual version of Ansible Commands</div>
+  <div class="box-title comment-title" id="comment-manual-version-of-ansible-commands"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Manual version of Ansible Commands</div>
   <p>If you wish to perform the same thing that we’ve just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.</p>
 </blockquote>
 
 <p>We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-the-cvmfs-client"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing the CVMFS Client</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-the-cvmfs-client"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing the CVMFS Client</div>
 
   <ol>
     <li>
@@ -607,7 +600,7 @@ wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
 <p>The configuration is not complex for CVMFS:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring CVMFS</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-cvmfs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring CVMFS</div>
 
   <ol>
     <li>
@@ -658,19 +651,19 @@ owIDAQAB
 <p>Probe the connection.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-testing-it-out"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Testing it out</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-it-out"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Testing it out</div>
 
   <ol>
     <li>
       <p>Run <code class="language-plaintext highlighter-rouge">sudo cvmfs_config probe data.galaxyproject.org</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What does it output?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OK
 </code></pre></div>          </div>
@@ -685,12 +678,12 @@ owIDAQAB
       <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/</code> and list the files in that folder</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You should see nothing, as CVMFS uses <code class="language-plaintext highlighter-rouge">autofs</code> in order to mount paths only upon request.</p>
 
         </blockquote>
@@ -701,7 +694,7 @@ owIDAQAB
       <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.galaxyproject.org/</code>.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /cvmfs/data.galaxyproject.org/
 ls
 ls byhand
@@ -710,12 +703,12 @@ ls managed
       </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see now?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You’ll see <code class="language-plaintext highlighter-rouge">.loc</code> files, genomes and indices.
 AutoFS only mounts the files when they’re accessed, so it appears like there is no folder there.</p>
         </blockquote>
@@ -725,7 +718,7 @@ AutoFS only mounts the files when they’re accessed, so it appears like there i
       <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project, IDC, and Nate’s hard work!</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-contributing-reference-genomes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contributing-reference-genomes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Contributing Reference Genomes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-contributing-reference-genomes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contributing-reference-genomes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Contributing Reference Genomes<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If you are developing a new tool, and want to add a reference genome, we recommend you <a href="https://gitter.im/galaxy-iuc/iuc">talk to us on Gitter</a>. You can also look at one of the tools that uses reference data, and try and copy from that. If you’re developing the location files completely new, you need to write the data manager.</p>
       </blockquote>
     </li>
@@ -879,7 +872,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

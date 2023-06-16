@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Introduction to Machine Learning using R">
         <meta property="og:description" content="Statistical Analyses for omics data and machine learning ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -426,7 +426,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -463,14 +463,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-statistics">
     <h1 data-toc-skip>Introduction to Machine Learning using R</h1>
@@ -653,6 +646,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> R basics in Galaxy:
                             
@@ -708,7 +705,15 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -1063,7 +1068,7 @@ are not known beforehand, making this typically an unsupervised task.</li>
 <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/intro-to-ml-with-r/bioinformatics-ml.png" alt="A series of overlapping boxes showing intersections of different topics like text mining and proteomics and evolution and microarrays, with various topics listed in the intersections. Unfortunately the source image is too low resolution even for sighted users." width="520" height="435" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Classification of the topics where machine learning methods are applied (<a href="https://doi.org/10.1093/bib/bbk007">https://doi.org/10.1093/bib/bbk007</a>)</figcaption></figure>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-examples-of-different-machine-learning-data-mining-techniques-that-can-be-applied-to-different-ngs-data-analysis-pipelines"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-examples-of-different-machine-learning-data-mining-techniques-that-can-be-applied-to-different-ngs-data-analysis-pipelines" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-examples-of-different-machine-learning-data-mining-techniques-that-can-be-applied-to-different-ngs-data-analysis-pipelines"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-examples-of-different-machine-learning-data-mining-techniques-that-can-be-applied-to-different-ngs-data-analysis-pipelines" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Examples of different Machine Learning / Data Mining techniques that can be applied to different NGS data analysis pipelines.<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>An extensive list of examples of applications of Machine Learning in Bioinformatics can be found in the <span class="citation"><a href="#Larra_aga_2006">Larrañaga <i>et al.</i> 2006</a></span></p>
 </blockquote>
 
@@ -1094,7 +1099,7 @@ are not known beforehand, making this typically an unsupervised task.</li>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-required-packages"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Required Packages</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-required-packages"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Required Packages</div>
 
   <ol>
     <li>
@@ -1139,7 +1144,7 @@ are not known beforehand, making this typically an unsupervised task.</li>
 We will be using <a href="https://www.tidyverse.org">tidyverse</a>, a collection of R packages for Data Science.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-load-the-uci-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Load the UCI Dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-load-the-uci-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Load the UCI Dataset</div>
 
   <ol>
     <li>
@@ -1189,12 +1194,12 @@ breastCancerData %&gt;% head()
 </span></code></pre></div>      </div>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is a factor?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>TODO</p>
 
@@ -1212,12 +1217,12 @@ breastCancerData %&gt;% head()
 <p>We will first remove the first column, which is the unique identifier of each row:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -1225,7 +1230,7 @@ breastCancerData %&gt;% head()
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exploratory-data-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exploratory Data Analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-exploratory-data-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exploratory Data Analysis</div>
   <ol>
     <li>
       <p>Remove the first column</p>
@@ -1332,12 +1337,12 @@ M:212     1st Qu.:-0.6888   1st Qu.:-0.7253   1st Qu.:-0.6913   1st Qu.:-0.6666
       <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/intro-to-ml-with-r/ggpairs5variables_tr.png" alt="ggpairs output of the first 5 variables of the recentered/rescaled data. " width="1024" height="559" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> ggpairs output of the first 5 variables of the recentered/rescaled data</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Do you see any differences?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>TODO</p>
 
@@ -1367,7 +1372,7 @@ M:212     1st Qu.:-0.6888   1st Qu.:-0.7253   1st Qu.:-0.6913   1st Qu.:-0.6666
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-dimensionality-reduction-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Dimensionality Reduction &amp; PCA</div>
+  <div class="box-title hands-on-title" id="hands-on-dimensionality-reduction-amp-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dimensionality Reduction &amp; PCA</div>
 
   <ol>
     <li>Let’s have a look into the variables that we currently have, and apply PCA to them. As you can see, we will be using only the numerical variables (i.e. we will exclude the first two, <code class="language-plaintext highlighter-rouge">ID</code> and <code class="language-plaintext highlighter-rouge">Diagnosis</code>):
@@ -1413,7 +1418,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
 <p>Every eigenvector has a corresponding eigenvalue. Simply put, an eigenvector is a direction, such as “vertical” or “45 degrees”, while an eigenvalue is a number telling you how much variance there is in the data in that direction. The eigenvector with the highest eigenvalue is, therefore, the first principal component. The number of eigenvalues and eigenvectors that exits is equal to the number of dimensions the data set has. In our case, we had 30 variables (32 original, minus the first two), so we have produced 30 eigenvectors / PCs. And we can see that we can address more than 95% of the variance (0.95157) using only the first 10 PCs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-deeper-look-into-pca"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Deeper look into PCA</div>
+  <div class="box-title hands-on-title" id="hands-on-deeper-look-into-pca"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deeper look into PCA</div>
 
   <ol>
     <li>
@@ -1470,7 +1475,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Try changing the parameters of the plot. For example, check the <code class="language-plaintext highlighter-rouge">choices</code> and the <code class="language-plaintext highlighter-rouge">var.scale</code>. Is there an impact? What does this mean?</li>
@@ -1478,7 +1483,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -1503,7 +1508,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
 <p>What we are going to do is group the tumor data points into two clusters using an algorithm called <code class="language-plaintext highlighter-rouge">k-means</code>, which aims to cluster the data in order to minimize the variances of the clusters. The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation (known as total within-cluster variation) is minimized. There are several k-means algorithms available. However, the standard algorithm defines the total within-cluster variation as the sum of squared distances Euclidean distances between items and the corresponding centroid:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-let-s-cluster-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Let's cluster our data</div>
+  <div class="box-title hands-on-title" id="hands-on-let-s-cluster-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Let's cluster our data</div>
 
   <ol>
     <li>
@@ -1617,7 +1622,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
 <p>One technique to choose the best <code class="language-plaintext highlighter-rouge">k</code> is called the <strong>elbow method</strong>. This method uses within-group homogeneity or within-group heterogeneity to evaluate the variability. In other words, you are interested in the percentage of the variance explained by each cluster. You can expect the variability to increase with the number of clusters, alternatively, heterogeneity decreases. Our challenge is to find the <code class="language-plaintext highlighter-rouge">k</code> that is beyond the diminishing returns. Adding a new cluster does not improve the variability in the data because very few information is left to explain.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-finding-the-optimal-k"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Finding the optimal k</div>
+  <div class="box-title hands-on-title" id="hands-on-finding-the-optimal-k"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Finding the optimal k</div>
 
   <ol>
     <li>
@@ -1667,12 +1672,12 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
       <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/intro-to-ml-with-r/elbow-plot-kmeans.png" alt="Elbow plot for multiple values of k. " width="1024" height="677" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Elbow plot for multiple values of k</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the optimal <code class="language-plaintext highlighter-rouge">k</code> value?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>From the graph, you can see the optimal <code class="language-plaintext highlighter-rouge">k</code> is around 10, where the curve is starting to have a diminishing return.</p>
 
@@ -1684,7 +1689,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Try re-running the clustering step with the new k. Is there a significant difference?</li>
@@ -1692,7 +1697,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -1720,7 +1725,7 @@ The algorithm works as follows:</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-k-means-clustering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: k-means Clustering</div>
+  <div class="box-title hands-on-title" id="hands-on-k-means-clustering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: k-means Clustering</div>
   <ol>
     <li>
       <p>We will be applying Hierarchical clustering to our dataset, and see what the result might be. Remember that our dataset has some columns with nominal (categorical) values (columns <code class="language-plaintext highlighter-rouge">ID</code> and <code class="language-plaintext highlighter-rouge">Diagnosis</code>), so we will need to make sure we only use the columns with numerical values. There are no missing values in this dataset that we need to clean before clustering. But the scales of the features are different and we need to normalize it.</p>
@@ -1803,7 +1808,7 @@ The algorithm works as follows:</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>The hierarchical clustering performed so far, only used two methods: <code class="language-plaintext highlighter-rouge">euclidean</code> and <code class="language-plaintext highlighter-rouge">average</code>. Try experimenting with different methods. Do the final results improve?</li>
@@ -1811,7 +1816,7 @@ The algorithm works as follows:</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -1869,7 +1874,7 @@ The algorithm works as follows:</p>
 <p>Regression trees are used when the dependent variable is continuous while classification trees are used when the dependent variable is categorical. In continuous, a value obtained is a mean response of observation. In classification, a value obtained by a terminal node is a mode of observations.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-decision-trees"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Decision Trees</div>
+  <div class="box-title hands-on-title" id="hands-on-decision-trees"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Decision Trees</div>
   <ol>
     <li>
       <p>Here, we will use the <code class="language-plaintext highlighter-rouge">rpart</code> and the <code class="language-plaintext highlighter-rouge">rpart.plot</code> package in order to produce and visualize a decision tree. First of all, we’ll create the train and test datasets using a 70/30 ratio and a fixed seed so that we can reproduce the results.</p>
@@ -1943,12 +1948,12 @@ M   9   109
       <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/intro-to-ml-with-r/decisionTreePruned.png" alt="Pruned decision tree. " width="1024" height="677" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Pruned decision tree</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What does the above “Confusion Matrix” tells you?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>TODO</p>
 
@@ -1979,7 +1984,7 @@ M   9   109
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Can we improve the above model? What are the key parameters that have the most impact?</li>
@@ -1987,7 +1992,7 @@ M   9   109
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -2018,7 +2023,7 @@ M   9   109
 <p>In this exercise, we will be using the <code class="language-plaintext highlighter-rouge">randomForest</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-random-forests"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Random Forests</div>
+  <div class="box-title hands-on-title" id="hands-on-random-forests"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Random Forests</div>
   <ol>
     <li>
       <p>First, let’s train the model:</p>
@@ -2151,7 +2156,7 @@ Fractal.Dimension.Worst        1.1498020
 <p>Linear regression is to predict response with a linear function of predictors. The most common function in R for this is <code class="language-plaintext highlighter-rouge">lm</code>. In our dataset, let’s try to investigate the relationship between <code class="language-plaintext highlighter-rouge">Radius.Mean</code>, <code class="language-plaintext highlighter-rouge">Concave.Points.Mean</code> and <code class="language-plaintext highlighter-rouge">Area.Mean</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-linear-regression"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Linear Regression</div>
+  <div class="box-title hands-on-title" id="hands-on-linear-regression"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Linear Regression</div>
   <ol>
     <li>
       <p>We can get a first impression by looking at the correlation of these variables:</p>
@@ -2266,12 +2271,12 @@ F-statistic: 1.111e+04 on 2 and 566 DF,  p-value: &lt; 2.2e-16
 <p>Now let’s use the RMSE and the R_square metrics to evaluate our model on the training and test set. R_square measures how much of variability in dependent variable can be explained by the model. It is defined as the square of the correlation coefficient (<code class="language-plaintext highlighter-rouge">R</code>), and that is why it is called “R Square” (more info <a href="https://en.wikipedia.org/wiki/Coefficient_of_determination">on the Wikipedia page for CoD</a>).</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Try evaluating model using RMSE, but on the training set this time</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##### Answer to exercise 1.</span><span class="w">
 </span><span class="c1">#Calculate residuals</span><span class="w">
@@ -2293,7 +2298,7 @@ F-statistic: 1.111e+04 on 2 and 566 DF,  p-value: &lt; 2.2e-16
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Calculate RMSE for the test data and check if the model is not overfit.</li>
@@ -2302,7 +2307,7 @@ F-statistic: 1.111e+04 on 2 and 566 DF,  p-value: &lt; 2.2e-16
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>TODO</p>
 
@@ -2555,7 +2560,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

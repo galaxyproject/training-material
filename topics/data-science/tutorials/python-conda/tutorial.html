@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Conda Environments For Software Development">
         <meta property="og:description" content="These lessons will help you get your feet in data science...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -370,7 +370,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -407,14 +407,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-data-science">
     <h1 data-toc-skip>Conda Environments For Software Development</h1>
@@ -620,7 +613,7 @@ Sentry.init({
                 <p>Conda environments, like Python Virtual Environments allow you to easily manage your installed packages and prevent conflicts between different project’s dependencies. This tutorial follows an identical structure to the virtualenv tutorial, but with conda.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> lesson <a href="https://carpentries-incubator.github.io/python-intermediate-development/">“Intermediate Research Software Development”</a>.</p>
 
@@ -710,7 +703,7 @@ Conda environments enable you to always use the latest available version without
 They also enable you to use a specific older version of a package for your project, should you need to.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-a-specific-package-version-is-only-ever-installed-once"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-specific-package-version-is-only-ever-installed-once" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: A Specific Package Version is Only Ever Installed Once<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-a-specific-package-version-is-only-ever-installed-once"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-specific-package-version-is-only-ever-installed-once" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: A Specific Package Version is Only Ever Installed Once<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Note that you will not have a separate package installations for each of your projects - they will only
 ever be installed once on your system (in <code class="language-plaintext highlighter-rouge">$CONDA/pkgs</code>) but will be referenced from different environments.</p>
 </blockquote>
@@ -736,7 +729,7 @@ on your system. The Conda command (<code class="language-plaintext highlighter-r
  and obtains the packages from one or more Conda repositories (e.g. Conda Forge, BioConda, etc.)</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-a-note-on-anaconda-and-conda"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-note-on-anaconda-and-conda" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: A Note on Anaconda and `conda`<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-a-note-on-anaconda-and-conda"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-note-on-anaconda-and-conda" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: A Note on Anaconda and `conda`<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Anaconda is an open source Python
 distribution commonly used for scientific programming - it conveniently installs Python, package and environment management <code class="language-plaintext highlighter-rouge">conda</code>, and a 
 number of commonly used scientific computing packages so you do not have to obtain them separately. 
@@ -763,7 +756,7 @@ too to which your knowledge can be ported).</p>
 <p>We will use Miniconda, a minimal conda installer that is commonly used, in place of the larger and slower to download full anaconda distribution.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-conda-via-miniconda"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Conda via Miniconda</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-conda-via-miniconda"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Conda via Miniconda</div>
   <ol>
     <li>Go to the <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda installation page</a> and find the appropriate installer for your system.</li>
     <li>Download and run the script.</li>
@@ -784,7 +777,7 @@ bash Miniconda3-latest-Linux-x86_64.sh <span class="nt">-b</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-reopen-shell-restart-jupyter-kernel"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reopen-shell-restart-jupyter-kernel" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Reopen Shell / Restart Jupyter Kernel<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-reopen-shell-restart-jupyter-kernel"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reopen-shell-restart-jupyter-kernel" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Reopen Shell / Restart Jupyter Kernel<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Here you will need to restart your kernel, or if you’re in a desktop environment, restart your terminal.</p>
 </blockquote>
 
@@ -796,7 +789,7 @@ bash Miniconda3-latest-Linux-x86_64.sh <span class="nt">-b</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-does-it-get-stuck"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-does-it-get-stuck" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Does it get stuck?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-does-it-get-stuck"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-does-it-get-stuck" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Does it get stuck?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This step we have sometimes seen get “stuck”, it will finish executing the transaction and hang, despite successfully installing the software. You can restart the kernel if this happens.</p>
 </blockquote>
 
@@ -842,7 +835,7 @@ conda config <span class="nt">--add</span> channels conda-forge
 <p>You’ll notice that there is a <code class="language-plaintext highlighter-rouge">base</code> environment created by default, where you can install packages and play around with Conda. We do not recommend installing things into the <code class="language-plaintext highlighter-rouge">base</code> environment, if at all possible. Create a new environment for each tool you need to install</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-why-separate-environments"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-separate-environments" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why separate environments?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-why-separate-environments"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-separate-environments" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Why separate environments?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Conda’s package resolution takes into account every other package installed in an environment. Especially if you use R packages, this can result in environments taking an inreasing amount to time to install new packages and resolve all of the dependencies.</p>
 
   <p>Thus by using isolated environments, you can be sure package resolution is quite fast.</p>
@@ -944,7 +937,7 @@ accordingly by re-issuing <code class="language-plaintext highlighter-rouge">con
 via your code sharing platform (e.g. GitHub).</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-official-documentation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-official-documentation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Official Documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-official-documentation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-official-documentation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Official Documentation<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>For a full list of options and commands, consult the <a href="https://docs.conda.io/projects/conda/en/latest/commands.html">official <code class="language-plaintext highlighter-rouge">conda</code> documentation</a></p>
 </blockquote>
 
@@ -1159,7 +1152,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

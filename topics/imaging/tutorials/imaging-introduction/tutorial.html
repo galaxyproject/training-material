@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Introduction to image analysis using Galaxy">
         <meta property="og:description" content="Image analysis using Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -383,7 +383,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -420,14 +420,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-imaging">
     <h1 data-toc-skip>Introduction to image analysis using Galaxy</h1>
@@ -688,7 +681,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
 <p>Our objective is to automatically count the number of cells contained in this image. In order to achieve this, we will enhance the quality of the image, automatically detect the nuclei and segment the nuclei and count them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -736,7 +729,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
 <p>Now, we can extract metadata from an image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-image-metadata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract Image Metadata</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-image-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract Image Metadata</div>
 
   <ol>
     <li><strong>Image Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract metadata from the image:
@@ -748,7 +741,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
       <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to the file name, to look at the file content and search for image acquisition information</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What is the datatype?</li>
@@ -757,7 +750,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>TIFF</li>
             <li>1344x1024</li>
@@ -774,7 +767,7 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
 <p>Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF (<a href="https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html">supported formats</a>). However, TIFF can not be displayed in the browser. Therefore, we convert <code class="language-plaintext highlighter-rouge">input.tif</code> to a PNG for visualization.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert Image</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert Image</div>
 
   <ol>
     <li><strong>Convert image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to convert the image to PNG:
@@ -794,12 +787,12 @@ contains a screen of <a href="https://en.wikipedia.org/wiki/DAPI">DAPI</a> stain
 <p><img src="../../images/imaging-introduction/viz_input.png" alt="raw input image. " width="1344" height="1024" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>You can observe that the image content is barely visible. Why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The original image is 16-bit and the intensity values are spread over a larger range than the
 display can render. Therefore, for improved visibility the intensity histogram of the image can
 be normalized first.</p>
@@ -809,7 +802,7 @@ be normalized first.</p>
 <p>Next we will normalize the histogram to improve the contrast. We do this using a <a href="https://en.wikipedia.org/wiki/Adaptive_histogram_equalization">Contrast Limited Adaptive Histogram Equalization (CLAHE)</a> approach.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-normalize-histogram-and-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Normalize Histogram and Convert Image</div>
+  <div class="box-title hands-on-title" id="hands-on-normalize-histogram-and-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize Histogram and Convert Image</div>
 
   <ol>
     <li><strong>Histogram equalization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to normalize the histogram of the image:
@@ -841,7 +834,7 @@ be normalized first.</p>
 <p>Specific features of interest (e.g., edges, noise) can be enhanced or suppressed by using an image filter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter image</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter image</div>
 
   <ol>
     <li><strong>Filter Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to smooth the image:
@@ -879,7 +872,7 @@ be normalized first.</p>
 <p>Objects of interest like nuclei can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-segment-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Segment image</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Segment image</div>
 
   <ol>
     <li><strong>Auto Threshold</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to segment the image:
@@ -906,7 +899,7 @@ be normalized first.</p>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the converted image to <code class="language-plaintext highlighter-rouge">viz segmented</code></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What does <strong>Binary 2 Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> do? (Hint: check the tool help section)</li>
@@ -919,7 +912,7 @@ be normalized first.</p>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The tool assigns each connected component (e.g., segmented cell) in the image an object id and stores it as the intensity value.</li>
             <li>The image looks completely black.
@@ -971,12 +964,12 @@ can do that by equalizing the histogram again:</p>
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>How many objects were segmented?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The <strong>Count Objects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool counted 425 objects.</p>
         </blockquote>
       </blockquote>
@@ -1239,7 +1232,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

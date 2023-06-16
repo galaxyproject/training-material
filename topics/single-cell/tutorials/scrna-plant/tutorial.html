@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Analysis of plant scRNA-Seq Data with Scanpy">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -460,7 +460,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -497,14 +497,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/galaxy-single-cell'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Analysis of plant scRNA-Seq Data with Scanpy</h1>
@@ -800,7 +793,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Please familiarise yourself with the <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">“Clustering 3K PBMCs with ScanPy”</a> tutorial first, as much of the process is the same, and the accompanying slide deck better explains some of the methods and concepts better.</p>
 
@@ -820,7 +813,7 @@ Sentry.init({
 <h2 id="data-upload">Data upload</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -851,7 +844,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>We can peek at the <code class="language-plaintext highlighter-rouge">#shr</code> file, and determine the dimensionality and naming scheme of the data. The rows and the columns depict different variables.</p>
 
@@ -863,7 +856,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Rows, notice the long A-C-T-G based names.</li>
@@ -881,7 +874,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <h2 id="csv-to-anndata">CSV to AnnData</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-converting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Converting the Data</div>
+  <div class="box-title hands-on-title" id="hands-on-converting-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Converting the Data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0" title="Import Anndata and loom tool" aria-role="link"><strong>Import Anndata and loom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0</span></span> with the following parameters:
@@ -898,7 +891,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-checking-dimensionality"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Checking Dimensionality</div>
+        <div class="box-title comment-title" id="comment-checking-dimensionality"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Checking Dimensionality</div>
 
         <p>We can now inspect the dimensionality of the dataset by “peeking” at the dataset in the history and observing the general information, simply by clicking on the name of the dataset.</p>
 
@@ -925,7 +918,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <h2 id="merge-batches-and-relabel">Merge Batches and Relabel</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merging-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merging Data</div>
+  <div class="box-title hands-on-title" id="hands-on-merging-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merging Data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool" aria-role="link"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span> with the following parameters:
@@ -939,13 +932,13 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-scheduling"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-scheduling" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Scheduling<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-scheduling"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-scheduling" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Scheduling<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>You can queue on the next task without the previous one being complete yet, just ensure that the input dataset for the next task is at least orange and not grey.</p>
       </blockquote>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>At this point, the AnnData dataset batch information has a value of <code class="language-plaintext highlighter-rouge">0</code> for the “SHR” cells and <code class="language-plaintext highlighter-rouge">1</code> for the “WT” cells. This is fine if you wish to remember these two values for the remainder of the analysis since the step below is optional, however for plotting purposes it can just be easier to relabel the batch information with the action text labels <code class="language-plaintext highlighter-rouge">shr</code> and <code class="language-plaintext highlighter-rouge">wt</code>.</p>
       </blockquote>
@@ -962,7 +955,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
       </ul>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-order-matters"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Order matters!</div>
+        <div class="box-title warning-title" id="warning-order-matters"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Order matters!</div>
 
         <p>The order in which the datasets are concatenated can affect the accuracy of the new labelling. If the <code class="language-plaintext highlighter-rouge">#wt</code> dataset was first selected and then the <code class="language-plaintext highlighter-rouge">#shr</code> dataset concatenated onto it, then the comma-seperated list of new categories above should be inverted.</p>
       </blockquote>
@@ -1016,7 +1009,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <h2 id="filtering-the-matrix">Filtering the Matrix</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating some metrics</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating some metrics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0" title="Inspect and manipulate tool" aria-role="link"><strong>Inspect and manipulate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1073,7 +1066,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <p>For this analysis, we will set a minimum threshold of detectability that each cell should count transcripts from at least 200 genes, and that each gene should be expressed in at least 5 cells. These lower-bound thresholds are not so easy to derive from such QC plots, but depend mostly on the type of data you are using. If the number of features and the library sizes were one order of magnitude higher, one might consider also scaling the lower-bound thresholds by one order of magnitude.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1155,7 +1148,7 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <p>If we inspect the resulting dataset, we see that the number of cells remaining is <code class="language-plaintext highlighter-rouge">5826</code> and the number of genes is <code class="language-plaintext highlighter-rouge">18913</code>, which is still a good number of cells and genes. It is good practice to save the raw data in case we need to use it data, so we “freeze the raw data” into a slot for later safe keeping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-saving-the-original-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Saving the original matrix</div>
+  <div class="box-title hands-on-title" id="hands-on-saving-the-original-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Saving the original matrix</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool" aria-role="link"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span> with the following parameters:
@@ -1177,14 +1170,14 @@ https://zenodo.org/record/4597857/files/GSE123818_Root_single_cell_wt_datamatrix
 <p>After normalising and regressing out unwanted factors, we will then scale the data to have unit variance with a zero mean, so that the mean expression of each gene is not a factor in the analysis and only the variation is, ensuring that the later clustering is driven only by the relative variation of the genes, and not neccesarily how expressive those genes are.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-highly-variable-genes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-highly-variable-genes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Highly Variable Genes?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-highly-variable-genes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-highly-variable-genes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Highly Variable Genes?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Those of you who are familiar with the <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">ScanPy Tutorial</a> might wonder why we have not reduced the number of genes by performing a highly variable gene selection.
 The answer is simply that it did not help with this particular dataset, and that by removing the least variable genes in the analysis, it did help us replicate the analysis in the paper. Try it for yourself as an intermediate step (after this analysis) and see!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-normalize-and-scale"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Normalize and Scale</div>
+  <div class="box-title hands-on-title" id="hands-on-normalize-and-scale"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalize and Scale</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0" title="Normalize tool" aria-role="link"><strong>Normalize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1233,7 +1226,7 @@ The answer is simply that it did not help with this particular dataset, and that
 <p>Dimensionality reduction is the art of reducing a high dimensional dataset into a low dimensional “embedding” that humans can actually see (i.e. 2 or 3 dimensions), ideally such that the relationships or distances between data points are preserved in this embedding. In the context of single-cell datasets, this essentially means compressing &gt; 10 000 genes into just 2 X/Y variables.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-is-dimensionality-reduction"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-dimensionality-reduction" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: What is Dimensionality Reduction?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-is-dimensionality-reduction"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-dimensionality-reduction" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What is Dimensionality Reduction?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>You can learn more about dimensionality reduction by consulting the following segment from <a href="/training-material/videos/watch.html?v=single-cell/tutorials/scrna-intro/slides&amp;t=13:46"><em>“An introduction to scRNA-seq data analysis”</em></a>.</p>
 
@@ -1247,7 +1240,7 @@ The answer is simply that it did not help with this particular dataset, and that
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-pca-and-umap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: PCA and UMAP</div>
+  <div class="box-title hands-on-title" id="hands-on-pca-and-umap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: PCA and UMAP</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Cluster, infer trajectories and embed tool" aria-role="link"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1276,7 +1269,7 @@ The answer is simply that it did not help with this particular dataset, and that
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>UMAP relies on a connected graph of cells to operate. Please view the following segment from <a href="/training-material/videos/watch.html?v=single-cell/tutorials/scrna-intro/slides&amp;t=13:40"><em>“An introduction to scRNA-seq data analysis”</em></a> for more information on how this process works.</p>
       </blockquote>
@@ -1294,7 +1287,7 @@ The answer is simply that it did not help with this particular dataset, and that
 <p>With our data now sufficiently “flat” and ready for human consumption, we can now do a naive plot of both the PCA and the UMAP and show cell assignments coloured by batch.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-pca-and-umap-by-batch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the PCA and UMAP by Batch</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-pca-and-umap-by-batch"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the PCA and UMAP by Batch</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1374,7 +1367,7 @@ The answer is simply that it did not help with this particular dataset, and that
 </table>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-and-plots-clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate and Plots Clusters</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-and-plots-clusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate and Plots Clusters</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0" title="Cluster, infer trajectories and embed tool" aria-role="link"><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1406,7 +1399,7 @@ The answer is simply that it did not help with this particular dataset, and that
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>We print the legend on the data because it’s easier to see where the cluster labels apply.</p>
       </blockquote>
@@ -1424,7 +1417,7 @@ The answer is simply that it did not help with this particular dataset, and that
 <h2 id="dotplot-and-validating-cell-types">DotPlot and Validating Cell Types</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-dot-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Dot Plot</div>
+  <div class="box-title hands-on-title" id="hands-on-dot-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dot Plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> with the following parameters:
@@ -1527,7 +1520,7 @@ The answer is simply that it did not help with this particular dataset, and that
 <h2 id="relabel-clusters">Relabel clusters</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cluster-re-labelling"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cluster Re-labelling</div>
+  <div class="box-title hands-on-title" id="hands-on-cluster-re-labelling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster Re-labelling</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool" aria-role="link"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span> with the following parameters:
@@ -1784,7 +1777,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

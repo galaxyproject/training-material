@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Filter, Plot and Explore Single-cell RNA-seq Data">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -398,7 +398,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -435,14 +435,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Filter, Plot and Explore Single-cell RNA-seq Data</h1>
@@ -799,7 +792,7 @@ Sentry.init({
 <p>You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat <span class="citation"><a href="#Satija2015">Satija <i>et al.</i> 2015</a></span>, Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>, Monocle <span class="citation"><a href="#Trapnell2014">Trapnell <i>et al.</i> 2014</a></span>, Scater <span class="citation"><a href="#McCarthy2017">McCarthy <i>et al.</i> 2017</a></span>, and so forth. We’re working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tutorials-everywhere"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Tutorials everywhere?</div>
+  <div class="box-title comment-title" id="comment-tutorials-everywhere"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tutorials everywhere?</div>
   <p>This tutorial is similar to another fantastic tutorial: <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">Clustering 3k PBMC</a>. That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.</p>
 </blockquote>
 
@@ -870,7 +863,7 @@ Sentry.init({
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-option-3-uploading-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Option 3: Uploading from Zenodo</div>
+  <div class="box-title hands-on-title" id="hands-on-option-3-uploading-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 3: Uploading from Zenodo</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -903,7 +896,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <ul>
     <li>The Galaxy tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
     <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.usegalaxy.eu</a></li>
@@ -919,7 +912,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What information is stored in your AnnData object? The last tool to generate this object counted the mitochondrial associated genes in your matrix. Where is that data stored?</li>
@@ -927,11 +920,11 @@ Sentry.init({
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-hint"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hint" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Hint<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-hint"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hint" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Hint<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>You want to use the same tool you used in the previous tutorial to examine your AnnData, since it’s not necessarily as simple as examining the Anndata dataset in the history!</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-inspecting-anndata-objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspecting AnnData Objects</div>
+      <div class="box-title hands-on-title" id="hands-on-inspecting-anndata-objects"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspecting AnnData Objects</div>
 
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1</span></span> with the following parameters:
@@ -956,7 +949,7 @@ Sentry.init({
     </blockquote>
   </blockquote>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>If you examine your AnnData object, you’ll find a number of different quality control metrics for both cells <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>obs</strong> and <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> genes <strong>var</strong>.
@@ -988,7 +981,7 @@ Sentry.init({
 <h3 id="creating-the-plots">Creating the plots</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-making-qc-plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Making QC plots</div>
+  <div class="box-title hands-on-title" id="hands-on-making-qc-plots"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Making QC plots</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1</span></span> with the following parameters:
@@ -1111,7 +1104,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-batch-variation"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Batch Variation</div>
+  <div class="box-title question-title" id="question-batch-variation"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Batch Variation</div>
 
   <p>Are there differences in sequencing depth across the samples?</p>
   <ol>
@@ -1120,7 +1113,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The plot <code class="language-plaintext highlighter-rouge">violin - batch - log</code> will have what you’re looking for!
@@ -1140,7 +1133,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-biological-variables"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Biological Variables</div>
+  <div class="box-title question-title" id="question-biological-variables"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Biological Variables</div>
 
   <p>Are there differences in sequencing depth across sex? Genotype?</p>
   <ol>
@@ -1150,7 +1143,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Similar to above, the plots <code class="language-plaintext highlighter-rouge">violin - sex - log</code> and <code class="language-plaintext highlighter-rouge">violin - genotype - log</code> will have what you’re looking for!
@@ -1183,7 +1176,7 @@ Sentry.init({
 <p>Now that we’ve assessed the differences in our samples, we will look at the libraries overall to identify appropriate thresholds for our analysis.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-filter-thresholds"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Filter Thresholds</div>
+  <div class="box-title question-title" id="question-filter-thresholds"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Filter Thresholds</div>
 
   <p>What threshold should you set for <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>?</p>
   <ol>
@@ -1192,7 +1185,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Any plot with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> would do here, actually! Some people prefer scatterplots to violins.</li>
@@ -1218,7 +1211,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>As before, any plot with <code class="language-plaintext highlighter-rouge">log1p_total_counts</code> will do! Again, we’ll use a scatterplot here, but you can use a violin plot if you wish!</li>
@@ -1242,7 +1235,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Any plot with <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> would do here, however the scatterplots are likely the easiest to interpret. We’ll use the same as last time.</li>
@@ -1265,7 +1258,7 @@ Sentry.init({
 <p>It’s now time to apply these thresholds to our data! First, a reminder of how many cells and genes are in your object: <code class="language-plaintext highlighter-rouge">31178 cells</code> and <code class="language-plaintext highlighter-rouge">35734 genes</code>. Let’s see how that changes each time!</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-decision-time"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-decision-time"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are working in a group, you can now divide up a decision here with one <em>control</em> and the rest varied numbers so that you can compare results throughout the tutorials.</p>
   <ul>
     <li>Control
@@ -1280,7 +1273,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-log1p-n-genes-by-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter cells by log1p_n_genes_by_counts</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-log1p-n-genes-by-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter cells by log1p_n_genes_by_counts</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1333,7 +1326,7 @@ Sentry.init({
 <p>Note that the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Scanpy Filtercells</strong> allows you to put <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> multiple parameters at the same time (i.e. filter <code class="language-plaintext highlighter-rouge">log1p_total_counts</code>, <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>,and <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>) in the same step. The only reason we aren’t doing that here is so you can see what each filter accomplishes. As such, examine your plot and general information.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Interpret the violin plot</li>
@@ -1341,7 +1334,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce. " width="2805" height="1045" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Raw vs 1st filter - genes/cell</figcaption></figure>
     <ol>
@@ -1354,7 +1347,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-log1p-total-counts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter cells by log1p_total_counts</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-log1p-total-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter cells by log1p_total_counts</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1405,7 +1398,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Interpret the violin plot</li>
@@ -1413,7 +1406,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice. " width="2759" height="1090" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> 1st filter vs 2nd filter - counts/cell</figcaption></figure>
     <ol>
@@ -1426,7 +1419,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-pct-counts-mito"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter cells by pct_counts_mito</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-cells-by-pct-counts-mito"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter cells by pct_counts_mito</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1487,7 +1480,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Interpret the violin plot</li>
@@ -1495,7 +1488,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-mitofilter.png" alt="Violinplot-filtermito. " width="2649" height="1035" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Violin plots after filtering genes, counts, and mito content/cell</figcaption></figure>
     <ol>
@@ -1513,7 +1506,7 @@ Sentry.init({
 <p>Fantastic work! However, you’ve now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let’s remove them! Note that <code class="language-plaintext highlighter-rouge">3</code> is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-decision-time-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-decision-time-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are working in a group, you can now divide up a decision here with one <em>control</em> and the rest varied numbers so that you can compare results throughout the tutorials.</p>
   <ul>
     <li>Variable: <strong>n_cells</strong></li>
@@ -1523,7 +1516,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter genes</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0" title="Scanpy FilterGenes tool" aria-role="link"><strong>Scanpy FilterGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1603,7 +1596,7 @@ Sentry.init({
 <p>So currently, you have a matrix that is 8605 cells by 15395 genes. This is still quite big data. We have two issues here - firstly, you already know there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. Secondly, we like to plot things on x/y plots, so for instance <em>Gapdh</em> could be on one axis, and <em>Actin</em> can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in this case, 15393 more dimensions), is a bit trickier! So our next steps are to transform our big data object into something that is easy to analyse and easy to visualise.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-normalisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Normalisation</div>
+  <div class="box-title hands-on-title" id="hands-on-normalisation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Normalisation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0" title="Scanpy NormaliseData tool" aria-role="link"><strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1619,7 +1612,7 @@ Sentry.init({
 <p>Now we need to look at reducing our gene dimensions. We have loads of genes, but not all of them are different from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify the dataset. We will flag genes that vary across the cells for future analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-find-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Find variable genes</div>
+  <div class="box-title hands-on-title" id="hands-on-find-variable-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find variable genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0" title="Scanpy FindVariableGenes tool" aria-role="link"><strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1636,7 +1629,7 @@ Sentry.init({
 <p>Next up, we’re going to scale our data so that all genes have the same variance and a zero mean. This is important to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-scaling-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Scaling data</div>
+  <div class="box-title hands-on-title" id="hands-on-scaling-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Scaling data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0" title="Scanpy ScaleData tool" aria-role="link"><strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1659,17 +1652,17 @@ Sentry.init({
 <p>Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, <code class="language-plaintext highlighter-rouge">3248</code> highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first <code class="language-plaintext highlighter-rouge">x</code> principal components in our data to drastically reduce the number of dimensions.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-3248"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: 3248???</div>
+  <div class="box-title comment-title" id="comment-3248"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: 3248???</div>
   <p>Where did the <code class="language-plaintext highlighter-rouge">3248</code> come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the <strong>Scanpy FindVariableGenes</strong> tool and select the parameter to <em>Remove genes not marked as highly variable</em>. Then you can Inspect your resulting object and you’ll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.</p>
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-check-your-anndata-object"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Check your AnnData object!</div>
+  <div class="box-title warning-title" id="warning-check-your-anndata-object"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Check your AnnData object!</div>
   <p>Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you’d have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled ‘3248’.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculate-principal-components"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculate Principal Components</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-principal-components"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate Principal Components</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0" title="Scanpy RunPCA tool" aria-role="link"><strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1702,7 +1695,7 @@ Sentry.init({
 <p>We’re still looking at around 20 dimensions at this point. We need to identify how similar a cell is to another cell, across every cell across these dimensions. For this, we will use the k-nearest neighbor (kNN) graph, to identify which cells are close together and which are not. The kNN graph plots connections between cells if their distance (when plotted in this 20 dimensional space!) is amonst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP. From <a href="https://github.com/lmcinnes/umap">UMAP developers</a>: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-decision-time-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-decision-time-2"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-2" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are working in a group, you can now divide up a decision here with one <em>control</em> and the rest varied numbers so that you can compare results throughout the tutorials.</p>
   <ul>
     <li>Control
@@ -1716,7 +1709,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-computegraph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: ComputeGraph</div>
+  <div class="box-title hands-on-title" id="hands-on-computegraph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: ComputeGraph</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1" title="Scanpy ComputeGraph tool" aria-role="link"><strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1</span></span> with the following parameters:
@@ -1736,7 +1729,7 @@ Sentry.init({
 <p>Two major visualisations for this data are tSNE and UMAP. We must calculate the coordinates for both prior to visualisation. For tSNE, the parameter <a href="https://www.nature.com/articles/s41467-019-13056-x"><strong>perplexity</strong></a> can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, by changing the <strong>neighbours</strong>.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-decision-time-3"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-3" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-decision-time-3"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-3" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you are working in a group, you can now divide up a decision here with one <em>control</em> and the rest varied numbers so that you can compare results throughout the tutorials.</p>
   <ul>
     <li>Control
@@ -1749,7 +1742,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculating-tsne-umap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculating tSNE &amp; UMAP</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-tsne-amp-umap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating tSNE &amp; UMAP</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1" title="Scanpy RunTSNE tool" aria-role="link"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1</span></span> with the following parameters:
@@ -1774,12 +1767,12 @@ Sentry.init({
 <h1 id="cell-clusters--gene-markers">Cell clusters &amp; gene markers</h1>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Let’s take a step back here. What is it, exactly, that you are trying to get from your data? What do you want to visualise, and what information do you need from your data to gain insight?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Really we need two things - firstly, we need to make sure our experiment was set up well. This is to say, our biological replicates should overlap and our variables should, ideally, show some difference. Secondly, we want insight - we want to know which cell types are in our data, which genes drive those cell types, and in this case, how they might be affected by our biological variable of growth restriction. How does this affect the developing cells, and what genes drive this? So let’s add in information about cell clusters and gene markers!</p>
 
@@ -1790,7 +1783,7 @@ Sentry.init({
 <p>Finally, let’s identify clusters! Unfortunately, it’s not as majestic as biologists often think - the maths doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab. Sigh. So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a <strong>resolution</strong> parameter for how granular you want to be.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-decision-time-4"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-4" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-decision-time-4"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-decision-time-4" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Decision-time!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Oh yes, yet another decision! Single cell analysis is sadly not straight forward.</p>
   <ul>
     <li>Control
@@ -1805,7 +1798,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-findclusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: FindClusters</div>
+  <div class="box-title hands-on-title" id="hands-on-findclusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: FindClusters</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1823,7 +1816,7 @@ Sentry.init({
 <h2 id="findmarkers">FindMarkers</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-findmarkers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: FindMarkers</div>
+  <div class="box-title hands-on-title" id="hands-on-findmarkers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: FindMarkers</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0" title="Scanpy FindMarkers tool" aria-role="link"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1858,7 +1851,7 @@ Sentry.init({
 <p>Now, there’s a small problem here, which is that if you <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> inspect the output marker tables, you won’t see gene names, you’ll see Ensembl IDs. While this is a more bioinformatically accurate way of doing this (not every ID has a gene name!), we might want to look at more well-recognised gene names, so let’s pop some of that information in!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-in-gene-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding in Gene Names</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-in-gene-names"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding in Gene Names</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1</span></span> with the following parameters:
@@ -1907,7 +1900,7 @@ Sentry.init({
 But first, let’s pick some marker genes from the <code class="language-plaintext highlighter-rouge">Markers-cluster</code> list that you made as well. I’ll be honest, in practice, you’d now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (a well annotated dataset that you’ll use as the ideal). In the mean time, let’s do this the old-fashioned way, and just copy a bunch of the markers in the original paper.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-the-cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot the cells!</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-the-cells"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the cells!</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0</span></span> with the following parameters:
@@ -1950,13 +1943,13 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <h2 id="biological-interpretation">Biological Interpretation</h2>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-appearance-is-everything"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Appearance is everything</div>
+  <div class="box-title question-title" id="question-appearance-is-everything"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Appearance is everything</div>
 
   <p>Which visualisation is the most useful for getting an overview of our data, <em>pca</em>, <em>tsne</em>, or <em>umap</em>?</p>
   <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-3visualisations.png" alt="PCA-tSNE-UMAP. " width="2351" height="1008" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Louvain clustering by dimension reduction</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can see why a PCA is generally not enough to see clusters in samples - keep in mind, you’re only seeing components 1 and 2! - and therefore why the tSNE and UMAP visualisation dimensionality reductions are so useful. But there is not necessarily a clear winner between tSNE and UMAP, but I think UMAP is slightly clearer with its clusters, so we’ll stick with that for the rest of the analysis.</p>
 
@@ -2008,7 +2001,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <p>The authors weren’t interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn’t really require such granularity of clusters.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-important"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-important" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? Important!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-important"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-important" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? Important!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you have deviated from any of the original parameters in this tutorial, you will likely have a different number of clusters. You will, therefore, need to change the ‘Annotating clusters’ <em>“Comma-separated list of new categories”</em> accordingly. Best of luck!</p>
 
 </blockquote>
@@ -2016,7 +2009,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <h3 id="annotating-clusters">Annotating Clusters</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotating-clusters"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotating clusters</div>
+  <div class="box-title hands-on-title" id="hands-on-annotating-clusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotating clusters</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Manipulate AnnData tool" aria-role="link"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1</span></span> with the following parameters:
@@ -2074,14 +2067,14 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <p>Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-genotype"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Genotype</div>
+  <div class="box-title question-title" id="question-genotype"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genotype</div>
 
   <p>Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?</p>
 
   <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-genotypedifferences.png" alt="Genotype Images. " width="3189" height="1051" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Genotype differences</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.</p>
 
@@ -2094,14 +2087,14 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <p>Is our analysis real? Is it right? Well, we can assess that a little bit.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-batch-effect"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Batch effect</div>
+  <div class="box-title question-title" id="question-batch-effect"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Batch effect</div>
 
   <p>Is there a batch effect?</p>
 
   <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-batcheffect.png" alt="Batch effect. " width="422" height="343" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Batch effect?</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>While some shifts are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
 Additionally, we will also look at the confounding effect of sex.</p>
@@ -2115,14 +2108,14 @@ Additionally, we will also look at the confounding effect of sex.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-depth-effect"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Depth effect</div>
+  <div class="box-title question-title" id="question-depth-effect"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Depth effect</div>
 
   <p>Are there any clusters or differences being driven by sequencing depth, a technical and random factor?</p>
 
   <figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-totalcounts.png" alt="Sequencing depth. " width="1921" height="740" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Counts across clusters</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).</p>
 
@@ -2131,14 +2124,14 @@ Additionally, we will also look at the confounding effect of sex.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-sample-purity"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Sample purity</div>
+  <div class="box-title question-title" id="question-sample-purity"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Sample purity</div>
 
   <p>Do you think we processed these samples well enough?</p>
 
   <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-hba.png" alt="Sequencing depth. " width="503" height="514" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Hemoglobin across clusters</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Additionally, hemoglobin - a red blood cell marker that should NOT be found in T-cells - appears throughout the entire sample in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.</p>
 
@@ -2147,14 +2140,14 @@ Additionally, we will also look at the confounding effect of sex.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-clustering-resolution"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Clustering resolution</div>
+  <div class="box-title question-title" id="question-clustering-resolution"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Clustering resolution</div>
 
   <p>Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?</p>
 
   <figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-itm2a.png" alt="Itm2a Expression. " width="1973" height="754" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Itm2a across clusters</figcaption></figure>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That’s a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone.
 If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).</p>
@@ -2171,7 +2164,7 @@ If we look at the differences between genotypes alone (so the pseudo-bulk), we c
 <p>Before we leave you to explore the unknown, you might have noticed that the above interpretations are only a few of the possible options. Plus you might have had fun trying to figure out which sample is which genotype is which sex and flicking back and forth between plots repeatedly. Figuring out which plots will be your <em>final publishable</em> plots takes a lot of time and testing. Luckily, there is a helpful interactive viewer <span class="citation"><a href="#Cakir2020">Cakir <i>et al.</i> 2020</a></span> export tool <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span> that can help you explore without having to produce new plots over and over!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Cellxgene</div>
+  <div class="box-title hands-on-title" id="hands-on-cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cellxgene</div>
 
   <ol>
     <li><span class="tool" data-tool="interactive_tool_cellxgene" title="Interactive CellXgene Environment tool" aria-role="link"><strong>Interactive CellXgene Environment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_cellxgene</span></span> with the following parameters:
@@ -2203,7 +2196,7 @@ If we look at the differences between genotypes alone (so the pseudo-bulk), we c
 <h1 id="conclusion">Conclusion</h1>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-working-in-a-group-the-finale"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-the-finale" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Working in a group? The finale!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-working-in-a-group-the-finale"><button class="gtn-boxify-button details" type="button" aria-controls="details-working-in-a-group-the-finale" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Working in a group? The finale!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Hopefully, no matter which pathway of analysis you took, you found the same general interpretations. If not, this is a good time to discuss and consider with your group why that might be - what decision was ‘wrong’ or ‘ill-advised’, and how would you go about ensuring you correctly interpreted your data in the future? Top tip - trial and error is a good idea, believe it or not, and the more ways you find the same insight, the more confident you can be! But nothing beats experimental validation…
 For those that did not take the ‘control’ options, please</p>
   <ol>
@@ -2672,7 +2665,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

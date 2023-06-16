@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: EncyclopeDIA">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -451,7 +451,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -488,14 +488,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>EncyclopeDIA</h1>
@@ -808,7 +801,7 @@ Sentry.init({
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/EncyclopeDIA_Figure3.png" alt="Precursor and Fragment scans in DIA. " width="1952" height="716" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Precursor and Fragment ion scans in DIA experiment</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-advantages-of-dia-over-dda"><button class="gtn-boxify-button details" type="button" aria-controls="details-advantages-of-dia-over-dda" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Advantages of DIA over DDA<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-advantages-of-dia-over-dda"><button class="gtn-boxify-button details" type="button" aria-controls="details-advantages-of-dia-over-dda" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Advantages of DIA over DDA<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>An advantage of DIA-MS compared to DDA-MS is that it is possible to obtain a better coverage of the proteome. Since DDA-MS focuses on the selection of precursor ions with significant abundance, data for less abundant (but perhaps equally interesting or important) peptides is not acquired. Therefore, DIA-MS, which fragments ions based on a mass range and not abundance, can provide a more comprehensive proteome coverage within a sample. DIA-MS relies on quantitation via fragment MS ions as compared to precursor ion MS and hence avoids the issue of quantitative interference due to co-eluting peptides associated with the DDA-MS methods. Finally, since DIA-MS is not dependent on the precursor intensity, MS2 signals can be used for quantitative analysis of low-abundance peptides and proteins.  For a more detailed description of DIA and its applications and advantages, we recommend users to watch two presentations by Brian Searle available on YouTube <a href="https://youtu.be/RidYXjvAk0s">Introduction to DIA</a> and <a href="https://youtu.be/coRDFs8Z8Ks">DIA tips</a>.</p>
 
@@ -817,7 +810,7 @@ Sentry.init({
 <h1 id="import-data">Import data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -920,7 +913,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conversion-of-gpf-dia-mass-spectrometry-raw-data-to-mzml-data-type"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.</div>
+  <div class="box-title hands-on-title" id="hands-on-conversion-of-gpf-dia-mass-spectrometry-raw-data-to-mzml-data-type"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="msconvert tool" aria-role="link"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1</span></span> with the following parameters:
@@ -953,7 +946,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>SearchToLib uses the mzML dataset collection from this step as its input, making this step vital for the function of the workflow.</p>
       </blockquote>
@@ -963,7 +956,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why is conversion from raw to mzML necessary?</li>
@@ -971,7 +964,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully.</li>
@@ -983,7 +976,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conversion-of-experimental-dia-mass-spectrometry-raw-data-to-mzml-data-type"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.</div>
+  <div class="box-title hands-on-title" id="hands-on-conversion-of-experimental-dia-mass-spectrometry-raw-data-to-mzml-data-type"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="msconvert tool" aria-role="link"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1</span></span> with the following parameters:
@@ -1016,7 +1009,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow. Additionally, as DIA uses overlapping windows and fragments (Figure 3B), deconvolution of the data is vital to analyze it correctly in the removal of repeated data. Conversion from raw to mzML allows for this deconvolution to occur within the workflow as part of the data’s conversion.</p>
       </blockquote>
@@ -1042,7 +1035,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 <p>SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the GPF DIA dataset collection converted previously, a background proteome FASTA file, as well as a DLIB Spectral Library. Outputs from this tool include the Chromatogram Library in <a href="https://support.proteomesoftware.com/hc/en-us/articles/360022979832-Reference-Libraries-Used-in-Scaffold-DIA">ELIB format</a>, as well as a text log file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-building-a-chromatogram-library-with-dia-ms-ms-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Building a Chromatogram Library with DIA MS/MS data.</div>
+  <div class="box-title hands-on-title" id="hands-on-building-a-chromatogram-library-with-dia-ms-ms-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Building a Chromatogram Library with DIA MS/MS data.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0" title="SearchToLib tool" aria-role="link"><strong>SearchToLib</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0</span></span> with the following parameters:
@@ -1064,7 +1057,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>Chromatogram Library generation using SearchToLib is the step that takes the most time in this workflow. With larger datasets, more time is required to generate the Chromatogram Library and SearchToLib may take up to several days to complete.</p>
       </blockquote>
@@ -1074,7 +1067,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What are the benefits to using Chromatogram Libraries compared to DDA generated libraries?</li>
@@ -1082,7 +1075,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The benefit to using Chromatogram Libraries compared to DDA generated libraries is largely found in the method of data aquisition. Because Chromatogram Libraries use pooled DIA sample data and use GPF to generate fractions, Chromatogram Libraries are found to be both very comprehensive, as well as very relevant libraries to the experimental samples that are to be analyzed. As Chromatogram Libraries take the form of an ELIB file-type, they contain additional information on retention times, peak intensities, and more compared to their DLIB DDA generated library counterparts. Furthermore, this method also avoids the extra labor associated with performing DDA for just library generation to analyze DIA samples.</li>
@@ -1094,7 +1087,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-searchtolib-inputs-and-outputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-searchtolib-inputs-and-outputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: SearchToLib Inputs and Outputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-searchtolib-inputs-and-outputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-searchtolib-inputs-and-outputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: SearchToLib Inputs and Outputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:</p>
 
@@ -1139,7 +1132,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/EncyclopeDIA_WALNUT_Workflow.png" alt="EncyclopeDIA WALNUT workflow. " width="2033" height="783" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> EncyclopeDIA WALNUT workflow overview</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-chromatogram-library-generation-using-walnut-variation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Chromatogram Library generation using WALNUT variation.</div>
+  <div class="box-title hands-on-title" id="hands-on-chromatogram-library-generation-using-walnut-variation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Chromatogram Library generation using WALNUT variation.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0" title="SearchToLib tool" aria-role="link"><strong>SearchToLib</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0</span></span> with the following parameters:
@@ -1161,7 +1154,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The biggest change between the WALNUT and the Standard EncyclopeDIA workflows is found in Chromatogram Library generation using SearchToLib.</p>
       </blockquote>
@@ -1171,7 +1164,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-without-a-chromatogram-library"><button class="gtn-boxify-button details" type="button" aria-controls="details-without-a-chromatogram-library" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Without a Chromatogram Library<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-without-a-chromatogram-library"><button class="gtn-boxify-button details" type="button" aria-controls="details-without-a-chromatogram-library" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Without a Chromatogram Library<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.</p>
 
@@ -1186,7 +1179,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 <p>EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-library-searching-directly-from-dia-ms-ms-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Library searching directly from DIA MS/MS data.</div>
+  <div class="box-title hands-on-title" id="hands-on-library-searching-directly-from-dia-ms-ms-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Library searching directly from DIA MS/MS data.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/0.9.5.0" title="EncyclopeDIA Quantify tool" aria-role="link"><strong>EncyclopeDIA Quantify</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/0.9.5.0</span></span> with the following parameters:
@@ -1208,7 +1201,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences, protein IDs, and quantitation of protein and peptide fragments.</p>
       </blockquote>
@@ -1218,7 +1211,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Are there any other tools available to analyze DIA data?</li>
@@ -1226,7 +1219,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>There are other softwares to analyze DIA data, such as Spectronaut and Scaffold DIA. However, these softwares have not been wrapped to form tools on the GalaxyEU platform, and therefore cannot be incorporated into this workflow.</li>
@@ -1246,7 +1239,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/EncyclopeDIA_ProteinQuantitation_Output.png" alt="Protein Quantitation Output. " width="1977" height="341" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Protein Quantitation Output Summary</figcaption></figure>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-encyclopedia-inputs-and-ouputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-encyclopedia-inputs-and-ouputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: EncyclopeDIA Inputs and Ouputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-encyclopedia-inputs-and-ouputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-encyclopedia-inputs-and-ouputs" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: EncyclopeDIA Inputs and Ouputs<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Inputs required for EncyclopeDIA:</p>
 
   <ul>
@@ -1284,7 +1277,7 @@ https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_tryps
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tool-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Tool Versions</div>
+  <div class="box-title comment-title" id="comment-tool-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tool Versions</div>
 
   <p>The tools are subjected to changes while being upgraded.
 Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including the updated parameters.</p>
@@ -1494,7 +1487,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

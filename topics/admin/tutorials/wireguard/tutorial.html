@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Deploying Wireguard for private mesh networking">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -374,7 +374,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -411,14 +411,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Deploying Wireguard for private mesh networking</h1>
@@ -729,7 +722,7 @@ despite the encryption, and is built directly into the kernel.</p>
 <h1 id="setting-up-the-infrastructure">Setting up the infrastructure</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuration-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuration files</div>
+  <div class="box-title hands-on-title" id="hands-on-configuration-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuration files</div>
 
   <ol>
     <li>
@@ -748,7 +741,7 @@ despite the encryption, and is built directly into the kernel.</p>
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-centos7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-centos7" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: CentOS7<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-centos7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-centos7" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: CentOS7<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>As mentioned in the “Ubuntu or Debian, CentOS or RHEL?” comment above, if you are using CentOS7 do not set <code class="language-plaintext highlighter-rouge">interpreter_python</code> in <code class="language-plaintext highlighter-rouge">ansible.cfg</code> .</p>
       </blockquote>
 
@@ -759,13 +752,13 @@ despite the encryption, and is built directly into the kernel.</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+          <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
 
           <p>Your hostname is probably different:</p>
 
@@ -792,7 +785,7 @@ despite the encryption, and is built directly into the kernel.</p>
 <p>First lets set up the playbook and install Wireguard, without configuring it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-wireguard"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Wireguard</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-wireguard"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Wireguard</div>
 
   <ol>
     <li>
@@ -824,7 +817,7 @@ despite the encryption, and is built directly into the kernel.</p>
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook wg.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -835,7 +828,7 @@ despite the encryption, and is built directly into the kernel.</p>
 <p>Now we can start configuring it. Wireguard relies on each node having a private/public keypair which is used for encrypting communications between the nodes. By default this uses modern elliptic cryptography which is quite simple and provably secure, wireguard only has ~4k LOC compared to 400k+ LOC for most VPN solutions. Let’s generate those keys now:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-a-keypair"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating a keypair</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-a-keypair"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating a keypair</div>
 
   <ol>
     <li>
@@ -859,7 +852,7 @@ despite the encryption, and is built directly into the kernel.</p>
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook wg.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -873,7 +866,7 @@ despite the encryption, and is built directly into the kernel.</p>
 <p>Ok, that’s got wireguard setup, but it still isn’t running. As of 2018 or so, systemd added built in support for wireguard and we’ll use that to setup the network devices, and the network itself.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-the-network"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up the network</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-the-network"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up the network</div>
 
   <ol>
     <li>
@@ -992,7 +985,7 @@ despite the encryption, and is built directly into the kernel.</p>
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook wg.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1157,7 +1150,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

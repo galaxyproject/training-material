@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: 16S Microbial analysis with Nanopore data">
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -359,7 +359,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -396,14 +396,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-metagenomics">
     <h1 data-toc-skip>16S Microbial analysis with Nanopore data</h1>
@@ -717,12 +710,12 @@ Sentry.init({
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why do we sequence the 16S rRNA genes for analyzing microbial communities?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>There are several reasons to use these genes as taxonomic markers. First, they are constituent parts of ribosomes, a piece of highly-conserved biological machinery, which makes them universally distributed. On the other hand, these genes present regions with varying degrees of sequence variability, which allows them to be used as a species-specific signature.</p>
   </blockquote>
 </blockquote>
@@ -730,7 +723,7 @@ Sentry.init({
 <h1 id="get-data">Get data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -770,7 +763,7 @@ Sentry.init({
 <p>Before starting to work on our datasets, it is necessary to assess their quality. This is an essential step if we aim to obtain a <strong>meaningful downstream analysis</strong>.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-fastq-sequence-quality-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastq-sequence-quality-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: FASTQ sequence quality format<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-fastq-sequence-quality-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-fastq-sequence-quality-format" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: FASTQ sequence quality format<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>FASTQ format is a text-based format for storing both a biological sequence and its corresponding quality scores. Both the sequence letter and the quality score are encoded with a single ASCII character for brevity. You can find more info in the <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia article</a>.</p>
 
@@ -781,7 +774,7 @@ Sentry.init({
 <p><strong>FastQC</strong> is one of the most widely used tools to <strong>check the quality</strong> of the samples generated by High Throughput Sequencing (HTS) technologies.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality check</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-check"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality check</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> with the following parameters:
@@ -818,14 +811,14 @@ Sentry.init({
 <p>In the first place, we are going to analyse the sequence length distribution of the different datasets.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Can you explain the sequence length distribution plot?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The main peak, around 1700 bp, corresponds approximately to the length of the gene coding for 16S rRNA. There is also a secondary peak around 200 bp, which may be due to <strong>truncated amplifications</strong>, or as a result of <strong>non-specific hybridization of primers</strong> used for PCR.</p>
 
@@ -841,12 +834,12 @@ Sentry.init({
 <p>Let’s have a look at figure 4, which shows the content of the GC by sequence.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What can cause GC content to show a bimodal peak?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>There are several possible causes for the presence of twin peaks in the GC content. One possible explanation is the presence of adapters in the sequence. Another possible cause is some kind of contamination, such as chimeras.</p>
 
@@ -855,7 +848,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>For more information on the topic, please see <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">the quality control tutorial</a>.</p>
 </blockquote>
 
@@ -868,7 +861,7 @@ Sentry.init({
 <p>Nanopore sequencing technology requires to ligate adapters to both ends of genomic material to facilitate the strand capture and loading of a processive enzyme at the 5’end, boosting the effectiveness of the sequencing process. Adapter sequences should be removed because they <strong>can interfere with aligment of reads</strong> to 16S rRNA gene reference database, for which we will use the <strong>porechop</strong> tool (<span class="citation"><a href="#rrwick2017">Wick 2017</a></span>).</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>If you are interested in Nanopore sequecing technology, you can find more information in <span class="citation"><a href="#Jain2016">Jain <i>et al.</i> 2016</a></span>.</p>
 
 </blockquote>
@@ -876,7 +869,7 @@ Sentry.init({
 <p>On the other hand, <strong>chimeric sequences</strong> are considered a contaminant and should be removed because they can result in artificial inflation of the microbial diversity. With <strong>Porechop</strong> you can eliminate them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-adapters-with-porechop"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove adapters with porechop</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-adapters-with-porechop"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove adapters with porechop</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3" title="Porechop tool" aria-role="link"><strong>Porechop</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3</span></span> with the following parameters:
@@ -895,7 +888,7 @@ Sentry.init({
 <p>To increase the specificity of the analysis, we will select the reads with lengths between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions of the 16S rRNA gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according to the recommendations from <span class="citation"><a href="#Nygaard2020">Nygaard <i>et al.</i> 2020</a></span>. This stage will be carried out through the use of <strong>fastp</strong> (<span class="citation"><a href="#Chen_2018">Chen <i>et al.</i> 2018</a></span>), an open-source tool designed to process FASTQ files.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-sequence-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter sequence with fastp</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-sequence-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter sequence with fastp</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="fastp tool" aria-role="link"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0</span></span> with the following parameters:
@@ -942,7 +935,7 @@ Sentry.init({
 <p>After processing the sequences, we are going to analyze them again using <strong>FastQC</strong> and <strong>MultiQC</strong> to see if we have managed to correct the anomalies that we had detected.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-check-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality check</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-check-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality check</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> with the following parameters:
@@ -991,7 +984,7 @@ Sentry.init({
 <p>For this tutorial, we will use the <strong>SILVA database</strong> (<span class="citation"><a href="#Quast2012">Quast <i>et al.</i> 2012</a></span>). It includes over 3.2 million 16S rRNA sequences from the <em>Bacteria</em>, <em>Archaea</em> and <em>Eukaryota</em> domains.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assign-taxonomic-labels-with-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assign taxonomic labels with Kraken2</div>
+  <div class="box-title hands-on-title" id="hands-on-assign-taxonomic-labels-with-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assign taxonomic labels with Kraken2</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0" title="Kraken2 tool" aria-role="link"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0</span></span> with the following parameters:
@@ -1010,7 +1003,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>A confidence score of 0.1 means that at least 10% of the k-mers should match entries in the database. This value can be reduced if a less restrictive taxonomic assignation is desired.</p>
       </blockquote>
@@ -1024,7 +1017,7 @@ Sentry.init({
 <p>Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the <strong>Krona pie chart</strong> tool (<span class="citation"><a href="#Ondov_2011">Ondov <i>et al.</i> 2011</a></span>). But before that, we need to adjust the format of the data output from <strong>Kraken2</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adjust-dataset-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adjust dataset format</div>
+  <div class="box-title hands-on-title" id="hands-on-adjust-dataset-format"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adjust dataset format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0" title="Reverse tool" aria-role="link"><strong>Reverse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0</span></span> with the following parameters:
@@ -1061,7 +1054,7 @@ Sentry.init({
 <p><strong>Krona</strong> allows hierarchical data to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of the bacterial communities and compare how the populations of microorganisms are modified according to the conditions of the environment.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualize-metagenomics-analysis-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualize metagenomics analysis results</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-metagenomics-analysis-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualize metagenomics analysis results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1" title="Krona pie chart tool" aria-role="link"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1</span></span> with the following parameters:
@@ -1080,7 +1073,7 @@ Sentry.init({
 <iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/metagenomics-nanopore/krona.png" alt="Krona. " width="1325" height="874" loading="lazy" /> </iframe>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What can we say about the health status of the soil samples?</li>
@@ -1088,7 +1081,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The low presence of <em>Alphaproteobacteria</em> (including members of the order <em>Rhizobiales</em>), as well as the abundance of <em>Bacteroidetes</em> and <em>Gammaproteobacteria</em>, suggest that the soil is highly exposed to phosphorus. This mineral is strongly associated with the anthropogenic activity as it is an important component of agrochemicals.</li>
@@ -1313,7 +1306,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Galaxy Interactive Tools">
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -497,7 +497,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -534,14 +534,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/dev'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-dev">
     <h1 data-toc-skip>Galaxy Interactive Tools</h1>
@@ -888,7 +881,7 @@ The environment_variables would be needed to retrieve data from Galaxy History. 
 <p>There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as a new Interactive Tool into a local Galaxy instance and an existing Galaxy instance.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: If you plan to use an existing Galaxy instance</div>
+  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: If you plan to use an existing Galaxy instance</div>
   <p>The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">this admin tutorial</a> for setting up a compatible Galaxy instance for development and testing of your GxIT.
 As well as updating the Galaxy server configuration, you will also have to configure the server’s DNS provider to allow wildcard DNS records. This allows Galaxy to create unique host names (subdomains) for GxITs to be served over, separating them from the main Galaxy application.</p>
 </blockquote>
@@ -965,7 +958,7 @@ output is not sufficient, then it’s time to start building your first
 Interactive Tool!</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-interactive-tool-infrastructure"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Interactive tool infrastructure</div>
+  <div class="box-title comment-title" id="comment-interactive-tool-infrastructure"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Interactive tool infrastructure</div>
   <p>Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by Galaxy core. As such, wrapping a new GxIT requires only three components:</p>
   <ul>
     <li>Application script(s)</li>
@@ -1006,7 +999,7 @@ the tutorial, we’ll sprinkle in some tips on how to speed up the development
 cycle.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-note-on-architecture"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A note on architecture</div>
+  <div class="box-title comment-title" id="comment-a-note-on-architecture"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note on architecture</div>
   <p>When building a GxIT, it is best to keep as much logic as possible in the tool XML, while keeping the Docker image as generic as possible. Why? Updating the tool XML is simple for Galaxy admins and developers in the future. They can view the tool XML directly on the server and understand how the tool works. The Docker image, meanwhile, is relatively opaque to other developers and administrators. To understand the container they must locate the original Dockerfile, which is not always available. Updating the container is more complex, as we will see later. Additionally, keeping the Docker container generic makes it testable outside of Galaxy.</p>
 
   <p>In short: updating the Docker container is hard, but updating the tool XML is easy!</p>
@@ -1028,7 +1021,7 @@ to see an example of how this can be done.</p>
 In the following sections, we will study how it was built.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <p>First, let’s clone the repository to take a quick look at it.</p>
 
@@ -1060,7 +1053,7 @@ In the following sections, we will study how it was built.</p>
 <h2 id="the-dockerfile">The Dockerfile</h2>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-a-brief-primer-on-docker"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-brief-primer-on-docker" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: A brief primer on Docker<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-a-brief-primer-on-docker"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-brief-primer-on-docker" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: A brief primer on Docker<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single “image”, which can be run on any machine with Docker installed.</p>
 
   <p><strong>Essentials of Docker:</strong></p>
@@ -1168,7 +1161,7 @@ If so, don’t forget to create a <code class="language-plaintext highlighter-ro
 next to your Dockerfile.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <p>Let’s start working on this Docker container.</p>
 
@@ -1187,7 +1180,7 @@ docker build <span class="nt">-t</span> <span class="nv">$IMAGE_TAG</span> <span
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-automating-the-build"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-automating-the-build" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Automating the build<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-automating-the-build"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-automating-the-build" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Automating the build<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>While developing the Docker container you may find yourself tweaking and rebuilding the container image many times.
 In the GitHub repository linked above, you’ll notice that the author has used a <code class="language-plaintext highlighter-rouge">Makefile</code> to accelerate the build and deploy process.
 This allows the developer to simply run <code class="language-plaintext highlighter-rouge">make docker</code> and <code class="language-plaintext highlighter-rouge">make push_hub</code> to build and push the container, or <code class="language-plaintext highlighter-rouge">make</code> to rebuild the container after making changes during development. Check out the <code class="language-plaintext highlighter-rouge">Makefile</code> to see what commands can be run using <code class="language-plaintext highlighter-rouge">make</code> in this repository.</p>
@@ -1210,7 +1203,7 @@ This allows the developer to simply run <code class="language-plaintext highligh
 <p>Before we go pushing our container to the cloud, we should give it a local test run to ensure that it’s working correctly on our development machine. Have a play and see how our little web app works!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Run our application in the container</span>
 docker run <span class="nt">-it</span> <span class="nt">-p</span> 127.0.0.1:8765:<span class="nv">$PORT</span> <span class="nv">$IMAGE_TAG</span>
 
@@ -1236,7 +1229,7 @@ has great documentation on creating repositories, authenticating with tokens
 and pushing images.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set remote tag for your container. This should include your username and</span>
 <span class="c"># repository name for Docker Hub.</span>
 <span class="nv">REMOTE</span><span class="o">=</span>&lt;DOCKERHUB_USERNAME&gt;/my-first-gxit
@@ -1252,7 +1245,7 @@ docker push <span class="nv">$REMOTE</span>:latest
 </code></pre></div>  </div>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-production-container-hosting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-production-container-hosting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Production container hosting<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-production-container-hosting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-production-container-hosting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Production container hosting<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>For production deployment, the
 <a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html">Galaxy standard</a>
 for container image hosting is
@@ -1279,7 +1272,7 @@ our new Docker container as a Galaxy tool.</p>
 <h2 id="the-tool-xml">The tool XML</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-4"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <p>Create a Galaxy tool XML file named <code class="language-plaintext highlighter-rouge">interactivetool_tabulator.xml</code>. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:</p>
   <ul>
@@ -1290,7 +1283,7 @@ our new Docker container as a Galaxy tool.</p>
   </ul>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-writing-the-tool-command"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Writing the tool command</div>
+    <div class="box-title comment-title" id="comment-writing-the-tool-command"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Writing the tool command</div>
 
     <p>This step can cause a lot of confusion. Here are a few pointer that you will find critical to understanding the process:</p>
     <ul>
@@ -1301,7 +1294,7 @@ our new Docker container as a Galaxy tool.</p>
   </blockquote>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-writing-the-gxit-tool-xml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-writing-the-gxit-tool-xml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Writing the GxIT tool XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-writing-the-gxit-tool-xml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-writing-the-gxit-tool-xml" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Writing the GxIT tool XML<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ul>
       <li>Refer to the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">Galaxy tool XML docs</a>.</li>
@@ -1313,7 +1306,7 @@ our new Docker container as a Galaxy tool.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"interactive_tool_tabulator"</span> <span class="na">tool_type=</span><span class="s">"interactive"</span> <span class="na">name=</span><span class="s">"Tabulator"</span> <span class="na">version=</span><span class="s">"0.1"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;description&gt;</span>Tuto tool for Gxit<span class="nt">&lt;/description&gt;</span>
@@ -1401,7 +1394,7 @@ our new Docker container as a Galaxy tool.</p>
 Let’s check this integration on your machine. You can use a VM if you prefer not to modify your machine environment.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-note-on-the-os"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A note on the OS</div>
+  <div class="box-title comment-title" id="comment-a-note-on-the-os"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note on the OS</div>
   <p>This part of the tutorial has been tested on Ubuntu and Debian and there is no guaranteed success for other operating systems.
 If you have another OS on your machine (i.e. Windows or MacOS), you may need to use an Ubuntu virtual machine or perhaps try <a href="https://docs.microsoft.com/en-us/windows/wsl/install">Windows subsystem for Linux</a>.</p>
 </blockquote>
@@ -1409,14 +1402,14 @@ If you have another OS on your machine (i.e. Windows or MacOS), you may need to 
 <h2 id="docker-installation">Docker installation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-docker"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install Docker</div>
+  <div class="box-title hands-on-title" id="hands-on-install-docker"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install Docker</div>
   <p>Install Docker as described on the <a href="https://docs.docker.com/engine/install/">docker website</a>. Click on your distribution name to get specific information.</p>
 </blockquote>
 
 <h2 id="galaxy-installation">Galaxy installation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Install Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-install-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Install Galaxy</div>
 
   <p>For Ubuntu:</p>
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install git to get Galaxy project</span>
@@ -1434,7 +1427,7 @@ git clone https://github.com/galaxyproject/galaxy
 <h2 id="galaxy-configuration">Galaxy configuration</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-5"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/GxIT/galaxy/config
 <span class="c"># Create custom config files</span>
@@ -1482,7 +1475,7 @@ the Galaxy core application directory, and adding the tool to our
 <code class="language-plaintext highlighter-rouge">tool_conf_interactive.xml</code> file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing</div>
+  <div class="box-title hands-on-title" id="hands-on-installing"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing</div>
 
   <ol>
     <li>
@@ -1521,7 +1514,7 @@ the Galaxy core application directory, and adding the tool to our
 We just need to add a single line to this file to enable our tool. Can you figure it out?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive Tools"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"interactive/interactivetool_tabulator.xml"</span> <span class="nt">/&gt;</span>
@@ -1543,7 +1536,7 @@ We just need to add a single line to this file to enable our tool. Can you figur
 <p>Have a look in the web interface of your Galaxy instance. You should find the new tool under the “Interactive tools” section in the tool panel. If so, we are ready to start testing it out!</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-distributing-a-new-gxit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-distributing-a-new-gxit" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Distributing a new GxIT<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-distributing-a-new-gxit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-distributing-a-new-gxit" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Distributing a new GxIT<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To release a GxIT for production use, we must distribute two components:</p>
   <ul>
@@ -1562,7 +1555,7 @@ We just need to add a single line to this file to enable our tool. Can you figur
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-install-a-gxit-with-an-ansible-playbook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-a-gxit-with-an-ansible-playbook" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Install a GxIT with an Ansible playbook<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-install-a-gxit-with-an-ansible-playbook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-a-gxit-with-an-ansible-playbook" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Install a GxIT with an Ansible playbook<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a Galaxy server. This means that you can manage and deploy a GxIT as part of your Galaxy instance without merging into the <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code> repository (or a fork of it).</p>
 
@@ -1609,12 +1602,12 @@ demonstrates how this can be acheived by adding our tool XML to the “local too
 <p>The most obvious way to test a tool is simply to run it in the Galaxy UI, straight from the tool panel. If you are extremely lucky, you will find that the tool starts up and runs without error. But we all know that never happens! So this is where we start iteratively debugging our tool, until it functions as expected.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-a-successful-tool-run"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: A successful tool run</div>
+  <div class="box-title comment-title" id="comment-a-successful-tool-run"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A successful tool run</div>
   <p>It is worth pointing out that the appearance of a GxIT in the Galaxy user history is not intuitive when you are used to running “regular” tool jobs. When the history item turns orange (“processing”), that’s when a GxIT is actually ready to use! At this point, the tool UI should refresh and display a link to the active GxIT. Remember, the history item doesn’t turn green until a job has terminated. With a GxIT, that only happens when the tool has been stopped by the user, or by wall time limits imposed by the Galaxy administrators.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-gxit-testing-infrastructure"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gxit-testing-infrastructure" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: GxIT testing infrastructure<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-gxit-testing-infrastructure"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gxit-testing-infrastructure" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: GxIT testing infrastructure<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Testing and debugging is currently the trickiest part of GxIT development. Ideally, Galaxy core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the ToolShed.</p>
 </blockquote>
 
@@ -1662,7 +1655,7 @@ that are accessible in the command section of the tool XML - these can be handy 
 <p>We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user’s Galaxy history? For example, if the user creates a file within the application. That’s where the environment variables created in the tool XML become useful.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-access-histories-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-access-histories-in-r" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Access histories in R<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-access-histories-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-access-histories-in-r" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Access histories in R<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>From the <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml">R-Studio GxIT</a> we can see that there is <a href="https://github.com/hexylena/rGalaxyConnector">an R library</a> that allows us to interact with Galaxy histories.</p>
 
   <p>“The convenience functions <code class="language-plaintext highlighter-rouge">gx_put()</code> and <code class="language-plaintext highlighter-rouge">gx_get()</code> are available to you to interact with your current Galaxy history. You can save your workspace with <code class="language-plaintext highlighter-rouge">gx_save()</code>”</p>
@@ -1853,7 +1846,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: M. tuberculosis Variant Analysis">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -469,7 +469,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -506,14 +506,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>M. tuberculosis Variant Analysis</h1>
@@ -830,7 +823,7 @@ as RefSeq entry <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/">NC_0
 <p>The data for today is a sample of <em>M. tuberculosis</em> <a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529">collected</a> from a <a href="https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4">southern African patient</a>. In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the <a href="https://www.nature.com/articles/ng.590">inferred</a> most recent common <a href="https://zenodo.org/record/3497110">ancestor</a> of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome (<a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3">NC_000962.3</a>) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
 
   <ol>
     <li><span class="tool" data-tool="upload1" title="Import tool" aria-role="link"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the following files from <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> or from the shared data library
@@ -868,7 +861,7 @@ of NGS data quality control, you may want to have a look at the dedicated
 tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control”</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control of the input datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
 
   <ol>
     <li>
@@ -899,7 +892,7 @@ dataset) will get added to your history.</p>
 <p>While one could examine the quality control report for each set of reads (forward and reverse) independently it can be quite useful to inspect them side by side using the <strong>MultiQC</strong> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combining-qc-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Combining QC results</div>
+  <div class="box-title hands-on-title" id="hands-on-combining-qc-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combining QC results</div>
 
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
@@ -922,7 +915,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
       <p>Using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> button, inspect the <em>Webpage</em> output produced by the tool</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Based on the report, do you think preprocessing of the reads
@@ -930,7 +923,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Sequence quality is quite good overall. If anything you might
@@ -951,7 +944,7 @@ fastq datasets in the next step</li>
 <p>As these reads look like they need a bit of trimming, we can turn to the <strong>Trimmomatic</strong> tool to clean up our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-trimming"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality trimming</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-trimming"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality trimming</div>
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1</span></span> to clean up the reads and remove the poor quality sections.
       <ul>
@@ -976,14 +969,14 @@ fastq datasets in the next step</li>
       <p>Inspect the output produced by Trimmomatic</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Why are there 4 output read files instead of 2?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because both their sequence and the gap between them (the “insert size”) can be used for further analysis. In a typical analysis, only the paired reads are used.</li>
@@ -1002,7 +995,7 @@ fastq datasets in the next step</li>
 <p>We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our SNP analysis. <strong>Kraken2</strong> is an effective way of looking at which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately the tool uses a lot of RAM (typically 50GB when used with the <em>Standard</em> database), so you might want to skip this step if your environment doesn’t have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use <strong>Kraken2</strong> as part of its analysis, see the optional section on analysing <em>SRR12416842</em> at the end of this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run Kraken2</div>
+  <div class="box-title hands-on-title" id="hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Kraken2</div>
 
   <ol>
     <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="link"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span> with the following parameters
@@ -1032,14 +1025,14 @@ fastq datasets in the next step</li>
       <p>Inspect the report produced by Kraken</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Was there any significant contamination of the sample?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>Over 85% of the reads here have been positively identified as <em>Mycobacterium</em> (the precise % will differ depending on which version of the Kraken database you are using). The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.</li>
@@ -1063,7 +1056,7 @@ fastq datasets in the next step</li>
 gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3">H37Rv strain</a> so will use it in this case.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-snippy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run Snippy</div>
+  <div class="box-title hands-on-title" id="hands-on-run-snippy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Snippy</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="link"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0</span></span> with the following parameters
@@ -1100,7 +1093,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
       <p>Inspect the Snippy VCF output</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1115,7 +1108,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1149,7 +1142,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 <p>We still cannot entirely trust the proposed variants. In particular, there are regions of the <em>M. tuberculosis</em> genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The <code class="language-plaintext highlighter-rouge">TB Variant Filter</code> can help filter out variants based on a variety of criteria, including those listed above.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-snippy-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run Snippy</div>
+  <div class="box-title hands-on-title" id="hands-on-run-snippy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Snippy</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0" title="TB Variant Filter tool" aria-role="link"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.6+galaxy0</span></span> with the following parameters
       <ul>
@@ -1161,14 +1154,14 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
       <p>Open the new VCF file.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many of the original variants have now been filtered out?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li><code class="language-plaintext highlighter-rouge">159</code> (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)</li>
@@ -1181,7 +1174,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-which-filters-to-apply"><button class="gtn-boxify-button details" type="button" aria-controls="details-which-filters-to-apply" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Which filters to apply?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-which-filters-to-apply"><button class="gtn-boxify-button details" type="button" aria-controls="details-which-filters-to-apply" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Which filters to apply?<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>TB Variant Filter tries to provide reasonable defaults for filtering
 variants predicted in the M. tuberculosis
@@ -1209,7 +1202,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 <p>Finally, TB Variant Report use the COMBAT-TB <a href="https://explorer.sanbi.ac.za">eXplorer</a> <a href="https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700">database</a> of <em>M. tuberculosis</em> genome annotation to annotate variants in Mtb. It also takes the output of <em>TB Profiler</em> and produces a neat report that is easy to browse and search.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-tb-profiler-and-tb-variant-report"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run TB Profiler and TB Variant Report</div>
+  <div class="box-title hands-on-title" id="hands-on-run-tb-profiler-and-tb-variant-report"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run TB Profiler and TB Variant Report</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0" title="TB-Profiler profile tool" aria-role="link"><strong>TB-Profiler profile</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0</span></span> with the following parameters
       <ul>
@@ -1241,7 +1234,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
       <p>Open the drug resistance and variant report html files.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1253,7 +1246,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1275,7 +1268,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 <p>We could go through all of the variants in the VCF files and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run JBrowse</div>
+  <div class="box-title hands-on-title" id="hands-on-run-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run JBrowse</div>
 
   <!-- GTN:IGNORE:006 -->
   <ol>
@@ -1363,7 +1356,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 far.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-take-a-closer-look-at-sample-18-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Take a closer look at sample 18-1</div>
+  <div class="box-title hands-on-title" id="hands-on-take-a-closer-look-at-sample-18-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Take a closer look at sample 18-1</div>
 
   <ol>
     <li>Fetch the data from Zenodo
@@ -1378,7 +1371,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
       <p>Examine the sample composition with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="link"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1390,7 +1383,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1412,7 +1405,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 <p>The next example is <em>SRR12416842</em> from an Indonesia <a href="https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221">study</a> of multi-drug resistant (MDR) tuberculosis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-take-a-closer-look-at-sample-srr12416842"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Take a closer look at sample SRR12416842</div>
+  <div class="box-title hands-on-title" id="hands-on-take-a-closer-look-at-sample-srr12416842"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Take a closer look at sample SRR12416842</div>
 
   <ol>
     <li>Fetch the data from EBI European Nucleotide Archive
@@ -1430,7 +1423,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
       <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="link"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0</span></span></p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1442,7 +1435,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1462,7 +1455,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
       <p>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0" title="BAM Coverage Plotter tool" aria-role="link"><strong>BAM Coverage Plotter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0</span></span> on the mapped reads BAM file that you got from <strong>snippy</strong> using the FASTA format reference you made with <strong>seqret</strong> as the reference.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1474,7 +1467,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1727,7 +1720,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

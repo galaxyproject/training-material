@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Pre-processing of Single-Cell RNA Data">
         <meta property="og:description" content="Training material and practicals for all kinds of single ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -437,7 +437,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -474,14 +474,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/galaxy-single-cell'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-single-cell">
     <h1 data-toc-skip>Pre-processing of Single-Cell RNA Data</h1>
@@ -758,7 +751,7 @@ Sentry.init({
 <p>The first part of this tutorial will deal with batches, and use example <em>FASTQ</em> data from a single batch, which we will perform <a href="#barcode-extraction">barcode extraction</a> and annotation upon. Alignment and quality control will also be performed, and we will see how to construct a rudimentary count matrix.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-10x-datasets"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: 10x Datasets</div>
+  <div class="box-title comment-title" id="comment-10x-datasets"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: 10x Datasets</div>
 
   <p>10x Genomics datasets can be processed in a much easier way that is outlined in the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html"><em>Pre-processing of 10X Single-Cell RNA Datasets</em></a> tutorial.</p>
 
@@ -804,7 +797,7 @@ Sentry.init({
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow_upper.png" alt="Workflow Upper. " width="2500" height="1124" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Single batch processing</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload and organization</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload and organization</div>
 
   <ol>
     <li>
@@ -842,7 +835,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <h2 id="barcode-extraction">Barcode Extraction</h2>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
 
   <p>Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the <a href="/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html"><em>Plates, Batches, and Barcodes</em></a>, as well as the <a href="/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html"><em>Understanding Barcodes</em></a> hands-on material for an introduction into transcript barcodes.</p>
 
@@ -851,7 +844,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>We will be demultiplexing our FASTQ batch data by performing barcode extraction whilst also making use of the provided barcodes file to filter for <em>specific</em> cell barcodes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-barcode-extraction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Barcode Extraction</div>
+  <div class="box-title hands-on-title" id="hands-on-barcode-extraction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Barcode Extraction</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1" title="UMI-tools extract tool" aria-role="link"><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1</span></span> with the following parameters:
@@ -878,12 +871,12 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Verifying that the desired UMI and cell barcodes have been extracted from the sequence of the Forward reads and inserted into the header of the Reverse reads is encouraged, using the method outlined in the above hands-on material.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How many reads were filtered out, and why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The input FASTQ files contained reads from all barcodes, including those with sequencing errors, resulting in a larger pool of detected barcodes than those desired. (e.g. Cell barcode <code class="language-plaintext highlighter-rouge">AAATTT</code> could have single base-pair sequencing errors that could modify it into <code class="language-plaintext highlighter-rouge">ATATTT</code> or <code class="language-plaintext highlighter-rouge">AAACTT</code>, etc).</p>
 
@@ -909,7 +902,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>For alignment, we will use RNA-STAR for performance and splice-awareness.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-performing-the-alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Performing the Alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-performing-the-alignment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Performing the Alignment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.7a" title="RNA-STAR tool" aria-role="link"><strong>RNA-STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.7a</span></span> with the following parameters:
@@ -962,7 +955,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>The purpose of MultiQC is to observe how well our reads were mapped against the reference genome. Many reads are discarded due to being of too low quality, or having ambiguous sequence content that can map them to multiple locations.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What percentage of our reads are uniquely mapped? How many millions of reads is this percentage?</li>
@@ -971,7 +964,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><code class="language-plaintext highlighter-rouge">59.5%</code> or ~80k reads were successfully mapped</li>
@@ -998,7 +991,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Before continuing let us first look back on some of the previous stages:</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-recap-of-previous-stages"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Recap of previous stages</div>
+  <div class="box-title comment-title" id="comment-recap-of-previous-stages"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Recap of previous stages</div>
 
   <ol>
     <li>
@@ -1020,7 +1013,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-confirming-the-alignment-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Confirming the Alignment Data</div>
+  <div class="box-title hands-on-title" id="hands-on-confirming-the-alignment-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Confirming the Alignment Data</div>
 
   <ol>
     <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the BAM output from STAR.</li>
@@ -1043,13 +1036,13 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-what-does-the-alignment-flag-value-of-16-tell-us-about-this-read"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What does the alignment flag value of 16 tell us about this read?</div>
+  <div class="box-title question-title" id="question-what-does-the-alignment-flag-value-of-16-tell-us-about-this-read"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: What does the alignment flag value of 16 tell us about this read?</div>
 
   <p><!-- TODO This information needs to be integrated into an actual tool -->
   We can interactively see what the different FLAG values mean by feeding values into the SAM specification to the <a href="https://broadinstitute.github.io/picard/explain-flags.html">Picard web tool</a></p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The read aligns to the reverse strand</p>
 
   </blockquote>
@@ -1077,7 +1070,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Another filtering measure we can apply is to keep reads that we are confident about, e.g those with a minimum number of mismatches to the reference within an acceptable range. Specifically, we want to keep all reads that align to the forward or reverse strand that also have less that 3 mismatches to the reference, and are also mapped only once to the reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="link"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span> with the following parameters:
@@ -1171,7 +1164,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why are we filtering only for alignment flags <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">16</code>?</li>
@@ -1180,7 +1173,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Alignment flags <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">16</code> specify that we wish to only keep reads that align to the forward and reverse strands.</li>
@@ -1206,7 +1199,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Unfortunately, both are currently limited to counting without being able to distinguish between different cells.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-example"><button class="gtn-boxify-button details" type="button" aria-controls="details-example" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Example<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-example"><button class="gtn-boxify-button details" type="button" aria-controls="details-example" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Example<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If we consider the number of reads that align to <em>GeneA</em>, the output given by these two tools is as follows:</p>
 
@@ -1276,7 +1269,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>In order to obtain this desired format, we must use <strong>UMI-tools count</strong> to perform the counting. However, this tool is dependent on <strong>FeatureCounts</strong> to annotate our reads with the one crucial piece of information that is missing from our BAM file: the name of the gene.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-verifying-missing-gene-name"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Verifying missing gene name</div>
+  <div class="box-title comment-title" id="comment-verifying-missing-gene-name"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Verifying missing gene name</div>
   <p>You can check this yourself by examining the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the BAM file <em>“STAR Alignment file”</em></p>
 </blockquote>
 
@@ -1285,7 +1278,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Let us annotate our BAM file with desired gene tags.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quantification-assist-via-featurecounts"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quantification assist via FeatureCounts</div>
+  <div class="box-title hands-on-title" id="hands-on-quantification-assist-via-featurecounts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quantification assist via FeatureCounts</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1" title="FeatureCounts tool" aria-role="link"><strong>FeatureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1</span></span> with the following parameters:
@@ -1320,14 +1313,14 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 With all the relevant data now in our BAM file, we can actually perform the counting via <code class="language-plaintext highlighter-rouge">UMI-tools count</code>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-verifying-added-gene-name"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Verifying added gene name</div>
+  <div class="box-title comment-title" id="comment-verifying-added-gene-name"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Verifying added gene name</div>
   <p>You can once again check this yourself by examining the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the BAM file <em>“STAR Alignment file”</em></p>
 </blockquote>
 
 <h3 id="counting-genes--cell">Counting Genes / Cell</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-final-quantification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Final Quantification</div>
+  <div class="box-title hands-on-title" id="hands-on-final-quantification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Final Quantification</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.5.1" title="UMI-tools count tool" aria-role="link"><strong>UMI-tools count</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_count/umi_tools_count/0.5.5.1</span></span> with the following parameters:
@@ -1354,7 +1347,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
 <p>At this stage, we now have a tabular file containing genes/features as rows, and cell labels as headers.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many genes do we have in the matrix?</li>
@@ -1362,7 +1355,7 @@ With all the relevant data now in our BAM file, we can actually perform the coun
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1381,7 +1374,7 @@ The number of columns can be seen by scrolling the file preview window completel
 <p>The generation of a single count matrix is now complete, with the emphasis on the word <em>single</em> due to the fact that we often deal in multiple batches of sequencing data.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-recap-of-previous-stages-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Recap of previous stages</div>
+  <div class="box-title comment-title" id="comment-recap-of-previous-stages-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Recap of previous stages</div>
 
   <ol>
     <li>
@@ -1411,7 +1404,7 @@ The number of columns can be seen by scrolling the file preview window completel
 <p>This concludes the first part of the tutorial which focused on the transformation of raw FASTQ data from a single batch into a count matrix. The second part of this tutorial guides us through the process of merging multiple processed batches from the first stage, and performing qualitative filtering.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-workflows-for-all-steps"><button class="gtn-boxify-button details" type="button" aria-controls="details-workflows-for-all-steps" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Workflows For All Steps<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-workflows-for-all-steps"><button class="gtn-boxify-button details" type="button" aria-controls="details-workflows-for-all-steps" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Workflows For All Steps<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Galaxy provides a workflow that captures the process of all the above stages for a <a href="workflows/scrna_pp_celseq.ga">single pair of FASTQ data</a>:</p>
 
@@ -1445,7 +1438,7 @@ The number of columns can be seen by scrolling the file preview window completel
 <p>Once again, file naming is important, and so we will rename our matrix files appropriately to the plate and batch they are supposed to originate from.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload and organisation</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organisation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload and organisation</div>
 
   <ol>
     <li>
@@ -1499,12 +1492,12 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/scrna_downstream.svg" alt="Table Join. " width="616" height="494" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Full Table Join</figcaption></figure>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>For more information on table joins, see <a href="http://www.sql-join.com/sql-join-types/">this guide</a></p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Why is it required to change the column headers in the Full matrix?</li>
@@ -1512,7 +1505,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Although the cell headers in each batch matrix is the same, the cells they label are <em>not</em> the same and need to be relabelled in the final matrix to tell us which batch they originated from.</li>
@@ -1526,7 +1519,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Let us now merge our matrices from different batches. In order to ensure that our batches are merged in the order that we wish, we should first create a list of datasets so that our matrices are merged in the order given by the list.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-table-merge"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Table Merge</div>
+  <div class="box-title hands-on-title" id="hands-on-table-merge"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Table Merge</div>
 
   <ol>
     <li>
@@ -1555,7 +1548,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Once the merge is complete, we can now peek at our full combined matrix by once again clicking on the file name to see a small summary.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Each of these matrices/batches come from the same organism.</p>
 
@@ -1566,7 +1559,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1599,7 +1592,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Since the plating protocol we are using is that designed by the Freiburg MPI Grün lab, we will follow their structure.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-plating-protocol"><button class="gtn-boxify-button details" type="button" aria-controls="details-plating-protocol" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Plating protocol<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-plating-protocol"><button class="gtn-boxify-button details" type="button" aria-controls="details-plating-protocol" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Plating protocol<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li>
@@ -1689,7 +1682,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 <p>Let us now apply this protocol to our count matrix, and look for any cross-contamination.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-barcode-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Barcode Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-barcode-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Barcode Filtering</div>
 
   <p>Select <strong>Cross-contamination Barcode Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1760,7 +1753,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-regular-expressions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Regular Expressions</div>
+  <div class="box-title comment-title" id="comment-regular-expressions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regular Expressions</div>
   <p>The <a href="https://www.regular-expressions.info/quickstart.html">regular expression</a> (RegEx) used in the final steps of the above <em>Hands-On</em> is required in order to tell us how to capture the important information in the cell headers contained in brackets <code class="language-plaintext highlighter-rouge">(</code> <code class="language-plaintext highlighter-rouge">)</code>, where <code class="language-plaintext highlighter-rouge">\\d</code> denotes an expected digit, and <code class="language-plaintext highlighter-rouge">[ACTG]+</code> denotes 1 or more characters matching A or C or T or G.</p>
 
   <p>The information captured in the brackets <code class="language-plaintext highlighter-rouge">(</code> <code class="language-plaintext highlighter-rouge">)</code> can then be placed in the desired arrangement, where <code class="language-plaintext highlighter-rouge">Place \\1 Matches \\2 Here \\3</code> would place the first <code class="language-plaintext highlighter-rouge">\\d</code> after “Place “, the second after “Matches “, and so on.</p>
@@ -1781,7 +1774,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 </ol>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>The count matrix that is output from this tool has only half the number of cells as the original input count matrix. Why is this?</li>
@@ -1790,7 +1783,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Because only half the barcodes in each batch were real. The <em>UMI-tools extract</em> took the entire barcodes file to filter against each batch, and the <em>UMI-tools count</em> also took the entire barcodes file to count against each batch. Naturally, each batch produced 192 cells, even though 96 were real. As a result of joining each of these matrices we ended up with a count-matrix of \(8 * 192 = 1536\) cells. The cross-contamination tool removes the false barcodes (50% in each batch), resulting in \(768\) cells.</li>
@@ -2127,7 +2120,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

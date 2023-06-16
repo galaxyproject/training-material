@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Connecting Galaxy to a compute cluster">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -455,7 +455,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -492,14 +492,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Connecting Galaxy to a compute cluster</h1>
@@ -919,17 +912,17 @@ be taken into consideration when choosing where to run jobs and what parameters 
 <h2 id="installing-slurm">Installing Slurm</h2>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Ansible Best Practices</div>
+  <div class="box-title comment-title" id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Ansible Best Practices</div>
   <p>If you’ve set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge">galaxyservers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge">galaxyservers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-do-you-need-a-drm"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-need-a-drm" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Do you need a DRM?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-do-you-need-a-drm"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-need-a-drm" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Do you need a DRM?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don’t, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-slurm"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Slurm</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-slurm"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Slurm</div>
 
   <ol>
     <li>
@@ -959,7 +952,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <p>In the same directory, run:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1010,7 +1003,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1095,20 +1088,20 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 <p>Galaxy runs <code class="language-plaintext highlighter-rouge">sbatch</code> jobs but we can use both <code class="language-plaintext highlighter-rouge">srun</code> and <code class="language-plaintext highlighter-rouge">sbatch</code> to test:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-commands-with-srun"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running commands with `srun`</div>
+  <div class="box-title hands-on-title" id="hands-on-running-commands-with-srun"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running commands with `srun`</div>
 
   <ol>
     <li>
       <p>Use <a href="https://slurm.schedmd.com/srun.html"><code class="language-plaintext highlighter-rouge">srun</code></a> to run the command <code class="language-plaintext highlighter-rouge">uname -a</code></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>srun uname -a
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>srun <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="gp">Linux gat-1.oz.training.galaxyproject.eu 5.4.0-48-generic #</span>52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
@@ -1122,19 +1115,19 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
 <p>Although it looks like this command ran as if I had not used <code class="language-plaintext highlighter-rouge">srun</code>, it was in fact routed through Slurm.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-commands-with-sbatch"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Running commands with `sbatch`</div>
+  <div class="box-title hands-on-title" id="hands-on-running-commands-with-sbatch"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Running commands with `sbatch`</div>
 
   <ol>
     <li>
       <p>Create a test job script somewhere, such as in <code class="language-plaintext highlighter-rouge">~/sbatch-test.sh</code>. It should be a batch script which runs <code class="language-plaintext highlighter-rouge">uname -a</code>, <code class="language-plaintext highlighter-rouge">uptime</code>, and sleeps for 30 seconds.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What does your shell script look like?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">uname</span> <span class="nt">-a</span>
 <span class="nb">uptime
@@ -1147,7 +1140,7 @@ sleep </span>30
       <p>Make the script executable:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x ~/sbatch-test.sh
 </code></pre></div>        </div>
       </blockquote>
@@ -1156,12 +1149,12 @@ sleep </span>30
       <p>Use <a href="https://slurm.schedmd.com/sbatch.html"><code class="language-plaintext highlighter-rouge">sbatch</code></a> to submit the job script</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What command did you run?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>sbatch ~/sbatch-test.sh
 </code></pre></div>          </div>
         </blockquote>
@@ -1171,13 +1164,13 @@ sleep </span>30
       <p>Use <a href="https://slurm.schedmd.com/squeue.html"><code class="language-plaintext highlighter-rouge">squeue</code></a> to check the queue</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>squeue
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
    3     debug sbatch-t   ubuntu  R       0:22      1 localhost
@@ -1195,7 +1188,7 @@ sleep </span>30
 <p>Above Slurm in the stack is slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-slurm-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Slurm-DRMAA</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-slurm-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Slurm-DRMAA</div>
 
   <ol>
     <li>
@@ -1217,7 +1210,7 @@ sleep </span>30
       <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook galaxy.yml</code>)</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1233,7 +1226,7 @@ sleep </span>30
 <p>At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and Galaxy’s own documentation) instruct that you should set the <code class="language-plaintext highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="language-plaintext highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because Galaxy runs under systemd, the environment that Galaxy starts under is controlled by the <code class="language-plaintext highlighter-rouge">environment</code> option in systemd service unit that the ansible role manages. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is <code class="language-plaintext highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Making Galaxy aware of DRMAA</div>
+  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Making Galaxy aware of DRMAA</div>
 
   <ol>
     <li>
@@ -1277,7 +1270,7 @@ sleep </span>30
       <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1286,13 +1279,13 @@ sleep </span>30
       <p>Watch the logs to check that everything loads correctly</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u 'galaxy-*'
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
 Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
@@ -1308,14 +1301,14 @@ Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.job
 <p>You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the digest tool to calculate an md5sum.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-testing-a-slurm-job"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Testing a Slurm Job</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-a-slurm-job"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Testing a Slurm Job</div>
 
   <ol>
     <li>
       <p>If you’re not still following the log files with <code class="language-plaintext highlighter-rouge">journalctl</code>, do so now.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u 'galaxy-*'
 </code></pre></div>        </div>
       </blockquote>
@@ -1328,7 +1321,7 @@ Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.job
       <p>Open <a href="https://my.gat.galaxy.training/?path=/%3Ftool_id=secure_hash_message_digest"><em>Secure Hash / Message Digest</em></a> tool</p>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <p>Your output may look slightly different. In your <code class="language-plaintext highlighter-rouge">journalctl</code> terminal window you should see the following messages:</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.mapper DEBUG 2020-02-10 09:37:17,946 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Mapped job to destination id: slurm
@@ -1378,14 +1371,14 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>Slurm allows us to query the exit state of jobs for a time period of the value of Slurm’s <code class="language-plaintext highlighter-rouge">MinJobAge</code> option, which defaults to 300 (seconds, == 5 minutes):</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-9"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <p>Your job number is potentially different.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scontrol show job 4
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <p>Your output may also look slightly different:</p>
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JobId=4 JobName=g1_upload1_admin_example_org
    UserId=galaxy(999) GroupId=galaxy(999) MCS_label=N/A
@@ -1420,7 +1413,7 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>After the job has been purged from the active jobs database, a bit of information (but not as much as <code class="language-plaintext highlighter-rouge">scontrol</code> provides) can be retrieved from Slurm’s logs. However, it’s a good idea to set up Slurm’s accounting database to keep old job information in a queryable format.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-which-directories-need-to-be-shared-on-a-cluster"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-directories-need-to-be-shared-on-a-cluster" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Which directories need to be shared on a cluster?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-which-directories-need-to-be-shared-on-a-cluster"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-directories-need-to-be-shared-on-a-cluster" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Which directories need to be shared on a cluster?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The following directories need to be accesible via the same path on both the head node and compute nodes:</p>
   <ul>
     <li><code class="language-plaintext highlighter-rouge">galaxy_shed_tools_dir</code></li>
@@ -1441,7 +1434,7 @@ galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thr
 <p>Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission (<span class="citation"><a href="#Tyryshkina_2019">Tyryshkina <i>et al.</i> 2019</a></span>). More work will be done in this area.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Note</div>
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
 
   <p>Job metrics are only visible to Galaxy <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like UseGalaxy.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
 
@@ -1459,14 +1452,14 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>These include very basic submission parameters. We want more information!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-the-job-metrics-plugin-configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up the job metrics plugin configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-the-job-metrics-plugin-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up the job metrics plugin configuration</div>
 
   <ol>
     <li>
       <p>Edit the <strong>global</strong> (for all hosts) group variables file, <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code>:</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in <code class="language-plaintext highlighter-rouge">all.yml</code> will allow us to refer to it later when setting the corresponding variable for Pulsar.</p>
       </blockquote>
 
@@ -1495,7 +1488,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
       <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-10"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1507,13 +1500,13 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy’s main configuration file (<code class="language-plaintext highlighter-rouge">galaxy.yml</code>). By setting <code class="language-plaintext highlighter-rouge">galaxy_job_metrics_plugins</code>, we instructed the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> role to create this file, and update the option (<code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>) in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-11"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/config/job_metrics_conf.yml
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out code-max-300">
-  <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+  <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
   <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1">##</span>
 <span class="c1">## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.</span>
@@ -1533,7 +1526,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <p>With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate some metrics</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-some-metrics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate some metrics</div>
 
   <ol>
     <li>
@@ -1866,7 +1859,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

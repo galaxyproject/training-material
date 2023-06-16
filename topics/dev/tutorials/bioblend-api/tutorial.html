@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Scripting Galaxy using the API and BioBlend">
         <meta property="og:description" content="Galaxy is an open-source project. Everyone can contribute...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -203,7 +203,7 @@ Sentry.init({
       "name": "jupyter-notebook"
     }
   ],
-  "abstract": "> <div class=\"box-title agenda-title\" id=\"agenda\">Agenda</div>"
+  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
 }
         </script>
         
@@ -344,7 +344,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -381,14 +381,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/dev'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-dev">
     <h1 data-toc-skip>Scripting Galaxy using the API and BioBlend</h1>
@@ -662,7 +655,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -804,10 +797,10 @@ Sentry.init({
 <p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-initialise"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Initialise</div>
+  <div class="box-title question-title" id="question-initialise"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Initialise</div>
   <p>First, define the connection parameters. What variables do you need?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">json</span>
 <span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 <span class="kn">from</span> <span class="n">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
@@ -827,10 +820,10 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-new-history"><i class="far fa-question-circle" aria-hidden="true"></i> Question: New History</div>
+  <div class="box-title question-title" id="question-new-history"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: New History</div>
   <p>Next, create a new Galaxy history via POST to the correct API.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">"name"</span><span class="p">:</span> <span class="s">"New history"</span><span class="p">}</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/histories"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="nf">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
@@ -846,7 +839,7 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-upload-a-dataset"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Upload a dataset</div>
+  <div class="box-title question-title" id="question-upload-a-dataset"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Upload a dataset</div>
   <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history. You need to run the special <code class="language-plaintext highlighter-rouge">upload1</code> tool by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/tools</code>. You don’t need to pass any inputs to it apart from attaching the file as <code class="language-plaintext highlighter-rouge">files_0|file_data</code>. Also, note that when attaching a file the payload should <strong>not</strong> be serialized to a JSON string and you need to drop <code class="language-plaintext highlighter-rouge">Content-Type</code> from the request headers.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
@@ -855,7 +848,7 @@ Sentry.init({
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">"history_id"</span><span class="p">:</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span>
     <span class="s">"tool_id"</span><span class="p">:</span> <span class="s">"upload1"</span>
@@ -875,10 +868,10 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-find-the-dataset-in-your-history"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Find the dataset in your history</div>
+  <div class="box-title question-title" id="question-find-the-dataset-in-your-history"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Find the dataset in your history</div>
   <p>Find the new uploaded dataset, either from the dict returned by the POST request above or from the history contents.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -891,7 +884,7 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Import a workflow</div>
+  <div class="box-title question-title" id="question-import-a-workflow"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Import a workflow</div>
   <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge">workflow</code>, which must be a deserialized JSON representation of the workflow <code class="language-plaintext highlighter-rouge">.ga</code> file.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
@@ -899,7 +892,7 @@ Sentry.init({
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">workflow_dict</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="nf">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
@@ -916,10 +909,10 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-details"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the workflow details</div>
+  <div class="box-title question-title" id="question-view-the-workflow-details"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the workflow details</div>
   <p>View the details of the imported workflow by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="nf">json</span><span class="p">()</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
@@ -933,10 +926,10 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Invoke the workflow</div>
+  <div class="box-title question-title" id="question-invoke-the-workflow"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Invoke the workflow</div>
   <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/WORKFLOW_ID/invocations</code>. The only needed data are <code class="language-plaintext highlighter-rouge">history</code> and <code class="language-plaintext highlighter-rouge">inputs</code>.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -953,7 +946,7 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-results"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the results</div>
+  <div class="box-title question-title" id="question-view-the-results"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the results</div>
   <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
@@ -1078,10 +1071,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-initialise-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Initialise</div>
+  <div class="box-title question-title" id="question-initialise-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Initialise</div>
   <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">import</span> <span class="n">bioblend.galaxy</span>
@@ -1099,10 +1092,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-new-history-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: New History</div>
+  <div class="box-title question-title" id="question-new-history-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: New History</div>
   <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1114,7 +1107,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-upload-a-dataset-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Upload a dataset</div>
+  <div class="box-title question-title" id="question-upload-a-dataset-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Upload a dataset</div>
   <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history using <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> .</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
@@ -1122,7 +1115,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">,</span> <span class="n">new_hist</span><span class="p">[</span><span class="s">"id"</span><span class="p">])</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1134,10 +1127,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-find-the-dataset-in-your-history-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Find the dataset in your history</div>
+  <div class="box-title question-title" id="question-find-the-dataset-in-your-history-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Find the dataset in your history</div>
   <p>Find the new uploaded dataset, either from the dict returned by <code class="language-plaintext highlighter-rouge">tools.upload_file()</code> or from the history contents.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">ret</span><span class="p">[</span><span class="s">'outputs'</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1149,7 +1142,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Import a workflow</div>
+  <div class="box-title question-title" id="question-import-a-workflow-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Import a workflow</div>
   <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
@@ -1157,7 +1150,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">import_workflow_from_local_path</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">)</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1169,10 +1162,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-details-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the workflow details</div>
+  <div class="box-title question-title" id="question-view-the-workflow-details-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the workflow details</div>
   <p>View the details of the imported workflow using <code class="language-plaintext highlighter-rouge">workflows.show_workflow()</code></p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">show_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1184,10 +1177,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Invoke the workflow</div>
+  <div class="box-title question-title" id="question-invoke-the-workflow-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Invoke the workflow</div>
   <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_workflow()</code> .</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
 <span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">invoke_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
@@ -1200,7 +1193,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-results-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the results</div>
+  <div class="box-title question-title" id="question-view-the-results-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the results</div>
   <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
@@ -1299,10 +1292,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-initialise-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Initialise</div>
+  <div class="box-title question-title" id="question-initialise-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Initialise</div>
   <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
 <span class="kn">import</span> <span class="n">bioblend.galaxy</span>
@@ -1320,10 +1313,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-new-history-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: New History</div>
+  <div class="box-title question-title" id="question-new-history-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: New History</div>
   <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1335,7 +1328,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-upload-a-dataset-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Upload a dataset</div>
+  <div class="box-title question-title" id="question-upload-a-dataset-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Upload a dataset</div>
   <p><strong>Upload</strong> the local file <code class="language-plaintext highlighter-rouge">1.txt</code> to the new history using the <code class="language-plaintext highlighter-rouge">upload_file()</code> method of <code class="language-plaintext highlighter-rouge">History</code> objects.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">1.txt</code> file from the following URL, you’ll need to download it first.</p>
@@ -1343,7 +1336,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/1.txt
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hda</span> <span class="o">=</span> <span class="n">new_hist</span><span class="p">.</span><span class="nf">upload_file</span><span class="p">(</span><span class="s">"1.txt"</span><span class="p">)</span>
 <span class="nf">pprint</span><span class="p">(</span><span class="n">hda</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1355,7 +1348,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Import a workflow</div>
+  <div class="box-title question-title" id="question-import-a-workflow-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Import a workflow</div>
   <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
@@ -1363,7 +1356,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/nsoranzo/bioblend-tutorial/main/test-data/convert_to_tab.ga
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">wf_string</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">read</span><span class="p">()</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">import_new</span><span class="p">(</span><span class="n">wf_string</span><span class="p">)</span>
@@ -1377,9 +1370,9 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-inputs"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the workflow inputs</div>
+  <div class="box-title question-title" id="question-view-the-workflow-inputs"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the workflow inputs</div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1390,10 +1383,10 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Invoke the workflow</div>
+  <div class="box-title question-title" id="question-invoke-the-workflow-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Invoke the workflow</div>
   <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge">Workflow</code> objects.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="n">hda</span><span class="p">}</span>
 <span class="n">wf</span><span class="p">.</span><span class="nf">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history</span><span class="o">=</span><span class="n">new_hist</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -1405,7 +1398,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-results-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question: View the results</div>
+  <div class="box-title question-title" id="question-view-the-results-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: View the results</div>
   <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
@@ -1590,7 +1583,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

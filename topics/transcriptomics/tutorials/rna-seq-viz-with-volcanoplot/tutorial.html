@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Visualization of RNA-Seq results with Volcano Plot">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -431,7 +431,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -468,14 +468,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>Visualization of RNA-Seq results with Volcano Plot</h1>
@@ -918,7 +911,7 @@ Sentry.init({
 <h2 id="import-data">Import data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -982,7 +975,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>First we will create a volcano plot highlighting all significant genes. We will call genes significant here if they have FDR &lt; 0.01 and a log fold change of 0.58 (equivalent to a fold-change of 1.5). These were the values used in the original paper for this dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a Volcano plot</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a Volcano plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5" title="Volcano Plot tool" aria-role="link"><strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5</span></span> to create a volcano plot
@@ -1005,12 +998,12 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>In the plot above the genes are coloured if they pass the thresholds for FDR and Log Fold Change, red if they are upregulated and blue if they are downregulated. You can see in this plot that there are many (hundreds) of significant genes in this dataset.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Why does the y axis use a negative P value scale?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The negative log of the P values are used for the y axis so that the smallest P values (most significant) are at the top of the plot.</p>
 
@@ -1022,7 +1015,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>You can also choose to show the labels (e.g. Gene Symbols) for the significant genes with this volcano plot tool. You can select to label all significant or just the top genes. The top genes are those that pass the FDR and logFC thresholds that have the smallest P values. As there are hundreds of significant genes here, too many to sensibly label, let’s label the top 10 genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot-labelling-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a Volcano plot labelling top genes</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot-labelling-top-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a Volcano plot labelling top genes</div>
   <ol>
     <li>Use the <strong>Rerun</strong> <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> button in the History to rerun <strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters as before except:
       <ul>
@@ -1041,12 +1034,12 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>As in the previous plot, genes are coloured if they pass the thresholds for FDR and Log Fold Change, (red for upregulated and blue for downregulated) and the top genes by P value are labelled. Note that in the plot above we can now easily see what the top genes are by P value and also which of them have bigger fold changes.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Which gene is the most statistically significant with large fold change?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Csn1s2b, as it is the gene nearest the top of the plot and it is also far to the left. This gene is a calcium-sensitive casein that is important in milk production. As this dataset compares lactating and pregnant mice, it makes sense that it is a gene that is very differentially expressed.</p>
 
@@ -1060,7 +1053,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p><img src="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" alt="Volcano genes. " height="560" width="62" loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot-labelling-genes-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create a Volcano plot labelling genes of interest</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-volcano-plot-labelling-genes-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a Volcano plot labelling genes of interest</div>
   <ol>
     <li>Use the <strong>Rerun</strong> <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> button in the History to rerun <strong>Volcano Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the same parameters as before except:
       <ul>
@@ -1079,7 +1072,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p><img src="../../images/rna-seq-viz-with-volcanoplot/volcanoplot_custom_genes.png" alt="Volcano plot labelling genes of interest. " width="1324" height="1334" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many of the genes of interest are significant?</li>
@@ -1087,7 +1080,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
       <p>Which gene of interest is the most statistically significant?</p>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>29/31 are significant, the genes not in the grey area.</li>
@@ -1102,7 +1095,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 <p>As in the previous plots, genes are coloured if they pass the thresholds for FDR and Log Fold Change. Here all the genes of interest are significant (red or blue) except for two genes, Mcl1 and Gmfg. Gmfg, has an FDR just very slightly outside the significance threshold we used of 0.01 (0.0105). Mcl1 is the authors’ gene of interest and they showed that while it’s expression did increase at the protein level, it did not increase at the transcription level, as we can see here, suggesting it is regulated post-transcriptionally.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-r-code"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-r-code" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: R code<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-r-code"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-r-code" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: R code<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>You can get the R code used to generate the plot under <em>Output Options</em> in the tool form. You can edit this code in R if you want to customise the plot. See the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">Visualization of RNA-Seq results with Volcano Plot in R</a> tutorial for how to do this.</p>
 
@@ -1353,7 +1346,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Masking repeats with RepeatMasker">
         <meta property="og:description" content="Genome annotation is a multi-level process that includes ...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -501,7 +501,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -538,14 +538,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxy-genome-annotation/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-genome-annotation">
     <h1 data-toc-skip>Masking repeats with RepeatMasker</h1>
@@ -844,7 +837,7 @@ Sentry.init({
 <h1 id="get-data">Get data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -877,14 +870,14 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 <p>First let’s try Red, a tool than can mask repeats <em>de novo</em>. For that, select the input assembly in fasta format.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-ab-initio-tool"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: *Ab initio* tool</div>
+  <div class="box-title comment-title" id="comment-ab-initio-tool"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: *Ab initio* tool</div>
 
   <p>Red is an <em>ab initio</em> tool, it means that it will try to predict repeat elements using only the genomic sequence. It’s perfect when you know nothing about the organism that you are working on.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1" title="Red tool" aria-role="link"><strong>Red</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1</span></span> with the following parameters:
@@ -904,12 +897,12 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What proportion of the whole genome sequence is masked?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You need to click on the <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> on one of the output. You should find it at the end of the extended <code class="language-plaintext highlighter-rouge">Tool Standard Output</code> in <strong>Job Information</strong>. It should be ~ 30.62%</p>
 
@@ -918,17 +911,17 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>How to hard-mask a genome with <strong>Red</strong> ?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>As you can see <strong>Red</strong> has no option to hard-mask your genome. However, one of the output is a <code class="language-plaintext highlighter-rouge">bed</code> file, so you can use <span><strong>bedtools MaskFastaBed</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> to replace repeated regions with stretches of N:</p>
 
     <blockquote class="notranslate hands_on">
-      <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+      <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
       <ol>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0" title="bedtools MaskFastaBed tool" aria-role="link"><strong>bedtools MaskFastaBed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0</span></span> with the following parameters:
@@ -952,14 +945,14 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 <p>Let’s run RepeatMasker, by selected the input assembly in fasta format. We select the soft-masking option, and we choose to use the Dfam database.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-choosing-the-right-species"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Choosing the right species</div>
+  <div class="box-title comment-title" id="comment-choosing-the-right-species"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Choosing the right species</div>
 
   <p>We select the <code class="language-plaintext highlighter-rouge">Human (Homo sapiens)</code> species here, even though we are masking a fungi genome. It means RepeatMasker will identify very common repeats found in many organisms. For more precise results, you can consider selecting a species closer to the one you analyse in the drop down list, or using other more advanced tools like RepeatModeler.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0" title="RepeatMasker tool" aria-role="link"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0</span></span> with the following parameters:
@@ -990,12 +983,12 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>What proportion of the whole genome sequence is masked?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You should find it in the <code class="language-plaintext highlighter-rouge">repeat statistics</code> output. It should be ~2.41%.</p>
   </blockquote>
@@ -1012,12 +1005,12 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-preparing-a-library"><button class="gtn-boxify-button details" type="button" aria-controls="details-preparing-a-library" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Preparing a library<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-preparing-a-library"><button class="gtn-boxify-button details" type="button" aria-controls="details-preparing-a-library" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Preparing a library<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>You can prepare your own repeat library, specific to the genome you’re using, by running RepeatModeler in Galaxy (it will take several hours to run):</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-building-a-repeat-library-with-repeatmodeler"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Building a repeat library with RepeatModeler</div>
+    <div class="box-title hands-on-title" id="hands-on-building-a-repeat-library-with-repeatmodeler"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Building a repeat library with RepeatModeler</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1" title="RepeatModeler tool" aria-role="link"><strong>RepeatModeler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1</span></span> with the following parameters:
@@ -1032,7 +1025,7 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0" title="RepeatMasker tool" aria-role="link"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0</span></span> with the following parameters:
@@ -1052,12 +1045,12 @@ https://zenodo.org/api/files/debdbbfd-4739-4f2d-bb79-814ac032c8b5/Muco_library_E
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Compare the different <code class="language-plaintext highlighter-rouge">repeat statistics</code> files produced, what is the highest library for RepeatMasker?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The RepeatModeler library seems to have the highest percentage of repeats found with ~ 34.89%. It could be explained as RepeatModeler is specifically made to work with RepeatMasker.</p>
   </blockquote>
@@ -1325,7 +1318,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

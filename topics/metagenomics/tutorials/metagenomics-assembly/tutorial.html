@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Assembly of metagenomic sequencing data">
         <meta property="og:description" content="Metagenomics is a discipline that enables the genomic stu...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -387,7 +387,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -424,14 +424,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-metagenomics">
     <h1 data-toc-skip>Assembly of metagenomic sequencing data</h1>
@@ -726,7 +719,7 @@ Sentry.init({
 <p>Assembling seems intuitively similar to putting together a jigsaw puzzle. Essentially, it looks for reads “that work together” or more precisely, reads that overlap. Tasks like this are <strong>not straightforward</strong>, but rather complex because of the complexity of the genomics (specially the repeats), the missing pieces and the errors introduced during sequencing.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Do you want to learn more about the principles behind single genome assembly? Follow our <a href="/training-material/topics/assembly/index.html">tutorials</a>.</p>
 </blockquote>
@@ -742,7 +735,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-strategies-for-assembly"><button class="gtn-boxify-button details" type="button" aria-controls="details-strategies-for-assembly" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Strategies for assembly<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-strategies-for-assembly"><button class="gtn-boxify-button details" type="button" aria-controls="details-strategies-for-assembly" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Strategies for assembly<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>For assembly, there are 3 main strategies:</p>
   <ol>
     <li>Greedy extension</li>
@@ -785,7 +778,7 @@ Sentry.init({
 <p>To run assembly, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
@@ -811,7 +804,7 @@ Sentry.init({
 <p>In case of a not very large dataset it’s more convenient to upload data directly from your computer to Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-data-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload data into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-data-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload data into Galaxy</div>
 
   <ol>
     <li>
@@ -840,7 +833,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
       <p><!--END_SNIPPET--></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
         <p>In case of large dataset, we can use FTP server or the <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Galaxy Rule-based Uploader</a>.</p>
       </blockquote>
     </li>
@@ -915,7 +908,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 <p>Co-assembly is more commonly used than individual assembly and then de-replication after binning. But in this tutorial, to show all steps, we will run an <strong>individual assembly</strong>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>Sometimes it is important to run assembly tools both on individual samples and on all pooled samples, and use both outputs to get the better outputs for the certain dataset.</p>
 </blockquote>
 
@@ -939,7 +932,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 <p>Both tools are available in Galaxy. But currently, only MEGAHIT can be used in individual mode for several samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Individual assembly of short-reads with MEGAHIT</div>
+  <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Individual assembly of short-reads with MEGAHIT</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="MEGAHIT tool" aria-role="link"><strong>MEGAHIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0</span></span> with parameters:
       <ul>
@@ -949,7 +942,7 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
               <p><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Run individually</code></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
                 <p>To run as co-assembly, select <code class="language-plaintext highlighter-rouge">Merge all fastq pair-end</code>, instead of <code class="language-plaintext highlighter-rouge">Run individually</code></p>
               </blockquote>
             </li>
@@ -980,12 +973,12 @@ https://zenodo.org/record/7818827/files/ERR2231572_2.fastqsanger.gz
 <p>Contrary to <strong>MetaSPAdes</strong>, <strong>MEGAHIT</strong> does not output <strong>scaffolds</strong>, i.e. segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Since the assembly process would take ~1h we are just going to import the results of the assembly previously run.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-import-generated-assembly-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import generated assembly files</div>
+    <div class="box-title hands-on-title" id="hands-on-import-generated-assembly-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import generated assembly files</div>
 
     <ol>
       <li>
@@ -1008,7 +1001,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many contigs has been for ERR2231568 sample?</li>
@@ -1017,7 +1010,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>There are 228,719 sequences in the file so 228,719 contigs</li>
@@ -1030,10 +1023,10 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-co-assembly-with-metaspades"><button class="gtn-boxify-button details" type="button" aria-controls="details-co-assembly-with-metaspades" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Co-assembly with MetaSPAdes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-co-assembly-with-metaspades"><button class="gtn-boxify-button details" type="button" aria-controls="details-co-assembly-with-metaspades" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Co-assembly with MetaSPAdes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assembly with MetaSPAdes</div>
+    <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly with MetaSPAdes</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="MetaSPAdes tool" aria-role="link"><strong>MetaSPAdes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2</span></span> with following parameters
@@ -1061,7 +1054,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 <p>Assemblies can be evaluated with <strong>metaQUAST</strong> (<span class="citation"><a href="#mikheenko2016">Mikheenko <i>et al.</i> 2016</a></span>), the metagenomics mode of <strong>QUAST</strong> (<span class="citation"><a href="#gurevich2013">Gurevich <i>et al.</i> 2013</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-evaluation-assembly-quality-with-metaquast"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Evaluation assembly quality with metaQUAST</div>
+  <div class="box-title hands-on-title" id="hands-on-evaluation-assembly-quality-with-metaquast"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Evaluation assembly quality with metaQUAST</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" aria-role="link"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1</span></span> with parameters:
@@ -1077,7 +1070,7 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
               <p><em>“Reads options”</em>: <code class="language-plaintext highlighter-rouge">Illumina paired-end reads in paired collection</code></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
                 <p>To make the job quicker, you can select <code class="language-plaintext highlighter-rouge">Disabled</code> here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.</p>
               </blockquote>
             </li>
@@ -1093,12 +1086,12 @@ https://zenodo.org/record/7818827/files/contigs_ERR2231572.fasta
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Since the Quast process would take times we are just going to import the results:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-import-generated-metaquast-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Import generated metaQuast results</div>
+    <div class="box-title hands-on-title" id="hands-on-import-generated-metaquast-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import generated metaQuast results</div>
 
     <ol>
       <li>
@@ -1138,7 +1131,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p>For each identified genomes, the genome fraction is given when clicking on <strong>Genome fraction (%)</strong></p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the genome fraction for ERR2231568? And for ERR2231572?</li>
@@ -1146,7 +1139,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572</li>
@@ -1163,7 +1156,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p>If an assembly contains many contigs that cover the same regions of the reference, the duplication ratio may be much larger than 1.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the duplication ratio for ERR2231568? And for ERR2231572?</li>
@@ -1171,7 +1164,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>The duplication ratio is 1.068 for ERR2231568 and 1.1 for ERR2231572 (column ERR2231572 in ERR2231572 report)</li>
@@ -1188,7 +1181,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     <p><strong>Read mapping</strong>: results of the mapping of the raw reads on the different assemblies (only if the <em>“Reads options”</em> is not disabled)</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?</li>
@@ -1196,7 +1189,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>79.47% of ERR2231568 raw reads were mapped to ERR2231568 assembly and 86.98% of ERR2231572 raw reads to ERR2231572 assembly.</li>
@@ -1207,7 +1200,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     </blockquote>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-alternative-ways-to-compute-coverage"><button class="gtn-boxify-button details" type="button" aria-controls="details-alternative-ways-to-compute-coverage" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Alternative ways to compute coverage<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-alternative-ways-to-compute-coverage"><button class="gtn-boxify-button details" type="button" aria-controls="details-alternative-ways-to-compute-coverage" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Alternative ways to compute coverage<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>2 alternative ways to compute coverage are to</p>
       <ol>
@@ -1215,7 +1208,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           <p>Use <a href="https://github.com/wwood/CoverM">CoverM</a>, which is available in Galaxy</p>
 
           <blockquote class="notranslate hands_on">
-            <div class="box-title hands-on-title" id="hands-on-calculate-coverage-using-coverm"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculate coverage using CoverM</div>
+            <div class="box-title hands-on-title" id="hands-on-calculate-coverage-using-coverm"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate coverage using CoverM</div>
 
             <ol>
               <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="CoverM-CONTIG tool" aria-role="link"><strong>CoverM-CONTIG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1</span></span> with parameters:
@@ -1236,7 +1229,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           <p>Map the original reads onto contigs and extract the percentage of mapped reads:</p>
 
           <blockquote class="notranslate hands_on">
-            <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Computation of the % reads used in assemblies</div>
+            <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Computation of the % reads used in assemblies</div>
 
             <ol>
               <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Bowtie2 tool" aria-role="link"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</span></span> with the following parameters:
@@ -1259,7 +1252,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </blockquote>
 
           <blockquote class="question">
-            <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+            <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
             <ol>
               <li>What is the overall alignment rate for ERR2231567? and ERR2231571?</li>
@@ -1267,7 +1260,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             </ol>
 
             <blockquote class="solution">
-              <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
               <ol>
                 <li>The overall alignment rate for ERR2231567 is 65.97% and 73.67% for ERR2231571</li>
@@ -1298,7 +1291,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <figure id="figure-6" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="./images/relocation.svg" width="80%" type="image/svg+xml" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.">Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.</object></div><small><a target="_blank" href="./images/relocation.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a></figcaption></figure>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many relocations has been found for ERR2231568? And for ERR2231572?</li>
@@ -1306,7 +1299,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>78 for ERR2231568 and 151 for ERR2231572</li>
@@ -1320,7 +1313,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Translocation</strong> occur when a contig has mapped on more than one reference chromosomes</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many translocations has been found for ERR2231568? And for ERR2231572?</li>
@@ -1330,7 +1323,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>25 for ERR2231568 and 55 for ERR2231572.</li>
@@ -1346,7 +1339,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Inversion</strong> occurs when a contig has two consecutive mappings on the same chromosome but in different strands</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many inversion has been found for ERR2231568? And for ERR2231572?</li>
@@ -1354,7 +1347,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>4 for ERR2231568 and 6 for ERR2231572.</li>
@@ -1370,7 +1363,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     <p><strong>Mismatches</strong> or mismatched bases in the contig-reference alignment</p>
 
     <blockquote class="question">
-      <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+      <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
       <ol>
         <li>How many mismatches have been identified for ERR2231568? And for ERR2231572?</li>
@@ -1378,7 +1371,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
       </ol>
 
       <blockquote class="solution">
-        <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
           <li>503,352 for ERR2231568 and 287,270 for ERR2231572.</li>
@@ -1396,7 +1389,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong># contigs</strong>: total number of contigs</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>How many contigs are for ERR2231568? And for ERR2231572?</li>
@@ -1407,7 +1400,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>66,434 contigs for ERR2231568 and 36,112 for ERR2231572.</li>
@@ -1424,7 +1417,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p><strong>Largest contig</strong>: length of the longest contig in the assembly</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the length of the longest contig in ERR2231568? And in ERR2231572?</li>
@@ -1432,7 +1425,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>63,871 bp in ERR2231568 and 65,608 for ERR2231572.</li>
@@ -1456,7 +1449,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         </ul>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is N50 for ERR2231568? And for ERR2231572?</li>
@@ -1464,7 +1457,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>921 for ERR2231568 and 1,233 for ERR2231572.</li>
@@ -1492,14 +1485,14 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
         <p>If we take the previous example in N50, L50 = 3.</p>
 
         <blockquote class="question">
-          <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+          <div class="box-title question-title" id="question-12"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
           <ol>
             <li>What is the L50 for ERR2231568? And for ERR2231572?</li>
           </ol>
 
           <blockquote class="solution">
-            <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ol>
               <li>17,280 for ERR2231568 and 7,496 for ERR2231572.</li>
@@ -1521,7 +1514,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 <p>This viewer draws contigs ordered from longest to shortest. Let’s inspect this viewer for ERR2231568.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-13"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Open the Contig size viewer for ERR2231568 and define start as <code class="language-plaintext highlighter-rouge">0</code> and end as <code class="language-plaintext highlighter-rouge">500000</code></p>
 
@@ -1533,7 +1526,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The first contig is white because &gt;50% of the contigs is unaligned. By clicking on the contig, we see that only a small block is aligned: 223.41 – 223.65 kbp to Leuconostoc_pseudomesenteroides_KCTC_3652_NZ_BMBP01000002.1.</li>
@@ -1587,7 +1580,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 <p>When clicking on the genome name, the contigs are displayed according to their mapping to the reference genome. The viewer can additionally visualize genes, operons, and read coverage distribution along the genome, if any of those were fed to QUAST.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-14"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Open the Contig alignment viewer for ERR2231568 and <em>Leuconostoc pseudomesenteroides</em> KCTC 3652, the most covered by contigs</p>
 
@@ -1601,7 +1594,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The contigs are displayed based on their mapping on the reference genome of <em>Leuconostoc pseudomesenteroides</em> KCTC 3652</li>
@@ -1614,7 +1607,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-visualization-of-the-de-novo-assembly-graph"><button class="gtn-boxify-button details" type="button" aria-controls="details-visualization-of-the-de-novo-assembly-graph" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Visualization of the *de novo* assembly graph<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-visualization-of-the-de-novo-assembly-graph"><button class="gtn-boxify-button details" type="button" aria-controls="details-visualization-of-the-de-novo-assembly-graph" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Visualization of the *de novo* assembly graph<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Current metagenome assemblers like MEGAHIT and MetaSPAdes use <strong>graphs</strong>, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.</p>
 
@@ -1623,7 +1616,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   <p><strong>Bandage</strong> (<span class="citation"><a href="#wick2015bandage">Wick <i>et al.</i> 2015</a></span>) is a tool creating interactive visualisations of assembly graphs.</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the assembly graph</div>
+    <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization the assembly graph</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="megahit contig2fastg tool" aria-role="link"><strong>megahit contig2fastg</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10</span></span> with parameters:
@@ -1633,7 +1626,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
             <p><em>“K-mer length”</em>: <code class="language-plaintext highlighter-rouge">91</code></p>
 
             <blockquote class="comment">
-              <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+              <div class="box-title comment-title" id="comment-7"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
               <p>To get the value, you need to</p>
               <ol>
                 <li>Go into the <strong>MEGAHIT</strong> output collection</li>
@@ -1661,7 +1654,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   <p>But it is really hard to read or extract any information from the graph. Let’s inspect the information about the assembly graph</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization the *de novo* assembly graph</div>
+    <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization the *de novo* assembly graph</div>
 
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Bandage Info tool" aria-role="link"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2</span></span> with parameters:
@@ -1679,7 +1672,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
   </blockquote>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-15"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many nodes are in the graph for ERR2231568? And for ERR2231572? What does they correspond to?</li>
@@ -1692,7 +1685,7 @@ https://zenodo.org/record/7818827/files/quast_ERR2231572.html
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>There are 228,719 nodes for ERR2231568 and 122,526 for ERR2231572. They correspond to the number of contigs</li>
@@ -2031,7 +2024,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

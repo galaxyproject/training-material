@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Somatic Variant Discovery from WES Data Using Control-FREEC">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -508,7 +508,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -545,14 +545,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>Somatic Variant Discovery from WES Data Using Control-FREEC</h1>
@@ -933,7 +926,7 @@ Sentry.init({
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1014,7 +1007,7 @@ from the original tagged dataset.
 <p>The data was obtained following a series of laboratory procedures, including DNA preparation, extraction, and sequencing, which means there is a possibility of errors occurring during those steps, which could affect data quality. To address that, it is necessary to test the quality of the fastq reads. The data quality needs to be within an acceptable range before looking for hCNVs. The low-quality data can lead us to false results. To detect low-quality data,  preprocessing step is required to trim or discard the low-quality reads before proceeding with the mapping and hCNV detection steps.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-more-on-quality-control-and-mapping"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More on quality control and mapping</div>
+  <div class="box-title comment-title" id="comment-more-on-quality-control-and-mapping"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More on quality control and mapping</div>
   <p>To read more about quality control this is tutorial on Galaxy training network 
 <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"> Quality Control</a> 
 For mapping <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping</a></p>
@@ -1022,7 +1015,7 @@ For mapping <a href="/training-material/topics/sequence-analysis/tutorials/mappi
 
 <h2 id="quality-control">Quality Control</h2>
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality control of the input datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality control of the input datasets</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> on the fastq datasets
       <ul>
@@ -1058,7 +1051,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
       <p>Inspect the <em>Webpage</em> output produced by the tool</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>
@@ -1071,7 +1064,7 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
         <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec_fastqc_per_sequence_gc_content_plot_before.png" alt="GCbefore. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Sequence quality per Sequence GC content generated by FastQC before end trimming.</figcaption></figure>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1107,7 +1100,7 @@ for example, see Fig. 4C in
 However, the aim is to detect clear reads for hCNVs and will use a trimming step to see if the analysis can be improved.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-normal-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read trimming and filtering of the normal tissue reads</div>
+  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-normal-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering of the normal tissue reads</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5</span></span> to trim and filter the normal tissue reads
       <ul>
@@ -1192,33 +1185,33 @@ The other two are for unmated reads as a result of excessive trimming.
 However, because of the high average data quality, there was no need to perform excessive trimming by selecting the previous three trimming conditions, so those files should be empty. Those files can be heden to keep the history cleaner.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-keeping-attention-on-the-data-type"><button class="gtn-boxify-button details" type="button" aria-controls="details-keeping-attention-on-the-data-type" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Keeping attention on the data type<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-keeping-attention-on-the-data-type"><button class="gtn-boxify-button details" type="button" aria-controls="details-keeping-attention-on-the-data-type" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Keeping attention on the data type<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Track whether the reads are paired or unpaired, and remember to include them in any tool to be used.
 The reason is that there are some tools, such as read mappers,
 that expect reads to be in a specific order and having unmapped reads can result in significant.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-tumor-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read trimming and filtering of the tumor tissue reads</div>
+  <div class="box-title hands-on-title" id="hands-on-read-trimming-and-filtering-of-the-tumor-tissue-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read trimming and filtering of the tumor tissue reads</div>
   <ol>
     <li>repeat the previous step for <strong>tumor tissue</strong> reads following the same steps as above.</li>
   </ol>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Exercise: Quality control of the polished datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exercise: Quality control of the polished datasets</div>
   <p>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0</span></span> like before,
 but using the four trimmed datasets produced by Trimmomatic as input.</p>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>Is there any difference between the reads before and after the trimming?</p>
     <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec_fastqc_per_base_sequence_quality_plot_after.png" alt="fastqafter. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Sequence quality per base generated by FastQC after end trimming. The x-axis on the grapgh is fore the read length and the The y-axis shows the quality scores. The higher the score the better the base call. The background of the graph divides the y axis into very good quality calls (green), calls of reasonable quality (orange), and calls of poor quality (red).</figcaption></figure>
     <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec_fastqc_per_sequence_gc_content_plot_afrer.png" alt="GCafter. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Sequence quality per Sequence GC content generated by FastQC after end trimming the plot shows an unusually shaped distribution that could indicate a contaminated library or some other kinds of biased subset</figcaption></figure>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>The quality of the data is good, so 
 trimming them didn’t lead to dramatic changes. However,
@@ -1230,7 +1223,7 @@ we can point out that some of the adapters were removed.</p>
 <h2 id="read-mapping">Read Mapping</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Read Mapping</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Read Mapping</div>
   <ol>
     <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Map with BWA-MEM tool" aria-role="link"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span> to map the reads from the <strong>normal tissue</strong> sample to the reference genome
       <ul>
@@ -1240,7 +1233,7 @@ we can point out that some of the adapters were removed.</p>
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Using the imported `hg19` sequence</div>
+            <div class="box-title comment-title" id="comment-using-the-imported-hg19-sequence"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Using the imported `hg19` sequence</div>
             <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
@@ -1282,7 +1275,7 @@ reverse reads (r2) dataset of the <strong>normal tissue</strong> sample; output 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-more-on-read-group-identifiers-and-sample-names"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More on read group identifiers and sample names</div>
+        <div class="box-title comment-title" id="comment-more-on-read-group-identifiers-and-sample-names"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More on read group identifiers and sample names</div>
         <p>In general, we can choose our own ID and SM values, but the ID should
 unambiguously identify the sequencing run that produced the reads,
 while the SM value should identify the biological sample.</p>
@@ -1345,7 +1338,7 @@ reads (r2) dataset of the <strong>tumor tissue</strong> sample; output of
 <p>The remaining data preprocessing until the Control-FreeC step is the same for Normal and Tumor reads.  Create a data collection to include those two files.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtrate-the-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtrate the mapped reads</div>
+  <div class="box-title hands-on-title" id="hands-on-filtrate-the-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtrate the mapped reads</div>
   <ol>
     <li>Use <span class="tool" data-tool="__BUILD_LIST__" title="Build list tool" aria-role="link"><strong>Build list</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>BUILD_LIST</strong></span></span> to creat a list from the maped reads of the <strong>normal tissue</strong> and <strong>tumor tissue</strong>
       <ul>
@@ -1397,7 +1390,7 @@ and the duplicated reads. This step is needed to reduce the running time
 and in results interpretation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-filtration-and-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data filtration and Remove duplicates</div>
+  <div class="box-title hands-on-title" id="hands-on-data-filtration-and-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data filtration and Remove duplicates</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="link"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3</span></span>  with the following parameters
       <ul>
@@ -1438,7 +1431,7 @@ and in results interpretation.</p>
 <p>To detect hCNVs expression accurately. The reads must go through the lift alignment process. Lift Alignment works by shifting reads that contain indels to the left of a reference genome until they can not be shifted anymore. As a result, it will only extract reads with indels, with no false reads (reads that mismatch with the reference genome other than the indels).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-homogenize-the-positional-distributed-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Homogenize the positional distributed indels</div>
+  <div class="box-title hands-on-title" id="hands-on-homogenize-the-positional-distributed-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Homogenize the positional distributed indels</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1" title="BamLeftAlign tool" aria-role="link"><strong>BamLeftAlign</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1</span></span>  with the following parameters
       <ul>
@@ -1467,7 +1460,7 @@ and in results interpretation.</p>
 <h2 id="filtrate-indels">Filtrate indels</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtrate-the-indels-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filtrate the indels reads</div>
+  <div class="box-title hands-on-title" id="hands-on-filtrate-the-indels-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtrate the indels reads</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3" title="Samtools view tool" aria-role="link"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy3</span></span>  with the following parameters
       <ul>
@@ -1570,7 +1563,7 @@ and in results interpretation.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-files-form-list"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract files form list</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-files-form-list"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract files form list</div>
   <p>extract the files from the list to handel them separitly</p>
   <ol>
     <li>Run <span class="tool" data-tool="__EXTRACT_DATASET__" title="Extract Dataset tool" aria-role="link"><strong>Extract Dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>EXTRACT_DATASET</strong></span></span>  with the following parameters:
@@ -1595,7 +1588,7 @@ and in results interpretation.</p>
 <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec_output.png" alt="Controlfreec. " width="1350" height="442" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> 1. Control-FREEC calculates copy number and BAF profiles and detects regions of copy number gain/loss and LOH regions in chromosomes 5,12 17. Gains, losses and LOH are shown in red, blue and light blue, respectively.</figcaption></figure>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-more-on-control-freec-and-hcnvs-detection"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: More on control_FREEC and hCNVs detection</div>
+  <div class="box-title comment-title" id="comment-more-on-control-freec-and-hcnvs-detection"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: More on control_FREEC and hCNVs detection</div>
   <p>Control-freec works by:</p>
   <ol>
     <li>Annotating genomic changes and heterozygosity loss in the sample dataset.</li>
@@ -1606,11 +1599,11 @@ and in results interpretation.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Can you expect the essential factors that afflict hCNVs detection?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Coverage bias in reads 
@@ -1624,7 +1617,7 @@ The presence of normal cells within tumour cells can have an impact on the const
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-detection-of-copy-number-changes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Detection of copy-number changes</div>
+  <div class="box-title hands-on-title" id="hands-on-detection-of-copy-number-changes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Detection of copy-number changes</div>
   <ol>
     <li>
       <p>Import the DED file for the captured reagions from <a href="https://doi.org/10.5281/zenodo.5697358">Zenodo</a>:</p>
@@ -1718,11 +1711,11 @@ The presence of normal cells within tumour cells can have an impact on the const
   </ul>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <p>In your opinion, what are the challenges in hCNVs detection?</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>The bias in Reads coverage changes in reads mobility and GC content can lead to 
@@ -1748,7 +1741,7 @@ and elements in creating the plot. Circos visualise the genomic alterations in g
 the relationships between the genomic intervals <a href="https://genome.cshlp.org/content/19/9/1639.short">Krzywinski, Schein et al. 2009</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualise-the-hcnv-findings"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualise the hCNV findings</div>
+  <div class="box-title hands-on-title" id="hands-on-visualise-the-hcnv-findings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise the hCNV findings</div>
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7" title="Circos tool" aria-role="link"><strong>Circos</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7</span></span>  with the following parameters
       <ul>
@@ -2074,12 +2067,12 @@ the relationships between the genomic intervals <a href="https://genome.cshlp.or
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Can you interpret generated plot from the Circos tool?</p>
   <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec-%5BCircos_Plot%5D.png" alt="Cicros. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> 	This circos plot shows of genetic alterations in chromosomes 5,12 and 17 tutmer tissues. The outermost circle represents the targeted chromosomes and inner circle for deletion related and amplificated related variations</figcaption></figure>
   <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/Control_Freec_Cicros_zoomed.png" alt="Cicros. " width="886" height="819" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Zoomed hCNV regions detected by Control_FREEC using Cicros</figcaption></figure>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The outermost circle represents the targeted chromosomes. 
 The inner circle
 shows the copy number changes in those regions.</p>
@@ -2345,7 +2338,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

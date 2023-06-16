@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Analyse HeLa fluorescence siRNA screen">
         <meta property="og:description" content="Image analysis using Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -374,7 +374,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -411,14 +411,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-imaging">
     <h1 data-toc-skip>Analyse HeLa fluorescence siRNA screen</h1>
@@ -730,7 +723,7 @@ Sentry.init({
 <p>The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei (<a href="https://zenodo.org/record/3360236">more information</a>). We will use a sample image from this dataset for training basic image processing skills in Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -830,7 +823,7 @@ max	100000	0.5
 <p>First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-feature-extraction-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create feature extraction workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-create-feature-extraction-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create feature extraction workflow</div>
 
   <ol>
     <li><strong>Filter Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to smooth the image:
@@ -918,7 +911,7 @@ max	100000	0.5
 <p>Now we want to apply our extracted workflow to <code class="language-plaintext highlighter-rouge">original data</code> and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-screen-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create screen analysis workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-create-screen-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create screen analysis workflow</div>
 
   <ol>
     <li>
@@ -953,7 +946,7 @@ max	100000	0.5
 <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/hela-screen-analysis/analyze_screen_workflow.png" alt="screen analysis workflow. " width="1135" height="363" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Full screen analysis workflow.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-screen-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run screen analysis workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-run-screen-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run screen analysis workflow</div>
 
   <ol>
     <li>
@@ -975,7 +968,7 @@ max	100000	0.5
 <p>Finally, we want to plot the results for better interpretation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plot-feature-extraction-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plot feature extraction results</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-feature-extraction-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot feature extraction results</div>
 
   <ol>
     <li>Click on the <code class="language-plaintext highlighter-rouge">Visualize this data</code> <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> icon of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results.</li>
@@ -1005,12 +998,12 @@ max	100000	0.5
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.</p>
         </blockquote>
       </blockquote>
@@ -1283,7 +1276,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

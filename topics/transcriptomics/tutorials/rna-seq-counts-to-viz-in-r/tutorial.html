@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: RNA Seq Counts to Viz in R">
         <meta property="og:description" content="Training material for all kinds of transcriptomics analysis.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -549,7 +549,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -586,14 +586,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-transcriptomics">
     <h1 data-toc-skip>RNA Seq Counts to Viz in R</h1>
@@ -811,6 +804,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> R basics in Galaxy:
                             
@@ -866,7 +863,15 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
+                    
+                        
+                    
+                        
+                    
+                        
                     
                         
                     
@@ -1220,13 +1225,13 @@ Sentry.init({
 <p>Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-prerequisites"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-prerequisites" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Prerequisites<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-prerequisites"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-prerequisites" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Prerequisites<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.</p>
 
   <p>If you are starting with this tutorial, you will need to import a dataset:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using datasets from Galaxy</div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using datasets from Galaxy</div>
 
     <ol>
       <li>Upload the following URL to Galaxy:
@@ -1247,7 +1252,7 @@ Sentry.init({
   </blockquote>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-using-datasets-without-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using datasets without Galaxy</div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-without-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using datasets without Galaxy</div>
     <ol>
       <li>
         <p>Read the tabular file into an object called <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code>:</p>
@@ -1304,7 +1309,7 @@ Sentry.init({
 <h2 id="volcano-plot">Volcano plot</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-first-plot-step-by-step"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: First plot, step by step</div>
+  <div class="box-title hands-on-title" id="hands-on-first-plot-step-by-step"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: First plot, step by step</div>
 
   <ol>
     <li>
@@ -1314,7 +1319,7 @@ Sentry.init({
 </span></code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-didn-t-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Didn't work?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-didn-t-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Didn't work?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You might need to install ggplot2 first</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">)</span><span class="w">
@@ -1338,7 +1343,7 @@ Sentry.init({
       <p>X-axis is now the log2 FC and and Y-axis the p-value</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-data-format"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Data format</div>
+        <div class="box-title comment-title" id="comment-data-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Data format</div>
 
         <p>Some <code class="language-plaintext highlighter-rouge">ggplot2</code> functions need data in the ‘long’ format:</p>
         <ul>
@@ -1357,7 +1362,7 @@ Sentry.init({
 </span></code></pre></div>      </div>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-graphical-representations-of-the-data-in-the-plot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Graphical representations of the data in the plot</div>
+        <div class="box-title comment-title" id="comment-graphical-representations-of-the-data-in-the-plot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Graphical representations of the data in the plot</div>
 
         <p><code class="language-plaintext highlighter-rouge">ggplot2</code> offers many different <code class="language-plaintext highlighter-rouge">geoms</code>; we will use some common ones today, including:</p>
         <ul>
@@ -1379,7 +1384,7 @@ Sentry.init({
 <p>The current version of the plot is not really informative, mostly due to the high number of p-values close to zero. In order to resolve this, we will apply <code class="language-plaintext highlighter-rouge">-log10()</code> to the y-axis values.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-volcano-plot-with-log-values-on-y-axis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Volcano plot with log values on y-axis</div>
+  <div class="box-title hands-on-title" id="hands-on-volcano-plot-with-log-values-on-y-axis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Volcano plot with log values on y-axis</div>
 
   <ol>
     <li>
@@ -1395,14 +1400,14 @@ Sentry.init({
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png" alt="Volcano Plot version 0. " width="640" height="425" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-categorising-expression-levels"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Categorising expression levels</div>
+  <div class="box-title question-title" id="question-categorising-expression-levels"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Categorising expression levels</div>
 
   <ol>
     <li>Why are there no points with log2 FC between -1 and 1?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The input file we used are the 130 genes with a significant adjusted p-values (below &lt; 0.05) and an absolute fold change higher than 2 (log2 FC &lt; -1 or log 2 FC &gt; 1).</p>
 
@@ -1410,7 +1415,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-sign"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: The `+` sign</div>
+  <div class="box-title comment-title" id="comment-the-sign"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: The `+` sign</div>
 
   <p>The <code class="language-plaintext highlighter-rouge">+</code> in the <code class="language-plaintext highlighter-rouge">ggplot2</code> package is particularly useful because it allows you to modify existing <code class="language-plaintext highlighter-rouge">ggplot</code> objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:</p>
 
@@ -1435,7 +1440,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-some-extra-comments"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Some extra comments</div>
+  <div class="box-title comment-title" id="comment-some-extra-comments"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Some extra comments</div>
 
   <p>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any <code class="language-plaintext highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x-</code> and <code class="language-plaintext highlighter-rouge">y-axis</code> mapping you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</p>
 
@@ -1445,7 +1450,7 @@ Sentry.init({
 <p>Building plots with <code class="language-plaintext highlighter-rouge">ggplot2</code> is typically an iterative process. We start by defining the dataset we’ll use, lay out the axes, and choose a <code class="language-plaintext highlighter-rouge">geom</code>. We can now modify this plot to extract more information from it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-format-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Format plot</div>
+  <div class="box-title hands-on-title" id="hands-on-format-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Format plot</div>
 
   <ol>
     <li>
@@ -1494,12 +1499,12 @@ Sentry.init({
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v5.png" alt="Volcano Plot version 5. " width="640" height="425" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
+  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
 
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
   geom_point() +
@@ -1516,7 +1521,7 @@ Sentry.init({
 <p><code class="language-plaintext highlighter-rouge">ggplot2</code> has a special technique called faceting that allows us to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our volcano plot into five panels, one for each chromosome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-volcano-plot-by-chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Volcano plot by chromosomes</div>
+  <div class="box-title hands-on-title" id="hands-on-volcano-plot-by-chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Volcano plot by chromosomes</div>
 
   <ol>
     <li>
@@ -1557,7 +1562,7 @@ Sentry.init({
 </span></code></pre></div>      </div>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-ggplot2-themes"><button class="gtn-boxify-button details" type="button" aria-controls="details-ggplot2-themes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: `ggplot2` themes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-ggplot2-themes"><button class="gtn-boxify-button details" type="button" aria-controls="details-ggplot2-themes" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: `ggplot2` themes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>In addition to <code class="language-plaintext highlighter-rouge">theme_bw()</code>, which changes the plot background to white, <code class="language-plaintext highlighter-rouge">ggplot2</code> comes with several other themes which can be useful to quickly change the look of your visualization.</p>
 
@@ -1588,12 +1593,12 @@ Sentry.init({
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v8.png" alt="Volcano Plot version 8. " width="640" height="425" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
+  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
 
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
  geom_point() +
@@ -1612,7 +1617,7 @@ Sentry.init({
 <p>We would like now to make a barplot showing the number of differentially expressed genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-barplot-of-the-number-of-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Barplot of the number of DE genes</div>
+  <div class="box-title hands-on-title" id="hands-on-barplot-of-the-number-of-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Barplot of the number of DE genes</div>
 
   <ol>
     <li>
@@ -1629,12 +1634,12 @@ Sentry.init({
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/barPlot_v1.png" alt="Bar plot 1. " width="640" height="425" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-remove-the-legend"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Remove the legend</div>
+  <div class="box-title question-title" id="question-remove-the-legend"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Remove the legend</div>
 
   <p>The chromosome is labeled on the individual plot facets so we don’t need the legend. Use the help file for <code class="language-plaintext highlighter-rouge">geom_bar</code> and any other online resources to remove the legend from the plot.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
  geom_bar(show.legend = F) +
@@ -1646,7 +1651,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-create-a-r-script-with-plots"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Create a R script with plots</div>
+  <div class="box-title question-title" id="question-create-a-r-script-with-plots"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Create a R script with plots</div>
 
   <p>Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization-2.1.pdf">RStudio <code class="language-plaintext highlighter-rouge">ggplot2</code> cheat sheet</a> for inspiration).</p>
 
@@ -1829,7 +1834,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Upgrading Galaxy">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -399,7 +399,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -436,14 +436,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Upgrading Galaxy</h1>
@@ -893,7 +886,7 @@ Sentry.init({
 </ul>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-galaxy-server-version-installed-by-the-tutorials"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-galaxy-server-version-installed-by-the-tutorials" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Galaxy server version installed by the tutorials<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-galaxy-server-version-installed-by-the-tutorials"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-galaxy-server-version-installed-by-the-tutorials" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Galaxy server version installed by the tutorials<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>At the time of writing, the version of Galaxy that was installed with the “Galaxy Installation with Ansible” tutorial is <em>20.09</em>. This tutorial is designed to upgrade the server to <em>21.01</em>. If you already have a version equal to or higher than <em>21.01</em> running on your server, never fear! The process outlined below can still be used to upgrade to the latest version of Galaxy - just swap out <em>21.01</em> used below for the current latest version.</p>
 </blockquote>
 
@@ -904,7 +897,7 @@ Sentry.init({
 <p>Once we know what our current version is, we can compare it with the latest available version</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-current-server-version"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the current server version</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-current-server-version"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the current server version</div>
 
   <p><strong>Method 1: Via the Admin UI page</strong>
 The currently installed version of Galaxy is shown on the Galaxy server’s Admin UI page.</p>
@@ -926,13 +919,13 @@ The currently installed version of Galaxy is shown on the Galaxy server’s Admi
       <p>In your browser - go to the following URL: <a href="https://my.gat.galaxy.training/?path=/api/version"><code class="language-plaintext highlighter-rouge">https://galaxy.example.org/api/version</code></a> (replacing <code class="language-plaintext highlighter-rouge">galaxy.example.org</code> with the hostname of your Galaxy server). The version will be displayed as follows:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl https://galaxy.example.org/api/version
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-browser-window"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Browser window</div>
+        <div class="box-title code-out-title" id="code-out-browser-window"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Browser window</div>
         <pre><code class="language-JSON">{
   "version_major": "20.09",
   "extra": {}
@@ -963,7 +956,7 @@ The currently installed version of Galaxy is shown on the Galaxy server’s Admi
 <p>We can see from this page that the latest release version of Galaxy is <em>21.01</em> (at the time of writing.)</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-what-is-the-current-latest-version"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What is the current latest version?</div>
+  <div class="box-title question-title" id="question-what-is-the-current-latest-version"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: What is the current latest version?</div>
   <p>As previously mentioned, the current latest release of Galaxy may not be <em>21.01</em>. What version is the latest that you can see?</p>
 </blockquote>
 
@@ -991,7 +984,7 @@ The currently installed version of Galaxy is shown on the Galaxy server’s Admi
 <p>In a production environment it is really important to make regular backups of the database in any case. The <strong>usegalaxy.*</strong> servers all perform at least daily backups of their respective databases and even have replicate database servers <em>just in case.</em></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-back-up-the-galaxy-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Back up the Galaxy database</div>
+  <div class="box-title hands-on-title" id="hands-on-back-up-the-galaxy-database"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Back up the Galaxy database</div>
 
   <p>We will be using the PostgreSQL <code class="language-plaintext highlighter-rouge">pg_dump</code> command to dump the complete contents of the Galaxy database to a file. From the usage text of the command:</p>
 
@@ -1007,7 +1000,7 @@ The currently installed version of Galaxy is shown on the Galaxy server’s Admi
   <p>From your terminal -</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+    <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
     <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>su <span class="nt">-l</span> galaxy
 pg_dump galaxy | <span class="nb">gzip</span> <span class="o">&gt;</span> galaxy_database-2009-1.sql.gz
 <span class="nb">ls</span> <span class="nt">-lah</span> galaxy_database<span class="k">*</span>
@@ -1015,7 +1008,7 @@ pg_dump galaxy | <span class="nb">gzip</span> <span class="o">&gt;</span> galaxy
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+    <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-rw-rw-r--</span> 1 galaxy galaxy 94K Jun  8 04:12 galaxy_database_2009-1.sql.gz
 </code></pre></div>    </div>
   </blockquote>
@@ -1048,7 +1041,7 @@ pg_dump galaxy | <span class="nb">gzip</span> <span class="o">&gt;</span> galaxy
 <p>Once you’ve made sure of these things, it’s time to do it!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-back-up-the-galaxy-database-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Back up the Galaxy database</div>
+  <div class="box-title hands-on-title" id="hands-on-back-up-the-galaxy-database-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Back up the Galaxy database</div>
 
   <p>In this tutorial we will upgrade the server to version <em>21.01</em>. This may be different for you. Please use the latest version instead.</p>
 
@@ -1077,7 +1070,7 @@ pg_dump galaxy | <span class="nb">gzip</span> <span class="o">&gt;</span> galaxy
       <p>Now run the playbook!</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1259,7 +1252,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

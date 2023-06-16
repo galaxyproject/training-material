@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Machine Learning Modeling of Anticancer Peptides">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -387,7 +387,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -424,14 +424,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Machine Learning Modeling of Anticancer Peptides</h1>
@@ -653,7 +646,7 @@ Sentry.init({
 <p>An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, workflow, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-easy-access-of-tools-workflows-and-data-from-docker-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Easy access of tools, workflows and data from docker image</div>
+  <div class="box-title hands-on-title" id="hands-on-easy-access-of-tools-workflows-and-data-from-docker-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Easy access of tools, workflows and data from docker image</div>
 
   <ol>
     <li>Downloading the docker image from the docker hub using <code class="language-plaintext highlighter-rouge">docker pull jayadevjoshi12/galaxy_pdaug:latest</code> command.</li>
@@ -688,7 +681,7 @@ Sentry.init({
 <h3 id="get-data">Get data</h3>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -724,7 +717,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length <span class="citation"><a href="#Govindan_Nair_2013">Govindan and Nair 2013</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculating-ctd-descriptors-for-acps-and-non-acps"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculating CTD descriptors for ACPs and non-ACPs</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-ctd-descriptors-for-acps-and-non-acps"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating CTD descriptors for ACPs and non-ACPs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="PDAUG Sequence Property Based Descriptors tool" aria-role="link"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span> with the following parameters:
@@ -752,7 +745,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In Binary classification, ML algorithms classify the elements of a set into two groups based on a classification rule. Binary classes are usually represented by <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>. In our example, we are finding peptides with anticancer properties, therefore we can denote all the peptides with anticancer properties as <code class="language-plaintext highlighter-rouge">1</code> and peptides with non-anticancer properties as <code class="language-plaintext highlighter-rouge">0</code>.  In general, samples represented with <code class="language-plaintext highlighter-rouge">1</code> also describe as positive data, and samples with <code class="language-plaintext highlighter-rouge">0</code> labels as negative data.  Data with multi-class classification problems can also be represented by <code class="language-plaintext highlighter-rouge">0, 1, 2, 3,</code> etc. In addition to this, in ML the class labels can also be represented by a string such as “anticancer” and “non-anticancer” or “treated” and “untreated”.  However, there are several ML tools and libraries prefer numerical class label over a string therefore, in this tutorial, <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code> will be used as class labels.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-class-labels-to-the-tabular-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding class labels to the tabular data</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-class-labels-to-the-tabular-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding class labels to the tabular data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="PDAUG Add Class Label tool" aria-role="link"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span> with the following parameters:
@@ -776,7 +769,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In previous steps, we labeled positive data or ACPs as “1”, and negative data or non-ACPs as “0”, now we can combine these two tabular datafiles as one training dataset.  In this step, we will merge these tabular detasets as a labeled training data set.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merging-two-tabular-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merging two tabular files</div>
+  <div class="box-title hands-on-title" id="hands-on-merging-two-tabular-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merging two tabular files</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="PDAUG Merge Dataframes tool" aria-role="link"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span> with the following parameters:
@@ -793,7 +786,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In this step, we will apply six ML algorithms Linear Regression Classifier (LRC), Random Forest Classifier(RFC), Gaussian naive Bayes Classifier (GBC), Decision Tree Classifier (DTC), Stochastic Gradient Descent Classifier (SGDC) &amp; Support Vector Machine Classifier (SVMC) with 10 fold cross-validation on the training data. In cross-validation, positive and negative data are randomly divided into 10 parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used min-max to normalize the data before ML modeling. The entire workflow was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-applying-6-ml-algorithms-on-the-training-data-set"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Applying 6 ML algorithms on the training data set</div>
+  <div class="box-title hands-on-title" id="hands-on-applying-6-ml-algorithms-on-the-training-data-set"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Applying 6 ML algorithms on the training data set</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="PDAUG ML Models tool" aria-role="link"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span> with the following parameters:
@@ -879,7 +872,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In previous steps we have trained the ML models, these models return a TSV  that captures performance measures of these algorithms. We used the <code class="language-plaintext highlighter-rouge">Merge Data Frame</code> tool to combine these results as one file in this step.  </p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-merging-result-as-one-tabular-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Merging result as one tabular file</div>
+  <div class="box-title hands-on-title" id="hands-on-merging-result-as-one-tabular-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Merging result as one tabular file</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="PDAUG Merge Dataframes tool" aria-role="link"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span> with the following parameters:
@@ -896,7 +889,7 @@ https://zenodo.org/record/4111092/files/non_ACPs.fasta
 <p>In the final step, a heat map will be generated which represents performance measures of various algorithms. We applied five different performance measures, accuracy, recall, F1-score, precision, and mean AUC (Area Under Curve) score.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plotting-the-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plotting the results</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting-the-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plotting the results</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="PDAUG Basic Plots tool" aria-role="link"><strong>PDAUG Basic Plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0</span></span> with the following parameters:
@@ -1108,7 +1101,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

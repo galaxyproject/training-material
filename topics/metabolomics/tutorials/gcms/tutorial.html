@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mass spectrometry : GC-MS analysis with metaMS package">
         <meta property="og:description" content="Training material to analyse Mass spectrometry data in Ga...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -369,7 +369,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -406,14 +406,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-metabolomics">
     <h1 data-toc-skip>Mass spectrometry : GC-MS analysis with metaMS package</h1>
@@ -744,7 +737,7 @@ Concerning the current GC-MS tutorial, you <strong>just have to compute the foll
 <h2 id="1---import-the-data-into-galaxy">1 - Import the data into Galaxy</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -808,7 +801,7 @@ https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
 <h2 id="2---first-steps-using-xcms">2 - First steps using XCMS</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-first-steps-using-a-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: First steps using a standard XCMS workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-first-steps-using-a-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: First steps using a standard XCMS workflow</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="link"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0</span></span> with the following parameters:
@@ -835,7 +828,7 @@ https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>With GC-MS data in profile mode, we need to use the <em>MatchedFilter</em> algorithm instead of the <em>Centwave</em> one used in the LC-MS tutorial.</p>
       </blockquote>
@@ -847,7 +840,7 @@ https://zenodo.org/record/3631074/files/W4M0004_database_small.msp
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>To merge your data, you need to <strong>input a sampleMetadata file</strong> containing filenames and their metadata informations like their class for example.
 If you don’t add a sampleMetadata file, the <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool will <strong>group all your files together</strong>. 
@@ -900,7 +893,7 @@ The two options are illustrated in this tutorial.</li>
 <p>This option follows the standard LC-MS workflow to obtain in the end a dataMatrix file and its corresponding variableMetadata file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-example-of-end-of-extraction-when-using-the-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Example of end of extraction when using the standard XCMS workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-example-of-end-of-extraction-when-using-the-standard-xcms-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Example of end of extraction when using the standard XCMS workflow</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="link"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0</span></span> with the following parameters:
@@ -933,7 +926,7 @@ The two options are illustrated in this tutorial.</li>
 <p>The outputs of this strategy are similar to the ones discribed in the LC-MS tutotial mentioned previously.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-important-be-careful-of-the-file-format"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Important : Be careful of the file format</div>
+  <div class="box-title comment-title" id="comment-important-be-careful-of-the-file-format"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Important : Be careful of the file format</div>
 
   <p>During each step of pre-processing, your dataset has its format changed and can have also its name changed.
 To be able to continue to MSMS processing, you need to have a RData object wich is <strong>merged and grouped</strong> (from <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) at least. 
@@ -947,12 +940,12 @@ Don’t forget to always check your files format! For the next step you need to 
 For our example, your file should be named <code class="language-plaintext highlighter-rouge">xset.merged.groupchromPeaks.RData</code>.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p class="text-justify">The pre-processing part of this analysis can be <strong>quite time-consuming</strong>, and already corresponds to quite a few number of steps, depending of your analysis. We highly recommend, at this step of the MS/MS workflow, to split your analysis by beginning a new Galaxy history with <strong>only the files you need</strong> (final xset Rdata file and your data collection of mzML). This will help you in limiting selecting the wrong dataset in further analysis, and bring a little <strong>tidiness</strong> for future review of your MS/MS analysis process. You should also be able to make a better peakpicking in the future in the same history and it will not be polluated by MS/MS part of your process.</p>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-copy-dataset-to-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-dataset-to-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Copy dataset to a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-copy-dataset-to-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-dataset-to-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Copy dataset to a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
@@ -975,11 +968,11 @@ For our example, your file should be named <code class="language-plaintext highl
 <p class="text-justify">Before the next step with msPurity package on MS/MS datas, here are some questions to be able to verify if your file is ready and if you have the same results as us. Please check these questions :</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-before-ms-ms-steps"><i class="far fa-question-circle" aria-hidden="true"></i> Question: before MS/MS steps</div>
+  <div class="box-title question-title" id="question-before-ms-ms-steps"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: before MS/MS steps</div>
 
   <p><strong>1</strong> - What are the steps of XCMS you made before your final file ?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Here are the different steps made for our example :</p>
     <ul>
@@ -996,7 +989,7 @@ For our example, your file should be named <code class="language-plaintext highl
   <p><br />
  <strong>2</strong> - Concerning what we said before and the previous answer, what is the complete name of your final RData file ?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p class="text-justify">During each step of XCMS pre-processing, the name of the file which is processing is completed by the name of the step you were doing. So, finally your file should be name <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.fillChromPeaks.RData</code>. That because (as seen in previous answer) you ran a grouping and the integration after merged datas.</p>
 
@@ -1004,7 +997,7 @@ For our example, your file should be named <code class="language-plaintext highl
   <p><br />
 <strong>3</strong> - What is the size (in MB) of your final RData file ?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p class="text-justify">To be able to see the size of a file in your history, you just have to select it. It will deploy informations about it and you can see the size of yours. For our example, the size of the final file is <strong>1.4 MB</strong>.</p>
 
@@ -1067,7 +1060,7 @@ For our example, your file should be named <code class="language-plaintext highl
 <p class="text-justify">That file can be used for database search online (as Golm (<span class="citation"><a href="#Kopka2005">J. <i>et al.</i> 2005</a></span>) and MassBank (<span class="citation"><a href="#Horai2010">Hisayuki <i>et al.</i> 2010</a></span>)) or locally (NIST MSSEARCH) for NIST search a tutorial is available here.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-metams-rungc"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: metaMS.runGC</div>
+  <div class="box-title hands-on-title" id="hands-on-metams-rungc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: metaMS.runGC</div>
 
   <p>We now know each step of this <em>runGC</em> function. So, please open the <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> too</strong> to run it. You should enter the following parameters for our tutorial :</p>
   <ul>
@@ -1114,7 +1107,7 @@ For our example, your file should be named <code class="language-plaintext highl
 <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/tuto_gcms_eic.png" alt="TIC. " width="1000" height="466" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Example of EIC of the 'Unknown 1' in sample 'alg2'</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-metams-plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: metaMS.plot</div>
+  <div class="box-title hands-on-title" id="hands-on-metams-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: metaMS.plot</div>
 
   <p>This tool is very easy to run. It is an obligation to process <strong>metaMS.runGC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></strong> before this one. After that, you just have to choose if you want or not to draw your TIC, BPC or EIC :</p>
   <ul>
@@ -1325,7 +1318,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

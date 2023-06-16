@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-C...">
         <meta property="og:description" content="Genetic differences (variants) between healthy and diseas...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -495,7 +495,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -532,14 +532,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-variant-analysis">
     <h1 data-toc-skip>From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis</h1>
@@ -938,7 +931,7 @@ Sentry.init({
 <p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Prepare the Galaxy history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
@@ -970,7 +963,7 @@ The study we are interested in for this tutorial is one on sequencing of SARS-Co
 <p>So lets see how we can find its raw data in the SRA, and how we can get some of that data into Galaxy to analyze it. The Acknowledgments section of the publication mentions that raw reads from the study have been deposited in the SRA under <strong>BioProject PRJNA622837</strong> so that’s going to be our starting point.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-find-the-example-data-in-the-sra"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Find the example data in the SRA</div>
+  <div class="box-title hands-on-title" id="hands-on-find-the-example-data-in-the-sra"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Find the example data in the SRA</div>
 
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to <a href="https://www.ncbi.nlm.nih.gov/sra">https://www.ncbi.nlm.nih.gov/sra</a></li>
@@ -989,7 +982,7 @@ Let’s refine our search a bit.</p>
       <p>At the time of writing, 1908 hits are retained with this query, which is still more than the approximately 800 genomes mentioned in the publication, but we got a lot closer.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The vast majority of what has been excluded by adding <code class="language-plaintext highlighter-rouge">RNA-Seq[Strategy]</code> to the query are datasets for which the “Strategy” is <em>AMPLICON</em>.
 For these datasets, the viral RNA (or more precisely, the cDNA obtained from it) got amplified with a tiled-amplicon protocol.
@@ -1022,14 +1015,14 @@ While tiled-amplicon sequencing has emerged as a standard way of sequencing SARS
 <p>Now that we have downloaded this file we can go to a Galaxy instance and start processing it.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing the data itself. We will use a few Galaxy tools to filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-the-metadata-file-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload the metadata file into Galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-metadata-file-into-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the metadata file into Galaxy</div>
 
   <ol>
     <li>
@@ -1059,7 +1052,7 @@ While tiled-amplicon sequencing has emerged as a standard way of sequencing SARS
 <p>If you inspect the metadata, you should see a column <strong>Collection_Date</strong>. That looks useful!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-metadata-lines-by-collection-date-range"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter metadata lines by collection date range</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-metadata-lines-by-collection-date-range"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter metadata lines by collection date range</div>
 
   <ol>
     <li>
@@ -1085,14 +1078,14 @@ If your input has this column in a different position, you would need to adjust 
 <p>We could explore this situation in more detail, and Galaxy could also process all the sequencing runs we are currently left with, but for the sake of simplicity of the tutorial, we want to select a <em>much</em> smaller subset of sequencing runs now anyway. In particular, from previous experience with this data we suggest to continue with just the following two interesting datasets: <strong>SRR11954102</strong> and <strong>SRR12733957</strong>. So let’s pull their identifiers out of the metadata file.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>The following steps may seem a bit silly given that we just revealed the two identifiers above.
 However, think of them as placeholders for extracting run identifiers based on some other criteria.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extracting-a-subset-of-identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extracting a subset of identifiers</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-a-subset-of-identifiers"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extracting a subset of identifiers</div>
 
   <ol>
     <li>
@@ -1135,7 +1128,7 @@ SRR11954102
 <p>Now that we have our identifiers of interest extracted, we are ready to download the actual sequencing data. Since this is a very common need Galaxy offers a dedicated tool for the purpose of downloading sequencing data from the SRA identified via its run accession.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-retrieve-sequencing-data-from-sra-via-run-accessions"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Retrieve sequencing data from SRA via run accessions</div>
+  <div class="box-title hands-on-title" id="hands-on-retrieve-sequencing-data-from-sra-via-run-accessions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Retrieve sequencing data from SRA via run accessions</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.3+galaxy0" title="Faster Download and Extract Reads in FASTQ tool" aria-role="link"><strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/3.0.3+galaxy0</span></span> with the following parameters:
@@ -1170,7 +1163,7 @@ SRR11954102
 <p>Since our data analysis will involve mapping the sequenced reads just downloaded to the SARS-CoV-2 reference, we also need to obtain that reference now.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-get-the-reference-genome-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Get the reference genome data</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-reference-genome-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the reference genome data</div>
 
   <ol>
     <li>
@@ -1200,7 +1193,7 @@ SRR11954102
 <p>Removing sequencing adapters improves alignments and variant calling. <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can automatically detect widely used sequencing adapters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
     <li><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1225,7 +1218,7 @@ SRR11954102
 <p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-align-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Align sequencing reads to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-align-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Align sequencing reads to reference genome</div>
 
   <ol>
     <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1253,7 +1246,7 @@ SRR11954102
 <p><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-pcr-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove PCR duplicates</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-pcr-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove PCR duplicates</div>
 
   <ol>
     <li><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1271,7 +1264,7 @@ SRR11954102
 <p>After the duplicate marking step above we can generate statistic about the alignment we have generated.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-alignment-statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generate alignment statistics</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-alignment-statistics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate alignment statistics</div>
 
   <ol>
     <li><strong>Samtools stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1292,7 +1285,7 @@ SRR11954102
 <p><strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Realign reads around indels</div>
+  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Realign reads around indels</div>
 
   <ol>
     <li><strong>Realign reads</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1318,7 +1311,7 @@ SRR11954102
 <p>This step adds indel qualities into our alignment file. This is necessary in order to call variants using <strong>Call variants</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-indel-qualities"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Add indel qualities</div>
+  <div class="box-title hands-on-title" id="hands-on-add-indel-qualities"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add indel qualities</div>
 
   <ol>
     <li><strong>Insert indel qualities</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1344,7 +1337,7 @@ SRR11954102
 <p>We are now ready to call variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Call variants</div>
+  <div class="box-title hands-on-title" id="hands-on-call-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call variants</div>
 
   <ol>
     <li><strong>Call variants</strong> with lofreq <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1390,7 +1383,7 @@ SRR11954102
 <p>We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotate variant effects</div>
+  <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotate variant effects</div>
 
   <ol>
     <li><strong>SnpEff eff:</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1414,7 +1407,7 @@ SRR11954102
 <p>We will now select various effects from the VCF and create a tabular file that is easier to understand for humans.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Create table of variants</div>
+  <div class="box-title hands-on-title" id="hands-on-create-table-of-variants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create table of variants</div>
 
   <ol>
     <li><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1434,7 +1427,7 @@ SRR11954102
 <p>We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Summarize data</div>
+  <div class="box-title hands-on-title" id="hands-on-summarize-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Summarize data</div>
 
   <ol>
     <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1742,7 +1735,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

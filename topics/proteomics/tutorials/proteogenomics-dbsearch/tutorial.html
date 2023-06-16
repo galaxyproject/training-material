@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Proteogenomics 2: Database Search">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -488,7 +488,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -525,14 +525,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Proteogenomics 2: Database Search</h1>
@@ -904,7 +897,7 @@ Sentry.init({
 <h1 id="pretreatments">Pretreatments</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: data upload and organization</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: data upload and organization</div>
 
   <ol>
     <li>Create a <strong>new history</strong> and name it something meaningful (e.g. <em>Proteogenomics DB search</em>)</li>
@@ -939,7 +932,7 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
 <p>For this, the sequence database-searching program called <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> will be used.The generated dataset collection of the three <em>MGF files</em> in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tool-versions"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Tool Versions</div>
+  <div class="box-title comment-title" id="comment-tool-versions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tool Versions</div>
 
   <p>The tools are subjected to changes while being upgraded. Here we have used an older version of SearchGUI (v3.3.10.1)-Peptide Shaker (v1.16.36.3).
 The new versions are available in Galaxy.</p>
@@ -949,7 +942,7 @@ The new versions are available in Galaxy.</p>
 <h2 id="searchgui">SearchGUI</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-searchgui"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: SearchGUI</div>
+  <div class="box-title hands-on-title" id="hands-on-searchgui"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: SearchGUI</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1" title="Search GUI tool" aria-role="link"><strong>Search GUI</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1</span></span> with the following parameters:
@@ -958,7 +951,7 @@ The new versions are available in Galaxy.</p>
           <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein Database”</em>: <code class="language-plaintext highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code> (Or however you named the <code class="language-plaintext highlighter-rouge">FASTA</code> file)</p>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+            <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
             <p>The “Uniprot_cRAP_SAV_indel_translatedbed” FASTA database is obtained when you run the first proteogenomics workflow.
    Please make sure to run the 1st workflow.</p>
           </blockquote>
@@ -967,7 +960,7 @@ The new versions are available in Galaxy.</p>
           <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input Peak lists (mgf)”</em>: <code class="language-plaintext highlighter-rouge">MGF files</code> dataset collection.</p>
 
           <blockquote class="tip">
-            <div class="box-title tip-title" id="tip-select-dataset-collections-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-dataset-collections-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Select dataset collections as input<span class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-select-dataset-collections-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-dataset-collections-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Select dataset collections as input<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
             <ul>
               <li>
@@ -985,7 +978,7 @@ The new versions are available in Galaxy.</p>
               <p><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“DB-Search Engines”</em>: <code class="language-plaintext highlighter-rouge">X!Tandem</code></p>
 
               <blockquote class="comment">
-                <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+                <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
                 <p>The section <strong>Search Engine Options</strong> contains a selection of sequence database searching
    programs that are available in SearchGUI. Any combination of these programs can be used for
    generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tandem</strong> we will be
@@ -1020,7 +1013,7 @@ The new versions are available in Galaxy.</p>
               <p><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variable modifications”</em>: <code class="language-plaintext highlighter-rouge">Oxidation of M, ITRAQ-4Plex of Y</code></p>
 
               <blockquote class="tip">
-                <div class="box-title tip-title" id="tip-search-for-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-search-for-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Search for options<span class="fold-unfold fa fa-minus-square"></span></button></div>
+                <div class="box-title tip-title" id="tip-search-for-options"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-search-for-options" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Search for options<span class="fold-unfold fa fa-minus-square"></span></button></div>
                 <p>For selection lists, typing the first few letters in the window will filter the
 available options.</p>
               </blockquote>
@@ -1048,7 +1041,7 @@ SearchGUI archive file) that will serve as an input for the next section, Peptid
 Rename the output as “<strong>Compressed SearchGUI results</strong>”</p>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+    <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
     <p>Note that sequence databases used for proteogenomics are usually much larger than
 the excerpt used in this tutorial. When using large databases, the peptide identification
 step can take much more time for computation. In proteogenomics, choosing the optimal
@@ -1068,7 +1061,7 @@ results. PeptideShaker has been wrapped in Galaxy to work in combination with Se
 outputs.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-file-formats"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: File Formats</div>
+  <div class="box-title comment-title" id="comment-file-formats"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: File Formats</div>
   <p>There are a number of choices for different data files that can be generated using
   PeptideShaker. A compressed file can be made containing all information needed to
   view them results in the standalone PeptideShaker viewer. A <code class="language-plaintext highlighter-rouge">mzidentML</code> file can
@@ -1079,7 +1072,7 @@ outputs.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-peptideshaker"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: PeptideShaker</div>
+  <div class="box-title hands-on-title" id="hands-on-peptideshaker"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: PeptideShaker</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3" title="Peptide Shaker tool" aria-role="link"><strong>Peptide Shaker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3</span></span> with the following parameters:
@@ -1092,7 +1085,7 @@ outputs.</p>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-certificate-of-analysis"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Certificate of Analysis</div>
+        <div class="box-title comment-title" id="comment-certificate-of-analysis"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Certificate of Analysis</div>
 
         <p>The “Certificate of Analysis” provides details on all the parameters
 used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded from the
@@ -1112,7 +1105,7 @@ Galaxy instance to your local computer in a text file if desired.</p>
 <p>The mzidentml output from the Peptide shaker is converted into an sqlite database file by using the mz to sqlite tool. This sqlite output is used to open the Multi-omics visualization platform, wherein you can view the spectra of the peptides using Lorikeet parameters. To open the MVP viewer, click on the “Visualize in MVP Application” icon ( this will pop-open the interactive multi-omics viewer in a new window/tab)</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mz-to-sqlite"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: mz to sqlite</div>
+  <div class="box-title hands-on-title" id="hands-on-mz-to-sqlite"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: mz to sqlite</div>
 
   <p>This tool extracts mzidentml and its associated proteomics datasets into a sqlite db</p>
 
@@ -1135,7 +1128,7 @@ Galaxy instance to your local computer in a text file if desired.</p>
 <h2 id="query-tabular">Query Tabular</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-reference-proteins"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove Reference proteins</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-reference-proteins"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove Reference proteins</div>
 
   <ol>
     <li><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</li>
@@ -1229,7 +1222,7 @@ Galaxy instance to your local computer in a text file if desired.</p>
           </ul>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+            <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
             <p>By default, table columns will be named: c1,c2,c3,…,cn (column names for a table must be unique).
 You can override the default names by entering a comma separated list of names, e.g. <code class="language-plaintext highlighter-rouge">,name1,,,name2</code>
@@ -1242,7 +1235,7 @@ Check your input file to find the settings which best fits your needs.</p>
           <p><em>“Save the sqlite database in your history”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
           <blockquote class="comment">
-            <div class="box-title comment-title" id="comment-querying-an-sqlite-database"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Querying an SQLite Database</div>
+            <div class="box-title comment-title" id="comment-querying-an-sqlite-database"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Querying an SQLite Database</div>
             <p><strong>Query Tabular</strong> can also use an existing SQLite database.
 Activating <code class="language-plaintext highlighter-rouge">Save the sqlite database in your history</code>
 will store the generated database in the history, allowing to reuse it directly.</p>
@@ -1268,7 +1261,7 @@ ORDER BY psms.id
 <p>The output from this step is that the resultant peptides would be those which doesn’t belong in the Uniprot or cRAP database. The query tabular tool is used again to create a tabular output containing peptides ready for Blast P analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Query Tabular</div>
 
   <p><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:</p>
 
@@ -1317,7 +1310,7 @@ ORDER BY length(Sequence),Sequence
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-tabular-to-fasta-version-1-1-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Tabular to FASTA (version 1.1.1)</div>
+  <div class="box-title hands-on-title" id="hands-on-tabular-to-fasta-version-1-1-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Tabular to FASTA (version 1.1.1)</div>
   <ol>
     <li><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
       <ul>
@@ -1332,7 +1325,7 @@ The short BlastP uses parameters for short peptide sequences (8-30 aas). Please 
 <p>The output FASTA file is going to be subjected to BLAST-P analysis.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tool-versions-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Tool Versions</div>
+  <div class="box-title comment-title" id="comment-tool-versions-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tool Versions</div>
 
   <p>The tools are subjected to changes while being upgraded.
 Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.</p>
@@ -1613,7 +1606,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

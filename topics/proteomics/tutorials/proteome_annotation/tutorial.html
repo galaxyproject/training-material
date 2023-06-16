@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Annotating a protein list identified by LC-MS/MS experiments">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -427,7 +427,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -464,14 +464,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Annotating a protein list identified by LC-MS/MS experiments</h1>
@@ -737,7 +730,7 @@ A total of 229 unique proteins were identified in EBC among which 153 proteins w
 <p>For this tutorial, we will use 3 datasets: the list of proteins identified by LC-MS/MS in the exhaled breath condensate (EBC) from <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span> and two others EBC proteomes previously published (<span class="citation"><a href="#Muccilli2015">Muccilli <i>et al.</i> 2015</a></span>  and <span class="citation"><a href="#Bredberg2011">Bredberg <i>et al.</i> 2011</a></span>). These datasets are available from Zenodo <a href="https://zenodo.org/record/3405119">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -772,7 +765,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
 <p>A group of 10 proteins were identified in both “technical” control samples with an enrichment in EBC samples below a fixed threshold. These proteins were thus considered to be technical contaminants (see list of proteins in Table 4 in <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>) and have to be removed from the initial dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-remove-the-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Remove the contaminants</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-the-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove the contaminants</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -793,7 +786,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
+        <div class="box-title comment-title" id="comment-outputs"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Outputs</div>
         <ul>
           <li><strong>Filtered_Lacombe_2018.txt - Discarded_lines</strong>: output list with the ten proteins (contaminants) removed from the original dataset (10 proteins)</li>
           <li><strong>Filtered_Lacombe_2018.txt</strong>: output contains the remaining proteins that will be considered for further analysis (151 proteins)</li>
@@ -809,7 +802,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
 <p>As EBC samples are obtained from air exhaled through the oral cavity, and even though the RTube collection device contained a saliva trap to separate saliva from the exhaled breath, contamination with salivary proteins had to be assessed. We decided to check the expression pattern for each protein of the “core” EBC proteome using the <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA, <span class="citation"><a href="#Uhln2005">Uhlén <i>et al.</i> 2005</a></span>). As HPA is indexed by Ensembl gene identifier (ENSG) we first need to convert Uniprot ID to Ensembl gene (ENSG). Secondly, check for proteins which are highly expressed in the salivary glands as reported by HPA, then in a third step, we filter out these proteins.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-uniprot-id-to-ensembl-gene-id"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert Uniprot ID to Ensembl gene ID</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-uniprot-id-to-ensembl-gene-id"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert Uniprot ID to Ensembl gene ID</div>
 
   <ol>
     <li><strong>ID Converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -833,7 +826,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-output"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Output</div>
+        <div class="box-title comment-title" id="comment-output"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Output</div>
 
         <p>In the output file, a new column which contains Ensembl IDs was added (at the end)</p>
       </blockquote>
@@ -842,7 +835,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-for-proteins-highly-expressed-in-salivary-glands"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check for proteins highly expressed in salivary glands</div>
+  <div class="box-title hands-on-title" id="hands-on-check-for-proteins-highly-expressed-in-salivary-glands"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check for proteins highly expressed in salivary glands</div>
 
   <ol>
     <li><strong>Add expression data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -862,7 +855,7 @@ https://zenodo.org/record/3405119/files/Mucilli.txt
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-outputs-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
+        <div class="box-title comment-title" id="comment-outputs-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Outputs</div>
 
         <p>In the output file, four columns were added (5, 6, 7 and 8) corresponding to the retrieved information from HPA.</p>
       </blockquote>
@@ -884,7 +877,7 @@ Q9NZT1  Calmodulin-like protein 5  8  ENSG00000178372   CALML5 Calmodulin-like 5
 by filtering out the lines that contain the word <code class="language-plaintext highlighter-rouge">salivary</code> in the column of RNA transcript specific TPM.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-the-data-to-remove-the-biological-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter the data to remove the biological contaminants</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-the-data-to-remove-the-biological-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter the data to remove the biological contaminants</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -905,7 +898,7 @@ by filtering out the lines that contain the word <code class="language-plaintext
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-outputs-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Outputs</div>
+        <div class="box-title comment-title" id="comment-outputs-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Outputs</div>
         <p>Two output files are created:</p>
         <ul>
           <li><strong>Filtered Add expression data on data .. - Discarded lines</strong> (12 proteins)</li>
@@ -916,7 +909,7 @@ by filtering out the lines that contain the word <code class="language-plaintext
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-using-genes-instead-of-keywords"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-genes-instead-of-keywords" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using genes instead of keywords<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-using-genes-instead-of-keywords"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-genes-instead-of-keywords" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Using genes instead of keywords<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Note also that a list of “gene” may have been entered (selected on the basis of their TPM value) applied to column 5 instead of the keywords “salivary” to column 8, as it has been done in <span class="citation"><a href="#Lacombe2018">Lacombe <i>et al.</i> 2018</a></span>.</p>
   </blockquote>
 
@@ -929,7 +922,7 @@ Now we can perform the GO terms analysis. Input list is the EBC proteome to be a
 removal, which is the output of biological contaminants filter step.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-go-terms-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: GO terms analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-go-terms-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: GO terms analysis</div>
 
   <ol>
     <li><strong>GO terms classification and enrichment analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -966,7 +959,7 @@ removal, which is the output of biological contaminants filter step.</p>
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-output-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Output</div>
+    <div class="box-title comment-title" id="comment-output-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Output</div>
 
     <p>Results created in History panel are the following:</p>
     <ul>
@@ -990,7 +983,7 @@ database that aims to provide intuitive bioinformatics tools for the visualizati
 interpretation and analysis of pathway knowledge.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-protein-list-mapping-on-reactome-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Protein list mapping on Reactome database</div>
+  <div class="box-title hands-on-title" id="hands-on-protein-list-mapping-on-reactome-database"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Protein list mapping on Reactome database</div>
 
   <ol>
     <li><strong>Query pathway database [Reactome]</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1013,7 +1006,7 @@ interpretation and analysis of pathway knowledge.</p>
 <h1 id="comparison-with-other-proteomic-datasets-from-previous-studies">Comparison with other proteomic datasets from previous studies</h1>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-lists-comparison-with-venn-diagramm-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Lists comparison with Venn diagramm tool</div>
+  <div class="box-title hands-on-title" id="hands-on-lists-comparison-with-venn-diagramm-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Lists comparison with Venn diagramm tool</div>
 
   <ol>
     <li><strong>Venn diagram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1044,7 +1037,7 @@ interpretation and analysis of pathway knowledge.</p>
   </ol>
 
   <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-output-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Output</div>
+    <div class="box-title comment-title" id="comment-output-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Output</div>
 
     <p>The Venn diagram shows the number of proteins specific and in common between the 3 lists.
 <img src="../../images/ProteoreAnnot-Venn.png" alt="Graphical output of the Venn diagram. " width="460" height="656" loading="lazy" />.</p>
@@ -1267,7 +1260,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Cleaning GBIF data for the use in Ecology">
         <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -389,7 +389,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -426,14 +426,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-ecology">
     <h1 data-toc-skip>Cleaning GBIF data for the use in Ecology</h1>
@@ -680,7 +673,7 @@ Sentry.init({
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -698,7 +691,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The spocc Galaxy tool allows you to search species occurrences across a single or many data sources (GBIF, eBird, iNaturalist, EcoEngine, VertNet, BISON). Changing the number of records to return allows you to have all or limited numbers of occurrences. Specifying more than one data source will change the manner the output dataset is formatted.</p>
 
@@ -733,7 +726,7 @@ Sentry.init({
 <p>Here we propose to investigate the content of the dataset looking notably at the “basisOfRecord” attribute to know more about heterogeneity related to the data collection origin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quot-basisofrecord-quot-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: &quot;basisOfRecord&quot; filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-quot-basisofrecord-quot-filtering"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: &quot;basisOfRecord&quot; filtering</div>
 
   <ol>
     <li><strong>Count</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -743,7 +736,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>This tool is one of the important “classical” Galaxy tool who allows you to better synthesize information content of your data. Here we apply this tool to the 17th column (corresponding to the basisOfRecord attribute) but don’t hesitate to investigate others attributes!</p>
       </blockquote>
@@ -753,7 +746,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>How many different types of data collection origin are there?</li>
@@ -761,7 +754,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>5</li>
@@ -775,7 +768,7 @@ Sentry.init({
 <h2 id="filtering-data-based-on-the-data-origin">Filtering data based on the data origin</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-data-on-basisofrecord-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter data on basisOfRecord GBIF attribute</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-data-on-basisofrecord-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter data on basisOfRecord GBIF attribute</div>
 
   <ol>
     <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -786,13 +779,13 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>A comment about the tool or something else. This box can also be in the main text</p>
       </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many records are kept and what is the percentage of filtered data?</li>
@@ -800,7 +793,7 @@ Sentry.init({
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>470 and 8.79% of records were drop out</li>
@@ -827,7 +820,7 @@ Sentry.init({
 <p>Here we propose to have a look at the number of counts by record to know if there is some possible records with errors.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summary-statistics-of-count"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Summary statistics of count</div>
+  <div class="box-title hands-on-title" id="hands-on-summary-statistics-of-count"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Summary statistics of count</div>
 
   <ol>
     <li><strong>Summary Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -842,14 +835,14 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is the min and max of individual counts?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>From 1 to 100</li>
@@ -862,7 +855,7 @@ Sentry.init({
 <h2 id="filtering-data-on-individual-counts"><strong>Filtering</strong> data on individual counts</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-data-on-individualcount-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter data on individualCount GBIF attribute</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-data-on-individualcount-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter data on individualCount GBIF attribute</div>
 
   <ol>
     <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -875,7 +868,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>How many records are kept and what is the percentage of filtered data?</li>
@@ -884,7 +877,7 @@ Sentry.init({
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>50 and 89.29% o records were drop out</li>
@@ -900,7 +893,7 @@ Sentry.init({
 <h2 id="have-a-look-at-the-age-of-records">Have a look at the age of records</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-here-we-propose-to-have-a-look-at-the-age-of-records-through-the-year-gbif-attribute-to-know-if-there-is-some-ancient-data-to-maybe-not-consider"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Here we propose to have a look at the age of records, through the `year` GBIF attribute to know if there is some ancient data to maybe not consider.</div>
+  <div class="box-title hands-on-title" id="hands-on-here-we-propose-to-have-a-look-at-the-age-of-records-through-the-year-gbif-attribute-to-know-if-there-is-some-ancient-data-to-maybe-not-consider"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Here we propose to have a look at the age of records, through the `year` GBIF attribute to know if there is some ancient data to maybe not consider.</div>
 
   <ol>
     <li><strong>Summary Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -915,7 +908,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is the year of the older and younger records?</li>
@@ -923,7 +916,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>From 1903 to 2018</li>
@@ -937,7 +930,7 @@ Sentry.init({
 <h2 id="filtering-data-based-on-the-age-of-records">Filtering data based on the age of records</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-data-on-ageofrecord-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter data on ageOfRecord GBIF attribute</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-data-on-ageofrecord-gbif-attribute"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter data on ageOfRecord GBIF attribute</div>
 
   <ol>
     <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -948,13 +941,13 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>A comment about the tool or something else. This box can also be in the main text</p>
       </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many records are kept and what is the percentage of filtered data?</li>
@@ -962,7 +955,7 @@ Sentry.init({
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>44 and 11.76% of records were drop out</li>
@@ -987,7 +980,7 @@ Sentry.init({
 <h2 id="taxonomic-investigation">Taxonomic investigation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-investigate-the-taxonomic-coverage-at-the-family-level"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Investigate the taxonomic coverage, at the family level</div>
+  <div class="box-title hands-on-title" id="hands-on-investigate-the-taxonomic-coverage-at-the-family-level"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Investigate the taxonomic coverage, at the family level</div>
 
   <ol>
     <li><strong>Count</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -997,7 +990,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>This column allows us to look at the different families associated to records. Normally, looking at a unique species, we will obtain only one family</p>
       </blockquote>
@@ -1009,7 +1002,7 @@ Sentry.init({
 <h2 id="filtering">Filtering</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-data-on-family-attribute"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Filter data on family attribute</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-data-on-family-attribute"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filter data on family attribute</div>
 
   <ol>
     <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1020,7 +1013,7 @@ Sentry.init({
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>We here select only records with the family of interest, Loliginidae</p>
       </blockquote>
@@ -1030,7 +1023,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Is the filtering here of interest ?</li>
@@ -1038,7 +1031,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>No, because 100% of records are kept</li>
@@ -1052,7 +1045,7 @@ Sentry.init({
 <h2 id="sub-step-with-ogr2ogr">Sub-step with <strong>OGR2ogr</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-occurrence-dataset-to-gis-one-for-visualization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Convert occurrence dataset to GIS one for visualization</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-occurrence-dataset-to-gis-one-for-visualization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert occurrence dataset to GIS one for visualization</div>
 
   <ol>
     <li><strong>OGR2ogr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1084,7 +1077,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Did you have access to standard output and error of the original R script?</li>
@@ -1092,7 +1085,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Yes, of course ;) A previsualization of stdout is visible when clicking on the history output dataset and full report accessible through the information button, then stdout or stderr (here you can see warnings on the stderr)</li>
@@ -1108,7 +1101,7 @@ Sentry.init({
 <p>From your GeoJSON Galaxy history dataset, you can launch GIS visualization.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-launch-openlayers-to-visualize-a-map-with-your-filtered-records"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Launch OpenLayers to visualize a map with your filtered records</div>
+  <div class="box-title hands-on-title" id="hands-on-launch-openlayers-to-visualize-a-map-with-your-filtered-records"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Launch OpenLayers to visualize a map with your filtered records</div>
 
   <ol>
     <li>Click on the <em>Visualize</em> tab on the upper menu and select <code class="language-plaintext highlighter-rouge">Create Visualization</code></li>
@@ -1119,14 +1112,14 @@ Sentry.init({
   </ol>
 
   <blockquote class="question">
-    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+    <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
     <ol>
       <li>You don’t see Opebnlayers? Did you know why?</li>
     </ol>
 
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>1.If you don’t see Openlayers but others visualization types like Cytoscape, this means your datatype is JSON, not geojson. You have to change the datafile manually before visualizing it</p>
 
@@ -1307,7 +1300,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

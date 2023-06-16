@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Identification of the binding sites of the T-cell acute l...">
         <meta property="og:description" content="DNA methylation is an epigenetic mechanism used by higher...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -523,7 +523,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -560,14 +560,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-epigenetics">
     <h1 data-toc-skip>Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</h1>
@@ -1047,7 +1040,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <p>As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial <a href="/training-material/topics/sequence-analysis">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-performing-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Performing quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-performing-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Performing quality control</div>
 
   <ol>
     <li>
@@ -1068,7 +1061,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
       <p>Examine the data in a FASTQ file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What are four key features of a FASTQ file?</li>
@@ -1076,7 +1069,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>A FASTQ file contains a sequence identifier and additional information, the raw sequence, information about the sequence again with optional information, and quality information about the sequence.</li>
             <li>A FASTA file contains only the description of the sequence and the sequence itself. A FASTA file does not contain any quality information.</li>
@@ -1093,7 +1086,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
       <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tal1/fastqc_before.png" alt="fastqbefore. " width="800" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Sequence quality per base generated by FastQC before end trimming.</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What does the y-axis represent in Figure 3?</li>
@@ -1101,7 +1094,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The phred-score. This score gives the probability of an incorrect base <em>e.g.</em> a score of 20 means that it is likely by 1% that one base is incorrect. See <a href="https://en.wikipedia.org/wiki/Phred_quality_score">here</a> for more information.</li>
             <li>This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See <a href="https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina">here</a> for more information.</li>
@@ -1117,7 +1110,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 <p>It is often necessary to trim a sequenced read to remove bases sequenced with high uncertainty (<em>i.e.</em> low-quality bases). In addition, artificial adaptor sequences used in library preparation protocols need to be removed before attempting to align the reads to a reference genome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trimming-and-clipping-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Trimming and clipping reads</div>
+  <div class="box-title hands-on-title" id="hands-on-trimming-and-clipping-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Trimming and clipping reads</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span>: Run Trimmomatic to trim low-quality reads.
@@ -1131,7 +1124,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </ul>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-changing-datatypes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-datatypes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing datatypes<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-changing-datatypes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-datatypes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Changing datatypes<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>If the FASTQ files cannot be selected, check whether their format is FASTQ with Sanger-scaled quality values (<em>fastqsanger</em>). If not, you can edit the data type by clicking on the pencil symbol next to a file in the history, clicking the “Datatype” tab, and choosing <em>fastqsanger</em> as the “New Type”.</p>
       </blockquote>
@@ -1142,14 +1135,14 @@ Input control experiments are used to identify and remove sampling bias, for exa
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How did the range of read lengths change after trimming/clipping?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.</li>
           </ol>
@@ -1167,7 +1160,7 @@ Input control experiments are used to identify and remove sampling bias, for exa
 Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool <a href="https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Aligning reads to a reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-aligning-reads-to-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Aligning reads to a reference genome</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4" title="BWA tool" aria-role="link"><strong>BWA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4</span></span>: Run BWA to map the trimmed/clipped reads to the mouse genome.
@@ -1189,7 +1182,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
       <p>Inspect a file produced by BWA.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What datatype is the BWA output file?</li>
@@ -1197,7 +1190,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The output is a BAM file.</li>
             <li>Check the number of lines for each file in your history. This gives you a rough estimate.</li>
@@ -1214,7 +1207,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
       <p>Examine the output (<i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>)</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What does each column in the output represent (<strong>Tip</strong>: look at the Tool Form)?</li>
@@ -1223,7 +1216,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Column 1: Reference sequence identifier
 Column 2: Reference sequence length
@@ -1245,7 +1238,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found <a href="https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing correlation between samples</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-correlation-between-samples"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing correlation between samples</div>
 
   <p>multiBamSummary splits the reference genome into bins of equal size and counts the number of reads in each bin from each sample. We set a small bin size here because we are working with a subset of reads that align to only a fraction of the genome.</p>
 
@@ -1270,7 +1263,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p>Feel free to play around with these parameter settings!</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Why do we want to skip zeros in <strong>plotCorrelation</strong>?</li>
@@ -1279,7 +1272,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.</li>
             <li>The clusters are different, <em>e.g.</em> Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. <a href="http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/"> More information about Pearson and Spearman’s correlation. </a></li>
@@ -1300,7 +1293,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will now evaluate the quality of the immunoprecipitation step in the ChIP-seq protocol.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-ip-strength"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing IP strength</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-ip-strength"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing IP strength</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0" title="plotFingerprint tool" aria-role="link"><strong>plotFingerprint</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.3.2.0.0</span></span>: Run plotFingerprint to assess ChIP signal strength.
@@ -1320,7 +1313,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/tal1/plotFingerprint_graph_v2.png" alt="fingerprintimage. " width="1428" height="1108" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Strength of immunoprecipitation of TAL1.</figcaption></figure>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What does this graph in Figure 10 represent?</li>
@@ -1330,7 +1323,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>It shows us how good the ChIP Signal compared to the control signal is. An ideal control (input) with perfect uniform distribution of reads along the genome (<em>i.e.</em> without enrichment in open chromatin etc.) and infinite sequencing coverage should generate a straight diagonal line. A very specific and strong ChIP enrichment will be indicated by a prominent and steep rise of the cumulative sum towards the highest rank.</li>
             <li>We expect that the control (input) signal is more or less uniform distributed over the genome (<em>e.g.</em> like the green line in the image above). The IP dataset should look more like the red line but it would be better if the values for IP start to increase at around 0.8 on the x-axis.</li>
@@ -1358,7 +1351,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>More information about MACS2 can be found in <span class="citation"><a href="#Zhang_2008">Zhang <i>et al.</i> 2008</a></span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-determining-tal1-binding-sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Determining TAL1 binding sites</div>
+  <div class="box-title hands-on-title" id="hands-on-determining-tal1-binding-sites"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Determining TAL1 binding sites</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool" aria-role="link"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span>: Run MACS2 callpeak with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
@@ -1391,7 +1384,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-and-aligned-data-with-trackster"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspecting peaks and aligned data with Trackster</div>
+  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-and-aligned-data-with-trackster"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspecting peaks and aligned data with Trackster</div>
 
   <ol>
     <li>
@@ -1442,14 +1435,14 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p>Navigate to the <em>Runx1</em> locus (<code class="language-plaintext highlighter-rouge">chr16:92501466-92926074</code>) to inspect the aligned reads and TAL1 peaks.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What do you see at the <em>Runx1</em> locus in Trackster?</li>
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Directly upstream of the shorter <em>Runx1</em> gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.</li>
           </ol>
@@ -1465,7 +1458,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We show here an alternative to Trackster, <a href="http://software.broadinstitute.org/software/igv/">IGV</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-with-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Inspecting peaks with IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-inspecting-peaks-with-igv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspecting peaks with IGV</div>
 
   <ol>
     <li>Open IGV on your local computer.</li>
@@ -1479,7 +1472,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We have processed ChIP-seq data from two stages of hematopoiesis and have lists of TAL1-occupied sites (peaks) in both cellular states. The next analysis step is to identify TAL1 peaks that are <em>shared</em> between the two cellular states and peaks that are <em>specific</em> to either cellular state.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Identifying unique and common TAL1 peaks between states</div>
+  <div class="box-title hands-on-title" id="hands-on-identifying-unique-and-common-tal1-peaks-between-states"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Identifying unique and common TAL1 peaks between states</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0" title="bedtools Intersect intervals tool" aria-role="link"><strong>bedtools Intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.29.0</span></span>: Run bedtools Intersect intervals to find peaks that exist both in G1E and megakaryocytes.
@@ -1507,7 +1500,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p>Rename files to reflect the origin and contents.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>How many TAL1 peaks are common to both G1E cells and megakaryocytes?</li>
@@ -1516,7 +1509,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>1 peak (answer may vary depending on references and tool versions used)</li>
             <li>407 peaks (answer may vary depending on references and tool versions used)</li>
@@ -1533,7 +1526,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will generate Input normalized coverage (bigWig) files for the ChIP samples, using the bamCompare tool from deepTools2. bamCompare provides multiple options to compare the two files (<em>e.g.</em> log2ratio, subtraction). We will use log2 ratio of the ChIP samples over Input.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generating-input-normalized-bigwigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Generating input-normalized bigwigs</div>
+  <div class="box-title hands-on-title" id="hands-on-generating-input-normalized-bigwigs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generating input-normalized bigwigs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0" title="bamCompare tool" aria-role="link"><strong>bamCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0</span></span>: Run bamCompare to get the log2 read ratios between treatment and control samples.
@@ -1565,7 +1558,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>Optionally, you can use plotProfile to create a profile plot using to computeMatrix output.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculating-signal-matrix-on-macs2-output"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculating signal matrix on MACS2 output</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-signal-matrix-on-macs2-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating signal matrix on MACS2 output</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="link"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>: Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
@@ -1586,7 +1579,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-plotting-a-heatmap-of-tal1-peaks"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Plotting a heatmap of TAL1 peaks</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting-a-heatmap-of-tal1-peaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plotting a heatmap of TAL1 peaks</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="link"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>: Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
@@ -1613,7 +1606,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
 <p>We will now check whether the samples have more reads from regions of the genome with high GC.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assessing-gc-bias"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assessing GC bias</div>
+  <div class="box-title hands-on-title" id="hands-on-assessing-gc-bias"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assessing GC bias</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0" title="computeGCbias tool" aria-role="link"><strong>computeGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/3.3.2.0.0</span></span>: Run computeGCbias to determine the GC bias of the sequenced reads.
@@ -1627,7 +1620,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       </ul>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>Why would we worry more about checking for GC bias in an input file?</li>
@@ -1635,7 +1628,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is expected that certain genomic regions contain more reads (<em>i.e.</em> regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.</li>
             <li>To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation <a href="https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background">here</a>.</li>
@@ -1647,7 +1640,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0" title="correctGCbias tool" aria-role="link"><strong>correctGCbias</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_correct_gc_bias/deeptools_correct_gc_bias/3.3.2.0.0</span></span>: Run correctGCbias to generate GC-corrected BAM/CRAM files.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <ol>
           <li>What does the tool correctGCbias do?</li>
@@ -1656,7 +1649,7 @@ Column 4: Number of placed but unmapped reads (typically unmapped partners of ma
         </ol>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The correctGCbias tool removes reads from regions with higher coverage than expected (typically corresponding to GC-rich regions) and adds reads to regions with lower coverage than expected (typically corresponding to AT-rich regions).</li>
             <li>The output of this tool is a GC-corrected file in BAM, bigWig, or bedGraph format.</li>
@@ -1905,7 +1898,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -66,7 +66,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Use Apptainer containers for running Galaxy jobs">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -499,7 +499,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -536,14 +536,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Use Apptainer containers for running Galaxy jobs</h1>
@@ -939,7 +932,7 @@ Sentry.init({
 <p>Apptainer is an alternative to Docker that is much friendlier for HPCs</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-apptainer-singularity-singularityce"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Apptainer, Singularity, SingularityCE?</div>
+  <div class="box-title comment-title" id="comment-apptainer-singularity-singularityce"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Apptainer, Singularity, SingularityCE?</div>
 
   <table>
     <thead>
@@ -1013,7 +1006,7 @@ Sylabs maintains their own free and open source fork, ‘SingularityCE’ (for <
 <p>First, we will install Apptainer using Ansible. Since there is a package available for major Linux distros now, we could simply install it in the pre tasks. However, we would have to enable additional repos, so we decided to create a role for this:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-apptainer-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Installing Apptainer with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-apptainer-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Installing Apptainer with Ansible</div>
 
   <ol>
     <li>
@@ -1039,7 +1032,7 @@ Sylabs maintains their own free and open source fork, ‘SingularityCE’ (for <
       <p>Install the requirements with <code class="language-plaintext highlighter-rouge">ansible-galaxy</code>:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1064,7 +1057,7 @@ Sylabs maintains their own free and open source fork, ‘SingularityCE’ (for <
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1074,13 +1067,13 @@ Sylabs maintains their own free and open source fork, ‘SingularityCE’ (for <
 to your server and run the following command:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>apptainer run docker://hello-world
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Bash</div>
+        <div class="box-title code-out-title" id="code-out-bash"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO:    Converting OCI blobs to SIF format
 INFO:    Starting build...
 Getting image source signatures
@@ -1107,12 +1100,12 @@ This message shows that your installation appears to be working correctly.
 <p>Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from <a href="https://quay.io/organization/biocontainers">the BioContainers repository</a>.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-galaxy-calls-it-singularity-not-apptainer"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Galaxy Calls It Singularity, not Apptainer</div>
+  <div class="box-title warning-title" id="warning-galaxy-calls-it-singularity-not-apptainer"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Galaxy Calls It Singularity, not Apptainer</div>
   <p>Galaxy still uses <code class="language-plaintext highlighter-rouge">singularity</code> in most variables, they will be replaced successively.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-use-apptainer"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configure Galaxy to use Apptainer</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-use-apptainer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configure Galaxy to use Apptainer</div>
 
   <ol>
     <li>
@@ -1153,7 +1146,7 @@ This message shows that your installation appears to be working correctly.
       <p>Create the <code class="language-plaintext highlighter-rouge">templates/galaxy/config</code> directory if it doesn’t exist:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> templates/galaxy/config
 </code></pre></div>        </div>
       </blockquote>
@@ -1227,7 +1220,7 @@ This message shows that your installation appears to be working correctly.
       <p>Re-run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1266,13 +1259,13 @@ GATTACAGATHISISJUSTATESTGATTACA
       <p>Your job should be executed using Apptainer with a BioContainer! You can watch the logs of Galaxy to see this happening.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+        <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gunicorn[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
 gunicorn[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version &gt; /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2&gt;&amp;1; ln -f -s '/data/000/dataset_22.dat' reference.fa &amp;&amp; minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' &gt; '/data/000/dataset_23.dat']
 gunicorn[1190010]: galaxy.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
@@ -1295,7 +1288,7 @@ gunicorn[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULA
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-manage-dependencies-menu"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Manage dependencies menu</div>
+  <div class="box-title comment-title" id="comment-manage-dependencies-menu"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Manage dependencies menu</div>
   <p>You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.</p>
 
   <p>When a container has been resolved through Apptainer, you’ll see something like this:
@@ -1303,7 +1296,7 @@ gunicorn[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULA
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-apptainer-conda-something-else"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-apptainer-conda-something-else" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Apptainer, Conda, something else?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-apptainer-conda-something-else"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-apptainer-conda-something-else" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Apptainer, Conda, something else?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We often hear</p>
 
   <blockquote class="quote">
@@ -1314,19 +1307,19 @@ gunicorn[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULA
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-does-apptainer-fix-issues-with-conda-dependencies-resolution"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-does-apptainer-fix-issues-with-conda-dependencies-resolution" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Does Apptainer fix issues with Conda dependencies resolution?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-does-apptainer-fix-issues-with-conda-dependencies-resolution"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-does-apptainer-fix-issues-with-conda-dependencies-resolution" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Does Apptainer fix issues with Conda dependencies resolution?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Yes and no. Apptainer images are built from Conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called “mulling” to bring together multiple Conda dependencies together in a single environment, and Apptainer images are produced for these dependencies as well. That said, complex or unresolvable Conda environments are not solved by Apptainer, because Apptainer is really just packaging Conda’s environment into a single binary file.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-gateway-time-out-504-in-dependencies-view"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gateway-time-out-504-in-dependencies-view" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Gateway Time-out (504) in Dependencies view<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-gateway-time-out-504-in-dependencies-view"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gateway-time-out-504-in-dependencies-view" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Gateway Time-out (504) in Dependencies view<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>When you open “Admin -&gt; Tool Management -&gt; Manage Dependencies -&gt; Containers”, it sometimes shows “Gateway Time-out (504)”</p>
 
   <p>Resolving all dependencies for all tools can take a bit, you can increase your timeout with the <code class="language-plaintext highlighter-rouge">proxy_read_timeout</code> setting in <code class="language-plaintext highlighter-rouge">templates/nginx/galaxy.j2</code></p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-resolution-is-quot-unresolved-quot"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-resolution-is-quot-unresolved-quot" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Resolution is &quot;unresolved&quot;<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-resolution-is-quot-unresolved-quot"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-resolution-is-quot-unresolved-quot" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Resolution is &quot;unresolved&quot;<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>In “Admin -&gt; Tool Management -&gt; Manage Dependencies -&gt; Dependencies”, the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is “unresolved”. How can I resolve this issue?</p>
 
   <p>Because our training uses containers for resolution it is expected that the non-container dependencies show as “unresolved”. There is not currently a view which indicates if the containers have been resolved.</p>
@@ -1538,7 +1531,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

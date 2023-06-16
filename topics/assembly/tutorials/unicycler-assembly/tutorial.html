@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -64,7 +64,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Unicycler Assembly">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -435,7 +435,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -472,14 +472,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-assembly">
     <h1 data-toc-skip>Unicycler Assembly</h1>
@@ -830,7 +823,7 @@ Sentry.init({
 <p>You can see that there many reads under the second peak with median of approximately 7.5 kb.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-oxford-nanopore-data-format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Oxford Nanopore Data Format</div>
+  <div class="box-title warning-title" id="warning-oxford-nanopore-data-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Oxford Nanopore Data Format</div>
   <p>Oxford Nanopore machines output data in <a href="http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/">fast5</a> format that contains additional information besides sequence data. In this tutorial we assume that this data is <em>already</em> converted into <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a>. An additional tutorial dedicated to handling fast5 datasets will be developed shortly.</p>
 </blockquote>
 
@@ -841,7 +834,7 @@ Sentry.init({
 <h3 id="assembly">Assembly</h3>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-knowing-your-assembly"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Knowing your assembly</div>
+  <div class="box-title comment-title" id="comment-knowing-your-assembly"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Knowing your assembly</div>
 
   <p>Here we assume that you know a thing or two about assembly process. If you don’t: look at the slides accompanying this tutorial as well as other tutorials is this section.</p>
 </blockquote>
@@ -933,7 +926,7 @@ Sentry.init({
 <p>In this example we will use a downsampled version of <em>E. coli</em> C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
@@ -972,7 +965,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>To assess quality we will use two tools: FastQC (<span class="citation"><a href="#FastQC">Andrews</a></span>) to generate quality statistics and multiQC (<span class="citation"><a href="#Ewels2016">Ewels <i>et al.</i> 2016</a></span>) to summarize these statistics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Quality Control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality Control</div>
 
   <ol>
     <li>
@@ -1007,7 +1000,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Now it is time to perform assembly.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-unicycler-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Unicycler Assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-unicycler-assembly"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Unicycler Assembly</div>
 
   <ol>
     <li><strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters :
@@ -1034,7 +1027,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Quast (<span class="citation"><a href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a></span>) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-assembly-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Assembly Quality</div>
+  <div class="box-title hands-on-title" id="hands-on-assembly-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Assembly Quality</div>
 
   <ol>
     <li><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters
@@ -1055,7 +1048,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <h2 id="annotation-with-prokka">Annotation with Prokka</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Annotation</div>
+  <div class="box-title hands-on-title" id="hands-on-annotation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Annotation</div>
 
   <ol>
     <li><strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
@@ -1096,7 +1089,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Go to IGV <a href="http://software.broadinstitute.org/software/igv/download">download page</a> and select one of the options. The one I would try first would be <strong>Java Web Start</strong>. Simply click the <strong>Launch</strong> button for 10 GB distribution.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Visualization in IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-in-igv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualization in IGV</div>
 
   <ol>
     <li>
@@ -1390,7 +1383,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

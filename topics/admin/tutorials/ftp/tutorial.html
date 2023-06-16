@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Enable upload via FTP">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -403,7 +403,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -440,14 +440,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Enable upload via FTP</h1>
@@ -837,7 +830,7 @@ Sentry.init({
 <p>FTP supports two different modes: active, and passive. Active mode requires that the user’s computer be reachable from the internet, which in the age of Network Address Translation (NAT) and firewalls is usually unusable. So passive mode is the most commonly used. In passive mode, a client connects to the FTP server, and requests a channel for sending files. The server responds with an IP and port, from its range of “Passive Ports”.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Requirements for Running This Tutorial</div>
+  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements for Running This Tutorial</div>
 
   <p>Your VM or wherever you are installing Galaxy needs to have the following ports available:</p>
 
@@ -874,7 +867,7 @@ Sentry.init({
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setting-up-ftp-upload-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Setting up ftp upload with Ansible</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-ftp-upload-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Setting up ftp upload with Ansible</div>
 
   <ol>
     <li>
@@ -896,7 +889,7 @@ Sentry.init({
       <p>Install the role with:</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1043,7 +1036,7 @@ Sentry.init({
       </table>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-nosessionreuserequired"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-nosessionreuserequired" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Why NoSessionReuseRequired?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-nosessionreuserequired"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-nosessionreuserequired" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Why NoSessionReuseRequired?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p><code class="language-plaintext highlighter-rouge">mod_tls</code> only accepts SSL/TLS data connections that reuse the SSL session of the control connection, as a security measure. Unfortunately, there are some clients (e.g. curl/Filezilla) which do not reuse SSL sessions.
 To relax the requirement that the SSL session from the control connection be reused for data connections we set <code class="language-plaintext highlighter-rouge">NoSessionReuseRequired</code>.</p>
       </blockquote>
@@ -1068,7 +1061,7 @@ To relax the requirement that the SSL session from the control connection be reu
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1082,7 +1075,7 @@ To relax the requirement that the SSL session from the control connection be reu
 <h2 id="check-it-works">Check it works</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-checking-proftpd-from-the-server"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Checking proftpd from the server</div>
+  <div class="box-title hands-on-title" id="hands-on-checking-proftpd-from-the-server"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Checking proftpd from the server</div>
 
   <ol>
     <li>
@@ -1095,12 +1088,12 @@ To relax the requirement that the SSL session from the control connection be reu
       <p>Check the port has been correctly attributed by <code class="language-plaintext highlighter-rouge">sudo lsof -i -P -n</code>.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>You should see all the ports used by the server. What interests us is the line with proftpd.
 You should see TCP *:21 (LISTEN).</p>
 
@@ -1112,7 +1105,7 @@ You should see TCP *:21 (LISTEN).</p>
       <p>Check the directory <code class="language-plaintext highlighter-rouge">/data/uploads/</code> has been created and is empty.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo tree /data/uploads/
 </code></pre></div>        </div>
       </blockquote>
@@ -1127,7 +1120,7 @@ You should see TCP *:21 (LISTEN).</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-checking-galaxy-detected-the-ftp-possibility"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Checking galaxy detected the ftp possibility</div>
+  <div class="box-title hands-on-title" id="hands-on-checking-galaxy-detected-the-ftp-possibility"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Checking galaxy detected the ftp possibility</div>
 
   <ol>
     <li>
@@ -1149,7 +1142,7 @@ You should see TCP *:21 (LISTEN).</p>
 <p>It’s working!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-your-first-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Upload your first file</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-your-first-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload your first file</div>
 
   <p>There are three options for uploading files, you can choose whichever is easiest for you.</p>
 
@@ -1171,7 +1164,7 @@ You should see TCP *:21 (LISTEN).</p>
         <li>Install lftp with <code class="language-plaintext highlighter-rouge">sudo apt-get install lftp</code>.</li>
         <li>Add the public certificate to the list of known certificates (only for LetsEncrypt Staging Certificates!):
           <blockquote class="code-in">
-            <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+            <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir .lftp
 echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 </code></pre></div>            </div>
@@ -1179,7 +1172,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
         </li>
         <li>Connect to the server with for example the admin account:
           <blockquote class="code-in">
-            <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+            <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
             <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lftp admin@example.org@$HOSTNAME
 </code></pre></div>            </div>
           </blockquote>
@@ -1198,7 +1191,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
       <p><strong>Curl</strong></p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -T {"/srv/galaxy/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
 </code></pre></div>        </div>
         <p>Here <code class="language-plaintext highlighter-rouge">-T</code> says to upload a file, <code class="language-plaintext highlighter-rouge">--ssl</code> ensures that the FTP connection is SSL/TLS encrypted, and <code class="language-plaintext highlighter-rouge">-k</code> ignores any certificate issues as the hostname <code class="language-plaintext highlighter-rouge">localhost</code> will not match the certificate we have.</p>
@@ -1209,7 +1202,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-check-where-the-file-has-been-uploaded"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Check where the file has been uploaded</div>
+  <div class="box-title hands-on-title" id="hands-on-check-where-the-file-has-been-uploaded"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check where the file has been uploaded</div>
 
   <ol>
     <li>
@@ -1219,18 +1212,18 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
       <p>Check the directory <code class="language-plaintext highlighter-rouge">/uploads/</code>.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo tree /uploads/
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What do you see?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>As I uploaded a file called <code class="language-plaintext highlighter-rouge">CITATION</code> with the admin@example.org user I see:</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/uploads/
 └── admin@example.org
@@ -1246,7 +1239,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-use-it-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Use it in galaxy</div>
+  <div class="box-title hands-on-title" id="hands-on-use-it-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Use it in galaxy</div>
 
   <ol>
     <li>
@@ -1268,7 +1261,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
       <p>Click again on Choose FTP files button. Your file has disappeared. By default, the files are removed from the FTP at import.</p>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-you-want-to-change-this-behaviour"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-want-to-change-this-behaviour" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: You want to change this behaviour?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-you-want-to-change-this-behaviour"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-want-to-change-this-behaviour" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: You want to change this behaviour?<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You just need to add <code class="language-plaintext highlighter-rouge">ftp_upload_purge: false</code> to the galaxy_config/galaxy variables (next to <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>).</p>
       </blockquote>
     </li>
@@ -1459,7 +1452,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

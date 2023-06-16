@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Secretome Prediction">
         <meta property="og:description" content="Training material for proteomics workflows in Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -381,7 +381,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -418,14 +418,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-proteomics">
     <h1 data-toc-skip>Secretome Prediction</h1>
@@ -657,7 +650,7 @@ Furthermore, we chose to exclude proteins annotated as being part of extracellul
     <p>A tabular file, the first column containing uniprot accession numbers of the proteins of interest. <a href="https://doi.org/10.5281/zenodo.519260">Test data</a></p>
 
     <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-test-data"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Test data</div>
+      <div class="box-title comment-title" id="comment-test-data"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Test data</div>
       <p>The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
     </blockquote>
   </li>
@@ -665,7 +658,7 @@ Furthermore, we chose to exclude proteins annotated as being part of extracellul
     <p>The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ‘ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz’</p>
 
     <blockquote class="comment">
-      <div class="box-title comment-title" id="comment-uniprot-gene-ontology-association-goa-files"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Uniprot Gene Ontology Association (GOA) files</div>
+      <div class="box-title comment-title" id="comment-uniprot-gene-ontology-association-goa-files"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Uniprot Gene Ontology Association (GOA) files</div>
       <ul>
         <li>Information about different GOA file types can be found <a href="https://www.ebi.ac.uk/GOA/downloads">here</a>.</li>
         <li>Information about the structure of the files can be found <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/README">here</a>.</li>
@@ -678,7 +671,7 @@ Furthermore, we chose to exclude proteins annotated as being part of extracellul
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-customizing-the-workflow"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Customizing the Workflow</div>
+  <div class="box-title comment-title" id="comment-customizing-the-workflow"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Customizing the Workflow</div>
   <p>This workflow was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:</p>
   <ol>
     <li>Switch the setting <code class="language-plaintext highlighter-rouge">Output lines appearing in</code> of the last <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (last tool before the final <strong>Unique</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from <code class="language-plaintext highlighter-rouge">All lines [-a 1 -a 2]</code> to <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file</code>. Thus, your output will contain only those proteins that are equally predicted by both methods used.</li>
@@ -887,7 +880,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

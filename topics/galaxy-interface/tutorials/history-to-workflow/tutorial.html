@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Extracting Workflows from Histories">
         <meta property="og:description" content="A collection of microtutorials explaining various feature...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -337,7 +337,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -374,14 +374,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-galaxy-interface">
     <h1 data-toc-skip>Extracting Workflows from Histories</h1>
@@ -490,7 +483,7 @@ Sentry.init({
 <h1 id="pretreatments">Pretreatments</h1>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-requirements"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Requirements</div>
+  <div class="box-title comment-title" id="comment-requirements"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Requirements</div>
 
   <p>To run this practical you will need</p>
 
@@ -514,7 +507,7 @@ Sentry.init({
 <p>Galaxy <em>workflows</em> enable this, and this tutorial shows how you can create one from the analysis you have already done, and then run the analysis exactly as you did before, but on the new datasets.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-confused-about-i-histories-i-and-i-workflows-i"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-confused-about-i-histories-i-and-i-workflows-i" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Confused about <i>Histories</i> and <i>Workflows?</i><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-confused-about-i-histories-i-and-i-workflows-i"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-confused-about-i-histories-i-and-i-workflows-i" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Confused about <i>Histories</i> and <i>Workflows?</i><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Well, you are not alone.  This analogy may help.</p>
 
@@ -537,7 +530,7 @@ Sentry.init({
 <p>By this time, you may have multiple histories under your Galaxy account.  You’ll need to make the history that you want create a recipe/workflow for be your <em>current</em> history.  Your current history is the one shown in the History panel on the right.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-managing-your-histories"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Managing your histories</div>
+  <div class="box-title hands-on-title" id="hands-on-managing-your-histories"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Managing your histories</div>
 
   <ol>
     <li>Make sure you are <em>logged in</em>.
@@ -560,7 +553,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-always-name-your-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-always-name-your-histories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Always name your histories<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-always-name-your-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-always-name-your-histories" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Always name your histories<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you just saw multiple <code class="language-plaintext highlighter-rouge">Unnamed history</code> entries in your histories view, then now you know why.</p>
 
@@ -572,7 +565,7 @@ Sentry.init({
 <p>Now that we have the history we want, let’s use Galaxy to create a reusable workflow from it.  To do this we’ll use the history’s <strong>gear / history options</strong> pull-down list.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Extract workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-extract-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract workflow</div>
 
   <ol>
     <li><em>Click</em> on the <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> <strong>History options</strong> at the top-right of the history panel.
@@ -626,7 +619,7 @@ Sentry.init({
 <p>The <em>extract workflow</em> step assigns the name of input datasets in your history to the corresponding inputs in your workflow.  This is very helpful in the short term because it makes it clear which of the boxes are which datasets.  But, for a workflow, we want a more general (but still helpful) name for input datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rename-inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Rename inputs</div>
+  <div class="box-title hands-on-title" id="hands-on-rename-inputs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rename inputs</div>
 
   <ol>
     <li><em>Click</em> on the first input dataset.
@@ -659,7 +652,7 @@ Sentry.init({
 <p>First, your history might contain several false starts or tool runs where the parameters weren’t quite right. Lets get rid of those now.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-drop-unused-input-datasets-and-tool-boxes"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Drop unused input datasets and tool boxes</div>
+  <div class="box-title hands-on-title" id="hands-on-drop-unused-input-datasets-and-tool-boxes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Drop unused input datasets and tool boxes</div>
 
   <ol>
     <li><em>Delete</em> unwanted steps
@@ -672,14 +665,14 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-removing-unnecessary-steps-before-creating-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-removing-unnecessary-steps-before-creating-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Removing unnecessary steps before creating workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-removing-unnecessary-steps-before-creating-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-removing-unnecessary-steps-before-creating-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Removing unnecessary steps before creating workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>You can also delete these steps when you are first extracting the workflow from your history, by unchecking them.  However, it is often easier to identify the steps to drop in the workflow view, where connections and dead-ends are more obvious.</p>
 </blockquote>
 
 <p>Second, you might want to give your output datasets meaningful names too.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-name-output-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Name output datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-name-output-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Name output datasets</div>
 
   <ol>
     <li><em>Click</em> on a step that produces an output file.
@@ -702,7 +695,7 @@ Sentry.init({
 <p>Now that our edits are done, let’s save our work and run the workflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-save-the-workflow-edits"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Save the workflow edits</div>
+  <div class="box-title hands-on-title" id="hands-on-save-the-workflow-edits"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save the workflow edits</div>
 
   <ol>
     <li><em>Click</em> on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> at the top right to save workflow.</li>
@@ -714,7 +707,7 @@ Sentry.init({
 <p>Now that we have finished creating our workflow, it is time to test it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Run the workflow</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run the workflow</div>
 
   <ol>
     <li><em>Click</em> on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> to run workflow.</li>
@@ -927,7 +920,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

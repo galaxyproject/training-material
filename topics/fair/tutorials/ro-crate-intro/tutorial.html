@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: RO-Crate - Introduction">
         <meta property="og:description" content="These lessons will teach you how to make your research ob...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -241,7 +241,7 @@ Sentry.init({
   "mentions": [
 
   ],
-  "abstract": "> <div class=\"box-title agenda-title\" id=\"agenda\">Agenda</div>"
+  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
 }
         </script>
         
@@ -382,7 +382,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -419,14 +419,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-fair">
     <h1 data-toc-skip>RO-Crate - Introduction</h1>
@@ -528,6 +521,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> CLI basics:
                             
@@ -537,6 +534,8 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -650,7 +649,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -738,7 +737,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 <p>This required entity, known as the <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html#ro-crate-metadata-file-descriptor">RO-Crate Metadata Descriptor</a>, helps this file self-identify as an RO-Crate Metadata Document, which is conforming to (<code class="language-plaintext highlighter-rouge">conformsTo</code>) the RO-Crate specification version 1.1. Notice that the <code class="language-plaintext highlighter-rouge">conformsTo</code> URL corresponds to the <code class="language-plaintext highlighter-rouge">@context</code> URL version-wise, but they have two different functions. The context brings the defined terms into the metadata document, while the conformance declares which RO-Crate conventions of using those terms are being followed.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-ro-crate-versions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ro-crate-versions" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: RO-Crate versions<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-ro-crate-versions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ro-crate-versions" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: RO-Crate versions<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This tutorial is written for RO-Crate 1.1, the RO-Crate website will list the <a href="https://www.researchobject.org/ro-crate/specification.html">current specification version</a> – RO-Crates can generally be upgraded to newer versions following <a href="https://semver.org/">semantic versioning</a> conventions, but check the <a href="https://www.researchobject.org/ro-crate/1.1/appendix/changelog.html">change log</a> for any important changes. The next development version of the specification, indicated with a <code class="language-plaintext highlighter-rouge">-DRAFT</code> status, may still be subject to changes and should only be used with caution.</p>
 </blockquote>
 
@@ -764,12 +763,12 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 <p>When describing the <a href="https://www.researchobject.org/ro-crate/1.1/root-data-entity.html#direct-properties-of-the-root-data-entity">root entity</a>, the properties generally apply to the whole of the crate. For instance it is a good idea to give a description of why these resources are gathered in a crate, as well as giving the crate a name and license for FAIR reuse and citation.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Try to add the <code class="language-plaintext highlighter-rouge">name</code>, <code class="language-plaintext highlighter-rouge">description</code> and <code class="language-plaintext highlighter-rouge">datePublished</code> properties, and for <code class="language-plaintext highlighter-rouge">license</code> as a cross-reference, use <a href="https://spdx.org/licenses/">SPDX</a> license list to find the identifier for Creative Commons Zero or another license of your choice:</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
@@ -784,7 +783,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-license-identifiers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-license-identifiers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: License identifiers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-license-identifiers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-license-identifiers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: License identifiers<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>In the above solution, the identifier for CC0-1.0 <a href="http://spdx.org/licenses/CC0-1.0">http://spdx.org/licenses/CC0-1.0</a> is slightly 
 different from their listed web page URI <a href="https://spdx.org/licenses/CC0-1.0.html">https://spdx.org/licenses/CC0-1.0.html</a> – the former 
 is chosen to align with <a href="https://github.com/spdx/license-list-data/tree/main/jsonld">SPDX JSON-LD identifiers</a>,
@@ -794,7 +793,7 @@ it is nevertheless best practice to propagate permalinks where known.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-choosing-a-license"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-a-license" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Choosing a license<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-choosing-a-license"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-choosing-a-license" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Choosing a license<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Choosing a license appropriate for your dataset can be non-trivial, particularly if third-party data/software and multiple organizations are involved. See <a href="https://faircookbook.elixir-europe.org/content/recipes/reusability/ATI-licensing.html">FAIR Cookbook on licensing</a>. It is worth noting that an RO-Crate permits data entities to have a <code class="language-plaintext highlighter-rouge">license</code> different from the overall Crate license. It is still recommended to choose an overall Crate license that can legally apply across all the content in the RO-Crate Root.</p>
 </blockquote>
 
@@ -806,12 +805,12 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <figure id="figure-2" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/introduction-figure-1.svg" type="image/svg+xml" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description."><img src="../../images/ro-crate-intro/introduction-figure-1.png" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." />JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.</object></div><small><a target="_blank" href="../../images/ro-crate-intro/introduction-figure-1.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption></figure>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Consider the root Data Entity <code class="language-plaintext highlighter-rouge">./</code>, and add such a cross-reference to the file <code class="language-plaintext highlighter-rouge">data.csv</code> using the <em>property</em> called <code class="language-plaintext highlighter-rouge">hasPart</code>:</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
@@ -827,7 +826,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>The RO-Crate root is always typed <code class="language-plaintext highlighter-rouge">Dataset</code>, though <code class="language-plaintext highlighter-rouge">@type</code> may in some cases have additional types by using a JSON array instead of a single value.  Most entities can have such more specific types, e.g. chosen from <a href="https://schema.org/docs/full.html">schema.org type list</a>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>Navigate the schema.org type list to find a subtype of <code class="language-plaintext highlighter-rouge">CreativeWork</code> that is suitable for a learning resource..</li>
     <li>Modify the root entity’s <code class="language-plaintext highlighter-rouge">@type</code> to be an array.</li>
@@ -835,7 +834,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w"> </span><span class="s2">"LearningResource"</span><span class="p">],</span><span class="w">
@@ -855,14 +854,14 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>A main type of resources collected in a Research Object is <em>data</em> – simplifying, we can consider data as any kind of file that can be opened in other programs. These are aggregated by the Root Dataset with the <code class="language-plaintext highlighter-rouge">hasPart</code> property. In this example we have an array with a single value, a reference to the entity describing the file <code class="language-plaintext highlighter-rouge">data.csv</code>.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-referencing-external-resources"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-referencing-external-resources" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Referencing external resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-referencing-external-resources"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-referencing-external-resources" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Referencing external resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>RO-Crates can also contain data entities that are folders and Web resources, as well as non-File data like online databases – see section on <a href="https://www.researchobject.org/ro-crate/1.1/data-entitites.html">data entities</a>.</p>
 </blockquote>
 
 <p>We should now be able to follow the <code class="language-plaintext highlighter-rouge">@id</code> reference for the corresponding <em>data entity</em> JSON block for our CSV file, which we need to add to the <code class="language-plaintext highlighter-rouge">@graph</code> of the RO-Crate Metadata Document.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Add a declaration for the CSV file as new entity with <code class="language-plaintext highlighter-rouge">@type</code> declared as <code class="language-plaintext highlighter-rouge">File</code>.</li>
@@ -871,7 +870,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
@@ -889,7 +888,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>For more information on describing files and folders, including their recommended and required attributes, see section on <a href="https://www.researchobject.org/ro-crate/1.1/data-entitites.html">data entities</a>.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Consider if the file content of <code class="language-plaintext highlighter-rouge">data.csv</code> is not covered by our overall license (CC0), but <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons BY-NC-SA 4.0</a> (which only permits non-commercial use)</li>
@@ -897,7 +896,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"data.csv"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"File"</span><span class="p">,</span><span class="w">
@@ -915,7 +914,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>Entities that we have added under <code class="language-plaintext highlighter-rouge">hasPart</code> are considered <em>data entities</em>, while entities only referenced from those are considered <em>contextual entities</em> – they help explain the crate and its content.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-adding-entities-to-the-json-array"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-entities-to-the-json-array" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding entities to the JSON array<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-adding-entities-to-the-json-array"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-entities-to-the-json-array" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Adding entities to the JSON array<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>You may have noticed we’re adding incrementally to the <code class="language-plaintext highlighter-rouge">@graph</code> array. It is important to remember the <code class="language-plaintext highlighter-rouge">,</code> between each entity, <strong>except</strong> for the final entity in the JSON array; and likewise for the properties within the JSON object for each entity. This is an artefact of the strict <a href="https://www.json.org/">JSON</a> file format rules to simplify parsing. The order of the entities within the <code class="language-plaintext highlighter-rouge">@graph</code> JSON-LD array and the order of the keys within a JSON object is <em>not significant</em>. The <em>graph</em> content is given by the <code class="language-plaintext highlighter-rouge">@id</code> cross-references.</p>
 </blockquote>
 
@@ -926,12 +925,12 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>We have previously declared two different <code class="language-plaintext highlighter-rouge">license</code> cross-references. While following the URLs in this case explain the licenses well, it is also best practice to include a very brief summary of contextual entities in the RO-Crate Metadata Document. This is more important if the cross-reference do not use a permalink and may change over time. As a minimum, each referenced entity should have a <code class="language-plaintext highlighter-rouge">@type</code> and <code class="language-plaintext highlighter-rouge">name</code> property. It is also possible to add <code class="language-plaintext highlighter-rouge">url</code> for more information</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Add a contextual entity for each of the two licenses, see the <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#licensing-access-control-and-copyright">licensing</a> section for details:</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://creativecommons.org/licenses/by-nc-sa/4.0/"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CreativeWork"</span><span class="p">,</span><span class="w">
@@ -956,7 +955,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>Moving back to the RO-Crate root <code class="language-plaintext highlighter-rouge">./</code>, let’s specify who are the authors of the crate.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Add yourself as an <a href="https://www.researchobject.org/ro-crate/1.1/contextual-entities.html#people"><code class="language-plaintext highlighter-rouge">author</code></a> of the crate using the type <code class="language-plaintext highlighter-rouge">Person</code></li>
@@ -966,7 +965,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
@@ -984,12 +983,12 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-who-can-be-authors-of-an-ro-crate"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-who-can-be-authors-of-an-ro-crate" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Who can be authors of an RO-Crate?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-who-can-be-authors-of-an-ro-crate"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-who-can-be-authors-of-an-ro-crate" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Who can be authors of an RO-Crate?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>When we say someone is an author of a crate, it means they have contributed something substansively to its content (typically the data). Agreement on what is considered authorship on a dataset can be tricky; you may decide some people would be better represented as <code class="language-plaintext highlighter-rouge">contributor</code>. One advantage of RO-Crate is that authorship can be declared explicitly also on each data entity, so it can be clearer where each person have contributed (e.g. a statistician is author of an R script).  This means that generally the authors of the crate can be a broader, more inclusive list than perhaps traditionally recognized as academic authorship.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>“Unroll” your <code class="language-plaintext highlighter-rouge">affiliation</code> of the person as cross-reference to another contextual entity, typed as an <code class="language-plaintext highlighter-rouge">Organization</code>.</li>
@@ -997,7 +996,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://orcid.org/0000-0002-1825-0097"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Person"</span><span class="p">,</span><span class="w"> 
@@ -1016,7 +1015,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
 <p>The reuse of existing identifiers is important for both persons and organization from a FAIR perspective, as their names may not be globally unique.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>Now imagine you are going to publish the RO-Crate on your institution’s web pages.</li>
@@ -1024,7 +1023,7 @@ In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity 
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"@id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"./"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"@type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset"</span><span class="p">,</span><span class="w">
@@ -1105,7 +1104,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
 <p><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " width="1044" height="1027" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <p>Try navigating the <a href="rainfall-1.2.1/ro-crate-preview.html">preview of the running example</a> and find:</p>
 
@@ -1117,7 +1116,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>CC BY-NC-SA 4.0 International</li>
       <li>Brown University</li>
@@ -1154,12 +1153,12 @@ docker run <span class="nt">-v</span> <span class="si">$(</span><span class="nb"
 </ul>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-complete-ro-crate-metadata-document"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Complete RO-Crate Metadata Document</div>
+  <div class="box-title question-title" id="question-complete-ro-crate-metadata-document"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Complete RO-Crate Metadata Document</div>
 
   <p>The final RO-Crate Metadata Document constructed in this tutorial should look something like:</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"@context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://w3id.org/ro/crate/1.1/context"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"@graph"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -1432,7 +1431,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

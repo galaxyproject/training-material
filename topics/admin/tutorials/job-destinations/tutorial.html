@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -65,7 +65,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Mapping Jobs to Destinations using TPV">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -443,7 +443,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -480,14 +480,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>Mapping Jobs to Destinations using TPV</h1>
@@ -869,7 +862,7 @@ separately.</p>
 <p>To demonstrate a real-life scenario and <abbr title="Total Perspective Vortex">TPV</abbr>’s role in it, let’s plan on setting up a configuration where the VM designated for training jobs doesn’t run real jobs and hence doesn’t get overloaded. To start, we’ll create a “testing” tool that we’ll use in our configuration. This testing tool can run quickly, and without overloading our small machines.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-deploying-a-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Deploying a Tool</div>
+  <div class="box-title hands-on-title" id="hands-on-deploying-a-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deploying a Tool</div>
 
   <ol>
     <li>
@@ -918,7 +911,7 @@ separately.</p>
       <p>Run the Galaxy playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -927,12 +920,12 @@ separately.</p>
       <p>Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool’s name in the tool panel, then click Execute.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the tool’s output?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '1' threads
 </code></pre></div>          </div>
@@ -963,7 +956,7 @@ separately.</p>
 And of course, Galaxy has an Ansible Role for that.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-automated-tpv-lind-and-copy-script"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding automated TPV-lind-and-copy-script</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-automated-tpv-lind-and-copy-script"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding automated TPV-lind-and-copy-script</div>
 
   <ol>
     <li>
@@ -985,7 +978,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
       <p>Install the missing role</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1039,7 +1032,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
       <p>Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1052,7 +1045,7 @@ And of course, Galaxy has an Ansible Role for that.</p>
 <p>We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. First however, we need to configure Galaxy to use TPV.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-tpv-to-your-job-configuration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding TPV to your job configuration</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-tpv-to-your-job-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding TPV to your job configuration</div>
 
   <ol>
     <li>
@@ -1178,7 +1171,7 @@ destination is able to accept jobs greater than 1 core, TPV will automatically r
       <p>Run the Galaxy playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1187,12 +1180,12 @@ destination is able to accept jobs greater than 1 core, TPV will automatically r
       <p>Click the rerun button on the last history item, or click <strong>Testing Tool</strong> in the tool panel, and then click the tool’s Run Tool button.</p>
 
       <blockquote class="question">
-        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
         <p>What is the tool’s output?</p>
 
         <blockquote class="solution">
-          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running with '2' threads
 </code></pre></div>          </div>
@@ -1215,7 +1208,7 @@ destination is able to accept jobs greater than 1 core, TPV will automatically r
 <p>Now that we’ve configured the resource requirements for a single tool, let’s see how we can configure defaults for all tools, and reuse those defaults to reduce repetition.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-defaults-and-inheritance"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring defaults and inheritance</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-defaults-and-inheritance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring defaults and inheritance</div>
 
   <ol>
     <li>
@@ -1251,7 +1244,7 @@ We can also explicitly specify an <code class="language-plaintext highlighter-ro
       <p>Run the Galaxy playbook. When the new <code class="language-plaintext highlighter-rouge">tpv_rules_local.yml</code> is copied, TPV will automatically pickup the changes without requiring a restart of Galaxy.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1270,7 +1263,7 @@ We can also explicitly specify an <code class="language-plaintext highlighter-ro
 on settings that have worked well in the usegalaxy.* federation. The rule file can simply be imported directly, with local overrides applied on top.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-adding-the-tpv-shared-database-to-job-conf"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Adding the TPV shared database to job_conf</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-the-tpv-shared-database-to-job-conf"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding the TPV shared database to job_conf</div>
 
   <ol>
     <li>
@@ -1319,7 +1312,7 @@ job resource requirements in the shared database that are much larger than your 
 clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-clamping-in-practice"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Clamping in practice</div>
+        <div class="box-title comment-title" id="comment-clamping-in-practice"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Clamping in practice</div>
         <p>For the purposes of this tutorial, we’ve clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
 any tools that exceed your cluster’s capabilities, and decide whether you want those tools to run in the first place.</p>
       </blockquote>
@@ -1328,7 +1321,7 @@ any tools that exceed your cluster’s capabilities, and decide whether you want
       <p>Run the Galaxy playbook.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1346,7 +1339,7 @@ can be matched up so that only desired combinations are compatible with each oth
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-using-conditionals-to-restrict-a-tool-to-admins-only"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Using conditionals to restrict a tool to admins only</div>
+  <div class="box-title hands-on-title" id="hands-on-using-conditionals-to-restrict-a-tool-to-admins-only"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using conditionals to restrict a tool to admins only</div>
 
   <ol>
     <li>
@@ -1384,7 +1377,7 @@ It is similarly possible to conditionally add job parameters, modify cores/mem/g
       <p>Run the Galaxy playbook to update the TPV rules.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1410,7 +1403,7 @@ This of course assumes that your users are well behaved enough not to choose the
 <p>Such form elements can be added to tools without modifying each tool’s configuration file through the use of the <strong>job resource parameters configuration file</strong></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configuring-a-resource-selector"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Configuring a Resource Selector</div>
+  <div class="box-title hands-on-title" id="hands-on-configuring-a-resource-selector"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Configuring a Resource Selector</div>
 
   <ol>
     <li>
@@ -1503,7 +1496,7 @@ This of course assumes that your users are well behaved enough not to choose the
 <p>Lastly, we need to write a rule in TPV that will read the value of the job resource parameter form fields and decide how to submit the job.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-processing-job-resource-parameters-in-tpv"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Processing job resource parameters in TPV</div>
+  <div class="box-title hands-on-title" id="hands-on-processing-job-resource-parameters-in-tpv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Processing job resource parameters in TPV</div>
 
   <ol>
     <li>
@@ -1551,7 +1544,7 @@ It is important to note that <strong>you are responsible for parameter validatio
       <p>Finally, we pass the walltime as part of the native specification.</p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-rules-for-tpv-code-evaluation"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Rules for TPV code evaluation</div>
+        <div class="box-title comment-title" id="comment-rules-for-tpv-code-evaluation"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Rules for TPV code evaluation</div>
         <p>Notice how the <code class="language-plaintext highlighter-rouge">walltime</code> parameter is wrapped in braces, whereas the <code class="language-plaintext highlighter-rouge">cores</code> value isn’t, yet they are both expressions. The reason for this difference is that when TPV evaluates an expression, all string fields (e.g. env, params) are evaluated as Python f-strings,
 while all non-string fields (integer fields like <code class="language-plaintext highlighter-rouge">cores</code> and <code class="language-plaintext highlighter-rouge">gpus</code>, float fields like <code class="language-plaintext highlighter-rouge">mem</code>, boolean fields like <code class="language-plaintext highlighter-rouge">if</code>) are evaluated as Python code-blocks. This rule enables the YAML file to be much more readable, but requires you to keep this simple rule in mind.
 Note also that Python code-blocks can be multi-line, and that the final line must evaluate to a value that can be assigned to the field.</p>
@@ -1561,7 +1554,7 @@ Note also that Python code-blocks can be multi-line, and that the final line mus
       <p>Run the Galaxy playbook to update the TPV rules.</p>
 
       <blockquote class="code-in">
-        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
@@ -1587,14 +1580,14 @@ Note also that Python code-blocks can be multi-line, and that the final line mus
 <p>The cores parameter can be verified from the output of the tool. The walltime can be verified with <code class="language-plaintext highlighter-rouge">scontrol</code>:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Bash</div>
   <p>Your job number may be different.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>scontrol show job 24
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output</div>
+  <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <p>Your output may look slightly different. Note that the <code class="language-plaintext highlighter-rouge">TimeLimit</code> for this job (which I gave a 12 hour time limit) was set to <code class="language-plaintext highlighter-rouge">12:00:00</code>.</p>
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JobId=24 JobName=g24_multi_anonymous_10_0_2_2
    UserId=galaxy(999) GroupId=galaxy(999)
@@ -1828,7 +1821,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

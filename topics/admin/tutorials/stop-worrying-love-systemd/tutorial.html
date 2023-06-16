@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -62,7 +62,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: How I learned to stop worrying and love the systemd">
         <meta property="og:description" content="Resources related to configuration and maintenance of Gal...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -373,7 +373,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -410,14 +410,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'galaxyproject/admins'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-admin">
     <h1 data-toc-skip>How I learned to stop worrying and love the systemd</h1>
@@ -926,7 +919,7 @@ graphical.target reached after 11.547s in userspace
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-pros"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Pros</div>
+    <div class="box-title code-out-title" id="code-out-pros"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Pros</div>
     <ul>
       <li>CGroups, to reap children!</li>
       <li>CGroups, for hard memory/cpu limits</li>
@@ -937,7 +930,7 @@ graphical.target reached after 11.547s in userspace
   </blockquote>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-cons"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Cons</div>
+    <div class="box-title code-in-title" id="code-in-cons"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Cons</div>
     <ul>
       <li>It’s new and requires time to learn
         <ul>
@@ -974,7 +967,7 @@ graphical.target reached after 11.547s in userspace
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-pros-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Pros</div>
+    <div class="box-title code-out-title" id="code-out-pros-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Pros</div>
     <ul>
       <li>Easier testing, you can trigger units any time</li>
       <li>Cgroups!</li>
@@ -985,7 +978,7 @@ graphical.target reached after 11.547s in userspace
   </blockquote>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-cons-1"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Cons</div>
+    <div class="box-title code-in-title" id="code-in-cons-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Cons</div>
     <ul>
       <li>Two files, instead of a single line. It <em>is</em> annoying, you’re not wrong. Maybe write an ansible role that translates it.</li>
       <li>No <code class="language-plaintext highlighter-rouge">MALITO</code> functionality built in.</li>
@@ -1095,7 +1088,7 @@ OnFailure=failure-notification@%n
 <h2 id="per-unit-logs">Per Unit Logs</h2>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-the-journalctl-way"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: The journalctl Way</div>
+  <div class="box-title code-out-title" id="code-out-the-journalctl-way"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: The journalctl Way</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">-u</span> galaxy
 </code></pre></div>  </div>
 </blockquote>
@@ -1108,7 +1101,7 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-pros-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Pros</div>
+    <div class="box-title code-out-title" id="code-out-pros-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Pros</div>
     <p>You did not need to know or remember:</p>
 
     <ul>
@@ -1118,7 +1111,7 @@ OnFailure=failure-notification@%n
   </blockquote>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-cons-2"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Cons</div>
+    <div class="box-title code-in-title" id="code-in-cons-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Cons</div>
     <ul>
       <li>Can’t just <code class="language-plaintext highlighter-rouge">cat</code> it.</li>
     </ul>
@@ -1138,7 +1131,7 @@ OnFailure=failure-notification@%n
 <p>And then you can simply</p>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-the-journalctl-way-1"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: The journalctl Way</div>
+  <div class="box-title code-out-title" id="code-out-the-journalctl-way-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: The journalctl Way</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">-f</span> <span class="nt">-u</span> galaxy<span class="k">*</span> <span class="nt">-u</span> nginx <span class="nt">-u</span> postgresql
 </code></pre></div>  </div>
 </blockquote>
@@ -1147,7 +1140,7 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-pros-3"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: Pros</div>
+    <div class="box-title code-out-title" id="code-out-pros-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Pros</div>
     <ul>
       <li>Tail multiple units at once</li>
       <li>Again don’t have to know where the files are</li>
@@ -1156,7 +1149,7 @@ OnFailure=failure-notification@%n
   </blockquote>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-cons-3"><i class="far fa-keyboard" aria-hidden="true"></i> Input: Cons</div>
+    <div class="box-title code-in-title" id="code-in-cons-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Cons</div>
     <p>?</p>
   </blockquote>
 </blockquote>
@@ -1176,14 +1169,14 @@ OnFailure=failure-notification@%n
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-the-old-way"><i class="far fa-keyboard" aria-hidden="true"></i> Input: The Old Way</div>
+    <div class="box-title code-in-title" id="code-in-the-old-way"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: The Old Way</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>zcat /var/log/<span class="k">*</span> | egrep <span class="s2">"(Jul</span><span class="se">\s</span><span class="s2">*1 11:4.:..|2022-07-01 11:4.:..)"</span>
 </code></pre></div>    </div>
     <p>Hope everything logs in the same timezone! And no one uses UTC when there’s a different system time configured.</p>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-the-journalctl-way-2"><i class="fas fa-laptop-code" aria-hidden="true"></i> Output: The journalctl Way</div>
+    <div class="box-title code-out-title" id="code-out-the-journalctl-way-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: The journalctl Way</div>
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--since</span> <span class="s2">"2022-07-01 11:40 CEST"</span> <span class="nt">--until</span> <span class="s2">"2022-07-01 11:50 CEST"</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1497,7 +1490,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

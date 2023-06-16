@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -63,7 +63,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: End-to-End Tissue Microarray Image Analysis with Galaxy-ME">
         <meta property="og:description" content="Image analysis using Galaxy">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -380,7 +380,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -417,14 +417,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-imaging">
     <h1 data-toc-skip>End-to-End Tissue Microarray Image Analysis with Galaxy-ME</h1>
@@ -667,7 +660,7 @@ Sentry.init({
 <p>Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this workflow have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-import-to-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Data import to history</div>
+  <div class="box-title hands-on-title" id="hands-on-data-import-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data import to history</div>
 
   <ol>
     <li>
@@ -703,7 +696,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-imaging-platform-differences"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: **Imaging platform differences**</div>
+  <div class="box-title warning-title" id="warning-imaging-platform-differences"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: **Imaging platform differences**</div>
 
   <p>The Exemplar-002 raw images are in <em>ome.tiff</em> format; however, commonly seen raw file-types are <em>ome.tiff</em>, <em>tiff</em>, <em>czi</em>, and <em>svs</em>. If your input images are not <em>ome.tiff</em> or <em>tiff</em>, you may have to edit the dataset attributes in Galaxy to allow tools to recognize them as viable inputs.</p>
 
@@ -725,7 +718,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-illumination-correction"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Illumination correction</div>
+  <div class="box-title hands-on-title" id="hands-on-illumination-correction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Illumination correction</div>
 
   <ol>
     <li>
@@ -744,7 +737,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 <p>After illumination is corrected across round tiles, the tiles must be stitched together, and subsequently, each round mosaic must be registered together into a single pyramidal OME-TIFF file. <strong>ASHLAR</strong> (<span class="citation"><a href="#Muhlich2022">Muhlich <i>et al.</i> 2022</a></span>) from MCMICRO provides both of these functions.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-important-detail-marker-file"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Important detail: Marker File</div>
+  <div class="box-title comment-title" id="comment-important-detail-marker-file"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Important detail: Marker File</div>
 
   <p><strong>ASHLAR</strong> optionally reads a marker metadata file to name the channels in the output OME-TIFF image. This marker file will also be used in later steps. Make sure that the marker file is comma-separated and has the <code class="language-plaintext highlighter-rouge">marker_names</code> as the third column (Figure 3.).</p>
 
@@ -753,7 +746,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-image-stitching-and-registration"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: : Image stitching and registration</div>
+  <div class="box-title hands-on-title" id="hands-on-image-stitching-and-registration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: : Image stitching and registration</div>
 
   <ol>
     <li>
@@ -778,7 +771,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-imaging-platform-differences-1"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: **Imaging platform differences**</div>
+  <div class="box-title warning-title" id="warning-imaging-platform-differences-1"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: **Imaging platform differences**</div>
 
   <p>ASHLAR, among other tools in the MCMICRO and Galaxy-ME pre-processing tools have some parameters that are specific to the 
 imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
@@ -800,7 +793,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_dearray.png" alt="Image of four cores (numbered 1-4) on a slide." width="193" height="194" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Preview image from UNetCoreograph, outlines show detection of each individual core in the TMA.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-tma-dearray"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  TMA dearray</div>
+  <div class="box-title hands-on-title" id="hands-on-tma-dearray"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  TMA dearray</div>
 
   <ol>
     <li>
@@ -811,7 +804,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-what-about-whole-slide-images"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: What about Whole Slide Images?</div>
+        <div class="box-title comment-title" id="comment-what-about-whole-slide-images"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What about Whole Slide Images?</div>
 
         <p>Whole slide images do not need to be dearrayed, so in most cases, this step can be skipped; however, UNetCoreograph has the <em>“Tissue”</em> option, which when selected, can act to separate the whole tissue from the background in a whole slide image which can be useful. In this case, it is important to toggle the <em>“Downsample factor”</em> as this often needs to be higher when extracting whole tissues.</p>
       </blockquote>
@@ -836,14 +829,14 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>In this tutorial, we use <strong>Mesmer</strong> because it tends to perform generally well on a diverse range of image types, and has a limited number of parameters to understand.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-important-detail-running-images-in-batches"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Important detail: Running images in batches</div>
+  <div class="box-title comment-title" id="comment-important-detail-running-images-in-batches"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Important detail: Running images in batches</div>
 
   <p>Now that each image has been split into individual core images, downstream tools must be run on the images separately. Luckily, Galaxy makes this easy by including the option to run each tool in batch across a collection of inputs. Next to the input for the tool, select <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<strong>Dataset collection</strong>) as the input type, and pass the collection output by UNetCoreograph as input.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-nuclear-segmentation"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Nuclear segmentation</div>
+  <div class="box-title hands-on-title" id="hands-on-nuclear-segmentation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Nuclear segmentation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2" title="Mesmer tool" aria-role="link"><strong>Mesmer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2</span></span> with the following parameters:
@@ -854,7 +847,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-np-squeeze"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: np.squeeze</div>
+        <div class="box-title comment-title" id="comment-np-squeeze"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: np.squeeze</div>
 
         <p>The <strong>np.squeeze</strong> parameter is very important to select as <code class="language-plaintext highlighter-rouge">Yes</code> to make the output compatible with next steps</p>
       </blockquote>
@@ -864,7 +857,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 </blockquote>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-imaging-platform-differences-image-resolution"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Imaging platform differences: Image resolution**</div>
+  <div class="box-title warning-title" id="warning-imaging-platform-differences-image-resolution"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Imaging platform differences: Image resolution**</div>
 
   <p>A crucial parameter for Mesmer and other segmentation tools is the <strong>Image resolution</strong>. This is reported in microns/pixel, and can vary depending on the imaging platform used and the settings at image acquisition. Mesmer accepts the resolution in microns/pixel; however, if using UnMICST, the resolution must be reported as a ratio of the resolution of UnMICST’s training images (0.65). For example, when using UnMICST, if your images were captured at a resolution of 0.65, then the UnMICST value would be 1, but if your images were captured at 0.325 microns/pixel, then the value you would enter for UnMICST would be 0.5.</p>
 
@@ -879,7 +872,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>The quantification step will produce a CSV cell feature table for every image in the batch.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-quantification"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Quantification</div>
+  <div class="box-title hands-on-title" id="hands-on-quantification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Quantification</div>
 
   <ol>
     <li>
@@ -893,7 +886,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-mask-metrics-and-intensity-metrics"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Mask metrics and Intensity metrics</div>
+        <div class="box-title comment-title" id="comment-mask-metrics-and-intensity-metrics"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Mask metrics and Intensity metrics</div>
 
         <p>Leaving the <em>“mask metrics”</em> and <em>“intensity metrics”</em> blank will by default run all available metrics</p>
 
@@ -910,7 +903,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>Learn more about this file format at the <a href="https://anndata.readthedocs.io/en/latest/index.html">anndata documentation</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-conver-to-anndata"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Conver to Anndata</div>
+  <div class="box-title hands-on-title" id="hands-on-conver-to-anndata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Conver to Anndata</div>
 
   <ol>
     <li>
@@ -927,7 +920,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-important-parameter-unique-names-for-cells-rows"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Important parameter: Unique names for cells/rows</div>
+        <div class="box-title warning-title" id="warning-important-parameter-unique-names-for-cells-rows"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Important parameter: Unique names for cells/rows</div>
 
         <p>Setting <em>“Whether to use unique name for cells/rows”</em> to <code class="language-plaintext highlighter-rouge">No</code> to ensures that downstream interactive visualizations will be able to map observational features to the mask CellIDs.</p>
       </blockquote>
@@ -943,7 +936,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png" alt="Screenshot of the phenotypes table. " width="1008" height="316" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Example of a phenotype workflow compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-single-cell-phenotyping-with-scimap"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Single Cell Phenotyping with Scimap</div>
+  <div class="box-title hands-on-title" id="hands-on-single-cell-phenotyping-with-scimap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Single Cell Phenotyping with Scimap</div>
 
   <ol>
     <li>
@@ -957,7 +950,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-limitations-of-gmm-automated-phenotyping"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Limitations of GMM automated phenotyping</div>
+        <div class="box-title comment-title" id="comment-limitations-of-gmm-automated-phenotyping"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Limitations of GMM automated phenotyping</div>
 
         <p>When manual gates are not provided, Scimap fits a GMM to determine a threshold between positive and negative cells. This automated gating works well when markers are highly abundant within the tissue, and the data shows a bimodal distribution (Figure 6A.). GMM gating can lead to spurious thresholds, however, when the data does not appear to be bimodal (Figure 6B.). This tends to happen when the marker is not highly abundant in the tissue, so there isn’t a large positive population. Markers that have a highly continuous range of intensity, like certain functional markers, can also be problematic with GMM gating. It is recommended to always look at the GMM plots output by Scimap, and validate any potentially spurious gates manually.</p>
 
@@ -978,7 +971,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>UNetCoreograph outputs each individual core image in <code class="language-plaintext highlighter-rouge">tiff</code> format. Interactive visualization tools, such as <strong>Vitessce</strong> and <strong>Avivator</strong> require the images to be in <code class="language-plaintext highlighter-rouge">OME-TIFF</code> format to be viewed. Galaxy-ME includes a conversion tool that can accomodate this, along with many other useful conversion functions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Convert image</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-image"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Convert image</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Convert image tool" aria-role="link"><strong>Convert image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0</span></span> with the following parameters:
@@ -998,7 +991,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>Some tools can cause the channel names in an OME-TIFF image to be lost. To fix this, or to change the channel names to whatever the user prefers, the <strong>Rename OME-TIFF Channels</strong> tool can be invoked using a markers file similar to the one used in previous steps.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rename-channels"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Rename channels</div>
+  <div class="box-title hands-on-title" id="hands-on-rename-channels"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Rename channels</div>
 
   <ol>
     <li>
@@ -1021,7 +1014,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_avivatorHistory.png" alt="Screenshot shows a galaxy dataset expanded, and then the 'display at aviator' link expanded into a screenshot of Aviator showing a multicoloured histology slide." width="1152" height="566" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The highlighted link automatically appears for any OME-TIFF image (left) and, when clicked, launches an Avivator window to explore the image (right).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-view-images-with-avivator"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  View Images with Avivator</div>
+  <div class="box-title hands-on-title" id="hands-on-view-images-with-avivator"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  View Images with Avivator</div>
   <ol>
     <li>Expand the dataset <code class="language-plaintext highlighter-rouge">ASHLAR</code>: OME-TIFF image to be viewed</li>
     <li>Click on <em>“display at Avivator”</em></li>
@@ -1038,7 +1031,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_vitessce_zoomed.png" alt="screenshot of vitessce interface, on the left in A is a picture of a cell highlighted. On the right in B is a bar chart comparing cell size vs lineages." width="1728" height="706" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Each window in the dashboard can be resized to view the components in more detail. A closer look at the phenotype-labeled mask overlaid on the actual image (A), and the phenotype barplot (B).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vitessce-visualization"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Vitessce visualization</div>
+  <div class="box-title hands-on-title" id="hands-on-vitessce-visualization"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Vitessce visualization</div>
 
   <ol>
     <li>
@@ -1069,7 +1062,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
 <p>Galaxy-ME includes additional tools from <strong>Scimap</strong> and tools from the <strong>Squidpy</strong> package (<span class="citation"><a href="#Palla2022">Palla <i>et al.</i> 2022</a></span>) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, <strong>Squidpy</strong> has several methods for understanding the spatial organization of the tissue. Using <strong>Squidpy</strong>, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-spatial-analysis-with-squidpy"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on:  Spatial analysis with Squidpy</div>
+  <div class="box-title hands-on-title" id="hands-on-spatial-analysis-with-squidpy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Spatial analysis with Squidpy</div>
 
   <ol>
     <li>
@@ -1090,7 +1083,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-neighborhood-enrichment-plot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Neighborhood enrichment plot</div>
+        <div class="box-title comment-title" id="comment-neighborhood-enrichment-plot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Neighborhood enrichment plot</div>
 
         <p><strong>Squidpy</strong> was used to calculate neighborhood enrichments for each phenotype in core 2 of exemplar 2 (Figure 10.). This shows which phenotypes co-locate most frequently within the tissue.</p>
 
@@ -1118,7 +1111,7 @@ For this, Galaxy-ME includes the alternative registration tool <span><strong><st
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-ripley-s-l-plot"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Ripley's L plot</div>
+        <div class="box-title comment-title" id="comment-ripley-s-l-plot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Ripley's L plot</div>
 
         <p><strong>Squidpy</strong> was used to calculate Ripley’s L curves for each phenotype in core 2 of exemplar 2 (Figure 11.). This shows the overall organization of each phenotype in the tissue. If the curve for a given phenotype lies above the light grey null line (Example: Epithelial cells in Figure 11.), the phenotype is statistically significantly clustered. If the curve lies on the null line (Example: Myeloid lineage in Figure 11.), it’s spatial distribution within the tissue is random. If the curve is underneath the null line (Example: T cells in Figure 11.), it’s spatial distribution is statistically significantly dispersed.</p>
 
@@ -1375,7 +1368,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

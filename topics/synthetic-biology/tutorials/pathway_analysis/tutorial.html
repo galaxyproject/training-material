@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@651abbad49d5deb3c67c3475c202b7a6c6593e6f",
+  release: "galaxy-training-network@6e6d45263f27dc1ef7985c71fca3fcbd291ad983",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -67,7 +67,7 @@ Sentry.init({
         <meta property="og:title" content="Galaxy Training: Evaluating and ranking a set of pathways based on multipl...">
         <meta property="og:description" content="Synthetic Biology is the engineering of biology : the del...">
         
-        <meta property="og:image" content="/training-material/assets/images/GTN.png">
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
         <script type="application/ld+json">
@@ -476,7 +476,7 @@ Sentry.init({
                     <li class="nav-item">
                       <div id="navbarSupportedContent" role="search">
                         <!-- Search form -->
-                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
                           <i class="fas fa-search nav-link" aria-hidden="true"></i>
                           <div class="md-form mb-2">
                             <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
@@ -513,14 +513,7 @@ Sentry.init({
 
 
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: 'Galaxy-Training-Network/Lobby'
-  };
-</script>
 
-
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <article class="tutorial topic-synthetic-biology">
     <h1 data-toc-skip>Evaluating and ranking a set of pathways based on multiple metrics</h1>
@@ -799,7 +792,7 @@ Sentry.init({
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial named <em>Pathway Analysis</em>.</li>
@@ -848,14 +841,14 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
 <p><img src="../../images/fba_calculation.png" alt="This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway." width="1124" height="571" loading="lazy" /></p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-comment"><button class="gtn-boxify-button details" type="button" aria-controls="details-comment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true"></i> Details: Comment<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-comment"><button class="gtn-boxify-button details" type="button" aria-controls="details-comment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Comment<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Blocking compounds that cannot provide any flux are temporarily removed from heterologous reactions for the FBA evaluation. Such cases can happen due to side substrates or products of predicted reactions that do not match any chassis compound, representing dead-end paths.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-calculating-the-flux-of-a-target-using-flux-balance-analysis-fba"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-the-flux-of-a-target-using-flux-balance-analysis-fba"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Flux balance analysis tool" aria-role="link"><strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1</span></span> with the following parameters:
@@ -866,7 +859,7 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-choose-a-compartment-corresponding-to-your-model"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Choose a compartment corresponding to your model</div>
+        <div class="box-title comment-title" id="comment-choose-a-compartment-corresponding-to-your-model"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Choose a compartment corresponding to your model</div>
 
         <p>You can specify the compartment from which the chemical species were extracted.
 The default is <code class="language-plaintext highlighter-rouge">c</code>, the BiGG code for the cytoplasm.</p>
@@ -877,7 +870,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-how-to-select-the-biomass-reaction-id"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: How to select the biomass reaction ID ?</div>
+        <div class="box-title comment-title" id="comment-how-to-select-the-biomass-reaction-id"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How to select the biomass reaction ID ?</div>
 
         <p>The biomass reaction ID objective is extracted from the current model <em>E.Coli iML1515</em>. You can search the term <code class="language-plaintext highlighter-rouge">biomass</code> in your XML model and pick the ID where the term <code class="language-plaintext highlighter-rouge">core</code> appears.</p>
       </blockquote>
@@ -891,14 +884,14 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is the FBA score for <code class="language-plaintext highlighter-rouge">rp_003_0001</code> pathway ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>View the SBML rp_003_0001 file and look for <code class="language-plaintext highlighter-rouge">fba_fraction</code> value in <code class="language-plaintext highlighter-rouge">&lt;groups:listOfGroups&gt;</code> section: value= <code class="language-plaintext highlighter-rouge">0.23693089430893874</code>.</li>
@@ -921,7 +914,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 <p>Secondly, we will use the <em>Thermo</em> tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-compute-thermodynamics-values-for-each-pathway-using-rpthermo-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Compute thermodynamics values for each pathway using rpThermo tool</div>
+  <div class="box-title hands-on-title" id="hands-on-compute-thermodynamics-values-for-each-pathway-using-rpthermo-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute thermodynamics values for each pathway using rpThermo tool</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Thermo tool" aria-role="link"><strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1</span></span> with the following parameters:
@@ -930,7 +923,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>The tool takes as input pathways in SBML format and returns annotated pathways (with thermodynamics information for each reaction) in SBML format too.</p>
       </blockquote>
@@ -940,14 +933,14 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is the thermodynamic score attributed to the reaction with the following <em>EC (Enzyme Commission) number</em> <em>2.5.1.29</em> for <code class="language-plaintext highlighter-rouge">rp_001_0001</code> pathway ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>View the SBML rp_001_0001 file and search the reaction ID <code class="language-plaintext highlighter-rouge">2.5.1.29</code> contained in <code class="language-plaintext highlighter-rouge">&lt;listOfReactions&gt;</code>. The corresponding value is indicated in <code class="language-plaintext highlighter-rouge">thermo_dGm_prime</code> field : <code class="language-plaintext highlighter-rouge">-242.348</code>.</li>
@@ -962,7 +955,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 <p>The <em>Pathway Score</em> tool provides a global score for a given pathway previously annotated by the <em>Flux Balance Analysis</em> and <em>Thermo</em> tools. This score is computed by a machine learning (ML) model (cf. Machine Learning Global Scoring in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>). The model takes as input features describing the pathway (thermodynamic feasibility, target flux with fixed biomass, length) and the reactions within the pathway (reaction SMARTS, Gibbs free energy, enzyme availability score) and prints out the probability for the pathway to be a valid pathway. The ML model has been trained on literature data (cf. section Benchmarking with literature data in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) and by a validation trial (cf. section Benchmarking by expert validation trial in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-compute-the-global-score-using-the-pathway-score-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Compute the global score using the _Pathway Score_ tool</div>
+  <div class="box-title hands-on-title" id="hands-on-compute-the-global-score-using-the-pathway-score-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute the global score using the _Pathway Score_ tool</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Score Pathway tool" aria-role="link"><strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1</span></span> with the following parameters:
@@ -971,7 +964,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>This tool will output a new annotated SBML file representing the pathway, containing the <code class="language-plaintext highlighter-rouge">global_score</code> annotation.</p>
       </blockquote>
@@ -981,14 +974,14 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What is the computed global score for the <code class="language-plaintext highlighter-rouge">rp_001_0001</code> pathway ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>View the SBML file <code class="language-plaintext highlighter-rouge">rp_001_0001</code> and search for <code class="language-plaintext highlighter-rouge">global_score</code> : value=<code class="language-plaintext highlighter-rouge">0.975147980451584</code>.</li>
@@ -1003,7 +996,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 <p>Finally, <em>Rank Pathways</em> ranks the previous set of heterologous pathways, based on their global score, to reveal what are the most likely pathways to produce the target molecule (here it is <em>lycopene</em>) in a given organism of interest (<em>E. coli</em> in this tutorial).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-rank-annotated-pathways-using-rpranker-tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Rank annotated pathways using rpRanker tool</div>
+  <div class="box-title hands-on-title" id="hands-on-rank-annotated-pathways-using-rpranker-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rank annotated pathways using rpRanker tool</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Rank Pathways tool" aria-role="link"><strong>Rank Pathways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1</span></span> with the following parameters:
@@ -1012,7 +1005,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>This tool will output a CSV file which contains the pathway IDs and their corresponding global score.</p>
       </blockquote>
@@ -1022,14 +1015,14 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true"></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
     <li>What are the 3 top-ranked pathways ?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true"></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><code class="language-plaintext highlighter-rouge">002_0011</code>, <code class="language-plaintext highlighter-rouge">001_0011</code> ,<code class="language-plaintext highlighter-rouge">002_0006</code>.</li>
@@ -1044,7 +1037,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 <p>In this section, you can run the Pathway Analysis Workflow more easily and fastly following these instructions:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Execute the entire workflow in one go.</div>
+  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Execute the entire workflow in one go.</div>
 
   <ol>
     <li>
@@ -1065,7 +1058,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment</div>
+        <div class="box-title comment-title" id="comment-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>All the outputs will be automatically generated and identical to the previous ones.</p>
       </blockquote>
@@ -1245,7 +1238,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/651abbad49d5deb3c67c3475c202b7a6c6593e6f">651abba</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/6e6d45263f27dc1ef7985c71fca3fcbd291ad983">6e6d452</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
