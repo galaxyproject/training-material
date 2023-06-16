@@ -3,40 +3,47 @@ layout: page
 title: Search Tutorials
 ---
 
-<form class="form" id="search-form">
-	<div class="row">
-		<div class="col-md-4">
-		<div class="form-group">
-		<label for="title">Search</label>
-		<input type="text" class="form-control" id="title" placeholder="Search Materials">
-		</div>
-		</div>
+<p>
+We are testing a new search experience. It does not do semantic ranking of results, but it's maybe a nicer and faster interface. In the future we might bring back the ranking of results. If you wish to access the old search interface, <a href="{{ site.baseurl}}/search">it will remain available here</a>.
+</p>
+<p>Tell us what you think!
+</p>
 
-		<div class="col-md-4">
-		<div class="form-group">
-		<label for="type">Type</label>
-		<select class="form-control" id="type">
-			<option value="Any">Any</option>
-			<option value="Hands-on">Hands-on</option>
-			<option value="Slides">Slides</option>
-			<option value="FAQ">FAQs</option>
-		</select>
-		</div>
-		</div>
-		
-		<div class="col-md-4">
-		<div class="form-group">
-		<label for="level">Level</label>
-		<select class="form-control" id="level">
-			<option value="Any">Any</option>
-			<option value="Introductory">Introductory</option>
-			<option value="Intermediate">Intermediate</option>
-			<option value="Advanced">Advanced</option>
-		</select>
-		</div>
-		</div>
+<div class="row" id="search-form">
+	<div class="col-md-5">
+	<div class="form-group">
+	<label for="title">Search</label>
+	<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
 	</div>
-</form>
+	</div>
+
+	<div class="col-md-3">
+	<div class="form-group">
+	<label for="type">Type</label>
+	<select class="form-control" id="type">
+		<option value="Any">Any</option>
+		<option value="Hands-on">Hands-on</option>
+		<option value="Slides">Slides</option>
+		<option value="FAQ">FAQs</option>
+	</select>
+	</div>
+	</div>
+	
+	<div class="col-md-3">
+	<div class="form-group">
+	<label for="level">Level</label>
+	<select class="form-control" id="level">
+		<option value="Any">Any</option>
+		<option value="Introductory">Introductory</option>
+		<option value="Intermediate">Intermediate</option>
+		<option value="Advanced">Advanced</option>
+	</select>
+	</div>
+	</div>
+	<div class="col-md-1">
+		<button class="btn btn-primary" onclick="search()">Search</button>
+	</div>
+</div>
 
 <table class="table" id="results">
 	<thead>
@@ -50,22 +57,22 @@ title: Search Tutorials
 		</tr>
 	</thead>
 	<tbody>
-		{% for page in site.pages %}
-			{% if page.short_id %}
+		{%- for page in site.pages -%}
+			{%- if page.short_id -%}
 			<tr id="{{ page.short_id }}">
-				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{% icon purl %} GTN:{{ page.short_id }}</a></td>
+				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a></td>
 				<td><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a><br/>
-					{% for tag in page.tags %}
+					{%- for tag in page.tags -%}
 					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
-					{% endfor %}
+					{%- endfor -%}
 				</td>
 				<td>{{ page | topic_name_from_page: site }}</td>
 				<td>{{ page.layout | layout_to_human }}</td>
 				<td>{{ page.level }}</td>
 				<td>{{ page.time_estimation }}</td>
 			</tr>
-			{% endif %}
-		{% endfor %}
+			{%- endif -%}
+		{%- endfor -%}
 	</tbody>
 </table>
 
@@ -81,6 +88,8 @@ const textInput = document.getElementById("title")
 const otherInputs = document.querySelectorAll("#search-form select")
 const table  = document.getElementById('results'),
       rows   = table.tBodies[0].rows;
+
+const DEBOUNCE_DURATION = 300; // in milliseconds
 
 var previousSearch = "";
 
@@ -119,14 +128,38 @@ function search(){
 	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
 }
 
-textInput.addEventListener("oninput", (event) => {
-	console.log(`Input! ${event}`)
-	search()
-});
+const onInputDebounced = debounce(_ => {
+	console.log('DEBOUNCED');
+	search();
+}, DEBOUNCE_DURATION);
+
+// Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a
+function debounce(callback, wait, context = this) {
+  let timeout = null;
+  let callbackArgs = null;
+
+  const later = () => callback.apply(context, callbackArgs);
+  return function() {
+    callbackArgs = arguments;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
 otherInputs.forEach((input) => {
 	addEventListener("change", (event) => {
 		console.log(`Change! ${event}`)
 		search()
 	})
 });
+
+// Get the q parameter from URL
+const params = (new URL(document.location)).searchParams;
+paramSearch = params.get('query')
+if (paramSearch) {
+	textInput.value = paramSearch
+	search()
+}
+
+
 </script>
