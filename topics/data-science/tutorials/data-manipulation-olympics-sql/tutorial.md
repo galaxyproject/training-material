@@ -128,7 +128,7 @@ FROM
 > 1. What tables are available?
 > 2. How are they structured?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. `countries`, `olympics`, `olympics_2022`
 > > 2. Each are tables with 10 or more columns.
@@ -192,7 +192,7 @@ So let's sort our file in chronological order, based on the year of the Olympic 
 >
 > 1. Which column contains the year?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. `year`
 > >
@@ -214,7 +214,7 @@ SELECT * FROM olympics ORDER BY year DESC LIMIT 30;
 > 1. Write a query to access only the first entry.
 > 2. Which athlete is listed at the top of the file now?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > > 1. We can use `LIMIT` for this.
 > >    ```sql
 > >    select * from olympics order by year limit 1;
@@ -240,7 +240,7 @@ SELECT * FROM olympics ORDER BY year, name LIMIT 30;
 >
 > Which athlete is listed at the top now? Which discipline (sport) did they compete in?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. A. Grigoriadis. He competed in the 500 meters freestyle swimming event.
 > >
@@ -252,11 +252,11 @@ SELECT * FROM olympics ORDER BY year, name LIMIT 30;
 
 Ok, time to train! Let's see if you can use the sort tool to answer the following questions:
 
-> <question-title>Exercise: Reverse the sort</question-title>
+> <question-title noprefix>Exercise: Reverse the sort</question-title>
 >
 > Which athlete comes *last by alphabet*, in the *most recent* Olympics?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > `Žolt Peto` who competed in table tennis at the 2020 Summer Olympics in Tokyo.
 > >
@@ -266,7 +266,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 {: .question}
 
 
-> <question-title>Exercise: sort by height</question-title>
+> <question-title noprefix>Exercise: sort by height</question-title>
 >
 > 1. What is the height of the tallest competing athlete? Which athlete(s) are of this height?
 > 2. What is the shortest?
@@ -279,7 +279,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > > ```
 > {: .tip}
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. We can use `.height`, and because we want the tallest on top, we will need to sort in *descending* (decreasing) order. Unfortunately you might discover there are null values.
 > > 2. Rerun the same query as step 1, but change the order to *ascending*
@@ -287,7 +287,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. Adam Sandurski from Poland is the tallest athlete in the file, at 214 cm tall.
 > >  2. Lyton Mphande from Seol is the shortest at 127 cm.
@@ -295,7 +295,7 @@ Ok, time to train! Let's see if you can use the sort tool to answer the followin
 > >
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > > 1. `select * from olympics  where height is not null order by height desc limit 1;`
 > > 2. `select * from olympics  where height is not null order by height asc limit 1`
 > > 3. `select * from olympics  where height is not null order by year desc, height desc limit 1`
@@ -316,7 +316,7 @@ Look at the `olympics` table and answer the following questions
 > 1. Which key contains this information?
 > 2. Which values can this column have? (make sure to notice capitalisation, 'Winter' is not the same as 'winter' to these tools)
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. `season`
 > > 2. The values can be `Summer` or `Winter` (`select distinct season from olympics`)
@@ -339,7 +339,7 @@ We'll be using the `WHERE` filter to select entries matching specific conditions
 >    1. `height` is larger than 200 or smaller than 160
 >    2. `height` is larger than 200 and smaller than 210
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. The answers are:
 > >    1. `select * from olympics where enrolled = 'Yes'`
@@ -366,7 +366,7 @@ CREATE TABLE winter AS SELECT * FROM olympics WHERE season = 'Winter'
 >
 > How many entries are in this file? (Hint: use `count(*)`)
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 44,680
 > >
@@ -385,14 +385,14 @@ CREATE TABLE summer AS SELECT * FROM olympics WHERE season = 'Summer'
 > 1. How many lines do you expect in the this file?
 > 2. How many lines are in this file? Were you right?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Use the `count(*)` select
 > > 2. Be careful to consider whether these counts include the header line of the file or not
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > > 1. The original file has 234,522 entries, and the Winter Olympics had 44,680 entries. So we would expect 234,522 - 44,680 = 189,842 rows of data.
 > > It is always useful to take a moment to think about the expected outcome, this makes it easier to spot mistakes and will save you time in the long run.
@@ -405,7 +405,7 @@ CREATE TABLE summer AS SELECT * FROM olympics WHERE season = 'Summer'
 Ok, time to train! let's see if you can use the `select` filter to answer the following questions:
 
 
-> <question-title>Exercise: Medal winners</question-title>
+> <question-title noprefix>Exercise: Medal winners</question-title>
 >
 > 1. How many gold medals were handed out?
 > 2. How many total medals?
@@ -413,7 +413,7 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > 4. How many medals were won by individuals with a height between 170 and 180 cm? (inclusive)
 > 5. How many gold medals were won by individuals shorter than 160cm or taller than 190?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > - Column 17 contains information about medals
 > > - The possible values are `Gold`, `Silver`, `Bronze`, and `` (empty).
@@ -423,7 +423,7 @@ Ok, time to train! let's see if you can use the `select` filter to answer the fo
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. 8,110   (Expression: `SELECT count(*) FROM olympics WHERE medal == "Gold"`)
 > >  2. 24,633  (Expression: `SELECT count(*) FROM olympics WHERE medal == "Gold" or medal == "Silver" or medal == "Bronze")`, or `medal != null`)
@@ -450,7 +450,7 @@ We'll need to use the `group by` syntax which takes a key, and then groups by th
 > 1. How many different Olympic games are in our file?
 > 2. Which Olympic games had the most participations? (Tip: use order by)
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. 52 games (`select count(*), games from olympics group by games`)
 > >
@@ -490,7 +490,7 @@ select count(*), games, sex from olympics group by games, sex
 >
 > 2. Which Olympic games had the most women participants?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. 2 women participated in the 1896 Olympics. (note that we cannot be sure if this is two different women, or 1 woman participating twice, in this query. Do you know any way we could query that? Try it out!)
 > >    The results looks something like this:
@@ -540,7 +540,7 @@ select games, count(distinct sport) as sports from olympics group by games order
 > 2. How many sport were in the first Olympics? How many in the latest?
 > 3. Which Olympics had the most different sports?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 2. 10 and 38.
 > > 3. The 2020 Summer Olympics had the most different sports (38)
@@ -554,19 +554,19 @@ Save the output as something descriptive.
 
 Ok, let's practice!
 
-> <question-title>Exercise: Number of participations per country</question-title>
+> <question-title noprefix>Exercise: Number of participations per country</question-title>
 >
 > 1. Which country has had the most participations in the Olympics?
 > 2. How many countries participated in the first Olympics? How many in the last?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. Since we are counting instances of a key, we can use `group by team` and then loop over that to print out the length, and the team name of each of those items.
 > > 2. This is basically the same question as "how many women" participated, try modifying that query.
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. The United States with 17,286 participations (`select team, count(team) as count from olympics group by team order by count desc;`)
 > >  2. 15 and 250. (`select games, count(distinct team) as teams from olympics group by games;`)
@@ -592,7 +592,7 @@ We can use continue to use group by for this, but now we'll need the max and min
 > > 1. How tall was the tallest athlete in basketball? And what about karate?
 > > 2. Why do some sports have null values?
 > >
-> > > <solution-title>Answer</solution-title>
+> > > <solution-title></solution-title>
 > > > ```sql
 > > > select max(height), min(height),sport from olympics group by sport
 > > > ```
@@ -627,7 +627,7 @@ You may have noticed that we could also provide multiple columns to group on. If
 > > 4. Why do some sports not have a value for one of the sexes?
 > > 5. Can you find a sport where women were taller than the men? (Hint: it starts with the letter A)
 > >
-> > > <solution-title>Answer</solution-title>
+> > > <solution-title></solution-title>
 > > >
 > > > 1. 167.25677031093 cm
 > > > 2. 170 cm
@@ -657,24 +657,24 @@ You may have noticed that we could also provide multiple columns to group on. If
 
 ## Exercises
 
-> <question-title>Exercise: Grouping and computing</question-title>
+> <question-title noprefix>Exercise: Grouping and computing</question-title>
 >
 > 1. How tall is the shortest woman Badminton player to win a gold medal?
 > 2. What is the average height of athletes from team Denmark in the 1964 Olympics? (Note: 1964 has summer and winter olympics)
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. We need to group on 3 columns: medal, sport and sex, and then select the `min`.
 > > 2. We need to group on 2 columns: country (team) and year, then compute the average over height.
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. 161 cm.
 > >  2. mean height: 175.91304347826, standard deviation: 7.0335410308672`
 > {: .solution}
 >
-> > <solution-title>Full Solutions</solution-title>
+> > <solution-title noprefix>Full Solutions</solution-title>
 > > ```sql
 > > select min(height), medal, sport, sex from olympics group by medal, sport, sex;
 > > select avg(height), team, games from olympics where team = "Denmark" group by team, games;
@@ -726,7 +726,7 @@ If we want to save that result to make it easier to query, then we have a couple
 >
 > 1. How old was Arnaud Boetsch during his Olympic tennis participation?
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Arnaud Boetsch is listed on the first two lines, who turned 27 the year of their Olympics.
 > >
@@ -753,7 +753,7 @@ $$ BMI = weight / (height^2) $$
 
 Let's compute this data for all athletes and add it as a new column!
 
-> <question-title>Exercise: Calculating BMI</question-title>
+> <question-title noprefix>Exercise: Calculating BMI</question-title>
 >
 > 1. How would you express this calculation in SQL?
 >    - Remember that our height is in cm, and the formula expects height in meters
@@ -761,7 +761,7 @@ Let's compute this data for all athletes and add it as a new column!
 >
 > 2. What is the BMI for Arnaud Boetsch?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > - division is `/` and multiplication is ` * ` .
 > > - Generally we cannot use `^`
@@ -772,7 +772,7 @@ Let's compute this data for all athletes and add it as a new column!
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > > 1. other variations are possible:
 > >
 > >    ```sql
@@ -830,11 +830,11 @@ Different tools may expect different ways of handling missing data. So you may h
 >
 > We will now replace empty cells in the `birth_place` column, to use `null` instead.
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > > Remember that comparison to nulls is done with `is` instead of `=`
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > > other variations are possible:
 > > ```sql
 > > update olympics set birth_place = null where birth_place = '';
@@ -857,13 +857,13 @@ In SQL, concatenation is done with `||`.
 >
 > 1. How do we captures both the day and the month?
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. We should use something like `substr(birth_day, instr(birth_day, ' '))`
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > > ```sql
 > > select
@@ -916,7 +916,7 @@ select name, athlete_id from olympics LIMIT 30
 >
 > 1. Do you see duplication? Why is that?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. Yes. For all athletes who participated more than once, the row will be identical.
 > >
@@ -933,7 +933,7 @@ select distinct name, athlete_id from olympics limit 30
 >
 > How many unique athletes do we have? Note that you cannot count multiple columns, so choose one that is correct.
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > > 94,733
 > >
 > > ```sql
@@ -958,7 +958,7 @@ It is available in the countries table.
 >
 > 2. Which keys(s) in this file are the same as in the `olympics.tsv` file?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 2. Both files have a `NOC` column with the 3-letter country code (`NOC` stands for National Olympic Committee). However, one is lowercase.
 > {: .solution}
@@ -978,7 +978,7 @@ select * from olympics left join countries on olympics.noc = countries.NOC LIMIT
 > 2. How many columns are in the resulting file? What about the NOC column?
 > 3. What is a possible downside to this approach?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > >
 > > 1. All the columns from the country information file are added to the end of each row of our olympics dataset
 > > 2. Our olympics datset had 17 columns, the country information file has 56 columns. Therefore we have 17+56=73 columns columns in our resulting file. This also means the NOC column
@@ -1001,7 +1001,7 @@ View the table `olympics_2022`, does it have the same structure as our original 
 > 1. Does the new table have the same structure?
 > 2. Can we simply add the lines of the new table to the end of our existing olympics dataset?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > > 1. Yes, this file has all the same columns, in the same order, so concatenation should be relatively straightforward.
 > > 2. Yes.
 > >
@@ -1030,7 +1030,7 @@ These operations covered in the tutorial are just a few examples of some of the 
 
 This section provides a number of exercises that require you to combine two or more of the techniques you learned in this tutorial. This is a great way to practice your data manipulation skills. Full solutions are provided for every exercise (i.e. all tools and settings), but for many of these exercises there will be multiple solutions, so if you obtained the same results in a different way, that is correct too!
 
-> <question-title>Exercise 1: Finding shortest/lightest athlete</question-title>
+> <question-title noprefix>Exercise 1: Finding shortest/lightest athlete</question-title>
 >
 > If you have done exercises in the [sorting](#sorting) section, you noticed that finding the shortest athlete ever to compete was not easy,
 > because all the rows with missing height data (`NA`) in the column were sorted to the top. We need to filter out these values first, then
@@ -1040,7 +1040,7 @@ This section provides a number of exercises that require you to combine two or m
 > 2. Find the shortest athlete of the Winter Olympics
 > 2. Find the lightest athlete of the *most recent* Summer Olympics
 >
-> > <solution-title>Hints</solution-title>
+> > <solution-title noprefix>Hints</solution-title>
 > >
 > > 1. You will need to filter out the columns with (`NA`) in the height column first
 > > 2. You will need to filter by season as well
@@ -1048,7 +1048,7 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > {: .solution}
 >
-> > <solution-title>Answers</solution-title>
+> > <solution-title noprefix>Answers</solution-title>
 > >
 > >  1. Lyton Mphande and  Rosario Briones were both 127 cm tall, competing in boxing and gymnastics respectively
 > >  2. Carolyn Krau was a 137 cm tall figure skater.
@@ -1056,7 +1056,7 @@ This section provides a number of exercises that require you to combine two or m
 > >
 > {: .solution}
 >
-> > <solution-title>Full solution</solution-title>
+> > <solution-title noprefix>Full solution</solution-title>
 > >
 > > 1. First we filter out the NA values from the height column:
 > >

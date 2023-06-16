@@ -93,7 +93,7 @@ View(olympics)
 > 3. How many lines are in the file?
 > 4. How many columns?
 >
-> > <solution-title>Answer</solution-title>
+> > <solution-title></solution-title>
 > > 1. When you expand the `olympics.tsv` dataset in your history (see also screenshot below), you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
 > > 2. Each row represents an athlete's participation in an event. If an athlete competes in multiple events, there is a line for each event.
 > > 3. 234,522. Look at the bottom of the View or Environment panels to see this number.
@@ -237,7 +237,7 @@ height_plot +
 #   + geom_point()
 ```
 
-> <question-title>Challenge (optional)</question-title>
+> <question-title noprefix>Challenge (optional)</question-title>
 > 
 > Scatter plots can be useful exploratory tools for small datasets. For data
 > sets with large numbers of observations, such as the `olympics` data
@@ -324,7 +324,7 @@ ggplot(olympics_small, aes(x=age, y=sport)) +
 ```
 
 
-> <question-title>Challenge</question-title>
+> <question-title noprefix>Challenge</question-title>
 > 
 > Use what you just learned to create a scatter plot of `height` over
 > `sport` with the plot types showing the season in different colors.
@@ -373,7 +373,7 @@ Notice how the boxplot layer is behind the jitter layer? What do you need to
 change in the code to put the boxplot in front of the points such that it's not
 hidden?
 
-> <question-title>Challenge</question-title>
+> <question-title noprefix>Challenge</question-title>
 > 
 > Boxplots are useful summaries, but hide the *shape* of the distribution. For
 > example, if there is a bimodal distribution, it would not be observed with a
@@ -605,7 +605,7 @@ The
 provides a wide variety of options.
 
 
-> <question-title>Challenge</question-title>
+> <question-title noprefix>Challenge</question-title>
 > Use what you just learned to create a plot the relationship between height and weight,
 > of participants, broken down by NOC and Sport.
 > > <solution-title></solution-title>
@@ -692,7 +692,7 @@ ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, fill = medal)) 
 ```
 
 
-> <question-title>Challenge</question-title>
+> <question-title noprefix>Challenge</question-title>
 >
 > With all of this information in hand, please take another five minutes to either
 > improve one of the plots generated in this exercise or create a beautiful graph
