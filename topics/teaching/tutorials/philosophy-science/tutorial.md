@@ -16,9 +16,9 @@ contributions:
     - gallardoalba
 ---
 
-> *A knowledge of the historic and philosophical background gives that kind of independence from prejudices of his generation from which most scientists are suffering. This independence created by philosophical insight is, in my opinion, the mark of distinction between a mere artisan or specialist and a real seeker after truth.*
+> *So many people today, and even professional scientists, seem to me like somebody who has seen thousands of trees but has never seen a forest. A knowledge of the historic and philosophical background gives that kind of independence from prejudices of his generation from which most scientists are suffering. This independence created by philosophical insight is, in my opinion, the mark of distinction between a mere artisan or specialist and a real seeker after truth.*
 >
-> Albert Einstein
+> Albert Einstein to Robert A. Thornton, 7 December 1944
 {: .quote}
 
 
