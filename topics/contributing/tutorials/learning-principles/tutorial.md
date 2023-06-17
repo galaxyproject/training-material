@@ -170,22 +170,21 @@ In the following sections we will explore the most important learning theories.
 > #### Cognitivist Learning Theory
 >
 >
-> Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes [30] [6].
+> Diverse authors agree that, in order to implement adequate online teaching practices, it is necessary to take into account the characteristics of mental processes ({% cite Wu1998 %}, {% cite Chandler2004 %}).
 >
-> **Cognitivism** emerged in the 1950s as a response to Behaviorism, which was deemed inadequate in explaining cognition. **Cognitive Learning Theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process [31][32], with a special focus on the processing of information.
+> **Cognitivism** emerged in the 1950s as a response to Behaviorism, which was deemed inadequate in explaining cognition. **Cognitive Learning Theory** aims to describe the links between cognitive structures -defined as the mental representations of objects or ideas- and the learning process ({% cite Qin2009 %}, {% cite vanderVeer1988 %}), with a special focus on the processing of information. Two important theories derive from this one: **Information Processing Theory** and **Cognitive load theory**:
 >
-> Two important theories derive from this one: **Information Processing Theory** and **Cognitive load theory**:
+> The **Information Processing Theory** describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory ({% cite Gentner2014 %}). According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge ({% cite Chandler2004 %}, {% cite Herring1993 %}, {% cite Yilmaz2011 %}).
 >
-> The **Information Processing Theory** describes learning as the result of sequential processing of information, which involve three types of memory: immediate memory, working memory and long term memory [33]. According to this theory, adequate learning resources require to assume two key elements: firstly, the fact that working memory is limited; and secondly, that the interaction between working and long term memory plays an important role in the construction and transferability of knowledge [6] [13] [34].
->
-> On the other hand, **Cognitive Load Theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity [35] [36] [37] [38] [39]. An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process [40] [41].
+> On the other hand, **Cognitive Load Theory** seeks specifically to address the efficiency with which information is processed. It states that the verbal and visual information is processed by independent cognitive structures, both of them with a limited capacity ({% cite Fori2012 %}, {% cite Via2013 %}, {% cite Kats2010 %}, {% cite Wright2010 %}). An interesting concept derived from this theory is the cognitive overload, which refers to those situations in which the information flow exceeds the learner’s processing capacity, resulting in an inhibition of the learning process ({% cite Aidi2009 %}).
 >
 >
 > #### Constructivist Learning Theory
 >
 > **Constructivism** holds that learning is essentially active; a person who learns something new incorporates it into their previous experiences and their own mental structures. Each new piece of information is assimilated and deposited into a network of previously existing knowledge and experiences  ({% cite Abbot1999 %}). All these ideas have been taken from different nuances, and two authors stand out: Jean Piaget with **psychological constructivism** and Lev Vigotsky with **social constructivism**.
 >
->**Psychological constructivism** maintains the idea that the individual, both through cognitive and social aspects of knowledge as well as affective ones, is not a mere product of the environment or a simple result of his or her internal dispositions, but a construction of his or her own that is produced day by day as a result of the interaction between these two factors. The driving force of this activity would be cognitive conflict; in any constructivist activity there must be a circumstance that shakes the previous structures of knowledge and forces a rearrangement of the old knowledge in order to assimilate the new.
+>From the perspective of **psychological constructivism**, learning is fundamentally a
+personal matter. It maintains the idea that the individual, both through cognitive and social aspects of knowledge as well as affective ones, is not a mere product of the environment or a simple result of his or her internal dispositions, but a construction of his or her own that is produced day by day as a result of the interaction between these two factors. The driving force of this activity would be cognitive conflict; in any constructivist activity there must be a circumstance that shakes the previous structures of knowledge and forces a rearrangement of the old knowledge in order to assimilate the new.
 >
 >According to the **social approach of Lev Vigotsky**, learning is that process in which the individual assimilates certain historical-cultural experience at the same time as he/she appropriates it, which requires an active subject who gives meaning to this experience, transforming it into his/her subjectivity ({% cite RodrguezRuiz2005 %}). 
 >
@@ -537,7 +536,7 @@ What are the uses of this tool?
     - Align instruction with learners' level of complexity of thinking as well as experience.
 
 
-## Critical Learning Theory: The Hidden Curriculum
+## Critical Learning Theory: The Hidden Curriculum Theory
 
 The concept of hidden curriculum refers to the learning that is incorporated by students though these aspects do not appear explicitly in the official curriculum, relying on the organisational aspects of classroom life that are generally not perceived by either students or teachers ({% cite Giroux2018 %}). 
 
