@@ -28,7 +28,7 @@ One of the first questions we must clarify before starting the journey through t
 
 From those definitions, the following questions arise: which rules do we have to follow to divide the Reality into its elements? How should we apply those rules? Have these rules been constant throughout history? We consider these questions essential because, while for most scientists, Science consists of a persistent attempt to model Nature in terms of an established theoretical framework, they are often unaware of the role of theoretical frameworks and socio-economic contexts in determining the priority of the problems to be solved, and conditions the canons of explanation that will be considered valid ({% cite Brown1979 %}, {% cite Varela1972 %}, {% cite Kuhn1979 %}).  
 
-To conclude this short introduction, it is necessary to warn you that this text is not devoid of ideology since, as Ernesto Sábato pointed out, “those who think that men of Science research without aesthetic-metaphysical bias have a rather singular idea of what scientific research is” ({% cite Sabato2022 %}).
+To conclude this short introduction, it is necessary to warn you that this text is not devoid of ideology since, as Ernesto Sábato pointed out, “those who think that scientists research without aesthetic-metaphysical bias have a rather singular idea of what scientific research is” ({% cite Sabato2022 %}).
 
 # Science in Ancient Greece
 
