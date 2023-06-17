@@ -5,4 +5,4 @@ layout: faq
 contributors: [EngyNasr]
 ---
 
-We see a lot that Kraken tends to assign many reads to human, despite they do not map to human genome. Due to resemblance between organisms and the limited species coverage of k2 DBs sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the standard DB, because yeast genes were mis-assigned to human.
+We see a lot that Kraken tends to assign many reads to human, despite they do not map to human genome. Due to resemblance between organisms and the limited species coverage of Kraken databases sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the standard databases, because yeast genes were mis-assigned to human.

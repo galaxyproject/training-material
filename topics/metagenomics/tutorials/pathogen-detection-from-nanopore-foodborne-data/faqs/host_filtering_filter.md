@@ -5,6 +5,6 @@ layout: faq
 contributors: [EngyNasr]
 ---
 
-It is an expression that matches everything that has words Gallus OR Homo OR Bos (c.f. [Regular expression](https://www.regular-expressions.info/))
+`^.*Gallus|Homo|Bos.*$` is a [regular expression](https://www.regular-expressions.info/) that matches a string containing the words Gallus **OR** Homo **OR** Bos. 
 
 

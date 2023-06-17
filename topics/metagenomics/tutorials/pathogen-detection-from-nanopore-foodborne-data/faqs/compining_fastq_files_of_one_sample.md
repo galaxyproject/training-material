@@ -5,4 +5,4 @@ layout: faq
 contributors: [EngyNasr]
 ---
 
-Good to combine the files from the same run before running QC. You could create a collection per run with all fastq files and then use the collection operation to concatenate all files in collection in 1 file
+After sequencing with MinKNOW software, it is a good approach to combine the files from the same run before processing them. You could create a collection per run with all fastq files and then use the collection operation to concatenate all files in a collection.
