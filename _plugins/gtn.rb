@@ -330,7 +330,7 @@ module Jekyll
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
       else
-        ''
+        site.data.fetch(page['url'].split('/')[2], {'title' => ''})['title']
       end
     end
 
