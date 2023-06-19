@@ -250,7 +250,7 @@ module TopicFilter
     material
   end
 
-  ## 
+  ##
   # Get the list of posts from the site
   # Params:
   # +site+:: The +Jekyll::Site+ object
@@ -310,7 +310,7 @@ module TopicFilter
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
 
-    self.get_posts(site).each do |post|
+    get_posts(site).each do |post|
       post.data['short_id'] = shortlinks_reversed[post.url]
     end
 
@@ -554,7 +554,7 @@ module TopicFilter
       end
     end
     # Same for news
-    self.get_posts(site).select { |p| mappings.keys.include? p.url }.each do |p|
+    get_posts(site).select { |p| mappings.keys.include? p.url }.each do |p|
       # Set the short id on the material
       p.data['redirect_from'] = [] if !p.data.key?('redirect_from')
       p.data['redirect_from'].push(*mappings[p.url])
