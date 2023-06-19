@@ -401,7 +401,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="get_default_link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 348</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 357</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_default_link</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">nil?</span>
 
@@ -446,7 +446,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ page | get_topic }}</pre>
 
           <div class="method-source-code" id="get_topic-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 337</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 346</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_topic</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-comment"># Arrays that will store all introduction slides and tutorials we discover.</span>
   <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
@@ -647,10 +647,15 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           <div class="method-source-code" id="layout_to_human-source">
             <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 316</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">layout_to_human</span>(<span class="ruby-identifier">layout</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">layout</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/slides/</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">layout</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/slides/</span>
     <span class="ruby-string">&#39;Slides&#39;</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">layout</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/tutorial_hands_on/</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/tutorial_hands_on/</span>
     <span class="ruby-string">&#39;Hands-on&#39;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;faq&#39;</span>
+    <span class="ruby-string">&#39;FAQs&#39;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;news&#39;</span>
+    <span class="ruby-string">&#39;News&#39;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -848,9 +853,13 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="topic_name_from_page-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 324</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 329</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topic_name_from_page</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
-  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;topic_name&#39;</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;url&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">2</span>], { <span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&#39;</span> })[<span class="ruby-string">&#39;title&#39;</span>]
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

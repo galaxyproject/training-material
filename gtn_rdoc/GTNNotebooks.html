@@ -797,7 +797,7 @@
 
   <span class="ruby-comment"># Replace zenodo links, the only replacement we do</span>
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">page_data</span>[<span class="ruby-string">&#39;zenodo_link&#39;</span>].<span class="ruby-identifier">nil?</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Replacing zenodo links in #{page_url}, #{page_data[&#39;zenodo_link&#39;]}&quot;</span>
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;Replacing zenodo links in #{page_url}, #{page_data[&#39;zenodo_link&#39;]}&quot;</span>
     <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/{{\s*page.zenodo_link\s*}}/</span>, <span class="ruby-identifier">page_data</span>[<span class="ruby-string">&#39;zenodo_link&#39;</span>])
   <span class="ruby-keyword">end</span>
 
