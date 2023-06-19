@@ -43,10 +43,12 @@ module Jekyll
             seen[abbr] = true
           end
 
+          initialism = abbr == abbr.upcase ? 'class="initialism"' : ''
+
           if firstdef
             "#{definition} (#{abbr})"
           else
-            "<abbr title=\"#{definition}\">#{abbr}</abbr>"
+            "<abbr title=\"#{definition}\" #{initialism}>#{abbr}</abbr>"
           end
         end
       end
