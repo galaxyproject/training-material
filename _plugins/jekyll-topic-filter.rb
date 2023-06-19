@@ -250,6 +250,28 @@ module TopicFilter
     material
   end
 
+  ## 
+  # Get the list of posts from the site
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +Array+:: The list of posts
+  #
+  # This is a transition period function that can later be removed. It is added
+  # because with the jekyll version we're using, site.posts is an iterable in
+  # prod+dev (_config-dev.yml) modes, however! If we access site.posts.docs in
+  # prod it's fine, while in dev mode, site.posts claims to be an Array (rather
+  # than I guess a 'posts' object with a docs method). So we check if it has
+  # docs and use that, otherwise just site.posts should be iterable.
+  def self.get_posts(site)
+    # Handle the transition period
+    if site.posts.respond_to?(:docs)
+      site.posts.docs
+    else
+      site.posts
+    end
+  end
+
   ##
   # Collate the materials into a large hash
   # Params:
@@ -288,7 +310,7 @@ module TopicFilter
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
 
-    site.posts.docs.each do |post|
+    self.get_posts(site).each do |post|
       post.data['short_id'] = shortlinks_reversed[post.url]
     end
 
@@ -532,7 +554,7 @@ module TopicFilter
       end
     end
     # Same for news
-    site.posts.docs.select { |p| mappings.keys.include? p.url }.each do |p|
+    self.get_posts(site).select { |p| mappings.keys.include? p.url }.each do |p|
       # Set the short id on the material
       p.data['redirect_from'] = [] if !p.data.key?('redirect_from')
       p.data['redirect_from'].push(*mappings[p.url])
