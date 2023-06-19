@@ -4,9 +4,9 @@
 {% assign supported_inexactly = own_material.supported_servers.inexact | length %}
 {% assign supported = supported_exactly | plus: supported_inexactly %}
 {% if supported > 0 or include.docker %}
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+    <button class="nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         {% icon instances %}{% if include.label %}&nbsp;{{ locale['supporting-galaxies'] | default: "Available on these Galaxies" }} {% endif %}
-    </a>
+    </button>
     <ul class="dropdown-menu">
 	<li class="dropdown-header">
 		<b>Known Working</b>
