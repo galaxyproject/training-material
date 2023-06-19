@@ -336,7 +336,7 @@ module GTNNotebooks
 
     # Replace zenodo links, the only replacement we do
     if !page_data['zenodo_link'].nil?
-      puts "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
+      Jekyll.logger.debug "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
       content.gsub!(/{{\s*page.zenodo_link\s*}}/, page_data['zenodo_link'])
     end
 

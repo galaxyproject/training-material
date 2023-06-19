@@ -94,7 +94,10 @@ class: center, middle, inverse
 {% include _includes/contributors-line.html page=page authorsonly=true %}
 
 <!-- modified date -->
-<div class="footnote" style="bottom: 8em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+<div class="footnote" style="bottom: 8em;">
+  {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
+  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+</div>
 
 
 <!-- other slide formats (video and plain-text) -->
