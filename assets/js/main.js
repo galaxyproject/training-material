@@ -167,7 +167,7 @@ function fixDiffPresentation(codeBlock){
 	})
 }
 
-<!--  For admin training -->
+// For admin training
 document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
@@ -183,7 +183,7 @@ $("#theme-selector button").click(function(evt){
 })
 
 
-<!-- Redirects -->
+// Redirects
 if(window.location.hostname === "galaxyproject.github.io") {
 	// Redirect
 	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
@@ -194,7 +194,7 @@ if(window.location.hostname === "galaxyproject.github.io") {
 	}, 5000)
 }
 
-<!-- Copy paste buttons -->
+// Copy paste buttons
 document.querySelectorAll('div.highlight').forEach((snippet) => {
 	// Google translate has additional #text nodes mixed in with
 	// the pre for some reason.
