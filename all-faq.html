@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0d07802b0e54cd60bc4a95a772bfe6a47d319ab4",
+  release: "galaxy-training-network@21b38b8c10e10d3fb9427772386eb4e0e5942344",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -267,6 +267,13 @@ Sentry.init({
 
 
 
+<h4 class="faq-area"> After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/compining_fastq_files_of_one_sample.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-after-sequencing-with-minknow-software-we-get-many-fastq-files-do-these-files-need-to-be-combined-into-one-file-before-uploading-or-is-it-possible-to-upload-them-all-at-once"><i class="far fa-question-circle" aria-hidden="true"></i> Question: After sequencing with MinKNOW software, we get many fastq files, do these files need to be combined into one file before uploading or is it possible to upload them all at once?</div>   <p>After sequencing with MinKNOW software, it is a good approach to combine the files from the same run before processing them. You could create a collection per run with all fastq files and then use the collection operation to concatenate all files in a collection.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
 <h4 class="faq-area"> AnnData Import/ AnnData Manipulate not working? <a href="/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-anndata-import-anndata-manipulate-not-working"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-anndata-import-anndata-manipulate-not-working" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: AnnData Import/ AnnData Manipulate not working?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>This is a known issue, please do not use version <code class="language-plaintext highlighter-rouge">0.7.4</code> of the tool, and use version <code class="language-plaintext highlighter-rouge">0.6.2</code> instead. The  Inspect AnnData tool should work fine however.</p>   <p><a href="/training-material/faqs/galaxy/tools_change_version.html">Switching tool versions</a></p> </blockquote> <!--END_SNIPPET-->
@@ -323,9 +330,23 @@ Sentry.init({
 
 
 
+<h4 class="faq-area"> Can we also use this workflow on Illumina raw reads? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/worflow_and_sequencing_techniques.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-we-also-use-this-workflow-on-illumina-raw-reads"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can we also use this workflow on Illumina raw reads?</div>   <p>Yes, some tools would need to be changed or removed:</p>   <ul>   <li>For the Preprocessing workflow, plotting with Nanoplot shall be removed and keep only FastQC, MultiQC and Fastp.</li>   <li>For the mapping in the SNP based pathogen detection workflow, instead of Minimap2, Bowtie can be used.</li> </ul> </blockquote> <!--END_SNIPPET-->
+
+
+
+
 <h4 class="faq-area"> Can we polish the assembly with long reads too? <a href="/training-material/topics/assembly/tutorials/chloroplast-assembly/faqs/polish_longreads.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-can-we-polish-the-assembly-with-long-reads-too"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-we-polish-the-assembly-with-long-reads-too" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Can we polish the assembly with long reads too?<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Yes. In this tutorial, we only polish the assembly with the short reads. This may be enough for bacterial genomes. However, for an even better polish (usually), a common approach is to also polish the assembly with the long reads. A typical workflow for this would assemble with long reads, then polish with long reads (x 4 rounds, with Racon), polish with long reads again (x 1 round, with Medaka), then polish with short reads (x2 rounds with Pilon).</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Can we use snippy pipeline instead for the phylogenetic analysis? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/variant_calling_quality.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-can-we-use-snippy-pipeline-instead-for-the-phylogenetic-analysis"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Can we use snippy pipeline instead for the phylogenetic analysis?</div>   <p>On principle yes. We did not try yet. Snippy is available in Galaxy</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -365,6 +386,13 @@ Sentry.init({
 
 
 
+<h4 class="faq-area"> Do the pipelines work with both isolates and direct from raw meat? or only isolate? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/workflow_and_isolations.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-do-the-pipelines-work-with-both-isolates-and-direct-from-raw-meat-or-only-isolate"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Do the pipelines work with both isolates and direct from raw meat? or only isolate?</div>   <p>The workflow can work with both isolates and raw meat. The workflow is designed to remove hosts before detecting any pathogen, so both isolates and raw meat samples are pre-processed equaliy before the analysis starts.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
 <h4 class="faq-area"> Do you have resources to help me get started working in the cloud? <a href="/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/faqs/cloud.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-do-you-have-resources-to-help-me-get-started-working-in-the-cloud"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Do you have resources to help me get started working in the cloud?</div>   <p>Yes, we have a number of documents and videos to help you start working with SRA data in the cloud:</p>   <ul>   <li><a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-cloud/">Cloud landing page</a></li>   <li><a href="https://www.youtube.com/watch?v=DkNz-RCCm-M">Exploring SRA metadata in BigQuery</a></li>   <li><a href="https://www.youtube.com/watch?v=_F4FhcDWSJg">Exploring SARS-CoV-2 metadata in Athena</a></li> </ul> </blockquote> <!--END_SNIPPET-->
@@ -382,6 +410,20 @@ Sentry.init({
 <h4 class="faq-area"> First job I submitted remains grey or running for a long time - is it broken? <a href="/training-material/topics/dev/tutorials/tool-generators/faqs/job_grey.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-first-job-i-submitted-remains-grey-or-running-for-a-long-time-is-it-broken"><i class="far fa-question-circle" aria-hidden="true"></i> Question: First job I submitted remains grey or running for a long time - is it broken?</div>   <ul>   <li>Check with <code class="language-plaintext highlighter-rouge">top</code> or your system monitor - if Conda is running, things are working but it’s slow the first time a dependency is installed.</li>   <li>The first run generally takes a while to install all the needed dependencies.</li>   <li>Subsequent runs should start immediately with all dependencies already in place.</li>   <li>Installing new Conda dependencies just takes time so tools that have new Conda packages will take longer to run the first time if they must be installed.</li>   <li>In general, a <code class="language-plaintext highlighter-rouge">planemo_test</code> job usually takes around a minute - planemo has to build and tear down a new Galaxy for generating test results and then again for testing properly. Longer if the tool has Conda dependencies.</li>   <li>The very first test in a fresh appliance may take 6 minutes so be patient.</li> </ul> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_removal.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-for-preprocessing-part-with-host-removal-where-do-you-find-the-abbreviations-for-each-host-species-available-e-g-bos-is-cow-homo-is-human"><i class="far fa-question-circle" aria-hidden="true"></i> Question: For preprocessing part with host removal: Where do you find the abbreviations for each host species available (e.g. bos is cow, homo is human..)?</div>   <p>The abbreviation (i.e. the genus) is the first word in the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">list of possible hosts</a>. The names are the scientific names for species, which would be shown on the taxonomy tree if you would look up the common name (i.e. bovine) on Wikipedia.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> From where can I import other genomes? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/importing_genomes.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-from-where-can-i-import-other-genomes"><i class="far fa-question-circle" aria-hidden="true"></i> Question: From where can I import other genomes?</div>   <p>In this tutorial, we used kalamari DB with the <a href="https://github.com/lskatz/Kalamari/blob/master/src/Kalamari_v3.9.1.tsv">full list of possible host sequences</a> that can be removed. Reads are either tagged to map one of those species or are left unassigned. If the task at hand in the real world cannot be covered by those, you can also try another DB for Kraken2 that includes your species (or maybe retain unmapped reads from a read aligner such as Bowtie2, Minimap2…).</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -480,6 +522,20 @@ Sentry.init({
 <h4 class="faq-area"> Is the ToolFactory a complete replacement for manual tool building? <a href="/training-material/topics/dev/tutorials/tool-generators/faqs/replace_manual_install.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-is-the-toolfactory-a-complete-replacement-for-manual-tool-building"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is the ToolFactory a complete replacement for manual tool building?</div>   <ul>   <li>No, except where all the requirements for the package or script can be satisfied by the limited automated functions of the code generator, or where there is a script with all the complex logic that might otherwise go into XML</li>   <li>Many advanced XML features are not available such as output filters.</li>   <li>Adding DIY output filters, XML macros and some other advanced features is possible if anyone is sufficiently enthusiastic - some features in the galaxyxml package would be relatively straightforward to add.</li> </ul> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Is there a way to filter on the Kalimari database? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/kalamri_database_filtering.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-is-there-a-way-to-filter-on-the-kalimari-database"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Is there a way to filter on the Kalimari database?</div>   <p>To filter the Kalamari database, e.g. leaving out milk bacteria only to detect spoilers or contaminants, but the Kalimera list contains a lot more than that, you can:</p>   <ol>   <li>Look at a publication etc. to find a list of bacteria to remove.</li>   <li>Change the regex <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code>  to <code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos|Bacterium1|Bacterium2...|BacteriumN.*$</code></li> </ol>   <p>Milk pathogens are somewhat known, <em>Salmonella</em>, <em>Escherichia</em>… It might be easier to retain reads only mapping to pathogens instead</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Isn't it awkward to find so many humans sequences there, since we filter for them before? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/remaining_human_sequences.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-isn-t-it-awkward-to-find-so-many-humans-sequences-there-since-we-filter-for-them-before"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Isn't it awkward to find so many humans sequences there, since we filter for them before?</div>   <p>We see a lot that Kraken tends to assign many reads to human, despite they do not map to human genome. Due to resemblance between organisms and the limited species coverage of Kraken databases sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the standard databases, because yeast genes were mis-assigned to human.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -613,6 +669,13 @@ Sentry.init({
 <h4 class="faq-area"> What advantages does a Chromatogram Library have over a DDA-generated library or predicted spectral library? <a href="/training-material/topics/proteomics/tutorials/encyclopedia/faqs/advantages.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-what-advantages-does-a-chromatogram-library-have-over-a-dda-generated-library-or-predicted-spectral-library"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What advantages does a Chromatogram Library have over a DDA-generated library or predicted spectral library?</div>   <p>While generating a Chromatogram Library is the most time consuming step of the EncyclopeDIA workflow, it is beneficial to DIA data analysis. DIA is a novel technique and methods for DIA data analysis are still being developed. One method commonly used includes searching DIA data against DDA-generated libraries. However, there are limitations in this method. Firstly, DDA-generated libraries are not always an accurate representation of DIA data: differences in the methods of data collection play an important role in the efficacy of the library. Secondly, DDA-generated libraries often require labs to run completely separate DDA experiments to simply generate a library with which to analyze their DIA data. Chromatogram Libraries mitigate some of the previous shortcomings mentioned. DIA data is incorporated into the generation of the Chromatogram Library and therefore provides context to the DIA data being analyzed. Secondly, the ELIB format of the Chromatogram Library allows for extra data to be included in the analysis of the DIA data, including intensity, m/z ratio, and retention time compared to the use of a DDA-generated DLIB library. Lastly, a Chromatogram Library can be generated without the use of a spectral library (as mentioned in the last question). Therefore, it is possible to forgo DDA data collection as the DLIB DDA-generated library is not strictly needed for Chromatogram Library generation and to run the EncyclopeDIA workflow (saving time and resources).</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> What does `^.*Gallus|Homo|Bos.*$` mean? <a href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/host_filtering_filter.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-what-does-gallus-homo-bos-mean"><i class="far fa-question-circle" aria-hidden="true"></i> Question: What does `^.*Gallus|Homo|Bos.*$` mean?</div>   <p><code class="language-plaintext highlighter-rouge">^.*Gallus|Homo|Bos.*$</code> is a <a href="https://www.regular-expressions.info/">regular expression</a> that matches a string containing the words Gallus <strong>OR</strong> Homo <strong>OR</strong> Bos.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -2481,7 +2544,7 @@ Undelete your deleted histories
 
 <h4 class="faq-area"> GTN Stats <a href="/training-material/faqs/gtn/gtn_stats.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">37</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">357</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">381</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">305</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.0</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">37</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">357</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">390</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">305</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.0</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
 
 
 
@@ -3358,7 +3421,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0d07802b0e54cd60bc4a95a772bfe6a47d319ab4">0d07802</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/21b38b8c10e10d3fb9427772386eb4e0e5942344">21b38b8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">

@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@0d07802b0e54cd60bc4a95a772bfe6a47d319ab4",
+  release: "galaxy-training-network@21b38b8c10e10d3fb9427772386eb4e0e5942344",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -593,6 +593,11 @@ Sentry.init({
 
             
             
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
             
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
@@ -1483,6 +1488,10 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
   <div class="box-title comment-title" id="comment-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>While these steps are running, you can move on to the next section <strong>Gene based pathogenic identification</strong> and run the steps there, as well. Both analyses can execute in parallel.</p>
 </blockquote>
+
+<p>You may have noticed some sequences have been assigned to the Human Genome (Homosapians) species, when we run <strong>Kraken2</strong> using the <strong>Standard PlusPF</strong> in this section. However, in the <strong>pre-processing</strong> section when we ran <strong>Kraken2</strong> with <strong>Kalamari</strong> no Human Genomes were found. The lab (data producers) has confirmed that these sequences assigned to human by <strong>Standard PlusPF</strong> database are not human and there should be no human sequences in the samples as <strong>Kalamari</strong> database result’s confirmed. So these sequences were wrongly assigned to human by <strong>Standard PlusPF</strong>. That is due to resemblance between organisms and the limited species coverage of <strong>Kraken2</strong> databases sometimes do happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the <strong>Standard PlusPF</strong>, because yeast genes were mis-assigned to human.</p>
+
+<p>We decide to keep these sequences since we do not know what are they via the <strong>taxonomy profiling</strong> step, which could mean that they might be identified as pathogens in the coming steps, and if we delete them we are possibly losing important information and losing the main goal of the workflow to detect pathogens and track them.</p>
 
 <h1 id="gene-based-pathogenic-identification">Gene based pathogenic identification</h1>
 
@@ -2669,7 +2678,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
                 
 
                 <h1>Frequently Asked Questions</h1>
-                Have questions about this tutorial? Check out the  <a href="/training-material/topics/metagenomics/faqs/">FAQ page for the Metagenomics topic</a> to see if your question is listed there.
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/metagenomics/faqs/">FAQ page for the Metagenomics topic</a> to see if your question is listed there.
                 If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
                 <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
 
@@ -3022,7 +3031,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0d07802b0e54cd60bc4a95a772bfe6a47d319ab4">0d07802</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/21b38b8c10e10d3fb9427772386eb4e0e5942344">21b38b8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
