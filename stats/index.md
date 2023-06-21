@@ -156,6 +156,10 @@ redirect_from:
 
 <!-- make the charts -->
 <script type="text/javascript">
+const style = getComputedStyle(document.body);
+Chart.defaults.global.defaultColor = style.getPropertyValue("--color-background");
+Chart.defaults.global.defaultFontColor = style.getPropertyValue("--text-color");
+
 Chart.plugins.unregister(ChartDataLabels);
 
 function genColors(size) {
@@ -260,6 +264,7 @@ var contributorsBar = new Chart('contributorsGraph', {
   data: {
     datasets: [{
       data: data_contributors,
+      borderColor: style.getPropertyValue("--text-color"),
     }]
   },
 
