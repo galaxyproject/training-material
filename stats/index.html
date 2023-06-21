@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@53adeb795dfd4c18c2eb7bb7dbd59cabd3530991",
+  release: "galaxy-training-network@5be32a54276038610fde53bf4f09575b0f11a143",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -50,7 +50,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-09 12:33:05 +0000">
+<meta name="DC.date" content="2023-06-21 12:49:21 +0000">
 
         
         
@@ -373,26 +373,12 @@ Sentry.init({
       <tr>
         <td></td>
         <td style="text-align:right">
-            <a href="/training-material/topics/data-science">
-                Foundations of Data Science
+            <a href="/training-material/topics/introduction">
+                Introduction to Galaxy Analyses
             </a>
 </td>
-        <td><a href="/training-material//topics/data-science/tutorials/data-manipulation-olympics-sql/tutorial.html">
-            Data Manipulation Olympics - SQL
-            </a></td>
-      </tr>
-    
-            
-            
-      <tr>
-        <td></td>
-        <td style="text-align:right">
-            <a href="/training-material/topics/data-science">
-                Foundations of Data Science
-            </a>
-</td>
-        <td><a href="/training-material//topics/data-science/tutorials/data-manipulation-olympics-jq/tutorial.html">
-            Data Manipulation Olympics - JQ
+        <td><a href="/training-material//topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
+            Data Manipulation Olympics
             </a></td>
       </tr>
     
@@ -415,12 +401,26 @@ Sentry.init({
       <tr>
         <td></td>
         <td style="text-align:right">
-            <a href="/training-material/topics/introduction">
-                Introduction to Galaxy Analyses
+            <a href="/training-material/topics/data-science">
+                Foundations of Data Science
             </a>
 </td>
-        <td><a href="/training-material//topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">
-            Data Manipulation Olympics
+        <td><a href="/training-material//topics/data-science/tutorials/data-manipulation-olympics-sql/tutorial.html">
+            Data Manipulation Olympics - SQL
+            </a></td>
+      </tr>
+    
+            
+            
+      <tr>
+        <td></td>
+        <td style="text-align:right">
+            <a href="/training-material/topics/data-science">
+                Foundations of Data Science
+            </a>
+</td>
+        <td><a href="/training-material//topics/data-science/tutorials/data-manipulation-olympics-jq/tutorial.html">
+            Data Manipulation Olympics - JQ
             </a></td>
       </tr>
     
@@ -496,6 +496,10 @@ Sentry.init({
 
 <!-- make the charts -->
 <script type="text/javascript">
+const style = getComputedStyle(document.body);
+Chart.defaults.global.defaultColor = style.getPropertyValue("--color-background");
+Chart.defaults.global.defaultFontColor = style.getPropertyValue("--text-color");
+
 Chart.plugins.unregister(ChartDataLabels);
 
 function genColors(size) {
@@ -600,6 +604,7 @@ var contributorsBar = new Chart('contributorsGraph', {
   data: {
     datasets: [{
       data: data_contributors,
+      borderColor: style.getPropertyValue("--text-color"),
     }]
   },
 
@@ -647,7 +652,7 @@ var contributorsBar = new Chart('contributorsGraph', {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/53adeb795dfd4c18c2eb7bb7dbd59cabd3530991">53adeb7</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5be32a54276038610fde53bf4f09575b0f11a143">5be32a5</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
