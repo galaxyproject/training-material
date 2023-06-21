@@ -1218,219 +1218,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "DNA Methylation data analysis",
-      "zenodo_link": "https://zenodo.org/record/557099",
-      "edam_ontology": [
-        "topic_3173"
-      ],
-      "questions": [
-        "What is methylation and why it cannot be recognised by a normal NGS procedure?",
-        "Can a different methylation influence the expression of a gene? How?",
-        "Which tools you can use to analyse methylation data?"
-      ],
-      "objectives": [
-        "Learn how to analyse methylation data",
-        "Get a first intuition what are common pitfalls."
-      ],
-      "time_estimation": "3h",
-      "key_points": [
-        "The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA.",
-        "If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong.",
-        "To get useful results you need -- data, data and data!"
-      ],
-      "contributors": [
-        {
-          "name": "Joachim Wolff",
-          "email": "wolffj@informatik.uni-freiburg.de",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "joachimwolff",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
-        },
-        {
-          "name": "Devon Ryan",
-          "joined": "2017-09",
-          "id": "dpryan79",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/dpryan79.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dpryan79/"
-        }
-      ],
-      "short_id": "T00142",
-      "url": "/topics/epigenetics/tutorials/methylation-seq/tutorial.html",
-      "topic_name": "epigenetics",
-      "tutorial_name": "methylation-seq",
-      "dir": "topics/epigenetics/tutorials/methylation-seq",
-      "id": "epigenetics/methylation-seq",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "methylation-seq.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.ga",
-          "path": "topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.ga",
-          "wfid": "epigenetics-methylation-seq",
-          "wfname": "methylation-seq",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-methylation-seq/versions/methylation-seq",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bwameth/bwameth/0.2.0.3",
-        "toolshed.g2.bx.psu.edu/repos/rnateam/metilene/metilene/0.2.6.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://galaxy.hyphy.org/",
-            "name": "HyPhy HIV NGS Tools",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Epigenetics",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "deeptools_compute_matrix",
-            "owner": "bgruening",
-            "revisions": "fd1275e01605",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "deeptools_plot_profile",
-            "owner": "bgruening",
-            "revisions": "aac8444d6681",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pileometh",
-            "owner": "bgruening",
-            "revisions": "906db57d5d65",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "replace_column_by_key_value_file",
-            "owner": "bgruening",
-            "revisions": "cc18bac5afdb",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "e39fceb6ab85",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "484e86282f4b",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwameth",
-            "owner": "iuc",
-            "revisions": "a6ea26c1f225",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "metilene",
-            "owner": "rnateam",
-            "revisions": "37abd09a0ae6",
-            "tool_panel_section_label": "Epigenetics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_compute_matrix\n  owner: bgruening\n  revisions: fd1275e01605\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_profile\n  owner: bgruening\n  revisions: aac8444d6681\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pileometh\n  owner: bgruening\n  revisions: 906db57d5d65\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: replace_column_by_key_value_file\n  owner: bgruening\n  revisions: cc18bac5afdb\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: e39fceb6ab85\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 484e86282f4b\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwameth\n  owner: iuc\n  revisions: a6ea26c1f225\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: metilene\n  owner: rnateam\n  revisions: 37abd09a0ae6\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "redirect_from": [
         "/topics/chip-seq/tutorials/tal1-binding-site-identification/tutorial",
         "/short/epigenetics/tal1-binding-site-identification",
@@ -1736,6 +1523,315 @@
       }
     },
     {
+      "layout": "tutorial_hands_on",
+      "title": "DNA Methylation data analysis",
+      "zenodo_link": "https://zenodo.org/record/557099",
+      "edam_ontology": [
+        "topic_3173"
+      ],
+      "questions": [
+        "What is methylation and why it cannot be recognised by a normal NGS procedure?",
+        "Can a different methylation influence the expression of a gene? How?",
+        "Which tools you can use to analyse methylation data?"
+      ],
+      "objectives": [
+        "Learn how to analyse methylation data",
+        "Get a first intuition what are common pitfalls."
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "The output of a methylation NGS is having a different distribution of the four bases. This is caused by the bisulfite treatment of the DNA.",
+        "If there is a different level of methylation in the loci of a gene this can be a hint that something is wrong.",
+        "To get useful results you need -- data, data and data!"
+      ],
+      "contributors": [
+        {
+          "name": "Joachim Wolff",
+          "email": "wolffj@informatik.uni-freiburg.de",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "joachimwolff",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+        },
+        {
+          "name": "Devon Ryan",
+          "joined": "2017-09",
+          "id": "dpryan79",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/dpryan79.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dpryan79/"
+        }
+      ],
+      "short_id": "T00142",
+      "url": "/topics/epigenetics/tutorials/methylation-seq/tutorial.html",
+      "topic_name": "epigenetics",
+      "tutorial_name": "methylation-seq",
+      "dir": "topics/epigenetics/tutorials/methylation-seq",
+      "id": "epigenetics/methylation-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "methylation-seq.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.ga",
+          "path": "topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.ga",
+          "wfid": "epigenetics-methylation-seq",
+          "wfname": "methylation-seq",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-methylation-seq/versions/methylation-seq",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/pileometh/pileometh/0.3.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/replace_column_by_key_value_file/replace_column_with_key_value_file/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.68",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bwameth/bwameth/0.2.0.3",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/metilene/metilene/0.2.6.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Epigenetics",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "deeptools_compute_matrix",
+            "owner": "bgruening",
+            "revisions": "fd1275e01605",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "deeptools_plot_profile",
+            "owner": "bgruening",
+            "revisions": "aac8444d6681",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "pileometh",
+            "owner": "bgruening",
+            "revisions": "906db57d5d65",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "replace_column_by_key_value_file",
+            "owner": "bgruening",
+            "revisions": "cc18bac5afdb",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "e39fceb6ab85",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "484e86282f4b",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwameth",
+            "owner": "iuc",
+            "revisions": "a6ea26c1f225",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "metilene",
+            "owner": "rnateam",
+            "revisions": "37abd09a0ae6",
+            "tool_panel_section_label": "Epigenetics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: deeptools_compute_matrix\n  owner: bgruening\n  revisions: fd1275e01605\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: deeptools_plot_profile\n  owner: bgruening\n  revisions: aac8444d6681\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pileometh\n  owner: bgruening\n  revisions: 906db57d5d65\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: replace_column_by_key_value_file\n  owner: bgruening\n  revisions: cc18bac5afdb\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: e39fceb6ab85\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 484e86282f4b\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwameth\n  owner: iuc\n  revisions: a6ea26c1f225\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: metilene\n  owner: rnateam\n  revisions: 37abd09a0ae6\n  tool_panel_section_label: Epigenetics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/methylation-seq/tutorial.json"
+      }
+    },
+    {
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "priority": 1,
+      "title": "Introduction to DNA Methylation data analysis",
+      "contributors": [
+        {
+          "name": "Joachim Wolff",
+          "email": "wolffj@informatik.uni-freiburg.de",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "joachimwolff",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "short_id": "S00060",
+      "url": "/topics/epigenetics/tutorials/introduction-dna-methylation/slides.html",
+      "topic_name": "epigenetics",
+      "tutorial_name": "introduction-dna-methylation",
+      "dir": "topics/epigenetics/tutorials/introduction-dna-methylation",
+      "id": "epigenetics/introduction-dna-methylation",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Epigenetics",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json"
+      }
+    },
+    {
       "layout": "introduction_slides",
       "logo": "GTN",
       "priority": 1,
@@ -1850,6 +1946,7 @@
       "contributors": [
         {
           "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
           "orcid": "0009-0004-2454-5950",
           "joined": "2018-08",
           "elixir_node": "uk",
@@ -1934,102 +2031,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json"
-      }
-    },
-    {
-      "layout": "introduction_slides",
-      "logo": "GTN",
-      "priority": 1,
-      "title": "Introduction to DNA Methylation data analysis",
-      "contributors": [
-        {
-          "name": "Joachim Wolff",
-          "email": "wolffj@informatik.uni-freiburg.de",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "joachimwolff",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "short_id": "S00060",
-      "url": "/topics/epigenetics/tutorials/introduction-dna-methylation/slides.html",
-      "topic_name": "epigenetics",
-      "tutorial_name": "introduction-dna-methylation",
-      "dir": "topics/epigenetics/tutorials/introduction-dna-methylation",
-      "id": "epigenetics/introduction-dna-methylation",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Epigenetics",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/introduction-dna-methylation/slides.json"
       }
     }
   ]
