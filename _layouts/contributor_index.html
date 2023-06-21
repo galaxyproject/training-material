@@ -65,6 +65,10 @@ layout: base
 							<a href="https://erasmus-plus.ec.europa.eu/projects/search/details/{{ contributors[page.contributor].funding_id }}">
 								{{ contributors[page.contributor].funding_id }}
 							</a>
+						{% elsif contributors[page.contributor].funding_system == "ukri" %}
+							<a href="https://gtr.ukri.org/projects?ref={{ contributors[page.contributor].funding_id }}">
+								{{ contributors[page.contributor].funding_id }}
+							</a>
 						{% endif %}
 					{% else %}
 						{{ contributors[page.contributor].funding_id }}
