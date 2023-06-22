@@ -154,7 +154,9 @@ layout: base
 				<h2>Contributions</h2>
 
 				{% if contributors[page.contributor].funder %}
+				{% if contributors[page.contributor].url %}
 				<a href="{{ contributors[page.contributor].url }}">{{ contributors[page.contributor].url }}</a>
+				{% endif %}
 				{{ contributors[page.contributor].funding_statement | markdownify }}
 				{% endif %}
 
