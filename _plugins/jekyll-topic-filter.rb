@@ -653,7 +653,7 @@ module TopicFilter
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
-      .reject {|c| site.data['contributors'][c]['funder'] == true}
+      .reject { |c| site.data['contributors'][c]['funder'] == true }
   end
 
   ##
@@ -667,7 +667,7 @@ module TopicFilter
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
-      .select {|c| site.data['contributors'][c]['funder'] == true}
+      .select { |c| site.data['contributors'][c]['funder'] == true }
   end
 
   ##
