@@ -13,7 +13,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('maintainers') }.map { |k, _v| k }
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |k, _v| k }
   end
 
   ##
