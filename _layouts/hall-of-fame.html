@@ -30,19 +30,19 @@ lang: en
     <h2>Contributors</h2>
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
-            {% unless contributors[username].halloffame == "no" %}
-            {% unless contributors[username].funder %}
+            {% unless site.data['contributors'][username].halloffame == "no" %}
+            {% unless site.data['contributors'][username].funder %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ contributors[username].name | default: username }}">
-                {% if contributors[username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
+                {% if site.data['contributors'][username].github != false %}
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
                 {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
                 {% endif %}
 
                 <div class="name" aria-hidden="true">
-                    {{ contributors[username].name | default: username }}
+                    {{ site.data['contributors'][username].name | default: username }}
                 </div>
                 </a>
 
@@ -69,21 +69,21 @@ lang: en
     <h2>Contributing Organizations & Funders</h2>
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
-            {% unless contributors[username].halloffame == "no" %}
-	    {% if contributors[username].funder %}
+            {% unless site.data['contributors'][username].halloffame == "no" %}
+            {% if site.data['contributors'][username].funder %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
-                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ contributors[username].name | default: username }}">
-                {% if contributors[username].github != false %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
-		{% elsif contributors[page.contributor].avatar %}
-			<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" aria-hidden="true">
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
+                {% if site.data['contributors'][username].github != false %}
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
+		{% elsif site.data['contributors'][page.contributor].avatar %}
+			<img src="{{ site.data['contributors'][page.contributor].avatar }}" alt="avatar" aria-hidden="true" height="120" width="120">
                 {% else %}
-                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
                 {% endif %}
 
                 <div class="name" aria-hidden="true">
-                    {{ contributors[username].name | default: username }}
+                    {{ site.data['contributors'][username].name | default: username }}
                 </div>
                 </a>
             </div>

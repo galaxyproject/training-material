@@ -34,9 +34,13 @@ requirements:
     topic_name: variant-analysis
     tutorials:
       - sars-cov-2
-contributors:
-- wm75
-- bebatut
+contributions:
+  authorship:
+  - wm75
+  - bebatut
+  funding:
+  - by-covid
+  - elixir-converge
 tags:
 - covid19
 - virology

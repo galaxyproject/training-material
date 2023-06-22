@@ -648,11 +648,26 @@ module TopicFilter
   # +materials+:: An array of materials
   # Returns:
   # +Array+:: An array of contributors as strings.
-  def self.identify_contributors(materials)
+  def self.identify_contributors(materials, site)
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
+      .reject { |c| site.data['contributors'][c]['funder'] == true }
+  end
+
+  ##
+  # Get a list of funders for a list of materials
+  # Parameters:
+  # +materials+:: An array of materials
+  # Returns:
+  # +Array+:: An array of funders as strings.
+  def self.identify_funders(materials, site)
+    materials
+      .map { |_k, v| v['materials'] }.flatten
+      # Not 100% sure why this flatten is needed? Probably due to the map over hash
+      .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
+      .select { |c| site.data['contributors'][c]['funder'] == true }
   end
 
   ##
@@ -830,8 +845,12 @@ module Jekyll
       TopicFilter.topic_filter(site, topic_name)
     end
 
-    def identify_contributors(materials)
-      TopicFilter.identify_contributors(materials)
+    def identify_contributors(materials, site)
+      TopicFilter.identify_contributors(materials, site)
+    end
+
+    def identify_funders(materials, site)
+      TopicFilter.identify_funders(materials, site)
     end
   end
 end
