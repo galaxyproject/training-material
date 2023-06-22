@@ -21,10 +21,10 @@ layout: base
 
 			<div class="col-md-3">
 				<div>
-				{% if contributors[page.contributor].github != false %}
-					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-				{% elsif contributors[page.contributor].avatar %}
+				{% if contributors[page.contributor].avatar %}
 					<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" >
+				{% elsif contributors[page.contributor].github != false %}
+					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
 				{% else %}
 					<span class="thumbnail">
 						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
