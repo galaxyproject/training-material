@@ -153,10 +153,15 @@ layout: base
 
 				<h2>Contributions</h2>
 
+				{% if contributors[page.contributor].funder %}
 				<p class="text-muted">
-					{% if contributors[page.contributor].funder %}
-						{{ contributors[page.contributor].funding_statement | markdownify }}
-					{% else %}
+					{{ contributors[page.contributor].funding_statement | markdownify }}
+					<br/>
+					Website: <a href="{{ contributors[page.contributor].url }}">{{ contributors[page.contributor].url }}</a>
+				</p>
+				{% else %}
+
+				<p class="text-muted">
 					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 					{% endif %}
 
