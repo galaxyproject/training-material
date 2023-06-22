@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@da8f243a209197d9747da5c56e726285ab7d5e64",
+  release: "galaxy-training-network@69d9ada3583772ad6372da4169ba9256564d2206",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -39,11 +39,13 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1687392615' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1687392615' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
-
 
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
@@ -69,7 +71,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1687392615'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -228,7 +230,7 @@ Sentry.init({
 	<tr>
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
-			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Avatar">Erik Schill</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar">Simon Bray</a>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Avatar" width="36" height="36">Erik Schill</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar" width="36" height="36">Simon Bray</a>
 		</td>
 	</tr>
 	
@@ -252,7 +254,7 @@ Sentry.init({
 
 
 
-<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #c3c4ff; --color-darker: #a9acff; --color-dimmed: #b6b8ff;">new feature</span>
+<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
 
 
 <hr/>
@@ -268,7 +270,7 @@ Sentry.init({
       </span>
     </p>
 
-    <p>Thanks to the great tutorial developed by first time contributor <a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Avatar" />Erik Schill</a> and edited by <a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar" />Simon Bray</a>, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.</p>
+    <p>Thanks to the great tutorial developed by first time contributor <a href="/training-material/hall-of-fame/rikeshi/" class="contributor-badge contributor-rikeshi"><img src="https://avatars.githubusercontent.com/rikeshi?s=36" alt="Avatar" width="36" height="36" />Erik Schill</a> and edited by <a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar" width="36" height="36" />Simon Bray</a>, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.</p>
 
 <p>As the GTN is intended to be easy for contributors and easy for learners, we wanted to make use of the <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr"><code class="language-plaintext highlighter-rouge">&lt;abbr&gt;</code></a> tag which allows you to define commonly re-used terms in your HTML. However this is a bit clumsy to write every time, so we’ve implemented a tag and some metadata which permits easily defining and referencing abbreviations throughout your text.</p>
 
@@ -319,7 +321,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   </div>
 
   <div class="col-md-4">
-    <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300" loading="lazy"/>
+    <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300"/>
   </div>
 </div>
 </div>
@@ -335,7 +337,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
     "new feature"
   ],
   "description": "<p>Thanks to the great tutorial developed by first time contributor <a href=\"/training-material/hall-",
-  "articleBody": "<p>Thanks to the great tutorial developed by first time contributor <a href=\"/training-material/hall-of-fame/rikeshi/\" class=\"contributor-badge contributor-rikeshi\"><img src=\"https://avatars.githubusercontent.com/rikeshi?s=36\" alt=\"Avatar\" />Erik Schill</a> and edited by <a href=\"/training-material/hall-of-fame/simonbray/\" class=\"contributor-badge contributor-simonbray\"><img src=\"https://avatars.githubusercontent.com/simonbray?s=36\" alt=\"Avatar\" />Simon Bray</a>, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.</p>\n\n<p>As the GTN is intended to be easy for contributors and easy for learners, we wanted to make use of the <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr\"><code class=\"language-plaintext highlighter-rouge\">&lt;abbr&gt;</code></a> tag which allows you to define commonly re-used terms in your HTML. However this is a bit clumsy to write every time, so we’ve implemented a tag and some metadata which permits easily defining and referencing abbreviations throughout your text.</p>\n\n<p>In your tutorial metadata you can add an abbreviations section like:</p>\n\n<div class=\"language-yaml highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code><span class=\"nn\">---</span>\n<span class=\"na\">title</span><span class=\"pi\">:</span> <span class=\"s\">My awesome tutorial</span>\n<span class=\"nn\">...</span>\n<span class=\"na\">abbreviations</span><span class=\"pi\">:</span>\n  <span class=\"na\">API</span><span class=\"pi\">:</span> <span class=\"s\">Application Programming Interface</span>\n  <span class=\"na\">JSON</span><span class=\"pi\">:</span> <span class=\"s\">JavaScript Object Notation</span>\n<span class=\"nn\">---</span>\n</code></pre></div></div>\n\n<p>And in your text you can use braces to refer to the term</p>\n\n<blockquote class=\"code-2col\">\n  <blockquote class=\"code-in\">\n    <h3 id=\"code-in-input-markdown\"><i class=\"far fa-keyboard\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-in</span> Input: Markdown</h3>\n    <p><code>\nThe `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.\n</code></p>\n  </blockquote>\n\n  <blockquote class=\"code-out\">\n    <h3 id=\"code-out-output\"><i class=\"fas fa-laptop-code\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-out</span> Output</h3>\n\n    <p>The <code class=\"language-plaintext highlighter-rouge\">/jobs</code> Application Programming Interface (API) will return JavaScript Object Notation (JSON). When we call the <abbr title=\"Application Programming Interface\">API</abbr> we’ll get back this result <abbr title=\"JavaScript Object Notation\">JSON</abbr>.</p>\n\n  </blockquote>\n</blockquote>\n\n<p>These will even generate an automatic Glossary at the end. Check out the use of this new feature in the BioBlend Dev Tutorial!</p>\n",
+  "articleBody": "<p>Thanks to the great tutorial developed by first time contributor <a href=\"/training-material/hall-of-fame/rikeshi/\" class=\"contributor-badge contributor-rikeshi\"><img src=\"https://avatars.githubusercontent.com/rikeshi?s=36\" alt=\"Avatar\" width=\"36\" height=\"36\" />Erik Schill</a> and edited by <a href=\"/training-material/hall-of-fame/simonbray/\" class=\"contributor-badge contributor-simonbray\"><img src=\"https://avatars.githubusercontent.com/simonbray?s=36\" alt=\"Avatar\" width=\"36\" height=\"36\" />Simon Bray</a>, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.</p>\n\n<p>As the GTN is intended to be easy for contributors and easy for learners, we wanted to make use of the <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr\"><code class=\"language-plaintext highlighter-rouge\">&lt;abbr&gt;</code></a> tag which allows you to define commonly re-used terms in your HTML. However this is a bit clumsy to write every time, so we’ve implemented a tag and some metadata which permits easily defining and referencing abbreviations throughout your text.</p>\n\n<p>In your tutorial metadata you can add an abbreviations section like:</p>\n\n<div class=\"language-yaml highlighter-rouge\"><div class=\"highlight\"><pre class=\"highlight\"><code><span class=\"nn\">---</span>\n<span class=\"na\">title</span><span class=\"pi\">:</span> <span class=\"s\">My awesome tutorial</span>\n<span class=\"nn\">...</span>\n<span class=\"na\">abbreviations</span><span class=\"pi\">:</span>\n  <span class=\"na\">API</span><span class=\"pi\">:</span> <span class=\"s\">Application Programming Interface</span>\n  <span class=\"na\">JSON</span><span class=\"pi\">:</span> <span class=\"s\">JavaScript Object Notation</span>\n<span class=\"nn\">---</span>\n</code></pre></div></div>\n\n<p>And in your text you can use braces to refer to the term</p>\n\n<blockquote class=\"code-2col\">\n  <blockquote class=\"code-in\">\n    <h3 id=\"code-in-input-markdown\"><i class=\"far fa-keyboard\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-in</span> Input: Markdown</h3>\n    <p><code>\nThe `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.\n</code></p>\n  </blockquote>\n\n  <blockquote class=\"code-out\">\n    <h3 id=\"code-out-output\"><i class=\"fas fa-laptop-code\" aria-hidden=\"true\"></i><span class=\"visually-hidden\">code-out</span> Output</h3>\n\n    <p>The <code class=\"language-plaintext highlighter-rouge\">/jobs</code> Application Programming Interface (API) will return JavaScript Object Notation (JSON). When we call the <abbr title=\"Application Programming Interface\">API</abbr> we’ll get back this result <abbr title=\"JavaScript Object Notation\">JSON</abbr>.</p>\n\n  </blockquote>\n</blockquote>\n\n<p>These will even generate an automatic Glossary at the end. Check out the use of this new feature in the BioBlend Dev Tutorial!</p>\n",
   "datePublished": "2021-05-25 00:00:00 +0000",
   "dateModified": "2023-05-18 11:55:15 +0000",
   "author": [
@@ -457,9 +459,9 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 	<p>
 	21 June 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #c6c4ff; --color-darker: #adaaff; --color-dimmed: #b9b7ff;">new topic</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d5d3ff; --color-darker: #bbb8ff; --color-dimmed: #c8c6ff;">new topic</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffbc76; --color-darker: #f5a100; --color-dimmed: #ffad3b;">new tutorial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffcea4; --color-darker: #ffaf45; --color-dimmed: #ffbe7e;">new tutorial</span>
 	
 	</p>
 	<p class="card-text">
@@ -478,9 +480,9 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 	<p>
 	7 June 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #c3c4ff; --color-darker: #a9acff; --color-dimmed: #b6b8ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #fff3af; --color-darker: #edd800; --color-dimmed: #fce600;">gtn</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff6c7; --color-darker: #f1dc00; --color-dimmed: #ffe92f;">gtn</span>
 	
 	</p>
 	<p class="card-text">
@@ -517,7 +519,7 @@ The GTN has you covered with the Pan-Galactic Tool Search that is now available.
 	<p>
 	15 May 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #ffbc76; --color-darker: #f5a100; --color-dimmed: #ffad3b;">new tutorial</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffcea4; --color-darker: #ffaf45; --color-dimmed: #ffbe7e;">new tutorial</span>
 	
 	</p>
 	<p class="card-text">
@@ -536,9 +538,9 @@ The GTN has you covered with the Pan-Galactic Tool Search that is now available.
 	<p>
 	11 May 2023 &nbsp;
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #c6c4ff; --color-darker: #adaaff; --color-dimmed: #b9b7ff;">new topic</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d5d3ff; --color-darker: #bbb8ff; --color-dimmed: #c8c6ff;">new topic</span>
 	
-	<span class="label label-default tutorial_tag" style="--color-primary: #c3c4ff; --color-darker: #a9acff; --color-dimmed: #b6b8ff;">new feature</span>
+	<span class="label label-default tutorial_tag" style="--color-primary: #d3d4ff; --color-darker: #b8b9ff; --color-dimmed: #c5c7ff;">new feature</span>
 	
 	</p>
 	<p class="card-text">
@@ -570,7 +572,7 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/da8f243a209197d9747da5c56e726285ab7d5e64">da8f243</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/69d9ada3583772ad6372da4169ba9256564d2206">69d9ada</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -601,41 +603,8 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
     </div>
 </footer>
 
-        <script src="/training-material/assets/js/jquery.slim.min.js"></script>
-	<script src="/training-material/assets/js/popper.min.js"></script> <!-- used in dropdown menus -->
-        <script src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
-        <script src="/training-material/assets/js/details-element-polyfill.js"></script>
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1687392615'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script src="/training-material/assets/js/bootstrap-toc.min.js"></script>
-        <script src="/training-material/assets/js/main.js"></script>
-        <script src="/training-material/assets/js/clipboard.min.js"></script>
-        <script>
-        document.querySelectorAll('div.highlight').forEach((snippet) => {
-                // Google translate has additional #text nodes mixed in with
-                // the pre for some reason.
-                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
-                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
-                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
-                }
-        });
-
-        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
-            target:function(trigger){return trigger.nextElementSibling;
-        }});
-        </script>
-        
-
-        <script type="text/javascript">
-            if(window.location.hostname === "galaxyproject.github.io") {
-                // Redirect
-                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
-                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
-
-                window.setTimeout(function(){
-                    window.location.href = redirect;
-                }, 5000)
-
-            }
-        </script>
     </body>
 </html>
