@@ -2,12 +2,6 @@
 layout: tutorial_hands_on
 
 title: ERGA post-assembly QC
-zenodo_link_1: 'https://zenodo.org/record/7831298#.ZDqNppFBwgY'
-zenodo_link_2: 'https://zenodo.org/record/7784764#.ZDWLjY5BwgY'
-zenodo_link_3: 'https://zenodo.org/record/7814950#.ZDWI445BwgY'
-zenodo_link_4: 'https://zenodo.org/record/7817734#.ZDWIsI5BwgY'
-zenodo_link_5: 'https://zenodo.org/record/7788734#.ZDWIXY5BwgY'
-zenodo_link_6: 'https://zenodo.org/record/7786773#.ZDWLoI5BwgY'
 questions:
 - "what combination of tools can assess the quality of an post-assembly?"
 - "what metrics can help to analyse the quality?"
