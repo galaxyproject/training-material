@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>ERGA post-assembly QC</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@476574d2b382dd1db6c2c408d8fb6ec4393a6904",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0.01,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1687536764' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1687536764' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="ERGA post-assembly QC">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-06-23 13:25:31 +0000">
+<meta name="DC.creator" content="Fabian Recktenwald">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+
+        
+        
+        
+        
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: ERGA post-assembly QC">
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-06-23 13:25:31 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "ERGA post-assembly QC",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'ERGA post-assembly QC' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html",
+  "timeRequired": "PT3H",
+  "teaches": "apply the post-assembly-QC-workflow using the necessary tools\n - analyse and evaluate the results of the workflow",
+  "keywords": "assembly",
+  "description": "The questions this  addresses are:\n - what combination of tools can assess the quality of an post-assembly?\n - what metrics can help to analyse the quality?\n - how to evaluate the outputs?\n\n\nThe objectives are:\n - apply the post-assembly-QC-workflow using the necessary tools\n - analyse and evaluate the results of the workflow\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/GitFab93/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/GitFab93/",
+      "name": "Fabian Recktenwald",
+      "image": "https://avatars.githubusercontent.com/GitFab93",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "orcid": "https://orcid.org/0000-0002-5752-2155"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0196",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0196",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0196"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "# Introduction"
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1687536764'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/assembly" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Assembly
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/assembly/faqs/" title="Check our FAQs for the Assembly topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html">2023-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html">2023-05-02</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-assembly">
+    <h1 data-toc-skip>ERGA post-assembly QC</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/GitFab93/" class="contributor-badge contributor-GitFab93"><img src="https://avatars.githubusercontent.com/GitFab93?s=36" alt="Avatar" width="36" height="36">Fabian Recktenwald</a><a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Avatar" width="36" height="36">Cristóbal Gallardo</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>what combination of tools can assess the quality of an post-assembly?</p>
+</li>
+        
+        <li><p>what metrics can help to analyse the quality?</p>
+</li>
+        
+        <li><p>how to evaluate the outputs?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>apply the post-assembly-QC-workflow using the necessary tools</p>
+</li>
+        
+        <li><p>analyse and evaluate the results of the workflow</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/workflows/" title="ERGA post-assembly QC workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics//docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 23, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
+             The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>The European Reference Genome Atlas (ERGA) is a large-scale project aimed at generating and integrating high-quality reference genomes for a wide range of European organisms. The project will use state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.</p>
+
+<p>Reference genomes provide a baseline for understanding genetic diversity within and among populations, and can be used to identify populations at risk of genetic erosion. This information is crucial for developing effective conservation strategies and management plans for threatened and endangered species (<span class="citation"><a href="#Shafer2015">Shafer <i>et al.</i> 2015</a></span>). Additionally, by better understanding the genetic basis of important traits, such as disease resistance and adaptation to changing environments, researchers can develop targeted interventions to mitigate the effects of environmental change and prevent the loss of genetic diversity (<span class="citation"><a href="#Frankham2011">FRANKHAM <i>et al.</i> 2011</a></span>). The ERGA project has the potential to greatly benefit biodiversity conservation efforts and advance our understanding of the genetic basis of biodiversity.</p>
+
+<p>Genome post-assembly quality control (GPAQC) is a crucial step for evaluating the accuracy and completeness of newly assembled genomes. This involves assessing the contiguity, completeness, accuracy, and consistency of the genome assembly using various bioinformatic tools and methods (<span class="citation"><a href="#Koren2017">Koren <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Hunt2015">Hunt <i>et al.</i> 2015</a></span>, <span class="citation"><a href="#Mikheenko2015">Mikheenko <i>et al.</i> 2015</a></span>, <span class="citation"><a href="#Vaser2017">Vaser <i>et al.</i> 2017</a></span>, <span class="citation"><a href="#Zimin2017">Zimin <i>et al.</i> 2017</a></span>). GPAQC aims to ensure that genomic data is reliable and useful for downstream analyses such as annotation, comparative genomics, and functional studies.</p>
+
+<p>In this tutorial you will learn how to implement the ERGA GPAQC pipeline, and how to interpretate the potential outcomes.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#study-cases" id="markdown-toc-study-cases">Study cases</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#genome-assembly-overview-with-blobtoolkit" id="markdown-toc-genome-assembly-overview-with-blobtoolkit">Genome assembly overview with BlobToolKit</a>    <ol>
+      <li><a href="#generate-read-coverage-data-with-hisat2" id="markdown-toc-generate-read-coverage-data-with-hisat2">Generate read coverage data with <strong>HISAT2</strong></a></li>
+      <li><a href="#generate-sequence-similarity-data-with-diamond" id="markdown-toc-generate-sequence-similarity-data-with-diamond">Generate sequence similarity data with DIAMOND</a></li>
+      <li><a href="#generate-busco-report" id="markdown-toc-generate-busco-report">Generate <strong>BUSCO</strong> report</a></li>
+      <li><a href="#generate-interactive-plots-with-blobtoolkit" id="markdown-toc-generate-interactive-plots-with-blobtoolkit">Generate interactive plots with <strong>BlobToolKit</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#k-mer-based-genome-profiling-and-evaluation" id="markdown-toc-k-mer-based-genome-profiling-and-evaluation">K-mer based genome profiling and evaluation</a>    <ol>
+      <li><a href="#generating-k-mer-profile-with-meryl" id="markdown-toc-generating-k-mer-profile-with-meryl">Generating k-mer profile with <strong>Meryl</strong></a></li>
+      <li><a href="#k-mer-profile-analysis-with-genomescope" id="markdown-toc-k-mer-profile-analysis-with-genomescope">K-mer profile analysis with <strong>GenomeScope</strong></a></li>
+      <li><a href="#k-mer-based-assembly-evaluation-with-merqury" id="markdown-toc-k-mer-based-assembly-evaluation-with-merqury">K-mer based assembly evaluation with <strong>Merqury</strong></a></li>
+      <li><a href="#providing-assembly-statistics-with-gfastats" id="markdown-toc-providing-assembly-statistics-with-gfastats">Providing assembly statistics with <strong>gfastats</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#hi-c-scaffolding" id="markdown-toc-hi-c-scaffolding">Hi-C scaffolding</a>    <ol>
+      <li><a href="#pre-processing-hi-c-data" id="markdown-toc-pre-processing-hi-c-data">Pre-processing Hi-C data</a></li>
+      <li><a href="#generate-hi-c-contact-map" id="markdown-toc-generate-hi-c-contact-map">Generate Hi-C contact map</a></li>
+    </ol>
+  </li>
+  <li><a href="#assembly-graph" id="markdown-toc-assembly-graph">Assembly graph</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="study-cases">Study cases</h1>
+
+<p>In this tutorial we will evaluate three genome assemblies, belonging to three different taxonomic groups, in order to illustrate the different scenarios that can be identified. The characteristics of each of them are described briefly below.</p>
+
+<p><strong>Case 1: <em>Chondrosia reniformis</em></strong></p>
+
+<p><em>Chondrosia reniformis</em> is a slow-growing marine sponge cosmopolitan species which can be found in the Mediterranean Sea and the eastern Atlantic Ocean in shallow waters; it is considered to playing an important ecological role in the marine ecosystem by filtering large volumes of water and providing habitat for other species (<span class="citation"><a href="#Voultsiadou2005">Voultsiadou 2005</a></span>). The members of this species are gonochoristic and oviparous, whose physiology and behavious seems to be highly influence for the presence of endosymbiosis heterotrophic bacteria (<span class="citation"><a href="#sara1997">Sara Michele and Carlo 1998</a></span>).</p>
+
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/chondrosia.jpg" alt="Figure 1: Distribution of data. " width="1024" height="360" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Histories corresponding to the three cases of study.</figcaption></figure>
+
+<p>The assembly is based on 70x PacBio HiFi and Arima2 Hi-C data generated by the Aquatic <a href="https://www.aquaticsymbiosisgenomics.org/">Symbiosis Genomics Project</a>. The assembly process included the following sequence of steps: initial PacBio assembly generation with Hifiasm, retained haplotig separation with purge_dups, and Hi-C based scaffolding with YaHS. The mitochondrial genome was assembled using MitoHiFi. Finally, the primary assembly was analysed and manually improved using gEVAL.</p>
+
+<p><strong>Case 2: <em>Erythrolamprus reginae</em></strong></p>
+
+<p><em>Erythrolamprus reginae</em> is a species of colubrid snake found in South America. This species has been reported to include triploid individuals with parthenogenic reproduction; this type of seems to be associated with higher mutation rate tandem dupliation (<span class="citation"><a href="#Bogart1980">Bogart 1980</a></span>).</p>
+
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/erytrocampus.jpg" alt="Figure 2: Distribution of data. " width="1023" height="369" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Histories corresponding to the three cases of study.</figcaption></figure>
+
+<p>The assembly used in this tutorial correspond to the curated primary assembly generated by the <a href="https://vertebrategenomesproject.org/">VGP project</a>, based on 34x Pacbio HiFi and Arima2 Hi-C data, by using the <a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">VGP assembly pipeline</a>.</p>
+
+<p><strong>Case 3: <em>Eschrichtius robustus</em></strong></p>
+
+<p><em>Eschrichtius robustus</em>, commonly known as the gray whale, is a species of whale found primarily in the North Pacific Ocean. Adult gray whales can reach lengths of up to 14.9 meters and weights of up to 36,000 kilograms. It is a diploid specie, genetically characterized by high homozygosity as a result of inbreeding (<span class="citation"><a href="#BrnicheOlsen2018">Brüniche-Olsen <i>et al.</i> 2018</a></span>).</p>
+
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/eschrichtius.jpg" alt="Figure 3: Distribution of data. " width="1200" height="420" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Histories corresponding to the three cases of study.</figcaption></figure>
+
+<p>The assembly used in this tutorial correspond to the curated primary assembly generated by the <a href="https://vertebrategenomesproject.org/">VGP project</a>, based on 29x Pacbio HiFi data, by using the <a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html">VGP assembly pipeline</a>.</p>
+
+<h1 id="get-data">Get data</h1>
+
+<p>As a first step we will get the data from Zenodo.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload data</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for allocating temporally all the datasets. This history can be named as <code class="language-plaintext highlighter-rouge">Datasets history</code></p>
+    </li>
+    <li>
+      <p>Import the Pacbio HiFi files from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collections</code></li>
+        <li>
+          <p>Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz   fastq.gz    HiFi    CReniformis_Pacbio
+dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
+dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+</code></pre></div>          </div>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Type</code>: column <code class="language-plaintext highlighter-rouge">C</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Group Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Collection Name</code>: column <code class="language-plaintext highlighter-rouge">E</code></li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
+      </ul>
+    </li>
+    <li>
+      <p>Import the remainig datasets from Zenodo:</p>
+
+      <ul>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
+        <li>Click on <strong>Rule-based</strong> tab</li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Datasets</code></li>
+        <li>
+          <p>Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd></p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CReformitis_assembly    https://zenodo.org/record/7831298/files/assembly_sponge.fasta.gz    fasta.gz    assembly
+CReformitis_metadata    https://zenodo.org/record/7781236/files/metadata_chon.yaml  yaml    metadata
+CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastq.gz    Hi-C
+CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastq.gz    Hi-C
+EReginae_Hi-C_F_01   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.001   fastq.gz    Hi-C
+EReginae_Hi-C_F_02   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.002   fastq.gz    Hi-C
+EReginae_Hi-C_F_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.003   fastq.gz    Hi-C
+EReginae_Hi-C_R_01   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.001   fastq.gz    Hi-C
+EReginae_Hi-C_R_02   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.002   fastq.gz    Hi-C
+EReginae_Hi-C_R_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.003   fastq.gz    Hi-C
+EReginata_assembly    https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz    fasta.gz    assembly
+ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  fasta.gz    metadata
+ERobustus_assembly  https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz  fasta.gz    assembly
+ERobustus_metadata  https://zenodo.org/record/7781236/files/metadata_esch.yaml  yaml    metadata
+Taxonomy_data   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz  gz  taxonomy
+Diamond_db   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd  dmnd  database
+</code></pre></div>          </div>
+        </li>
+        <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>: column <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">URL</code>: column <code class="language-plaintext highlighter-rouge">B</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Type</code>: column <code class="language-plaintext highlighter-rouge">C</code></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name Tag</code>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+          </ul>
+        </li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code> and press <kbd>Upload</kbd></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Once we have imported all the datasets, we will move each one to its correspondent history.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-upload-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload data</div>
+
+  <ol>
+    <li>Create three new empty histories, one for each specie.</li>
+    <li>Rename the histories as  <code class="language-plaintext highlighter-rouge">Case 1: *Chondrosia reniformis*</code>, <code class="language-plaintext highlighter-rouge">Case 2: *Erythrolamprus reginae*</code> and  <code class="language-plaintext highlighter-rouge">Case 3: *Eschrichtius robustus*</code>.</li>
+    <li>Click in <strong>History options</strong> and select <code class="language-plaintext highlighter-rouge">Show Histories Side-by-Side</code></li>
+    <li>Click in <code class="language-plaintext highlighter-rouge">Select histories</code>, and include the histories corresponding to the three species.</li>
+    <li>
+      <p>Move the datasets to its correspondent history.</p>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-non-unique-datasets"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Non-unique datasets</div>
+        <p>Both the <strong>Taxonomic_data</strong> and the <strong>Diamond_database</strong> should be included in all of them.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+</blockquote>
+
+<p>Once all the datasets have been copied to their correspondent history, we should obtain something similar to this:</p>
+
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/histories_side_by_side.png" alt="Figure 4: Distribution of data. " width="1445" height="1164" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Histories corresponding to the three cases of study.</figcaption></figure>
+
+<h1 id="genome-assembly-overview-with-blobtoolkit">Genome assembly overview with BlobToolKit</h1>
+
+<p><strong>BlobToolKit</strong> is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data (<span class="citation"><a href="#Challis2020">Challis <i>et al.</i> 2020</a></span>). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.</p>
+
+<p>In this tutorial, we will use BlobToolKit in order to integrate the following data:</p>
+
+<ul>
+  <li><strong>Read coverage data</strong>: BlobToolKit can use read coverage information to identify potential errors or gaps in the genome assembly. By comparing the depth of coverage across the genome, it can highlight regions that may be overrepresented or underrepresented, which can indicate potential issues with the assembly.</li>
+  <li><strong>Taxonomic annotations</strong>: BlobToolKit can use taxonomic information to identify potential contaminants or foreign DNA in the genome assembly. It does this by comparing the taxonomic profile of the genome assembly to a reference database of known organisms.</li>
+  <li><strong>Sequence similarity data</strong>: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.</li>
+  <li><strong>BUSCO reports</strong>: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.</li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-why-should-we-evaluate-contaminants"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why should we evaluate contaminants?</div>
+
+  <p>A significant proportion of the genome sequences in both GenBank and RefSeq (0.54% and 0.34% of entries, respectively) include sequences from contaminants; the contamination primarily exists in the form of short contigs, flanking regions on longer contigs, or areas of larger scaffolds that are flanked by Ns, although a few longer sequences with contamination were also detected (<span class="citation"><a href="#Steinegger2020">Steinegger and Salzberg 2020</a></span>).</p>
+
+</blockquote>
+
+<p>In the next steps, we will generate the data required for generating the visualization plots with BlobToolKit.</p>
+
+<h2 id="generate-read-coverage-data-with-hisat2">Generate read coverage data with <strong>HISAT2</strong></h2>
+
+<p>Read coverage is an essential metric for evaluating the quality of genome assemblies, and it provides valuable information for identifying regions of high and low quality, detecting misassemblies, and identifying potential contaminants. Thus, for example, unexpected regions of low coverage suggests potential errors, such as misassemblies, gaps, or low complexity regions (<span class="citation"><a href="#Koren2017">Koren <i>et al.</i> 2017</a></span>).</p>
+
+<p>In this tutorial we will use <strong>HISAT2</strong> for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment (<span class="citation"><a href="#Zhang2021">Zhang <i>et al.</i> 2021</a></span>). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-how-is-coverage-information-encoded-in-the-bam-file"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: How is coverage information encoded in the BAM file?</div>
+
+  <p>Coverage information is encoded in the BAM file format through the number of reads that align to each position in the reference genome. Specifically, the BAM file stores each read’s start and end position in the genome, as well as the length and orientation of the read, among other information. To calculate coverage, the number of reads that overlap each position in the reference genome is counted.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-bam-file-with-hisat2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate BAM file with HISAT2</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">CReniformis_Pacbio</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1" title="HISAT2 tool" aria-role="link"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1</span></span> with the following parameters:
+      <ul>
+        <li><em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">CReformitis_assembly</code></li>
+          </ul>
+        </li>
+        <li><em>“Is this a single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file”</em>: output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Repeat the prevous steps with the datasets from the two remanining species.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-sequence-similarity-data-with-diamond">Generate sequence similarity data with DIAMOND</h2>
+
+<p><strong>DIAMOND</strong> is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy (<span class="citation"><a href="#Buchfink2014">Buchfink <i>et al.</i> 2014</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0" title="Diamond tool" aria-role="link"><strong>Diamond</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><em>“Alignment mode”</em>: <code class="language-plaintext highlighter-rouge">DNA query sequences (blastx)</code>
+          <ul>
+            <li><em>“Allow for frameshifts?”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+              <ul>
+                <li><em>“restrict hit culling to overlapping query ranges”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“frame shift penalty”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input query file in FASTA or FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">CReformitis_assembly</code></li>
+        <li><em>“Will you select a reference database from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference database”</em>: <code class="language-plaintext highlighter-rouge">Diamond_db</code></li>
+          </ul>
+        </li>
+        <li><em>“Restrict search taxonomically?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Sensitivity Mode”</em>: <code class="language-plaintext highlighter-rouge">Fast (--fast)</code>
+          <ul>
+            <li><em>“Block size in billions of sequence letters to be processed at a time”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+          </ul>
+        </li>
+        <li><em>“Method to filter?”</em>: <code class="language-plaintext highlighter-rouge">Maximum e-value to report alignments</code></li>
+        <li><em>“Method to restrict the number of hits?”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of target sequences</code></li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><em>“Format of output file”</em>: <code class="language-plaintext highlighter-rouge">BLAST tabular</code>
+              <ul>
+                <li><em>“Tabular fields”</em>: <code class="language-plaintext highlighter-rouge">Query Seq-id</code>,<code class="language-plaintext highlighter-rouge">Subject Seq -id</code>, <code class="language-plaintext highlighter-rouge">Start of alignment in query</code>, <code class="language-plaintext highlighter-rouge">End of alignment in query</code>, <code class="language-plaintext highlighter-rouge">Expected value</code>, <code class="language-plaintext highlighter-rouge">Bit score</code> and <code class="language-plaintext highlighter-rouge">Unique Subject Taxonomy ID(s), separated by a ',' (in numerical order)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Repeat the prevous steps with the datasets from the two remanining species.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-busco-report">Generate <strong>BUSCO</strong> report</h2>
+
+<p><strong>BUSCO</strong> (Benchmarking Universal Single-Copy Orthologs) is a tool used for quantitative assessment of genome assembly, gene set, and transcriptome completeness. It is based on evolutionarily informed expectations of gene content derived from near-universal single-copy orthologs (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>)</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-orthologs"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Orthologs</div>
+
+  <p>Orthologs are genes in different species which have usually the same function and have evolved from a common ancestral gene. They are important for new genome assemblies in order to predict gene functions and help with gene annotation (<span class="citation"><a href="#Gennarelli2010">Gennarelli and Cattaneo 2010</a></span>).</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-estimate-single-copy-gene-representation-completeness"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Estimate single copy gene representation completeness</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0" title="Busco tool" aria-role="link"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (DNA)</code>
+          <ul>
+            <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
+          </ul>
+        </li>
+        <li><em>“Auto-detect or select lineage?”</em>: <code class="language-plaintext highlighter-rouge">Auto-detect</code></li>
+        <li><em>“Which outputs should be generated”</em>: <code class="language-plaintext highlighter-rouge">Short summary text</code></li>
+      </ul>
+
+      <blockquote class="details">
+        <div class="box-title details-title" id="details-additional-information"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-information" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details:  Additional information<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>BUSCO sets represent 3023 genes for vertebrates, 2675 for arthropods, 843 for metazoans, 1438 for fungi and 429 for eukaryotes. An intuitive metric is provided 	in BUSCO notation - C:complete[D:dublicated], F:fragmented, M:missing, n:number of genes used.</p>
+      </blockquote>
+    </li>
+    <li>Repeat the prevous steps with the datasets from the two remanining species.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What are the values of complete BUSCO genes for each species?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Eschrichtius robustus: 96.0%</li>
+      <li>Erythrolamprus reginae: 91.3%</li>
+      <li>Chondrosia reniformis: 82.8%</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="generate-interactive-plots-with-blobtoolkit">Generate interactive plots with <strong>BlobToolKit</strong></h2>
+
+<p><strong>BlobToolKit</strong> is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data (<span class="citation"><a href="#Challis2020">Challis <i>et al.</i> 2020</a></span>). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.</p>
+
+<p>To work with BlobToolKit we need to create a new dataset structure called <strong>BlobDir</strong>. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.</p>
+
+<p>To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory (<span class="citation"><a href="#Challis2020">Challis <i>et al.</i> 2020</a></span>).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-creating-the-blobdir-dataset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Creating the BlobDir dataset</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0" title="BlobToolKit tool" aria-role="link"><strong>BlobToolKit</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><em>“Select mode”</em>: <code class="language-plaintext highlighter-rouge">Create a BlobToolKit dataset</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome assembly file”</em>: <code class="language-plaintext highlighter-rouge">CReformitis_assembly</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Metadata file”</em>: <code class="language-plaintext highlighter-rouge">CReformitis_metadata</code></li>
+            <li><em>“NCBI taxonomy ID”</em>: <code class="language-plaintext highlighter-rouge">121349</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“NCBI taxdump directory”</em>: <code class="language-plaintext highlighter-rouge">Taxonomy_Data</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0" title="BlobToolKit tool" aria-role="link"><strong>BlobToolKit</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><em>“Select mode”</em>: <code class="language-plaintext highlighter-rouge">Add data to a BlobToolKit dataset</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Blobdir.tgz file”</em>: output of <strong>BlobToolKit</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BUSCO full table file”</em>: <code class="language-plaintext highlighter-rouge">Full table</code> (output of <strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“BLAST/Diamond hits”</em>: <code class="language-plaintext highlighter-rouge">Enabled</code>
+              <ul>
+                <li><em>“BLAST/Diamond hits dataset”</em>: output of <strong>Diamond</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              </ul>
+            </li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM/SAM/CRAM read alignment file”</em>: output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="interactive_tool_blobtoolkit" title="Interactive BlobToolKit tool" aria-role="link"><strong>Interactive BlobToolKit</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_blobtoolkit</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Blobdir file”</em>: output of <strong>BlobToolKit</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+      </ul>
+    </li>
+    <li>
+      <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon and inspect the output of <strong>Interactive BlobToolKit</strong>.</p>
+    </li>
+    <li>Repeat the prevous steps with the datasets from the two remanining species.</li>
+  </ol>
+
+</blockquote>
+
+<p>Now, we will evaluate three of plots that we can find in the Blobtoolkit interactve interface. First, we will start with the <strong>snailplot</strong>, which provides a holistic view of the assembly.</p>
+
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.snail.c.png" alt="Figure 5: BlobToolKit snail plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Chondrosia reniformis snail plot summary. The grey line represents the assembly scaffolds, where the distance to the center of the circle indicates the length of the scaffolds. A scale line in the center of the circle helps to gauge the length. Longest contig: The red line in the plot indicates the longest contig in the assembly. N50 and N90: The dark orange and light orange lines represent the scaffolds contained in the N50 and N90 metrics, respectively. GC/AT content: The outer light and dark blue lines represent the GC and AT content, respectively. In an ideal assembly, the line between the two colors should be consistent, without much fluctuation. Gaps: Gaps in the assembly, if present, are denoted by the percent N in the bottom right of the image.</figcaption></figure>
+
+<p>The main plot is divided into 1,000 size-ordered bins around the circumference with each bin representing 0.1% of the 117,390,217 bp assembly. The <strong>distribution of sequence lengths is shown in dark grey</strong> with the plot radius scaled to the longest sequence present in the assembly (10,413,042 bp, shown in red).</p>
+
+<p><strong>Orange and pale-orange arcs show the N50 and N90 sequence lengths</strong> (8,459,200 and 6,903,244 bp), respectively. The <strong>pale grey spiral shows the cumulative sequence count on a log scale</strong> with white scale lines showing successive orders of magnitude. The <strong>blue and pale-blue area around the outside of the plot shows the distribution of GC, AT and N percentages</strong> in the same bins as the inner plot. A summary of complete, fragmented, duplicated and missing BUSCO genes in the eukaryota_odb10 set is shown in the top right.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-snailplot-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Snailplot question</div>
+
+  <p>Which differences do you appreciate between the snailplots corresponding to <em>Erythrolamprus reginae</em> and <em>Eschrichtius robustus</em>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.snail.png" alt="Figure 6: BlobToolKit snailplots comparison. " width="4394" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Comparison between snailplots from E. reginae (A) and E. robustus (B).</figcaption></figure>
+
+    <ul>
+      <li>(A) The snake (<em>Erythrolamprus reginae</em>) does have a relatively large proportion of the genome assembled into some few and long scaffolds (reflected in the high “longest scaffold” value and the high “Log10 scaffold count” value).</li>
+      <li>(B) The whale (<em>Eschrichtius robustus</em>) does have a relatively large proportion of the genome assembled into fragmented scaffolds (reflected in the low N90 value compared to the N50 value and the high “Log10 scaffold count” value)</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Now, we are going to analyze the blob plot corresponding to <em>Erythrolamprus reginae</em>, which is specially useful for gaining insights into the composition of your genomic data and identify potential contaminants or endosymbionts.</p>
+
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.blob.circle.png" alt="Figure 7: BlobToolKit circle plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Blob plot of base coverage in input against GC proportion for sequences in *E. reginate assembly*. Sequences are coloured by phylum. Circles are sized in proportion to sequence length . Histograms show the distribution of sequence length sum along each axis</figcaption></figure>
+
+<p>The blob plot is a two-dimensional scatter plot that helps in visualizing and analyzing genomic data for quality control, contaminant detection, and filtering. In the circle plot, <strong>each sequence is represented by a circle</strong>, with its diameter proportional to the sequence length. Circles are colored based on their taxonomic affiliation, and their positions on the X and Y axes are determined by their GC content and coverage, respectively. GC content is the proportion of G and C bases in the sequence, which can differ substantially between genomes. Coverage, on the other hand, is a measure of the number of times a particular sequence has been read during the sequencing process. The plot also includes coverage and GC histograms for each taxonomic group, weighted by the total span (cumulative length) of sequences occupying each bin.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-pre-curated-assembly-evaluation"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Pre-curated assembly evaluation</div>
+
+  <p>Usually, the evaluation of the pre-curated assembly yield quite different results when compared with the post-curation evaluation. A frequent difference is the abudance of contigs that belong to different organisms, as a result of contamination in the reads. It can be clearly appreciated in the next figure, which correspond to the <em>E. reginae</em> pre-curated assembly. A striking element is the presence of 38 contigs corresponding to the phylum Artverviricota (dark green), a group of viruses that encode a reverse transcriptase.</p>
+
+  <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.blob.circle_precuration.png" alt="Figure 8: BlobToolKit circle plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Blob plot of base coverage in input against GC proportion for sequences in pre-curated E. reginate assembly. Sequences are coloured by phylum. Circles are sized in proportion to sequence length . Histograms show the distribution of sequence length sum along each axis</figcaption></figure>
+
+  <p>In addition, as we can appreciate, the samples included contamination from fungi, arthropoda and bacteria.</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-blob-plot-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Blob plot question</div>
+
+  <p>Does exist significant contamination in the <em>Eschrichtius robustus</em> and <em>Chondrosia reniformis</em> assemblies?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.blob.circle_comparison.png" alt="Figure 9: BlobToolKit snailplots comparison. " width="4428" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Comparison between blob plots from E. robustus (A) and C. reniformis (B).</figcaption></figure>
+
+    <ul>
+      <li>(A) The whale (<em>Eschrichtius robustus</em>) does have significant contamination. Approximately half of the assembly of the whale does contain contaminants or cosymbionts (total count: 703, Chordata count: 316).</li>
+      <li>(B) The sponge (<em>Condrosia reniformis</em>) doesn’t contain any contamination (total count: 15, Chordata count: 15).</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Finally, let’s have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the <strong>contribution of the contigs from contaminated reads to the final assembly</strong>. In that case, first we will evaluate all sequences together, and then we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let’s start with the accumulative plot corresponding to all sequences (fig. 10).</p>
+
+<p>In this kind of plot, <strong>the x-axis represent the number of contigs</strong> (sorted by species and length), and <strong>the y-axis correspond to the cumulative length in nucleotides</strong>. The gray line shows the cumulative length of all sequences. As we can appreciate, most sequences corespond to the taxa chordata (1.9Gb, distributed along 151 contigs). In addition, we can see that the final assembly includes 174 contigs corresponding to different taxa, or not classified at all. In order to be able to analyze the contribution of those sequences, we will filter the contigs corresponding to the chordata.</p>
+
+<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.cumulative.png" alt="Figure 10: BlobToolKit cumulativ plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Cumulative sequence length for assembly Blobdir. The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule. Plot axes are scaled to the filtered assembly.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-how-do-i-apply-filters-to-a-dataset"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  How do I apply filters to a dataset?</div>
+
+  <p>Datasets can be filtered based on any category or variable using the “Filters” menu. To filter based on a category, click the tab above any bar of the preview histogram to hide/show records assigned to this category. To filter variables, use the sliders at either end of the preview histogram to change the maximum and minimum values or enter the numbers directly into the text boxes above the histogram.</p>
+
+</blockquote>
+
+<p>By hidding the contings corresponding to chordata, we can have a detailed view of the contributions of each contaminant (fig. 11).</p>
+
+<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Blobdir.cumulative_filtered.png" alt="Figure 11: BlobToolKit cumulativ plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span>  The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule and are stacked by cumulative value on the x-axis to show the proportion of each phylum in the overall assembly. The assembly has been filtered to exclude sequences with phylum matches Chordata. Plot axes are scaled to the filtered assembly.</figcaption></figure>
+
+<p>In figure 11 we can appreciate clearly the relative contribution of each contaminant with respect to the total contamination.</p>
+
+<h1 id="k-mer-based-genome-profiling-and-evaluation">K-mer based genome profiling and evaluation</h1>
+
+<p>k-mers can be utilized to infer genome characteristics such as length and heterozygosity by analyzing their frequency distribution in raw sequencing reads (<span class="citation"><a href="#Manekar2018">Manekar and Sathe 2018</a></span>). In this tutorial we will make use of three different tools in order to perform the k-mer based genome profiling and assembly evaluation.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-genome-profiling-details"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Genome profiling details</div>
+
+  <p>You can find more details about genome profiling in the <a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis">VGP training</a>.</p>
+
+</blockquote>
+
+<h2 id="generating-k-mer-profile-with-meryl">Generating k-mer profile with <strong>Meryl</strong></h2>
+
+<p>DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools, exactly like in <strong>Meryl</strong>. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. (<span class="citation"><a href="#Clavijo">Clavijo</a></span>)</p>
+
+<p>Meryl is a powerful tool for counting k-mers in large-scale genomic datasets. It uses a sorting-based approach that sorts the k-mers in lexicographical order.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generating-k-mer-profile"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generating k-mer profile</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="link"><strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6</span></span> with the following parameters:
+      <ul>
+        <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Count operations</code>
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input sequences”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset collection)</li>
+            <li><em>“K-mer size selector”</em>: <code class="language-plaintext highlighter-rouge">Set a k-mer size</code>
+              <ul>
+                <li><em>“K-mer size”</em>: <code class="language-plaintext highlighter-rouge">21</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-compute-k"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  compute k</div>
+
+        <p>In general k can be computed as k=log4 (G(1-p)/p), with G as genome size and p as tolerable collision rate.
+In our case we set the k-mer size to 21.</p>
+      </blockquote>
+    </li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="link"><strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6</span></span> again with the following parameters:
+      <ul>
+        <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Operations on sets of k-mers</code>
+          <ul>
+            <li><em>“Operations on sets of k-mers”</em>: <code class="language-plaintext highlighter-rouge">Union-sum: return k-mers that occur in any input, set the count to the sum of the counts</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input meryldb”</em>: previous output of <strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Meryl tool" aria-role="link"><strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6</span></span> a third time with the following parameters:
+      <ul>
+        <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Generate histogram dataset</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input meryldb”</em>: previous output of <strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the output as <code class="language-plaintext highlighter-rouge">Histogram dataset</code></li>
+  </ol>
+
+</blockquote>
+
+<h2 id="k-mer-profile-analysis-with-genomescope">K-mer profile analysis with <strong>GenomeScope</strong></h2>
+
+<p><strong>Genomescope</strong> is used for analysing genomes with the help of k-mer profile analysis. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data. (<span class="citation"><a href="#Vurture2017">Vurture <i>et al.</i> 2017</a></span>)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-plots-for-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate plots for analysis</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2" title="GenomeScope tool" aria-role="link"><strong>GenomeScope</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input histogram file”</em>: <code class="language-plaintext highlighter-rouge">Histogram dataset</code></li>
+        <li><em>“Ploidy for model to use”</em>: <code class="language-plaintext highlighter-rouge">2</code> for <em>C. reniformis</em> and <em>E. robustus</em>, <code class="language-plaintext highlighter-rouge">3</code> for <em>E. reginae</em>.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-plots"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Plots</div>
+
+        <p>The generated plots will have the coverage on the x-axis and the frequency on the y-axis. It shows the fitted model in the observed k-mer data as well as the k-mer peaks and other information like some estimated parameters of the assembly.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png" alt="Figure 12: Genomescope plot. " width="2000" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Genomescope 21-mer profile (k:21) of Chondrosia reniformis, diploid (p:2). The plot includes estimations about the genome length (len:124,167,659bp), unique sequences (uniq:61.5%), homozygous portion (aa: 98.7%), heterozygous portions (ab:1.32%), mean k-mer coverage for heterozygous bases (kcov:35.4), read error rate (err:0.752%) and average rate of read duplications (dup:0.378).</figcaption></figure>
+
+<p>Figure 12 corresponds to the k-mer profile of the sponge (<em>Chondrosia reniformis</em>). Presumably, the large gene number in the sponge genome is due to regional gene duplication; so far evidence for a transposition in sponges has been presented. Data indicate that only 0.25 % of the total sponge genome comprises CA/TG microsatellites, and until now also no SINEs/transposable elements have been identified. The estimated genome size around 124,Mbp is relatively close to <em>Chondrosia reniformis</em> genome size (117,39Mbp).</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-genome-profile-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genome profile question</div>
+
+  <p>Which differences can you appreciate between the genome profile of <em>Erythrolamprus reginae</em> and <em>Eschrichtius robustus</em>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/genome_profiling_comparison.png" alt="Figure 13: Genomescope plot . " width="4010" height="2000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Genomescope genome profile. Erythrolamprus reginae (A). Eschrichtius robustus (B).</figcaption></figure>
+
+    <ul>
+      <li>(A) The genome profile of the snake (<em>Erythrolamprus reginae</em>) suggests a high level of heterozygosity (reflected by the first peak at 11.1x coverage). 51.6% unique sequences have been estimated. In this case the low value is attributed to the parthenogenesis and the polyploidy of this snake which causes tandem duplications and higher DNA replication as a result of the triploid-diploid cycles.</li>
+      <li>(B) The genome profile of the whale (<em>Eschrichtius robustus</em>) suggests a high level of homozygosity (reflected by the second peak at 29x coverage). The homozygous k-mer distribution can be expected from the high grade of inbreeding.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="k-mer-based-assembly-evaluation-with-merqury">K-mer based assembly evaluation with <strong>Merqury</strong></h2>
+
+<p>Merqury is designed for evaluating the completeness and accuracy of long-read genome assemblies using short-read sequencing data. Thus the quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool.
+Merqury works by comparing k-mers of an assembly to those from unassembled high-accuracy reads of the raw sequencing data. K-mer-based methods are also used to identify errors and missing sequences. (<span class="citation"><a href="#Rhie2020">Rhie <i>et al.</i> 2020</a></span>)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generating-stats-and-plots"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generating stats and plots</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2" title="Merqury tool" aria-role="link"><strong>Merqury</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2</span></span> with the following parameters:
+      <ul>
+        <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“K-mer counts database”</em>: <code class="language-plaintext highlighter-rouge">read_db</code> (output of <strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Number of assemblies”</em>: <code class="language-plaintext highlighter-rouge">One assembly (pseudo-haplotype or mixed-haplotype)</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome assembly”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-output"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Output</div>
+
+        <p>Merqury will now generate following outputs:</p>
+
+        <ol>
+          <li>stats with completeness statistics</li>
+          <li>QV stats with quality value statistics</li>
+          <li>plots</li>
+        </ol>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Let’s have a closer look at the copy number plots for each of the three species. Merqury will generate k-mers from the raw sequencing data (in the following called the ‘read set’) and will compare them to the assembly, in contrast to genomescope. Despite being diploid or triploid the species only got plotted with the primary assembly. This is why only one-copy k-mers get evaluated.</p>
+
+<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png" alt="Figure 14: Merqury plot. " width="1800" height="1500" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Merqury copy numbers (CN) plot of the whale (*Eschrichtius robustus*). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set. The black area can be indicative for sequencing error in the read set or missing sequences in the assembly.</figcaption></figure>
+
+<p>The small black area indicates that most of the k-mers found in the read set are also found in the assembly (but not all since only the primary assembly got plotted). It reflects a highly homozygous assembly. This plot indicates a sequencing coverage at ~30x as seen before with genomescope.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-genome-profile-question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Genome profile question</div>
+
+  <p>Which differences can you appreciate between the genome profile of <em>Chondrosia reniformis</em> and <em>Erythrolamprus reginae</em>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/merqury_comparison_plot.png" alt="Figure 15: Merqury plot. " width="3549" height="1500" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Merqury copy numbers (CN) plot of Chondrosia reniformis (A) and Erythrolamprus reginae (B). The red area displays the k-mers of the assembly. The black area displays the k-mers only found in the read set. The black area can be indicative for sequencing error in the read set or missing sequences in the assembly.</figcaption></figure>
+
+    <ul>
+      <li>(A) The sponge (<em>Chondrosia reniformis</em>) does have two peaks as seen before with genomescope which is typical for a diploid species. The large black area indicates that there is a high amount of k-mers in the read set which is not used in the assembly since only the primary assembly got plotted. The secondary assembly is missing.</li>
+      <li>(B) The snake (<em>Erythrolamprus reginae</em>) does have three peaks as seen before with genomescope which is typical for a triploid species. The black area is even larger compared to the sponge since only the primary assembly got plotted. The secondary and third assembly are missing.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="providing-assembly-statistics-with-gfastats">Providing assembly statistics with <strong>gfastats</strong></h2>
+
+<p>gfastats is a tool for providing summary statistics and genome file manipulation. In our case it will generate genome assembly statistics in a tabular-format output. Metrics like N50/L50, GC-content and lengths of contigs, scaffolds and gaps as well as other statistical information are provided for assessing the contiguity of the assembly.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-summary-statistics"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate summary statistics</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0" title="gfastats tool" aria-role="link"><strong>gfastats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><em>“Specify target sequences”</em>: <code class="language-plaintext highlighter-rouge">Disabled</code></li>
+        <li><em>“Tool mode”</em>: <code class="language-plaintext highlighter-rouge">Summary statistics generation</code>
+          <ul>
+            <li><em>“Report mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assembly statistics (--nstar-report)</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-n50-ng50"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  N50/NG50</div>
+
+        <p>Consider taking all contigs and sorting them by size. Starting with the largest and ending with the smallest. Now add up the length of each contig beginning with the largest, then the second largest and so on. When reaching 50% of the total length of all contigs it’s done. The length of the contig you stopped is the N50 value. (<span class="citation"><a href="#Videvall201703">Videvall</a></span>)</p>
+
+        <p>NG50 or more general NG(X) is based on the same idea as N50. The difference is that in this case the whole genome size or estimated genome size is taken into account. Through this comparisons can be made over different assemblies and genome sizes.</p>
+
+      </blockquote>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-l50"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  L50</div>
+
+        <p>Remember adding up the length of each contig until reaching the 50%. The L50 value is the number of the contig you have stopped.</p>
+
+        <p>Example: The sum of all contigs together is 2000 kbp. The contig at 50% has length 300 kbp and is the third one and thus the third largest.
+Then N50 = 300 kbp and L50 = 3.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+  <p>In the best case a high quality assembly should consist of just a few and large contigs to represent the genome as a whole. Therefore a good assembly should lead to a high N50 value and in contrast a low quality assembly with tiny, fragmented contigs would lead to a low N50 value. (<span class="citation"><a href="#Videvall201704">Videvall</a></span>)</p>
+
+  <p>The metric doesn’t only rely on measuring the 50% mark. The general case is N(X) where X ranges from 0 - 100 mostly in ten steps. However the NX metric is not suitable for comparing different species with different genome lengths.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-gc-content"><button class="gtn-boxify-button details" type="button" aria-controls="details-gc-content" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details:  GC-content<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>The GC-content or guanine-cytosine ratio tells one about the occurrence of guanine and cytosine in a genome. It is stated in percent. The two nucleobases are held together by three hydrogen bonds. A high GC-content makes DNA more stable than a low GC-content. Because the ratio of most species and organisms has been found out by now, it is also a good metric to gauge completeness.(<span class="citation"><a href="#Wikipedia">Wikipedia</a></span>)</p>
+  </blockquote>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-cc-contig-chromosome-ratio"><button class="gtn-boxify-button details" type="button" aria-controls="details-cc-contig-chromosome-ratio" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details:  CC(contig/chromosome) ratio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>Another good metric for gauging contiguity is the CC ratio. The value is calculated by dividing contig counts by the chromosome pair number. A perfect score would be 1. Therefore the lower the value the better the contiguity of the assembly.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="hi-c-scaffolding">Hi-C scaffolding</h1>
+
+<p>To understand how chromosomes are arranged in their three-dimensional structure in the nucleus, high resolution and high throughput imaging techniques have been developed. Hi-C is a high throughput method to measure pairwise contacts between pairs of genomic loci. 
+It is based on cross-linking the DNA in the nucleus and its histones(proteins). However the DNA gets cut and marked and afterwards the cutted parts get ligated together. Then the DNA gets fragmented and sequenced forwards and backwards generating paired reads. The resulting information can be used to assemble the reads to the corresponding chromosome.
+(<span class="citation"><a href="#Pal2018">Pal <i>et al.</i> 2018</a></span>)</p>
+
+<h2 id="pre-processing-hi-c-data">Pre-processing Hi-C data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mapping-hi-c-reads-against-a-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Mapping Hi-C reads against a reference genome</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="BWA-MEM2 tool" aria-role="link"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+        <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
+      </ul>
+    </li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0" title="BWA-MEM2 tool" aria-role="link"><strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0</span></span> again with the following parameters:
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">1.Simple Illumina mode</code></li>
+        <li><em>“BAM sorting mode”</em>: <code class="language-plaintext highlighter-rouge">Sort by read names  (i.e., the QNAME field) </code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0" title="Filter and merge tool" aria-role="link"><strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First set of reads”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second set of reads”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>BWA-MEM2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-hi-c-contact-map">Generate Hi-C contact map</h2>
+
+<p>PretextMap converts BAM/SAM files into genome contact maps. With those contact maps it is possible to analyse the 3D organisation of chromosomes. The resulting map will be used for visualisation and editing contigs/scaffolds. (<span class="citation"><a href="#Kumar2017">Kumar <i>et al.</i> 2017</a></span>)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-a-contact-map-with-pretextmap-and-pretextsnapshot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate a contact map with PretextMap and PretextSnapshot</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0" title="PretextMap tool" aria-role="link"><strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset in SAM or BAM format”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Filter and merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">Don't sort</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1" title="Pretext Snapshot tool" aria-role="link"><strong>Pretext Snapshot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input Pretext map file”</em>: <code class="language-plaintext highlighter-rouge">pretext_map_out</code> (output of <strong>PretextMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Output image format”</em>: <code class="language-plaintext highlighter-rouge">PNG</code></li>
+        <li><em>“Show grid?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/pretext_snake.png" alt="Figure 16: Contact Map Snake. " width="1000" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Hi-C contact map of Erythrolamprus reginae generated by Pretext.</figcaption></figure>
+
+<p>The contact map of the snake (<em>Erythrolamprus reginae</em>) does have a clear diagonal pattern. These interactions are commonly called “cis” interactions and occur between genomic loci that are spatially close to each other. Interactions beyond the diagonal pattern are called “trans” and indicate long-range interactions.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-hi-c-contact-map-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Hi-C contact map question</div>
+
+  <p>What can you say about the Hi-C map corresponding to <em>Chondrosia reniformis</em>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/pretext_sponge.png" alt="Figure 17: Contact Map Sponge. " width="1000" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Hi-C contact map of Chondrosia reniformis generated by Pretext.</figcaption></figure>
+
+    <p>The contact map of the sponge (<em>Chondrosia reniformis</em>) does contain widespread interactions all over the genome. Additionally a diagonal pattern can be observed. The widespread interactions all over the genome can be the result of experimental and technical issues or it can have a biological and funcitonal significance.</p>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="assembly-graph">Assembly graph</h1>
+
+<p>Bandage is a tool to visualise de novo assembly graphs with connections. (<span class="citation"><a href="#Wick2015">Wick <i>et al.</i> 2015</a></span>)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-assembly-graph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate assembly graph</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0" title="gfastats tool" aria-role="link"><strong>gfastats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
+        <li><em>“Specify target sequences”</em>: <code class="language-plaintext highlighter-rouge">Disabled</code></li>
+        <li><em>“Tool mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assembly manipulation</code>
+          <ul>
+            <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">GFA</code>
+              <ul>
+                <li><em>“Terminal overlaps selection”</em>: <code class="language-plaintext highlighter-rouge">No (default)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4" title="Bandage Image tool" aria-role="link"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Graphical Fragment Assembly”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>gfastats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/bandage_sponge.jpg" alt="Figure 18: Assembly Graph Sponge. " width="1392" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Assembly graph of the sponge (*Chrondrosia reniformis*). Contigs (nodes) are displayed in different colors and their connections (edges) are displayed as red dotted lines.</figcaption></figure>
+
+<p>The Assembly graph of <em>Chondrosia reniformis</em> is relatively simple and doesn’t have a complex structure. The connectivity of the nodes is clear but uncomplete and lacking some indicative regions of overlapping contigs. Repetitive regions can be investigated by searching for multiple paths or connections in the graph.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-assembly-graph-question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Assembly graph question</div>
+
+  <p>Which differences can you appreciate between the assembly graph corresponding to <em>Erythrolamprus reginae</em> and <em>Eschrichtius robustus</em>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/bandage.jpg" alt="Figure 19: Assembly Graph Snake and Whale. " width="2618" height="1000" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Assembly graph of Erythrolamprus reginae (A) and Eschrichtius robustus (B). Contigs (nodes) are displayed in different colors and their connections (edges) are displayed as red dotted lines.</figcaption></figure>
+
+    <ul>
+      <li>(A) The assembly graph of the snake (<em>Erythrolamprus reginae</em>) does have a confusing and complex structure. This can be an indicator for errors or misassemblies. The nodes are well-connected but relatively unclear in their path which is reflected by many small contigs and only a few large contigs. This assembly graph does contain a lot of repetitive sequences that result in multiple paths and connections between the nodes.</li>
+      <li>(B) The assembly graph of the whale (<em>Eschrichtius robustus</em>) is overall relatively simple and doesn’t have a too complex structure. The nodes are well-connected and most of the paths are clear which is reflected by many large contigs and only some small contigs. This assembly does also contain repetitive regions but clearly less than in the assembly of the snake.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In conclusion, it’s worth to run the the post-assembly workflow to assess the quality of genome assemblies. The following table contains metrics to sum up the quality control.</p>
+
+<figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/post-assembly-QC/table_of_metrics.png" alt="Figure 20:  Final stats. " width="892" height="463" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> This table contains 9 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.</figcaption></figure>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>The ERGA post-assembly pipeline allows to assess and improve the quality of genome assemblies</p>
+</li>
+                        
+                        <li><p>The ERGA post-assembly pipeline contains of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics and Hi-C scaffolding.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/assembly/faqs/">FAQ page for the Assembly topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Bogart1980">Bogart, J. P., 1980 <b>Evolutionary Implications of Polyploidy in Amphibians and Reptiles</b>, pp. 341–378 <span style="font-style: normal">in</span> <i>Polyploidy</i>, <i>Springer US</i>. <a href="https://doi.org/10.1007/978-1-4613-3069-1_18">10.1007/978-1-4613-3069-1_18</a></li>
+<li id="sara1997">Sara Michele, C.-V. R., Bavestrello Giorgio, and C. Carlo, 1998 <b>Endosymbiosis in Sponges: Relevance for Epigenesis and Evolution </b>. Symbiosis 25: 57–68. <a href="https://dalspace.library.dal.ca/bitstream/handle/10222/77605/VOLUME%2025-NUMBERS%201-3-1998-PAGE%2057.pdf">https://dalspace.library.dal.ca/bitstream/handle/10222/77605/VOLUME%2025-NUMBERS%201-3-1998-PAGE%2057.pdf</a></li>
+<li id="Voultsiadou2005">Voultsiadou, E., 2005 <b>Sponge diversity in the Aegean Sea: Check list and new information</b>. Italian Journal of Zoology 72: 53–64. <a href="https://doi.org/10.1080/11250000509356653">10.1080/11250000509356653</a></li>
+<li id="Gennarelli2010">Gennarelli, M., and A. Cattaneo, 2010 <b>Genetic Variations and Association</b>, pp. 129–151 <span style="font-style: normal">in</span> <i>International Review of Neurobiology</i>, <i>Elsevier</i>. <a href="https://doi.org/10.1016/b978-0-12-384976-2.00006-x">10.1016/b978-0-12-384976-2.00006-x</a></li>
+<li id="Frankham2011">FRANKHAM, R. I. C. H. A. R. D., J. O. N. A. T. H. A. N. D. BALLOU, M. A. R. K. D. B. ELDRIDGE, R. O. B. E. R. T. C. LACY, K. A. T. H. E. R. I. N. E. RALLS <i>et al.</i>, 2011 <b>Predicting the Probability of Outbreeding Depression</b>. Conservation Biology 25: 465–475. <a href="https://doi.org/10.1111/j.1523-1739.2011.01662.x">10.1111/j.1523-1739.2011.01662.x</a></li>
+<li id="Buchfink2014">Buchfink, B., C. Xie, and D. H. Huson, 2014 <b>Fast and sensitive protein alignment using DIAMOND</b>. Nature Methods 12: 59–60. <a href="https://doi.org/10.1038/nmeth.3176">10.1038/nmeth.3176</a></li>
+<li id="Hunt2015">Hunt, M., N. D. Silva, T. D. Otto, J. Parkhill, J. A. Keane <i>et al.</i>, 2015 <b>Circlator: automated circularization of genome assemblies using long sequencing reads</b>. Genome Biology 16: <a href="https://doi.org/10.1186/s13059-015-0849-0">10.1186/s13059-015-0849-0</a></li>
+<li id="Mikheenko2015">Mikheenko, A., V. Saveliev, and A. Gurevich, 2015 <b>MetaQUAST: evaluation of metagenome assemblies</b>. Bioinformatics 32: 1088–1090. <a href="https://doi.org/10.1093/bioinformatics/btv697">10.1093/bioinformatics/btv697</a></li>
+<li id="Shafer2015">Shafer, A. B. A., J. B. W. Wolf, P. C. Alves, L. Bergström, M. W. Bruford <i>et al.</i>, 2015 <b>Genomics and the challenging translation into conservation practice</b>. Trends in Ecology &amp\mathsemicolon Evolution 30: 78–87. <a href="https://doi.org/10.1016/j.tree.2014.11.009">10.1016/j.tree.2014.11.009</a></li>
+<li id="Simo2015">Simão, F. A., R. M. Waterhouse, P. Ioannidis, E. V. Kriventseva, and E. M. Zdobnov, 2015 <b>BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</b>. Bioinformatics 31: 3210–3212. <a href="https://doi.org/10.1093/bioinformatics/btv351">10.1093/bioinformatics/btv351</a></li>
+<li id="Wick2015">Wick, R. R., M. B. Schultz, J. Zobel, and K. E. Holt, 2015 <b>Bandage: interactive visualization of \lessi\greaterde novo\less/i\greater genome assemblies</b>. Bioinformatics 31: 3350–3352. <a href="https://doi.org/10.1093/bioinformatics/btv383">10.1093/bioinformatics/btv383</a></li>
+<li id="Koren2017">Koren, S., B. P. Walenz, K. Berlin, J. R. Miller, N. H. Bergman <i>et al.</i>, 2017 <b>Canu: scalable and accurate long-read assembly via adaptive \lessi\greaterk\less/i\greater-mer weighting and repeat separation</b>. Genome Research 27: 722–736. <a href="https://doi.org/10.1101/gr.215087.116">10.1101/gr.215087.116</a></li>
+<li id="Kumar2017">Kumar, R., H. Sobhy, P. Stenberg, and L. Lizana, 2017 <b>Genome contact map explorer: a platform for the comparison,  interactive visualization and analysis of genome contact maps</b>. Nucleic Acids Research 45: e152–e152. <a href="https://doi.org/10.1093/nar/gkx644">10.1093/nar/gkx644</a></li>
+<li id="Vaser2017">Vaser, R., I. Sović, N. Nagarajan, and M. Šikić, 2017 <b>Fast and accurate de novo genome assembly from long uncorrected reads</b>. Genome Research 27: 737–746. <a href="https://doi.org/10.1101/gr.214270.116">10.1101/gr.214270.116</a></li>
+<li id="Vurture2017">Vurture, G. W., F. J. Sedlazeck, M. Nattestad, C. J. Underwood, H. Fang <i>et al.</i>, 2017 <b>GenomeScope: fast reference-free genome profiling from short reads</b> (B. Berger, Ed.). Bioinformatics 33: 2202–2204. <a href="https://doi.org/10.1093/bioinformatics/btx153">10.1093/bioinformatics/btx153</a></li>
+<li id="Zimin2017">Zimin, A. V., D. Puiu, R. Hall, S. Kingan, B. J. Clavijo <i>et al.</i>, 2017 <b>The first near-complete assembly of the hexaploid bread wheat genome,  Triticum aestivum</b>. GigaScience 6: <a href="https://doi.org/10.1093/gigascience/gix097">10.1093/gigascience/gix097</a></li>
+<li id="BrnicheOlsen2018">Brüniche-Olsen, A., R. Westerman, Z. Kazmierczyk, V. V. Vertyankin, C. Godard-Codding <i>et al.</i>, 2018 <b>The inference of gray whale (Eschrichtius robustus) historical population attributes from whole-genome sequences</b>. BMC Evolutionary Biology 18: <a href="https://doi.org/10.1186/s12862-018-1204-3">10.1186/s12862-018-1204-3</a></li>
+<li id="Manekar2018">Manekar, S. C., and S. R. Sathe, 2018 <b>A benchmark study of k-mer counting methods for high-throughput sequencing</b>. GigaScience. <a href="https://doi.org/10.1093/gigascience/giy125">10.1093/gigascience/giy125</a></li>
+<li id="Pal2018">Pal, K., M. Forcato, and F. Ferrari, 2018 <b>Hi-C analysis: from data generation to integration</b>. Biophysical Reviews 11: 67–78. <a href="https://doi.org/10.1007/s12551-018-0489-1">10.1007/s12551-018-0489-1</a></li>
+<li id="Challis2020">Challis, R., E. Richards, J. Rajan, G. Cochrane, and M. Blaxter, 2020 <b>BlobToolKit – Interactive Quality Assessment of Genome Assemblies</b>. G3 Genes\vertGenomes\vertGenetics 10: 1361–1374. <a href="https://doi.org/10.1534/g3.119.400908">10.1534/g3.119.400908</a></li>
+<li id="Rhie2020">Rhie, A., B. P. Walenz, S. Koren, and A. M. Phillippy, 2020 <b>Merqury: reference-free quality,  completeness,  and phasing assessment for genome assemblies</b>. Genome Biology 21: <a href="https://doi.org/10.1186/s13059-020-02134-9">10.1186/s13059-020-02134-9</a></li>
+<li id="Steinegger2020">Steinegger, M., and S. L. Salzberg, 2020 <b>Terminating contamination: large-scale search identifies more than 2, 000, 000 contaminated entries in GenBank</b>. Genome Biology 21: <a href="https://doi.org/10.1186/s13059-020-02023-1">10.1186/s13059-020-02023-1</a></li>
+<li id="Zhang2021">Zhang, Y., C. Park, C. Bennett, M. Thornton, and D. Kim, 2021 <b>Rapid and accurate alignment of nucleotide conversion sequencing reads with HISAT-3N</b>. Genome Research 31: 1290–1295. <a href="https://doi.org/10.1101/gr.275193.120">10.1101/gr.275193.120</a></li>
+<li id="Clavijo">Clavijo, B. J. <b>k-mer counting, part I: Introduction</b>. <a href="https://bioinfologics.github.io/post/2018/09/17/k-mer-counting-part-i-introduction/">https://bioinfologics.github.io/post/2018/09/17/k-mer-counting-part-i-introduction/</a></li>
+<li id="Videvall201703">Videvall, E. <b>What’s N50?</b> <a href="https://www.molecularecologist.com/2017/03/29/whats-n50/">https://www.molecularecologist.com/2017/03/29/whats-n50/</a></li>
+<li id="Videvall201704">Videvall, E. <b>The N50 filtering problem</b>. <a href="https://www.molecularecologist.com/2017/04/05/the-first-problem-with-n50/#: :text=In%20contrast%2C%20a%20poor%20assembly,indicative%20measures%20of%20better%20assemblies">https://www.molecularecologist.com/2017/04/05/the-first-problem-with-n50/#: :text=In%20contrast%2C%20a%20poor%20assembly,indicative%20measures%20of%20better%20assemblies</a></li>
+<li id="Wikipedia">Wikipedia <b>GC-content</b>. <a href="https://en.wikipedia.org/wiki/GC-content">https://en.wikipedia.org/wiki/GC-content</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ERGA post-assembly QC (Assembly)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Fabian Recktenwald, Cristóbal Gallardo,  <b>ERGA post-assembly QC (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{assembly-ERGA-post-assembly-QC,
+author = "Fabian Recktenwald and Cristóbal Gallardo",
+	title = "ERGA post-assembly QC (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: blobtoolkit
+  owner: bgruening
+  revisions: 7d9ee8cd14b8
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: blobtoolkit
+  owner: bgruening
+  revisions: 53dd00a4ab68
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: diamond
+  owner: bgruening
+  revisions: 1e3323a44643
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: gfastats
+  owner: bgruening
+  revisions: 5799092ffdff
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: gfastats
+  owner: bgruening
+  revisions: 3ef480892a9f
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: text_processing
+  owner: bgruening
+  revisions: d698c222f354
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: samtools_stats
+  owner: devteam
+  revisions: 3a0efe14891f
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: smudgeplot
+  owner: galaxy-australia
+  revisions: 5e0825476fb7
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bandage
+  owner: iuc
+  revisions: ddddce450736
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bellerophon
+  owner: iuc
+  revisions: 25ca5d73aedf
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: busco
+  owner: iuc
+  revisions: bb935709506a
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: bwa_mem2
+  owner: iuc
+  revisions: b4a22d90cce9
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: genomescope
+  owner: iuc
+  revisions: 01210c4e9144
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: hisat2
+  owner: iuc
+  revisions: f4af63aaf57a
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: merqury
+  owner: iuc
+  revisions: f8113c25bc6b
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: meryl
+  owner: iuc
+  revisions: 29dabd8db6f2
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pretext_map
+  owner: iuc
+  revisions: dfb8a4497339
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: pretext_snapshot
+  owner: iuc
+  revisions: 44c66e8d21e6
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: collapse_collections
+  owner: nml
+  revisions: 90981f86000f
+  tool_panel_section_label: Assembly
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/476574d2b382dd1db6c2c408d8fb6ec4393a6904">476574d</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1687536764'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>

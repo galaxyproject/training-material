@@ -1,0 +1,262 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "ERGA post-assembly QC",
+  "questions": [
+    "what combination of tools can assess the quality of an post-assembly?",
+    "what metrics can help to analyse the quality?",
+    "how to evaluate the outputs?"
+  ],
+  "objectives": [
+    "apply the post-assembly-QC-workflow using the necessary tools",
+    "analyse and evaluate the results of the workflow"
+  ],
+  "time_estimation": "3H",
+  "key_points": [
+    "The ERGA post-assembly pipeline allows to assess and improve the quality of genome assemblies",
+    "The ERGA post-assembly pipeline contains of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics and Hi-C scaffolding."
+  ],
+  "contributors": [
+    {
+      "name": "Fabian Recktenwald",
+      "joined": "2023-03",
+      "id": "GitFab93",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/GitFab93.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/GitFab93/"
+    },
+    {
+      "name": "Cristóbal Gallardo",
+      "joined": "2020-11",
+      "elixir_node": "de",
+      "orcid": "0000-0002-5752-2155",
+      "id": "gallardoalba",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/"
+    }
+  ],
+  "short_id": null,
+  "url": "/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.html",
+  "topic_name": "assembly",
+  "tutorial_name": "ERGA-post-assembly-QC",
+  "dir": "topics/assembly/tutorials/ERGA-post-assembly-QC",
+  "id": "assembly/ERGA-post-assembly-QC",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ERGA-post-assembly-QC/workflows/main_workflow.ga",
+      "path": "topics/assembly/tutorials/ERGA-post-assembly-QC/workflows/main_workflow.ga",
+      "wfid": "assembly-ERGA-post-assembly-QC",
+      "wfname": "main_workflow",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main_workflow",
+      "license": "AGPL-3.0-or-later",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0000-0002-5752-2155",
+          "name": "Cristóbal Gallardo Alba"
+        }
+      ],
+      "test_results": null
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/assembly/tutorials/ERGA-post-assembly-QC/tutorial.json",
+  "tools": [
+    "CONVERTER_gz_to_uncompressed",
+    "__EXTRACT_DATASET__",
+    "interactive_tool_blobtoolkit",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4",
+    "toolshed.g2.bx.psu.edu/repos/galaxy-australia/smudgeplot/smudgeplot/0.2.5+galaxy+2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/2022.09+galaxy4",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+    "toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": "true"
+      }
+    ],
+    "inexact": [
+
+    ]
+  },
+  "topic_name_human": "Assembly",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "blobtoolkit",
+        "owner": "bgruening",
+        "revisions": "7d9ee8cd14b8",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "blobtoolkit",
+        "owner": "bgruening",
+        "revisions": "53dd00a4ab68",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "diamond",
+        "owner": "bgruening",
+        "revisions": "1e3323a44643",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "gfastats",
+        "owner": "bgruening",
+        "revisions": "5799092ffdff",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "gfastats",
+        "owner": "bgruening",
+        "revisions": "3ef480892a9f",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "text_processing",
+        "owner": "bgruening",
+        "revisions": "d698c222f354",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "samtools_stats",
+        "owner": "devteam",
+        "revisions": "3a0efe14891f",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "smudgeplot",
+        "owner": "galaxy-australia",
+        "revisions": "5e0825476fb7",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bandage",
+        "owner": "iuc",
+        "revisions": "ddddce450736",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bellerophon",
+        "owner": "iuc",
+        "revisions": "25ca5d73aedf",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "busco",
+        "owner": "iuc",
+        "revisions": "bb935709506a",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "bwa_mem2",
+        "owner": "iuc",
+        "revisions": "b4a22d90cce9",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "genomescope",
+        "owner": "iuc",
+        "revisions": "01210c4e9144",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "hisat2",
+        "owner": "iuc",
+        "revisions": "f4af63aaf57a",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "merqury",
+        "owner": "iuc",
+        "revisions": "f8113c25bc6b",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "meryl",
+        "owner": "iuc",
+        "revisions": "29dabd8db6f2",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "pretext_map",
+        "owner": "iuc",
+        "revisions": "dfb8a4497339",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "pretext_snapshot",
+        "owner": "iuc",
+        "revisions": "44c66e8d21e6",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "collapse_collections",
+        "owner": "nml",
+        "revisions": "90981f86000f",
+        "tool_panel_section_label": "Assembly",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: blobtoolkit\n  owner: bgruening\n  revisions: 7d9ee8cd14b8\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: blobtoolkit\n  owner: bgruening\n  revisions: 53dd00a4ab68\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: diamond\n  owner: bgruening\n  revisions: 1e3323a44643\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gfastats\n  owner: bgruening\n  revisions: 5799092ffdff\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gfastats\n  owner: bgruening\n  revisions: 3ef480892a9f\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_stats\n  owner: devteam\n  revisions: 3a0efe14891f\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: smudgeplot\n  owner: galaxy-australia\n  revisions: 5e0825476fb7\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bandage\n  owner: iuc\n  revisions: ddddce450736\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bellerophon\n  owner: iuc\n  revisions: 25ca5d73aedf\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: busco\n  owner: iuc\n  revisions: bb935709506a\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa_mem2\n  owner: iuc\n  revisions: b4a22d90cce9\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: genomescope\n  owner: iuc\n  revisions: 01210c4e9144\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: hisat2\n  owner: iuc\n  revisions: f4af63aaf57a\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: merqury\n  owner: iuc\n  revisions: f8113c25bc6b\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: meryl\n  owner: iuc\n  revisions: 29dabd8db6f2\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pretext_map\n  owner: iuc\n  revisions: dfb8a4497339\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pretext_snapshot\n  owner: iuc\n  revisions: 44c66e8d21e6\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Assembly\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}
