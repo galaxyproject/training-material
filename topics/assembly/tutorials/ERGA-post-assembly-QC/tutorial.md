@@ -105,7 +105,7 @@ As a first step we will get the data from Zenodo.
 >       - Click `Add Definition` button and select `Collection Name`: column `E`
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
-> 3. Import the remainig datasets from [Zenodo]({{ page.zenodo_link_1 }}), [Zenodo]({{ page.zenodo_link_5 }}) and [Zenodo]({{ page.zenodo_link_6 }})
+> 3. Import the remainig datasets from Zenodo:
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
