@@ -17,10 +17,13 @@ tags:
   - taxonomic data
   - data quality
 contributors:
-- onorvez
-- Marie59
-- colineroyaux
-- yvanlebras
+  authorship:
+  - onorvez
+  - Marie59
+  - colineroyaux
+  - yvanlebras
+  funding:
+  - erasmusplus
 
 ---
 
