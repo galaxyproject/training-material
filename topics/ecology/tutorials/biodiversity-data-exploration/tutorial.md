@@ -17,6 +17,7 @@ tags:
   - taxonomic data
   - data quality
 contributors:
+  authorship:
   - onorvez
   - Marie59
   - colineroyaux
