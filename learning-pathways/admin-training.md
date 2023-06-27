@@ -71,6 +71,8 @@ pathway:
         topic: admin
       - name: monitoring
         topic: admin
+      - name: sentry
+        topic: admin
 
   - section: "Friday: Grab bag"
     description: |
