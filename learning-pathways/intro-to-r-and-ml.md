@@ -13,8 +13,8 @@ pathway:
   - section: "Module 1: R in Galaxy"
     description: |
       Get a first understanding of how to code using R fully using the Galaxy infrastructure.
-	  The first part will introduce the basic concepts of R, whereas the second part will focus
-	  on providing some advanced concepts around data manipulation.
+      The first part will introduce the basic concepts of R, whereas the second part will focus
+      on providing some advanced concepts around data manipulation.
     tutorials:
       - name: data-science
         topic: r-basics
@@ -22,9 +22,10 @@ pathway:
         topic: r-advanced
 
   - section: "Module 2: Machine Learning using R"
-    description: Having some foundational understanding of how to code in R, this module will provide initially
-	an overview of the different types of Machine Learning, and then will provide some practical, hands-on
-	examples of creating ML models.
+    description:  |
+      Having some foundational understanding of how to code in R, this module will provide initially
+      an overview of the different types of Machine Learning, and then will provide some practical, hands-on
+      examples of creating ML models.
     tutorials:
       - name: statistics
         topic: intro-to-ml-with-r
