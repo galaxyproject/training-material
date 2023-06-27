@@ -16,7 +16,7 @@ key_points:
 tags:
   - taxonomic data
   - data quality
-contributors:
+contributions:
   authorship:
   - onorvez
   - Marie59
