@@ -29,6 +29,9 @@ contributions:
    editing:
     - hrhotz
     - wm75
+   funding:
+    - erasmusplus
+    - eosc-life
 ---
 
 # Introduction

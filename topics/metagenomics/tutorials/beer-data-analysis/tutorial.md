@@ -29,6 +29,8 @@ contributions:
     - chensy96
     - bebatut
     - teresa-m
+    funding:
+    - erasmusplus
 ---
 
 # Introduction
