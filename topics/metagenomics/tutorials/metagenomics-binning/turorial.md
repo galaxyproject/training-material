@@ -61,7 +61,6 @@ Each of these methods has its strengths and limitations, and the choice of binni
 - **Chimeric sequences**: Sequences that are the result of sequencing errors or contamination can lead to chimeric sequences, which can make it difficult to accurately bin reads.
 - **Strain variation**: Organisms within a species can exhibit significant genetic variation, which can make it difficult to distinguish between different strains in a metagenomic sample.
 
-
 There are plenty of computational tools to perform metafenomics binning. Some of the most widely used include:
 
 - **MaxBin**  ({%cite maxbin2015%}): A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
