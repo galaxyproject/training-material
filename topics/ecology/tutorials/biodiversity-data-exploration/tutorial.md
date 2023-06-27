@@ -22,7 +22,7 @@ contributors:
   - Marie59
   - colineroyaux
   - yvanlebras
-funding:
+  funding:
   - erasmusplus
 
 ---
