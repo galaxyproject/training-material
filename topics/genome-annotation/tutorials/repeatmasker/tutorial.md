@@ -15,14 +15,16 @@ level: Introductory
 key_points:
   - RepeatMasker can be used to soft-mask a genome
   - It is an essential first step before running structural annotation pipelines
-contributors:
-  - abretaud
-  - alexcorm
-  - lleroi
-  - r1corre
-  - stephanierobin
-  - erasmusplus
-  - jkreplak
+contributions:
+  authorship:
+    - abretaud
+    - alexcorm
+    - lleroi
+    - r1corre
+    - stephanierobin
+    - jkreplak
+  funding:
+    - erasmusplus
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements
