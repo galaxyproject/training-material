@@ -12,7 +12,7 @@ cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin t
 tags: [Galaxy administrators, 5-day course]
 
 pathway:
-  - section: "Module 1: Setting up Galaxy with Ansible"
+  - section: "Monday: Setting up Galaxy with Ansible"
     description: This module covers getting a Galaxy server setup with Ansible, a server you will develop furhter in the rest of the modules
     tutorials:
       - name: introduction
@@ -22,7 +22,7 @@ pathway:
       - name: ansible-galaxy
         topic: admin
 
-  - section: "Module 2: Making the server useful"
+  - section: "Tuesday: Making the server useful"
     description: |
       Here we pivot to focus on making our server useful; adding tools and data,
       configuring quotas and authentication
@@ -44,7 +44,7 @@ pathway:
       - name: bioblend-api
         topic: dev
 
-  - section: "Module 3: Clusters"
+  - section: "Wednesday: Clusters"
     description:
     tutorials:
       - name: connect-to-compute-cluster
@@ -58,7 +58,7 @@ pathway:
       - name: pulsar
         topic: admin
 
-  - section: "Module 4"
+  - section: "Thursday: Expanding"
     description: ""
     tutorials:
       - name: celery
@@ -72,7 +72,7 @@ pathway:
       - name: monitoring
         topic: admin
 
-  - section: "Module 5: Grab bag"
+  - section: "Friday: Grab bag"
     description: |
       Here we have some additional topics, some of which are not admin related.
       Please feel free to pick and choose the tutorials that are interesting for you.
