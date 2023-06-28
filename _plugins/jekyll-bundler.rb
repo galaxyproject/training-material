@@ -36,11 +36,11 @@ module Jekyll
     #
     # Example:
     # {{ 'load' | bundle_preloads }}
-    def bundle_preloads(test)
+    def bundle_preloads(_test)
       if Jekyll.env == 'production'
         bundle_preloads_prod
       else
-        ""
+        ''
       end
     end
 
@@ -76,9 +76,8 @@ module Jekyll
 
     def load_bundle_dev(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
-      if bundle.nil?
-        raise "Bundle #{name} not found in site config"
-      end
+      raise "Bundle #{name} not found in site config" if bundle.nil?
+
       baseurl = @context.registers[:site].config['baseurl']
 
       bundle['resources'].map do |f|
@@ -88,9 +87,8 @@ module Jekyll
 
     def load_bundle_production(name)
       bundle = @context.registers[:site].config['javascript_bundles'][name]
-      if bundle.nil?
-        raise "Bundle #{name} not found in site config"
-      end
+      raise "Bundle #{name} not found in site config" if bundle.nil?
+
       baseurl = @context.registers[:site].config['baseurl']
       bundle_path = "#{baseurl}/assets/js/bundle.#{name}.js?v=#{bundle['timestamp']}"
       "<script src='#{bundle_path}'></script>"

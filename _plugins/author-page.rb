@@ -36,12 +36,8 @@ module Jekyll
         end
       end
 
-      if t.data.key?('maintainers')
-        t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) }
-      end
-      if t.data.key?('funding')
-        t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) }
-      end
+      t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) } if t.data.key?('maintainers')
+      t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) } if t.data.key?('funding')
 
       datastructure
     end
@@ -73,9 +69,6 @@ module Jekyll
         end
 
         pusher(t, learning_pathways_by_author, false) if t['layout'] == 'learning-pathway'
-        if t['layout'] == 'learning-pathway'
-          puts learning_pathways_by_author
-        end
 
         # Philosophies
         has_philosophy[t.data['username']] = true if t['layout'] == 'training_philosophy' && !t.data['username'].nil?
