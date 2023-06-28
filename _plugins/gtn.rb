@@ -356,6 +356,7 @@ module Jekyll
     # +String+:: The URL of the default link
     def get_default_link(material)
       return 'NO LINK' if material.nil?
+      return 'NO LINK' if material == true
 
       url = nil
 
