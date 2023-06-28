@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Genome annotation for prokaryotes</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@e965adf18394a1d09027706ae85ab4b9f560c142",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0.01,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/learning-pathways/genome-annotation-prokaryote.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1687942013' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1687942013' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Genome annotation for prokaryotes">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-06-27 15:54:14 +0000">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Genome annotation for prokaryotes">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1687942013'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/learning-pathways/genome-annotation-prokaryote.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/learning-pathways/genome-annotation-prokaryote.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/learning-pathways/genome-annotation-prokaryote.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/learning-pathways/genome-annotation-prokaryote.html">2023-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-05-02/learning-pathways/genome-annotation-prokaryote.html">2023-05-02</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+<!-- Gitter -->
+
+
+
+<section>
+<h3> GTN Learning Pathway </h3>
+<div>
+  <div style="display:inline-block;vertical-align:top;width:10%">
+   <img src="/training-material/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" />
+   </div>
+   <div  style="display:inline-block; margin-left: 2em; width:70%">
+      We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial.
+   </div>
+</div>
+</section>
+
+
+<section class="tutorials-list  topic-type-">
+    <h1>Genome annotation for prokaryotes</h1>
+    <p><p>Learn how to annotate a prokaryotic genome sequence: find the position and function of genes, and even set up a manual curation environment with Apollo.</p>
+</p>
+    <p>
+</p>
+
+
+    
+
+
+
+    
+        <h3 id="st-module-1-introduction">Module 1: Introduction</h3>
+        <p><p>General introduction to genome annotation</p>
+</p>
+
+        
+	<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: genome-annotation/introduction -->
+      
+
+        <tr>
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/genome-annotation/tutorials/introduction/slides.html">
+                Introduction to Genome Annotation
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/introduction/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/introduction/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fintroduction%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/introduction/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+
+              
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/introduction/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/introduction/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fintroduction%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/introduction/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+ </td>
+
+          
+
+          
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+    
+        <h3 id="st-module-2-gene-calling-and-functional-annotation">Module 2: Gene calling and functional annotation</h3>
+        <p><p>In this module you will learn to run the Funannotate tool suite to find the position of genes and to functionally annotate them</p>
+</p>
+
+        
+	<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: genome-annotation/annotation-with-prokka -->
+      
+
+        <tr>
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html">
+                Genome annotation with Prokka
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #c6bbff; --color-darker: #b1a2ff; --color-dimmed: #bbafff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/annotation-with-prokka/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+
+</div>
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+         <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Ftutorial.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/annotation-with-prokka/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+
+</div>
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+         <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fannotation-with-prokka%2Ftutorial.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/annotation-with-prokka/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+ </td>
+
+          
+
+          
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+    
+        <h3 id="st-module-3-manual-curation">Module 3: Manual curation</h3>
+        <p><p>Automatic annotation is rarely perfect, in this module you will learn how to start a collaborative manual curation project using Galaxy and Apollo</p>
+</p>
+
+        
+	<table class="table table-responsive table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: genome-annotation/apollo -->
+      
+
+        <tr>
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">
+                Refining Genome Annotations with Apollo (prokaryotes)
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+              
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #c6bbff; --color-darker: #b1a2ff; --color-dimmed: #bbafff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              
+            
+            </div>
+
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/apollo/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fapollo%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/apollo/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+
+</div>
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+         <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fapollo%2Ftutorial.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/apollo/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/apollo/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/genome-annotation/tutorials/apollo/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+		<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fapollo%2Fslides.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+		</li>
+
+	<li class="dropdown-item">
+	<a class="btn btn-default topic-icon" href="/training-material/topics/genome-annotation/tutorials/apollo/slides-plain.html" aria-label="more accessible, plain text slides">
+		<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+	</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+<div class="btn-group">
+  <!-- add video button -->
+  <a class="btn btn-default topic-icon" href="/training-material/videos/watch.html?v=genome-annotation/tutorials/apollo/slides" title="Video Slides (text-to-speech)">
+    <i class="far fa-play-circle" aria-hidden="true"></i>
+  </a>
+
+  
+
+</div>
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+         <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fapollo%2Ftutorial.html&edit-text=&act=url" title="">
+            More Languages
+        </a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- GTN Video Library  -->
+  
+<div class="btn-group">
+  
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this tutorial in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+    </a>
+    <ul class="dropdown-menu">
+        
+        
+
+        
+        
+        
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/apollo/tutorial" title="View GTN Video Library for this Tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021)
+            </a>
+        </li>
+        
+        
+          
+          
+          
+
+        <li>
+            <a class="dropdown-item" href="https://gallantries.github.io/video-library/videos/genome-annotation/apollo/slides" title="View GTN Video Library for these Slides">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Lecture (February 2021)
+            </a>
+        </li>
+        
+        
+        
+    </ul>
+  
+</div>
+  
+   
+ </td>
+
+          
+
+          
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+
+
+    
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e965adf18394a1d09027706ae85ab4b9f560c142">e965adf</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/learning-pathways/genome-annotation-prokaryote.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1687942013'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
