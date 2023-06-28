@@ -12,12 +12,15 @@ key_points:
   - "Bioinformatic command line tools are collections of commands that can be used to carry out bioinformatic analyses."
   - "To use most powerful bioinformatic tools, you will need to use the command line."
   - "There are many different file formats for storing genomics data. It is important to understand what type of information is contained in each file, and how it was derived."
-contributors:
+contributions:
+  authorship:
   - Sofokli5
   - fpsom
   - shiltemann
   - hexylena
   - carpentries
+  funding:
+  - erasmusplus
 ---
 
 
