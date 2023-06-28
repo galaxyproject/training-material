@@ -16,10 +16,10 @@ pathway:
       The first part will introduce the basic concepts of R, whereas the second part will focus
       on providing some advanced concepts around data manipulation.
     tutorials:
-      - name: data-science
-        topic: r-basics
-      - name: data-science
-        topic: r-advanced
+      - topic: data-science
+        name: r-basics
+      - topic: data-science
+        name: r-advanced
 
   - section: "Module 2: Machine Learning using R"
     description:  |
@@ -27,8 +27,8 @@ pathway:
       an overview of the different types of Machine Learning, and then will provide some practical, hands-on
       examples of creating ML models.
     tutorials:
-      - name: statistics
-        topic: intro-to-ml-with-r
+      - topic: statistics
+        name: intro-to-ml-with-r
 ---
 
 New to R and/or Machine Learning? Follow this learning path to get familiar with the basics!
