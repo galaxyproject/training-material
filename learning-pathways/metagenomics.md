@@ -56,10 +56,10 @@ pathway:
     tutorials:
       - name: taxonomic-profiling
         topic: metagenomics
-        description: More theoretical tutorial
+        #description: More theoretical tutorial
       - name: beer-data-analysis
         topic: metagenomics
-        description: Application tutorial
+        #description: Application tutorial
 
   #- section: "Module 6: Taxonomic binning"
   #  description: 

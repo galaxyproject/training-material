@@ -97,6 +97,7 @@ build: clean api/swagger.json ## build files but do not run a server (You can sp
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		bundle exec ruby bin/validate-frontmatter.rb
+		bundle exec ruby bin/validate-other.rb
 .PHONY: check-frontmatter
 
 check-contributors: ## Validate the contributors.yaml file
