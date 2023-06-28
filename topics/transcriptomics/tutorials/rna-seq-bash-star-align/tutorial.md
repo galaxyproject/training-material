@@ -23,6 +23,8 @@ contributions:
     - shiltemann
     - hexylena
     - carpentries
+  funding:
+    - erasmusplus
 ---
 
 # Introduction
@@ -370,5 +372,3 @@ For the final step of this tutorial we will use featureCounts to count the numbe
 > The **featurecounts.txt** produced contains all the information needed for further downstream analysis of the sequences we aligned (e.g. Differential Expression).
 >
 {: .hands_on}
-
-
