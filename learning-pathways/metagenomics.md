@@ -1,6 +1,11 @@
 ---
 layout: learning-pathway  # (uncomment this line to activate it)
 
+maintainers:
+- bebatut
+funding:
+- erasmusplus
+
 title: Metagenomics data processing and analysis for microbiome
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of metagenomics data.

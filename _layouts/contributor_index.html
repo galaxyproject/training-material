@@ -218,6 +218,22 @@ layout: base
 				</ul>
 				{% endif %}
 
+				{% if page.learning_pathways_count > 0 %}
+				<h3>Learning Pathways</h3>
+				<ul>
+				{% for res in page.learning_pathways %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+
 				{% if page.news_count > 0 %}
                 <h3>News</h3>
                 <div class="newslist">

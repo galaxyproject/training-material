@@ -7,6 +7,10 @@ tags: [genome annotation, prokaryote]
 
 cover-image: assets/images/gga.png
 cover-image-alt: "Galaxy Genome Annotation logo"
+maintainers:
+- abretaud
+funding:
+- erasmusplus
 
 pathway:
   - section: "Module 1: Introduction"

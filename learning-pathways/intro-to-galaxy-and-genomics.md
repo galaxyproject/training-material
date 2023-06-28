@@ -2,6 +2,11 @@
 layout: learning-pathway
 tags: [beginner]
 
+maintainers:
+- shiltemann
+funding:
+- erasmusplus
+
 title: Introduction to Galaxy and Sequence analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of sequencing data.
