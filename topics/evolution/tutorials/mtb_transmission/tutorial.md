@@ -735,7 +735,7 @@ In this step we will use a simple tool that searches and replaces text to remove
 > <hands-on-title>Removing redundant content</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Single file` (output of **Collapse Collection on data** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `Single file` (output of **Collapse Collection** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >          - *"Find pattern"*: `Drug-resistance: `
