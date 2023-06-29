@@ -40,16 +40,12 @@ Related to ecology, the term **diversity** describes the number of different spe
 
     It considers the number of different species in an environment (also referred to as species **richness**). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species **evenness**). 
 
-    xxx
-    ![richness and evenness](../images/richness_evenness.png "richness and evenness")
-
 - **β diversity** measures the distance between two or more separate entities
 
     It therefore describes the difference between two communities or ecosystems.
 
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
-    xxx 
     ![α, β and γ diversity](../images/diversity_differences.png "α, β and γ diversity")
 
 In this analysis we will use Galaxy for calculating the Shannon's alpha diversity index and the Bray-Curtis dissimilarity index for β diversity. 
@@ -129,6 +125,8 @@ There are various measures of alpha diversity accessible:
 In the table below you can find a list of commonly used indexes to calculate α diversity and their description.
 
 ![α diversity](../images/alphadiversity_metrics.png "α diversity")
+
+![richness and evenness](../images/alpha_diversity_richness_evenness.png "richness and evenness")
 
 | Indices for α diversity | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Class     |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
