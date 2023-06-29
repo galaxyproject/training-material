@@ -167,7 +167,7 @@ function fixDiffPresentation(codeBlock){
 	})
 }
 
-<!--  For admin training -->
+// For admin training
 document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
@@ -181,3 +181,29 @@ $("#theme-selector button").click(function(evt){
 		}, 8000);
 	}
 })
+
+
+// Redirects
+if(window.location.hostname === "galaxyproject.github.io") {
+	// Redirect
+	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+	window.setTimeout(function(){
+	window.location.href = redirect;
+	}, 5000)
+}
+
+// Copy paste buttons
+document.querySelectorAll('div.highlight').forEach((snippet) => {
+	// Google translate has additional #text nodes mixed in with
+	// the pre for some reason.
+	var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+	if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+		gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+	}
+});
+
+var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+    target:function(trigger){return trigger.nextElementSibling;
+}});

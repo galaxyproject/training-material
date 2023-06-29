@@ -51,7 +51,15 @@ module Gtn
       end
 
       # Discover FAQs
-      Dir.glob('faqs/**/*.md').each do |tutorial|
+      all_faqs = Dir.glob('faqs/**/*.md') + Dir.glob('topics/*/faqs/**/*.md') + \
+                 Dir.glob('topics/*/tutorials/*/faqs/*.md')
+      # Remove symlinked files
+      all_faqs = all_faqs.reject { |x| File.symlink?(x) }
+      # Reject indexes, readme, etc.
+      all_faqs = all_faqs.grep_v(/index.md$/)
+      all_faqs = all_faqs.grep_v(/README.md$/)
+
+      all_faqs.each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
@@ -63,6 +71,22 @@ module Gtn
           current_mapping['id'][short_code] = html_path
         end
       end
+
+      # Discover news
+      Dir.glob('news/_posts/*.md').each do |material|
+        m = material.match(%r{news/_posts/(?<year>\d\d\d\d)-(?<month>\d\d)-(?<day>\d\d)-(?<title>.*)\.md})
+        html_path = "/news/#{m[:year]}/#{m[:month]}/#{m[:day]}/#{m[:title]}.html"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == 'N' }.length.to_s.rjust(5, '0')
+          short_code = "N#{short_code_number}"
+          puts "Discovered news #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
       current_mapping
     end
   end

@@ -127,7 +127,7 @@ This matrix is then a **tool for self evaluation**:
 >     - User application awareness
 >     - Knowledge of training methodology
 >
-{: .hands_on}-->
+{: .hands_on}
 
 <!--{% include _includes/quiz.html id="trainer_skills.yaml" %}-->
 
@@ -205,7 +205,7 @@ Inspired by Eric Mazur and the idea of active learning, {% cite via2020course %}
 | ------------------- | -------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
 | Lecture, webinar    | Remember, Comprehend             | Inspire learners, ignite learners' enthusiasm, clarify/explain a concept, provide an overview, give context, summarise content                                    | _list_ the key points of the lecture/webinar, _summarise_ take home message(s)                                              |
 | Exercise, practical | Apply, Analyse                   | Help learners digest course materials, solve typical problems, apply knowledge, show how to do things with appropriate guidance, give an idea of how a tool works | _follow_ a set of instructions or protocol, _calculate_ a set of results or outcomes from a given protocol                  |
-| Flipped class       | Apply, Analyse                   | Teach learners how to formulate questions, help learners to memorise new information & concepts, or analyse & understand course materials                         | _summarise_ the content material, \*ask\* appropriate questions                                                             |
+| Flipped class       | Apply, Analyse                   | Teach learners how to formulate questions, help learners to memorise new information & concepts, or analyse & understand course materials                         | _summarise_ the content material, *ask* appropriate questions                                                             |
 | Peer instruction    | Synthesise, Evaluate             | Prepare learners to defend an argument, give learners opportunities to explain things, thereby helping to develop critical thinking & awareness                   | _explain_ how they solved an exercise, _evaluate_ others' choices/decisions, _diagnose_ errors in the exercise-solving task |
 | Group discussion    | Synthesise, Evaluate             | Give learners opportunities to practice questioning, develop new ideas & critical thinking                                                                        | _communicate_ their own ideas, _defend_ their own opinions                                                                  |
 | Group work          | Synthesise, Evaluate             | Promote collaborative work & peer instruction, provide opportunities for giving/receiving feedback, & digesting course materials                                  | _provide_ feedback on their peers' work, _share_ ideas, _explain_ the advantages of team-work                               |
@@ -444,7 +444,7 @@ Here are some examples of practices to achieve goals above. None of the practice
 
 - **Never teach alone. Teach together**. Whenever possible: With two or more trainers in the classroom, the class can be observed from different angles, it is easier to detect learners who are not comfortable or struggling or lagging behind. It is possible to provide one-to-one support without stopping the lesson flow. It is also important that trainers teaching together provide feedback to each other.
 
-    > <details-title>Different models to teach together or **[co-teaching](https://teachtogether.tech/en/index.html#g:co-teaching)**</details-title>
+    > <details-title>Different models to teach together or co-teaching</details-title>
     >
     > - **Team teaching**: Both teachers deliver a single stream of content in tandem, taking turns like musicians taking solos.
     > - **Teach and assist**: Teacher A teaches while Teacher B moves around the classroom to help struggling learners.

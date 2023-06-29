@@ -314,15 +314,24 @@ module Jekyll
     end
 
     def layout_to_human(layout)
-      if layout =~ /slides/
+      case layout
+      when /slides/
         'Slides'
-      elsif layout =~ /tutorial_hands_on/
+      when /tutorial_hands_on/
         'Hands-on'
+      when 'faq'
+        'FAQs'
+      when 'news'
+        'News'
       end
     end
 
     def topic_name_from_page(page, site)
-      site.data[page['topic_name']]['title']
+      if page.key? 'topic_name'
+        site.data[page['topic_name']]['title']
+      else
+        site.data.fetch(page['url'].split('/')[2], { 'title' => '' })['title']
+      end
     end
 
     ##
@@ -347,6 +356,7 @@ module Jekyll
     # +String+:: The URL of the default link
     def get_default_link(material)
       return 'NO LINK' if material.nil?
+      return 'NO LINK' if material == true
 
       url = nil
 

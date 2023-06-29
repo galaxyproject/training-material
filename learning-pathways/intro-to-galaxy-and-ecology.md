@@ -2,6 +2,11 @@
 layout: learning-pathway
 tags: [beginner]
 
+maintainers:
+- yvanlebras
+funding:
+- erasmusplus
+
 title: Introduction to Galaxy and Ecological data analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of ecological data.
