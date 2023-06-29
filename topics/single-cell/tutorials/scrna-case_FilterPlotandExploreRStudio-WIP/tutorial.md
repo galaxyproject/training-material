@@ -120,11 +120,7 @@ srt<-CreateSeuratObject(counts = matrix.mtx)
  You've created a Seurat object, congratulations!
 
 # Adding Cell Level Metadata
- Now that we have an object, we can add in our metadata from our experimental design dataframe (table). This will be useful to us shortly as we begin to visualize our data! 
-
->The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
-
-
+ Now that we have an object, we can add in our metadata from our experimental design dataframe (table). This will be useful to us shortly as we begin to visualize our data!
 ```r
 srt@meta.data$Sex<-exp_design.tsv$Sample.Characteristic.sex.
 srt@meta.data$Organism<-exp_design.tsv$Sample.Characteristic.organism.
@@ -138,6 +134,7 @@ srt@meta.data$Organism.Part<-exp_design.tsv$Sample.Characteristic.organism.part.
 srt@meta.data$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
 srt@meta.data$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 ```
+>The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
 
  Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
 
@@ -179,12 +176,12 @@ In order to accurately assess potential batch effects, use the "group.by" argume
 
 Now let's get an idea of how different variables, like the sex or genotype of the mice, might be represented across our dataset. 
 
-> 1. Sex?
+1. Sex?
 ```r
 VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
 ```
 
-> 2. Genotype?
+2. Genotype?
 ```r
 VlnPlot(srt,
         group.by = "Genotype", features = "nCount_RNA", log = TRUE)
@@ -192,7 +189,6 @@ VlnPlot(srt,
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
-
 ```r
 plot(x = srt$nCount_RNA, 
      y = srt$perc.mt, 
