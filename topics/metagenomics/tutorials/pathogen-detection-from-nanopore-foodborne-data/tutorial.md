@@ -317,7 +317,7 @@ In this tutorial we use:
     >    - {% icon param-files %} *"Tabular Dataset to filter"*: `Classification` outputs of **Kraken2** {% icon tool %}
     >    - *"Taxonomix ID(s) to match"*:`9031 9606 9913`
     >
-    >       We specify here the taxonomic ID of the hosts so we can filter reads assigned to these hosts. To be generic, we remove here:
+    >       We specify here the taxonomic ID of the hosts so we can filter reads assigned to these hosts. Kraken2 uses taxonomic IDs from NCBI, the IDs for a specific taxa can be found at [ncbi](https://www.ncbi.nlm.nih.gov/taxonomy). To be generic, we remove here:
     >         - Human (`9606`)
     >         - Chicken (`9031`)
     >         - Beef (`9913`)
@@ -455,7 +455,7 @@ Once the BIOM file has been generated, we launch the interactive visualisation t
 
 </div>
 
-Now let's now explore the **Phinch visulization** tool running for `Barcode11` 
+Now let's explore the **Phinch visulization** tool running for `Barcode11` 
 
 > <hands-on-title>Explore data interactively</hands-on-title>
 >
