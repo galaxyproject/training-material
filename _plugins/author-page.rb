@@ -35,6 +35,10 @@ module Jekyll
           end
         end
       end
+
+      t.data['maintainers'].each { |c| datastructure[c].push([t, 'maintainer']) } if t.data.key?('maintainers')
+      t.data['funding'].each { |c| datastructure[c].push([t, 'funding']) } if t.data.key?('funding')
+
       datastructure
     end
 
@@ -50,6 +54,7 @@ module Jekyll
       # pre-calculating this hash saves about 4.9 seconds off the previous
       # build time of 5 seconds.
       tutorials_by_author = Hash.new { |hash, key| hash[key] = [] }
+      learning_pathways_by_author = Hash.new { |hash, key| hash[key] = [] }
       slides_by_author = Hash.new { |hash, key| hash[key] = [] }
       news_by_author = Hash.new { |hash, key| hash[key] = [] }
       has_philosophy = Hash.new { false }
@@ -62,6 +67,8 @@ module Jekyll
         if !%w[base_slides introduction_slides tutorial_slides].index(t['layout']).nil?
           pusher(t, slides_by_author, false)
         end
+
+        pusher(t, learning_pathways_by_author, false) if t['layout'] == 'learning-pathway'
 
         # Philosophies
         has_philosophy[t.data['username']] = true if t['layout'] == 'training_philosophy' && !t.data['username'].nil?
@@ -89,10 +96,12 @@ module Jekyll
         page2.data['tutorials'] = tutorials_by_author[contributor]
         page2.data['slides'] = slides_by_author[contributor]
         page2.data['news'] = news_by_author[contributor]
+        page2.data['learning_pathways'] = learning_pathways_by_author[contributor]
 
         page2.data['tutorials_count'] = tutorials_by_author[contributor].length
         page2.data['slides_count'] = slides_by_author[contributor].length
         page2.data['news_count'] = news_by_author[contributor].length
+        page2.data['learning_pathways_count'] = learning_pathways_by_author[contributor].length
 
         page2.data['has_philosophy'] = has_philosophy[contributor]
 

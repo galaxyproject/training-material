@@ -2,6 +2,11 @@
 layout: learning-pathway
 tags: [beginner]
 
+maintainers:
+- fpsom
+funding:
+- erasmusplus
+
 title: From R to Machine Learning; an introductory course
 description: |
   This learning path aims to teach you the basics of Machine Learning using R.
