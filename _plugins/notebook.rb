@@ -449,7 +449,7 @@ module GTNNotebooks
     notebook
   end
 
-  def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
+  def self.renderMarkdownCells(site, notebook, metadata, _page_url, _dir)
     seen_abbreviations = {}
     notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'markdown'

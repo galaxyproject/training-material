@@ -3,14 +3,13 @@ require 'fileutils'
 require './_plugins/notebook'
 require './_plugins/gtn'
 
-
 def json_boxify(h, page)
   h['cells'].each do |cell|
     # If it's a list, loop
     if cell['source'].is_a? Array
       cell['source'].each do |line|
         line.gsub!(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title( ?(?<noprefix>noprefix))>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
-          m = ::Regexp.last_match
+          m = Regexp.last_match
           box_type = m[:boxclass]
           title = m[:title]
           noprefix = m[:noprefix]
@@ -20,7 +19,7 @@ def json_boxify(h, page)
       end
     else
       cell['source'].gsub!(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title(?<noprefix>\s+noprefix)?>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
-        m = ::Regexp.last_match
+        m = Regexp.last_match
         box_type = m[:boxclass]
         title = m[:title]
         noprefix = m[:noprefix]
@@ -33,11 +32,10 @@ def json_boxify(h, page)
 end
 
 Jekyll::Hooks.register :site, :pre_render do |site|
-  puts "[GTN/Notebooks] Rendering"
+  puts '[GTN/Notebooks] Rendering'
 
   # For every tutorial with the 'notebook' key in the page data
   site.pages.select { |page| GTNNotebooks.notebook_filter(page.data) }.each do |page|
-
     # We get the path to the tutorial source
     dir = File.dirname(File.join('.', page.url))
     fn = File.join('.', page.url).sub(/html$/, 'md')
