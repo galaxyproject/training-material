@@ -7,7 +7,7 @@ ec = 0
 ARGV.each do |fn|
   d = JSON.parse(File.read(fn))
 
-  if not d.is_a?(Hash)
+  if !d.is_a?(Hash)
     puts "#{fn}:0:0:e: This notebook is invalid"
     ec = 1
   end
