@@ -8,7 +8,9 @@ def json_boxify(h, page)
     # If it's a list, loop
     if cell['source'].is_a? Array
       cell['source'].each do |line|
+        # rubocop:disable Layout/LineLength
         line.gsub!(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title( ?(?<noprefix>noprefix))>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
+          # rubocop:enable Layout/LineLength
           m = Regexp.last_match
           box_type = m[:boxclass]
           title = m[:title]
@@ -18,7 +20,9 @@ def json_boxify(h, page)
         end
       end
     else
+      # rubocop:disable Layout/LineLength
       cell['source'].gsub!(%r{<(?<boxclass>#{Gtn::Boxify.box_classes})-title(?<noprefix>\s+noprefix)?>(?<title>.*?)</\s*\k<boxclass>-title\s*>}) do
+        # rubocop:enable Layout/LineLength
         m = Regexp.last_match
         box_type = m[:boxclass]
         title = m[:title]
