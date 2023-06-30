@@ -403,6 +403,11 @@ module GTNNotebooks
     # representing the notebook
     accepted_languages = [notebook_language]
     accepted_languages << 'bash' if notebook_language == 'python'
+
+    if !data['zenodo_link'].nil?
+      Jekyll.logger.debug "Replacing zenodo links in #{url}, #{data['zenodo_link']}"
+      content.gsub!(/{{\s*page.zenodo_link\s*}}/, data['zenodo_link'])
+    end
     notebook = convert_notebook_markdown(content, accepted_languages)
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.

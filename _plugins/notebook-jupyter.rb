@@ -15,7 +15,7 @@ def json_boxify(h, page)
           title = m[:title]
           noprefix = m[:noprefix]
           _, box = Gtn::Boxify.generate_title(box_type, title, lang, page.path, noprefix: noprefix)
-          return box
+          box
         end
       end
     else
@@ -25,14 +25,14 @@ def json_boxify(h, page)
         title = m[:title]
         noprefix = m[:noprefix]
         _, box = Gtn::Boxify.generate_title(box_type, title, 'en', page.path, noprefix: noprefix)
-        return box
+        box
       end
     end
   end
   h
 end
 
-Jekyll::Hooks.register :site, :post_write do |site|
+Jekyll::Hooks.register :site, :pre_render do |site|
   puts "[GTN/Notebooks] Rendering"
 
   # For every tutorial with the 'notebook' key in the page data
@@ -62,7 +62,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         if m
           cell['source'].gsub!(/<blockquote class="solution"[^>]*>/,
                                '<br/><details style="border: 2px solid #B8C3EA; margin: 1em 0.2em;' \
-                               'padding: 0.5em;"><summary>👁 View solution</summary>')
+                               'padding: 0.5em; cursor: pointer;"><summary>👁 View solution</summary>')
 
           idx = m.begin(0)
           q = cell['source'][0..idx]
