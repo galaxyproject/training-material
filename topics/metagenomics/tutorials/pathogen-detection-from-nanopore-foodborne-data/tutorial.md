@@ -555,7 +555,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >    - {% icon param-file %} *"Input reads"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
     >
     >      > <comment-title></comment-title>
-    >      > We need to run **Flye** individually on each sample otherwise **Flye** runs by default a co-assembly mode, *i.e.* it combines read of both samples together before running the assembly.
+    >      > We need to run **Flye** individually on each sample otherwise **Flye** runs by default a co-assembly mode, *i.e.* it combines reads of both samples together before running the assembly.
     >      {: .comment}
     >
     >    - *"Mode"*: `Nanopore HQ (--nano-hq)`
@@ -590,7 +590,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >    - *"Select output file(s)"*: `select all`
     {: .hands-on}
 
-    To keep information about the provenance of the contigs, we extract sample names from the **Nanopore processed sequences reads** collection and add it to contigs files to add this information to them.
+    To keep information about the provenance of the contigs, we extract the sample names from the **Nanopore processed sequences reads** collection and add it to the contigs files.
 
     > <hands-on-title> Contig renaming to add sample names </hands-on-title>
     > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
