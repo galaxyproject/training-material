@@ -787,6 +787,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 > {: .solution}
 {: .question}
 
+To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for further analysis in the **Pathogen Tracking among all samples** section, tabular manipulation tools such as **Cut**{% icon tool %} and **Add line to file**{% icon tool %} are used. We mainly use them to filter and keep only the columns of interest, e.g. the Accession IDs of the found genes with a Virulence Factor and the sample ID along with which contig at which exact location. 
 
 <div class="Long-Version" markdown="1">
 
@@ -955,13 +956,13 @@ To identify variants, we
 >
 > 1. How many variants were found by **Clair3**?
 > 2. How many variants were found after quality filtering?
-> 2. What is the Strain identified by the NCBI for the sample?
+> 2. What is the Strain of the NCBI reference gemome used for identifying the SNPs in our samples?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. Before filtering: 2,652
 > > 2. After filtering 2,489
-> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), can be inferred searching the Chroms. NCBI Reference Sequence: NC_003197.2
+> > 2. Strain [LT2](https://bacdive.dsmz.de/strain/5117), can be inferred searching the Chroms. NCBI Reference Sequence ID: NC_003197.2
 > {: .solution}
 {: .question}
 
