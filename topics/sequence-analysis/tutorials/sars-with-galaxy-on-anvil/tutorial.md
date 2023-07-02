@@ -105,10 +105,13 @@ In the next few steps, you will walk through how to get set up to use Galaxy on 
 > 2. Click "View Workspaces". 
 >   - Select the “Public” tab. 
 >   - In the top search bar type the activity workspace `SARS-CoV-2-Genome`. You can also go directly to the following link: https://anvil.terra.bio/#workspaces/gdscn-exercises/SARS-CoV-2-Genome.
+> ![Screenshot of the AnVIL platform workspaces page highlighting the Public tab and the SARS-CoV-2-Genome Workspace search result.](../images/sars-with-galaxy-in-anvil/01-sars-workspace.png)
 > 3. Clone the workspace by clicking the teardrop button and selecting “Clone”.
+> ![Screenshot showing the teardrop button. The button has been clicked revealing the "clone" option. The Clone option and the teardrop button are highlighted.](../images/sars-with-galaxy-in-anvil/02-clone-button.png)
 >   - In the new window, give your Workspace clone a name by adding an underscore (“_”) and your name.
 >   - Next, select the Billing project provided by your instructor. 
 >   - Leave the Description and Authorization Domain boxes as-is.
+> ![Screenshot showing the "clone a workspace" popout. The Workspace name, Billing Project, and Clone Workspace button have been filled in and highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/03-clone-settings.png)
 >   - Click “CLONE WORKSPACE”.
 > 
 {: .hands_on}
@@ -123,10 +126,15 @@ Galaxy is a great tool for performing bioinformatics analysis without having to 
 
 > <hands-on-title>Clone the Workspace </hands-on-title>
 >
-> 1. In your new Workspace, click on the “ANALYSES” tab. Next, click on “START”. You should see a popup window on the right side of the screen. Click on the Galaxy logo to proceed.
+> 1. In your new Workspace, click on the “ANALYSES” tab. Next, click on “START”. You should see a popup window on the right side of the screen. 
+> ![Screenshot of the Workspace Notebooks tab. The notebook tab name and the plus button that starts a cloud environment for Galaxy have been highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/05-start-galaxy.png)
+> 2. Click on the Galaxy logo to proceed.
 >    - Click on “NEXT” and “CREATE” to keep all settings as-is.
+>    - ![The NEXT button among cloud environments has been highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/06-galaxy-next.png)
+>    - ![The CREATE button among cloud environments has been highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/07-galaxy-create.png)
 >    - Click on the Galaxy icon. You will see that the environment is still being set up. This will take 8-10 minutes. 
-> 2. When it is done, click “Open”. You might need to refresh the page.
+> ![The Galaxy icon appears if the environment has been successfully launched.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png)
+> 3. When it is done, click “Open”. You might need to refresh the page.
 > 
 {: .hands_on}
 
@@ -147,7 +155,7 @@ Notice the three main sections.
 
 **History** - When you start a project you will be able to see all of the documents in the project in the history. Now be aware, this can become very busy. Also the naming that Galaxy uses is not very intuitive, so you must make sure that you label your files with something that makes sense to you.
 
-![Screenshot of the Galaxy landing page. The Tools and History headings have been highlighted.]
+![Screenshot of the Galaxy landing page. The Tools and History headings have been highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/10-galaxy-on-anvil.png)
 
 On the welcome page, there are links to tutorials. You may try these out on your own. If you want to try a new analysis this is a good place to start.
 
@@ -158,7 +166,8 @@ Luckily, we linked to the original data when we cloned our Workspace! We have th
 > <hands-on-title>Import Data from the Workspace</hands-on-title>
 >
 > 1. Click on Upload Data in the Tools pane.
-> 2. Click on “Choose remote files” at the bottom of the popup. Double-click the Workspace folder, then “Tables/” then “reference/”. Click the reference .fasta file so that it is highlighted in green and click “Ok”.
+> 2. Click on “Choose remote files” at the bottom of the popup. Double-click the top selection, which is the Workspace folder, then “Tables/” then “reference/”. Click the reference .fasta file so that it is highlighted in green and click “Ok”.
+> ![Screenshot of the Galaxy Data upload page with the current AnVIL workspace highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png)
 > 3. Now that your reference has been added, click “Choose remote files” again to add the two sample files. Double-click the Workspace folder, then “Tables/” then “samples/”. Click the two sample `fastq` files so that they are highlighted in green and click “OK”.
 > 4. Click “Start” and once complete, you can click “Close”.
 > 5. Confirm your upload worked by looking at the file names in the History pane.
@@ -173,7 +182,7 @@ Now we have some data in our account we can look at it. In this exercise we will
 
 Use your mouse and click on the eye icon {% icon galaxy-eye %} of the first file `VA_sample_forward_reads.fastq`. In the Main screen you will see something like this:
 
-![Screnshot of a fastq file. The data includes DNA sequences but also includes many coded characters, making it hard to understand.]
+![Screenshot of a fastq file. The data includes DNA sequences but also includes many coded characters, making it hard to understand.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/12-fastq-view.png)
 
 > <question-title></question-title>
 >
@@ -206,11 +215,9 @@ The main dash will highlight in green if everything is okay. In the history, you
 
 Click on the eye icon {% icon galaxy-eye %} in the new file in the history “FASTQC on data2 Webpage”. 
 
-![Screenshot of the Galaxy history pane. The eye icon beside the FastQC results data is highlighted.]
-
 You will open up a summary report for the sequencing file:
 
-![Screenshot of the FastQC results. The Basic Statistics and Per Base Sequence Quality sections for the report on VA_sample_forward_reads.fastq are visible.]
+![Screenshot of the FastQC results. The Basic Statistics and Per Base Sequence Quality sections for the report on VA_sample_forward_reads.fastq are visible.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/13-fastqc-report.png)
 
 > <question-title></question-title>
 >
@@ -259,8 +266,6 @@ We will use our two SARS data files, which are ready for alignment.
 >
 {: .hands_on}
 
-![Screenshot of the BWA-MEM tool options. The "Run Tool" button is highlighted.]
-
 The output file is a `BAM` file, which lists where each read aligns to the reference genome and whether there are any differences. You can click the eye button to preview the results, but the results are not easy to interpret visually (much like the `fastq` files). Instead you will use a genome viewer in the next step.
 
 > <question-title></question-title>
@@ -292,7 +297,7 @@ We have aligned our data but it is currently a table of where the reads align. T
 
 You will need to click on the magnifying glasses to zoom in, but you should see the A,C,G, and Ts and their corresponding colors that make up the SARS-CoV-2 genome!
 
-![Screenshot of preliminary JBrowse results. The eye icon is highlighted, as it should be used to open the JBrowse viewer. The magnifying glasses in JBrowse are also highlighted as they enable zooming in to see the individual bases.]
+![Screenshot of preliminary JBrowse results. The eye icon is highlighted, as it should be used to open the JBrowse viewer. The magnifying glasses in JBrowse are also highlighted as they enable zooming in to see the individual bases.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/15-galaxy-jbrowse-ref.png)
 
 This is interesting, but it doesn’t let us compare the genome to the sample we have. We suspect there may be some differences that indicate our sample is the delta variant. 
 
@@ -321,11 +326,9 @@ You should see a new JBrowse item appear in your history. Click the eye icon {% 
 >
 {: .hands_on}
 
-![Screenshot of JBrowse viewer. The Available Tracks sidebar is shown, with both sample data boxes checked.]
+![Screenshot of JBrowse viewer. The Available Tracks sidebar is shown, with both sample data boxes checked.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/14-galaxy-jbrowse-bams.png)
 
 Let’s look at an example mutation in our sample. Type in the reference position “24410” and click “Go”. You should see a bunch of “A”s highlighted in green throughout our sample. The reference sequence (top line) is a “G” but all of the reads are an “A”. This means that our sample is genetically different from the established SARS-CoV-2 reference genome! Researchers often call these single base differences “SNPs” - Single Nucleotide Polymorphisms.
-
-![Screenshot of JBrowse viewer at base 24410 in the genome. The search bar has been highlighted and shows that 24410 has been entered. A SNP has been highlighted indicating a shift from G to A. The SNP is readily visible because it is a different color (green).]
 
 > <question-title></question-title>
 >
@@ -342,9 +345,7 @@ Let’s look at an example mutation in our sample. Type in the reference positio
 
 > <details-title>Sequencing errors</details-title>
 >
-> It’s possible to make mistakes in the data preparation before we get to the data analysis. Sometimes this happens when the samples are being prepared in the lab and sometimes this happens because the sequencer makes a mistake. This is one reason why quality scores are helpful. With millions of reads of data, it’s more likely that we see a “SNP” that is actually an accident. Multiple copies of the same areas of our data (“read depth”) help us be sure it’s a real SNP. When we compare across lots of aligned reads of the same area, we can determine the actual sequence by consensus. For example, we can be reasonably confident that the “G” at position 1,203 shown below is just a sequencing or lab mistake.
->
-> ![Screenshot of JBrowse viewer at base 1203 in the genome. A single base in a single read has been highlighted indicating a shift in that read to a G. This difference is not likely to represent the sample as a whole.]
+> It’s possible to make mistakes in the data preparation before we get to the data analysis. Sometimes this happens when the samples are being prepared in the lab and sometimes this happens because the sequencer makes a mistake. This is one reason why quality scores are helpful. With millions of reads of data, it’s more likely that we see a “SNP” that is actually an accident. Multiple copies of the same areas of our data (“read depth”) help us be sure it’s a real SNP. When we compare across lots of aligned reads of the same area, we can determine the actual sequence by consensus. For example, we can be reasonably confident that the “G” at position 1,203 is just a sequencing or lab mistake.
 >
 {: .details}
 
@@ -355,12 +356,12 @@ It’s a good idea to export your “History” so that your collaborators can s
 > <hands-on-title>Export History to Workspace</hands-on-title>
 >
 > 1. Click on the History Menu {% icon galaxy-history-options %} and click on “Export History to File”.
->   ![History dropdown menu button and Export History to File buttons are highlighted.]
+>   ![History dropdown menu button and Export History to File buttons are highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/16-export-history.png)
 > 2. Make sure you select “to a remote file”. Then, click to select where to export your History. On the popup menu, select your Workspace name, then select “Other Data”. Finally, select “Files”. Then click “Select this folder”. Make sure the export directory looks correct. 
 > 3. Next, name your history “SARS Galaxy Variant Detection” and click “Export”.
->   ![When exporting History, make sure you select "to a remote file". The directory should be your workspace name followed by Other Data and Files. The export button is highlighted.]
+>   ![When exporting History, make sure you select "to a remote file". The directory should be your workspace name followed by Other Data and Files. The export button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/17-export.png)
 > 4. Back at your Workspace, click on the “Data” tab, and the Files folder. You should now see the History export in your files. If you click on the file, you can download it or view it in Google Cloud Storage Browser.
->   ![Back on AnVIL, the Data tab and Files folder are selected. A file called SARS_Galaxy_Variant_Detection is now present.]
+>   ![Back on AnVIL, the Data tab and Files folder are selected. A file called SARS_Galaxy_Variant_Detection is now present.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/18-export-verify.png)
 >
 {: .hands_on}
 
@@ -370,13 +371,13 @@ Once you are done with the activity, you’ll need to shut down your Galaxy clou
 
 > <hands-on-title>Shut Down Galaxy in AnVIL</hands-on-title>
 > 1. Return to AnVIL, and find the Galaxy logo that shows your cloud environment is running. Click on the Galaxy logo.
->   ![Screenshot of the Workspace menu. The currently running Galaxy cloud environment logo on the right of the page is highlighted.]
+>   ![Screenshot of the Workspace menu. The currently running Galaxy cloud environment logo on the right of the page is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/19-galaxy-env.png)
 > 2. Click "Settings".
->   ![Screenshot of the Environment details menu. The Settings button is highlighted.]
+>   ![Screenshot of the Environment details menu. The Settings button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/20-galaxy-edit.png)
 > 3. Next, scroll down and click on “DELETE ENVIRONMENT”:
->   ![Screenshot of the cloud environment pop out menu. The “DELETE ENVIRONMENT” button is highlighted.]
+>   ![Screenshot of the cloud environment pop out menu. The “DELETE ENVIRONMENT” button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/21-galaxy-delete.png)
 > 4. Finally, select “Delete everything, including persistent disk”. Make sure you are done with the activity and then click “DELETE”.
-    ![Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted.]
+    ![Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png)
 >
 {: .hands_on}
 
