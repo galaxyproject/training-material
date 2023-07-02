@@ -13,6 +13,7 @@ objectives:
 - Generate and interpret graphs displaying experimental results
 - Critique large data sets and use bioinformatics to assess genetics data
 - Tap into the interdisciplinary nature of science
+time_estimation: "1H"
 key_points:
 - Use Galaxy on the AnVIL cloud computing resource to check data, perform an alignment, and visualize the results.
 contributions:
