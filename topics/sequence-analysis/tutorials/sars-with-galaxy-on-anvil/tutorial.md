@@ -18,6 +18,18 @@ key_points:
 contributions:
     authorship:
     - nakucher
+    - avahoffman
+    - robertmeller
+    editing:
+    - katherinecox
+    - cutsort
+    - nakucher
+    infrastructure:
+    - cansavvy
+    - avahoffman
+    - katherinecox
+    - ehumph
+    - cutsort
 lang: "en"
 ---
 
