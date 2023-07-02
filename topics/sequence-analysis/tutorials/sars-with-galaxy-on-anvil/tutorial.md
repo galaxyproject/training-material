@@ -66,6 +66,10 @@ Learning Objectives
 - Answer “what is a genetic variant?”
 - Learn about the molecular structure of a variant
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=kELyrelihP8
+" target="_blank"><img src="http://img.youtube.com/vi/kELyrelihP8/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+
 ## The Sequencing Revolution
 
 This lecture module introduces the history of the sequencing revolution. It highlights the enormous proliferation of genomic data that has accompanied the rapidly growing technology. It also suggests opportunities for careers in genomics, as well as an in-depth look at how some sequencing technologies actually work.
@@ -75,6 +79,10 @@ Learning Objectives
 - Introduce the sequencing workforce
 - Explore the evolution of sequencing technology
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=tXLTHqNT6Jg
+" target="_blank"><img src="http://img.youtube.com/vi/tXLTHqNT6Jg/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+
 ## Alignments
 
 This lecture module introduces the structure of genomic data and how alignments work. It touches on the “shredded book” analogy, demonstrates how short chunks of data can be compared to find variation, and reviews data files needed for alignments, including reference genomes and read data. It also reviews some diverse applications of variant detection made possible via alignment tools.
@@ -83,6 +91,10 @@ Learning Objectives
 - Learn about data as “reads” & shredded books
 - Become familiar with reference genomes and alignments
 - Explore the file structure of genomic data and quality scoring
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=MEZP_AzlLyg
+" target="_blank"><img src="http://img.youtube.com/vi/MEZP_AzlLyg/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 ## Cloud Computing
 
@@ -94,6 +106,10 @@ Learning Objectives
 - Learn about cloud computing for genomics
 - Revisit the big picture, from variants to alignments
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hreCMUQaA6s
+" target="_blank"><img src="http://img.youtube.com/vi/hreCMUQaA6s/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+
 # Overview
 
 This overview video introduces the lab activity. It briefly reviews some of the essential background for the activity, highlights key areas to focus on for activity assessment questions, and provides a detailed walk-through of the steps - from starting AnVIL and Galaxy to browsing the genome and shutting down the cloud computing instance.
@@ -103,9 +119,19 @@ Learning Objectives:
 - Review big steps in the analysis
 - Cover the setup on AnVIL in detail
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=D-bkZRA2TQ4
+" target="_blank"><img src="http://img.youtube.com/vi/D-bkZRA2TQ4/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+
 # Set Up
 
 In the next few steps, you will walk through how to get set up to use Galaxy on the AnVIL platform. AnVIL is centered around different “Workspaces”. Each Workspace functions almost like a mini code laboratory - it is a place where data can be examined, stored, and analyzed. The first thing we want to do is to copy or “clone” a Workspace to create a space for you to experiment.
+
+> <comment-title></comment-title>
+> Because AnVIL runs on a commerical cloud provider, you will need to have set up billing for yourself or through your institution to follow along with this exercise, or you will need to be added to a billing account created for a training event.
+> 
+> Learn more about options for creating billing accounts here: https://jhudatascience.org/AnVIL_Book_Getting_Started/overview-pis.html.
+{: .comment}
 
 > <tip-title>Screen view</tip-title>
 >
