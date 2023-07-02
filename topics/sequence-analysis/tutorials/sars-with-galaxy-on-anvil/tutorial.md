@@ -421,4 +421,4 @@ Once you are done with the activity, you’ll need to shut down your Galaxy clou
 {: .hands_on}
 
 # Conclusion
-
+Congratulations! You have run your first analysis using Galaxy in the AnVIL platform!
