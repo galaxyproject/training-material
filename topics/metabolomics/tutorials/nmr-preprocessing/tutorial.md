@@ -999,36 +999,4 @@ Cos2). You can refers to slides 8 and 9.
 >
 >    > <comment-title> short description </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+>    > A comment about the tool or something else. This box can als
