@@ -737,7 +737,7 @@ The outputs of **ABRicate** is a tabular file with different columns:
 > >    1. Tet(C), which resists [TETRACYCLINE](https://medlineplus.gov/druginfo/meds/a682098.html). It was found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.
 > >    2. 2 genes with sulfonamide-resistant dihydropteroate synthase Sul1 products
 > >    3. 2 genes with oxacillin-hydrolyzing class D beta-lactamase OXA-2 products
-> > 2. No **AMR** genes were found by the database in `Barcode11_Spike2b` sample.
+> > 2. No **AMR** genes were found by the database in `Barcode11` sample.
 > >
 > {: .solution}
 {: .question}
@@ -1032,7 +1032,7 @@ In this last section, we would like to show how to aggregate results and use the
 1. Drawing a presence-absence heatmap of the identified **VF** genes within all samples to visualize in which samples these genes can be found.
 2. Drawing a [phylogenetic tree](https://www.sciencedirect.com/topics/medicine-and-dentistry/phylogenetic-tree) for each pathogenic gene detected, where we will relate the contigs of the samples together where this gene is found.
 
-With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.
+With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other i.e. which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.
 
 > <hands-on-title>Organize imported data</hands-on-title>
 >
@@ -1165,7 +1165,11 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 
 ## Phylogenetic Tree building
 
-Phylogenetic trees are nice ways to track all the bacterial pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences from the sample genome the pathogentic gene is found and whether it is at the same or a different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.
+Phylogenetic trees can be used to track the evolution of the pathogen between the samples. Therefore, the VFs are used as a marker gene for 
+the pathogen, similar to 16S marker genes for species profiling. We use the VFs since we know they are associated to the pathogenicity of the sample.
+By observing the created trees one can identify groups of related pathogens. If additional meta data of the samples would be available one could 
+further identify groups that are associated to specific traits such as increase pathogenicity or faster transmission.
+Consequently, the tree could be used for phylogenetic placement of unknwon samples.
 
 For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use **ClustalW** ({% cite Larkin2007 %}) for [Multiple Sequence Alignment (MSA)](https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment) needed before constructing a phylogenetic tree, for the tree itself we use **FASTTREE** and **Newick Display** ({% cite Dress2008 %}) to visualize it.
 
