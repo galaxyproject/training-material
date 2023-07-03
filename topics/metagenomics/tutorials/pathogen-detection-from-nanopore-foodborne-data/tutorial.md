@@ -1162,11 +1162,7 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 
 ## Phylogenetic Tree building
 
-Phylogenetic trees can be used to track the evolution of the pathogen between the samples. Therefore, the VFs are used as a marker gene for 
-the pathogen, similar to 16S marker genes for species profiling. We use the VFs since we know they are associated to the pathogenicity of the sample.
-By observing the created trees one can identify groups of related pathogens. If additional meta data of the samples would be available one could 
-further identify groups that are associated to specific traits such as increase pathogenicity or faster transmission.
-Consequently, the tree could be used for phylogenetic placement of unknwon samples.
+Phylogenetic trees can be used to track the evolution of the pathogen between the samples. Therefore, the VFs are used as a marker gene for the pathogen, similar to 16S marker genes for species profiling. We use the VFs since we know they are associated to the pathogenicity of the sample. By observing the created trees one can identify groups of related pathogens. If additional meta data of the samples would be available one could further identify groups that are associated to specific traits such as increase pathogenicity or faster transmission. Consequently, the tree could be used for phylogenetic placement of unknwon samples.
 
 For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use **ClustalW** ({% cite Larkin2007 %}) for [Multiple Sequence Alignment (MSA)](https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment) needed before constructing a phylogenetic tree, for the tree itself we use **FASTTREE** and **Newick Display** ({% cite Dress2008 %}) to visualize it.
 
