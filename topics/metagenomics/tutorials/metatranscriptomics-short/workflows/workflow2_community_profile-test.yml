@@ -1,0 +1,16 @@
+---
+- doc: Test the workflow
+  job:
+      QC controlled forward reads:
+      class: File
+      location: https://zenodo.org/record/7940872/files/T1A_QC_controlled_forward_reads.fastq
+      filetype: fastqsanger
+      QC controlled reverse reads:
+      class: File
+      location: https://zenodo.org/record/7940872/files/T1A_QC_controlled_reverse_reads.fastq
+      filetype: fastqsanger
+  outputs:
+    Predicted taxon relative abundances:
+      asserts:
+        has_text:
+          text: "k__Bacteria"

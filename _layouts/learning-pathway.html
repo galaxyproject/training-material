@@ -1,0 +1,67 @@
+---
+layout: base
+---
+
+{% assign pathway = page %}
+
+<!-- Gitter -->
+{% if topic.gitter %}
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
+{% endif %}
+
+
+<section>
+<h3> GTN Learning Pathway </h3>
+<div>
+  <div style="display:inline-block;vertical-align:top;width:10%">
+   <img src="{{site.baseurl}}/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" />
+   </div>
+   <div  style="display:inline-block; margin-left: 2em; width:70%">
+      We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial.
+   </div>
+</div>
+</section>
+
+
+<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
+    <h1>{{ pathway.title }}</h1>
+    <p>{{ pathway.description | markdownify }}</p>
+    <p>{{ content | markdownify }}</p>
+
+
+    {% if pathway.requirements %}
+    <h2 id="requirements">Requirements</h2>
+    <p>Before diving into this learning pathway, we recommend you to have a look at:</p>
+
+    <ul>
+        {% include _includes/display_extra_training.md extra_trainings=pathway.requirements %}
+    </ul>
+    {% endif %}
+
+
+
+    {% for section in page.pathway %}
+        <h3 id="st-{{ section.section | slugify }}">{{ section.section }}</h3>
+        <p>{{ section.description | markdownify }}</p>
+
+        {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	{% include _includes/tutorial_list.html sub=material_list %}
+    {% endfor %}
+</section>
+
+<hr style="margin-top: 6em"/>
+<section>
+	<!-- Maintained by -->
+	<h2 id="maintainers">Maintained by</h2>
+	<p>This material is maintained by:</p>
+	{% assign maintainers = pathway.maintainers | sorted %}
+	{% include _includes/contributor-list.html contributors=maintainers badge=true %}
+
+	<h2 id="funders">Funders</h2>
+	<p>This material was funded by:</p>
+	{% assign funders = pathway.funding | sorted %}
+	{% include _includes/contributor-list.html contributors=funders badge=true %}
+
+</section>

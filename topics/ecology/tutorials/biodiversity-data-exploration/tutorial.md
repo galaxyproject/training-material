@@ -16,11 +16,14 @@ key_points:
 tags:
   - taxonomic data
   - data quality
-contributors:
-- onorvez
-- Marie59
-- colineroyaux
-- yvanlebras
+contributions:
+  authorship:
+  - onorvez
+  - Marie59
+  - colineroyaux
+  - yvanlebras
+  funding:
+  - erasmusplus
 
 ---
 

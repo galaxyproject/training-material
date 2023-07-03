@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Exome sequencing data analysis for diagnosing a genetic disease"
+subtopic: human-genetics-cancer
 zenodo_link: "https://doi.org/10.5281/zenodo.3054169"
 questions:
   - "How do you identify genetic variants in samples based on exome sequencing
@@ -148,6 +149,7 @@ data for either analysis.
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Obtain the raw sequencing data

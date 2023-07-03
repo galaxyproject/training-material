@@ -1,0 +1,60 @@
+---
+layout: base
+---
+
+<h1> My Galaxy Instance </h1>
+
+<p>
+My Galaxy Instance allows the GTN to link you to specific pages in your preferred Galaxy
+</p>
+
+<a id="clickthrough" class="btn btn-primary" href="https://usegalaxy.eu">Go to your server</a>
+<input id="domain" type="text" placeholder="usegalaxy.eu" />
+<button id="edit" class="btn btn-secondary">Edit</button>
+<button id="save" class="btn btn-primary">Save</button>
+
+<p>
+Configure My Galaxy Instance by entering your preferred Galaxy Server (e.g. usegalaxy.eu or usegalaxy.org.au) and clicking Save.
+</p>
+<p>
+<b>Note</b>: This URL is only stored in your browser.
+</p>
+
+<script>
+// Without jquery we wait for the page to load
+document.addEventListener("DOMContentLoaded", function(event) {
+	// Get the path from the URL parameter named 'path'
+	let params = new URLSearchParams(window.location.search);
+	let path = params.get('path') || '/';
+	var url = localStorage.getItem('gxy-url');
+
+	function setUrl(url, path) {
+		$('#clickthrough').attr('href', 'https://' + url + path);
+		$("#clickthrough").text(`Go to your https://${url}${path}`);
+		$('#clickthrough').show();
+		$('#domain').hide();
+		$('#domain').val(url);
+		$('#edit').show();
+		$('#save').hide();
+	}
+	if (url) {
+		setUrl(url, path);
+	} else {
+		$('#edit').hide();
+		$('#clickthrough').hide();
+	}
+
+	$('#save').click(function() {
+		var url = $('#domain').val();
+		localStorage.setItem('gxy-url', url);
+		setUrl(url, path);
+	});
+	$('#edit').click(function() {
+		$('#clickthrough').hide();
+		$('#domain').show();
+		$('#domain').val(url);
+		$('#edit').hide();
+		$('#save').show();
+	});
+});
+</script>

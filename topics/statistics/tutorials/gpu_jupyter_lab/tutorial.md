@@ -111,9 +111,9 @@ To use Git version control for cloning any codebase from GitHub, the following s
 > 1. Create a new folder named `covid_ct_segmentation` alongside other folders such as "data", "outputs", "elyra" or you can use your favourite folder name.
 > 2. Inside the created folder, clone a code repository by clicking on "Git" icon as shown in Figure 6.
 > 3. In the shown popup, provide the repository path as shown below and then, click on "clone":
-> > ```
-> > https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
-> > ```
+>    ```
+>    https://github.com/anuprulez/gpu_jupyterlab_ct_image_segmentation
+>    ```
 > 4. The repository "anuprulez/gpu_jupyterlab_ct_image_segmentation" gets immediately cloned.
 > 5. Move inside the created folder `gpu_jupyterlab_ct_image_segmentation`. A few notebooks can be found inside that are numbered.
 >    ![Clone repository](../../images/git_clone.png "Clone a code repository using Git")
@@ -171,7 +171,7 @@ The training task completed in the notebook above can also be sent to a Galaxy c
 >    >
 >    {: .comment}
 >
->    > ![Galaxy history](../../images/finished_history_remote_ai.png "Galaxy history showing finished datasets after remote training on a Galaxy cluster")
+>    ![Galaxy history](../../images/finished_history_remote_ai.png "Galaxy history showing finished datasets after remote training on a Galaxy cluster")
 > 
 > **Note**: The training may take longer depending on how busy Galaxy's queueing is as it sends the training task to be done on a Galaxy cluster. Therefore, this feature should be used when the training task is expected to run for several hours. The training time is higher because a large Docker container is downloaded on the assigned cluster and only then, the training task can proceed.
 >
@@ -211,7 +211,7 @@ In this mode, the GPU Jupyterlab tool executes the input `ipynb` file and produc
 When the parameter `Execute notebook and return a new one` is set to `yes`, the GPU Jupyterlab tool can be used as a part of any workflow. In this mode, it requires an `ipynb` file/notebook that gets executed in Galaxy and output datasets if any become available in the Galaxy history. Along with a notebook, multiple input datasets can also be attached that become automatically available inside the notebook. They can be accessed inside the notebook and processed to produce desired output datasets. These output datasets can further be used with other Galaxy tools. The following image shows a sample workflow for illustration purposes. Similarly, high-quality workflows to analyse scientific datasets can be created.
 
 
-> !["A sample Galaxy workflow that uses GPU Jupyterlab as a tool"](../../images/workflow_gpu_jupyterlab.png "A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.")
+!["A sample Galaxy workflow that uses GPU Jupyterlab as a tool"](../../images/workflow_gpu_jupyterlab.png "A sample Galaxy workflow that uses GPU Jupyterlab as a tool which takes input datasets from one tool, trains a machine learning model to predict classes and then the predicted datasets is used as input to another Galaxy tool.")
 
 Let's look at how can this workflow be created in a step-wise manner. There are 3 steps - first, the training dataset is filtered using the `Filter` tool. The output of this tool along with 2 other datasets (`test_rows` and `test_rows_labels`), a sample IPython notebook is executed by the GPU Jupyterlab tool. The sample IPython notebook trains a simple machine learning model using the train dataset and creates a classification model using `RandomForestClassifier`. The trained model is then used to predict classes using the test dataset. The predicted classes is produced as a file in an output collection by the GPU Jupyterlab tool. As a last step, `Cut` tool is used to extract the first column of the output collection. Together, these steps showcase how the GPU Jupyterlab tool is used with other Galaxy tools in a workflow.
 

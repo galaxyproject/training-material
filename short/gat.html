@@ -1,0 +1,60 @@
+---
+layout: base
+---
+
+<h1> My GAT Instance </h1>
+
+<p>
+My GAT Instance allows the documentation to link you to specific pages in your Galaxy Admin Training Instance.
+</p>
+
+<a id="clickthrough" class="btn btn-primary" href="https://gat-0.xy.galaxy.training">Go to your training</a>
+<input id="domain" type="text" placeholder="gat-0.xy.galaxy.training" />
+<button id="edit" class="btn btn-secondary">Edit</button>
+<button id="save" class="btn btn-primary">Save</button>
+
+<p>
+Configure My GAT Instance by entering the URL of your VM.
+</p>
+<p>
+<b>Note</b>: This URL is only stored in your browser.
+</p>
+
+<script>
+// Without jquery we wait for the page to load
+document.addEventListener("DOMContentLoaded", function(event) {
+	// Get the path from the URL parameter named 'path'
+	let params = new URLSearchParams(window.location.search);
+	let path = params.get('path') || '/';
+	var url = localStorage.getItem('gat-url');
+
+	function setUrl(url, path) {
+		$('#clickthrough').attr('href', 'https://' + url + path);
+		$("#clickthrough").text(`Go to your https://${url}${path}`);
+		$('#clickthrough').show();
+		$('#domain').hide();
+		$('#domain').val(url);
+		$('#edit').show();
+		$('#save').hide();
+	}
+	if (url) {
+		setUrl(url, path);
+	} else {
+		$('#edit').hide();
+		$('#clickthrough').hide();
+	}
+
+	$('#save').click(function() {
+		var url = $('#domain').val();
+		localStorage.setItem('gat-url', url);
+		setUrl(url, path);
+	});
+	$('#edit').click(function() {
+		$('#clickthrough').hide();
+		$('#domain').show();
+		$('#domain').val(url);
+		$('#edit').hide();
+		$('#save').show();
+	});
+});
+</script>

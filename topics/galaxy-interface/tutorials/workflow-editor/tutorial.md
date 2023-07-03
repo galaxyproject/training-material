@@ -162,7 +162,7 @@ a test dataset and run our workflow.
 
 > <hands-on-title>Running the workflow</hands-on-title>
 >
-> 1. Return to the analysis are by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
+> 1. Return to the analysis page by clicking the Home button {% icon galaxy-home %} (or *Analyze Data* on older versions of Galaxy) on the top
 > 2. Upload a dataset using "Paste/Fetch data" with the contents
 >
 >    ```

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Trajectory Analysis using Monocle3 '
+title: 'Inferring trajectories using Monocle3'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/record/7078524'
@@ -483,9 +483,9 @@ In the mentioned tutorial, we annotated the cells so that we know what type they
 ## Clustering
 
 Don't get confused - we haven't clustered our cells yet, for now we have only plotted them based on cell type annotation. Now it's time to create clusters, which - in an ideal world where all computation picks up the exact biological phenomenons - would yield the same areas as the clusters determined by the Scanpy algorithms. Is this the case here? Do Monocle and Scanpy identify the same clusters?
->
+
 Monocle uses a technique called "community detection" ({% cite Traag_2019 %}) to group cells. This approach was introduced by {% cite Levine_2015 %} as part of the phenoGraph algorithm.
->
+
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from {% cite Wolf_2019 %}, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
 > <details-title>Clusters vs partitions</details-title>
@@ -540,8 +540,9 @@ If we compare the annotated cell types and the clusters that were just formed, w
 
 
 ## Gene expression
-> We haven't looked at gene expression yet! This step is particularly important when working with data which is not annotated. Then, based on the expression of marker genes, you are able to identify which clusters correspond to which cell types. This is indeed what we did in the previous tutorial using scanpy. We can do the same using Monocle3! Since we work on annotated data, we can directly check if the expressed genes actually correspond to the previously assigned cell types. If they do, that’s great - if two different methods are consistent, that gives us more confidence that our results are valid.
-> Below is the table that we used in the previous tutorial to identify the cell types.
+
+We haven't looked at gene expression yet! This step is particularly important when working with data which is not annotated. Then, based on the expression of marker genes, you are able to identify which clusters correspond to which cell types. This is indeed what we did in the previous tutorial using scanpy. We can do the same using Monocle3! Since we work on annotated data, we can directly check if the expressed genes actually correspond to the previously assigned cell types. If they do, that’s great - if two different methods are consistent, that gives us more confidence that our results are valid.
+Below is the table that we used in the previous tutorial to identify the cell types.
 
 | Marker | Cell type |
 |--------------------|
@@ -646,9 +647,9 @@ We’re getting closer and closer! The next step is to learn the trajectory grap
 {: .hands_on}
 
 As you can see, the learned trajectory path is just a line connecting the clusters. However, there are some important points to understand here.
-> If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There's a danger here that we might start seeing things that don't really exist.
-> You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small 'dot' classified as another partition.
-> There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, {% icon history-share %} checking the correct box in {% tool Monocle3 plotCells %}.
+If the resolution of the clusters is high, then the trajectory path will be very meticulous, strongly branched and curved. There's a danger here that we might start seeing things that don't really exist.
+You can set an option to learn a single tree structure for all the partitions or use the partitions calculated when clustering and identify disjoint graphs in each. To make the right decision, you have to understand how/if the partitions are related and what would make more biolgical sense. In our case, we were only interested in a big partition containing all the cells and we ignored the small 'dot' classified as another partition.
+There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. Those patterns might correspond to various biological processes: transition events for different phases, cell cycle, cell differentiation. Therefore, branching points are quite important on the trajectory path. You can always plot them, {% icon history-share %} checking the correct box in {% tool Monocle3 plotCells %}.
 
 
 ![A trajectory path, branching out to connect all the clusters and thus show their relationships.](../../images/scrna-casestudy-monocle/learned_trajectory.png "Learned trajectory path")
@@ -700,7 +701,7 @@ Finally, it's time to see our cells in pseudotime! We have already learned a tra
 {: .tip}
 
 Now we can see how all our hard work has come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn't it beautiful? But wait, don't be too enthusiastic - why on earth DP-M1 group branches out? We didn't expect that... What could that mean?
->
+
 There are a lot of such questions in bioinformatics, and we're always get excited to try to answer them. However, with analysing scRNA-seq data, it's almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimensionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.
 
 ![Pseudotime plot, showing the development of T-cells – starting in dark blue on DN cells and ending up on mature T-cells, marked in yellow on pseudotime scale and (going in the opposite direction) DP-M1 branch which is marked in light orange.](../../images/scrna-casestudy-monocle/pseudotime.png "Trajectory analysis - pseudotime")

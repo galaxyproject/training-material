@@ -65,6 +65,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file `female_oral2.fastq-4143.gz` from [Zenodo](https://zenodo.org/record/3977236) or from the data library (ask your instructor)
@@ -75,6 +76,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the imported dataset to `Reads`.
