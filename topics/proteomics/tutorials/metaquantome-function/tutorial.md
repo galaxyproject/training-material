@@ -74,6 +74,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.

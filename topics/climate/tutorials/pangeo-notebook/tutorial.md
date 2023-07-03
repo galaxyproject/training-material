@@ -348,7 +348,6 @@ dset.sel(time=(np.timedelta64(2,'D') + np.timedelta64(12,'h')))['pm2p5_conc'].pl
 plt.title("Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts\n 24th December 2021 at 12:00 UTC", fontsize=18)
 plt.savefig("CAMS-PM2_5-fc-20211224.png")
 ```
->    {: .code-in}
 
 And you should get the following plot:
 

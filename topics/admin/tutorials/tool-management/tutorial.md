@@ -47,17 +47,16 @@ You are an administrator of a Galaxy server. A colleague has approached you with
 
 To run this tutorial, you will need to [install Ephemeris](https://ephemeris.readthedocs.io/en/latest/installation.html). You would normally install it on your workstation, but during training courses we recommend to install it on the same virtual machine used for the Galaxy server.
 
-> <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
+> <hands-on-title>Installing Ephemeris in a Python virtual environment</hands-on-title>
 >
-> 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
+> 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
 >    ```console
->    virtualenv -p python3 ~/ephemeris_venv
+>    python3 -m venv ~/ephemeris_venv
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
-{: .tip}
-
+{: .hands_on}
 
 # Extracting Tools
 
@@ -99,7 +98,7 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml`.
+> 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml` in the folder `tools`.
 >
 >    > <question-title></question-title>
 >    > What did your command look like?
@@ -107,9 +106,60 @@ Ephemeris can take care of this process. Let's practice this on a real workflow.
 >    > > <solution-title></solution-title>
 >    > > > <code-in-title>Bash</code-in-title>
 >    > > > ```bash
->    > > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
+>    > > > workflow-to-tools -w mapping.ga -o tools/workflow_tools.yml -l Mapping
 >    > > > ```
 >    > > > {: data-cmd="true"}
+>    > > >
+>    > > > Or as a diff:
+>    > > > {% raw %}
+>    > > > ```diff
+>    > > > --- /dev/null
+>    > > > +++ b/tools/workflow_tools.yml
+>    > > > @@ -0,0 +1,41 @@
+>    > > > +install_tool_dependencies: True
+>    > > > +install_repository_dependencies: True
+>    > > > +install_resolver_dependencies: True
+>    > > > +
+>    > > > +tools:
+>    > > > +- name: fastqc
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - e7b2202befea
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: trim_galore
+>    > > > +  owner: bgruening
+>    > > > +  revisions:
+>    > > > +  - 949f01671246
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: multiqc
+>    > > > +  owner: iuc
+>    > > > +  revisions:
+>    > > > +  - f7985e0479b9
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: bowtie2
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - 09b2cdb7ace5
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: samtools_stats
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - 24c5d43cb545
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > +- name: bamtools_filter
+>    > > > +  owner: devteam
+>    > > > +  revisions:
+>    > > > +  - cb20f99fd45b
+>    > > > +  tool_panel_section_label: Mapping
+>    > > > +  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+>    > > > {% endraw %}
+>    > > > ```
+>    > > > {: data-commit="Add a tool list to install"}
 >    > > {: .code-in}
 >    > {: .solution }
 >    {: .question}
@@ -140,7 +190,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -148,7 +198,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >
 {: .hands_on}
 
-> <tip-title>Certificate issues</tip-title>
+> <tip-title>Certificate issues (GAT, uncommon)</tip-title>
 >
 > If your Galaxy instance is served via the HTTPS protocol (as it should be!), ephemeris will use the [requests](https://requests.readthedocs.io) Python library to encrypt the communication with Galaxy. Therefore, if your Galaxy uses a self-signed SSL certificate, `shed-tools` may fail with a `CERTIFICATE_VERIFY_FAILED` error.
 >
@@ -167,7 +217,7 @@ For that, you can install from a YAML file:
 
 > <hands-on-title>Installing tools from a tool list</hands-on-title>
 >
-> 1. (optional) Watch the installation proceed by running `journalctl -f -u galaxy` in a separate remote shell.
+> 1. (optional) Watch the installation proceed by running `journalctl -f` in a separate remote shell.
 >
 > 2. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install all of the tools from the `workflow_tools.yml` file on your Galaxy.
 >
@@ -178,7 +228,7 @@ For that, you can install from a YAML file:
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> -t workflow_tools.yml
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -193,17 +243,7 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
-> <tip-title>Opening a split screen in byobu</tip-title>
-> <kbd>Shift-F2</kbd>: Create a horizontal split
->
-> <kbd>Shift-Left/Right/Up/Down</kbd>: Move focus among splits
->
-> <kbd>Ctrl-F6</kbd>:  Close split in focus
->
-> <kbd>Ctrl-D</kbd>:  (Linux, Mac users) Close split in focus
->
-> There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
-{: .tip}
+{% snippet topics/admin/faqs/byobu-shortcuts.md %}
 
 > <tip-title>Can I install tools without restarting?</tip-title>
 > Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
@@ -229,7 +269,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
+>    > > shed-tools test -g https://galaxy.example.org -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -330,8 +370,14 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 > Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:
 >
 > ```console
-> curl -X PUT https://<your-galaxy>/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
+> curl -X PUT https://galaxy.example.org/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
 > ```
 >
 > This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
 {: .tip}
+
+<!--
+{% snippet topics/admin/faqs/missed-something.md step=7 %}
+-->
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tool-management" %}

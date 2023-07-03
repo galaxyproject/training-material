@@ -6,17 +6,19 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{{ page.title | default: site.title }}</title>
+        <title>{{ page.title | default: site.title | strip_html }}</title>
         {% if jekyll.environment == 'production' %}
             {% include _includes/analytics.html %}
         {% endif %}
-        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
+        <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
         <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
-        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
-        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
-        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
-        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
 
         {{ page | generate_dublin_core: site }}
 
@@ -30,13 +32,20 @@
         <meta property="og:site_name" content="Galaxy Training Network" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
 
         <script type="application/ld+json">
             {% include _includes/material.jsonld material=page topic=topic site=site %}
         </script>
     </head>
   <body>
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
+
     <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <textarea id="source">
 name: inverse
@@ -85,7 +94,10 @@ class: center, middle, inverse
 {% include _includes/contributors-line.html page=page authorsonly=true %}
 
 <!-- modified date -->
-<div class="footnote" style="bottom: 8em;">{% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}}</div>
+<div class="footnote" style="bottom: 8em;">
+  {% icon last_modification %} {{locale['last-modification'] | default: "Updated"}}: {{ page.last_modified_at | date: "%b %-d, %Y"}} &nbsp;
+  {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a>
+</div>
 
 
 <!-- other slide formats (video and plain-text) -->
@@ -164,9 +176,10 @@ Useful when presenting."
 .footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub]({{ site.github_repository }}/tree/main{{ page.url }})]
 {% endif %}
     </textarea>
-	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-    <script type="text/javascript">
+	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+    <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
+    <script>
       var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
       var hljs = remark.highlighter.engine;
       var snippets = document.querySelectorAll('code.remark-code');
@@ -178,7 +191,7 @@ Useful when presenting."
       }});
     </script>
 
-    <script type="text/javascript">
+    <script>
         if(window.location.hostname === "galaxyproject.github.io") {
             // Redirect
             var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;

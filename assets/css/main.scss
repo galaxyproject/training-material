@@ -47,7 +47,7 @@ $tutorial-box-spacing: 1rem;
 	--code-background: #000;
 
 	--border-light: #ddd;
-	--hyperlink: #0067d6;
+	--hyperlink: #0056b3;
 	--hyperlink-hover: #004590;
 
 	// From Galaxy
@@ -78,6 +78,16 @@ $tutorial-box-spacing: 1rem;
 @import "./syntax_highlighting.scss";
 /* THEMES */
 @import "./themes.scss";
+
+/* Other CSS libraries we use */
+// If you use .css (i.e. from the file extension) it will use a CSS import
+// which triggers multiple requests.
+@import "./academicons";
+@import "./bootstrap.min";
+@import "./bootstrap-toc.min";
+@import "./leaflet-1.9.3";
+@import "../fontawesome/css/all.min";
+
 
 // palette
 // These remain SASS variables because they're used in mixins.
@@ -220,6 +230,28 @@ img {
     margin: 2.5%;
 }
 
+div.main-content {
+	img {
+		height: auto;
+		width: auto;
+	}
+}
+
+figure {
+  text-align: center;
+  margin: 1rem 2rem;
+
+  & > img {
+      margin-bottom: 1rem;
+      height: auto;
+  }
+
+  figcaption {
+    text-align: justify;
+  }
+}
+
+
 :not(pre) > code {
     color: var(--code-foreground);
     background: var(--code-background);
@@ -233,27 +265,32 @@ pre.highlight {
     color: var(--code-foreground);
     border: 1px solid var(--text-color-muted);
     @include syntax-dark;
+
+	code > ::selection {
+		color: var(--code-background);
+		background: var(--code-foreground);
+	}
 }
 
-figure {
-  text-align: center;
-  margin: 1rem 2rem;
+/* Make the @@ portions of diffs, which indicate area, much more visible */
+div.language-diff .p {
+	border-top: 1px solid #66d9ef;
+	border-bottom: 1px solid #66d9ef;
 
-  & > img {
-      margin-bottom: 1rem;
-  }
+	border-left: 5px solid #66d9ef;
+	border-right: 5px solid #66d9ef;
 
-  .figcaption-prefix {
-      font-weight: bold;
-  }
+	font-weight: 900;
 
-  figcaption {
-    text-align: justify;
-  }
+	line-height: 3em;
+
+	margin-right: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
 }
 
 footer {
-    margin-top: 3em;
+    margin-top: 5em;
     text-align: center;
     color: var(--text-color-muted);
     font-size: $font-size - 2;
@@ -278,6 +315,10 @@ nav.navbar {
         color: var(--brand-color-contrast);
     }
 
+    a {
+	border: none;
+    }
+
     .navbar-brand, .navbar-nav li {
 	padding: 0.5em;
 	background: var(--navbar-item-background);
@@ -289,6 +330,11 @@ nav.navbar {
 
     a.navbar-brand {
 	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
+    }
+
+    // Text decoration not necessary for accessibility here.
+    a {
+        text-decoration: none;
     }
 
     .navbar-collapse {
@@ -526,6 +572,39 @@ blockquote {
 	}
 }
 
+.pathway{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+
+    .pathwayitem {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-light);
+      .card-header {
+	background: var(--brand-color);
+	border-bottom: 1px solid var(--border-light);
+      }
+    }
+    .pathwaycover {
+        width: 100%;
+        object-fit: cover;
+        margin-top: auto;
+        margin-bottom: auto;
+        background-color: white;
+        border-radius: 2rem;;
+        padding: 1rem;
+        -webkit-transition: border 0.2s ease-in-out;
+        -o-transition: border 0.2s ease-in-out;
+        transition: border 0.2s ease-in-out;
+    }
+    h3 {
+        margin-top: 0.25rem;
+    }
+
+}
 
 .newslist {
     display: flex;
@@ -684,17 +763,17 @@ blockquote {
 @media (max-width: 768px) {
     .navbar {
         .dropdown-menu {
-            background-color: transparent;
+		background-color: var(--color-background);
             border-color: transparent;
         }
 
         .dropdown-item {
-            color: var(--text-color-muted);
+		color: var(--text-color);
 
             &:hover,
             &:focus,
             &:active {
-                background-color: transparent;
+                background-color: var(--brand-color);
                 color:  var(--text-color);
             }
         }
@@ -745,11 +824,14 @@ blockquote {
     border-width: 0 2px 1px 0;
     background-color: var(--color-primary);
     border-color: var(--color-darker);
-    cursor: pointer;
 
     &:hover {
         color: #000;
         background-color: var(--color-dimmed);
+    }
+
+    &.label-large {
+	    font-size: 150%;
     }
 }
 
@@ -785,15 +867,33 @@ blockquote {
 }
 
 
-/* WCAG Contrast. These aim to pass AA level for normal sized text. */
+/* WCAG Contrast. These aim to pass AAA level for normal sized text. */
 a {
     color: var(--hyperlink);
+    border-bottom: 1px dotted var(--hyperlink);
 
     &:hover,
     &:focus,
+    &:focus-visible,
     &:active {
         color: var(--hyperlink-hover);
-        text-decoration: underline;
+        border-bottom: 1px solid var(--hyperlink-hover);
+        text-decoration: none;
+    }
+
+    // Unset this for logos on the homepage
+    &.logo {
+	border: none;
+	img {
+		max-height: 5em;
+	}
+    }
+
+    &.btn-info {
+	color: black;
+    }
+    &.badge-info {
+	color: black;
     }
 }
 
@@ -840,7 +940,6 @@ nav[data-toggle='toc'] {
                     padding-left: 0px;
                     color: var(--hyperlink);
                     border-left: none;
-                    text-decoration: underline;
                 }
             }
         }
@@ -893,19 +992,22 @@ nav[data-toggle='toc'] {
     flex-direction: row;
     align-items: center;
     border-radius: 1em;
-    border: 1px solid var(--hyperlink);
+    border: 1px dotted var(--hyperlink);
     padding-right: 0.5em;
     margin: 0.2em;
     line-height: 1em;
     flex-shrink: 0;
 
     img {
-        height: 1em;
+	height: 2em !important;
+	width: 2em !important;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
     }
 
     &:hover {
+	background: var(--brand-color);
+	color: var(--brand-color-contrast);
 	border: 1px solid var(--hyperlink-hover);
     }
 }
@@ -932,6 +1034,15 @@ div.highlight .btn{
 	top:4px;
 }
 
+@media (prefers-reduced-motion) {
+  .btn {
+	-webkit-transition: none;
+	-o-transition: none;
+	transition: none;
+  }
+}
+
+
 div.highlight:hover .btn,div.highlight .btn:focus{
 	opacity:1
 }
@@ -947,10 +1058,6 @@ div.highlight:hover .btn,div.highlight .btn:focus{
     #clear_search{
         cursor: pointer;
     }
-
-    .topic-icon {
-        padding: .5rem .75rem;
-    }
 }
 
 ul.supporting_material{
@@ -961,6 +1068,11 @@ ul.supporting_material{
         padding-right: 10px;
         font-size: 15px;
     }
+}
+
+// chrome reports this improves UX by providing better click targets
+li {
+	padding-bottom: 0.2em;
 }
 
 .alert-heading {
@@ -986,27 +1098,45 @@ ul.supporting_material{
   margin-top: 1em;
 }
 
-span.tool {
-	border: 1px solid #999;
-	padding: 2px;
-	border-radius: 5px;
 
-	&:hover {
-		border: 1px solid blue;
-
+// The default presentation
+body {
+	.show-when-galaxy-proxy-active {
+		cursor: not-allowed;
 	}
 
-	&.galaxy-proxy-active {
+	span.tool, span.workflow {
+		border: 1px solid #999;
+		padding: 2px;
+		border-radius: 5px;
+
+		&:hover {
+			border: 1px solid blue;
+		}
+	}
+}
+
+// The fancier presentation when possible
+body.galaxy-proxy-active {
+	.show-when-galaxy-proxy-active {
+		cursor: pointer;
+	}
+
+	.hide-when-galaxy-proxy-active {
+		display: none;
+	}
+
+	span.tool, span.workflow {
 		cursor: pointer;
 		color: var(--brand-color-contrast);
 		background-color: var(--brand-color);
 		border-color: var(--brand-color);
 		padding: 0.2em 0.5em;
-	}
 
-	&.galaxy-proxy-active:hover {
-		background-color: var(--hyperlink);
-		border-color: var(--hyperlink);
+		&:hover {
+			background-color: var(--hyperlink);
+			border-color: var(--hyperlink);
+		}
 	}
 }
 
@@ -1211,6 +1341,15 @@ $btn-pink:$keypoints-color;
   margin: 5px;
 }
 
+.btn-primary {
+	background-color: var(--brand-color);
+	border-color: var(--brand-color);
+}
+.btn-success {
+	background-color: #1d7531; // AA
+	border-color: #1d7531; // AA
+}
+
 
 /* CYOA */
 .gtn-cyoa {
@@ -1271,9 +1410,23 @@ ul.text-list, ol.text-list {
         margin-bottom: 0;
         text-align: center;
     }
+
+    .card-title-small {
+        font-size: 250%;
+        font-weight: 900;
+        margin-bottom: 0;
+        text-align: center;
+
+    }
     .card-text {
         text-align: center;
         font-size: 150%;
+        padding: 0.3em;
+    }
+
+    .card-text-small {
+        text-align: center;
+        font-size: 125%;
         padding: 0.3em;
     }
 }
@@ -1333,3 +1486,34 @@ a[target="_blank"]::after {
     }
 }
 }
+
+// For the git-gat learning pathway boxes
+#git-gat-timeline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#git-gat-timeline li  {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--text-color);
+    border-radius: 5px;
+    padding: 0.5em;
+    margin: 0.5em;
+}
+#git-gat-timeline li.active {
+    background: #a8ffa8;
+}
+#git-gat-timeline li.active a {
+    color: black;
+}
+#git-gat-timeline li.disabled {
+    background: #eee;
+}
+#git-gat-timeline li.disabled a {
+    color: #555;
+}
+#git-gat-timeline span {
+    align-self: center;
+}
+

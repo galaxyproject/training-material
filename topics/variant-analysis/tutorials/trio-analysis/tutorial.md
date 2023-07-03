@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Trio Analysis using Synthetic Datasets from RD-Connect GPAP
+subtopic: human-genetics-cancer
 zenodo_link: 'https://doi.org/10.5281/zenodo.6483454'
 questions:
 - How do you import data from the EGA?
@@ -23,7 +24,6 @@ contributors:
 - hexylena
 - shiltemann
 tags:
-- cancer
 - cyoa
 
 ---
@@ -36,7 +36,7 @@ To discover causal mutations of inherited diseases it’s common practice to do 
 
 To discover these mutations either whole exome sequencing (WES) or whole genome sequencing (WGS) can be used. With these technologies it is possible to uncover the DNA of the parents and offspring to find (shared) mutations in the DNA. These mutations can include insertions/deletions (indels), loss of heterozygosity (LOH), single nucleotide variants (SNVs), copy number variations (CNVs), and fusion genes.
 
-In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
+In this tutorial we will also make use of the HTSGET protocol, which is a program to download our data securely and savely. This protocol has been implemented in the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} tool, so we don't have to leave Galaxy to retrieve our data.
 
 We will not start our analysis from scratch, since the main goal of this tutorial is to use the HTSGET protocol to download variant information from an online archive and to find the causative variant from those variants. If you want to learn how to do the analysis from scratch, using the raw reads, you can have a look at the [Exome sequencing data analysis for diagnosing a genetic disease]({% link topics/variant-analysis/tutorials/exome-seq/tutorial.md %}) tutorial.
 
@@ -91,7 +91,7 @@ Our test data is stored in EGA, which can be easily accessed using the EGA Downl
 
 > <hands-on-title>Check log-in and authorized datasets</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} with the following parameters:
 >    - *"What would you like to do?"*: `List my authorized datasets`
 >
 > > <comment-title>Check if the dataset is listed.</comment-title>
@@ -102,11 +102,11 @@ Our test data is stored in EGA, which can be easily accessed using the EGA Downl
 {: .hands_on}
 
 ## Download list of files
-When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use **version 4+** of the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %}.
+When you have access to the EGA dataset, you can download all the needed files. However, the EGA dataset contains many different filetypes and cases, but we are only interested in the VCFs from case 5 and, to reduce execution time, the variants on chromosome 17. To be able to donwload these files we first need to request the list of files from which we can download. Make sure to use **version 4+** of the {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %}.
 
 > <hands-on-title>Request list of files in the dataset</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} **version 4+** with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} **version 4+** with the following parameters:
 >    - *"What would you like to do?"*: `List files in a datasets`
 >    - *"EGA Dataset Accession ID?"*: `EGAD00001008392`
 >
@@ -139,7 +139,7 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 
 > <hands-on-title>Download listed VCFs</hands-on-title>
 >
-> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/4.0.0+galaxy0) %} with the following parameters:
+> 1. {% tool [EGA Download Client](toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0) %} with the following parameters:
 >    - *"What would you like to do?"*: `Download multiple files (based on a file with IDs)`
 >        - {% icon param-file %} *"Table with IDs to download"*: `Filtered list of files` (output of **Search in textfiles** {% icon tool %})
 >        - *"Column containing the file IDs"*: `Column: 1`
@@ -168,14 +168,7 @@ Finally, we need to decompress our bgzipped VCFs, since we will use a text manip
 >
 > After transforming all the VCFs you need to combine the converted VCFs into a colllection again.
 >
-> > <tip-title>Adding files to collection</tip-title>
-> >
-> > 1. Click on the dataset **selector icon** {% icon param-check %} in your history.
-> > 2. Select the 3 vcf files.
-> > 3. Click on the button **For all selected...** and select **Build Dataset List**
-> > 4. Give the new collection a name and click on **Create collection**.
-> >
-> {: .tip}
+> {% snippet faqs/galaxy/collections_build_list.md datasets_description="the 3 vcf files" n="3" %}
 >
 {: .hands_on}
 

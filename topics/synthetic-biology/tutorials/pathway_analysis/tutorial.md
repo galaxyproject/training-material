@@ -245,9 +245,9 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 
 > <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
-> 1. Import your **Pathway Analysis Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga).
+> 1. Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga" title="Pathway Analysis Workflow" %}
 >
 > 2. Click on *Workflow* on the top menu bar of Galaxy. You will see **Pathway Analysis Workflow**
 > 3. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow

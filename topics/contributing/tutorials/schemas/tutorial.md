@@ -33,3 +33,11 @@ contributors:
 {% assign kid_key = "Quiz Schema" %}
 {% assign kid_val = site.data['schema-quiz'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "Learning Pathway Schema" %}
+{% assign kid_val = site.data['schema-learning-pathway'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% assign kid_key = "News" %}
+{% assign kid_val = site.data['schema-news'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}

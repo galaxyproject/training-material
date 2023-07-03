@@ -1,0 +1,29 @@
+- doc: Test outline for main_workflow.ga
+  job:
+    Reference compound list (alkanes):
+      class: File
+      path: https://zenodo.org/record/7701862/files/reference_alkanes.csv
+    Reference spectra (RCX metabolites 20210817):
+      class: File
+      path: https://zenodo.org/record/7701862/files/reference_spectral_library.msp
+    sample_metadata.tsv:
+      class: File
+      path: https://zenodo.org/record/7701862/files/sample_metadata.tsv
+    Input Dataset Collection:
+      class: Collection
+      collection_type: list
+      elements:
+        - identifier: el1
+          class: File
+          path: https://zenodo.org/record/6878356/files/8_qc_no_dil_milliq.raw
+        - identifier: el2
+          class: File
+          path: https://zenodo.org/record/6878356/files/21_qc_no_dil_milliq.raw
+        - identifier: el3
+          class: File
+          path: https://zenodo.org/record/6878356/files/29_qc_no_dil_milliq.raw
+  outputs:
+    matchms_scores:
+      file: test-data/matchms_scores.tsv
+      compare: sim_size
+      delta: 100

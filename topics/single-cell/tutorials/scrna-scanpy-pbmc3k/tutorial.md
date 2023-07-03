@@ -93,6 +93,7 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets

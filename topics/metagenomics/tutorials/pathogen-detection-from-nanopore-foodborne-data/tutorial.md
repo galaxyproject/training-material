@@ -29,6 +29,9 @@ contributions:
    editing:
     - hrhotz
     - wm75
+   funding:
+    - erasmusplus
+    - eosc-life
 ---
 
 # Introduction
@@ -103,6 +106,7 @@ Before we can begin any Galaxy analysis, we need to upload the input data: FASTQ
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 2. Rename the files to `Barcode10` and `Barcode11` respectively
@@ -361,15 +365,7 @@ In this section we would like to identify the different organisms found in our s
 
 In the previous section we ran **Kraken2** along with the **Kalamari** database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run **Kraken2** again; but this time with one of its built-in databases, **Standard PlusPF**, which can give us more insight into pathogen candidate species than **Kalamari**. You can test this yourself by comparing reports of both **Kraken2** runs.
 
-> <details-title>Kraken2 and the k-mer approach for taxonomy classification</details-title>
->
-> In the $$k$$-mer approach for taxonomy classification, we use a database containing DNA sequences of genomes whose taxonomy we already know. On a computer, the genome sequences are broken into short pieces of length $$k$$ (called $$k$$-mers), usually 30bp.
->
-> **Kraken** examines the $$k$$-mers within the query sequence, searches for them in the database, looks for where these are placed within the taxonomy tree inside the database, makes the classification with the most probable position, then maps $$k$$-mers to the lowest common ancestor (LCA) of all genomes known to contain the given $$k$$-mer.
->
-> ![Kraken2](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken sequence classification algorithm. To classify a sequence, each k-mer in the sequence is mapped to the lowest common ancestor (LCA, i.e. the lowest node) of the genomes that contain that k-mer in the database. The taxa associated with the sequence's k-mers, as well as the taxa's ancestors, form a pruned subtree of the general taxonomy tree, which is used for classification. In the classification tree, each node has a weight equal to the number of k-mers in the sequence associated with the node's taxon. Each root-to-leaf (RTL) path in the classification tree is scored by adding all weights in the path, and the maximal RTL path in the classification tree is the classification path (nodes highlighted in yellow). The leaf of this classification path (the orange, leftmost leaf in the classification tree) is the classification used for the query sequence. Source: {% cite Wood2014 %}")
->
-{: .details}
+{% snippet topics/metagenomics/faqs/kraken.md %}
 
 <div class="Short-Version" markdown="1">
 
@@ -505,7 +501,7 @@ To look for these genes and determine the strain of the bacteria we are testing 
 
 1. Genome assembly to get contigs, i.e. longer sequences, using **metaflye** ({% cite flye %})  then assembly polishing using [__medaka consensus pipeline__](https://github.com/nanoporetech/medaka) and visualizing the assembly graph using **Bandage Image** ({% cite Wick2015 %})
 2. Generate an **MLST** report with **MLST** tool that scans genomes against PubMLST schemes
-3. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate) 
+3. Generate reports with **AMR** genes and **VF** using [__ABRicate__](https://github.com/tseemann/abricate)
 
 As outputs, we will get our **FASTA** and **Tabular** files to track genes and visualize our pathogenic identification. For that we will need one more file to create a report and we can upload it directly:
 
@@ -871,7 +867,7 @@ To identify variants, we
 
     > <comment-title></comment-title>
     > [__Medaka consensus tool__ and __medaka variant tool__](https://github.com/nanoporetech/medaka) can be also used instead of **Clair3**, they give similar results but they are much slower then **Clair3** and offer fewer options.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 
@@ -907,11 +903,11 @@ To identify variants, we
 
     </div>
 
-4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %}) 
+4. **Filter variants** to keep only the pass and good quality variants using **SnpSift Filter** ({% cite Cingolani2012 %})
 
     > <comment-title></comment-title>
     > [__LoFreq filter__](https://csb5.github.io/lofreq/) can be also used instead, both tools performs equal and fast results.
-    {: .comment-on}
+    {: .comment}
 
     <div class="Long-Version" markdown="1">
 
@@ -1158,6 +1154,7 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 > >    - `Barcode11` sample is spiked with _S. enterica subsp. houtenae_ strain. 
 > > 
 > >    This can be the main cause of the big similarities and the few differences of the bacteria pathogen **VF** gene products found between both of the two samples. 
+> >    
 > >    Other factors such as the **time** and **location** of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that
 > >
 > {: .solution}
