@@ -96,6 +96,7 @@ First, let's setup our history and initial dataset.
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
@@ -105,6 +106,7 @@ First, let's setup our history and initial dataset.
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*

@@ -15,16 +15,9 @@ layout: base
   {% assign gitter = site.gitter_url %}
 {% endif %}
 
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: '{{ gitter | remove: "https://gitter.im/" }}'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
     <h1>{{ topic.title }}</h1>
-    <p>{{ topic.summary }}</p>
+    <p>{{ topic.summary | markdownify }}</p>
     <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
 
     {% if topic.requirements %}
@@ -50,6 +43,7 @@ layout: base
         {% include _includes/tutorial_list.html sub=subtopic %}
     {% endfor %}
 
+    {{ content }}
 
     {% if topic.type == "use" %}
         <h2 id="docker_image">Galaxy instances</h2>
@@ -78,8 +72,13 @@ layout: base
 
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
-    {% assign contributors_list_sorted = topic_material | identify_contributors %}
+    {% assign contributors_list_sorted = topic_material | identify_contributors: site %}
     {% include _includes/contributor-list.html contributors=contributors_list_sorted badge=true %}
+
+    <h2 id="funders">Funders</h2>
+    <p>This material was funded by:</p>
+    {% assign funders_list_sorted = topic_material | identify_funders: site %}
+    {% include _includes/contributor-list.html contributors=funders_list_sorted badge=true %}
 
     {% if topic.references %}
     <h2 id="references">References</h2>

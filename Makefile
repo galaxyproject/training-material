@@ -53,7 +53,7 @@ COND_ENV_DIR=$(shell dirname $(dir $(CONDA)))
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --no-document --system && \
-		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby && \
+		ICONV_LIBS="-L${CONDA_PREFIX}/lib/ -liconv" gem install --no-document addressable:'2.5.2' jekyll jekyll-feed jekyll-redirect-from csl-styles awesome_bot html-proofer pkg-config kwalify bibtex-ruby citeproc-ruby fastimage && \
 		pushd ${COND_ENV_DIR}/envs/${CONDA_ENV}/share/rubygems/bin && \
 		ln -sf ../../../bin/ruby ruby
 .PHONY: install
@@ -97,6 +97,7 @@ build: clean api/swagger.json ## build files but do not run a server (You can sp
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		bundle exec ruby bin/validate-frontmatter.rb
+		bundle exec ruby bin/validate-other.rb
 .PHONY: check-frontmatter
 
 check-contributors: ## Validate the contributors.yaml file
@@ -170,7 +171,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter ## run linting checks which do not require a built site
+lint: check-frontmatter check-contributors ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -231,8 +232,8 @@ video: ## Build all videos
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
-	bash bin/workflow_to_tool_yaml.sh && \
-	python bin/add_galaxy_instance_annotations.py
+	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
+	python bin/supported-fetch.py
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index

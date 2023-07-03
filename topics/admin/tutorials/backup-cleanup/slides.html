@@ -1,0 +1,242 @@
+---
+layout: tutorial_slides
+logo: assets/images/gat.png
+video: true
+redirect_from:
+- /topics/admin/tutorials/maintenance/slides
+
+title: "Server Maintenance: Cleanup, Backup, and Restoration"
+zenodo_link: ""
+questions:
+- How can I back up my Galaxy?
+- What data should be included?
+- How can I ensure jobs get cleaned up appropriately?
+- How do I maintain a Galaxy server?
+- What happens if I lose everything?
+objectives:
+- Learn about different maintenance steps
+- Setup postgres backups
+- Setup cleanups
+- Learn what to back up and how to recover
+time_estimation: "30m"
+key_points:
+  - Use configuration management (e.g. Ansible)
+  - Store configuration management in git
+  - Back up the parts of Galaxy that can't be recreated
+contributors:
+  - natefoo
+  - bgruening
+  - slugger70
+  - hexylena
+subtopic: maintenance
+---
+
+# Server Maintenance
+
+???
+
+- Server Maintenance
+
+---
+
+## Dataset Cleanup
+
+Can only delete (or purge) dataset when all 'associations' pointing at it have been marked `deleted`.
+
+| method | description |
+| ---- | ---- |
+| `scripts/cleanup_datasets/pgcleanup.py` | PostgreSQL-optimized fast cleanup script |
+| `scripts/cleanup_datasets/cleanup_datasets.py` | General cleanup script |
+| `gxadmin cleanup <days>` | calls pgcleanup |
+
+???
+
+- One of the important admimn tasks is to keep an eye on the storage consumption.
+- Every instance should have a data rention policy defined and shared with users.
+- Codebase contains scripts that can assist with cleaning up and reclaiming space.
+- The gxadmin tool can assist with invoking these scripts.
+
+---
+class: reduce70
+
+## pgcleanup invocation
+
+```console
+$ ./scripts/cleanup_datasets/pgcleanup.py --help
+usage: pgcleanup.py [-h] [-c CONFIG_FILE] [-d] [--dry-run] [--force-retry]
+                    [-o DAYS] [-U] [-s SEQUENCE] [-w WORK_MEM] [-l LOG_DIR]
+                    [ACTION [ACTION ...]]
+
+positional arguments:
+  ACTION                Action(s) to perform, chosen from: delete_datasets,
+                        delete_exported_histories, delete_inactive_users,
+                        delete_userless_histories, purge_datasets,
+                        purge_deleted_hdas, purge_deleted_histories,
+                        purge_deleted_users, purge_error_hdas,
+                        purge_hdas_of_purged_histories,
+                        purge_historyless_hdas, update_hda_purged_flag
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -c CONFIG_FILE, --config-file CONFIG_FILE, --config CONFIG_FILE
+                        Galaxy config file (defaults to
+                        $GALAXY_ROOT/config/galaxy.yml if that file exists or
+                        else to ./config/galaxy.ini if that exists). If this
+                        isn't set on the command line it can be set with the
+                        environment variable GALAXY_CONFIG_FILE.
+  -d, --debug           Enable debug logging (SQL queries)
+  --dry-run             Dry run (rollback all transactions)
+  --force-retry         Retry file removals (on applicable actions)
+  -o DAYS, --older-than DAYS
+                        Only perform action(s) on objects that have not been
+                        updated since the specified number of days
+  -U, --no-update-time  Don't set update_time on updated objects
+  -s SEQUENCE, --sequence SEQUENCE
+                        DEPRECATED: Comma-separated sequence of actions
+  -w WORK_MEM, --work-mem WORK_MEM
+                        Set PostgreSQL work_mem for this connection
+  -l LOG_DIR, --log-dir LOG_DIR
+                        Log file directory
+```
+
+???
+
+- Cleanup scripts provide various options for filtering on which datasets to take action.
+- Use the dry run option to verify what datasets you are about to affect.
+
+---
+class: reduce70
+
+## pgcleanup actions
+
+| action | description |
+| ---- | ---- |
+| `delete_userless_histories` | <ul><li>Mark deleted all "anonymous" Histories (not owned by a registered user) that are older than the specified number of days.</li></ul> |
+| `delete_exported_histories` | <ul><li>Mark deleted all Datasets that are derivative of JobExportHistoryArchives that are older than the specified number of days.</li></ul> |
+| `purge_deleted_users` | <ul><li>Mark purged all users that are older than the specified number of days.</li><li>Mark purged all Histories whose user_ids are purged in this step.</li><li>Mark purged all HistoryDatasetAssociations whose history_ids are purged in this step.</li><li>Delete all UserGroupAssociations whose user_ids are purged in this step.</li><li>Delete all UserRoleAssociations whose user_ids are purged in this step EXCEPT FOR THE PRIVATE ROLE.</li><li>Delete all UserAddresses whose user_ids are purged in this step.</li></ul> |
+| `purge_deleted_histories` | <ul><li>Mark purged all Histories marked deleted that are older than the specified number of days.</li><li>Mark purged all HistoryDatasetAssociations in Histories marked purged in this step (if not already purged).</li></ul> |
+| `purge_deleted_hdas` | <ul><li>Mark purged all HistoryDatasetAssociations currently marked deleted that are older than the specified number of days.</li><li>Mark deleted all MetadataFiles whose hda_id is purged in this step.</li><li>Mark deleted all ImplicitlyConvertedDatasetAssociations whose hda_parent_id is purged in this step.</li><li>Mark purged all HistoryDatasetAssociations for which an ImplicitlyConvertedDatasetAssociation with matching hda_id is deleted in this step.</li></ul> |
+
+???
+
+- Some available actions are safer than others, for example "delete userless histories".
+- In Galaxy, when something is marked deleted, it still exists with a deleted flag.
+- Once purged the file is gone.
+
+---
+class: reduce70
+
+## More pgcleanup actions
+
+| action | description |
+| ---- | ---- |
+| `purge_historyless_hdas` | <ul><li>Mark purged all HistoryDatasetAssociations whose history_id is null.</li></ul> |
+| `purge_error_hdas` | <ul><li>Mark purged all HistoryDatasetAssociations whose dataset_id is state = 'error' that are older than the specified number of days.</li></ul> |
+| `purge_hdas_of_purged_histories` | <ul><li>Mark purged all HistoryDatasetAssociations in histories that are purged and older than the specified number of days.</li></ul> |
+| `delete_datasets` | <ul><li>Mark deleted all Datasets whose associations are all marked as deleted (LDDA) or purged (HDA) that are older than the specified number of days.</li><li>JobExportHistoryArchives have no deleted column, so the datasets for these will simply be deleted after the specified number of days.</li></ul> |
+| `purge_datasets` | <ul><li>Mark purged all Datasets marked deleted that are older than the specified number of days.</li></ul> |
+
+???
+
+- Be wary about aggressive storage reclamation. It can aggravate users.
+- Well-defined and updated data retention policy brings benefits.
+
+---
+# Additional cleaning scripts
+
+* `admin_cleanup_datasets.py`
+  * Mark datasets as deleted that are older than specified cutoff.
+  * Has email templated notification (can also be used to just send info without deleting).
+  * Can be restricted to a tool.
+
+???
+
+- One of the included scripts can send templated email to the affected users.
+- Take advantage of this to give your users some time to backup their data before you reclaim the space.
+
+---
+
+## Other disk space cleanups
+
+- `tmpwatch` (`tmpreaper` on Debian-based distros) your job working directory
+  - `cleanup_job` in `galaxy.yml` (defaults to `always` though)
+- `tmpwatch` your `new_file_path`
+  - `/usr/bin/tmpwatch -v --mtime --dirmtime 7d /srv/galaxy/var/tmp`
+
+???
+
+- Galaxy generates intermediate data as part of the job execution.
+- These should be automatically cleaned up unless you change the cleanup_job flag in galaxy's configuration.
+
+---
+
+# Backups
+
+???
+
+- Backups
+
+---
+class: left
+
+## What to backup
+
+**Must** be backed up:
+
+| item | path (from tutorials) |
+| ---- | ---- |
+| Database ([PITR][postgresql-pitr], enable in [galaxyproject.postgresql][ansible-postgresql]) | system dependent |
+| Installed shed tools | `/srv/galaxy/var/shed_tools` |
+| *Managed* (aka *mutable*) configs | `/srv/galaxy/var/config` |
+| Logs (if you like...) | `systemd-journald` |
+| Datasets (if you can...) | `/data` |
+
+If absolute reproducibility matters:
+
+| item | path (from tutorials) |
+| ---- | ---- |
+| Tool dependencies | `/srv/galaxy/var/dependencies` |
+| Data manager-installed reference data | `/srv/galaxy/var/tool-data` |
+
+???
+
+- Many parts of Galaxy are convenient to back up since they are straight folder hierarchies.
+- Use your system's recommended way to back up galaxy's database.
+- If you have local modifications to galaxy's code back up those as well.
+
+---
+class: left
+
+## What not to back up
+
+Restorable from Ansible Playbook:
+
+| item | path (from tutorials) |
+| ---- | ---- |
+| Galaxy | `/srv/galaxy/server` |
+| Virtualenv | `/srv/galaxy/venv` |
+| *Static* configs | `/srv/galaxy/config` |
+
+Recreatable at runtime:
+
+| item | path (from tutorials) |
+| ---- | ---- |
+| Anything in *managed/mutable data dir* not previously mentioned | `/srv/galaxy/var` |
+| Job working directories | `/srv/galaxy/jobs` |
+
+[postgresql-pitr]: https://www.postgresql.org/docs/current/continuous-archiving.html
+[ansible-postgresql]: https://github.com/galaxyproject/ansible-postgresql
+
+---
+
+## Restoring from backups
+
+If lost *database* or *managed/mutable configs*, then **restore these first**
+
+Then run playbook
+
+???
+
+- In case of an incident do not rush even when pressure is piling.
+- Careful planning of the restoration procedure will save you from hasty recovery attempts with errors.
+- Consider running a recovery drill pretending that e.g. your galaxy machine was wiped.

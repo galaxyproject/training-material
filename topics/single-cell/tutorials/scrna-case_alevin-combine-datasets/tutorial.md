@@ -87,7 +87,9 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
+2. **Importing from a history** 
+    - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
+    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/hrukkudyr_us/h/cs2combining-datasets-after-pre-processing---input)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
@@ -225,7 +227,9 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
->    Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>    Run this tool - we will use the output in Step 2.
+>
+>    From the output of Step 1 we want only the single column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c8`

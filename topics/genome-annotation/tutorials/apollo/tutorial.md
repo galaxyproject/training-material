@@ -23,12 +23,14 @@ key_points:
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
-contributors:
-  - abretaud
-  - hexylena
-  - nathandunn
-  - mboudet
-  - erasmusplus
+contributions:
+  authorship:
+    - abretaud
+    - hexylena
+    - nathandunn
+    - mboudet
+  funding:
+    - erasmusplus
 
 requirements:
   - type: "internal"
@@ -94,6 +96,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 0. Create a new history and give it a good name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 1. Click the upload icon {% icon galaxy-upload %}

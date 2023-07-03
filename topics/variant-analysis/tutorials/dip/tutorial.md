@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Calling variants in diploid systems"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.60520"
 questions:
   - "How to find variable sites in diploid genomes?"
@@ -248,12 +249,12 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 > 2. Run **GEMINI db_info** {% icon tool %} to see the content of the database:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
 >
->    This produces a list of all database tables and their columns. The latest version of the GEMINI database schema can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html).
+>    This produces a list of all database tables and their columns according to the [latest version of the GEMINI database schema](https://gemini.readthedocs.org/en/latest/content/database_schema.html).
 {: .hands_on}
 
 ## Querying the GEMINI database
 
-The GEMINI database can be queried using the versatile SQL language (more on SQL [here](https://swcarpentry.github.io/sql-novice-survey)). In Galaxy this is done using the **GEMINI query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered using the **GEMINI db_info** tool above.
+The GEMINI database can be queried using the versatile [SQL language](https://swcarpentry.github.io/sql-novice-survey). In Galaxy this is done using the **GEMINI query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered using the **GEMINI db_info** tool above.
 
 > <comment-title>GEMINI tutorials</comment-title>
 >

@@ -138,10 +138,10 @@ We now want to add group tags using the "Tag elements from file" tool.
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> 3. Click on the {% icon galaxy-selector %} icon (**Operations on multiple datasets**)
-> 4. Check all new datasets
-> 5. Click on **For all selected...** and then **Build Dataset List**
-> 6. Enter a name for the new collection and click **Create list**
+> 3. Create a **Dataset List (Collection)** with these 7 files
+>
+>    {% snippet faqs/galaxy/collections_build_list.md datasets_description="The 7 datasets you've just imported" n="7" %}
+>
 {: .hands_on}
 
 We have now a collection with our files. We can now either upload a tabular file containing the element identifiers

@@ -65,6 +65,7 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import `wt_H3K4me3_read1.fastq.gz` and `wt_H3K4me3_read2.fastq.gz` from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
@@ -75,6 +76,7 @@ In the following, we will process a dataset with the mapper **Bowtie2** and we w
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.

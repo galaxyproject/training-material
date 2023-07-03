@@ -7,7 +7,7 @@ contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,ne
 ---
 
 * Copy the link location
-* Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
+* Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
 {% if include.reset_form %}
 * Click **Reset** button at the bottom of the form. If the button is greyed out -> skip to the next step.
 {% endif %}
@@ -17,8 +17,8 @@ contributors: [bebatut,hexylena,mtekman,lecorguille,shiltemann,nomadscientist,ne
 {% if include.collection_type %}
 * Click on **Collection Type** and select `{{ include.collection_type }}`
 {% endif %}
-* Select **Paste/Fetch Data**
-* Paste the link into the text field
+* Select {% icon galaxy-wf-edit %} **Paste/Fetch Data**
+* Paste the link(s) into the text field
 {% if include.link %}
   `{{ include.link }}`
 {% endif %}

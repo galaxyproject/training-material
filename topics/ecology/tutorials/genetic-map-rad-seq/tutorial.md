@@ -53,6 +53,7 @@ The original data is available at [STACKS website](http://catchenlab.life.illino
 > 1. Create a new history for this RAD-seq exercise.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import Fasta files from parents and 20 progeny.
