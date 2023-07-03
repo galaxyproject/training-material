@@ -999,4 +999,104 @@ Cos2). You can refers to slides 8 and 9.
 >
 >    > <comment-title> short description </comment-title>
 >    >
->    > A comment about the tool or something else. This box can als
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Re-arrange
+
+To create the template, each step of the workflow had its own subsection.
+
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+# Conclusion
+
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           >
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **NMR_Preprocessing**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
+>    - In *"Apodization"*:
+>        - *"Apodization: method"*: `exp`
+>    - In *"Zero Order Phase Correction"*:
+>        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
+>    - In *"Shift Referencing"*:
+>        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
+>    - In *"Baseline Correction"*:
+>        - *"Baseline Correction: exclusion area(s)"*: ` NO `
+>    - In *"Negative intensities to Zero"*:
+>        - *"Set negative intensities to zero?"*: ` NO `
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Re-arrange
+
+To create the template, each step of the workflow had its own subsection.
+
+***TODO***: *Re-arrange the generated subsections into sections or other subsections.
+Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+# Conclusion
+
+Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
+pipeline used.
