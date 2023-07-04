@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: SARS-CoV-2 Viral Sample Alignment and Variant Visualization
 level: Introductory
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.8115178'
 questions:
 - How do I check my data quality?
 - How do I put together my dataset of fragmented sequences into a full sequence? 
@@ -13,7 +13,7 @@ objectives:
 - Generate and interpret graphs displaying experimental results
 - Critique large data sets and use bioinformatics to assess genetics data
 - Tap into the interdisciplinary nature of science
-time_estimation: "1H"
+time_estimation: '1H'
 key_points:
 - Use Galaxy on the AnVIL cloud computing resource to check data, perform an alignment, and visualize the results.
 contributions:
@@ -61,9 +61,7 @@ Learning Objectives
 - Answer “what is a genetic variant?”
 - Learn about the molecular structure of a variant
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=kELyrelihP8
-" target="https://youtu.be/kELyrelihP8"><img src="http://img.youtube.com/vi/kELyrelihP8/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=kELyrelihP8" target="https://youtu.be/kELyrelihP8"><img src="http://img.youtube.com/vi/kELyrelihP8/0.jpg" alt="Video thumbnail image for the What is a Variant background video." width="240" height="180" border="10" /></a>
 
 ## The Sequencing Revolution
 
@@ -74,9 +72,7 @@ Learning Objectives
 - Introduce the sequencing workforce
 - Explore the evolution of sequencing technology
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=tXLTHqNT6Jg
-" target="https://youtu.be/tXLTHqNT6Jg"><img src="http://img.youtube.com/vi/tXLTHqNT6Jg/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=tXLTHqNT6Jg" target="https://youtu.be/tXLTHqNT6Jg"><img src="http://img.youtube.com/vi/tXLTHqNT6Jg/0.jpg" alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 ## Alignments
 
@@ -87,9 +83,7 @@ Learning Objectives
 - Become familiar with reference genomes and alignments
 - Explore the file structure of genomic data and quality scoring
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=MEZP_AzlLyg
-" target="https://youtu.be/MEZP_AzlLyg"><img src="http://img.youtube.com/vi/MEZP_AzlLyg/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=MEZP_AzlLyg" target="https://youtu.be/MEZP_AzlLyg"><img src="http://img.youtube.com/vi/MEZP_AzlLyg/0.jpg" alt="Video thumbnail image for the Alignments background video." width="240" height="180" border="10" /></a>
 
 ## Cloud Computing
 
@@ -101,9 +95,7 @@ Learning Objectives
 - Learn about cloud computing for genomics
 - Revisit the big picture, from variants to alignments
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=hreCMUQaA6s
-" target="https://youtu.be/hreCMUQaA6s"><img src="http://img.youtube.com/vi/hreCMUQaA6s/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hreCMUQaA6s" target="https://youtu.be/hreCMUQaA6s"><img src="http://img.youtube.com/vi/hreCMUQaA6s/0.jpg"  alt="Video thumbnail image for the Cloud Computing background video." width="240" height="180" border="10" /></a>
 
 # Overview
 
@@ -114,9 +106,7 @@ Learning Objectives:
 - Review big steps in the analysis
 - Cover the setup on AnVIL in detail
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=D-bkZRA2TQ4
-" target="https://www.youtube.com/watch?v=OFGa6x2bGHs"><img src="http://img.youtube.com/vi/D-bkZRA2TQ4/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=D-bkZRA2TQ4" target="https://www.youtube.com/watch?v=OFGa6x2bGHs"><img src="http://img.youtube.com/vi/D-bkZRA2TQ4/0.jpg" alt="Video thumbnail image for the Activity Overview background video." width="240" height="180" border="10" /></a>
 
 # Set Up
 
@@ -155,7 +145,7 @@ In the next few steps, you will walk through how to get set up to use Galaxy on 
 Galaxy is a great tool for performing bioinformatics analysis without having to update software or worry too much about coding. In order to use Galaxy, we need to create a cloud environment. This is like quickly renting a few computers from Google as the engine to power our Galaxy analysis. 
 
 > <warning-title>Internet Browser</warning-title>
-> Currently, you will need to use Chrome or Safari as your browser for Galaxy cloud environments to work.
+> Google Chrome is the most recommended browser to use AnVIL Galaxy cloud environments to operate as expected. Safari and Firefox may be used as well, though there may be some functionality that is not supported in these or other browsers.
 {: .warning}
 
 > <hands-on-title>Clone the Workspace </hands-on-title>
