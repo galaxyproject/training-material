@@ -416,7 +416,7 @@ Once you are done with the activity, you’ll need to shut down your Galaxy clou
 > 3. Next, scroll down and click on “DELETE ENVIRONMENT”:
 >   ![Screenshot of the cloud environment pop out menu. The “DELETE ENVIRONMENT” button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/21-galaxy-delete.png)
 > 4. Finally, select “Delete everything, including persistent disk”. Make sure you are done with the activity and then click “DELETE”.
-    ![Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png)
+>    ![Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted.](/topics/sequence-analysis/images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png)
 >
 {: .hands_on}
 
