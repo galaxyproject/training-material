@@ -31,6 +31,9 @@ contributions:
     - katherinecox
     - ehumph
     - cutsort
+    funder:
+    - nhgri-gdscn
+    - nhgri-anvil
 lang: "en"
 ---
 
@@ -42,19 +45,11 @@ This lesson aims to introduce a mutant detection bioinformatics pipeline based o
 > 
 > In this tutorial we will deal with:
 > 
-> 1. Background Concepts
-> 2. Overview
-> 3. Set Up
-> 4. Start Galaxy
-> 5. Importing Data into Galaxy
-> 6. Examining `fastq` Files in Galaxy
-> 7. Alignment
-> 8. Viewing Aligned Data
-> 9. Export your History
-> 10. Wrap Up
-> 
+> 1. TOC 
 > {:toc}
+>
 {: .agenda}
+
 
 # Background Concepts
 
