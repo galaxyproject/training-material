@@ -79,7 +79,10 @@ Jekyll::Hooks.register :site, :pre_render do |site|
     end
 
     # Write it out!
-    ipynb_path = File.join(site.dest, dir, "#{topic_id}-#{tutorial_id}.ipynb")
+    ipynb_dir = File.join(site.dest, dir)
+    # Create if missing
+    FileUtils.mkdir_p(ipynb_dir)
+    ipynb_path = File.join(ipynb_dir, "#{topic_id}-#{tutorial_id}.ipynb")
     File.write(ipynb_path, JSON.pretty_generate(json_boxify(with_solutions, page)))
     # page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
     # page2.content = JSON.pretty_generate(with_solutions)
@@ -98,7 +101,7 @@ Jekyll::Hooks.register :site, :pre_render do |site|
       cell
     end
 
-    ipynb_path2 = File.join(site.dest, dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
+    ipynb_path2 = File.join(ipynb_dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
     File.write(ipynb_path2, JSON.pretty_generate(json_boxify(no_solutions, page)))
     # page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
     # page2.content = JSON.pretty_generate(no_solutions)
