@@ -38,7 +38,7 @@ end
 Jekyll::Hooks.register :site, :pre_render do |site|
   puts '[GTN/Notebooks] Rendering'
 
-  site.config['__rendered_notebook_cache'] = Hash.new
+  site.config['__rendered_notebook_cache'] = {}
 
   # For every tutorial with the 'notebook' key in the page data
   site.pages.select { |page| GTNNotebooks.notebook_filter(page.data) }.each do |page|
@@ -126,5 +126,4 @@ Jekyll::Hooks.register :site, :post_write do |site|
     File.write(info['path1'], info['content1'])
     File.write(info['path2'], info['content2'])
   end
-
 end
