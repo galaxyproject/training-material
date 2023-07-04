@@ -61,9 +61,9 @@ Learning Objectives
 - Answer “what is a genetic variant?”
 - Learn about the molecular structure of a variant
 
-<figure class="video_container">
-  <iframe src="https://www.youtube.com/embed/OFGa6x2bGHs" frameborder="0" allowfullscreen="true"> </iframe>
-</figure>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=kELyrelihP8
+" target="https://youtu.be/kELyrelihP8"><img src="http://img.youtube.com/vi/kELyrelihP8/0.jpg" 
+alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 ## The Sequencing Revolution
 
@@ -75,7 +75,7 @@ Learning Objectives
 - Explore the evolution of sequencing technology
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=tXLTHqNT6Jg
-" target="_blank"><img src="http://img.youtube.com/vi/tXLTHqNT6Jg/0.jpg" 
+" target="https://youtu.be/tXLTHqNT6Jg"><img src="http://img.youtube.com/vi/tXLTHqNT6Jg/0.jpg" 
 alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 ## Alignments
@@ -88,7 +88,7 @@ Learning Objectives
 - Explore the file structure of genomic data and quality scoring
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=MEZP_AzlLyg
-" target="_blank"><img src="http://img.youtube.com/vi/MEZP_AzlLyg/0.jpg" 
+" target="https://youtu.be/MEZP_AzlLyg"><img src="http://img.youtube.com/vi/MEZP_AzlLyg/0.jpg" 
 alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 ## Cloud Computing
@@ -102,7 +102,7 @@ Learning Objectives
 - Revisit the big picture, from variants to alignments
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=hreCMUQaA6s
-" target="_blank"><img src="http://img.youtube.com/vi/hreCMUQaA6s/0.jpg" 
+" target="https://youtu.be/hreCMUQaA6s"><img src="http://img.youtube.com/vi/hreCMUQaA6s/0.jpg" 
 alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 # Overview
@@ -115,7 +115,7 @@ Learning Objectives:
 - Cover the setup on AnVIL in detail
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=D-bkZRA2TQ4
-" target="_blank"><img src="http://img.youtube.com/vi/D-bkZRA2TQ4/0.jpg" 
+" target="https://www.youtube.com/watch?v=OFGa6x2bGHs"><img src="http://img.youtube.com/vi/D-bkZRA2TQ4/0.jpg" 
 alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
 
 # Set Up
