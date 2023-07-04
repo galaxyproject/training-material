@@ -31,7 +31,7 @@ contributions:
     - katherinecox
     - ehumph
     - cutsort
-    funder:
+    funding:
     - nhgri-gdscn
     - nhgri-anvil
 lang: "en"
