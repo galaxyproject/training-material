@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Nuclear Magnetic Resonance: data preprocessing
+title: 'Nuclear Magnetic Resonance: data preprocessing'
 zenodo_link: ''
 questions:
 - What are the main steps of untargeted 1H-NMR data preprocessing for metabolomic analyses?
@@ -132,19 +132,35 @@ You can add columns for analytical and biological information such as biological
 
 Your data are now ready for preprocessing. This step can be done with the NMR_Preprocessing tool. It will produce a datamatrix (`NMR_Preprocessing_dataMatrix`) including the preprocessed fid with row corresponding to chemical shifts and columns to samples, a variablemetadata file (`NMR_Preprocessing_variableMetadata`) including information on variables (NMR chemical shifts) and a graph with intermediate (depending on the graph option chosen for each sub-step) and final preprocessed spectra. These spectra will help you to have an idea about the effect of chosen parameters on the preprocessing step. 
 
-The NMR_preprocessing tool includes several steps as described in Figure 2.
+The NMR_preprocessing tool includes several steps as described in Figure 2. This tutorial ends up after the "Negative values zeroing step."
 
-![Figure 2: Steps of NMR spectra preprocessin](../../images/tutorial-nmr-workflow.png)
+![Figure 2: Steps of NMR spectra preprocessing](../../images/tutorial-nmr-workflow.png)
 
 ## Group delay correction with **NMR_Preprocessing**
 
-This step corresponds to the 1st order phase correction (see slides 6 and 7). 
+Phase correction (see slide 7 and Figure 3) is a very important adjustment that needs to be made to a spectrum. Phase of a signal is related to the amount of signal observed above and below the baseline. Phase correction works to provide a signal in pure-absorption mode, which means a signal totally above and/or totally below the baseline.
+
+![Figure 3: Illustration of the Group Delay recorded before the signal acquisition](../../images/tutorial-nmr-workflow-firstorderphasecorrection.png)
+
+Phase correction involves adjusting both zero (ph0, see 5th step) and first-order (ph1) phases. This step corresponds to the 1st order phase correction. First-order phase shift leads to a frequency-dependent phase distortion that is proportional to the chemical shift. In cases where these delays are small compared to the frequency offset, the phase error can be corrected. Otherwise, in the presence of large delays, this correction will introduce baseline distortions.
+
+ > <hands-on-title> 1st order phase correction </hands-on-title>
+>
+> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
+>    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
+>    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
+>    - In *"Group delay correction"*: 
+>        - *"Display the FIDs after 1st order phase correction?"*: `yes`
+
+> You can leave all parameters with their default values.
+>
+{: .hands_on}
 
 ## Solvent supression with **NMR_Preprocessing**
 
-This step is explained in slides 8 and 9. `Smoothing parameter` determines how smooth is the solvent signal. Figure 3 below illustrates the effect of the `Smoothing parameter` spectra. Spectra have been obtained for a sample obtained with `Smoothing parameter` values of 1, 10^6 and 1^9.
+This step is explained in slides 8 and 9. `Smoothing parameter` determines how smooth is the solvent signal. Figure 4 below illustrates the effect of the `Smoothing parameter` on spectra. Spectra have been obtained with `Smoothing parameter` values of 1, 10^6 and 1^9.
 
-![Figure 3: Effect of the `Smoothing parameter` in the Solvent suppression step](../../images/tutorial-nmr-workflow-solventsuppression.png)
+![Figure 4: Effect of the Smoothing parameter in the Solvent suppression step](../../images/tutorial-nmr-workflow-solventsuppression.png)
 
 > <hands-on-title> Effect of `Smoothing parameter` on signal intensity </hands-on-title>
 >
@@ -153,9 +169,9 @@ This step is explained in slides 8 and 9. `Smoothing parameter` determines how s
 >    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
 >    - In *"Solvent Suppression"*: the lambda smoother used to penalized the non-parametric estimation of the solvent signal
 >        - *"Solvent Suppression: Smoothing parameter"*: `1.0`
->        - *"Display the FIDs after solvent suppression?"*: `yes`
+>        - *"Display the FIDs after solvent suppression?"*: `no`
 
-> You can leave the other parameters with their default values.
+> You can leave other parameters with their default values.
 >
 > <question-title></question-title>
 > 
@@ -195,16 +211,19 @@ Cos2). You can refers to slides 8 and 9.
 >    - In *"Apodization"*:
 >        - *"Apodization: method"*: `exp`
 >        - *"Apodization: Line broadening"*: `5`
-
+>        - *"Display the FIDs after solvent suppression?"*: `no`
+>        - *"Display the FIDs after Apodization?"*: `no`
+>
 > 2. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
 >    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
 >    - In *"Apodization"*:
 >        - *"Apodization: method"*: `exp`
 >        - *"Apodization: Line broadening"*: `0.3`
-
-> You can leave the other parameters with their default values.
-
+>        - *"Display the FIDs after Apodization?"*: `no`
+>
+> You can leave other parameters with their default values.
+>
 > <question-title></Effect of the weighting function >
 > Based on the "2016-61-UR-N4-CD" spectrum, which is the effet of the line broadening value on FID?
 >
@@ -214,154 +233,115 @@ Cos2). You can refers to slides 8 and 9.
 > {: .solution}
 >
 {: .question}
-> Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that corresponds to different "methods" and "Line broadening" values:
+
+>    > <comment-title> Comment to W4M users </comment-title>
+>    >
+>    > In the [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing) history, several datasets are available to evaluate effects of parameter on preprocessed spectra:
 > - Method: negative exponential and Line broadening: 0.3 = datasets 19 - 22
 > - Method: negative exponential and Line broadening: 5.0 = datasets 23 - 26
 > - Method: cos2 and Phase: 0.0                           = datasets 27 - 30
 > - Method: gauss and Line broadening: 5.0                = datasets 31 - 34
-> - Method: hamming and Phase: 0.0                        = datasets 35 - 28
-> 
+> - Method: hamming and Phase: 0.0                        = datasets 35 - 38
+>    {: .comment}
 {: .hands_on}
 	
-## Sub-step with **NMR_Preprocessing**
+## Fourier transform with **NMR_Preprocessing**
 
-> <hands-on-title> Task description </hands-on-title>
+Nest step corresponds to conversion of the signal in the time domain into a spectrum in the frequency domain, performed in the "Fourier transform" step (see slide 12).
+
+> <hands-on-title> Fourier transform </hands-on-title>
 >
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Solvent Suppression"*:
->        - *"Solvent Suppression: Smoothing parameter"*: `1000000000.0`
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
+>    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
+>    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
+>    - In *"Fourier transform"*:
+>        - *"Display the FIDs after solvent suppression?"*: `no`
+> You can leave other parameters with their default values.
+> {: .hands_on}
+
+## Zero order phase correction with **NMR_Preprocessing**
+
+In the fifth step, correction of the zero order phase is applied (see slide 7). The zero-order phase arises because the relative phase of the transmitter pulse and receiver are offset. This results in a mixing of the desired real part of the spectrum with a portion of the corresponding imaginary part, so one side of the base of each peak is observed to dip below the baseline). Zero-order phase correction undoes this mixing. The zero-order phase shift affects all frequencies in the same way.
+
+> <hands-on-title> Zero order phase correction </hands-on-title>
+>
+> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
+>    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
+>    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
 >    - In *"Zero Order Phase Correction"*:
+>        - *"Zero Order Phase Correction: method"*: ` RMS `
 >        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
+>        - In *"Zero Order Phase Correction: exclusion area(s)"*:
+>           - *"Exclusion zone: left border"*: ` 5.1 `
+>           - *"Exclusion zone: right border"*: ` 4.5 `
 >
->    ***TODO***: *Check parameter descriptions*
+> You can leave other parameters with their default values.
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Comment to W4M users </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In the [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing) history, several datasets are available to evaluate effects of the method applied for phase correction:
+> - Method: RMS = datasets 39 - 42
+> - Method: MAX = datasets 43 - 46
 >    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Shift Referencing with **NMR_Preprocessing**
 
-> <question-title></question-title>
+A known standard (called internal reference compound), TMS or TSP, is usually added to the samples to refine the scale calibration. In this step, the chemical shift is defined relative to this reference and a ppm value is attributed to the reference peak (usually 0 ppm) and spectra are aligned to this peak.
+
+> <hands-on-title> Shift Referencing </hands-on-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
+>    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
+>    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
+>    - In *"Shift Referencing"*:
+>        - *"Shift Referencing: definition of the search zone"*: `window`
+>        - In *"Shift Referencing: definition of the search zone"*
+>            - In *"Search zone"*
+>               - *"Search zone: left border"*: -2.0
+>               - *"Search zone: right border"*: -2.0
+>        - *"Shift Referencing: shiftHandling"*: `zerofilling`
+>        - *"Shift Referencing: the value of the reference peak in ppm"*: `0.0`
 >
+> <question-title></Effect of "search zone" parameter>
+> 
+> Run the NMR_Preprocessing tool with `Nearvalue` and `window` as values for the "Shift Referencing: definition of the search zone" parameter, and `-2.0` and `2.0` respectively for left and right borders. What do you observe on spectra ofbatined for individual "X2016.61.UR.N4.CD".
 > > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > Explanations CCA
+> > 1. 10^6
+> > 2. 1
+> > 3. 10^9
 > >
 > {: .solution}
 >
 {: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->            - *"Line broadening"*: `0.3`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> How does Shift referencing work in NMR_Preprocessing? </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The algorithm proposes two ways to locate the reference compound peak in each spectrum within a range of    >    > intensities (`search zone`: nearvalue, all, (user-defined) window): it selects either the maximum intensity >    > or the first peak in the search range higher than a predefined threshold.
 >    {: .comment}
 >
+>    > <comment-title> Comment to W4M users </comment-title>
+> Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that corresponds to different "search zone" and "shiftHandling" values:
+> - definition of the search zone: nearvalue; shiftHandling: zerofilling = datasets 47 - 50
+> - definition of the search zone: all; shiftHandling: zerofilling       = datasets 51 - 54
+> - definition of the search zone: window; Search zone: left border: -2.0; Search zone: right border: 2.0; shiftHandling: zerofilling                                          = datasets 55 - 58
+> - definition of the search zone: nearvalue; shiftHandling: cut         = datasets 59 - 62
+> - definition of the search zone: nearvalue; shiftHandling: circular    = datasets 63 - 66
+>    {: .comment}
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Baseline correction **NMR_Preprocessing**
 
-## Sub-step with **NMR_Preprocessing**
+To ensure successful integration, baseline should be flat with no distortion. Baseline artefacts have to be removed. These artefacts result from multiple sources, such as the presence of macromolecules, a not entirely linear electronic detection process or calibration errors from the 180° pulse. Function used in this step estimates and removes the smoothed baseline from the spectra, based on two parameters  
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Baseline correction </hands-on-title>
 >
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->            - *"Line broadening"*: `5.0`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
 >    - In *"Baseline Correction"*:
 >        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `cos2`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
+>        - *"Baseline Correction: exclusion area(s)"*: ` NO `
 >        - *"Baseline Correction: exclusion area(s)"*: ` NO `
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -519,15 +499,10 @@ Cos2). You can refers to slides 8 and 9.
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
+
 >    - In *"Zero Order Phase Correction"*:
 >        - *"Zero Order Phase Correction: method"*: ` max `
 >        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -965,74 +940,6 @@ Cos2). You can refers to slides 8 and 9.
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->    - In *"Negative intensities to Zero"*:
->        - *"Set negative intensities to zero?"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           >
 > 1. Question1?
 > 2. Question2?
 >
