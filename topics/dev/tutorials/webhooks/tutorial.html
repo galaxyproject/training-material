@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -256,7 +256,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -694,7 +694,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
                 <span class="p">}));</span>
 
                 <span class="nx">$</span><span class="p">.</span><span class="nf">getJSON</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nf">if </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if </span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">success</span><span class="p">)</span> <span class="p">{</span>
                         <span class="nx">me</span><span class="p">.</span><span class="nf">renderImg</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">src</span><span class="p">);</span>
                     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
                         <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="dl">'</span><span class="s1">[ERROR] "</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">url</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">":</span><span class="se">\n</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
@@ -735,8 +735,8 @@ entire user-object, including histories and datasets.</p>
 
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">webhook</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
-    <span class="n">error</span> <span class="o">=</span> <span class="s">''</span>
-    <span class="n">comic_src</span> <span class="o">=</span> <span class="s">''</span>
+    <span class="n">error</span> <span class="o">=</span> <span class="sh">''</span>
+    <span class="n">comic_src</span> <span class="o">=</span> <span class="sh">''</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="c1"># Third-party dependencies
@@ -744,36 +744,36 @@ entire user-object, including histories and datasets.</p>
             <span class="kn">from</span> <span class="n">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
         <span class="k">except</span> <span class="nb">ImportError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">log</span><span class="p">.</span><span class="nf">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+            <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span> <span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
 
         <span class="c1"># Get latest id
-</span>        <span class="k">if</span> <span class="s">'latest_id'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
-            <span class="n">url</span> <span class="o">=</span> <span class="s">'https://phdcomics.com/gradfeed.php'</span>
+</span>        <span class="k">if</span> <span class="sh">'</span><span class="s">latest_id</span><span class="sh">'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="sh">'</span><span class="s">https://phdcomics.com/gradfeed.php</span><span class="sh">'</span>
             <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
-            <span class="n">soap</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
-            <span class="n">pattern</span> <span class="o">=</span> <span class="s">'(?:https://www\.phdcomics\.com/comics\.php\?f=)(\d+)'</span>
-            <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">([</span>
+            <span class="n">soap</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="sh">'</span><span class="s">html.parser</span><span class="sh">'</span><span class="p">)</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="sh">'</span><span class="s">(?:https://www\.phdcomics\.com/comics\.php\?f=)(\d+)</span><span class="sh">'</span>
+            <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="sh">'</span><span class="s">latest_id</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="nf">max</span><span class="p">([</span>
                 <span class="nf">int</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">link</span><span class="p">.</span><span class="n">text</span><span class="p">).</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soap</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="s">'link'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">soap</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="sh">'</span><span class="s">link</span><span class="sh">'</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">re</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">pattern</span><span class="p">))</span>
             <span class="p">])</span>
 
-        <span class="n">random_id</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="s">'latest_id'</span><span class="p">])</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="s">'https://www.phdcomics.com/comics/archive.php?comicid=%d'</span> <span class="o">%</span> \
+        <span class="n">random_id</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">webhook</span><span class="p">.</span><span class="n">config</span><span class="p">[</span><span class="sh">'</span><span class="s">latest_id</span><span class="sh">'</span><span class="p">])</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="sh">'</span><span class="s">https://www.phdcomics.com/comics/archive.php?comicid=%d</span><span class="sh">'</span> <span class="o">%</span> \
             <span class="n">random_id</span>
         <span class="n">content</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="nf">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">).</span><span class="nf">read</span><span class="p">()</span>
-        <span class="n">soup</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
-        <span class="n">comic_img</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="s">'comic2'</span><span class="p">)</span>
+        <span class="n">soup</span> <span class="o">=</span> <span class="nc">BeautifulSoup</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="sh">'</span><span class="s">html.parser</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">comic_img</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="nf">find_all</span><span class="p">(</span><span class="sh">'</span><span class="s">img</span><span class="sh">'</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="sh">'</span><span class="s">comic2</span><span class="sh">'</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">comic_img</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">attrs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s">'src'</span><span class="p">)</span>
+            <span class="n">comic_src</span> <span class="o">=</span> <span class="n">comic_img</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">attrs</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">src</span><span class="sh">'</span><span class="p">)</span>
         <span class="k">except</span> <span class="nb">IndexError</span><span class="p">:</span>
-            <span class="n">pattern</span> <span class="o">=</span> <span class="s">'&lt;img id=comic2 name=comic2 src=([\w:\/\.]+)'</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="sh">'</span><span class="s">&lt;img id=comic2 name=comic2 src=([\w:\/\.]+)</span><span class="sh">'</span>
             <span class="n">comic_src</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="nf">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">content</span><span class="p">).</span><span class="nf">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">error</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="s">'success'</span><span class="p">:</span> <span class="ow">not</span> <span class="n">error</span><span class="p">,</span> <span class="s">'error'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="s">'src'</span><span class="p">:</span> <span class="n">comic_src</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="sh">'</span><span class="s">success</span><span class="sh">'</span><span class="p">:</span> <span class="ow">not</span> <span class="n">error</span><span class="p">,</span> <span class="sh">'</span><span class="s">error</span><span class="sh">'</span><span class="p">:</span> <span class="n">error</span><span class="p">,</span> <span class="sh">'</span><span class="s">src</span><span class="sh">'</span><span class="p">:</span> <span class="n">comic_src</span><span class="p">}</span>
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1035,7 +1035,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1067,7 +1067,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

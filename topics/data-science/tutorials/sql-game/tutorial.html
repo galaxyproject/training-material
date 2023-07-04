@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -317,7 +317,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -558,6 +558,24 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Introduction to SQL:
                             
@@ -567,24 +585,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -652,6 +652,22 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Advanced SQL:
                             
@@ -661,22 +677,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -881,7 +881,7 @@ Original text and other content is released under Creative Commons CC BY-SA 4.0.
 <p>Setup the database connection:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlalchemy</span>
-<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="p">.</span><span class="nf">create_engine</span><span class="p">(</span><span class="s">"sqlite:///sql-murder-mystery.db"</span><span class="p">)</span>
+<span class="n">engine</span> <span class="o">=</span> <span class="n">sqlalchemy</span><span class="p">.</span><span class="nf">create_engine</span><span class="p">(</span><span class="sh">"</span><span class="s">sqlite:///sql-murder-mystery.db</span><span class="sh">"</span><span class="p">)</span>
 <span class="o">%</span><span class="n">load_ext</span> <span class="n">sql</span>
 <span class="o">%</span><span class="n">sql</span> <span class="n">sqlite</span><span class="p">:</span><span class="o">///</span><span class="n">sql</span><span class="o">-</span><span class="n">murder</span><span class="o">-</span><span class="n">mystery</span><span class="p">.</span><span class="n">db</span>
 <span class="o">%</span><span class="n">config</span> <span class="n">SqlMagic</span><span class="p">.</span><span class="n">displaycon</span><span class="o">=</span><span class="bp">False</span>
@@ -897,9 +897,9 @@ Original text and other content is released under Creative Commons CC BY-SA 4.0.
 <span class="n">m</span><span class="p">.</span><span class="nf">reflect</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">m</span><span class="p">.</span><span class="n">tables</span><span class="p">.</span><span class="nf">values</span><span class="p">():</span>
-    <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">table</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="s">', '</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">c</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">])])</span>
-<span class="n">pd</span><span class="p">.</span><span class="nf">set_option</span><span class="p">(</span><span class="s">'display.max_colwidth'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
-<span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">"Table"</span><span class="p">,</span> <span class="s">"Columns"</span><span class="p">])</span>
+    <span class="n">results</span><span class="p">.</span><span class="nf">append</span><span class="p">([</span><span class="n">table</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="sh">'</span><span class="s">, </span><span class="sh">'</span><span class="p">.</span><span class="nf">join</span><span class="p">([</span><span class="n">c</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">table</span><span class="p">.</span><span class="n">c</span><span class="p">])])</span>
+<span class="n">pd</span><span class="p">.</span><span class="nf">set_option</span><span class="p">(</span><span class="sh">'</span><span class="s">display.max_colwidth</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="sh">"</span><span class="s">Table</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Columns</span><span class="sh">"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <h2 id="the-search">The search!</h2>
@@ -933,7 +933,7 @@ skills to find the murderer.</p>
 <p>Write the following queries in your SQL environment to check whether you’ve found the right murderer:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%%</span><span class="n">sql</span>
-<span class="n">INSERT</span> <span class="n">INTO</span> <span class="n">solution</span> <span class="nc">VALUES </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s">"Insert the name of the person you found here"</span><span class="p">);</span>
+<span class="n">INSERT</span> <span class="n">INTO</span> <span class="n">solution</span> <span class="nc">VALUES </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="sh">"</span><span class="s">Insert the name of the person you found here</span><span class="sh">"</span><span class="p">);</span>
 <span class="n">SELECT</span> <span class="n">value</span> <span class="n">FROM</span> <span class="n">solution</span><span class="p">;</span>
 </code></pre></div></div>
 
@@ -1096,7 +1096,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1128,7 +1128,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

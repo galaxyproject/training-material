@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -279,7 +279,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -595,6 +595,10 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
                             
                             <li> Galaxy Code Architecture:
                             
@@ -603,10 +607,6 @@ Sentry.init({
                             
                             
                             </li>
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -898,13 +898,13 @@ for the first time):</p>
 
 <p>The mapping between objects and the database is defined in <code class="language-plaintext highlighter-rouge">lib/galaxy/model/__init__.py</code> via “declarative mapping”, which means that models are defined as Python classes together with the database metadata that describes the database table corresponding to each class. For example, the definition of the JobParameter class includes the database table name:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__tablename__</span> <span class="o">=</span> <span class="s">"job_parameter"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__tablename__</span> <span class="o">=</span> <span class="sh">"</span><span class="s">job_parameter</span><span class="sh">"</span>
 </code></pre></div></div>
 
 <p>and four <code class="language-plaintext highlighter-rouge">Column</code> attributes that correspond to table columns with the same names:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">job_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"job.id"</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">job_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="nc">ForeignKey</span><span class="p">(</span><span class="sh">"</span><span class="s">job.id</span><span class="sh">"</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">name</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">String</span><span class="p">(</span><span class="mi">255</span><span class="p">))</span>
 <span class="n">value</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="n">TEXT</span><span class="p">)</span>
 </code></pre></div></div>
@@ -955,19 +955,19 @@ for the first time):</p>
 
 <p>To define an attribute that is a foreign key, you need to reference the associated table + its primary key column using the <code class="language-plaintext highlighter-rouge">ForeignKey</code> construct (the datatype will be derived from that column, so you don’t have to include it):</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"bar.id"</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="sh">"</span><span class="s">bar.id</span><span class="sh">"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>To define a relationship between tables, you need to set it on <em>both</em> tables:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Order</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="err">…</span>
-    <span class="n">items</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="s">"Item"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"order"</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="sh">"</span><span class="s">Item</span><span class="sh">"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="sh">"</span><span class="s">order</span><span class="sh">"</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Item</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
     <span class="err">…</span>
-    <span class="n">order_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="s">"order.id"</span><span class="p">)</span>
-    <span class="n">awesome_order</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="s">"Order"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="s">"items"</span><span class="p">)</span>
+    <span class="n">order_id</span> <span class="o">=</span> <span class="nc">Column</span><span class="p">(</span><span class="nc">ForeignKey</span><span class="p">(</span><span class="sh">"</span><span class="s">order.id</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">awesome_order</span> <span class="o">=</span> <span class="nf">relationship</span><span class="p">(</span><span class="sh">"</span><span class="s">Order</span><span class="sh">"</span><span class="p">,</span> <span class="n">back_populates</span><span class="o">=</span><span class="sh">"</span><span class="s">items</span><span class="sh">"</span><span class="p">)</span>
     <span class="c1"># relationship not named "order" to avoid confusion: this is NOT the table name for Order
 </span></code></pre></div></div>
 
@@ -1874,7 +1874,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1906,7 +1906,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

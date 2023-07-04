@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Code Architecture">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-07-04 12:52:00 +0000">
+<meta name="DC.date" content="2023-07-04 13:54:17 +0000">
 <meta name="DC.creator" content="John Chilton">
 <meta name="DC.creator" content="Björn Grüning">
 
@@ -70,7 +70,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1051,8 +1051,8 @@ and <code class="language-plaintext highlighter-rouge">receive</code> (an async 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">application</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
     <span class="n">event</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">receive</span><span class="p">()</span>
-    <span class="p">...</span>
-    <span class="k">await</span> <span class="nf">send</span><span class="p">({</span><span class="s">"type"</span><span class="p">:</span> <span class="s">"http.response.body"</span><span class="p">,</span> <span class="p">...})</span>
+    <span class="bp">...</span>
+    <span class="k">await</span> <span class="nf">send</span><span class="p">({</span><span class="sh">"</span><span class="s">type</span><span class="sh">"</span><span class="p">:</span> <span class="sh">"</span><span class="s">http.response.body</span><span class="sh">"</span><span class="p">,</span> <span class="p">...})</span>
 </code></pre></div></div>
 
 <p>Checkout <a href="https://asgi.readthedocs.io/">ASGI documentation</a> for more details.</p>
@@ -1069,8 +1069,8 @@ plumbing is just aliases for starlette ASGI handling.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">starlette.responses</span> <span class="kn">import</span> <span class="n">PlainTextResponse</span>
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">):</span>
-    <span class="k">assert</span> <span class="n">scope</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s">"http"</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="nc">PlainTextResponse</span><span class="p">(</span><span class="s">'Hello, world!'</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">scope</span><span class="p">[</span><span class="sh">'</span><span class="s">type</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="sh">"</span><span class="s">http</span><span class="sh">"</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="nc">PlainTextResponse</span><span class="p">(</span><span class="sh">'</span><span class="s">Hello, world!</span><span class="sh">'</span><span class="p">)</span>
     <span class="k">await</span> <span class="nf">response</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1099,11 +1099,11 @@ INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 
 <span class="k">async</span> <span class="k">def</span> <span class="nf">homepage</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nc">JSONResponse</span><span class="p">({</span><span class="s">'hello'</span><span class="p">:</span> <span class="s">'world'</span><span class="p">})</span>
+    <span class="k">return</span> <span class="nc">JSONResponse</span><span class="p">({</span><span class="sh">'</span><span class="s">hello</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">world</span><span class="sh">'</span><span class="p">})</span>
 
 
 <span class="n">app</span> <span class="o">=</span> <span class="nc">Starlette</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">routes</span><span class="o">=</span><span class="p">[</span>
-    <span class="nc">Route</span><span class="p">(</span><span class="s">'/'</span><span class="p">,</span> <span class="n">homepage</span><span class="p">),</span>
+    <span class="nc">Route</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">,</span> <span class="n">homepage</span><span class="p">),</span>
 <span class="p">])</span>
 </code></pre></div></div>
 
@@ -1117,12 +1117,12 @@ INFO: Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 <p>From https://github.com/tiangolo/fastapi/blob/master/fastapi/applications.py</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">...</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="bp">...</span>
 <span class="kn">from</span> <span class="n">starlette.applications</span> <span class="kn">import</span> <span class="n">Starlette</span>
-<span class="p">...</span>
+<span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">FastAPI</span><span class="p">(</span><span class="n">Starlette</span><span class="p">):</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 </code></pre></div></div>
 
 <p>FastAPI (the library and the application base) extends starlette framework with features for building APIs. These include data
@@ -1142,10 +1142,10 @@ validation, serialization, documentation generation.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">root_path</span><span class="p">:</span>
-        <span class="n">scope</span><span class="p">[</span><span class="s">"root_path"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">root_path</span>
+        <span class="n">scope</span><span class="p">[</span><span class="sh">"</span><span class="s">root_path</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">root_path</span>
     <span class="k">if</span> <span class="n">AsyncExitStack</span><span class="p">:</span>
         <span class="k">async</span> <span class="k">with</span> <span class="nc">AsyncExitStack</span><span class="p">()</span> <span class="k">as</span> <span class="n">stack</span><span class="p">:</span>
-             <span class="n">scope</span><span class="p">[</span><span class="s">"fastapi_astack"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stack</span>
+             <span class="n">scope</span><span class="p">[</span><span class="sh">"</span><span class="s">fastapi_astack</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">stack</span>
              <span class="k">await</span> <span class="nf">super</span><span class="p">().</span><span class="nf">__call__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">await</span> <span class="nf">super</span><span class="p">().</span><span class="nf">__call__</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>  <span class="c1"># pragma: no cover
@@ -1162,7 +1162,7 @@ validation, serialization, documentation generation.</p>
 <p>https://github.com/encode/starlette/blob/master/starlette/applications.py</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-   <span class="n">scope</span><span class="p">[</span><span class="s">"app"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span>
+   <span class="n">scope</span><span class="p">[</span><span class="sh">"</span><span class="s">app</span><span class="sh">"</span><span class="p">]</span> <span class="o">=</span> <span class="n">self</span>
    <span class="k">await</span> <span class="n">self</span><span class="p">.</span><span class="nf">middleware_stack</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1177,7 +1177,7 @@ validation, serialization, documentation generation.</p>
 <p>https://github.com/encode/starlette/blob/master/starlette/applications.py</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_middleware_stack</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
     <span class="n">app</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">router</span>
     <span class="k">for</span> <span class="n">cls</span><span class="p">,</span> <span class="n">options</span> <span class="ow">in</span> <span class="nf">reversed</span><span class="p">(</span><span class="n">middleware</span><span class="p">):</span>
@@ -1222,7 +1222,7 @@ class: enlarge150</p>
 <p>https://github.com/encode/starlette/blob/master/starlette/applications.py</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">build_middleware_stack</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ASGIApp</span><span class="p">:</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
     <span class="n">app</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">router</span>
     <span class="k">for</span> <span class="n">cls</span><span class="p">,</span> <span class="n">options</span> <span class="ow">in</span> <span class="nf">reversed</span><span class="p">(</span><span class="n">middleware</span><span class="p">):</span>
@@ -1254,7 +1254,7 @@ class: enlarge150</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">starlette</span> <span class="kn">import</span> <span class="n">routing</span>
 
 <span class="k">class</span> <span class="nc">APIRouter</span><span class="p">(</span><span class="n">routing</span><span class="p">.</span><span class="n">Router</span><span class="p">):</span>
-   <span class="p">...</span>
+   <span class="bp">...</span>
 </code></pre></div></div>
 
 <hr />
@@ -1264,7 +1264,7 @@ class: enlarge150</p>
 <p>https://github.com/encode/starlette/blob/master/starlette/routing.py</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">Scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">:</span> <span class="n">Receive</span><span class="p">,</span> <span class="n">send</span><span class="p">:</span> <span class="n">Send</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-   <span class="p">...</span>
+   <span class="bp">...</span>
    <span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">self</span><span class="p">.</span><span class="n">routes</span><span class="p">:</span>
        <span class="c1"># Determine if any route matches the incoming scope,
 </span>       <span class="c1"># and hand over to the matching route if found.
@@ -1273,7 +1273,7 @@ class: enlarge150</p>
            <span class="n">scope</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">child_scope</span><span class="p">)</span>
            <span class="k">await</span> <span class="n">route</span><span class="p">.</span><span class="nf">handle</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">receive</span><span class="p">,</span> <span class="n">send</span><span class="p">)</span>
            <span class="k">return</span>
-       <span class="p">...</span>
+       <span class="bp">...</span>
 </code></pre></div></div>
 
 <p>https://www.starlette.io/routing/</p>
@@ -1304,10 +1304,10 @@ application (ASGI endpoint) is constructed.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">factory</span><span class="p">():</span>
     <span class="n">props</span> <span class="o">=</span> <span class="nc">WebappSetupProps</span><span class="p">(</span>
-        <span class="n">app_name</span><span class="o">=</span><span class="s">'galaxy'</span><span class="p">,</span>
+        <span class="n">app_name</span><span class="o">=</span><span class="sh">'</span><span class="s">galaxy</span><span class="sh">'</span><span class="p">,</span>
         <span class="n">default_section_name</span><span class="o">=</span><span class="n">DEFAULT_CONFIG_SECTION</span><span class="p">,</span>
-        <span class="n">env_config_file</span><span class="o">=</span><span class="s">'GALAXY_CONFIG_FILE'</span><span class="p">,</span>
-        <span class="n">env_config_section</span><span class="o">=</span><span class="s">'GALAXY_CONFIG_SECTION'</span><span class="p">,</span>
+        <span class="n">env_config_file</span><span class="o">=</span><span class="sh">'</span><span class="s">GALAXY_CONFIG_FILE</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">env_config_section</span><span class="o">=</span><span class="sh">'</span><span class="s">GALAXY_CONFIG_SECTION</span><span class="sh">'</span><span class="p">,</span>
         <span class="n">check_galaxy_root</span><span class="o">=</span><span class="bp">True</span>
     <span class="p">)</span>
     <span class="n">config_provider</span> <span class="o">=</span> <span class="nc">WebappConfigResolver</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
@@ -1328,16 +1328,16 @@ application (ASGI endpoint) is constructed.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">initialize_fast_app</span><span class="p">(</span><span class="n">gx_webapp</span><span class="p">,</span> <span class="n">gx_app</span><span class="p">):</span>
     <span class="n">app</span> <span class="o">=</span> <span class="nc">FastAPI</span><span class="p">(</span>
-        <span class="n">title</span><span class="o">=</span><span class="s">"Galaxy API"</span><span class="p">,</span>
-        <span class="n">docs_url</span><span class="o">=</span><span class="s">"/api/docs"</span><span class="p">,</span>
+        <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Galaxy API</span><span class="sh">"</span><span class="p">,</span>
+        <span class="n">docs_url</span><span class="o">=</span><span class="sh">"</span><span class="s">/api/docs</span><span class="sh">"</span><span class="p">,</span>
         <span class="n">openapi_tags</span><span class="o">=</span><span class="n">api_tags_metadata</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="nf">add_exception_handler</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
     <span class="nf">add_galaxy_middleware</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">gx_app</span><span class="p">)</span>
     <span class="nf">add_request_id_middleware</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
-    <span class="nf">include_all_package_routers</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="s">'galaxy.webapps.galaxy.api'</span><span class="p">)</span>
+    <span class="nf">include_all_package_routers</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="sh">'</span><span class="s">galaxy.webapps.galaxy.api</span><span class="sh">'</span><span class="p">)</span>
     <span class="n">wsgi_handler</span> <span class="o">=</span> <span class="nc">WSGIMiddleware</span><span class="p">(</span><span class="n">gx_webapp</span><span class="p">)</span>
-    <span class="n">app</span><span class="p">.</span><span class="nf">mount</span><span class="p">(</span><span class="s">'/'</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">)</span>
+    <span class="n">app</span><span class="p">.</span><span class="nf">mount</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">app</span>
 </code></pre></div></div>
 
@@ -1355,7 +1355,7 @@ application (ASGI endpoint) is constructed.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">include_all_package_routers</span><span class="p">(</span><span class="n">app</span><span class="p">:</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">module</span> <span class="ow">in</span> <span class="nf">walk_controller_modules</span><span class="p">(</span><span class="n">package_name</span><span class="p">):</span>
-        <span class="n">router</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s">"router"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">router</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="sh">"</span><span class="s">router</span><span class="sh">"</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">router</span><span class="p">:</span>
             <span class="n">app</span><span class="p">.</span><span class="nf">include_router</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1366,7 +1366,7 @@ application (ASGI endpoint) is constructed.</p>
 
 <h3 id="routing-inside-the-application">Routing inside the Application</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">router</span> <span class="o">=</span> <span class="nc">Router</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s">'tags'</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">router</span> <span class="o">=</span> <span class="nc">Router</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">tags</span><span class="sh">'</span><span class="p">])</span>
 
 
 <span class="nd">@router.cbv</span>
@@ -1374,8 +1374,8 @@ application (ASGI endpoint) is constructed.</p>
     <span class="n">manager</span><span class="p">:</span> <span class="n">TagsManager</span> <span class="o">=</span> <span class="nf">depends</span><span class="p">(</span><span class="n">TagsManager</span><span class="p">)</span>
 
     <span class="nd">@router.put</span><span class="p">(</span>
-        <span class="s">'/api/tags'</span><span class="p">,</span>
-        <span class="n">summary</span><span class="o">=</span><span class="s">"Apply a new set of tags to an item."</span><span class="p">,</span>
+        <span class="sh">'</span><span class="s">/api/tags</span><span class="sh">'</span><span class="p">,</span>
+        <span class="n">summary</span><span class="o">=</span><span class="sh">"</span><span class="s">Apply a new set of tags to an item.</span><span class="sh">"</span><span class="p">,</span>
         <span class="n">status_code</span><span class="o">=</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_204_NO_CONTENT</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">def</span> <span class="nf">update</span><span class="p">(</span>
@@ -1383,15 +1383,15 @@ application (ASGI endpoint) is constructed.</p>
         <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span> <span class="o">=</span> <span class="n">DependsOnTrans</span><span class="p">,</span>
         <span class="n">payload</span><span class="p">:</span> <span class="n">ItemTagsPayload</span> <span class="o">=</span> <span class="nc">Body</span><span class="p">(</span>
             <span class="p">...,</span>  <span class="c1"># Required
-</span>            <span class="n">title</span><span class="o">=</span><span class="s">"Payload"</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s">"Request body containing the item and the tags to be assigned."</span><span class="p">,</span>
+</span>            <span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Payload</span><span class="sh">"</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Request body containing the item and the tags to be assigned.</span><span class="sh">"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">):</span>
-        <span class="s">"""Replaces the tags associated with an item with the new ones specified in the payload.
+        <span class="sh">"""</span><span class="s">Replaces the tags associated with an item with the new ones specified in the payload.
 
         - The previous tags will be __deleted__.
         - If no tags are provided in the request body, the currently associated tags will also be __deleted__.
-        """</span>
+        </span><span class="sh">"""</span>
         <span class="n">self</span><span class="p">.</span><span class="n">manager</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1412,7 +1412,7 @@ application (ASGI endpoint) is constructed.</p>
 <p>Back to <code class="language-plaintext highlighter-rouge">initialize_fast_app</code>, two of the final lines were as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wsgi_handler</span> <span class="o">=</span> <span class="nc">WSGIMiddleware</span><span class="p">(</span><span class="n">gx_webapp</span><span class="p">)</span>
-<span class="n">app</span><span class="p">.</span><span class="nf">mount</span><span class="p">(</span><span class="s">'/'</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">)</span>
+<span class="n">app</span><span class="p">.</span><span class="nf">mount</span><span class="p">(</span><span class="sh">'</span><span class="s">/</span><span class="sh">'</span><span class="p">,</span> <span class="n">wsgi_handler</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This effectively provides a fallback to our legacy WSGI application.</p>
@@ -1496,8 +1496,8 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
 <p>Setup on <code class="language-plaintext highlighter-rouge">webapp</code> in <code class="language-plaintext highlighter-rouge">galaxy.webapps.galaxy.buildapp.py</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">webapp</span><span class="p">.</span><span class="nf">add_route</span><span class="p">(</span>
-    <span class="s">'/datasets/:dataset_id/display/{filename:.+?}'</span><span class="p">,</span>
-    <span class="n">controller</span><span class="o">=</span><span class="s">'dataset'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'display'</span><span class="p">,</span>
+    <span class="sh">'</span><span class="s">/datasets/:dataset_id/display/{filename:.+?}</span><span class="sh">'</span><span class="p">,</span>
+    <span class="n">controller</span><span class="o">=</span><span class="sh">'</span><span class="s">dataset</span><span class="sh">'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="sh">'</span><span class="s">display</span><span class="sh">'</span><span class="p">,</span>
     <span class="n">dataset_id</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="bp">None</span>
 <span class="p">)</span>
 </code></pre></div></div>
@@ -1519,20 +1519,20 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
 <p>Simplified <code class="language-plaintext highlighter-rouge">handle_request</code> from <code class="language-plaintext highlighter-rouge">lib/galaxy/web/framework/base.py</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">handle_request</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
-    <span class="n">path_info</span> <span class="o">=</span> <span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span> <span class="s">'PATH_INFO'</span><span class="p">,</span> <span class="s">''</span> <span class="p">)</span>
+    <span class="n">path_info</span> <span class="o">=</span> <span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span> <span class="sh">'</span><span class="s">PATH_INFO</span><span class="sh">'</span><span class="p">,</span> <span class="sh">''</span> <span class="p">)</span>
     <span class="nb">map</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">mapper</span><span class="p">.</span><span class="nf">match</span><span class="p">(</span> <span class="n">path_info</span><span class="p">,</span> <span class="n">environ</span> <span class="p">)</span>
-    <span class="k">if</span> <span class="n">path_info</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="s">'/api'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">path_info</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">/api</span><span class="sh">'</span><span class="p">):</span>
         <span class="n">controllers</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">api_controllers</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">controllers</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">controllers</span>
 
     <span class="n">trans</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">transaction_factory</span><span class="p">(</span> <span class="n">environ</span> <span class="p">)</span>
 
-    <span class="n">controller_name</span> <span class="o">=</span> <span class="nb">map</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span> <span class="s">'controller'</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
+    <span class="n">controller_name</span> <span class="o">=</span> <span class="nb">map</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span> <span class="sh">'</span><span class="s">controller</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
     <span class="n">controller</span> <span class="o">=</span> <span class="n">controllers</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span> <span class="n">controller_name</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
 
     <span class="c1"># Resolve action method on controller
-</span>    <span class="n">action</span> <span class="o">=</span> <span class="nb">map</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span> <span class="s">'action'</span><span class="p">,</span> <span class="s">'index'</span> <span class="p">)</span>
+</span>    <span class="n">action</span> <span class="o">=</span> <span class="nb">map</span><span class="p">.</span><span class="nf">pop</span><span class="p">(</span> <span class="sh">'</span><span class="s">action</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">index</span><span class="sh">'</span> <span class="p">)</span>
     <span class="n">method</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span> <span class="n">controller</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="bp">None</span> <span class="p">)</span>
 
     <span class="n">kwargs</span> <span class="o">=</span> <span class="n">trans</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">params</span><span class="p">.</span><span class="nf">mixed</span><span class="p">()</span>
@@ -1584,18 +1584,18 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
 <span class="k">class</span> <span class="nc">FastAPIRoles</span><span class="p">:</span>
     <span class="n">role_manager</span><span class="p">:</span> <span class="n">RoleManager</span> <span class="o">=</span> <span class="nf">depends</span><span class="p">(</span><span class="n">RoleManager</span><span class="p">)</span>
 
-    <span class="nd">@router.get</span><span class="p">(</span><span class="s">'/api/roles'</span><span class="p">)</span>
+    <span class="nd">@router.get</span><span class="p">(</span><span class="sh">'</span><span class="s">/api/roles</span><span class="sh">'</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span> <span class="o">=</span> <span class="n">DependsOnTrans</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RoleListModel</span><span class="p">:</span>
         <span class="n">roles</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">list_displayable_roles</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
         <span class="k">return</span> <span class="nc">RoleListModel</span><span class="p">(</span><span class="n">__root__</span><span class="o">=</span><span class="p">[</span><span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">])</span>
 
-    <span class="nd">@router.get</span><span class="p">(</span><span class="s">'/api/roles/{id}'</span><span class="p">)</span>
+    <span class="nd">@router.get</span><span class="p">(</span><span class="sh">'</span><span class="s">/api/roles/{id}</span><span class="sh">'</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="n">EncodedDatabaseIdField</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span> <span class="o">=</span> <span class="n">DependsOnTrans</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RoleModel</span><span class="p">:</span>
         <span class="n">role_id</span> <span class="o">=</span> <span class="n">trans</span><span class="p">.</span><span class="n">app</span><span class="p">.</span><span class="n">security</span><span class="p">.</span><span class="nf">decode_id</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
         <span class="n">role</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role_id</span><span class="p">)</span>
         <span class="k">return</span> <span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
 
-    <span class="nd">@router.post</span><span class="p">(</span><span class="s">"/api/roles"</span><span class="p">,</span> <span class="n">require_admin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="nd">@router.post</span><span class="p">(</span><span class="sh">"</span><span class="s">/api/roles</span><span class="sh">"</span><span class="p">,</span> <span class="n">require_admin</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span> <span class="o">=</span> <span class="n">DependsOnTrans</span><span class="p">,</span> <span class="n">role_definition_model</span><span class="p">:</span> <span class="n">RoleDefinitionModel</span> <span class="o">=</span> <span class="nc">Body</span><span class="p">(...))</span> <span class="o">-&gt;</span> <span class="n">RoleModel</span><span class="p">:</span>
         <span class="n">role</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">create_role</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role_definition_model</span><span class="p">)</span>
         <span class="k">return</span> <span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
@@ -1607,28 +1607,28 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
 
 <h3 id="fastapi-and-pydantic">FastAPI and Pydantic</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RoleIdField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"ID"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Encoded ID of the role"</span><span class="p">)</span>
-<span class="n">RoleNameField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Name"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Name of the role"</span><span class="p">)</span>
-<span class="n">RoleDescriptionField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Description"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Description of the role"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">RoleIdField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">ID</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Encoded ID of the role</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">RoleNameField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Name</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Name of the role</span><span class="sh">"</span><span class="p">)</span>
+<span class="n">RoleDescriptionField</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Description</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Description of the role</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">BasicRoleModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="nb">id</span><span class="p">:</span> <span class="n">EncodedDatabaseIdField</span> <span class="o">=</span> <span class="n">RoleIdField</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleNameField</span>
-    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Type"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Type or category of the role"</span><span class="p">)</span>
+    <span class="nb">type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Type</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Type or category of the role</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">RoleModel</span><span class="p">(</span><span class="n">BasicRoleModel</span><span class="p">):</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleDescriptionField</span>
-    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"URL"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"URL for the role"</span><span class="p">)</span>
-    <span class="n">model_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Model class"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s">"Database model class (Role)"</span><span class="p">)</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">URL</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">URL for the role</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">model_class</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Model class</span><span class="sh">"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="sh">"</span><span class="s">Database model class (Role)</span><span class="sh">"</span><span class="p">)</span>
 
 
 <span class="k">class</span> <span class="nc">RoleDefinitionModel</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleNameField</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">RoleDescriptionField</span>
-    <span class="n">user_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"User IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
-    <span class="n">group_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s">"Group IDs"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">user_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">User IDs</span><span class="sh">"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">group_ids</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">EncodedDatabaseIdField</span><span class="p">]]</span> <span class="o">=</span> <span class="nc">Field</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sh">"</span><span class="s">Group IDs</span><span class="sh">"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="p">[])</span>
 </code></pre></div></div>
 
 <hr />
@@ -1668,19 +1668,19 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
 
     <span class="nd">@web.expose_api</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
-        <span class="s">"""
+        <span class="sh">"""</span><span class="s">
         GET /api/roles
         Displays a collection (list) of roles.
-        """</span>
+        </span><span class="sh">"""</span>
         <span class="n">roles</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">list_displayable_roles</span><span class="p">(</span><span class="n">trans</span><span class="p">)</span>
         <span class="k">return</span> <span class="nc">RoleListModel</span><span class="p">(</span><span class="n">__root__</span><span class="o">=</span><span class="p">[</span><span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">roles</span><span class="p">])</span>
 
     <span class="nd">@web.expose_api</span>
     <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
-        <span class="s">"""
+        <span class="sh">"""</span><span class="s">
         GET /api/roles/{encoded_role_id}
         Displays information about a role.
-        """</span>
+        </span><span class="sh">"""</span>
         <span class="n">role_id</span> <span class="o">=</span> <span class="nf">decode_id</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">app</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span>
         <span class="n">role</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role_id</span><span class="p">)</span>
         <span class="k">return</span> <span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
@@ -1688,11 +1688,11 @@ function of <code class="language-plaintext highlighter-rouge">galaxy.webapps.ga
     <span class="nd">@web.expose_api</span>
     <span class="nd">@web.require_admin</span>
     <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">trans</span><span class="p">:</span> <span class="n">ProvidesUserContext</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="o">**</span><span class="n">kwd</span><span class="p">):</span>
-        <span class="s">"""
+        <span class="sh">"""</span><span class="s">
         POST /api/roles
         Creates a new role.
-        """</span>
-        <span class="nf">expand_json_keys</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="p">[</span><span class="s">"user_ids"</span><span class="p">,</span> <span class="s">"group_ids"</span><span class="p">])</span>
+        </span><span class="sh">"""</span>
+        <span class="nf">expand_json_keys</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="p">[</span><span class="sh">"</span><span class="s">user_ids</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">group_ids</span><span class="sh">"</span><span class="p">])</span>
         <span class="n">role_definition_model</span> <span class="o">=</span> <span class="nc">RoleDefinitionModel</span><span class="p">(</span><span class="o">**</span><span class="n">payload</span><span class="p">)</span>
         <span class="n">role</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">role_manager</span><span class="p">.</span><span class="nf">create_role</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role_definition_model</span><span class="p">)</span>
         <span class="k">return</span> <span class="nf">role_to_model</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
@@ -1991,7 +1991,7 @@ injection.</p>
 <span class="nd">@cbv</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">FastAPITags</span><span class="p">:</span>
     <span class="n">manager</span><span class="p">:</span> <span class="n">TagsManager</span> <span class="o">=</span> <span class="nc">Depends</span><span class="p">(</span><span class="n">get_tags_manager</span><span class="p">)</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 </code></pre></div></div>
 
 <p>Dependency injection allows for type checking but doesn’t use type inference (requires factory functions, etc..)</p>
@@ -2011,7 +2011,7 @@ injection.</p>
 <span class="nd">@cbv</span><span class="p">(</span><span class="n">router</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">FastAPITags</span><span class="p">:</span>
     <span class="n">manager</span><span class="p">:</span> <span class="n">TagsManager</span> <span class="o">=</span> <span class="nc">Depends</span><span class="p">(</span><span class="n">get_tags_manager</span><span class="p">)</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TagsController</span><span class="p">(</span><span class="n">BaseAPIController</span><span class="p">):</span>
 
@@ -2060,7 +2060,7 @@ injection.</p>
 <p>From <code class="language-plaintext highlighter-rouge">lib/galaxy/celery/tasks.py</code></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">lagom</span> <span class="kn">import</span> <span class="n">magic_bind_to_container</span>
-<span class="p">...</span>
+<span class="bp">...</span>
 
 <span class="k">def</span> <span class="nf">galaxy_task</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
     <span class="n">CELERY_TASKS</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">func</span><span class="p">.</span><span class="n">__name__</span><span class="p">)</span>
@@ -2087,10 +2087,10 @@ injection.</p>
 
 <span class="nd">@celery_app.task</span>
 <span class="nd">@galaxy_task</span>
-<span class="k">def</span> <span class="nf">set_metadata</span><span class="p">(</span><span class="n">hda_manager</span><span class="p">:</span> <span class="n">HDAManager</span><span class="p">,</span> <span class="n">ldda_manager</span><span class="p">:</span> <span class="n">LDDAManager</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">,</span> <span class="n">model_class</span><span class="o">=</span><span class="s">'HistoryDatasetAssociation'</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">model_class</span> <span class="o">==</span> <span class="s">'HistoryDatasetAssociation'</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">set_metadata</span><span class="p">(</span><span class="n">hda_manager</span><span class="p">:</span> <span class="n">HDAManager</span><span class="p">,</span> <span class="n">ldda_manager</span><span class="p">:</span> <span class="n">LDDAManager</span><span class="p">,</span> <span class="n">dataset_id</span><span class="p">,</span> <span class="n">model_class</span><span class="o">=</span><span class="sh">'</span><span class="s">HistoryDatasetAssociation</span><span class="sh">'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">model_class</span> <span class="o">==</span> <span class="sh">'</span><span class="s">HistoryDatasetAssociation</span><span class="sh">'</span><span class="p">:</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="n">hda_manager</span><span class="p">.</span><span class="nf">by_id</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">model_class</span> <span class="o">==</span> <span class="s">'LibraryDatasetDatasetAssociation'</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">model_class</span> <span class="o">==</span> <span class="sh">'</span><span class="s">LibraryDatasetDatasetAssociation</span><span class="sh">'</span><span class="p">:</span>
         <span class="n">dataset</span> <span class="o">=</span> <span class="n">ldda_manager</span><span class="p">.</span><span class="nf">by_id</span><span class="p">(</span><span class="n">dataset_id</span><span class="p">)</span>
     <span class="n">dataset</span><span class="p">.</span><span class="n">datatype</span><span class="p">.</span><span class="nf">set_meta</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
 </code></pre></div></div>
@@ -2860,13 +2860,13 @@ description of configured plugins.</p>
         <span class="c1"># ... other stuff here
 </span>
     <span class="k">def</span> <span class="nf">__build_container_resolvers</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">app_info</span><span class="p">):</span>
-        <span class="n">conf_file</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">app_info</span><span class="p">,</span> <span class="s">'containers_resolvers_config_file'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="n">conf_file</span> <span class="o">=</span> <span class="nf">getattr</span><span class="p">(</span><span class="n">app_info</span><span class="p">,</span> <span class="sh">'</span><span class="s">containers_resolvers_config_file</span><span class="sh">'</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="n">plugin_source</span> <span class="o">=</span> <span class="n">plugin_config</span><span class="p">.</span><span class="nf">plugin_source_from_path</span><span class="p">(</span><span class="n">conf_file</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_parse_resolver_conf</span><span class="p">(</span><span class="n">plugin_source</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_parse_resolver_conf</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">plugin_source</span><span class="p">):</span>
         <span class="n">extra_kwds</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s">'app_info'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">app_info</span>
+            <span class="sh">'</span><span class="s">app_info</span><span class="sh">'</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">app_info</span>
         <span class="p">}</span>
         <span class="k">return</span> <span class="n">plugin_config</span><span class="p">.</span><span class="nf">load_plugins</span><span class="p">(</span>
             <span class="n">self</span><span class="p">.</span><span class="n">resolver_classes</span><span class="p">,</span> <span class="n">plugin_source</span><span class="p">,</span> <span class="n">extra_kwds</span>
@@ -2876,7 +2876,7 @@ description of configured plugins.</p>
         <span class="kn">import</span> <span class="n">galaxy.tool_util.deps.container_resolvers</span>
         <span class="k">return</span> <span class="n">plugin_config</span><span class="p">.</span><span class="nf">plugins_dict</span><span class="p">(</span>
             <span class="n">galaxy</span><span class="p">.</span><span class="n">tool_util</span><span class="p">.</span><span class="n">deps</span><span class="p">.</span><span class="n">container_resolvers</span><span class="p">,</span>
-            <span class="s">'resolver_type'</span>
+            <span class="sh">'</span><span class="s">resolver_type</span><span class="sh">'</span>
         <span class="p">)</span>
 </code></pre></div></div>
 
@@ -2886,9 +2886,9 @@ description of configured plugins.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">CachedMulledDockerContainerResolver</span><span class="p">(</span><span class="n">ContainerResolver</span><span class="p">):</span>
 
-<span class="n">resolver_type</span> <span class="o">=</span> <span class="s">"cached_mulled"</span>
+<span class="n">resolver_type</span> <span class="o">=</span> <span class="sh">"</span><span class="s">cached_mulled</span><span class="sh">"</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">app_info</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="s">"biocontainers"</span><span class="p">,</span> <span class="n">hash_func</span><span class="o">=</span><span class="s">"v2"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">app_info</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="sh">"</span><span class="s">biocontainers</span><span class="sh">"</span><span class="p">,</span> <span class="n">hash_func</span><span class="o">=</span><span class="sh">"</span><span class="s">v2</span><span class="sh">"</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
         <span class="nf">super</span><span class="p">(</span><span class="n">CachedMulledDockerContainerResolver</span><span class="p">,</span> <span class="n">self</span><span class="p">).</span><span class="nf">__init__</span><span class="p">(</span><span class="n">app_info</span><span class="p">)</span>
         <span class="n">self</span><span class="p">.</span><span class="n">namespace</span> <span class="o">=</span> <span class="n">namespace</span>
         <span class="n">self</span><span class="p">.</span><span class="n">hash_func</span> <span class="o">=</span> <span class="n">hash_func</span>
@@ -3852,7 +3852,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3880,7 +3880,7 @@ This material is licensed under the <a rel="license" href="https://creativecommo
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

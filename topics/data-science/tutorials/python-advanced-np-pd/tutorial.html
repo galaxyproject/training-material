@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -294,7 +294,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -533,6 +533,14 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Introduction to Python:
                             
@@ -542,14 +550,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -769,14 +769,14 @@ Sentry.init({
                 <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">usegalaxy.eu</a> and <a href="https://usegalaxy.org/">usegalaxy.org</a> sites.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
 
   <p>Adaptations have been made to make this work better in a GTN/Galaxy environment.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -835,10 +835,10 @@ Sentry.init({
 
 <p>If we want to get a single number from the array, we must provide an index in square brackets after the variable name, just as we do in math when referring to an element of a matrix. Our data has two dimensions, so we will need to use two indices to refer to one specific value:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'first value in data:'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">first value in data:</span><span class="sh">'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'middle value in data:'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">middle value in data:</span><span class="sh">'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>The expression random_data[25, 35] accesses the element at row 25, column 35. While this expression may not surprise you, random_data[0, 0] might. Programming languages like Fortran, MATLAB and R start counting at 1 because that’s what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because it represents an offset from the first value in the array (the second value is offset by one index from the first value). As a result, if we have an M×N array in Python, its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second.</p>
@@ -852,7 +852,7 @@ An index like [25, 35] selects a single element of an array, but we can select w
 <p>We don’t have to include the upper and lower bound on the slice. If we don’t include the lower bound, Python uses 0 by default; if we don’t include the upper, the slice runs to the end of the axis, and if we don’t include either (i.e., if we use ‘:’ on its own), the slice includes everything:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">small</span> <span class="o">=</span> <span class="n">random_data</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">36</span><span class="p">:]</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'small is:'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">small is:</span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">small</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -868,9 +868,9 @@ An index like [25, 35] selects a single element of an array, but we can select w
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">maxval</span><span class="p">,</span> <span class="n">minval</span><span class="p">,</span> <span class="n">stdval</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">random_data</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">min</span><span class="p">(</span><span class="n">random_data</span><span class="p">),</span> <span class="n">np</span><span class="p">.</span><span class="nf">std</span><span class="p">(</span><span class="n">random_data</span><span class="p">)</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="s">'maximum inflammation:'</span><span class="p">,</span> <span class="n">maxval</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'minimum inflammation:'</span><span class="p">,</span> <span class="n">minval</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'standard deviation:'</span><span class="p">,</span> <span class="n">stdval</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">maximum inflammation:</span><span class="sh">'</span><span class="p">,</span> <span class="n">maxval</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">minimum inflammation:</span><span class="sh">'</span><span class="p">,</span> <span class="n">minval</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">standard deviation:</span><span class="sh">'</span><span class="p">,</span> <span class="n">stdval</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>How did we know what functions NumPy has and how to use them? If you are working in IPython or in a Jupyter Notebook, there is an easy way to find out. If you type the name of something followed by a dot, then you can use tab completion (e.g. type <code class="language-plaintext highlighter-rouge">np.</code> and then press Tab) to see a list of all functions and attributes that you can use. After selecting one, you can also add a question mark (e.g. <code class="language-plaintext highlighter-rouge">np.cumprod?</code>), and IPython will return an explanation of the method! This is the same as doing <code class="language-plaintext highlighter-rouge">help(np.cumprod)</code>.</p>
@@ -878,7 +878,7 @@ An index like [25, 35] selects a single element of an array, but we can select w
 <p>When analyzing data, though, we often want to look at variations in statistical values, such as the maximum inflammation per patient or the average inflammation per day. One way to do this is to create a new temporary array of the data we want, then ask it to do the calculation:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">patient_0</span> <span class="o">=</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="c1"># 0 on the first axis (rows), everything on the second (columns)
-</span><span class="nf">print</span><span class="p">(</span><span class="s">'maximum inflammation for patient 0:'</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">patient_0</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">maximum inflammation for patient 0:</span><span class="sh">'</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="n">patient_0</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>What if we need the maximum inflammation for each patient over all days (as in the next diagram on the left) or the average for each day (as in the diagram on the right)? As the diagram below shows, we want to perform the operation across an axis:</p>
@@ -906,15 +906,15 @@ An index like [25, 35] selects a single element of an array, but we can select w
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
 
 <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]])</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'A = '</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">A = </span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
 
 <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">hstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">])</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'B = '</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">B = </span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
 
 <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">vstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">])</span>
-<span class="nf">print</span><span class="p">(</span><span class="s">'C = '</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">C = </span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -929,12 +929,12 @@ An index like [25, 35] selects a single element of an array, but we can select w
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-and-stacking-arrays"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting and stacking arrays</div>
+  <div class="box-title question-title" id="question-selecting-and-stacking-arrays-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting and stacking arrays</div>
 
   <p>Write some additional code that slices the first and last columns of A, and stacks them into a 3x2 array. Make sure to print the results to verify your solution.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>A ‘gotcha’ with array indexing is that singleton dimensions are dropped by default. That means <code class="language-plaintext highlighter-rouge">A[:, 0]</code> is a one dimensional array, which won’t stack as desired. To preserve singleton dimensions, the index itself can be a slice or array. For example, <code class="language-plaintext highlighter-rouge">A[:, :1]</code> returns a two dimensional array with one singleton dimension (i.e. a column vector).</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D = np.hstack((A[:, :1], A[:, -1:]))
@@ -946,13 +946,13 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-with-conditionals"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
+  <div class="box-title question-title" id="question-selecting-with-conditionals-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
 
   <p>Given the followind array <code class="language-plaintext highlighter-rouge">A</code>, keep only the elements that are lower that <code class="language-plaintext highlighter-rouge">0.05</code>.</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = np.array([0.81, 0.025, 0.15, 0.67, 0.01])
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A = A[A&lt;0.05]
 </code></pre></div>    </div>
@@ -971,9 +971,9 @@ print(D)
 
 <p>There are many ways to create a pandas dataframe. For example you can use a numpy array as input.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="s">''</span><span class="p">,</span><span class="s">'Col1'</span><span class="p">,</span><span class="s">'Col2'</span><span class="p">],</span>
-                <span class="p">[</span><span class="s">'Row1'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
-                <span class="p">[</span><span class="s">'Row2'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="sh">''</span><span class="p">,</span><span class="sh">'</span><span class="s">Col1</span><span class="sh">'</span><span class="p">,</span><span class="sh">'</span><span class="s">Col2</span><span class="sh">'</span><span class="p">],</span>
+                <span class="p">[</span><span class="sh">'</span><span class="s">Row1</span><span class="sh">'</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+                <span class="p">[</span><span class="sh">'</span><span class="s">Row2</span><span class="sh">'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]])</span>
 
 <span class="nf">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="nc">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">1</span><span class="p">:],</span>
                   <span class="n">index</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span><span class="mi">0</span><span class="p">],</span>
@@ -984,7 +984,7 @@ print(D)
 
 <p>We can read a tabular file with <code class="language-plaintext highlighter-rouge">pd.read_csv</code>. The first argument is the filepath of the file to be read. The <code class="language-plaintext highlighter-rouge">sep</code> argument refers to the symbol used to separate the data into different columns. You can check the rest of the arguments using the <code class="language-plaintext highlighter-rouge">help()</code> function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular</span><span class="sh">"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -996,7 +996,7 @@ print(D)
 
 <p>By default row indexes are numbers, but we could use a column of the data. To pass the name of the column to <code class="language-plaintext highlighter-rouge">read_csv</code>, you can use its <code class="language-plaintext highlighter-rouge">index_col</code> parameter. Be careful though, because the row indexes must be unique for each row.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="s">'GeneID'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular</span><span class="sh">"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="sh">'</span><span class="s">GeneID</span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1021,18 +1021,18 @@ print(D)
 
 <p>You can use <code class="language-plaintext highlighter-rouge">DataFrame.describe()</code> to get summary statistics about the data. <code class="language-plaintext highlighter-rouge">DataFrame.describe()</code> returns the summary statistics of only the columns that have numerical data.  All other columns are ignored, unless you use the argument <code class="language-plaintext highlighter-rouge">include='all'</code>. Depending on the data type of each column, the statistics that can’t be calculated are replaced with  the value <code class="language-plaintext highlighter-rouge">NaN</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="nf">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="s">'all'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="nf">describe</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="sh">'</span><span class="s">all</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-using-pd-head-and-pd-tail"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Using pd.head and pd.tail</div>
+  <div class="box-title question-title" id="question-using-pd-head-and-pd-tail-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Using pd.head and pd.tail</div>
 
   <p>After reading the data, use <code class="language-plaintext highlighter-rouge">help(data.head)</code> and <code class="language-plaintext highlighter-rouge">help(data.tail)</code> to find out what <code class="language-plaintext highlighter-rouge">DataFrame.head</code> and <code class="language-plaintext highlighter-rouge">DataFrame.tail</code> do.
 	a. What method call will display the first three rows of the data?
 	b. What method call will display the last three columns of this data? (Hint: you may need to change your view of the data.)</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. We can check out the first five rows of the data by executing <code class="language-plaintext highlighter-rouge">data.head()</code> (allowing us to view the head of the DataFrame). We can specify the number of rows we wish to see by specifying the parameter <code class="language-plaintext highlighter-rouge">n</code> in our call to <code class="language-plaintext highlighter-rouge">data.head()</code>. To view the first three rows, execute:</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.head(n=3)
@@ -1125,12 +1125,12 @@ print(D)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-saving-in-a-csv-file"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Saving in a csv file</div>
+  <div class="box-title question-title" id="question-saving-in-a-csv-file-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Saving in a csv file</div>
 
   <p>As well as the <code class="language-plaintext highlighter-rouge">read_csv</code> function for reading data from a file, Pandas provides a <code class="language-plaintext highlighter-rouge">to_csv</code> function to write dataframes to files. Applying what you’ve learned about reading from files, write one of your dataframes to a file called <code class="language-plaintext highlighter-rouge">processed.csv</code>. You can use <code class="language-plaintext highlighter-rouge">help</code> to get information on how to use <code class="language-plaintext highlighter-rouge">to_csv</code>.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data_flipped.to_csv('processed.csv')
 </code></pre></div>    </div>
@@ -1157,19 +1157,19 @@ print(D)
 </code></pre></div></div>
 <p>You can also use <code class="language-plaintext highlighter-rouge">DataFrame.loc[..., ...]</code> to select values by their (entry) label and basically specify location by row name analogously to 2D version of dictionary keys.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"FBgn0039155"</span><span class="p">,</span> <span class="s">"Base mean"</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">"</span><span class="s">FBgn0039155</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Base mean</span><span class="sh">"</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>You can use Python’s usual slicing notation, to select all or a subset of rows and/or columns. For example, the following code selects all the columns of the row <code class="language-plaintext highlighter-rouge">"FBgn0039155"</code>.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">"FBgn0039155"</span><span class="p">,</span> <span class="p">:])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">"</span><span class="s">FBgn0039155</span><span class="sh">"</span><span class="p">,</span> <span class="p">:])</span>
 </code></pre></div></div>
 
 <p>Which would get the same result as printing <code class="language-plaintext highlighter-rouge">data.loc["FBgn0039155"]</code> (without a second index).</p>
 
 <p>You can select multiple columns or rows using <code class="language-plaintext highlighter-rouge">DataFrame.loc</code> and a named slice or <code class="language-plaintext highlighter-rouge">Dataframe.iloc</code> and the numbers corresponding to the rows and columns.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'FBgn0003360'</span><span class="p">:</span><span class="s">'FBgn0029167'</span><span class="p">,</span> <span class="s">'Base mean'</span><span class="p">:</span><span class="s">'Wald-Stats'</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">'</span><span class="s">FBgn0003360</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">FBgn0029167</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">Wald-Stats</span><span class="sh">'</span><span class="p">])</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span> <span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
 </code></pre></div></div>
 
@@ -1185,18 +1185,18 @@ print(D)
 
 <p>The result of slicing is a new dataframe and can be used in further operations. All the statistical operators that work on entire dataframes work the same way on slices. E.g., calculate max of a slice.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="s">'FBgn0003360'</span><span class="p">:</span><span class="s">'FBgn0029167'</span><span class="p">,</span> <span class="s">'Base mean'</span><span class="p">].</span><span class="nf">max</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[</span><span class="sh">'</span><span class="s">FBgn0003360</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">FBgn0029167</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">].</span><span class="nf">max</span><span class="p">())</span>
 </code></pre></div></div>
 
 <h2 id="use-conditionals-to-select-data">Use conditionals to select data</h2>
 
 <p>You can use conditionals to select data. A comparison is applied element by element and returns a similarly-shaped dataframe of <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. The last one can be used as a mask to subset the original dataframe. The following example creates a new dataframe consisting only of the columns ‘P-adj’ and ‘Gene name’, then keeps the rows that comply with the expression <code class="language-plaintext highlighter-rouge">'P-adj' &lt; 0.000005</code></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'P-adj'</span><span class="p">,</span> <span class="s">'Gene name'</span><span class="p">]]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="sh">'</span><span class="s">P-adj</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">]]</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="s">'P-adj'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.000005</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="sh">'</span><span class="s">P-adj</span><span class="sh">'</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.000005</span>
 <span class="n">new_data</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1205,7 +1205,7 @@ print(D)
 
 <p>Consider the following example of a dataframe consisting only of numerical data. The expression and the mask would be normally applied to the data and the mask would return <code class="language-plaintext highlighter-rouge">NaN</code> for the data that don’t comply with the expression.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'StdErr'</span><span class="p">,</span>	<span class="s">'Wald-Stats'</span><span class="p">,</span> <span class="s">'P-value'</span><span class="p">,</span> <span class="s">'P-adj'</span><span class="p">]]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="sh">'</span><span class="s">StdErr</span><span class="sh">'</span><span class="p">,</span>	<span class="sh">'</span><span class="s">Wald-Stats</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">P-value</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">P-adj</span><span class="sh">'</span><span class="p">]]</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span> <span class="o">&lt;</span> <span class="mf">0.05</span>
 <span class="n">new_data</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
@@ -1217,7 +1217,7 @@ print(D)
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-manipulating-dataframes"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Manipulating dataframes</div>
+  <div class="box-title question-title" id="question-manipulating-dataframes-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Manipulating dataframes</div>
 
   <p>Explain what each line in the following short program does: what is in first, second, etc.?</p>
 
@@ -1228,7 +1228,7 @@ fourth = third.drop('StdErr', axis = 1)
 fourth.to_csv('result.csv')
 </code></pre></div>  </div>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Let’s go through this piece of code line by line.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>first = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1259,7 +1259,7 @@ fourth.to_csv('result.csv')
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-min-max-indexes"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding min-max indexes</div>
+  <div class="box-title question-title" id="question-finding-min-max-indexes-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding min-max indexes</div>
 
   <p>Explain in simple terms what <code class="language-plaintext highlighter-rouge">idxmin</code> and <code class="language-plaintext highlighter-rouge">idxmax</code> do in the short program below. When would you use these methods?</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data = pd.read_csv("https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular", sep = "\t", index_col = 'GeneID')
@@ -1269,7 +1269,7 @@ print(data['Base mean'].idxmax())
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">idxmin</code> will return the index value corresponding to the minimum; idxmax will do the same for the maximum value.</p>
 
@@ -1283,7 +1283,7 @@ FBgn0026562</p>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-selecting-with-conditionals-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
+  <div class="box-title question-title" id="question-selecting-with-conditionals-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Selecting with conditionals</div>
 
   <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an expression to select each of the following:
 a. P-value of each gene
@@ -1291,7 +1291,7 @@ b. all the information of gene <code class="language-plaintext highlighter-rouge
 c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>a. <code class="language-plaintext highlighter-rouge">data['P-value']</code>
 b.<code class="language-plaintext highlighter-rouge">data.loc['FBgn0039178', :]</code>
@@ -1306,25 +1306,25 @@ c. <code class="language-plaintext highlighter-rouge">data[data['Chromosome'] ==
 
 <p>Pandas makes this very easy through the use of the <code class="language-plaintext highlighter-rouge">groupby()</code> method, which splits the data into groups. When the data is grouped in this way, the aggregate method <code class="language-plaintext highlighter-rouge">agg()</code> can be used to apply an aggregating or summary function to each group.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="nf">agg</span><span class="p">({</span><span class="s">'Base mean'</span><span class="p">:</span><span class="s">'first'</span><span class="p">,</span>
-                             <span class="s">'log2(FC)'</span><span class="p">:</span> <span class="s">'max'</span><span class="p">})</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">Chromosome</span><span class="sh">'</span><span class="p">).</span><span class="nf">agg</span><span class="p">({</span><span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">first</span><span class="sh">'</span><span class="p">,</span>
+                             <span class="sh">'</span><span class="s">log2(FC)</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">})</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">summarised_data</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>There are a couple of things that should be noted. The <code class="language-plaintext highlighter-rouge">agg()</code> method accepts a dictionary as input that specifies the function to be applied to each column. The output is a new dataframe, that each row corresponds to one group. The output dataframe uses the grouping column as index. We could change the last one by simply using the <code class="language-plaintext highlighter-rouge">reset_index()</code> method.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="nf">agg</span><span class="p">({</span><span class="s">'Base mean'</span><span class="p">:</span><span class="s">'first'</span><span class="p">,</span>
-                                                  <span class="s">'log2(FC)'</span><span class="p">:</span> <span class="s">'max'</span><span class="p">}).</span><span class="nf">reset_index</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">summarised_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">Chromosome</span><span class="sh">'</span><span class="p">).</span><span class="nf">agg</span><span class="p">({</span><span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">:</span><span class="sh">'</span><span class="s">first</span><span class="sh">'</span><span class="p">,</span>
+                                                  <span class="sh">'</span><span class="s">log2(FC)</span><span class="sh">'</span><span class="p">:</span> <span class="sh">'</span><span class="s">max</span><span class="sh">'</span><span class="p">}).</span><span class="nf">reset_index</span><span class="p">()</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">summarised_data</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-finding-the-max-of-each-group"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding the max of each group</div>
+  <div class="box-title question-title" id="question-finding-the-max-of-each-group-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Finding the max of each group</div>
 
   <p>Using the same dataset, try to find the longest genes in each chromosome.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-16"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-16" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data['Gene Length'] = data['End'] - data['Start']
 data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
@@ -1334,12 +1334,12 @@ data.groupby('Chromosome').agg(max_length = ('Gene Length', 'max'))
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-grouping-with-multiple-variables"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Grouping with multiple variables</div>
+  <div class="box-title question-title" id="question-grouping-with-multiple-variables-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Grouping with multiple variables</div>
 
   <p>Using the same dataset, try to find how many genes are found on each strand of each chromosome.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-17"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-17" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can group the data according to more than one column.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data.groupby(['Chromosome', 'Strand']).size()
@@ -1517,7 +1517,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1549,7 +1549,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

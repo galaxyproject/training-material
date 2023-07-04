@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -233,7 +233,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -786,7 +786,7 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
 <p>We can create this symlink as follows in our mako template:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Ensure BAI index is symlinked
-</span><span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="p">.</span><span class="n">file_name</span><span class="o">+</span><span class="s">'.bai'</span>
+</span><span class="n">bai_target</span> <span class="o">=</span> <span class="n">hda</span><span class="p">.</span><span class="n">file_name</span><span class="o">+</span><span class="sh">'</span><span class="s">.bai</span><span class="sh">'</span>
 <span class="kn">import</span> <span class="n">os</span>
 
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">isfile</span><span class="p">(</span><span class="n">bai_target</span><span class="p">):</span>
@@ -901,7 +901,7 @@ length of the RNAME (chromosome) is 5386 bases and 2 reads are aligned to it.</p
 <p>To make the data a bit more usable for Javascript , we convert it into a simple dictionary
 of the following syntax:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s">'chrA'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrB'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="s">'chrC'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'chrD'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="s">'chrE'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'chrF'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'chrG'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sh">'</span><span class="s">chrA</span><span class="sh">'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrB</span><span class="sh">'</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrC</span><span class="sh">'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrD</span><span class="sh">'</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrE</span><span class="sh">'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrF</span><span class="sh">'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">chrG</span><span class="sh">'</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="sh">'</span><span class="s">*</span><span class="sh">'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 </code></pre></div></div>
 
 <p>Although it is possible to do this in python we recommend doing this in JS.
@@ -924,7 +924,7 @@ so getting the raw data into Javascript is rather easy:</p>
       <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">data</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
       <span class="kd">var</span> <span class="nx">chunks</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="se">\t</span><span class="dl">"</span><span class="p">);</span>
 
-      <span class="nf">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">_</span><span class="dl">"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2">_</span><span class="dl">"</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// only if it does not contain underscore</span>
         <span class="nx">output</span><span class="p">[</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">chunks</span><span class="p">[</span><span class="mi">2</span><span class="p">]);</span>
       <span class="p">}</span>
     <span class="p">}</span>
@@ -1343,7 +1343,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1375,7 +1375,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

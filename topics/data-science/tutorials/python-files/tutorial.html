@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -255,7 +255,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -625,7 +625,7 @@ Sentry.init({
                 <p>Here we’ll give a quick tutorial on how to read and write files within Python.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -644,11 +644,11 @@ Sentry.init({
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">urllib.request</span>
 <span class="c1"># Download a copy of Hamlet.
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://gutenberg.org/cache/epub/1524/pg1524.txt"</span><span class="p">,</span> <span class="s">"hamlet.txt"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="sh">"</span><span class="s">https://gutenberg.org/cache/epub/1524/pg1524.txt</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">hamlet.txt</span><span class="sh">"</span><span class="p">)</span>
 <span class="c1"># Download some COVID data for Europe
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://opendata.ecdc.europa.eu/covid19/vaccine_tracker/csv/data.csv"</span><span class="p">,</span> <span class="s">"vaccinations.csv"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="sh">"</span><span class="s">https://opendata.ecdc.europa.eu/covid19/vaccine_tracker/csv/data.csv</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">vaccinations.csv</span><span class="sh">"</span><span class="p">)</span>
 <span class="c1"># And a fastq file
-</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="s">"https://gist.github.com/hexylena/7d249607f8f763301f06c78a48c3bf6f/raw/a100e278cee1c94035a3a644b16863deee0ba2c0/example.fastq"</span><span class="p">,</span> <span class="s">"example.fastq"</span><span class="p">)</span>
+</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="nf">urlretrieve</span><span class="p">(</span><span class="sh">"</span><span class="s">https://gist.github.com/hexylena/7d249607f8f763301f06c78a48c3bf6f/raw/a100e278cee1c94035a3a644b16863deee0ba2c0/example.fastq</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">example.fastq</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And now we’re ready to get started learning about files!</p>
@@ -682,7 +682,7 @@ Sentry.init({
 
 <p>You will mostly use <code class="language-plaintext highlighter-rouge">r</code> and <code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">a</code> is especially useful for writing to program logs where you don’t really care what was written before, you just want to add your new logs to the end of the file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">hamlet.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 </code></pre></div></div>
@@ -721,7 +721,7 @@ handle.close() # Important!
 
 <p>Every line that’s read in ends in a newline currently. This is done because if we wanted to write it back out, we would need to preserve those newlines, or all of the content would be on one giant line. Let’s try writing out a file, it’s <em>just</em> like reading in a file!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet-copy.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">hamlet-copy.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
         <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
@@ -742,7 +742,7 @@ HAMLET. O, but she’ll keep her word.
 
 <p>So let’s count up how many times each character speaks! (Roughly)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">hamlet.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 
@@ -752,7 +752,7 @@ HAMLET. O, but she’ll keep her word.
 <p>Here we’ve initialised the <code class="language-plaintext highlighter-rouge">lines</code> variable with the contents of the text, and setup <code class="language-plaintext highlighter-rouge">speakers</code> as a dictionary that will let us track how many times each character speaks. Next let’s define a function to check if a character is speaking on that line. It is if it meets two conditions: the first word is all caps, and it ends with a <code class="language-plaintext highlighter-rouge">.</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_speaker</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">word</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">'.'</span>
+    <span class="k">return</span> <span class="n">word</span> <span class="o">==</span> <span class="n">word</span><span class="p">.</span><span class="nf">upper</span><span class="p">()</span> <span class="ow">and</span> <span class="n">word</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span>
 </code></pre></div></div>
 
 <p>We can use that function later to check if a line starts with a speaker</p>
@@ -840,12 +840,12 @@ HAMLET. O, but she’ll keep her word.
 
 <p>Writing a file out is exactly like reading a file, we just use the different file mode <code class="language-plaintext highlighter-rouge">w</code> to indicate we wish to write to a file:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'hello.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">hello.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="c1"># Let's write it out a few times
-</span>    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
-    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"Hello, world!"</span><span class="p">)</span>
+</span>    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello, world!</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello, world!</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello, world!</span><span class="sh">"</span><span class="p">)</span>
+    <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">Hello, world!</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Check the file’s contents in your folder, does it look like you expect? Remember your <code class="language-plaintext highlighter-rouge">\n</code>s!</p>
@@ -895,16 +895,16 @@ GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTAT
 
 <p>In the setup portion we downloaded a FASTQ file, now let’s extract all of the sequences from this file, and write them out as a FASTA file. Why would you want to do this? Sometimes after sequencing a sample (especially metagenomics), you want to blast the sequences to figure out which organisms they belong to. A common way to do that is BLAST which accepts fasta formatted sequences. So we’ll write something to convert these formats, removing the <code class="language-plaintext highlighter-rouge">+</code> and quality score lines.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'example.fastq'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">example.fastq</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
 
 <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'example-converted.fasta'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">example-converted.fasta</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
         <span class="c1"># Since fastq files have groups of 4 lines, we can use that to extract
 </span>        <span class="c1"># specific lines of every read:
 </span>        <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"&gt;"</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt;</span><span class="sh">"</span> <span class="o">+</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
         <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
@@ -913,7 +913,7 @@ GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTAT
 <p>That’s it! Check if your <code class="language-plaintext highlighter-rouge">fasta</code> file looks correct.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-enumerate"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enumerate" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: `enumerate`<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-enumerate-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enumerate-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: `enumerate`<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you want to know which item number you’re on while you’re looping over a list, you can use the function <code class="language-plaintext highlighter-rouge">enumerate()</code>
 Try out this code to see how it works:</p>
 
@@ -929,10 +929,10 @@ Try out this code to see how it works:</p>
 <p>If you’re reading data from a comma separated value (CSV) or tab separated value (TSV) file, you should use the built in <code class="language-plaintext highlighter-rouge">csv</code> module to do this. You might ask yourself “Why, csv parsing is easy” and that is a common thought! It would be so simple to do something like</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Please don't do this :)
-</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+</span><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">vaccinations.csv</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
     <span class="n">first_lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">first_lines</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+        <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>But you would be wrong! This code has a subtle bug that you might not see until someone generates data that specifically affects it, with “quoted” columns. If you have a table like</p>
@@ -974,31 +974,31 @@ Jane,"London, UK",Z86.16
 
 <p>Note that some columns are quoted. What do you think will happen with the following code?</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">csv_data</span> <span class="o">=</span> <span class="s">"""
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">csv_data</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">
 Patient,Location,Disease Indications
-Helena,"Den Haag, the Netherlands",Z87.890
-Bob,"Little Rock, Arkansas, USA",Z72.53
-Jane,"London, UK",Z86.16
-"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+Helena,</span><span class="sh">"</span><span class="s">Den Haag, the Netherlands</span><span class="sh">"</span><span class="s">,Z87.890
+Bob,</span><span class="sh">"</span><span class="s">Little Rock, Arkansas, USA</span><span class="sh">"</span><span class="s">,Z72.53
+Jane,</span><span class="sh">"</span><span class="s">London, UK</span><span class="sh">"</span><span class="s">,Z86.16
+</span><span class="sh">"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="c1"># Please don't do this :)
 </span><span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">csv_data</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">','</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="s">,</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Does that look right? Maybe not. Instead we can use the <code class="language-plaintext highlighter-rouge">csv</code> module to work around this and properly process CSV files:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">csv</span>
 
-<span class="n">csv_data</span> <span class="o">=</span> <span class="s">"""
+<span class="n">csv_data</span> <span class="o">=</span> <span class="sh">"""</span><span class="s">
 Patient,Location,Disease Indications
-Helena,"Den Haag, the Netherlands",Z87.890
-Bob,"Little Rock, Arkansas, USA",Z72.53
-Jane,"London, UK",Z86.16
-"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+Helena,</span><span class="sh">"</span><span class="s">Den Haag, the Netherlands</span><span class="sh">"</span><span class="s">,Z87.890
+Bob,</span><span class="sh">"</span><span class="s">Little Rock, Arkansas, USA</span><span class="sh">"</span><span class="s">,Z72.53
+Jane,</span><span class="sh">"</span><span class="s">London, UK</span><span class="sh">"</span><span class="s">,Z86.16
+</span><span class="sh">"""</span><span class="p">.</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="c1"># Please DO this :)
-</span><span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
+</span><span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="sh">"</span><span class="s">,</span><span class="sh">"</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="sh">'"'</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1010,11 +1010,11 @@ Jane,"London, UK",Z86.16
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">csv</span>
 
 <span class="n">vax</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'vaccinations.csv'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">","</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="s">'"'</span><span class="p">)</span>
+<span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">vaccinations.csv</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">csv_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="nf">reader</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="sh">"</span><span class="s">,</span><span class="sh">"</span><span class="p">,</span> <span class="n">quotechar</span><span class="o">=</span><span class="sh">'"'</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">csv_reader</span><span class="p">:</span>
         <span class="c1"># Skip our header row
-</span>        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'YearWeekISO'</span><span class="p">:</span>
+</span>        <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="sh">'</span><span class="s">YearWeekISO</span><span class="sh">'</span><span class="p">:</span>
             <span class="k">continue</span>
         <span class="c1"># Otherwise load in the data
 </span>        <span class="n">vax</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
@@ -1095,7 +1095,7 @@ Jane,"London, UK",Z86.16
 
 <p>Let’s subset the data to make it a bit easier to work with, maybe we’ll just use the Dutch data (please feel free to choose another column though!)</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">country</span> <span class="o">=</span> <span class="s">'NL'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">country</span> <span class="o">=</span> <span class="sh">'</span><span class="s">NL</span><span class="sh">'</span>
 
 <span class="n">subset</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">vax</span><span class="p">:</span>
@@ -1108,12 +1108,12 @@ Jane,"London, UK",Z86.16
 <p>That should be easier to work with, now we only have one country’s data. Let’s do some exercises with this data:</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-which-vaccines-were-given"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Which vaccines were given?</div>
+  <div class="box-title question-title" id="question-which-vaccines-were-given-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Which vaccines were given?</div>
 
   <p>Which vaccines were given? Use the <code class="language-plaintext highlighter-rouge">subset</code> to examine which vaccines were given in the Netherlands. <em>Tip</em>: if <code class="language-plaintext highlighter-rouge">x</code> is a list, <code class="language-plaintext highlighter-rouge">set(x)</code> will return the unique values in that list.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>To figure out which vaccines were given, we can look at column 12:</p>
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vaccines</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1130,7 +1130,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-how-many-of-each-vaccine-were-given"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: How many of each vaccine were given?</div>
+  <div class="box-title question-title" id="question-how-many-of-each-vaccine-were-given-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: How many of each vaccine were given?</div>
 
   <p>How many of each were given?</p>
 
@@ -1138,7 +1138,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: Columns 5, 7, and 8 have doses being given out to patients.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">doses</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
     <span class="n">brand</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span>
@@ -1154,7 +1154,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-how-many-of-each-vaccine-were-exported-received"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: How many of each vaccine were exported? received?</div>
+  <div class="box-title question-title" id="question-how-many-of-each-vaccine-were-exported-received-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: How many of each vaccine were exported? received?</div>
 
   <p>How many of each were exported? received?</p>
 
@@ -1162,7 +1162,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: you will need to handle an edge case here. Try and find it out!</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">export</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">received</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
@@ -1185,15 +1185,15 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-when-was-the-first-dose-received"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: When was the first dose received?</div>
+  <div class="box-title question-title" id="question-when-was-the-first-dose-received-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: When was the first dose received?</div>
 
   <p><em>Tip</em>: use <code class="language-plaintext highlighter-rouge">break</code>, and check how many doses were given!</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="ow">and</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"On </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s"> doses of </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="si">}</span><span class="s"> were given"</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">On </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s">, </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s"> doses of </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="si">}</span><span class="s"> were given</span><span class="sh">"</span><span class="p">)</span>
         <span class="k">break</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1203,7 +1203,7 @@ Jane,"London, UK",Z86.16
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-transform-the-data-for-plotting"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Transform the data for plotting</div>
+  <div class="box-title question-title" id="question-transform-the-data-for-plotting-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Transform the data for plotting</div>
 
   <p>Let’s say you want to plot the fraction of the population that has been vaccinated by the various points in time.</p>
 
@@ -1216,11 +1216,11 @@ Jane,"London, UK",Z86.16
   <p>The output should be a list of percentages ranging from [0.0 to 1.0].</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total_doses</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">percent_vaccinated_per_week</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">subset</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">!=</span> <span class="s">'ALL'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">row</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">!=</span> <span class="sh">'</span><span class="s">ALL</span><span class="sh">'</span><span class="p">:</span>
         <span class="k">continue</span>
     <span class="n">total_doses</span> <span class="o">=</span> <span class="n">total_doses</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
     <span class="n">percent_vaccinated_per_week</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">total_doses</span> <span class="o">/</span> <span class="nf">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">13</span><span class="p">]))</span>
@@ -1240,12 +1240,12 @@ Jane,"London, UK",Z86.16
 </span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 <span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">percent_vaccinated_per_week</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Week'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Percent Vaccinated'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Week</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Percent Vaccinated</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-which-vaccines-were-given-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Which vaccines were given?</div>
+  <div class="box-title question-title" id="question-which-vaccines-were-given-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Which vaccines were given?</div>
 
   <p>Write this out to a new file, with two columns. The index and the Percent Vaccinated. It should be a comma separated file, and should have a header. Save this as a csv file named <code class="language-plaintext highlighter-rouge">weekly-percent-vax.csv</code></p>
 
@@ -1253,7 +1253,7 @@ Jane,"London, UK",Z86.16
 <em>Tip</em>: Use <code class="language-plaintext highlighter-rouge">enumerate()</code> to get a list of items with indexes.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>with open('weekly-percent-vax.csv', 'w') as handle:
     writer = csv.writer(csv_data, delimiter=",", quotechar='"')
@@ -1437,7 +1437,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1469,7 +1469,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -81,6 +81,7 @@
     <li ><a href="#method-i-find_duration">#find_duration</a>
     <li ><a href="#method-i-fixNews">#fixNews</a>
     <li ><a href="#method-i-get_authors">#get_authors</a>
+    <li ><a href="#method-i-json_boxify">#json_boxify</a>
     <li ><a href="#method-i-linkify">#linkify</a>
     <li ><a href="#method-i-lookup_name">#lookup_name</a>
     <li ><a href="#method-i-onlyEnabled">#onlyEnabled</a>
@@ -420,6 +421,55 @@
   <span class="ruby-keyword">else</span>
     []
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-json_boxify" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">json_boxify</span><span
+            class="method-args">(h, page)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="json_boxify-source">
+            <pre><span class="ruby-comment"># File _plugins/notebook-jupyter.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">json_boxify</span>(<span class="ruby-identifier">h</span>, <span class="ruby-identifier">page</span>)
+  <span class="ruby-identifier">h</span>[<span class="ruby-string">&#39;cells&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cell</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># If it&#39;s a list, loop</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
+      <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+        <span class="ruby-comment"># rubocop:disable Layout/LineLength</span>
+        <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r{&lt;(?&lt;boxclass&gt;#{Gtn::Boxify.box_classes})-title( ?(?&lt;noprefix&gt;noprefix))&gt;(?&lt;title&gt;.*?)&lt;/\s*\k&lt;boxclass&gt;-title\s*&gt;}</span>) <span class="ruby-keyword">do</span>
+          <span class="ruby-comment"># rubocop:enable Layout/LineLength</span>
+          <span class="ruby-identifier">m</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>
+          <span class="ruby-identifier">box_type</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:boxclass</span>]
+          <span class="ruby-identifier">title</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:title</span>]
+          <span class="ruby-identifier">noprefix</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:noprefix</span>]
+          <span class="ruby-identifier">_</span>, <span class="ruby-identifier">box</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-identifier">lang</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>, <span class="ruby-value">noprefix:</span> <span class="ruby-identifier">noprefix</span>)
+          <span class="ruby-identifier">box</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># rubocop:disable Layout/LineLength</span>
+      <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">%r{&lt;(?&lt;boxclass&gt;#{Gtn::Boxify.box_classes})-title(?&lt;noprefix&gt;\s+noprefix)?&gt;(?&lt;title&gt;.*?)&lt;/\s*\k&lt;boxclass&gt;-title\s*&gt;}</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-comment"># rubocop:enable Layout/LineLength</span>
+        <span class="ruby-identifier">m</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>
+        <span class="ruby-identifier">box_type</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:boxclass</span>]
+        <span class="ruby-identifier">title</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:title</span>]
+        <span class="ruby-identifier">noprefix</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">:noprefix</span>]
+        <span class="ruby-identifier">_</span>, <span class="ruby-identifier">box</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Boxify</span>.<span class="ruby-identifier">generate_title</span>(<span class="ruby-identifier">box_type</span>, <span class="ruby-identifier">title</span>, <span class="ruby-string">&#39;en&#39;</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">path</span>, <span class="ruby-value">noprefix:</span> <span class="ruby-identifier">noprefix</span>)
+        <span class="ruby-identifier">box</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">h</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

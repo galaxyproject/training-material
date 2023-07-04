@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -277,7 +277,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -641,7 +641,7 @@ Sentry.init({
                 <p>Python is a typed language, data has a type, and different types of data cannot always be connected immediately and might need some conversion step before they can be used together. For instance if you add a number to a number, what should happen? If you add a number to a message, what do you expect will happen?</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -696,7 +696,7 @@ Sentry.init({
 
 <p>You can also check the types of variables</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fitness</span> <span class="o">=</span> <span class="s">'average'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fitness</span> <span class="o">=</span> <span class="sh">'</span><span class="s">average</span><span class="sh">'</span>
 <span class="nf">print</span><span class="p">(</span><span class="nf">type</span><span class="p">(</span><span class="n">fitness</span><span class="p">))</span>
 </code></pre></div></div>
 
@@ -709,14 +709,14 @@ Sentry.init({
 
 <p>And some operations may not work:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="s">'hello'</span> <span class="o">-</span> <span class="s">'h'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">hello</span><span class="sh">'</span> <span class="o">-</span> <span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>For instance, you can use the <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">*</code> operators on strings.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_name</span> <span class="o">=</span> <span class="s">'Ahmed'</span> <span class="o">+</span> <span class="s">' '</span> <span class="o">+</span> <span class="s">'Walsh'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">full_name</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Ahmed</span><span class="sh">'</span> <span class="o">+</span> <span class="sh">'</span><span class="s"> </span><span class="sh">'</span> <span class="o">+</span> <span class="sh">'</span><span class="s">Walsh</span><span class="sh">'</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">full_name</span><span class="p">)</span>
-<span class="n">separator</span> <span class="o">=</span> <span class="s">'='</span> <span class="o">*</span> <span class="mi">10</span>
+<span class="n">separator</span> <span class="o">=</span> <span class="sh">'</span><span class="s">=</span><span class="sh">'</span> <span class="o">*</span> <span class="mi">10</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -732,13 +732,13 @@ Sentry.init({
 
 <p>Not all types support all operations, adding an integer to a string doesn’t make much sense:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>This does not work because it’s ambiguous: should <code class="language-plaintext highlighter-rouge">1 + '2'</code> be <code class="language-plaintext highlighter-rouge">3</code> (a number) or <code class="language-plaintext highlighter-rouge">'12'</code> (a string)? Some types can be converted to other types by using the type name as a function.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="s">'2'</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">'2'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="nf">int</span><span class="p">(</span><span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">2</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h3 id="operation-support">Operation Support</h3>
@@ -782,8 +782,8 @@ Sentry.init({
 
 <p>Integers and floating-point numbers can be mixed in arithmetic. Python 3 (which we use) automatically converts integers to floats as needed.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'half is </span><span class="si">{</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'three squared is </span><span class="si">{</span><span class="mf">3.0</span> <span class="o">**</span> <span class="mi">2</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">half is </span><span class="si">{</span><span class="mi">1</span> <span class="o">/</span> <span class="mf">2.0</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">three squared is </span><span class="si">{</span><span class="mf">3.0</span> <span class="o">**</span> <span class="mi">2</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="variables-only-change-value-when-something-is-assigned-to-them">Variables only change value when something is assigned to them.</h2>
@@ -794,7 +794,7 @@ the former updates automatically. However, this does <strong>not</strong> happen
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">variable_one</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">variable_two</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">variable_one</span>
 <span class="n">variable_one</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'first is </span><span class="si">{</span><span class="n">variable_one</span><span class="si">}</span><span class="s"> and second is </span><span class="si">{</span><span class="n">variable_two</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">first is </span><span class="si">{</span><span class="n">variable_one</span><span class="si">}</span><span class="s"> and second is </span><span class="si">{</span><span class="n">variable_two</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The computer reads the value of <code class="language-plaintext highlighter-rouge">first</code> when doing the multiplication, creates
@@ -802,13 +802,13 @@ a new value, and assigns it to <code class="language-plaintext highlighter-rouge
 where it came from. Every computation happens line-by-line.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-fractions"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Fractions</div>
+  <div class="box-title question-title" id="question-fractions-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Fractions</div>
 
   <p>What type of value is 3.14159?
 How can you find out?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It is a floating-point number (often abbreviated “float”).
 It is possible to find out by using the built-in function <code class="language-plaintext highlighter-rouge">type()</code>.</p>
@@ -824,12 +824,12 @@ It is possible to find out by using the built-in function <code class="language-
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-automatic-type-conversion"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Automatic Type Conversion</div>
+  <div class="box-title question-title" id="question-automatic-type-conversion-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Automatic Type Conversion</div>
 
   <p>What type of value is the result of (3.25 + 4)?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It is a float:
 integers are automatically converted to floats as necessary.</p>
@@ -848,7 +848,7 @@ print(f'result is {type(result)}')
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-choose-a-type"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Choose a Type</div>
+  <div class="box-title question-title" id="question-choose-a-type-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Choose a Type</div>
 
   <p>What type of value (integer, floating point number, or character string)
 would you use to represent each of the following?  Try to come up with more than one good answer for each problem.  For example, in  # 1, when would counting days with a floating point variable make more sense than using an integer?</p>
@@ -863,7 +863,7 @@ would you use to represent each of the following?  Try to come up with more than
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The answers to the questions are:</p>
     <ol>
@@ -878,14 +878,14 @@ would you use to represent each of the following?  Try to come up with more than
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-division-types"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Division Types</div>
+  <div class="box-title question-title" id="question-division-types-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Division Types</div>
 
   <p>In Python 3, the <code class="language-plaintext highlighter-rouge">//</code> operator performs integer (whole-number) floor division, the <code class="language-plaintext highlighter-rouge">/</code> operator performs floating-point
 division, and the <code class="language-plaintext highlighter-rouge">%</code> (or <em>modulo</em>) operator calculates and returns the remainder from integer division:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 // 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 / 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
-<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'5 % 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">5 // 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">//</span> <span class="mi">3</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">5 / 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">'</span><span class="s">5 % 3: </span><span class="si">{</span><span class="mi">5</span> <span class="o">%</span> <span class="mi">3</span><span class="si">}</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div>  </div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 // 3: 1
@@ -899,7 +899,7 @@ write an expression that calculates the number of surveys needed
 to reach everyone once.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We want the minimum number of surveys that reaches everyone once, which is
 the rounded up value of <code class="language-plaintext highlighter-rouge">num_subjects/ num_per_survey</code>. This is
 equivalent to performing a floor division with <code class="language-plaintext highlighter-rouge">//</code> and adding 1. Before
@@ -921,7 +921,7 @@ print(num_subjects, 'subjects,', num_per_survey, 'per survey:', num_surveys)
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-strings-to-numbers"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Strings to Numbers</div>
+  <div class="box-title question-title" id="question-strings-to-numbers-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Strings to Numbers</div>
 
   <p>Where reasonable, <code class="language-plaintext highlighter-rouge">float()</code> will convert a string to a floating point number,
 and <code class="language-plaintext highlighter-rouge">int()</code> will convert a floating point number to an integer:</p>
@@ -937,13 +937,13 @@ float to int: 3
   <p>If the conversion doesn’t make sense, however, an error message will occur.</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-python"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+    <div class="box-title code-in-title" id="code-in-python-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>print("string to float:", float("Hello world!"))
 </code></pre></div>    </div>
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+    <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1, in &lt;module&gt;
 ValueError: could not convert string to float: 'Hello world!'
@@ -960,7 +960,7 @@ ValueError: could not convert string to float: 'Hello world!'
 </code></pre></div>  </div>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>What do you expect this program to do? It would not be so unreasonable to expect the Python 3 <code class="language-plaintext highlighter-rouge">int</code> command to
 convert the string “3.4” to 3.4 and an additional type conversion to 3. After all, Python 3 performs a lot of other
 magic - isn’t that part of its charm?</p>
@@ -988,7 +988,7 @@ typecasts, you must convert it explicitly in code.</p>
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-arithmetic-with-different-types"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Arithmetic with Different Types</div>
+  <div class="box-title question-title" id="question-arithmetic-with-different-types-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Arithmetic with Different Types</div>
 
   <p>Which of the following will return the floating point number <code class="language-plaintext highlighter-rouge">2.0</code>?
 Note: there may be more than one right answer.</p>
@@ -1008,7 +1008,7 @@ third = "1.1"
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Answer: 1 and 4 give exactly 2.0.
 Answer 5 gives the value <code class="language-plaintext highlighter-rouge">2</code> which may be considered equivalent, but is not returning a float specifically.</p>
@@ -1198,7 +1198,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1230,7 +1230,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

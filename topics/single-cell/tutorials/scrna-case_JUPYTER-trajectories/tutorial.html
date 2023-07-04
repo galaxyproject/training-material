@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -347,7 +347,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -614,6 +614,8 @@ Sentry.init({
                         
                     
                         
+                    
+                        
                             
                             <li> Generating a single cell matrix using Alevin:
                             
@@ -623,8 +625,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
                         
                     
                         
@@ -678,10 +678,6 @@ Sentry.init({
                         
                     
                         
-                    
-                        
-                    
-                        
                             
                             <li> Combining datasets after pre-processing:
                             
@@ -691,6 +687,10 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -809,22 +809,6 @@ Sentry.init({
                         
                     
                         
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
                             
                             <li> Use Jupyter notebooks in Galaxy:
                             
@@ -834,6 +818,22 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -1029,7 +1029,7 @@ Sentry.init({
 <p>And now time to plot it!
 <em>Note: We’re saving to <strong>png</strong>, but you can also choose pdf</em></p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot1.png'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="sh">'</span><span class="s">on data</span><span class="sh">'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot1.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plot1-Force-Directed Graph</figcaption></figure>
@@ -1045,9 +1045,9 @@ Sentry.init({
 
 <p>Now that we have our diffusion map, we need to re-calculate neighbors using the diffusion map instead of the PCs. Then we re-draw and plot a new force directed graph using the new neighbors.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">neighbors</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">use_rep</span><span class="o">=</span><span class="s">'X_diffmap'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="nf">neighbors</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">use_rep</span><span class="o">=</span><span class="sh">'</span><span class="s">X_diffmap</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot2.png'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="sh">'</span><span class="s">on data</span><span class="sh">'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot2.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Diffusion Map</figcaption></figure>
 
@@ -1083,12 +1083,12 @@ However, we tried that, and it called far too many clusters given the depth of s
 
 <p><a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html">PAGA</a> is used to generalise relationships between groups, or likely clusters, in this case.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now we want to plot our PAGA, but we might also be interested in colouring our plot by genes as well. In this case, remembering that we are dutifully counting our genes by their EnsemblIDs rather than Symbols (which do not exist for all EnsemblIDs), we have to look up our gene of interest (CD4, CD8a) and plot the corresponding IDs.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cell type'</span><span class="p">,</span> <span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot4.png'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ENSMUSG00000023274</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ENSMUSG00000053977</span><span class="sh">'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Cell type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">CD4</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Cd8a</span><span class="sh">'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot4.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " width="1386" height="264" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PAGA</figcaption></figure>
@@ -1099,11 +1099,11 @@ However, we tried that, and it called far too many clusters given the depth of s
 
 <p>Force directed graphs can be initialised randomly, or we can prod it in the right direction. We’ll prod it with our PAGA calculations. Note that you could also try prodding it with tSNE or UMAP. A lot of these tools can be used on top of each other or with each other in different ways, this tutorial is just one example. Similarly, you could be using any <strong>obs</strong> information for grouping, so could do this for <em>louvain</em> or <em>cell_type</em> for instance.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">init_pos</span><span class="o">=</span><span class="s">'paga'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">init_pos</span><span class="o">=</span><span class="sh">'</span><span class="s">paga</span><span class="sh">'</span><span class="p">)</span>
 
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot5.png'</span><span class="p">)</span>
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'genotype'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Genotype'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot6.png'</span><span class="p">)</span>
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot7.png'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Cluster</span><span class="sh">'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="sh">'</span><span class="s">on data</span><span class="sh">'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot5.png</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">genotype</span><span class="sh">'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">Genotype</span><span class="sh">'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot6.png</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">ENSMUSG00000023274</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">ENSMUSG00000053977</span><span class="sh">'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">CD4</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Cd8a</span><span class="sh">'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot7.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
@@ -1119,7 +1119,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <p>And now, just for fun, we can compare the scatter graph with our PAGA side by side.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">paga_compare</span><span class="p">(</span>
-    <span class="n">adata</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">right_margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edge_width_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">''</span><span class="p">,</span> <span class="n">right_margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edge_width_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
     <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1133,7 +1133,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 
 <p>First, let’s name our ‘root’.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="n">uns</span><span class="p">[</span><span class="s">'iroot'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">flatnonzero</span><span class="p">(</span><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">]</span>  <span class="o">==</span> <span class="s">'DN'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="n">uns</span><span class="p">[</span><span class="sh">'</span><span class="s">iroot</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">flatnonzero</span><span class="p">(</span><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">]</span>  <span class="o">==</span> <span class="sh">'</span><span class="s">DN</span><span class="sh">'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </code></pre></div></div>
 
 <h2 id="working-in-a-group-decision-time-1">Working in a group? Decision-time!</h2>
@@ -1142,7 +1142,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <p>Onto the <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html">diffusion pseudotime</a>, where we are infer multiple time points within the same piece of data!</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="nf">dpt</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
-<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'dpt_pseudotime'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot8.png'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="nf">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="sh">'</span><span class="s">cell_type</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">dpt_pseudotime</span><span class="sh">'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="sh">'</span><span class="s">on data</span><span class="sh">'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Plot8.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " width="819" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Force-Directed + Pseudotime</figcaption></figure>
@@ -1158,24 +1158,24 @@ However, we tried that, and it called far too many clusters given the depth of s
 
 <p>It’s now time to export your data! First, we need to get it Jupyter to see it as a file.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">'Trajectorythymus.h5ad'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">Trajectorythymus.h5ad</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now you can export it, as well as all your lovely plots! If you go into the <em>figures</em> folder at the left, you’ll see your lovely plots and can choose which ones to export. The following code will push them into your galaxy history. You can also directly download them onto your computer from the file window at the left.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="s">"Trajectorythymus.h5ad"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">Trajectorythymus.h5ad</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot1.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot2.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot5.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot6.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot7.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot8.png"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/paga_compare.pdf"</span><span class="p">)</span>
-<span class="nf">put</span><span class="p">(</span><span class="s">"figures/pagaPlot4.png"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot1.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot2.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot5.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot6.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot7.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/draw_graph_faPlot8.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/paga_compare.pdf</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/pagaPlot4.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>The cell below will only work if you haven’t changed the name of the notebook. If you renamed it, simply type its new name in the parenthesis.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="s">"single-cell-scrna-case_JUPYTER-trajectories.ipynb"</span><span class="p">)</span>       
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">single-cell-scrna-case_JUPYTER-trajectories.ipynb</span><span class="sh">"</span><span class="p">)</span>       
 </code></pre></div></div>
 
 <p>This may take a moment, so go check your Galaxy history to make sure your images, anndata object, and notebook (.ipynb) have all made it back into your Galaxy history. Once they are all there, you can exit this browser and return to the Galaxy tutorial!</p>
@@ -1191,7 +1191,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <p>Congratulations! You’ve made it through Jupyter!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Closing JupyterLab</div>
+  <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Closing JupyterLab</div>
   <ol>
     <li>Click <strong>User</strong>: <strong>Active Interactive Tools</strong></li>
     <li>Tick the box of your Jupyter Interactive Tool, and click <strong>Stop</strong></li>
@@ -1371,7 +1371,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1403,7 +1403,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

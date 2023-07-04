@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -274,13 +274,13 @@ Sentry.init({
       "name": "jupyter-notebook"
     }
   ],
-  "abstract": "> <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>"
+  "abstract": "> <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>"
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -528,6 +528,22 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Advanced SQL:
                             
@@ -537,22 +553,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -741,7 +741,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://github.com/swcarpentry/sql-novice-survey/">Databases and SQL</a> lesson, which is licensed CC-BY 4.0.</p>
 
@@ -752,7 +752,7 @@ Sentry.init({
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -780,9 +780,9 @@ from an SQLite database stored in a file called <code class="language-plaintext 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
-<span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="s">"survey.db"</span><span class="p">)</span>
+<span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="sh">"</span><span class="s">survey.db</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
-<span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="s">"SELECT Site.lat, Site.long FROM Site;"</span><span class="p">)</span>
+<span class="n">cursor</span><span class="p">.</span><span class="nf">execute</span><span class="p">(</span><span class="sh">"</span><span class="s">SELECT Site.lat, Site.long FROM Site;</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">cursor</span><span class="p">.</span><span class="nf">fetchall</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
@@ -839,7 +839,7 @@ this function takes a user’s ID as a parameter and returns their name:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id='"</span> <span class="o">+</span> <span class="n">person_id</span> <span class="o">+</span> <span class="s">"';"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT personal || </span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="s"> || family FROM Person WHERE id=</span><span class="sh">'"</span> <span class="o">+</span> <span class="n">person_id</span> <span class="o">+</span> <span class="sh">"'</span><span class="s">;</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -850,7 +850,7 @@ this function takes a user’s ID as a parameter and returns their name:</p>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Full name for dyer:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">dyer</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>We use string concatenation on the first line of this function
@@ -893,7 +893,7 @@ Here’s what our example program looks like if we do this:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT personal || </span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="s"> || family FROM Person WHERE id=?;</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -904,7 +904,7 @@ Here’s what our example program looks like if we do this:</p>
 
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="s">"Full name for dyer:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'dyer'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Full name for dyer:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">dyer</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>The key changes are in the query string and the <code class="language-plaintext highlighter-rouge">execute</code> call.
@@ -925,7 +925,7 @@ For instance, we can define a new function called <code class="language-plaintex
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">new_person</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -935,7 +935,7 @@ For instance, we can define a new function called <code class="language-plaintex
 
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT personal || </span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="s"> || family FROM Person WHERE id=?;</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -947,9 +947,9 @@ For instance, we can define a new function called <code class="language-plaintex
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Insert a new name
-</span><span class="nf">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
+</span><span class="nf">add_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="sh">'</span><span class="s">barrett</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Mary</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Barrett</span><span class="sh">'</span><span class="p">))</span>
 <span class="c1"># Check it exists
-</span><span class="nf">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Full name for barrett:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">barrett</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Note that in versions of sqlite3 &gt;= 2.5, the <code class="language-plaintext highlighter-rouge">get_name</code> function described
@@ -962,7 +962,7 @@ the connection, in order to save our changes to the database.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">sqlite3</span>
 
 <span class="k">def</span> <span class="nf">add_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">new_person</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">INSERT INTO Person (id, personal, family) VALUES (?, ?, ?);</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -973,7 +973,7 @@ the connection, in order to save our changes to the database.</p>
 
 
 <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">database_file</span><span class="p">,</span> <span class="n">person_id</span><span class="p">):</span>
-    <span class="n">query</span> <span class="o">=</span> <span class="s">"SELECT personal || ' ' || family FROM Person WHERE id=?;"</span>
+    <span class="n">query</span> <span class="o">=</span> <span class="sh">"</span><span class="s">SELECT personal || </span><span class="sh">'</span><span class="s"> </span><span class="sh">'</span><span class="s"> || family FROM Person WHERE id=?;</span><span class="sh">"</span>
 
     <span class="n">connection</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="p">.</span><span class="nf">connect</span><span class="p">(</span><span class="n">database_file</span><span class="p">)</span>
     <span class="n">cursor</span> <span class="o">=</span> <span class="n">connection</span><span class="p">.</span><span class="nf">cursor</span><span class="p">()</span>
@@ -985,13 +985,13 @@ the connection, in order to save our changes to the database.</p>
     <span class="k">return</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="c1"># Insert a new name
-</span><span class="nf">add_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="p">(</span><span class="s">'barrett'</span><span class="p">,</span> <span class="s">'Mary'</span><span class="p">,</span> <span class="s">'Barrett'</span><span class="p">))</span>
+</span><span class="nf">add_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="p">(</span><span class="sh">'</span><span class="s">barrett</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Mary</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Barrett</span><span class="sh">'</span><span class="p">))</span>
 <span class="c1"># Check it exists
-</span><span class="nf">print</span><span class="p">(</span><span class="s">"Full name for barrett:"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="s">'survey.db'</span><span class="p">,</span> <span class="s">'barrett'</span><span class="p">))</span>
+</span><span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Full name for barrett:</span><span class="sh">"</span><span class="p">,</span> <span class="nf">get_name</span><span class="p">(</span><span class="sh">'</span><span class="s">survey.db</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">barrett</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-filling-a-table-vs-printing-values"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Filling a Table vs. Printing Values</div>
+  <div class="box-title question-title" id="question-filling-a-table-vs-printing-values-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Filling a Table vs. Printing Values</div>
 
   <p>Write a Python program that creates a new database in a file called
 <code class="language-plaintext highlighter-rouge">original.db</code> containing a single table called <code class="language-plaintext highlighter-rouge">Pressure</code>, with a
@@ -1001,7 +1001,7 @@ How long does it take to run a program that simply writes those
 random numbers to a file?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import sqlite3
 # import random number generator
 from numpy.random import uniform
@@ -1036,7 +1036,7 @@ with open('random_numbers.txt', 'w') as outfile:
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-filtering-in-sql-vs-filtering-in-python"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Filtering in SQL vs. Filtering in Python</div>
+  <div class="box-title question-title" id="question-filtering-in-sql-vs-filtering-in-python-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Filtering in SQL vs. Filtering in Python</div>
 
   <p>Write a Python program that creates a new database called
 <code class="language-plaintext highlighter-rouge">backup.db</code> with the same structure as <code class="language-plaintext highlighter-rouge">original.db</code> and copies all
@@ -1045,7 +1045,7 @@ Which is faster: filtering values in the query, or reading
 everything into memory and filtering in Python?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The first example reads all the data into memory and filters the
 numbers using the if statement in Python.</p>
 
@@ -1106,7 +1106,7 @@ connection_backup.close()
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-generating-insert-statements"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Generating Insert Statements</div>
+  <div class="box-title question-title" id="question-generating-insert-statements-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Generating Insert Statements</div>
 
   <p>One of our colleagues has sent us a
 CSV
@@ -1297,7 +1297,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1329,7 +1329,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

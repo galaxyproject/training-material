@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -294,7 +294,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -530,6 +530,14 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Introduction to Python:
                             
@@ -539,14 +547,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -766,14 +766,14 @@ Sentry.init({
                 <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of data analysis using the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the “Introduction to Python” and “Advanced Python” tutorials available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
 
   <p>Adaptations have been made to make this work better in a GTN/Galaxy environment.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -793,7 +793,7 @@ Sentry.init({
 
 <p>Firstly, we read the file with the data.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="s">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="s">"</span><span class="se">\t</span><span class="s">"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="s">'GeneID'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="p">.</span><span class="nf">read_csv</span><span class="p">(</span><span class="sh">"</span><span class="s">https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular</span><span class="sh">"</span><span class="p">,</span> <span class="n">sep</span> <span class="o">=</span> <span class="sh">"</span><span class="se">\t</span><span class="sh">"</span><span class="p">,</span> <span class="n">index_col</span> <span class="o">=</span> <span class="sh">'</span><span class="s">GeneID</span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -812,12 +812,12 @@ Sentry.init({
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">121</span><span class="p">:,</span> <span class="p">:]</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="s">'P-value'</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="s">'Gene name'</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="sh">'</span><span class="s">P-value</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'P-value'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Gene name'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">P-value</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><img src="../../images/python-plotting/Figure9_Lineplot.png" alt="A line chart is shown with a y axis of gene name and an x axis of p-value. The specific content of the graph is not important other than that it is produced with the expected x and y labels." width="432" height="288" loading="lazy" /></p>
@@ -833,7 +833,7 @@ Sentry.init({
 <p>If you want to save and download the image to your local machine, you can use the <code class="language-plaintext highlighter-rouge">plt.savefig()</code> command with the name of the file (png, pdf etc) as the argument. The file is saved in the Jupyter Notebook session and then you can download it. For example:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="nf">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">'foo.png'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">'</span><span class="s">foo.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">plt.tight_layout()</code> is used to make sure that no part of the image is cut off during saving.</p>
@@ -842,12 +842,12 @@ Sentry.init({
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">121</span><span class="p">:,</span> <span class="p">:]</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="s">'P-value'</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="s">'Gene name'</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="sh">'</span><span class="s">P-value</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">subset</span><span class="p">[</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">]</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">gcf</span><span class="p">()</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">'my_figure.png'</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">'</span><span class="s">my_figure.png</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="more-about-plots">More about plots</h2>
@@ -855,9 +855,9 @@ Sentry.init({
 <p>You can use the <code class="language-plaintext highlighter-rouge">plot()</code> method directly on a dataframe. You can plot multiple lines in the same plot. Just specify more columns in the x or y axis argument. For example:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="p">:]</span>
-<span class="n">new_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'P-value'</span><span class="p">,</span> <span class="s">'P-adj'</span><span class="p">]].</span><span class="nf">plot</span><span class="p">()</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nf">len</span><span class="p">(</span><span class="n">new_subset</span><span class="p">.</span><span class="n">index</span><span class="p">)),</span> <span class="n">new_subset</span><span class="p">[</span><span class="s">'Gene name'</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Gene name'</span><span class="p">)</span>
+<span class="n">new_subset</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="sh">'</span><span class="s">P-value</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">P-adj</span><span class="sh">'</span><span class="p">]].</span><span class="nf">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nf">len</span><span class="p">(</span><span class="n">new_subset</span><span class="p">.</span><span class="n">index</span><span class="p">)),</span> <span class="n">new_subset</span><span class="p">[</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">],</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><img src="../../images/python-plotting/Figure10_Multiple_lines_plot.png" alt="The graph is similar to the last image, now the x axis is the gene name, and the y axis runs from 0 to 7 with an annotation of 1e-65 above. Now there are two lines, one in red labelled p-adj, and one in blue labelled p-value." width="432" height="288" loading="lazy" /></p>
@@ -866,53 +866,53 @@ Sentry.init({
 
 <p>Another useful plot type is the barplot. In the following example we plot the number of genes that belong to the different chromosomes of the dataset.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
-<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">Chromosome</span><span class="sh">'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
+<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="sh">'</span><span class="s">bar</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'N'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 <p><img src="../../images/python-plotting/Figure11_Barplot.png" alt="It is now a bar plot with chromosome as an X axis and some values of N for the y axis for a few chromosomes." width="640" height="480" loading="lazy" /></p>
 
 <p><code class="language-plaintext highlighter-rouge">matplotlib</code> supports also different plot styles from ather popular plotting libraries such as ggplot and seaborn. For example, the previous plot in ggplot style.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="s">'ggplot'</span><span class="p">)</span>
-<span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
-<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="sh">'</span><span class="s">ggplot</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">Chromosome</span><span class="sh">'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
+<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="sh">'</span><span class="s">bar</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'N'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 <p><img src="../../images/python-plotting/Figure12_ggplot_Barplot.png" alt="The same graph as the previous, but with a different aethetic, the background is now light grey instead of white and the bars are red instead of blue to be a bit more like ggplot2 outputs." width="640" height="480" loading="lazy" /></p>
 
 <p>You can also change different parameters and customize the plot.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="s">'default'</span><span class="p">)</span>
-<span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="s">'Chromosome'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
-<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">'bar'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s">'red'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s">'black'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">plt</span><span class="p">.</span><span class="n">style</span><span class="p">.</span><span class="nf">use</span><span class="p">(</span><span class="sh">'</span><span class="s">default</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">bar_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="nf">groupby</span><span class="p">(</span><span class="sh">'</span><span class="s">Chromosome</span><span class="sh">'</span><span class="p">).</span><span class="nf">size</span><span class="p">()</span>
+<span class="n">bar_data</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="sh">'</span><span class="s">bar</span><span class="sh">'</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="sh">'</span><span class="s">red</span><span class="sh">'</span><span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="sh">'</span><span class="s">black</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'N'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><img src="../../images/python-plotting/Figure13_Barplot_2.png" alt="The same graph again, but now the bars are red with a black border." width="640" height="480" loading="lazy" /></p>
 
 <p>Another useful type of plot is a scatter plot. In the following example we plot the Base mean of a subset of genes.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scatter_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="s">'Base mean'</span><span class="p">,</span> <span class="s">'Gene name'</span><span class="p">]].</span><span class="nf">head</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">scatter_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[[</span><span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">]].</span><span class="nf">head</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="mi">15</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">scatter_data</span><span class="p">[</span><span class="s">'Gene name'</span><span class="p">],</span> <span class="n">scatter_data</span><span class="p">[</span><span class="s">'Base mean'</span><span class="p">])</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">scatter</span><span class="p">(</span><span class="n">scatter_data</span><span class="p">[</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">],</span> <span class="n">scatter_data</span><span class="p">[</span><span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">])</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span> <span class="o">=</span> <span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="s">'Base mean'</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="s">'Gene name'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Base mean</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><img src="../../images/python-plotting/Figure14_Scatterplot.png" alt="A scatterplot is shown comparing gene name to base mean." width="640" height="480" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-plotting"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Plotting</div>
+  <div class="box-title question-title" id="question-plotting-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Plotting</div>
 
   <p>Using the same dataset, create a scatterplot of the average P-value for every chromosome for the “+” and the “-“ strand.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>First find the data and save it in a new dataframe. Then create the scatterplot. You can even go one step further and assign different colors for the different strands.Note the use of the <code class="language-plaintext highlighter-rouge">map</code> method that assigns the different colors using a dictionary as an input.</p>
 
@@ -1097,7 +1097,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1129,7 +1129,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

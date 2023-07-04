@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -205,13 +205,13 @@ Sentry.init({
       "name": "jupyter-notebook"
     }
   ],
-  "abstract": "> <div class="box-title agenda-title" id="agenda">Agenda</div>"
+  "abstract": "> <div class="box-title agenda-title" id="agenda-1">Agenda</div>"
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -599,7 +599,7 @@ Sentry.init({
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-2">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -658,12 +658,12 @@ function to send inputs multiply to the specified function <code class="language
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What did you see here?</p>
 
   <p>Was it clear and easy to read?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>It prints four timestamps immediately, all around the same time. Then one second later it prints 4 more, and one second later, a final four.
 Our Pool of 4 processes processes the function the maximal amount of times possible concurrently. Once each of those functions returns, then it can move on to processing the next tasks.
 This is precisely the situation of e.g. 4 queues at the grocery; as soon as one customer is processed, they immediately begin on the next, until no more remain.</p>
@@ -691,11 +691,11 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <span class="kn">import</span> <span class="n">time</span>
 
 <span class="n">servers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"https://usegalaxy.org"</span><span class="p">,</span>
-    <span class="s">"https://usegalaxy.org.au"</span><span class="p">,</span>
-    <span class="s">"https://usegalaxy.eu"</span><span class="p">,</span>
-    <span class="s">"https://usegalaxy.fr"</span><span class="p">,</span>
-    <span class="s">"https://usegalaxy.be"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">https://usegalaxy.org</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">https://usegalaxy.org.au</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">https://usegalaxy.eu</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">https://usegalaxy.fr</span><span class="sh">"</span><span class="p">,</span>
+    <span class="sh">"</span><span class="s">https://usegalaxy.be</span><span class="sh">"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
@@ -703,8 +703,8 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">servers</span><span class="p">:</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s">"/api/version"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
-        <span class="n">data</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">'version_major'</span><span class="p">]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="sh">"</span><span class="s">/api/version</span><span class="sh">"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="sh">'</span><span class="s">version_major</span><span class="sh">'</span><span class="p">]</span>
     <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">ConnectTimeout</span><span class="p">:</span>
         <span class="n">data</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
     <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">ReadTimeout</span><span class="p">:</span>
@@ -722,8 +722,8 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fetch_version</span><span class="p">(</span><span class="n">server_url</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s">"/api/version"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="s">'version_major'</span><span class="p">]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="sh">"</span><span class="s">/api/version</span><span class="sh">"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="sh">'</span><span class="s">version_major</span><span class="sh">'</span><span class="p">]</span>
     <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">ConnectTimeout</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">None</span>
     <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">ReadTimeout</span><span class="p">:</span>
@@ -753,10 +753,10 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>If however this were a more complicated task (e.g. calculating a large number, machine learning, etc.), then we might wish to set our pool size to the number of CPUs - 1, as each process will potentially consume it’s CPU allocation completely, and we wish to have some left over for the managing program and any other work going on, on the system.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Try changing the pool size and see what effect it has on runtime. Start from a value of 1, and go up to 5, the number of servers in our list.</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Given the small sample size (5 servers), and the variability of response times (in local testing between 3-8 seconds for the single-pool version), you can see varying results but <em>generally</em> it should decrease as the pool size increases. However, sometimes you will see the Pool=5 version take the same or longer than Pool=4.</p>
 
     <p>Especially in the case that 1 server (or 1 request one time) dominates the request time, this can “hide” the improvements as the others complete quickly on the remaining N-1 processes.</p>
@@ -776,7 +776,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 </span><span class="kn">import</span> <span class="n">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplots</span><span class="p">()</span>
 <span class="n">ax</span><span class="p">.</span><span class="nf">plot</span><span class="p">(</span><span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">results</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s">'time (s)'</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s">'Pool Size'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">'Pool size vs runtime'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="sh">'</span><span class="s">time (s)</span><span class="sh">'</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="sh">'</span><span class="s">Pool Size</span><span class="sh">'</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sh">'</span><span class="s">Pool size vs runtime</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">.</span><span class="nf">grid</span><span class="p">()</span>
 <span class="c1"># Uncomment if your notebook cannot display images inline.
 # fig.savefig("pool-vs-runtime.png")
@@ -805,7 +805,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
             <span class="n">version</span> <span class="o">=</span> <span class="n">future</span><span class="p">.</span><span class="nf">result</span><span class="p">()</span>
             <span class="n">data</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">version</span>
         <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="s">'%r generated an exception: %s'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">%r generated an exception: %s</span><span class="sh">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
@@ -815,7 +815,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>This is a bit more complicated to write, but again, if you’re not blocking on CPU resources, then this is potentially approximately as effecient as thread pools.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What result did you get? Was it slower, faster, or about the same as processes?</p>
 </blockquote>
 
@@ -1010,7 +1010,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1042,7 +1042,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

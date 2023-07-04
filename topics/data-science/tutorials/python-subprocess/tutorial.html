@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -255,7 +255,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -617,7 +617,7 @@ Sentry.init({
 Here we’ll give a quick tutorial on how to read and write files within Python.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -659,14 +659,14 @@ Here we’ll give a quick tutorial on how to read and write files within Python.
 
 <p>Additionally you’ll need two files, you <em>generally should not do this</em>, but you can use a subprocess to download the file! We’ll use <code class="language-plaintext highlighter-rouge">subprocess.check_call</code> for this which simply executes the program, and continues on. If there is an error in the execution, it will raise an exception and stop execution.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/836/945/GCF_000836945.1_ViralProj14044/GCF_000836945.1_ViralProj14044_genomic.fna.gz"</span>
-<span class="n">genome</span> <span class="o">=</span> <span class="s">'Escherichia virus T4.fna.gz'</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/836/945/GCF_000836945.1_ViralProj14044/GCF_000836945.1_ViralProj14044_genomic.fna.gz</span><span class="sh">"</span>
+<span class="n">genome</span> <span class="o">=</span> <span class="sh">'</span><span class="s">Escherichia virus T4.fna.gz</span><span class="sh">'</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="sh">'</span><span class="s">wget</span><span class="sh">'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="sh">'</span><span class="s">-O</span><span class="sh">'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="sh">'</span><span class="s">gzip</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">-d</span><span class="sh">'</span><span class="p">,</span> <span class="n">genome</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-do-these-commands-look-like-on-the-cli"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-do-these-commands-look-like-on-the-cli" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What do these commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-do-these-commands-look-like-on-the-cli-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-do-these-commands-look-like-on-the-cli-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What do these commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://ftp.ncbi.nlm.nih.gov/.... -O "Escherichia virus T4.fna.gz"
 gzip -d "Escherichia virus T4.fna.gz"
 </code></pre></div>  </div>
@@ -697,13 +697,13 @@ gzip -d "Escherichia virus T4.fna.gz"
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-terminal"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Terminal</div>
+    <div class="box-title code-in-title" id="code-in-terminal-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Terminal</div>
     <p>Here we manually quote the argument</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>glimmer3 "bow genome.txt"
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-python"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Python</div>
+    <div class="box-title code-out-title" id="code-out-python-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Python</div>
     <p>Here python handles that for us</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>subprocess.check_call(['glimmer3', 'bow genome.txt'])
 </code></pre></div>    </div>
@@ -711,7 +711,7 @@ gzip -d "Escherichia virus T4.fna.gz"
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-exploitation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-exploitation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Exploitation!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-exploitation-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-exploitation-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Exploitation!<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>This is one of the major reasons we don’t use <code class="language-plaintext highlighter-rouge">os.system</code> or older Python interfaces for running commands.
 If you’re processing files, and a user supplies a file with a space, if your program isn’t expecting that space in that filename, then it could do something dangerous!
 Like exploit your system!</p>
@@ -724,18 +724,18 @@ Like exploit your system!</p>
 <h1 id="check-output-gene-calling-with-augustus">Check Output: Gene Calling with Augustus</h1>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">gff3</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
-    <span class="s">'augustus'</span><span class="p">,</span> <span class="c1"># Our command
-</span>    <span class="s">'--species=E_coli_K12'</span><span class="p">,</span> <span class="c1"># the first argument, the species, we're using a phage so we call genes  based on it's host organism
-</span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The path to our genome file, without the .gz because we decompressed it.
-</span>    <span class="s">'--gff3=on'</span> <span class="c1"># We would like gff3 formatted output (it's easier to parse!)
+    <span class="sh">'</span><span class="s">augustus</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># Our command
+</span>    <span class="sh">'</span><span class="s">--species=E_coli_K12</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># the first argument, the species, we're using a phage so we call genes  based on it's host organism
+</span>    <span class="sh">'</span><span class="s">Escherichia virus T4.fna</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># The path to our genome file, without the .gz because we decompressed it.
+</span>    <span class="sh">'</span><span class="s">--gff3=on</span><span class="sh">'</span> <span class="c1"># We would like gff3 formatted output (it's easier to parse!)
 </span><span class="p">])</span>
 
-<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span>
-<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">gff3</span> <span class="o">=</span> <span class="n">gff3</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>augustus --species=E_coli_K12 'Escherichia virus T4.fna' --gff3=on
 </code></pre></div>  </div>
 </blockquote>
@@ -751,7 +751,7 @@ Like exploit your system!</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cleaned_gff3</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">gff3</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="s">'#'</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">startswith</span><span class="p">(</span><span class="sh">'</span><span class="s">#</span><span class="sh">'</span><span class="p">):</span>
         <span class="k">continue</span>
     <span class="n">cleaned_gff3</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
@@ -774,17 +774,17 @@ Like exploit your system!</p>
 
 <p>One of the more complicated cases, however, is when you need pipes.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="s">"https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/721/125/GCF_001721125.1_ASM172112v1/GCF_001721125.1_ASM172112v1_cds_from_genomic.fna.gz"</span>
-<span class="n">cds</span> <span class="o">=</span> <span class="s">'E. Coli CDSs.fna.gz'</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'wget'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s">'-O'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
-<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'gzip'</span><span class="p">,</span> <span class="s">'-d'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">url</span> <span class="o">=</span> <span class="sh">"</span><span class="s">https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/001/721/125/GCF_001721125.1_ASM172112v1/GCF_001721125.1_ASM172112v1_cds_from_genomic.fna.gz</span><span class="sh">"</span>
+<span class="n">cds</span> <span class="o">=</span> <span class="sh">'</span><span class="s">E. Coli CDSs.fna.gz</span><span class="sh">'</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="sh">'</span><span class="s">wget</span><span class="sh">'</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="sh">'</span><span class="s">-O</span><span class="sh">'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
+<span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="sh">'</span><span class="s">gzip</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">-d</span><span class="sh">'</span><span class="p">,</span> <span class="n">cds</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>With subprocesses, you can control the stdin, and stdout of the process by using file handles.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-terminal-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Terminal</div>
+    <div class="box-title code-in-title" id="code-in-terminal-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Terminal</div>
     <p>Here we pipe a file to a process named <code class="language-plaintext highlighter-rouge">build-icm</code> which takes one argument, the output name. It reads sequences from stdin.</p>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cat seq.fa | build-icm test.icm
 # OR
@@ -792,7 +792,7 @@ build-icm test.icm &lt; seq.fa
 </code></pre></div>    </div>
   </blockquote>
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-python-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Python</div>
+    <div class="box-title code-out-title" id="code-out-python-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output: Python</div>
     <p>Here we need to do a bit more.</p>
     <ol>
       <li>Open a file handle</li>
@@ -807,12 +807,12 @@ build-icm test.icm &lt; seq.fa
 
 <p>We’ll do that now:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'E. Coli CDSs.fna'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="s">'build-icm'</span><span class="p">,</span> <span class="s">'test.icm'</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">handle</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">E. Coli CDSs.fna</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_call</span><span class="p">([</span><span class="sh">'</span><span class="s">build-icm</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">test.icm</span><span class="sh">'</span><span class="p">],</span> <span class="n">stdin</span><span class="o">=</span><span class="n">handle</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>build-icm test.icm &lt; 'E. Coli CDSs.fna'
 </code></pre></div>  </div>
 </blockquote>
@@ -820,17 +820,17 @@ build-icm test.icm &lt; seq.fa
 <p>Here we build a model, based on the sequences of <em>E. Coli</em> K-12, that Glimmer3 can use.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
-    <span class="s">'glimmer3'</span><span class="p">,</span> <span class="c1"># Our program
-</span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The input genome
-</span>    <span class="s">'test.icm'</span><span class="p">,</span> <span class="c1"># The model we just built
-</span>    <span class="s">'t4-genes'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
-</span><span class="p">]).</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
+    <span class="sh">'</span><span class="s">glimmer3</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># Our program
+</span>    <span class="sh">'</span><span class="s">Escherichia virus T4.fna</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># The input genome
+</span>    <span class="sh">'</span><span class="s">test.icm</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># The model we just built
+</span>    <span class="sh">'</span><span class="s">t4-genes</span><span class="sh">'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
+</span><span class="p">]).</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
 </span>
 <span class="nf">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-does-this-commands-look-like-on-the-cli-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-does-this-commands-look-like-on-the-cli-5" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What does this commands look like on the CLI?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>glimmer3 'Escherichia virus T4.fna' test.icm t4-genes
 </code></pre></div>  </div>
 </blockquote>
@@ -838,11 +838,11 @@ build-icm test.icm &lt; seq.fa
 <p><em>What happened here?</em> The output of the program was written to <code class="language-plaintext highlighter-rouge">stderr</code>, not <code class="language-plaintext highlighter-rouge">stdout</code>, so Python may print that out to your screen, but <code class="language-plaintext highlighter-rouge">output</code> will be empty. To solve this common problem we can re-run the program and collect both <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">output</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span>
-    <span class="s">'glimmer3'</span><span class="p">,</span> <span class="c1"># Our program
-</span>    <span class="s">'Escherichia virus T4.fna'</span><span class="p">,</span> <span class="c1"># The input genome
-</span>    <span class="s">'test.icm'</span><span class="p">,</span> <span class="c1"># The model we just built
-</span>    <span class="s">'t4-genes'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
-</span><span class="p">],</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">STDOUT</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
+    <span class="sh">'</span><span class="s">glimmer3</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># Our program
+</span>    <span class="sh">'</span><span class="s">Escherichia virus T4.fna</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># The input genome
+</span>    <span class="sh">'</span><span class="s">test.icm</span><span class="sh">'</span><span class="p">,</span> <span class="c1"># The model we just built
+</span>    <span class="sh">'</span><span class="s">t4-genes</span><span class="sh">'</span>  <span class="c1"># The base name for output files. It'll produce t4-genes.detail and t4-genes.predict.
+</span><span class="p">],</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="p">.</span><span class="n">STDOUT</span><span class="p">).</span><span class="nf">decode</span><span class="p">(</span><span class="sh">'</span><span class="s">utf-8</span><span class="sh">'</span><span class="p">)</span> <span class="c1"># And of course we decode as utf-8
 </span>
 <span class="nf">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1020,7 +1020,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1052,7 +1052,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

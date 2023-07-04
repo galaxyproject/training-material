@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -211,7 +211,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -606,7 +606,7 @@ Sentry.init({
 <p>However, we can provide type hints as we write python which will allow our editor to type check code as we go, even if it is not typically enforced at any point.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -630,15 +630,15 @@ Sentry.init({
 <span class="nb">float</span>
 <span class="nb">bool</span>
 <span class="bp">None</span>
-<span class="p">...</span>
+<span class="bp">...</span>
 </code></pre></div></div>
 
 <p>or they can be relabeling of existing types, letting you create new types as needed to represent your internal data structures</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
 
-<span class="n">NameType</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"NameType"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="n">Point2D</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"Point2D"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span>
+<span class="n">NameType</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">"</span><span class="s">NameType</span><span class="sh">"</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="n">Point2D</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">"</span><span class="s">Point2D</span><span class="sh">"</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span>
 </code></pre></div></div>
 
 <blockquote class="tip">
@@ -651,7 +651,7 @@ Sentry.init({
 <p>Imagine for a minute you have a situation like the following, take a minute to read and understand the code:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Fetch the user and history list
-</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
+</span><span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="sh">"</span><span class="s">hexylena</span><span class="sh">"</span><span class="p">)</span>
 
 <span class="c1"># And make sure all of the permissions are correct
 </span><span class="n">history</span> <span class="o">=</span> <span class="n">History</span><span class="p">.</span><span class="nf">fetch</span><span class="p">(</span><span class="n">history_id</span><span class="p">)</span>
@@ -660,7 +660,7 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>Can you be sure the <code class="language-plaintext highlighter-rouge">history_id</code> and <code class="language-plaintext highlighter-rouge">user_id</code> are in the correct order? It
 seems like potentially not, given the ordering of “user” and “history” in the
@@ -670,7 +670,7 @@ won’t know.</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>This is unanswerable without the code.</li>
       <li>
@@ -713,8 +713,8 @@ won’t know.</li>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
 
-<span class="n">UserId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"UserId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-<span class="n">HistoryId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="s">"HistoryId"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">UserId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">"</span><span class="s">UserId</span><span class="sh">"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
+<span class="n">HistoryId</span> <span class="o">=</span> <span class="nc">NewType</span><span class="p">(</span><span class="sh">"</span><span class="s">HistoryId</span><span class="sh">"</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And then defined on our function, e.g.</p>
@@ -730,8 +730,8 @@ won’t know.</li>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history_id</span><span class="p">:</span> <span class="n">HistoryId</span>
 <span class="n">user_id</span><span class="p">:</span> <span class="n">UserId</span>
 
-<span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
-<span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="s">"hexylena"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">history_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="sh">"</span><span class="s">hexylena</span><span class="sh">"</span><span class="p">)</span>
+<span class="p">(</span><span class="n">history_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span> <span class="o">=</span> <span class="nc">GetUserAndCurrentHistory</span><span class="p">(</span><span class="sh">"</span><span class="s">hexylena</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>If we’re using a code editor with typing hints, e.g. VSCode with PyLance, we’ll see something like:</p>
@@ -741,10 +741,10 @@ won’t know.</li>
 <p>Here we see that we’re not allowed to call this function this way, it’s simply impossible.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>What happens if you execute this code?</p>
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>It executes happily. Types are <strong>not enforced at runtime</strong>. So this case where they’re both custom types around an integer, Python sees that it expects an int in both versions of the function call, and that works fine for it. That is why we are repeatedly calling them “type hints”, they’re hints to your editor to show suggestions and help catch bugs, but they’re not enforced.
 If you modified the line <code class="language-plaintext highlighter-rouge">y = HistoryId(2)</code> to be something like <code class="language-plaintext highlighter-rouge">y = "test"</code>, the code will also execute fine. Python doesn’t care that there’s suddenly a string where you promised and asked for, an int. It simply does not matter.</p>
 
@@ -756,7 +756,7 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 
 <p>Adding types to variables is easy, you’ve seen a few examples already:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s">"Hello"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Hello</span><span class="sh">"</span>
 <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">c</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.14159</span>
 <span class="n">d</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="bp">True</span>
@@ -767,7 +767,7 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 <p>But you can go further than this with things like <code class="language-plaintext highlighter-rouge">tuple</code> and <code class="language-plaintext highlighter-rouge">list</code> types:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">e</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">f</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s">"Hi."</span><span class="p">)</span>
+<span class="n">f</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">Hi.</span><span class="sh">"</span><span class="p">)</span>
 <span class="n">g</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
 </code></pre></div></div>
 
@@ -791,7 +791,7 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
 
-<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span> <span class="c1"># Implicitly any
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">"</span><span class="s">T</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># Implicitly any
 </span>
 <span class="k">def</span> <span class="nf">reverse_list</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -814,23 +814,23 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 <p>Here we have used a <code class="language-plaintext highlighter-rouge">Union[A, B, ...]</code> to declare that it can only be one of these three types.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol class="solution">
     <li>
       <p>Are both of these valid definitions?`</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">q2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3214</span><span class="p">,</span> <span class="s">"asdf"</span><span class="p">]</span>
+<span class="n">q2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3214</span><span class="p">,</span> <span class="sh">"</span><span class="s">asdf</span><span class="sh">"</span><span class="p">]</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>If that wasn’t what you expected, how would you define it so that it would be?</p>
       <blockquote>
-        <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Yes, both are valid, but maybe you expected a homogeneous list. If you wanted that, you could instead do</p>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">q3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<span class="n">q4</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3243</span><span class="p">,</span> <span class="s">"asdf"</span><span class="p">]</span> <span class="c1"># Fails
+<span class="n">q4</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.3243</span><span class="p">,</span> <span class="sh">"</span><span class="s">asdf</span><span class="sh">"</span><span class="p">]</span> <span class="c1"># Fails
 </span></code></pre></div>        </div>
       </blockquote>
     </li>
@@ -846,17 +846,17 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 <span class="k">def</span> <span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">padding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
     <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">padding</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+            <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">padding</span><span class="si">}</span><span class="s"> </span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nf">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 
 
-<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="s">"hello"</span><span class="p">,</span> <span class="s">"world"</span><span class="p">,</span> <span class="s">"你好"</span><span class="p">,</span> <span class="s">"世界"</span><span class="p">]</span>
+<span class="n">lines</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">hello</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">world</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">你好</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">世界</span><span class="sh">"</span><span class="p">]</span>
 
 <span class="c1"># Without the optional argument
 </span><span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">)</span>
 <span class="c1"># And with the optional
-</span><span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="s">"★"</span><span class="p">)</span>
+</span><span class="nf">pretty</span><span class="p">(</span><span class="n">lines</span><span class="p">,</span> <span class="sh">"</span><span class="s">★</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>While this superficially <em>looks</em> like a keyword argument with a default value, however it’s subtly different. Here an explicit value of None is allowed, and we still know that it will either be a string, or it will be None. Not something that was possible with just a keyword argument.</p>
@@ -877,18 +877,18 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 <p>Here is an example module that would be stored in <code class="language-plaintext highlighter-rouge">corp/__init__.py</code></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-    <span class="s">"""Return a list containing n references to x."""</span>
+    <span class="sh">"""</span><span class="s">Return a list containing n references to x.</span><span class="sh">"""</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>
 
 
 <span class="k">def</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="s">"""Print x capitalized, and return x."""</span>
+    <span class="sh">"""</span><span class="s">Print x capitalized, and return x.</span><span class="sh">"""</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nf">capitalize</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">x</span>
 
 
 <span class="k">def</span> <span class="nf">concatenate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="p">:</span>
-    <span class="s">"""Add two strings together."""</span>
+    <span class="sh">"""</span><span class="s">Add two strings together.</span><span class="sh">"""</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </code></pre></div></div>
 
@@ -896,13 +896,13 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">corp</span> <span class="kn">import</span> <span class="o">*</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="nf">repeat</span><span class="p">(</span><span class="s">"A"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Should return ["A", "A", "A"]
-</span><span class="n">y</span> <span class="o">=</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="s">"hElLo WorLd"</span><span class="p">)</span> <span class="c1"># Should print Hello World
-</span><span class="n">z</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">(</span><span class="s">"Hi"</span><span class="p">,</span> <span class="s">"Bob"</span><span class="p">)</span> <span class="c1"># HiBob
+<span class="n">x</span> <span class="o">=</span> <span class="nf">repeat</span><span class="p">(</span><span class="sh">"</span><span class="s">A</span><span class="sh">"</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="c1"># Should return ["A", "A", "A"]
+</span><span class="n">y</span> <span class="o">=</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="sh">"</span><span class="s">hElLo WorLd</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># Should print Hello World
+</span><span class="n">z</span> <span class="o">=</span> <span class="nf">concatenate</span><span class="p">(</span><span class="sh">"</span><span class="s">Hi</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">Bob</span><span class="sh">"</span><span class="p">)</span> <span class="c1"># HiBob
 </span></code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-type-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add type annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-add-type-annotations-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add type annotations</div>
   <ol>
     <li>Add type annotations to each of those functions AND the variables <code class="language-plaintext highlighter-rouge">x</code>, <code class="language-plaintext highlighter-rouge">y</code>, <code class="language-plaintext highlighter-rouge">z</code></li>
     <li>How did you know which types were appropriate?</li>
@@ -911,7 +911,7 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 </blockquote>
 
 <blockquote class="solution">
-  <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <ol>
     <li>
       <p>The proper annotations:</p>
@@ -919,7 +919,7 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="c1"># Or
 </span><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
-<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">"</span><span class="s">T</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">repeat</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 
 <span class="k">def</span> <span class="nf">print_capitalized</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -929,9 +929,9 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 
       <p>and</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">...</span>
-<span class="n">y</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">...</span>
-<span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="p">...</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="bp">...</span>
+<span class="n">y</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">...</span>
+<span class="n">z</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">...</span>
 </code></pre></div>      </div>
     </li>
     <li>You might have discovered this by a combination of looking at the function definitions and their documentation, and perhaps also the sample invocations and what types were passed there.</li>
@@ -945,7 +945,7 @@ tmp.py:15: error: Incompatible types in assignment (expression has type "History
 <p>You can use MonkeyType to automatically apply type annotations to your code. Based on the execution of the code, it will make a best guess about what types are supported.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-using-monkeytype-to-generate-automatic-annotations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using MonkeyType to generate automatic annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-using-monkeytype-to-generate-automatic-annotations-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Using MonkeyType to generate automatic annotations</div>
 
   <ol>
     <li>Create a folder for a module named <code class="language-plaintext highlighter-rouge">some</code></li>
@@ -982,25 +982,25 @@ add(1, 2)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>What was the output of that command?</li>
     <li>This function will accept strings as well, add a statement to exercise that in <code class="language-plaintext highlighter-rouge">myscript.py</code> and re-run <code class="language-plaintext highlighter-rouge">monkeytype run</code> and <code class="language-plaintext highlighter-rouge">monkeytype stub</code>. What is the new output?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>
         <p>The expected output is:</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="p">...</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span> <span class="bp">...</span>
 </code></pre></div>        </div>
       </li>
       <li>
         <p>You can add a statement like <code class="language-plaintext highlighter-rouge">add("a", "b")</code> below <code class="language-plaintext highlighter-rouge">add(1, 2)</code> to see:</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">b</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span> <span class="p">...</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">b</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span> <span class="bp">...</span>
 </code></pre></div>        </div>
       </li>
     </ol>
@@ -1008,31 +1008,31 @@ add(1, 2)
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <p>Why is it different?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Because MonkeyType works by running the code provided (<code class="language-plaintext highlighter-rouge">myscript.py</code>) and annotating based on what executions it saw. In the first invocation it had not seen any calls to <code class="language-plaintext highlighter-rouge">add()</code> with strings, so it only reported <code class="language-plaintext highlighter-rouge">int</code> as acceptable types. However, the second time it saw <code class="language-plaintext highlighter-rouge">str</code>s as well. Can you think of another type that would be supported by this operation, that was not caught? (list!)</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+  <div class="box-title question-title" id="question-11"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
   <ol>
     <li>Does that type annotation make sense based on what you’ve learned today?</li>
     <li>Can you write a better type annoation based on what you know?</li>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>It works, but it’s not a great type annotation. Here the description looks like it can accept two <code class="language-plaintext highlighter-rouge">int</code>s and return a <code class="language-plaintext highlighter-rouge">str</code> which isn’t correct.</li>
       <li>
         <p>Here is a better type annotation</p>
 
         <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">TypeVar</span>
-<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="s">"T"</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="nc">TypeVar</span><span class="p">(</span><span class="sh">"</span><span class="s">T</span><span class="sh">"</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
    
 <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
@@ -1227,7 +1227,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1259,7 +1259,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

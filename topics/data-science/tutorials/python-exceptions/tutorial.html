@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -255,7 +255,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -619,7 +619,7 @@ Sentry.init({
                 <p>Try/except are a construct in Python used to catch a potential exception. Sometimes things go wrong in your code! Or in someone else’s code in a module. Sometimes some errors might be expected like when you try and read a user supplied file, maybe it isn’t available because they’ve specified the wrong path.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -661,7 +661,7 @@ Sentry.init({
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">numbers</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="s">"You are calculating the mean of an empty list, which is not possible."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="nc">ValueError</span><span class="p">(</span><span class="sh">"</span><span class="s">You are calculating the mean of an empty list, which is not possible.</span><span class="sh">"</span><span class="p">)</span>
     <span class="k">return</span> <span class="nf">sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span> <span class="o">/</span> <span class="nf">len</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
 
 <span class="nf">mean</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
@@ -669,7 +669,7 @@ Sentry.init({
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-where-do-valueerror-zerodivisionerror-come-from"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-where-do-valueerror-zerodivisionerror-come-from" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Where do ValueError, ZeroDivisionError come from?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-where-do-valueerror-zerodivisionerror-come-from-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-where-do-valueerror-zerodivisionerror-come-from-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Where do ValueError, ZeroDivisionError come from?<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>There are loads of different types of exception codes! <a href="https://docs.python.org/3/library/exceptions.html">The python documentation has a large list</a> of exceptions and some descriptions for when or why those exceptions might be raised.</p>
 </blockquote>
 
@@ -682,22 +682,22 @@ Sentry.init({
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numbers</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">result</span> <span class="o">=</span> <span class="nf">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Result is </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">Result is </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">"We cannot calculate the mean"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">We cannot calculate the mean</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Here we use <code class="language-plaintext highlighter-rouge">try:</code> to setup a new block, and this code is <strong>tried</strong>, Python attempts to execute it. Below are one or more <code class="language-plaintext highlighter-rouge">except:</code> blocks which catch specific errors. Here we have specifically said we know a ValueError can happen, and decided to handle it.</p>
 
 <p>Or for another example, accessing a user supplied file. Oftentimes users will call your program and supply a non-existent, or inacessible file. Here you can use multiple <code class="language-plaintext highlighter-rouge">except</code> blocks to catch all of those potential errors.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_supplied_file</span> <span class="o">=</span> <span class="s">'does-not-exist.txt'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">user_supplied_file</span> <span class="o">=</span> <span class="sh">'</span><span class="s">does-not-exist.txt</span><span class="sh">'</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="nf">open</span><span class="p">(</span><span class="n">user_supplied_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span>
+    <span class="nf">open</span><span class="p">(</span><span class="n">user_supplied_file</span><span class="p">,</span> <span class="sh">'</span><span class="s">r</span><span class="sh">'</span><span class="p">)</span>
 <span class="k">except</span> <span class="nb">FileNotFoundError</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"The path you supplied (</span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">) doesn't exist, please double check it!"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">The path you supplied (</span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">) doesn</span><span class="sh">'</span><span class="s">t exist, please double check it!</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">PermissionError</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"You supplied a valid file, but it is unreadable. Try changing it's permissions with `chmod +r </span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">`"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">You supplied a valid file, but it is unreadable. Try changing it</span><span class="sh">'</span><span class="s">s permissions with `chmod +r </span><span class="si">{</span><span class="n">user_supplied_file</span><span class="si">}</span><span class="s">`</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Failing to open a file raises a <code class="language-plaintext highlighter-rouge">FileNotFoundError</code> which indicates the file isn’t available, and <code class="language-plaintext highlighter-rouge">PermissionError</code> indicates that a file is unreadable. However in practice, sometimes you’ll see something like this:</p>
@@ -718,8 +718,8 @@ except:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
 
 <span class="k">try</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-        <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="s">"&gt;some fasta sequence we want to search against a database"</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nf">open</span><span class="p">(</span><span class="sh">'</span><span class="s">gene_query.fa</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">w</span><span class="sh">'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="n">handle</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">"</span><span class="s">&gt;some fasta sequence we want to search against a database</span><span class="sh">"</span><span class="p">)</span>
 
     <span class="c1"># runQuery('gene_query.fa')
 </span>
@@ -727,12 +727,12 @@ except:
 </span>    <span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span>
 <span class="k">except</span><span class="p">:</span>
     <span class="c1"># And now our results are invalid.
-</span>    <span class="nf">print</span><span class="p">(</span><span class="s">"Something went wrong! Oh no! Check your inputs."</span><span class="p">)</span>
+</span>    <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">Something went wrong! Oh no! Check your inputs.</span><span class="sh">"</span><span class="p">)</span>
 <span class="k">finally</span><span class="p">:</span>
     <span class="c1"># So we should cleanup this temporary file we created, so it doesn't cause
 </span>    <span class="c1"># problems or distract the user from the results file.
 </span>    <span class="c1"># This function will delete a file from your computer:
-</span>    <span class="n">os</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="s">'gene_query.fa'</span><span class="p">)</span>
+</span>    <span class="n">os</span><span class="p">.</span><span class="nf">remove</span><span class="p">(</span><span class="sh">'</span><span class="s">gene_query.fa</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
 <h2 id="fallback">Fallback</h2>
@@ -918,7 +918,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -950,7 +950,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

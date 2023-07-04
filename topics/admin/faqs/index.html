@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -68,7 +68,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -317,7 +317,7 @@ Sentry.init({
 
 <h4 class="faq-area"> Mapping Jobs to Specific Storage By User <a href="/training-material/topics/admin/faqs/mapping_by_user.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-mapping-jobs-to-specific-storage-by-user"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-mapping-jobs-to-specific-storage-by-user" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Mapping Jobs to Specific Storage By User<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>It is possible to map your jobs to use specific storage backends based on user! If you have e.g. specific user groups that need their data stored separately from other users, for whatever political reasons, then in your dynamic destination you can do something like:</p>   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">job_destination</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="nf">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">)</span><br><span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="s">"alice"</span><span class="p">:</span><br>    <span class="n">job_destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="s">'object_store_id'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'foo'</span> <span class="c1"># Maybe lookup the ID from a mapping somewhere<br></span></code></pre></div></div>   <p>If you manage to do this in production, please let us know and we can update this FAQ with any information you encounter.</p> </blockquote> <!--END_SNIPPET-->
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-mapping-jobs-to-specific-storage-by-user"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-mapping-jobs-to-specific-storage-by-user" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Mapping Jobs to Specific Storage By User<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>It is possible to map your jobs to use specific storage backends based on user! If you have e.g. specific user groups that need their data stored separately from other users, for whatever political reasons, then in your dynamic destination you can do something like:</p>   <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">job_destination</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="nf">get_destination</span><span class="p">(</span><span class="n">destination_id</span><span class="p">)</span><br><span class="k">if</span> <span class="n">user</span> <span class="o">==</span> <span class="sh">"</span><span class="s">alice</span><span class="sh">"</span><span class="p">:</span><br>    <span class="n">job_destination</span><span class="p">.</span><span class="n">params</span><span class="p">[</span><span class="sh">'</span><span class="s">object_store_id</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="sh">'</span><span class="s">foo</span><span class="sh">'</span> <span class="c1"># Maybe lookup the ID from a mapping somewhere<br></span></code></pre></div></div>   <p>If you manage to do this in production, please let us know and we can update this FAQ with any information you encounter.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -573,7 +573,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -601,7 +601,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

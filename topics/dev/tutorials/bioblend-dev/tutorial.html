@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -234,7 +234,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -776,14 +776,14 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
 <span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">galaxy_key</span><span class="p">)</span>
 <span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_workflows</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wf_dict</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'name'</span><span class="p">]</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="s">'id'</span><span class="p">]</span><span class="si">}</span><span class="s">"</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">name</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf_dict</span><span class="p">[</span><span class="sh">'</span><span class="s">id</span><span class="sh">'</span><span class="p">]</span><span class="si">}</span><span class="sh">"</span><span class="p">))</span>
 
 <span class="c1"># BioBlend.objects
 </span><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
 <span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="n">galaxy_url</span><span class="p">,</span> <span class="n">galaxy_key</span><span class="p">)</span>
 <span class="n">workflows</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">wf</span> <span class="ow">in</span> <span class="n">workflows</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="n">name</span><span class="si">}</span><span class="s"> : </span><span class="si">{</span><span class="n">wf</span><span class="p">.</span><span class="nb">id</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div>  </div>
   <p>It does the same thing (prints all available workflows) using both BioBlend and BioBlend.objects. What differences can you see?</p>
   <blockquote class="solution">
@@ -851,7 +851,7 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
       <p>BioBlend code:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="sh">'</span><span class="s">http://localhost:8080</span><span class="sh">'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="n">invs</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_invocations</span><span class="p">()</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">invs</span><span class="p">)</span>
 </code></pre></div>      </div>
@@ -859,7 +859,7 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
       <p>BioBlend.objects code:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">bioblend.galaxy.objects</span> <span class="kn">import</span> <span class="n">GalaxyInstance</span>
-<span class="n">obj_gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="s">'http://localhost:8080'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">obj_gi</span> <span class="o">=</span> <span class="nc">GalaxyInstance</span><span class="p">(</span><span class="sh">'</span><span class="s">http://localhost:8080</span><span class="sh">'</span><span class="p">,</span> <span class="n">key</span><span class="o">=&lt;</span><span class="n">API_KEY</span><span class="o">&gt;</span><span class="p">)</span>
 <span class="n">previews</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">invocations</span><span class="p">.</span><span class="nf">get_previews</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">preview</span> <span class="ow">in</span> <span class="n">previews</span><span class="p">:</span>
     <span class="nf">print</span><span class="p">(</span><span class="n">preview</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
@@ -963,13 +963,13 @@ We use the <a href="https://git-scm.com">git</a> versioning tool to download the
       </blockquote>
 
       <p>BioBlend code:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create_history</span><span class="p">(</span><span class="sh">'</span><span class="s">MyNewHistory</span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <p>BioBlend.objects code:</p>
 
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="s">'MyNewHistory'</span><span class="p">)</span>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">history</span> <span class="o">=</span> <span class="n">obj_gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="sh">'</span><span class="s">MyNewHistory</span><span class="sh">'</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">history</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
@@ -1085,7 +1085,7 @@ My name is curl
       <p>We can see that it also expects an <code class="language-plaintext highlighter-rouge">id</code> parameter, which is the tool ID. The <code class="language-plaintext highlighter-rouge">kwds</code> argument indicates that the endpoint might accept additional keyword arguments as well.</p>
 
       <p>Let’s check the method documentation:</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
 DELETE /api/tools/{tool_id}/dependencies
 Attempts to uninstall requirements via the dependency resolver
 
@@ -1098,7 +1098,7 @@ parameters:
     resolver_type:
         Use the dependency resolver of this resolver_type to install
         dependency
-"""</span>
+</span><span class="sh">"""</span>
 </code></pre></div>      </div>
       <p>The endpoint expects a DELETE request at URL <code class="language-plaintext highlighter-rouge">/api/tools/{tool_id}/dependencies</code>. The <code class="language-plaintext highlighter-rouge">id</code> parameter in the method signature corresponds to the variable <code class="language-plaintext highlighter-rouge">{tool_id}</code> present in the endpoint URL.</p>
 
@@ -1113,10 +1113,10 @@ parameters:
 
       <p><strong>File <a href="https://github.com/galaxyproject/galaxy/blob/v21.01/lib/galaxy/tools/__init__.py#L1833">tools/__init__.py</a>, line 1833</strong>:</p>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">tool_requirements_status</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Return a list of dictionaries for all tool dependencies with their
     associated status
-    """</span>
+    </span><span class="sh">"""</span>
     <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_view</span><span class="p">.</span><span class="nf">get_requirements_status</span><span class="p">(</span>
         <span class="p">{</span><span class="n">self</span><span class="p">.</span><span class="nb">id</span><span class="p">:</span> <span class="n">self</span><span class="p">.</span><span class="n">tool_requirements</span><span class="p">},</span>
         <span class="n">self</span><span class="p">.</span><span class="n">installed_tool_dependencies</span>
@@ -1143,7 +1143,7 @@ Let’s recall that the endpoint expects a DELETE request at URL <code class="la
         <li>
           <p>We use the <code class="language-plaintext highlighter-rouge">self._make_url()</code> helper method to construct a valid URL with the supplied <code class="language-plaintext highlighter-rouge">tool_id</code> parameter. Finally, we need to append <code class="language-plaintext highlighter-rouge">'/dependencies'</code> for our endpoint.</p>
 
-          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
+          <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">/dependencies</span><span class="sh">'</span>
 </code></pre></div>          </div>
         </li>
         <li>
@@ -1160,7 +1160,7 @@ Let’s recall that the endpoint expects a DELETE request at URL <code class="la
       <p><strong>Adding the docstring</strong></p>
 
       <p>We should document the method and its parameter for the user.</p>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sh">"""</span><span class="s">
 Uninstall dependencies for a given tool via a resolver.
 
 :type tool_id: str
@@ -1168,7 +1168,7 @@ Uninstall dependencies for a given tool via a resolver.
 
 :rtype: list of dicts
 :return: Tool requirement statuses
-"""</span>
+</span><span class="sh">"""</span>
 </code></pre></div>      </div>
 
       <p>This is the docstring format used in BioBlend. At the top we provide a short general description of the method. Then we document each parameter with its type and a short description. The return value of the method is documented last. After the PR is merged, the docstring will be rendered as part of the <a href="https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html">BioBlend documentation</a>.</p>
@@ -1194,10 +1194,10 @@ Uninstall dependencies for a given tool via a resolver.
 
         <p><strong>Example</strong>:</p>
 
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get_version</span><span class="p">()[</span><span class="s">'version_major'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="s">'21.01'</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">'Newer version of Galaxy!'</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">config</span><span class="p">.</span><span class="nf">get_version</span><span class="p">()[</span><span class="sh">'</span><span class="s">version_major</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="sh">'</span><span class="s">21.01</span><span class="sh">'</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Newer version of Galaxy!</span><span class="sh">'</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="nf">print</span><span class="p">(</span><span class="s">'Older version of Galaxy!'</span><span class="p">)</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Older version of Galaxy!</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div>        </div>
         <p>An example where this is useful is the <a href="https://github.com/galaxyproject/bioblend/blob/v0.16.0/bioblend/galaxy/dataset_collections/__init__.py#L125"><code class="language-plaintext highlighter-rouge">download_dataset_collection()</code></a> method. It downloads a dataset collection as an archive file. Early versions of Galaxy return a ‘tar.gz’ archive. Later versions return a ‘zip’ archive. The BioBlend method uses the Galaxy version to determine the archive type.</p>
       </blockquote>
@@ -1208,7 +1208,7 @@ Uninstall dependencies for a given tool via a resolver.
       <p>In the end, our new method should look something like this:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">uninstall_dependencies</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">tool_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
-    <span class="s">"""
+    <span class="sh">"""</span><span class="s">
     Uninstall dependencies for a given tool via a resolver.
 
     :type tool_id: str
@@ -1216,8 +1216,8 @@ Uninstall dependencies for a given tool via a resolver.
 
     :rtype: list of dicts
     :return: Tool requirement statuses
-    """</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="s">'/dependencies'</span>
+    </span><span class="sh">"""</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="nf">_make_url</span><span class="p">(</span><span class="n">tool_id</span><span class="p">)</span> <span class="o">+</span> <span class="sh">'</span><span class="s">/dependencies</span><span class="sh">'</span>
     <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="nf">_delete</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="p">{},</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
 </code></pre></div>      </div>
     </li>
@@ -1230,9 +1230,9 @@ Uninstall dependencies for a given tool via a resolver.
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">test_tool_dependency_uninstall</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
     <span class="n">statuses</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">gi</span><span class="p">.</span><span class="n">tools</span><span class="p">.</span><span class="nf">uninstall_dependencies</span><span class="p">(</span>
-         <span class="s">'CONVERTER_fasta_to_bowtie_color_index'</span>
+         <span class="sh">'</span><span class="s">CONVERTER_fasta_to_bowtie_color_index</span><span class="sh">'</span>
     <span class="p">)</span>
-    <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s">'model_class'</span><span class="p">],</span> <span class="s">'NullDependency'</span><span class="p">)</span>
+    <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">statuses</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="sh">'</span><span class="s">model_class</span><span class="sh">'</span><span class="p">],</span> <span class="sh">'</span><span class="s">NullDependency</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1242,7 +1242,7 @@ Uninstall dependencies for a given tool via a resolver.
         <p>At the time of writing BioBlend supports Galaxy 17.09 and later. However, certain functionality might not be available in all these versions. For example, <code class="language-plaintext highlighter-rouge">download_dataset_collection</code> is only supported by Galaxy 18.01 and later. We don’t want to run tests specific to this functionality on earlier versions of Galaxy. They would simply fail. We can skip a test for specific versions of Galaxy by adding the <code class="language-plaintext highlighter-rouge">@test_util.skip_unless_galaxy</code> decorator above the test method in question.</p>
 
         <p><strong>Example</strong>:</p>
-        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@test_util.skip_unless_galaxy</span><span class="p">(</span><span class="s">'release_19.09'</span><span class="p">)</span>
+        <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@test_util.skip_unless_galaxy</span><span class="p">(</span><span class="sh">'</span><span class="s">release_19.09</span><span class="sh">'</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">test_some_functionality</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
 </code></pre></div>        </div>
         <p>This test will only be run against Galaxy 19.09 and later.</p>
@@ -1686,7 +1686,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1718,7 +1718,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

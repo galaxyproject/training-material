@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -277,7 +277,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -570,6 +570,14 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Introduction to Python:
                             
@@ -579,14 +587,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -705,8 +705,6 @@ Sentry.init({
                         
                     
                         
-                    
-                        
                             
                             <li> Plotting in Python:
                             
@@ -716,6 +714,8 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -789,8 +789,6 @@ Sentry.init({
                         
                     
                         
-                    
-                        
                             
                             <li> Advanced Python:
                             
@@ -800,6 +798,8 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -1053,7 +1053,7 @@ Sentry.init({
 and more precisely PM2.5 (<a href="https://en.wikipedia.org/wiki/Particulates#Size,_shape_and_solubility_matter">Particle Matter &lt; 2.5 μm</a>) 4 days forecast from December, 22 2021. Parallel data analysis with Pangeo is not covered in this tutorial.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-remark"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Remark</div>
+  <div class="box-title comment-title" id="comment-remark-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Remark</div>
 
   <p>This tutorial uses data on a regular latitude-longitude grid. More complex and irregular grids are not discussed in this tutorial. In addition,
 this tutorial is not meant to cover all the different possibilities offered by Xarrays but shows functionalities we find useful for day to day
@@ -1062,7 +1062,7 @@ analysis.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1106,7 +1106,7 @@ analysis.</p>
 
 <p>The netCDF dataset can now be opened with Xarray:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="nf">open_dataset</span><span class="p">(</span><span class="s">"data/CAMS-PM2_5-20211222.netcdf"</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span> <span class="o">=</span> <span class="n">xr</span><span class="p">.</span><span class="nf">open_dataset</span><span class="p">(</span><span class="sh">"</span><span class="s">data/CAMS-PM2_5-20211222.netcdf</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Once opened, we can get metadata using <code class="language-plaintext highlighter-rouge">print</code> statement.</p>
@@ -1117,7 +1117,7 @@ analysis.</p>
 <p>Below is what you should get if everything goes fine.</p>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-7"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &lt;xarray.Dataset&gt;
  Dimensions:     (longitude: 700, latitude: 400, level: 1, time: 97)
  Coordinates:
@@ -1139,7 +1139,7 @@ Attributes:
 </blockquote>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-command-not-found"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-command-not-found" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Command not found<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-command-not-found-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-command-not-found-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Command not found<span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>If you get an error with the previous command, first check the location of the input file <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code>:
 it needs to be in the same directory as your Jupyter Notebook.</p>
 </blockquote>
@@ -1158,12 +1158,12 @@ it needs to be in the same directory as your Jupyter Notebook.</p>
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-cam-pm2-5-dataset"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: CAM PM2.5 Dataset</div>
+  <div class="box-title question-title" id="question-cam-pm2-5-dataset-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: CAM PM2.5 Dataset</div>
 
   <p>What is the name of the variable for Particle matter &lt; 2.5 μm and its physical units?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>To get metadata information from <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> Data variable, we use its variable name and print it. Printing it will only print metadata, not the values.
         <ul>
@@ -1174,13 +1174,13 @@ it needs to be in the same directory as your Jupyter Notebook.</p>
     </ol>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="box-title code-in-title" id="code-in-python-7"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">pm2p5_conc</span><span class="p">)</span>
 </code></pre></div>      </div>
     </blockquote>
 
     <blockquote class="code-out">
-      <div class="box-title code-out-title" id="code-out-1"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+      <div class="box-title code-out-title" id="code-out-8"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   &lt;xarray.DataArray <span class="s1">'pm2p5_conc'</span> <span class="o">(</span><span class="nb">time</span>: 97, level: 1, latitude: 400, longitude: 700<span class="o">)&gt;</span>
    <span class="o">[</span>27160000 values with <span class="nv">dtype</span><span class="o">=</span>float32]
    Coordinates:
@@ -1199,11 +1199,11 @@ it needs to be in the same directory as your Jupyter Notebook.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-different-ways-to-access-data-variables"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Different ways to access Data variables</div>
+  <div class="box-title comment-title" id="comment-different-ways-to-access-data-variables-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Different ways to access Data variables</div>
 
   <p>To access a variable or coordinate, we can use “.” or specify its name as a string between squared brackets “[” “]”. For example:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">])</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">])</span>
 <span class="c1"># or alternatively
 </span><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">pm2p5_conc</span><span class="p">)</span>
 </code></pre></div>  </div>
@@ -1239,22 +1239,22 @@ it needs to be in the same directory as your Jupyter Notebook.</p>
 <p>The output will be very similar to what we did previously when selecting from coordinates by index.</p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-select-a-single-time-for-pm2-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Select a single time for PM2.5</div>
+  <div class="box-title question-title" id="question-select-a-single-time-for-pm2-5-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Select a single time for PM2.5</div>
 
   <p>How to select the forecast for December, 24th 2021 at 12:00 UTC?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index.</p>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python-1"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">))))</span>
+      <div class="box-title code-in-title" id="code-in-python-8"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">))))</span>
 </code></pre></div>      </div>
     </blockquote>
 
     <blockquote class="code-out">
-      <div class="box-title code-out-title" id="code-out-2"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+      <div class="box-title code-out-title" id="code-out-9"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
 Dimensions:     <span class="o">(</span>longitude: 700, latitude: 400, level: 1<span class="o">)</span>
 Coordinates:
@@ -1294,7 +1294,7 @@ Attributes:
 
 <p>Let’s now shift the longitudes to get values between <code class="language-plaintext highlighter-rouge">-180</code>, <code class="language-plaintext highlighter-rouge">180</code> degrees.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="n">coords</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'longitude'</span><span class="p">]</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span> <span class="o">-</span> <span class="mi">180</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="n">coords</span><span class="p">[</span><span class="sh">'</span><span class="s">longitude</span><span class="sh">'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="sh">'</span><span class="s">longitude</span><span class="sh">'</span><span class="p">]</span> <span class="o">+</span> <span class="mi">180</span><span class="p">)</span> <span class="o">%</span> <span class="mi">360</span> <span class="o">-</span> <span class="mi">180</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="n">longitude</span><span class="p">)</span>
 </code></pre></div></div>
 
@@ -1302,7 +1302,7 @@ Attributes:
 
 <h3 id="visualize-on-a-map-pm25-for-december-24th-2021-at-1200-utc">Visualize on a map PM2.5 for December, 24th 2021 at 12:00 UTC</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">))).</span><span class="n">pm2p5_conc</span><span class="p">.</span><span class="nf">plot</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)</span><span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">))).</span><span class="n">pm2p5_conc</span><span class="p">.</span><span class="nf">plot</span><span class="p">()</span>
 </code></pre></div></div>
 <p>We will get a figure like the one below:</p>
 
@@ -1331,17 +1331,17 @@ Attributes:
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">Mercator</span><span class="p">())</span>
-<span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s">'D'</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="s">'h'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+</span><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">)))[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
                                                                                     <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                                                                     <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># One way to customize your title
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">"Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-20211224.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC</span><span class="sh">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-20211224.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>And you should get the following plot:</p>
@@ -1354,8 +1354,8 @@ Attributes:
 
 <p>Firstly, we need to create a list of times and convert it to <code class="language-plaintext highlighter-rouge">pandas datetime</code> in order to make it easier to format times when plotting:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_times</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">list_times</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">list_times</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="sh">'</span><span class="s">2021-12-22</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">list_times</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d %b %H:%S UTC</span><span class="sh">"</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Secondly, we need to use the same plotting method as earlier, but we pass additional parameters:</p>
@@ -1377,19 +1377,19 @@ Attributes:
 
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                                                                        <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
-                                                                                       <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
-                                                                                       <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                       <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">projection</span><span class="sh">"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                       <span class="n">col</span><span class="o">=</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                                                                                        <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                                                                      <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+                                                                                      <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">longitude</span><span class="sh">"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">latitude</span><span class="sh">"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
 </span>                                                                                       <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># We have to set the map's options on our axes
-</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
-      <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
-      <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="sh">'</span><span class="s">2021-12-22</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+      <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
+      <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS PM2.5 </span><span class="sh">"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d %b %H:%S UTC</span><span class="sh">"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Save your figure
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-multi.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>In the second part of our plot, we are going to customize each subplot (this is why we loop for each of them and get their axes) by adding:</p>
 
@@ -1401,19 +1401,19 @@ Attributes:
 <p><img src="../../images/CAMS-PM2_5-fc-multi.png" alt="Customized multi-plot. " width="1584" height="1296" loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pm2-5-over-italy"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy</div>
+  <div class="box-title question-title" id="question-pm2-5-over-italy-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy</div>
 
   <p>Using a Multi-plot between Rome and Naples, can you tell us if the forecasted PM2.5 will increase or decrease during the first 24 hours?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N. PM2.5 will increase and reach values close to 35 μm.m-3.
 We will use <code class="language-plaintext highlighter-rouge">slice</code> to select the area and we slice latitudes with <code class="language-plaintext highlighter-rouge">latitude=slice(47.3, 36.5)</code> and not <code class="language-plaintext highlighter-rouge">latitude=slice(36.5, 47.3)</code>.
 The reason is that when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in
 decreasing order for CAMS.</p>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="box-title code-in-title" id="code-in-python-9"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
 
 <span class="c1"># We're using cartopy to project our data.
@@ -1422,20 +1422,20 @@ decreasing order for CAMS.</p>
 
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">))).</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
-                                                                          <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">))).</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
+                                                                          <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                                                                      <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
-                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
-                                                                                     <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">projection</span><span class="sh">"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                     <span class="n">col</span><span class="o">=</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                                                                                      <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">longitude</span><span class="sh">"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">latitude</span><span class="sh">"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
 </span>                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># We have to set the map's options on all axes
-</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="sh">'</span><span class="s">2021-12-22</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS PM2.5 </span><span class="sh">"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d %b %H:%S UTC</span><span class="sh">"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Save your figure
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-multi-Italy.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div>      </div>
     </blockquote>
 
@@ -1450,11 +1450,11 @@ decreasing order for CAMS.</p>
 
 <h3 id="mask-values-that-do-not-meet-a-criteria-with-where">Mask values that do not meet a criteria with <code class="language-plaintext highlighter-rouge">Where</code></h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">))</span>
 </code></pre></div></div>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-happened"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What happened?</div>
+  <div class="box-title comment-title" id="comment-what-happened-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What happened?</div>
   <p>Each element of the dataset where the criteria within the <code class="language-plaintext highlighter-rouge">where</code> statement is not met, e.g. when PM2.5 &lt;= 25, will be set to <code class="language-plaintext highlighter-rouge">nan</code>.
 You may not see any changes when printing the dataset but if you look carefuly at <code class="language-plaintext highlighter-rouge">pm2p5_conc</code> values, you will see many <code class="language-plaintext highlighter-rouge">nan</code>.</p>
 
@@ -1471,17 +1471,17 @@ You may not see any changes when printing the dataset but if you look carefuly a
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">Mercator</span><span class="p">())</span>
-<span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="s">'10m'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="n">resolution</span><span class="o">=</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
 
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="nf">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+</span><span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="nf">isel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
                                                                      <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                                                      <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
                                                                      <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># One way to customize your title
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="s">"Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC</span><span class="se">\n</span><span class="s"> only values &gt; 25"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
-<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-20211224-25.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">title</span><span class="p">(</span><span class="sh">"</span><span class="s">Copernicus Atmosphere Monitoring Service PM2.5, 2 day forecasts</span><span class="se">\n</span><span class="s"> 24th December 2021 at 12:00 UTC</span><span class="se">\n</span><span class="s"> only values &gt; 25</span><span class="sh">"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-20211224-25.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p><img src="../../images/CAMS-PM2_5-fc-20211224-25.png" alt="PM2.5 over Italy with threshold at 25. " width="1080" height="720" loading="lazy" /></p>
 
@@ -1497,20 +1497,20 @@ You may not see any changes when printing the dataset but if you look carefuly a
 
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'h'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">))).</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
-                                                                           <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">).</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">h</span><span class="sh">'</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">))).</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span>
+                                                                           <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                                                                       <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
-                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
-                                                                                     <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                                                                                     <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">projection</span><span class="sh">"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                                                                     <span class="n">col</span><span class="o">=</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                                                                                      <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+                                                                                     <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">longitude</span><span class="sh">"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">latitude</span><span class="sh">"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
 </span>                                                                                     <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># We have to set the map's options on all four axes
-</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
-     <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
-     <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="s">"PM2.5 &gt; 25 μm.m-3"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="sh">'</span><span class="s">2021-12-22</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+     <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
+     <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">"</span><span class="s">PM2.5 &gt; 25 μm.m-3</span><span class="sh">"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d %b %H:%S UTC</span><span class="sh">"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Save your figure
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy-25.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-multi-Italy-25.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p><img src="../../images/CAMS-PM2_5-fc-multi-Italy-25.png" alt="Multi-plot of PM2.5 over Italy with threshold at 25. " width="1584" height="1296" loading="lazy" /></p>
@@ -1525,7 +1525,7 @@ You may not see any changes when printing the dataset but if you look carefuly a
 </code></pre></div></div>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-3"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-10"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
 Dimensions:     <span class="o">()</span>
  Data variables:
@@ -1534,22 +1534,22 @@ Dimensions:     <span class="o">()</span>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-maximum-pm2-5-over-italy"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Maximum PM2.5 over Italy</div>
+  <div class="box-title question-title" id="question-maximum-pm2-5-over-italy-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Maximum PM2.5 over Italy</div>
 
   <p>What is the maximum forecasted PM2.5 value over the Rome-Naples region?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We  select the same sub-area: 11. East to 15.0 East and 40. N to 43. N and compute the maximum with <code class="language-plaintext highlighter-rouge">max</code>. The maximum PM2.5 value is <strong>59.13694382</strong> μm.m-3 (that is rounded to <strong>59.14</strong>).</p>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="box-title code-in-title" id="code-in-python-10"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nf">max</span><span class="p">()</span>
 </code></pre></div>      </div>
     </blockquote>
 
     <blockquote class="code-out">
-      <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+      <div class="box-title code-out-title" id="code-out-11"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xarray.Dataset
 Dimensions:
 Coordinates: <span class="o">(</span>0<span class="o">)</span>
@@ -1566,24 +1566,24 @@ Attributes: <span class="o">(</span>0<span class="o">)</span>
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-find-when-the-maximum-pm2-5-is-forecasted"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Find when the maximum PM2.5 is forecasted</div>
+  <div class="box-title question-title" id="question-find-when-the-maximum-pm2-5-is-forecasted-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Find when the maximum PM2.5 is forecasted</div>
 
   <p>When is the maximum PM2.5 value forecasted?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We will select a sub-area: 11. East to 15.0 East and 40. N to 43. N and average over the entire selected area and search where the maximum PM2.5 value of 59.13694382 μm.m-3 is found. The maximum PM2.5 value occurs on 2021-12-22 at 20:00 UTC.</p>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python-4"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
-      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset_tmean</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nf">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="s">'latitude'</span><span class="p">,</span> <span class="s">'longitude'</span><span class="p">))</span>
-<span class="n">dset_tmean_max</span> <span class="o">=</span> <span class="n">dset_tmean</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset_tmean</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">]</span> <span class="o">==</span> <span class="mf">59.13694382</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+      <div class="box-title code-in-title" id="code-in-python-11"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dset_tmean</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nf">max</span><span class="p">(</span><span class="n">dim</span><span class="o">=</span><span class="p">(</span><span class="sh">'</span><span class="s">latitude</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">longitude</span><span class="sh">'</span><span class="p">))</span>
+<span class="n">dset_tmean_max</span> <span class="o">=</span> <span class="n">dset_tmean</span><span class="p">.</span><span class="nf">where</span><span class="p">(</span><span class="n">dset_tmean</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">]</span> <span class="o">==</span> <span class="mf">59.13694382</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="nf">print</span><span class="p">(</span><span class="n">dset_tmean_max</span><span class="p">)</span>
 </code></pre></div>      </div>
     </blockquote>
 
     <blockquote class="code-out">
-      <div class="box-title code-out-title" id="code-out-5"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+      <div class="box-title code-out-title" id="code-out-12"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
 Dimensions:     <span class="o">(</span><span class="nb">time</span>: 1, level: 1<span class="o">)</span>
 Coordinates:
@@ -1597,7 +1597,7 @@ Data variables:
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-pixel-size-when-averaging"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Pixel size when averaging</div>
+  <div class="box-title comment-title" id="comment-pixel-size-when-averaging-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Pixel size when averaging</div>
   <p>We average over a relatively small area so we do not make a weighted average. Use weighted averages when averaging over the entire globe or over a large area where the pixel sizes may vary (depending on the latitude).</p>
 
 </blockquote>
@@ -1608,11 +1608,11 @@ Data variables:
 
 <p>The resampling frequency is lower than our original data, so we would need to apply a global operation on the data we group together such as mean, min, max:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'1D'</span><span class="p">).</span><span class="nf">mean</span><span class="p">())</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="sh">'</span><span class="s">1D</span><span class="sh">'</span><span class="p">).</span><span class="nf">mean</span><span class="p">())</span>
 </code></pre></div></div>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-6"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
+  <div class="box-title code-out-title" id="code-out-13"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;xarray.Dataset&gt;
 Dimensions:     <span class="o">(</span><span class="nb">time</span>: 5, longitude: 700, latitude: 400, level: 1<span class="o">)</span>
 Coordinates:
@@ -1629,54 +1629,54 @@ Data variables:
 
 <p>When the resampling frequency is higher than the original data, we need to indicate how to fill the gaps, for instance, interpolate and indicate which interpolation method to apply or select nearest values, etc.:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'30min'</span><span class="p">).</span><span class="nf">interpolate</span><span class="p">(</span><span class="s">'linear'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="sh">'</span><span class="s">30min</span><span class="sh">'</span><span class="p">).</span><span class="nf">interpolate</span><span class="p">(</span><span class="sh">'</span><span class="s">linear</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-be-careful-when-sub-sampling"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Be careful when sub-sampling!</div>
+  <div class="box-title comment-title" id="comment-be-careful-when-sub-sampling-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Be careful when sub-sampling!</div>
   <p>Increasing the frequency of your data e.g. artificially creating data may not be scientifically relevant. Please use it carefully! Interpolating is not always scientifically relevant and sometimes you may prefer to choose a different method, like taking the nearest value for instance:</p>
 
   <blockquote class="code-in">
-    <div class="box-title code-in-title" id="code-in-python-5"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'30min'</span><span class="p">).</span><span class="nf">nearest</span><span class="p">()</span>
+    <div class="box-title code-in-title" id="code-in-python-12"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="n">dset</span><span class="p">.</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="sh">'</span><span class="s">30min</span><span class="sh">'</span><span class="p">).</span><span class="nf">nearest</span><span class="p">()</span>
 </code></pre></div>    </div>
   </blockquote>
 
 </blockquote>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-pm2-5-over-italy-in-the-next-4-days"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy in the next 4 days</div>
+  <div class="box-title question-title" id="question-pm2-5-over-italy-in-the-next-4-days-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: PM2.5 over Italy in the next 4 days</div>
 
   <p>Using a Multi-plot between Rome and Naples, and making averages per day, can you tell us if forecasted PM2.5 will increase or decrease?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>PM2.5 over Italy is overall decreasing over the next 4 forecasted days.</p>
 
     <blockquote class="code-in">
-      <div class="box-title code-in-title" id="code-in-python-6"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
+      <div class="box-title code-in-title" id="code-in-python-13"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Python</div>
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="nf">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
 
 <span class="c1"># We're using cartopy to project our data.
 # (see documentation on cartopy)
 </span><span class="n">proj_plot</span> <span class="o">=</span> <span class="n">ccrs</span><span class="p">.</span><span class="nc">Mercator</span><span class="p">()</span>
 
-<span class="n">sub_dset</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="s">'1D'</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span>
+<span class="n">sub_dset</span> <span class="o">=</span> <span class="n">dset</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">latitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">43.</span><span class="p">,</span> <span class="mf">40.</span><span class="p">),</span> <span class="n">longitude</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="mf">11.</span><span class="p">,</span><span class="mf">15.</span><span class="p">)).</span><span class="nf">resample</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="sh">'</span><span class="s">1D</span><span class="sh">'</span><span class="p">).</span><span class="nf">mean</span><span class="p">()</span>
 <span class="c1"># We need to project our data to the new projection and for this we use `transform`.
 # we set the original data projection in transform (here PlateCarree)
-</span><span class="n">p</span> <span class="o">=</span> <span class="n">sub_dset</span><span class="p">[</span><span class="s">'pm2p5_conc'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
+</span><span class="n">p</span> <span class="o">=</span> <span class="n">sub_dset</span><span class="p">[</span><span class="sh">'</span><span class="s">pm2p5_conc</span><span class="sh">'</span><span class="p">].</span><span class="nf">plot</span><span class="p">(</span><span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="p">.</span><span class="nc">PlateCarree</span><span class="p">(),</span>
                                 <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">35</span><span class="p">,</span>
-                                <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="s">"projection"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
-                                <span class="n">col</span><span class="o">=</span><span class="s">'time'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                <span class="n">subplot_kws</span><span class="o">=</span><span class="p">{</span><span class="sh">"</span><span class="s">projection</span><span class="sh">"</span><span class="p">:</span> <span class="n">proj_plot</span><span class="p">},</span>
+                                <span class="n">col</span><span class="o">=</span><span class="sh">'</span><span class="s">time</span><span class="sh">'</span><span class="p">,</span> <span class="n">col_wrap</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                 <span class="n">robust</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
-                                <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"longitude"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="s">"latitude"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
+                                <span class="n">aspect</span><span class="o">=</span><span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">longitude</span><span class="sh">"</span><span class="p">]</span> <span class="o">/</span> <span class="n">dset</span><span class="p">.</span><span class="n">dims</span><span class="p">[</span><span class="sh">"</span><span class="s">latitude</span><span class="sh">"</span><span class="p">],</span>  <span class="c1"># for a sensible figsize
 </span>                                <span class="n">cmap</span><span class="o">=</span><span class="n">cmc</span><span class="p">.</span><span class="n">roma_r</span><span class="p">)</span>
 <span class="c1"># We have to set the map's options on all axes
-</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="s">'2021-12-22'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s">'D'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
-    <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="s">'10m'</span><span class="p">)</span>
-    <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="s">"CAMS PM2.5 "</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="s">"%d %b %H:%S UTC"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</span><span class="k">for</span> <span class="n">ax</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">p</span><span class="p">.</span><span class="n">axes</span><span class="p">.</span><span class="n">flat</span><span class="p">,</span>  <span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">datetime64</span><span class="p">(</span><span class="sh">'</span><span class="s">2021-12-22</span><span class="sh">'</span><span class="p">)</span> <span class="o">+</span> <span class="n">dset</span><span class="p">.</span><span class="n">time</span><span class="p">.</span><span class="nf">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nf">slice</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="n">np</span><span class="p">.</span><span class="nf">timedelta64</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="sh">'</span><span class="s">D</span><span class="sh">'</span><span class="p">)))).</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">coastlines</span><span class="p">(</span><span class="sh">'</span><span class="s">10m</span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">.</span><span class="nf">set_title</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS PM2.5 </span><span class="sh">"</span> <span class="o">+</span> <span class="n">pd</span><span class="p">.</span><span class="nf">to_datetime</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="nf">strftime</span><span class="p">(</span><span class="sh">"</span><span class="s">%d %b %H:%S UTC</span><span class="sh">"</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="c1"># Save your figure
-</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="s">"CAMS-PM2_5-fc-multi-Italy-mean-per-day.png"</span><span class="p">)</span>
+</span><span class="n">plt</span><span class="p">.</span><span class="nf">savefig</span><span class="p">(</span><span class="sh">"</span><span class="s">CAMS-PM2_5-fc-multi-Italy-mean-per-day.png</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div>      </div>
     </blockquote>
 
@@ -1883,7 +1883,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1915,7 +1915,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

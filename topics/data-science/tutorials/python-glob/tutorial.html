@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@9720579406f0ce1ef32b82b0c5c83822f7941326",
+  release: "galaxy-training-network@315fadc9154beb8a09bfe3bbb9cb31f8059fadb5",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688475117' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688475117' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1688478855' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1688478855' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -255,7 +255,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1688478855'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -613,7 +613,7 @@ Sentry.init({
                 <p>Globbing is the term used in computer science when we have a bunch of files and we want to list all of them matching some pattern.</p>
 
 <blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda">Agenda</div>
+  <div class="box-title agenda-title" id="agenda-1">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -634,15 +634,15 @@ Sentry.init({
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">os</span>
 <span class="kn">import</span> <span class="n">subprocess</span>
 
-<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'a/b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'c/e'</span><span class="p">,</span> <span class="s">'d'</span><span class="p">,</span> <span class="s">'.'</span><span class="p">]</span>
-<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a.txt'</span><span class="p">,</span> <span class="s">'a.csv'</span><span class="p">,</span> <span class="s">'b.csv'</span><span class="p">,</span> <span class="s">'b.txt'</span><span class="p">,</span> <span class="s">'e.glm'</span><span class="p">]</span>
+<span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a/b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c/e</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">d</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">.</span><span class="sh">'</span><span class="p">]</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">a.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a.csv</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b.csv</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b.txt</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">e.glm</span><span class="sh">'</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
     <span class="c1"># Create some directories
 </span>    <span class="n">os</span><span class="p">.</span><span class="nf">makedirs</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="c1"># Create some files
 </span>    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span><span class="s">'touch'</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">)])</span>
+        <span class="n">subprocess</span><span class="p">.</span><span class="nf">check_output</span><span class="p">([</span><span class="sh">'</span><span class="s">touch</span><span class="sh">'</span><span class="p">,</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">f</span><span class="p">)])</span>
 </code></pre></div></div>
 
 <p>Now we should have a pretty full folder!</p>
@@ -652,15 +652,15 @@ Sentry.init({
 <p>We can use the glob module to find files:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">glob</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'*.csv'</span><span class="p">))</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'*.txt'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">*.csv</span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">*.txt</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Here we use an asterisk (<code class="language-plaintext highlighter-rouge">*</code>) as a wildcard, it matches any bit of text (but not into folders!) to all matching files. Here we list all matching <code class="language-plaintext highlighter-rouge">csv</code> or <code class="language-plaintext highlighter-rouge">txt</code> files. This is great to find files matching a pattern.</p>
 
 <p>We can also use asterisks anywhere in the glob, it doesn’t just have to be the filename portion:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'a*'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">a*</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>Here we even see a third entry: the directory.</p>
@@ -671,18 +671,18 @@ Sentry.init({
 
 <p>Only need a single directory? Just include that!</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'a/*.csv'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">a/*.csv</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <p>But if you need more levels, or want to look in <em>all</em> folders, then you need the double wildcard! With two asterisks <code class="language-plaintext highlighter-rouge">**</code> we can search recursively through directories for files:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">**/a.csv</span><span class="sh">'</span><span class="p">))</span>
 </code></pre></div></div>
 
 <h1 id="exercise">Exercise</h1>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-where-in-the-world-is-the-csv"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Where in the world is the CSV?</div>
+  <div class="box-title question-title" id="question-where-in-the-world-is-the-csv-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Where in the world is the CSV?</div>
 
   <ol>
     <li>How would you find all <code class="language-plaintext highlighter-rouge">.csv</code> files?</li>
@@ -691,7 +691,7 @@ Sentry.init({
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><code class="language-plaintext highlighter-rouge">glob.glob('**/*.csv')</code></li>
@@ -710,7 +710,7 @@ Sentry.init({
 
 <p>If you know your analyses are dependent on file ordering, then you can use <code class="language-plaintext highlighter-rouge">sorted()</code> to make sure the data is provided in a uniform way every time.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="s">'**/a.csv'</span><span class="p">)))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="nf">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">.</span><span class="nf">glob</span><span class="p">(</span><span class="sh">'</span><span class="s">**/a.csv</span><span class="sh">'</span><span class="p">)))</span>
 </code></pre></div></div>
 
 <p>If you’re not sure if your results will be dependent, you can try sorting anyway. Or better yet, randomising the list of inputs to make sure your code behaves properly in any scenario.</p>
@@ -877,7 +877,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/9720579406f0ce1ef32b82b0c5c83822f7941326">9720579</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/315fadc9154beb8a09bfe3bbb9cb31f8059fadb5">315fadc</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -909,7 +909,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1688475117'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1688478855'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
