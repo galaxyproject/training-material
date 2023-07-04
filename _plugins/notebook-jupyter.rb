@@ -38,6 +38,8 @@ end
 Jekyll::Hooks.register :site, :pre_render do |site|
   puts '[GTN/Notebooks] Rendering'
 
+  site.config['__rendered_notebook_cache'] = Hash.new
+
   # For every tutorial with the 'notebook' key in the page data
   site.pages.select { |page| GTNNotebooks.notebook_filter(page.data) }.each do |page|
     # We get the path to the tutorial source
@@ -80,10 +82,7 @@ Jekyll::Hooks.register :site, :pre_render do |site|
 
     # Write it out!
     ipynb_dir = File.join(site.dest, dir)
-    # Create if missing
-    FileUtils.mkdir_p(ipynb_dir)
     ipynb_path = File.join(ipynb_dir, "#{topic_id}-#{tutorial_id}.ipynb")
-    File.write(ipynb_path, JSON.pretty_generate(json_boxify(with_solutions, page)))
     # page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}.ipynb")
     # page2.content = JSON.pretty_generate(with_solutions)
     # page2.data['layout'] = nil
@@ -102,11 +101,30 @@ Jekyll::Hooks.register :site, :pre_render do |site|
     end
 
     ipynb_path2 = File.join(ipynb_dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
-    File.write(ipynb_path2, JSON.pretty_generate(json_boxify(no_solutions, page)))
     # page2 = PageWithoutAFile.new(site, '', dir, "#{topic_id}-#{tutorial_id}-course.ipynb")
     # page2.content = JSON.pretty_generate(no_solutions)
     # page2.data['layout'] = nil
     # page2.data['citation_target'] = 'jupyter'
     # site.pages << page2
+
+    site.config['__rendered_notebook_cache'][page.path] = {
+      'dir' => ipynb_dir,
+      'path1' => ipynb_path,
+      'content1' => JSON.pretty_generate(json_boxify(with_solutions, page)),
+      'path2' => ipynb_path2,
+      'content2' => JSON.pretty_generate(json_boxify(no_solutions, page)),
+    }
   end
+end
+
+# Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
+Jekyll::Hooks.register :site, :post_write do |site|
+  site.config['__rendered_notebook_cache'].each do |_path, info|
+    # Create if missing
+    FileUtils.mkdir_p(info['dir'])
+    # Write it out!
+    File.write(info['path1'], info['content1'])
+    File.write(info['path2'], info['content2'])
+  end
+
 end
