@@ -1006,4 +1006,4 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 # Conclusion
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+pipeline used.
