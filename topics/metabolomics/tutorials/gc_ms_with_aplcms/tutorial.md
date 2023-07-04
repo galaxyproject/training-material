@@ -34,6 +34,17 @@ There are two major routes of data analysis. The first, which we call **unsuperv
 
 ![recetox-aplcms overview](../../images/aplcms_scheme.png "Overview of individual steps of the recetox-aplcms package that can be combined in two separate workflows processing HRMS data in an unsupervised manner or by including a-priori knowledge.")
 
+The workflows consist of the following building blocks:
+
+- **remove noise** - denoise the raw data and extract the EIC
+- **generate feature table** - group features in EIC into peaks using peak-shape model
+- **compute clusters** - compute mz and rt clusters across samples
+- **compute template** - find the template for rt correction
+- **correct time** - correct the rt across samples using splines
+- **align features** - align identical features across samples
+- **recover weaker signals** - recover missed features in samples based on the aligned features
+- **merge known table** - add known features to detected features table and vice versa
+
 
 > ### Agenda
 >
@@ -44,123 +55,120 @@ There are two major routes of data analysis. The first, which we call **unsuperv
 >
 {: .agenda}
 
-# Title for your first section
+# Data preparation and prepocessing
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+## Import the data into Galaxy
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
-
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Upload data </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) into a collection:
 >
 >    ```
->    
+>    https://zenodo.org/record/7890956/files/8_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7890956/files/21_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7890956/files/29_qc_no_dil_milliq.raw
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="input" renaming=false %}
+>
+> 3. Make sure your data is in a **collection**. You can always manually create the collection from separate files:
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+>    In the further steps, this dataset collection will be referred to as `input` (and we recommend naming this collection like that to avoid confusion).
+>
+> 4. Import the following extra file from [Zenodo]({{ page.zenodo_link }}): TODO
+>
+>    ```
+>    https://gitlab.ics.muni.cz/umsa/umsa-files/-/raw/master/testdata/recetox-aplcms/hybrid/known_table.parquet
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> 
+>    Please pay attention to the format of the uploaded file, and make sure it is correctly imported.
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    > <comment-title> The known table </comment-title>
+>    >
+>    > TODO
+>    >
+>    {: .comment}
 >
-> 5. Add to each database a tag corresponding to ...
+{: .hands_on}
+
+## Convert the raw data to mzML
+
+Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We use the tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert our samples to the appropriate format (`.mzML` in this case).
+
+> <hands-on-title> Convert the raw data to mzML </hands-on-title>
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+> 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `input` (Input dataset collection)
+>    - *"Do you agree to the vendor licenses?"*: `Yes`
+>    - *"Output Type"*: `mzML`
 >
 {: .hands_on}
 
 # Common part
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+TODO
 
-![Alternative text](../../images/image_name "Legend of the image")
+## Remove noise
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+This step extracts ion chromatogram (EIC) showing the intensity of only a particular ions of interest over time.
+Since the intensity is droping over time in the experiment, we want to normalise this and remove noise from the raw data.
+It also performs a first clustering step of points with close m/z values into the extracted ion chromatograms (EICs).
 
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> <details-title> Parameters </details-title>
+> 
+> A precise tuning of input parameters is crucial in this step, since it can potentially lead to elimination of some of the data of interest, or, on the other extreme, preservance of some noisy background data:
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> - **Minimal elution time** (`min_run`) - minimal length of elution time of a peak to be actually recognised as a peak. It is closely related to the chromatography method used. Only peaks with greater elution length are kept.
+> - **Minimal signal presence** (`min_pres`) - determines in how many consequent scans do we want to have the signal present. Sometimes the signal from a real feature is not present 100% of the time along the feature's retention time. This parameter sets the threshold for an ion trace to be considered a feature. This parameter is best determined by examining the raw data. For example, if we know a data point shows up only every 3 scans for 10 seconds, this setting can be used ilter it out.
+> - **m/z tolerance** (`mz_tol`) - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. Can be seen as width of m/z peak.
+> - **Baseline correction** (`baseline`) - intensity cutoff to be used. After grouping the observations, the highest intensity in each group is found. If the highest is lower than this value, the entire group will be deleted.
+>
+> ![recetox-aplcms noise parameters](../../images/aplcms_explain_min_run_and_pres.jpg "Graphical explanation of effect of minimal elution time (min_run) and minimal signal presence (min_pres) parameters on input data.")
 >
 {: .details}
 
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **recetox-aplcms - remove noise**
-
-intensity is droping over time in the experiment, we want to normalise this and remove noise
-
-Parameters
-- `min_pres` - in how many consequent scans do we want to have the signal present
-  - e.g. data point show up only every 3 scans for 10 seconds, this setting can filter it out
-  - we can't set the maximum at this point
-- `min_run` - length of elution time (seconds) - what has to be the minimum width of a peak to it be considered a peak
-- `mz_tol` - ppm tolerance, helps us what is still considered as one signal, width of m/z peak
-- `baseline` - intensity cutoff you want to use
-
 > ### {% icon hands_on %} Hands-on: Task description
+>
+> TODO remove defualt values
 >
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Minimal signal presence [fraction of scans]"*: `0.5` (**min_pres**)
+>    - *"Minimal elution time [unit corresponds to the retention time]"*: `12` (**min_run**)
+>    - *"m/z tolerance [ppm]"*: `10` (**mz_tol**)
+>    - *"Baseline correction [unit of signal intensity]"*: `0.0` (**baseline**)
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Can we provide some numerical intervals for input parameters?
-> 2. Is the data filtered also on retention time?
+> 1. Are there any numerical intervals available for the input parameters?
+> 2. Can the data be filtered also on retention time axis?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Not really, because they are very instrument and data specific.
-> > 2. Yes, and it can be adjusted with the `min_run` parameter.
+> > 1. All input parameters are instrument-specific, therefore we cannot provide recommended intervals for the values. TODO: isnt min_pres from 0 to 1?
+> > 2. Indeed, for this purpose, `min_run` parameter can be used.
 > >
 > {: .solution}
 >
 {: .question}
 
-Output is in the `.parquet` format, just a binary (more accurate yet smaller in size) representation of tabular format. We would loose accuracy by storing it in text format. In the table we have our filtered data, already preliminary grouped on m/z basis - within the ppm tolerance we chose. 
+Output is in the `.parquet` format, which is a binary representation of tabular format. 
+This format is used to increase the accuracy of stored values, that would be significantly lower when stored in text format.
+In the table we have our filtered data all within the ppm tolerance we chose, and already preliminary grouped on m/z basis.
 
 ## Sub-step with **recetox-aplcms - generate feature table**
 
