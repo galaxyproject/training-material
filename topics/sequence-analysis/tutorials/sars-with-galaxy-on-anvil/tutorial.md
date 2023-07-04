@@ -277,6 +277,8 @@ You will open up a summary report for the sequencing file:
 >
 >Using this formula, we can calculate that a quality score of 40 means only 0.00010 probability of an error!
 >
+> Learn more from the [Quality Control Tutorial FAQs](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/faqs/).
+>
 {: .details}
 
 # Exercise Three: Alignment
