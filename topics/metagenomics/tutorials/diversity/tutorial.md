@@ -136,6 +136,8 @@ In the table below you can find a list of commonly used indexes to calculate α 
 
 ![richness and evenness](../images/alpha_diversity_richness_evenness.png "richness and evenness")
 
+> [name=sophia-h]I know we said to add the mathematical description into the same table but I feel like it becomes a bit too crowded so I made a detail box with the formulations and citations... what do you think?
+
 | Indices for α diversity | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Class     |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
 | Shannons                | Calculates the uncertainty in predicting the species identity of an individual that is selected from a community.                                                                                                                                                                                                                                                                                                                                                                                                                 | Diversity |
@@ -188,11 +190,15 @@ Krakentools introduction + metrics available there
 
 |           | JC1A      | JP4D      | Explanation                                                                                                                                                                                                                                                                                                                                                                                              |
 |-----------|-----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Shannon   | 5.3441    | 6.4429    | When the Shannon index is given as a value of 5, it indicates a relatively high level of diversity within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.                                                                                                                                           |
-| Berger-Parker | 0.2299    | 0.0581    | When the Berger-Parker index is given as a value of 0.23, it suggests that a single species dominates the community, as it represents 23% of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only 5% of the total individuals, which implies a more balanced distribution of individuals among different species compared to a higher Berger-Parker index value.                                                                                                                                                                                       |
-| Simpson   | 0.9401    | 0.9926    | When the Simpson's index is given as a value of 0.94, it indicates a high level of species diversity and evenness within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance. |
-| Inverse Simpson | 16.6941   | 136.0287  | When the Inverse Simpson's index is given as a value of 16.69, it suggests a relatively low level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of 136 indicates a higher diversity compared to a lower index value. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species. |
+| Shannon   | 5.3441    | 6.4429    | When the Shannon index is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.                                                                                                                                           |
+| Berger-Parker | 0.2299    | 0.0581    | When the Berger-Parker index is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.                                                                                                                                                                                       |
+| Simpson   | 0.9401    | 0.9926    | When the Simpson's index is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance. |
+| Inverse Simpson | 16.6941   | 136.0287  | When the Inverse Simpson's index is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species. |
 | Fisher    | 3240.0957 | 9163.5027 |                                                                                                           > >
+> [name=sophia-h]How can I implement a table in the question solution box?
+> 
+> [name=sophia-h] Here are the Fisher's alpha values that I don't understand
+> 
 > > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.
                                                                       |
 
@@ -251,22 +257,25 @@ These indexes have been developed to address specific research questions, accomm
 
 > <details-title>More details on calculating β diversity</details-title>
 
+> [name=sophia-h] I cant use the line | in the mathematical expression because then it confuses the table... I read that, to circumvent it, I could use \vert but somehow it isn't displayed properly.. maybe it does on github, we would need to check that
+
 | Index                     | Mathematical Expression                                                      | Description                                                                                                                                                                                                                                                                                                     | Citation                |
 | ------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| Jaccard Index             | J(X, Y) = |X ∩ Y| / |X ∪ Y|                                                  | X ∩ Y represents the intersection of sets X and Y (elements common to both sets), and X ∪ Y represents the union of sets X and Y (all unique elements from both sets combined).                                                                                                                                 | {% cite Jaccard.1912 %} |
-| Sørensen Index            | DSC = 2|X ∩ Y| / |X| + |Y|                                                   | X ∩ Y represents the intersection of sets X and Y (elements common to both sets),  and |X| and |Y| are the cardinalities of the two sets (i.e. the number of elements in each set)                                                                                                                              | {% cite Srensen.1948 %} |
+| Jaccard Index             | J(X, Y) = \vert X ∩ Y\vert  / \vert X ∪ Y\vert                                                   | X ∩ Y represents the intersection of sets X and Y (elements common to both sets), and X ∪ Y represents the union of sets X and Y (all unique elements from both sets combined).                                                                                                                                 | {% cite Jaccard.1912 %} |
+| Sørensen Index            | DSC = 2\vert X ∩ Y\vert  / \vert X\vert  + \vert Y\vert                                                    | X ∩ Y represents the intersection of sets X and Y (elements common to both sets),  and \vert X\vert  and \vert Y \vert  are the cardinalities of the two sets (i.e. the number of elements in each set)                                                                                                                              | {% cite Srensen.1948 %} |
 | Bray-Curtis Dissimilarity | BC<sub>ij</sub> = 1 - (2C<sub>ij</sub> / (S<sub>i</sub> + S<sub>j</sub>))    | C<sub>ij</sub> represents the sum of the absolute differences in abundances between corresponding species in samples i and j, S<sub>i</sub> represents the total abundance or sum of species abundances in sample i, and S<sub>j</sub> represents the total abundance or sum of species abundances in sample j. | {% cite Bray.1957 %}    |
 | Kulczynski Dissimilarity  | D = 1 - (S<sub>AB</sub> / (S<sub>A</sub> + S<sub>B</sub> - 2S<sub>AB</sub>)) | S<sub>AB</sub> the number of shared OTUs between communities A and B, S<sub>A</sub> the number of OTUs in community A, and S<sub>B</sub> the number of OTUs in community B                                                                                                                                      |
 
 
-xxx
+
 ![UniFrac](../images/unifrac.png "UniFrac")
 
 
 {: .details}
 
 ## Hands on: Calculate β diversity with Krakentools
-
+> 
+Krakentools
 > <hands-on-title>Calculate α and β diversity with Krakentools</hands-on-title>
 >
 >
@@ -288,6 +297,73 @@ xxx
 > {: .solution}
 >
 {: .question}
+
+# Evaluation of different diversity metrics
+
+Bonilla-Rosso et al. did **performance evaluation** of different diversity metrics using simulated data sets {% cite BonillaRosso.2012 %}. For details on the individual metrics, please check their [publication](https://pubmed.ncbi.nlm.nih.gov/22554028/). However, it is important to note that none of the estimated metrics showed statistical similarity to their corresponding parameters in the source communities. Moreover, the results obtained were inconsistent across the samples.
+
+This **inconsistency** can be attributed to the fact that individual metrics only provide a **specific** perspective on diversity and are prone to bias in their estimation, leading to incorrect ranking of the samples.
+
+In summary, **relying solely on single-diversity metrics may not be enough** to accurately compare the diversity between two communities. Instead, we recommend utilizing multi-dimensional metrics to capture diverse rankings across different scales of diversity, which can be affected differently in manipulative studies.
+
+**Multidimensional diversity metrics**, also known as multivariate diversity metrics, are quantitative measures that capture multiple dimensions or aspects of diversity simultaneously. These metrics go beyond single-diversity metrics, such as species richness or Shannon entropy, which provide a one-dimensional representation of diversity.
+
+In contrast, multidimensional diversity metrics **take into account various attributes or characteristics** of species or communities to provide a more comprehensive understanding of diversity. These attributes can include species abundances, functional traits, phylogenetic relationships, or spatial distributions.
+
+The choice and composition of dimensions in multidimensional diversity metrics depend on the research context and the specific objectives of the study. Some aspects, multidimensional diversity metrics take into account, include:
+1. **Functional Diversity**: This metric considers the range and variation of functional traits among species within a community. It assesses the diversity of ecological roles and functional strategies present, contributing to ecosystem functioning and resilience.
+2. **Phylogenetic Diversity**: This metric incorporates the evolutionary relationships among species within a community. It quantifies the diversity based on the length and topology of the phylogenetic tree, highlighting the evolutionary history and relatedness of species.
+3. **Spatial Diversity**: This metric incorporates spatial patterns and distributions of species within a landscape or ecosystem. It considers the heterogeneity of habitats, connectivity, and the arrangement of species populations across space.
+
+Multidimensional diversity metrics offer a **more nuanced and holistic perspective** on biodiversity, capturing different facets and dimensions of ecological variation. They provide insights into the ecological processes shaping communities and ecosystems and can be valuable in conservation planning, ecosystem management, and understanding the functional implications of biodiversity patterns.
+
+## Multidimensional diversity metrics and Parameter q
+
+Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their **order q**, which determines **the extent to which rare or common species are emphasized**. The ranking and comparison of assemblages rely on the chosen value of q. 
+
+Instead of selecting a few measures to describe an assemblage, it is preferable to **present a continuous profile** that depicts diversity or entropy as a function of q (where q ≥ 0). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of q ranging from 0 to q = 3 or 4, beyond which there is usually little change.
+
+ 
+
+![Parameter q](../images/hill_numbers "UniFrac")
+
+
+> <details-title>More details on the Hill numbers</details-title>
+
+
+>Hill numbers, also known as diversity indices or diversity measures, are mathematical metrics used to quantify the diversity or richness of a biological community. They were developed by ecologist Robert H. Whittaker and are widely used in ecology and biodiversity studies.
+>
+>Hill numbers provide a way to summarize and compare the diversity of different communities based on the abundance or occurrence of different species within those communities. These numbers take into account both the number of species present and their relative abundances. The higher the Hill number, the greater the diversity or richness of the community.
+
+>Hill numbers are often represented by the symbol "D", followed by a subscript that indicates the order of diversity. The order of diversity determines the weight given to rare versus common species. Commonly used Hill numbers include:
+
+>1.	Species richness (D₀): This is the simplest Hill number and represents the total number of species in a community, without considering their abundances. It provides a basic measure of biodiversity based on species count.
+>2.	Shannon diversity index (D₁): This index incorporates both species richness and evenness. It takes into account both the number of species and their relative abundances, providing a more comprehensive measure of diversity.
+>3.	Simpson diversity index (D₂): This index focuses on the dominance or concentration of species within a community. It considers both species richness and the probability that two individuals randomly selected from the community belong to the same species.
+
+{: .details}
+
+
+> <details-title>More details on the Rényi entropy</details-title> 
+
+>Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
+The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
+
+>Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α),
+
+>where P = {p₁, p₂, ..., pN} is the probability distribution of N discrete events or states, and pi represents the probability of the ith event.
+
+>The value of α determines the properties of Rényi entropy. When α = 1, Rényi entropy reduces to Shannon entropy, providing a measure of average uncertainty or information content. As α approaches 0, Rényi entropy converges to the minimum value, representing the most certain or least diverse distribution. Conversely, as α approaches infinity, Rényi entropy approaches the maximum value, indicating a uniform or maximally diverse distribution.
+
+>Rényi entropy has applications in various fields, including information theory, statistical physics, and data analysis. It offers a way to quantify the diversity or randomness of a system beyond the traditional Shannon entropy, allowing for a more nuanced understanding of information content and structure.
+
+{: .details}
+
+
+For further information on how to choose the best diversity metric also check
+
+1. [Measuring the diversity of the human microbiota with targeted next-generation sequencing](https://academic.oup.com/bib/article/19/4/679/2871295?utm_source=pocket_reader)
+2. [Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets](https://academic.oup.com/femsec/article/82/1/37/567182?utm_source=pocket_reader)
 
 # Conclusion
 
