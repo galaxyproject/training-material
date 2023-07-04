@@ -61,9 +61,9 @@ Learning Objectives
 - Answer “what is a genetic variant?”
 - Learn about the molecular structure of a variant
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=kELyrelihP8
-" target="_blank"><img src="http://img.youtube.com/vi/kELyrelihP8/0.jpg" 
-alt="Video thumbnail image for the Sequencing Revolution background video." width="240" height="180" border="10" /></a>
+<figure class="video_container">
+  <iframe src="https://www.youtube.com/embed/OFGa6x2bGHs" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
 
 ## The Sequencing Revolution
 
@@ -292,7 +292,7 @@ We will use our two SARS data files, which are ready for alignment.
 
 > <hands-on-title>Align to the Reference Dataset</hands-on-title>
 >
-> 1. Go to GENOMICS ANALYSIS and expand the Mapping menu. Select {% tool [Map with BWA-MEM](https://usegalaxy.org/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %}. This program will align your reads to your SARS reference genome. Some of our reads are >100 base pairs so we will use the MEM option. 
+> 1. Go to GENOMICS ANALYSIS and expand the Mapping menu. Select {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2) %}. This program will align your reads to your SARS reference genome. Some of our reads are >100 base pairs so we will use the MEM option. 
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: Use a genome from history and build index.
 >    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `SARS-CoV-2_reference_genome.fasta`
 >    - *"Single or Paired-end reads"*: `Paired`
