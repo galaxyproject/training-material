@@ -322,7 +322,7 @@ The output file is a `BAM` file, which lists where each read aligns to the refer
 
 # Viewing aligned data
 
-We have aligned our data but it is currently a table of where the reads align. This is hard to read, so we will use [JBrowse](https://jbrowse.org/jb2/) to view the data.
+We have aligned our data but it is currently a table of where the reads align. This is hard to read, so we will use [JBrowse](https://jbrowse.org/jbrowse1.html) to view the data.
 
 > <hands-on-title>Visualize Reference Data</hands-on-title>
 >
