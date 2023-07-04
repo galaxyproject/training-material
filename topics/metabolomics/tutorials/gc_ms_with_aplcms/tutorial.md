@@ -126,14 +126,14 @@ This step extracts ion chromatogram (EIC) showing the intensity of only a partic
 Since the intensity is droping over time in the experiment, we want to normalise this and remove noise from the raw data.
 It also performs a first clustering step of points with close m/z values into the extracted ion chromatograms (EICs).
 
-> <details-title> Parameters </details-title>
+> <details-title> Key parameters </details-title>
 > 
 > A precise tuning of input parameters is crucial in this step, since it can potentially lead to elimination of some of the data of interest, or, on the other extreme, preservance of some noisy background data:
 >
-> - **Minimal elution time** (`min_run`) - minimal length of elution time of a peak to be actually recognised as a peak. It is closely related to the chromatography method used. Only peaks with greater elution length are kept.
-> - **Minimal signal presence** (`min_pres`) - determines in how many consequent scans do we want to have the signal present. Sometimes the signal from a real feature is not present 100% of the time along the feature's retention time. This parameter sets the threshold for an ion trace to be considered a feature. This parameter is best determined by examining the raw data. For example, if we know a data point shows up only every 3 scans for 10 seconds, this setting can be used ilter it out.
-> - **m/z tolerance** (`mz_tol`) - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. Can be seen as width of m/z peak.
-> - **Baseline correction** (`baseline`) - intensity cutoff to be used. After grouping the observations, the highest intensity in each group is found. If the highest is lower than this value, the entire group will be deleted.
+> - **Minimal elution time** - minimal length of elution time of a peak to be actually recognised as a peak. It is closely related to the chromatography method used. Only peaks with greater elution length are kept.
+> - **Minimal signal presence** - determines in how many consequent scans do we want to have the signal present. Sometimes the signal from a real feature is not present 100% of the time along the feature's retention time. This parameter sets the threshold for an ion trace to be considered a feature. This parameter is best determined by examining the raw data. For example, if we know a data point shows up only every 3 scans for 10 seconds, this setting can be used ilter it out.
+> - **m/z tolerance** - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. Can be seen as width of m/z peak.
+> - **Baseline correction** - intensity cutoff to be used. After grouping the observations, the highest intensity in each group is found. If the highest is lower than this value, the entire group will be deleted.
 >
 > ![recetox-aplcms noise parameters](../../images/aplcms_explain_min_run_and_pres.jpg "Graphical explanation of effect of minimal elution time (min_run) and minimal signal presence (min_pres) parameters on input data.")
 >
@@ -145,10 +145,10 @@ It also performs a first clustering step of points with close m/z values into th
 >
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->    - *"Minimal signal presence [fraction of scans]"*: `0.5` (**min_pres**)
->    - *"Minimal elution time [unit corresponds to the retention time]"*: `12` (**min_run**)
->    - *"m/z tolerance [ppm]"*: `10` (**mz_tol**)
->    - *"Baseline correction [unit of signal intensity]"*: `0.0` (**baseline**)
+>    - *"Minimal signal presence [fraction of scans]"*: `0.5`
+>    - *"Minimal elution time [unit corresponds to the retention time]"*: `12`
+>    - *"m/z tolerance [ppm]"*: `10`
+>    - *"Baseline correction [unit of signal intensity]"*: `0.0`
 >
 {: .hands_on}
 
@@ -160,7 +160,7 @@ It also performs a first clustering step of points with close m/z values into th
 > > ### {% icon solution %} Solution
 > >
 > > 1. All input parameters are instrument-specific, therefore we cannot provide recommended intervals for the values. TODO: isnt min_pres from 0 to 1?
-> > 2. Indeed, for this purpose, `min_run` parameter can be used.
+> > 2. Indeed, for this purpose, `Minimal elution time` parameter can be used.
 > >
 > {: .solution}
 >
@@ -170,7 +170,9 @@ Output is in the `.parquet` format, which is a binary representation of tabular 
 This format is used to increase the accuracy of stored values, that would be significantly lower when stored in text format.
 In the table we have our filtered data all within the ppm tolerance we chose, and already preliminary grouped on m/z basis.
 
-## Sub-step with **recetox-aplcms - generate feature table**
+## Generate feature table
+
+This tool takes the grouped features created with recetox-aplcms-remove-noise and computes the peak shape in rt domain and integrates the peak area.
 
 Peaks detection
 - we want to fit peak shapes to our data, this allows us to compute precise intensities
@@ -179,31 +181,23 @@ Peaks detection
 
 This tool takes the grouped features from the previous step and computes the peak shape in retention time domain and then integrates the peak area
 
-
-Parameters:
-- `sd_cut_min/max` - here we can now specify the maximum and minimum peak width by selecting allowed range for standard deviation (either side)
-- `sigma_ratio_lim_min/max` - ratio (sd1 divided by sd2) between standard deviations
-  **TODO** can we add a picture explainig its effects?
-- `bandwidth` - to improve the peak shape by smoothing
+> <details-title> Key parameters </details-title>
+> 
+> - **Minimal/maximal standard deviation** - here we can now specify the maximum and minimum peak width by selecting allowed range for standard deviation (either side)
+> - **Minimal/maximal sigma ratio** - ratio (sd1 divided by sd2) between standard deviations ... depicts how skewed the peak can be
+>  TODO can we add a picture explainig its effects?
+> - **Bandwidth factor** - to improve the peak shape by smoothing ... he minimal and maximal bandwidth can be limited by explicit values.
+>
+> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture bow shows the bi-Gaussian model. It can be skewed to the other direction too. The sd.cut parameter sets the minimal and maximal value allow for either sigma.1 and sigma.2 in the picture.")
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - generate feature table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_generate_feature_table/recetox_aplcms_generate_feature_table/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input profile data"*: `output_file` (output of **recetox-aplcms - remove noise** {% icon tool %})
->    - *"shape_model"*: `bi-Gaussian`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
