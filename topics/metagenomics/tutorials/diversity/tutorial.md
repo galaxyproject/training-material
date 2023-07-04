@@ -74,7 +74,15 @@ The dataset we will work with in this tutorial is the output file of Bracken, wh
 
 ![Output file of Bracken](../images/bracken_output.png "Output file of Bracken")
 
-xxx output file description
+Having a closer look at the Bracken output file, you find a table with seven columns:
+
+- Column 1: species name
+- Column 2: taxonomy ID
+- Column 3: taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
+- Column 4: reads assigned by Kraken
+- Column 5: additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken to improve the result. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
+- Column 6: sum of column 4 and column 5
+- Column 7: fraction of the reads assigned to the particular species and the total reads
 
 # Prepare Galaxy and data
 
@@ -275,8 +283,8 @@ xxx
 >
 > > <solution-title></solution-title>
 > >
-> > 1. xxx
-> > 2. The Bray-Curtis dissimilarity  measures the dissimiliraty of two samples. Consequently, an output of 0 represents two samples that are exactly the same, while an output of 1 means they are maximally divergent. In our case, xxx
+> > 1. The output file gives you a table comparing sample 0 and 1, respectively. Consequently, comparing 0 to 0 and 1 to 1 results in a dissimilarity of 0, as those are exactly the same. Comparing sample 0 to sample 1 shows a Bray-Curtis dissimilarity of 0.701.
+> > 2. The Bray-Curtis dissimilarity  measures the dissimiliraty of two samples. Consequently, an output of 0 represents two samples that are exactly the same, while an output of 1 means they are maximally divergent. In our case, a Bray-Curtis dissimilarity of 0.7 suggests that there is a substantial difference in the species composition or abundances between the two communities being compared. The higher the dissimilarity value, the greater the difference in species composition or abundances.
 > {: .solution}
 >
 {: .question}
