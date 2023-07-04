@@ -27,29 +27,13 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+`recetox-aplcms` is a software package designed for the processing of LC/MS based metabolomics data, in particular for peak detection in high resolution mass spectrometry (HRMS) data. 
+It supports reading `.mzml` files in raw profile mode and uses a bi-Gaussian chromatographic peak shape ({% cite yu2010quantification %}) for feature detection and quantification. `recetox-aplcms` is based on the apLCMS R package ({% cite 10.1093/bioinformatics/btp291 %}) and includes various software updates and is actively developed and maintained on GitHub.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+![recetox-aplcms overview](../../images/aplcms_scheme.png "Overview of individual steps of the recetox-aplcms package that can be combined in two separate workflows processing HRMS data in an unsupervised manner or by including a-priori knowledge.")
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
