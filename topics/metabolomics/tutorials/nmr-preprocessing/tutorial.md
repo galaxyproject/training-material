@@ -115,8 +115,11 @@ You can add columns for analytical and biological information such as biological
 >    > <comment-title> NMR_Read parameters </comment-title>
 >    {% tool [NMR_Read](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
 >    > If use of _title_ file and presence of sub-directories: set the FID Title line, `subdirs = TRUE`,  `dirs.names = FALSE`
+>    > 
 >    > If use of _title_ file and no sub-directories: set the FID Title line, `subdirs = FALSE`,  `dirs.names = FALSE`
+>    > 
 >    > If no use of _title_ file and presence of sub-directories: `subdirs = TRUE`,  `dirs.names = TRUE`
+>    > 
 >    > If no use of _title_ file and no sub-directories: `subdirs = FALSE`,  `dirs.names = TRUE`
 >    {: .comment}
 >
@@ -305,705 +308,94 @@ A known standard (called internal reference compound), TMS or TSP, is usually ad
 >
 > <question-title></Effect of "search zone" parameter>
 > 
-> Run the NMR_Preprocessing tool with `Nearvalue` and `window` as values for the "Shift Referencing: definition of the search zone" parameter, and `-2.0` and `2.0` respectively for left and right borders. What do you observe on spectra ofbatined for individual "X2016.61.UR.N4.CD".
+> Run the NMR_Preprocessing tool with `Nearvalue` and `window` as values for the "Shift Referencing:   > definition of the search zone" parameter, and `-2.0` and `2.0` respectively for left and right       > borders for the `window` search zone. What do you observe on spectra ofbatined for individual        > "X2016.61.UR.N4.CD"?
 > > <solution-title></solution-title>
-> > Explanations CCA
-> > 1. 10^6
-> > 2. 1
-> > 3. 10^9
+> > Shift towards the right for the `window` value
 > >
 > {: .solution}
->
+> 
 {: .question}
->
+> 
 >    > <comment-title> How does Shift referencing work in NMR_Preprocessing? </comment-title>
 >    >
->    > The algorithm proposes two ways to locate the reference compound peak in each spectrum within a range of    >    > intensities (`search zone`: nearvalue, all, (user-defined) window): it selects either the maximum intensity >    > or the first peak in the search range higher than a predefined threshold.
+>    > The algorithm proposes two ways to locate the reference compound peak in each spectrum within a >    > range of intensities (`search zone`: nearvalue, all, (user-defined) window): it selects either  >    > the maximum intensity or the first peak in the search range higher than a predefined threshold.
 >    {: .comment}
->
+> 
 >    > <comment-title> Comment to W4M users </comment-title>
-> Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that corresponds to different "search zone" and "shiftHandling" values:
-> - definition of the search zone: nearvalue; shiftHandling: zerofilling = datasets 47 - 50
-> - definition of the search zone: all; shiftHandling: zerofilling       = datasets 51 - 54
-> - definition of the search zone: window; Search zone: left border: -2.0; Search zone: right border: 2.0; shiftHandling: zerofilling                                          = datasets 55 - 58
-> - definition of the search zone: nearvalue; shiftHandling: cut         = datasets 59 - 62
-> - definition of the search zone: nearvalue; shiftHandling: circular    = datasets 63 - 66
+>    > Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that       >    > corresponds to different "search zone" and "shiftHandling" values:
+>    > - definition of the search zone: nearvalue; shiftHandling: zerofilling = datasets 47 - 50
+>    > - definition of the search zone: all; shiftHandling: zerofilling       = datasets 51 - 54
+>    > - definition of the search zone: window; Search zone: left border: -2.0; Search zone: right border: 2.0; shiftHandling: zerofilling                                       = datasets 55 - 58
+>    >  - definition of the search zone: nearvalue; shiftHandling: cut        = datasets 59 - 62
+>    > - definition of the search zone: nearvalue; shiftHandling: circular    = datasets 63 - 66
 >    {: .comment}
+> 
 {: .hands_on}
 
 
 ## Baseline correction **NMR_Preprocessing**
 
-To ensure successful integration, baseline should be flat with no distortion. Baseline artefacts have to be removed. These artefacts result from multiple sources, such as the presence of macromolecules, a not entirely linear electronic detection process or calibration errors from the 180° pulse. Function used in this step estimates and removes the smoothed baseline from the spectra, based on two parameters  
+To ensure successful integration, baseline should be flat with no distortion. Baseline artefacts have to be removed. These artefacts result from multiple sources, such as the presence of macromolecules, a not entirely linear electronic detection process or calibration errors from the 180° pulse. Function used in this step estimates and removes the smoothed baseline from the spectra, based on two parameters `smoothing` and `asymmetry`.
 
 > <hands-on-title> Baseline correction </hands-on-title>
 >
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
+>    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
+>    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
 >    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
+>        - *"Baseline Correction: smoothing parameter"*: `100000`
+>        - *"Baseline Correction:asymmetry parameter"*: `0.05`
+>        - *"Baseline Correction: exclusion area(s)"*: `NO`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > <comment-title> How does Baseline correction work in NMR_Preprocessing? </comment-title>
+>    > Algorithm uses uses asymmetric least squares with a roughness penalty.
+>    > `smoothing` (default value=1e7): the larger it is, the smoother will be. With `smoothing`=0,    >    > the baseline will be equal to the signal and the corrected signal will be zero.
+>    > `asymetry` (default value=0.05): the smaller it is, the less the smoother will try to follow    >    > peaks when it is under the function and the more it will try to be under the function.
 >    {: .comment}
->
+> 
+>    > <comment-title> Comment to W4M users </comment-title>
+>    > Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that       >    > corresponds to different "smoothing" and "asymetry" values:
+>    > - smoothing parameter: 100; asymetry parameter: 0.05   = datasets 67 - 70
+>    > - smoothing parameter: 10^9; asymetry parameter: 0.05  = datasets 71 - 74
+>    > - smoothing parameter: 10^5; asymetry parameter: 0.001 = datasets 75 - 78
+>    > - smoothing parameter: 10^5; asymetry parameter: 0.5   = datasets 79 - 82
+>    > - smoothing parameter: 10^5; asymetry parameter: 1.0   = datasets 83 - 86
+>    {: .comment}
+> 
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> Run the NMR_Preprocessing tool with `0.001`, `0.5` and `1.0` as values for the "Baseline correction: > asymmetry parameter" parameter. What do you observe on spectra ofbatined for individual              > "X2016.61.UR.N4.CD" (compare also with the default value?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > CCA
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **NMR_Preprocessing**
+## Negative values zeroing with **NMR_Preprocessing**
 
-> <hands-on-title> Task description </hands-on-title>
+Despite the application of baseline and phase corrections, spectra may still have negative intensities at specific frequency values. These cannot be properly interpreted and can have bad impacts on  statistical analyses. This filter simply sets them to zero.
+
+> <hands-on-title> Negative values zeroing </hands-on-title>
 >
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `gauss`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
+>    - In *"Negative intensities to Zero?"*:
+>        - *"Set negative intensities to zero?"*: `YES`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > <comment-title> Comment to W4M users </comment-title>
+>    > Several datasets are available in the history [AAP Urine](https://workflow4metabolomics.usegalaxy.fr/u/mtremblayfranco/h/gtnnmrpreprocessing), that       >    > corresponds to `NO` and `YES` values:
+>    > - Set negative intensities to zero?: YES = datasets 89 - 90
+>    > - Set negative intensities to zero?: NO  = datasets 91 - 94
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `hamming`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
-
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: method"*: ` max `
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `all`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `window`
->            - In *"Search_zone"*:
->                - {% icon param-repeat %} *"Insert Search_zone"*
->                    - *"Search zone: left border"*: `2.0`
->                    - *"Search zone: right border"*: `-2.0`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->        - *"Shift Referencing: shiftHandling"*: ` cut `
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->        - *"Shift Referencing: shiftHandling"*: ` circular `
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: smoothing parameter"*: `100.0`
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: smoothing parameter"*: `1000000000.0`
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: asymmetry parameter"*: `0.001`
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: asymmetry parameter"*: `0.5`
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: asymmetry parameter"*: `1.0`
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **NMR_Preprocessing**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
->    - In *"Apodization"*:
->        - *"Apodization: method"*: `exp`
->    - In *"Zero Order Phase Correction"*:
->        - *"Zero Order Phase Correction: exclusion area(s)"*: ` YES `
->    - In *"Shift Referencing"*:
->        - *"Shift Referencing: definition of the search zone"*: `nearvalue`
->    - In *"Baseline Correction"*:
->        - *"Baseline Correction: exclusion area(s)"*: ` NO `
->    - In *"Negative intensities to Zero"*:
->        - *"Set negative intensities to zero?"*: ` NO `
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Spectroscopic data pre-processing is a keystone procedure for enhanced information recovery in metabolomics, and the NMR_Preprocessing tool, based on the PepsNMR R package which is the only existing package able to comprehensively address a very detailed series of pre-processing steps designed for 1D 1 H NMR data. Use of this tool can increase spectral repeatability, suggesting an overall better recovery of information, and it can enhance predictive power in a classification context.
+
