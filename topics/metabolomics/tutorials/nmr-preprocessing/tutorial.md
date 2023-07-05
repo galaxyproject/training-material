@@ -398,4 +398,4 @@ Despite the application of baseline and phase corrections, spectra may still hav
 # Conclusion
 
 Spectroscopic data pre-processing is a keystone procedure for enhanced information recovery in metabolomics, and the NMR_Preprocessing tool, based on the PepsNMR R package which is the only existing package able to comprehensively address a very detailed series of pre-processing steps designed for 1D 1 H NMR data. Use of this tool can increase spectral repeatability, suggesting an overall better recovery of information, and it can enhance predictive power in a classification context.
-
+
