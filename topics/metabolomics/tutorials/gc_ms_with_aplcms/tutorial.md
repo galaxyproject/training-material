@@ -183,12 +183,12 @@ This tool takes the grouped features from the previous step and computes the pea
 
 > <details-title> Key parameters </details-title>
 > 
-> - **Minimal/maximal standard deviation** - here we can now specify the maximum and minimum peak width by selecting allowed range for standard deviation (either side)
-> - **Minimal/maximal sigma ratio** - ratio (sd1 divided by sd2) between standard deviations ... depicts how skewed the peak can be
+> - **Minimal/maximal standard deviation** - specify the maximum and minimum peak width by selecting allowed range for the standard deviation (both $$\sigma_1$$ and $$\sigma_2$$).
+> - **Minimal/maximal sigma ratio** - ratio ($$\frac{\sigma_1}{\sigma_2}$$) between standard deviations ... depicts how skewed the peak can be ... ratio range between left-standard deviation and the right-standard deviation
 >  TODO can we add a picture explainig its effects?
 > - **Bandwidth factor** - to improve the peak shape by smoothing ... he minimal and maximal bandwidth can be limited by explicit values.
 >
-> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture bow shows the bi-Gaussian model. It can be skewed to the other direction too. The sd.cut parameter sets the minimal and maximal value allow for either sigma.1 and sigma.2 in the picture.")
+> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture bow shows the bi-Gaussian model, characterised by two standard deviations. It can be skewed to the other direction too.")
 >
 {: .details}
 
