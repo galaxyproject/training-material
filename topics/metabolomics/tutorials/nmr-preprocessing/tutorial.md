@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Nuclear Magnetic Resonance: data preprocessing'
+title: 'Nuclear Magnetic Resonance Data preprocessing'
 zenodo_link: ''
 questions:
 - What are the main steps of untargeted 1H-NMR data preprocessing for metabolomic analyses?
@@ -16,7 +16,7 @@ key_points:
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant preprocessing.
 contributors:
 - mtremblayfr
-- Cécile Canlet
+- ccanlet
 - ManonMartin
 ---
 
@@ -31,6 +31,14 @@ To be able to perform semi-automatically a complete 1H NMR analysis with advance
 
 To illustrate this approach, we will use data from {% cite EscribanoVasquez2018 %}. One of the objectives of this work was to assess the influence of microbiota and high fat diet on the urinary metabolome. To analyze these data, we will then follow a Galaxy workflow developed by the Wokflow4metabolomics group ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
+Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
+you understand how the NMR_PReprocessing tool works:
+[link to slides](../../tutorials/nmr-preprocessing/slides.html).
+This document is refered to as "Check the next X slides" in the present training material.
+As an example, [check the 1st slide](../../tutorials/nmr-preprocessing/slides.html#pepsnmr_rpackage)
+for complementary material about PepsNMR R package.
+
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -42,7 +50,7 @@ To illustrate this approach, we will use data from {% cite EscribanoVasquez2018 
 
 # Overview
 
-NMR data preprocessing is based on the PepsNMR R package (% cite Martin2018 %) (see slide 2). It covers several steps included in two tools (NMR_Read and NMR_Preprocessing, see slide 3).
+NMR data preprocessing is based on the PepsNMR R package (% cite Martin2018 %). It covers several steps included in two tools (NMR_Read and NMR_Preprocessing). You can see the NMR preprocessing workflow available in W4M [check the first slide](../../tutorials/nmr-preprocessing/slides.html#nmrpreprocessing_workflow).
 
 In this tutorial we will focus on xx main steps:
 - xx
@@ -65,9 +73,7 @@ To this aim, the authors collected samples from 59 male C57b mice divided in fou
 >    > Only Bruker files are currently supported in the W4M plateform.
 >    {: .comment}
 
-The first step is to upload files into your Galaxy history. Bruker files have to be included in a zip file. Two directory structures are possible. FID can be 'structured' into sub-directories as illustrated in Figure 1, or not. You can upload data your own zip file from the 'Upload Data' button or you can used a shared zip file. 
-
-![Figure 1: Example of FID's organization in directories and sub-directories](../../images/tutorial-nmr-read-sub-true.png)
+The first step is to upload files into your Galaxy history. Bruker files have to be included in a zip file. Two directory structures are possible. FID can be organized into sub-directories or not. You can upload data your own zip file from the 'Upload Data' button or you can used a shared zip file. 
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -96,7 +102,7 @@ You should have in your history a green zip file (`AAP_Urine`).
 
 # Reading the zip file with the NMR_Read tool
 
-The NMR_Read tool is used to read 'fid' files included in the zip file you previously added into your history. Parameters of this tool are linked with the possible options to organize fid files to preprocess (see slides 4 and 5).
+The NMR_Read tool is used to read 'fid' files included in the zip file you previously added into your history. Parameters of this tool are linked with the possible options to organize fid files to preprocess ([check the next 2 slides](../../tutorials/nmr-preprocessing/slides.html#nmrpreprocessing_workflow)).
 This tool will return a FID data matrix saved as `NMR_Read_datamatrix` and a samplemetadata matrix saved as `NMR_Read_sampleMetadata`.
 
 The dataMatrix file is a table containing intensities of NMR chemical shifts (variables, in rows) for every samples (in columns). The first column is for variables’ identifiers while the first row is for samples’ identifiers. 
@@ -398,4 +404,4 @@ Despite the application of baseline and phase corrections, spectra may still hav
 # Conclusion
 
 Spectroscopic data pre-processing is a keystone procedure for enhanced information recovery in metabolomics, and the NMR_Preprocessing tool, based on the PepsNMR R package which is the only existing package able to comprehensively address a very detailed series of pre-processing steps designed for 1D 1 H NMR data. Use of this tool can increase spectral repeatability, suggesting an overall better recovery of information, and it can enhance predictive power in a classification context.
-
+
