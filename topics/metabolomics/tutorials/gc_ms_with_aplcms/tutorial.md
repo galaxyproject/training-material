@@ -183,7 +183,7 @@ This steps takes the features grouped by m/z from the previous step and detects 
 > - **Minimal/maximal sigma ratio** - the lower and upper limit of the ratio between left-standard deviation and the right-standard deviation $$\frac{\sigma_1}{\sigma_2}$$. It represents relative skewness of the peak.
 > - **Bandwidth factor** - parameter used to scale down the overall range of retention times (the bandwidth) assumed in the kernel smoother used for peak identification. The value is between zero and one. The minimal and maximal bandwidth can be limited by explicit values. It is used to improve the peak shape by smoothing.
 >
-> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "TODO change picture... The picture shows the bi-Gaussian model, characterised by two standard deviations. Different ratio of standard deviations leads to a different shape, characterised by shape of skewness.")
+> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture shows the bi-Gaussian model, characterised by two standard deviations. The ratio of standard deviations influences the degree of skewness, thus producing a different shape of the peak.")
 >
 {: .details}
 
