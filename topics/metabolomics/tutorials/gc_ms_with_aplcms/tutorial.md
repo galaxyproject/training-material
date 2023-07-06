@@ -283,25 +283,19 @@ Apply spline-based retention time correction to a feature table given the templa
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute clusters**
+## Compute clusters (2nd round) 
 
-second round of grouping... comment on how you can iterativelly combine this steps multiple times, since you still get the same format of outputs etc.
+After we have aligned the retention time of our samples, we need to run second round of clustering to reflect introduced changes. 
+
+> ### {% icon comment %} Steps iteration
+>
+> Note that the outputs and inputs of the previous steps are compatible, making it possible to iterativelly combine these steps multiple times, until desired quality of results is achieved.
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
->    - *"Tolerances input method"*: `file`
->        - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
 >
 {: .hands_on}
 
@@ -309,7 +303,7 @@ second round of grouping... comment on how you can iterativelly combine this ste
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
+> 1. What already used step could we use next? What would be its effects? 
 > 2. Question2?
 >
 > > ### {% icon solution %} Solution
@@ -321,26 +315,14 @@ second round of grouping... comment on how you can iterativelly combine this ste
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - align features**
+## Features alignment
 
-kernel density alignment
+This step performs feature alignment after clustering and retention time correction. The peaks clustered across samples are grouped based on the given tolerances to create an aligned feature table, connecting identical features across samples. Among tolerances, the `Minimal occurrence in samples` parameter can be used to control in at least how many samples a feature has to be detected in order to be included in the aligned feature table.  This allows us to preserve only peaks that appear really consistenly across the samples.
 
-- `min_occurrence` - how many samples does the feature need to be present in... This way we can filter peaks that appear really consistenly across the samples.
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
 
@@ -360,10 +342,55 @@ kernel density alignment
 >
 {: .question}
 
-Outputs:
-- rt_table - rt for all samples for our features
-- intensity_table - intensities for all samples
-- peak_metadata - all data related to specific peaks that have been detected (enumerate columns), number of peaks that have been grouped together... 
+> <details-title> Output files </details-title>
+> 
+> The output consists of three tables. All tables share `id` column.
+>
+> #### Metadata Table
+>
+> Contains all quantitative data related to specific peaks that have been detected (mean m/z and rt with their maximal and minimal values). The `npeaks` column denotes the number of peaks which have been grouped into this feature. The columns with the sample names indicate whether this feature is present in the sample.
+> 
+> > |  id   | mz           |  mzmin       |  mzmax        |  rt            |  rtmin        |  rtmax        |   npeaks  |  21_qc_no_dil_milliq   |  29_qc_no_dil_milliq   |  8_qc_no_dil_milliq    |
+> > |-------|--------------|--------------|---------------|----------------|---------------|---------------|-----------|------------------------|------------------------|------------------------|
+> > |  1    | 70.03707021  |  70.037066   |  70.0370750   |  294.1038014   |  294.0634942  |  294.149985   |   3       |  1                     |  1                     |  1                     |
+> > |  2    | 70.06505677  |  70.065045   |  70.0650676   |  141.9560055   |  140.5762528  |  143.335758   |   2       |  1                     |  0                     |  1                     |
+> > |  57   | 78.04643252  |  78.046429   |  78.0464325   |  294.0063397   |  293.9406777  |  294.072001   |   2       |  1                     |  1                     |  0                     |
+> > |  ...  | ...          |   ...        |  ...          |  ...           |  ...          |  ...          |   ...     |  ...                   |  ...                   |  ...                   |
+> {: .matrix}
+> 
+> #### Intensity Table
+> 
+> This table contains the peak area for aligned features in all samples.
+> 
+> > |  id   |  21_qc_no_dil_milliq   |  29_qc_no_dil_milliq   |  8_qc_no_dil_milliq    |
+> > |-------|------------------------|------------------------|------------------------|
+> > |  1    |  13187487.20482895     |  7957395.699119729     |  11700594.397257797    |
+> > |  2    |  2075168.6398983458    |  0                     |  2574362.159289044     |
+> > |  57   |  2934524.4406785755    |  1333044.5065971944    |  0                     |
+> > |  ...  |  ...                   |  ...                   |  ...                   |
+> {: .matrix}
+> 
+> #### Retention Time Table
+> 
+> This table contains the retention times for all aligned features in all samples.
+>
+> > |  id   |  21_qc_no_dil_milliq   |  29_qc_no_dil_milliq   |  8_qc_no_dil_milliq    |
+> > |-------|------------------------|------------------------|------------------------|
+> > |  1    |  294.09792478513236    |  294.1499853056912     |  294.0634942428341     |
+> > |  2    |  140.57625284242982    |  0                     |  143.33575827589172    |
+> > |  57   |  294.07200187644435    |  293.9406777222317     |  0                     |
+> > |  ...  |  ...                   |  ...                   |  ...                   |
+> {: .matrix}
+>
+{: .details}
+
+TBD what is next + hyperlinks
+
+> ### {% icon comment %} Next steps
+>
+> At this point, there are two alternative routes how to continue - you can use [unsupervised]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_aplcms/tutorial.html#unsupervised) approach (use no existing knowledge, detects peaks de novo from the data based on the data itself) or [hybrid]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_aplcms/tutorial.html#hybrid) approach (combine de novo peak detection with existing knowledge).
+> 
+{: .comment}
 
 # Unsupervised
 
@@ -380,12 +407,11 @@ Our tables have many gaps, some features weren't detected in some samples... but
 >
 > 1. {% tool [recetox-aplcms - recover weaker signals](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_recover_weaker_signals/recetox_aplcms_recover_weaker_signals/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->    - {% icon param-file %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - {% icon param-file %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-collection %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
+>    - {% icon param-collection %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
 >    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
