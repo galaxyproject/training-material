@@ -166,29 +166,24 @@ It also performs a first clustering step of points with close m/z values into th
 >
 {: .question}
 
-Output is in the `.parquet` format, which is a binary representation of tabular format. 
+> <details-title> Parquet format </details-title>
+> 
+> Output is in the `.parquet` format, which is a binary representation of tabular format. 
 This format is used to increase the accuracy of stored values, that would be significantly lower when stored in text format.
-In the table we have our filtered data all within the ppm tolerance we chose, and already preliminary grouped on m/z basis.
+>
+{: .details}
 
 ## Generate feature table
 
-This tool takes the grouped features created with recetox-aplcms-remove-noise and computes the peak shape in rt domain and integrates the peak area.
-
-Peaks detection
-- we want to fit peak shapes to our data, this allows us to compute precise intensities
-- this also resolves peak overlaps, by fitting them both as separate peaks
-- this then ofc does work with centroid data (there we dont have the peak shapes anymore, just some "averages" of them)
-
-This tool takes the grouped features from the previous step and computes the peak shape in retention time domain and then integrates the peak area
+This steps takes the features grouped by m/z from the previous step and detects peaks. The goal is to fit peak shapes in retention time domain to our data, which allows computing precise intensities by integrating the peak area. This step also resolves peak overlaps, by fitting them both as separate peaks. As a consequence of this approach, recetox-aplcms does not work with centroid data since there are no peak shapes anymore, just some "averages" of them.
 
 > <details-title> Key parameters </details-title>
 > 
 > - **Minimal/maximal standard deviation** - specify the maximum and minimum peak width by selecting allowed range for the standard deviation (both $$\sigma_1$$ and $$\sigma_2$$).
-> - **Minimal/maximal sigma ratio** - ratio ($$\frac{\sigma_1}{\sigma_2}$$) between standard deviations ... depicts how skewed the peak can be ... ratio range between left-standard deviation and the right-standard deviation
->  TODO can we add a picture explainig its effects?
-> - **Bandwidth factor** - to improve the peak shape by smoothing ... he minimal and maximal bandwidth can be limited by explicit values.
+> - **Minimal/maximal sigma ratio** - the lower and upper limit of the ratio between left-standard deviation and the right-standard deviation $$\frac{\sigma_1}{\sigma_2}$$. It represents relative skewness of the peak.
+> - **Bandwidth factor** - parameter used to scale down the overall range of retention times (the bandwidth) assumed in the kernel smoother used for peak identification. The value is between zero and one. The minimal and maximal bandwidth can be limited by explicit values. It is used to improve the peak shape by smoothing.
 >
-> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture bow shows the bi-Gaussian model, characterised by two standard deviations. It can be skewed to the other direction too.")
+> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "TODO change picture... The picture shows the bi-Gaussian model, characterised by two standard deviations. Different ratio of standard deviations leads to a different shape, characterised by shape of skewness.")
 >
 {: .details}
 
@@ -201,13 +196,13 @@ This tool takes the grouped features from the previous step and computes the pea
 
 > ### {% icon question %} Questions
 >
-> 1. Why do we need to fit our peaks to a (in this case Gaussian) shape?
-> 2. Why do we get two standard deviations?
+> 1. What is the purpose of fitting the peaks to a shape (in this case bi-Gaussian)?
+> 2. Why are there two standard deviations?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. This allows us to precisely compute the area under the curve and get precise intensity.
-> > 2. two standard deviations (sd1, sd2) because we use bi-Gausian shape (the sides of the shape can be different). if they would be same, then its Gaussian
+> > 1. It allows precise computation of the area under the curve and estimating the intensity.
+> > 2. Two standard deviations ($$\sigma_1$$ and $$\sigma_2$$) come from bi-Gaussian shape, where both sides of the shape can be different. When these values are equal, we obtain Gaussian shape.
 > >
 > {: .solution}
 >
