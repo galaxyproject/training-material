@@ -208,47 +208,36 @@ This steps takes the features grouped by m/z from the previous step and detects 
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute clusters**
+## Compute clusters
 
-pre-alignment step - we put all peaks from all samples to one table and group them based on m/z and rt... for that we can specify parameters which parametrise the "size" of buckets (clusters)
-- all peaks get assignd a cluster_id shared across samples
+Pre-alignment step where we put all peaks from all samples into a single table and group them based on bth m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster_id` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
+
+> <details-title> Clustering algorithm details </details-title>
+> 
+> Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature, then a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster_id` columns.
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - *"Tolerances input method"*: `direct`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
 > 1. Can we influence the clustering sensitivity w.r.t. retention time?
-> 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, use `mz_tol_absolute` parameter.
-> > 2. Answer for question2
+> > 1. Yes, use retention time tolerance parameter can be used for this purpose.
 > >
 > {: .solution}
 >
 {: .question}
 
-Output is again separated to individual tables, but with assigned cluster ID.
-
-tolerances - these are values entered in the clustering step - if not provided, they are estimated instead
+Output is again separated to a collecton of individual tables, but with assigned `cluster_id`.
 
 ## Sub-step with **recetox-aplcms - compute template**
 
