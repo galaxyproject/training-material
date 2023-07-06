@@ -394,11 +394,15 @@ TBD what is next + hyperlinks
 
 # Unsupervised
 
+Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
+
 **TODO** somehow inspect tables, comment on many gaps
 
 ## Sub-step with **recetox-aplcms - recover weaker signals**
 
-Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
+Second stage peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
+
+This recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity.
 
 - `recover_min_count` - how many data points need to be there to consider them a peak
 - `bandwidth` - again the same for smoothing
