@@ -76,13 +76,14 @@ The dataset we will work with in this tutorial is the output file of Bracken, wh
 
 Having a closer look at the Bracken output file, you find a table with seven columns:
 
-- Column 1: species name
-- Column 2: taxonomy ID
-- Column 3: taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
-- Column 4: reads assigned by Kraken
-- Column 5: additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken to improve the result. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
-- Column 6: sum of column 4 and column 5
-- Column 7: fraction of the reads assigned to the particular species and the total reads
+ 1. species name
+ 2. taxonomy ID
+ 3. taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
+ 4. reads assigned by Kraken
+ 5. additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken to improve the result. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
+ 6.  sum of column 4 and column 5
+ 7. fraction of the reads assigned to the particular species and the total reads
+
 
 # Prepare Galaxy and data
 
@@ -115,17 +116,18 @@ We need now to import the data
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. 3. Create a paired collection.
+> 2. Create a paired collection.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
 {: .hands_on}
 
+
 # Calculating α diversity
 
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
-There are various measures of alpha diversity accessible:
+Metrics of alpha diversity can be grouped into different classes:
 - **richness** indexes that estimate the quantity of distinct species within a sample
 - **evenness** indexes that evaluate the relative abundances of species rather than their total count
 - **diversity** indexes that incorporate both the relative abundances and total count of distinct species
@@ -137,6 +139,30 @@ In the table below you can find a list of commonly used indexes to calculate α 
 ![richness and evenness](../images/alpha_diversity_richness_evenness.png "richness and evenness")
 
 > [name=sophia-h]I know we said to add the mathematical description into the same table but I feel like it becomes a bit too crowded so I made a detail box with the formulations and citations... what do you think?
+> [name=Bérénice Batut] Maybe it will renders ok in the tutorial. Can you put both and we decide later? For the one in the detail box, please use the same order for the rows. You use the term *class* but you did not introduce it first
+> Another possibility: not using a table but a list as in the introduction for alpha, beta, gamma diversity so we can put everything and also organize the list by classes already
+> I might be nice to add also the range of the value
+> 
+> [name=sophia-h]the value range often depends on the input, for example on the number of species present in the sample
+> 
+> [name=sophia-h] I added the term class to the description of diversity vs evennes vs richness above
+
+> [name=sophia-h]one table:
+
+
+| Indices for α diversity | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Class     | Mathematical Expression                                                                         | Explanation                                                                                                                                                                                                                                       | Citation                |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Shannons                | Calculates the uncertainty in predicting the species identity of an individual that is selected from a community.                                                                                                                                                                                                                                                                                                                                                                                                                 | Diversity | H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>)                            | pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.                                                                                                                                          | {% cite Shannon.1948 %} |
+| Berger-Parker           | Expresses the proportional importance of the most abundant type. Highly biased by sample size and richness.                                                                                                                                                                                                                                                                                                                                                                                                                       | Diversity | D = n<sub>max</sub>/N                                                                           | n<sub>max</sub> is the abundance of the most dominant species,  and N is the total number of individuals (sum of all abundances).                                                                                                                 | {% cite Berger.1970 %}  |
+| Simpsons                | Calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity.                                                                                                                                                                                                                                                                                                                          | Diversity | D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup>                                   | ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.                                                                   | {% cite SIMPSON.1949 %} |
+| Inverse Simpons         | Transformation of Simpsons index that increases with increasing diversity.                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Diversity |                                                                                                 |                                                                                                                                                                                                                                                   |                         |
+| Fishers                 | Describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a log series distribution.                                                                                                                                                                                                                                                                                                              | Diversity | S\=a\*ln(1+n/a)                                                                                 | S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                      | {% cite Fisher.1943 %}  |
+| Pielou’s evenness       | Quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness.                                                                                                                                                                                                                                | Evenness  | J = H'/ln(S)                                                                                    | H' is Shannon Weiner diversity and S is the total number of species in a sample, across all samples in dataset.                                                                                                                                   | {% cite Pielou.1966 %}  |
+| Margalef’s richness     | Indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species.                                                                                                                                                                                                                                                                                                                                                 | Richness  | D = (S - 1) / Log (n)                                                                           | S is the total number of species, and n is the total number of individuals in the sample                                                                                                                                                          | {% cite Margalef. %}    |
+| Chao1                   | Estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness. | Richness  | S<sub>chao1</sub> = S<sub>obs</sub> + (n<sub>1</sub>(n<sub>1</sub> - 1))/(2(n<sub>2</sub> + 1)) | S<sub>obs</sub> is the observed species richness, n<sub>1</sub> represents the number of species represented by a single individual (singletons), and n<sub>2</sub> represents the number of species represented by two individuals (doubletons). | {% cite Chao.1992 %}    |
+| ACE                     | ACE (Abundance-based Coverage Estimator) takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.                                                                                 | Richness  |                                                                                                 |                                                                                                                                                                                                                                                   |                         |
+
+> [name=sophia-h]two tables:
 
 | Indices for α diversity | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | Class     |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
@@ -153,15 +179,15 @@ In the table below you can find a list of commonly used indexes to calculate α 
 > <details-title> Mathematical expressions for calculating α diversity</details-title>
 
 
-| Index               | Mathematical Expression                                                                         | Description                                                                                                                                                                                                                                       | Citation                |
-| ------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| Simpson             | D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup>                                   | ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.                                                                   | {% cite SIMPSON.1949 %} |
-| Shannon             | H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>)                            | pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.                                                                                                                                          | {% cite Shannon.1948 %} |
-| Berger-Parker       | D = n<sub>max</sub>/N                                                                           | n<sub>max</sub> is the abundance of the most dominant species,  and N is the total number of individuals (sum of all abundances).                                                                                                                 | {% cite Berger.1970 %}  |
-| Fisher's alpha      | S\=a\*ln(1+n/a)                                                                                 | S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                      | {% cite Fisher.1943 %}  |
-| Pilou's Evenness    | J = H'/ln(S)                                                                                    | H' is Shannon Weiner diversity and S is the total number of species in a sample, across all samples in dataset.                                                                                                                                   | {% cite Pielou.1966 %}  |
-| Margalef's richness | D = (S - 1) / Log (n)                                                                           | S is the total number of species, and n is the total number of individuals in the sample                                                                                                                                                          | {% cite Margalef. %}    |
-| Chao1               | S<sub>chao1</sub> = S<sub>obs</sub> + (n<sub>1</sub>(n<sub>1</sub> - 1))/(2(n<sub>2</sub> + 1)) | S<sub>obs</sub> is the observed species richness, n<sub>1</sub> represents the number of species represented by a single individual (singletons), and n<sub>2</sub> represents the number of species represented by two individuals (doubletons). | {% cite Chao.1992 %}    |
+| Indices for α diversity | Mathematical Expression                                                                         | Description                                                                                                                                                                                                                                       | Citation                |
+| ----------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| Shannons                | H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>)                            | pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.                                                                                                                                          | {% cite Shannon.1948 %} |
+| Berger-Parker           | D = n<sub>max</sub>/N                                                                           | n<sub>max</sub> is the abundance of the most dominant species,  and N is the total number of individuals (sum of all abundances).                                                                                                                 | {% cite Berger.1970 %}  |
+| Simpsons                | D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup>                                   | ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.                                                                   | {% cite SIMPSON.1949 %} |
+| Fishers                 | S\=a\*ln(1+n/a)                                                                                 | S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                      | {% cite Fisher.1943 %}  |
+| Pielou’s evenness       | J = H'/ln(S)                                                                                    | H' is Shannon Weiner diversity and S is the total number of species in a sample, across all samples in dataset.                                                                                                                                   | {% cite Pielou.1966 %}  |
+| Margalef’s richness     | D = (S - 1) / Log (n)                                                                           | S is the total number of species, and n is the total number of individuals in the sample                                                                                                                                                          | {% cite Margalef. %}    |
+| Chao1                   | S<sub>chao1</sub> = S<sub>obs</sub> + (n<sub>1</sub>(n<sub>1</sub> - 1))/(2(n<sub>2</sub> + 1)) | S<sub>obs</sub> is the observed species richness, n<sub>1</sub> represents the number of species represented by a single individual (singletons), and n<sub>2</sub> represents the number of species represented by two individuals (doubletons). | {% cite Chao.1992 %}    |
 
 {: .details}
 
@@ -188,14 +214,25 @@ Krakentools introduction + metrics available there
 > >
 > > 1. 
 
-|           | JC1A      | JP4D      | Explanation                                                                                                                                                                                                                                                                                                                                                                                              |
-|-----------|-----------|-----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Shannon   | 5.3441    | 6.4429    | When the Shannon index is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.                                                                                                                                           |
-| Berger-Parker | 0.2299    | 0.0581    | When the Berger-Parker index is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.                                                                                                                                                                                       |
-| Simpson   | 0.9401    | 0.9926    | When the Simpson's index is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance. |
-| Inverse Simpson | 16.6941   | 136.0287  | When the Inverse Simpson's index is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species. |
-| Fisher    | 3240.0957 | 9163.5027 |                                                                                                           > >
+> >|                 | JC1A      | JP4D      |
+> >| --------------- | --------- | --------- |
+> >| Shannon         | 5,3441    | 6,4429    |
+> >| Berger-Parker   | 0,2299    | 0,0581    |
+> >| Simpson         | 0,9401    | 0,9926    |
+> >| Inverse Simpson | 16,6941   | 136,0287  |
+> >| Fisher          | 3240,0957 | 9163,5027 |
+
+> > When the **Shannon index** is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.
+> > 
+> > When the **Berger-Parker index** is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.
+> > 
+> >  When the **Simpson's index** is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
+> >  
+> >  When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
+> >  
 > [name=sophia-h]How can I implement a table in the question solution box?
+> [name=Bérénice Batut] As you did, you just need to add `> ` before each line. Look at other tutorials for examples
+> Maybe better here to put the explanations outside the table
 > 
 > [name=sophia-h] Here are the Fisher's alpha values that I don't understand
 > 
@@ -258,20 +295,24 @@ These indexes have been developed to address specific research questions, accomm
 > <details-title>More details on calculating β diversity</details-title>
 
 > [name=sophia-h] I cant use the line | in the mathematical expression because then it confuses the table... I read that, to circumvent it, I could use \vert but somehow it isn't displayed properly.. maybe it does on github, we would need to check that
+> [name=Bérénice Batut] Maybe use a list as I mentioned for beta diversity
+> 
+> [name=sophia-h]solved the problem :) and me personally, I find a table gives a better overview than a list
 
 | Index                     | Mathematical Expression                                                      | Description                                                                                                                                                                                                                                                                                                     | Citation                |
 | ------------------------- | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| Jaccard Index             | J(X, Y) = \vert X ∩ Y\vert  / \vert X ∪ Y\vert                                                   | X ∩ Y represents the intersection of sets X and Y (elements common to both sets), and X ∪ Y represents the union of sets X and Y (all unique elements from both sets combined).                                                                                                                                 | {% cite Jaccard.1912 %} |
-| Sørensen Index            | DSC = 2\vert X ∩ Y\vert  / \vert X\vert  + \vert Y\vert                                                    | X ∩ Y represents the intersection of sets X and Y (elements common to both sets),  and \vert X\vert  and \vert Y \vert  are the cardinalities of the two sets (i.e. the number of elements in each set)                                                                                                                              | {% cite Srensen.1948 %} |
+| Jaccard Index             | J(X, Y) =  \|  X ∩ Y\|  / \| X ∪ Y\|                                                   | X ∩ Y represents the intersection of sets X and Y (elements common to both sets), and X ∪ Y represents the union of sets X and Y (all unique elements from both sets combined).                                                                                                                                 | {% cite Jaccard.1912 %} |
+| Sørensen Index            | DSC = 2\| X ∩ Y\|  / \| X\| + \| Y\|                                                   | X ∩ Y represents the intersection of sets X and Y (elements common to both sets),  and \| X\| and \| Y \|  are the cardinalities of the two sets (i.e. the number of elements in each set)                                                                                                                              | {% cite Srensen.1948 %} |
 | Bray-Curtis Dissimilarity | BC<sub>ij</sub> = 1 - (2C<sub>ij</sub> / (S<sub>i</sub> + S<sub>j</sub>))    | C<sub>ij</sub> represents the sum of the absolute differences in abundances between corresponding species in samples i and j, S<sub>i</sub> represents the total abundance or sum of species abundances in sample i, and S<sub>j</sub> represents the total abundance or sum of species abundances in sample j. | {% cite Bray.1957 %}    |
 | Kulczynski Dissimilarity  | D = 1 - (S<sub>AB</sub> / (S<sub>A</sub> + S<sub>B</sub> - 2S<sub>AB</sub>)) | S<sub>AB</sub> the number of shared OTUs between communities A and B, S<sub>A</sub> the number of OTUs in community A, and S<sub>B</sub> the number of OTUs in community B                                                                                                                                      |
-
 
 
 ![UniFrac](../images/unifrac.png "UniFrac")
 
 
 {: .details}
+
+
 
 ## Hands on: Calculate β diversity with Krakentools
 > 
@@ -317,15 +358,20 @@ The choice and composition of dimensions in multidimensional diversity metrics d
 
 Multidimensional diversity metrics offer a **more nuanced and holistic perspective** on biodiversity, capturing different facets and dimensions of ecological variation. They provide insights into the ecological processes shaping communities and ecosystems and can be valuable in conservation planning, ecosystem management, and understanding the functional implications of biodiversity patterns.
 
-## Multidimensional diversity metrics and Parameter q
+> <details-title>More details on Multidimensional diversity metrics and Parameter q</details-title>
+> 
+>## Multidimensional diversity metrics and Parameter q
+> [name=Bérénice Batut] Maybe move that into a detail box
 
-Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their **order q**, which determines **the extent to which rare or common species are emphasized**. The ranking and comparison of assemblages rely on the chosen value of q. 
+>Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their **order q**, which determines **the extent to which rare or common species are emphasized**. The ranking and comparison of assemblages rely on the chosen value of q. 
 
-Instead of selecting a few measures to describe an assemblage, it is preferable to **present a continuous profile** that depicts diversity or entropy as a function of q (where q ≥ 0). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of q ranging from 0 to q = 3 or 4, beyond which there is usually little change.
+>Instead of selecting a few measures to describe an assemblage, it is preferable to **present a continuous profile** that depicts diversity or entropy as a function of q (where q ≥ 0). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of q ranging from 0 to q = 3 or 4, beyond which there is usually little change.
 
  
 
-![Parameter q](../images/hill_numbers "UniFrac")
+>![Parameter q](../images/hill_numbers "UniFrac")
+
+{: .details}
 
 
 > <details-title>More details on the Hill numbers</details-title>
@@ -362,8 +408,8 @@ The Rényi entropy of a discrete probability distribution is defined by the para
 
 For further information on how to choose the best diversity metric also check
 
-1. [Measuring the diversity of the human microbiota with targeted next-generation sequencing](https://academic.oup.com/bib/article/19/4/679/2871295?utm_source=pocket_reader)
-2. [Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets](https://academic.oup.com/femsec/article/82/1/37/567182?utm_source=pocket_reader)
+1. [Measuring the diversity of the human microbiota with targeted next-generation sequencing](https://academic.oup.com/bib/article/19/4/679/2871295?utm_source=pocket_reader) {% cite BonillaRosso.2012 %}
+2. [Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets](https://academic.oup.com/femsec/article/82/1/37/567182?utm_source=pocket_reader) {% cite Finotello.2018 %}
 
 # Conclusion
 
