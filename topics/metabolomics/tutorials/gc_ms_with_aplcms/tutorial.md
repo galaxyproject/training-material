@@ -252,25 +252,18 @@ To continue with further steps, we need a template into which we can align the d
 >
 {: .hands_on}
 
-## Sub-step with **recetox-aplcms - correct time**
+## Correct time
 
 We need our previously clustered features, selected template and tolerances.
+Apply spline-based retention time correction to a feature table given the template table and the mz and rt tolerances.
 
-> ### {% icon hands_on %} Hands-on: Task description
+**TODO** add picture depicting effect of time correction?
+
+> ### {% icon hands_on %} Hands-on: Correct time
 >
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - {% icon param-file %} *"Input template features table"*: `output_file` (output of **recetox-aplcms - compute template** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
