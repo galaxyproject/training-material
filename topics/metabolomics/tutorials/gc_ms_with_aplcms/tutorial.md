@@ -396,18 +396,21 @@ TBD what is next + hyperlinks
 
 Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
 
-**TODO** somehow inspect tables, comment on many gaps
+**TODO** show example of table with many gaps, comment on them
 
-## Sub-step with **recetox-aplcms - recover weaker signals**
+## Recover weaker signals
 
-Second stage peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
+This step recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity. It runs the second stage peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
 
-This recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity.
+> <details-title> Key parameters </details-title>
+> 
+> Since most of the previous steps are run again, also their parameters are repeated, giving the opportunity to set them more or less strict.
+>
+> Besides them, there is parameter `Minimal count to recover`, allowing to set the minimum number of raw data points to be considered as a true feature.
+>
+{: .details}
 
-- `recover_min_count` - how many data points need to be there to consider them a peak
-- `bandwidth` - again the same for smoothing
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
 > 1. {% tool [recetox-aplcms - recover weaker signals](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_recover_weaker_signals/recetox_aplcms_recover_weaker_signals/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
@@ -416,15 +419,6 @@ This recovers features which are present in a sample but might have been filtere
 >    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -452,16 +446,6 @@ We might have added new features, so we do the clustering again.
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
->    - *"Tolerances input method"*: `direct`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -481,26 +465,20 @@ We might have added new features, so we do the clustering again.
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - align features**
+## Features alignment
 
-Features can now appear in more samples, so we also repeat the alignment step.
+Features can now appear in more samples then before, so we also need to repeat the alignment step.
 
-These steps can be potentially again repeated and combined (as well as for example combined with retention time correction) in arbitrary number of iterations.
+> ### {% icon comment %} Steps iteration
+>
+> These steps can be potentially again repeated and combined (as well as for example combined with retention time correction if neccesary) in arbitrary number of iterations.
+>
+{: .comment}
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-file %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
 >
 {: .hands_on}
 
