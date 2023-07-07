@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
+level: Advanced
 zenodo_link: 'https://zenodo.org/record/7974884'
 tags:
     - alternative splicing
