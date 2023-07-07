@@ -264,10 +264,18 @@ To continue with further steps, we need a template into which we can align the d
 
 ## Correct time
 
-We need our previously clustered features, selected template and tolerances.
+We need our previously clustered features and selected template.
 Apply spline-based retention time correction to a feature table given the template table and the mz and rt tolerances.
 
-**TODO** add picture depicting effect of time correction?
+> <details-title> Retention time correction effects </details-title>
+> 
+> **TODO** explain effect of time correction
+>
+> **TODO** Change picture where we actually see how rt of targeted sample is shifted based on template
+>
+> ![recetox-aplcms time correction](../../images/aplcms_corrected_time.png "Deviation of retention time of samples compared to selected template sample after correction.")
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Correct time
 >
