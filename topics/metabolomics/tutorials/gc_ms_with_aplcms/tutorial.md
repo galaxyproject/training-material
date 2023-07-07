@@ -500,26 +500,16 @@ Features can now appear in more samples then before, so we also need to repeat t
 
 # Hybrid
 
-## Sub-step with **recetox-aplcms - merge known table**
+## Merge known table
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Merge known table
 >
 > 1. {% tool [recetox-aplcms - merge known table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_merge_known_table/recetox_aplcms_merge_known_table/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Table of known features"*: `output` (Input dataset)
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - *"Tables merge direction"*: `Merge known table to features`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -539,27 +529,17 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - recover weaker signals**
+## Recover weaker signals
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
 > 1. {% tool [recetox-aplcms - recover weaker signals](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_recover_weaker_signals/recetox_aplcms_recover_weaker_signals/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->    - {% icon param-file %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - {% icon param-file %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-collection %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
+>    - {% icon param-collection %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
 >    - {% icon param-file %} *"Metadata table"*: `output_metadata_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `output_rt_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `output_intensity_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -579,23 +559,12 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute clusters**
+## Compute clusters
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
->    - *"Tolerances input method"*: `file`
->        - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
 >
 {: .hands_on}
 
@@ -615,21 +584,12 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute template**
+## Compute template
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Compute template
 >
 > 1. {% tool [recetox-aplcms - compute template](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_template/recetox_aplcms_compute_template/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Input data"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
 
@@ -649,23 +609,13 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - correct time**
+## Correct time
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Correct time
 >
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - {% icon param-file %} *"Input template features table"*: `output_file` (output of **recetox-aplcms - compute template** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -685,23 +635,12 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute clusters**
+## Compute clusters
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
->    - *"Tolerances input method"*: `file`
->        - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
 >
 {: .hands_on}
 
@@ -721,22 +660,12 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - align features**
+## Features alignment
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
 
@@ -756,26 +685,16 @@ Features can now appear in more samples then before, so we also need to repeat t
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - merge known table**
+## Merge known table
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Merge known table
 >
 > 1. {% tool [recetox-aplcms - merge known table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_merge_known_table/recetox_aplcms_merge_known_table/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Table of known features"*: `output` (Input dataset)
->    - {% icon param-file %} *"Input tolerances values"*: `tolerances` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - *"Tables merge direction"*: `Merge features to known table`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
