@@ -74,7 +74,7 @@ Many clustering algorithms use distance measures to determine the similarity or 
 
 The choice of a distance measure is crucial in clustering. It defines how the similarity of two elements `(x, y)` is calculated as it influences the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If the euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
 
-![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
+![Distances](images/raceid_distance.png "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
 
 > <question-title></question-title>
