@@ -30,7 +30,7 @@ contributors:
 `recetox-aplcms` is a software package designed for the processing of LC/MS based metabolomics data, in particular for peak detection in high resolution mass spectrometry (HRMS) data. 
 It supports reading `.mzml` files in raw profile mode and uses a bi-Gaussian chromatographic peak shape ({% cite yu2010quantification %}) for feature detection and quantification. `recetox-aplcms` is based on the apLCMS R package ({% cite 10.1093/bioinformatics/btp291 %}) and includes various software updates and is actively developed and maintained on GitHub.
 
-There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery.
+There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery. While unsupervised approach allows for unbiased exploration and discovery of patterns, hybrid approac integrates prior knowledge or supervised techniques to enhance targeted analysis and interpretation. The choice between these approaches depends on the research objectives, available prior knowledge, and the specific questions being addressed in the metabolomics study.
 
 ![recetox-aplcms overview](../../images/aplcms_scheme.png "Overview of individual steps of the recetox-aplcms package that can be combined in two separate workflows processing HRMS data in an unsupervised manner or by including a-priori knowledge.")
 
@@ -118,7 +118,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 # Common part
 
-TODO
+In this first part, recetox-aplcms integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. Then, recetox-aplcms detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, recetox-aplcms matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
 
 ## Remove noise
 
@@ -216,7 +216,7 @@ This steps takes the features grouped by m/z from the previous step and detects 
 
 ## Compute clusters
 
-Pre-alignment step where we put all peaks from all samples into a single table and group them based on bth m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
+Pre-alignment step where we put all peaks from all samples into a single table and group them based on both m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
 
 > <details-title> Clustering algorithm details </details-title>
 > 
@@ -417,9 +417,15 @@ This step performs feature alignment after clustering and retention time correct
 
 # Unsupervised
 
-Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
+Unsupervised approach focuses on exploring and discovering patterns in the data without prior knowledge or assumptions. This method employes techniques such as dimensionality reduction and clustering to reveal inherent structures and relationships within the metabolite profiles. Unsupervised approach is useful when the specific patterns or classes within the data are not known beforehand, allowing for unbiased exploration of the data and potential identification of novel patterns or subgroups. However, unsupervised approach may require additional validation and annotation steps to assign biological meaning to the discovered patterns.
 
-**TODO** show example of table with many gaps, comment on them
+> <details-title> Gaps </details-title>
+> 
+> Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
+>
+> **TODO** show example of table with many gaps, comment on them
+>
+{: .details}
 
 ## Recover weaker signals
 
@@ -534,6 +540,8 @@ Features can now appear in more samples then before, so we also need to repeat t
 ***TODO*** more explanation of the outputs? comparision with pre-recovered data?
 
 # Hybrid
+
+Hybrid approach combines unsupervised techniques with supervised or targeted methods. This approach incorporates external information, such as known metabolic pathways or class labels, to guide the analysis and interpretation of the data. Hybrid approach may leverage prior knowledge to enhance the detection and interpretation of specific metabolite classes, pathways, or biomarkers of interest. Hybrid approach is particularly valuable when there is prior knowledge available or when targeted analysis is desired.
 
 ## Merge known table
 
