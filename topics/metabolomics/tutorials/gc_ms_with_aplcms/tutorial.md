@@ -216,11 +216,11 @@ This steps takes the features grouped by m/z from the previous step and detects 
 
 ## Compute clusters
 
-Pre-alignment step where we put all peaks from all samples into a single table and group them based on bth m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster_id` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
+Pre-alignment step where we put all peaks from all samples into a single table and group them based on bth m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
 
 > <details-title> Clustering algorithm details </details-title>
 > 
-> Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature, then a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster_id` columns.
+> Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature, then a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster` columns.
 > 
 > **TODO** add picture
 >
@@ -247,7 +247,7 @@ Pre-alignment step where we put all peaks from all samples into a single table a
 >
 {: .question}
 
-Output is again separated to a collecton of individual tables, but with assigned `cluster_id`.
+Output is again separated to a collecton of individual tables, but with assigned `cluster`.
 
 ## Compute template
 
