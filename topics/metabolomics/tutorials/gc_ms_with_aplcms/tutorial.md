@@ -135,7 +135,7 @@ It also performs a first clustering step of points with close m/z values into th
 > - **m/z tolerance** - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. Can be seen as width of m/z peak.
 > - **Baseline correction** - intensity cutoff to be used. After grouping the observations, the highest intensity in each group is found. If the highest is lower than this value, the entire group will be deleted.
 >
-> ![recetox-aplcms noise parameters](../../images/aplcms_explain_min_run_and_pres.jpg "Graphical explanation of effect of minimal elution time (min_run) and minimal signal presence (min_pres) parameters on input data.")
+> ![recetox-aplcms noise parameters](../../images/aplcms_explain_min_run_and_pres.png "Graphical explanation of effect of minimal elution time (min_run) and minimal signal presence (min_pres) parameters on input data.")
 >
 {: .details}
 
@@ -183,7 +183,7 @@ This steps takes the features grouped by m/z from the previous step and detects 
 > - **Minimal/maximal sigma ratio** - the lower and upper limit of the ratio between left-standard deviation and the right-standard deviation $$\frac{\sigma_1}{\sigma_2}$$. It represents relative skewness of the peak.
 > - **Bandwidth factor** - parameter used to scale down the overall range of retention times (the bandwidth) assumed in the kernel smoother used for peak identification. The value is between zero and one. The minimal and maximal bandwidth can be limited by explicit values. It is used to improve the peak shape by smoothing.
 >
-> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.jpg "The picture shows the bi-Gaussian model, characterised by two standard deviations. The ratio of standard deviations influences the degree of skewness, thus producing a different shape of the peak.")
+> ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.png "The picture shows the bi-Gaussian model, characterised by two standard deviations. The ratio of standard deviations influences the degree of skewness, thus producing a different shape of the peak.")
 >
 {: .details}
 
@@ -222,8 +222,8 @@ Pre-alignment step where we put all peaks from all samples into a single table a
 > 
 > Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature, then a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster` columns.
 > 
-> **TODO** add picture
->
+> ![recetox-aplcms clustering](../../images/aplcms_clustering.png "Illustrative example of clustering algorithm with highlighted m/z groups (red) and rt groups (blue). Cluster is the same only when these two groups overlap (green).")
+> 
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Compute clusters
