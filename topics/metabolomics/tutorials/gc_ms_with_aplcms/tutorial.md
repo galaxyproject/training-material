@@ -384,8 +384,6 @@ This step performs feature alignment after clustering and retention time correct
 >
 {: .details}
 
-TBD what is next + hyperlinks
-
 > ### {% icon comment %} Next steps
 >
 > At this point, there are two alternative routes how to continue - you can use [unsupervised]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_aplcms/tutorial.html#unsupervised) approach (use no existing knowledge, detects peaks de novo from the data based on the data itself) or [hybrid]({{ site.baseurl }}/topics/metabolomics/tutorials/gc_ms_with_aplcms/tutorial.html#hybrid) approach (combine de novo peak detection with existing knowledge).
@@ -438,14 +436,14 @@ This step recovers features which are present in a sample but might have been fi
 >
 {: .question}
 
-## Sub-step with **recetox-aplcms - compute clusters**
+## Compute clusters
 
 We might have added new features, so we do the clustering again.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
 >
 {: .hands_on}
 
@@ -478,7 +476,7 @@ Features can now appear in more samples then before, so we also need to repeat t
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
+>    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
 >
 {: .hands_on}
 
@@ -497,6 +495,8 @@ Features can now appear in more samples then before, so we also need to repeat t
 > {: .solution}
 >
 {: .question}
+
+***TODO*** more explanation of the outputs? comparision with pre-recovered data?
 
 # Hybrid
 
