@@ -73,7 +73,7 @@ jobs:
 
       - name: Ensure no unexpected encoded HTML in output
         run: |
-          fgrep -R 'lt;blockquote' _site
+          ! fgrep -R 'lt;blockquote' _site
 
       - name: Run aXe accessibility testing on some representative URLs
         run: |
