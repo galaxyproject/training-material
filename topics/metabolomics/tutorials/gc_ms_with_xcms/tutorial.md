@@ -326,46 +326,46 @@ The spectral data comes as an `.msp` file, which is a text file structured accor
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
->    Click *"View data"* {% icon galaxy-eye %} icon next to the dataset in the Galaxy history. The contents of the file would look like this:
+> Click *"View data"* {% icon galaxy-eye %} icon next to the dataset in the Galaxy history. The contents of the file would look like this:
 >
->    {% snippet faqs/galaxy/datasets_icons.md %}
+> {% snippet faqs/galaxy/datasets_icons.md %}
 >
->    ```
->     NAME:C001
->     IONMODE:Negative
->     SPECTRUMTYPE:Centroid
->     RETENTIONTIME:383.27
->     Num Peaks:231
->     217.1073 64041926
->     243.0865 35597866
->     257.1134 31831229
->     224.061 27258239
->     258.11 24996353
->     241.0821 23957171
->     315.1188 13756744
->     ...
+> ```
+> NAME:C001
+> IONMODE:Negative
+> SPECTRUMTYPE:Centroid
+> RETENTIONTIME:383.27
+> Num Peaks:231
+> 217.1073 64041926
+> 243.0865 35597866
+> 257.1134 31831229
+> 224.061 27258239
+> 258.11 24996353
+> 241.0821 23957171
+> 315.1188 13756744
+> ...
 >
->     NAME:C002
->     IONMODE:Negative
->     SPECTRUMTYPE:Centroid
->     RETENTIONTIME:281.62
->     Num Peaks:165
->     307.1573 299174880
->     147.0654 298860831
->     149.0447 287809889
->     218.1066 118274758
->     189.076 112486871
->     364.1787 75134143
->     191.0916 52526567
->     308.1579 52057158
->     ...
->    ```
+> NAME:C002
+> IONMODE:Negative
+> SPECTRUMTYPE:Centroid
+> RETENTIONTIME:281.62
+> Num Peaks:165
+> 307.1573 299174880
+> 147.0654 298860831
+> 149.0447 287809889
+> 218.1066 118274758
+> 189.076 112486871
+> 364.1787 75134143
+> 191.0916 52526567
+> 308.1579 52057158
+> ...
+> ```
 >
->    > <details-title> Negative ion mode </details-title>
->    >
->    > You might wonder how can the ionisation mode (_IONMODE_) for GC-MS data be negative when using electron impact (EI+) ionization. This is, of course, incorrect. This is actually just a default behaviour of **RAMClustR**. We can optionally change this by providing **RAMClustR** an experiment definition file. This file can be created manually or using the {% tool [RAMClustR define experiment](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2) %} tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI+ in our case), and this will be transfered to the `.msp` file. Finally, we can provide such a file as an input to **RAMClustR** in the _Extras_ inputs section.
->    >
->    {: .details}
+> > <details-title> Negative ion mode </details-title>
+> >
+> > You might wonder how can the ionisation mode (_IONMODE_) for GC-MS data be negative when using electron impact (EI+) ionization. This is, of course, incorrect. This is actually just a default behaviour of **RAMClustR**. We can optionally change this by providing **RAMClustR** an experiment definition file. This file can be created manually or using the {% tool [RAMClustR define experiment](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2) %} tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI+ in our case), and this will be transfered to the `.msp` file. Finally, we can provide such a file as an input to **RAMClustR** in the _Extras_ inputs section.
+> >
+> {: .details}
 >
 {: .hands_on}
 
