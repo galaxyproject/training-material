@@ -116,7 +116,7 @@ In the next few steps, you will walk through how to get set up to use Galaxy on 
 > <comment-title></comment-title>
 > Because AnVIL runs on a commerical cloud provider, you will need to have set up billing for yourself or through your institution to follow along with this exercise, or you will need to be added to a billing account created for a training event.
 > 
-> Learn more about options for creating billing accounts here: https://jhudatascience.org/AnVIL_Book_Getting_Started/overview-pis.html.
+> Learn more about options for creating billing accounts at this link: https://jhudatascience.org/AnVIL_Book_Getting_Started/overview-pis.html.
 {: .comment}
 
 > <tip-title>Screen view</tip-title>
@@ -182,11 +182,11 @@ Notice the three main sections.
 
 ![Screenshot of the Galaxy landing page. The Tools and History headings have been highlighted.](../../images/sars-with-galaxy-in-anvil/10-galaxy-on-anvil.png)
 
-On the welcome page, there are links to tutorials. You may try these out on your own. If you want to try a new analysis this is a good place to start.
+The welcome page includes links to tutorials. You may try these out on your own. If you want to try a new analysis this is a good place to start.
 
 # Exercise One: Importing Data into Galaxy
 
-Luckily, we linked to the original data when we cloned our Workspace! We have three files we will need for our activity. These are (1) the reference genome for SARS-CoV-2, and both forward (2) and reverse (3) reads for our sample. There are two sets of reads for our sample because the scientists who collected it used paired-end sequencing. The reference genome ends in “.fasta” because it has already been cleaned up by scientists. The sample we are looking at ends in ".fastq" because it is raw data from the sequencer.
+Luckily, we linked to the original data when we cloned our Workspace! We have three files we will need for our activity. These are (1) the reference genome for SARS-CoV-2, and both forward (2) and reverse (3) reads for our sample. Our sample has two sets of reads because the scientists who collected it used paired-end sequencing. The reference genome ends in “.fasta” because it has already been cleaned up by scientists. The sample we are looking at ends in ".fastq" because it is raw data from the sequencer.
 
 > <hands-on-title>Import Data from the Workspace</hands-on-title>
 >
@@ -217,7 +217,7 @@ Use your mouse and click on the eye icon {% icon galaxy-eye %} of the first file
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 4 lines that represent one read.
+> > 1. Four lines represent one read.
 > > 2. The lines represent: 1 - A sequence identifier, 2 - The sequence (the base calls; A, C, T, G and N), 3 - A separator (not really data), 4 - The base call quality scores.
 > > 3. It can help us filter out data that is wrong and/or low quality.
 > >
@@ -230,7 +230,7 @@ FastQC is a tool which aims to provide simple quality control checks on raw sequ
 
 > <hands-on-title>Determine the Quality of the Samples</hands-on-title>
 >
-> 1. Find {% tool [FastQC](https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/5ec9f6bceaee) %} in the GENOMIC FILE MANIPULATION: FASTQ Quality Control tool folder.
+> 1. Find {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc) %} in the GENOMIC FILE MANIPULATION: FASTQ Quality Control tool folder.
 >    - {% icon param-file %} *"Raw read data from your current history"*: `VA_sample_forward_reads.fastq`
 > 2. Run the tool.
 >
@@ -287,7 +287,7 @@ The output file is a `BAM` file, which lists where each read aligns to the refer
 > <question-title></question-title>
 >
 > 1. What is alignment software (for example, BWA-MEM) actually doing?
-> 2. Here we are using paired fastq (“paired end”) data. What is an advantage of using paired data?
+> 2. In this example, we are using paired fastq (“paired end”) data. What is an advantage of using paired data?
 >
 > > <solution-title></solution-title>
 > >
