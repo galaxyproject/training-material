@@ -132,7 +132,7 @@ In the next few steps, you will walk through how to get set up to use Galaxy on 
 >   - In the top search bar type the activity workspace `SARS-CoV-2-Genome`. You can also go directly to the following link: https://anvil.terra.bio/#workspaces/gdscn-exercises/SARS-CoV-2-Genome.
 >   ![Screenshot of the AnVIL platform workspaces page highlighting the Public tab and the SARS-CoV-2-Genome Workspace search result.](../../images/sars-with-galaxy-in-anvil/01-sars-workspace.png)
 > 3. Clone the workspace by clicking the teardrop button and selecting “Clone”.
-> ![Screenshot showing the teardrop button. The button has been clicked revealing the "clone" option. The Clone option and the teardrop button are highlighted.](../../images/sars-with-galaxy-in-anvil/02-clone-button.png)
+>    ![Screenshot showing the teardrop button. The button has been clicked revealing the "clone" option. The Clone option and the teardrop button are highlighted.](../../images/sars-with-galaxy-in-anvil/02-clone-button.png)
 >   - In the new window, give your Workspace clone a name by adding an underscore (“_”) and your name.
 >   - Next, select the Billing project provided by your instructor. 
 >   - Leave the Description and Authorization Domain boxes as-is.
