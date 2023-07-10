@@ -341,6 +341,14 @@ After we have aligned the retention time of our samples, we need to run second r
 
 This step performs feature alignment after clustering and retention time correction. The peaks clustered across samples are grouped based on the given tolerances to create an aligned feature table, connecting identical features across samples. Among tolerances, the `Minimal occurrence in samples` parameter can be used to control in at least how many samples a feature has to be detected in order to be included in the aligned feature table.  This allows us to preserve only peaks that appear really consistenly across the samples.
 
+> <details-title> Algorithm details </details-title>
+> 
+> **TODO** explain in details.
+>
+> **TODO** add picture?
+> 
+{: .details}
+
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
@@ -472,7 +480,7 @@ This step recovers features which are present in a sample but might have been fi
 >
 {: .question}
 
-## Compute clusters
+## Compute clusters (3rd round)
 
 We might have added new features, so we do the clustering again.
 
@@ -501,7 +509,7 @@ We might have added new features, so we do the clustering again.
 >
 {: .question}
 
-## Features alignment
+## Features alignment (2nd round)
 
 Features can now appear in more samples then before, so we also need to repeat the alignment step.
 
@@ -544,6 +552,12 @@ Features can now appear in more samples then before, so we also need to repeat t
 Hybrid approach combines unsupervised techniques with supervised or targeted methods. This approach incorporates external information, such as known metabolic pathways or class labels, to guide the analysis and interpretation of the data. Hybrid approach may leverage prior knowledge to enhance the detection and interpretation of specific metabolite classes, pathways, or biomarkers of interest. Hybrid approach is particularly valuable when there is prior knowledge available or when targeted analysis is desired.
 
 ## Merge known table
+
+> <details-title> Example </details-title>
+> 
+> **TODO** show both tables and how they are merged
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Merge known table
 >
@@ -609,7 +623,7 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Compute clusters
+## Compute clusters (3rd round)
 
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
@@ -636,7 +650,7 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Compute template
+## Compute template (2nd round)
 
 > ### {% icon hands_on %} Hands-on: Compute template
 >
@@ -661,7 +675,7 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Correct time
+## Correct time (2nd round)
 
 > ### {% icon hands_on %} Hands-on: Correct time
 >
@@ -689,7 +703,7 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Compute clusters
+## Compute clusters (4th round)
 
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
@@ -716,7 +730,7 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Features alignment
+## Features alignment (2nd round)
 
 > ### {% icon hands_on %} Hands-on: Align features
 >
@@ -744,7 +758,13 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 >
 {: .question}
 
-## Merge known table
+## Merge known table (2nd round)
+
+> <details-title> Example </details-title>
+> 
+> **TODO** show both tables and how they are merged
+>
+{: .details}
 
 > ### {% icon hands_on %} Hands-on: Merge known table
 >
@@ -775,14 +795,6 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 > {: .solution}
 >
 {: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
