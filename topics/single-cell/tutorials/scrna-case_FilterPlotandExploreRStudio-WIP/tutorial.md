@@ -184,7 +184,7 @@ VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito")
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito")
 ```
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
@@ -193,14 +193,14 @@ High mito expression typically indicates stressed out cells (typically due to th
 We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
 
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito", xlim = c(0,1750))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito", xlim = c(0,1750))
 ```
 It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2%--a conservative threshold that still encompasses the majority of other cells.  
 
 Now we can take a closer look at the y-axis to decide on a mito threshold to set. Once more, we want to get rid of as few cells as possible while still removing those with unexpectedly high mito percentages. 
 
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito", ylim = c(0,3))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito", ylim = c(0,3))
 ```
 
 We can see a clear trend wherein cells that have around 3% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
@@ -218,13 +218,13 @@ If not, repeat the preceding steps to hone in on a threshold more suited for you
 To do so, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
 
 ```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab= "gene_count", ylab="% mito")
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "% mito")
 ```
 
 Once again, let's zoom in on the x-axis but this time to get an idea of which nFeature_RNA threshold to set:
 
 ```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab= "gene_count", ylab="% mito", xlim = c(0,1275))
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "% mito", xlim = c(0,1275))
 ```
 You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
 
@@ -296,7 +296,7 @@ filtered_srt <- RunPCA(filtered_srt, features = VariableFeatures(object = filter
 To visualize how our principal components (PCs) represent our data, let's create an elbow plot: 
 
 ```r
-ElbowPlot(filtered_srt, ndims=50)
+ElbowPlot(filtered_srt, ndims = 50)
 ```
 
 We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs. 
