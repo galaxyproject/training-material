@@ -230,7 +230,7 @@ FastQC is a tool which aims to provide simple quality control checks on raw sequ
 
 > <hands-on-title>Determine the Quality of the Samples</hands-on-title>
 >
-> 1. Find {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc) %} in the GENOMIC FILE MANIPULATION: FASTQ Quality Control tool folder.
+> 1. Find {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} in the GENOMIC FILE MANIPULATION: FASTQ Quality Control tool folder.
 >    - {% icon param-file %} *"Raw read data from your current history"*: `VA_sample_forward_reads.fastq`
 > 2. Run the tool.
 >
