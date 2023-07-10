@@ -192,7 +192,7 @@ Luckily, we linked to the original data when we cloned our Workspace! We have th
 >
 > 1. Click on Upload Data in the Tools pane.
 > 2. Click on “Choose remote files” at the bottom of the popup. Double-click the top selection, which is the Workspace folder, then “Tables/” then “reference/”. Click the reference .fasta file so that it is highlighted in green and click “Ok”.
-> ![Screenshot of the Galaxy Data upload page with the current AnVIL workspace highlighted.](../../images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png)
+>    ![Screenshot of the Galaxy Data upload page with the current AnVIL workspace highlighted.](../../images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png)
 > 3. Now that your reference has been added, click “Choose remote files” again to add the two sample files. Double-click the Workspace folder, then “Tables/” then “samples/”. Click the two sample `fastq` files so that they are highlighted in green and click “OK”.
 > 4. Click “Start” and once complete, you can click “Close”.
 > 5. Confirm your upload worked by looking at the file names in the History pane.
