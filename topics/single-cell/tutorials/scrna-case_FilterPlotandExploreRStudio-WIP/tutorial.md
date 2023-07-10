@@ -139,9 +139,7 @@ srt@meta.data$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
  Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
 
 ```r
-srt <- PercentageFeatureSet(srt, 
-                               pattern = "^mt-", 
-                               col.name = "perc.mt")
+srt <- PercentageFeatureSet(srt, pattern = "^mt-", col.name = "perc.mt")
 ```
 
  For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes. With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage--the mt prefix may not always include all mitochondrial genes depending on how your dataset was labelled. 
@@ -162,10 +160,7 @@ We’re going to plot our data a few different ways. Different bioinformaticians
 So let's generate some QC plots. First off, let's check our dataset for batch effect:
 
 ```r
-VlnPlot(srt,
-        group.by = "Individual",
-        features = "nCount_RNA", 
-        log = TRUE)
+VlnPlot(srt, group.by = "Individual", features = "nCount_RNA", log = TRUE)
 ```
 
 This plot shows us the number of cells split by the individual (mouse) from which the cells came from. Now, depending on your experimental design, batch may be represented by something other than individual--like timepoint or even the wet lab researcher who isolated the cells. 
@@ -183,18 +178,13 @@ VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
 
 2. Genotype?
 ```r
-VlnPlot(srt,
-        group.by = "Genotype", features = "nCount_RNA", log = TRUE)
+VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
  ```
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
 ```r
-plot(x = srt$nCount_RNA, 
-     y = srt$perc.mt, 
-     main = "UMI Counts x Percent Mito", 
-     xlab = "UMI_count", 
-     ylab="% mito")
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito")
 ```
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
@@ -203,24 +193,14 @@ High mito expression typically indicates stressed out cells (typically due to th
 We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
 
 ```r
-plot(x = srt$nCount_RNA, 
-     y = srt$perc.mt, 
-     main = "UMI Counts x Percent Mito", 
-     xlab = "UMI_count", 
-     ylab="% mito", 
-     xlim = c(0,1750))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito", xlim = c(0,1750))
 ```
 It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2%--a conservative threshold that still encompasses the majority of other cells.  
 
 Now we can take a closer look at the y-axis to decide on a mito threshold to set. Once more, we want to get rid of as few cells as possible while still removing those with unexpectedly high mito percentages. 
 
 ```r
-plot(x = srt$nCount_RNA, 
-     y = srt$perc.mt, 
-     main = "UMI Counts x Percent Mito", 
-     xlab = "UMI_count", 
-     ylab="% mito", 
-     ylim = c(0,3))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab="% mito", ylim = c(0,3))
 ```
 
 We can see a clear trend wherein cells that have around 3% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
@@ -238,22 +218,13 @@ If not, repeat the preceding steps to hone in on a threshold more suited for you
 To do so, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
 
 ```r
-plot(x = srt$nFeature_RNA, 
-     y = srt$perc.mt, 
-     main = "Gene Counts x Percent Mito", 
-     xlab= "gene_count", 
-     ylab="% mito")
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab= "gene_count", ylab="% mito")
 ```
 
 Once again, let's zoom in on the x-axis but this time to get an idea of which nFeature_RNA threshold to set:
 
 ```r
-plot(x = srt$nFeature_RNA, 
-     y = srt$perc.mt, 
-     main = "Gene Counts x Percent Mito", 
-     xlab= "gene_count", 
-     ylab="% mito", 
-     xlim = c(0,1275))
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab= "gene_count", ylab="% mito", xlim = c(0,1275))
 ```
 You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
 
@@ -267,8 +238,7 @@ Once we are happy with our filtering thresholds, it’s now time to apply them t
 
 
 ```r
-subset_srt<-subset(srt,
-                      nCount_RNA > 1750 & nFeature_RNA > 1275 & perc.mt < 3 | nFeature_RNA < 600) 
+subset_srt<-subset(srt, nCount_RNA > 1750 & nFeature_RNA > 1275 & perc.mt < 3 | nFeature_RNA < 600) 
 ```
 
 In this step we are also creating a new object (notice the new object name preceding the subset function you just ran) so that we may compare back and forth between our unfiltered and filtered data set if we please. 
@@ -284,9 +254,7 @@ Now that you’ve removed a whole heap of cells, and since the captured genes ar
 >We can take the filtered matrix we just extracted and create a new Seurat object, this time including an additional min.cells argument. This will remove any genes from our matrix that have less than 3 cells expressing them. Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
 
 ```r
-filtered_srt <- CreateSeuratObject(counts = subset_matrix, 
-                                      meta.data = subset_srt@meta.data, 
-                                      min.cells = 3)
+filtered_srt <- CreateSeuratObject(counts = subset_matrix, meta.data = subset_srt@meta.data, min.cells = 3)
 ```
 
 Now that we have filtered out both noisy "cells" and genes from our dataset, let's clean up our environment. Remove objects that we no longer need to ensure that we stay organized and RStudio has enough memory capacity to perform downstream analyses. This likely will not be an issue while doing this tutorial, but in practice it will help things run smoothly. 
@@ -302,11 +270,7 @@ Currently, we still have quite big data. We have two issues here:
 We will run SCTransform, a combinatorial function by Seurat that normalizes the data, finds variable features, and then scales the data. In their initial workflow, and in the Scanpy version of this tutorial, these steps are run individually. However, with the second version of SCTransform comes time efficiency and optimization for downstream analyses. 
 
 ```r
-filtered_srt<- SCTransform(filtered_srt, 
-                          vars.to.regress = c("perc.mt", "nFeature_RNA", "nCount_RNA"),
-                          verbose = TRUE, 
-                          return.only.var.genes = FALSE, 
-                          seed.use = 1448145)
+filtered_srt<- SCTransform(filtered_srt, vars.to.regress = c("perc.mt", "nFeature_RNA", "nCount_RNA"), verbose = TRUE, return.only.var.genes = FALSE, seed.use = 1448145)
 ```
 
 Normalisation helps reduce the differences between gene and UMI counts by fitting total counts to 10,000 per cell. The inherent log-transform (by log(count+1)) aligns the gene expression level better with a normal distribution. This is fairly standard to prepare for any future dimensionality reductions.
@@ -326,8 +290,7 @@ Transcript changes are not usually singular - which is to say, genes were in pat
 >Principal components are calculated from highly dimensional data to find the most representative spread in the dataset. So in our highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:
 
 ```r
-filtered_srt <- RunPCA(filtered_srt, 
-              features = VariableFeatures(object = filtered_srt))
+filtered_srt <- RunPCA(filtered_srt, features = VariableFeatures(object = filtered_srt))
 ```
 
 To visualize how our principal components (PCs) represent our data, let's create an elbow plot: 
