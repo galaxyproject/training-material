@@ -139,7 +139,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 The first part of data processing is using the **XCMS** tool to detect peaks in the MS signal. For that, we first need to take the `.mzML` files and create a format usable by the **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} ({% cite gatto2012msnbase %}. {% cite gatto2020msnbase %}) takes as input our files and prepares `RData` files for the first **XCMS** step.
 
-> <hands-on-title> Create the **XCMS** object </hands-on-title>
+> <hands-on-title> Create the XCMS object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"File(s) from your history containing your chromatograms"*: `input.mzML` (output of **msconvert** {% icon tool %})
@@ -170,13 +170,11 @@ The first step in the workflow is to detect the peaks in our data using **XCMS**
 > >
 > >    ```
 > >    https://zenodo.org/record/7890956/files/XCMS_object.rdata.xcms.fillpeaks
-> >    https://zenodo.org/record/7890956/files/reference_alkanes.csv
-> >    https://zenodo.org/record/7890956/files/reference_spectral_library.msp
 > >    ```
 > >
 > >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > >
-> >    Please pay attention to the format of all uploaded files, and make sure they were correctly imported. The format of **XCMS** object is `rdata.xcms.fillpeaks`.
+> >    The format of uploaded file containing **XCMS** object should be `rdata.xcms.fillpeaks`.
 > >
 > >    {% snippet faqs/galaxy/datatypes_understanding_datatypes.md %}
 > >
@@ -455,18 +453,18 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 > <details-title> Overview of the spectral similarity scores </details-title>
 >
-> ### Cosine Greedy
+> ## Cosine Greedy
 > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
 >
 > This score was among the first to be used for looking up matching spectra in spectral libraries and, to this day, remains one of the most popular scoring methods for both library matching and molecular networking workflows.
 >
-> ### Cosine Hungarian
+> ## Cosine Hungarian
 > This method computes the similarities in the same way as the *Cosine Greedy* but with a difference in *m/z* peak alignment. The difference lies in that the Hungarian algorithm is used here to find matching peaks. This leads to the best peak pairs match but can take significantly longer than the "greedy" algorithm.
 >
-> ### Modified Cosine
+> ## Modified Cosine
 > Modified Cosine is another, as its name states, representative of the family of cosine-based scores. This method aligns peaks by finding the best possible matches and considers two peaks a match if their *m/z* values are within tolerance before or after a mass-shift is applied. A mass shift is essentially a difference of precursor-*m/z* of two compared spectra. The similarity is then again expressed as a cosine of the angle between two vectors.
 >
-> ### Neutral Losses Cosine
+> ## Neutral Losses Cosine
 > Neutral Loss metric works similarly to all described above with one major difference: instead of encoding the spectra as "intensity vs *m/z*" vector, it encodes it to an "intensity vs *Δm/z*", where delta is computed as an *m/z* difference between precursor and a fragment *m/z*. This, in theory, could better capture the underlying structural similarities between molecules.
 >
 {: .details}
