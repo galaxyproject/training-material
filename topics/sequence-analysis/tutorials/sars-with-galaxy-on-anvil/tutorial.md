@@ -16,6 +16,8 @@ objectives:
 time_estimation: '1H'
 key_points:
 - Use Galaxy on the AnVIL cloud computing resource to check data, perform an alignment, and visualize the results.
+tags:
+  - covid19
 contributions:
     authorship:
     - nakucher
@@ -34,7 +36,6 @@ contributions:
     funding:
     - nhgri-gdscn
     - nhgri-anvil
-lang: "en"
 ---
 
 There is a growing need for undergraduate students to learn cutting-edge concepts in genomics data science, including performing analysis on the cloud instead of a personal computer. 
