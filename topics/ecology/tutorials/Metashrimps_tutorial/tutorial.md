@@ -40,7 +40,6 @@ of metadata.
 MetaShRIMPS is a tool developped by the PNDB (French Biodiversity Data Hub), a research structure initiated by the 
 French Natural History Museum (MNHN).
 
-
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -50,17 +49,10 @@ French Natural History Museum (MNHN).
 >
 {: .agenda}
 
-# Objective of the tool
+# Why do we need FAIR Data ?
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
+# How can this tool help in improving metadata quality
 Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
