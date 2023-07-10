@@ -1,0 +1,264 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "SARS-CoV-2 Viral Sample Alignment and Variant Visualization",
+  "level": "Introductory",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.8115178",
+  "questions": [
+    "How do I check my data quality?",
+    "How do I put together my dataset of fragmented sequences into a full sequence?",
+    "How do I visually explore the variants in my SARS-CoV-2 sample?"
+  ],
+  "objectives": [
+    "Gather and evaluate experimental evidence, including qualitative and quantitative data",
+    "Generate and interpret graphs displaying experimental results",
+    "Critique large data sets and use bioinformatics to assess genetics data",
+    "Tap into the interdisciplinary nature of science"
+  ],
+  "time_estimation": "1H",
+  "key_points": [
+    "Use Galaxy on the AnVIL cloud computing resource to check data, perform an alignment, and visualize the results."
+  ],
+  "tags": [
+    "covid19"
+  ],
+  "contributions": {
+    "authorship": [
+      "nakucher",
+      "avahoffman",
+      "robertmeller"
+    ],
+    "editing": [
+      "katherinecox",
+      "cutsort",
+      "nakucher"
+    ],
+    "infrastructure": [
+      "cansavvy",
+      "avahoffman",
+      "katherinecox",
+      "ehumph",
+      "cutsort"
+    ],
+    "funding": [
+      "nhgri-gdscn",
+      "nhgri-anvil"
+    ]
+  },
+  "short_id": null,
+  "url": "/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html",
+  "topic_name": "sequence-analysis",
+  "tutorial_name": "sars-with-galaxy-on-anvil",
+  "dir": "topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil",
+  "id": "sequence-analysis/sars-with-galaxy-on-anvil",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.json",
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://galaxy.genouest.org",
+        "name": "Galaxy@GenOuest",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.fr/",
+        "name": "UseGalaxy.fr",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.no/",
+        "name": "UseGalaxy.no",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.org.au",
+        "name": "UseGalaxy.org.au",
+        "usegalaxy": "true"
+      }
+    ],
+    "inexact": [
+      {
+        "url": "https://galaxy.mesocentre.uca.fr",
+        "name": "Galaxy@AuBi",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://galaxytrakr.org/",
+        "name": "GalaxyTrakr",
+        "usegalaxy": "false"
+      },
+      {
+        "url": "https://usegalaxy.be/",
+        "name": "UseGalaxy.be",
+        "usegalaxy": "true"
+      }
+    ]
+  },
+  "topic_name_human": "Sequence analysis",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "bwa",
+        "owner": "devteam",
+        "revisions": "e188dc7a68e6",
+        "tool_panel_section_label": "Sequence analysis",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "fastqc",
+        "owner": "devteam",
+        "revisions": "3d0c7bdf12f5",
+        "tool_panel_section_label": "Sequence analysis",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "jbrowse",
+        "owner": "iuc",
+        "revisions": "17359b808b01",
+        "tool_panel_section_label": "Sequence analysis",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: jbrowse\n  owner: iuc\n  revisions: 17359b808b01\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Natalie Kucher",
+      "email": "nkucher3@jhu.edu",
+      "joined": "2023-06",
+      "id": "nakucher",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nakucher.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/"
+    },
+    {
+      "name": "Ava Hoffman",
+      "joined": "2023-06",
+      "id": "avahoffman",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/avahoffman.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/"
+    },
+    {
+      "name": "Robert Meller",
+      "joined": "2023-06",
+      "id": "robertmeller",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/robertmeller.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/robertmeller/"
+    },
+    {
+      "name": "Katherine Cox",
+      "joined": "2023-06",
+      "id": "katherinecox",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/katherinecox.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/katherinecox/"
+    },
+    {
+      "name": "Frederick Tan",
+      "joined": "2023-06",
+      "id": "cutsort",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/cutsort.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cutsort/"
+    },
+    {
+      "name": "Natalie Kucher",
+      "email": "nkucher3@jhu.edu",
+      "joined": "2023-06",
+      "id": "nakucher",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nakucher.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/"
+    },
+    {
+      "name": "Candace Savonen",
+      "joined": "2023-06",
+      "id": "cansavvy",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/cansavvy.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cansavvy/"
+    },
+    {
+      "name": "Ava Hoffman",
+      "joined": "2023-06",
+      "id": "avahoffman",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/avahoffman.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/"
+    },
+    {
+      "name": "Katherine Cox",
+      "joined": "2023-06",
+      "id": "katherinecox",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/katherinecox.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/katherinecox/"
+    },
+    {
+      "name": "Elizabeth Humphries",
+      "joined": "2023-06",
+      "id": "ehumph",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/ehumph.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ehumph/"
+    },
+    {
+      "name": "Frederick Tan",
+      "joined": "2023-06",
+      "id": "cutsort",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/cutsort.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cutsort/"
+    },
+    {
+      "name": "National Human Genome Research Institute Genomic Data Science Community Network",
+      "github": false,
+      "joined": "2023-06",
+      "avatar": "https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nhgri-gdscn.json",
+      "funder": true,
+      "funding_id": "75N92022P00232",
+      "id": "nhgri-gdscn",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nhgri-gdscn/"
+    },
+    {
+      "name": "National Human Genome Research Institute Genomic Data Science Analysis, Visualization, and Informatics Lab-Space",
+      "github": false,
+      "joined": "2023-06",
+      "avatar": "https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nhgri-anvil.json",
+      "funder": true,
+      "funding_id": "U24HG010263",
+      "id": "nhgri-anvil",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nhgri-anvil/"
+    }
+  ]
+}
