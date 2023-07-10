@@ -32,27 +32,14 @@ contributors:
 
 # Introduction
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This tutorial aims to teach how to use the interactive tool MetaShRIMPS, available on Galaxy Ecology,
+to produce Data Papers drafts and FAIR quality assessment reports from metadata using EML
+standard.
+This tutorial purpose is also to explain the purpose of this tool which is to improve the overall FAIR quality
+of metadata.
+MetaShRIMPS is a tool developped by the PNDB (French Biodiversity Data Hub), a research structure initiated by the 
+French Natural History Museum (MNHN).
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -63,7 +50,7 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Objective of the tool
 
 Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
