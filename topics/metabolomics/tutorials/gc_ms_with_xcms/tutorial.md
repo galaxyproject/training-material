@@ -484,12 +484,12 @@ The output table contains the scores and number of matched ions of the deconvolu
 >
 {: .hands_on}
 
-> | query | reference | matches | scores |
+> | query | reference | CosineGreedy_score | CosineGreedy_matches |
 > |-------|-----------|---------|--------|
-> | C001  | Uridine_4TMS isomer 1   | 81       | 0.787    |
-> | C004  | Asparagine_3TMS   | 56       | 0.909   |
-> | C012  | Myo-inositol_6TMS | 29       | 0.688   |
-> | ...   | ...       | ...     | ...    |
+> | C044  | Guanine_3TMS    | 0.987    | 19    |
+> | C068  | Tryptophan_3TMS | 0.981    | 9   |
+> | C053  | Norleucine_2TMS | 0.980    | 12   |
+> | ...   | ...             | ... | ...  |
 {: .matrix}
 
 At this stage, all steps are complete: we have the list of identified spectra corresponding to a compound from the reference database. Since this process is dependent on the parameters we used along the way, the result should be considered dependent on them. To enumerate this dependency, each potential compound has been assigned a confidence score.
