@@ -330,7 +330,7 @@ This is interesting, but it doesn’t let us compare the genome to the sample we
 
 > <hands-on-title>Visualize Aligned Data</hands-on-title>
 >
-> 1. Scroll down in the Tools menu to STATISTICS AND VISUALIZATION. Under "Graph/Display Data", select {% tool [JBrowse](https://toolshed.g2.bx.psu.edu/view/iuc/jbrowse/a6e57ff585c0) %}.
+> 1. Scroll down in the Tools menu to STATISTICS AND VISUALIZATION. Under "Graph/Display Data", select {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %}.
 >    - {% icon param-select %} *"Reference genome to display"*: `Use a genome from history` 
 >    - {% icon param-select %} *"Select the reference genome"*: `SARS-CoV-2_reference_genome.fasta`
 >    - {% icon param-repeat %} *"+ Insert Track Group"*
