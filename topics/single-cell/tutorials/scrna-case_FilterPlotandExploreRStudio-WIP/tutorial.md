@@ -183,6 +183,7 @@ VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
+
 ```r
 plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito")
 ```
@@ -211,6 +212,7 @@ Take a look at what proportion of cells those thresholds will include and disclu
 prop.table(table(srt@meta.data$nCount_RNA > 1750)) 
 prop.table(table(srt@meta.data$perc.mt > 3))
 ```
+
 If we are happy with those thresholds for cells and percent mito, we can look at the the gene count threshold next. 
 
 If not, repeat the preceding steps to hone in on a threshold more suited for your dataset.
@@ -226,6 +228,7 @@ Once again, let's zoom in on the x-axis but this time to get an idea of which nF
 ```r
 plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "% mito", xlim = c(0,1275))
 ```
+
 You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
 
 Now let's take a look at what those nFeature_RNA thresholds will include and disclude from our data. 
@@ -233,6 +236,7 @@ Now let's take a look at what those nFeature_RNA thresholds will include and dis
 ```r
 prop.table(table(srt@meta.data$nFeature_RNA > 1275 | srt@meta.data$nFeature_RNA < 575))
 ```
+
 # Applying our Thresholds 
 Once we are happy with our filtering thresholds, it’s now time to apply them to our data!
 
@@ -262,6 +266,7 @@ Now that we have filtered out both noisy "cells" and genes from our dataset, let
 ```r
 rm(subset_matrix, subset_srt)
 ```
+
 # Processing
 Currently, we still have quite big data. We have two issues here:
 > 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. 
