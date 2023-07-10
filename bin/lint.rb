@@ -151,7 +151,7 @@ module GtnLinter
   def self.link_gtn_tutorial_external(contents)
     find_matching_texts(
       contents,
-      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/(.*tutorial).html)\)}
+      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/[^)]*)\)}
     )
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
