@@ -3,7 +3,7 @@ title: Quality Scores
 area: format
 box_type: details
 layout: faq
-contributors: [bebatut, hexylena]
+contributors: [bebatut, nakucher, hexylena]
 ---
 
 But what does this quality score mean?

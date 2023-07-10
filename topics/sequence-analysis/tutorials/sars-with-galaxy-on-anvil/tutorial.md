@@ -259,18 +259,7 @@ You will open up a summary report for the sequencing file:
 > {: .solution}
 {: .question}
 
-> <details-title>Learn more about quality scores</details-title>
->
-> You may be wondering how the fourth line of the .fastq files relates to the quality score above. To save space, the sequencer records an [ASCII character](http://drive5.com/usearch/manual/quality_score.html) to represent scores 0-42. For example 10 corresponds to “+” and 40 corresponds to “I”. FastQC knows how to translate this. This is often called “Phred” scoring.
-> What does 0-42 represent? These numbers, when plugged into a formula, tell us the probability of an error for that base. This is the formula, where Q is our quality score (0-42) and P is the probability of an error:
->
->Q = -10 log10(P)
->
->Using this formula, we can calculate that a quality score of 40 means only 0.00010 probability of an error!
->
-> Learn more from the [Quality Control Tutorial FAQs](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/faqs/).
->
-{: .details}
+{% snippet topics/sequence-analysis/faqs/quality_score.md %}
 
 # Exercise Three: Alignment
 
