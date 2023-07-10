@@ -1,33 +1,36 @@
 ---
 layout: tutorial_hands_on
 
-title: Creating Quality FAIR assessment reports and draft of Data Papers from EML
+title: Creating FAIR Quality assessment reports and draft of Data Papers from EML
   metadata with MetaShRIMPS
-zenodo_link: https://zenodo.org/record/8130567/files
+zenodo_link: https://doi.org/10.5281/zenodo.8130567
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to improve the FAIR quality of an EML metadata ?
+- How to use metadatas for machine actionnable processes ?
+- What is the point of having a FAIR metadata ?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Learn how to use the interactive tool Metashrimps
+- Understand the challenges MetaShRIMPS is trying to respond to
+- Learn how to create a FAIR Quality assessment report from a metadata using EML standard
+- Understand the concept of Data Paper and learn how to produce it
+- Explain the necessity of using such tools when producing ecological metadata
+time_estimation: 30mn
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
+tags:
+  - Metadata
+  - EML
+  - FAIR
+  - Data Paper
 contributors:
-- contributor1
-- contributor2
+- TanguyGen
+- yvanlebras
 
 ---
 
 
 # Introduction
-
-<!-- This is a comment. -->
 
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
