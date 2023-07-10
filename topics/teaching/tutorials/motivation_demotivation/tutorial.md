@@ -213,7 +213,7 @@ What do we mean about this? To better understand, we should consider the followi
 - accessibility (including venue, materials and teacher accessibility)
 - mindset (growth vs fixed mindset)
 
-    > <details-title>About mindset (from {% cite dweck2006mindset %})</details-title>
+    > <details-title>About mindset (from Dweck 2006)</details-title>
     >
     > Someone with a **growth mindset** views intelligence, abilities, and talents as learnable and capable of improvement through effort. On the other hand, someone with a **fixed mindset** views those same traits as inherently stable and unchangeable over time.
     >
@@ -232,8 +232,8 @@ In order to have fully MOTIVATED learners, it is important that:
 
 ![3 level matrix ](images/environment_perception.png "Interactive effects of environment, efficacy, and value on motivation. Source: {% cite ambrose2010learning %}")
 
-> <details-title>About Figure "Interactive effects of environment, efficacy, and value on motivation" from {% cite ambrose2010learning %}</details-title>
->
+> <details-title>About Figure "Interactive effects of environment, efficacy, and value on motivation" (from Ambrose 2010)</details-title>
+> From {% cite ambrose2010learning %}:
 > 1. If no value and no expectation, leaners will reject learning with disengagement and even anger
 > 2. If high expectancies but no valuem: the task is doable but unimportant, learners will evade and have difficulty to pay attention
 > 3. If value but low expectancyies, they lack of confidence in their ability.

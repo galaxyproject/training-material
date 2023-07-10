@@ -251,6 +251,28 @@ module TopicFilter
   end
 
   ##
+  # Get the list of posts from the site
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +Array+:: The list of posts
+  #
+  # This is a transition period function that can later be removed. It is added
+  # because with the jekyll version we're using, site.posts is an iterable in
+  # prod+dev (_config-dev.yml) modes, however! If we access site.posts.docs in
+  # prod it's fine, while in dev mode, site.posts claims to be an Array (rather
+  # than I guess a 'posts' object with a docs method). So we check if it has
+  # docs and use that, otherwise just site.posts should be iterable.
+  def self.get_posts(site)
+    # Handle the transition period
+    if site.posts.respond_to?(:docs)
+      site.posts.docs
+    else
+      site.posts
+    end
+  end
+
+  ##
   # Collate the materials into a large hash
   # Params:
   # +site+:: The +Jekyll::Site+ object
@@ -288,9 +310,13 @@ module TopicFilter
     shortlinks = site.data['shortlinks']
     shortlinks_reversed = shortlinks['id'].invert
 
+    get_posts(site).each do |post|
+      post.data['short_id'] = shortlinks_reversed[post.url]
+    end
+
     interesting = {}
     pages.each do |page|
-      page.data['short_id'] = shortlinks_reversed[page.data['url']]
+      page.data['short_id'] = shortlinks_reversed[page.url]
 
       # Skip anything outside of topics.
       next if !page.url.include?('/topics/')
@@ -527,6 +553,13 @@ module TopicFilter
         p.data['redirect_from'].uniq!
       end
     end
+    # Same for news
+    get_posts(site).select { |p| mappings.keys.include? p.url }.each do |p|
+      # Set the short id on the material
+      p.data['redirect_from'] = [] if !p.data.key?('redirect_from')
+      p.data['redirect_from'].push(*mappings[p.url])
+      p.data['redirect_from'].uniq!
+    end
 
     materials
   end
@@ -615,11 +648,26 @@ module TopicFilter
   # +materials+:: An array of materials
   # Returns:
   # +Array+:: An array of contributors as strings.
-  def self.identify_contributors(materials)
+  def self.identify_contributors(materials, site)
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
+      .reject { |c| site.data['contributors'][c]['funder'] == true }
+  end
+
+  ##
+  # Get a list of funders for a list of materials
+  # Parameters:
+  # +materials+:: An array of materials
+  # Returns:
+  # +Array+:: An array of funders as strings.
+  def self.identify_funders(materials, site)
+    materials
+      .map { |_k, v| v['materials'] }.flatten
+      # Not 100% sure why this flatten is needed? Probably due to the map over hash
+      .map { |mat| get_contributors(mat) }.flatten.uniq.shuffle
+      .select { |c| site.data['contributors'][c]['funder'] == true }
   end
 
   ##
@@ -797,8 +845,12 @@ module Jekyll
       TopicFilter.topic_filter(site, topic_name)
     end
 
-    def identify_contributors(materials)
-      TopicFilter.identify_contributors(materials)
+    def identify_contributors(materials, site)
+      TopicFilter.identify_contributors(materials, site)
+    end
+
+    def identify_funders(materials, site)
+      TopicFilter.identify_funders(materials, site)
     end
   end
 end

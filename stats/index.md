@@ -140,7 +140,7 @@ redirect_from:
   <div class="card-body">
    <h5 class="card-title">Analytics Data</h5>
    <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org">Visit plausible.galaxyproject.eu</a>.</p>
-   <iframe src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameBorder="0"></iframe>
+   <iframe title="plausible stats" src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameBorder="0"></iframe>
    </div>
  </div>
 </div>
@@ -156,6 +156,10 @@ redirect_from:
 
 <!-- make the charts -->
 <script type="text/javascript">
+const style = getComputedStyle(document.body);
+Chart.defaults.global.defaultColor = style.getPropertyValue("--color-background");
+Chart.defaults.global.defaultFontColor = style.getPropertyValue("--text-color");
+
 Chart.plugins.unregister(ChartDataLabels);
 
 function genColors(size) {
@@ -260,6 +264,7 @@ var contributorsBar = new Chart('contributorsGraph', {
   data: {
     datasets: [{
       data: data_contributors,
+      borderColor: style.getPropertyValue("--text-color"),
     }]
   },
 

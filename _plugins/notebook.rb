@@ -1,10 +1,15 @@
-# frozen_string_literal: true
-
 require 'digest'
 require 'json'
 require 'fileutils'
 require 'yaml'
 require 'base64'
+
+# Monkey patching hash
+class Hash
+  def fetch2(key, default)
+    fetch(key, default) || default
+  end
+end
 
 # Generate Notebooks from Markdown
 module GTNNotebooks
@@ -181,7 +186,7 @@ module GTNNotebooks
     folks = if metadata.key?('contributors')
               metadata['contributors']
             else
-              metadata['contributions'].map { |_k, v| v }.flatten
+              metadata['contributions']['authorship']
             end
 
     contributors = nil
@@ -209,11 +214,11 @@ module GTNNotebooks
       "\n",
       "**Objectives**\n",
       "\n"
-    ] + metadata['questions'].map { |q| "- #{q}\n" } + [
+    ] + metadata.fetch2('questions', []).map { |q| "- #{q}\n" } + [
       "\n",
       "**Objectives**\n",
       "\n"
-    ] + metadata['objectives'].map { |q| "- #{q}\n" } + [
+    ] + metadata.fetch2('objectives', []).map { |q| "- #{q}\n" } + [
       "\n",
       "**Time Estimation: #{metadata['time_estimation']}**\n",
       "\n",
@@ -327,6 +332,12 @@ module GTNNotebooks
     # Re-run a second time to catch singly-nested Q&A?
     content = group_doc_by_first_char(content)
 
+    # Replace zenodo links, the only replacement we do
+    if !page_data['zenodo_link'].nil?
+      Jekyll.logger.debug "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
+      content.gsub!(/{{\s*page.zenodo_link\s*}}/, page_data['zenodo_link'])
+    end
+
     ICONS.each do |key, val|
       content.gsub!(/{% icon #{key} %}/, val)
     end
@@ -376,9 +387,9 @@ module GTNNotebooks
 
     final_content = [
       "# Introduction\n",
-      content.gsub(/```r/, '```{r}'),
+      content.gsub(/```[Rr]/, '```{r}'),
       "# Key Points\n"
-    ] + page_data['key_points'].map { |k| "- #{k}" } + [
+    ] + page_data.fetch2('key_points', []).map { |k| "- #{k}" } + [
       "\n# Congratulations on successfully completing this tutorial!\n",
       'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/' \
       "training-material#{page_url}#feedback) and check there for further resources!\n"
@@ -392,6 +403,11 @@ module GTNNotebooks
     # representing the notebook
     accepted_languages = [notebook_language]
     accepted_languages << 'bash' if notebook_language == 'python'
+
+    if !data['zenodo_link'].nil?
+      Jekyll.logger.debug "Replacing zenodo links in #{url}, #{data['zenodo_link']}"
+      content.gsub!(/{{\s*page.zenodo_link\s*}}/, data['zenodo_link'])
+    end
     notebook = convert_notebook_markdown(content, accepted_languages)
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.
@@ -424,7 +440,7 @@ module GTNNotebooks
       'metadata' => { 'editable' => false, 'collapsed' => false },
       'source' => [
         "# Key Points\n\n"
-      ] + data['key_points'].map { |k| "- #{k}\n" } + [
+      ] + data.fetch2('key_points', []).map { |k| "- #{k}\n" } + [
         "\n# Congratulations on successfully completing this tutorial!\n\n",
         'Please [fill out the feedback on the GTN website](https://training.galaxyproject.org/training-material' \
         "#{url}#feedback) and check there for further resources!\n"
@@ -433,7 +449,7 @@ module GTNNotebooks
     notebook
   end
 
-  def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
+  def self.renderMarkdownCells(site, notebook, metadata, _page_url, _dir)
     seen_abbreviations = {}
     notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'markdown'
@@ -506,30 +522,30 @@ module GTNNotebooks
         # love it) or we'll link to the production images and folks can live
         # without their images for a bit until it's merged.
 
-        if cell['source'].match(/<img src="\.\./)
-          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
-            path = img[10..]
-            image_path = File.join(dir, path)
-
-            if img[-3..].downcase == 'png'
-              # puts "[GTN/Notebook/Images] Embedding png: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/png;base64,#{data}")
-            elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
-              # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/jpeg;base64,#{data}")
-            elsif img[-3..].downcase == 'svg'
-              # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/svg+xml;base64,#{data}")
-            else
-              # puts "[GTN/Notebook/Images] Fallback for #{img}"
-              # Falling back to non-embedded images
-              "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
-            end
-          end
-        end
+        # if cell['source'].match(/<img src="\.\./)
+        #   cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
+        #     path = img[10..]
+        #     image_path = File.join(dir, path)
+        #
+        #     if img[-3..].downcase == 'png'
+        #       # puts "[GTN/Notebook/Images] Embedding png: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/png;base64,#{data}")
+        #     elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
+        #       # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/jpeg;base64,#{data}")
+        #     elsif img[-3..].downcase == 'svg'
+        #       # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/svg+xml;base64,#{data}")
+        #     else
+        #       # puts "[GTN/Notebook/Images] Fallback for #{img}"
+        #       # Falling back to non-embedded images
+        #       "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
+        #     end
+        #   end
+        # end
 
         # Strip out the highlighting as it is bad on some platforms.
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')

@@ -30,6 +30,8 @@ contributions:
   authorship:
     - plushz
     - bebatut
+  funding:
+    - erasmusplus
 tags:
   - assembly
   - metagenomics

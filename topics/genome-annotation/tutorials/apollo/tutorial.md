@@ -23,12 +23,14 @@ key_points:
   - Apollo allows a group to view and manually refine predicted genome annotations
   - Use Apollo to edit annotations within your group.
   - Export manual annotations as GFF3.
-contributors:
-  - abretaud
-  - hexylena
-  - nathandunn
-  - mboudet
-  - erasmusplus
+contributions:
+  authorship:
+    - abretaud
+    - hexylena
+    - nathandunn
+    - mboudet
+  funding:
+    - erasmusplus
 
 requirements:
   - type: "internal"

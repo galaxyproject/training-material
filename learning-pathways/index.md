@@ -13,7 +13,7 @@ Learning pathways are sets of tutorials curated for you by community experts to 
 <div class="pathway">
 {% for path in pathways %}
 
-{% assign coverimage = path.coverimage | default: "/assets/images/GTN.png" %}
+{% assign coverimage = path.coverimage | default: "/assets/images/GTNLogo1000.png" %}
 {% assign coverimagealt = path.coverimagealt | default: "GTN logo with a multi-coloured star and the words Galaxy Training Network"%}
 <div class="card pathwayitem">
  <div class="card-header">
