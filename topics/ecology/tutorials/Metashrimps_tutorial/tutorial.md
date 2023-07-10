@@ -50,8 +50,7 @@ French Natural History Museum (MNHN).
 {: .agenda}
 
 # Why do we need FAIR Data ?
-
-![FAIR Data Principles](./Images/FAIR_data_principles.jpg){width=50% height=50%}
+<img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="200"/>
 # How can this tool help in improving metadata quality
 Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
