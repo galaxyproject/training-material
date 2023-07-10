@@ -158,7 +158,7 @@ Galaxy is a great tool for performing bioinformatics analysis without having to 
 >    - ![The NEXT button among cloud environments has been highlighted.](../../images/sars-with-galaxy-in-anvil/06-galaxy-next.png)
 >    - ![The CREATE button among cloud environments has been highlighted.](../../images/sars-with-galaxy-in-anvil/07-galaxy-create.png)
 >    - Click on the Galaxy icon. You will see that the environment is still being set up. This will take 8-10 minutes. 
-> ![The Galaxy icon appears if the environment has been successfully launched.](../../images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png)
+>    ![The Galaxy icon appears if the environment has been successfully launched.](../../images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png)
 > 3. When it is done, click “Open”. You might need to refresh the page.
 > 
 {: .hands_on}
