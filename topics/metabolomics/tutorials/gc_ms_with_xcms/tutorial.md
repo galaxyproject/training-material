@@ -293,7 +293,7 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 # Peak deconvolution
 
-The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the chemical compounds present in the sample, separated by the chromatography and ionized in the mass spectrometer. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While each feature is typically derived from a single compound and represents a fragment, the whole mass spectrum can be used to more accurately identify the precursor compound or molecular ion. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group peaks into spectra without relying on the predicting in-source phenomena (in-source fragments or adduct formation) or fragmentation mechanisms.
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the chemical compounds present in the sample, separated by the chromatography and ionized in the mass spectrometer. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While each feature is typically derived from a single compound and represents a fragment, the whole mass spectrum can be used to more accurately identify the precursor compound or molecular ion. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group peaks into spectra without relying on the predicting in-source phenomena (in-source fragments or adduct formation) or fragmentation mechanisms.
 
 > <details-title> RAMClust method </details-title>
 > 
@@ -307,7 +307,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 
 > <hands-on-title> Peak deconvolution </hands-on-title>
 >
-> 1. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} with the following parameters:
+> 1. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0) %} with the following parameters:
 >    - *"Choose input format:"*: `XCMS`
 >        - In *"Input MS Data as XCMS"*:
 >            - {% icon param-file %} *"Input XCMS"*: `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillChromPeaks.RData` (output of **xcms fillChromPeaks (fillPeaks)** {% icon tool %})
@@ -379,7 +379,7 @@ The second output file is the so called **Spec Abundance** table, containing the
 
 The retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants for GC-based experiments. The retention index of a compound is computed from the retention time by interpolating between the retention times adjacent alkanes which are assigned a fixed retention index. This can be different for the individual chromatographic system, but the derived retention indices are independent and allow comparing values measured by different analytical laboratories.
 
-We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
+We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -437,7 +437,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 > <hands-on-title> Compute similarity scores </hands-on-title>
 >
-> 1. {% tool [matchms similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
+> 1. {% tool [matchms similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Queries spectra"*: `RI using kovats of Mass spectra from RAMClustR` (output of **RIAssigner** {% icon tool %})
 >    - *"Symmetric"*: `No` (if we were to query our spectra agains itself, we would select `Yes`)
 >        - {% icon param-file %} *"Reference spectra"*: `reference_spectral_library.msp` (downloaded file from Zenodo)
@@ -473,13 +473,13 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 ## Format the output
 
-The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use the {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
+The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use the {% tool [matchms scores formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0) %} to convert the data to a tab-separated file with a scores matrix.
 
 The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output can be filtered to only contain the top matches (3 by default) and/or to contain only pairs with a score and number of matched ions larger than provided thresholds.
 
 > <hands-on-title> Format the output </hands-on-title>
 >
-> 1. {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} with the following parameters:
+> 1. {% tool [matchms scores formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Scores object"*: `CosineGreedy scores` (output of **matchms similarity** {% icon tool %})
 >
 >    You can leave the other parameters with their default values.
