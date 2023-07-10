@@ -278,8 +278,8 @@ Given that our data has passed some quality checks, we will try to align the dat
 
 We will use our two SARS data files, which are ready for alignment.
 
-- VA_sample_forward_reads.fastq
-- VA_sample_reverse_reads.fastq
+- `VA_sample_forward_reads.fastq`
+- `VA_sample_reverse_reads.fastq`
 
 > <hands-on-title>Align to the Reference Dataset</hands-on-title>
 >
