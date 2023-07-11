@@ -44,8 +44,8 @@ contributions:
     - Camila-goclowski
   editing:
     - nomadscientist
-  funding:
-    - eosc-life
+    - hexylena
+
 
 notebook:
   language: r
@@ -90,7 +90,7 @@ barcodes.tsv<-read.delim("/import/3", header = FALSE)
 gx_get(4) #exp_design.tsv
 exp_design.tsv<-read.delim("/import/4")
 ```
- The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes  the row names. This can be accomplished by doing the following: 
+ The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by doing the following: 
 
 ```r
 rownames(exp_design.tsv)<-exp_design.tsv$Assay 
@@ -121,6 +121,7 @@ srt<-CreateSeuratObject(counts = matrix.mtx)
 
 # Adding Cell Level Metadata
  Now that we have an object, we can add in our metadata from our experimental design dataframe (table). This will be useful to us shortly as we begin to visualize our data!
+ 
 ```r
 srt@meta.data$Sex<-exp_design.tsv$Sample.Characteristic.sex.
 srt@meta.data$Organism<-exp_design.tsv$Sample.Characteristic.organism.
@@ -134,6 +135,7 @@ srt@meta.data$Organism.Part<-exp_design.tsv$Sample.Characteristic.organism.part.
 srt@meta.data$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
 srt@meta.data$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 ```
+
 >The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
 
  Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
@@ -162,6 +164,7 @@ So let's generate some QC plots. First off, let's check our dataset for batch ef
 ```r
 VlnPlot(srt, group.by = "Individual", features = "nCount_RNA", log = TRUE)
 ```
+[plot1]
 
 This plot shows us the number of cells split by the individual (mouse) from which the cells came from. Now, depending on your experimental design, batch may be represented by something other than individual--like timepoint or even the wet lab researcher who isolated the cells. 
 
@@ -175,18 +178,22 @@ Now let's get an idea of how different variables, like the sex or genotype of th
 ```r
 VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
 ```
+[plot2]
 
 2. Genotype?
 ```r
 VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
  ```
+[plot3]
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
 
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito")
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito")
 ```
+
+[plot4]
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
 High mito expression typically indicates stressed out cells (typically due to the extraction, sorting, or sample prep protocols). These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data.  
@@ -194,17 +201,20 @@ High mito expression typically indicates stressed out cells (typically due to th
 We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
 
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito", xlim = c(0,1750))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito", xlim = c(0,1750))
 ```
-It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2%--a conservative threshold that still encompasses the majority of other cells.  
+[plot5]
+
+It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold that still encompasses the majority of other cells.  
 
 Now we can take a closer look at the y-axis to decide on a mito threshold to set. Once more, we want to get rid of as few cells as possible while still removing those with unexpectedly high mito percentages. 
 
 ```r
-plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "% mito", ylim = c(0,3))
+plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito", ylim = c(0,3))
 ```
+[plot6]
 
-We can see a clear trend wherein cells that have around 3% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
+We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
 
 Take a look at what proportion of cells those thresholds will include and disclude from our dataset: 
 
@@ -220,14 +230,16 @@ If not, repeat the preceding steps to hone in on a threshold more suited for you
 To do so, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
 
 ```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "% mito")
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito")
 ```
+[plot7]
 
 Once again, let's zoom in on the x-axis but this time to get an idea of which nFeature_RNA threshold to set:
 
 ```r
-plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "% mito", xlim = c(0,1275))
+plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito", xlim = c(0,1275))
 ```
+[plot8]
 
 You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
 
