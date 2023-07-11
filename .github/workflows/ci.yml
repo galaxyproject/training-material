@@ -71,6 +71,10 @@ jobs:
             --enforce-https=false \
             ./_site
 
+      - name: Ensure no unexpected encoded HTML in output
+        run: |
+          ! fgrep -R 'lt;blockquote' _site
+
       - name: Run aXe accessibility testing on some representative URLs
         run: |
           node_modules/.bin/http-server _site/ &
