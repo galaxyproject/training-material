@@ -45,11 +45,10 @@ French Natural History Museum (MNHN).
 >
 >
 ><img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="500"/>
->This principles were [officialy instaured in 2016](https://www.go-fair.org/fair-principles/) to improve and the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
+
+>This principles were [officialy instaured in 2016](https://doi.org/10.1038/sdata.2016.18) to improve and the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
 >Metadata is the data used to describe and explain all the context behind the production of data. It is necessary to produce a rich and FAIR metadata in order 
 >to permit external users to understand and reuse data for their own studies.
->The purpose of this tool is to help the user improve their metadata quality in order to increase its value to the scientific community and to help highlighting
->the work of all the producers of the data.
 {:  .comment}
 > <agenda-title></agenda-title>
 >
@@ -60,17 +59,24 @@ French Natural History Museum (MNHN).
 >
 {: .agenda}
 
-## Why do we need FAIR Data and Metadata?
 
+# How can this tool improve the quality metadata?
 
-## How can this tool improve the quality metadata?
-
-This tool aims to give an easy access to a quality assessment report of metadatas which could guide the producers of
+The purpose of this tool is to help the user improve their metadata quality in order to increase its value to the scientific community and to help highlighting
+the work of all the producers of the data.
+To respond to this objective, this tool aims to give an easy access to a quality assessment report of EML metadata which could guide the producers of
 data/metadata to the production of a FAIR metadata.
+The other objective of this tool is to highlight to work of all of the people that helped in producing this data by giving the access of a draft of Data Paper
+that is recuperable either in a non editable HTML file, that can represent the metadata in a more ergonomic way facilitating its understanding and sharability,
+or in an editable docx file. Having an editable Data Paper draft will permit the producer to complete/modify the draft of Data Paper so that it could become
+publishable as a real Data Paper giving recognition to all the people that helped producing the data.
 
-
-# How to use MetaShRIMPS?
-## Get data
+> <comment-title>What is a Data Paper?</comment-title>
+> According to the [GBIF](https://www.gbif.org/data-papers) (Global Biodiversity Information Facility), 
+>A data paper is a peer reviewed document describing a dataset, published in a peer reviewed journal. It takes effort to prepare, curate and describe data. 
+>Data papers provide recognition for this effort by means of a scholarly article.
+{:  .comment}
+# Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -83,35 +89,31 @@ data/metadata to the production of a FAIR metadata.
 >
 >    {% snippet topics/ecology/tutorials/Metashrimps_tutorial/import_files.md %}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Upload Data in MetaShRIMPS
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+When oppening MetaShRIMPS, you will have an interface looking like this :
 
-![Alternative text](../../images/image_name "Legend of the image")
+<img src="./Images/upload_1.png" alt="FAIR Data Principles" width="500"/>
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+To upload data on MetaShRIMPS, you have to click on the browse button and select in your files, the file
+you want to use in this tool. 
+> <warning-title>Select the right format</warning-title>
+> The file uploaded in this tool must be a metadata in XML format using EML metadata standard.
+{: .warning}
 
-***TODO***: *Consider adding a detail box to expand the theory*
+<img src="./Images/upload_2.png" alt="FAIR Data Principles" width="500"/>
 
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
+After uploading the tool you just have to click on **Execute** to launch the tool with the file.
 
-A big step can have several subsections or sub steps:
+# Results
 
+After clicking the **Execute**, 2 new tabs will open called "Draft of Data Paper" and "Fair Assessment".
+You can access all of the tool results by clicking on each tab (it can take a little time for your results to appear).
 
+## Draft of Data Paper
 
-## Re-arrange
+By click on the "Draft of Data Paper" tab, you will access to the draft of Data Paper presented in an HTML format.
+You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
+<img src="./Images/DataPaper_map.png" alt="FAIR Data Principles" width="500"/><img src="./Images/DataPaper_entity.png" alt="FAIR Data Principles" width="500"/>
 
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
-# Conclusion
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+## Fair Quality Assessment report
