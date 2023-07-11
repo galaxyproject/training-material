@@ -69,26 +69,19 @@ have fun!
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ https://doi.org/10.5281/zenodo.8130567 }})
->     -> `{{ page.title }}`):
->
+> 2.Import this file from [Zenodo]({{ https://doi.org/10.5281/zenodo.8130567 }}) to test it
+>     -> `{{ Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS" }}`):
 >    ```
->    
+>    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 4.  Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 6. Add to each database a tag corresponding to ...
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
