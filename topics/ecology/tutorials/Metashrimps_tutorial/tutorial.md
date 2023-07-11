@@ -75,17 +75,7 @@ have fun!
 >    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
-> 4.  Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 6. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
-{: .hands_on}
+>    {% snippet topics/ecology/tutorials/Metashrimps_tutorial/import_files.md %}
 
 # Title of the section usually corresponding to a big step in the analysis
 
