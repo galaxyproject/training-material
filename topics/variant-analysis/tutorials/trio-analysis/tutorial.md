@@ -436,10 +436,10 @@ To find the most plausible causative variant we will use the {% tool [GEMINI inh
 
 
 ## Gene.iobio Analyses
-Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_2021 %}. The {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} tool generates an html file which sends the VCFs to the iobio site using public URLs. Therefore, your history has to be shared.
+Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_2021 %}. The {% tool [gene.iobio visualisation](toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1) %} tool generates an html file which sends the VCFs to the iobio site using public URLs. Therefore, your history has to be shared, i.e. **everyone with a link can access your history!**
 
 
-> <hands-on-title> Generate gene.iobio html </hands-on-title>
+> <hands-on-title> Make files accessible for gene.iobio </hands-on-title>
 >
 > 1. Open the **History Options menu** {% icon galaxy-dropdown %} at the topright corner of your history panel.
 > 2. select **Share or Publish** {% icon galaxy-workflow %}.
