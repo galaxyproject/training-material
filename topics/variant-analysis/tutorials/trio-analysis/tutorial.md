@@ -447,7 +447,7 @@ Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_20
 >
 {: .hands_on}
 
-For this tool it is not required to set any filtering steps or determine the most plausible inheritence pattern. Since gene.iobio runs multiple default filtering steps for autosomal dominant, recessive, *De novo*, compound heterozygous, and X-linked recessive inheritance patterns. In addition, it prioritizes variants based on gene-disease association algorithms significantly reducing processing time.
+For this tool it is not required to set any filtering steps or determine the most plausible inheritence pattern. Since gene.iobio runs multiple default filtering steps for autosomal dominant, recessive, *De novo*, compound heterozygous, and X-linked recessive inheritance patterns. In addition, it prioritizes variants based on gene-disease association algorithms, which significantly reduces processing time.
 
 > <hands-on-title> Generate gene.iobio html </hands-on-title>
 >
@@ -467,7 +467,7 @@ For this tool it is not required to set any filtering steps or determine the mos
 >
 >    > <tip-title> Using gene.iobio </tip-title>
 >    >
->    > To open the generated html file click on the **eye** {% icon galaxy-eye %}, which will show the gene.iobio interface. Now a phenotype has to be added to generate a list of genes which likely contain causative variants. In this case it is breast cancer. Now click on the **Hamburger icon** in the topleft corner of the gene.iobio interface. This will show 20 genes including the BRCA1 gene with the causative variant under the **Genes** tab. Click on the BRCA1 gene and gene.iobio starts analyzing the gene for causative variants. Then under the **Variants** you will find the causative variant listed and click on the variant block to see more information on it. Gene.iobio reports information on the type, location, and quality of the variant, the associated phenotype, the pathogenicity, the population frequency, conservation of the location of the variant, and the inheritence pattern (Autosomal dominant).
+>    > To open the generated html file click on the **eye** {% icon galaxy-eye %}, which will show the gene.iobio interface. Now a phenotype has to be added to generate a list of genes which likely contain causative variants, in this case it is breast cancer. Next, click on the **Hamburger icon** in the topleft corner of the gene.iobio interface. This will show 20 genes including the BRCA1 gene with the causative variant under the **Genes** tab. Click on the BRCA1 gene and gene.iobio starts analyzing the gene for causative variants. Then under the **Variants** tab you will find the causative variant listed. You can click on the variant block to see more information on it. A report will show with information on the type, location, and quality of the variant, the associated phenotype, the pathogenicity, the population frequency, conservation of the location of the variant, and the inheritence pattern (Autosomal dominant).
 >    {: .tip}
 >
 >    > <tip-title> Increase genes to analyze </tip-title>
