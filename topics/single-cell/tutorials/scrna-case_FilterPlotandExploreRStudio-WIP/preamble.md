@@ -27,7 +27,7 @@ Let's get our dataset loaded into Galaxy, first.
 # Open RStudio in Galaxy 
 You should now see a matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files in your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
-> Run {% tool [RStudio](interactive_tool_rstudio)}
+> Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
 
 The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar)> Active Interactive Tools > RStudio)
