@@ -367,7 +367,7 @@ Now we can transform the subsampled VCF and PED file into a GEMINI database. Not
 > <hands-on-title>Transform VCF and PED files into a GEMINI database</hands-on-title>
 >
 > 1. {% tool [GEMINI load](toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SnpEff Annotated vcf_bgzip` (output of **Convert compressed file to uncompressed.** {% icon tool %})
+>    - {% icon param-file %} *"VCF dataset to be loaded in the GEMINI database"*: `SnpEff Annotated vcf_bgzip` (output of **Convert uncompressed file to compressed.** {% icon tool %})
 >    - {% icon param-file %} *"Sample and family information in PED format"*: the pedigree file prepared above
 >
 >
