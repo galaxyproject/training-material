@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Identification of non-canonical ORFs and their potential biological function</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@3b9ae5e893e360fc00670f1c6610c8462795f1c7",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0.01,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identification of non-canonical ORFs and their potential biological function">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-07-08 12:42:31 +0000">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Identification of non-canonical ORFs and their potential ..." />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-07-08 12:42:31 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identification of non-canonical ORFs and their potential biological function",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+  },
+  "learningResourceType": "slides",
+  "name": "Slides for 'Identification of non-canonical ORFs and their potential biological function' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html",
+  "keywords": "transcriptomics",
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/",
+      "name": "Cristóbal Gallardo",
+      "image": "https://avatars.githubusercontent.com/gallardoalba",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5752-2155",
+      "orcid": "https://orcid.org/0000-0002-5752-2155"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "## Index of contents"
+}
+        </script>
+    </head>
+  <body>
+
+
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/transcriptomics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/main/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+
+# Identification of non-canonical ORFs and their potential biological function
+
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Avatar" width="36" height="36">Cristóbal Gallardo</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  <i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span><abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:">gxy.io/GTN:</a>
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 6em;">
+
+
+  <i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a>
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    - Mapping: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/mapping/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html)
+    
+
+
+
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+## Index of contents
+
+1. Introduction
+
+2. Galaxy workflow
+
+---
+
+## Introduction
+
+- What do we mean by non-canonical ORFs?
+
+- Why study non-canonical ORFs?
+
+- Why have not been yet characterized?
+
+- How identify non-canonical ORFs?
+
+---
+
+## What do we mean by non-canonical ORFs?
+
+![Definition of canonical](/training-material/topics/transcriptomics/images/differential_isoform/slides/cambridge_dictionary.png)
+
+.footnote[Source: [Cambridge dictionary](https://dictionary.cambridge.org/dictionary/english/canonical)]
+
+---
+
+## What do we mean by non-canonical ORFs?
+
+![Mean Ribo-Seq expression and Ribo-Seq expression standard deviation (SD) have been plotted for human lymphoblastoid cells from RPFdbV2.](/training-material/topics/transcriptomics/images/differential_isoform/slides/expression_distribution.png)
+
+.footnote[Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1038/s41525-020-00167-4&quot;&gt;Erady &lt;i&gt;et al.&lt;/i&gt; 2021&lt;/a&gt;&lt;/span&gt;]
+
+---
+
+## What do we mean by non-canonical ORFs?
+
+![The dark proteome: translation from noncanonical open reading frames.](/training-material/topics/transcriptomics/images/differential_isoform/slides/dark_proteome.png)
+
+---
+
+## Why study non-canonical ORFs?
+
+- Potentially novel &lt;b&gt;prognostic and diagnostic markers&lt;/b&gt;
+
+- The vast majority &lt;b&gt;have not been investigated&lt;/b&gt;
+
+- Particulary attractive as &lt;b&gt;allosteric celullar regulators&lt;/b&gt;
+
+---
+
+## Why study non-canonical ORFs?
+
+![Noncanonical open reading frames enconde functional proteins essential for cancer cell survival.](/training-material/topics/transcriptomics/images/differential_isoform/slides/non-canonical_nature.png)
+
+---
+
+## Why study non-canonical ORFs?
+
+![Translation and natural selection of micropeptides from lon non-canonical RNAs.](/training-material/topics/transcriptomics/images/differential_isoform/slides/non-canonical_nature2.png)
+
+---
+
+## Why have not been characterized?
+
+
+- Arbitrary thresholds on ORF lengths
+    - Peptides smaller than 100 aminoacids are usually discarted
+- Frequently annotated as non-coding RNAs
+- Propensity for structural disorder
+    -  Discarted as intrinsically disordered proteins (IDPs)
+
+---
+
+## Why study small peptides?
+
+![The large unexplored biology of small proteins in pro and eukaryotes.](/training-material/topics/transcriptomics/images/differential_isoform/slides/small_peptides.png)
+
+---
+
+## Why study small peptides?
+
+![Short peptides regulate gene expression.](/training-material/topics/transcriptomics/images/differential_isoform/slides/short_peptides.png)
+
+---
+
+## Why study small peptides?
+
+![Example of small peptides biological function.](/training-material/topics/transcriptomics/images/differential_isoform/slides/small_peptides_examples.png)
+
+.footnote[Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1111/febs.15845&quot;&gt;Steinberg and Koch 2021&lt;/a&gt;&lt;/span&gt;]
+
+---
+
+## Annotated as non-coding RNAs?
+
+![Coding or non-coding? This is the question.](/training-material/topics/transcriptomics/images/differential_isoform/slides/question.jpg)
+
+---
+
+## Annotated as non-coding RNAs?
+
+![The small peptide world in long noncoding RNAs.](/training-material/topics/transcriptomics/images/differential_isoform/slides/small_non_coding.png)
+
+---
+
+## Annotated as non-coding RNAs?
+
+![SPENCER: a comprehensive database for small peptides encoded by noncanical RNAs in cancer patients.](/training-material/topics/transcriptomics/images/differential_isoform/slides/spencer_datase.png)
+
+---
+
+## Why study intrinsically disordered proteins (IDP)?
+
+![Why study intrinsically disordered proteins?](/training-material/topics/transcriptomics/images/differential_isoform/slides/disordered_regions.png)
+
+.footnote[Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1126/science.1228775&quot;&gt;Babu &lt;i&gt;et al.&lt;/i&gt; 2012&lt;/a&gt;&lt;/span&gt;]
+
+---
+
+## Disorder-Function Paradigm
+
+![Disorder-Function paradigm.](/training-material/topics/transcriptomics/images/differential_isoform/slides/disorder_article.png)
+
+---
+
+## Disorder-Function Paradigm
+
+![Expanding the paradigm: intrinsically disordered proteins and allosteric regulation.](/training-material/topics/transcriptomics/images/differential_isoform/slides/intrinsically_disordered.png)
+
+---
+
+## Disorder-Function Paradigm
+
+![Intrinsically disordered proteins/regions and insight into their biomolecular interaction.](/training-material/topics/transcriptomics/images/differential_isoform/slides/disorder_protein.jpg)
+
+.footnote[Source: &lt;span class=&quot;citation&quot;&gt;&lt;a href=&quot;https://doi.org/10.1016/j.bpc.2022.106769&quot;&gt;Chakrabarti and Chakravarty 2022&lt;/a&gt;&lt;/span&gt;]
+
+---
+
+## How identify non-canonical ORFs?
+
+![How to identify non-canonical ORFs.](/training-material/topics/transcriptomics/images/differential_isoform/slides/scientist.jpg)
+
+---
+
+## How identify non-canonical ORFs?
+
+![IsoformSwitchAnalyzeR: analysis of changes in genome-wide patterns of alternative splicing and its functional consequences.](/training-material/topics/transcriptomics/images/differential_isoform/slides/isoform_switching.png)
+
+---
+
+## How identify non-canonical ORFs?
+
+![Illustration of isoform switch](/training-material/topics/transcriptomics/images/differential_isoform/slides/isoform_switching.jpg)
+
+---
+
+## Galaxy Workflow
+
+![Galaxy workflow.](/training-material/topics/transcriptomics/images/differential_isoform/slides/galaxy_training.png)
+
+Full detailed explanation in the [Genome-wide alternative splicing analysis](/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html) Galaxy training.
+
+---
+
+## Galaxy Workflow
+
+![Full workflow image.](/training-material/topics/transcriptomics/images/differential_isoform/slides/full_workflow.png)
+
+Full detailed explanation in the [Genome-wide alternative splicing analysis](/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html) Galaxy training.
+
+---
+
+## Galaxy Workflow
+
+![Workflow summary.](/training-material/topics/transcriptomics/images/differential_isoform/slides/simple_workflow.png)
+
+---
+
+## Initial QC assessment
+
+![QC step.Identify potential artifacts that may impact the interpretation of downstream analysis.](/training-material/topics/transcriptomics/images/differential_isoform/slides/initial_QC.png)
+
+Identify potential artifacts that may impact the interpretation of downstream analysis.
+
+---
+
+## Mapping and identication of novel splicing sites with RNASTAR
+
+![Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.](/training-material/topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.png)
+
+Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.
+
+---
+
+## Post-mapping QC assessment with RSeQC
+
+![Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.](/training-material/topics/transcriptomics/images/differential_isoform/slides/rseqc_junction_saturation_plot.png)
+
+RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.
+
+---
+
+## Reference-based transcriptome assembly and quantification with StringTie
+
+![Transcriptome assembly and quantification with StringTie. StringTie is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts.](/training-material/topics/transcriptomics/images/differential_isoform/slides/stringtie_pipeline.png)
+
+StringTie is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts.
+
+---
+
+## Post-assembly QC assessment with rnaQUAST
+
+![Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.](/training-material/topics/transcriptomics/images/differential_isoform/slides/rnaQUAST_cumulative_isoform.png)
+
+rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.
+
+---
+
+## Isoform switching and functional analysis with IsoformSwitchAnalyzeR
+
+![Isoform switching and functional analysis. IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using DEXSeq.](/training-material/topics/transcriptomics/images/differential_isoform/slides/isoformswitch_pipeline.png)
+
+IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using DEXSeq.
+
+---
+
+## Isoform switching and functional analysis with IsoformSwitchAnalyzeR
+
+![IsoformSwitchAnalyzeR consequences plot.](/training-material/topics/transcriptomics/images/differential_isoform/slides/consequences_plot.png)
+
+To analyze large-scale patterns in predicted IS consequences, IsoformSwitchAnalyzeR computes all isoform switching events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss)
+
+---
+
+## Candidate non-canonical ORF
+
+![Candidate non-canonical ORF.](/training-material/topics/transcriptomics/images/differential_isoform/slides/candidate_gene.png)
+
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Avatar" width="36" height="36">Cristóbal Gallardo</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+<a rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+This material is licensed under the Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/theme.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+
+    </body>
+</html>

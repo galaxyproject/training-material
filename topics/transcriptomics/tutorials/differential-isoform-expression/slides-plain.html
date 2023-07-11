@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Identification of non-canonical ORFs and their potential biological function</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@3b9ae5e893e360fc00670f1c6610c8462795f1c7",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0.01,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689070972' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689070972' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identification of non-canonical ORFs and their potential biological function">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-07-11 10:22:59 +0000">
+<meta name="DC.creator" content="Cristóbal Gallardo">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Identification of non-canonical ORFs and their potential ...">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689070972'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/transcriptomics/tutorials/differential-isoform-expression/slides.html" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides-plain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/transcriptomics/tutorials/differential-isoform-expression/slides-plain.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-07-01/topics/transcriptomics/tutorials/differential-isoform-expression/slides-plain.html">2023-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/topics/transcriptomics/tutorials/differential-isoform-expression/slides-plain.html">2023-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/transcriptomics/tutorials/differential-isoform-expression/slides.html">View markdown source on GitHub</a>
+	<h1>Identification of non-canonical ORFs and their potential biological function</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Avatar" width="36" height="36">Cristóbal Gallardo</a>
+	</div>
+
+</div>
+
+
+		
+
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 11, 2023 </div>
+
+	<hr />
+
+
+	<h2 id="index-of-contents">Index of contents</h2>
+
+<ol>
+  <li>
+    <p>Introduction</p>
+  </li>
+  <li>
+    <p>Galaxy workflow</p>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="introduction">Introduction</h2>
+
+<ul>
+  <li>
+    <p>What do we mean by non-canonical ORFs?</p>
+  </li>
+  <li>
+    <p>Why study non-canonical ORFs?</p>
+  </li>
+  <li>
+    <p>Why have not been yet characterized?</p>
+  </li>
+  <li>
+    <p>How identify non-canonical ORFs?</p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="what-do-we-mean-by-non-canonical-orfs">What do we mean by non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/cambridge_dictionary.png" alt="Definition of canonical" /></p>
+
+<p>.footnote[Source: <a href="https://dictionary.cambridge.org/dictionary/english/canonical">Cambridge dictionary</a>]</p>
+
+<hr />
+
+<h2 id="what-do-we-mean-by-non-canonical-orfs-1">What do we mean by non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/expression_distribution.png" alt="Mean Ribo-Seq expression and Ribo-Seq expression standard deviation (SD) have been plotted for human lymphoblastoid cells from RPFdbV2." /></p>
+
+<p>.footnote[Source: <span class="citation"><a href="#Erady2021">Erady <i>et al.</i> 2021</a></span>]</p>
+
+<hr />
+
+<h2 id="what-do-we-mean-by-non-canonical-orfs-2">What do we mean by non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/dark_proteome.png" alt="The dark proteome: translation from noncanonical open reading frames." /></p>
+
+<hr />
+
+<h2 id="why-study-non-canonical-orfs">Why study non-canonical ORFs?</h2>
+
+<ul>
+  <li>
+    <p>Potentially novel <b>prognostic and diagnostic markers</b></p>
+  </li>
+  <li>
+    <p>The vast majority <b>have not been investigated</b></p>
+  </li>
+  <li>
+    <p>Particulary attractive as <b>allosteric celullar regulators</b></p>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="why-study-non-canonical-orfs-1">Why study non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/non-canonical_nature.png" alt="Noncanonical open reading frames enconde functional proteins essential for cancer cell survival." /></p>
+
+<hr />
+
+<h2 id="why-study-non-canonical-orfs-2">Why study non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/non-canonical_nature2.png" alt="Translation and natural selection of micropeptides from lon non-canonical RNAs." /></p>
+
+<hr />
+
+<h2 id="why-have-not-been-characterized">Why have not been characterized?</h2>
+
+<ul>
+  <li>Arbitrary thresholds on ORF lengths
+    <ul>
+      <li>Peptides smaller than 100 aminoacids are usually discarted</li>
+    </ul>
+  </li>
+  <li>Frequently annotated as non-coding RNAs</li>
+  <li>Propensity for structural disorder
+    <ul>
+      <li>Discarted as intrinsically disordered proteins (IDPs)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="why-study-small-peptides">Why study small peptides?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/small_peptides.png" alt="The large unexplored biology of small proteins in pro and eukaryotes." /></p>
+
+<hr />
+
+<h2 id="why-study-small-peptides-1">Why study small peptides?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/short_peptides.png" alt="Short peptides regulate gene expression." /></p>
+
+<hr />
+
+<h2 id="why-study-small-peptides-2">Why study small peptides?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/small_peptides_examples.png" alt="Example of small peptides biological function." /></p>
+
+<p>.footnote[Source: <span class="citation"><a href="#Steinberg2021">Steinberg and Koch 2021</a></span>]</p>
+
+<hr />
+
+<h2 id="annotated-as-non-coding-rnas">Annotated as non-coding RNAs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/question.jpg" alt="Coding or non-coding? This is the question." /></p>
+
+<hr />
+
+<h2 id="annotated-as-non-coding-rnas-1">Annotated as non-coding RNAs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/small_non_coding.png" alt="The small peptide world in long noncoding RNAs." /></p>
+
+<hr />
+
+<h2 id="annotated-as-non-coding-rnas-2">Annotated as non-coding RNAs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/spencer_datase.png" alt="SPENCER: a comprehensive database for small peptides encoded by noncanical RNAs in cancer patients." /></p>
+
+<hr />
+
+<h2 id="why-study-intrinsically-disordered-proteins-idp">Why study intrinsically disordered proteins (IDP)?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/disordered_regions.png" alt="Why study intrinsically disordered proteins?" /></p>
+
+<p>.footnote[Source: <span class="citation"><a href="#Babu2012">Babu <i>et al.</i> 2012</a></span>]</p>
+
+<hr />
+
+<h2 id="disorder-function-paradigm">Disorder-Function Paradigm</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/disorder_article.png" alt="Disorder-Function paradigm." /></p>
+
+<hr />
+
+<h2 id="disorder-function-paradigm-1">Disorder-Function Paradigm</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/intrinsically_disordered.png" alt="Expanding the paradigm: intrinsically disordered proteins and allosteric regulation." /></p>
+
+<hr />
+
+<h2 id="disorder-function-paradigm-2">Disorder-Function Paradigm</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/disorder_protein.jpg" alt="Intrinsically disordered proteins/regions and insight into their biomolecular interaction." /></p>
+
+<p>.footnote[Source: <span class="citation"><a href="#Chakrabarti2022">Chakrabarti and Chakravarty 2022</a></span>]</p>
+
+<hr />
+
+<h2 id="how-identify-non-canonical-orfs">How identify non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/scientist.jpg" alt="How to identify non-canonical ORFs." /></p>
+
+<hr />
+
+<h2 id="how-identify-non-canonical-orfs-1">How identify non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/isoform_switching.png" alt="IsoformSwitchAnalyzeR: analysis of changes in genome-wide patterns of alternative splicing and its functional consequences." /></p>
+
+<hr />
+
+<h2 id="how-identify-non-canonical-orfs-2">How identify non-canonical ORFs?</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/isoform_switching.jpg" alt="Illustration of isoform switch" /></p>
+
+<hr />
+
+<h2 id="galaxy-workflow">Galaxy Workflow</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/galaxy_training.png" alt="Galaxy workflow." /></p>
+
+<p>Full detailed explanation in the <a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">Genome-wide alternative splicing analysis</a> Galaxy training.</p>
+
+<hr />
+
+<h2 id="galaxy-workflow-1">Galaxy Workflow</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/full_workflow.png" alt="Full workflow image." /></p>
+
+<p>Full detailed explanation in the <a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">Genome-wide alternative splicing analysis</a> Galaxy training.</p>
+
+<hr />
+
+<h2 id="galaxy-workflow-2">Galaxy Workflow</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/simple_workflow.png" alt="Workflow summary." /></p>
+
+<hr />
+
+<h2 id="initial-qc-assessment">Initial QC assessment</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/initial_QC.png" alt="QC step.Identify potential artifacts that may impact the interpretation of downstream analysis." /></p>
+
+<p>Identify potential artifacts that may impact the interpretation of downstream analysis.</p>
+
+<hr />
+
+<h2 id="mapping-and-identication-of-novel-splicing-sites-with-rnastar">Mapping and identication of novel splicing sites with RNASTAR</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.png" alt="Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions." /></p>
+
+<p>Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.</p>
+
+<hr />
+
+<h2 id="post-mapping-qc-assessment-with-rseqc">Post-mapping QC assessment with RSeQC</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/rseqc_junction_saturation_plot.png" alt="Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites." /></p>
+
+<p>RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.</p>
+
+<hr />
+
+<h2 id="reference-based-transcriptome-assembly-and-quantification-with-stringtie">Reference-based transcriptome assembly and quantification with StringTie</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/stringtie_pipeline.png" alt="Transcriptome assembly and quantification with StringTie. StringTie is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts." /></p>
+
+<p>StringTie is a fast and highly efficient assembler of RNA-seq alignments into potential transcripts.</p>
+
+<hr />
+
+<h2 id="post-assembly-qc-assessment-with-rnaquast">Post-assembly QC assessment with rnaQUAST</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/rnaQUAST_cumulative_isoform.png" alt="Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot." /></p>
+
+<p>rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.</p>
+
+<hr />
+
+<h2 id="isoform-switching-and-functional-analysis-with-isoformswitchanalyzer">Isoform switching and functional analysis with IsoformSwitchAnalyzeR</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/isoformswitch_pipeline.png" alt="Isoform switching and functional analysis. IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using DEXSeq." /></p>
+
+<p>IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using DEXSeq.</p>
+
+<hr />
+
+<h2 id="isoform-switching-and-functional-analysis-with-isoformswitchanalyzer-1">Isoform switching and functional analysis with IsoformSwitchAnalyzeR</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/consequences_plot.png" alt="IsoformSwitchAnalyzeR consequences plot." /></p>
+
+<p>To analyze large-scale patterns in predicted IS consequences, IsoformSwitchAnalyzeR computes all isoform switching events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss)</p>
+
+<hr />
+
+<h2 id="candidate-non-canonical-orf">Candidate non-canonical ORF</h2>
+
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/candidate_gene.png" alt="Candidate non-canonical ORF." /></p>
+
+
+
+	<hr />
+
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</section>
+
+
+<h2 id="bibliography">References</h2>
+<ol class="bibliography"><li id="Babu2012">Babu, M. M., R. W. Kriwacki, and R. V. Pappu, 2012 <b>Versatility from Protein Disorder</b>. Science 337: 1460–1461. <a href="https://doi.org/10.1126/science.1228775">10.1126/science.1228775</a></li>
+<li id="Erady2021">Erady, C., A. Boxall, S. Puntambekar, N. S. Jagannathan, R. Chauhan <i>et al.</i>, 2021 <b>Pan-cancer analysis of transcripts encoding novel open-reading frames (nORFs) and their potential biological functions</b>. npj Genomic Medicine 6: <a href="https://doi.org/10.1038/s41525-020-00167-4">10.1038/s41525-020-00167-4</a></li>
+<li id="Steinberg2021">Steinberg, R., and H.-G. Koch, 2021 <b>The largely unexplored biology of small proteins in pro- and eukaryotes</b>. The FEBS Journal 288: 7002–7024. <a href="https://doi.org/10.1111/febs.15845">10.1111/febs.15845</a></li>
+<li id="Chakrabarti2022">Chakrabarti, P., and D. Chakravarty, 2022 <b>Intrinsically disordered proteins/regions and insight into their biomolecular interactions</b>. Biophysical Chemistry 283: 106769. <a href="https://doi.org/10.1016/j.bpc.2022.106769">10.1016/j.bpc.2022.106769</a></li></ol>
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/3b9ae5e893e360fc00670f1c6610c8462795f1c7">3b9ae5e</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/transcriptomics/tutorials/differential-isoform-expression/slides.html" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1689070972'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
