@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@3b9ae5e893e360fc00670f1c6610c8462795f1c7",
+  release: "galaxy-training-network@e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689070972' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689070972' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689119365' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689119365' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Trio Analysis using Synthetic Datasets from RD-Connect GPAP">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-17 13:15:54 +0000">
+<meta name="DC.date" content="2023-07-11 14:19:08 +0000">
 <meta name="DC.creator" content="Jasper Ouwerkerk">
 <meta name="DC.creator" content="Wolfgang Maier">
 <meta name="DC.creator" content="Helena Rasche">
@@ -96,7 +96,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-17 13:15:54 +0000",
+  "dateModified": "2023-07-11 14:19:08 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
   "interactivityType": "mixed",
@@ -356,7 +356,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1689070972'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689119365'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -776,12 +776,6 @@ Sentry.init({
 		</a>
 	</li>
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
-		</a>
-	</li>
-    
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
@@ -805,7 +799,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 11, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -864,12 +858,12 @@ Sentry.init({
   </li>
   <li><a href="#annotation" id="markdown-toc-annotation">Annotation</a>    <ol>
       <li><a href="#annotate-with-snpeff" id="markdown-toc-annotate-with-snpeff">Annotate with SNPeff</a></li>
+      <li><a href="#compress-vcf" id="markdown-toc-compress-vcf">Compress VCF</a></li>
     </ol>
   </li>
-  <li><a href="#gemini-analyses" id="markdown-toc-gemini-analyses">GEMINI analyses</a>    <ol>
-      <li><a href="#create-a-pedigree-file-describing-the-family-trio" id="markdown-toc-create-a-pedigree-file-describing-the-family-trio">Create a pedigree file describing the family trio</a></li>
-      <li><a href="#load-gemini-database" id="markdown-toc-load-gemini-database">Load GEMINI database</a></li>
-      <li><a href="#find-inheritance-pattern" id="markdown-toc-find-inheritance-pattern">Find inheritance pattern</a></li>
+  <li><a href="#trio-analysis" id="markdown-toc-trio-analysis">Trio Analysis</a>    <ol>
+      <li><a href="#gemini-analyses" id="markdown-toc-gemini-analyses">GEMINI analyses</a></li>
+      <li><a href="#geneiobio-analyses" id="markdown-toc-geneiobio-analyses">Gene.iobio Analyses</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1295,11 +1289,38 @@ EGAF00005573882	1	42856357	14b53924d1492e28ad6078ceb8cfdbc7	Case5_F.17.g.vcf.gz
 
 </blockquote>
 
-<h1 id="gemini-analyses">GEMINI analyses</h1>
+<h2 id="compress-vcf">Compress VCF</h2>
+<p>Now that we have finished running all the tools which require the VCF format as input, they can be converted back to the <strong>vcf_bgzip</strong> format. To compress the VCF we will use a built-in tool from Galaxy, which can be accessed by manipulating the file itself in a similair fashion as changing its detected type.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-compress-vcf-back-to-vcf-bgzip"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Compress **vcf** back to **vcf_bgzip**</div>
+
+  <p>Execute the following steps for the SnpEff VCF.</p>
+
+  <ol>
+    <li>
+      <p>Click on the <strong>pencil</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> of the SnpEff VCF.</p>
+    </li>
+    <li>
+      <p>Click on the <strong>convert tab</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>.</p>
+    </li>
+    <li>
+      <p>Under <strong>Target datatype</strong> select <code class="language-plaintext highlighter-rouge">vcf_bgzip (using 'Convert uncompressed file to compressed.')</code></p>
+    </li>
+    <li>
+      <p>Click <i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> <strong>Create Dataset</strong>.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="trio-analysis">Trio Analysis</h1>
+
+<h2 id="gemini-analyses">GEMINI analyses</h2>
 <p>Next, we will transform our VCF into a GEMINI database which makes it easier to query the VCFs and to determine different inheritence patterns between the mother, father, and offspring. In addition, GEMINI will add even more annotations to the variants. This allows us to filter the variants even more which gets us to closer to the real causative variant.
 All these steps are performed by the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="link"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span> tool. However, before we can load the VCF we also need to define a pedigree file.</p>
 
-<h2 id="create-a-pedigree-file-describing-the-family-trio">Create a pedigree file describing the family trio</h2>
+<h3 id="create-a-pedigree-file-describing-the-family-trio">Create a pedigree file describing the family trio</h3>
 <p>A pedigree file is a file that informs GEMINI which family members are affected by the disease and which sample name corresponds to what individual. This information is saved as a table containing information about the phenotype of the family.</p>
 
 <ol>
@@ -1332,7 +1353,7 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 
 <p>For more information on the PED file you can read the help section of the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="link"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span> tool in the description, which can be found at the bottom of the page when clicking on the tool.</p>
 
-<h2 id="load-gemini-database">Load GEMINI database</h2>
+<h3 id="load-gemini-database">Load GEMINI database</h3>
 <p>Now we can transform the subsampled VCF and PED file into a GEMINI database. Note that this can take a very long time depending on the size of the VCF. In our case it should take around 30-40 minutes.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1341,7 +1362,7 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2" title="GEMINI load tool" aria-role="link"><strong>GEMINI load</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2</span></span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to be loaded in the GEMINI database”</em>: <code class="language-plaintext highlighter-rouge">SNPeff annotated VCF</code> (output of <strong>SnpEff eff</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to be loaded in the GEMINI database”</em>: <code class="language-plaintext highlighter-rouge">SnpEff Annotated vcf_bgzip</code> (output of <strong>Convert uncompressed file to compressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample and family information in PED format”</em>: the pedigree file prepared above</li>
       </ul>
     </li>
@@ -1349,7 +1370,7 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 
 </blockquote>
 
-<h2 id="find-inheritance-pattern">Find inheritance pattern</h2>
+<h3 id="find-inheritance-pattern">Find inheritance pattern</h3>
 <p>With the GEMINI database it is now possible to identify the causative variant that could explain the breast cancer in the mother and daughter. The inheritance information makes it a bit easier to determine which tool to run to find the causative variant, instead of finding it by trying all the different inheritance patterns.</p>
 
 <blockquote class="question">
@@ -1436,13 +1457,80 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
 
 </blockquote>
 
+<h2 id="geneiobio-analyses">Gene.iobio Analyses</h2>
+<p>Alternatively, the trio analysis can be done using gene.iobio <span class="citation"><a href="#Di_Sera_2021">Sera <i>et al.</i> 2021</a></span>. The <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1" title="gene.iobio visualisation tool" aria-role="link"><strong>gene.iobio visualisation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1</span></span> tool generates an html file which sends the VCFs to the iobio site using public URLs. Therefore, your history has to be shared, i.e. <strong>everyone with a link can access your history!</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-make-files-accessible-for-gene-iobio"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Make files accessible for gene.iobio</div>
+
+  <ol>
+    <li>Open the <strong>History Options menu</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> at the topright corner of your history panel.</li>
+    <li>select <strong>Share or Publish</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span>.</li>
+    <li>Then toggle the <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <strong>Make History accessible</strong>.</li>
+  </ol>
+
+</blockquote>
+
+<p>For this tool it is not required to set any filtering steps or determine the most plausible inheritence pattern. Since gene.iobio runs multiple default filtering steps for autosomal dominant, recessive, <em>De novo</em>, compound heterozygous, and X-linked recessive inheritance patterns. In addition, it prioritizes variants based on gene-disease association algorithms, which significantly reduces processing time.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-generate-gene-iobio-html"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate gene.iobio html</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1" title="gene.iobio visualisation tool" aria-role="link"><strong>gene.iobio visualisation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proband VCF file”</em>: <code class="language-plaintext highlighter-rouge">SnpEff Annotated vcf_bgzip</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Proband sex”</em>: <code class="language-plaintext highlighter-rouge">Female</code></li>
+        <li><em>“Proband sample name”</em>: <code class="language-plaintext highlighter-rouge">Case6C</code></li>
+        <li><em>“Single/Trio analysis”</em>: <code class="language-plaintext highlighter-rouge">Trio</code>
+          <ul>
+            <li>In <em>“Father input”</em>:
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Father VCF file”</em>: <code class="language-plaintext highlighter-rouge">SnpEff Annotated vcf_bgzip</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“Father sample name”</em>: <code class="language-plaintext highlighter-rouge">Case6F</code></li>
+              </ul>
+            </li>
+            <li>In <em>“Mother input”</em>:
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mother VCF file”</em>: <code class="language-plaintext highlighter-rouge">SnpEff Annotated vcf_bgzip</code> (output of <strong>Convert compressed file to uncompressed.</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“Is the mother affected?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“Mother sample name”</em>: <code class="language-plaintext highlighter-rouge">Case6M</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Select reference genome version”</em>: <code class="language-plaintext highlighter-rouge">GRCh37</code></li>
+      </ul>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-using-gene-iobio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-gene-iobio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip:  Using gene.iobio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>To open the generated html file click on the <strong>eye</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>, which will show the gene.iobio interface. Now a phenotype has to be added to generate a list of genes which likely contain causative variants, in this case it is breast cancer. Next, click on the <strong>Hamburger icon</strong> in the topleft corner of the gene.iobio interface. This will show 20 genes including the BRCA1 gene with the causative variant under the <strong>Genes</strong> tab. Click on the BRCA1 gene and gene.iobio starts analyzing the gene for causative variants. Then under the <strong>Variants</strong> tab you will find the causative variant listed. You can click on the variant block to see more information on it. A report will show with information on the type, location, and quality of the variant, the associated phenotype, the pathogenicity, the population frequency, conservation of the location of the variant, and the inheritence pattern (Autosomal dominant).</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-increase-genes-to-analyze"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-increase-genes-to-analyze" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip:  Increase genes to analyze<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>More genes can be analyzed in three ways 1) the generated list of genes associated with a phenotypm can be increased. 2) The list of genes associated with another phenotype can be combined with the current list of genes. 3) A gene can manually be added.</p>
+
+        <ol>
+          <li>To increase the number of genes in the generated list of genes click on the <strong>gear icon</strong> <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> in gene.iobio and click on the drop down box under <strong>Keep top n genes from phenotype search</strong>.</li>
+          <li>To add more genes to the analysis type and select another phenotype in the top bar. After finding your phenotype of interest press enter and click <strong>Combine genes with current list</strong> in the pop-up screen.</li>
+          <li>To add a single gene to the analysis type and select a gene name in the top bar. After finding your gene of interest press enter.</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
 <h1 id="conclusion">Conclusion</h1>
-<p>In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We were able to find the causative variant by pre-processing and annotating our VCFs using the SnpEff and GEMINI annotations. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.</p>
+<p>In this tutorial we have illustrated how to easily download a dataset of interest savely and securely from the EGA using the HTSGET protocol. In addition, we performed a trio analysis to find the causative variant in an autosomal dominant inherited disease. We pre-processed and annotated our VCFs using the SnpEff and found the causative variant using both the GEMINI and gene.iobio tool. With this workflow you can now easily analyse and find the causative variant(s) in many different family trios from any database which HTSGET can connect to.</p>
 
 <h1 id="workflow">Workflow</h1>
 <p>Here is the final layout of the workflow. For more details you can download the workflow from the overview at the top of the page.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/trio-analysis/workflow.png" alt="Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Filter step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern. " width="950" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/trio-analysis/workflow.png" alt="Image showing the whole workflow of the tutorial. Each seperate step is represented by a rectangular block with the tool name in the upper part in blue and the lower part shows the output in white. In the top left the workflow starts with the EGA Download Client which ouputs the authorized datasets (txt), below that again the EGA Download Client is shown which outputs the list of files in the ega dataset, which is connected to the search in textfiles tool. That tool is connected again to an EGA Download Client step where the VCFs are downloaded using the list of files from the previous tool. This step is connected to a decompress step to change the bgzipped VCFs to regular VCFs. That step is connected to a Filter step which outputs a VCF. The next connected step is the bcftools norm tool which outputs a normalized VCF. Then the normalized VCFs are processed using the Text reformatting tool. Using the output from that step the bcftools megre step is used to output a single VCF and connect it to the SnpEff eff tool. This tool annotates the VCF and that step is connected to the GEMINI load tool which is also connected to step block with the title pedigree. Then the GEMINI load tool connects to the GEMINI inheritance pattern block which outputs an tabular file called GEMINI autosomal_dominant pattern. " width="1208" height="678" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The workflow to download the VCFs and find the causative variant. If you skipped the EGA download step then the workflow starts at the second column. Here each column represents a seperate step, from left to right the steps are: Data preparation, Pre-Processing, Annotation, and GEMINI analysis.</figcaption></figure>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
@@ -1490,7 +1578,8 @@ FAM0001822	Case6C	Case6F	Case6M	2	2
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Easton2007">Easton, D. F., A. M. Deffenbaugh, D. Pruss, C. Frye, R. J. Wenstrup <i>et al.</i>, 2007 <b>A Systematic Genetic Assessment of 1, 433 Sequence Variants of Unknown Clinical Significance in the BRCA1 and BRCA2 Breast Cancer–Predisposition Genes</b>. The American Journal of Human Genetics 81: 873–883. <a href="https://doi.org/10.1086/521032">10.1086/521032</a></li>
 <li id="Tan2015">Tan, A., G. R. Abecasis, and H. M. Kang, 2015 <b>Unified representation of genetic variants</b>. Bioinformatics 31: 2202–2204. <a href="https://doi.org/10.1093/bioinformatics/btv112">10.1093/bioinformatics/btv112</a></li>
-<li id="Eberle2017">Eberle, M. A., E. Fritzilas, P. Krusche, M. Källberg, B. L. Moore <i>et al.</i>, 2017 <b>A reference data set of 5.4 million phased human variants validated by genetic inheritance from sequencing a three-generation 17-member pedigree</b>. Genome Res. 27: 157–164.</li></ol>
+<li id="Eberle2017">Eberle, M. A., E. Fritzilas, P. Krusche, M. Källberg, B. L. Moore <i>et al.</i>, 2017 <b>A reference data set of 5.4 million phased human variants validated by genetic inheritance from sequencing a three-generation 17-member pedigree</b>. Genome Res. 27: 157–164. <a href="https://doi.org/10.1101/gr.210500.116">10.1101/gr.210500.116</a></li>
+<li id="Di_Sera_2021">Sera, T. D., M. Velinder, A. Ward, Y. Qiao, S. Georges <i>et al.</i>, 2021 <b>Gene.iobio: an interactive web tool for versatile, clinically-driven variant interrogation and prioritization</b>. Scientific Reports 11: <a href="https://doi.org/10.1038/s41598-022-09959-3">10.1038/s41598-022-09959-3</a></li></ol>
                 
 
                 
@@ -1623,6 +1712,11 @@ tools:
   revisions: 2270a8b83c12
   tool_panel_section_label: Variant Analysis
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: geneiobio
+  owner: iuc
+  revisions: c0af7b196a89
+  tool_panel_section_label: Variant Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: snpeff
   owner: iuc
   revisions: 5c7b70713fb5
@@ -1657,7 +1751,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/3b9ae5e893e360fc00670f1c6610c8462795f1c7">3b9ae5e</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f">e7a0be8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1689,7 +1783,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1689070972'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1689119365'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

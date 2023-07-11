@@ -153,6 +153,7 @@
   "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json",
   "tools": [
     "CONVERTER_gz_to_uncompressed",
+    "CONVERTER_uncompressed_to_gz",
     "Filter1",
     "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
     "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
@@ -161,6 +162,7 @@
     "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
     "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
     "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1",
     "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"
   ],
   "supported_servers": {
@@ -168,11 +170,6 @@
       {
         "url": "https://usegalaxy.eu",
         "name": "UseGalaxy.eu",
-        "usegalaxy": "true"
-      },
-      {
-        "url": "https://usegalaxy.org",
-        "name": "UseGalaxy.org (Main)",
         "usegalaxy": "true"
       }
     ],
@@ -236,6 +233,13 @@
         "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
       },
       {
+        "name": "geneiobio",
+        "owner": "iuc",
+        "revisions": "c0af7b196a89",
+        "tool_panel_section_label": "Variant Analysis",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
         "name": "snpeff",
         "owner": "iuc",
         "revisions": "5c7b70713fb5",
@@ -244,7 +248,7 @@
       }
     ]
   },
-  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_merge\n  owner: iuc\n  revisions: 86296490704e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: da6fc9f4a367\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ega_download_client\n  owner: iuc\n  revisions: f9db47f68e5e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_merge\n  owner: iuc\n  revisions: 86296490704e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: da6fc9f4a367\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ega_download_client\n  owner: iuc\n  revisions: f9db47f68e5e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: geneiobio\n  owner: iuc\n  revisions: c0af7b196a89\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
   "tours": false,
   "video": false,
   "translations": {
