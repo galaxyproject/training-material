@@ -69,8 +69,7 @@ have fun!
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+> 2. Import the files from [Zenodo]({{ https://doi.org/10.5281/zenodo.8130567 }})
 >     -> `{{ page.title }}`):
 >
 >    ```
