@@ -114,9 +114,7 @@ You can access all of the tool results by clicking on each tab (it can take a li
 
 By click on the "Draft of Data Paper" tab, you will access to the draft of Data Paper presented in an HTML format.
 You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
-<img src="./Images/DataPaper_map.png" alt="FAIR Data Principles" width="500"/>
-*Geographical Coverage*
-<img src="./Images/DataPaper_entity.png" alt="FAIR Data Principles" width="500"/>
-*Description of an entity*
+<img src="./Images/DataPaper_map.png" alt="FAIR Data Principles" width="500"/><img src="./Images/DataPaper_entity.png" alt="FAIR Data Principles" width="500"/>
+*Geographical Coverage**Description of an entity*
 You can select 
 ## Fair Quality Assessment report
