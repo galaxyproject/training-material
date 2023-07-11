@@ -40,6 +40,17 @@ of metadata.
 MetaShRIMPS is a tool developped by the PNDB (French Biodiversity Data Hub), a research structure initiated by the 
 French Natural History Museum (MNHN).
 
+> <comment-title>Why do we need FAIR Data and Metadata?</comment-title>
+> [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
+>
+>
+><img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="500"/>
+>This principles were [officialy instaured in 2016](https://www.go-fair.org/fair-principles/) to improve and the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
+>Metadata is the data used to describe and explain all the context behind the production of data. It is necessary to produce a rich and FAIR metadata in order 
+>to permit external users to understand and reuse data for their own studies.
+>The purpose of this tool is to help the user improve their metadata quality in order to increase its value to the scientific community and to help highlighting
+>the work of all the producers of the data.
+{:  .comment}
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -49,24 +60,16 @@ French Natural History Museum (MNHN).
 >
 {: .agenda}
 
-# Why do we need FAIR Data and Metadata?
-"FAIR" stand for **Findable, Accessible, Interoperable, Reusable**. 
+## Why do we need FAIR Data and Metadata?
 
 
-<img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="500"/>
+## How can this tool improve the quality metadata?
 
-The principles were initiated in 2014 to improve the shar
-# How can this tool help in improving metadata quality
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+This tool aims to give an easy access to a quality assessment report of metadatas which could guide the producers of
+data/metadata to the production of a FAIR metadata.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
 
-have fun!
-
+# How to use MetaShRIMPS?
 ## Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
