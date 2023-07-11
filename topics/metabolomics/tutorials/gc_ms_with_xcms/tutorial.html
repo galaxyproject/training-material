@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f",
+  release: "galaxy-training-network@a1844256b4541eff4c95f8a4f10ffd309df64cc7",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689119365' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689119365' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689119407' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689119407' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-07-09 00:25:16 +0000">
+<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
 <meta name="DC.creator" content="Matej Troják">
 <meta name="DC.creator" content="Helge Hecht">
 <meta name="DC.creator" content="Maxim Skoryk">
@@ -95,7 +95,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-07-09 00:25:16 +0000",
+  "dateModified": "2023-05-17 17:21:19 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)",
   "interactivityType": "mixed",
@@ -301,7 +301,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1689119365'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689119407'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -732,7 +732,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -1188,38 +1188,36 @@ your data:</p>
 
   <p>Click <em>“View data”</em> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon next to the dataset in the Galaxy history. The contents of the file would look like this:</p>
 
-  <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-different-dataset-icons-and-their-usage"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-different-dataset-icons-and-their-usage" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Different dataset icons and their usage<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Dataset icons and their usage:</p>   <ul>   <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>“Eye icon”</strong>: Display data of the job in the browser.</li>   <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>“Pencil icon”</strong>: Edit attributes of the job.</li>   <li><i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> <strong>“Trash icon”</strong>: Delete the job.</li>   <li><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> <strong>“Info icon”</strong>: Job details and run information.</li>   <li><i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> <strong>“Refresh/Rerun icon”</strong>: Run this (selected) job again or examine original submitted form (filled in).</li>   <li><i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span> <strong>“Bug icon”</strong>: Review and optionally submit a bug report.</li> </ul> </blockquote>
-  <p><!--END_SNIPPET--></p>
+  <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-different-dataset-icons-and-their-usage"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-different-dataset-icons-and-their-usage" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Different dataset icons and their usage<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;Dataset icons and their usage:&lt;/p&gt;   &lt;ul&gt;   &lt;li&gt;<i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>“Eye icon”</strong>: Display data of the job in the browser.&lt;/li&gt;   &lt;li&gt;<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>“Pencil icon”</strong>: Edit attributes of the job.&lt;/li&gt;   &lt;li&gt;<i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> <strong>“Trash icon”</strong>: Delete the job.&lt;/li&gt;   &lt;li&gt;<i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> <strong>“Info icon”</strong>: Job details and run information.&lt;/li&gt;   &lt;li&gt;<i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> <strong>“Refresh/Rerun icon”</strong>: Run this (selected) job again or examine original submitted form (filled in).&lt;/li&gt;   &lt;li&gt;<i class="fas fa-bug" aria-hidden="true"></i><span class="visually-hidden">galaxy-bug</span> <strong>“Bug icon”</strong>: Review and optionally submit a bug report.&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NAME:C001
-IONMODE:Negative
-SPECTRUMTYPE:Centroid
-RETENTIONTIME:383.27
-Num Peaks:231
-217.1073 64041926
-243.0865 35597866
-257.1134 31831229
-224.061 27258239
-258.11 24996353
-241.0821 23957171
-315.1188 13756744
-...
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    NAME:C001
+    IONMODE:Negative
+    SPECTRUMTYPE:Centroid
+    RETENTIONTIME:383.27
+    Num Peaks:231
+    217.1073 64041926
+    243.0865 35597866
+    257.1134 31831229
+    224.061 27258239
+    258.11 24996353
+    241.0821 23957171
+    315.1188 13756744
+    ...
 
-NAME:C002
-IONMODE:Negative
-SPECTRUMTYPE:Centroid
-RETENTIONTIME:281.62
-Num Peaks:165
-307.1573 299174880
-147.0654 298860831
-149.0447 287809889
-218.1066 118274758
-189.076 112486871
-364.1787 75134143
-191.0916 52526567
-308.1579 52057158
-...
+    NAME:C002
+    IONMODE:Negative
+    SPECTRUMTYPE:Centroid
+    RETENTIONTIME:281.62
+    Num Peaks:165
+    307.1573 299174880
+    147.0654 298860831
+    149.0447 287809889
+    218.1066 118274758
+    189.076 112486871
+    364.1787 75134143
+    191.0916 52526567
+    308.1579 52057158
+    ...
 </code></pre></div>  </div>
 
   <blockquote class="details">
@@ -1691,7 +1689,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f">e7a0be8</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/a1844256b4541eff4c95f8a4f10ffd309df64cc7">a184425</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1723,7 +1721,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1689119365'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1689119407'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
