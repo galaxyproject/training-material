@@ -41,7 +41,7 @@ tags:
 
 contributions:
   authorship:
-    - cgoclowski
+    - Camila-goclowski
   editing:
     - nomadscientist
   funding:
