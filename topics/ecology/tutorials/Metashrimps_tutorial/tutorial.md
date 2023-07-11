@@ -55,7 +55,6 @@ French Natural History Museum (MNHN).
 
 <img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="500"/>
 
-
 The principles were initiated in 2014 to improve the shar
 # How can this tool help in improving metadata quality
 Below are a series of hand-on boxes, one for each tool in your workflow file.
