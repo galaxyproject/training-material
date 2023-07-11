@@ -442,7 +442,7 @@ Alternatively, the trio analysis can be done using gene.iobio {% cite Di_Sera_20
 > <hands-on-title> Make files accessible for gene.iobio </hands-on-title>
 >
 > 1. Open the **History Options menu** {% icon galaxy-dropdown %} at the topright corner of your history panel.
-> 2. select **Share or Publish** {% icon galaxy-workflow %}.
+> 2. select **Share or Publish** {% icon workflow %}.
 > 3. Then toggle the {% icon galaxy-toggle %} **Make History accessible**.
 >
 {: .hands_on}
