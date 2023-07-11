@@ -41,7 +41,7 @@ tags:
 
 contributions:
   authorship:
-    - camila-goclowski
+    - cgoclowski
   editing:
     - nomadscientist
   funding:
@@ -430,6 +430,7 @@ It would be nice to know what these cells are. This analysis (googling all of th
 | 5        | Itm2a                   | Mature T-cell                       |
 
 We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
+
 ```r
 library(dplyr)
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
@@ -440,6 +441,7 @@ filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
 ))
 ```
 Once we have labelled our clusters, we can visualize what our cell types actually look like: 
+
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
 ```
