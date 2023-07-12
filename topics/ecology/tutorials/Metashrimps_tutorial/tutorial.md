@@ -127,6 +127,7 @@ You will have access to different figures such as a table displaying the results
 
 You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
 Acessible, Interoperable, Reusable) on a 100 point scale.
+
 ![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
 
 # Conclusion
