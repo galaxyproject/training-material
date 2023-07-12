@@ -421,7 +421,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
                   "ComputationalWorkflow"
               ],
               "author": author_uuids,
-              "license": workflow['license'],
+              "license": workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : "https://spdx.org/licenses/CC-BY-4.0",
               "name": workflow['name'],
               "version": 0 # TODO
           },
