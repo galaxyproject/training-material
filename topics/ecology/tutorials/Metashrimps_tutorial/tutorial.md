@@ -112,7 +112,7 @@ You can access all of the tool results by clicking on each tab (it can take a li
 
 ## Draft of Data Paper
 
-By click on the "Draft of Data Paper" tab, you will access to the draft of Data Paper presented in an HTML format.
+By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
 You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
 ![Map describing geographical coverage](./Images/DataPaper_map.png "Representation of a geographical coverage")![Table describing an entity](./Images/DataPaper_entity.png "Description of an entit")
 
@@ -122,3 +122,10 @@ You can at the top, of the page download the draft in either an HTML format or a
 
 ## Fair Quality Assessment report
 
+By clicking on the "Fair Assessment" tab, you will access the FAIR Quality report of the metadata uploaded.
+You will have access to different figures such as a table displaying the results of all checks tested for your metadata.
+![Table of results](./Images/Fairscore_tab.png "Example of the table displaying the results of the Quality Checks")
+
+You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
+Acessible, Interoperable, Reusable) on a 100 point scale.
+![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
