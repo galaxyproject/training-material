@@ -16,8 +16,9 @@ objectives:
 - Explain the necessity of using such tools when producing ecological metadata
 time_estimation: 30mn
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- This tool aims to improve FAIR quality of metadata
+- Creating metadata as FAIR as possible is a must
+- Be carefull of the format and standard of metadata used only EML metadata will work
 tags:
   - Metadata
   - EML
@@ -35,12 +36,10 @@ contributors:
 This tutorial aims to teach how to use the interactive tool MetaShRIMPS, available on Galaxy Ecology,
 to produce Data Papers drafts and FAIR quality assessment reports from metadata using EML
 standard.
-This tutorial purpose is also to explain the purpose of this tool which is to improve the overall FAIR quality
-of metadata.
-MetaShRIMPS is a tool developped by the PNDB (French Biodiversity Data Hub), a research structure initiated by the 
-French Natural History Museum (MNHN).
+This tutorial purpose is also to explain why is it needed to improve the overall FAIR quality
+of metadata and how this tool respond to this necessity.
 
-> <comment-title>Why do we need FAIR Data and Metadata?</comment-title>
+> <comment-title>What does FAIR mean?</comment-title>
 > [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
 >
 >
@@ -105,16 +104,15 @@ you want to use in this tool.
 
 After uploading the tool you just have to click on **Execute** to launch the tool with the file.
 
-# Results
+# Outputs
 
 After clicking the **Execute**, 2 new tabs will open called "Draft of Data Paper" and "Fair Assessment".
-You can access all of the tool results by clicking on each tab (it can take a little time for your results to appear).
+You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to appear).
 
 ## Draft of Data Paper
 
 By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
 You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
-![Map describing geographical coverage](./Images/DataPaper_map.png "Representation of a geographical coverage")![Table describing an entity](./Images/DataPaper_entity.png "Description of an entity")
 
 You can at the top, of the page download the draft in either an HTML format or an editable docx format.
 ![Download in HTML](./Images/Download_HTML.png""Download in HTML")![Download in docx](./Images/Download_docx.png "Download in docx*)
@@ -132,4 +130,5 @@ Acessible, Interoperable, Reusable) on a 100 point scale.
 
 # Conclusion
 
-You have finished this small tutorial on MetaShRIMPS don't hesitate to contact us if you have any questions :)
+Here is the end of this little tutorial aiming in explaining the purpose of MetaShRIMPS and how to use it.
+Don't hesitate to contact us if you have any questions :)
