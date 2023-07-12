@@ -1,7 +1,7 @@
 ---
 layout: learning-pathway  # (uncomment this line to activate it)
 
-maintainers:
+editorial_board:
 - bebatut
 funding:
 - erasmusplus

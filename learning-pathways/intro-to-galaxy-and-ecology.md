@@ -2,7 +2,7 @@
 layout: learning-pathway
 tags: [beginner]
 
-maintainers:
+editorial_board:
 - yvanlebras
 funding:
 - erasmusplus
