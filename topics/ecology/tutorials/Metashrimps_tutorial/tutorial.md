@@ -106,8 +106,8 @@ After uploading the tool you just have to click on **Execute** to launch the too
 
 # Outputs
 
-After clicking the **Execute** button, 2 new tabs will open called "Draft of Data Paper" and "Fair Assessment".
-You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to appear).
+After clicking the **Execute** button, 2 new tabs called "Draft of Data Paper" and "Fair Assessment"  will appear.
+You can access all of the tool outputs by clicking on each tab (it can take a little time for your results to be displayed).
 
 ## Draft of Data Paper
 
