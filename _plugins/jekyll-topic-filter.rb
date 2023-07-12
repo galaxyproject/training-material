@@ -480,7 +480,9 @@ module TopicFilter
           'trs_endpoint' => "#{domain}/#{trs}",
           'license' => license,
           'creators' => creators,
+          'name' => wf_json['name'],
           'test_results' => workflow_test_outputs,
+          'modified' => File.mtime(wf_path),
         }
       end
     end

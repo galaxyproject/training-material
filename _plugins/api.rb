@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'securerandom'
 require 'json'
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
@@ -358,6 +359,77 @@ module Jekyll
           site.pages << page2
         end
       end
+    end
+  end
+end
+
+# Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.
+Jekyll::Hooks.register :site, :post_write do |site|
+  dir = File.join(site.dest, 'api', 'workflows')
+
+  # ro-crate-metadata.json
+  TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
+    material['workflows'].each do |workflow|
+      wfid = workflow['wfid']
+      wfname = workflow['wfname']
+
+      wfdir = File.join(dir, wfid, wfname)
+      FileUtils.mkdir_p(wfdir)
+      path = File.join(wfdir, 'ro-crate-metadata.json')
+
+      Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
+
+      uuids = workflow['creators'].map { |c|
+        if c.has_key?('identifier')
+          'https://orcid.org/' + c['identifier']
+        else
+          '#' + SecureRandom.uuid
+        end
+      }
+      author_uuids = uuids.map{|u| { '@id' => "#{u}" } }
+      author_linked = workflow['creators'].map.with_index { |c, i| 
+        {
+          '@id' => "#{uuids[i]}",
+          '@type' => c['class'],
+          'name' => c['name'],
+        }
+      }
+
+      crate = {
+        '@context' => 'https://w3id.org/ro/crate/1.1/context',
+        '@graph' => [
+          {
+              "@id": "./",
+              "@type": "Dataset",
+              "datePublished": workflow['modified'],
+          },
+          {
+              "@id": "ro-crate-metadata.json",
+              "@type": "CreativeWork",
+              "about": {
+                  "@id": "./"
+              },
+              "conformsTo": {
+                  "@id": "https://w3id.org/ro/crate/1.1"
+              }
+          },
+          {
+              "@id": "#assembly-assembly-quality-control",
+              "@type": [
+                  "File",
+                  "SoftwareSourceCode",
+                  "ComputationalWorkflow"
+              ],
+              "author": author_uuids,
+              "license": workflow['license'],
+              "name": workflow['name'],
+              "version": 0 # TODO
+          },
+        ]
+      }
+      crate['@graph'] += author_linked
+
+      File.write(path, JSON.pretty_generate(crate))
     end
   end
 end
