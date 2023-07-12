@@ -114,11 +114,10 @@ You can access all of the tool results by clicking on each tab (it can take a li
 
 By clicking on the "Draft of Data Paper" tab, you will have access to the draft of Data Paper presented in an HTML format.
 You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
-![Map describing geographical coverage](./Images/DataPaper_map.png "Representation of a geographical coverage")![Table describing an entity](./Images/DataPaper_entity.png "Description of an entit")
+![Map describing geographical coverage](./Images/DataPaper_map.png "Representation of a geographical coverage")![Table describing an entity](./Images/DataPaper_entity.png "Description of an entity")
 
 You can at the top, of the page download the draft in either an HTML format or an editable docx format.
-<img src="./Images/Download_HTML.png" alt="FAIR Data Principles" width="500"/><img src="./Images/Download_docx.png" alt="FAIR Data Principles" width="500"/>
-*Image 1: Download in HTML ; Image 2 : Download in docx*
+![Download in HTML](./Images/Download_HTML.png""Download in HTML")![Download in docx](./Images/Download_docx.png "Download in docx*)
 
 ## Fair Quality Assessment report
 
@@ -129,3 +128,7 @@ You will have access to different figures such as a table displaying the results
 You will also have acces to a graph presenting scores of Quality for each of the FAIR principles tested (Findable,
 Acessible, Interoperable, Reusable) on a 100 point scale.
 ![FAIR scores](./Images/Fairscore_bar.png "Example of a FAIR score")
+
+# Conclusion
+
+You have finished this small tutorial on MetaShRIMPS don't hesitate to contact us if you have any questions :)
