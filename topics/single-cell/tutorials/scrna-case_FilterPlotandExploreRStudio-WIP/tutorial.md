@@ -141,7 +141,9 @@ The code preceding the left pointing arrow will indicate where to put your metad
  Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
 
 ```r
-srt <- PercentageFeatureSet(srt, pattern = "^mt-", col.name = "perc.mt")
+srt <- PercentageFeatureSet(srt, 
+  pattern = "^mt-", 
+  col.name = "perc.mt")
 ```
 
  For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes. With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage--the mt prefix may not always include all mitochondrial genes depending on how your dataset was labelled. 
@@ -162,7 +164,9 @@ We’re going to plot our data a few different ways. Different bioinformaticians
 So let's generate some QC plots. First off, let's check our dataset for batch effect:
 
 ```r
-VlnPlot(srt, group.by = "Individual", features = "nCount_RNA", log = TRUE)
+VlnPlot(srt, group.by = "Individual", 
+  features = "nCount_RNA", 
+  log = TRUE)
 ```
 ![Violin Plot split by Individual/Batch](../../images/scrna-SeuratRStudio/plot1.png "Violin Plot of counts split by Individual.")
 
@@ -192,7 +196,6 @@ Now that we have a better understanding of what our data looks like, we can begi
 ```r
 plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito")
 ```
-
 ![UMI x mito](../../images/scrna-SeuratRStudio/plot4.png "UMI counts x Percent mito.")
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
@@ -239,7 +242,7 @@ Once again, let's zoom in on the x-axis but this time to get an idea of which nF
 ```r
 plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito", xlim = c(0,1275))
 ```
-![Gene x mito--zoomed in](../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito--zoomed in.")
+![Gene x mito--zoomed in][def]
 
 You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
 
@@ -514,3 +517,5 @@ Important to note, lest all bioinformaticians combine forces to attack the biolo
 Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
 Congratulations! You have interpreted your plots in several important ways!
+
+[def]: ../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito--zoomed in."
