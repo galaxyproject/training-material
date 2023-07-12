@@ -138,7 +138,7 @@ srt@meta.data$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 
 The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
 
- Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
+Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
 
 ```r
 srt <- PercentageFeatureSet(srt, 
