@@ -379,52 +379,52 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
       Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
 
-      uuids = workflow['creators'].map { |c|
-        if c.has_key?('identifier')
-          'https://orcid.org/' + c['identifier']
+      uuids = workflow['creators'].map do |c|
+        if c.key?('identifier')
+          "https://orcid.org/#{c['identifier']}"
         else
-          '#' + SecureRandom.uuid
+          "##{SecureRandom.uuid}"
         end
-      }
-      author_uuids = uuids.map{|u| { '@id' => "#{u}" } }
-      author_linked = workflow['creators'].map.with_index { |c, i| 
+      end
+      author_uuids = uuids.map { |u| { '@id' => u.to_s } }
+      author_linked = workflow['creators'].map.with_index do |c, i|
         {
-          '@id' => "#{uuids[i]}",
+          '@id' => (uuids[i]).to_s,
           '@type' => c['class'],
           'name' => c['name'],
         }
-      }
+      end
 
       crate = {
         '@context' => 'https://w3id.org/ro/crate/1.1/context',
         '@graph' => [
           {
-              "@id": "./",
-              "@type": "Dataset",
-              "datePublished": workflow['modified'],
+            '@id': './',
+            '@type': 'Dataset',
+            datePublished: workflow['modified'],
           },
           {
-              "@id": "ro-crate-metadata.json",
-              "@type": "CreativeWork",
-              "about": {
-                  "@id": "./"
-              },
-              "conformsTo": {
-                  "@id": "https://w3id.org/ro/crate/1.1"
-              }
+            '@id': 'ro-crate-metadata.json',
+            '@type': 'CreativeWork',
+            about: {
+              '@id': './'
+            },
+            conformsTo: {
+              '@id': 'https://w3id.org/ro/crate/1.1'
+            }
           },
           {
-              "@id": "#assembly-assembly-quality-control",
-              "@type": [
-                  "File",
-                  "SoftwareSourceCode",
-                  "ComputationalWorkflow"
-              ],
-              "author": author_uuids,
-              "license": workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : "https://spdx.org/licenses/CC-BY-4.0",
-              "name": workflow['name'],
-              "version": 0 # TODO
-          },
+            '@id': '#assembly-assembly-quality-control',
+            '@type': %w[
+              File
+              SoftwareSourceCode
+              ComputationalWorkflow
+            ],
+            author: author_uuids,
+            license: workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0',
+            name: workflow['name'],
+            version: 0 # TODO
+          }
         ]
       }
       crate['@graph'] += author_linked
