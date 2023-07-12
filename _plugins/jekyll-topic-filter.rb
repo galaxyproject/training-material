@@ -17,6 +17,16 @@ module TopicFilter
   end
 
   ##
+  # This function returns a list of all the topics that are available.
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +Array+:: The topic objects themselves
+  def self.enumerate_topics(site)
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |_k, v| v }
+  end
+
+  ##
   # Fill the cache with all the topics
   # Params:
   # +site+:: The +Jekyll::Site+ object
