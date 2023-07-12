@@ -53,7 +53,7 @@ notebook:
 ---
 
 # Setting the environment and files 
- First thing's first, we should load the packages we will need into our environment. In your console (likely in the lower left corner of your RStudio window) run the following line of code. 
+First thing's first, we should load the packages we will need into our environment. In your console (likely in the lower left corner of your RStudio window) run the following line of code. 
 
 ```r
 library(Matrix)
@@ -61,10 +61,10 @@ library(Seurat)
 library(dplyr) 
 ```
 
- Alright, the packages are called - now let's get our data files moved from the Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
+Alright, the packages are called - now let's get our data files moved from the Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
 
 # Upload, view and modify the files
- Now that we have made it into RStudio and called the packages we'll use, let's begin loading the datasets we retrieved in Galaxy into RStudio. Galaxy expedites this process by providing us the gx_get() function, which will output the file path to locate each dataset within our history. 
+Now that we have made it into RStudio and called the packages we'll use, let's begin loading the datasets we retrieved in Galaxy into RStudio. Galaxy expedites this process by providing us the gx_get() function, which will output the file path to locate each dataset within our history. 
 
 So, for example, our matrix was the first to be saved in our history. As such, we will ask for the filepath for the first piece of  in our history with the following line:  
 
@@ -72,13 +72,13 @@ So, for example, our matrix was the first to be saved in our history. As such, w
 gx_get(1)  #get the file path for matrix.mtx  Galaxy history
 ```
 
- Now we have the file path! We can use the Matrix package to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
+Now we have the file path! We can use the Matrix package to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
 
 ```r
 library(Matrix)
 matrix.mtx<-readMM("/import/1") 
 ```
- Now we will do the same thing with the feature, barcode, and experimental design files. Don't try to skip ahead and fill in the position of the dataset, reading in the files will not work without having used the gx_get() function. 
+Now we will do the same thing with the feature, barcode, and experimental design files. Don't try to skip ahead and fill in the position of the dataset, reading in the files will not work without having used the gx_get() function. 
 
 ```r
 gx_get(2) #genes.tsv
@@ -90,16 +90,16 @@ barcodes.tsv<-read.delim("/import/3", header = FALSE)
 gx_get(4) #exp_design.tsv
 exp_design.tsv<-read.delim("/import/4")
 ```
- The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by doing the following: 
+The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by doing the following: 
 
 ```r
 rownames(exp_design.tsv)<-exp_design.tsv$Assay 
 ```
 
- Now, in our RStudio environment, we should have all of the data sets necessary to create a Seurat Object: the matrix, a file with feature (gene) names, a file with cell barcodes, and an optional, but highly useful, experimental design file containing sample (cell-level) metadata. 
+Now, in our RStudio environment, we should have all of the data sets necessary to create a Seurat Object: the matrix, a file with feature (gene) names, a file with cell barcodes, and an optional, but highly useful, experimental design file containing sample (cell-level) metadata. 
 
 # Generating Seurat object
- Next we will add our dimension names to our matrix. In the end, this will provide us with a matrix whose rows are gene names, columns are cell barcodes, and values are expression of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
+Next we will add our dimension names to our matrix. In the end, this will provide us with a matrix whose rows are gene names, columns are cell barcodes, and values are expression of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
 
 
 ```r
@@ -107,9 +107,9 @@ matrix.mtx@Dimnames[[1]]<-genes.tsv$V2
 matrix.mtx@Dimnames[[2]]<-barcodes.tsv$V1
 ```
 
- In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with Read10x. Read10x is Seurat's automated function to add in feature and barcode names. However, due to the nature of how Galaxy histories and RStudio interact, we'll use this manual method. 
+In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with Read10x. Read10x is Seurat's automated function to add in feature and barcode names. However, due to the nature of how Galaxy histories and RStudio interact, we'll use this manual method. 
 
- Now we will create a Seurat object using our newly labelled counts matrix! Make sure you have called the Seurat library, first, or RStudio will not recognize the function. 
+Now we will create a Seurat object using our newly labelled counts matrix! Make sure you have called the Seurat library, first, or RStudio will not recognize the function. 
 
 
 ```r
@@ -146,10 +146,10 @@ srt <- PercentageFeatureSet(srt,
   col.name = "perc.mt")
 ```
 
- For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes. With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage--the mt prefix may not always include all mitochondrial genes depending on how your dataset was labelled. 
+For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes. With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage--the mt prefix may not always include all mitochondrial genes depending on how your dataset was labelled. 
 
 # QC Plots
- Now that we have a complete Seurat object, we can begin the filtering process. There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. 
+Now that we have a complete Seurat object, we can begin the filtering process. There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. 
 
 There will also be genes that may be sequencing artifacts or that appear with such low frequency that statistical tools will fail to accurately analyse them. 
 
