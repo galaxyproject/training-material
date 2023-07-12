@@ -380,7 +380,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
 
       uuids = workflow['creators'].map do |c|
-        if c.key?('identifier')
+        if c.key?('identifier') && !c['identifier'].empty?
           "https://orcid.org/#{c['identifier']}"
         else
           "##{SecureRandom.uuid}"
@@ -423,7 +423,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
             author: author_uuids,
             license: workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0',
             name: workflow['name'],
-            version: 0 # TODO
+            version: Gtn::ModificationTimes.obtain_modification_count(workflow['path'])
           }
         ]
       }

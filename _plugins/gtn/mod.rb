@@ -6,24 +6,41 @@ module Gtn
   # This is faster than talking to the file system.
   module ModificationTimes
     @@TIME_CACHE = nil
+    @@COMMIT_COUNT_CACHE = nil
 
     def self.init_cache
       return unless @@TIME_CACHE.nil?
 
       @@TIME_CACHE = {}
+      @@COMMIT_COUNT_CACHE = Hash.new(0)
       puts '[GTN/MOD] Filling Time Cache'
-      results = `git log --name-only --pretty='GTN_GTN:%ct'`.split('GTN_GTN:')
-      results.map! { |x| x.split(/\n\n/) }
-      results.select! { |x| x.length > 1 }
-      results.each do |date, files|
+      `git log --name-only --pretty='GTN_GTN:%ct'`
+        .split('GTN_GTN:')
+        .map { |x| x.split(/\n\n/) }
+        .select { |x| x.length > 1 }
+        .each do |date, files|
         files.split(/\n/).each do |f|
           @@TIME_CACHE[f] = Time.at(date.to_i) if !@@TIME_CACHE.key? f
+          @@COMMIT_COUNT_CACHE[f] += 1
         end
       end
     end
 
     def self.time_cache
       @@TIME_CACHE
+    end
+
+    def self.commit_count_cache
+      @@COMMIT_COUNT_CACHE
+    end
+
+    def self.obtain_modification_count(f)
+      init_cache
+      if @@COMMIT_COUNT_CACHE.key? f
+        @@COMMIT_COUNT_CACHE[f]
+      else
+        0
+      end
     end
 
     def self.obtain_time(f)
@@ -45,5 +62,5 @@ end
 
 if $PROGRAM_NAME == __FILE__
   Gtn::ModificationTimes.init_cache
-  pp Gtn::ModificationTimes.time_cache
+  pp Gtn::ModificationTimes.commit_count_cache
 end
