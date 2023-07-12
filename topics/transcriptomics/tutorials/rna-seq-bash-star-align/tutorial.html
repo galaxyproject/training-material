@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@a1844256b4541eff4c95f8a4f10ffd309df64cc7",
+  release: "galaxy-training-network@e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689119407' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689119407' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689120604' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689120604' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="RNA-seq Alignment with STAR">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-29 12:43:54 +0000">
+<meta name="DC.date" content="2023-07-09 00:25:16 +0000">
 <meta name="DC.creator" content="Sofoklis Keisaris">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-06-29 12:43:54 +0000",
+  "dateModified": "2023-07-09 00:25:16 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "RNA-seq Alignment with STAR",
   "interactivityType": "mixed",
@@ -283,7 +283,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1689119407'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689120604'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -723,7 +723,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 9, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -801,43 +801,54 @@ The “Data Upload” process is the only one in this tutorial that takes place 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
 
-  <p>Import the FASTQ file pairs from <a href="https://zenodo.org/record/6457007">Zenodo</a> or a data library:</p>
-  <ul>
-    <li><code class="language-plaintext highlighter-rouge">GSM461177</code> (untreated): <code class="language-plaintext highlighter-rouge">GSM461177_1</code> and <code class="language-plaintext highlighter-rouge">GSM461177_2</code></li>
-    <li><code class="language-plaintext highlighter-rouge">GSM461180</code> (treated): <code class="language-plaintext highlighter-rouge">GSM461180_1</code> and <code class="language-plaintext highlighter-rouge">GSM461180_2</code></li>
-  </ul>
+  <ol>
+    <li>Import the FASTQ file pairs from <a href="https://zenodo.org/record/6457007">Zenodo</a> or a data library:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">GSM461177</code> (untreated): <code class="language-plaintext highlighter-rouge">GSM461177_1</code> and <code class="language-plaintext highlighter-rouge">GSM461177_2</code></li>
+        <li><code class="language-plaintext highlighter-rouge">GSM461180</code> (treated): <code class="language-plaintext highlighter-rouge">GSM461180_1</code> and <code class="language-plaintext highlighter-rouge">GSM461180_2</code></li>
+      </ul>
 
-  <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/6457007/files/GSM461177_1.fastqsanger
-   https://zenodo.org/record/6457007/files/GSM461177_2.fastqsanger
-   https://zenodo.org/record/6457007/files/GSM461180_1.fastqsanger
-   https://zenodo.org/record/6457007/files/GSM461180_2.fastqsanger
-</code></pre></div>  </div>
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461177_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461177_2.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_1.fastqsanger
+https://zenodo.org/record/6457007/files/GSM461180_2.fastqsanger
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
 
-  <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-via-links"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;ul&gt;   &lt;li&gt;Copy the link location&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel&lt;/p&gt;   &lt;/li&gt;   &lt;li&gt;Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong>&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;Paste the link(s) into the text field&lt;/p&gt;   &lt;/li&gt;   &lt;li&gt;     &lt;p&gt;Press <strong>Start</strong>&lt;/p&gt;   &lt;/li&gt;   &lt;li&gt;<strong>Close</strong> the window&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
-  <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-data-from-a-data-library"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:&lt;/p&gt;   &lt;ol&gt;   &lt;li&gt;Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong>&lt;/li&gt;   &lt;li&gt;Navigate to  the correct folder as indicated by your instructor.     &lt;ul&gt;       &lt;li&gt;On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Select the desired files&lt;/li&gt;   &lt;li&gt;Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;In the pop-up window, choose&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;<em>“Select history”</em>: the history you want to import the data to (or create a new one)&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click on <strong>Import</strong>&lt;/li&gt; &lt;/ol&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
+        <p>Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.</p>
 
-  <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+        <p>For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on <a href="https://zenodo.org/record/6457007">Zenodo</a>:</p>
 
-    <p>Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.</p>
-
-    <p>For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on <a href="https://zenodo.org/record/6457007">Zenodo</a>:</p>
-
-    <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461177_1_subsampled.fastqsanger
+        <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6457007/files/GSM461177_1_subsampled.fastqsanger
 https://zenodo.org/record/6457007/files/GSM461177_2_subsampled.fastqsanger
 https://zenodo.org/record/6457007/files/GSM461180_1_subsampled.fastqsanger
 https://zenodo.org/record/6457007/files/GSM461180_2_subsampled.fastqsanger
-</code></pre></div>    </div>
+</code></pre></div>        </div>
 
-  </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Change the datatype from <code class="language-plaintext highlighter-rouge">fastqsanger</code> to <code class="language-plaintext highlighter-rouge">fastq</code>.</p>
 
-  <p>Change the datatype from <code class="language-plaintext highlighter-rouge">fastqsanger</code> to <code class="language-plaintext highlighter-rouge">fastq</code>.</p>
-
-  <p><!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-changing-the-datatype"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;ul&gt;   &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;   &lt;li&gt;In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top&lt;/li&gt;   &lt;li&gt;In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">fastq</code>     &lt;ul&gt;       &lt;li&gt;tip: you can start typing the datatype into the field to filter the dropdown menu&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
-
-  <p>We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism’s reference genome (here <em>D. melanogaster</em>) and the organism’s gene annotation.
-   Those can be aquired directly via link and Galaxy’s data library as described above. For this tutorial we are going to use the files <a href="https://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz">dm6.fa.gz</a> and <a href="https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/02c5f7fcdb6bf41f">Drosophila_melanogaster.BDGP6.87.gtf (dm6)</a>. Note that it is essential to convert genome’s file from <code class="language-plaintext highlighter-rouge">*.fa.gz</code> to <code class="language-plaintext highlighter-rouge">*.fa</code>. That is easy now that we have already used the same method to convert <code class="language-plaintext highlighter-rouge">fastqsanger</code> to <code class="language-plaintext highlighter-rouge">fastq</code>. Remember to change the name of the file, too, in your working history as Galaxy will not do it automatically. Doing so will prevent any confusions later on.</p>
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">fastq</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>We also need to import two more files, essential for the alignment operation (and basically every alignment procedure): the organism’s reference genome (here <em>D. melanogaster</em>) and the organism’s gene annotation.
+Those can be aquired directly via link and Galaxy’s data library as described above. For this tutorial we are going to use the files <a href="https://hgdownload.soe.ucsc.edu/goldenPath/dm6/bigZips/dm6.fa.gz">dm6.fa.gz</a> and <a href="https://usegalaxy.eu/libraries/folders/F30cab321d898d2fb/dataset/02c5f7fcdb6bf41f">Drosophila_melanogaster.BDGP6.87.gtf (dm6)</a>. Note that it is essential to convert genome’s file from <code class="language-plaintext highlighter-rouge">*.fa.gz</code> to <code class="language-plaintext highlighter-rouge">*.fa</code>. That is easy now that we have already used the same method to convert <code class="language-plaintext highlighter-rouge">fastqsanger</code> to <code class="language-plaintext highlighter-rouge">fastq</code>. Remember to change the name of the file, too, in your working history as Galaxy will not do it automatically. Doing so will prevent any confusions later on.</li>
+  </ol>
 
   <!--SNIPPET-->
   <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">dm6.fa</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
@@ -1364,7 +1375,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/a1844256b4541eff4c95f8a4f10ffd309df64cc7">a184425</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e7a0be84b0c8b6e3993f8e7ae2950d88aa11877f">e7a0be8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1396,7 +1407,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1689119407'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1689120604'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
