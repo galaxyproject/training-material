@@ -456,25 +456,25 @@ One example for **evenness** index is:
 Examples for **diversity** indexes are:
 
 - **Shannons** index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community ({% cite Shannon.1948 %}).
-- 
+
    $$ H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>) $$
     
    pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.                                                                                                                                          
 - **Berger-Parker** index, which expresses the proportional importance of the most abundant type. Highly biased by sample size and richness ({% cite Berger.1970 %} ).
-- 
+
    $$ D = n<sub>max</sub>/N $$
   
    <sub>max</sub> is the abundance of the most dominant species, and N is the total number of individuals (sum of all abundances).                                                                                                                 | |
 - **Simpsons** index, which calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity ({% cite SIMPSON.1949 %}).
-- 
+
   $$ D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup> $$
   
    ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.
                                                                     
 - **Inverse Simpons** index, which is the transformation of Simpsons index that increases with increasing diversity.                                                              
 - **Fishers alpha** index, which describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a log series distribution ({% cite Fisher.1943 %}).
- 
-  $$ S\=a\*ln(1+n/a) $$
+
+   $$ S\=a\*ln(1+n/a) $$
                                                                
    S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                     
 
