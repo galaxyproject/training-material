@@ -185,7 +185,7 @@ VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
 2. Genotype?
 ```r
 VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
- ```
+```
 ![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
