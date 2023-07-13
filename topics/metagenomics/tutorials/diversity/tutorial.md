@@ -46,7 +46,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
-    ![α, β and γ diversity](../images/diversity_differences.png "α, β and γ diversity")
+    ![α, β and γ diversity](./images/diversity_differences.png)
 
 In this analysis we will use Galaxy for calculating the Shannon's alpha diversity index and the Bray-Curtis dissimilarity index for β diversity. 
 
