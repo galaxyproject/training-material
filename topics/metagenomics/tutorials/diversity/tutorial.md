@@ -370,6 +370,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
  
 
 >![Parameter q](./images/hill_numbers.png)
+>https://www.redalyc.org/journal/5117/511766773011/html/
 
 {: .details}
 
