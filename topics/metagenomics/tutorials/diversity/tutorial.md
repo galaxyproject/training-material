@@ -84,6 +84,14 @@ Having a closer look at the Bracken output file, you find a table with seven col
  6.  sum of column 4 and column 5
  7. fraction of the reads assigned to the particular species and the total reads
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Prepare Galaxy and data
 
