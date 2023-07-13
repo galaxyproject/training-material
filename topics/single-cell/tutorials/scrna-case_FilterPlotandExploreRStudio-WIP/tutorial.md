@@ -121,17 +121,17 @@ srt<-CreateSeuratObject(counts = matrix.mtx)
  Now that we have an object, we can add in our metadata from our experimental design dataframe (table). This will be useful to us shortly as we begin to visualize our data!
  
 ```r
-srt@meta.data$Sex<-exp_design.tsv$Sample.Characteristic.sex.
-srt@meta.data$Organism<-exp_design.tsv$Sample.Characteristic.organism.
-srt@meta.data$Strain<-exp_design.tsv$Sample.Characteristic.strain.
-srt@meta.data$Developmental.Stage<-exp_design.tsv$Sample.Characteristic.developmental.stage.
-srt@meta.data$Age<-exp_design.tsv$Sample.Characteristic.age.
-srt@meta.data$Individual<-exp_design.tsv$Sample.Characteristic.individual.
-srt@meta.data$Disease<-exp_design.tsv$Sample.Characteristic.disease.
-srt@meta.data$Genotype<-exp_design.tsv$Sample.Characteristic.genotype.
-srt@meta.data$Organism.Part<-exp_design.tsv$Sample.Characteristic.organism.part.
-srt@meta.data$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
-srt@meta.data$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
+srt$Sex<-exp_design.tsv$Sample.Characteristic.sex.
+srt$Organism<-exp_design.tsv$Sample.Characteristic.organism.
+srt$Strain<-exp_design.tsv$Sample.Characteristic.strain.
+srt$Developmental.Stage<-exp_design.tsv$Sample.Characteristic.developmental.stage.
+srt$Age<-exp_design.tsv$Sample.Characteristic.age.
+srt$Individual<-exp_design.tsv$Sample.Characteristic.individual.
+srt$Disease<-exp_design.tsv$Sample.Characteristic.disease.
+srt$Genotype<-exp_design.tsv$Sample.Characteristic.genotype.
+srt$Organism.Part<-exp_design.tsv$Sample.Characteristic.organism.part.
+srt$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
+srt$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 ```
 
 The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
