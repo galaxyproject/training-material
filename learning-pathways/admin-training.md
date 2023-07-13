@@ -1,6 +1,7 @@
 ---
 layout: learning-pathway
 title: Admin Training Course
+type: admin-dev
 description: |
   Learn how to setup, configure, and maintain your own Galaxy server. This learning pathway
   will guide you through all the steps required to setup your own Galaxy server with Ansible,
