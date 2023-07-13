@@ -1,0 +1,193 @@
+---
+layout: page
+title: Your Preferences
+---
+
+## Colour Scheme
+
+We have attempted to decompose our themes into several axes depending on your accessibility needs:
+
+<select class="form-control theme-control" id="brightness" onchange="savePrefs()">
+	<option value="auto">Auto</option>
+	<option value="light">Light</option>
+	<option value="dark">Dark</option>
+</select>
+
+
+### Preferred Light Theme
+
+<select class="form-control theme-control" id="light_theme" onchange="savePrefs()">
+	<option value="white">White</option>
+	<option value="yellow">Paper</option>
+</select>
+
+### Preferred Dark Theme
+
+<select class="form-control theme-control" id="dark_theme" onchange="savePrefs()">
+	<option value="night">Night</option>
+	<option value="midnight">Midnight</option>
+</select>
+
+### UI Contrast
+
+<select class="form-control theme-control" id="contrast" onchange="savePrefs()">
+	<option value="low">Low</option>
+	<option value="standard">Standard</option>
+	<option value="high">High</option>
+</select>
+
+
+### UI Theme
+
+<select class="form-control theme-control" id="theme" onchange="savePrefs()">
+	<option value="default">Default</option>
+	<option value="rainbow">🌈</option>
+	<option value="blm">✊🏿</option>
+	<option value="halloween">🎃</option>
+	<option value="progress">🏳️‍🌈</option>
+	<option value="trans">🏳️‍⚧️ </option>
+	<option value="straya">🇦🇺</option>
+</select>
+
+
+<script>
+function savePrefs() {
+	// Convert this into a hash
+	var prefs = {};
+	[...document.querySelectorAll(".theme-control")]
+		.map(x => { return [x.id, x.value]})
+		.forEach(x => { prefs[x[0]] = x[1] })
+	gtnLocalSet('theme2', JSON.stringify(prefs))
+	processTheme2();
+}
+
+function restorePrefs(){
+	var prefs = JSON.parse(gtnLocalGet("theme2")) || {};
+	Object.keys(prefs).forEach(k => {
+		document.getElementById(k).value = prefs[k]
+	})
+	processTheme2();
+}
+restorePrefs();
+</script>
+
+## Data Privacy
+
+We collect the following information on visitors:
+
+- Device information
+- Location (country granularity)
+- Page visited
+
+We do not have information correlating visits across pages, we cannot identify
+if you visit one page, or many pages in a single visit.
+
+You can see the aggregate collected information in
+[Plausible](https://plausible.galaxyproject.eu/training.galaxyproject.org/). 
+
+**We do not have access to more granular data.**
+
+However, if you wish you may opt out of these aggregate statistics.
+
+> > <code-in-title>What you provide</code-in-title>
+> > - Device information
+> > - Location (country granularity)
+> > - Page visited
+> {: .code-in}
+> 
+> > <code-out-title>How we use it</code-out-title>
+> > - Helps us request Grant Funding
+> > - Helps us know who is using our tutorials
+> > - Makes authors happy to know people love their tutorial!
+> {: .code-out}
+{: .code-2col}
+
+Opt out from plausible:
+<select class="form-control privacy-control" id="plausible-opt-out" onchange="savePrivacy()">
+	<option value="opt-in">Opt-in</option>
+	<option value="opt-out">Opt-out</option>
+</select>
+
+### Sentry
+
+When something breaks on the GTN in the UI, we collect information about how that happened to help our developers fix problems within the GTN.
+
+> > <code-in-title>What you provide</code-in-title>
+> > - Device information
+> > - Page
+> > - Stack trace
+> > - GTN Javascript variables
+> {: .code-in}
+> 
+> > <code-out-title>How we use it</code-out-title>
+> > - Fixing JavaScript Bugs
+> > - Especially from unusual platforms which we cannot test on.
+> {: .code-out}
+{: .code-2col}
+
+Opt out from sentry:
+<select class="form-control privacy-control" id="sentry-opt-out" onchange="savePrivacy()">
+	<option value="opt-in">Opt-in</option>
+	<option value="opt-out">Opt-out</option>
+</select>
+
+
+<script>
+function savePrivacy() {
+	gtnLocalSet('sentry-opt-out', document.getElementById("sentry-opt-out").value)
+	gtnLocalSet('plausible-opt-out', document.getElementById("plausible-opt-out").value)
+}
+// restore from prefs
+document.getElementById("sentry-opt-out").value = gtnLocalGet("sentry-opt-out") || "opt-in";
+document.getElementById("plausible-opt-out").value = gtnLocalGet("plausible-opt-out") || "opt-in";
+</script>
+
+## Settings
+
+Here we expose the several types of data storage that browsers offer, so you can easily see what data this website creates and uses:
+
+### LocalStorage
+
+This data is never transferred to the server
+
+<table id="settings-data">
+</table>
+
+<script>
+let gtnSettingsKeys = Object.keys(window.localStorage);
+gtnSettingsKeys.sort()
+gtnSettingsKeys.forEach(k => {
+	// Add a row to the table with this key/value
+	var tr = document.createElement("tr");
+	var td = document.createElement("td");
+	td.innerHTML = `<code>${k}</code>`;
+	tr.appendChild(td);
+	var td = document.createElement("td");
+	td.innerHTML = `<code>${window.localStorage[k]}</code>`;
+	tr.appendChild(td);
+	document.getElementById("settings-data").appendChild(tr);
+})
+</script>
+
+### SessionStorage
+
+This data is never transferred to the server, and is deleted when your browser window closes.
+
+<table id="session-data">
+</table>
+
+<script>
+let gtnSessionKeys = Object.keys(window.sessionStorage);
+gtnSessionKeys.sort()
+gtnSessionKeys.forEach(k => {
+	// Add a row to the table with this key/value
+	var tr = document.createElement("tr");
+	var td = document.createElement("td");
+	td.innerHTML = `<code>${k}</code>`;
+	tr.appendChild(td);
+	var td = document.createElement("td");
+	td.innerHTML = `<code>${window.localStorage[k]}</code>`;
+	tr.appendChild(td);
+	document.getElementById("session-data").appendChild(tr);
+})
+</script>
