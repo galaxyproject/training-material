@@ -75,7 +75,6 @@ gx_get(1)  #get the file path for matrix.mtx  Galaxy history
 Now we have the file path! We can use the Matrix package to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
 
 ```r
-library(Matrix)
 matrix.mtx<-readMM("/import/1") 
 ```
 Now we will do the same thing with the feature, barcode, and experimental design files. Don't try to skip ahead and fill in the position of the dataset, reading in the files will not work without having used the gx_get() function. 
@@ -113,7 +112,6 @@ Now we will create a Seurat object using our newly labelled counts matrix! Make 
 
 
 ```r
-library(Seurat)
 srt<-CreateSeuratObject(counts = matrix.mtx)
 ```
 
@@ -447,7 +445,6 @@ It would be nice to know what these cells are. This analysis (googling all of th
 We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 
 ```r
-library(dplyr)
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
   seurat_clusters %in% c(3) ~ "Double negative (early T-cell)", 
   seurat_clusters %in% c(1, 2, 4, 6) ~ " Double positive (middle T-cell)",
