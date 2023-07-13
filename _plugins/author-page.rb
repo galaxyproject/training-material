@@ -103,9 +103,13 @@ module Jekyll
         page2.data['news_count'] = news_by_author[contributor].length
         page2.data['learning_pathways_count'] = learning_pathways_by_author[contributor].length
 
-        page2.data['editors'] = TopicFilter.enumerate_topics(site).select {|t| t.fetch('editorial_board', []).include?(contributor) }
+        page2.data['editors'] = TopicFilter.enumerate_topics(site).select do |t|
+          t.fetch('editorial_board', []).include?(contributor)
+        end
         # Also their learning pathways
-        page2.data['editors'] += site.pages.select {|t| t['layout'] == 'learning-pathway' && t.data.fetch('editorial_board', []).include?(contributor) }
+        page2.data['editors'] += site.pages.select do |t|
+          t['layout'] == 'learning-pathway' && t.data.fetch('editorial_board', []).include?(contributor)
+        end
         page2.data['editor_count'] = page2.data['editors'].length
 
         page2.data['has_philosophy'] = has_philosophy[contributor]
