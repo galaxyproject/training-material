@@ -1,6 +1,8 @@
 ---
 layout: learning-pathway  # (uncomment this line to activate it)
 type: use
+cover-image: assets/images/microgalaxy-logo.png
+cover-image-alt: "microgalaxy logo"
 
 maintainers:
 - bebatut
