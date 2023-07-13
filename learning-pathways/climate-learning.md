@@ -10,7 +10,7 @@ tags: [Climate, Overview]
 pathway:
   - section: "Following 3 climate tutorials"
     description: |
-      During this session you will first learn about the galaxy interface and how to use batch tools. Then, you'll be able to run throug a jupyter notebook launch from Galaxy. Finally, you will conduct a climate analysis on a desktop application with Panoply.
+      During this session you will first learn about the galaxy interface and how to use batch tools. Then, you'll be able to run through a jupyter notebook launch from Galaxy. Finally, you will conduct a climate analysis on a desktop application with Panoply.
     tutorials:
       - name: pangeo
         topic: climate
@@ -21,6 +21,6 @@ pathway:
 
 ---
 
-This can be done in less than 3h. You be really complete you can than create a workflow from the history of your 1st tutorial and show how workflows work.
+This can be done in less than 3h. To be really complete you can then create a workflow from the history of your 1st tutorial and show how workflows work.
 
 
