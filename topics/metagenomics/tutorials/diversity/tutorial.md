@@ -47,6 +47,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
     ![α, β and γ diversity](./images/diversity_differences.png)
+  
 
 In this analysis we will use Galaxy for calculating the Shannon's alpha diversity index and the Bray-Curtis dissimilarity index for β diversity. 
 
@@ -135,16 +136,22 @@ We need now to import the data
 
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
+![α diversity](./images/alphadiversity_metrics.png)
+
 Metrics of alpha diversity can be grouped into different classes:
 - **richness** indexes that estimate the quantity of distinct species within a sample
 - **evenness** indexes that evaluate the relative abundances of species rather than their total count
 - **diversity** indexes that incorporate both the relative abundances and total count of distinct species
 
+  ![richness and evenness](./images/alpha_diversity_richness_evenness.png)
+
+  
+
 In the table below you can find a list of commonly used indexes to calculate α diversity and their description.
 
-![α diversity](./images/alphadiversity_metrics.png)
 
-![richness and evenness](./images/alpha_diversity_richness_evenness.png)
+
+
 
 > [name=sophia-h]I know we said to add the mathematical description into the same table but I feel like it becomes a bit too crowded so I made a detail box with the formulations and citations... what do you think?
 > [name=Bérénice Batut] Maybe it will renders ok in the tutorial. Can you put both and we decide later? For the one in the detail box, please use the same order for the rows. You use the term *class* but you did not introduce it first
