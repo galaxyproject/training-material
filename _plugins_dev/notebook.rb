@@ -1,3 +1,11 @@
+def jupyter_pre_render(site)
+  nil
+end
+
+def jupyter_post_write(site)
+  nil
+end
+
 module Jekyll
   class RmarkdownGenerator < Generator
     def generate(site)

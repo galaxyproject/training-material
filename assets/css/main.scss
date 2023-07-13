@@ -65,19 +65,95 @@ $tutorial-box-spacing: 1rem;
 	// A11y
 	--outline-color: red;
 
-
 	--h1-theme-before: "";
 	--h1-theme-after: "";
 	--h2-theme-before: "";
 	--h2-theme-after: "";
+
+	--border: #888;
 }
+
+body[data-brightness="light"][data-light_theme="yellow"] {
+	--color-background: #ffe;
+	--text-color: #111;
+}
+
+
+body[data-brightness="dark"] {
+	--color-background: #000;
+	--color-foreground: #fff;
+	--text-color: #fff;
+	--border: #aaa;
+	--hyperlink-hover: #fff;
+	--hyperlink: #7bf;
+}
+
+body[data-brightness="dark"][data-dark_theme="night"] {
+	--color-background: #444;
+	--text-color: #ccc;
+	--text-color-muted: #aaa;
+}
+
+// High Contrast
+body[data-contrast="high"] {
+	--border: #000;
+	--text-color-muted: var(--text-color) !important;
+}
+body[data-contrast="high"][data-brightness="dark"]  {
+	--border: #fff;
+}
+
+// Low Contrast
+body[data-contrast="low"] {
+	--border: #ddd;
+}
+
+body[data-contrast="low"][data-brightness="dark"]  {
+	--border: #333;
+}
+
+// TODO: move into JS and 'override' the theme there so we don't have to do this nonsense.
+// @media (prefers-color-scheme: dark) {
+// 	body[data-brightness="auto"] {
+// 		--color-background: #000;
+// 		--text-color: #fff;
+// 	}
+//
+// 	body[data-contrast="high"][data-brightness="auto"] {
+// 		--border: #000;
+// 	}
+//
+// 	body[data-contrast="low"][data-brightness="auto"] {
+// 		--border: #ddd;
+// 	}
+// }
+
+select {
+	// .form-control is more specific than select
+	border: 1px solid var(--border) !important;
+	background: var(--color-background) !important;
+	color: var(--text-color) !important;
+}
+
+hr {
+	border-top: 1px solid var(--border) !important;
+}
+
+.table thead th {
+  border-top: 2px solid var(--border) !important;
+  border-bottom: 2px solid var(--border) !important;
+}
+.table td, .table th {
+  border-top: 1px solid var(--border) !important;
+}
+
 
 /* SLIDES */
 @import "./slides.scss";
 /* SYNTAX */
 @import "./syntax_highlighting.scss";
 /* THEMES */
-@import "./themes.scss";
+// @import "./themes.scss";
 
 /* Other CSS libraries we use */
 // If you use .css (i.e. from the file extension) it will use a CSS import

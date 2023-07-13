@@ -62,6 +62,43 @@ if(training_theme_cookie){
 	setTheme(training_theme_cookie, false);
 }
 
+// Theme2
+function processTheme2(){
+	// MediaQueryList
+	const darkModePreference = window.matchMedia("(prefers-color-scheme: dark)");
+	if (darkModePreference.matches) {
+		document.body.dataset.brightness = 'dark';
+	} else {
+		document.body.dataset.brightness = 'light';
+	}
+
+	// recommended method for newer browsers: specify event-type as first argument
+	darkModePreference.addEventListener("change", e => {
+		console.log(e.matches);
+		if (e.matches) {
+			document.body.dataset.brightness = 'dark';
+		} else {
+			document.body.dataset.brightness = 'light';
+		}
+	});
+
+	// Do this last so it overrides the above
+	if (gtnLocalGet('theme2') !== null){
+		var prefs = JSON.parse(gtnLocalGet('theme2'));
+		console.log("prefs", prefs);
+		Object.keys(prefs).forEach(function(key) {
+			if (key === "brightness" && prefs[key] === "auto"){
+				return;
+			}
+			document.body.dataset[key] = prefs[key];
+		})
+	}
+
+}
+processTheme2();
+
+
+
 // However we have some additional things:
 var gtnThemeCurrentDate = new Date();
 var gtnThemeCurrentMonth = gtnThemeCurrentDate.getMonth();
