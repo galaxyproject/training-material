@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@66545cdb34ad18dee1d1e63811824bc9a1ba327f",
+  release: "galaxy-training-network@dca839d07019082ae3335eab97a7b614e0ccb453",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689233335' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689233335' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689241336' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689241336' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-07-03 15:49:13 +0000">
+<meta name="DC.date" content="2023-07-13 09:07:22 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Engy Nasr">
 
@@ -94,7 +94,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-07-03 15:49:13 +0000",
+  "dateModified": "2023-07-13 09:07:22 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition",
   "interactivityType": "mixed",
@@ -266,7 +266,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1689233335'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689241336'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -697,7 +697,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 3, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -2319,9 +2319,21 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
         <div class="box-title hands-on-title" id="hands-on-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Heatmap</div>
 
         <ol>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Collapse Collection tool" aria-role="link"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions</code> collection output of <strong>cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the <strong>Gene based Pathogentic Identification</strong> section</li>
+              <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0" title="Add line to file tool" aria-role="link"><strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions</code> output from <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“text to add”</em>: <code class="language-plaintext highlighter-rouge">All_VFs</code></li>
+            </ul>
+          </li>
           <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1" title="Multi-Join tool" aria-role="link"><strong>Multi-Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1</span></span> with the following parameters:
             <ul>
-              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to join”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions</code> collection output of <strong>cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the <strong>Gene based Pathogentic Identification</strong> section</li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to join”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions</code> output from <strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“add additional file”</em>: <code class="language-plaintext highlighter-rouge">VFs accessions with SampleID</code> collection output of <strong>Add line to file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from the <strong>Gene based Pathogentic Identification</strong> section</li>
               <li><em>“Common key column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
               <li><em>“Column with values to preserve”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
@@ -2337,16 +2349,23 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
                 <ul>
                   <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
                     <ul>
-                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^[^0]\w+</code></li>
-                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">dataset_(.*?)_</code></li>
+                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">Sample_</code></li>
                       <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Ignore first line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
+                    </ul>
+                  </li>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
+                    <ul>
+                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(\S+)</code></li>
+                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">Acc_$1</code></li>
+                      <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Case-Insensitive search”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       <li><em>“Ignore first line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">specific column</code>
-                        <ul>
-                          <li><em>“in column</em>”: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
-                        </ul>
-                      </li>
+                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
                     </ul>
                   </li>
                 </ul>
@@ -2360,20 +2379,62 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
                 <ul>
                   <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
                     <ul>
-                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^[^0]\w+</code></li>
-                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-                      <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Acc_0</code></li>
+                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                      <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                      <li><em>“Case-Insensitive search”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       <li><em>“Ignore first line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">specific column</code>
-                        <ul>
-                          <li><em>“in column</em>”: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
-                        </ul>
-                      </li>
+                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
                     </ul>
                   </li>
                 </ul>
               </li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Replace tool" aria-role="link"><strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li>In <em>“Find and Replace”</em>:
+                <ul>
+                  <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Find and Replace”</em>
+                    <ul>
+                      <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">Acc_\S*</code></li>
+                      <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                      <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Ignore first line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                      <li><em>“Case-Insensitive search”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                      <li><em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="link"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: output of <strong>Multi-Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“Operation”</em>:<code class="language-plaintext highlighter-rouge">Keep</code></li>
+              <li><em>“Delimited by”</em>:<code class="language-plaintext highlighter-rouge">Tab</code></li>
+              <li><em>“Cut by”</em>:<code class="language-plaintext highlighter-rouge">fields</code></li>
+              <li><em>“List of Fields”</em>:<code class="language-plaintext highlighter-rouge">1</code></li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced Cut tool" aria-role="link"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: output of the last <strong>Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“Operation”</em>:<code class="language-plaintext highlighter-rouge">Discard</code></li>
+              <li><em>“Delimited by”</em>:<code class="language-plaintext highlighter-rouge">Tab</code></li>
+              <li><em>“Cut by”</em>:<code class="language-plaintext highlighter-rouge">fields</code></li>
+              <li><em>“List of Fields”</em>:<code class="language-plaintext highlighter-rouge">1,2</code></li>
+            </ul>
+          </li>
+          <li><span class="tool" data-tool="Paste1" title="Paste tool" aria-role="link"><strong>Paste</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Paste1</span></span> with the following parameters:
+            <ul>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Paste”</em>: output of <strong>Advanced Cut</strong> (Tool N. 7) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“and”</em>: output of <strong>Advanced Cut</strong> (Tool N. 8) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“Delimit by”</em>:<code class="language-plaintext highlighter-rouge">Tab</code></li>
             </ul>
           </li>
         </ol>
@@ -2981,7 +3042,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/66545cdb34ad18dee1d1e63811824bc9a1ba327f">66545cd</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/dca839d07019082ae3335eab97a7b614e0ccb453">dca839d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3013,7 +3074,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1689233335'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1689241336'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
