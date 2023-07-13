@@ -134,9 +134,9 @@ Metrics of alpha diversity can be grouped into different classes:
 
 In the table below you can find a list of commonly used indexes to calculate α diversity and their description.
 
-![α diversity](../images/alphadiversity_metrics.png "α diversity")
+![α diversity](./images/alphadiversity_metrics.png)
 
-![richness and evenness](../images/alpha_diversity_richness_evenness.png "richness and evenness")
+![richness and evenness](./images/alpha_diversity_richness_evenness.png)
 
 > [name=sophia-h]I know we said to add the mathematical description into the same table but I feel like it becomes a bit too crowded so I made a detail box with the formulations and citations... what do you think?
 > [name=Bérénice Batut] Maybe it will renders ok in the tutorial. Can you put both and we decide later? For the one in the detail box, please use the same order for the rows. You use the term *class* but you did not introduce it first
@@ -307,7 +307,7 @@ These indexes have been developed to address specific research questions, accomm
 | Kulczynski Dissimilarity  | D = 1 - (S<sub>AB</sub> / (S<sub>A</sub> + S<sub>B</sub> - 2S<sub>AB</sub>)) | S<sub>AB</sub> the number of shared OTUs between communities A and B, S<sub>A</sub> the number of OTUs in community A, and S<sub>B</sub> the number of OTUs in community B                                                                                                                                      |
 
 
-![UniFrac](../images/unifrac.png "UniFrac")
+![UniFrac](./images/unifrac.png)
 
 
 {: .details}
@@ -369,7 +369,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 
  
 
->![Parameter q](../images/hill_numbers "UniFrac")
+>![Parameter q](./images/hill_numbers)
 
 {: .details}
 
