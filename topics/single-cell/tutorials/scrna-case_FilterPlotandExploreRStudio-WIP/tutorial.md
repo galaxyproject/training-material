@@ -316,6 +316,7 @@ To visualize how our principal components (PCs) represent our data, let's create
 ```r
 ElbowPlot(filtered_srt, ndims = 50)
 ```
+![PC Elbow Plot](../../images/scrna-SeuratRStudio/plot9.png "Elbow Plot: Varianvce Explained x PC.")
 
 We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs. 
 
@@ -357,12 +358,14 @@ Now that we have run dimensionality reduction on our dataset, it is ready for vi
 ```r
 DimPlot(filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE)+ NoLegend()
 ```
+![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
 We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting a quick and initial understanding of which clusters might be representing which cell types.
 
 ```r
 FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 ```
+![FeaturePlot: Gapdh](../../images/scrna-SeuratRStudio/plot11.png "FeaturePlot: Gapdh")
 
 We just plotted a housekeeping gene, Gapdh, so the broad expression is expected. 
 
@@ -373,6 +376,7 @@ For example, we can plot macrophage marker Aif1 and get an idea of which cells a
 ```r
 FeaturePlot(filtered_srt, features = "Aif1", order = TRUE)
 ```
+![FeaturePlot: Aif1](../../images/scrna-SeuratRStudio/plot12.png "FeaturePlot: Aif1")
 
 It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters. 
 
@@ -425,11 +429,12 @@ This same test of differential expression can be run using any identity class an
 # Biological Interpretations
 Now it’s the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it’s really about what information you want to get from your data - the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward with for your own data. Let us start interrogating our data!
 
-Let's take a look at what our clusters look like: 
+Let's take another look at what our clusters look like: 
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
 ```
+![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
 Note that Seurat's cluster numbering is based on size alone - clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
 
