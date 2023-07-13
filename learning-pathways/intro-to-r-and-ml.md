@@ -1,6 +1,7 @@
 ---
 layout: learning-pathway
 tags: [beginner]
+type: use
 
 maintainers:
 - fpsom
