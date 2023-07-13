@@ -331,16 +331,14 @@ These indexes have been developed to address specific research questions, accomm
 
 
 ## Hands on: Calculate β diversity with Krakentools
-> 
+
 > <hands-on-title>Calculate α and β diversity with Krakentools</hands-on-title>
->
->
->  {% tool [Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)]([https://toolshed.g2.bx.psu.edu/view/iuc/krakentools_beta_diversity/b33f117e9b67]) %} with the following parameters:
->     - *"Taxonomy file"*: `Dataset Collection`: uploaded Bracken output file
->      
->    - *"Specify type of input file"*: `Bracken species abundance file`
+> 1. {% tool [Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)]([https://toolshed.g2.bx.psu.edu/view/iuc/krakentools_beta_diversity/b33f117e9b67]) %} with the following parameters:
+>   - *"Taxonomy file"*: `Dataset Collection`: uploaded Bracken output file 
+>   - *"Specify type of input file"*: `Bracken species abundance file`
 >    
 {: .hands_on}
+
 
 > <question-title></question-title>
 >
