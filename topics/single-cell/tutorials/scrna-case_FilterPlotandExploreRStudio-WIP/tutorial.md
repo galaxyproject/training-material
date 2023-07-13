@@ -447,6 +447,8 @@ It would be nice to know what these cells are. This analysis (googling all of th
 | 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
 | 5        | Itm2a                   | Mature T-cell                       |
 
+Feel free the plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annnotations. 
+
 We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 
 ```r
@@ -462,6 +464,8 @@ Once we have labelled our clusters, we can visualize what our cell types actuall
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
 ```
+![DimPlot colored by labelled celltype](../../images/scrna-SeuratRStudio/plot13.png "DimPlot colored by assigned cell type")
+
 Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some realy biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!
 
 Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" argument in Seurat's plot functions.  
@@ -469,6 +473,7 @@ Are there any differences in genotype? Or in biological terms, is there an impac
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.by = "Genotype")
 ```
+![DimPlot colored by labelled celltype split by genotype](../../images/scrna-SeuratRStudio/plot14.png "DimPlot colored by assigned cell typesplit by genotype")
 
 We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
@@ -480,6 +485,7 @@ First thing's first, is there a batch effect?
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
 ```
+![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-SeuratRStudio/plot15.png "DimPlot colored by assigned cell types split by individual/batch")
 
 While some differences across batch are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
 
@@ -488,14 +494,19 @@ Additionally, we will also look at the confounding effect of sex:
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individual", "Genotype"))
 ```
+![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-SeuratRStudio/plot16.png "DimPlot colored by Sex, Individual, and Genotype")
+
+
 We note that the one female sample - unfortunately one of mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
 
 Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 
 ```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "nCount_SCT")
+FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT")
 ```
+![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot17.png "FeaturePlot colored by counts")
+
 
 Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
 
