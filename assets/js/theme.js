@@ -26,12 +26,17 @@ function getThemePreference(){
 	if(paramTheme){
 		setThemePreference(paramTheme, false);
 	}
-	return gtnLocalGet('training-theme');
+	return JSON.parse(gtnLocalGet('theme2')).theme;
 }
 
 
 function setThemePreference(newValue, automatic) {
-	gtnLocalSet('training-theme', newValue);
+	var tmpprefs = JSON.parse(gtnLocalGet('theme2'));
+	if (tmpprefs === null){
+		tmpprefs = {};
+	}
+	tmpprefs['theme'] = newValue;
+	gtnLocalSet('theme2', JSON.stringify(tmpprefs));
 
 	// If this setTheme call was triggered "automatically", not by user choice, mark it as such
 	if(automatic === true){
@@ -60,6 +65,12 @@ training_theme_cookie = getThemePreference()
 if(training_theme_cookie){
 	// Then restore the theme to what's in the URL/preference.
 	setTheme(training_theme_cookie, false);
+	var prefs = JSON.parse(gtnLocalGet('theme2'));
+	if (prefs === null){
+		prefs = {};
+	}
+	prefs['theme'] = training_theme_cookie;
+	gtnLocalSet('theme2', JSON.stringify(prefs));
 }
 
 // Theme2
