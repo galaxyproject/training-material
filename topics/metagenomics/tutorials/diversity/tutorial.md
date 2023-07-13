@@ -72,7 +72,7 @@ Here, to get an overview, you can find a Krona chart visualizing the different s
 
 The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.
 
-![Output file of Bracken](../images/bracken_output.png "Output file of Bracken")
+![Output file of Bracken](./images/bracken_output.png)
 
 Having a closer look at the Bracken output file, you find a table with seven columns:
 
@@ -369,7 +369,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 
  
 
->![Parameter q](./images/hill_numbers)
+>![Parameter q](./images/hill_numbers.png)
 
 {: .details}
 
