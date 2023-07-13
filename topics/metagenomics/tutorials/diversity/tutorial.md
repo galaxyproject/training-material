@@ -119,7 +119,6 @@ We need now to import the data
 >    ```text
 >    {{ page.zenodo_link }}/files/xxx
 >    {{ page.zenodo_link }}/files/xxx
-
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -237,18 +236,17 @@ Examples for **diversity** indexes are:
 > >  When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
 > >
 > > 
-> > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.
->                                                                     
+> > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.                                                                   
 > {: .solution}
 >
 {: .question}
 
 
 > <comment-title></comment-title>
-
+>
 > Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and Vegan.
-
-
+>
+>
 > QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.
 > 
 > Some of the key features and functionalities of QIIME 2 include:
@@ -271,7 +269,7 @@ Examples for **diversity** indexes are:
 > 5. Ecological Network Analysis: vegan provides functions for analyzing ecological networks, including network visualization, calculation of network metrics (e.g., connectance, centrality), and testing network structure.
 > 6. Ecological Indices: The package includes various ecological indices, such as niche overlap indices, indicator species analysis, and null model analysis for testing community patterns against null hypotheses.
 > 7. Plotting and Visualization: vegan offers flexible plotting functions to visualize ecological data, including bar plots, scatter plots, biplots, and ordination plots.
-
+>
 {: .comment}
 
 # Calculating β diversity 
@@ -363,7 +361,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 >
 > ![Parameter q](./images/hill_numbers.png)
 > https://www.redalyc.org/journal/5117/511766773011/html/
-
+> 
 {: .details}
 
 
