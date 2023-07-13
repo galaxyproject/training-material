@@ -143,7 +143,7 @@ Metrics of alpha diversity can be grouped into different classes:
 - **evenness** indexes that evaluate the relative abundances of species rather than their total count
 - **diversity** indexes that incorporate both the relative abundances and total count of distinct species
 
-  ![richness and evenness](./images/alpha_diversity_richness_evenness.png)
+![richness and evenness](./images/alpha_diversity_richness_evenness.png)
 
 
 Examples for **richness** indexes are:
@@ -193,18 +193,17 @@ Examples for **diversity** indexes are:
                                                                
    S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                     
 
-
-
-
-Krakentools introduction + metrics available there
+**KrakenTools** is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool **Calculate alpha diversity** offers the possibility to calculate five different alpha diversity indexes:
+1. Shannon's alpha diversity
+2. Berger Parker's alpha
+3. Simpson's diversity
+4. Inverse Simpson's diversity
+5. Fisher's index
 
 > <hands-on-title>Calculate α diversity with Krakentools</hands-on-title>
->
 > 1. {% tool [Krakentools: Calculate alpha diversity]([toolshed.g2.bx.psu.edu/view/iuc/krakentools_alpha_diversity/9d0330e23bfd)) %} with the following parameters:
 >    - *"Abundance file"*: `Dataset Collection`: uploaded Bracken output file
->      
 >    - *"Specify alpha diversity type"*: `Shannon's alpha diversity`
->
 >
 {: .hands_on}
 
@@ -236,15 +235,10 @@ Krakentools introduction + metrics available there
 > >  When the **Simpson's index** is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
 > >  
 > >  When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
-> >  
-> [name=sophia-h]How can I implement a table in the question solution box?
-> [name=Bérénice Batut] As you did, you just need to add `> ` before each line. Look at other tutorials for examples
-> Maybe better here to put the explanations outside the table
-> 
-> [name=sophia-h] Here are the Fisher's alpha values that I don't understand
-> 
+> >
+> > 
 > > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.
->                                                                      |>
+>                                                                     
 > {: .solution}
 >
 {: .question}
@@ -252,7 +246,7 @@ Krakentools introduction + metrics available there
 
 > <comment-title></comment-title>
 
->Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and Vegan.
+> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and Vegan.
 
 
 > QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.
@@ -393,7 +387,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 > Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
 The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
 >
-> Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α),
+> $$ Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α) $$
 >
 > where P = {p₁, p₂, ..., pN} is the probability distribution of N discrete events or states, and pi represents the probability of the ith event.
 >
