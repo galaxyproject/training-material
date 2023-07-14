@@ -1,5 +1,8 @@
 ---
 layout: learning-pathway  # (uncomment this line to activate it)
+type: use
+cover-image: assets/images/microgalaxy-logo.png
+cover-image-alt: "microgalaxy logo"
 
 maintainers:
 - bebatut
@@ -54,7 +57,7 @@ pathway:
     description: |
         This module covers the following questions:
         - Which species (or genera, families, ...) are present in my sample?
-        - What are the different approaches and tools to get the community profile of my sample? 
+        - What are the different approaches and tools to get the community profile of my sample?
         - How can we visualize and compare community profiles?
 
         This module will cover taxonomic profiling in theory and also with an example tutorial.
@@ -67,15 +70,15 @@ pathway:
         #description: Application tutorial
 
   #- section: "Module 6: Taxonomic binning"
-  #  description: 
+  #  description:
   #
   #  tutorials:
   #    - name: learner_participation_engagement
   #      topic: metagenomics
 
-  
+
   #- section: "Module 7: Community Biodiversity"
-  #  description: 
+  #  description:
   #
   #  tutorials:
   #    - name: learner_participation_engagement

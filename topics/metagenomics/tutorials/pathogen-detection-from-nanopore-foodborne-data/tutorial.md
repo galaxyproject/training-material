@@ -1083,37 +1083,76 @@ We use **Heatmap w ggplot** tool along with other tabular manipulating tools to 
 
     > <hands-on-title> Heatmap </hands-on-title>
     >
-    > 1. {% tool [Multi-Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1) %} with the following parameters:
-    >    - {% icon param-file %} *"File to join"*: `VFs accessions` collection output of **cut** {% icon tool %} from the **Gene based Pathogentic Identification** section
+    > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+    >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `VFs accessions` collection output of **cut** {% icon tool %} from the **Gene based Pathogentic Identification** section
+    >    - *"Prepend File name"*: `No`
+    > 2. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"input file"*: `VFs accessions` output from **Collapse Collection** {% icon tool %}
+    >    - *"text to add"*: `All_VFs`
+    > 3. {% tool [Multi-Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_multijoin_tool/1.1.1) %} with the following parameters:
+    >    - {% icon param-file %} *"File to join"*: `VFs accessions` output from **Add line to file** {% icon tool %}
     >    - {% icon param-file %} *"add additional file"*: `VFs accessions with SampleID` collection output of **Add line to file** {% icon tool %} from the **Gene based Pathogentic Identification** section
     >    - *"Common key column"*: `1`
     >    - *"Column with values to preserve"*: `Column: 1`
     >    - *"Add header line to the output file"*: `Yes`
     >    - *"Input files contain a header line (as first line)"*: `Yes`
     >    - *"Ignore duplicated keys"*: `Yes`
-    >
-    > 2. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    > 4. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
     >    - {% icon param-file %} *"File to process"*: output of **Multi-Join** {% icon tool %}
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
-    >            - *"Find pattern"*: `^[^0]\w+`
-    >            - *"Replace with"*: `1`
+    >            - *"Find pattern"*: `dataset_(.*?)_`
+    >            - *"Replace with"*: `Sample_`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
+    >            - *"Ignore first line"*: `No`
+    >            - *"Find and Replace text in"*: `entire line`
+    >        - {% icon param-repeat %} *"Insert Find and Replace"*
+    >            - *"Find pattern"*: `(\S+)`
+    >            - *"Replace with"*: `Acc_$1`
+    >            - *"Find-Pattern is a regular expression"*: `Yes`
+    >            - *"Case-Insensitive search"*: `Yes`
+    >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Ignore first line"*: `Yes`
-    >            - *"Find and Replace text in"*: `specific column`
-    >              - *"in column*": `Column: 2`
-    > 3. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    >            - *"Find and Replace text in"*: `entire line`
+    > 5. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
     >    - {% icon param-file %} *"File to process"*: output of **Replace** {% icon tool %}
     >    - In *"Find and Replace"*:
     >        - {% icon param-repeat %} *"Insert Find and Replace"*
-    >            - *"Find pattern"*: `^[^0]\w+`
+    >            - *"Find pattern"*: `Acc_0`
+    >            - *"Replace with"*: `0`
+    >            - *"Find-Pattern is a regular expression"*: `No`
+    >            - *"Case-Insensitive search"*: `Yes`
+    >            - *"Replace all occurences of the pattern"*: `Yes`
+    >            - *"Ignore first line"*: `Yes`
+    >            - *"Find and Replace text in"*: `entire line`
+    > 6. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+    >    - {% icon param-file %} *"File to process"*: output of **Replace** {% icon tool %}
+    >    - In *"Find and Replace"*:
+    >        - {% icon param-repeat %} *"Insert Find and Replace"*
+    >            - *"Find pattern"*: `Acc_\S*`
     >            - *"Replace with"*: `1`
     >            - *"Find-Pattern is a regular expression"*: `Yes`
     >            - *"Replace all occurences of the pattern"*: `Yes`
     >            - *"Ignore first line"*: `Yes`
-    >            - *"Find and Replace text in"*: `specific column`
-    >              - *"in column*": `Column: 3`
+    >            - *"Case-Insensitive search"*: `No`
+    >            - *"Find and Replace text in"*: `entire line`
+    > 7. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"File to cut"*: output of **Multi-Join** {% icon tool %}
+    >    - *"Operation"*:`Keep`
+    >    - *"Delimited by"*:`Tab`
+    >    - *"Cut by"*:`fields`
+    >    - *"List of Fields"*:`1`
+    > 8. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+    >    - {% icon param-file %} *"File to cut"*: output of the last **Replace** {% icon tool %}
+    >    - *"Operation"*:`Discard`
+    >    - *"Delimited by"*:`Tab`
+    >    - *"Cut by"*:`fields`
+    >    - *"List of Fields"*:`1,2`
+    > 9. {% tool [Paste](Paste1) %} with the following parameters:
+    >    - {% icon param-file %} *"Paste"*: output of **Advanced Cut** (Tool N. 7) {% icon tool %}
+    >    - {% icon param-file %} *"and"*: output of **Advanced Cut** (Tool N. 8) {% icon tool %}
+    >    - *"Delimit by"*:`Tab`
     {: .hands_on}
 
 2. Draw heatmap
