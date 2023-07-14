@@ -12,14 +12,15 @@
         <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}">
         <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}">
         <link rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
-        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="preload" href="{{ site.baseurl}}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
-        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=3" | prepend: site.baseurl }}">
-        <link rel="manifest" href="{{ site.baseurl}}/manifest.json">
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
+        {{ 'load' | bundle_preloads }}
+        <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
+        <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
-
 
 
         {{ page | generate_dublin_core: site }}
@@ -50,7 +51,7 @@
         {% endif %}
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+        {{ 'theme' | load_bundle }}
         {% include _includes/default-header.html %}
         {% if topic.custom_css %}
         <style>
@@ -61,43 +62,8 @@
         {{ content }}
         </div>
         {% include _includes/default-footer.html %}
-        <script src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-	<script src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script> <!-- used in dropdown menus -->
-        <script src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
-        <script src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
+
+        {{ 'main' | load_bundle }}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
-        <script src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
-        <script src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
-        <script>
-        document.querySelectorAll('div.highlight').forEach((snippet) => {
-                // Google translate has additional #text nodes mixed in with
-                // the pre for some reason.
-                var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
-                if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
-                        gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
-                }
-        });
-
-        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
-            target:function(trigger){return trigger.nextElementSibling;
-        }});
-        </script>
-        {% if page.layout == "topic" %}
-        <script type="text/javascript" src="{{ site.baseurl }}/assets/js/list.min.js"></script>
-        {% endif %}
-
-        <script type="text/javascript">
-            if(window.location.hostname === "galaxyproject.github.io") {
-                // Redirect
-                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
-                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
-
-                window.setTimeout(function(){
-                    window.location.href = redirect;
-                }, 5000)
-
-            }
-        </script>
     </body>
 </html>

@@ -21,10 +21,10 @@ layout: base
 
 			<div class="col-md-3">
 				<div>
-				{% if contributors[page.contributor].github != false %}
-					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-				{% elsif contributors[page.contributor].avatar %}
+				{% if contributors[page.contributor].avatar %}
 					<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" >
+				{% elsif contributors[page.contributor].github != false %}
+					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
 				{% else %}
 					<span class="thumbnail">
 						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
@@ -63,6 +63,10 @@ layout: base
 							</a>
 						{% elsif contributors[page.contributor].funding_system == "erasmusplus" %}
 							<a href="https://erasmus-plus.ec.europa.eu/projects/search/details/{{ contributors[page.contributor].funding_id }}">
+								{{ contributors[page.contributor].funding_id }}
+							</a>
+						{% elsif contributors[page.contributor].funding_system == "ukri" %}
+							<a href="https://gtr.ukri.org/projects?ref={{ contributors[page.contributor].funding_id }}">
 								{{ contributors[page.contributor].funding_id }}
 							</a>
 						{% endif %}
@@ -149,12 +153,15 @@ layout: base
 
 				<h2>Contributions</h2>
 
+				{% if contributors[page.contributor].funder %}
+				{% if contributors[page.contributor].url %}
+				<a href="{{ contributors[page.contributor].url }}">{{ contributors[page.contributor].url }}</a>
+				{% endif %}
+				{{ contributors[page.contributor].funding_statement | markdownify }}
+				{% endif %}
+
 				<p class="text-muted">
-					{% if contributors[page.contributor].funder %}
-						{{ contributors[page.contributor].funding_statement | markdownify }}
-					{% else %}
 					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
-					{% endif %}
 
                 {% unless contributors[page.contributor].github == false %}
                 <br><br>
@@ -210,6 +217,22 @@ layout: base
 				{% endfor %}
 				</ul>
 				{% endif %}
+
+				{% if page.learning_pathways_count > 0 %}
+				<h3>Learning Pathways</h3>
+				<ul>
+				{% for res in page.learning_pathways %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% include _includes/contributor-human-icons.html activity=res_activity %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
 
 				{% if page.news_count > 0 %}
                 <h3>News</h3>

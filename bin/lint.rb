@@ -108,6 +108,7 @@ end
 # Linting functions for the GTN
 module GtnLinter
   @BAD_TOOL_LINK = /{% tool (\[[^\]]*\])\(https?.*tool_id=([^)]*)\)\s*%}/i
+  @BAD_TOOL_LINK2 = /{% tool (\[[^\]]*\])\(https:\/\/toolshed.g2([^)]*)\)\s*%}/i
 
   def self.find_matching_texts(contents, query)
     contents.map.with_index do |text, idx|
@@ -150,7 +151,7 @@ module GtnLinter
   def self.link_gtn_tutorial_external(contents)
     find_matching_texts(
       contents,
-      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/(.*tutorial).html)\)}
+      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/[^)]*)\)}
     )
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
@@ -349,7 +350,7 @@ module GtnLinter
   end
 
   def self.bad_tool_links(contents)
-    find_matching_texts(contents, @BAD_TOOL_LINK)
+    find_matching_texts(contents, @BAD_TOOL_LINK) + find_matching_texts(contents, @BAD_TOOL_LINK2)
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
         path: @path,

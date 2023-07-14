@@ -438,8 +438,11 @@ Because of the PCR amplification, there might be read duplicates (different read
 >    - {% icon param-file %} *"Select lines from"*: Select the output of  **MarkDuplicates** {% icon tool %}
 >    - *"that*: `Matching`
 >    - *"the pattern*: `(Library|LIBRARY)`
+>
 > 2. Check that the datatype is tabular. If not, change it.
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+>
 > 3. {% tool  [Transpose rows/columns in a tabular file](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}:
 >    - {% icon param-file %} *"Select lines from"*: Select the output of **Select** {% icon tool %}
 >

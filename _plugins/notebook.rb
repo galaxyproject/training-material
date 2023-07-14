@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'digest'
 require 'json'
 require 'fileutils'
@@ -336,7 +334,7 @@ module GTNNotebooks
 
     # Replace zenodo links, the only replacement we do
     if !page_data['zenodo_link'].nil?
-      puts "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
+      Jekyll.logger.debug "Replacing zenodo links in #{page_url}, #{page_data['zenodo_link']}"
       content.gsub!(/{{\s*page.zenodo_link\s*}}/, page_data['zenodo_link'])
     end
 
@@ -405,6 +403,11 @@ module GTNNotebooks
     # representing the notebook
     accepted_languages = [notebook_language]
     accepted_languages << 'bash' if notebook_language == 'python'
+
+    if !data['zenodo_link'].nil?
+      Jekyll.logger.debug "Replacing zenodo links in #{url}, #{data['zenodo_link']}"
+      content.gsub!(/{{\s*page.zenodo_link\s*}}/, data['zenodo_link'])
+    end
     notebook = convert_notebook_markdown(content, accepted_languages)
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.
@@ -446,7 +449,7 @@ module GTNNotebooks
     notebook
   end
 
-  def self.renderMarkdownCells(site, notebook, metadata, page_url, dir)
+  def self.renderMarkdownCells(site, notebook, metadata, _page_url, _dir)
     seen_abbreviations = {}
     notebook['cells'].map do |cell|
       if cell.fetch('cell_type') == 'markdown'
@@ -519,30 +522,30 @@ module GTNNotebooks
         # love it) or we'll link to the production images and folks can live
         # without their images for a bit until it's merged.
 
-        if cell['source'].match(/<img src="\.\./)
-          cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
-            path = img[10..]
-            image_path = File.join(dir, path)
-
-            if img[-3..].downcase == 'png'
-              # puts "[GTN/Notebook/Images] Embedding png: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/png;base64,#{data}")
-            elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
-              # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/jpeg;base64,#{data}")
-            elsif img[-3..].downcase == 'svg'
-              # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
-              data = Base64.encode64(File.binread(image_path))
-              %(<img src="data:image/svg+xml;base64,#{data}")
-            else
-              # puts "[GTN/Notebook/Images] Fallback for #{img}"
-              # Falling back to non-embedded images
-              "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
-            end
-          end
-        end
+        # if cell['source'].match(/<img src="\.\./)
+        #   cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
+        #     path = img[10..]
+        #     image_path = File.join(dir, path)
+        #
+        #     if img[-3..].downcase == 'png'
+        #       # puts "[GTN/Notebook/Images] Embedding png: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/png;base64,#{data}")
+        #     elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
+        #       # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/jpeg;base64,#{data}")
+        #     elsif img[-3..].downcase == 'svg'
+        #       # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
+        #       data = Base64.encode64(File.binread(image_path))
+        #       %(<img src="data:image/svg+xml;base64,#{data}")
+        #     else
+        #       # puts "[GTN/Notebook/Images] Fallback for #{img}"
+        #       # Falling back to non-embedded images
+        #       "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
+        #     end
+        #   end
+        # end
 
         # Strip out the highlighting as it is bad on some platforms.
         cell['source'].gsub!(/<pre class="highlight">/, '<pre style="color: inherit; background: transparent">')

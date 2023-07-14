@@ -1,6 +1,12 @@
 ---
 layout: learning-pathway
 tags: [beginner]
+type: use
+
+maintainers:
+- shiltemann
+funding:
+- erasmusplus
 
 title: Introduction to Galaxy and Sequence analysis
 description: |
