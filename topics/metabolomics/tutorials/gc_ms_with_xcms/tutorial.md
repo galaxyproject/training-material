@@ -326,8 +326,10 @@ The spectral data comes as an `.msp` file, which is a text file structured accor
 >
 >    Click *"View data"* {% icon galaxy-eye %} icon next to the dataset in the Galaxy history. The contents of the file would look like this:
 >
+> 
 >    {% snippet faqs/galaxy/datasets_icons.md %}
 >
+> 
 >    ```
 >     NAME:C001
 >     IONMODE:Negative
