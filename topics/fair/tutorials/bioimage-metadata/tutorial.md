@@ -5,15 +5,21 @@ title: FAIR Bioimage Metadata
 zenodo_link: ''
 
 questions:
+- What are the commonly used repositories for bioimaging data?
+- Which repositories are suitable for my data?
+- What are the requirements for submitting?
 
 objectives:
--	Locate bioimage data repositories
+- Locate bioimage data repositories
 - Compare repositories to find which are suitable for your data
 - Find out what the requirements are for submitting
 
 time_estimation: "45min"
 
 key_points:
+- Data repositories are available to help make data FAIR.
+- Find out what the repository's requirements are to help decide which is suitable for your data.
+- All repositories require some metadata, collecting the metadata alongside data acquisition will make this process easier.
 
 tags:
 - fair
@@ -21,6 +27,7 @@ tags:
 - bioimaging
   
 priority: 4
+
 contributions:
   authorship:
     - wee-snufkin
@@ -37,7 +44,7 @@ requirements:
       - data-management
 ---
 
-# Examples of bioimage data repositories
+# FAIR Bioimaging
 
 Submitting your data to a repository is a good way to make the data FAIR. This will make it:
 - **F**indable, as the data will be given specific identifiers
@@ -45,6 +52,7 @@ Submitting your data to a repository is a good way to make the data FAIR. This w
 -	**I**nteroperable, as the repository with often enforce the use of formalised, consistent language
 -	**R**eusable, as the data will be released under a license with detailed provenance
 
+# Examples of bioimage data repositories
 
 > <tip-title>Repositories everywhere</tip-title>
 >
@@ -114,5 +122,14 @@ Submitting your data to a repository is a good way to make the data FAIR. This w
 However, this raises further challenges. At the time of data acquisition, you probably won’t know which repository you will submit to, what the study results will be, or even who will be the target audience for the data. So what metadata do you need to collect?
 > Currently, there is no standard for bioimages, so here is the general outline how to proceed:
 > - If you have chosen a repository, use their template/guidelines
-> - Otherwise, use [REMBI](https://www.nature.com/articles/s41592-021-01166-8). These are published guidelines which we will look at in more detail soon. REMBI is useful as it should cover most of the metadata requirements of the repositories, even if you haven’t decided which you want to use yet.
-> - For medical images, see the [DICOM](https://www.dicomstandard.org/) standard 
+> - Otherwise, use [REMBI](https://www.nature.com/articles/s41592-021-01166-8). These are published guidelines which are explained in detail in the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}). REMBI is useful as it should cover most of the metadata requirements of the repositories, even if you haven’t decided which you want to use yet.
+> - For medical images, see the [DICOM](https://www.dicomstandard.org/) standard
+
+# How to store metadata
+
+> Metadata should be stored somewhere that it can be viewed and edited by collaborators. This helps everyone to stay on the same page with regard to what data should and has been collected. This is also useful if different people contribute to different aspects of the image acquisition, e.g. maybe one person prepared the sample, another imaged it under the microscope, and a third person did the post-processing. Each person can then update the metadata related to their part of the study.
+
+> Recommendations for storing metadata:
+> - If a repository has been chosen, use their template (if provided)
+> - Use a Delimited text file format, e.g. .csv, .tsv. You can use spreadsheet software and save to this format, try to use a plain format, e.g. avoid merged/split cells.
+> -  Use data management software suitable for your data, e.g. [OMERO](https://www.openmicroscopy.org/omero/)
