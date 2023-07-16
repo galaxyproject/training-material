@@ -14,7 +14,7 @@ objectives:
 - Compare repositories to find which are suitable for your data
 - Find out what the requirements are for submitting
 
-time_estimation: "45min"
+time_estimation: "15min"
 
 key_points:
 - Data repositories are available to help make data FAIR.
