@@ -3,11 +3,16 @@ layout: tutorial_hands_on
 title: FAIR Bioimage Metadata
 
 zenodo_link: ''
+
 questions:
 
 objectives:
+-	Locate bioimage data repositories
+- Compare repositories to find which are suitable for your data
+- Find out what the requirements are for submitting
 
-time_estimation: ""
+time_estimation: "45min"
+
 key_points:
 
 tags:
@@ -18,6 +23,7 @@ tags:
 priority: 4
 contributions:
   authorship:
+    - wee-snufkin
     - kkamieniecka
     - poterlowicz-lab
 
@@ -29,5 +35,84 @@ requirements:
     tutorials:
       - fair-intro
       - data-management
-
 ---
+
+# Examples of bioimage data repositories
+
+Submitting your data to a repository is a good way to make the data FAIR. This will make it:
+- **F**indable, as the data will be given specific identifiers
+- **A**ccessible, as the data will be available online, open and free where possible
+-	**I**nteroperable, as the repository with often enforce the use of formalised, consistent language
+-	**R**eusable, as the data will be released under a license with detailed provenance
+
+
+> <tip-title>Repositories everywhere</tip-title>
+>
+> As well as these funded repositories your Institute may have their own repository. For example, at the Warwick University, there is also OMERO and WRAP.
+> 
+{: .tip}
+
+
+> <comment-title></comment-title>
+> The repositories we are looking at in this course are for bioimage data, not medical data. There are other specialist repositories available if you have medical data.
+{: .comment}
+
+
+> <question-title></question-title>
+>
+> Listed below are three examples of Bioimage Data Repositories:
+> - [IDR: Image Data Repository](https://idr.openmicroscopy.org/)
+> - [EMPIAR: Electron Microscopy Public Image Archive](https://www.ebi.ac.uk/empiar/)
+> - [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/)
+> Visit their websites and find out what their scope is or what sorts of datasets they accept.
+>
+> > <solution-title></solution-title>
+> >
+> > - **IDR: Image Data Repository**: Curated datasets of cell and tissue microscopy images
+> > - **EMPIAR: Electron Microscopy Public Image Archive**: Cryo-EM, Scanning Electron Microscopy, Soft X-ray tomography
+> > - **BioImage Archive**: Everything else and some overlap with IDR and EMPIAR
+> {: .solution}
+>
+{: .question}
+
+# Things to consider when choosing a repository
+
+> <question-title></question-title>
+>
+> Choose one repository from above and look through its documentation. Try to find:
+> 1. What data formats are accepted?
+> 2. What license is recommended to publish the data?
+> 3. Are there specific instructions for large datasets?
+>
+> > <solution-title></solution-title>
+> >
+> > - **IDR: Image Data Repository**:
+> >   1. The IDR uses the Bio-Formats library for reading imaging data. Bio-Formats supports over 150 proprietary and open file formats (see the [full list](https://bio-formats.readthedocs.io/en/stable/supported-formats.html)).
+> >   2. It is strongly recommended that submitters make their datasets available under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
+> >   3. As specified on the [IDR website](https://idr.openmicroscopy.org/about/submission.html), dataset size is typically not an issue, but for sizes significantly larger than 1000 GB special planning may be needed.
+> > - **EMPIAR: Electron Microscopy Public Image Archive**:
+> >   1. Provide image data in the formats in which they are uploaded, but recommended is the use of common formats in the field including MRC, MRCS, TIFF, DM4, IMAGIC, SPIDER, MRC FEI, RAW FEI and BIG DATA VIEWER HDF5. 
+> >   2. All data in EMPIAR is freely and publicly available to the global community under the [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license.
+> >   3. As specified on the [EMPIAR page](https://www.ebi.ac.uk/empiar/deposition/manual/#manIntro), typically having more than 4000 files in a directory has a tendency to slow down access considerably. It is recommended in this case to sub-divide the directory into subdirectories with no more than 4000 files each. If you have a single file larger than 1 TB, contact EMPAIR in advance.
+> >      To find out more, check the [FAQ page](https://www.ebi.ac.uk/empiar/faq).
+> > - **BioImage Archive**:
+> >   1. The BioImage Archive accepts all image data formats, although formats readable by [Bio-Formats library](https://bio-formats.readthedocs.io/en/stable/supported-formats.html), are preferable.
+> >   2. According to [BioImage Archive Policies](https://www.ebi.ac.uk/bioimage-archive/help-policies/), all new data directly submitted to the BioImage Archive will be made available under a [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) licence, datasets brokered/imported from other resources may have other licenses though.
+> >   3. There are different submission methods depending on data size:
+> >      - Less than 50 GB total size, less than 20GB per file – use submission tool
+> >      - Up to 1TB total size – use FTP
+> >      - Anything larger – use Aspera
+> >      To find out more, check the [FAQ page](https://www.ebi.ac.uk/bioimage-archive/help-faq/).
+> {: .solution}
+>
+{: .question}
+
+
+# What metadata to collect
+
+> Whichever repository you choose, you will be required to upload some metadata along with your data. In an ideal world, you would remember everything about your data when you submit it. In reality, this is unlikely, the data could have been collected over a long time period or by different people. To overcome these challenges, it is best to collect metadata alongside imaging experiments, don’t leave it all to the end!
+However, this raises further challenges. At the time of data acquisition, you probably won’t know which repository you will submit to, what the study results will be, or even who will be the target audience for the data. So what metadata do you need to collect?
+> Currently, there is no standard for bioimages, so here is the general outline how to proceed:
+> - If you have chosen a repository, use their template/guidelines
+> - Otherwise, use [REMBI](https://www.nature.com/articles/s41592-021-01166-8). These are published guidelines which we will look at in more detail soon. REMBI is useful as it should cover most of the metadata requirements of the repositories, even if you haven’t decided which you want to use yet.
+> - For medical images, see the [DICOM](https://www.dicomstandard.org/) standard 
