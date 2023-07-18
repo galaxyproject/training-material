@@ -289,17 +289,13 @@ Apply spline-based retention time correction to a feature table given the templa
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we determine in advance the value of retention time shift applied to the sample used as reference template?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The reference template is used to adjust other samples accordingly. However, the template sample itself is not influenced by the correction step. Therefore, the shift value is zero.
 > >
 > {: .solution}
 >
@@ -345,7 +341,7 @@ This step performs feature alignment after clustering and retention time correct
 
 > <details-title> Algorithm details </details-title>
 > 
-> **TODO** explain in details.
+> To properly align features, we repeat the model-based search to determine the retention time cutoff and group features accordingly. Within each feature group, we employ kernel density estimators to assess the m/z and retention time dimensions, potentially leading to further divisions within the group. The resulting groups represent aligned features across all profiles. From each group, we extract the median m/z and median retention time as representative characteristic values for the features. This information is recorded in an aligned feature table (for practical pruposes, separated to three tables), which includes the median m/z, median retention time, m/z range, and intensities in each profile for every feature.
 >
 > **TODO** add picture?
 > 
@@ -360,22 +356,6 @@ This step performs feature alignment after clustering and retention time correct
 >    - *"Minimal occurrence in samples"*: `2`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 > <details-title> Output files </details-title>
 > 
@@ -418,6 +398,20 @@ This step performs feature alignment after clustering and retention time correct
 > {: .matrix}
 >
 {: .details}
+
+> ### {% icon question %} Questions
+>
+> 1. Why is the output aligned feature table separated into three tables?
+> 2. How can I find retention times and intensities corresponding to a feature from the metadata table?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The purpose of separating the information to multiple tables is to simplify data inspection, eliminate overhead of too many details in one location, and make the outputs compatible with other tools (such as XCMS).
+> > 2. All three tables share the `id` column. The particular value of the `id` column can be used to find corresponding retention times and intensities.
+> >
+> {: .solution}
+>
+{: .question}
 
 > ### {% icon comment %} Next steps
 >
