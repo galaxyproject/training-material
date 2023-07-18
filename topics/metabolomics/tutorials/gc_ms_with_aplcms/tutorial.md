@@ -269,11 +269,13 @@ Apply spline-based retention time correction to a feature table given the templa
 
 > <details-title> Retention time correction effects </details-title>
 > 
-> **TODO** explain effect of time correction
+> The retention time alignment starts by grouping features based on their m/z values using a lenient m/z tolerance. Kernel density estimation is applied to the m/z values within each group to identify multiple modes and split the group accordingly. Next, a retention-time cutoff is determined using a model-based search. Retention time differences are calculated between features within each m/z group. The differences are combined, and a density estimation is performed.
 >
-> **TODO** Change picture where we actually see how rt of targeted sample is shifted based on template
+> A threshold is determined by finding the largest distance where the observed density exceeds 1.5 times the fitted value. If any spacing in retention time is larger than the threshold, feature groups with similar m/z values are further divided.
+> 
+> The alignment is performed by selecting one profile as the template (one with the most number of features) and aligning all other profiles against it using a kernel smoother. Adjustments are made to the retention times based on the alignment results, and for features outside the range, their retention times are adjusted with the same amount as the nearest endpoint of the alignment.
 >
-> ![recetox-aplcms time correction](../../images/aplcms_corrected_time.png "Deviation of retention time of samples compared to selected template sample after correction.")
+> ![recetox-aplcms time correction](../../images/aplcms_corrected_time.png "The effect of time correction on a sample. The retention time of targeted sample (red) is shifted to corrected values (green) based on the reference template (blue).")
 >
 {: .details}
 
