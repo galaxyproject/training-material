@@ -423,17 +423,19 @@ This step performs feature alignment after clustering and retention time correct
 
 Unsupervised approach focuses on exploring and discovering patterns in the data without prior knowledge or assumptions. This method employes techniques such as dimensionality reduction and clustering to reveal inherent structures and relationships within the metabolite profiles. Unsupervised approach is useful when the specific patterns or classes within the data are not known beforehand, allowing for unbiased exploration of the data and potential identification of novel patterns or subgroups. However, unsupervised approach may require additional validation and annotation steps to assign biological meaning to the discovered patterns.
 
-> <details-title> Gaps </details-title>
-> 
-> Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
->
-> **TODO** show example of table with many gaps, comment on them
->
-{: .details}
-
 ## Recover weaker signals
 
 This step recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity. It runs the second stage peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
+
+> <details-title> Gaps in the feature table </details-title>
+>
+> After inspecting the obtained metadata table, we can observe that many columns indicating presence of the feature in the sample are empty (resp. there is zero). Same holds for respective positions in intensity and retention time tables. That basically means we lost some information for metabolites that did not pass the noise filter and were not included in the feature table during LC/MS profiling. However, that does not neccesary mean they not present in the samples. To double check this, we revisit the data and try to recover them.
+> 
+> The recovery process involves sequentially examining each LC/MS profile. Firstly, an interpolating spline is used to adjust the retention times in the aligned feature table to match the specific profile. Secondly, for features in the aligned table with zero values in the profile, a search is conducted within a smaller region around their m/z and retention time locations. This region is narrower than the range defined by the m/z and retention time across other profiles. The noise filtering is not applied during this step. If one or more features are detected within this region, the feature most consistent with the parameters in the feature table is considered the missed feature, and its intensity replaces the zero value in the aligned feature table.
+>
+> **TODO** add table and picture: metadata table with many gaps, comment on their meaning... next to it a 3D plot where is a feature in sample but with very low intensity
+>
+{: .details}
 
 > <details-title> Key parameters </details-title>
 > 
