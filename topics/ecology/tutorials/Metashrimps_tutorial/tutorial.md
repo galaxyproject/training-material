@@ -42,8 +42,7 @@ of metadata and how this tool responds to this necessity.
 > <comment-title>What does FAIR mean?</comment-title>
 > [FAIR](https://www.go-fair.org/fair-principles/) stand for **Findable, Accessible, Interoperable, Reusable**. 
 >
->
-><img src="./Images/FAIR_data_principles.jpg" alt="FAIR Data Principles" width="500"/>
+>![FAIR Data Principles](./Images/FAIR_data_principles.jpg){:width="500"}
 
 >These principles were [officialy instaured in 2016](https://doi.org/10.1038/sdata.2016.18) to improve the access and usabiliy of data by the machine and to help making data reusable and shareable for users.
 >Metadata is the data used to describe and explain all the context behind the production of data. It is necessary to produce a rich and FAIR metadata in order 
@@ -80,8 +79,8 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 > <hands-on-title> Data Upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2.Import this metadata file from [Zenodo]({{ https://doi.org/10.5281/zenodo.8130567 }}) to test it
->     -> `{{ Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS" }}`):
+> 2.Import this metadata file from [Zenodo]({{ page.zenodo_link }}) to test it
+>     -> Training Data for "Creating Quality FAIR assessment reports and draft of Data Papers from EML metadata with MetaShRIMPS"):
 >    ```
 >    https://zenodo.org/record/8130567/files/Kakila_database_marine_mammal.xml
 >    ```
@@ -92,7 +91,7 @@ publishable as a real Data Paper giving recognition to all the people that helpe
 
 When oppening MetaShRIMPS, you will have an interface looking like this :
 
-<img src="./Images/upload_1.png" alt="FAIR Data Principles" width="500"/>
+![Interface of MetaShRIMPS](./Images/upload_1.png){:width="500"}
 
 To upload data on MetaShRIMPS, if you was selecting the xml file as input of the tool, it is already launched, if not, you have to click on the browse button and select in your local folders, the file
 you want to use. 
@@ -100,7 +99,7 @@ you want to use.
 > The file uploaded in this tool must be a metadata in XML format using EML metadata standard.
 {: .warning}
 
-<img src="./Images/upload_2.png" alt="FAIR Data Principles" width="500"/>
+![Interface when file is selected](./Images/upload_1.png){:width="500"}
 
 After uploading the file, or if you have indicate it as input data if the tool, you just have to click on **Execute** to launch the tool with the file.
 
@@ -115,7 +114,8 @@ By clicking on the "Draft of Data Paper" tab, you will have access to the draft 
 You can either navigate through the Data Paper with the tabs or with the scrollbar on the right and access different elements.
 
 You can at the top of the page download the draft in either an HTML format or an editable docx format.
-![Download in HTML](./Images/Download_HTML.png""Download in HTML")![Download in docx](./Images/Download_docx.png "Download in docx*)
+![Download in HTML](./Images/Download_HTML.png""Download in HTML")
+![Download in docx](./Images/Download_docx.png "Download in docx*)
 
 ## Fair Quality Assessment report
 
