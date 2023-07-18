@@ -25,8 +25,19 @@ tags:
   - FAIR
   - Data Paper
 contributors:
-- TanguyGen
+- 
 - yvanlebras
+contributions:
+    authorship:
+        - TanguyGen
+        - yvanlebras
+    editing:
+        - yvanlebras
+        - hexylena
+    infrastructure:
+        - PNDB
+        - MNHN
+
 
 ---
 
