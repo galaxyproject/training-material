@@ -4,7 +4,7 @@ type: use
 cover-image: assets/images/microgalaxy-logo.png
 cover-image-alt: "microgalaxy logo"
 
-maintainers:
+editorial_board:
 - bebatut
 funding:
 - erasmusplus

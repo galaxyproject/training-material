@@ -3,7 +3,7 @@ layout: learning-pathway
 tags: [beginner]
 type: use
 
-maintainers:
+editorial_board:
 - fpsom
 funding:
 - erasmusplus

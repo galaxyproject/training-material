@@ -9,6 +9,10 @@ description: |
 
 cover-image: assets/images/gat.png
 cover-image-alt: GTN Logo on a spiral galaxy background with text galaxy admin training
+editorial_board:
+- hexylena
+- natefoo
+- slugger70
 
 tags: [Galaxy administrators, 5-day course]
 
