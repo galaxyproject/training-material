@@ -343,7 +343,7 @@ This step performs feature alignment after clustering and retention time correct
 > 
 > To properly align features, we repeat the model-based search to determine the retention time cutoff and group features accordingly. Within each feature group, we employ kernel density estimators to assess the m/z and retention time dimensions, potentially leading to further divisions within the group. The resulting groups represent aligned features across all profiles. From each group, we extract the median m/z and median retention time as representative characteristic values for the features. This information is recorded in an aligned feature table (for practical pruposes, separated to three tables), which includes the median m/z, median retention time, m/z range, and intensities in each profile for every feature.
 >
-> **TODO** add picture?
+> **TODO** add picture? - taking medians from values in a group
 > 
 {: .details}
 
