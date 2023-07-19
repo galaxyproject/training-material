@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@28c873e14fd5f0838083b029e26e98240cce94b0",
+  release: "galaxy-training-network@f1b669feb7257deeda57a32d78cf8b0743a85b21",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689738026' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689738026' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689738124' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689738124' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pre-processing of 10X Single-Cell ATAC-seq Datasets">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-25 16:03:32 +0000">
+<meta name="DC.date" content="2023-07-17 15:45:09 +0000">
 <meta name="DC.creator" content="Pavankumar Videm">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-04-25 16:03:32 +0000",
+  "dateModified": "2023-07-17 15:45:09 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Pre-processing of 10X Single-Cell ATAC-seq Datasets",
   "interactivityType": "mixed",
@@ -238,7 +238,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1689738026'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689738124'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -615,7 +615,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Apr 25, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 17, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -820,7 +820,7 @@ https://zenodo.org/record/7855968/files/atac_pbmc_1k_nextgem_S1_R3_001_chr21.fas
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span> with the following parameters:
       <ul>
-        <li><em>“Short read data from your current history”</em>: Use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">barcoded read 1</code> and <code class="language-plaintext highlighter-rouge">barcoded read 2</code> (outputs of <strong>Sinto barcode</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
+        <li><em>“Raw read data from your current history”</em>: Use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">barcoded read 1</code> and <code class="language-plaintext highlighter-rouge">barcoded read 2</code> (outputs of <strong>Sinto barcode</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
       </ul>
     </li>
     <li>Inspect the web page output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">barcoded read 1</code> sample.</li>
@@ -893,7 +893,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
 <p>In scRNA-seq we always have the standard set of genes (usually downloaded from public databases) to quantify the expression levels. For scATAC-seq, there are no such reference open chromatin regions because the regions of chromatin accessibility are tissue dependent. Hence, we first have to detect open chromatin regions. There are several ways of doing this. The most common ways are the following:</p>
 <ul>
   <li>Find a published bulk ATAC-seq data that is the closest to your scATAC-seq data and use the regions from the bulk ATAC-seq data</li>
-  <li>Chumk the genome into equal-sized bins and use these bins as reference locations for quantification</li>
+  <li>Chunk the genome into equal-sized bins and use these bins as reference locations for quantification</li>
   <li>Combine the data from all the cells of the scATAC-seq data together and detect open chromatin regions from the data. Later use these detected regions for quantification</li>
 </ul>
 
@@ -929,7 +929,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
         <li><em>“Sort by”</em>: <code class="language-plaintext highlighter-rouge">chromosome, then by start position (asc)</code></li>
       </ul>
     </li>
-    <li>Rename the datasets <code class="language-plaintext highlighter-rouge">sorted fragments</code></li>
+    <li>Rename the dataset <code class="language-plaintext highlighter-rouge">sorted fragments</code></li>
   </ol>
 </blockquote>
 
@@ -1046,7 +1046,7 @@ At this step, two approaches exist:</p>
 
 <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.png" alt="Anndata format. " width="1381" height="1122" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. peaks) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
 
-<p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>) and <a href="https://colomemaria.github.io/episcanpy_doc/index.html">EpiScanpy</a> (<span class="citation"><a href="#danese2021episcanpy">Danese <i>et al.</i> 2021</a></span>) tool suits for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
+<p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>) and <a href="https://colomemaria.github.io/episcanpy_doc/index.html">EpiScanpy</a> (<span class="citation"><a href="#danese2021episcanpy">Danese <i>et al.</i> 2021</a></span>) tool suites for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-build-count-matrix-with-episcanpy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Build count matrix with EpiScanpy</div>
@@ -1828,7 +1828,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/28c873e14fd5f0838083b029e26e98240cce94b0">28c873e</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/f1b669feb7257deeda57a32d78cf8b0743a85b21">f1b669f</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1860,7 +1860,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1689738026'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1689738124'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
