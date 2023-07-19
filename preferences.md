@@ -7,6 +7,8 @@ title: Your Preferences
 
 We have attempted to decompose our themes into several axes depending on your accessibility needs:
 
+This control responds to [prefers-color-scheme](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme)
+
 <select class="form-control theme-control" id="brightness" onchange="savePrefs()">
 	<option value="auto">Auto</option>
 	<option value="light">Light</option>
@@ -30,9 +32,11 @@ We have attempted to decompose our themes into several axes depending on your ac
 
 ### UI Contrast
 
+This control responds to [prefers-contrast](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-contrast)
+
 <select class="form-control theme-control" id="contrast" onchange="savePrefs()">
+	<option value="auto">Auto</option>
 	<option value="low">Low</option>
-	<option value="standard">Standard</option>
 	<option value="high">High</option>
 </select>
 

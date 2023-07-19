@@ -18,6 +18,10 @@ function gtnLocalGet(key){
 	}
 }
 
+function getTheme2(){
+	return JSON.parse(gtnLocalGet('theme2')) || {brightness: "auto", light_theme: "white", dark_theme: "night", contrast: "auto", theme: "default"};
+}
+
 function getThemePreference(){
 	// If there's a theme specified in the URL
 	params = (new URL(document.location)).searchParams;
@@ -26,15 +30,12 @@ function getThemePreference(){
 	if(paramTheme){
 		setThemePreference(paramTheme, false);
 	}
-	return JSON.parse(gtnLocalGet('theme2')).theme;
+	return getTheme2().theme;
 }
 
 
 function setThemePreference(newValue, automatic) {
-	var tmpprefs = JSON.parse(gtnLocalGet('theme2'));
-	if (tmpprefs === null){
-		tmpprefs = {};
-	}
+	var tmpprefs = getTheme2();
 	tmpprefs['theme'] = newValue;
 	gtnLocalSet('theme2', JSON.stringify(tmpprefs));
 
@@ -65,7 +66,7 @@ training_theme_cookie = getThemePreference()
 if(training_theme_cookie){
 	// Then restore the theme to what's in the URL/preference.
 	setTheme(training_theme_cookie, false);
-	var prefs = JSON.parse(gtnLocalGet('theme2')) || {};
+	var prefs = getTheme2();
 	prefs['theme'] = training_theme_cookie;
 	gtnLocalSet('theme2', JSON.stringify(prefs));
 }
@@ -90,9 +91,31 @@ function processTheme2(){
 		}
 	});
 
+
+	const contrastModePreferenceMore = window.matchMedia("(prefers-contrast: more)");
+	const contrastModePreferenceLess= window.matchMedia("(prefers-contrast: less)");
+	if (contrastModePreferenceMore.matches) {
+		document.body.dataset.contrast = 'high';
+	}
+	if (contrastModePreferenceLess.matches) {
+		document.body.dataset.contrast = 'low';
+	}
+
+	// recommended method for newer browsers: specify event-type as first argument
+	contrastModePreferenceMore.addEventListener("change", e => {
+		if (e.matches) {
+			document.body.dataset.contrast = 'high';
+		}
+	});
+	contrastModePreferenceLess.addEventListener("change", e => {
+		if (e.matches) {
+			document.body.dataset.contrast = 'low';
+		}
+	});
+
 	// Do this last so it overrides the above
 	if (gtnLocalGet('theme2') !== null){
-		var prefs = JSON.parse(gtnLocalGet('theme2'));
+		var prefs = getTheme2();
 		console.log("prefs", prefs);
 		Object.keys(prefs).forEach(function(key) {
 			if (key === "brightness" && prefs[key] === "auto"){
@@ -137,14 +160,15 @@ else { // Not one of the "special" months
 
 // URL overrides
 // If there's a theme specified in the URL
-var theme2Override = JSON.parse(gtnLocalGet('theme2')) || {};
+var theme2Override = getTheme2();
 var params = (new URL(document.location)).searchParams;
 ['brightness', 'light_theme', 'dark_theme', 'contrast', 'theme'].forEach(function(key) {
 	if(params.get(key)){
-		document.body.dataset.brightness = params.get(key);
+		console.log(`Processing URL override for ${key}=${params.get(key)}`);
+		document.body.dataset[key] = params.get(key);
 		theme2Override[key] = params.get(key);
 	}
-}
+})
 if(Object.keys(theme2Override).length > 0){
 	gtnLocalSet('theme2', JSON.stringify(theme2Override));
 }
