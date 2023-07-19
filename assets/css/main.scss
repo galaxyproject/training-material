@@ -424,6 +424,37 @@ body {
 	}
 }
 
+// When someone is printing this
+@media print {
+	// Used for hiding the TOC on tutorials
+	.hide-when-printing {
+		display: none;
+	}
+
+	// Save ink.
+	pre.highlight {
+		background: none !important;
+		color: var(--text-color) !important;
+
+		.na { color: #32440d !important; }
+		.sb, .sc, .sd, .s2, .sh, .si, .sx, .sr, .s1, .ss, .s, .sa, .dl {
+			color: #664 !important;
+		}
+		.c, .ch, .cd, .cpf, .cm, .c1 {
+			color: #333 !important;
+		}
+		.gh, .go,
+		.nb, .ni, .nn, .vc, .vg, .vi, .nv, .vm, .w, .bp,
+		.kn, .ow, .o, .nt {
+			color: #222 !important;
+		}
+		.gp {
+			color: #378 !important;
+		}
+	}
+
+}
+
 
 div#theme-selector,div#lang-selector,div#archive-selector {
 	display: flex;
