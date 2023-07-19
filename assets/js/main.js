@@ -18,7 +18,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 	var parentBlockquote = button.parents("blockquote")[0];
 
 	// Collapse every child of the blockquote, that is NOT a box-title
-    $(">*:not(.box-title)", parentBlockquote).toggle();
+    $(">*:not(.box-title)", parentBlockquote).toggleClass("box-collapsed");
 	// And toggle our icon
     $(">span.fold-unfold", button).toggleClass("fa-plus-square fa-minus-square");
 
@@ -34,7 +34,7 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 // collapse some box types by default
 // LEGACY
  $(".solution>h3,.details>h3,.tip>h3").each(function() {
-    $(">*:not(h3)", $(this.parent)).toggle();
+    $(">*:not(h3)", $(this.parent)).toggle("box-collapsed");
     $(this).append("<span role='button' class='fold-unfold fa fa-plus-square'></span>");
 });
 
