@@ -24,9 +24,6 @@ tags:
   - EML
   - FAIR
   - Data Paper
-contributors:
-- 
-- yvanlebras
 contributions:
     authorship:
         - TanguyGen
@@ -37,8 +34,6 @@ contributions:
     infrastructure:
         - PNDB
         - MNHN
-
-
 ---
 
 
