@@ -65,10 +65,7 @@ training_theme_cookie = getThemePreference()
 if(training_theme_cookie){
 	// Then restore the theme to what's in the URL/preference.
 	setTheme(training_theme_cookie, false);
-	var prefs = JSON.parse(gtnLocalGet('theme2'));
-	if (prefs === null){
-		prefs = {};
-	}
+	var prefs = JSON.parse(gtnLocalGet('theme2')) || {};
 	prefs['theme'] = training_theme_cookie;
 	gtnLocalSet('theme2', JSON.stringify(prefs));
 }
@@ -136,4 +133,18 @@ else { // Not one of the "special" months
 		// And set the theme back to default
 		setTheme("default", true);
 	}
+}
+
+// URL overrides
+// If there's a theme specified in the URL
+var theme2Override = JSON.parse(gtnLocalGet('theme2')) || {};
+var params = (new URL(document.location)).searchParams;
+['brightness', 'light_theme', 'dark_theme', 'contrast', 'theme'].forEach(function(key) {
+	if(params.get(key)){
+		document.body.dataset.brightness = params.get(key);
+		theme2Override[key] = params.get(key);
+	}
+}
+if(Object.keys(theme2Override).length > 0){
+	gtnLocalSet('theme2', JSON.stringify(theme2Override));
 }
