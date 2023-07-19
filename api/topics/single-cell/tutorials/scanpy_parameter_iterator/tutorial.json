@@ -1,0 +1,199 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Scanpy Parameter Iterator",
+  "zenodo_link": "https://zenodo.org/record/8011681",
+  "subtopic": "tricks",
+  "priority": 3,
+  "questions": [
+    "How can I run a tool with multiple parameter values?",
+    "Do I have to enter the parameter values manually each time when I want to check a new value?",
+    "What tools can take multiple values at once and iterate over them?"
+  ],
+  "objectives": [
+    "Get familiar with Scanpy Parameter Iterator",
+    "Recognise what tools you can use Parameter Iterator with",
+    "Become confident in working on dataset collections",
+    "Compare the plots resulting from different parameters values"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-case_alevin",
+        "scrna-case_alevin-combine-datasets",
+        "scrna-case_basic-pipeline"
+      ]
+    }
+  ],
+  "time_estimation": "1H",
+  "key_points": [
+    "Scanpy ParameterIterator can be used for n-neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).",
+    "You can enter the parameter values either as a list or as step increase values to be iterated.",
+    "Parameter Iterator is a useful tool to quiclky and easily compare the differences in the outputs caused by the changed parameter values. Hence it allows to choose the most optimal parameter values."
+  ],
+  "tags": [
+    "single-cell",
+    "tips&tricks",
+    "parameter-iterator"
+  ],
+  "contributions": {
+    "authorship": [
+      "wee-snufkin"
+    ],
+    "funding": [
+      "eosc-life"
+    ]
+  },
+  "short_id": null,
+  "url": "/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html",
+  "topic_name": "single-cell",
+  "tutorial_name": "scanpy_parameter_iterator",
+  "dir": "topics/single-cell/tutorials/scanpy_parameter_iterator",
+  "id": "single-cell/scanpy_parameter_iterator",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "Scanpy-Parameter-Iterator-workflow-full.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.ga",
+      "path": "topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.ga",
+      "wfid": "single-cell-scanpy_parameter_iterator",
+      "wfname": "scanpy-parameter-iterator-workflow-full",
+      "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full",
+      "license": "CC-BY-4.0",
+      "creators": [
+        {
+          "class": "Person",
+          "identifier": "0009-0001-2017-8805",
+          "name": "Julia Jakiela"
+        }
+      ],
+      "test_results": null
+    }
+  ],
+  "api": "https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.json",
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9"
+  ],
+  "supported_servers": {
+    "exact": [
+      {
+        "url": "https://usegalaxy.eu",
+        "name": "UseGalaxy.eu",
+        "usegalaxy": "true"
+      },
+      {
+        "url": "https://usegalaxy.org",
+        "name": "UseGalaxy.org (Main)",
+        "usegalaxy": "true"
+      }
+    ],
+    "inexact": [
+      {
+        "url": "https://usegalaxy.org.au",
+        "name": "UseGalaxy.org.au",
+        "usegalaxy": "true"
+      }
+    ]
+  },
+  "topic_name_human": "Single Cell",
+  "admin_install": {
+    "install_tool_dependencies": true,
+    "install_repository_dependencies": true,
+    "install_resolver_dependencies": true,
+    "tools": [
+      {
+        "name": "scanpy_compute_graph",
+        "owner": "ebi-gxa",
+        "revisions": "6417cccad133",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_find_cluster",
+        "owner": "ebi-gxa",
+        "revisions": "2ccd9f9e2cd0",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_parameter_iterator",
+        "owner": "ebi-gxa",
+        "revisions": "a8c73996ac50",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_plot_embed",
+        "owner": "ebi-gxa",
+        "revisions": "35f6611fb8c3",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_run_tsne",
+        "owner": "ebi-gxa",
+        "revisions": "181d61d2f3cd",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      },
+      {
+        "name": "scanpy_run_umap",
+        "owner": "ebi-gxa",
+        "revisions": "bd4a244faeb8",
+        "tool_panel_section_label": "Single Cell",
+        "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+      }
+    ]
+  },
+  "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: scanpy_compute_graph\n  owner: ebi-gxa\n  revisions: 6417cccad133\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_find_cluster\n  owner: ebi-gxa\n  revisions: 2ccd9f9e2cd0\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_parameter_iterator\n  owner: ebi-gxa\n  revisions: a8c73996ac50\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_plot_embed\n  owner: ebi-gxa\n  revisions: 35f6611fb8c3\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_run_tsne\n  owner: ebi-gxa\n  revisions: 181d61d2f3cd\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scanpy_run_umap\n  owner: ebi-gxa\n  revisions: bd4a244faeb8\n  tool_panel_section_label: Single Cell\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Julia Jakiela",
+      "email": "juliajot36@gmail.com",
+      "joined": "2022-06",
+      "id": "wee-snufkin",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/"
+    },
+    {
+      "name": "EOSC-Life",
+      "github": false,
+      "joined": "2023-04",
+      "avatar": "https://www.eosc-life.eu/wp-content/themes/eosc-life-v2/assets/images/eosclogo.png",
+      "funder": true,
+      "funding_id": "824087",
+      "funding_system": "cordis",
+      "funding_statement": "EOSC-Life has received funding from the European Union’s Horizon 2020 programme under grant agreement number 824087",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/eosc-life.json",
+      "id": "eosc-life",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eosc-life/"
+    }
+  ]
+}

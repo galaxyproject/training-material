@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Scanpy Parameter Iterator</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+Sentry.init({
+  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+  release: "galaxy-training-network@4eea383c7bb20f9d33cca3584cad795fc64d8ffd",
+  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+  sampleRate: 0.1,
+  tracesSampleRate: 0.1,
+  // Capture Replay for no sessions by default
+  replaysSessionSampleRate: 0.01,
+  // plus for 1% of sessions with an error
+  replaysOnErrorSampleRate: 0.01,
+  // PII OFF
+  sendDefaultPii: false, // Off by default but just in case.
+  environment: "production",
+});
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1689749591' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1689749591' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Scanpy Parameter Iterator">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-06-10 08:02:35 +0000">
+<meta name="DC.creator" content="Julia Jakiela">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material and practicals for all kinds of single ...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Scanpy Parameter Iterator">
+        <meta property="og:description" content="Training material and practicals for all kinds of single ...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-06-10 08:02:35 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Scanpy Parameter Iterator",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial requests, as well as up-vote requests from others at our [Single Cell Community Planning site](https://github.com/orgs/galaxyproject/projects/31/views/1).\n{: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Scanpy Parameter Iterator' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html",
+  "timeRequired": "PT1H",
+  "teaches": "Get familiar with Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Become confident in working on dataset collections\n - Compare the plots resulting from different parameters values",
+  "keywords": "single-cell, single-cell, tips&tricks, parameter-iterator",
+  "description": "The questions this  addresses are:\n - How can I run a tool with multiple parameter values?\n - Do I have to enter the parameter values manually each time when I want to check a new value?\n - What tools can take multiple values at once and iterate over them?\n\n\nThe objectives are:\n - Get familiar with Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Become confident in working on dataset collections\n - Compare the plots resulting from different parameters values\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html",
+      "name": "Generating a single cell matrix using Alevin",
+      "description": "Hands-on for 'Generating a single cell matrix using Alevin' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
+      "name": "Combining datasets after pre-processing",
+      "description": "Hands-on for 'Combining datasets after pre-processing' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html",
+      "name": "Filter, Plot and Explore Single-cell RNA-seq Data",
+      "description": "Hands-on for 'Filter, Plot and Explore Single-cell RNA-seq Data' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial requests, as well as up-vote requests from others at our [Single Cell Community Planning site](https://github.com/orgs/galaxyproject/projects/31/views/1).\n{: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "single-cell"
+    },
+    {
+      "@type": "Thing",
+      "name": "tips&tricks"
+    },
+    {
+      "@type": "Thing",
+      "name": "parameter-iterator"
+    }
+  ],
+  "abstract": "# Introduction"
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1689749591'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/single-cell" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Single Cell
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/single-cell/faqs/" title="Check our FAQs for the Single Cell topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-07-01/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">2023-07-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-06-01/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">2023-06-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-single-cell">
+    <h1 data-toc-skip>Scanpy Parameter Iterator</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Avatar" width="36" height="36">Julia Jakiela</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I run a tool with multiple parameter values?</p>
+</li>
+        
+        <li><p>Do I have to enter the parameter values manually each time when I want to check a new value?</p>
+</li>
+        
+        <li><p>What tools can take multiple values at once and iterate over them?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Get familiar with Scanpy Parameter Iterator</p>
+</li>
+        
+        <li><p>Recognise what tools you can use Parameter Iterator with</p>
+</li>
+        
+        <li><p>Become confident in working on dataset collections</p>
+</li>
+        
+        <li><p>Compare the plots resulting from different parameters values</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/single-cell">Single Cell</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Generating a single cell matrix using Alevin:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Combining datasets after pre-processing:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Filter, Plot and Explore Single-cell RNA-seq Data:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/8011681">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/" title="Scanpy Parameter Iterator workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 10, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
+             The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us interpret the biology behind. However, it’s not always so straightforward – each tool has various parameters so eventually, we might end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information. 
+Since there is a vast number of values that we can specify in the tools, how can we know if the values we choose are the most optimal ones or at least good enough? Well, we can use different values and then compare the outputs to see which is consistent with our understanding of the underlying biology. 
+And here the Parameter Iterator comes in – it allows to run the analysis using different variables quickly and easily. Now you don’t have to execute your workflow every time you change one value to compare the output. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values at one go.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using tutorial mode<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
+  <li><a href="#workflow" id="markdown-toc-workflow">Workflow</a></li>
+  <li><a href="#inputs" id="markdown-toc-inputs">Inputs</a></li>
+  <li><a href="#number-of-neighbours-to-derive-knn-graph-for-scanpy-computegraph-tool" id="markdown-toc-number-of-neighbours-to-derive-knn-graph-for-scanpy-computegraph-tool">Number of neighbours to derive kNN graph (for <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</a></li>
+  <li><a href="#perplexity-for-scanpy-runtsne-tool" id="markdown-toc-perplexity-for-scanpy-runtsne-tool">Perplexity (for <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</a></li>
+  <li><a href="#resolution-for-scanpy-findcluster-tool" id="markdown-toc-resolution-for-scanpy-findcluster-tool">Resolution (for <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</a></li>
+  <li><a href="#additional-steps" id="markdown-toc-additional-steps">Additional steps</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="get-data">Get Data</h1>
+<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction (<span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>). You can download the dataset below or import the history with the starting data.</p>
+
+<p>Here are several ways of getting our toy dataset – choose whichever you like!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Data upload - Import history</div>
+
+  <ol>
+    <li>
+      <p>Import history from: <a href="https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-1">example input history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Data upload - Add to history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/8011681">Zenodo</a> or from
+the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">single-cell</code>
+ -&gt; <code class="language-plaintext highlighter-rouge">Scanpy Parameter Iterator</code>):</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/8011681/files/Scanpy_RunPCA_AnnData_object.h5ad
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the dataset if you wish: <code class="language-plaintext highlighter-rouge">Scanpy RunPCA: AnnData object</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="workflow">Workflow</h1>
+
+<p>This tutorial is an extension of the full analysis shown in <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore Single-cell RNA-seq Data</a> tutorial in the Single-cell RNA-seq: Case Study series. So if you’ve been working through it, you can use your dataset from that tutorial here. If you haven’t completed it but you’re interested in how we get to this point, feel free to have a look at the mentioned tutorial.</p>
+
+<p>Our starting data will be the output of <strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. It is part of the full analysis tutorial, but we will only focus on a smaller and shortened bit of the <a href="https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">full workflow</a> to show the application of the Parameter Iterator. Our workflow consists of the following steps:</p>
+
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow.png" alt="Workflow that we are going to use in this tutorial: Scanpy RunPCA, Scanpy ComputeGraph, Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed. " width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Shortened workflow that we are going to use in this tutorial.</figcaption></figure>
+
+<p><br />
+For the detailed explanation of the tools presented above, check out <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a>.</p>
+
+<h1 id="inputs">Inputs</h1>
+<p>Scanpy ParameterIterator tool currently works only for the following parameters:</p>
+<ol>
+  <li>Number of neighbours to derive kNN graph (for <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+  <li>Perplexity (for <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+  <li>Resolution (for <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+</ol>
+
+<p>There are two formats of the input values:</p>
+<ol>
+  <li>List of all parameter values to be iterated</li>
+  <li>Step increase values to be iterated</li>
+</ol>
+
+<h1 id="number-of-neighbours-to-derive-knn-graph-for-scanpy-computegraph-tool">Number of neighbours to derive kNN graph (for <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
+
+<p>Our dataset is right after PCA. Therefore we will now use <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbours affect the final outcome. It is important that <strong>n-neighbours is an integer</strong>.</p>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-float-vs-integer"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Float vs integer</div>
+  <p>Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.</p>
+</blockquote>
+
+<p>k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From <a href="https://github.com/lmcinnes/umap">UMAP developers</a>: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9" title="Scanpy ParameterIterator tool" aria-role="link"><strong>Scanpy ParameterIterator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><em>“Parameter type”</em>: <code class="language-plaintext highlighter-rouge">n-neighbours</code></li>
+        <li><em>“Choose the format of the input values”</em>: <code class="language-plaintext highlighter-rouge">List of all parameter values to be iterated</code></li>
+        <li><em>“User input values”</em>: <code class="language-plaintext highlighter-rouge">5,10,15,20,25,30,35,40</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - n-neighbours</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+    </li>
+    <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
+      <ul>
+        <li>navigate to <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon)</li>
+        <li>add tags accordingly - <em>n-neighbours_10</em>: <code class="language-plaintext highlighter-rouge">#n-neighbours_10</code> etc.</li>
+        <li>If you want to refresh your memory on how to add tags to datasets, have a look here:</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding a tag<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The output of the Parameter Iterator is the list of datasets. We will be working on dataset collections quite a lot, so if you want to gain more understanding of collection operations, visit the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">corresponding tutorial</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-derive-knn-graph-with-iterated-parameter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Derive kNN graph with iterated parameter</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9" title="Scanpy ComputeGraph tool" aria-role="link"><strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Scanpy RunPCA: AnnData object</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“File with n_neighbours, use with parameter iterator. Overrides the n_neighbors setting”</em>:
+          <ul>
+            <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<em>Dataset collection</em>)</li>
+            <li>Choose <code class="language-plaintext highlighter-rouge">Parameter iterated - n-neighbours</code></li>
+          </ul>
+        </li>
+        <li><em>“Use the indicated representation”</em>: <code class="language-plaintext highlighter-rouge">X_pca</code></li>
+        <li><em>“Number of PCs to use”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+  </ol>
+
+</blockquote>
+
+<p>You should now see the output is also a collection. If you click on that, you will see Anndata files, differing only by the n-neighbour value.</p>
+
+<p>Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this option is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-why-only-one-parameter-iteration-at-a-time"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why only one Parameter Iteration at a time?</div>
+  <p>Iterating the parameters within one tool will give you a list with X datasets: each dataset is the output with the given parameter value. However, if you want to use Parameter Iterator again within another tool, specifying Y parameter values, you <strong>will not</strong> get X x Y datasets as you might expect. Therefore you have to choose <strong>just one</strong> output file to be passed on to the next tool which will use Parameter Iterator again. Alternatively, you can use Parameter Iterator once and run the rest of the tools on dataset collection with just one parameter value.</p>
+</blockquote>
+
+<p>Where are we now in our workflow?</p>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_n-neighbours.png" alt="Image showing the step we are at: after Scanpy RunPCA, already run Scanpy ComputeGraph, and before Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed. " width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> We used Parameter Iterator for the n-neighbours to derive kNN graph, now we’ll complete our small workflow to see the differences at the end.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-complete-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Complete the workflow</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9" title="Scanpy RunTSNE tool" aria-role="link"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)</code></li>
+        <li><em>“Use the indicated representation”</em>: <code class="language-plaintext highlighter-rouge">X_pca</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“The perplexity is related to the number of nearest neighbours, select a value between 5 and 50”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9" title="Scanpy RunUMAP tool" aria-role="link"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>2A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Resolution, high value for more and smaller clusters”</em>: <code class="language-plaintext highlighter-rouge">0.6</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+
+</blockquote>
+
+<p>In fact, the differences will be only seen in the UMAP embedding, so we’ll plot only them. However, when you run your own analysis, you might want to check if there aren’t any changes in other embeddings as well.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-umap-embedding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Plot UMAP embedding</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)</code></li>
+        <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
+        <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If you click on the resulting collection you will see several plots. Click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to see how they differ. Galaxy’s <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for comparing multiple datasets.</p>
+
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/n_neighbours.png" alt="Eight graphs showing the differences between UMAP embeddings caused by different values of n-neighbours." width="2348" height="1164" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Comparison of UMAP embedding with different values of n-neighbours, perplexity set to 30 and resolution to 0.6.</figcaption></figure>
+
+<p>If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
+We will go forward with n-neighbour value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
+Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon). You can bring each individual dataset to the visible and active datasets by clicking <em>Unhide</em>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-unhide-the-dataset-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Unhide the dataset of interest</div>
+  <ol>
+    <li>In <em>Show hidden</em> find the dataset <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on data X and data Y: Graph object AnnData</code> with the tag <code class="language-plaintext highlighter-rouge">#n-neighbours_15</code> (or any value that you want to go forward with).</li>
+    <li>Click on <em>Unhide</em></li>
+    <li>Your chosen dataset is now visible amongst the active datasets in your history!</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="perplexity-for-scanpy-runtsne-tool">Perplexity (for <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
+
+<p>Let’s have another look at our wee workflow.</p>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png" alt="Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with perplexity parameter.</figcaption></figure>
+
+<p>The next tool in our workflow is Scanpy RunTSNE which takes the parameter perplexity. Even though the tool description says that this value should be an integer, we tested it with floats as well and it works well, so you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run Parameter Iterator again.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9" title="Scanpy ParameterIterator tool" aria-role="link"><strong>Scanpy ParameterIterator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><em>“Parameter type”</em>: <code class="language-plaintext highlighter-rouge">perplexity</code></li>
+        <li><em>“Choose the format of the input values”</em>: <code class="language-plaintext highlighter-rouge">Step increase values to be iterated</code></li>
+        <li><em>“Starting value”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
+        <li><em>“Step”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><em>“Ending value”</em>: <code class="language-plaintext highlighter-rouge">45</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - perplexity</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+    </li>
+    <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
+      <ul>
+        <li>navigate to <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon)</li>
+        <li>add tags accordingly - <em>perplexity_15</em>: <code class="language-plaintext highlighter-rouge">#perplexity_15</code> etc.</li>
+        <li>If you want to refresh your memory on how to add tags to datasets, have a look here:</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding a tag<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-runtsne-with-iterated-parameter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  RunTSNE with iterated parameter</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9" title="Scanpy RunTSNE tool" aria-role="link"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on data X and data Y: Graph object AnnData</code> with the tag <code class="language-plaintext highlighter-rouge">#n-neighbours_15</code></li>
+        <li><em>“Use the indicated representation”</em>: <code class="language-plaintext highlighter-rouge">X_pca</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“The perplexity is related to the number of nearest neighbours”</em>:
+          <ul>
+            <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<em>Dataset collection</em>)</li>
+            <li>Choose <code class="language-plaintext highlighter-rouge">Parameter iterated - perplexity</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+  </ol>
+
+</blockquote>
+
+<p>Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the plots to choose the best value for further analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-complete-the-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Complete the workflow</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9" title="Scanpy RunUMAP tool" aria-role="link"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)</code></li>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Resolution, high value for more and smaller clusters”</em>: <code class="language-plaintext highlighter-rouge">0.6</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning</div>
+  <p>In <em>Use programme defaults</em> you can specify <em>Additional suffix to the name of the slot to save the embedding</em> – if it’s included, PERPLEXITY will be substituted with the value of the perplexity setting. However, in that case you will get an error when using <strong>Scanpy PlotEmbed</strong>: due to the value included in the entry name, the tool will not recognise the correct embedding. Therefore, we leave that box unfilled even though it would make it easier to differentiate between datasets.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-tsne-embedding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Plot tSNE embedding</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (perplexity)</code></li>
+        <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">tsne</code></li>
+        <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Can you see those differences?</p>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/perplexity.png" alt="Graphs showing the differences between tSNE embeddings caused by different values of perplexity." width="2338" height="1170" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Comparison of tSNE  embedding with different values of perplexity, n-neighbours set to 15 and resolution to 0.6.</figcaption></figure>
+
+<p>What do you think about those plots? Which value would you choose? Well, we will go forward with a perplexity value equal to 30 to demonstrate the final step.</p>
+
+<h1 id="resolution-for-scanpy-findcluster-tool">Resolution (for <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
+
+<p>Where is <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in our workflow?</p>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png" alt="Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can use the Parameter Iterator with resolution parameter.</figcaption></figure>
+
+<p>The input data for the <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is the output of <strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, so let’s get this single dataset with the parameter values (from previous tools) of our choice, that is n-neighbours=15 and perplexity=30.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-unhide-the-dataset-of-interest-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Unhide the dataset of interest</div>
+  <ol>
+    <li>In <em>Show hidden</em> find the dataset <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on data X: UMAP object AnnData</code> with the tags <code class="language-plaintext highlighter-rouge">#n-neighbours_15</code> and <code class="language-plaintext highlighter-rouge">#perplexity_30</code> (or any value that you want to go forward with).</li>
+    <li>Click on <em>Unhide</em></li>
+    <li>Your chosen dataset is now visible amongst the active datasets in your history!</li>
+  </ol>
+
+</blockquote>
+
+<p>The last tool that we can use Parameter Iterator for is <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. We will iterate over the resolution values and in this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9" title="Scanpy ParameterIterator tool" aria-role="link"><strong>Scanpy ParameterIterator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_parameter_iterator/scanpy_parameter_iterator/0.0.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><em>“Parameter type”</em>: <code class="language-plaintext highlighter-rouge">resolution</code></li>
+        <li><em>“Choose the format of the input values”</em>: <code class="language-plaintext highlighter-rouge">Step increase values to be iterated</code></li>
+        <li><em>“Starting value”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><em>“Step”</em>: <code class="language-plaintext highlighter-rouge">0.2</code></li>
+        <li><em>“Ending value”</em>: <code class="language-plaintext highlighter-rouge">1.4</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - resolution</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+    </li>
+    <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
+      <ul>
+        <li>navigate to <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon)</li>
+        <li>add tags accordingly - <em>resolution_0.2</em>: <code class="language-plaintext highlighter-rouge">#resolution_0.2</code> etc.</li>
+        <li>If you want to refresh your memory on how to add tags to datasets, have a look here:</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Adding a tag<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add a tag  starting with <code class="language-plaintext highlighter-rouge">#</code>     <ul>       <li>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</li>     </ul>   </li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-findcluster-with-iterated-parameter"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  FindCluster with iterated parameter</div>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on data X: UMAP object AnnData</code> with the tags <code class="language-plaintext highlighter-rouge">#n-neighbours_15</code> and <code class="language-plaintext highlighter-rouge">#perplexity_30</code></li>
+      </ul>
+      <ul>
+        <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“File with resolution, use with parameter iterator. Overrides the resolution setting”</em>:
+          <ul>
+            <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<em>Dataset collection</em>)</li>
+            <li>Choose <code class="language-plaintext highlighter-rouge">Parameter iterated - resolution</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+  </ol>
+
+</blockquote>
+
+<p>You can see the effect of resolution parameter on all embeddings: UMAP, tSNE and PCA so you can plot them all and compare the granularity of the clusters. It is also useful to see how the equal increments affect the clustering and what is the rate of change of the granularity.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-plot-the-embeddings"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Plot the embeddings</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code></li>
+        <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">pca</code></li>
+        <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+<em>You can re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the same tool again, but change <code class="language-plaintext highlighter-rouge">pca</code> to <code class="language-plaintext highlighter-rouge">tsne</code> and then finally to <code class="language-plaintext highlighter-rouge">umap</code> in order to skip the following two steps.</em></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code></li>
+        <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">tsne</code></li>
+        <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy9</span></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input object in AnnData/Loom format”</em> (make sure you choose <em>Dataset collection</em>): <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code></li>
+        <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
+        <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">louvain</code></li>
+        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>That’s the last tool in our workflow which uses Parameter Iterator! Let’s have a final look at the generated plots.</p>
+
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/resolution_pca.png" alt="Graphs showing the differences between PCA embeddings caused by different values of resolution." width="2326" height="1207" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Comparison of PCA embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.</figcaption></figure>
+
+<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/resolution_tsne.png" alt="Graphs showing the differences between tSNE embeddings caused by different values of resolution." width="2316" height="1208" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Comparison of tSNE embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.</figcaption></figure>
+
+<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/resolution_umap.png" alt="Graphs showing the differences between UMAP embeddings caused by different values of resolution." width="2326" height="1216" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Comparison of UMAP embedding with different values of resolution, with n-neighbours set to 15 and perplexity to 30.</figcaption></figure>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p>Still not sure which value works best? For more explanation and in-depth analysis, please read through <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a>. Hopefully it will give you more insight into interpretation of the resulting plots.</p>
+</blockquote>
+
+<h1 id="additional-steps">Additional steps</h1>
+<ul>
+  <li>
+    <p>It may happen that some of the values you choose will give an error, but some will work fine. In that case, you can use <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Filter failed datasets</strong> tool to remove datasets with errors from a collection.</p>
+  </li>
+  <li>
+    <p>If you still haven’t found an answer that would help you with the parameter iteration in your own analysis, check out <a href="https://usegalaxy.eu/published/workflow?id=8f677efac7100097">another workflow</a> which has some extra steps, not directly related to our analysis. But it might contain steps that would be helpful for you.</p>
+  </li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p>If you feel confident both with your data and with the Galaxy tools, you can try to accelerate the process and plot the results of parameter iteration before proceeding to the next step (if that’s possible, oftentimes you would have to run the next tool to get sensible results). Then you can select one dataset from the collection even before running the next tool supported by another Parameter Iterator.</p>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>You might want to consult your results with this <a href="https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated">control history</a>, or check out the <a href="https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow">workflow</a> for this tutorial. You can also continue to analyse this data by returning to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial.</p>
+
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> In this tutorial you have learnt how to use Parameter Iterator with the number of nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Eventually, you were able to choose the most optimal values for the analysis. Hopefully this tool will make you more confident with the choices you make in terms of the parameters that are crucial for the correct interpretation of biological data.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Scanpy ParameterIterator can be used for n-neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).</p>
+</li>
+                        
+                        <li><p>You can enter the parameter values either as a list or as step increase values to be iterated.</p>
+</li>
+                        
+                        <li><p>Parameter Iterator is a useful tool to quiclky and easily compare the differences in the outputs caused by the changed parameter values. Hence it allows to choose the most optimal parameter values.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/single-cell/faqs/">FAQ page for the Single Cell topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/single-cell#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li></ol>
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Scanpy Parameter Iterator (Single Cell)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Julia Jakiela,  <b>Scanpy Parameter Iterator (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{single-cell-scanpy_parameter_iterator,
+author = "Julia Jakiela",
+	title = "Scanpy Parameter Iterator (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://www.eosc-life.eu/wp-content/themes/eosc-life-v2/assets/images/eosclogo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/eosc-life/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>EOSC-Life has received funding from the European Union’s Horizon 2020 programme under grant agreement number 824087</p>
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: scanpy_compute_graph
+  owner: ebi-gxa
+  revisions: 6417cccad133
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_find_cluster
+  owner: ebi-gxa
+  revisions: 2ccd9f9e2cd0
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_parameter_iterator
+  owner: ebi-gxa
+  revisions: a8c73996ac50
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_plot_embed
+  owner: ebi-gxa
+  revisions: 35f6611fb8c3
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_run_tsne
+  owner: ebi-gxa
+  revisions: 181d61d2f3cd
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: scanpy_run_umap
+  owner: ebi-gxa
+  revisions: bd4a244faeb8
+  tool_panel_section_label: Single Cell
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4eea383c7bb20f9d33cca3584cad795fc64d8ffd">4eea383</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1689749591'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
