@@ -214,7 +214,7 @@ For alignment, we will use RNA-STAR for performance and splice-awareness.
 >    - *"Single-end or paired-end reads"*: `Single-end`
 >        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file"*: `Reads2` (output of **UMI-tools extract** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
->        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
+>        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model but provide a gtf`
 >            - {% icon param-file %} *"Select reference genome"*: `Mus Musculus (mm10)` (Mouse)
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `Mus_musculus.GRCm38.93.mm10.UCSC.ncbiRefSeq`
 > 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9) %} with the following parameters:
