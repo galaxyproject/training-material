@@ -551,9 +551,48 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 
 ## Merge known table
 
-> <details-title> Example </details-title>
+This step allows to incorporate the knowledge of known metabolites or historically detected features on the same machinery to help detect and quantify lower-intensity peaks. The features we have found so far are merged with the data frame of known features. Then we will recover the weaker signals and repeat all the previous steps. Finally, the data frame of known metabolites and historical features is updated with the new information from the measured data.
+
+> <details-title> Known table with example </details-title>
 > 
-> **TODO** show both tables and how they are merged
+> The known table can contain these columns: *chemical_formula*, *HMDB_ID*, *KEGG_compound_ID*, *mass*, *ion.type* (the ion form), *m.z* (either theoretical or mean observed m/z value of previously found features), *Number_profiles_processed* (the total number of processed samples to build this database), *Percent_found* (the percentage of historically processed samples in which the feature appeared), *mz_min* (minimum observed m/z value), *mz_max* (maximum observed m/z value), *RT_mean* (mean observed retention time), *RT_sd* (standard deviation of observed retention time), *RT_min* (minimum observed retention time), *RT_max* (maximum observed retention time), *int_mean.log* (mean observed log intensity), *int_sd.log* (standard deviation of observed log intensity), *int_min.log* (minimum observed log intensity), *int_max.log* (maximum observed log intensity).
+> 
+> Let us have the known table with the following contents:
+> 
+> > chemical_formula | HMDB_ID | KEGG_compound_ID | mass | ion.type | m.z |
+> > -----------------|---------|------------------|------|----------|-----|
+> > ... | ... | ... | ... | ... | ... |
+> > C5H10O5 | HMDB00098 | C00181 | 150.05282343 | M+H   | 151.06009942999998 |
+> > C8H10N4O3 | HMDB02123 | NA | 210.075290206 | M+H   | 211.082566206 |
+> > C18H20N2S | HMDB15038 | C07175 | 296.13471934 | M+H   | 297.14199534 |
+> > C16H13ClN2O2 | HMDB14376 | C07125 | 300.066555377 | M+H   | 301.073831377 |
+> > C20H28O8 | HMDB32844 | NA | 396.178417872 | M+H   | 397.185693872 |
+> > ... | ... | ... | ... | ... | ... |
+> {: .matrix}
+>
+> Then the information about m/z will be added to our feature table for further processing: 
+>
+> > |  id   | mz           |  mzmin       |  mzmax        |  rt            |  rtmin        |  rtmax        |   npeaks  |  21_qc_no_dil_milliq   |  29_qc_no_dil_milliq   |  8_qc_no_dil_milliq    |
+> > |-------|--------------|--------------|---------------|----------------|---------------|---------------|-----------|------------------------|------------------------|------------------------|
+> > |  1    | 70.03707021  |  70.037066   |  70.0370750   |  294.1038014   |  294.0634942  |  294.149985   |   3       |  1                     |  1                     |  1                     |
+> > |  2    | 70.06505677  |  70.065045   |  70.0650676   |  141.9560055   |  140.5762528  |  143.335758   |   2       |  1                     |  0                     |  1                     |
+> > |  57   | 78.04643252  |  78.046429   |  78.0464325   |  294.0063397   |  293.9406777  |  294.072001   |   2       |  1                     |  1                     |  0                     |
+> > |  ...  | ...          |   ...        |  ...          |  ...           |  ...          |  ...          |   ...     |  ...                   |  ...                   |  ...                   |
+> > |  1871  | 151.06009942999998 |   NA       |  NA          |  NA          |  NA     |  NA     |   NA |  NA              |  NA              |  NA              |
+> > |  1872  | 211.082566206 |   NA   |  NA     |  NA      |  NA     |  NA     |   NA |  NA              |  NA              |  NA              |
+> > |  1873  | 297.14199534 |   NA   |  NA     |  NA      |  NA     |  NA     |   NA |  NA              |  NA              |  NA              |
+> > |  1874  | 301.073831377 |   NA   |  NA     |  NA      |  NA     |  NA     |   NA |  NA              |  NA              |  NA              |
+> > |  1875  | 397.185693872 |   NA   |  NA     |  NA      |  NA     |  NA     |   NA |  NA              |  NA              |  NA              |
+> > |  ...  | ...          |   ...        |  ...          |  ...           |  ...          |  ...          |   ...     |  ...                   |  ...                   |  ...                   |
+> {: .matrix}
+>
+> Note that the data values are only illustrative.
+>
+{: .details}
+
+> <details-title> Key parameters </details-title>
+> 
+> - **Match tolerance [ppm]** - The ppm tolerance to match identified features to known metabolites/features, depends on the mass accuracy of your machine.
 >
 {: .details}
 
@@ -758,9 +797,28 @@ Hybrid approach combines unsupervised techniques with supervised or targeted met
 
 ## Merge known table (2nd round)
 
-> <details-title> Example </details-title>
+> <details-title> Updated known table with example </details-title>
 > 
-> **TODO** show both tables and how they are merged
+> After finishing all steps, we can include all new knownledge into existing database:
+> 
+> > chemical_formula | HMDB_ID | KEGG_compound_ID | mass | ion.type | m.z | Number_profiles_processed | Percent_found | mz_min | mz_max | RT_mean | RT_sd | RT_min | RT_max | int_mean(log) | int_sd(log) | int_min(log) | int_max(log)
+> > -----------------|---------|------------------|------|----------|-----|---------------------------|---------------|--------|--------|---------|-------|--------|--------|---------------|-------------|---------------|--------------|
+> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+> > C5H10O5 | HMDB00098 | C00181 | 150.05282343 | M+H   | 151.06009942999998 | 3.0 | 1.0 | 151.06009942999998 | 151.06172515032375 | 191.2551471245085 | 0.4430276002417259 | 190.8004248337492 | 191.68547177224977 | 9.37396208102855 | 0.0247741820684487 | 9.347567941998712 | 9.396712797272118
+> > C8H10N4O3 | HMDB02123 | NA | 210.075290206 | M+H   | 211.082566206 | 3.0 | 1.0 | 211.07901081624345 | 211.082566206 | 167.9441831090941 | 0.4031343080704094 | 167.54668517707515 | 168.3527267744501 | 7.199170317946007 | 0.0254833388951392 | 7.1698777762386285 | 7.216237500092092
+> > C18H20N2S | HMDB15038 | C07175 | 296.13471934 | M+H   | 297.14199534 | 3.0 | 1.0 | 297.1371550623409 | 297.14199534 | 109.97665012187495 | 95.2526270699826 | 0.0 | 166.34891329963853 | 6.332251446676835 | 0.2113801719274527 | 6.182783093698555 | 6.481719799655116
+> > C16H13ClN2O2 | HMDB14376 | C07125 | 300.066555377 | M+H   | 301.073831377 | 3.0 | 1.0 | 301.0736065580818 | 301.07921477804985 | 115.87415505877158 | 100.34999045612813 | 0.0 | 173.88690693535776 | 6.828260757688546 | 0.0399063569267865 | 6.800042702093164 | 6.856478813283927
+> > C20H28O8 | HMDB32844 | NA | 396.178417872 | M+H   | 397.185693872 | 3.0 | 1.0 | 397.1817069960474 | 397.185693872 | 109.22118480492205 | 94.5892574861945 | 0.0 | 164.2527571907555 | 6.610149642385979 | 0.0322116360186999 | 6.587372576124044 | 6.632926708647915
+> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+> {: .matrix}
+>
+> Note that the data values are only illustrative.
+>
+{: .details}
+
+> <details-title> Key parameters </details-title>
+> 
+> - **Minimal occurence of feature** - The number of spectra a new feature must be present for it to be added to the database. We recommend setting this parameter in a stringent manner.
 >
 {: .details}
 
