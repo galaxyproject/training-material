@@ -158,7 +158,7 @@ https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diver
 
 Metrics of alpha diversity can be grouped into different classes:
 **richness**: estimate the quantity of distinct species within a sample
-- **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef. %})
+- **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef.1969 %})
                                        
    $$ D = \frac{(S - 1)}{\Log(n)} $$
    
@@ -270,7 +270,7 @@ Metrics of alpha diversity can be grouped into different classes:
 
 > <comment-title></comment-title>
 >
-> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and [Vegan](https://github.com/vegandevs/vegan).
+> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 ({% cite Bolyen.2019 %}) and [Vegan](https://github.com/vegandevs/vegan).
 >
 >
 > QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.
