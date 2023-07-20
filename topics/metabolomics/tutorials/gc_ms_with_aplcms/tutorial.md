@@ -609,23 +609,21 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can I use my custom database of known metabolites?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, you can use custom database with similar structure as described above.
 > >
 > {: .solution}
 >
 {: .question}
 
 ## Recover weaker signals
+
+This step recovers features which are present in a sample, but might have been filtered out initially as noise due to low signal intensity, as well as those possibly obtained by merging the known table into our feature table. 
 
 > ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
@@ -644,8 +642,6 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
 > 1. Question1?
@@ -662,6 +658,8 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Compute clusters (3rd round)
 
+Now we repeat the whole workflow since we might have added new features, and we start with the clustering.
+
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
@@ -670,8 +668,6 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -689,14 +685,14 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Compute template (2nd round)
 
+With new cluters, we need to prepare a new template for time correction step.
+
 > ### {% icon hands_on %} Hands-on: Compute template
 >
 > 1. {% tool [recetox-aplcms - compute template](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_template/recetox_aplcms_compute_template/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input data"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -714,6 +710,8 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Correct time (2nd round)
 
+Adding features from the known table might require to apply the retention time correction again.
+
 > ### {% icon hands_on %} Hands-on: Correct time
 >
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
@@ -723,8 +721,6 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -742,6 +738,8 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Compute clusters (4th round)
 
+Correcting retention time requires updating the clustering.
+
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
@@ -750,8 +748,6 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -769,6 +765,8 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Features alignment (2nd round)
 
+And this all leads to final computation of features alignment.
+
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
@@ -778,8 +776,6 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >    - *"Minimal occurrence in samples"*: `2`
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -797,24 +793,7 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Merge known table (2nd round)
 
-> <details-title> Updated known table with example </details-title>
-> 
-> After finishing all steps, we can include all new knownledge into existing database:
-> 
-> > chemical_formula | HMDB_ID | KEGG_compound_ID | mass | ion.type | m.z | Number_profiles_processed | Percent_found | mz_min | mz_max | RT_mean | RT_sd | RT_min | RT_max | int_mean(log) | int_sd(log) | int_min(log) | int_max(log)
-> > -----------------|---------|------------------|------|----------|-----|---------------------------|---------------|--------|--------|---------|-------|--------|--------|---------------|-------------|---------------|--------------|
-> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
-> > C5H10O5 | HMDB00098 | C00181 | 150.05282343 | M+H   | 151.06009942999998 | 3.0 | 1.0 | 151.06009942999998 | 151.06172515032375 | 191.2551471245085 | 0.4430276002417259 | 190.8004248337492 | 191.68547177224977 | 9.37396208102855 | 0.0247741820684487 | 9.347567941998712 | 9.396712797272118
-> > C8H10N4O3 | HMDB02123 | NA | 210.075290206 | M+H   | 211.082566206 | 3.0 | 1.0 | 211.07901081624345 | 211.082566206 | 167.9441831090941 | 0.4031343080704094 | 167.54668517707515 | 168.3527267744501 | 7.199170317946007 | 0.0254833388951392 | 7.1698777762386285 | 7.216237500092092
-> > C18H20N2S | HMDB15038 | C07175 | 296.13471934 | M+H   | 297.14199534 | 3.0 | 1.0 | 297.1371550623409 | 297.14199534 | 109.97665012187495 | 95.2526270699826 | 0.0 | 166.34891329963853 | 6.332251446676835 | 0.2113801719274527 | 6.182783093698555 | 6.481719799655116
-> > C16H13ClN2O2 | HMDB14376 | C07125 | 300.066555377 | M+H   | 301.073831377 | 3.0 | 1.0 | 301.0736065580818 | 301.07921477804985 | 115.87415505877158 | 100.34999045612813 | 0.0 | 173.88690693535776 | 6.828260757688546 | 0.0399063569267865 | 6.800042702093164 | 6.856478813283927
-> > C20H28O8 | HMDB32844 | NA | 396.178417872 | M+H   | 397.185693872 | 3.0 | 1.0 | 397.1817069960474 | 397.185693872 | 109.22118480492205 | 94.5892574861945 | 0.0 | 164.2527571907555 | 6.610149642385979 | 0.0322116360186999 | 6.587372576124044 | 6.632926708647915
-> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
-> {: .matrix}
->
-> Note that the data values are only illustrative.
->
-{: .details}
+After finishing all steps, we can include all new knownledge into existing database.
 
 > <details-title> Key parameters </details-title>
 > 
@@ -836,7 +815,24 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> <details-title> Example of updated known table </details-title>
+> 
+> Example how can be new knowledge included in the known table:
+> 
+> > chemical_formula | HMDB_ID | KEGG_compound_ID | mass | ion.type | m.z | Number_profiles_processed | Percent_found | mz_min | mz_max | RT_mean | RT_sd | RT_min | RT_max | int_mean(log) | int_sd(log) | int_min(log) | int_max(log)
+> > -----------------|---------|------------------|------|----------|-----|---------------------------|---------------|--------|--------|---------|-------|--------|--------|---------------|-------------|---------------|--------------|
+> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+> > C5H10O5 | HMDB00098 | C00181 | 150.05282343 | M+H   | 151.06009942999998 | 3.0 | 1.0 | 151.06009942999998 | 151.06172515032375 | 191.2551471245085 | 0.4430276002417259 | 190.8004248337492 | 191.68547177224977 | 9.37396208102855 | 0.0247741820684487 | 9.347567941998712 | 9.396712797272118
+> > C8H10N4O3 | HMDB02123 | NA | 210.075290206 | M+H   | 211.082566206 | 3.0 | 1.0 | 211.07901081624345 | 211.082566206 | 167.9441831090941 | 0.4031343080704094 | 167.54668517707515 | 168.3527267744501 | 7.199170317946007 | 0.0254833388951392 | 7.1698777762386285 | 7.216237500092092
+> > C18H20N2S | HMDB15038 | C07175 | 296.13471934 | M+H   | 297.14199534 | 3.0 | 1.0 | 297.1371550623409 | 297.14199534 | 109.97665012187495 | 95.2526270699826 | 0.0 | 166.34891329963853 | 6.332251446676835 | 0.2113801719274527 | 6.182783093698555 | 6.481719799655116
+> > C16H13ClN2O2 | HMDB14376 | C07125 | 300.066555377 | M+H   | 301.073831377 | 3.0 | 1.0 | 301.0736065580818 | 301.07921477804985 | 115.87415505877158 | 100.34999045612813 | 0.0 | 173.88690693535776 | 6.828260757688546 | 0.0399063569267865 | 6.800042702093164 | 6.856478813283927
+> > C20H28O8 | HMDB32844 | NA | 396.178417872 | M+H   | 397.185693872 | 3.0 | 1.0 | 397.1817069960474 | 397.185693872 | 109.22118480492205 | 94.5892574861945 | 0.0 | 164.2527571907555 | 6.610149642385979 | 0.0322116360186999 | 6.587372576124044 | 6.632926708647915
+> > ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... |
+> {: .matrix}
+>
+> Note that the data values are only illustrative.
+>
+{: .details}
 
 > ### {% icon question %} Questions
 >
@@ -855,5 +851,4 @@ This step allows to incorporate the knowledge of known metabolites or historical
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+**TODO** comment on resulting tables
