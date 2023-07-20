@@ -286,7 +286,7 @@ In this tutorial we use:
     >    - *"Print scientific names instead of just taxids"*: `Yes`
     >    - In *"Create Report"*:
     >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
-    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
+    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `No`
     >        - *"Report counts for ALL taxa, even if counts are zero"*: `Yes`
     >        - *"Report minimizer data"*: `Yes`
     >    - *"Select a Kraken2 database"*: `kalamari`
