@@ -26,6 +26,7 @@ contributions:
    authorship:
     - bebatut
     - EngyNasr
+    - paulzierep
    editing:
     - hrhotz
     - wm75
@@ -318,7 +319,9 @@ In this tutorial we use:
     > <hands-on-title> Host read filtering </hands-on-title> 
     >
     > 1. {% tool [Krakentools: Extract Kraken Reads By ID](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1) %} with the following parameters:
-    >    - {% icon param-files %} *"Tabular Dataset to filter"*: `Classification` outputs of **Kraken2** {% icon tool %}
+    >    - *"Single or paired reads?"*: `Single`
+    >    - {% icon param-files %} *"Results"*: `Kraken2 with Kalamri database Results` outputs of **Kraken2** {% icon tool %}
+    >    - {% icon param-files %} *"Report"*: `Kraken2 with Kalamri database Report` outputs of **Kraken2** {% icon tool %}
     >    - *"Taxonomix ID(s) to match"*:`9031 9606 9913`
     >
     >       We specify here the taxonomic ID of the hosts so we can filter reads assigned to these hosts. Kraken2 uses taxonomic IDs from NCBI, the IDs for a specific taxa can be found at [ncbi](https://www.ncbi.nlm.nih.gov/taxonomy). To be generic, we remove here:
