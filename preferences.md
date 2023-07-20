@@ -154,22 +154,20 @@ Here we expose the several types of data storage that browsers offer, so you can
 
 This data is never transferred to the server
 
-<table id="settings-data">
-</table>
+<dl id="settings-data">
+</dl>
 
 <script>
 let gtnSettingsKeys = Object.keys(window.localStorage);
 gtnSettingsKeys.sort()
 gtnSettingsKeys.forEach(k => {
 	// Add a row to the table with this key/value
-	var tr = document.createElement("tr");
-	var td = document.createElement("td");
-	td.innerHTML = `<code>${k}</code>`;
-	tr.appendChild(td);
-	var td = document.createElement("td");
-	td.innerHTML = `<code>${window.localStorage[k]}</code>`;
-	tr.appendChild(td);
-	document.getElementById("settings-data").appendChild(tr);
+	var dt = document.createElement("dt");
+	var dd = document.createElement("dd");
+	dt.innerHTML = `${k}`;
+	dd.innerHTML = `<code>${window.localStorage[k]}</code>`;
+	document.getElementById("settings-data").appendChild(dt);
+	document.getElementById("settings-data").appendChild(dd);
 })
 </script>
 
@@ -177,21 +175,19 @@ gtnSettingsKeys.forEach(k => {
 
 This data is never transferred to the server, and is deleted when your browser window closes.
 
-<table id="session-data">
-</table>
+<dl id="session-data">
+</dl>
 
 <script>
 let gtnSessionKeys = Object.keys(window.sessionStorage);
 gtnSessionKeys.sort()
 gtnSessionKeys.forEach(k => {
 	// Add a row to the table with this key/value
-	var tr = document.createElement("tr");
-	var td = document.createElement("td");
-	td.innerHTML = `<code>${k}</code>`;
-	tr.appendChild(td);
-	var td = document.createElement("td");
-	td.innerHTML = `<code>${window.localStorage[k]}</code>`;
-	tr.appendChild(td);
-	document.getElementById("session-data").appendChild(tr);
+	var dt = document.createElement("dt");
+	var dd = document.createElement("dd");
+	dt.innerHTML = `${k}`;
+	dd.innerHTML = `<code>${window.sessionStorage[k]}</code>`;
+	document.getElementById("session-data").appendChild(dt);
+	document.getElementById("session-data").appendChild(dd);
 })
 </script>
