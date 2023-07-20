@@ -1,13 +1,13 @@
 ---
 layout: tutorial_hands_on
-title: Calculating α and β diversity with Krakentools
+title: Calculating α and β diversity from microbiome taxonomic data
 zenodo_link: xxx
 questions:
-- How many different species are present in my sample? How do I additionally take their relative abundance into account?
-- How similar or how dissimilar are my samples?
-- What are the different metrics used to calculate the diversity of my samples?
+- How many different taxons are present in my sample? How do I additionally take their relative abundance into account?
+- How similar or how dissimilar are my samples in term of taxonomic diversity?
+- What are the different metrics used to calculate the taxonomic diversity of my samples?
 objectives:
-- Explain what diversity is
+- Explain what taxonomic diversity is
 - Explain different metrics to calculate α and β diversity 
 - Apply Krakentools to calculate α and β diversity and understand the output
 level: Introductory
@@ -32,7 +32,7 @@ In various fields, diversity indexes are employed to understand and compare the 
 
 To study microbiome data, indirect methods like **metagenomics** can be used. Metagenomic samples contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
 
-Once we know which species are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data](https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html])), we can do diversity analyses.
+Once we know which taxons are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data]({% link topics/metagenomics/tutorials/taxonomic-profiling/tutorial.md %}])), we can do diversity analyses.
 
 Related to ecology, the term **diversity** describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:
 
@@ -40,13 +40,11 @@ Related to ecology, the term **diversity** describes the number of different spe
 
     It considers the number of different species in an environment (also referred to as species **richness**). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species **evenness**). 
 
-- **β diversity** measures the distance between two or more separate entities
-
-    It therefore describes the difference between two communities or ecosystems.
+- - **β diversity** compare the diversity between different communities by measuring their distance
 
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
-    ![α, β and γ diversity](./images/diversity_differences.png)
+![α, β and γ diversity](./images/diversity_differences.png)
   
 
 In this analysis we will use Galaxy for calculating the Shannon's alpha diversity index and the Bray-Curtis dissimilarity index for β diversity. 
@@ -61,13 +59,11 @@ Here we will use 2 datasets:
 
 The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.
 
-The datafiles are named according to the first four characters of the filenames.
-
 Originally, it was a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. The samples have than been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.md %}).
 
 In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1). For this tutorial, we will use the output file of Bracken.
 
-Here, to get an overview, you can find a Krona chart visualizing the different species present in the two samples.
+To get an overview, you can find a Krona chart visualizing the different species present in the two samples.
 
 <iframe id="krona" src="krona-kraken.html" frameBorder="0" width="100%" height="900px"> ![Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species)](./images/krona-kraken.png) </iframe>
 
@@ -81,7 +77,7 @@ Having a closer look at the Bracken output file, you find a table with seven col
  2. taxonomy ID
  3. taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
  4. reads assigned by Kraken
- 5. additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken to improve the result. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
+ 5. additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken using bayesian reestimation. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
  6.  sum of column 4 and column 5
  7. fraction of the reads assigned to the particular species and the total reads
 
@@ -138,9 +134,9 @@ We need now to import the data
 ![α diversity](./images/alphadiversity_metrics.png)
 
 Metrics of alpha diversity can be grouped into different classes:
-- **richness** indexes that estimate the quantity of distinct species within a sample
-- **evenness** indexes that evaluate the relative abundances of species rather than their total count
-- **diversity** indexes that incorporate both the relative abundances and total count of distinct species
+- **richness**: estimate the quantity of distinct species within a sample
+- **evenness**: evaluate the relative abundances of species rather than their total count
+- **diversity**: incorporate both the relative abundances and total count of distinct species
 
 ![richness and evenness](./images/alpha_diversity_richness_evenness.png)
 
@@ -149,23 +145,31 @@ Examples for **richness** indexes are:
 
 - **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef. %})
                                        
-   $$ D = (S - 1) / Log (n) $$
+   $$ D = \frac{(S - 1)}{\Log(n)} $$
    
-   S is the total number of species, and n is the total number of individuals in the sample                                                                                                                                                          
+   With
+   - $$S$$ the total number of species,
+   - $$n$$ the total number of individuals in the sample                                                                                                                                                          
 - **Chao1**, which estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness ({% cite Chao.1992 %}).
   
-   $$ S<sub>chao1</sub> = S<sub>obs</sub> + (n<sub>1</sub>(n<sub>1</sub> - 1))/(2(n<sub>2</sub> + 1)) $$
+   $$ S<sub>chao1</sub> = S<sub>obs</sub> + \frac{n<sub>1</sub>(n<sub>1</sub> - 1)}{2(n<sub>2</sub> + 1)} $$
   
-   S<sub>obs</sub> is the observed species richness, n<sub>1</sub> represents the number of species represented by a single individual (singletons), and n<sub>2</sub>       represents the number of species represented by two individuals (doubletons).
+   With:
+   - $$S<sub>obs</sub>$$ the observed species richness, 
+   - $$n<sub>1</sub>$$ the number of species represented by a single individual (singletons), 
+   - $$n<sub>2</sub>$$ the number of species represented by two individuals (doubletons).
   
 - **ACE** (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.    
                                                                              
 One example for **evenness** index is:
 
 - **Pielou’s evenness**, which quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness ({%cite Pielou.1966 %}).  
-   $$ J = H'/ln(S) $$
+
+   $$ J = \frac{H'}{ln(S)} $$
                                                                                 
-   H' is Shannon Weiner diversity and S is the total number of species in a sample, across all samples in dataset. 
+   With:
+   - $$H'$$ Shannon Weiner diversity
+   - $$S$$ the total number of species in a sample, across all samples in dataset. 
 
 Examples for **diversity** indexes are:
 
@@ -178,7 +182,7 @@ Examples for **diversity** indexes are:
 
    $$ D = n<sub>max</sub>/N $$
   
-   <sub>max</sub> is the abundance of the most dominant species, and N is the total number of individuals (sum of all abundances).                                                                                                                 | |
+   <sub>max</sub> is the abundance of the most dominant species, and N is the total number of individuals (sum of all abundances).
 - **Simpsons** index, which calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity ({% cite SIMPSON.1949 %}).
 
   $$ D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup> $$
@@ -217,23 +221,23 @@ Examples for **diversity** indexes are:
 > >
 > > 
 > > 1. 
-> >
-> >|                 | JC1A      | JP4D      |
-> >| --------------- | --------- | --------- |
-> >| Shannon         | 5,3441    | 6,4429    |
-> >| Berger-Parker   | 0,2299    | 0,0581    |
-> >| Simpson         | 0,9401    | 0,9926    |
-> >| Inverse Simpson | 16,6941   | 136,0287  |
-> >| Fisher          | 3240,0957 | 9163,5027 |
-> > 
-> >
-> > When the **Shannon index** is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.
-> > 
-> > When the **Berger-Parker index** is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.
-> > 
-> >  When the **Simpson's index** is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
+> >     
+> >     |                 | JC1A      | JP4D      |
+> >     | --------------- | --------- | --------- |
+> >     | Shannon         | 5,3441    | 6,4429    |
+> >     | Berger-Parker   | 0,2299    | 0,0581    |
+> >     | Simpson         | 0,9401    | 0,9926    |
+> >     | Inverse Simpson | 16,6941   | 136,0287  |
+> >     | Fisher          | 3240,0957 | 9163,5027 |
+> >      
+> >     
+> >      When the **Shannon index** is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.
+> >      
+> >      When the **Berger-Parker index** is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.
+> >      
+> >       When the **Simpson's index** is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
 > >  
-> >  When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
+> >       When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
 > >
 > > 
 > > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.                                                                   
@@ -309,9 +313,8 @@ These indexes have been developed to address specific research questions, accomm
    ![UniFrac](./images/unifrac.png)
 
 
-## Hands on: Calculate β diversity with Krakentools
 
-> <hands-on-title>Calculate α and β diversity with Krakentools</hands-on-title>
+> <hands-on-title>Calculate β diversity with Krakentools</hands-on-title>
 > 1. {% tool [Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)]([https://toolshed.g2.bx.psu.edu/view/iuc/krakentools_beta_diversity/b33f117e9b67]) %} with the following parameters:
 >   - *"Taxonomy file"*: `Dataset Collection`: uploaded Bracken output file 
 >   - *"Specify type of input file"*: `Bracken species abundance file`
