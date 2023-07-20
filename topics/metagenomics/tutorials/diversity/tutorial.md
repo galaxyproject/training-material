@@ -47,7 +47,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 ![α, β and γ diversity](./images/diversity_differences.png)
   
 
-In this analysis we will use Galaxy for calculating the Shannon's alpha diversity index and the Bray-Curtis dissimilarity index for β diversity. 
+In this analysis we will use Galaxy for calculating different alpha diversity indexes and the Bray-Curtis dissimilarity index for β diversity. 
 
 # Background on data
 
@@ -57,9 +57,7 @@ Here we will use 2 datasets:
 - `JP4D`: a microbiome sample collected from the Lagunita Fertilized Pond
 - `JC1A`: a **control** samples from a control mesocosm.
 
-The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits.
-
-Originally, it was a collection of paired-end data with R1 being the forward reads and R2 being the reverse reads. The samples have than been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.md %}).
+The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.md %}).
 
 In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1). For this tutorial, we will use the output file of Bracken.
 
@@ -69,17 +67,41 @@ To get an overview, you can find a Krona chart visualizing the different species
 
 The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.
 
-![Output file of Bracken](./images/bracken_output.png)
+``name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Paracoccus sp. MC1862	2760307	S	98	4	102	0.00169
+Paracoccus sp. AK26	2589076	S	85	8	93	0.00154
+Paracoccus sp. Arc7-R13	2500532	S	67	13	80	0.00133
+Paracoccus sp. BM15	1529068	S	27	1	28	0.00046
+Paracoccus sanguinis	1545044	S	142	37	179	0.00297
+Paracoccus contaminans	1945662	S	87	18	105	0.00174
+Paracoccus aminovorans	34004	S	86	26	112	0.00186``
 
-Having a closer look at the Bracken output file, you find a table with seven columns:
+> <question-title></question-title>
+>
+> What information do the different columns contain?
+>
+> > <solution-title></solution-title>
+> >
+> >  1. species name
+> >  2. taxonomy ID
+> >  3. taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
+> >  4. reads assigned by Kraken
+> >  5. additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken using bayesian reestimation. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
+> >  6.  sum of column 4 and column 5
+> >  7. fraction of the reads assigned to the particular species and the total reads
+> >
+> {: .solution}
+{: .question}
 
- 1. species name
- 2. taxonomy ID
- 3. taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species
- 4. reads assigned by Kraken
- 5. additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken using bayesian reestimation. For details on the procedure, have a look into the [Bracken publication](https://peerj.com/articles/cs-104/).
- 6.  sum of column 4 and column 5
- 7. fraction of the reads assigned to the particular species and the total reads
+
+> <details-title>More details on using input other than Bracken</details-title>
+>
+> It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank "species". This step is not necessary when using Bracken output as already only the species level is listed.
+>
+> xxx hands on: filter on specific taxonomic level using filter on column tool in galaxy
+> xxx show example of kraken and metaphlan output file
+>
+{: .details}
 
 > <agenda-title></agenda-title>
 >
@@ -132,17 +154,10 @@ We need now to import the data
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
 ![α diversity](./images/alphadiversity_metrics.png)
+https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36
 
 Metrics of alpha diversity can be grouped into different classes:
-- **richness**: estimate the quantity of distinct species within a sample
-- **evenness**: evaluate the relative abundances of species rather than their total count
-- **diversity**: incorporate both the relative abundances and total count of distinct species
-
-![richness and evenness](./images/alpha_diversity_richness_evenness.png)
-
-
-Examples for **richness** indexes are:
-
+**richness**: estimate the quantity of distinct species within a sample
 - **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef. %})
                                        
    $$ D = \frac{(S - 1)}{\Log(n)} $$
@@ -161,19 +176,22 @@ Examples for **richness** indexes are:
   
 - **ACE** (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.    
                                                                              
-One example for **evenness** index is:
 
+
+**evenness**: evaluate the relative abundances of species rather than their total count
+  
 - **Pielou’s evenness**, which quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness ({%cite Pielou.1966 %}).  
 
    $$ J = \frac{H'}{ln(S)} $$
                                                                                 
    With:
    - $$H'$$ Shannon Weiner diversity
-   - $$S$$ the total number of species in a sample, across all samples in dataset. 
+   - $$S$$ the total number of species in a sample, across all samples in dataset.
+ 
 
-Examples for **diversity** indexes are:
-
-- **Shannons** index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community ({% cite Shannon.1948 %}).
+   
+**diversity**: incorporate both the relative abundances and total count of distinct species
+  - **Shannons** index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community ({% cite Shannon.1948 %}).
 
    $$ H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>) $$
     
@@ -194,7 +212,11 @@ Examples for **diversity** indexes are:
 
    $$ S\=a\*ln(1+n/a) $$
                                                                
-   S is number of taxa, n is number of individuals and a is the Fisher's alpha.                                                                                                                                                                     
+   S is number of taxa, n is number of individuals and a is the Fisher's alpha. 
+
+![richness and evenness](./images/alpha_diversity_richness_evenness.png)
+
+                                                           
 
 **KrakenTools** is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool **Calculate alpha diversity** offers the possibility to calculate five different alpha diversity indexes:
 1. Shannon's alpha diversity
@@ -220,7 +242,7 @@ Examples for **diversity** indexes are:
 > > <solution-title></solution-title>
 > >
 > > 
-> > 1. 
+> > 1. The five alpha indexes available in Krakentools are: Shannon's alpha diversity, Berger Parker's alpha, Simpson's diversity, Inverse Simpson's diversity, Fisher's index. Below you can find a table comparing the different results for both the JC1A and JP4D sample as well as an explanation of the meaning of these values.
 > >     
 > >     |                 | JC1A      | JP4D      |
 > >     | --------------- | --------- | --------- |
@@ -248,31 +270,30 @@ Examples for **diversity** indexes are:
 
 > <comment-title></comment-title>
 >
-> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and Vegan.
+> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 and [Vegan](https://github.com/vegandevs/vegan).
 >
 >
 > QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.
 > 
 > Some of the key features and functionalities of QIIME 2 include:
-> 1. Data Import and Preprocessing: QIIME 2 supports the import of raw sequencing data and performs quality control and data preprocessing steps, such as demultiplexing, quality filtering, and primer removal.
-> 2. Taxonomic Assignments: The software enables taxonomic classification of microbial sequences using various algorithms and reference databases.
-> 3. Diversity Analysis: QIIME 2 allows users to explore and quantify microbial diversity within and between samples. It provides metrics for alpha diversity (within-sample diversity) and beta diversity (between-sample diversity).
-> 4. Community Analysis: Users can investigate the composition and structure of microbial communities, including taxonomic summaries, abundance profiles, and statistical comparisons between groups.
-> 5. Phylogenetic Analysis: QIIME 2 supports the construction of phylogenetic trees to infer evolutionary relationships among microbial taxa and perform phylogenetic diversity analysis.
-> 6. Statistical Analysis: The software offers a wide range of statistical methods for differential abundance analysis, correlation analysis, multivariate analysis, and other types of statistical tests.
-> 7. Visualization: QIIME 2 provides interactive and customizable visualizations to aid in the exploration and interpretation of microbiome data, including heatmaps, bar plots, PCoA plots, and taxonomic trees.
+> 1. Diversity Analysis: QIIME 2 allows users to explore and quantify microbial diversity within and between samples. It provides metrics for alpha diversity (within-sample diversity) and beta diversity (between-sample diversity).
+> 2. Data Import and Preprocessing
+> 3. Taxonomic Assignments
+> 4. Community Analysis
+> 5. Phylogenetic Analysis
+> 6. Statistical Analysiss.
+> 7. Visualization
 >
 > The vegan package is a community ecology package in the R programming language. It provides a wide range of tools and methods for analyzing and interpreting ecological data, particularly in the context of community ecology. The package is designed to handle multivariate data and offers various statistical techniques for studying species composition, diversity, and community dynamics.
 >
 > The vegan package encompasses several functionalities, including:
 >
 > 1. Diversity Analysis: vegan offers numerous diversity indices, such as species richness, Shannon diversity index, Simpson index, and many others. These indices allow researchers to quantify the diversity of species within a community and compare diversity between different samples or groups.
-> 2. Community Similarity: The package provides tools for measuring community similarity or dissimilarity, including popular metrics such as Bray-Curtis dissimilarity and Jaccard index. These metrics allow researchers to assess the degree of similarity between communities and perform clustering or ordination analyses.
-> 3. Ordination Techniques: vegan includes several ordination methods, such as Principal Component Analysis (PCA), Correspondence Analysis (CA), Non-Metric Multidimensional Scaling (NMDS), and Canonical Correspondence Analysis (CCA). These techniques aid in visualizing and exploring patterns in multivariate ecological data.
-> 4. Community Classification: The package offers tools for performing community classification and assessing the significance of group differences. It includes methods such as Permutational Multivariate Analysis of Variance (PERMANOVA) and Analysis of Similarities (ANOSIM).
-> 5. Ecological Network Analysis: vegan provides functions for analyzing ecological networks, including network visualization, calculation of network metrics (e.g., connectance, centrality), and testing network structure.
-> 6. Ecological Indices: The package includes various ecological indices, such as niche overlap indices, indicator species analysis, and null model analysis for testing community patterns against null hypotheses.
-> 7. Plotting and Visualization: vegan offers flexible plotting functions to visualize ecological data, including bar plots, scatter plots, biplots, and ordination plots.
+> 2. Ordination Techniques
+> 3. Community Classification:
+> 4. Ecological Network Analysis
+> 5. Ecological Indices
+> 6. Plotting and Visualization
 >
 {: .comment}
 
@@ -288,25 +309,35 @@ These indexes have been developed to address specific research questions, accomm
   
   $$ J(X, Y) =  \|  X ∩ Y\|  / \| X ∪ Y\| $$
   
-  X ∩ Y represents the intersection of sets X and Y (elements common to both sets), and X ∪ Y represents the union of sets X and Y (all unique elements from both sets combined)
+With:
+- $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
+- $$X ∪ Y$$ the union of sets X and Y (all unique elements from both sets combined)
   
 - **Sørensen Index**, which is similar to Jaccard Index, but accounts for species abundance ({% cite Srensen.1948 %}).
 
   $$ DSC = 2\| X ∩ Y\|  / \| X\| + \| Y\| $$
 
-  X ∩ Y represents the intersection of sets X and Y (elements common to both sets),  and \| X\| and \| Y \|  are the cardinalities of the two sets (i.e. the number of elements in each set)
+With:
+- $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
+- $$ \| X\| and \| Y \|$$  the cardinalities of the two sets (i.e. the number of elements in each set)
   
 - **Bray-Curtis Dissimilarity**, which measures the dissimilarity of species abundances between two samples ({% cite Bray.1957 %}).
 
   $$ BC<sub>ij</sub> = 1 - (2C<sub>ij</sub> / (S<sub>i</sub> + S<sub>j</sub>)) $$
 
-  C<sub>ij</sub> represents the sum of the absolute differences in abundances between corresponding species in samples i and j, S<sub>i</sub> represents the total abundance or sum of species abundances in sample i, and S<sub>j</sub> represents the total abundance or sum of species abundances in sample j
+With:
+- $$C<sub>ij</sub>$$ the sum of the absolute differences in abundances between corresponding species in samples i and j
+- $$S<sub>i</sub>$$ the total abundance or sum of species abundances in sample i
+- $$S<sub>j</sub>$$ the total abundance or sum of species abundances in sample j
   
 - **Kulczynski Dissimilarity**, which masures the dissimilarity in the proportional abundances of shared species.
 
   $$ D = 1 - (S<sub>AB</sub> / (S<sub>A</sub> + S<sub>B</sub> - 2S<sub>AB</sub>)) $$
 
-  S<sub>AB</sub> the number of shared OTUs between communities A and B, S<sub>A</sub> the number of OTUs in community A, and S<sub>B</sub> the number of OTUs in community B
+With:
+- $$S<sub>AB</sub>$$ the number of shared OTUs between communities A and B
+- $$S<sub>A</sub>$$ the number of OTUs in community A
+- $$S<sub>B</sub>$$ the number of OTUs in community B
   
 - **UniFrac**, which incorporates information on phylogenetic distances between observed species in the computation. Can be calculated either weighted (accounts for abundances) or unweighted (accounts only for richness).
 
@@ -365,11 +396,8 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 > ![Parameter q](./images/hill_numbers.png)
 > https://www.redalyc.org/journal/5117/511766773011/html/
 > 
-{: .details}
-
-
-> <details-title>More details on the Hill numbers</details-title>
->
+> # Hill numbers
+> 
 > Hill numbers, also known as diversity indices or diversity measures, are mathematical metrics used to quantify the diversity or richness of a biological community. They were developed by ecologist Robert H. Whittaker and are widely used in ecology and biodiversity studies.
 >
 > Hill numbers provide a way to summarize and compare the diversity of different communities based on the abundance or occurrence of different species within those communities. These numbers take into account both the number of species present and their relative abundances. The higher the Hill number, the greater the diversity or richness of the community.
@@ -380,10 +408,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 > 2.	Shannon diversity index (D₁): This index incorporates both species richness and evenness. It takes into account both the number of species and their relative abundances, providing a more comprehensive measure of diversity.
 > 3.	Simpson diversity index (D₂): This index focuses on the dominance or concentration of species within a community. It considers both species richness and the probability that two individuals randomly selected from the community belong to the same species.
 >
-{: .details}
-
-
-> <details-title>More details on the Rényi entropy</details-title> 
+> # Rényi entropy
 >
 > Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
 The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
