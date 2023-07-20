@@ -152,7 +152,7 @@ Here we expose the several types of data storage that browsers offer, so you can
 
 ### LocalStorage
 
-This data is never transferred to the server
+This data is **never** transferred to the server
 
 <dl id="settings-data">
 </dl>
@@ -169,11 +169,14 @@ gtnSettingsKeys.forEach(k => {
 	document.getElementById("settings-data").appendChild(dt);
 	document.getElementById("settings-data").appendChild(dd);
 })
+if(gtnSettingsKeys.length === 0){
+	document.getElementById("settings-data").innerHTML = `There is no data.`;
+}
 </script>
 
 ### SessionStorage
 
-This data is never transferred to the server, and is deleted when your browser window closes.
+This data is **never** transferred to the server, and is deleted when your browser window closes.
 
 <dl id="session-data">
 </dl>
@@ -190,4 +193,22 @@ gtnSessionKeys.forEach(k => {
 	document.getElementById("session-data").appendChild(dt);
 	document.getElementById("session-data").appendChild(dd);
 })
+if(gtnSessionKeys.length === 0){
+	document.getElementById("session-data").innerHTML = `There is no data.`;
+}
+</script>
+
+### Cookies
+
+This data is automatically transferred to the server. You can clear it using your browser's tools:
+
+<pre id="cookies-data">
+</pre>
+
+<script>
+if(document.cookies !== undefined){
+	document.getElementById('cookies-data').innerHTML = document.cookies;
+} else {
+	document.getElementById('cookies-data').innerHTML = "No cookies have been set.";
+}
 </script>
