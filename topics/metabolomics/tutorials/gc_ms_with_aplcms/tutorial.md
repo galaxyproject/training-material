@@ -276,7 +276,7 @@ Apply spline-based retention time correction to a feature table given the templa
 > The alignment is performed by selecting one profile as the template (one with the most number of features) and aligning all other profiles against it using a kernel smoother. Adjustments are made to the retention times based on the alignment results, and for features outside the range, their retention times are adjusted with the same amount as the nearest endpoint of the alignment.
 >
 > <figure>
->    <iframe src="data/time-correction-plot.html" width="100%" height="600px" frameBorder="0"></iframe> 
+>    <iframe src="data/time-correction-plot.html" width="800px" height="600px" frameBorder="0"></iframe>
 >    <figcaption>The effect of time correction on a sample. The retention time of targeted sample (green) is shifted to corrected values (red) based on the reference template (blue). The data in the plot is reduced by 75% for efficiency reasons.</figcaption>
 >  </figure>
 >
