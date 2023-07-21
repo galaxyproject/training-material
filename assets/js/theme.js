@@ -125,6 +125,13 @@ function processTheme2(){
 		})
 	}
 
+	if(gtnLocalGet('fontMain') !== null){
+		document.body.dataset["font_main"] = gtnLocalGet("fontMain");
+	}
+	if(gtnLocalGet('fontCode') !== null){
+		document.body.dataset["font_code"] = gtnLocalGet("fontCode");
+	}
+
 }
 processTheme2();
 

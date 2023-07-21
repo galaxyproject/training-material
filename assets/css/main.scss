@@ -1,33 +1,7 @@
 ---
 ---
 
- @font-face {
-  font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102.woff);
-  font-display: swap;
-}
-
- @font-face {
-  font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-BoldItalic-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-BoldItalic-102.woff);
-  font-weight: bold;
-  font-style: oblique;
-  font-display: swap;
-}
-
- @font-face {
-  font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102.woff);
-  font-style: oblique;
-  font-display: swap;
-}
-
- @font-face {
-  font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102.woff);
-  font-weight: bold;
-  font-display: swap;
-}
+@import "./fontsmain.scss";
 
 $font-size: 15px;
 $tutorial-box-spacing: 1rem;
@@ -117,6 +91,20 @@ body[data-contrast="low"] {
 
 body[data-contrast="low"][data-brightness="dark"]  {
 	--border: #333;
+}
+
+body[data-font_main="comic-sans"] {
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+body[data-font_main="open-dyslexic"] {
+	font-family: "OpenDyslexic", "Open Dyslexic", serif;
+}
+
+body[data-font_code="comic-sans"] {
+	pre, code {
+		font-family: "Comic Mono", monospace;
+	}
 }
 
 // All of our themes

@@ -75,6 +75,35 @@ function restorePrefs(){
 restorePrefs();
 </script>
 
+## Fonts
+
+While some of our fonts are available on Google Fonts, we **do not** use Google Fonts to serve them.
+
+<select class="form-control font-control" id="font" onchange="saveFont()">
+	<option value="default">Default (Atkinson Hyperlegible)</option>
+	<option value="open-dyslexic">Open Dyslexic</option>
+	<option value="comic-sans">Comic Sans</option>
+</select>
+
+Font for code blocks:
+
+<select class="form-control font-control-code" id="font-code" onchange="saveFont()">
+	<option value="default">Default</option>
+	<option value="comic-sans">Comic Sans Mono</option>
+</select>
+
+<script>
+function saveFont(){
+	gtnLocalSet("fontMain", document.getElementById("font").value);
+	gtnLocalSet("fontCode", document.getElementById("font-code").value);
+
+	document.body.dataset["font_main"] = document.getElementById("font").value
+	document.body.dataset["font_code"] = document.getElementById("font-code").value
+}
+document.getElementById("font").value = gtnLocalGet("fontMain");
+document.getElementById("font-code").value = gtnLocalGet("fontCode");
+</script>
+
 ## Data Privacy
 
 We collect the following information on visitors:
