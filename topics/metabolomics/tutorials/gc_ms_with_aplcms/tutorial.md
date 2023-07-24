@@ -559,11 +559,11 @@ Features can now appear in more samples than before, so we also need to repeat t
 
 # Hybrid
 
-Hybrid approach combines unsupervised techniques with supervised or targeted methods. This approach incorporates external information, such as known metabolic pathways or class labels, to guide the analysis and interpretation of the data. Hybrid approach may leverage prior knowledge to enhance the detection and interpretation of specific metabolite classes, pathways, or biomarkers of interest. Hybrid approach is particularly valuable when there is prior knowledge available or when targeted analysis is desired.
+The hybrid approach combines unsupervised techniques with supervised or targeted methods. This approach incorporates external information, such as known metabolic pathways or class labels, to guide the analysis and interpretation of the data. The hybrid approach may leverage prior knowledge to enhance the detection and interpretation of specific metabolite classes, pathways, or biomarkers of interest. The hybrid approach is particularly valuable when there is prior knowledge available or when targeted analysis is desired.
 
 ## Merge known table
 
-This step allows to incorporate the knowledge of known metabolites or historically detected features on the same machinery to help detect and quantify lower-intensity peaks. The features we have found so far are merged with the data frame of known features. Then we will recover the weaker signals and repeat all the previous steps. Finally, the data frame of known metabolites and historical features is updated with the new information from the measured data.
+This step allows us to incorporate the knowledge of known metabolites or historically detected features on the same machinery to help detect and quantify lower-intensity peaks. The features we have found so far are merged with the data frame of known features. Then we will recover the weaker signals and repeat all the previous steps. Finally, the data frame of known metabolites and historical features is updated with the new information from the measured data.
 
 > <details-title> Known table with example </details-title>
 > 
@@ -604,7 +604,7 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 > <details-title> Key parameters </details-title>
 > 
-> - **Match tolerance [ppm]** - The ppm tolerance to match identified features to known metabolites/features, depends on the mass accuracy of your machine.
+> - **Match tolerance [ppm]** - The ppm tolerance to match identified features to known metabolites/features depends on the mass accuracy of your machine.
 >
 {: .details}
 
@@ -627,7 +627,7 @@ This step allows to incorporate the knowledge of known metabolites or historical
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, you can use custom database with similar structure as described above.
+> > 1. Yes, you can use a custom database with a similar structure as described above.
 > >
 > {: .solution}
 >
@@ -635,7 +635,7 @@ This step allows to incorporate the knowledge of known metabolites or historical
 
 ## Recover weaker signals
 
-This step recovers features which are present in a sample, but might have been filtered out initially as noise due to low signal intensity, as well as those possibly obtained by merging the known table into our feature table. 
+This step recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity, as well as those possibly obtained by merging the known table into our feature table. 
 
 > ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
@@ -697,7 +697,7 @@ Now we repeat the whole workflow since we might have added new features, and we 
 
 ## Compute template (2nd round)
 
-With new cluters, we need to prepare a new template for time correction step.
+With new clusters, we need to prepare a new template for the time correction step.
 
 > ### {% icon hands_on %} Hands-on: Compute template
 >
@@ -722,7 +722,7 @@ With new cluters, we need to prepare a new template for time correction step.
 
 ## Correct time (2nd round)
 
-Adding features from the known table might require to apply the retention time correction again.
+Adding features from the known table might require applying the retention time correction again.
 
 > ### {% icon hands_on %} Hands-on: Correct time
 >
@@ -777,7 +777,7 @@ Correcting retention time requires updating the clustering.
 
 ## Features alignment (2nd round)
 
-And this all leads to final computation of features alignment.
+And this all leads to the final computation of features alignment.
 
 > ### {% icon hands_on %} Hands-on: Align features
 >
@@ -805,7 +805,7 @@ And this all leads to final computation of features alignment.
 
 ## Merge known table (2nd round)
 
-After finishing all steps, we can include all new knownledge into existing database.
+After finishing all steps, we can include all new knowledge into the existing database.
 
 > <details-title> Key parameters </details-title>
 > 
@@ -829,7 +829,7 @@ After finishing all steps, we can include all new knownledge into existing datab
 
 > <details-title> Example of updated known table </details-title>
 > 
-> Example how can be new knowledge included in the known table:
+> Example of how can be new knowledge included in the known table:
 > 
 > > chemical_formula | HMDB_ID | KEGG_compound_ID | mass | ion.type | m.z | Number_profiles_processed | Percent_found | mz_min | mz_max | RT_mean | RT_sd | RT_min | RT_max | int_mean(log) | int_sd(log) | int_min(log) | int_max(log)
 > > -----------------|---------|------------------|------|----------|-----|---------------------------|---------------|--------|--------|---------|-------|--------|--------|---------------|-------------|---------------|--------------|
