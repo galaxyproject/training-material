@@ -26,7 +26,7 @@ contributions:
 `recetox-aplcms` is a software package designed for the processing of LC/MS based metabolomics data, in particular for peak detection in high resolution mass spectrometry (HRMS) data. 
 It supports reading `.mzml` files in raw profile mode and uses a bi-Gaussian chromatographic peak shape ({% cite yu2010quantification %}) for feature detection and quantification. `recetox-aplcms` is based on the apLCMS R package ({% cite 10.1093/bioinformatics/btp291 %}) and includes various software updates and is actively developed and maintained on GitHub.
 
-There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery. While unsupervised approach allows for unbiased exploration and discovery of patterns, hybrid approac integrates prior knowledge or supervised techniques to enhance targeted analysis and interpretation. The choice between these approaches depends on the research objectives, available prior knowledge, and the specific questions being addressed in the metabolomics study.
+There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery. While the unsupervised approach allows for unbiased exploration and discovery of patterns, the hybrid approach integrates prior knowledge or supervised techniques to enhance targeted analysis and interpretation. The choice between these approaches depends on the research objectives, available prior knowledge, and the specific questions being addressed in the metabolomics study.
 
 ![recetox-aplcms overview](../../images/aplcms_scheme.png "Overview of individual steps of the recetox-aplcms package that can be combined in two separate workflows processing HRMS data in an unsupervised manner or by including a-priori knowledge.")
 
@@ -39,14 +39,13 @@ The workflows consist of the following building blocks:
 - **correct time** - correct the rt across samples using splines
 - **align features** - align identical features across samples
 - **recover weaker signals** - recover missed features in samples based on the aligned features
-- **merge known table** - add known features to detected features table and vice versa
+- **merge known table** - add known features to the detected features table and vice versa
 
-For demonstration of this tutorial, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
+We use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples to demonstrate data analysis in this tutorial.
 
 > <details-title> Seminal plasma samples </details-title>
 > 
-> The seminal plasma samples were analyzed according to the standard operating procedure [(SOP) for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
-> The 3 samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in dilution series to test the system suitability and the quality of the assay.
+> The seminal plasma samples were analyzed according to the standard operating procedure [(SOP) for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331). The three samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in dilution series to test the system suitability and the quality of the assay.
 >
 {: .details}
 
@@ -126,9 +125,9 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 # Common part
 
-In this first part, recetox-aplcms integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. 
+In this first part, `recetox-aplcms` integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. 
 
-Then, recetox-aplcms detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, recetox-aplcms matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
+Then, `recetox-aplcms` detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, `recetox-aplcms` matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
 
 ## Remove noise
 
@@ -154,7 +153,7 @@ It also performs a first clustering step of points with close m/z values into th
 > **TODO** remove defualt values
 >
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Input spectra data"*: `mzML input (msconvert)` (output of **msconvert** {% icon tool %})
 >    - *"Minimal signal presence [fraction of scans]"*: `0.5`
 >    - *"Minimal elution time [unit corresponds to the retention time]"*: `12`
 >    - *"m/z tolerance [ppm]"*: `10`
@@ -185,7 +184,7 @@ This format is used to increase the accuracy of stored values, that would be sig
 
 ## Generate feature table
 
-This steps takes the features grouped by m/z from the previous step and detects peaks. The goal is to fit peak shapes in retention time domain to our data, which allows computing precise intensities by integrating the peak area. This step also resolves peak overlaps, by fitting them both as separate peaks. As a consequence of this approach, recetox-aplcms does not work with centroid data since there are no peak shapes anymore, just some "averages" of them.
+This steps takes the features grouped by m/z from the previous step and detects peaks. The goal is to fit peak shapes in retention time domain to our data, which allows computing precise intensities by integrating the peak area. This step also resolves peak overlaps, by fitting them both as separate peaks. As a consequence of this approach, `recetox-aplcms` does not work with centroid data since there are no peak shapes anymore, just some "averages" of them.
 
 > <details-title> Key parameters </details-title>
 > 
@@ -200,7 +199,7 @@ This steps takes the features grouped by m/z from the previous step and detects 
 > ### {% icon hands_on %} Hands-on: Generate feature table
 >
 > 1. {% tool [recetox-aplcms - generate feature table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_generate_feature_table/recetox_aplcms_generate_feature_table/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input profile data"*: `output_file` (output of **recetox-aplcms - remove noise** {% icon tool %})
+>    - {% icon param-file %} *"Input profile data"*: `noise-free data` (output of **recetox-aplcms - remove noise** {% icon tool %})
 >    - *"Bandwidth factor"*: `0.5`
 >    - *"Minimal sigma ratio"*: `0.1`
 >    - *"Maximal sigma ratio"*: `2`
@@ -239,7 +238,7 @@ Pre-alignment step where we put all peaks from all samples into a single table a
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `feature tables` (output of **recetox-aplcms - generate feature table** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -268,7 +267,7 @@ To continue with further steps, we need a template into which we can align the d
 > ### {% icon hands_on %} Hands-on: Compute template
 >
 > 1. {% tool [recetox-aplcms - compute template](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_template/recetox_aplcms_compute_template/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
 
@@ -295,8 +294,8 @@ Apply spline-based retention time correction to a feature table given the templa
 > ### {% icon hands_on %} Hands-on: Correct time
 >
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - {% icon param-file %} *"Input template features table"*: `output_file` (output of **recetox-aplcms - compute template** {% icon tool %})
+>    - {% icon param-collection %} *"Input clustered features table"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-file %} *"Input template features table"*: `reference template` (output of **recetox-aplcms - compute template** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -326,7 +325,7 @@ After we have aligned the retention time of our samples, we need to run second r
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `corrected features` (output of **recetox-aplcms - correct time** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -363,7 +362,7 @@ This step performs feature alignment after clustering and retention time correct
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Clustered features"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"Minimal occurrence in samples"*: `2`
@@ -461,12 +460,12 @@ This step recovers features which are present in a sample but might have been fi
 > ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
 > 1. {% tool [recetox-aplcms - recover weaker signals](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_recover_weaker_signals/recetox_aplcms_recover_weaker_signals/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->    - {% icon param-collection %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - {% icon param-collection %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
->    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-collection %} *"Input spectra data"*: `mzML input (msconvert)` (output of **msconvert** {% icon tool %})
+>    - {% icon param-collection %} *"Input extracted feature samples collection"*: `feature tables` (output of **recetox-aplcms - generate feature table** {% icon tool %})
+>    - {% icon param-collection %} *"Input corrected feature samples collection"*: `corrected features` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-file %} *"Metadata table"*: `aligned metadata table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"RT table"*: `aligned rt table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Intensity table"*: `aligned intensity table` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"m/z tolerance [ppm]"*: `10`
@@ -498,7 +497,7 @@ We might have added new features, so we do the clustering again.
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `recovered features` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -533,7 +532,7 @@ Features can now appear in more samples then before, so we also need to repeat t
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
+>    - {% icon param-collection %} *"Clustered features"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"Minimal occurrence in samples"*: `2`
@@ -612,10 +611,10 @@ This step allows to incorporate the knowledge of known metabolites or historical
 > ### {% icon hands_on %} Hands-on: Merge known table
 >
 > 1. {% tool [recetox-aplcms - merge known table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_merge_known_table/recetox_aplcms_merge_known_table/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Table of known features"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata table"*: `aligned metadata table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"RT table"*: `aligned rt table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Intensity table"*: `aligned intensity table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Table of known features"*: `known table` (Input dataset)
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"Tables merge direction"*: `Merge known table to features`
@@ -641,12 +640,12 @@ This step recovers features which are present in a sample, but might have been f
 > ### {% icon hands_on %} Hands-on: Recover weaker signals
 >
 > 1. {% tool [recetox-aplcms - recover weaker signals](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_recover_weaker_signals/recetox_aplcms_recover_weaker_signals/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
->    - {% icon param-collection %} *"Input extracted feature samples collection"*: `output_file` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - {% icon param-collection %} *"Input corrected feature samples collection"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
->    - {% icon param-file %} *"Metadata table"*: `output_metadata_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
->    - {% icon param-file %} *"RT table"*: `output_rt_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
->    - {% icon param-file %} *"Intensity table"*: `output_intensity_file` (output of **recetox-aplcms - merge known table** {% icon tool %})
+>    - {% icon param-collection %} *"Input spectra data"*: `mzML input (msconvert)` (output of **msconvert** {% icon tool %})
+>    - {% icon param-collection %} *"Input extracted feature samples collection"*: `feature tables` (output of **recetox-aplcms - generate feature table** {% icon tool %})
+>    - {% icon param-collection %} *"Input corrected feature samples collection"*: `corrected features` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-file %} *"Metadata table"*: `aligned metadata table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"RT table"*: `aligned rt table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Intensity table"*: `aligned intensity table` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"m/z tolerance [ppm]"*: `10`
@@ -676,7 +675,7 @@ Now we repeat the whole workflow since we might have added new features, and we 
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `recovered features` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -703,7 +702,7 @@ With new cluters, we need to prepare a new template for time correction step.
 > ### {% icon hands_on %} Hands-on: Compute template
 >
 > 1. {% tool [recetox-aplcms - compute template](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_template/recetox_aplcms_compute_template/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >
 {: .hands_on}
 
@@ -728,8 +727,8 @@ Adding features from the known table might require to apply the retention time c
 > ### {% icon hands_on %} Hands-on: Correct time
 >
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input clustered features table"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - {% icon param-file %} *"Input template features table"*: `output_file` (output of **recetox-aplcms - compute template** {% icon tool %})
+>    - {% icon param-collection %} *"Input clustered features table"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-file %} *"Input template features table"*: `reference template` (output of **recetox-aplcms - compute template** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -756,7 +755,7 @@ Correcting retention time requires updating the clustering.
 > ### {% icon hands_on %} Hands-on: Compute clusters
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Input data"*: `output_file` (output of **recetox-aplcms - correct time** {% icon tool %})
+>    - {% icon param-collection %} *"Input data"*: `corrected features` (output of **recetox-aplcms - correct time** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >
@@ -783,7 +782,7 @@ And this all leads to final computation of features alignment.
 > ### {% icon hands_on %} Hands-on: Align features
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Clustered features"*: `clustered_feature_tables` (output of **recetox-aplcms - compute clusters** {% icon tool %})
+>    - {% icon param-collection %} *"Clustered features"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"Minimal occurrence in samples"*: `2`
@@ -817,10 +816,10 @@ After finishing all steps, we can include all new knownledge into existing datab
 > ### {% icon hands_on %} Hands-on: Merge known table
 >
 > 1. {% tool [recetox-aplcms - merge known table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_merge_known_table/recetox_aplcms_merge_known_table/0.10.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Metadata table"*: `metadata_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"RT table"*: `rt_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Intensity table"*: `intensity_file` (output of **recetox-aplcms - align features** {% icon tool %})
->    - {% icon param-file %} *"Table of known features"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata table"*: `aligned metadata table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"RT table"*: `aligned rt table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Intensity table"*: `aligned intensity table` (output of **recetox-aplcms - align features** {% icon tool %})
+>    - {% icon param-file %} *"Table of known features"*: `known table` (Input dataset)
 >    - *"Relative m/z tolerance [ppm]"*: `10`
 >    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
 >    - *"Tables merge direction"*: `Merge features to known table`
