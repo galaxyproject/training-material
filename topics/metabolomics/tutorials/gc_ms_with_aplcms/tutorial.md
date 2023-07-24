@@ -125,23 +125,23 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 # Common part
 
-In this first part, `recetox-aplcms` integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. 
+In this first part, `recetox-aplcms` integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the noise. 
 
-Then, `recetox-aplcms` detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, `recetox-aplcms` matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
+Then, `recetox-aplcms` detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behaviour across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behaviour. Finally, by considering retention time, m/z values, and peak intensities, `recetox-aplcms` matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
 
 ## Remove noise
 
-This step extracts ion chromatogram (EIC) showing the intensity of only a particular ions of interest over time.
-Since the intensity is droping over time in the experiment, we want to normalise this and remove noise from the raw data.
+This step extracts an ion chromatogram (EIC) showing the intensity of only particular ions of interest over time.
+Since the intensity is dropping over time in the experiment, we want to normalise this and remove noise from the raw data.
 It also performs a first clustering step of points with close m/z values into the extracted ion chromatograms (EICs).
 
 > <details-title> Key parameters </details-title>
 > 
-> A precise tuning of input parameters is crucial in this step, since it can potentially lead to elimination of some of the data of interest, or, on the other extreme, preservance of some noisy background data:
+> A precise tuning of input parameters is crucial in this step since it can potentially lead to the elimination of some of the data of interest or, on the other extreme, the preservance of some noisy background data:
 >
 > - **Minimal elution time** - minimal length of elution time of a peak to be actually recognised as a peak. It is closely related to the chromatography method used. Only peaks with greater elution length are kept.
-> - **Minimal signal presence** - determines in how many consequent scans do we want to have the signal present. Sometimes the signal from a real feature is not present 100% of the time along the feature's retention time. This parameter sets the threshold for an ion trace to be considered a feature. This parameter is best determined by examining the raw data. For example, if we know a data point shows up only every 3 scans for 10 seconds, this setting can be used ilter it out.
-> - **m/z tolerance** - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. Can be seen as width of m/z peak.
+> - **Minimal signal presence** - determines in how many consequent scans do we want to have the signal present. Sometimes the signal from a real feature is not present 100% of the time along the feature's retention time. This parameter sets the threshold for an ion trace to be considered a feature. This parameter is best determined by examining the raw data. For example, if we know a data point shows up only every three scans for 10 seconds, this setting can be used to filter it out.
+> - **m/z tolerance** - tolerance (in ppm) to determine how far along m/z do two points need to be separated for them to be considered different a different peak. It can be seen as the width of the m/z peak.
 > - **Baseline correction** - intensity cutoff to be used. After grouping the observations, the highest intensity in each group is found. If the highest is lower than this value, the entire group will be deleted.
 >
 > ![recetox-aplcms noise parameters](../../images/aplcms_explain_min_run_and_pres.png "Graphical explanation of effect of minimal elution time (min_run) and minimal signal presence (min_pres) parameters on input data.")
@@ -164,12 +164,12 @@ It also performs a first clustering step of points with close m/z values into th
 > ### {% icon question %} Questions
 >
 > 1. Are there any numerical intervals available for the input parameters?
-> 2. Can the data be filtered also on retention time axis?
+> 2. Can the data be filtered also on the retention time axis?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. All input parameters are instrument-specific, therefore we cannot provide recommended intervals for the values.
-> > 2. Indeed, for this purpose, `Minimal elution time` parameter can be used.
+> > 1. All input parameters are instrument-specific. Therefore we cannot provide recommended intervals for the values.
+> > 2. Indeed, for this purpose, the `Minimal elution time` parameter can be used.
 > >
 > {: .solution}
 >
@@ -178,18 +178,18 @@ It also performs a first clustering step of points with close m/z values into th
 > <details-title> Parquet format </details-title>
 > 
 > Output is in the `.parquet` format, which is a binary representation of tabular format. 
-This format is used to increase the accuracy of stored values, that would be significantly lower when stored in text format.
+This format is used to increase the accuracy of stored values, which would be significantly lower when stored in text format.
 >
 {: .details}
 
 ## Generate feature table
 
-This steps takes the features grouped by m/z from the previous step and detects peaks. The goal is to fit peak shapes in retention time domain to our data, which allows computing precise intensities by integrating the peak area. This step also resolves peak overlaps, by fitting them both as separate peaks. As a consequence of this approach, `recetox-aplcms` does not work with centroid data since there are no peak shapes anymore, just some "averages" of them.
+This step takes the features grouped by m/z from the previous step and detects peaks. The goal is to fit peak shapes in the retention time domain to our data, which allows computing precise intensities by integrating the peak area. This step also resolves peak overlaps by fitting them both as separate peaks. As a consequence of this approach, `recetox-aplcms` does not work with centroid data since there are no peak shapes anymore, just some "averages" of them.
 
 > <details-title> Key parameters </details-title>
 > 
-> - **Minimal/maximal standard deviation** - specify the maximum and minimum peak width by selecting allowed range for the standard deviation (both $$\sigma_1$$ and $$\sigma_2$$).
-> - **Minimal/maximal sigma ratio** - the lower and upper limit of the ratio between left-standard deviation and the right-standard deviation $$\frac{\sigma_1}{\sigma_2}$$. It represents relative skewness of the peak.
+> - **Minimal/maximal standard deviation** - specify the maximum and minimum peak width by selecting the allowed range for the standard deviation (both $$\sigma_1$$ and $$\sigma_2$$).
+> - **Minimal/maximal sigma ratio** - the lower and upper limit of the ratio between left-standard deviation and the right-standard deviation $$\frac{\sigma_1}{\sigma_2}$$. It represents the relative skewness of the peak.
 > - **Bandwidth factor** - parameter used to scale down the overall range of retention times (the bandwidth) assumed in the kernel smoother used for peak identification. The value is between zero and one. The minimal and maximal bandwidth can be limited by explicit values. It is used to improve the peak shape by smoothing.
 >
 > ![recetox-aplcms sigma parameters](../../images/aplcms_explain_bi_gaussian.png "The picture shows the bi-Gaussian model, characterised by two standard deviations. The ratio of standard deviations influences the degree of skewness, thus producing a different shape of the peak.")
@@ -217,7 +217,7 @@ This steps takes the features grouped by m/z from the previous step and detects 
 > > ### {% icon solution %} Solution
 > >
 > > 1. It allows precise computation of the area under the curve and estimating the intensity.
-> > 2. Two standard deviations ($$\sigma_1$$ and $$\sigma_2$$) come from bi-Gaussian shape, where both sides of the shape can be different. When these values are equal, we obtain Gaussian shape.
+> > 2. Two standard deviations ($$\sigma_1$$ and $$\sigma_2$$) come from a bi-Gaussian shape, where both sides of the shape can be different. When these values are equal, we obtain a Gaussian shape.
 > >
 > {: .solution}
 >
@@ -225,11 +225,11 @@ This steps takes the features grouped by m/z from the previous step and detects 
 
 ## Compute clusters
 
-Pre-alignment step where we put all peaks from all samples into a single table and group them based on both m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
+The pre-alignment step, where we put all peaks from all samples into a single table and group them based on both m/z and rt. The tool takes a collection of all detected features and computes the clusters over a global feature table, adding the `sample_id` and `cluster` (shared across samples) columns to the table. This process is parametrised by influencing the "size" of buckets (clusters) using relative m/z tolerance and retention time tolerance.
 
 > <details-title> Clustering algorithm details </details-title>
 > 
-> Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature, then a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster` columns.
+> Features are first grouped in m/z dimension based on the relative m/z tolerance. Then, the absolute tolerance is computed for each feature and a new group is separated once the difference between consecutive features is above this threshold. The same process is then repeated for the retention time dimension. The individual indices are then combined into a single index in the `cluster` columns.
 > 
 > ![recetox-aplcms clustering](../../images/aplcms_clustering.png "Illustrative example of clustering algorithm with highlighted m/z groups (red) and rt groups (blue). Cluster is the same only when these two groups overlap (green).")
 > 
@@ -256,7 +256,7 @@ Pre-alignment step where we put all peaks from all samples into a single table a
 >
 {: .question}
 
-Output is again separated to a collecton of individual tables, but with assigned `cluster`.
+Output is again separated into a collection of individual tables but with assigned `cluster`.
 
 ## Compute template
 
@@ -303,7 +303,7 @@ Apply spline-based retention time correction to a feature table given the templa
 
 > ### {% icon question %} Questions
 >
-> 1. Can we determine in advance the value of retention time shift applied to the sample used as reference template?
+> 1. Can we determine in advance the value of the retention time shift applied to the sample used as a reference template?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -315,11 +315,11 @@ Apply spline-based retention time correction to a feature table given the templa
 
 ## Compute clusters (2nd round) 
 
-After we have aligned the retention time of our samples, we need to run second round of clustering to reflect introduced changes. 
+After we have aligned the retention time of our samples, we need to run the second round of clustering to reflect the introduced changes. 
 
 > ### {% icon comment %} Steps iteration
 >
-> Note that the outputs and inputs of the previous steps are compatible, making it possible to iterativelly combine these steps multiple times, until desired quality of results is achieved.
+> Note that the outputs and inputs of the previous steps are compatible, making it possible to iteratively combine these steps multiple times until desired quality of results is achieved.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -340,7 +340,7 @@ After we have aligned the retention time of our samples, we need to run second r
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > 1. **TODO**
 > > 2. Answer for question2
 > >
 > {: .solution}
@@ -349,11 +349,11 @@ After we have aligned the retention time of our samples, we need to run second r
 
 ## Features alignment
 
-This step performs feature alignment after clustering and retention time correction. The peaks clustered across samples are grouped based on the given tolerances to create an aligned feature table, connecting identical features across samples. Among tolerances, the `Minimal occurrence in samples` parameter can be used to control in at least how many samples a feature has to be detected in order to be included in the aligned feature table.  This allows us to preserve only peaks that appear really consistenly across the samples.
+This step performs feature alignment after clustering and retention time correction. The peaks clustered across samples are grouped based on the given tolerances to create an aligned feature table, connecting identical features across samples. Among tolerances, the `Minimal occurrence in samples` parameter can be used to control at least in how many samples a feature has to be detected in order to be included in the aligned feature table. This allows us to preserve only peaks that appear really consistently across the samples.
 
 > <details-title> Algorithm details </details-title>
 > 
-> To properly align features, we repeat the model-based search to determine the retention time cutoff and group features accordingly. Within each feature group, we employ kernel density estimators to assess the m/z and retention time dimensions, potentially leading to further divisions within the group. The resulting groups represent aligned features across all profiles. From each group, we extract the median m/z and median retention time as representative characteristic values for the features. This information is recorded in an aligned feature table (for practical pruposes, separated to three tables), which includes the median m/z, median retention time, m/z range, and intensities in each profile for every feature.
+> To properly align features, we repeat the model-based search to determine the retention time cutoff and group features accordingly. Within each feature group, we employ kernel density estimators to assess the m/z and retention time dimensions, potentially leading to further divisions within the group. The resulting groups represent aligned features across all profiles. From each group, we extract the median m/z and median retention time as representative characteristic values for the features. This information is recorded in an aligned feature table (for practical purposes, separated into three tables), which includes the median m/z, median retention time, m/z range, and intensities in each profile for every feature.
 >
 > **TODO** add picture? - taking medians from values in a group
 > 
@@ -371,7 +371,7 @@ This step performs feature alignment after clustering and retention time correct
 
 > <details-title> Output files </details-title>
 > 
-> The output consists of three tables. All tables share `id` column.
+> The output consists of three tables. All tables share an `id` column.
 >
 > #### Metadata Table
 >
@@ -413,12 +413,12 @@ This step performs feature alignment after clustering and retention time correct
 
 > ### {% icon question %} Questions
 >
-> 1. Why is the output aligned feature table separated into three tables?
+> 1. Why is the outputted aligned feature table separated into three tables?
 > 2. How can I find retention times and intensities corresponding to a feature from the metadata table?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The purpose of separating the information to multiple tables is to simplify data inspection, eliminate overhead of too many details in one location, and make the outputs compatible with other tools (such as XCMS).
+> > 1. The purpose of separating the information into multiple tables is to simplify data inspection, eliminate the overhead of too many details in one location, and make the outputs compatible with other tools (such as XCMS).
 > > 2. All three tables share the `id` column. The particular value of the `id` column can be used to find corresponding retention times and intensities.
 > >
 > {: .solution}
@@ -433,17 +433,17 @@ This step performs feature alignment after clustering and retention time correct
 
 # Unsupervised
 
-Unsupervised approach focuses on exploring and discovering patterns in the data without prior knowledge or assumptions. This method employes techniques such as dimensionality reduction and clustering to reveal inherent structures and relationships within the metabolite profiles. Unsupervised approach is useful when the specific patterns or classes within the data are not known beforehand, allowing for unbiased exploration of the data and potential identification of novel patterns or subgroups. However, unsupervised approach may require additional validation and annotation steps to assign biological meaning to the discovered patterns.
+The unsupervised approach focuses on exploring and discovering patterns in the data without prior knowledge or assumptions. This method employs techniques such as dimensionality reduction and clustering to reveal inherent structures and relationships within the metabolite profiles. The unsupervised approach is useful when the specific patterns or classes within the data are not known beforehand, allowing for unbiased exploration of the data and potential identification of novel patterns or subgroups. However, the unsupervised approach may require additional validation and annotation steps to assign biological meaning to the discovered patterns.
 
 ## Recover weaker signals
 
-This step recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity. It runs the second stage peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
+This step recovers features which are present in a sample but might have been filtered out initially as noise due to low signal intensity. It runs the second stage of peak detection based on the aligned feature table from the feature alignment step. If a feature is contained in the aligned feature table, this step revisits the raw data and searches for this feature at the retention time obtained by mapping the corrected retention time back to the original sample.
 
 > <details-title> Gaps in the feature table </details-title>
 >
-> After inspecting the obtained metadata table, we can observe that many columns indicating presence of the feature in the sample are empty (resp. there is zero). Same holds for respective positions in intensity and retention time tables. That basically means we lost some information for metabolites that did not pass the noise filter and were not included in the feature table during LC/MS profiling. However, that does not neccesary mean they not present in the samples. To double check this, we revisit the data and try to recover them.
+> After inspecting the obtained metadata table, we can observe that many columns indicating the presence of the feature in the sample are empty (resp., there is a zero). The same holds for respective positions in intensity and retention time tables. That basically means we lost some information for metabolites that did not pass the noise filter and were not included in the feature table during LC/MS profiling. However, that does not necessarily mean they are not present in the samples. To double-check this, we revisit the data and try to recover them.
 > 
-> The recovery process involves sequentially examining each LC/MS profile. Firstly, an interpolating spline is used to adjust the retention times in the aligned feature table to match the specific profile. Secondly, for features in the aligned table with zero values in the profile, a search is conducted within a smaller region around their m/z and retention time locations. This region is narrower than the range defined by the m/z and retention time across other profiles. The noise filtering is not applied during this step. If one or more features are detected within this region, the feature most consistent with the parameters in the feature table is considered the missed feature, and its intensity replaces the zero value in the aligned feature table.
+> The recovery process involves sequentially examining each LC/MS profile. Firstly, an interpolating spline is used to adjust the retention times in the aligned feature table to match the specific profile. Secondly, for features in the aligned table with zero values in the profile, a search is conducted within a smaller region around their m/z and retention time locations. This region is narrower than the range defined by the m/z and retention time across other profiles. Noise filtering is not applied during this step. If one or more features are detected within this region, the feature most consistent with the parameters in the feature table is considered the missed feature, and its intensity replaces the zero value in the aligned feature table.
 >
 > **TODO** add table and picture: metadata table with many gaps, comment on their meaning... next to it a 3D plot where is a feature in sample but with very low intensity
 >
@@ -451,9 +451,9 @@ This step recovers features which are present in a sample but might have been fi
 
 > <details-title> Key parameters </details-title>
 > 
-> Since most of the previous steps are run again, also their parameters are repeated, giving the opportunity to set them more or less strict.
+> Since most of the previous steps are run again, also their parameters are repeated, giving the opportunity to set them more or less strictly.
 >
-> Besides them, there is parameter `Minimal count to recover`, allowing to set the minimum number of raw data points to be considered as a true feature.
+> Besides them, there is a parameter `Minimal count to recover`, allowing to set the minimum number of raw data points to be considered as a true feature.
 >
 {: .details}
 
@@ -521,11 +521,11 @@ We might have added new features, so we do the clustering again.
 
 ## Features alignment (2nd round)
 
-Features can now appear in more samples then before, so we also need to repeat the alignment step.
+Features can now appear in more samples than before, so we also need to repeat the alignment step.
 
 > ### {% icon comment %} Steps iteration
 >
-> These steps can be potentially again repeated and combined (as well as for example combined with retention time correction if neccesary) in arbitrary number of iterations.
+> These steps can be again repeated and combined (as well as, for example, combined with retention time correction if necessary) in an arbitrary number of iterations.
 >
 {: .comment}
 
