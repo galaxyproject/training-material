@@ -2,24 +2,20 @@
 layout: tutorial_hands_on
 
 title: 'Mass spectrometry: GC-MS analysis with apLCMS'
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/7890956'
+level: Intermediate
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- TBA
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- TBA
+time_estimation: 2H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- The processing of untargeted GC-MS metabolomic data can be done using open-source tools.
+- This processing workflow is complementary to XCMS.
+contributions:
+  authorship:
+    - xtrojak
+    - hechth
 
 ---
 
@@ -45,6 +41,14 @@ The workflows consist of the following building blocks:
 - **recover weaker signals** - recover missed features in samples based on the aligned features
 - **merge known table** - add known features to detected features table and vice versa
 
+For demonstration of this tutorial, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
+
+> <details-title> Seminal plasma samples </details-title>
+> 
+> The seminal plasma samples were analyzed according to the standard operating procedure [(SOP) for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
+> The 3 samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in dilution series to test the system suitability and the quality of the assay.
+>
+{: .details}
 
 > ### Agenda
 >
@@ -56,6 +60,8 @@ The workflows consist of the following building blocks:
 {: .agenda}
 
 # Data preparation and prepocessing
+
+Prior to commencing the analysis pipeline, the dataset must be downloaded and prepared. Several preprocessing steps can be executed in parallel on individual samples. To facilitate this process, utilizing Galaxy's Dataset collections is recommended. When uploading data into Galaxy, you can select to create the dataset collection directly.
 
 ## Import the data into Galaxy
 
@@ -81,7 +87,7 @@ The workflows consist of the following building blocks:
 >
 >    In the further steps, this dataset collection will be referred to as `input` (and we recommend naming this collection like that to avoid confusion).
 >
-> 4. Import the following extra file from [Zenodo]({{ page.zenodo_link }}): TODO
+> 4. Import the following extra file from [Zenodo]({{ page.zenodo_link }}): **TODO**
 >
 >    ```
 >    https://gitlab.ics.muni.cz/umsa/umsa-files/-/raw/master/testdata/recetox-aplcms/hybrid/known_table.parquet
@@ -97,11 +103,13 @@ The workflows consist of the following building blocks:
 >
 >    > <comment-title> The known table </comment-title>
 >    >
->    > TODO
+>    > **TODO**
 >    >
 >    {: .comment}
 >
 {: .hands_on}
+
+As a result of this step, we should have in our history a green Dataset collection with three `.raw` files as well as the table of known metabolites.
 
 ## Convert the raw data to mzML
 
@@ -118,7 +126,9 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 # Common part
 
-In this first part, recetox-aplcms integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. Then, recetox-aplcms detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, recetox-aplcms matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
+In this first part, recetox-aplcms integrates noise filtering, peak detection and alignment, and statistical analysis to process and extract meaningful information from LC-MS data. To enhance the quality of the data, the tool employs noise filtering techniques to remove false-positive peaks caused by background noise. It applies statistical methods or threshold-based approaches to distinguish true peaks from the oise. 
+
+Then, recetox-aplcms detects and extracts individual peaks from the noise-free data. It uses an adaptive algorithm that iteratively identifies peaks by considering the local intensity distributions. Once the peaks are detected, they are grouped based on their chromatographic behavior across multiple samples. It aligns the peaks by accounting for variations in retention time, which can occur due to instrument drift or other factors. This is achieved by retention time correction, when the tool estimates retention time shifts based on peak intensities and their alignment patterns, iteratively adjusting the retention time values to minimize misalignment and maximize the alignment of peaks with similar chromatographic behavior. Finally, by considering retention time, m/z values, and peak intensities, recetox-aplcms matches corresponding features, ensuring their accurate alignment and enabling meaningful comparisons.
 
 ## Remove noise
 
@@ -141,7 +151,7 @@ It also performs a first clustering step of points with close m/z values into th
 
 > ### {% icon hands_on %} Hands-on: Remove noise
 >
-> TODO remove defualt values
+> **TODO** remove defualt values
 >
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `output` (Input dataset collection)
@@ -159,7 +169,7 @@ It also performs a first clustering step of points with close m/z values into th
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. All input parameters are instrument-specific, therefore we cannot provide recommended intervals for the values. TODO: isnt min_pres from 0 to 1?
+> > 1. All input parameters are instrument-specific, therefore we cannot provide recommended intervals for the values.
 > > 2. Indeed, for this purpose, `Minimal elution time` parameter can be used.
 > >
 > {: .solution}
