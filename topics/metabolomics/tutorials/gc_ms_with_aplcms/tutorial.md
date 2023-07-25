@@ -150,14 +150,11 @@ It also performs a first clustering step of points with close m/z values into th
 
 > ### {% icon hands_on %} Hands-on: Remove noise
 >
-> **TODO** remove defualt values
->
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input spectra data"*: `mzML input (msconvert)` (output of **msconvert** {% icon tool %})
->    - *"Minimal signal presence [fraction of scans]"*: `0.5`
->    - *"Minimal elution time [unit corresponds to the retention time]"*: `12`
->    - *"m/z tolerance [ppm]"*: `10`
->    - *"Baseline correction [unit of signal intensity]"*: `0.0`
+>    - *"Minimal signal presence [fraction of scans]"*: `0.8`
+>    - *"Minimal elution time [unit corresponds to the retention time]"*: `0.5`
+>    - *"m/z tolerance [ppm]"*: `30.0`
 >
 {: .hands_on}
 
@@ -200,12 +197,11 @@ This step takes the features grouped by m/z from the previous step and detects p
 >
 > 1. {% tool [recetox-aplcms - generate feature table](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_generate_feature_table/recetox_aplcms_generate_feature_table/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input profile data"*: `noise-free data` (output of **recetox-aplcms - remove noise** {% icon tool %})
->    - *"Bandwidth factor"*: `0.5`
->    - *"Minimal sigma ratio"*: `0.1`
->    - *"Maximal sigma ratio"*: `2`
+>    - *"Minimal sigma ratio"*: `0.05`
+>    - *"Maximal sigma ratio"*: `20.0`
 >    - *"Standard deviations boundaries"*: `Yes`
->       - *"Minimal standard deviation"*: `0.01`
->       - *"Maximal standard deviation"*: `500.0`
+>       - *"Minimal standard deviation"*: `0.1`
+>       - *"Maximal standard deviation"*: `10.0`
 >
 {: .hands_on}
 
@@ -239,8 +235,7 @@ The pre-alignment step, where we put all peaks from all samples into a single ta
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input data"*: `feature tables` (output of **recetox-aplcms - generate feature table** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
+>    - *"Relative m/z tolerance [ppm]"*: `5.0`
 >
 {: .hands_on}
 
@@ -296,8 +291,7 @@ Apply spline-based retention time correction to a feature table given the templa
 > 1. {% tool [recetox-aplcms - correct time](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_correct_time/recetox_aplcms_correct_time/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input clustered features table"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
 >    - {% icon param-file %} *"Input template features table"*: `reference template` (output of **recetox-aplcms - compute template** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
+>    - *"Relative m/z tolerance [ppm]"*: `5.0`
 >
 {: .hands_on}
 
@@ -326,8 +320,8 @@ After we have aligned the retention time of our samples, we need to run the seco
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input data"*: `corrected features` (output of **recetox-aplcms - correct time** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
+>    - *"Relative m/z tolerance [ppm]"*: `3.0`
+>    - *"Retention time tolerance [unit corresponds to the retention time]"*: `1.0`
 >
 {: .hands_on}
 
@@ -359,9 +353,8 @@ This step performs feature alignment after clustering and retention time correct
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Clustered features"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
->    - *"Minimal occurrence in samples"*: `2`
+>    - *"Relative m/z tolerance [ppm]"*: `3.0`
+>    - *"Retention time tolerance [unit corresponds to the retention time]"*: `1.0`
 >
 {: .hands_on}
 
