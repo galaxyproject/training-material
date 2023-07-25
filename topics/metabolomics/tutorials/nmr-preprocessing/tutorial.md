@@ -12,7 +12,7 @@ objectives:
 - To evaluate the potential of a workflow approach when dealing with 1H-NMR data preprocessing.
 time_estimation: 2H
 key_points:
-- To process untargeted 1H-NMR based metabolomic data preprocessing, various steps are needed.	
+- To process untargeted 1H-NMR based metabolomic data, various steps are needed.	
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant preprocessing.
 contributors:
 - mtremblayfr
@@ -27,12 +27,12 @@ contributors:
 Metabolomics is an -omic science known for being one of the most closely related to phenotype. It focuses on studying the very small molecules which are called metabolites, to better understand matters linked to the metabolism. It involves the study of different types of matrices, such as blood, urine, tissues, in various organisms including plants and humans.
 One of the three main technologies used to perform metabolomic analyses is Proton Nuclear Magnetic Resonance (1H NMR). Data analysis for this technology requires several steps, ranging from Fourier transform of Free Induction Decay (raw spectra) to statistical analysis and annotation. But, an inadequate preprocessing will never be compensated by a powerful data analysis. Some crucial steps must be carefully performed before the statistical analysis. Moreover, metabolomics studies can have several hundreds of samples. Manual preprocessing can be very time-consuming. 
 
-To be able to perform semi-automatically a complete 1H NMR analysis with advanced methods (solvent suppression, baseline correction, etc.) in a single environment, the Wokflow4Metabolomics team provides Galaxy tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted 1H-NMR data processing: extracting information from FID data to obtain what is called a peak table. This step is commonly refered to as the preprocessing step. This tutorial will show you how to perform such a step using the Galaxy implementation of the PepsNMR R package (% cite Martin2018 %).
+To be able to perform a semi-automatically complete 1H NMR data preprocessing with advanced methods (solvent suppression, baseline correction, etc.) in a single environment, the Wokflow4Metabolomics team provides Galaxy tools dedicated to metabolomics. This tutorial details the steps involved in the first part of untargeted 1H-NMR data processing: extracting information from FID data to obtain what is called a peak table. This step is commonly refered to as the preprocessing step. This tutorial will show you how to perform such a step using the Galaxy implementation of the PepsNMR R package (% cite Martin2018 %).
 
 To illustrate this approach, we will use data from {% cite EscribanoVasquez2018 %}. One of the objectives of this work was to assess the influence of microbiota and high fat diet on the urinary metabolome. To analyze these data, we will then follow a Galaxy workflow developed by the Wokflow4metabolomics group ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
 Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
-you understand how the NMR_PReprocessing tool works:
+you to understand how the NMR_Preprocessing tool works:
 [link to slides](../../tutorials/nmr-preprocessing/slides.html).
 This document is refered to as "Check the next X slides" in the present training material.
 As an example, [check the 1st slide](../../tutorials/nmr-preprocessing/slides.html#pepsnmr_rpackage)
@@ -62,7 +62,7 @@ In this tutorial we will focus on xx main steps:
 In this tutorial we will use the [GTN_NMRpreprocessing dataset](https://theses.hal.science/tel-02866073) generated in the lab of Claire Cherbuy (Micalis Institute, Jouy-en-Josas, France).
 The intestinal microbiota is involved in the regulation of several metabolic pathways of the host, leading to important host-microbiota interaction axes such as those involved in metabolic signalling and immune/inflammatory responses. This microbial community has the enzymatic machinery necessary to metabolize nutriments coming from diet, and is a key factor of the host's energetic metabolism. Fat
 consumption has increased considerably in recent decades. This high consumption of fat is harmful for health. On a high fat diet, the intestinal microbiota is in a dysbiotic state.
-The objective of this study was to investigate the impact of a bacterial species, E. coli, which increases during fat consumption, on the metabolomic trajectory of mono-associated mice fed a standard and high fat diet. Two strains of E. coli were used in our study: the CEC15 strain we previously isolated from freshly pooled faecal samples of 15-day-old suckling rodents and the Nissle 1917 strain, as a representative member of the B2 E. coli phylogroup that has shown to increase in the human gut microbiote during the last decades.
+The objective of this study was to investigate the impact of a bacterial species, E. coli, which increases during fat consumption, on the metabolomic trajectory of mono-associated mice fed a standard and high fat diet. Two strains of E. coli were used in this study: the CEC15 strain previously isolated by C. Cherbuy's group from freshly pooled faecal samples of 15-day-old suckling rodents and the Nissle 1917 strain, as a representative member of the B2 E. coli phylogroup that has shown to increase in the human gut microbiote during the last decades.
 
 To this aim, the authors collected samples from 59 male C57b mice divided in four microbiota groups (Germ Free / Germ Free+CEC 15 / Germ Free+Nissle1917 / Conventionally raised mice) and two diets (Normal / High fat) and performed 1-H NMR analysis.
 
@@ -151,7 +151,7 @@ Phase correction ([check the next 3 slides](../../tutorials/nmr-preprocessing/sl
 
 ![Figure 3: Illustration of the Group Delay recorded before the signal acquisition](../../images/tutorial-nmr-workflow-firstorderphasecorrection.png)
 
-Phase correction involves adjusting both zero (ph0, see 5th step) and first-order (ph1) phases. This step corresponds to the 1st order phase correction. First-order phase shift leads to a frequency-dependent phase distortion that is proportional to the chemical shift. In cases where these delays are small compared to the frequency offset, the phase error can be corrected. Otherwise, in the presence of large delays, this correction will introduce baseline distortions.
+Phase correction involves adjusting both zero (ph0, see 5th step) and first-order (ph1) phases. This step corresponds to the 1st order phase correction. The first-order phase shift is due to the presence of a digital filter. The first tens of points in the FID are not part of the recorded signal and are called the group delay. Since the phase shift differs across signals, it introduces a first order phase shift linearly related to frequency.
 
 > <hands-on-title> 1st order phase correction </hands-on-title>
 > 
@@ -167,7 +167,7 @@ Phase correction involves adjusting both zero (ph0, see 5th step) and first-orde
 
 ## 2. Solvent supression
 
-[Check the next 2 slides](../../tutorials/nmr-preprocessing/slides.html#solvent_suppression), [](../../tutorials/nmr-preprocessing/slides.html#solvent_suppression_illustration) for explanations on solvent suppression. Smoothing parameter determines how smooth is the solvent signal. Figure 4 below illustrates the effect of the Smoothing parameter on spectra. Spectra have been obtained with Smoothing parameter values of `1`, `10^6` and`1^9`.
+[Check the next 2 slides](../../tutorials/nmr-preprocessing/slides.html#solvent_suppression), [](../../tutorials/nmr-preprocessing/slides.html#solvent_suppression_illustration) for explanations on solvent suppression. Smoothing parameter determines how smooth is the solvent signal after solvent suppression. Figure 4 below illustrates the effect of the Smoothing parameter on spectra. Spectra have been obtained with Smoothing parameter values of `1`, `10^6` and`1^9`.
 
 ![Figure 4: Effect of the Smoothing parameter in the Solvent suppression step](../../images/tutorial-nmr-workflow-solventsuppression.png)
 
@@ -176,7 +176,7 @@ Phase correction involves adjusting both zero (ph0, see 5th step) and first-orde
 > 1. {% tool [NMR_Preprocessing](toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/nmr_preprocessing/NMR_Preprocessing/3.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"Data matrix of FIDs"*: the `dataMatrix` file
 >    - {% icon param-file %} *"Sample metadata file"*: the `sampleMetadata` file
->    - In *"Solvent Suppression"*: the lambda smoother used to penalized the non-parametric estimation of the solvent signal
+>    - In *"Solvent Suppression"*: the lambda smoother is used to penalized the non-parametric estimation of the solvent signal
 >        - *"Solvent Suppression: Smoothing parameter"*: `1.0`
 >        - *"Display the FIDs after solvent suppression?"*: `no`
 > 
@@ -191,10 +191,12 @@ Phase correction involves adjusting both zero (ph0, see 5th step) and first-orde
 > in the Figure 4?
 > 
 > > <solution-title></solution-title>
-> > Explanations CCA
-> > 1. 10^6
-> > 2. 1
-> > 3. 10^9
+> > 
+> > The smaller the lambda value, the smoother the signals. The value lambda = 1 corresponds to the second spectrum: the 
+> > solvent signal is well suppressed, but this value is too small: all metabolite signals are diminished. A compromise 
+> > must therefore be found between suppressing the solvent signal and smoothing the metabolite signals. The value lamba = 
+> > 10^9 corresponds to spectrum n°3 and lambda = 10^6 to spectrum n°1. There is very little difference between these 2 
+> > spectra. Default value seems to be a good compromise.
 > > 
 > {: .solution}
 > 
