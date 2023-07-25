@@ -121,6 +121,43 @@ Lastly, we need to tell the GTN framework we would like videos to be generated.
 That's it! With this, videos can be automatically generated.
 
 
+# Voices
+
+There are multiple voices available, see the following list:
+
+Name    | Region    | Neural | Audio Clip
+---     | ------    | ----   | ----
+Amy     | en-GB     | True   | <audio controls src="{% link assets/audio/amy.mp3 %}"></audio>
+Aria    | en-NZ     | True   | <audio controls src="{% link assets/audio/aria.mp3 %}"></audio>
+Brian   | en-GB     | True   | <audio controls src="{% link assets/audio/brian.mp3 %}"></audio>
+Emma    | en-GB     | True   | <audio controls src="{% link assets/audio/emma.mp3 %}"></audio>
+Joanna  | en-US     | True   | <audio controls src="{% link assets/audio/joanna.mp3 %}"></audio>
+Joey    | en-US     | True   | <audio controls src="{% link assets/audio/joey.mp3 %}"></audio>
+Kendra  | en-US     | True   | <audio controls src="{% link assets/audio/kendra.mp3 %}"></audio>
+Matthew | en-US     | True   | <audio controls src="{% link assets/audio/matthew.mp3 %}"></audio>
+Nicole  | en-AU     | False  | <audio controls src="{% link assets/audio/nicole.mp3 %}"></audio>
+Olivia  | en-AU     | True   | <audio controls src="{% link assets/audio/olivia.mp3 %}"></audio>
+Raveena | en-IN     | False  | <audio controls src="{% link assets/audio/raveena.mp3 %}"></audio>
+Salli   | en-US     | True   | <audio controls src="{% link assets/audio/salli.mp3 %}"></audio>
+Ayanda  | en-ZA     | True   | <audio controls src="{% link assets/audio/ayanda.mp3 %}"></audio>
+Geraint | en-GB-WLS | True   | <audio controls src="{% link assets/audio/geraint.mp3 %}"></audio>
+
+By default a random voice is chosen every time the video is rebuilt (only
+whenever a change is made to that slide deck.) We do this to ensure a good
+diversity of genders and nationalities in the audio samples.
+
+However, if you have a preferred voice, you can set that permanently for that
+video, add the following metadata to the top of your slide deck:
+
+```
+voice:
+  id: Lupe
+  lang: es-US
+  neural: true
+```
+
+The above voice example is specific to Spanish language content, hence not being represented in the first list.
+
 # How it works: In Detail
 
 1. We take our markdown slides, e.g. [`topics/introduction/tutorials/galaxy-intro-short/slides.html`](https://github.com/galaxyproject/training-material/blob/main/topics/introduction/tutorials/galaxy-intro-short/slides.html)

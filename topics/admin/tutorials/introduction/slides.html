@@ -53,16 +53,16 @@ contributors:
 
 [Resource Directory](https://galaxyproject.org/use/)
 
-Supported                                         | Main | Local | Cloud | Appliance
----------                                         | ---- | ----- | ----- | ---------
-Your data sets are moderately sized               | yes  | yes   | yes   | yes
-Your computation requirements are moderate        | yes  | yes   | yes   | yes
-You want to share your Galaxy objects with others | yes  | yes   | yes   | yes
-All needed Tools are installed on Main            | yes  | ?     | yes   | yes
-Your data sets are very large                     | no   | ?     | yes   | yes
-Your computation requirements are very large      | no   | ?     | yes   | yes
-You have absolute data security requirements      | no   | yes   | yes   | yes
-No network transfer of data                       | no   | yes   | no    | yes
+Supported                                         | UseGalaxy.* | Local     | Cloud
+---------                                         | ----        | -----     | -----
+Moderate Data                                     | ✅          | ✅        | ✅
+Big Data                                          | ❌          | 🤷‍♀️ | ✅
+Moderate Computations                             | ✅          | ✅        | ✅
+Long/Expensive Computations                       | ❌          | 🤷‍  | ✅
+You want to share your Galaxy objects with others | ✅          | ✅        | ✅
+All needed Tools are pre-installed                | ✅          | 🤷‍♂️ | ✅
+Human Data / Proprietary Data                     | ❌          | ✅        | ✅
+No network transfer of data                       | ❌          | ✅        | ❌
 
 ---
 
@@ -145,7 +145,7 @@ An "average" 2018 NGS analysis (by Anton Nekrutenko): **66 GB**
 Solutions:
 
 - Quotas
-- Set job limits in `job_conf.yml`
+- Set job limits in the job conf
 - Clean up deleted data (with a cron job)
 - Forced removal based on age
 - Users can configure their workflows to delete intermediate tool outputs

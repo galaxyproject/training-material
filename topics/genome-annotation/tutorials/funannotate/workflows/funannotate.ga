@@ -1,0 +1,1049 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Structural and functional genome annotation with Funannotate",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0003-0914-2470",
+            "name": "Anthony Bretaudeau"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Funannotate",
+    "steps": {
+        "0": {
+            "annotation": "The genome sequence that you wish to annotate, in fasta format. It needs to be soft masked beforehand.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "The genome sequence that you wish to annotate, in fasta format. It needs to be soft masked beforehand.",
+                    "name": "Genome assembly"
+                }
+            ],
+            "label": "Genome assembly",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 7.75
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cca15c08-8dd9-424a-8260-4c02a94c2612",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Some RNASeq data, forward reads, in fastq format",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Some RNASeq data, forward reads, in fastq format",
+                    "name": "RNASeq reads forward"
+                }
+            ],
+            "label": "RNASeq reads forward",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 3.45001220703125,
+                "top": 164.33334350585938
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6681e7b9-68f6-46e4-811f-60473d23fe0f",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Some RNASeq data, reverse reads, in fastq format",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Some RNASeq data, reverse reads, in fastq format",
+                    "name": "RNASeq reads reverse"
+                }
+            ],
+            "label": "RNASeq reads reverse",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 6,
+                "top": 310.6666564941406
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "160023e3-250f-424d-abe5-f7e3978768f0",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Some protein sequences to align on the genome to help annotation",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Some protein sequences to align on the genome to help annotation",
+                    "name": "Protein evidence sequences"
+                }
+            ],
+            "label": "Protein evidence sequences",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 7.116668701171875,
+                "top": 441.4166564941406
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "abb56aaf-5988-4fb8-a68f-0edaee00f445",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "A submission template retrieved from NCBI (generate it on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/)",
+            "content_id": null,
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "A submission template retrieved from NCBI (generate it on https://submit.ncbi.nlm.nih.gov/genbank/template/submission/)",
+                    "name": "NCBI submission template"
+                }
+            ],
+            "label": "NCBI submission template",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 2.45001220703125,
+                "top": 580.4833068847656
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "537f8bb4-4986-4d8d-a49b-1842dfaa739a",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "The genbank output of an alternate annotation (for comparison)",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "The genbank output of an alternate annotation (for comparison)",
+                    "name": "Alternate annotation gbk"
+                }
+            ],
+            "label": "Alternate annotation gbk",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 727.7333068847656
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "51a62e82-d478-45c3-bcbc-f38f1fd85974",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "The gff3 output of an alternate annotation (for comparison)",
+            "content_id": null,
+            "errors": null,
+            "id": 6,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "The gff3 output of an alternate annotation (for comparison)",
+                    "name": "Alternate annotation gff3"
+                }
+            ],
+            "label": "Alternate annotation gff3",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.4666748046875,
+                "top": 845.7500305175781
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e4367779-3fc7-4eec-8e45-86158b3950bc",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "refGenomeSource|genomeFastaFiles": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "singlePaired|input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "singlePaired|input2": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool RNA STAR",
+                    "name": "refGenomeSource"
+                },
+                {
+                    "description": "runtime parameter for tool RNA STAR",
+                    "name": "singlePaired"
+                },
+                {
+                    "description": "runtime parameter for tool RNA STAR",
+                    "name": "singlePaired"
+                }
+            ],
+            "label": null,
+            "name": "RNA STAR",
+            "outputs": [
+                {
+                    "name": "output_log",
+                    "type": "txt"
+                },
+                {
+                    "name": "splice_junctions",
+                    "type": "interval"
+                },
+                {
+                    "name": "mapped_reads",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 766.699951171875,
+                "top": 239.0
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput_log": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output_log"
+                },
+                "HideDatasetActionsplice_junctions": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "splice_junctions"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "3ea5a2a63fa2",
+                "name": "rgrnastar",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"algo\": {\"params\": {\"settingsType\": \"default\", \"__current_case__\": 0}}, \"chimOutType\": \"\", \"filter\": {\"basic_filters\": [\"exclude_unmapped\"], \"output_params2\": {\"output_select2\": \"no\", \"__current_case__\": 1}}, \"oformat\": {\"outSAMattributes\": [\"NH\", \"HI\", \"AS\", \"nM\", \"ch\"], \"HI_offset\": \"1\", \"outSAMprimaryFlag\": \"OneBestScore\", \"outSAMmapqUnique\": \"60\"}, \"outWig\": {\"outWigType\": \"None\", \"__current_case__\": 0, \"outWigStrand\": \"false\"}, \"perf\": {\"outBAMsortingBinsN\": \"50\", \"winAnchorMultimapNmax\": \"50\"}, \"refGenomeSource\": {\"geneSource\": \"history\", \"__current_case__\": 1, \"genomeFastaFiles\": {\"__class__\": \"RuntimeValue\"}, \"genomeSAindexNbases\": \"11\", \"GTFconditional\": {\"GTFselect\": \"without-gtf\", \"__current_case__\": 1, \"quantmode_output\": {\"quantMode\": \"-\", \"__current_case__\": 0}}}, \"singlePaired\": {\"sPaired\": \"paired\", \"__current_case__\": 1, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"input2\": {\"__class__\": \"RuntimeValue\"}}, \"twopass\": {\"twopassMode\": \"None\", \"__current_case__\": 0, \"twopass_read_subset\": \"\", \"sj_precalculated\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.7.10b+galaxy3",
+            "type": "tool",
+            "uuid": "269a3794-e421-4826-a5de-8a328fd194bd",
+            "workflow_outputs": [
+                {
+                    "label": "Mapped RNASeq",
+                    "output_name": "mapped_reads",
+                    "uuid": "79cf59ea-3aef-4cb8-9c70-5b42e03a5da9"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "evidences|prot_evidence|protein_evidence": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "evidences|rna_bam": {
+                    "id": 7,
+                    "output_name": "mapped_reads"
+                },
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "database"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "evidences"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "genemark"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "genemark"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "other_predictors"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "other_predictors"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "other_predictors"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "other_predictors"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate predict annotation",
+                    "name": "parameters"
+                }
+            ],
+            "label": null,
+            "name": "Funannotate predict annotation",
+            "outputs": [
+                {
+                    "name": "annot_gbk",
+                    "type": "genbank"
+                },
+                {
+                    "name": "annot_tbl",
+                    "type": "txt"
+                },
+                {
+                    "name": "annot_gff3",
+                    "type": "gff3"
+                },
+                {
+                    "name": "fasta_proteins",
+                    "type": "fasta"
+                },
+                {
+                    "name": "fasta_transcripts_mrna",
+                    "type": "fasta"
+                },
+                {
+                    "name": "fasta_transcripts_cds",
+                    "type": "fasta"
+                },
+                {
+                    "name": "tbl2asn_report",
+                    "type": "txt"
+                },
+                {
+                    "name": "tbl2asn_error",
+                    "type": "txt"
+                },
+                {
+                    "name": "tbl2asn_validation",
+                    "type": "txt"
+                },
+                {
+                    "name": "stats",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 1055.2666015625,
+                "top": 65.88333129882812
+            },
+            "post_job_actions": {
+                "HideDatasetActionannot_gbk": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "annot_gbk"
+                },
+                "HideDatasetActionannot_gff3": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "annot_gff3"
+                },
+                "HideDatasetActionannot_tbl": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "annot_tbl"
+                },
+                "HideDatasetActionfasta_transcripts_cds": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fasta_transcripts_cds"
+                },
+                "HideDatasetActionfasta_transcripts_mrna": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fasta_transcripts_mrna"
+                },
+                "HideDatasetActionstats": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "stats"
+                },
+                "HideDatasetActiontbl2asn_error": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tbl2asn_error"
+                },
+                "HideDatasetActiontbl2asn_report": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tbl2asn_report"
+                },
+                "HideDatasetActiontbl2asn_validation": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tbl2asn_validation"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.15+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "51b6ee65ef7f",
+                "name": "funannotate_predict",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"augustus\": {\"augustus_species\": \"none\", \"min_training_models\": \"200\", \"optimize_augustus\": \"false\"}, \"busco\": {\"busco_db\": \"mucorales_odb10\", \"busco_seed_species\": \"rhizopus_oryzae\"}, \"database\": {\"__class__\": \"RuntimeValue\"}, \"evidences\": {\"rna_bam\": {\"__class__\": \"RuntimeValue\"}, \"transcript_evidence\": {\"__class__\": \"RuntimeValue\"}, \"prot_evidence\": {\"prot_evidence_source\": \"custom\", \"__current_case__\": 1, \"protein_evidence\": {\"__class__\": \"RuntimeValue\"}}, \"p2g_pident\": \"80\", \"p2g_prefilter\": \"diamond\"}, \"evm\": {\"repeats2evm\": \"false\", \"evm_partitioning\": {\"evm_partition\": \"yes\", \"__current_case__\": 0, \"evm_partition_interval\": \"1500\"}, \"weights\": \"\"}, \"filtering\": {\"min_intronlen\": \"10\", \"max_intronlen\": \"3000\", \"min_protlen\": \"50\", \"keep_no_stops\": \"false\", \"repeat_filter\": \"overlap blast\"}, \"force\": \"true\", \"genemark\": {\"genemark_license\": {\"__class__\": \"RuntimeValue\"}, \"genemark_mode\": \"ES\", \"genemark_mod\": {\"__class__\": \"RuntimeValue\"}, \"soft_mask\": \"2000\"}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"organism\": {\"species\": \"Mucor mucedo\", \"isolate\": \"\", \"strain\": \"muc1\", \"organism\": \"false\", \"ploidy\": \"1\", \"SeqCenter\": \"CFMR\", \"SeqAccession\": \"12345\", \"name\": \"FUN_\", \"numbering\": \"1\"}, \"other_predictors\": {\"stringtie\": {\"__class__\": \"RuntimeValue\"}, \"maker_gff\": {\"__class__\": \"RuntimeValue\"}, \"pasa_gff\": {\"__class__\": \"RuntimeValue\"}, \"pasa_gff_weight\": \"1\", \"other_gff\": {\"__class__\": \"RuntimeValue\"}, \"other_gff_weight\": \"1\"}, \"outputs\": [\"gbk\", \"tbl\", \"gff3\", \"proteins_fa\", \"mrna_transcripts_fa\", \"cds_transcripts_fa\", \"tbl2asn_report\", \"tbl2asn_error\", \"tbl2asn_validation\", \"stats\"], \"parameters\": {\"__class__\": \"RuntimeValue\"}, \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8.15+galaxy0",
+            "type": "tool",
+            "uuid": "aefc0275-b611-4ede-9650-2e16553a7352",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fasta_proteins",
+                    "uuid": "aa7fb986-b7db-4353-a83b-3f1591911388"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "ortho_method|input": {
+                    "id": 8,
+                    "output_name": "fasta_proteins"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool eggNOG Mapper",
+                    "name": "ortho_method"
+                }
+            ],
+            "label": null,
+            "name": "eggNOG Mapper",
+            "outputs": [
+                {
+                    "name": "seed_orthologs",
+                    "type": "tabular"
+                },
+                {
+                    "name": "annotations",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1444.9666748046875,
+                "top": 418.7333068847656
+            },
+            "post_job_actions": {
+                "HideDatasetActionseed_orthologs": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "seed_orthologs"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "9d1fbff733cf",
+                "name": "eggnog_mapper",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation_options\": {\"no_annot\": \"\", \"__current_case__\": 0, \"seed_ortholog_evalue\": \"0.001\", \"seed_ortholog_score\": null, \"tax_scope\": null, \"target_orthologs\": \"all\", \"go_evidence\": \"non-electronic\"}, \"eggnog_data\": \"5.0.2\", \"ortho_method\": {\"m\": \"diamond\", \"__current_case__\": 0, \"input\": {\"__class__\": \"RuntimeValue\"}, \"input_trans\": {\"itype\": \"proteins\", \"__current_case__\": 0}, \"matrix_gapcosts\": {\"matrix\": \"BLOSUM62\", \"__current_case__\": 2, \"gap_costs\": \"--gapopen 11 --gapextend 1\"}, \"sensmode\": \"sensitive\", \"dmnd_iterate\": \"false\", \"dmnd_ignore_warnings\": \"false\", \"query_cover\": null, \"subject_cover\": null, \"pident\": null, \"evalue\": null, \"score\": \"0.001\"}, \"output_options\": {\"no_file_comments\": \"false\", \"report_orthologs\": \"false\", \"md5\": \"false\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.8+galaxy3",
+            "type": "tool",
+            "uuid": "0d9f93f0-88b3-406b-b8f9-ecb2d74c61e9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "annotations",
+                    "uuid": "521fe026-4958-4965-9414-e7074aea7860"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "fasta_proteins"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool InterProScan",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "InterProScan",
+            "outputs": [
+                {
+                    "name": "outfile_tsv",
+                    "type": "tabular"
+                },
+                {
+                    "name": "outfile_xml",
+                    "type": "xml"
+                }
+            ],
+            "position": {
+                "left": 1475.8499755859375,
+                "top": 817.8666687011719
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutfile_xml": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "outfile_xml"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "74810db257cc",
+                "name": "interproscan",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"applications\": [\"TIGRFAM\", \"SFLD\", \"SUPERFAMILY\", \"PANTHER\", \"Gene3D\", \"Hamap\", \"PrositeProfiles\", \"Coils\", \"SMART\", \"CDD\", \"PRINTS\", \"PIRSR\", \"PrositePatterns\", \"Pfam\", \"MobiDBLite\", \"PIRSF\"], \"database\": \"5.59-91.0\", \"goterms\": \"true\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"iprlookup\": \"false\", \"licensed\": {\"use\": \"true\", \"__current_case__\": 1, \"applications_licensed\": [\"Phobius\", \"SignalP_EUK\", \"TMHMM\"]}, \"oformat\": [\"TSV\", \"XML\"], \"pathways\": \"true\", \"seqtype\": \"p\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.59-91.0+galaxy3",
+            "type": "tool",
+            "uuid": "cb7a1910-3c31-47d9-835b-f1bd16a1c3ff",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile_tsv",
+                    "uuid": "65e267a7-d3c6-410d-9b44-f655d70d7d9a"
+                }
+            ]
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "eggnog": {
+                    "id": 9,
+                    "output_name": "annotations"
+                },
+                "input|genbank": {
+                    "id": 8,
+                    "output_name": "annot_gbk"
+                },
+                "iprscan": {
+                    "id": 10,
+                    "output_name": "outfile_xml"
+                },
+                "sbt": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "annotations"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "antismash"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "database"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "eggnog"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "fix"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "input"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "iprscan"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "phobius"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "remove"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate functional",
+                    "name": "sbt"
+                }
+            ],
+            "label": null,
+            "name": "Funannotate functional",
+            "outputs": [
+                {
+                    "name": "gbk",
+                    "type": "genbank"
+                },
+                {
+                    "name": "annot",
+                    "type": "tabular"
+                },
+                {
+                    "name": "contigs_fsa",
+                    "type": "fasta"
+                },
+                {
+                    "name": "agp",
+                    "type": "tabular"
+                },
+                {
+                    "name": "tbl",
+                    "type": "txt"
+                },
+                {
+                    "name": "sqn",
+                    "type": "txt"
+                },
+                {
+                    "name": "fa_scaffolds",
+                    "type": "fasta"
+                },
+                {
+                    "name": "fa_proteins",
+                    "type": "fasta"
+                },
+                {
+                    "name": "fa_transcripts_mrna",
+                    "type": "fasta"
+                },
+                {
+                    "name": "fa_transcripts_cds",
+                    "type": "fasta"
+                },
+                {
+                    "name": "gff3",
+                    "type": "gff3"
+                },
+                {
+                    "name": "tbl2asn_report",
+                    "type": "txt"
+                },
+                {
+                    "name": "stats",
+                    "type": "json"
+                },
+                {
+                    "name": "must_fix",
+                    "type": "json"
+                },
+                {
+                    "name": "need_curating",
+                    "type": "json"
+                },
+                {
+                    "name": "new_names_passed",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 1877.11669921875,
+                "top": 101.59999084472656
+            },
+            "post_job_actions": {
+                "HideDatasetActionagp": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "agp"
+                },
+                "HideDatasetActionannot": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "annot"
+                },
+                "HideDatasetActioncontigs_fsa": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "contigs_fsa"
+                },
+                "HideDatasetActionfa_scaffolds": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "fa_scaffolds"
+                },
+                "HideDatasetActionmust_fix": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "must_fix"
+                },
+                "HideDatasetActionneed_curating": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "need_curating"
+                },
+                "HideDatasetActionnew_names_passed": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "new_names_passed"
+                },
+                "HideDatasetActionsqn": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "sqn"
+                },
+                "HideDatasetActiontbl": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tbl"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.15+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9feee7fc49a1",
+                "name": "funannotate_annotate",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotations\": {\"__class__\": \"RuntimeValue\"}, \"antismash\": {\"__class__\": \"RuntimeValue\"}, \"busco_db\": \"mucorales_odb10\", \"database\": {\"__class__\": \"RuntimeValue\"}, \"eggnog\": {\"__class__\": \"RuntimeValue\"}, \"fix\": {\"__class__\": \"RuntimeValue\"}, \"input\": {\"input_type\": \"gbk\", \"__current_case__\": 0, \"genbank\": {\"__class__\": \"RuntimeValue\"}}, \"iprscan\": {\"__class__\": \"RuntimeValue\"}, \"isolate\": \"\", \"outputs\": [\"gbk\", \"annotations\", \"contigs_fsa\", \"agp\", \"tbl\", \"sqn\", \"scaffolds_fa\", \"proteins_fa\", \"mrna_transcripts_fa\", \"cds_transcripts_fa\", \"gff3\", \"discrepency\", \"stats\", \"must_fix\", \"need_curating\", \"new_names_passed\"], \"phobius\": {\"__class__\": \"RuntimeValue\"}, \"remove\": {\"__class__\": \"RuntimeValue\"}, \"rename\": \"\", \"sbt\": {\"__class__\": \"RuntimeValue\"}, \"strain\": \"muc1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8.15+galaxy0",
+            "type": "tool",
+            "uuid": "e07de1e0-8f91-4477-b951-7d97dba2e397",
+            "workflow_outputs": [
+                {
+                    "label": "Final annotation (genbank)",
+                    "output_name": "gbk",
+                    "uuid": "d0694cd1-6d81-4d72-83b9-94cb57dc1502"
+                },
+                {
+                    "label": "Final annotation (CDS sequences)",
+                    "output_name": "fa_transcripts_cds",
+                    "uuid": "9a1e7b70-1090-41ed-8637-65b7372a9f6c"
+                },
+                {
+                    "label": "Final annotation (mRNA sequences)",
+                    "output_name": "fa_transcripts_mrna",
+                    "uuid": "99fffa40-2196-491d-9a66-559ebf2d9561"
+                },
+                {
+                    "label": "Final annotation (protein sequences)",
+                    "output_name": "fa_proteins",
+                    "uuid": "17b03b77-0485-4176-b2b3-03bfa2d3bcb0"
+                },
+                {
+                    "label": null,
+                    "output_name": "tbl2asn_report",
+                    "uuid": "d3d4daec-75fe-4071-af37-c2907e46f5c1"
+                },
+                {
+                    "label": null,
+                    "output_name": "stats",
+                    "uuid": "4a682ab6-8a6f-4a0f-bb0e-ba796f587ddc"
+                },
+                {
+                    "label": "Final annotation (GFF3)",
+                    "output_name": "gff3",
+                    "uuid": "4a0602fc-e6d2-43fc-9957-344707c22c05"
+                }
+            ]
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "reference_genome|genome": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 11,
+                    "output_name": "gff3"
+                },
+                "track_groups_1|data_tracks_0|data_format|annotation": {
+                    "id": 7,
+                    "output_name": "mapped_reads"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool JBrowse",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": null,
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2152.60009765625,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6e57ff585c0",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"gencode\": \"1\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": \"true\", \"aboutDescription\": \"\", \"show_tracklist\": \"true\", \"show_nav\": \"true\", \"show_overview\": \"true\", \"show_menu\": \"true\", \"hideGenomeOptions\": \"false\"}, \"plugins\": {\"BlastView\": \"true\", \"ComboTrackSelector\": \"false\", \"GCContent\": \"false\"}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Annotation\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"match_part\": {\"match_part_select\": \"false\", \"__current_case__\": 1}, \"index\": \"false\", \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": \"\"}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}, {\"__index__\": 1, \"category\": \"RNASeq\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"pileup\", \"__current_case__\": 3, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"auto_snp\": \"true\", \"chunkSizeLimit\": \"5000000\", \"jb_custom_config\": {\"option\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
+            "type": "tool",
+            "uuid": "e6d0e687-1a13-482b-a00a-28c7304d59ac",
+            "workflow_outputs": [
+                {
+                    "label": "JBrowse",
+                    "output_name": "output",
+                    "uuid": "ac4d8805-f123-44d2-b30f-8ac906cc471f"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "input": [
+                    {
+                        "id": 5,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 11,
+                        "output_name": "gbk"
+                    }
+                ]
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Funannotate compare",
+                    "name": "database"
+                },
+                {
+                    "description": "runtime parameter for tool Funannotate compare",
+                    "name": "proteinortho"
+                }
+            ],
+            "label": null,
+            "name": "Funannotate compare",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2318,
+                "top": 403.7333068847656
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.15+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "a7ce2601500c",
+                "name": "funannotate_compare",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"database\": {\"__class__\": \"RuntimeValue\"}, \"go_fdr\": \"0.05\", \"heatmap_stdev\": \"1.0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"ml\": {\"ml_method\": \"iqtree\", \"__current_case__\": 0}, \"num_orthos\": \"500\", \"proteinortho\": {\"__class__\": \"RuntimeValue\"}, \"run_dnds\": \"no\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.8.15+galaxy0",
+            "type": "tool",
+            "uuid": "750137e5-2cac-4bec-8337-03dab562a7a5",
+            "workflow_outputs": [
+                {
+                    "label": "Funannotate compare report",
+                    "output_name": "output",
+                    "uuid": "e531c81f-f6b7-4c82-a712-c562873ff714"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "predictiongff3": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "referencegff3": {
+                    "id": 11,
+                    "output_name": "gff3"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "AEGeAn ParsEval",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 2318.5,
+                "top": 643.7333068847656
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0",
+            "tool_shed_repository": {
+                "changeset_revision": "1b52f0c8ad7f",
+                "name": "aegean_parseval",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"delta\": \"0\", \"maxtrans\": \"32\", \"output_type\": \"html\", \"predictiongff3\": {\"__class__\": \"ConnectedValue\"}, \"predlabel\": \"\", \"referencegff3\": {\"__class__\": \"ConnectedValue\"}, \"refrlabel\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.16.0",
+            "type": "tool",
+            "uuid": "b5870c4b-d799-4da0-83cc-7dd5a0b049e4",
+            "workflow_outputs": [
+                {
+                    "label": "AEGeAN report",
+                    "output_name": "output_html",
+                    "uuid": "0d776b46-2c1c-4083-9f9d-a213fa62eb81"
+                }
+            ]
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "fa_proteins"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2252.2666015625,
+                "top": 1072.0666809082031
+            },
+            "post_job_actions": {
+                "HideDatasetActionbusco_table": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "busco_table"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.6+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "94170eee0ad8",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"prot\", \"__current_case__\": 2}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"outputs\": [\"short_summary\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.4.6+galaxy0",
+            "type": "tool",
+            "uuid": "bec3d4d9-88e6-4ea0-beb6-219d5c727290",
+            "workflow_outputs": [
+                {
+                    "label": "Busco summary",
+                    "output_name": "busco_sum",
+                    "uuid": "57a619f5-b331-4ca6-8e6e-72eb61860032"
+                },
+                {
+                    "label": "Busco image",
+                    "output_name": "summary_image",
+                    "uuid": "97d23764-ad4a-4d69-948c-c81afb76fbaf"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "genome-annotation"
+    ],
+    "uuid": "cb81783b-75a8-427b-9013-1a75cda50f88",
+    "version": 57
+}

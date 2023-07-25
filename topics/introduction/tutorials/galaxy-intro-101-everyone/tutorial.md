@@ -121,6 +121,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >
@@ -136,6 +137,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 >      - Option 2: Datatypes can be **manually set**
 >
 >    {% snippet faqs/galaxy/datasets_detect_datatype.md datatype="datatypes" %}
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="csv" %}
 >
 > 4. Add an `#iris` tag {% icon galaxy-tags %} to the dataset
@@ -562,7 +564,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 > If you had problems extracting your workflow in the previous step, we provide [a working copy for you]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
-> {% snippet faqs/galaxy/workflows_import.md %}
+> {% snippet faqs/galaxy/workflows_run_trs.md path="topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga" title="Main Workflow" %}
 >
 {: .comment}
 
@@ -634,6 +636,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `diamonds`

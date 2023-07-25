@@ -98,6 +98,10 @@ A substantial amount of the data we work with in science is tabular data, i.e. d
 
 ## Import tabular data into R
 
+As in the "R Basics" tutorial, we will continue in {% tool [RStudio](interactive_tool_rstudio) %}.
+
+{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+
 There are several ways to import data into R. For our purpose here, we will focus on using the tools every R installation comes with (so called "base" R) to import a comma-delimited file containing the results of our variant calling workflow. We will need to load the sheet using a function called `read.csv()`.
 
 > <question-title>Review the arguments of the `read.csv()` function</question-title>

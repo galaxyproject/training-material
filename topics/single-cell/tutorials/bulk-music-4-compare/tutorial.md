@@ -220,7 +220,7 @@ Hopefully, this has been illuminating! Now let's try two other ways of inferring
 >
 > > <solution-title></solution-title>
 > >
-> > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/plot_altogether.png "Altogether vs like4like")
+> > ![Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph.](../../images/bulk-music/compare_like.png "Altogether vs like4like")
 > > 1. Overall, our interpretation here is that the differences are less pronounced. It's interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inference of a beta cell and leading to a higher proportion of interred B-cells.
 > >
 > {: .solution}
@@ -262,7 +262,7 @@ Let's try one more inference - this time, we'll use only healthy cells as a refe
 >
 > > <solution-title></solution-title>
 > >
-> > > > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
+> > ![Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph.](../../images/bulk-music/compare_3.png "The impact of the single cell reference")
 > >
 > > 1. If using a like4like inference reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.
 > >

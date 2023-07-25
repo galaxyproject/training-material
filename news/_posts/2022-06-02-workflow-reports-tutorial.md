@@ -1,7 +1,8 @@
 ---
 title: "New Tutorial: Workflow Reports"
 tags: [new tutorial, Galaxy Tips & Tricks]
-contributors: [shiltemann]
+contributions:
+  authorship: [shiltemann]
 cover: "topics/galaxy-interface/tutorials/workflow-reports/images/invocations-list.png"
 tutorial: "topics/galaxy-interface/tutorials/workflow-reports/tutorial.html"
 coveralt: "Access the workflow report from the invocations menu"

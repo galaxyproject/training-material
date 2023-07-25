@@ -43,6 +43,7 @@ contributions:
     - nomadscientist
   editing:
     - hexylena
+    - wee-snufkin
   testing:
     - wee-snufkin
 translations:
@@ -558,6 +559,10 @@ Next up, we're going to scale our data so that all genes have the same variance 
 
 {% icon congratulations %} Congratulations! You have processed your object!
 
+> <comment-title></comment-title>
+> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
+{: .comment}
+
 # Preparing coordinates
 
 We still have too many dimensions. Transcript changes are not usually singular - which is to say, genes were in pathways and in groups. It would be easier to analyse our data if we could more easily group these changes.
@@ -569,7 +574,7 @@ Principal components are calculated from highly dimensional data to find the mos
 > Where did the `3248` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run {% icon galaxy-refresh %} the **Scanpy FindVariableGenes** tool and select the parameter to *Remove genes not marked as highly variable*. Then you can Inspect your resulting object and you'll see only 3248 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your FindVariableGenes tool with way more than 3248 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 3248 or 2000 (if you set a limit on it) highly variable genes.
 {: .comment}
 
-> <warning-title>Check your AnnData object!</warning>
+> <warning-title>Check your AnnData object!</warning-title>
 > Your AnnData object should have far more than 3248 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 3248 or 2000 output from your testing in the section above labelled '3248'.
 {: .warning}
 
@@ -898,7 +903,7 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 > <question-title>Sample purity</question-title>
 >
-> Do you think we processed these samples good enough?
+> Do you think we processed these samples well enough?
 >
 > ![Sequencing depth](../../images/scrna-casestudy/wab-hba.png "Hemoglobin across clusters")
 >
@@ -963,7 +968,7 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > 3. Feel free to explore any other similar histories
 {: .details}
 
-{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2) helpful to compare with, or this [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs3filter-plot-and-explore-single-cell-rna-seq-data).
+{% icon congratulations %} Congratulations! You've made it to the end! You might find this [example control history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2) ([updated version](https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated)) helpful to compare with, or this [workflow](https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3).
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it's like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 

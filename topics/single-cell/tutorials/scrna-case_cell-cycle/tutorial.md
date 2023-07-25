@@ -23,6 +23,10 @@ time_estimation: 1H
 key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle
 - Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data
+tags:
+- single-cell
+- 10x
+- transcriptomics
 
 contributions:
   authorship:
@@ -473,7 +477,7 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 
 Comparing the before and after plots, we can clearly see that the effects of the cell cycle have been removed. Although you wouldn't usually need to filter out the cell cycle genes or create these plots when analysing your own data, hopefully you have found doing it now to be helpful for understanding the impact of cell cycle regression.
 
-<question-title></question-title>
+> <question-title></question-title>
 >
 > 1. What impact do you think the cell cycle regression will have when you analyse the whole dataset? What would happen if we plotted all of the genes from the main dataset?
 >

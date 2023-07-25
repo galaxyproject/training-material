@@ -4,8 +4,7 @@
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        {% assign thispage = page.url | replace: '.html', '.md' %}
-        <a class="dropdown-item" href="{{ site.github_repository }}{% unless thispage == '/' %}/edit/{{ site.github_repository_branch }}{{ thispage }}{% endunless %}" title="Edit on GitHub">
+        <a class="dropdown-item" href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}" title="Edit on GitHub">
           {% icon github %} Edit on GitHub
         </a>
 
@@ -71,9 +70,9 @@
 
             <div id="archive-selector">
             {% for tag in site.git_tags_recent %}
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}" title="Version {{tag}}">{{ tag }}</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/{{tag}}{{ page.url }}">{{ tag }}</a>
             {% endfor %}
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
 
         </div>

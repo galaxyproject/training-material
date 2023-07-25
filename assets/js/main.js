@@ -24,10 +24,10 @@ $("blockquote.solution>.box-title>button,blockquote.details>.box-title>button,bl
 
 	// Naturally we also need to toggle the aria-expanded attribute to make sure we're accessible
     $(this).attr("aria-expanded",
-		// if it's collapsed
-		$(">span.fold-unfold", this).hasClass("fa-plus-square") ? 
+		// if it's collapsed (i.e. showing plus icon indicating expanding)
+		$(">span.fold-unfold", this).hasClass("fa-plus-square") ?
 		// mark as collapsed
-		"true" : "false"
+		"false" : "true"
 	);
 });
 
@@ -59,7 +59,12 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 // CYOA Support
 function cyoaChoice(text){
 	if(text !== undefined && text !== null){
-		localStorage.setItem('gtn-cyoa', text);
+		var loc = new URL(document.location)
+		try {
+			localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+		} catch(e) {
+			// Helaas pindakaas
+		}
 
 		var inputs = document.querySelectorAll(".gtn-cyoa input"),
 			options = [...inputs].map(x => x.value),
@@ -72,21 +77,31 @@ function cyoaChoice(text){
 		document.querySelectorAll(`.${text}`).forEach(el => el.classList.remove("gtn-cyoa-hidden"));
 
 		// Just in case we mark it as checked (e.g. if default/from URL)
-		document.querySelector(`input[value="${text}"]`).checked = true
+		var input_el = document.querySelector(`input[value="${text}"]`)
+		// Can be undefined
+		if(input_el) {
+			input_el.checked = true;
+		}
 	}
 }
 
 function cyoaDefault(defaultOption){
 	// Start with the URL parameter
-	var urlOption = (new URL(document.location)).searchParams.get("gtn-cyoa");
+	var loc = new URL(document.location)
+	var urlOption = loc.searchParams.get("gtn-cyoa");
 	if(urlOption){
 		cyoaChoice(urlOption);
 		return;
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
-	var lsOption = localStorage.getItem('gtn-cyoa');
-	if(lsOption !== null){
+	var lsOption;
+	try {
+		lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
+	} catch(e) {
+		// Helaas pindakaas
+	}
+	if(lsOption !== null && lsOption !== undefined){
 		cyoaChoice(lsOption);
 		return;
 	}
@@ -152,9 +167,9 @@ function fixDiffPresentation(codeBlock){
 	})
 }
 
-<!--  For admin training -->
-document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
-document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+// For admin training
+document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 $("#theme-selector button").click(function(evt){
 	var theme = $(evt.target).data('theme');
@@ -166,3 +181,29 @@ $("#theme-selector button").click(function(evt){
 		}, 8000);
 	}
 })
+
+
+// Redirects
+if(window.location.hostname === "galaxyproject.github.io") {
+	// Redirect
+	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+	window.setTimeout(function(){
+	window.location.href = redirect;
+	}, 5000)
+}
+
+// Copy paste buttons
+document.querySelectorAll('div.highlight').forEach((snippet) => {
+	// Google translate has additional #text nodes mixed in with
+	// the pre for some reason.
+	var gtn_snippet_pres = [...snippet.childNodes].filter(x => x.tagName == "PRE")
+	if(gtn_snippet_pres && gtn_snippet_pres.length > 0){
+		gtn_snippet_pres[0].insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet tabindex="0"><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+	}
+});
+
+var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+    target:function(trigger){return trigger.nextElementSibling;
+}});

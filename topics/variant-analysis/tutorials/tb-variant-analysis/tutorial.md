@@ -4,8 +4,6 @@ layout: tutorial_hands_on
 title: "M. tuberculosis Variant Analysis"
 subtopic: one-health
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
-tags:
-  - prokaryote
 questions:
   - "How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome"
 objectives:
@@ -22,6 +20,9 @@ contributors:
   - pvanheus
   - slugger70
   - thobalose
+tags:
+  - prokaryote
+  - one-health
 ---
 # Introduction
 
@@ -50,6 +51,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 {: .hands_on}
@@ -93,7 +95,7 @@ While one could examine the quality control report for each set of reads (forwar
 
 > <hands-on-title>Combining QC results</hands-on-title>
 >
-> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
+> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -269,8 +271,8 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 > variants predicted in the M. tuberculosis
 > genome, using multiple different strategies.
 > Firstly, certain regions of the Mtb genome
-contain repetitive sequences, e.g. from
-the PE/PPE gene family. Historically all of the genomic regions corresponding to
+> contain repetitive sequences, e.g. from
+> the PE/PPE gene family. Historically all of the genomic regions corresponding to
 > those genes were filtered out but 
 > the new default draws on work from
 > Maximillian Marin and others. This
@@ -278,12 +280,12 @@ the PE/PPE gene family. Historically all of the genomic regions corresponding to
 > regions is the current region filter in
 > TB Variant Filter for reads over 100 bp.
 > If you are using shorter reads (e.g. from Illumina iSeq) the "Refined Low Confidence and Low Mappability" region list should be used instead.
->For more on how these regions were calculated read the [paper](https://academic.oup.com/bioinformatics/article-abstract/38/7/1781/6502279?login=false) or [preprint](https://www.biorxiv.org/content/10.1101/2021.04.08.438862v3.full).
+> For more on how these regions were calculated read the [paper](https://academic.oup.com/bioinformatics/article-abstract/38/7/1781/6502279?login=false) or [preprint](https://www.biorxiv.org/content/10.1101/2021.04.08.438862v3.full).
 >
 > In addition to region filters, filters for variant type, allele frequency, coverage depth and distance from indels are provided.
 > Older variant callers struggled to accurately
 > call insertions and deletions (indels) but more recent tools (e.g. GATK v4 and the variant caller used in Snippy, Freebayes) no longer have this weakness. One remaining reason to filter SNVs/SNPs near indels is that they might have a different
-evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
+> evolutionary history to "free standing" SNVs/SNPs, so the "close to indel filter" is still available in TB Variant Filter in case such SNPs/SNVs should be filtered out.
 {: .details}
 
 Now that we have a collection of *high quality variants* we can search them against variants known to be associated with drug resistance. The *TB Profiler* tool does this using a database of variants curated by Dr Jody Phelan at the London School of Hygiene and Tropical Medicine. It can do its own mapping and variant calling but also accepts mapped reads in BAM format as input. It does its own variant calling and filtering.
@@ -291,7 +293,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > <hands-on-title>Run TB Profiler and TB Variant Report</hands-on-title>
-> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.0+galaxy0) %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0) %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
@@ -447,7 +449,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > {: .solution}
 >    {: .question}
 >
-> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.3+galaxy0) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
+> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4) %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
 > 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0) %} on the mapped reads BAM file that you got from **snippy** using the FASTA format reference you made with **seqret** as the reference.
 >

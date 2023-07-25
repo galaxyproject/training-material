@@ -77,7 +77,10 @@ Because our data is *paired* we need to create a hierarchical collection called 
 To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy's history menu. Fig. 2 below shows this process.
 
 
-![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif "Selecting multiple datasets and creating a paired collection.")
+
+![selecting multiple datasets](../../images/collections/select_multiple_datasets.gif  "Selecting multiple datasets and creating a paired collection.")
+
+
 
 
 The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the `_1` and `_2` endings of dataset names. Let's however pretend that this did not happen. Click on **Unpair all** (highlighted in red in the figure above) link and then on **Filters** link (see animation in Fig. 3). The interface will change into its unpaired state.
@@ -96,7 +99,7 @@ Clicking on collection will expand it to show four pairs it contains (panel **B*
 
 # Processing data organized as a collection
 
-By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
+By now we see that a collection can be used to bundle a large number of items into a single history item. Galaxy tools take collection as input. Let's map reads contained in collection `M117-collection` against human mitochondrial genome. Before we can do this we need to upload mitochondrial genome using the following URL (see a {% icon tip %} **Tip** on how to do this [below](#tip-importing-via-links)):
 
 ```
 https://zenodo.org/record/5119008/files/chrM.fa.gz
@@ -114,7 +117,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `chrM.fa.gz` (The mitochondrial genome we just uploaded)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -126,7 +129,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > ------
 >
-> ![bwa_mem_interface](../../images/bwa_mem_interface_coll_tut.png)
+> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png)
 >
 > ------
 >
