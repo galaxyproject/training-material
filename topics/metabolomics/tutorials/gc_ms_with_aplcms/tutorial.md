@@ -455,11 +455,12 @@ This step recovers features which are present in a sample but might have been fi
 >    - {% icon param-file %} *"Metadata table"*: `aligned metadata table` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"RT table"*: `aligned rt table` (output of **recetox-aplcms - align features** {% icon tool %})
 >    - {% icon param-file %} *"Intensity table"*: `aligned intensity table` (output of **recetox-aplcms - align features** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
->    - *"m/z tolerance [ppm]"*: `10`
->    - *"Minimal count to recover"*: `3`
->    - *"Bandwidth factor"*: `0.5`
+>    - *"Relative m/z tolerance [ppm]"*: `5.0`
+>    - *"Retention time tolerance [unit corresponds to the retention time]"*: `2.0`
+>    - *"m/z tolerance [ppm]"*: `5.0`
+>    - *"Range for m/z recovery [ppm]"*: `5.0`
+>    - *"Range for rt recovery [unit of retention time]"*: `5.0`
+>    - *"Minimal count to recover"*: `7`
 >
 {: .hands_on}
 
@@ -483,8 +484,8 @@ We might have added new features, so we do the clustering again.
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input data"*: `recovered features` (output of **recetox-aplcms - recover weaker signals** {% icon tool %})
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
+>    - *"Relative m/z tolerance [ppm]"*: `3.0`
+>    - *"Retention time tolerance [unit corresponds to the retention time]"*: `1.0`
 >
 {: .hands_on}
 
@@ -518,9 +519,8 @@ Features can now appear in more samples than before, so we also need to repeat t
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Clustered features"*: `clustered features` (output of **recetox-aplcms - compute clusters** {% icon tool %}))
->    - *"Relative m/z tolerance [ppm]"*: `10`
->    - *"Retention time tolerance [unit corresponds to the retention time]"*: `5.0`
->    - *"Minimal occurrence in samples"*: `2`
+>    - *"Relative m/z tolerance [ppm]"*: `3.0`
+>    - *"Retention time tolerance [unit corresponds to the retention time]"*: `1.0`
 >
 {: .hands_on}
 
