@@ -331,17 +331,13 @@ After we have aligned the retention time of our samples, we need to run the seco
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. What already used step could we use next? What would be its effects? 
-> 2. Question2?
+> 1. What already used step could we use next? What would be its effects?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. **TODO**
-> > 2. Answer for question2
+> > 1. Running **recetox-aplcms - compute template** {% icon tool %}, followed by **recetox-aplcms - correct time** {% icon tool %}, has the potential to enhance features' retention time alignment and consequently improve the results of subsequent steps.
 > >
 > {: .solution}
 >
@@ -474,17 +470,13 @@ This step recovers features which are present in a sample but might have been fi
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. For the parameters that are repeated from previous steps, is it neccesary to use the same values for them?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. **TODO** what is the answer? what is recommended?
 > >
 > {: .solution}
 >
