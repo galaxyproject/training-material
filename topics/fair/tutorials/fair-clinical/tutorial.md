@@ -20,10 +20,9 @@ tags:
 priority: 1
 contributions:
   authorship:
-    - "sandra ng"
+    - SNG888
     - kkamieniecka
-  editing:
-    - kkamieniecka
+    
 subtopic: fair-data
 
 requirements:
