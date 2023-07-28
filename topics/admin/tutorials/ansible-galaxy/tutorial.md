@@ -923,6 +923,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_commit_id: release_23.0
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>    +miniconda_python: 3.7
+>    +miniconda_installer_version: 4.12.0
 >    +miniconda_version: 4.12.0
 >    +miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
