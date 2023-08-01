@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: 'Filter, Plot, and Explore with Seurat in RStudio'
 subtopic: single-cell-CS
 priority: 6
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
 - Is my single cell dataset a quality dataset?
