@@ -201,20 +201,6 @@ Why do we need to correct those?
 {: .hands_on}
 
 # Assembly assessment / cleaning
-
-## Checking of the assembly statistics
-
-> <hands-on-title>Task description</hands-on-title>
->
-> 1. **Trinity Statistics** {% icon tool %} with the following parameters:
->    - *"Trinity assembly"*: `transcriptome_raw.fasta`
->
->    > <comment-title></comment-title>
->    > This step, even with this toy dataset, will take around 2 hours
->    {: .comment}
->
-{: .hands_on}
-
 ## Remapping on the raw transcriptome
 
 > <hands-on-title>Task description</hands-on-title>
