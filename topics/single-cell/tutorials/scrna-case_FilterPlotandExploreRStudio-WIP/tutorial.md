@@ -52,8 +52,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio-WIP/preamble.md
 ---
 
-# Setting the environment and files 
-First thing's first, we should load the packages we will need into our environment. In your console (likely in the lower left corner of your RStudio window) run the following line of code. 
+# Setting your environment 
+First thing's first, we should load the packages we will need into our environment. In your console (likely in the lower left corner of your RStudio window), run the following lines of code: 
 
 ```r
 library(Matrix)
@@ -61,24 +61,30 @@ library(Seurat)
 library(dplyr) 
 ```
 
-Alright, the packages are called - now let's get our data files moved from the Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
+The packages are called - now let's get our data files moved from the Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
 
 # Upload, view and modify the files
-Now that we have made it into RStudio and called the packages we'll use, let's begin loading the datasets we retrieved in Galaxy into RStudio. Galaxy expedites this process by providing us the gx_get() function, which will output the file path to locate each dataset within our history. 
+Now that we've made it into RStudio, and called the packages we'll use, let's begin loading datasets from Galaxy into our RStudio environment. Galaxy helps us with this step by providing us the gx_get() function, which will tell us the file paths at which we find the datasets saved in our Galaxy histories. 
 
-So, for example, our matrix was the first to be saved in our history. As such, we will ask for the filepath for the first piece of  in our history with the following line:  
+So, for example, our matrix was the first to be imported. As such, we will ask for the filepath for the first piece of data in our history with the following line:  
 
 ```r
-gx_get(1)  #get the file path for matrix.mtx  Galaxy history
+gx_get(1)  #get the file path for matrix.mtx: #1 in Galaxy history
 ```
 
-Now we have the file path! We can use the Matrix package to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
+Now we have the file path! We can use the Matrix package, specifically their readMM function, to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
 
 ```r
 matrix.mtx<-readMM("/import/1") 
 ```
-Now we will do the same thing with the feature, barcode, and experimental design files. Don't try to skip ahead and fill in the position of the dataset, reading in the files will not work without having used the gx_get() function. 
+Now we will do the same thing with the feature, barcode, and experimental design files. 
 
+> <warning-title>Don't skip ahead!</warning-title>
+>  Don't try to skip ahead and fill in the position of the dataset, reading in the files very often will not work without having used the gx_get() function--if it does, well, lucky you. 
+>
+{: .warning}
+
+We'll run the same command, simply replacing the data number in order to find where we will ask R to find our data. Then, we will use the read.delim function in read the  list of genes, cells, and cell annotations from the researchers:
 ```r
 gx_get(2) #genes.tsv
 genes.tsv<-read.delim("/import/2", header = FALSE) 
@@ -89,7 +95,7 @@ barcodes.tsv<-read.delim("/import/3", header = FALSE)
 gx_get(4) #exp_design.tsv
 exp_design.tsv<-read.delim("/import/4")
 ```
-The formatting of the experimental design dataset has cell barcodes as the first column of data as opposed to the row names. In order to Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by doing the following: 
+The format of the experimental design dataset contains cell barcodes as the first column of data as opposed to the official row names. In order for Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by running the following line of code: 
 
 ```r
 rownames(exp_design.tsv)<-exp_design.tsv$Assay 
@@ -97,16 +103,32 @@ rownames(exp_design.tsv)<-exp_design.tsv$Assay
 
 Now, in our RStudio environment, we should have all of the data sets necessary to create a Seurat Object: the matrix, a file with feature (gene) names, a file with cell barcodes, and an optional, but highly useful, experimental design file containing sample (cell-level) metadata. 
 
-# Generating Seurat object
-Next we will add our dimension names to our matrix. In the end, this will provide us with a matrix whose rows are gene names, columns are cell barcodes, and values are expression of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
+# Generating a Seurat object
+Next we will add our dimension names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and cells are expression values of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
 
+><tip-title>About Seurat Objects</tip-title>
+>The order of the dimensions, such that genes are the first and cells are the second is a given matter of Seurat objects. 
+>
+>You will recieve an error if you try to label the first dimension with cell barcodes or the second with genes. This is because the Dimname slots are like empty fill in the blanks: if the number of labels input doesn't match the number of blanks in that dimension, that is the number of labels don't match the number of cells/genes, Seurat will not accept the labels. 
+{: .tip}
 
 ```r
 matrix.mtx@Dimnames[[1]]<-genes.tsv$V2
 matrix.mtx@Dimnames[[2]]<-barcodes.tsv$V1
 ```
 
-In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with Read10x. Read10x is Seurat's automated function to add in feature and barcode names. However, due to the nature of how Galaxy histories and RStudio interact, we'll use this manual method. 
+In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x step. Read10x is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method. 
+
+><tip-title>How to Use Read10X</tip-title>
+>The only necessary parameter of Seurat's Read10X fucntion is the file path to the directory (folder) containing the matrix.mtx, barcodes.tsv, and genes.tsv (sometimes also called features.tsv) files.
+>
+>So if the EBI SCXA Retrieval tool were to have output a data directory in the sixth history position, the following code would be able to import a labelled counts matrix called "labelled matrix" into our RStudio environment: 
+>```r
+>gx_get(6) #get the file path
+>labelled_matrix<-Read10X(dir = "/import/6")
+>```
+>
+{: .tip}
 
 Now we will create a Seurat object using our newly labelled counts matrix! Make sure you have called the Seurat library, first, or RStudio will not recognize the function. 
 
@@ -133,10 +155,13 @@ srt$Organism.Part<-exp_design.tsv$Sample.Characteristic.organism.part.
 srt$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
 srt$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 ```
+><tip-title>Syntax Lesson</tip-title>
+>The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object$new_metadata_columnname), and the code following the arrow will denote where to find that metadata information (metadata_table$columnname) 
+>
+{: .tip}
 
-The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object@metadata$newcolumnname), and the code following the arrow will denote where to find that metadata information (metadatatable$columnname) 
 
-Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial. 
+Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial--which will be useful to us shortly as we begin to filter our data. 
 
 ```r
 srt <- PercentageFeatureSet(srt, 
@@ -144,16 +169,22 @@ srt <- PercentageFeatureSet(srt,
   col.name = "perc.mt")
 ```
 
-For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes. With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage--the mt prefix may not always include all mitochondrial genes depending on how your dataset was labelled. 
+For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes in the line of code above. 
+
+With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage
+
+> <warning-title>Careful</warning-title>
+>  The "mt" prefix may not always include all mitochondrial genes depending on how your dataset has been labelled. 
+>
+{: .warning}
+
 
 # QC Plots
-Now that we have a complete Seurat object, we can begin the filtering process. There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. 
+Now that we have a complete Seurat object, we can begin the filtering process. 
 
-There will also be genes that may be sequencing artifacts or that appear with such low frequency that statistical tools will fail to accurately analyse them. 
+There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to accurately analyse them. 
 
-This background noise of both cells and genes not only makes it harder to distinguish real biological information from sequencing artifacts, but also makes it computationally difficult to analyse. 
-
-First on our agenda is to filter the matrix to give us cleaner data off which to extract meaningful insight from. It will also allow for faster analysis of your data.
+This background noise of both cells and genes not only makes it harder to distinguish real biological information from artifacts, but also makes it computationally demanding to analyse. 
 
 We want to filter our cells, but first we need to know what our data looks like. There are a number of subjective choices to make within scRNA-seq analysis, for instance we now need to make our best informed decisions about where to set our thresholds (more on that soon!). 
 
@@ -172,7 +203,10 @@ This plot shows us the number of cells split by the individual (mouse) from whic
 
 Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
 
-In order to accurately assess potential batch effects, use the "group.by" argument to indicate the variable which differed across experiments.   
+><tip-title>Syntax Lesson</tip-title>
+>In order to accurately assess potential batch effects, use the "group.by" argument to indicate the variable which differed across experiments. 
+>
+>{: .tip}   
 
 Now let's get an idea of how different variables, like the sex or genotype of the mice, might be represented across our dataset. 
 
@@ -530,5 +564,3 @@ Important to note, lest all bioinformaticians combine forces to attack the biolo
 Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
 Congratulations! You have interpreted your plots in several important ways!
-
-[def]: ../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito--zoomed in."
