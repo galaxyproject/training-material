@@ -473,7 +473,7 @@ FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected. 
 
 ><tip-title>Weird scale?</tip-title>
-> If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count vales. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again: 
+> If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count values. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again: 
 ```r
 DefaultAssay(filtered_srt)<-"SCT"
 ```
