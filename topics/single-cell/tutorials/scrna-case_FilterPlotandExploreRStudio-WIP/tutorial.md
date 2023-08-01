@@ -206,7 +206,7 @@ Ideally, we would like to see a relatively even distribution of counts for each 
 ><tip-title>Syntax Lesson</tip-title>
 >In order to accurately assess potential batch effects, use the "group.by" argument to indicate the variable which differed across experiments. 
 >
->{: .tip}   
+{: .tip}   
 
 Now let's get an idea of how different variables, like the sex or genotype of the mice, might be represented across our dataset. 
 
@@ -223,7 +223,7 @@ VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
 ![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
-Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells for removal. First we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
+Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. First, we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
 
 ```r
 plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito")
@@ -231,7 +231,12 @@ plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xl
 ![UMI x mito](../../images/scrna-SeuratRStudio/plot4.png "UMI counts x Percent mito.")
 We are looking for cell counts with high mitochondrial percentages in their feature expression. 
 
-High mito expression typically indicates stressed out cells (typically due to the extraction, sorting, or sample prep protocols). These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data.  
+><comment-title>High Mitochondrial Reads</comment-title>
+>High mito expression will typically indicate stressed out cells (often due to the extraction, sorting, or sample prep protocols). 
+>
+{: .comment} 
+
+These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data. 
 
 We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
 
@@ -240,8 +245,11 @@ plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xl
 ```
 ![UMI x mito zoomed in on X](../../images/scrna-SeuratRStudio/plot5.png "UMI counts x Percent mito-Zoomed in on X.")
 
-It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold that still encompasses the majority of other cells.  
-
+><comment-title>Interpretations</comment-title>
+>It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold that still includes the majority of other cells. 
+>
+{: .comment} 
+  
 Now we can take a closer look at the y-axis to decide on a mito threshold to set. Once more, we want to get rid of as few cells as possible while still removing those with unexpectedly high mito percentages. 
 
 ```r
@@ -249,7 +257,10 @@ plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xl
 ```
 ![UMI x mito zoomed in Y](../../images/scrna-SeuratRStudio/plot6.png "UMI counts x Percent mito-Zoomed in on Y.")
 
-We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet.
+><comment-title>Interpretations</comment-title>
+>We can see a clear trend wherein cells that have around 3 percent mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. 
+>
+{: .comment} 
 
 Take a look at what proportion of cells those thresholds will include and disclude from our dataset: 
 
@@ -260,9 +271,12 @@ prop.table(table(srt@meta.data$perc.mt > 3))
 
 If we are happy with those thresholds for cells and percent mito, we can look at the the gene count threshold next. 
 
-If not, repeat the preceding steps to hone in on a threshold more suited for your dataset.
+><comment-title>Otherwise</comment-title>
+>If not, repeat the preceding steps to hone in on a threshold more suited for your dataset. 
+>
+{: .comment} 
 
-To do so, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
+To set a threshold for gene count, let's plot the gene counts (nFeature_RNA) against the percent mito (perc.mt):
 
 ```r
 plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito")
@@ -276,7 +290,12 @@ plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito",
 ```
 ![Gene x mito--zoomed in][def]
 
-You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side).
+><comment-title>Interpretations</comment-title>
+>You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. 
+>
+>We could also use the violin plots to come up with these thresholds, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707 which both have cell counts on the lower side). 
+>
+{: .comment} 
 
 Now let's take a look at what those nFeature_RNA thresholds will include and disclude from our data. 
 
@@ -287,6 +306,10 @@ prop.table(table(srt@meta.data$nFeature_RNA > 1275 | srt@meta.data$nFeature_RNA 
 # Applying our Thresholds 
 Once we are happy with our filtering thresholds, it’s now time to apply them to our data!
 
+><tip-title>Create a new object</tip-title>
+> You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice in case you decide to change your filtering parameters, which you likely will, or if something goes awry. 
+>
+{: .tip} 
 
 ```r
 subset_srt<-subset(srt, nCount_RNA > 1750 & nFeature_RNA > 1275 & perc.mt < 3 | nFeature_RNA < 600) 
@@ -301,8 +324,17 @@ Next, we want to filter out genes that no longer show nay expression in the cell
 subset_matrix<-GetAssayData(subset_srt)
 ```
 
-Now that you’ve removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let’s remove them! 
->We can take the filtered matrix we just extracted and create a new Seurat object, this time including an additional min.cells argument. This will remove any genes from our matrix that have less than 3 cells expressing them. Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
+Now that you’ve removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are not expressed in any of the cells remaining in our matrix. 
+
+Genes that do not appear in any cell, or even in only 1 or 2 cells, can make some analytical tools break and will generally not be biologically informative. So let’s remove them! 
+
+We can use the filtered matrix we just extracted to create a new Seurat object, this time including the argument: min.cells = 3. This will remove any genes from our matrix that have less than 3 cells expressing them. 
+
+><tip-title>More Thresholds</tip-title>
+> Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more. 
+>
+{: .tip} 
+
 
 ```r
 filtered_srt <- CreateSeuratObject(counts = subset_matrix, meta.data = subset_srt@meta.data, min.cells = 3)
@@ -564,3 +596,5 @@ Important to note, lest all bioinformaticians combine forces to attack the biolo
 Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
 Congratulations! You have interpreted your plots in several important ways!
+
+[def]: ../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito--zoomed in."
