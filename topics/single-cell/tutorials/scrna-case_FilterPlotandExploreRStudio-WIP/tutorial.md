@@ -461,7 +461,7 @@ Now that we have run dimensionality reduction on our dataset, it is ready for vi
 DimPlot(filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE)+ NoLegend()
 ```
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
-Good work! It looks like with a clustering resolution of 0.5, we are able to identify 8 clusters of cells in our data.
+Good work! It looks like with a clustering resolution of 0.5, we are able to identify 7 clusters of cells in our data.
 
 We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting an initial understanding of which clusters might be representative of which cell types.
 
@@ -482,12 +482,12 @@ DefaultAssay(filtered_srt)<-"SCT"
 
 In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered. 
 
-For example, we can plot macrophage marker Aif1 and get an idea of which cells and/or clusters might resemble macrophages: 
+For example, we can plot early T-cell marker Il2ra and get an idea of which cells and/or clusters might resemble the early T-cells: 
 
 ```r
-FeaturePlot(filtered_srt, features = "Aif1", order = TRUE)
+FeaturePlot(filtered_srt, features = "Il2ra", order = TRUE)
 ```
-![FeaturePlot: Aif1](../../images/scrna-SeuratRStudio/plot12.png "FeaturePlot: Aif1")
+![FeaturePlot: Aif1](../../images/scrna-SeuratRStudio/plot12.png "FeaturePlot: Il2ra")
 
 It is a good idea, when analyzing your own data, to plot some markers of cell types you expect to be present. Later on we can also use these FeaturePlots to visualize manual annotation of clusters. 
 
@@ -511,7 +511,7 @@ Idents(filtered_srt)<- filtered_srt$seurat_clusters
 > There are often many different ways to get the same job done in R, but especially when manipulating Seurat objects. We could alternatively set the active identity of our object with the following line of code too: 
 >
 >```r
-filtered_srt<-SetIdents(object = filtered_srt, value = "seurat_clusters")
+filtered_srt<-SetIdent(object = filtered_srt, value = "seurat_clusters")
 ```
 {: .tip} 
 
@@ -528,7 +528,7 @@ We can also see which genes are differentially expressed across other variables 
 
 ```r
 metadata<-as.data.frame(filtered_srt@meta.data)
-filtered_srt<-SetIdents(objects = filtered_srt, value = "genotype")
+filtered_srt<-SetIdent(objects = filtered_srt, value = "genotype")
 ```
 
 The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line of code above will set the object's identity class to be the genotype from which the cell came from. 
@@ -572,24 +572,29 @@ It would be nice to know what these cells are. This analysis (googling all of th
 | Clusters | Markers                 | Cell Type                           |
 |----------|-------------------------|-------------------------------------|
 | 3        | Il2ra                   | Double negative (early T-cell)      |
-| 1,2,4,6  | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
+| 1,2,5    | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)     |
 | 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
-| 5        | Itm2a                   | Mature T-cell                       |
+| 4        | Itm2a                   | Mature T-cell                       |
 
 Feel free the plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annnotations. 
 
 ><tip-title>Plotting Markers</tip-title>
->To do so, simply use the same FeaturePlot() function we used above, but replace the feature argument with your new marker of interest.  
-{: .comment} 
+>To do so, simply use the same FeaturePlot() function we used above, but replace the feature argument with your new marker of interest.
+>
+```r
+FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
+```
+![FeaturePlots of cell type markers](../../images/scrna-SeuratRStudio/plot21.png "FeaturePlots of our known cell type markers")
+{: .tip} 
 
 We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 
 ```r
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
   seurat_clusters %in% c(3) ~ "Double negative (early T-cell)", 
-  seurat_clusters %in% c(1, 2, 4, 6) ~ " Double positive (middle T-cell)",
+  seurat_clusters %in% c(1,2,5) ~ " Double positive (middle T-cell)",
   seurat_clusters %in% c(0) ~ "Double positive (late middle T-cell)", 
-  seurat_clusters %in% c(5) ~ "Mature T-cell"
+  seurat_clusters %in% c(4) ~ "Mature T-cell"
 ))
 ```
 Once we have labelled our clusters, we can visualize what our cell types actually look like: 
@@ -641,32 +646,52 @@ FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT")
 ![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot17.png "FeaturePlot colored by counts")
 
 
-Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the double negative or mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. 
+There doesn't visually appear to be any differences in sequencing depth across the clusters, but let's check out some of those other variables we grouped by: 
+
+```r
+FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT", split.by = "Individual")
+```
+![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot18.png "FeaturePlot colored by counts split by Individual")
+
+Eureka! This might explain the dramatic shift in early to middle T-Cell shift between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely account for the discernment between clusters 1, 2, and 5). 
+
+Luckily, and importantly, we don’t see that the double negative or mature T-cell being similarly affected. So, although, this variable of sequencing depth, or moreso, Individual, might be something to regress out somehow, it doesn’t seem to be impacting our dataset such that we cannot draw meaningful insights. 
+
 
 ><tip-title>Overprocessing</tip-title>
->The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!). 
+>The less you can regress/modify your data, in general, the better--you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!). 
 {: .comment} 
 
 
 Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check: 
 
 ```r
-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hbb-a1")
+FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hba-a1")
 ```
+![FeaturePlot of Hemoglobin](../../images/scrna-SeuratRStudio/plot19.png "FeaturePlot of Hemoglobin")
 
-Hemoglobin - a red blood cell marker that should NOT be found in T-cells - appears throughout the entire dataset in low numbers. This suggests some background in the media the cells were in, and we might consider in the wet lab trying to get a purer, happier sample, or in the dry lab, techniques such as SoupX or others to remove this background. Playing with filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
+
+Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, happier sample, with less background or in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise. 
+
+><tip-title>Removing Noise</tip-title>
+>Adjusting the filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
+{: .tip} 
 
 Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
 
 ```r
-DimPlot(object = "filtered_srt", reduction = "umap", group.by = "celltype")
-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Itm2a")
+plot1<-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
+plot2<-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Cd4")
+plot1 | plot2
 ```
+![Double Positive differentiation?](../../images/scrna-SeuratRStudio/plot20.png "Double Positive differentiation?")
 
-Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the DP population, which we know is also affected by depth of sequencing. That’s a reasonable argument that DP-M1, DP-M2, and DP-M3 might not be all that different. Maybe we need more depth of sequencing across all the DP cells, or to compare these explicitly to each other (consider variations on FindMarkers!). However, DP-L is both seemingly leaving the DP cluster and also has fewer knockout cells, so we might go and look at what DP-L is expressing in the marker genes. If we look at T-mat further, we can see that its marker gene - Itm2a - is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone. If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that most of the genes in that list are actually ribosomal. This might be a housekeeping background, this might be cell cycle related, this might be biological, or all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
+Important to note, lest all bioinformaticians combine forces to attack the biologists: just because a cluster doesn’t look like a cluster by eye is NOT enough to say it’s not a cluster! But looking at the biology here, we struggled to find marker genes to distinguish the double positive populations, which we know are also affected by depth of sequencing. That’s a reasonable argument that Clusters 1, 2, and 5 might not be all that different. Maybe we need more depth of sequencing across all those cells, or to compare these explicitly to each other (consider variations on FindMarkers!). 
 
-Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
+However, the late double positive cluster is both seemingly leaving the larger body of clusters and also has fewer knockout cells, so we might go and look at what those cells are expressing in the marker genes. If we look at the mature T-cells further, we can see that their marker gene--Itm2a--is only expressed in half of the cluster. You might consider sub-clustering this to investigate further, either through changing the resolution or through analysing this cluster alone. 
+
+If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that many, if not most, of the genes in that list are actually ribosomal. This could be a housekeeping background, it might be cell cycle related, it may be biological, or some combination of all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
+
+Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.
 
 Congratulations! You have interpreted your plots in several important ways!
-
-[def]: ../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito--zoomed in."
