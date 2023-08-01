@@ -176,6 +176,7 @@ With that being said, once you are analyzing your own data, it is highly recomme
 > <warning-title>Careful</warning-title>
 >  The "mt" prefix may not always include all mitochondrial genes depending on how your dataset has been labelled. 
 >
+>Sometimes the labels may be done via a capital prefix ("^MT") and other times mitochondrial genes must be identified via feature-level metadata like a GTF file. 
 {: .warning}
 
 
@@ -348,30 +349,48 @@ rm(subset_matrix, subset_srt)
 
 # Processing
 Currently, we still have quite big data. We have two issues here:
-> 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable can obscure biological differences. 
-> 2. We like to plot things on x/y plots, so for instance Gapdh could be on one axis, and Actin can be on another, and you plot cells on that 2-dimensional axis based on how many of each transcript they possess. While that would be fine, adding in a 3rd dimension (or, indeed, in our case, many more dimensions), is a bit trickier. So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize.
+> 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely would, distract us from identifying true biological differences. 
+> 2. We like to plot things on 2-dimensional X/Y plots. So, for instance, Gapdh could be on one axis, and Actin could be on another, and then each cell is plotted onto that 2D axis based on how many of each transcript they possess. 
+>Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier. 
+>So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize.
 
 We will run SCTransform, a combinatorial function by Seurat that normalizes the data, finds variable features, and then scales the data. In their initial workflow, and in the Scanpy version of this tutorial, these steps are run individually. However, with the second version of SCTransform comes time efficiency and optimization for downstream analyses. 
 
 ```r
 filtered_srt<- SCTransform(filtered_srt, vars.to.regress = c("perc.mt", "nFeature_RNA", "nCount_RNA"), verbose = TRUE, return.only.var.genes = FALSE, seed.use = 1448145)
 ```
+><comment-title>What is Normalization?</comment-title>
+> Normalisation helps reduce the differences between gene and UMI counts by fitting total counts across cells in our data to be comparable to one another. SCTransform regularizes the gene expression profiles via a negative binomial regression while also controlling for overfitting of the data. This step can also be done using Seurat's NormalizeData() function, but would need to be followed by FindVariableFeatures() and ScaleData(). 
+>
+{: .comment} 
 
-Normalisation helps reduce the differences between gene and UMI counts by fitting total counts to 10,000 per cell. The inherent log-transform (by log(count+1)) aligns the gene expression level better with a normal distribution. This is fairly standard to prepare for any future dimensionality reductions.
 
-We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses. The find variable genes step within SCTransform (and Seurat's FindVariableFeatures function) will flag the genes that do vary across the cells for future analysis.
+We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses. 
 
-Then, SCTransform (or Seurat's ScaleData function) will scale the data so that all genes have the same variance and a zero mean. 
+The find variable features step within SCTransform (or Seurat's FindVariableFeatures() function) will flag genes that do vary across to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
+
+Then, SCTransform (or Seurat's ScaleData() function) will scale the data so that all genes have the same variance and a zero mean. 
 
 This is an important step to set up our data for further dimensionality reduction. It also helps negate sequencing depth differences between samples, since the gene levels across the cells become comparable. 
 
->Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters.
+><comment-title>Don't Worry!</comment-title>
+> Note, that the differences from scaling etc. are not the values you have at the end - i.e. if your cell has average GAPDH levels, it will not appear as a ‘0’ when you calculate gene differences between clusters. 
+>
+{: .comment} 
 
-Although we've made our expression values comparable to one another and our overall dataset less computationally demanding, we still have too many dimensions (n cells x n genes!). 
+Although we've made our expression values comparable to one another and our overall dataset less computationally demanding, we still have way too many dimensions (n cells x n genes!). 
 
-Transcript changes are not usually singular - which is to say, genes were in pathways and in groups. It would be easier to analyse our data if we could more easily group these changes.To address this we will run principal component analysis (PCA). 
+Transcript changes are not usually singular--which is to say, genes function and exist in pathways and groups. It would be easier to analyse our data if we could group these differences. To address this we will run principal component analysis (PCA). 
 
->Principal components are calculated from highly dimensional data to find the most representative spread in the dataset. So in our highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:
+><comment-title>What is PCA?</comment-title>
+>Principal components (PCs) are calculated from highly dimensional data to find the most representative spread in the dataset. So in our highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component.
+{: .comment} 
+
+We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions: 
+
+><tip-title>Running Computationally Demanding Steps on Variable Features </tip-title>
+>You'll notice that the RunPCA() function is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step. 
+{: .tip} 
 
 ```r
 filtered_srt <- RunPCA(filtered_srt, features = VariableFeatures(object = filtered_srt))
@@ -384,7 +403,9 @@ ElbowPlot(filtered_srt, ndims = 50)
 ```
 ![PC Elbow Plot](../../images/scrna-SeuratRStudio/plot9.png "Elbow Plot: Varianvce Explained x PC.")
 
-We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs. 
+><comment-title>Interpretations</comment-title>
+>We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs.  
+{: .comment} 
 
 > You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs. 
 
@@ -394,7 +415,9 @@ For this, we will use the k-nearest neighbor (kNN) graph, to identify which cell
 
 >The kNN graph plots connections between cells if their distance (when plotted in this 10 dimensional space!) is amongst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP--which is what will ultimately allow us to visualize our data in 2 dimensions. 
 
->>From UMAP developers: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
+><comment-title>From UMAP developers:</comment-title>
+>From UMAP developers: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
+{: .comment} 
 
 Let's now use the 10 PC threshold we chose from the Elbowplot and apply it to find neighbors:
 
@@ -402,38 +425,60 @@ Let's now use the 10 PC threshold we chose from the Elbowplot and apply it to fi
 filtered_srt <- FindNeighbors(filtered_srt, dims = 1:10)
 ```
 
-Now we can uses the neighborhood graph to identify clusters of cells whose transcriptional profiles look similar to one another.
+Now we can use the neighborhood graph to identify clusters of cells whose transcriptional profiles appear most similar to one another.
 
 ```r
 filtered_srt <- FindClusters(filtered_srt, resolution = 0.5)
 ```
 
-Unfortunately, identifying clusters is not as majestic as biologists often think - the math doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab. Sigh. 
+Unfortunately, identifying clusters is not as majestic as biologists often think - the math doesn’t necessarily identify true cell clusters. Every algorithm for identifying cell clusters falls short of a biologist knowing their data, knowing what cells should be there, and proving it in the lab. 
 
 So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a resolution parameter for how granular you want to be.
 
-Now that we have made note within our object of which cells cluster together, we can start to visualize our data! Two major visualizations for this data are tSNE and UMAP. We must calculate the coordinates for both prior to visualization. For tSNE, the parameter perplexity can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, by changing the neighbors.
+><tip-title>On Clustering Resolution</tip-title>
+>The resolution parameter available in the FindCLusters() function allows for you, the bioinformatician, to dictate the granularity of the clusters. 
+>
+>For example, a higher clustering resolution dictates increased granularity, and more stringent clusters. That is--cells must more closely resemble one another in order to be grouped into the same cluster than at a lower clustering resolution. 
+> 
+>In general, I find it easiest to think of a higher resolution producing more clusters and conversely, a lower resolution will produce less clusters. This parameter is a useful one that you will use often to help decipher how many true populations of cells are present in your data!
+{: .tip} 
+
+Now that we have made note within our object of which cells cluster together, we can start to visualize our data! Two major visualizations for this data type are tSNE and UMAP. We can calculate the coordinates for both prior to visualization. For tSNE, the parameter perplexity can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, via the FindNeighbors() function.
+
+><tip-title>On UMAP</tip-title>
+>UMAP is the most recently developed, and most widely used dimensionality reduction for visualization of principal component data. It has been optimized since tSNE to better preserve global structure and is less computationally demanding. 
+>
+{: .tip} 
 
 ```r
 filtered_srt <- RunUMAP(filtered_srt, dims = 1:10)
 ```
 
-## Take a Look
+#Let's Take a Look
 Now that we have run dimensionality reduction on our dataset, it is ready for visualization. Let's take a look at what our cells look like in a UMAP projection: 
 
 ```r
 DimPlot(filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE)+ NoLegend()
 ```
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
+Good work! It looks like with a clustering resolution of 0.5, we are able to identify 8 clusters of cells in our data.
 
-We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting a quick and initial understanding of which clusters might be representing which cell types.
+We can also look for expression of particular genes and see how those map to our UMAP projection. This is often useful in getting an initial understanding of which clusters might be representative of which cell types.
 
 ```r
 FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 ```
 ![FeaturePlot: Gapdh](../../images/scrna-SeuratRStudio/plot11.png "FeaturePlot: Gapdh")
 
-We just plotted a housekeeping gene, Gapdh, so the broad expression is expected. 
+We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected. 
+
+><tip-title>Weird scale?</tip-title>
+> If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count vales. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again: 
+```r
+DefaultAssay(filtered_srt)<-"SCT"
+```
+>
+{: .tip} 
 
 In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered. 
 
@@ -453,14 +498,28 @@ Following an initial look at the DimPlots and FeaturePlots, we can take an even 
 
 In order to do so we can run cluster level differential expression tests. First, we will need to set our object's active identity to be the clusters. This will ensure that when Seurat's differential expression function is run, the groupings of cells across which it will compare are the clusters. 
 
+><tip-title>What are Identities?</tip-title>
+> Identities are, at their core, categorical metadata values. They are columns of cell-level metadata that somehow group the cells together. Examples of identities could be cluster number, cell type if/once known, genotype, etc.
+>
+{: .tip} 
+
 ```r
 Idents(filtered_srt)<- filtered_srt$seurat_clusters
 ```
 
-Then, we'll run Seurat's FindAllMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is partoicularly useful in identifying up, or down, regulated genes that drive the differences in identity. 
+><tip-title>Syntax</tip-title>
+> There are often many different ways to get the same job done in R, but especially when manipulating Seurat objects. We could alternatively set the active identity of our object with the following line of code too: 
+>
+>```r
+filtered_srt<-SetIdents(object = filtered_srt, value = "seurat_clusters")
+```
+{: .tip} 
+
+Then, we'll run Seurat's FindAllMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is particularly useful in identifying up, or down, regulated genes that drive differences in identity/cluster. 
 
 ```r
 cluster_markers<-FindAllMarkers(object = filtered_srt)
+View(cluster_markers)
 ```
 
 We'll use these marker lists later on to label our cell types. 
@@ -469,10 +528,10 @@ We can also see which genes are differentially expressed across other variables 
 
 ```r
 metadata<-as.data.frame(filtered_srt@meta.data)
-Idents(filtered_srt)<- filtered_srt$Genotype
+filtered_srt<-SetIdents(objects = filtered_srt, value = "genotype")
 ```
 
-The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line above sets our object's identity class to the genotype from which the cell came from. 
+The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line of code above will set the object's identity class to be the genotype from which the cell came from. 
 
 Now, let's see what genes differentiate our wildtype from our mutant cells. First, we can identify how many different genotypes are in our data: 
 
@@ -490,7 +549,9 @@ markers<-FindMarkers(object = filtered_srt, ident.1 = "wild type genotype", iden
 
 The above function will find all of the differentially expressed genes between ident.1 (wildtype) and ident.2 (mutant) using the Wilcoxon test. The resulting output will show genes with positive fold changes (denoting a higher expression in the first identity--wildtype) and negative fold changes (denoting a higher expression value in the second identity--mutant). 
 
-This same test of differential expression can be run using any identity class and any two identities within the same class. As this is a more fine tuned comparison than FindAllMarkers, it can be useful to uncover differences across specific samples. 
+><comment-title>On Finding Markers</comment-title>
+> This same test of differential expression can be run using any identity class and any two identities within the same class. As this is a more fine tuned comparison than FindAllMarkers, it can be useful to uncover differences across specific samples.  
+{: .comment} 
 
 # Biological Interpretations
 Now it’s the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it’s really about what information you want to get from your data - the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward with for your own data. Let us start interrogating our data!
