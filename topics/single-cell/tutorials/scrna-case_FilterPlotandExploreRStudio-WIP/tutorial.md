@@ -554,7 +554,7 @@ The above function will find all of the differentially expressed genes between i
 {: .comment} 
 
 # Biological Interpretations
-Now it’s the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it’s really about what information you want to get from your data - the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward with for your own data. Let us start interrogating our data!
+Now it’s the fun bit! We can see where genes are expressed, and start considering and interpreting the biology of it. At this point, it’s really about what information you want to get from your data--the following is only the tip of the iceberg. However, a brief exploration is good, because it may help give you ideas going forward for your own data. Let's start interrogating our data!
 
 Let's take another look at what our clusters look like: 
 
@@ -563,9 +563,11 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
 ```
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
-Note that Seurat's cluster numbering is based on size alone - clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
+><comment-title>On Cluster Numbering</comment-title>
+>Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
+{: .comment} 
 
-It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are as well as going through the marker tables you generated!) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
+It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
 
 | Clusters | Markers                 | Cell Type                           |
 |----------|-------------------------|-------------------------------------|
@@ -576,7 +578,11 @@ It would be nice to know what these cells are. This analysis (googling all of th
 
 Feel free the plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annnotations. 
 
-We can manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
+><tip-title>Plotting Markers</tip-title>
+>To do so, simply use the same FeaturePlot() function we used above, but replace the feature argument with your new marker of interest.  
+{: .comment} 
+
+We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 
 ```r
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
@@ -595,6 +601,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
 
 Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some realy biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!
 
+## Keep Digging
 Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" argument in Seurat's plot functions.  
 
 ```r
@@ -602,7 +609,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.
 ```
 ![DimPlot colored by labelled celltype split by genotype](../../images/scrna-SeuratRStudio/plot14.png "DimPlot colored by assigned cell typesplit by genotype")
 
-We can see that DP-L, which seems to be extending away from the DP-M bunch, as well as the mature T-cells (or particularly the top half) are missing some knockout cells. Perhaps there is some sort of inhibition here? INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
+We can see that there seems to be a decrease in cellcounts across the celltypes in the het mutant... INTERESTING! What next? We might look further at the transcripts present in both those populations, and perhaps also look at the genotype marker table… So much to investigate! But before we set you off to explore to your heart’s delight, let’s also look at this a bit more technically.
 
 # Technical Assessment 
 Is our analysis real? Is it right? Well, we can assess that a little bit.
@@ -614,7 +621,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "Individual")
 ```
 ![DimPlot colored by labelled celltype split by individual/batch](../../images/scrna-SeuratRStudio/plot15.png "DimPlot colored by assigned cell types split by individual/batch")
 
-While some differences across batch are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
+While some differences across batch are expected and nothing to be concerned about, the immature T-cells looks to be mainly comprised of Individual 3. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells - where there is batch mixing, we can still assess this biologically even without batch correction. 
 
 Additionally, we will also look at the confounding effect of sex: 
 
@@ -626,7 +633,6 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individu
 
 We note that the one female sample - unfortunately one of mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
-
 Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 
 ```r
@@ -635,7 +641,12 @@ FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT")
 ![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot17.png "FeaturePlot colored by counts")
 
 
-Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the DP-L or (mostly) the mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
+Eureka! This explains the odd DP shift between wildtype and knockout cells - the left side of the DP cells simply have a higher sequencing depth (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge. Importantly, we don’t see that the double negative or mature T-cell clusters are similarly affected. So, whilst again, this variable of sequencing depth might be something to regress out somehow, it doesn’t seem to be impacting our dataset. 
+
+><tip-title>Overprocessing</tip-title>
+>The less you can regress/modify your data, in general, the better - you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!). 
+{: .comment} 
+
 
 Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check: 
 
