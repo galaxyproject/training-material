@@ -25,7 +25,7 @@ requirements:
         - scrna-case_alevin-combine-datasets
         - scrna-case_basic-pipeline
 
-time_estimation: 1H
+time_estimation: 2H
 
 key_points:
 - Scanpy ParameterIterator can be used for n-neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).
@@ -36,7 +36,6 @@ key_points:
 tags:
 - single-cell
 - tips&tricks
-- parameter-iterator
 
 contributions:
   authorship:
@@ -136,14 +135,13 @@ There are two formats of the input values:
 
 # Number of neighbours to derive kNN graph (for **Scanpy ComputeGraph** {% icon tool %})
 
-We will now use **Scanpy ComputeGraph** {% icon tool %} to derive the kNN graph from our PCA values. We can use the Parameter Iterator to check how the different k values of nearest neighbours will affect the final outcome. It is important that **k neighbours is an integer**. 
+We will now use **Scanpy ComputeGraph** {% icon tool %} to derive the k-nearest neighbour (kNN) graph from our PCA values. We can use the Parameter Iterator to check how the different k values of nearest neighbours will affect the final outcome. It is important that **k neighbours is an integer**. 
 
 > <warning-title>Float vs integer</warning-title>
 > Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Float, or floating point numbers, are values with a 'floating' decimal point. To avoid float values, you must use ‘List of all parameter values to be iterated’ as your chosen values.
 {: .warning}
 
-
-k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP developers](https://github.com/lmcinnes/umap): “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!
+The kNN graph will be needed for plotting a UMAP. According to the [UMAP developers](https://github.com/lmcinnes/umap): “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!
 
 > <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
 >
@@ -152,7 +150,7 @@ k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From [UMAP de
 >    - *"Choose the format of the input values"*: `List of all parameter values to be iterated`
 >    - *"User input values"*: `5,10,15,20,25,30,35,40`
 > 
-> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - n-neighbours` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - n-neighbours` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
 >    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
@@ -179,20 +177,24 @@ The output of the Parameter Iterator is the list of datasets. We will be working
 >    - *"Use the indicated representation"*: `X_pca`
 >    - *"Number of PCs to use"*: `20`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 {: .hands_on}
 
 You should now see the output is also a collection. If you click on that, you will see Anndata files, differing only by the n-neighbour value. 
 
-Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this option is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.
+Now you have two options, either: 
+ - pick one of the generated output files and proceed to the next tool with another parameter iteration; or
+ - continue with the current collection of datasets.
+
+We choose the second option as only then you will be able to see the effect of using different nearest neighbour values. However, the disadvantage of this option is that you have to select only one value for the subsequent parameters in the workflow in order to see the changes in the final plots.
 
 > <comment-title>Why only one Parameter Iteration at a time?</comment-title>
 > Iterating the parameters within one tool will give you a list with X datasets: each dataset is the output with the given parameter value. However, if you want to use Parameter Iterator again within another tool, specifying Y parameter values, you **will not** get X x Y datasets as you might expect. Therefore you have to choose **just one** output file to be passed on to the next tool which will use Parameter Iterator again. Alternatively, you can use Parameter Iterator once and run the rest of the tools on dataset collection with just one parameter value. 
 {: .comment}
 
 Where are we now in our workflow?
-![Image showing the step we are at: after Scanpy RunPCA, already run Scanpy ComputeGraph, and before Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed](../../images/scrna-casestudy_parameter-iterator/workflow_n-neighbours.png "We used Parameter Iterator for the n-neighbours to derive kNN graph, now we’ll complete our small workflow to see the differences at the end.")
+![Image showing the step we are at: after Scanpy RunPCA, already run Scanpy ComputeGraph, and before Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed](../../images/scrna-casestudy_parameter-iterator/workflow_n-neighbours.png "We used the Parameter Iterator for the k nearest neighbours to derive the kNN graph. Now we’ll complete our small workflow to see the differences at the end.")
 
 > <hands-on-title> Complete the workflow </hands-on-title>
 >
@@ -202,24 +204,24 @@ Where are we now in our workflow?
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
-> 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)` 
 >    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 >
-> 2A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 3. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunUMAP on collection X: UMAP object AnnData` 
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 >
-> 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 {: .hands_on}
 
-In fact, the differences will be only seen in the UMAP embedding, so we’ll plot only them. However, when you run your own analysis, you might want to check if there aren’t any changes in other embeddings as well. 
+The differences will only appear in the UMAP embedding, so we’ll plot only them. However, when you run your own analysis, you might want to check if there are changes in other embeddings as well. 
 
 > <hands-on-title> Plot UMAP embedding </hands-on-title>
 >
@@ -264,7 +266,7 @@ The next tool in our workflow is Scanpy RunTSNE which takes the parameter perple
 >    - *"Step"*: `5`
 >    - *"Ending value"*: `45`
 > 
-> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - perplexity` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - perplexity` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
 >    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
@@ -285,7 +287,7 @@ The next tool in our workflow is Scanpy RunTSNE which takes the parameter perple
 >       - Click on {% icon param-collection %} (*Dataset collection*)
 >       - Choose `Parameter iterated - perplexity`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 {: .hands_on}
 
@@ -296,14 +298,14 @@ Changing the value of perplexity will only affect the tSNE graphs, so we can com
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)` 
 >    - *"Use programme defaults"*: {% icon history-share %} `Yes`
 >
-> 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 1A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 > 2. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9) %} with the following parameters:
 >    - {% icon param-collection %} *"Input object in AnnData/Loom format"* (make sure you choose *Dataset collection*): `Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)` 
 >    - *"Use programme defaults"*: {% icon history-share %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 >
-> 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 3A. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (perplexity)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 {: .hands_on}
 
@@ -355,7 +357,7 @@ The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {
 >    - *"Step"*: `0.2`
 >    - *"Ending value"*: `1.4`
 > 
-> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - resolution` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - resolution` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
 >    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
@@ -374,7 +376,7 @@ The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {
 >       - Click on {% icon param-collection %} (*Dataset collection*)
 >       - Choose `Parameter iterated - resolution`
 >
-> 2. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (resolution)` (you have to first click on the collection so that you see the datasets, and then raname it)
+> 2. **Rename** {% icon galaxy-pencil %} the Anndata object collection output: `Scanpy FindCluster on collection X: Clusters AnnData (resolution)` (you have to first click on the collection so that you see the datasets, and then rename it)
 >
 {: .hands_on}
 
