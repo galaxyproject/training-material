@@ -28,9 +28,9 @@ requirements:
 time_estimation: 2H
 
 key_points:
-- Scanpy ParameterIterator can be used for n-neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).
-- You can enter the parameter values either as a list or as step increase values to be iterated.
-- Parameter Iterator is a useful tool to quiclky and easily compare the differences in the outputs caused by the changed parameter values. Hence it allows to choose the most optimal parameter values. 
+- Scanpy ParameterIterator can be used for k nearest neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).
+- You can enter the parameter values either as a list or as values to be iterated in step.
+- Parameter Iterator is a useful tool to quickly and easily compare the differences in the outputs caused by changing parameter values. Hence it allows us to choose the optimal parameter values.
 
 
 tags:
@@ -40,6 +40,8 @@ tags:
 contributions:
   authorship:
     - wee-snufkin
+  testing:
+    - nomadscientist
   funding:
     - eosc-life
 
@@ -235,10 +237,12 @@ The differences will only appear in the UMAP embedding, so we’ll plot only the
 
 If you click on the resulting collection you will see several plots. Click on {% icon galaxy-eye %} to see how they differ. Galaxy's {% icon galaxy-scratchbook %} Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for comparing multiple datasets.
 
-![Eight graphs showing the differences between UMAP embeddings caused by different values of n-neighbours.](../../images/scrna-casestudy_parameter-iterator/n_neighbours.png "Comparison of UMAP embedding with different values of n-neighbours, perplexity set to 30 and resolution to 0.6.")
+![Eight graphs showing the differences between UMAP embeddings caused by different values of k nearest neighbours.](../../images/scrna-casestudy_parameter-iterator/n_neighbours.png "Comparison of UMAP embedding with different values of k nearest neighbours, perplexity set to 30 and resolution to 0.6.")
 
-If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
-We will go forward with n-neighbour value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
+If you compare the UMAP graphs, you can see the differences that were caused by changing the value of k nearestneighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
+
+We will go forward with k value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
+
 Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on *Show hidden* (crossed eye {% icon galaxy-eye %} icon). You can bring each individual dataset to the visible and active datasets by clicking *Unhide*.
 
 > <hands-on-title> Unhide the dataset of interest </hands-on-title>
@@ -252,10 +256,10 @@ Here is the answer: The datasets that are included in the collections can be acc
 # Perplexity (for **Scanpy RunTSNE** {% icon tool %})
 
 Let’s have another look at our wee workflow. 
-![Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator.](../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png "We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with perplexity parameter.")
+![Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator.](../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png "We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with the perplexity parameter.")
 
 
-The next tool in our workflow is Scanpy RunTSNE which takes the parameter perplexity. Even though the tool description says that this value should be an integer, we tested it with floats as well and it works well, so you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run Parameter Iterator again.
+The next tool in our workflow is Scanpy RunTSNE, which contains the perplexity parameter. Although the tool description says that this value should be an integer, we tested it with float values and it works. Therefore, you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run the Parameter Iterator again.
 
 > <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
 >
@@ -291,7 +295,7 @@ The next tool in our workflow is Scanpy RunTSNE which takes the parameter perple
 >
 {: .hands_on}
 
-Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the plots to choose the best value for further analysis. 
+Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the tSNE plots to choose the best value for further analysis. 
 
 > <hands-on-title> Complete the workflow </hands-on-title>
 > 1. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9) %} with the following parameters:
@@ -325,15 +329,15 @@ Changing the value of perplexity will only affect the tSNE graphs, so we can com
 {: .hands_on}
 
 Can you see those differences?
-![Graphs showing the differences between tSNE embeddings caused by different values of perplexity.](../../images/scrna-casestudy_parameter-iterator/perplexity.png "Comparison of tSNE  embedding with different values of perplexity, n-neighbours set to 15 and resolution to 0.6.")
+![Graphs showing the differences between tSNE embeddings caused by different values of perplexity.](../../images/scrna-casestudy_parameter-iterator/perplexity.png "Comparison of tSNE  embedding with different values of perplexity, k nearest neighbours set to 15 and resolution to 0.6.")
 
 
-What do you think about those plots? Which value would you choose? Well, we will go forward with a perplexity value equal to 30 to demonstrate the final step.
+What do you think about those plots? Which value would you choose? Perplexity is probably the least intuitive or consistently functioning parameter, so feel free to learn more [here](https://apiumhub.com/tech-blog-barcelona/dimensionality-reduction-tsne/#:~:text=.tensorflow.org%2F-,Perplexity,are%20between%205%20and%2050.). We will go forward with a perplexity value equal to 30.
 
 # Resolution (for **Scanpy FindCluster** {% icon tool %})
 
 Where is **Scanpy FindCluster** {% icon tool %} in our workflow?
-![Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster.](../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png "We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can use the Parameter Iterator with resolution parameter.")
+![Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster.](../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png "We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can iterate the resolution parameter.")
 
 
 The input data for the **Scanpy FindCluster** {% icon tool %} is the output of **Scanpy RunUMAP** {% icon tool %}, so let’s get this single dataset with the parameter values (from previous tools) of our choice, that is n-neighbours=15 and perplexity=30.
@@ -346,7 +350,7 @@ The input data for the **Scanpy FindCluster** {% icon tool %} is the output of *
 >
 {: .hands_on}
 
-The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {% icon tool %}. We will iterate over the resolution values and in this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters. 
+The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {% icon tool %}. We will iterate over the resolution values. In this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters. 
 
 > <hands-on-title> Set your values in Parameter Iterator </hands-on-title>
 >
@@ -428,7 +432,7 @@ That’s the last tool in our workflow which uses Parameter Iterator! Let’s ha
 
 
 # Conclusion
-You might want to consult your results with this [control history](https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated), or check out the [workflow](https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow) for this tutorial. You can also continue to analyse this data by returning to the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. 
+You might want to compare your results with this [control history](https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated), or check out the [workflow](https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow) for this tutorial. You can also continue to analyse this data by returning to the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. 
 
 
-{% icon congratulations %} In this tutorial you have learnt how to use Parameter Iterator with the number of nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Eventually, you were able to choose the most optimal values for the analysis. Hopefully this tool will make you more confident with the choices you make in terms of the parameters that are crucial for the correct interpretation of biological data. 
+{% icon congratulations %} You have finished the tutorial! You have learned how to use the Parameter Iterator with the nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Hopefully this tool will help you more quickly assess parameter values, ultimately helping you choose values that both confirm prior knowledge as well as offer new insights on biological data. 
