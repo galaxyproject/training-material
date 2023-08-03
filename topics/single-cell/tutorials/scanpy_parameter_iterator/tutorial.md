@@ -136,10 +136,10 @@ There are two formats of the input values:
 
 # Number of neighbours to derive kNN graph (for **Scanpy ComputeGraph** {% icon tool %})
 
-Our dataset is right after PCA. Therefore we will now use **Scanpy ComputeGraph** {% icon tool %} to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbours affect the final outcome. It is important that **n-neighbours is an integer**. 
+We will now use **Scanpy ComputeGraph** {% icon tool %} to derive the kNN graph from our PCA values. We can use the Parameter Iterator to check how the different k values of nearest neighbours will affect the final outcome. It is important that **k neighbours is an integer**. 
 
 > <warning-title>Float vs integer</warning-title>
-> Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.
+> Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Float, or floating point numbers, are values with a 'floating' decimal point. To avoid float values, you must use ‘List of all parameter values to be iterated’ as your chosen values.
 {: .warning}
 
 
