@@ -29,7 +29,7 @@ module Jekyll
       hour = 'hour'
       hours = 'hours'
       minutes = 'minutes'
-      if @context.registers[:page]&.key?('lang') and @context.registers[:page]['lang'] != 'en'
+      if @context.registers[:page]&.key?('lang') && (@context.registers[:page]['lang'] != 'en')
         lang = @context.registers[:page]['lang']
         hour = @context.registers[:site].data['lang'][lang]['hour']
         hours = @context.registers[:site].data['lang'][lang]['hours']
