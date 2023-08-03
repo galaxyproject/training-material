@@ -7,14 +7,14 @@ subtopic: tricks
 priority: 3
 questions:
 - How can I run a tool with multiple parameter values?
-- Do I have to enter the parameter values manually each time when I want to check a new value?
+- Do I have to enter parameter values manually each time I want to check a new value?
 - What tools can take multiple values at once and iterate over them?
 
 objectives:
-- Get familiar with Scanpy Parameter Iterator
+- Execute the Scanpy Parameter Iterator
 - Recognise what tools you can use Parameter Iterator with
-- Become confident in working on dataset collections
-- Compare the plots resulting from different parameters values
+- Operate tools working on dataset collections
+- Compare plots resulting from different parameters values
 
 requirements:
 -
@@ -50,9 +50,11 @@ contributions:
 
 # Introduction
 
-The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us interpret the biology behind. However, it’s not always so straightforward – each tool has various parameters so eventually, we might end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information. 
-Since there is a vast number of values that we can specify in the tools, how can we know if the values we choose are the most optimal ones or at least good enough? Well, we can use different values and then compare the outputs to see which is consistent with our understanding of the underlying biology. 
-And here the Parameter Iterator comes in – it allows to run the analysis using different variables quickly and easily. Now you don’t have to execute your workflow every time you change one value to compare the output. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values at one go. 
+The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us investigate biology. However, analysis is not always straightforward – each tool has various parameters to select. Eventually, we can end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data, then make sure your analysis shows that, for you to then be able to identify the 25% new information. 
+
+Given the vast array of values that we can specify in the tool parameters, how can we know if the values we choose are the most optimal ones - or at least good enough? Well, we can try different values in our workflow and then compare the outputs to see which is consistent with our understanding of the underlying biology. But can we do this efficiently, at scale, to test multiple values?
+
+And here the Parameter Iterator comes in – it allows us to test different variables quickly and easily. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values in one go. 
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
