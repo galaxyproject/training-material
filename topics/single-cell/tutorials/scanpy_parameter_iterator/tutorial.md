@@ -332,7 +332,7 @@ Can you see those differences?
 ![Graphs showing the differences between tSNE embeddings caused by different values of perplexity.](../../images/scrna-casestudy_parameter-iterator/perplexity.png "Comparison of tSNE  embedding with different values of perplexity, k nearest neighbours set to 15 and resolution to 0.6.")
 
 
-What do you think about those plots? Which value would you choose? Perplexity is probably the least intuitive or consistently functioning parameter, so feel free to learn more [here](https://apiumhub.com/tech-blog-barcelona/dimensionality-reduction-tsne/#:~:text=.tensorflow.org%2F-,Perplexity,are%20between%205%20and%2050.). We will go forward with a perplexity value equal to 30.
+What do you think about those plots? Which value would you choose? Perplexity is probably the least intuitive or consistently functioning parameter, so feel free to learn more from [this nifty blog post](https://apiumhub.com/tech-blog-barcelona/dimensionality-reduction-tsne/#:~:text=.tensorflow.org%2F-,Perplexity,are%20between%205%20and%2050.). We will go forward with a perplexity value equal to 30.
 
 # Resolution (for **Scanpy FindCluster** {% icon tool %})
 
