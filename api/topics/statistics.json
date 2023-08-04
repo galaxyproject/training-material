@@ -403,6 +403,883 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
+      "zenodo_link": "https://zenodo.org/record/4697906",
+      "questions": [
+        "What is a convolutional neural network (CNN)?",
+        "What are some applications of CNN?"
+      ],
+      "objectives": [
+        "Understand the inspiration behind CNN and learn the CNN architecture",
+        "Learn the convolution operation and its parameters",
+        "Learn how to create a CNN using Galaxy's deep learning tools",
+        "Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "intro_deep_learning",
+            "FNN",
+            "RNN"
+          ]
+        }
+      ],
+      "time_estimation": "2H",
+      "contributors": [
+        {
+          "name": "Kaivan Kamali",
+          "email": "kxk302@gmail.com",
+          "joined": "2021-02",
+          "id": "kxk302",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
+        }
+      ],
+      "short_id": "T00257",
+      "url": "/topics/statistics/tutorials/CNN/tutorial.html",
+      "topic_name": "statistics",
+      "tutorial_name": "CNN",
+      "dir": "topics/statistics/tutorials/CNN",
+      "id": "statistics/CNN",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "This hands-on tutorial covers Convolutional Neural Networks (CNN)",
+          "materials": [
+            {
+              "link": "topics/statistics/tutorials/CNN/slides.html",
+              "title": "Convolutional Neural Networks",
+              "type": "Slides"
+            },
+            {
+              "link": "topics/statistics/tutorials/CNN/tutorial.html",
+              "title": "Convolutional Neural Networks",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "statistics"
+          ],
+          "title": "Convolutional Neural Networks (CNN)",
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "FilipposZ"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H",
+              "link": "P1NVYOJrv_4",
+              "speakers": [
+                "kxk302"
+              ]
+            }
+          ],
+          "gtn_id": "statistics/CNN",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "Intro_To_CNN.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/workflows/Intro_To_CNN.ga",
+          "path": "topics/statistics/tutorials/CNN/workflows/Intro_To_CNN.ga",
+          "wfid": "statistics-CNN",
+          "wfname": "intro_to_cnn",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-CNN/versions/intro_to_cnn",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Statistics and machine learning",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "keras_model_builder",
+            "owner": "bgruening",
+            "revisions": "772e0e89fc68",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_model_config",
+            "owner": "bgruening",
+            "revisions": "8a794e6d3388",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_train_and_eval",
+            "owner": "bgruening",
+            "revisions": "b6ef6d0cb6b7",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ml_visualization_ex",
+            "owner": "bgruening",
+            "revisions": "947c2eacccb8",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "model_prediction",
+            "owner": "bgruening",
+            "revisions": "1552b8cb4a94",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sklearn_to_categorical",
+            "owner": "bgruening",
+            "revisions": "ec69cbe34b73",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ml_visualization_ex\n  owner: bgruening\n  revisions: 947c2eacccb8\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_to_categorical\n  owner: bgruening\n  revisions: ec69cbe34b73\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Text-mining with the SimText toolset",
+      "zenodo_link": "http://doi.org/10.5281/zenodo.4638516",
+      "questions": [
+        "How can I automatically collect PubMed data for a set of biomedical entities such as genes?",
+        "How can I analyze similarities among biomedical entities based on PubMed data on large-scale?"
+      ],
+      "objectives": [
+        "Learn how to use the SimText toolset",
+        "Upload a table with biomedical entities in Galaxy",
+        "Retrieve PubMed data for each of the biomedical entities",
+        "Extract biomedical terms from the PubMed data for each biomedical entity",
+        "Analyze the similarity among the biomedical entities based on the extracted data in an interactive app"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "The SimText toolset allows large-scale literature analysis of a set of biomedical entities such as genes or diseases",
+        "The similarities among the biomedical entities can be explored interactively",
+        "The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature"
+      ],
+      "tags": [
+        "interactive-tools"
+      ],
+      "contributors": [
+        {
+          "name": "Marie Gramm",
+          "email": "mgramm2@smail.uni-koeln.de",
+          "orcid": "0000-0002-4217-5277",
+          "joined": "2021-03",
+          "id": "mgramm1",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mgramm1.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/"
+        },
+        {
+          "name": "Dennis Lal group",
+          "email": "dennislal.group@gmail.com",
+          "joined": "2021-03",
+          "id": "dlalgroup",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/dlalgroup.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        }
+      ],
+      "short_id": "T00272",
+      "url": "/topics/statistics/tutorials/text-mining_simtext/tutorial.html",
+      "topic_name": "statistics",
+      "tutorial_name": "text-mining_simtext",
+      "dir": "topics/statistics/tutorials/text-mining_simtext",
+      "id": "statistics/text-mining_simtext",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/text-mining_simtext/workflows/main_workflow.ga",
+          "path": "topics/statistics/tutorials/text-mining_simtext/workflows/main_workflow.ga",
+          "wfid": "statistics-text-mining_simtext",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-text-mining_simtext/versions/main_workflow",
+          "license": null,
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "",
+              "name": ""
+            }
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json",
+      "tools": [
+        "interactive_tool_simtext_app",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Statistics and machine learning",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "pmids_to_pubtator_matrix",
+            "owner": "iuc",
+            "revisions": "69714f06f18b",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "pubmed_by_queries",
+            "owner": "iuc",
+            "revisions": "02e46a96e98a",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: pmids_to_pubtator_matrix\n  owner: iuc\n  revisions: 69714f06f18b\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pubmed_by_queries\n  owner: iuc\n  revisions: 02e46a96e98a\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
+      "zenodo_link": "https://zenodo.org/record/6091361",
+      "questions": [
+        "How to use Jupyterlab and it several features?",
+        "How to use it for creating input datasets and writing artificial intelligence (AI) algorithms?"
+      ],
+      "objectives": [
+        "Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms",
+        "Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy",
+        "Develop AI algorithms using Tensorflow",
+        "Send long-running jobs to Galaxy's cluster and save results in its history",
+        "Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "jupyterlab"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "intro_deep_learning"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "tags": [
+        "interactive-tools",
+        "machine-learning",
+        "deep-learning",
+        "jupyter-lab",
+        "image-segmentation",
+        "protein-3D-structure"
+      ],
+      "contributors": [
+        {
+          "name": "Anup Kumar",
+          "email": "anup.rulez@gmail.com",
+          "twitter": "musafirtweetsz",
+          "joined": "2018-08",
+          "elixir_node": "de",
+          "id": "anuprulez",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/anuprulez.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/"
+        }
+      ],
+      "short_id": "T00266",
+      "url": "/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
+      "topic_name": "statistics",
+      "tutorial_name": "gpu_jupyter_lab",
+      "dir": "topics/statistics/tutorials/gpu_jupyter_lab",
+      "id": "statistics/gpu_jupyter_lab",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "gpu_jupyterlab_as_jupytool.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/workflows/gpu_jupyterlab_as_jupytool.ga",
+          "path": "topics/statistics/tutorials/gpu_jupyter_lab/workflows/gpu_jupyterlab_as_jupytool.ga",
+          "wfid": "statistics-gpu_jupyter_lab",
+          "wfname": "gpu_jupyterlab_as_jupytool",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-gpu_jupyter_lab/versions/gpu_jupyterlab_as_jupytool",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json",
+      "tools": [
+        "Cut1",
+        "Filter1",
+        "interactive_tool_ml_jupyter_notebook"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Statistics and machine learning",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Age prediction using machine learning",
+      "zenodo_link": "https://zenodo.org/record/2545213#.XEWTJ9-YVa0",
+      "questions": [
+        "How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?"
+      ],
+      "objectives": [
+        "Learn ageing biomarkers from RNA-seq and DNA methylation datasets",
+        "Apply regression based machine learning algorithms",
+        "Learn feature selection and hyperparameter optimisation"
+      ],
+      "key_points": [
+        "Various machine learning algorithms should be used to find the best ones",
+        "For each machine learning algorithm, it hyperparameters should be optimised based on the dataset",
+        "Feature selection should be done for high-dimensional datasets"
+      ],
+      "time_estimation": "2H",
+      "contributors": [
+        {
+          "name": "Ekaterina Polkh",
+          "joined": "2017-09",
+          "id": "polkhe",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
+        },
+        {
+          "name": "Anup Kumar",
+          "email": "anup.rulez@gmail.com",
+          "twitter": "musafirtweetsz",
+          "joined": "2018-08",
+          "elixir_node": "de",
+          "id": "anuprulez",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/anuprulez.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/"
+        }
+      ],
+      "short_id": "T00261",
+      "url": "/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html",
+      "topic_name": "statistics",
+      "tutorial_name": "age-prediction-with-ml",
+      "dir": "topics/statistics/tutorials/age-prediction-with-ml",
+      "id": "statistics/age-prediction-with-ml",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "age-prediction-dnam.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-dnam.ga",
+          "path": "topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-dnam.ga",
+          "wfid": "statistics-age-prediction-with-ml",
+          "wfname": "age-prediction-dnam",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-age-prediction-with-ml/versions/age-prediction-dnam",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "age-prediction-rna.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-rna.ga",
+          "path": "topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-rna.ga",
+          "wfid": "statistics-age-prediction-with-ml",
+          "wfname": "age-prediction-rna",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-age-prediction-with-ml/versions/age-prediction-rna",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Statistics and machine learning",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "plotly_parallel_coordinates_plot",
+            "owner": "bgruening",
+            "revisions": "7b21a9b5922f",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "plotly_regression_performance_plots",
+            "owner": "bgruening",
+            "revisions": "389227fa1864",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sklearn_build_pipeline",
+            "owner": "bgruening",
+            "revisions": "840f29aad145",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sklearn_ensemble",
+            "owner": "bgruening",
+            "revisions": "1a53edc4b438",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "sklearn_searchcv",
+            "owner": "bgruening",
+            "revisions": "25ab6b4e376e",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: plotly_parallel_coordinates_plot\n  owner: bgruening\n  revisions: 7b21a9b5922f\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: plotly_regression_performance_plots\n  owner: bgruening\n  revisions: 389227fa1864\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_build_pipeline\n  owner: bgruening\n  revisions: 840f29aad145\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_ensemble\n  owner: bgruening\n  revisions: 1a53edc4b438\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_searchcv\n  owner: bgruening\n  revisions: 25ab6b4e376e\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Deep Learning (Part 2) - Recurrent neural networks (RNN)",
+      "zenodo_link": "https://zenodo.org/record/4477881",
+      "questions": [
+        "What is a recurrent neural network (RNN)?",
+        "What are some applications of RNN?"
+      ],
+      "objectives": [
+        "Understand the difference between feedforward neural networks (FNN) and RNN",
+        "Learn various RNN types and architectures",
+        "Learn how to create a neural network using Galaxy's deep learning tools",
+        "Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "intro_deep_learning",
+            "FNN"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "CNN"
+          ]
+        }
+      ],
+      "time_estimation": "2H",
+      "contributors": [
+        {
+          "name": "Kaivan Kamali",
+          "email": "kxk302@gmail.com",
+          "joined": "2021-02",
+          "id": "kxk302",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
+        }
+      ],
+      "short_id": "T00259",
+      "url": "/topics/statistics/tutorials/RNN/tutorial.html",
+      "topic_name": "statistics",
+      "tutorial_name": "RNN",
+      "dir": "topics/statistics/tutorials/RNN",
+      "id": "statistics/RNN",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "This hands-on tutorial covers Recurrenct Neural Networks (RNN)",
+          "materials": [
+            {
+              "link": "topics/statistics/tutorials/RNN/slides.html",
+              "title": "Recurrent Neural Networks",
+              "type": "Slides"
+            },
+            {
+              "link": "topics/statistics/tutorials/RNN/tutorial.html",
+              "title": "Recurrent Neural Networks",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "statistics"
+          ],
+          "title": "Recurrent Neural Networks (RNN)",
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "kxk302"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "50M",
+              "link": "1dwzEhjOAmw",
+              "speakers": [
+                "kxk302"
+              ]
+            }
+          ],
+          "gtn_id": "statistics/RNN",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "Intro_To_RNN.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/RNN/workflows/Intro_To_RNN.ga",
+          "path": "topics/statistics/tutorials/RNN/workflows/Intro_To_RNN.ga",
+          "wfid": "statistics-RNN",
+          "wfname": "intro_to_rnn",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-RNN/versions/intro_to_rnn",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Statistics and machine learning",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "keras_model_builder",
+            "owner": "bgruening",
+            "revisions": "772e0e89fc68",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_model_config",
+            "owner": "bgruening",
+            "revisions": "8a794e6d3388",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_train_and_eval",
+            "owner": "bgruening",
+            "revisions": "b6ef6d0cb6b7",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ml_visualization_ex",
+            "owner": "bgruening",
+            "revisions": "947c2eacccb8",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "model_prediction",
+            "owner": "bgruening",
+            "revisions": "1552b8cb4a94",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ml_visualization_ex\n  owner: bgruening\n  revisions: 947c2eacccb8\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Basics of machine learning",
       "zenodo_link": "https://zenodo.org/record/1468039#.W8zyxBRoSAo",
       "questions": [
@@ -1067,79 +1944,107 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Age prediction using machine learning",
-      "zenodo_link": "https://zenodo.org/record/2545213#.XEWTJ9-YVa0",
+      "title": "Deep Learning (Part 1) - Feedforward neural networks (FNN)",
+      "zenodo_link": "https://zenodo.org/record/4660497",
       "questions": [
-        "How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?"
+        "What is a feedforward neural network (FNN)?",
+        "What are some applications of FNN?"
       ],
       "objectives": [
-        "Learn ageing biomarkers from RNA-seq and DNA methylation datasets",
-        "Apply regression based machine learning algorithms",
-        "Learn feature selection and hyperparameter optimisation"
+        "Understand the inspiration for neural networks",
+        "Learn various activation functions, and classification/regression problems solved by neural networks",
+        "Discuss various cost/loss functions and the backpropagation algorithm",
+        "Learn how to create a neural network using Galaxy's deep learning tools",
+        "Solve a simple regression problem, car purchase price prediction, via FNN in Galaxy"
       ],
-      "key_points": [
-        "Various machine learning algorithms should be used to find the best ones",
-        "For each machine learning algorithm, it hyperparameters should be optimised based on the dataset",
-        "Feature selection should be done for high-dimensional datasets"
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "intro_deep_learning"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "RNN"
+          ]
+        }
       ],
       "time_estimation": "2H",
       "contributors": [
         {
-          "name": "Ekaterina Polkh",
-          "joined": "2017-09",
-          "id": "polkhe",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
-        },
-        {
-          "name": "Anup Kumar",
-          "email": "anup.rulez@gmail.com",
-          "twitter": "musafirtweetsz",
-          "joined": "2018-08",
-          "elixir_node": "de",
-          "id": "anuprulez",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/anuprulez.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/"
+          "name": "Kaivan Kamali",
+          "email": "kxk302@gmail.com",
+          "joined": "2021-02",
+          "id": "kxk302",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
         }
       ],
-      "short_id": "T00261",
-      "url": "/topics/statistics/tutorials/age-prediction-with-ml/tutorial.html",
+      "short_id": "T00258",
+      "url": "/topics/statistics/tutorials/FNN/tutorial.html",
       "topic_name": "statistics",
-      "tutorial_name": "age-prediction-with-ml",
-      "dir": "topics/statistics/tutorials/age-prediction-with-ml",
-      "id": "statistics/age-prediction-with-ml",
+      "tutorial_name": "FNN",
+      "dir": "topics/statistics/tutorials/FNN",
+      "id": "statistics/FNN",
       "video_library": {
         "tutorial": null,
         "slides": null,
         "demo": null,
-        "both": null,
+        "both": {
+          "description": "This hands-on tutorial covers Feedforward Neural Networks (FNN)",
+          "materials": [
+            {
+              "link": "topics/statistics/tutorials/FNN/slides.html",
+              "title": "Feedforward Neural Networks",
+              "type": "Slides"
+            },
+            {
+              "link": "topics/statistics/tutorials/FNN/tutorial.html",
+              "title": "Feedforward Neural Networks",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "statistics"
+          ],
+          "title": "Feedforward Neural Networks (FNN)",
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "kxk302"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H10M",
+              "link": "VbzJDkyPL4A",
+              "speakers": [
+                "kxk302"
+              ]
+            }
+          ],
+          "gtn_id": "statistics/FNN",
+          "captioned": true
+        },
         "session": null
       },
       "hands_on": true,
-      "slides": false,
+      "slides": true,
       "workflows": [
         {
-          "workflow": "age-prediction-dnam.ga",
+          "workflow": "Intro_To_FNN.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-dnam.ga",
-          "path": "topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-dnam.ga",
-          "wfid": "statistics-age-prediction-with-ml",
-          "wfname": "age-prediction-dnam",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-age-prediction-with-ml/versions/age-prediction-dnam",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "age-prediction-rna.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-rna.ga",
-          "path": "topics/statistics/tutorials/age-prediction-with-ml/workflows/age-prediction-rna.ga",
-          "wfid": "statistics-age-prediction-with-ml",
-          "wfname": "age-prediction-rna",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-age-prediction-with-ml/versions/age-prediction-rna",
+          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/workflows/Intro_To_FNN.ga",
+          "path": "topics/statistics/tutorials/FNN/workflows/Intro_To_FNN.ga",
+          "wfid": "statistics-FNN",
+          "wfname": "intro_to_fnn",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-FNN/versions/intro_to_fnn",
           "license": null,
           "creators": [
 
@@ -1147,20 +2052,20 @@
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_parallel_coordinates_plot/plotly_parallel_coordinates_plot/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.1"
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1"
       ],
       "supported_servers": {
         "exact": [
           {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
           },
           {
             "url": "https://usegalaxy.eu",
@@ -1184,7 +2089,11 @@
           }
         ],
         "inexact": [
-
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          }
         ]
       },
       "topic_name_human": "Statistics and machine learning",
@@ -1194,9 +2103,30 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "plotly_parallel_coordinates_plot",
+            "name": "keras_model_builder",
             "owner": "bgruening",
-            "revisions": "7b21a9b5922f",
+            "revisions": "772e0e89fc68",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_model_config",
+            "owner": "bgruening",
+            "revisions": "8a794e6d3388",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "keras_train_and_eval",
+            "owner": "bgruening",
+            "revisions": "b6ef6d0cb6b7",
+            "tool_panel_section_label": "Statistics and machine learning",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "model_prediction",
+            "owner": "bgruening",
+            "revisions": "1552b8cb4a94",
             "tool_panel_section_label": "Statistics and machine learning",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
@@ -1206,31 +2136,10 @@
             "revisions": "389227fa1864",
             "tool_panel_section_label": "Statistics and machine learning",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "sklearn_build_pipeline",
-            "owner": "bgruening",
-            "revisions": "840f29aad145",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "sklearn_ensemble",
-            "owner": "bgruening",
-            "revisions": "1a53edc4b438",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "sklearn_searchcv",
-            "owner": "bgruening",
-            "revisions": "25ab6b4e376e",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: plotly_parallel_coordinates_plot\n  owner: bgruening\n  revisions: 7b21a9b5922f\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: plotly_regression_performance_plots\n  owner: bgruening\n  revisions: 389227fa1864\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_build_pipeline\n  owner: bgruening\n  revisions: 840f29aad145\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_ensemble\n  owner: bgruening\n  revisions: 1a53edc4b438\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_searchcv\n  owner: bgruening\n  revisions: 25ab6b4e376e\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: plotly_regression_performance_plots\n  owner: bgruening\n  revisions: 389227fa1864\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -1244,136 +2153,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/age-prediction-with-ml/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
-      "zenodo_link": "https://zenodo.org/record/6091361",
-      "questions": [
-        "How to use Jupyterlab and it several features?",
-        "How to use it for creating input datasets and writing artificial intelligence (AI) algorithms?"
-      ],
-      "objectives": [
-        "Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms",
-        "Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy",
-        "Develop AI algorithms using Tensorflow",
-        "Send long-running jobs to Galaxy's cluster and save results in its history",
-        "Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "jupyterlab"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "intro_deep_learning"
-          ]
-        }
-      ],
-      "time_estimation": "1H",
-      "tags": [
-        "interactive-tools",
-        "machine-learning",
-        "deep-learning",
-        "jupyter-lab",
-        "image-segmentation",
-        "protein-3D-structure"
-      ],
-      "contributors": [
-        {
-          "name": "Anup Kumar",
-          "email": "anup.rulez@gmail.com",
-          "twitter": "musafirtweetsz",
-          "joined": "2018-08",
-          "elixir_node": "de",
-          "id": "anuprulez",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/anuprulez.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/anuprulez/"
-        }
-      ],
-      "short_id": "T00266",
-      "url": "/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
-      "topic_name": "statistics",
-      "tutorial_name": "gpu_jupyter_lab",
-      "dir": "topics/statistics/tutorials/gpu_jupyter_lab",
-      "id": "statistics/gpu_jupyter_lab",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "gpu_jupyterlab_as_jupytool.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/workflows/gpu_jupyterlab_as_jupytool.ga",
-          "path": "topics/statistics/tutorials/gpu_jupyter_lab/workflows/gpu_jupyterlab_as_jupytool.ga",
-          "wfid": "statistics-gpu_jupyter_lab",
-          "wfname": "gpu_jupyterlab_as_jupytool",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-gpu_jupyter_lab/versions/gpu_jupyterlab_as_jupytool",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json",
-      "tools": [
-        "Cut1",
-        "Filter1",
-        "interactive_tool_ml_jupyter_notebook"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Statistics and machine learning",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json"
       }
     },
     {
@@ -2012,212 +2793,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Deep Learning (Part 3) - Convolutional neural networks (CNN)",
-      "zenodo_link": "https://zenodo.org/record/4697906",
-      "questions": [
-        "What is a convolutional neural network (CNN)?",
-        "What are some applications of CNN?"
-      ],
-      "objectives": [
-        "Understand the inspiration behind CNN and learn the CNN architecture",
-        "Learn the convolution operation and its parameters",
-        "Learn how to create a CNN using Galaxy's deep learning tools",
-        "Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "intro_deep_learning",
-            "FNN",
-            "RNN"
-          ]
-        }
-      ],
-      "time_estimation": "2H",
-      "contributors": [
-        {
-          "name": "Kaivan Kamali",
-          "email": "kxk302@gmail.com",
-          "joined": "2021-02",
-          "id": "kxk302",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
-        }
-      ],
-      "short_id": "T00257",
-      "url": "/topics/statistics/tutorials/CNN/tutorial.html",
-      "topic_name": "statistics",
-      "tutorial_name": "CNN",
-      "dir": "topics/statistics/tutorials/CNN",
-      "id": "statistics/CNN",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "This hands-on tutorial covers Convolutional Neural Networks (CNN)",
-          "materials": [
-            {
-              "link": "topics/statistics/tutorials/CNN/slides.html",
-              "title": "Convolutional Neural Networks",
-              "type": "Slides"
-            },
-            {
-              "link": "topics/statistics/tutorials/CNN/tutorial.html",
-              "title": "Convolutional Neural Networks",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "statistics"
-          ],
-          "title": "Convolutional Neural Networks (CNN)",
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "FilipposZ"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H",
-              "link": "P1NVYOJrv_4",
-              "speakers": [
-                "kxk302"
-              ]
-            }
-          ],
-          "gtn_id": "statistics/CNN",
-          "captioned": true
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "Intro_To_CNN.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/CNN/workflows/Intro_To_CNN.ga",
-          "path": "topics/statistics/tutorials/CNN/workflows/Intro_To_CNN.ga",
-          "wfid": "statistics-CNN",
-          "wfname": "intro_to_cnn",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-CNN/versions/intro_to_cnn",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_to_categorical/sklearn_to_categorical/1.0.8.3"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Statistics and machine learning",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "keras_model_builder",
-            "owner": "bgruening",
-            "revisions": "772e0e89fc68",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_model_config",
-            "owner": "bgruening",
-            "revisions": "8a794e6d3388",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_train_and_eval",
-            "owner": "bgruening",
-            "revisions": "b6ef6d0cb6b7",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ml_visualization_ex",
-            "owner": "bgruening",
-            "revisions": "947c2eacccb8",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "model_prediction",
-            "owner": "bgruening",
-            "revisions": "1552b8cb4a94",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "sklearn_to_categorical",
-            "owner": "bgruening",
-            "revisions": "ec69cbe34b73",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ml_visualization_ex\n  owner: bgruening\n  revisions: 947c2eacccb8\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: sklearn_to_categorical\n  owner: bgruening\n  revisions: ec69cbe34b73\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/CNN/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Interval-Wise Testing for omics data",
       "zenodo_link": "https://doi.org/10.5281/zenodo.5589610",
       "questions": [
@@ -2619,436 +3194,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Deep Learning (Part 2) - Recurrent neural networks (RNN)",
-      "zenodo_link": "https://zenodo.org/record/4477881",
-      "questions": [
-        "What is a recurrent neural network (RNN)?",
-        "What are some applications of RNN?"
-      ],
-      "objectives": [
-        "Understand the difference between feedforward neural networks (FNN) and RNN",
-        "Learn various RNN types and architectures",
-        "Learn how to create a neural network using Galaxy's deep learning tools",
-        "Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "intro_deep_learning",
-            "FNN"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "CNN"
-          ]
-        }
-      ],
-      "time_estimation": "2H",
-      "contributors": [
-        {
-          "name": "Kaivan Kamali",
-          "email": "kxk302@gmail.com",
-          "joined": "2021-02",
-          "id": "kxk302",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
-        }
-      ],
-      "short_id": "T00259",
-      "url": "/topics/statistics/tutorials/RNN/tutorial.html",
-      "topic_name": "statistics",
-      "tutorial_name": "RNN",
-      "dir": "topics/statistics/tutorials/RNN",
-      "id": "statistics/RNN",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "This hands-on tutorial covers Recurrenct Neural Networks (RNN)",
-          "materials": [
-            {
-              "link": "topics/statistics/tutorials/RNN/slides.html",
-              "title": "Recurrent Neural Networks",
-              "type": "Slides"
-            },
-            {
-              "link": "topics/statistics/tutorials/RNN/tutorial.html",
-              "title": "Recurrent Neural Networks",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "statistics"
-          ],
-          "title": "Recurrent Neural Networks (RNN)",
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "kxk302"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "50M",
-              "link": "1dwzEhjOAmw",
-              "speakers": [
-                "kxk302"
-              ]
-            }
-          ],
-          "gtn_id": "statistics/RNN",
-          "captioned": true
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "Intro_To_RNN.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/RNN/workflows/Intro_To_RNN.ga",
-          "path": "topics/statistics/tutorials/RNN/workflows/Intro_To_RNN.ga",
-          "wfid": "statistics-RNN",
-          "wfname": "intro_to_rnn",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-RNN/versions/intro_to_rnn",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Statistics and machine learning",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "keras_model_builder",
-            "owner": "bgruening",
-            "revisions": "772e0e89fc68",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_model_config",
-            "owner": "bgruening",
-            "revisions": "8a794e6d3388",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_train_and_eval",
-            "owner": "bgruening",
-            "revisions": "b6ef6d0cb6b7",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ml_visualization_ex",
-            "owner": "bgruening",
-            "revisions": "947c2eacccb8",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "model_prediction",
-            "owner": "bgruening",
-            "revisions": "1552b8cb4a94",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ml_visualization_ex\n  owner: bgruening\n  revisions: 947c2eacccb8\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/RNN/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Deep Learning (Part 1) - Feedforward neural networks (FNN)",
-      "zenodo_link": "https://zenodo.org/record/4660497",
-      "questions": [
-        "What is a feedforward neural network (FNN)?",
-        "What are some applications of FNN?"
-      ],
-      "objectives": [
-        "Understand the inspiration for neural networks",
-        "Learn various activation functions, and classification/regression problems solved by neural networks",
-        "Discuss various cost/loss functions and the backpropagation algorithm",
-        "Learn how to create a neural network using Galaxy's deep learning tools",
-        "Solve a simple regression problem, car purchase price prediction, via FNN in Galaxy"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "intro_deep_learning"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "RNN"
-          ]
-        }
-      ],
-      "time_estimation": "2H",
-      "contributors": [
-        {
-          "name": "Kaivan Kamali",
-          "email": "kxk302@gmail.com",
-          "joined": "2021-02",
-          "id": "kxk302",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kxk302.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kxk302/"
-        }
-      ],
-      "short_id": "T00258",
-      "url": "/topics/statistics/tutorials/FNN/tutorial.html",
-      "topic_name": "statistics",
-      "tutorial_name": "FNN",
-      "dir": "topics/statistics/tutorials/FNN",
-      "id": "statistics/FNN",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "This hands-on tutorial covers Feedforward Neural Networks (FNN)",
-          "materials": [
-            {
-              "link": "topics/statistics/tutorials/FNN/slides.html",
-              "title": "Feedforward Neural Networks",
-              "type": "Slides"
-            },
-            {
-              "link": "topics/statistics/tutorials/FNN/tutorial.html",
-              "title": "Feedforward Neural Networks",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "statistics"
-          ],
-          "title": "Feedforward Neural Networks (FNN)",
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "kxk302"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H10M",
-              "link": "VbzJDkyPL4A",
-              "speakers": [
-                "kxk302"
-              ]
-            }
-          ],
-          "gtn_id": "statistics/FNN",
-          "captioned": true
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "Intro_To_FNN.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/FNN/workflows/Intro_To_FNN.ga",
-          "path": "topics/statistics/tutorials/FNN/workflows/Intro_To_FNN.ga",
-          "wfid": "statistics-FNN",
-          "wfname": "intro_to_fnn",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-FNN/versions/intro_to_fnn",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Statistics and machine learning",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "keras_model_builder",
-            "owner": "bgruening",
-            "revisions": "772e0e89fc68",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_model_config",
-            "owner": "bgruening",
-            "revisions": "8a794e6d3388",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "keras_train_and_eval",
-            "owner": "bgruening",
-            "revisions": "b6ef6d0cb6b7",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "model_prediction",
-            "owner": "bgruening",
-            "revisions": "1552b8cb4a94",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "plotly_regression_performance_plots",
-            "owner": "bgruening",
-            "revisions": "389227fa1864",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: keras_model_builder\n  owner: bgruening\n  revisions: 772e0e89fc68\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_model_config\n  owner: bgruening\n  revisions: 8a794e6d3388\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: keras_train_and_eval\n  owner: bgruening\n  revisions: b6ef6d0cb6b7\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: model_prediction\n  owner: bgruening\n  revisions: 1552b8cb4a94\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: plotly_regression_performance_plots\n  owner: bgruening\n  revisions: 389227fa1864\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/FNN/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Classification in Machine Learning",
       "zenodo_link": "https://zenodo.org/record/3738729#.XoZyHXUzaV4",
       "questions": [
@@ -3340,151 +3485,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/classification_machinelearning/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/classification_machinelearning/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Text-mining with the SimText toolset",
-      "zenodo_link": "http://doi.org/10.5281/zenodo.4638516",
-      "questions": [
-        "How can I automatically collect PubMed data for a set of biomedical entities such as genes?",
-        "How can I analyze similarities among biomedical entities based on PubMed data on large-scale?"
-      ],
-      "objectives": [
-        "Learn how to use the SimText toolset",
-        "Upload a table with biomedical entities in Galaxy",
-        "Retrieve PubMed data for each of the biomedical entities",
-        "Extract biomedical terms from the PubMed data for each biomedical entity",
-        "Analyze the similarity among the biomedical entities based on the extracted data in an interactive app"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "The SimText toolset allows large-scale literature analysis of a set of biomedical entities such as genes or diseases",
-        "The similarities among the biomedical entities can be explored interactively",
-        "The litertaure based grouping can be compared to an existing grouping to discover similarities/ relationships hidden in the literature"
-      ],
-      "tags": [
-        "interactive-tools"
-      ],
-      "contributors": [
-        {
-          "name": "Marie Gramm",
-          "email": "mgramm2@smail.uni-koeln.de",
-          "orcid": "0000-0002-4217-5277",
-          "joined": "2021-03",
-          "id": "mgramm1",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mgramm1.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mgramm1/"
-        },
-        {
-          "name": "Dennis Lal group",
-          "email": "dennislal.group@gmail.com",
-          "joined": "2021-03",
-          "id": "dlalgroup",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/dlalgroup.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dlalgroup/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        }
-      ],
-      "short_id": "T00272",
-      "url": "/topics/statistics/tutorials/text-mining_simtext/tutorial.html",
-      "topic_name": "statistics",
-      "tutorial_name": "text-mining_simtext",
-      "dir": "topics/statistics/tutorials/text-mining_simtext",
-      "id": "statistics/text-mining_simtext",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/text-mining_simtext/workflows/main_workflow.ga",
-          "path": "topics/statistics/tutorials/text-mining_simtext/workflows/main_workflow.ga",
-          "wfid": "statistics-text-mining_simtext",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-text-mining_simtext/versions/main_workflow",
-          "license": null,
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "",
-              "name": ""
-            }
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json",
-      "tools": [
-        "interactive_tool_simtext_app",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pmids_to_pubtator_matrix/pmids_to_pubtator_matrix/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pubmed_by_queries/pubmed_by_queries/0.0.2"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Statistics and machine learning",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "pmids_to_pubtator_matrix",
-            "owner": "iuc",
-            "revisions": "69714f06f18b",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pubmed_by_queries",
-            "owner": "iuc",
-            "revisions": "02e46a96e98a",
-            "tool_panel_section_label": "Statistics and machine learning",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: pmids_to_pubtator_matrix\n  owner: iuc\n  revisions: 69714f06f18b\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pubmed_by_queries\n  owner: iuc\n  revisions: 02e46a96e98a\n  tool_panel_section_label: Statistics and machine learning\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/text-mining_simtext/tutorial.json"
       }
     },
     {
