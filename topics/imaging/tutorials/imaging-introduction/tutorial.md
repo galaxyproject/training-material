@@ -15,7 +15,7 @@ objectives:
   - "How to perform basic image processing in Galaxy."
 key_points:
 - The **Image Info** tool can provide valuable metadata information of an image.
-- TIFF files can not directly viewed in the browser, but have to be converted.
+- TIFF files cannot viewed directly in most web browser, but have to be converted.
 - For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.
 time_estimation: "1H"
 follow_up_training:
@@ -27,6 +27,7 @@ follow_up_training:
 contributors:
   - thomaswollmann
   - shiltemann
+  - kostrykin
 tags:
   - HeLa
 
@@ -110,13 +111,14 @@ Now, we can extract metadata from an image.
 
 # Image Conversion
 
-Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF can not be displayed in the browser. Therefore, we convert `input.tif` to a PNG for visualization.
+Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF cannot be displayed in most web browsers. Therefore, we convert `input.tif` to a PNG for visualization.
 
 > <hands-on-title>Convert Image</hands-on-title>
 >
 > 1. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file
 >    - *"Output data type"*: `PNG`
+>    - *"Pyramid image"*: `No Pyramid`
 > 2. Rename {% icon galaxy-pencil %} the generated file to `viz_input`
 > 3. Click on the {% icon galaxy-eye %} (eye) icon next to the file name to look at the file content
 >
@@ -203,7 +205,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > 5. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
 >    - *"Output data type"*: `PNG`
-> 6. Rename {% icon galaxy-pencil %} the converted image to `viz segmented`
+> 6. Rename {% icon galaxy-pencil %} the converted image to `viz_segmented`
 >
 >    > <question-title></question-title>
 >    >
@@ -236,14 +238,12 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    {: .question}
 >
 >
-> 7. **Overlay Segmentation Mask** {% icon tool %} with the following parameters to convert the image to PNG:
->    - {% icon param-file %} *"Image Source File"*: `viz_normalized` file
->    - {% icon param-file %} *"Mask Source File"*: `viz_segmented` file
->    - *"Image Is Greyscale"*: `Yes`
->    - *"Thickness"*: `3`
->    - *"Stroke Color"*: `red`
->    - *"Plot Labels"*: `yes`
->    - *"Label Color"*: `yellow`
+> 7. **Overlay Images** {% icon tool %} with the following parameters to convert the image to PNG:
+>    - *"How to visualize the overlay?"*: `Segmentation mask over image`
+>    - {% icon param-file %} *"Image"*: `viz_normalized` file
+>    - {% icon param-file %} *"Label image"*: `input_segmented` file (output of **Auto Threshold** {% icon tool %})
+>    - *"Contour thickness"*: `0.3`
+>    - *"Contour color"*: `red`
 > 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
 > 9. **Count Objects** {% icon tool %} with the following parameters to count the segmented objects in the image:
 >    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
@@ -262,7 +262,7 @@ The resulting image should look something like this:
 
 ![segmentation mask output image](../../images/imaging-introduction/viz_segmentation_mask.png){: width="75%"}
 
-We see the segmentation mask overlayed; each detected object (nucleus) is labeled with its ID value.
+We see the segmentation mask overlayed.
 
 We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.
 
