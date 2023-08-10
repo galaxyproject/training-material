@@ -1,6 +1,6 @@
 # Introduction
 
-This tutorial is an adaptation of [Filter, Plot and Explore]({% link https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html %}) where the workflow has been converted into a Jupyter notebook that can be ran in Galaxy through `JupyterLab`. The notebook runs in Python and primarily relies on the Scanpy library for performing most tasks. Running through this notebook will allow you to see and modify the code being run at each step, feel free to experiment with the different code cells to gain a deeper understanding of the analysis process.
+This tutorial is an adaptation of [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) where the workflow has been converted into a Jupyter notebook that can be ran in Galaxy through `JupyterLab`. The notebook runs in Python and primarily relies on the Scanpy library for performing most tasks. Running through this notebook will allow you to see and modify the code being run at each step, feel free to experiment with the different code cells to gain a deeper understanding of the analysis process.
 
 ## Get data
 
