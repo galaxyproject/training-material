@@ -241,9 +241,11 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > 7. **Overlay Images** {% icon tool %} with the following parameters to convert the image to PNG:
 >    - *"How to visualize the overlay?"*: `Segmentation mask over image`
 >    - {% icon param-file %} *"Image"*: `viz_normalized` file
->    - {% icon param-file %} *"Label image"*: `input_segmented` file (output of **Auto Threshold** {% icon tool %})
->    - *"Contour thickness"*: `0.3`
+>    - {% icon param-file %} *"Label image"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
+>    - *"Contour thickness"*: `2`
 >    - *"Contour color"*: `red`
+>    - *"Show labels"*: `yes`
+>    - *"Label color"*: `yellow`
 > 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
 > 9. **Count Objects** {% icon tool %} with the following parameters to count the segmented objects in the image:
 >    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
@@ -262,7 +264,7 @@ The resulting image should look something like this:
 
 ![segmentation mask output image](../../images/imaging-introduction/viz_segmentation_mask.png){: width="75%"}
 
-We see the segmentation mask overlayed.
+We see the segmentation mask overlayed; each detected object (nucleus) is labeled with its ID value.
 
 We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.
 
