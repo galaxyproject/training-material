@@ -635,8 +635,6 @@ sc.pl.embedding(
 )
 ```
 
-![PCA Embeddings](../../images/scrna-casestudy-jupyter/pca-embeddings.png "PCA Embeddings")
-
 ```python
 # TSNE
 sc.pl.embedding(
@@ -648,8 +646,6 @@ sc.pl.embedding(
 )
 ```
 
-![tSNE Embeddings](../../images/scrna-casestudy-jupyter/tsne-embeddings.png "tSNE Embeddings")
-
 ```python
 # UMAP
 sc.pl.embedding(
@@ -660,8 +656,6 @@ sc.pl.embedding(
     use_raw=False
 )
 ```
-
-![UMAP Embeddings](../../images/scrna-casestudy-jupyter/umap-embeddings.png "UMAP Embeddings")
 
 Congratulations! You now have plots galore!
 
