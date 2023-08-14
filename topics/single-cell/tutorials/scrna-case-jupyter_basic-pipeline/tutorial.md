@@ -239,6 +239,9 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 > >
 > {: .solution}
 >
+{: .question}
+
+> <question-title>Filter Thresholds</question-title>
 >
 > What threshold should you set for `log1p_total_counts`?
 > 1. Which plot(s) addresses this?
@@ -254,6 +257,9 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 > >
 > {: .solution}
 >
+{: .question}
+
+> <question-title>Filter Thresholds</question-title>
 >
 > What threshold should you set for `pct_counts_mito`?
 > 1. Which plot(s) addresses this?
