@@ -53,7 +53,7 @@ notebook:
 ---
 
 # Setting your environment 
-First thing's first, we should load the packages we will need into our environment. In your console (likely in the lower left corner of your RStudio window), run the following lines of code: 
+First thing's first, we need to load the packages we will be using. In order to use any functions of a package, we must first call the library of that package. In your console (likely in the lower left corner of your RStudio window), run the following lines of code to do so: 
 
 ```r
 library(Matrix)
@@ -61,18 +61,18 @@ library(Seurat)
 library(dplyr) 
 ```
 
-The packages are called - now let's get our data files moved from the Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
+The packages are called--now let's get our data files moved from our Galaxy history and into our RStudio enviornment so that we can create a Seurat object.
 
 # Upload, view and modify the files
-Now that we've made it into RStudio, and called the packages we'll use, let's begin loading datasets from Galaxy into our RStudio environment. Galaxy helps us with this step by providing us the gx_get() function, which will tell us the file paths at which we find the datasets saved in our Galaxy histories. 
+Now that we've made it into RStudio, and called the packages we'll use, let's begin moving datasets from Galaxy and into our RStudio environment. Galaxy helps us with this by providing the gx_get() function, which will tell us the file paths for the datasets currently occupying our Galaxy histories. 
 
-So, for example, our matrix was the first to be imported. As such, we will ask for the filepath for the first piece of data in our history with the following line:  
+So, for example, our matrix was the first to be imported. As such, we will ask for the file path of the first piece of data in our history: we will tell gx_get() the number of the dataset in our history that we are interested in, and the function will output the path we need to bring that dataset into R.
 
 ```r
 gx_get(1)  #get the file path for matrix.mtx: #1 in Galaxy history
 ```
 
-Now we have the file path! We can use the Matrix package, specifically their readMM function, to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
+Now we have the file path! We can use the Matrix package, specifically their readMM() function, to read our counts matrix into our environment, using our file path to let it know where to find the matrix. 
 
 ```r
 matrix.mtx<-readMM("/import/1") 
@@ -84,7 +84,7 @@ Now we will do the same thing with the feature, barcode, and experimental design
 >
 {: .warning}
 
-We'll run the same command, simply replacing the data number in order to find where we will ask R to find our data. Then, we will use the read.delim function in read the  list of genes, cells, and cell annotations from the researchers:
+We'll run the same command, simply replacing the data number in order to ask for the file path to data in an alternative slot in our Galaxy history. Then, we will use the read.delim function in read in the list of genes, cells, and cell annotations provided to us  by the researchers:
 ```r
 gx_get(2) #genes.tsv
 genes.tsv<-read.delim("/import/2", header = FALSE) 
@@ -95,7 +95,7 @@ barcodes.tsv<-read.delim("/import/3", header = FALSE)
 gx_get(4) #exp_design.tsv
 exp_design.tsv<-read.delim("/import/4")
 ```
-The format of the experimental design dataset contains cell barcodes as the first column of data as opposed to the official row names. In order for Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by running the following line of code: 
+The format of the experimental design dataset contains cell barcodes as the first column of data with simply numbered (1-n) row names. In order for Seurat to properly use this dataset, we will need to make the cell barcodes the row names. This can be accomplished by running the following line of code: 
 
 ```r
 rownames(exp_design.tsv)<-exp_design.tsv$Assay 
@@ -107,7 +107,7 @@ Now, in our RStudio environment, we should have all of the data sets necessary t
 Next we will add our dimension names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and cells are expression values of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
 
 ><tip-title>About Seurat Objects</tip-title>
->The order of the dimensions, such that genes are the first and cells are the second is a given matter of Seurat objects. 
+>The order of the dimensions, such that genes are the first and cells are the second is a set characteristic of Seurat objects. 
 >
 >You will recieve an error if you try to label the first dimension with cell barcodes or the second with genes. This is because the Dimname slots are like empty fill in the blanks: if the number of labels input doesn't match the number of blanks in that dimension, that is the number of labels don't match the number of cells/genes, Seurat will not accept the labels. 
 {: .tip}
@@ -117,10 +117,10 @@ matrix.mtx@Dimnames[[1]]<-genes.tsv$V2
 matrix.mtx@Dimnames[[2]]<-barcodes.tsv$V1
 ```
 
-In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x step. Read10x is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method. 
+In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x() step. Read10x() is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method. 
 
 ><tip-title>How to Use Read10X</tip-title>
->The only necessary parameter of Seurat's Read10X fucntion is the file path to the directory (folder) containing the matrix.mtx, barcodes.tsv, and genes.tsv (sometimes also called features.tsv) files.
+>The only necessary parameter of Seurat's Read10X() fucntion is the file path to the directory (folder) containing the matrix.mtx, barcodes.tsv, and genes.tsv (sometimes also called features.tsv) files.
 >
 >So if the EBI SCXA Retrieval tool were to have output a data directory in the sixth history position, the following code would be able to import a labelled counts matrix called "labelled matrix" into our RStudio environment: 
 >```r
@@ -132,14 +132,14 @@ In a more typical Seurat pipeline, or on a local version of RStudio, this step w
 
 Now we will create a Seurat object using our newly labelled counts matrix! Make sure you have called the Seurat library, first, or RStudio will not recognize the function. 
 
-
 ```r
 srt<-CreateSeuratObject(counts = matrix.mtx)
 ```
 
- You've created a Seurat object, congratulations!
+You've created a Seurat object, congratulations!
 
 # Adding Cell Level Metadata
+
  Now that we have an object, we can add in our metadata from our experimental design dataframe (table). This will be useful to us shortly as we begin to visualize our data!
  
 ```r
@@ -160,23 +160,20 @@ srt$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 >
 {: .tip}
 
-
 Now that we have our almost fully annotated object, we will add one more metadata column: percent mitochondrial (perc.mt). This metadata column will denote what percentage of a cell's feature (gene) expression is mitochondrial--which will be useful to us shortly as we begin to filter our data. 
 
 ```r
-srt <- PercentageFeatureSet(srt, 
-  pattern = "^mt-", 
-  col.name = "perc.mt")
+srt <- PercentageFeatureSet(srt, pattern = "^mt-", col.name = "perc.mt")
 ```
 
-For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet function to search for mitochondrial genes in the line of code above. 
+For the sake of this data set, and many others, the mitochondrial genes will all be marked with an "mt" as the prefix, so that is how we have asked Seurat's PercentageFeatureSet() function to search for mitochondrial genes in the line of code above. 
 
-With that being said, once you are analyzing your own data, it is highly recommended that you figure out how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentage
+With that being said, when you are analyzing your own data, it is highly recommended that you identify how your data set has labelled mitochondrial genes to ensure that you are calculating the correct percentages.
 
 > <warning-title>Careful</warning-title>
 >  The "mt" prefix may not always include all mitochondrial genes depending on how your dataset has been labelled. 
 >
->Sometimes the labels may be done via a capital prefix ("^MT") and other times mitochondrial genes must be identified via feature-level metadata like a GTF file. 
+>Sometimes the labels may be done via a capital prefix ("^MT") and in some cases, mitochondrial genes must be identified via feature-level metadata like a GTF file. 
 {: .warning}
 
 
@@ -185,9 +182,9 @@ Now that we have a complete Seurat object, we can begin the filtering process.
 
 There will  be a number of ‘cells’ that are actually just empty droplets or low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to accurately analyse them. 
 
-This background noise of both cells and genes not only makes it harder to distinguish real biological information from artifacts, but also makes it computationally demanding to analyse. 
+This background noise of both cells and genes not only makes it harder to distinguish real biological information from artifacts, but also makes it computationally demanding to analyze. 
 
-We want to filter our cells, but first we need to know what our data looks like. There are a number of subjective choices to make within scRNA-seq analysis, for instance we now need to make our best informed decisions about where to set our thresholds (more on that soon!). 
+We want to filter our cells, but first we need to know what our data looks like. There are a number of subjective decisions to make within scRNA-seq analysis, for instance we now need to make informed decisions about where to set our thresholds (more on that soon!). 
 
 We’re going to plot our data a few different ways. Different bioinformaticians might prefer to see the data in different ways, and here we are only generating a few of the plots you can use. Ultimately you need to go with what makes the most sense to you.
 
@@ -205,7 +202,7 @@ This plot shows us the number of cells split by the individual (mouse) from whic
 Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
 
 ><tip-title>Syntax Lesson</tip-title>
->In order to accurately assess potential batch effects, use the "group.by" argument to indicate the variable which differed across experiments. 
+>In order to accurately assess potential batch effects, use the "group.by" parameter to indicate the variable which differed across experiments. 
 >
 {: .tip}   
 
@@ -237,9 +234,9 @@ We are looking for cell counts with high mitochondrial percentages in their feat
 >
 {: .comment} 
 
-These cells won't tell us much biologically, rather, they will contribute noise that we will aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data. 
+These cells won't tell us much biologically, rather, they will contribute noise that we'll aim to filter out of our data. With that being said, there is a level of metabolic activity that is expected but will be specific to your samples/tissue/organism--so it is worth looking into what that might look like when it comes time to analyze your own data. 
 
-We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim argument:
+We can also zoom in on the x-axis to get a better idea of what threshold to set by adjusting the xlim parameter:
 
 ```r
 plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xlab = "UMI_count", ylab = "percent mito", xlim = c(0,1750))
@@ -247,7 +244,7 @@ plot(x = srt$nCount_RNA, y = srt$perc.mt, main = "UMI Counts x Percent Mito", xl
 ![UMI x mito zoomed in on X](../../images/scrna-SeuratRStudio/plot5.png "UMI counts x Percent mito-Zoomed in on X.")
 
 ><comment-title>Interpretations</comment-title>
->It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold that still includes the majority of other cells. 
+>It looks like just before nCount_RNA = 1750, the perc.mito peaks above 2 percent--a conservative threshold. 
 >
 {: .comment} 
   
@@ -273,7 +270,7 @@ prop.table(table(srt@meta.data$perc.mt > 3))
 If we are happy with those thresholds for cells and percent mito, we can look at the the gene count threshold next. 
 
 ><comment-title>Otherwise</comment-title>
->If not, repeat the preceding steps to hone in on a threshold more suited for your dataset. 
+>If not, repeat the preceding steps to hone in on a threshold more suited to your needs. 
 >
 {: .comment} 
 
@@ -284,7 +281,7 @@ plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito",
 ```
 ![Gene x mito](../../images/scrna-SeuratRStudio/plot7.png "Gene counts x Percent mito.")
 
-Once again, let's zoom in on the x-axis but this time to get an idea of which nFeature_RNA threshold to set:
+Once again, let's zoom in on the x-axis, but this time to get an idea of which nFeature_RNA threshold to set:
 
 ```r
 plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito", xlim = c(0,1275))
@@ -305,10 +302,10 @@ prop.table(table(srt@meta.data$nFeature_RNA > 1275 | srt@meta.data$nFeature_RNA 
 ```
 
 # Applying our Thresholds 
-Once we are happy with our filtering thresholds, it’s now time to apply them to our data!
+Once we are happy with our filtering thresholds, it’s time to apply them to our data!
 
 ><tip-title>Create a new object</tip-title>
-> You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice in case you decide to change your filtering parameters, which you likely will, or if something goes awry. 
+> You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice  so that you don't have to start all over in case you decide to change your filtering parameters, which you likely will, or if something goes awry. 
 >
 {: .tip} 
 
@@ -316,18 +313,17 @@ Once we are happy with our filtering thresholds, it’s now time to apply them t
 subset_srt<-subset(srt, nCount_RNA > 1750 & nFeature_RNA > 1275 & perc.mt < 3 | nFeature_RNA < 600) 
 ```
 
-In this step we are also creating a new object (notice the new object name preceding the subset function you just ran) so that we may compare back and forth between our unfiltered and filtered data set if we please. 
+In this step we are also creating a new object (notice the new object name preceding the subset() function you just ran) so that we may compare back and forth between our unfiltered and filtered data set if we please. 
 
-
-Next, we want to filter out genes that no longer show nay expression in the cells remaining in our filtered dataset. In order to do so we will extract that filtered matrix from our filtered object. 
+Next, we want to filter out genes that no longer show any expression in the remaining, high quality cells in our filtered dataset. In order to do so we will extract the filtered matrix from our filtered object. 
 
 ```r
 subset_matrix<-GetAssayData(subset_srt)
 ```
 
-Now that you’ve removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are not expressed in any of the cells remaining in our matrix. 
+Since you’ve removed a whole heap of cells, and the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are not expressed in any of the cells left in our filtered matrix. 
 
-Genes that do not appear in any cell, or even in only 1 or 2 cells, can make some analytical tools break and will generally not be biologically informative. So let’s remove them! 
+Genes that do not appear in any cell, or even in only 1 or 2 cells, may break some analytical tools and will generally not be biologically informative. So let’s remove them! 
 
 We can use the filtered matrix we just extracted to create a new Seurat object, this time including the argument: min.cells = 3. This will remove any genes from our matrix that have less than 3 cells expressing them. 
 
@@ -335,7 +331,6 @@ We can use the filtered matrix we just extracted to create a new Seurat object, 
 > Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more. 
 >
 {: .tip} 
-
 
 ```r
 filtered_srt <- CreateSeuratObject(counts = subset_matrix, meta.data = subset_srt@meta.data, min.cells = 3)
@@ -367,7 +362,7 @@ filtered_srt<- SCTransform(filtered_srt, vars.to.regress = c("perc.mt", "nFeatur
 
 We also have loads of genes, but not all of them vary in expression from cell to cell. For instance, housekeeping genes are defined as not changing much from cell to cell, so we could remove these from our data to simplify our analyses. 
 
-The find variable features step within SCTransform (or Seurat's FindVariableFeatures() function) will flag genes that do vary across to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
+The find variable features step within SCTransform (or Seurat's FindVariableFeatures() function) will flag genes that do vary across cells to expedite future analyses and ensure that we, and Seurat, don't waste time looking for meaningful differences where they don't exist.
 
 Then, SCTransform (or Seurat's ScaleData() function) will scale the data so that all genes have the same variance and a zero mean. 
 
@@ -416,7 +411,7 @@ For this, we will use the k-nearest neighbor (kNN) graph, to identify which cell
 >The kNN graph plots connections between cells if their distance (when plotted in this 10 dimensional space!) is amongst the k-th smallest distances from that cell to other cells. This will be crucial for identifying clusters, and is necessary for plotting a UMAP--which is what will ultimately allow us to visualize our data in 2 dimensions. 
 
 ><comment-title>From UMAP developers:</comment-title>
->From UMAP developers: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
+>“Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”.
 {: .comment} 
 
 Let's now use the 10 PC threshold we chose from the Elbowplot and apply it to find neighbors:
@@ -436,7 +431,7 @@ Unfortunately, identifying clusters is not as majestic as biologists often think
 So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a resolution parameter for how granular you want to be.
 
 ><tip-title>On Clustering Resolution</tip-title>
->The resolution parameter available in the FindCLusters() function allows for you, the bioinformatician, to dictate the granularity of the clusters. 
+>The resolution parameter available in the FindClusters() function allows for you, the bioinformatician, to dictate the granularity of the clusters. 
 >
 >For example, a higher clustering resolution dictates increased granularity, and more stringent clusters. That is--cells must more closely resemble one another in order to be grouped into the same cluster than at a lower clustering resolution. 
 > 
@@ -539,7 +534,7 @@ Now, let's see what genes differentiate our wildtype from our mutant cells. Firs
 unique(filtered_srt$Genotype) 
 ```
 
-This output helpfully shows us what the genotypes are, and how they are labelled in our metadata. The small details, like capitalization, are important for referencing metadata information--our references must perfectly match the labelling in the object, otherwise it will not be recognized by the functions. 
+This output helpfully shows us what the genotypes are, and how they are labelled in our metadata. The small details, like capitalization, are important for referencing metadata information--our references must perfectly match the labelling in the object, otherwise they will not be recognized by the functions. 
 
 Now that we know how our wildtype and mutant cells are labelled, we can use that information to directly compare the two. This time we will use a pairwise comparison method by using Seurat's FindMarkers function (not to be confused with FindAllMarkers which has a comprehensive comparison approach):
 
@@ -576,10 +571,10 @@ It would be nice to know what these cells are. This analysis (googling all of th
 | 0        | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell)|
 | 4        | Itm2a                   | Mature T-cell                       |
 
-Feel free the plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annnotations. 
+Feel free to plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annotations. 
 
 ><tip-title>Plotting Markers</tip-title>
->To do so, simply use the same FeaturePlot() function we used above, but replace the feature argument with your new marker of interest.
+>To do so, simply use the same FeaturePlot() function we used above, but replace the feature parameter with your new marker of interest.
 >
 ```r
 FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
@@ -604,10 +599,10 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
 ```
 ![DimPlot colored by labelled celltype](../../images/scrna-SeuratRStudio/plot13.png "DimPlot colored by assigned cell type")
 
-Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some realy biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!
+Now we can begin to feel a bit more oriented in exploring our data. The clusters are labelled with cell types, and our object has been processed enough such that we may now begin to answer some real biological questions! Now that we know what we’re dealing with, let’s examine the effect of our variable, real science!
 
 ## Keep Digging
-Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" argument in Seurat's plot functions.  
+Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus? We can begin to answer this question visually by using the "split.by" parameter in Seurat's plot functions.  
 
 ```r
 DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype", split.by = "Genotype")
@@ -636,7 +631,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = c("Sex", "Individu
 ![DimPlot colored by Sex, Individual, and Genotype](../../images/scrna-SeuratRStudio/plot16.png "DimPlot colored by Sex, Individual, and Genotype")
 
 
-We note that the one female sample - unfortunately one of mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
+We note that the one female sample - unfortunately one of merely three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.
 
 Are there any clusters or differences being driven by sequencing depth, a technical and random factor?
 
@@ -653,9 +648,9 @@ FeaturePlot(object = filtered_srt, reduction = "umap", features = "nCount_SCT", 
 ```
 ![FeaturePlot colored by counts](../../images/scrna-SeuratRStudio/plot18.png "FeaturePlot colored by counts split by Individual")
 
-Eureka! This might explain the dramatic shift in early to middle T-Cell shift between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely account for the discernment between clusters 1, 2, and 5). 
+There we go! This might explain the dramatic shift in early to middle T-Cell between wildtype and knockout cells--the leftmost early to middle T-cells simply have a higher sequencing depth represented by Individual 3 (UMIs/cell) than the ones on the right side. Well, that explains some of the sub-cluster that we’re seeing in that splurge (specifically this likely accounts for the discernment between clusters 1, 2, and 5). 
 
-Luckily, and importantly, we don’t see that the double negative or mature T-cell being similarly affected. So, although, this variable of sequencing depth, or moreso, Individual, might be something to regress out somehow, it doesn’t seem to be impacting our dataset such that we cannot draw meaningful insights. 
+Luckily, and importantly, we don’t see the double negative or mature T-cells being similarly affected. So, although, this variable of sequencing depth, or moreso, Individual, might be something to regress out somehow, it doesn’t seem to be impacting our dataset such that we cannot draw meaningful insights. 
 
 
 ><tip-title>Overprocessing</tip-title>
