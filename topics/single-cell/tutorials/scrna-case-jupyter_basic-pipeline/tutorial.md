@@ -230,7 +230,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 > > <solution-title></solution-title>
 > >
 > > 1. Any plot with `log1p_n_genes_by_counts` would do here, actually! Some people prefer scatterplots to violins.
-> > ![Scatter-genesxmito](../../images/scrna-casestudy-jupyter/scatter-mito-genes.png "Scatter - mito x genes (Raw)")
+> >    ![Scatter-genesxmito](../../images/scrna-casestudy-jupyter/scatter-mito-genes.png "Scatter - mito x genes (Raw)")
 > >
 > > 2. In `Scatter - mito x genes` you can see how cells with `log1p_n_genes_by_counts` up to around, perhaps, `5.7` (around 300 genes) often have high `pct_counts_mito`.
 > >   - You can plot this as just `n_counts` and see this same trend at around 300 genes, but with this data the log format is clearer so that's how we're presenting it.
@@ -247,7 +247,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 > > <solution-title></solution-title>
 > >
 > > 1. As before, any plot with `log1p_total_counts` will do! Again, we'll use a scatterplot here, but you can use a violin plot if you wish!
-> > ![Scatter-countsxmito](../../images/scrna-casestudy-jupyter/scatter-mito-umis.png "Scatterplot - mito x UMIs (Raw)")
+> >    ![Scatter-countsxmito](../../images/scrna-casestudy-jupyter/scatter-mito-umis.png "Scatterplot - mito x UMIs (Raw)")
 > >
 > > 2. We can see that we will need to set a higher threshold (which makes sense, as you'd expect more UMI's per cell rather than unique genes!). Again, perhaps being a bit aggressive in our threshold, we might choose `6.3`, for instance (which amounts to around 500 counts/cell).
 > >   - In an ideal world, you'll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!
@@ -262,7 +262,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 > > <solution-title></solution-title>
 > >
 > > 1. Any plot with `pct_counts_mito` would do here, however the scatterplots are likely the easiest to interpret. We'll use the same as last time.
-> > ![Scatter-countsxmito](../../images/scrna-casestudy-jupyter/scatter-mito-umis.png "Scatterplot - mito x UMIs (Raw)")
+> >    ![Scatter-countsxmito](../../images/scrna-casestudy-jupyter/scatter-mito-umis.png "Scatterplot - mito x UMIs (Raw)")
 > >
 > > 2. We can see a clear trend wherein cells that have around 5% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we'll go more aggressive with a `4.5%`.
 > >    - In general, you must adapt all cut-offs to your data - metabolically active cells might have higher mitochondrial RNA in general, and you don't want to lose a cell population because of a cut-off.
