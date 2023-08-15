@@ -578,7 +578,7 @@
       <div id="method-c-renderMarkdownCells" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">renderMarkdownCells</span><span
-            class="method-args">(site, notebook, metadata, _page_url, _dir)</span>
+            class="method-args">(site, notebook, metadata, _page_url, dir)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -587,7 +587,7 @@
 
           <div class="method-source-code" id="renderMarkdownCells-source">
             <pre><span class="ruby-comment"># File _plugins/notebook.rb, line 452</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">renderMarkdownCells</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">notebook</span>, <span class="ruby-identifier">metadata</span>, <span class="ruby-identifier">_page_url</span>, <span class="ruby-identifier">_dir</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">renderMarkdownCells</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">notebook</span>, <span class="ruby-identifier">metadata</span>, <span class="ruby-identifier">_page_url</span>, <span class="ruby-identifier">dir</span>)
   <span class="ruby-identifier">seen_abbreviations</span> = {}
   <span class="ruby-identifier">notebook</span>[<span class="ruby-string">&#39;cells&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cell</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">cell</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;cell_type&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;markdown&#39;</span>
@@ -660,30 +660,30 @@
       <span class="ruby-comment"># love it) or we&#39;ll link to the production images and folks can live</span>
       <span class="ruby-comment"># without their images for a bit until it&#39;s merged.</span>
 
-      <span class="ruby-comment"># if cell[&#39;source&#39;].match(/&lt;img src=&quot;\.\./)</span>
-      <span class="ruby-comment">#   cell[&#39;source&#39;].gsub!(/&lt;img src=&quot;(\.\.[^&quot;]*)/) do |img|</span>
-      <span class="ruby-comment">#     path = img[10..]</span>
-      <span class="ruby-comment">#     image_path = File.join(dir, path)</span>
-      <span class="ruby-comment">#</span>
-      <span class="ruby-comment">#     if img[-3..].downcase == &#39;png&#39;</span>
-      <span class="ruby-comment">#       # puts &quot;[GTN/Notebook/Images] Embedding png: #{img}&quot;</span>
-      <span class="ruby-comment">#       data = Base64.encode64(File.binread(image_path))</span>
-      <span class="ruby-comment">#       %(&lt;img src=&quot;data:image/png;base64,#{data}&quot;)</span>
-      <span class="ruby-comment">#     elsif (img[-3..].downcase == &#39;jpg&#39;) || (img[-4..].downcase == &#39;jpeg&#39;)</span>
-      <span class="ruby-comment">#       # puts &quot;[GTN/Notebook/Images] Embedding jpg: #{img}&quot;</span>
-      <span class="ruby-comment">#       data = Base64.encode64(File.binread(image_path))</span>
-      <span class="ruby-comment">#       %(&lt;img src=&quot;data:image/jpeg;base64,#{data}&quot;)</span>
-      <span class="ruby-comment">#     elsif img[-3..].downcase == &#39;svg&#39;</span>
-      <span class="ruby-comment">#       # puts &quot;[GTN/Notebook/Images] Embedding svg: #{img}&quot;</span>
-      <span class="ruby-comment">#       data = Base64.encode64(File.binread(image_path))</span>
-      <span class="ruby-comment">#       %(&lt;img src=&quot;data:image/svg+xml;base64,#{data}&quot;)</span>
-      <span class="ruby-comment">#     else</span>
-      <span class="ruby-comment">#       # puts &quot;[GTN/Notebook/Images] Fallback for #{img}&quot;</span>
-      <span class="ruby-comment">#       # Falling back to non-embedded images</span>
-      <span class="ruby-comment">#       &quot;&lt;img src=\&quot;https://training.galaxyproject.org/training-material/#{page_url.split(&#39;/&#39;)[0..-2].join(&#39;/&#39;)}/..&quot;</span>
-      <span class="ruby-comment">#     end</span>
-      <span class="ruby-comment">#   end</span>
-      <span class="ruby-comment"># end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/&lt;img src=&quot;\.\./</span>)
+        <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/&lt;img src=&quot;(\.\.[^&quot;]*)/</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">img</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">path</span> = <span class="ruby-identifier">img</span>[<span class="ruby-value">10</span><span class="ruby-operator">..</span>]
+          <span class="ruby-identifier">image_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">path</span>)
+      
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">img</span>[<span class="ruby-value">-3</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;png&#39;</span>
+            <span class="ruby-comment"># puts &quot;[GTN/Notebook/Images] Embedding png: #{img}&quot;</span>
+            <span class="ruby-identifier">data</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">binread</span>(<span class="ruby-identifier">image_path</span>))
+            <span class="ruby-node">%(&lt;img src=&quot;data:image/png;base64,#{data}&quot;)</span>
+          <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">img</span>[<span class="ruby-value">-3</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;jpg&#39;</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">img</span>[<span class="ruby-value">-4</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;jpeg&#39;</span>)
+            <span class="ruby-comment"># puts &quot;[GTN/Notebook/Images] Embedding jpg: #{img}&quot;</span>
+            <span class="ruby-identifier">data</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">binread</span>(<span class="ruby-identifier">image_path</span>))
+            <span class="ruby-node">%(&lt;img src=&quot;data:image/jpeg;base64,#{data}&quot;)</span>
+          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">img</span>[<span class="ruby-value">-3</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;svg&#39;</span>
+            <span class="ruby-comment"># puts &quot;[GTN/Notebook/Images] Embedding svg: #{img}&quot;</span>
+            <span class="ruby-identifier">data</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">binread</span>(<span class="ruby-identifier">image_path</span>))
+            <span class="ruby-node">%(&lt;img src=&quot;data:image/svg+xml;base64,#{data}&quot;)</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-comment"># puts &quot;[GTN/Notebook/Images] Fallback for #{img}&quot;</span>
+            <span class="ruby-comment"># Falling back to non-embedded images</span>
+            <span class="ruby-node">&quot;&lt;img src=\&quot;https://training.galaxyproject.org/training-material/#{page_url.split(&#39;/&#39;)[0..-2].join(&#39;/&#39;)}/..&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
 
       <span class="ruby-comment"># Strip out the highlighting as it is bad on some platforms.</span>
       <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/&lt;pre class=&quot;highlight&quot;&gt;/</span>, <span class="ruby-string">&#39;&lt;pre style=&quot;color: inherit; background: transparent&quot;&gt;&#39;</span>)
