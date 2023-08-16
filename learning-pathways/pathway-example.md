@@ -9,6 +9,8 @@ description: |
 
 type: use  # 'use' for science topics, or admin-dev or instructors
 tags: [some, keywords, here ]
+editorial_board:
+- shiltemann
 
 cover-image: assets/images/gat.png # optional, define your own cover image for the pathway index page, default is the GTN logo
 cover-image-alt: alt text for this image

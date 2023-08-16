@@ -171,7 +171,7 @@ First things first. Let's do a basic FASTQ quality control using **FastQC**
 > <hands-on-title></hands-on-title>
 >
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->       - *"Short read data from your current history"*: Use {% icon param-files %} **Multiple datasets** to choose both `barcoded read 1` and `barcoded read 2` (outputs of **Sinto barcode** {% icon tool %}).
+>       - *"Raw read data from your current history"*: Use {% icon param-files %} **Multiple datasets** to choose both `barcoded read 1` and `barcoded read 2` (outputs of **Sinto barcode** {% icon tool %}).
 > 2. Inspect the web page output of **FastQC** {% icon tool %} for the `barcoded read 1` sample.
 >
 > > <question-title></question-title>
@@ -220,7 +220,7 @@ Now we map the reads to a reference genome using {% tool [BWA-MEM](toolshed.g2.b
 # Peak calling
 In scRNA-seq we always have the standard set of genes (usually downloaded from public databases) to quantify the expression levels. For scATAC-seq, there are no such reference open chromatin regions because the regions of chromatin accessibility are tissue dependent. Hence, we first have to detect open chromatin regions. There are several ways of doing this. The most common ways are the following:
 * Find a published bulk ATAC-seq data that is the closest to your scATAC-seq data and use the regions from the bulk ATAC-seq data
-* Chumk the genome into equal-sized bins and use these bins as reference locations for quantification
+* Chunk the genome into equal-sized bins and use these bins as reference locations for quantification
 * Combine the data from all the cells of the scATAC-seq data together and detect open chromatin regions from the data. Later use these detected regions for quantification
 
 In this tutorial, we opt for the 3rd option. 
@@ -247,7 +247,7 @@ An ATAC-seq fragment file is a BED file with Tn5 integration sites, the cell bar
 > 1. {% tool [bedtools SortBED](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.30.0+galaxy2) %} with the following parameters:
 >    - *"Sort the following BED/bedGraph/GFF/VCF/EncodePeak file *"*: `fragments BED` (output of **Sinto fragments** {% icon tool%})`
 >    - *"Sort by"*: `chromosome, then by start position (asc)`
-> 1. Rename the datasets `sorted fragments`
+> 1. Rename the dataset `sorted fragments`
 {: .hands_on}
 
 ## Call Peaks
@@ -327,7 +327,7 @@ The most common format, called [`AnnData`](https://anndata.readthedocs.io/en/sta
 
 ![Anndata format]({% link topics/single-cell/images/scrna-pre-processing/tenx_anndata.png %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. peaks) <code>var</code> and unstructured annotations <code>uns</code>.")
 
-This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}) and [EpiScanpy](https://colomemaria.github.io/episcanpy_doc/index.html) ({% cite danese2021episcanpy %}) tool suits for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an `AnnData` object.
+This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.html) ({% cite wolf2018scanpy %}) and [EpiScanpy](https://colomemaria.github.io/episcanpy_doc/index.html) ({% cite danese2021episcanpy %}) tool suites for analyzing single-cell omics data. So we need first to import the matrix and annotations of peaks and cells (present in fragments BED file) into an `AnnData` object.
 
 > <hands-on-title>Build count matrix with EpiScanpy</hands-on-title>
 >
