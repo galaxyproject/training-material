@@ -108,7 +108,7 @@ end
 # Linting functions for the GTN
 module GtnLinter
   @BAD_TOOL_LINK = /{% tool (\[[^\]]*\])\(https?.*tool_id=([^)]*)\)\s*%}/i
-  @BAD_TOOL_LINK2 = /{% tool (\[[^\]]*\])\(https:\/\/toolshed.g2([^)]*)\)\s*%}/i
+  @BAD_TOOL_LINK2 = %r{{% tool (\[[^\]]*\])\(https://toolshed.g2([^)]*)\)\s*%}}i
 
   def self.find_matching_texts(contents, query)
     contents.map.with_index do |text, idx|
@@ -350,18 +350,19 @@ module GtnLinter
   end
 
   def self.bad_tool_links(contents)
-    find_matching_texts(contents, @BAD_TOOL_LINK) + find_matching_texts(contents, @BAD_TOOL_LINK2)
+    find_matching_texts(contents, @BAD_TOOL_LINK) + \
+      find_matching_texts(contents, @BAD_TOOL_LINK2)
       .map do |idx, _text, selected|
-      ReviewDogEmitter.error(
-        path: @path,
-        idx: idx,
-        match_start: selected.begin(0),
-        match_end: selected.end(0) + 1,
-        replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
-        message: 'You have used the full tool URL to a specific server, here we only need the tool ID portion.',
-        code: 'GTN:009'
-      )
-    end
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0) + 1,
+          replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
+          message: 'You have used the full tool URL to a specific server, here we only need the tool ID portion.',
+          code: 'GTN:009'
+        )
+      end
   end
 
   def self.snippets_too_close_together(contents)

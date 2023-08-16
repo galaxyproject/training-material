@@ -23,6 +23,10 @@ time_estimation: 1H
 key_points:
 - Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle
 - Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data
+tags:
+- single-cell
+- 10x
+- transcriptomics
 
 contributions:
   authorship:
