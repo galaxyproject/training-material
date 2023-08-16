@@ -348,10 +348,13 @@ rm(subset_matrix, subset_srt)
 
 # Processing
 Currently, we still have quite big data. We have two issues here:
+
 > 1. We already saw in our filtering plots that there are differences in how many transcripts and genes have been counted per cell. This technical variable could, and likely would, distract us from identifying true biological differences. 
 > 2. We like to plot things on 2-dimensional X/Y plots. So, for instance, Gapdh could be on one axis, and Actin could be on another, and then each cell is plotted onto that 2D axis based on how many of each transcript they possess. 
->Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier. 
->So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize.
+
+Although that would be fine, adding in a 3rd dimension (or, indeed, in our case, a dimension for each of the thousands of genes), is a bit trickier.
+
+So, our next steps will be to transform our big data object into something that is easy to analyse and easy to visualize.
 
 We will run SCTransform, a combinatorial function by Seurat that normalizes the data, finds variable features, and then scales the data. In their initial workflow, and in the Scanpy version of this tutorial, these steps are run individually. However, with the second version of SCTransform comes time efficiency and optimization for downstream analyses. 
 
@@ -406,7 +409,7 @@ ElbowPlot(filtered_srt, ndims = 50)
 >We can see that there is really not much variation explained past the 9th PC. So we might save ourselves a great deal of time and muddied data by focusing on the top 10 PCs.  
 {: .comment} 
 
-> You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs. 
+You can also think about it like choosing a threshold of variance explained. Conservatively, 2.5 standard deviations are explained by about 10 of the PCs. 
 
 We’re still looking at around 10 dimensions at this point--likely not the easiest to visualize. To make our lives easier, we need to identify how similar a cell is to another cell, across every cell across each of these dimensions. 
 
