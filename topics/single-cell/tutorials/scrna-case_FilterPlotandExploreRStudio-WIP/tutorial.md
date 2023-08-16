@@ -562,7 +562,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
 ><comment-title>On Cluster Numbering</comment-title>
->Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing >the most cells. 
+>Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
 {: .comment} 
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
