@@ -88,7 +88,7 @@ Now we will do the same thing with the feature, barcode, and experimental design
 >
 {: .warning}
 
-We'll run the same command, simply replacing the data number in order to ask for the file path to data in an alternative slot in our Galaxy history. Then, we will use the read.delim function in read in the list of genes, cells, and cell annotations provided to us  by the researchers:
+We'll run the same command, simply replacing the data number in order to ask for the file path to data in an alternative slot in our Galaxy history. Then, we will use the read.delim() function in read in the list of genes, cells, and cell annotations provided to us  by the researchers:
 ```r
 gx_get(2) #genes.tsv
 genes.tsv<-read.delim("/import/2", header = FALSE) 
@@ -539,7 +539,7 @@ unique(filtered_srt$Genotype)
 
 This output helpfully shows us what the genotypes are, and how they are labelled in our metadata. The small details, like capitalization, are important for referencing metadata information--our references must perfectly match the labelling in the object, otherwise they will not be recognized by the functions. 
 
-Now that we know how our wildtype and mutant cells are labelled, we can use that information to directly compare the two. This time we will use a pairwise comparison method by using Seurat's FindMarkers function (not to be confused with FindAllMarkers which has a comprehensive comparison approach):
+Now that we know how our wildtype and mutant cells are labelled, we can use that information to directly compare the two. This time we will use a pairwise comparison method by using Seurat's FindMarkers() function (not to be confused with FindAllMarkers which has a comprehensive comparison approach):
 
 ```r
 markers<-FindMarkers(object = filtered_srt, ident.1 = "wild type genotype", ident.2 = "Igf2-p0 heterozygous knockout", test.use = "wilcox")
@@ -584,7 +584,7 @@ Feel free to plot these markers onto our dataset to see where they fall. This is
 >![FeaturePlots of cell type markers](../../images/scrna-SeuratRStudio/plot21.png "FeaturePlots of our known cell type markers")
 {: .tip} 
 
-We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
+We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate() function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
 
 ```r
 filtered_srt@meta.data<- mutate(filtered_srt@meta.data, celltype = case_when(
