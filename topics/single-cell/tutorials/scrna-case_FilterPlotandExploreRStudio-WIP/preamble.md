@@ -6,6 +6,12 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 > This tutorial is significantly based on the [Seurat documentation](https://satijalab.com/seurat) as well as [Seurat's Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html).
 {: .comment}
 
+We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
+
+> <comment-title></comment-title>
+>If you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or you may download the subset dataset(s) from [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe-test). Alternatively, download them from EBI below!
+{: .comment}
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -14,12 +20,6 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 > {:toc}
 >
 {: .agenda}
-
-We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
-
-> <comment-title></comment-title>
->If you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from EBI below. Alternitavely, you may download the dataset(s) from [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe-test). 
-{: .comment}
 
 # Get Data onto Galaxy 
 To start, let's get our dataset loaded into Galaxy. 
