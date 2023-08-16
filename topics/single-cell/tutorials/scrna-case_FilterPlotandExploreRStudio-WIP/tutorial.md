@@ -453,7 +453,7 @@ Now that we have made note within our object of which cells cluster together, we
 filtered_srt <- RunUMAP(filtered_srt, dims = 1:10)
 ```
 
-#Let's Take a Look
+# Let's Take a Look
 Now that we have run dimensionality reduction on our dataset, it is ready for visualization. Let's take a look at what our cells look like in a UMAP projection: 
 
 ```r
@@ -473,10 +473,9 @@ We just plotted a housekeeping gene, Gapdh, so the broad expression we observe i
 
 ><tip-title>Weird scale?</tip-title>
 > If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count values. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again: 
-```r
-DefaultAssay(filtered_srt)<-"SCT"
-```
->
+>```r
+>DefaultAssay(filtered_srt)<-"SCT"
+>```
 {: .tip} 
 
 In practice, it is helpful to plot known markers of cell types you expect to be in your dataset. This will give you a first look at how your cells are clustered. 
@@ -506,12 +505,12 @@ In order to do so we can run cluster level differential expression tests. First,
 Idents(filtered_srt)<- filtered_srt$seurat_clusters
 ```
 
-><tip-title>Syntax</tip-title>
+><tip-title>Syntax Lesson</tip-title>
 > There are often many different ways to get the same job done in R, but especially when manipulating Seurat objects. We could alternatively set the active identity of our object with the following line of code too: 
 >
 >```r
-filtered_srt<-SetIdent(object = filtered_srt, value = "seurat_clusters")
-```
+>filtered_srt<-SetIdent(object = filtered_srt, value = "seurat_clusters")
+>```
 {: .tip} 
 
 Then, we'll run Seurat's FindAllMarkers function, which will compare each identity (in this case cluster) against every other identity within its class (all the other clusters). This function of marker finding is particularly useful in identifying up, or down, regulated genes that drive differences in identity/cluster. 
@@ -563,7 +562,7 @@ DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
 ><comment-title>On Cluster Numbering</comment-title>
->Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing the most cells. 
+>Note that Seurat's cluster numbering is based on size alone, so clusters 0 and 1 are not necessarily related, they are just the clusters containing >the most cells. 
 {: .comment} 
 
 It would be nice to know what these cells are. This analysis (googling all of the marker genes, both checking where the ones you know are and then going through marker tables we generated) is a fun task for any individual experiment, so we’re going to speed past that and nab the assessment from the original paper!
@@ -579,11 +578,10 @@ Feel free to plot these markers onto our dataset to see where they fall. This is
 
 ><tip-title>Plotting Markers</tip-title>
 >To do so, simply use the same FeaturePlot() function we used above, but replace the feature parameter with your new marker of interest.
->
-```r
-FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
-```
-![FeaturePlots of cell type markers](../../images/scrna-SeuratRStudio/plot21.png "FeaturePlots of our known cell type markers")
+>```r
+>FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
+>```
+>![FeaturePlots of cell type markers](../../images/scrna-SeuratRStudio/plot21.png "FeaturePlots of our known cell type markers")
 {: .tip} 
 
 We can then manually label the clusters in whatever way we please. [Dplyr](https://dplyr.tidyverse.org/reference/mutate.html)'s mutate function allows us to incorporate conditional metadata. That is to say, we can ask the function to label cells based on the cluster in which they have been assigned: 
@@ -659,7 +657,7 @@ Luckily, and importantly, we don’t see the double negative or mature T-cells b
 
 ><tip-title>Overprocessing</tip-title>
 >The less you can regress/modify your data, in general, the better--you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!). 
-{: .comment} 
+{: .tip} 
 
 
 Do you think we processed these samples well enough? We have seen in the previous images that these clusters are not very tight or distinct, so we could consider stronger filtering. Let's take a look at gene expression of a gene we know should not be expressed in tCells as a sanity check: 
