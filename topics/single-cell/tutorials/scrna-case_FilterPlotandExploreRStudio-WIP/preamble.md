@@ -15,6 +15,8 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 >
 {: .agenda}
 
+We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://4000-camilagoclo-trainingmat-tqxghg8qiwp.ws-eu103.gitpod.io/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://4000-camilagoclo-trainingmat-tqxghg8qiwp.ws-eu103.gitpod.io/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from EBI below.
+
 # Get Data onto Galaxy 
 Let's get our dataset loaded into Galaxy, first. 
 

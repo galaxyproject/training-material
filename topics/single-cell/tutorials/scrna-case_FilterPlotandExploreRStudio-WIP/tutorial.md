@@ -45,6 +45,10 @@ contributions:
   editing:
     - nomadscientist
     - hexylena
+    - mtekman
+    - shiltemann
+    - pavanvidem
+
 
 
 notebook:
