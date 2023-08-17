@@ -221,7 +221,7 @@ module Jekyll
 
           q
         end
-        out['maintainers'] = out['maintainers'].map { |c| mapContributor(site, c) }
+        out['editorial_board'] = out['editorial_board'].map { |c| mapContributor(site, c) }
 
         page2 = PageWithoutAFile.new(site, '', 'api/topics/', "#{topic}.json")
         page2.content = JSON.pretty_generate(out)
@@ -233,14 +233,14 @@ module Jekyll
       puts '[GTN/API] Topics'
       # Individual Topic Indexes
       site.data.each_pair do |k, v|
-        if v.is_a?(Hash) && v.key?('type') && v.key?('maintainers')
+        if v.is_a?(Hash) && v.key?('type') && v.key?('editorial_board')
 
           topics[k] = {
             'name' => v['name'],
             'title' => v['title'],
             'summary' => v['summary'],
             'url' => site.config['url'] + site.config['baseurl'] + "/api/topics/#{k}.json",
-            'maintainers' => v['maintainers'].map { |c| mapContributor(site, c) }
+            'editorial_board' => v['editorial_board'].map { |c| mapContributor(site, c) }
           }
         end
       end

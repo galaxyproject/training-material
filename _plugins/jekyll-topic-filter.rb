@@ -13,7 +13,17 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('maintainers') }.map { |k, _v| k }
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |k, _v| k }
+  end
+
+  ##
+  # This function returns a list of all the topics that are available.
+  # Params:
+  # +site+:: The +Jekyll::Site+ object
+  # Returns:
+  # +Array+:: The topic objects themselves
+  def self.enumerate_topics(site)
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |_k, v| v }
   end
 
   ##

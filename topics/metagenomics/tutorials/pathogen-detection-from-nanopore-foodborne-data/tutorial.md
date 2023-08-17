@@ -26,6 +26,7 @@ contributions:
    authorship:
     - bebatut
     - EngyNasr
+    - paulzierep
    editing:
     - hrhotz
     - wm75
@@ -285,7 +286,7 @@ In this tutorial we use:
     >    - *"Print scientific names instead of just taxids"*: `Yes`
     >    - In *"Create Report"*:
     >        - *"Print a report with aggregrate counts/clade to file"*: `Yes`
-    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `Yes`
+    >        - *"Format report output like Kraken 1's kraken-mpa-report"*: `No`
     >        - *"Report counts for ALL taxa, even if counts are zero"*: `Yes`
     >        - *"Report minimizer data"*: `Yes`
     >    - *"Select a Kraken2 database"*: `kalamari`
@@ -318,7 +319,9 @@ In this tutorial we use:
     > <hands-on-title> Host read filtering </hands-on-title> 
     >
     > 1. {% tool [Krakentools: Extract Kraken Reads By ID](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_extract_kraken_reads/krakentools_extract_kraken_reads/1.2+galaxy1) %} with the following parameters:
-    >    - {% icon param-files %} *"Tabular Dataset to filter"*: `Classification` outputs of **Kraken2** {% icon tool %}
+    >    - *"Single or paired reads?"*: `Single`
+    >    - {% icon param-files %} *"Results"*: `Kraken2 with Kalamri database Results` outputs of **Kraken2** {% icon tool %}
+    >    - {% icon param-files %} *"Report"*: `Kraken2 with Kalamri database Report` outputs of **Kraken2** {% icon tool %}
     >    - *"Taxonomix ID(s) to match"*:`9031 9606 9913`
     >
     >       We specify here the taxonomic ID of the hosts so we can filter reads assigned to these hosts. Kraken2 uses taxonomic IDs from NCBI, the IDs for a specific taxa can be found at [ncbi](https://www.ncbi.nlm.nih.gov/taxonomy). To be generic, we remove here:
@@ -568,7 +571,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
 
     > <hands-on-title> Visualization of the assembly grap </hands-on-title>
     > 4. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters:
-    >    - {% icon param-files %} *"Graphical Fragment Assembly"*: Assembly graph outputs of **Flye** {% icon tool %}
+    >    - {% icon param-files %} *"Graphical Fragment Assembly"*: `assembly_graph` Assembly graph outputs of **Flye** {% icon tool %}
     {: .hands-on}
 
     </div>
@@ -581,7 +584,7 @@ To identify VF or AMR genes, it is better to assemble reads into longer seuqence
     >
     > 3. {% tool [medaka consensus pipeline](toolshed.g2.bx.psu.edu/repos/iuc/medaka_consensus_pipeline/medaka_consensus_pipeline/1.7.2+galaxy0) %} with the following parameters:
     >    - {% icon param-files %} *"Select basecalls"*: collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing section
-    >    - {% icon param-files %} *"Select assembly"*: collection output of **Flye** {% icon tool %}
+    >    - {% icon param-files %} *"Select assembly"*: `consensus` collection output of **Flye** {% icon tool %}
     >    - *"Select model"*: `r941_min_hac_g507`
     >    - *"Select output file(s)"*: `select all`
     {: .hands-on}
@@ -1209,7 +1212,7 @@ For the phylogenetic trees, for each bacteria pathogen gene found in the samples
 To get the sequence to align, we need to extract the sequences of the VFs in the contigs:
 
 > <hands-on-title> Extract the sequences of the VFs </hands-on-title>
-> 1. {% tool [Collapse Collecction](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `Contigs`
 >    - *"Prepend File name"*: `Yes`
 >
