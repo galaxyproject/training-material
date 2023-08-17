@@ -51,7 +51,9 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR a
 
 # Clinical datasets
 Hands-on: describing clinical datasets - time 3 minutes - silent reflection
- how would you describe clinical datasets? In general terms, and specifically
+ How would you describe clinical datasets? In general terms, and specifically
+
+In general, clincial data are clinical reports (from trials and observational studies) and individual patient data.  In this section we will explore some of the different types of clinical data.
 
 ## Metadata that accompanies transcriptomic data
 In GEO and ArrayExpress the elements that we are describing as clinical data is the Characteristics or Source Characteristics.
@@ -68,31 +70,55 @@ Take note the availability of characteristics data for the different datasets
 ## Interventional clinical trials
 In these trials, usually the participants have a condition or disease, and the research question is related to the effectiveness of a treatment.  Some of the participants are given the treatment(s) under investigation, and the other participants are given either a placebo or non-treatment drug.  Usually these are under double-blind conditions, both participant and doctor do not know whether they are receiving/dispensing treatment or placebo.  In addition, there may also be a set of control participants that do not have the condition or disease.  Data is usually collected at baseline or screening, before any treatment or placebo is given, and then at least one time point in the future.  The breadth and type of data collected can vary across trials, and this can be limiting when trying to pool data from different trials.  The data collected could be minimal, basic metadata to accompany sample or imagining data.  But also could be quite extensive including quality of life questionnaires filled out by the patient.
 
+An example of an interventional clinical trial is TRACTISS, where the aim of the study was to establish whether rituximab improves clinical outcomes for Primary Sjögren's Syndrome patients
+https://bmcmusculoskeletdisord.biomedcentral.com/articles/10.1186/1471-2474-15-21
+
 ## Observational clinical trials
 In these trials, data is collected at least once, there may not be a follow-up collection.  The research question is usually related directly about the disease or condition, for example understanding biomarkers of a disease.  As with interventional clinical trials, the breadth of data collected varies on the trial.  There is often a control group but not always.  
+
+PRECISEADS is an example of an observational clinical trial where the study's aim is molecular reclassification to find clinically useful biomarkers for systemic autoimmune diseases
+https://www.imi.europa.eu/projects-results/project-factsheets/precisesads
 
 ## Registries
 Registries usually record (over a period of time), disease progression of patients with the same disease or conditiion.  Often referred to a hub/collection point once diagnosis confirmed.  Patients are continually added to the registries and therefore registries can provide a large pool of patients with relatively similar data collected.  As these are registries of patients with a particular condition, there are no control participants.
 
-## Electronic health records (EHR)
-These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as annoymised data, to avoid the ability to indentify individuals from the data.
+Here are links to two registry projects.  Both websites describe the projects, the aims and the outputs from the studies.
+UK Sjögren's registry: https://www.sjogrensregistry.org/index.php
+UK JIA Biologics Registers: https://www.sjogrensregistry.org/index.php
 
-Hands-on: explore HDRUK Innovation Gateway https://www.healthdatagateway.org/
+## Electronic health records (EHR)
+These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as annoymised data, to avoid the ability to indentify individuals from the data.  
+
+In the UK, Clinical Practice Research Datalink (CPRD) collects anonymised patient data from a network of GP practices, and links this data to a range of other health related data and provides a longitudinal, representative UK population health dataset.  For more information about CPRD go to https://cprd.com
+
+The Health Data Research Innovation Gateway (https://www.healthdatagateway.org/) can help find and discover UK health datasets, tools and other resources to further health research.
+
+Hands-on: explore HDRUK Innovation Gateway for datasets
+Click https://web.www.healthdatagateway.org/search?search=&datasetSort=latest&tab=Datasets
+In the filters, expand Publisher and in Search Filter type CPRD and enter.  Select CPRD
+Expand Phenotype and search for rheumatoid, and select Rheumatoid Arthritis
+Take a look at the information about the two datasets
+
+Clear the filters, and search for datasets related to your areas of interest
+
 
 # The importance of making clinical datasets FAIR
 
-In some recent work in rheumatoid arthritis, it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not many diseases.  
+## Associations between clinical features and omics
+In some recent work in rheumatoid arthritis, it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not, many diseases.  
 
 ![RA-MAP.](../../images/ra_map.png "")
-
-For many diseases (or even pan-diseases), there is  need for well-powered cohorts in the hundreds to thousands in number.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, 3 did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data, substantially diminishes the value of public data sets and violates FAIR principles.
 
 Hands-on:  For your domain, look at datasets on ArrayExpress and GEO and see how many of them have sex, age, ethnicity/race, and some measure of disease activity.
 Do the datasets have all these characteristics?
 
-Usually, after finding potentially interesting datasets on GEO or ArrayExpress, the next step to trying to enrich these public datasets is to contact the PI of the study.  From experience, the PI is usually happy to share additional data, especially if there have been previous collaborations.  However, even given willingness to share, there is the contacting of the person who actually has the data and agreeing what can and will be shared.  This at best will take weeks, but most likely months, especially if there’s been a lapse in communications between parties.
+## Powering up cohorts for analyses and machine learning
+For many diseases (or even pan-diseases), there is need for well-powered cohorts in the hundreds to thousands in number, for analyses purposes.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, 3 did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data, substantially diminishes the value of public data sets and violates FAIR principles.
 
-[To do] Machine learning with clinical data
+Similarly, in order to make the most of machine learning techniques, datasets need to be reasonably large.  
+
+## Time-saving
+Usually, after finding potentially interesting datasets on GEO or ArrayExpress, the next step to trying to enrich these public datasets is to contact the PI of the study.  From experience, the PI is usually happy to share additional data, especially if there have been previous collaborations.  However, even given willingness to share, there is the contacting of the person who actually has the data and agreeing what can and will be shared.  This at best will take weeks, but most likely months, especially if there’s been a lapse in communications between parties.
 
 # Practical techniques to make clinical data FAIR
 There are certain concerns when making clinical data freely available through public libraries such as GEO and ArrayExpress.  Data needs to be anonymised or at least pseudo-anoymised.  
@@ -135,7 +161,7 @@ A key benefit of data dictionaries, is that the information captured is generall
 
 ## Data catalogues
 [to write up, include links to the rdmbites]
-Data dictionaries are particularly informative for individual (or groups of similar) datasets.  Data catalogues, on the other hand, are useful for projects or consortia where there are many datasets.  The data catalogues are the metadata for the individual datasets that are being used or generated in projects, and they can provide context and provenance for each dataset.
+Data dictionaries are particularly informative for individual (or groups of similar) datasets.  Data catalogues, on the other hand, are useful for teams, projects or consortia where there are many datasets.  Data catalogues are the metadata for the individual datasets that are being used or generated in projects, and they can provide context and provenance for each dataset.
 
 [show an image of data catalogue?
 how much more to describe if including links to the rdmbites?]
@@ -145,8 +171,19 @@ how much more to describe if including links to the rdmbites?]
 As with data dictionaries, data catalogues rarely capture any information that need to be restricted access and usually can be shared in full.
 
 ## Publishing on Zenodo
-[to write up, show example of CLUSTER datasets on Zenodo, look for links that describe how to upload to Zenodo]
+[show example of CLUSTER datasets on Zenodo]
+Data dictionaries and data catalogues include a wealth of information about the clinical datasets they reference, and in general, contain no sensitive or confidential data.  Zenodo (https://www.zenodo.org) is an open reposititory for research outcomes hosted by CERN.  It is free to use and each upload is citeable through a Digital Object Identifier (DOI).  Uploads are instantly available, with version control features.
 
-## Data access request forms
-Data management committee
-[these two can be combined, but are the mechanisms for sharing data based]
+To upload, create a log in using GitHub ID, ORCID, or email.  Click on Upload (at the top of the page, left of centre), and follow the instructions.
+
+## Managing Data Access Requests
+Regardless of whether or not you publish data dictionaries and data catalogues, it is worth considering the mechanisms when receiving data access requests.  
+
+When a project is ongoing, if there is a Data Management Committee (DMC), the responsibility of data access requests would be with the DMC.  It is really helpful to have a centralised point to provide data goverance including guidelines for data sharing.
+
+If there is no Data Management Committee, or as a project draws to a close, it is worth clarifying the process of handling data access requests to minimise effort and delays for both parties.  Points to consider are:
+Point of contact - (e.g. this could be a catch all email address that is handled by a team administrator)
+Data Access Request form 
+
+In the UK, the HDRUK Innovation Gateway may also be a way to manage the data access request process. 
+
