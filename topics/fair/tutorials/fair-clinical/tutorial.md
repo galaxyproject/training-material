@@ -107,7 +107,7 @@ Clear the filters, and search for datasets related to your areas of interest
 ## Associations between clinical features and omics
 In some recent work in rheumatoid arthritis, it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not, many diseases.  
 
-![RA-MAP.](../../images/ra_map.png "")
+![RA-MAP.](../../images/RAMAP_graphic.png "")
 
 Hands-on:  For your domain, look at datasets on ArrayExpress and GEO and see how many of them have sex, age, ethnicity/race, and some measure of disease activity.
 Do the datasets have all these characteristics?
@@ -123,8 +123,22 @@ Usually, after finding potentially interesting datasets on GEO or ArrayExpress, 
 # Practical techniques to make clinical data FAIR
 There are certain concerns when making clinical data freely available through public libraries such as GEO and ArrayExpress.  Data needs to be anonymised or at least pseudo-anoymised.  
 
-Hands-on:  what data (screenshot of some data) would be problematic to share?
-[need to create a dataset with items such as DOB, Names, Address/PostCode]
+Hands-on:  In the data below, what data would be problematic to share?
+
+![PatientData.](../../images/Patient_data.png "")
+
+Solution: In the above dataset, remove columns
+C - FIRST
+D - LAST
+H - ADDRESS
+L - ZIP
+as these are clear identifiers to the person
+
+In terms of location, preferable to keep this as broad as possible.  In this case keep column J - STATE, but drop column I - CITY and column K - COUNTY is debatable to keep or not.
+
+Column B - BIRTHDATE is another clear identifier but could be replaced by age.
+
+It is preferable not to keep dates (Columns M - DATEOFASSESSMENT and N - DATEOFDISEASEONSET).  We will discuss date handling in the next section
 
 ## Converting dates to time periods 
 Avoid including dates, and convert these into time periods.  For example, use date of birth and date of assessment to calculate Age (at assessment or baseline).  Similarly, can calculate Age at Diagnosis, and Age at Onset, if dates are given.
@@ -132,7 +146,12 @@ Avoid including dates, and convert these into time periods.  For example, use da
 If there are more than one visits, and if these are not within roughly defined time periods, for example 4 weeks, 12 weeks, calculate the number of days between the visits.
 
 Hands-on: from the dataset shown, which columns would you change to time periods from dates? For those columns, convert to time periods
-[need to create a dataset that can be used for the next few hands-on]
+
+![Patient_Dates.](../../images/Patient_dates.png "")
+
+Solution: Replace BIRTHDATE with AGE (at DATEOFASSESSMENT) and DATEOFDISEASEONSET with AGEATONSET.  Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
+
+![DatesRemoved.](../../images/Datesremoved.png "")
 
 ## Comprehensive metadata for omics datasets
 When publishing omics datasets to libraries such as GEO and ArrayExpress, consider at least including Age, Sex, Race/Ethnicity, and if possible some disease activity measure.  Publishing as much as possible is great for researchers to access enriched datasets, and also reduces fielding queries and requests to the PI.
@@ -144,8 +163,7 @@ A data dictionary is the metadata of the dataset.  It should include details suc
 
 Here’s an example of a data dictionary used on a project
 
-
-![data dictionary](../../images/data_dictionary.png "")
+![datadictionary](../../images/ExampleDataDict1.png "")
 
 Key things to note are:
 The variable name is often the short form name of the data item.
@@ -154,8 +172,13 @@ In this example data items are encoded, and so their format is numeric, with con
 Validation rule, usually refer to instructions given when data was originally input, but could be the calculation formula for the data item.
 Codes and Labels here are the encoding definitions
 
-Hands-on: create a data dictionary for the dataset
-[need to create data dictionary for the hands-on dataset]
+Hands-on: Create a data dictionary for the dataset below
+
+![dataDictHandsOn](../../images/DataDictionaryHandsOn.png "")
+
+Solution: Here is one example of a suitable data dictionary for the dataset
+
+![dataDictSoln](../../images/DataDictSolution.png "")
 
 A key benefit of data dictionaries, is that the information captured is generally not confidential or patient-sensitive and therefore, there are few if any restrictions to sharing them.
 
