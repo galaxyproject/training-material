@@ -806,7 +806,7 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 {% icon congratulations %} Congratulations! You have interpreted your plots in several important ways!
 
-# Export your data, figures, and notebook
+# Export your data, and notebook, and figures
 
 It’s now time to export your data! First, we need to get it Jupyter to see it as a file.
 
@@ -822,7 +822,7 @@ To export your notebook to your Galaxy history, you can use the following. Chang
 
 Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
 
-```
+```python
 put("figures/plotname.png")
 put("figures/plotname.png")
 put("figures/plotname.png")
