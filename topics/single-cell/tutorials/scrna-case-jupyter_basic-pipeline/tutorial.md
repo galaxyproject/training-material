@@ -52,10 +52,13 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
 
 ---
+> <warning-title>Remember: Notebook-based tutorials can give different outputs!</warning-title>
+> The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to this tutorial. That's ok! The outputs should still be pretty close (the basic interpretation has survived 5 years of analytical updates and counting...).
+{: .warning}
 
 # Install libraries
 
-This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installtion in order to make the notebook a bit cleaner, if there are any issues with the installation then removing this parameter may give you more information about the issue.
+This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installation in order to make the notebook a bit cleaner. If there are any issues with the installation, then removing this parameter may give you more information about the issue.
 
 ```python
 pip install scanpy -q
@@ -75,7 +78,7 @@ pip install pandas -q
 
 ---
 
-We can now import the two libraries that we will be using, **scanpy** is the primary library that we will use and will handle all the plotting and data processing, **pandas** is used briefly for some manual data manipulation.
+We can now import the two libraries that we will be using, **scanpy** is the primary library that we will use and will handle all the plotting and data processing. Meanwhile, **pandas** is used briefly for some manual data manipulation.
 
 ```python
 import scanpy as sc
@@ -109,6 +112,10 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 >   > Inspect the Anndata object by printing it with:
 >   > ```python
 >   > print(adata)
+>   >
+>   > print(adata.obs)
+>   >
+>   > print(adata.var)
 >   > ```
 >   {: .tip}
 > > <solution-title></solution-title>
