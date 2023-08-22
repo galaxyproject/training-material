@@ -457,14 +457,15 @@ Principal components are calculated from highly dimensional data to find the mos
 {: .comment}
 
 > <warning-title>Check your AnnData object!</warning-title>
-> Your AnnData object should have far more than 1982 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 1982 or 2000 output from your testing in the section above labelled '1982'.
+> Run ```print(scaled_data)```
+> Your AnnData object should have far more than 1982 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 1982 from your testing in the section above labelled '1982'.
 {: .warning}
 
 ```python
 pca_components = sc.tl.pca(scaled_data, n_comps=50, copy=True)
 ```
 
-Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Examine ```pca_components```.
+Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Let's visualise the variance of each principal component.
 
 ```python
 sc.pl.pca_variance_ratio(pca_components, n_pcs=50)
