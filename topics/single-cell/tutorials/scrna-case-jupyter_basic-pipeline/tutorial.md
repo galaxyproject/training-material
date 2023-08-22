@@ -552,7 +552,7 @@ But we are also interested in differences across genotype, so let’s also check
 markers_genotype = sc.tl.rank_genes_groups(markers_cluster, groupby="genotype", method='t-test_overestim_var', n_genes=50, copy=True)
 ```
 
-**Note:** The function ```rank_genes_groups``` does not return a DataFrame that we can use but instead metadata about the marker table, so first we need to construct the marker table using this generated metadata, this is done using the following function however its not too important to understand what this code does!
+**Note:** The function ```rank_genes_groups``` does not return a DataFrame that we can use but instead metadata about the marker table, so first we need to construct the marker table using this generated metadata. This is done using the following function, however it's not too important to understand what this code does!
 
 ```python
 def generate_marker_table(adata):
