@@ -471,6 +471,8 @@ Why 50 principal components you ask? Well, we’re pretty confident 50 is an ove
 sc.pl.pca_variance_ratio(pca_components, n_pcs=50)
 ```
 
+![Variance ratio](../../images/scrna-casestudy-jupyter/pca-variance.png "Variance ratio")
+
 We can see that there is really not much variation explained past component 19. So we might save ourselves a great deal of time and muddied data by focusing on the top ```20``` PCs.
 
 ## Neighborhood graph
