@@ -53,14 +53,6 @@ notebook:
 
 ---
 
-# Introduction
-
-You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We’re working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
-
-> <comment-title>Tutorials everywhere?</comment-title>
-> This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
-{: .comment}
-
 # Install libraries
 
 This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installtion in order to make the notebook a bit cleaner, if there are any issues with the installation then removing this parameter may give you more information about the issue.
