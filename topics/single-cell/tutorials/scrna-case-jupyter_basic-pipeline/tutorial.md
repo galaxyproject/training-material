@@ -449,7 +449,11 @@ We still have too many dimensions. Transcript changes are not usually singular -
 Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, ```1982``` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first ```x``` principal components in our data to drastically reduce the number of dimensions.
 
 > <comment-title>1982???</comment-title>
-> Where did the `1982` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```. Then you can Inspect your resulting object and you'll see only 1982 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your ```sc.pp.highly_variable_genes``` function with way more than 1982 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 1982 or 2000 (if you set a limit on it) highly variable genes.
+> Where did the `1982` come from? 
+> 
+> The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```, therefore: ```sc.pp.highly_variable_genes(output_h5ad, subset=True)```. This subsetting removes any nonvariable genes. 
+>
+> Then you can ```print(output_h5ad)``` and you'll see only 1982 genes. The following processing steps will use only the highly variable genes for their calculations, but depend on keeping all genes in the object. Thus, please use the original output of your ```sc.pp.highly_variable_genes``` function with far more than 1982 genes!, currently stored as ```scaled_data```.
 {: .comment}
 
 > <warning-title>Check your AnnData object!</warning-title>
@@ -616,7 +620,7 @@ display(genotype_markers_named.head(5))
 
 Well done! It’s time for the best bit, the plotting!
 
-# Ploting!
+# Plotting!
 
 It’s time! Let’s plot it all! But first, let’s pick some marker genes from the ```markers_cluster``` list that you made as well. I’ll be honest, in practice, you’d now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (a well annotated dataset that you’ll use as the ideal). In the mean time, let’s do this the old-fashioned way, and just copy a bunch of the markers in the original paper.
 
