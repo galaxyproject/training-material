@@ -286,7 +286,7 @@ It’s now time to apply these thresholds to our data! First, a reminder of how 
 > - Everyone else: Choose your own thresholds and compare results!
 {: .details}
 
-We will plot the raw data before applying any filters so that we can see more clearly the changes we are making.
+We will plot the raw data before applying any filters so that we can more clearly see the changes we will make.
 
 ```python
 # Raw
@@ -314,7 +314,7 @@ print(genes_filtered_obj)
 > >
 > > ![Violinplot-filteronce](../../images/scrna-casestudy-jupyter/violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
 > > 1. The only part that seems to change is the `log1p_n_genes_by_counts`.  You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.
-> > 2. In `General - Filterbygenes`, you can see you now have `17,040 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `17,040 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -342,7 +342,7 @@ print(counts_filtered_obj)
 > >
 > > ![Violinplot-filtertwice](../../images/scrna-casestudy-jupyter/violin-filteredgenesxfilteredcounts.png "1st filter vs 2nd filter - counts/cell")
 > > 1. We will focus on the `log1p_total_counts` as that shows the biggest change. Similar to above, the bottom of the violin shape has flattered due to the threshold.
-> > 2. In `General - Filterbycounts`, you can see you now have `8,678 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `8,678 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -369,7 +369,7 @@ print(mito_filtered_obj)
 > >
 > > ![Violinplot-filtermito](../../images/scrna-casestudy-jupyter/violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
 > > 1. If we carefully check the axes, we can see that the `pct_counts_mito` has shrunk.
-> > 2. In `General - Filterbymito`, you can see you now have `8,605 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `8,605 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
