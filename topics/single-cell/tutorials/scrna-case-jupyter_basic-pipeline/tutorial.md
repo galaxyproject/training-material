@@ -1,14 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, Plot and Explore Single-cell RNA-seq Data (Jupyter Notebook)
+title: Filter, Plot and Explore Single-cell RNA-seq Data (Python)
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
-redirect_from:
-- /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
-- /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
