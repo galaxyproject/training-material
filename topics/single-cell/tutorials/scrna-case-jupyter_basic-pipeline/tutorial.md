@@ -806,6 +806,22 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 {% icon congratulations %} Congratulations! You have interpreted your plots in several important ways!
 
+# Export your data, figures, and notebook
+
+It’s now time to export your data! First, we need to get it Jupyter to see it as a file.
+
+```adata.write('markers_cluster_copy')```
+
+Now you can export it.
+
+```put("Trajectorythymus.h5ad")```
+
+To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
+
+```put("yourtitlehere.ipynb")```    
+
+ as well as all your lovely plots! If you go into the figures folder at the left, you’ll see your lovely plots and can choose which ones to export. The following code will push them into your galaxy history. You can also directly download them onto your computer from the file window at the left.
+
 # Conclusion
 
 {% icon congratulations %} Congratulations! You’ve made it to the end! 
