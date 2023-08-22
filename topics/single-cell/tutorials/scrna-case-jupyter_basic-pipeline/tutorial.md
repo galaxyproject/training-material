@@ -820,7 +820,13 @@ To export your notebook to your Galaxy history, you can use the following. Chang
 
 ```put("yourtitlehere.ipynb")```    
 
- as well as all your lovely plots! If you go into the figures folder at the left, you’ll see your lovely plots and can choose which ones to export. The following code will push them into your galaxy history. You can also directly download them onto your computer from the file window at the left.
+Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
+
+```
+put("figures/plotname.png")
+put("figures/plotname.png")
+put("figures/plotname.png")
+```
 
 # Conclusion
 
