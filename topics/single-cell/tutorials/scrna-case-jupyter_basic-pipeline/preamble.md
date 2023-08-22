@@ -1,6 +1,13 @@
 # Introduction
 
-This tutorial is an adaptation of [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) where the workflow has been converted into a Jupyter notebook that can be ran in Galaxy through `JupyterLab`. The notebook runs in Python and primarily relies on the Scanpy library for performing most tasks. Running through this notebook will allow you to see and modify the code being run at each step, feel free to experiment with the different code cells to gain a deeper understanding of the analysis process.
+You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat Satija et al. 2015, Scanpy Wolf et al. 2018, Monocle Trapnell et al. 2014, Scater McCarthy et al. 2017, and so forth. We’re working with Scanpy, the python iteration of the most widely used single cell toolkit.
+
+> <details-title>Python Version</details-title>
+>
+> This tutorial is an adaptation of [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). The workflow has been converted into a Jupyter notebook that can be ran in Galaxy through `JupyterLab`. The notebook runs in Python and primarily relies on the Scanpy library for performing most tasks. Running through this notebook will allow you to see and modify the code being run at each step, so feel free to experiment with the different code cells to gain a deeper understanding of the analysis process.
+>
+{: .details}
+
 
 ## Get data
 
@@ -52,7 +59,7 @@ You have two options for running the code in this tutorial, you can either downl
 
 > <hands-on-title>Option 1: Importing notebook from file</hands-on-title>
 >
-> 1. Download the notebook from the {% icon external-link %} **Supporting Materials** section in the overview box
+> 1. Download the [notebook](% link topics/single-cell/tutorials/scrna-case_basic-pipeline/single-cell-scrna-case-jupyter_basic-pipeline.ipynb) from the {% icon external-link %} **Supporting Materials** section in the overview box
 >
 > 2. Click the {% icon galaxy-upload %} **Upload Files** button in JupyterLab
 >

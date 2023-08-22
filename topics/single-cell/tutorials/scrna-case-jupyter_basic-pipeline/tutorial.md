@@ -1,14 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, Plot and Explore Single-cell RNA-seq Data (Jupyter Notebook)
+title: Filter, Plot and Explore Single-cell RNA-seq Data (Python)
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
-redirect_from:
-- /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
-- /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -55,18 +52,13 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
 
 ---
-
-# Introduction
-
-You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We’re working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
-
-> <comment-title>Tutorials everywhere?</comment-title>
-> This tutorial is similar to another fantastic tutorial: [Clustering 3k PBMC]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}). That tutorial will go into much further depth on the analysis, in particular the visualisation and science behind identifying marker genes. Their experimental data is clean and well annotated, which illustrates the steps beautifully. Here, we work more as a case study with messier data, to help empower you in making choices during the analysis. We highly recommend you work through all the galaxy single cell tutorials to build confidence and expertise! For trainers, note that there are small-group options in this tutorial.
-{: .comment}
+> <warning-title>Remember: Notebook-based tutorials can give different outputs!</warning-title>
+> The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to this tutorial. That's ok! The outputs should still be pretty close (the basic interpretation has survived 5 years of analytical updates and counting...).
+{: .warning}
 
 # Install libraries
 
-This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installtion in order to make the notebook a bit cleaner, if there are any issues with the installation then removing this parameter may give you more information about the issue.
+This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installation in order to make the notebook a bit cleaner. If there are any issues with the installation, then removing this parameter may give you more information about the issue.
 
 ```python
 pip install scanpy -q
@@ -86,7 +78,7 @@ pip install pandas -q
 
 ---
 
-We can now import the two libraries that we will be using, **scanpy** is the primary library that we will use and will handle all the plotting and data processing, **pandas** is used briefly for some manual data manipulation.
+We can now import the two libraries that we will be using, **scanpy** is the primary library that we will use and will handle all the plotting and data processing. Meanwhile, **pandas** is used briefly for some manual data manipulation.
 
 ```python
 import scanpy as sc
@@ -120,6 +112,10 @@ You have generated an annotated AnnData object from your raw scRNA-seq fastq fil
 >   > Inspect the Anndata object by printing it with:
 >   > ```python
 >   > print(adata)
+>   >
+>   > print(adata.obs)
+>   >
+>   > print(adata.var)
 >   > ```
 >   {: .tip}
 > > <solution-title></solution-title>
@@ -142,7 +138,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 ```python
 # Violin - genotype - log
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype)
+sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
 ```
  
   
@@ -221,7 +217,7 @@ That’s a lot of information! Let’s attack this in sections and see what ques
 
 Now that we’ve assessed the differences in our samples, we will look at the libraries overall to identify appropriate thresholds for our analysis.
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: genes</question-title>
 >
 > What threshold should you set for `log1p_n_genes_by_counts`?
 > 1. Which plot(s) addresses this?
@@ -241,7 +237,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 >
 {: .question}
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: UMIs</question-title>
 >
 > What threshold should you set for `log1p_total_counts`?
 > 1. Which plot(s) addresses this?
@@ -259,7 +255,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 >
 {: .question}
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: mito</question-title>
 >
 > What threshold should you set for `pct_counts_mito`?
 > 1. Which plot(s) addresses this?
@@ -290,7 +286,7 @@ It’s now time to apply these thresholds to our data! First, a reminder of how 
 > - Everyone else: Choose your own thresholds and compare results!
 {: .details}
 
-We will first plot the raw data before applying any filters so that we can see more clearly the changes we are making.
+We will plot the raw data before applying any filters so that we can more clearly see the changes we will make.
 
 ```python
 # Raw
@@ -318,7 +314,7 @@ print(genes_filtered_obj)
 > >
 > > ![Violinplot-filteronce](../../images/scrna-casestudy-jupyter/violin-raw-filteredgenes.png "Raw vs 1st filter - genes/cell")
 > > 1. The only part that seems to change is the `log1p_n_genes_by_counts`.  You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.
-> > 2. In `General - Filterbygenes`, you can see you now have `17,040 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `17,040 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -346,7 +342,7 @@ print(counts_filtered_obj)
 > >
 > > ![Violinplot-filtertwice](../../images/scrna-casestudy-jupyter/violin-filteredgenesxfilteredcounts.png "1st filter vs 2nd filter - counts/cell")
 > > 1. We will focus on the `log1p_total_counts` as that shows the biggest change. Similar to above, the bottom of the violin shape has flattered due to the threshold.
-> > 2. In `General - Filterbycounts`, you can see you now have `8,678 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `8,678 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -373,7 +369,7 @@ print(mito_filtered_obj)
 > >
 > > ![Violinplot-filtermito](../../images/scrna-casestudy-jupyter/violin-mitofilter.png "Violin plots after filtering genes, counts, and mito content/cell")
 > > 1. If we carefully check the axes, we can see that the `pct_counts_mito` has shrunk.
-> > 2. In `General - Filterbymito`, you can see you now have `8,605 cells x 35,734 genes`.
+> > 2. In the printed AnnData information, you can see you now have `8,605 cells x 35,734 genes`.
 > >
 > {: .solution}
 >
@@ -412,7 +408,7 @@ Using the final ```filtered_object```, we can summarise the results of our filte
 | Filter mito/cell   | 8605        | 35734 |
 | Filter cells/gene  | 8605        | 15395 |
 
-Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
+{% icon congratulations %} Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
 
 # Processing
 
@@ -438,7 +434,7 @@ Next up, we’re going to scale our data so that all genes have the same varianc
 scaled_data = sc.pp.scale(output_h5ad, max_value=10.0, copy=True)
 ```
 
-Congratulations! You have processed your object!
+{% icon congratulations %} Congratulations! You have processed your object!
 
 > <comment-title></comment-title>
 > At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
@@ -453,18 +449,23 @@ We still have too many dimensions. Transcript changes are not usually singular -
 Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, ```1982``` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first ```x``` principal components in our data to drastically reduce the number of dimensions.
 
 > <comment-title>1982???</comment-title>
-> Where did the `1982` come from? The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```. Then you can Inspect your resulting object and you'll see only 1982 genes. The following processing steps will use only the highly variable genes for their calculations, but I strongly suggest you keep even the nonvariable genes in (i.e., use the original output of your ```sc.pp.highly_variable_genes``` function with way more than 1982 genes!), as a general rule. This tutorial will not work at the end plotting stage if you only take forward the 1982 or 2000 (if you set a limit on it) highly variable genes.
+> Where did the `1982` come from? 
+> 
+> The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```, therefore: ```sc.pp.highly_variable_genes(output_h5ad, subset=True)```. This subsetting removes any nonvariable genes. 
+>
+> Then you can ```print(output_h5ad)``` and you'll see only 1982 genes. The following processing steps will use only the highly variable genes for their calculations, but depend on keeping all genes in the object. Thus, please use the original output of your ```sc.pp.highly_variable_genes``` function with far more than 1982 genes!, currently stored as ```scaled_data```.
 {: .comment}
 
 > <warning-title>Check your AnnData object!</warning-title>
-> Your AnnData object should have far more than 1982 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 1982 or 2000 output from your testing in the section above labelled '1982'.
+> Run ```print(scaled_data)```
+> Your AnnData object should have far more than 1982 genes in it (if you followed our settings and tool versions, you'd have a matrix 8605 × 15395 (cells x genes). Make sure to use that AnnData object output from FindVariableGenes, rather than the 1982 from your testing in the section above labelled '1982'.
 {: .warning}
 
 ```python
 pca_components = sc.tl.pca(scaled_data, n_comps=50, copy=True)
 ```
 
-Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Examine ```pca_components```.
+Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Let's visualise the variance of each principal component.
 
 ```python
 sc.pl.pca_variance_ratio(pca_components, n_pcs=50)
@@ -507,7 +508,7 @@ tsne_components = sc.tl.tsne(neighbours, use_rep='X_pca', perplexity=30, copy=Tr
 umap_components = sc.tl.umap(tsne_components, copy=True)
 ```
 
-Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
+{% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
 
 # Cell clusters & gene markers
 
@@ -529,9 +530,7 @@ Finally, let’s identify clusters! Unfortunately, it’s not as majestic as bio
 > Oh yes, yet another decision! Single cell analysis is sadly not straight forward.
 > - Control
 >      - **Resolution, high value for more and smaller clusters** = `0.6`
->      - **Clustering algorithm** = `Louvain`
 > - Everyone else: Pick your own number. If it helps, this sample should have a lot of very similar cells in it. It contains developing T-cells, so you aren't expecting massive differences between cells, like you would in, say, an entire embryo, with all sorts of unrelated cell types.
-> - Everyone else: Consider the newer **Leiden** clustering method. Note that in future parameters, you will likely need to specify 'leiden' rather than 'louvain', which is the default, if you choose this clustering method.
 {: .details}
 
 ```python
@@ -553,7 +552,7 @@ But we are also interested in differences across genotype, so let’s also check
 markers_genotype = sc.tl.rank_genes_groups(markers_cluster, groupby="genotype", method='t-test_overestim_var', n_genes=50, copy=True)
 ```
 
-**Note:** The function ```rank_genes_groups``` does not return a DataFrame that we can use but instead metadata about the marker table, so first we need to construct the marker table using this generated metadata, this is done using the following function however its not too important to understand what this code does!
+**Note:** The function ```rank_genes_groups``` does not return a DataFrame that we can use but instead metadata about the marker table, so first we need to construct the marker table using this generated metadata. This is done using the following function, however it's not too important to understand what this code does!
 
 ```python
 def generate_marker_table(adata):
@@ -620,7 +619,7 @@ display(genotype_markers_named.head(5))
 
 Well done! It’s time for the best bit, the plotting!
 
-# Ploting!
+# Plotting!
 
 It’s time! Let’s plot it all! But first, let’s pick some marker genes from the ```markers_cluster``` list that you made as well. I’ll be honest, in practice, you’d now be spending a lot of time looking up what each gene does (thank you google!). There are burgeoning automated-annotation tools, however, so long as you have a good reference (a well annotated dataset that you’ll use as the ideal). In the mean time, let’s do this the old-fashioned way, and just copy a bunch of the markers in the original paper.
 
@@ -657,7 +656,7 @@ sc.pl.embedding(
 )
 ```
 
-Congratulations! You now have plots galore!
+{% icon congratulations %} Congratulations! You now have plots galore!
 
 # Insights into the beyond
 
@@ -805,10 +804,32 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
-Congratulations! You have interpreted your plots in several important ways!
+{% icon congratulations %} Congratulations! You have interpreted your plots in several important ways!
+
+# Export your data, and notebook, and figures
+
+It’s now time to export your data! First, we need to get it Jupyter to see it as a file.
+
+```adata.write('markers_cluster_copy')```
+
+Now you can export it.
+
+```put("Trajectorythymus.h5ad")```
+
+To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
+
+```put("yourtitlehere.ipynb")```    
+
+Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
+
+```python
+put("figures/plotname.png")
+put("figures/plotname.png")
+put("figures/plotname.png")
+```
 
 # Conclusion
 
-Congratulations! You’ve made it to the end! You might find this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2">example control history</a> <a href="https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated">(updated version)</a> helpful to compare with, or this <a href="https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">workflow</a>.
+{% icon congratulations %} Congratulations! You’ve made it to the end! 
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
