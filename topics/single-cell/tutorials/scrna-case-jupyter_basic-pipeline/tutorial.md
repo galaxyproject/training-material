@@ -217,7 +217,7 @@ That’s a lot of information! Let’s attack this in sections and see what ques
 
 Now that we’ve assessed the differences in our samples, we will look at the libraries overall to identify appropriate thresholds for our analysis.
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: genes</question-title>
 >
 > What threshold should you set for `log1p_n_genes_by_counts`?
 > 1. Which plot(s) addresses this?
@@ -237,7 +237,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 >
 {: .question}
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: UMIs</question-title>
 >
 > What threshold should you set for `log1p_total_counts`?
 > 1. Which plot(s) addresses this?
@@ -255,7 +255,7 @@ Now that we’ve assessed the differences in our samples, we will look at the li
 >
 {: .question}
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: mito</question-title>
 >
 > What threshold should you set for `pct_counts_mito`?
 > 1. Which plot(s) addresses this?
@@ -286,7 +286,7 @@ It’s now time to apply these thresholds to our data! First, a reminder of how 
 > - Everyone else: Choose your own thresholds and compare results!
 {: .details}
 
-We will first plot the raw data before applying any filters so that we can see more clearly the changes we are making.
+We will plot the raw data before applying any filters so that we can see more clearly the changes we are making.
 
 ```python
 # Raw
