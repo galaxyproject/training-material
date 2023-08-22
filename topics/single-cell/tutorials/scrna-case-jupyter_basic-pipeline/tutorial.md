@@ -138,7 +138,7 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 ```python
 # Violin - genotype - log
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'])
+sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
 ```
  
   
