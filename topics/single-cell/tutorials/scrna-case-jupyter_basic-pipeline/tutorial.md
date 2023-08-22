@@ -579,7 +579,7 @@ def generate_marker_table(adata):
     # reorder columns
     res_df = res_df.reindex(columns=['cluster', 'rank', 'genes', 'scores', 'logfoldchanges', 'pvals', 'pvals_adj'])
     
-    # insert rest column
+    # insert ref column
     res_df.insert(2, 'ref', 'rest')
     
     return res_df
