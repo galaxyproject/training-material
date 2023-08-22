@@ -408,7 +408,7 @@ Using the final ```filtered_object```, we can summarise the results of our filte
 | Filter mito/cell   | 8605        | 35734 |
 | Filter cells/gene  | 8605        | 15395 |
 
-Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
+{% icon congratulations %} Congratulations! You have filtered your object! Now it should be a lot easier to analyse.
 
 # Processing
 
@@ -434,7 +434,7 @@ Next up, we’re going to scale our data so that all genes have the same varianc
 scaled_data = sc.pp.scale(output_h5ad, max_value=10.0, copy=True)
 ```
 
-Congratulations! You have processed your object!
+{% icon congratulations %} Congratulations! You have processed your object!
 
 > <comment-title></comment-title>
 > At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
@@ -503,7 +503,7 @@ tsne_components = sc.tl.tsne(neighbours, use_rep='X_pca', perplexity=30, copy=Tr
 umap_components = sc.tl.umap(tsne_components, copy=True)
 ```
 
-Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
+{% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
 
 # Cell clusters & gene markers
 
@@ -653,7 +653,7 @@ sc.pl.embedding(
 )
 ```
 
-Congratulations! You now have plots galore!
+{% icon congratulations %} Congratulations! You now have plots galore!
 
 # Insights into the beyond
 
@@ -801,10 +801,10 @@ Is our analysis real? Is it right? Well, we can assess that a little bit.
 
 Ultimately, there are quite a lot ways to analyse the data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population.
 
-Congratulations! You have interpreted your plots in several important ways!
+{% icon congratulations %} Congratulations! You have interpreted your plots in several important ways!
 
 # Conclusion
 
-Congratulations! You’ve made it to the end! You might find this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2">example control history</a> <a href="https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated">(updated version)</a> helpful to compare with, or this <a href="https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">workflow</a>.
+{% icon congratulations %} Congratulations! You’ve made it to the end! You might find this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2">example control history</a> <a href="https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated">(updated version)</a> helpful to compare with, or this <a href="https://usegalaxy.eu/u/j.jakiela/w/copy-of-filter-plot-and-explore-single-cell-rna-seq-data-imported-from-uploaded-file-3">workflow</a>.
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
