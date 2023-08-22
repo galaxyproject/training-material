@@ -530,9 +530,7 @@ Finally, let’s identify clusters! Unfortunately, it’s not as majestic as bio
 > Oh yes, yet another decision! Single cell analysis is sadly not straight forward.
 > - Control
 >      - **Resolution, high value for more and smaller clusters** = `0.6`
->      - **Clustering algorithm** = `Louvain`
 > - Everyone else: Pick your own number. If it helps, this sample should have a lot of very similar cells in it. It contains developing T-cells, so you aren't expecting massive differences between cells, like you would in, say, an entire embryo, with all sorts of unrelated cell types.
-> - Everyone else: Consider the newer **Leiden** clustering method. Note that in future parameters, you will likely need to specify 'leiden' rather than 'louvain', which is the default, if you choose this clustering method.
 {: .details}
 
 ```python
