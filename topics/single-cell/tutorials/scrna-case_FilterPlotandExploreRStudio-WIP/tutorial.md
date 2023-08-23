@@ -528,7 +528,7 @@ We can also see which genes are differentially expressed across other variables 
 
 ```r
 metadata<-as.data.frame(filtered_srt@meta.data)
-filtered_srt<-SetIdent(objects = filtered_srt, value = "genotype")
+filtered_srt<-SetIdent(object = filtered_srt, value = "Genotype")
 ```
 
 The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line of code above will set the object's identity class to be the genotype from which the cell came from. 
