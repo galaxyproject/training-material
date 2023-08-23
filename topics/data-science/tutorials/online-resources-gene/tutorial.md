@@ -20,10 +20,8 @@ key_points:
 - You can further explore the resources included in this tutorial to learn more about the gene-associated conditions and the variants.
 - You can input a FASTA file containing a sequence of interest for BLAST searches.
 contributors:
-  autorship:
-    - lisanna
-  funding:
-    - biont
+  - lisanna
+  - biont
 ---
 
 This tutorial is a bit atypical: we will not work in Galaxy but mostly outside of it, navigating databases and tools through their own web interfaces. The scope of this tutorial is to illustrate several sources of biological data in different file formats, and representing different information.

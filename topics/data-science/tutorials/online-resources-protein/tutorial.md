@@ -4,16 +4,27 @@ title: One protein along the UniProt page
 level: Introductory
 zenodo_link: ''
 questions:
-- 
-- 
-- .
+- How can you search for proteins using text, gene, or protein names?
+- How do you interpret the information at the top of the UniProt entry page?
+- What types of information can you expect from different download formats, such as FASTA and JSON?
+- How is the function of a protein like opsins described in the "Function" section?
+- What structured information is found in the "Names and Taxonomy",  "Subcellular location", "Disease & Variants", "PTM/Processing" sections?
+- How to learn about the protein expression, interactions, structure, family, sequence and similar proteins?
+- How do the "Variant viewer" and "Feature viewer" tabs assist in mapping protein information along the sequence?
+- What does the "Publications" tab list, and how can you filter publications?
+- What is the significance of tracking entry annotation changes over time?
 objectives:
-- 
+- By exploring protein entries, understanding how to interpret protein function, taxonomy, structure, interactions, variants, and more. 
+- The tutorial covers topics such as using unique identifiers, downloading protein data, analyzing sequence features, and exploring external resources. 
 time_estimation: 1H
 key_points:
-- 
+  - How to navigate UniProtKB entries, accessing comprehensive details about proteins, such as their functions, taxonomy, and interactions
+  - The Variant and Feature viewer are your tools to visually explore protein variants, domains, modifications, and other key sequence features.
+  - Expand your understanding by utilizing external links to cross-reference data and uncover complex relationships. 
+  - Explore the History tab for access to previous versions of entry annotations.
 contributors:
-- lisanna
+  - lisanna
+  - biont
 ---
 
 This tutorial is a bit atypical: we will not work in Galaxy but outside of it, in the [UniProt](uniprot.org) database pages.
@@ -35,7 +46,7 @@ That is our target, `P04000 · OPSR_HUMAN`. Before opening the page, two things 
 
 Click on the entry link. 
 
-![UniProt page](/uploads/upload_c03d17ad4be39b85f0156b1049ec7b81.png "UniProt page")
+![Screenshot of the UniProt entry page header](../../images/online-resources/UniProt.png "UniProt page")
 
 To navigate this long page, the menu (navigation bar) on the left will be extremely useful. Just from it, we understand that this database contains information about the entry on: the know functions, the taxonomy, the location, variants and associated diseases, Post Translational Modification (PTMs), the expression, the interactions, the structure, the domains and their classification, the sequences and finally similar proteins. All this information is reviewed (remember the gold star label, indicating that this protein lives in the manually annotated SwissProt database). The navigation bar stays in the same place on the screen as you move up and down in an entry, so that you can quickly navigate to sections of interest. We will consult all the mentioned sections separately, but let's first focus on the headers on the left. 
 
@@ -191,7 +202,7 @@ Finally, let's have a quick look at the other tabs. The `Publications` one lists
 
 The `External links` tab puts together all the references to external databases and resources of information that we found in each Entry page section. The links text often reports the unique identifiers that represent the same biological entity in other databases. To get a feeling of this compexity, check the following image (that is already partially outdated).
 
-![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](/uploads/upload_7b636ae3522c9fbbae5ec026ea3fc774.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram ([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php))")
+![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](../../images/online-resources/complexDB.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram ([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php))")
 
 Finally, the `History` tab is also an interesting one. It reports and makes available for download all the previous versions of this entry annotations, that is: all the "evolution" of its annotation, in this case dating back to 1988. 
 
@@ -205,13 +216,3 @@ Finally, the `History` tab is also an interesting one. It reports and makes avai
 > >
 > {: .solution}
 {: .question}
-
-
-
-
-
-
-
-
-
-
