@@ -138,33 +138,64 @@ We want to filter our cells, but first we need to know what our data looks like.
 
 ```python
 # Violin - genotype - log
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
+sc.pl.violin(
+  adata, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='genotype', 
+  save='-genotype-log.png'
+)
 ```
  
   
 ```python
 # Violin - sex - log
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='sex')
+sc.pl.violin(
+  adata, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='sex', 
+  save='-sex-log.png'
+)
 ```
 
 ```python
 # Violin - batch - log
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='batch')
+sc.pl.violin(
+  adata, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='batch', 
+  save='-batch-log.png'
+)
 ```
 
 ```python
 # Scatter - mito x UMIs
-sc.pl.scatter(adata, x='log1p_total_counts', y='pct_counts_mito')
+sc.pl.scatter(
+  adata, 
+  x='log1p_total_counts', 
+  y='pct_counts_mito', 
+  save='-mitoxUMIs.png'
+)
 ```
 
 ```python
 # Scatter - mito x genes
-sc.pl.scatter(adata, x='log1p_n_genes_by_counts', y='pct_counts_mito')
+sc.pl.scatter(
+  adata, 
+  x='log1p_n_genes_by_counts', 
+  y='pct_counts_mito', 
+  save='-mitoxgenes.png'
+)
 ```
 
 ```python
 # Scatter - genes x UMIs
-sc.pl.scatter(adata, x='log1p_total_counts', y='log1p_n_genes_by_counts', color='pct_counts_mito')
+sc.pl.scatter(
+  adata, 
+  x='log1p_total_counts', 
+  y='log1p_n_genes_by_counts', 
+  color='pct_counts_mito', 
+  save='-genesxUMIs.png'
+)
 ```
 
 ## Analysing the plots
@@ -290,7 +321,12 @@ We will plot the raw data before applying any filters so that we can more clearl
 
 ```python
 # Raw
-sc.pl.violin(adata, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
+sc.pl.violin(
+  adata, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='genotype', 
+  save='-raw.png'
+)
 ```
 
 ```python
@@ -298,7 +334,12 @@ genes_filtered_obj = adata[adata.obs['log1p_n_genes_by_counts'] >= 5.7]
 genes_filtered_obj = genes_filtered_obj[genes_filtered_obj.obs['log1p_n_genes_by_counts'] <= 20.0]
 
 # Violin - Filterbygenes
-sc.pl.violin(genes_filtered_obj, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
+sc.pl.violin(
+  genes_filtered_obj, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='genotype', 
+  save='-Filterbygenes.png'
+)
 ```
 
 ```python
@@ -326,7 +367,12 @@ counts_filtered_obj = genes_filtered_obj[genes_filtered_obj.obs['log1p_total_cou
 counts_filtered_obj = counts_filtered_obj[counts_filtered_obj.obs['log1p_total_counts'] <= 20.0]
 
 # Violin - Filterbycounts
-sc.pl.violin(counts_filtered_obj, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
+sc.pl.violin(
+  counts_filtered_obj, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='genotype',
+  save='-Filterbycounts.png'
+)
 ```
 
 ```python
@@ -353,7 +399,12 @@ mito_filtered_obj = counts_filtered_obj[counts_filtered_obj.obs['pct_counts_mito
 mito_filtered_obj = mito_filtered_obj[mito_filtered_obj.obs['pct_counts_mito'] <= 4.5]
 
 # Violin - Filterbymito
-sc.pl.violin(mito_filtered_obj, keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], groupby='genotype')
+sc.pl.violin(
+  mito_filtered_obj, 
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  groupby='genotype',
+  save='-Filterbymito.png'
+)
 ```
 
 ```python
@@ -468,7 +519,7 @@ pca_components = sc.tl.pca(scaled_data, n_comps=50, copy=True)
 Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Let's visualise the variance of each principal component.
 
 ```python
-sc.pl.pca_variance_ratio(pca_components, n_pcs=50)
+sc.pl.pca_variance_ratio(pca_components, n_pcs=50, save='-variance-ratio.png')
 ```
 
 ![Variance ratio](../../images/scrna-casestudy-jupyter/pca-variance.png "Variance ratio")
@@ -632,7 +683,8 @@ sc.pl.embedding(
     basis='pca',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
-    use_raw=False
+    use_raw=False,
+    save='.png'
 )
 ```
 
@@ -643,7 +695,8 @@ sc.pl.embedding(
     basis='tsne',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
-    use_raw=False
+    use_raw=False,
+    save='.png'
 )
 ```
 
@@ -654,7 +707,8 @@ sc.pl.embedding(
     basis='umap',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
-    use_raw=False
+    use_raw=False,
+    save='.png'
 )
 ```
 
@@ -717,7 +771,8 @@ sc.pl.embedding(
     basis='umap',  
     color=['cell_type','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1','log1p_total_counts'],
     gene_symbols='Symbol',
-    use_raw=False
+    use_raw=False,
+    save='-annotated.png'
 )
 ```
 
