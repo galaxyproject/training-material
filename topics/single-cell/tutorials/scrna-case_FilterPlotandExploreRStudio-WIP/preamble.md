@@ -26,7 +26,7 @@ To start, let's get our dataset loaded into Galaxy.
 
 > <hands-on-title>GetData</hands-on-title>
 > Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
-> - *"SC-Atlas experiment accession"*: 'E-MTAB-6945'
+> - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 > - *"Choose the type of matrix to download"*: 'Raw filtered counts'
 {: .hands_on}
 
