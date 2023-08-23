@@ -220,15 +220,13 @@ Points to consider when handling data access requests:
 - involve the institution's legal team 
   - terms and conditions of use of data and/or samples
   - publication guidelines
-  - 
 - standardise the process with a Data Access Request Form
 
 An example of a data access process is shown below
 ![DataAccessProcess](../../images/DataAccessProcess.png "")
 
-[To do: upload example Data access request form to Zenodo and add link (check Sharepoint for authorship guidelines)]
 This is an example of a data and sample access request form and contracts associated with data and samples
-
+[To do: upload example Data access request form to Zenodo and add link (check Sharepoint for authorship guidelines)]
 
 In the UK, the HDRUK Innovation Gateway may also be a way to manage the data access request process. 
 
