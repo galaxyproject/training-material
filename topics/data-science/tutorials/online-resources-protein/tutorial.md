@@ -33,6 +33,8 @@ This tutorial is designed to be the continuation of the tutorial "One gene acros
 
 # The UniProtKB Entry page
 
+
+
 The portal to visit to obtain all information about a protein is [UniProtKB](https://www.uniprot.org/). We can search it using a text search, or the gene or protein name. 
 
 Let's try first a set of generic keywords, like `Human opsin`. This leads to 410 results (at the time of preparation of this tutorial), and provides us the feeling that we need to be more specific (although - spoiler - our actual target is among the first hits). 
