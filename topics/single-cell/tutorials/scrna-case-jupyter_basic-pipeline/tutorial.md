@@ -865,7 +865,7 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 # Export your data, and notebook, and figures
 
-It’s now time to export your data! First, we need to get it Jupyter to see it as a file.
+It’s now time to export your data! First, we need to get Jupyter to see it as a file.
 
 ```adata.write('markers_cluster_copy')```
 
