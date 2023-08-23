@@ -3,7 +3,7 @@
 You’ve previously done all the work to make a single cell matrix. Now it’s time to fully process our data using Seurat: remove low quality cells, reduce the many dimensions of data that make it difficult to work with, and ultimately try to define clusters and find some biological meaning and insights! There are many packages for analysing single cell data - Seurat (Satija et al. 2015), Scanpy (Wolf et al. 2018), Monocle (Trapnell et al. 2014), Scater (McCarthy et al. 2017), and many more. We’re working with Seurat in RStudio because it is well updated, broadly used, and highly trusted within the field of bioinformatics.
 
 > <comment-title></comment-title>
-> This tutorial is significantly based on the [Seurat documentation](https://satijalab.com/seurat) as well as [Seurat's Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html).
+> This tutorial is significantly based on the [Seurat documentation](https://satijalab.org/seurat) as well as [Seurat's Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html).
 {: .comment}
 
 We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
