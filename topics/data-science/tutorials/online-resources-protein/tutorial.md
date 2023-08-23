@@ -208,7 +208,6 @@ The `External links` tab puts together all the references to external databases 
 
 Finally, the `History` tab is also an interesting one. It reports and makes available for download all the previous versions of this entry annotations, that is: all the "evolution" of its annotation, in this case dating back to 1988. 
 
-
 > <question-title></question-title>
 >
 > Was this entry ever not manually annotated?
