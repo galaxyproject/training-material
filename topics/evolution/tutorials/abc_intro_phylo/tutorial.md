@@ -98,18 +98,32 @@ This tutorial has the following structure:
 - Maximum Likelihood with IQTree
 
 
-## Motivation
-
-There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species
+## What is a Phylogeny?
 
 ![IThink](./images/Darwin_tree.png){:width="400"}
 
-**needs a reference**
+<!-- **needs a reference** -->
 
-all birds...
+A **phylogenetic tree*, also called a _phylogeny_, is most often a tree-like structure, like Darwin's famous sketch reproduced above, in which the tips of the diagram represent extant (that is, living/existing) taxonomic entities like species, or genera, or strains (in general called "taxa"), and the lines connecting them together describe the evolutionary relationships between them.
+The connections between those lines within the figure above correspond to hypothetical ancestral taxa: they're representing branching events when species split into two new species, or a strain developed a phylogenetic important offshoot strain, etc.
 
-![AllBirds](./images/nature11631-f2.jpg){:width="400"}
-(from from Jetz *et al.* 2012, Nature (491):444–448)
+Through the SARS-Cov2 pandemic, we have all probably seen a phylogenetic tree of strains, showing how they have branched from each other over time.
+
+The phylogeny of a group of taxa is the best representation of their evolutionary relationships.
+As such it is also the main basis on which we can build statistics comparing species: without the phylogeny, comparing species (or strains, genera, etc.) is not meaningful.  
+As Theodosius Dobzhansky famously wrote, **Nothing in Biology Makes Sense Except in the Light of Evolution**.
+
+
+## Motivation
+
+There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species above, 
+to...
+
+<!-- all birds... -->
+
+![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width=600}
+<!-- ![AllBirds](./images/nature11631-f2.jpg){:width="400"}
+(from from Jetz *et al.* 2012, Nature (491):444–448) -->
 
 and much bigger projects across all of life:
 
