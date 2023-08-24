@@ -59,7 +59,7 @@ You have two options for running the code in this tutorial, you can either downl
 
 > <hands-on-title>Option 1: Importing notebook from file</hands-on-title>
 >
-> 1. Download the [notebook](% link topics/single-cell/tutorials/scrna-case_basic-pipeline/single-cell-scrna-case-jupyter_basic-pipeline.ipynb) from the {% icon external-link %} **Supporting Materials** section in the overview box
+> 1. Download the notebook from the {% icon external-link %} **Supporting Materials** section in the overview box
 >
 > 2. Click the {% icon galaxy-upload %} **Upload Files** button in JupyterLab
 >
