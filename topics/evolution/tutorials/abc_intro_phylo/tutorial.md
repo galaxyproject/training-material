@@ -140,7 +140,7 @@ Aside from fundamental understanding, there are other strong motivators for infe
 
 > <comment-title>Gene trees, species trees</comment-title>
 > 
-> It's worth noting that getting the phylogeny from a set of genes -- what we often call a *gene tree* -- might *not* > give us the phylogeny of the species that house those genes, *even if we get everything right!*
+> It's worth noting that getting the phylogeny from a set of genes -- what we often call a **gene tree** -- might *not* > give us the phylogeny of the species that house those genes, *even if we get everything right!*
 >
 > This happens because there are other processes that can lead to the so-called "gene tree" not being the same as the species tree:
 >	- lateral gene transfer events
@@ -186,7 +186,7 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
 > 
 > 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
-> 3. The *Molecular clock* assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
+> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
 > 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 >
 > We will (mostly) make *all* these assumptions in this tutorial!
@@ -202,24 +202,24 @@ We need to define some terms, which may be new to you.
 
 **how to get a figure label on this? Call it Fig 1. Tree Anatomy**
 
-Mathematically a *Tree* is a kind of *graph*, which has objects called *nodes* or *vertices*, connected in pairs by things called *edges*.  
-Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to *taxa*, and the edges, also called *branches*, show the relationships between them. 
+Mathematically a **Tree** is a kind of **graph**, which has objects called **nodes** or **vertices**, connected in pairs by things called **edges**.  
+Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to **taxa**, and the edges, also called **branches**, show the relationships between them. 
 Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
-Nodes that only have one edge attached to them are called *leaves* (or *tips*), and these correspond to taxa with no descendant taxa in the tree. 
-These taxa might be from fossils, or be currently living, in which case they're referred to as *extant*.
+Nodes that only have one edge attached to them are called **leaves** (or **tips**), and these correspond to taxa with no descendant taxa in the tree. 
+These taxa might be from fossils, or be currently living, in which case they're referred to as **extant**.
 
-It's common to call *phylogenetic tree* just a *phylogeny*.
+It's common to call **phylogenetic tree** just a **phylogeny**.
 
-Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the *root*.
+Many phylogenies have a special node assigned as the common ancestor of all the taxa represented by the leaves in the tree, and this node is called the **root**.
 If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
-Such trees and phylogenies are called *rooted*; if there is no such root then they are called *unrooted*. 
+Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
 
-In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade* (or often just "*clade*"). 
+In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade** (or often just "**clade**"). 
 (Monophyletic means "one tribe (of) origin" from the Greek.)
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
-The tree above is called a *binary* tree, because each internal node branches into *two* descendants.
+The tree above is called a **binary tree**, because each internal node branches into *two* descendants.
 It is a very common assumption that our trees will be binary, and we will make that assumption here.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
 In this tutorial we will only be considering trees that are binary.
 
@@ -423,11 +423,11 @@ It won't take very long for FastTree to build your tree.
 But when it's done, how can you see it?
 
 Clicking on the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
-This is *Newick Format*, and it's worth knowing at least a little of what it means.  
+This is **Newick Format**, and it's worth knowing at least a little of what it means.  
 
-* Each matched pair of parentheses denotes a *cluster* or *subtree*: such as "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
-* A number after such a cluster (so, after a closing parenthesis) is a *label* for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
-* If there is a colon ':' followed by a number, then this is the *branch length* for the subtree.
+* Each matched pair of parentheses denotes a **cluster** or **subtree**: such as "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
+* A number after such a cluster (so, after a closing parenthesis) is a **label** for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
+* If there is a colon ':' followed by a number, then this is the **branch length** for the subtree.
 
 
 ![NewickExplained](./images/NewickExplained.png){:align="center"}
