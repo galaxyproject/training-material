@@ -871,7 +871,7 @@ It’s now time to export your data! First, we need to get Jupyter to see it as 
 
 Now you can export it.
 
-```put("Trajectorythymus.h5ad")```
+```put("MarkersCluster.h5ad")```
 
 To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
 
