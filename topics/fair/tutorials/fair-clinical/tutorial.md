@@ -7,6 +7,7 @@ zenodo_link: ''
 questions:
 - Why make clinical data FAIR?
 - How to make clinical data FAIR?
+- test
 objectives:
 - Learn how to make clinical datasets FAIR
 - Recognise why FAIR datasets are important
