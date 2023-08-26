@@ -89,9 +89,7 @@ Here are several ways of getting our toy dataset – choose whichever you like!
 >
 > 1. Create a new history for this tutorial
 >
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) 
 >
 >    ```
 >    {{ page.zenodo_link }}/files/Scanpy_RunPCA_AnnData_object.h5ad
@@ -99,7 +97,6 @@ Here are several ways of getting our toy dataset – choose whichever you like!
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the dataset if you wish: `Scanpy RunPCA: AnnData object`
 >
@@ -425,10 +422,6 @@ That’s the last tool in our workflow which uses Parameter Iterator! Let’s ha
 - It may happen that some of the values you choose will give an error, but some will work fine. In that case, you can use {% icon tool %} **Filter failed datasets** tool to remove datasets with errors from a collection. 
 
 - If you still haven’t found an answer that would help you with the parameter iteration in your own analysis, check out [another workflow](https://usegalaxy.eu/published/workflow?id=8f677efac7100097) which has some extra steps, not directly related to our analysis. But it might contain steps that would be helpful for you. 
-
-> <comment-title></comment-title>
-> If you feel confident both with your data and with the Galaxy tools, you can try to accelerate the process and plot the results of parameter iteration before proceeding to the next step (if that’s possible, oftentimes you would have to run the next tool to get sensible results). Then you can select one dataset from the collection even before running the next tool supported by another Parameter Iterator.
-{: .comment}
 
 
 # Conclusion
