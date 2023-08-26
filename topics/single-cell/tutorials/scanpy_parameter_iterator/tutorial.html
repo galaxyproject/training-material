@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@e63a214f754f0bdcd84a0a4c527df552544d8f2d",
+  release: "galaxy-training-network@42cfbbba2cc67c86521a90928b9fefb252cac36d",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1693008627' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1693008627' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1693083216' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1693083216' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Scanpy Parameter Iterator">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-10 08:02:35 +0000">
+<meta name="DC.date" content="2023-08-26 20:17:45 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-06-10 08:02:35 +0000",
+  "dateModified": "2023-08-26 20:17:45 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Scanpy Parameter Iterator",
   "interactivityType": "mixed",
@@ -149,10 +149,10 @@ Sentry.init({
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'Scanpy Parameter Iterator' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html",
-  "timeRequired": "PT1H",
-  "teaches": "Get familiar with Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Become confident in working on dataset collections\n - Compare the plots resulting from different parameters values",
-  "keywords": "single-cell, single-cell, tips&tricks, parameter-iterator",
-  "description": "The questions this  addresses are:\n - How can I run a tool with multiple parameter values?\n - Do I have to enter the parameter values manually each time when I want to check a new value?\n - What tools can take multiple values at once and iterate over them?\n\n\nThe objectives are:\n - Get familiar with Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Become confident in working on dataset collections\n - Compare the plots resulting from different parameters values\n\n",
+  "timeRequired": "PT2H",
+  "teaches": "Execute the Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Operate tools working on dataset collections\n - Compare plots resulting from different parameters values",
+  "keywords": "single-cell, single-cell, tips&tricks",
+  "description": "The questions this  addresses are:\n - How can I run a tool with multiple parameter values?\n - Do I have to enter parameter values manually each time I want to check a new value?\n - What tools can take multiple values at once and iterate over them?\n\n\nThe objectives are:\n - Execute the Scanpy Parameter Iterator\n - Recognise what tools you can use Parameter Iterator with\n - Operate tools working on dataset collections\n - Compare plots resulting from different parameters values\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -258,10 +258,6 @@ Sentry.init({
     {
       "@type": "Thing",
       "name": "tips&tricks"
-    },
-    {
-      "@type": "Thing",
-      "name": "parameter-iterator"
     }
   ],
   "abstract": "# Introduction"
@@ -270,7 +266,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1693008627'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1693083216'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -469,6 +465,12 @@ Sentry.init({
 	
 
 	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Avatar" width="36" height="36">Wendi Bacon</a></td>
+	</tr>
+	
 
 	
 
@@ -492,7 +494,7 @@ Sentry.init({
         <li><p>How can I run a tool with multiple parameter values?</p>
 </li>
         
-        <li><p>Do I have to enter the parameter values manually each time when I want to check a new value?</p>
+        <li><p>Do I have to enter parameter values manually each time I want to check a new value?</p>
 </li>
         
         <li><p>What tools can take multiple values at once and iterate over them?</p>
@@ -503,16 +505,16 @@ Sentry.init({
         <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
         <ul>
         
-        <li><p>Get familiar with Scanpy Parameter Iterator</p>
+        <li><p>Execute the Scanpy Parameter Iterator</p>
 </li>
         
         <li><p>Recognise what tools you can use Parameter Iterator with</p>
 </li>
         
-        <li><p>Become confident in working on dataset collections</p>
+        <li><p>Operate tools working on dataset collections</p>
 </li>
         
-        <li><p>Compare the plots resulting from different parameters values</p>
+        <li><p>Compare plots resulting from different parameters values</p>
 </li>
         
         </ul>
@@ -722,7 +724,7 @@ Sentry.init({
         
 
         
-        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
         
 
         
@@ -793,7 +795,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 10, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 26, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -818,9 +820,11 @@ Sentry.init({
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
-<p>The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us interpret the biology behind. However, it’s not always so straightforward – each tool has various parameters so eventually, we might end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information. 
-Since there is a vast number of values that we can specify in the tools, how can we know if the values we choose are the most optimal ones or at least good enough? Well, we can use different values and then compare the outputs to see which is consistent with our understanding of the underlying biology. 
-And here the Parameter Iterator comes in – it allows to run the analysis using different variables quickly and easily. Now you don’t have to execute your workflow every time you change one value to compare the output. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values at one go.</p>
+<p>The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us investigate biology. However, analysis is not always straightforward – each tool has various parameters to select. Eventually, we can end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data, then make sure your analysis shows that, for you to then be able to identify the 25% new information.</p>
+
+<p>Given the vast array of values that we can specify in the tool parameters, how can we know if the values we choose are the most optimal ones - or at least good enough? Well, we can try different values in our workflow and then compare the outputs to see which is consistent with our understanding of the underlying biology. But can we do this efficiently, at scale, to test multiple values?</p>
+
+<p>And here the Parameter Iterator comes in – it allows us to test different variables quickly and easily. This tutorial will show you how to use Parameter Iterator to generate multiple outputs with different parameter values in one go.</p>
 
 <!--SNIPPET-->
 <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using tutorial mode<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
@@ -876,19 +880,13 @@ And here the Parameter Iterator comes in – it allows to run the analysis using
       <p>Create a new history for this tutorial</p>
     </li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/8011681">Zenodo</a> or from
-the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">single-cell</code>
- -&gt; <code class="language-plaintext highlighter-rouge">Scanpy Parameter Iterator</code>):</p>
+      <p>Import the files from <a href="https://zenodo.org/record/8011681">Zenodo</a></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/8011681/files/Scanpy_RunPCA_AnnData_object.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing data from a data library<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
@@ -936,14 +934,14 @@ For the detailed explanation of the tools presented above, check out <a href="/t
 
 <h1 id="number-of-neighbours-to-derive-knn-graph-for-scanpy-computegraph-tool">Number of neighbours to derive kNN graph (for <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
 
-<p>Our dataset is right after PCA. Therefore we will now use <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to derive kNN graph. We can use Parameter Iterator to check how different values of the number of neighbours affect the final outcome. It is important that <strong>n-neighbours is an integer</strong>.</p>
+<p>We will now use <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to derive the k-nearest neighbour (kNN) graph from our PCA values. We can use the Parameter Iterator to check how the different k values of nearest neighbours will affect the final outcome. It is important that <strong>k neighbours is an integer</strong>.</p>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-float-vs-integer"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Float vs integer</div>
-  <p>Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Therefore in this case you have to use ‘List of all parameter values to be iterated’ with your chosen values.</p>
+  <p>Using ‘Step increase values to be iterated’ as the format of the input values automatically generates float values instead of integers. Float, or floating point numbers, are values with a ‘floating’ decimal point. To avoid float values, you must use ‘List of all parameter values to be iterated’ as your chosen values.</p>
 </blockquote>
 
-<p>k-nearest neighbor (kNN) graph will be needed for plotting a UMAP. From <a href="https://github.com/lmcinnes/umap">UMAP developers</a>: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!</p>
+<p>The kNN graph will be needed for plotting a UMAP. According to the <a href="https://github.com/lmcinnes/umap">UMAP developers</a>: “Larger neighbor values will result in more global structure being preserved at the loss of detailed local structure. In general this parameter should often be in the range 5 to 50, with a choice of 10 to 15 being a sensible default”. Therefore, let’s pick some values bigger and smaller than 15 to check how it changes the final UMAP. This is where the Parameter Iterator comes in!</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
@@ -957,7 +955,7 @@ For the detailed explanation of the tools presented above, check out <a href="/t
       </ul>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - n-neighbours</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - n-neighbours</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
     </li>
     <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
       <ul>
@@ -994,14 +992,20 @@ For the detailed explanation of the tools presented above, check out <a href="/t
         <li><em>“Number of PCs to use”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
       </ul>
     </li>
-    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Scanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</li>
   </ol>
 
 </blockquote>
 
 <p>You should now see the output is also a collection. If you click on that, you will see Anndata files, differing only by the n-neighbour value.</p>
 
-<p>Now you have two options: either pick one of the generated output files and proceed to the next tool with another parameter iteration or continue with the current collection of datasets. We choose the second option as only then you will be able to see the effect of using different n-neighbours values. However, the disadvantage of this option is that you have to come up with one value for the subsequent parameters in the workflow to see the changes in the final plots.</p>
+<p>Now you have two options, either:</p>
+<ul>
+  <li>pick one of the generated output files and proceed to the next tool with another parameter iteration; or</li>
+  <li>continue with the current collection of datasets.</li>
+</ul>
+
+<p>We choose the second option as only then you will be able to see the effect of using different nearest neighbour values. However, the disadvantage of this option is that you have to select only one value for the subsequent parameters in the workflow in order to see the changes in the final plots.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-why-only-one-parameter-iteration-at-a-time"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why only one Parameter Iteration at a time?</div>
@@ -1009,7 +1013,7 @@ For the detailed explanation of the tools presented above, check out <a href="/t
 </blockquote>
 
 <p>Where are we now in our workflow?</p>
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_n-neighbours.png" alt="Image showing the step we are at: after Scanpy RunPCA, already run Scanpy ComputeGraph, and before Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed. " width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> We used Parameter Iterator for the n-neighbours to derive kNN graph, now we’ll complete our small workflow to see the differences at the end.</figcaption></figure>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_n-neighbours.png" alt="Image showing the step we are at: after Scanpy RunPCA, already run Scanpy ComputeGraph, and before Scanpy RunTSNE, Scanpy RunUMAP, Scanpy FindCluster, Scanpy PlotEmbed. " width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> We used the Parameter Iterator for the k nearest neighbours to derive the kNN graph. Now we’ll complete our small workflow to see the differences at the end.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-complete-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Complete the workflow</div>
@@ -1025,7 +1029,7 @@ For the detailed explanation of the tools presented above, check out <a href="/t
     </li>
   </ol>
 
-  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9" title="Scanpy RunUMAP tool" aria-role="link"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy9</span></span> with the following parameters:
@@ -1036,7 +1040,7 @@ For the detailed explanation of the tools presented above, check out <a href="/t
     </li>
   </ol>
 
-  <p>2A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+  <p>2A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9</span></span> with the following parameters:
@@ -1048,11 +1052,11 @@ For the detailed explanation of the tools presented above, check out <a href="/t
     </li>
   </ol>
 
-  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (n-neighbours)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
 
 </blockquote>
 
-<p>In fact, the differences will be only seen in the UMAP embedding, so we’ll plot only them. However, when you run your own analysis, you might want to check if there aren’t any changes in other embeddings as well.</p>
+<p>The differences will only appear in the UMAP embedding, so we’ll plot only them. However, when you run your own analysis, you might want to check if there are changes in other embeddings as well.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plot-umap-embedding"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Plot UMAP embedding</div>
@@ -1072,11 +1076,13 @@ For the detailed explanation of the tools presented above, check out <a href="/t
 
 <p>If you click on the resulting collection you will see several plots. Click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to see how they differ. Galaxy’s <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden">galaxy-scratchbook</span> Window Manager, which you can enable (and disable again) from the menu bar can be very helpful for comparing multiple datasets.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/n_neighbours.png" alt="Eight graphs showing the differences between UMAP embeddings caused by different values of n-neighbours." width="2348" height="1164" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Comparison of UMAP embedding with different values of n-neighbours, perplexity set to 30 and resolution to 0.6.</figcaption></figure>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/n_neighbours.png" alt="Eight graphs showing the differences between UMAP embeddings caused by different values of k nearest neighbours." width="2348" height="1164" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Comparison of UMAP embedding with different values of k nearest neighbours, perplexity set to 30 and resolution to 0.6.</figcaption></figure>
 
-<p>If you compare the UMAP graphs, you can see the differences that were caused by changing the value of n-neighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis. 
-We will go forward with n-neighbour value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
-Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon). You can bring each individual dataset to the visible and active datasets by clicking <em>Unhide</em>.</p>
+<p>If you compare the UMAP graphs, you can see the differences that were caused by changing the value of k nearestneighbours. Relying on your biological knowledge, you can now choose which parameter value works best and use it for further analysis.</p>
+
+<p>We will go forward with k value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15?</p>
+
+<p>Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on <em>Show hidden</em> (crossed eye <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon). You can bring each individual dataset to the visible and active datasets by clicking <em>Unhide</em>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-unhide-the-dataset-of-interest"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Unhide the dataset of interest</div>
@@ -1091,9 +1097,9 @@ Here is the answer: The datasets that are included in the collections can be acc
 <h1 id="perplexity-for-scanpy-runtsne-tool">Perplexity (for <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
 
 <p>Let’s have another look at our wee workflow.</p>
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png" alt="Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with perplexity parameter.</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_perplexity.png" alt="Image showing the step we are at: after Scanpy RunPCA and Scanpy ComputeGraph from which we will take one dataset to pass on to Scanpy RunTSNE with Parameter Iterator." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> We will take one dataset from the Scanpy ComputeGraph as the input to Scanpy RunTSNE and use the Parameter Iterator with the perplexity parameter.</figcaption></figure>
 
-<p>The next tool in our workflow is Scanpy RunTSNE which takes the parameter perplexity. Even though the tool description says that this value should be an integer, we tested it with floats as well and it works well, so you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run Parameter Iterator again.</p>
+<p>The next tool in our workflow is Scanpy RunTSNE, which contains the perplexity parameter. Although the tool description says that this value should be an integer, we tested it with float values and it works. Therefore, you can use ‘Step increase values to be iterated’. Keep in mind that perplexity should take values between 5 and 50. Let’s run the Parameter Iterator again.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
@@ -1109,7 +1115,7 @@ Here is the answer: The datasets that are included in the collections can be acc
       </ul>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - perplexity</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - perplexity</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
     </li>
     <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
       <ul>
@@ -1142,12 +1148,12 @@ Here is the answer: The datasets that are included in the collections can be acc
         </li>
       </ul>
     </li>
-    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunTSNE on collection X: tSNE object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</li>
   </ol>
 
 </blockquote>
 
-<p>Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the plots to choose the best value for further analysis.</p>
+<p>Changing the value of perplexity will only affect the tSNE graphs, so we can complete the workflow and compare the tSNE plots to choose the best value for further analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-complete-the-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Complete the workflow</div>
@@ -1160,7 +1166,7 @@ Here is the answer: The datasets that are included in the collections can be acc
     </li>
   </ol>
 
-  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+  <p>1A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy RunUMAP on collection X: UMAP object AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy9</span></span> with the following parameters:
@@ -1172,7 +1178,7 @@ Here is the answer: The datasets that are included in the collections can be acc
     </li>
   </ol>
 
-  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+  <p>3A. <strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (perplexity)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
 
 </blockquote>
 
@@ -1198,14 +1204,14 @@ Here is the answer: The datasets that are included in the collections can be acc
 </blockquote>
 
 <p>Can you see those differences?</p>
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/perplexity.png" alt="Graphs showing the differences between tSNE embeddings caused by different values of perplexity." width="2338" height="1170" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Comparison of tSNE  embedding with different values of perplexity, n-neighbours set to 15 and resolution to 0.6.</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/perplexity.png" alt="Graphs showing the differences between tSNE embeddings caused by different values of perplexity." width="2338" height="1170" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Comparison of tSNE  embedding with different values of perplexity, k nearest neighbours set to 15 and resolution to 0.6.</figcaption></figure>
 
-<p>What do you think about those plots? Which value would you choose? Well, we will go forward with a perplexity value equal to 30 to demonstrate the final step.</p>
+<p>What do you think about those plots? Which value would you choose? Perplexity is probably the least intuitive or consistently functioning parameter, so feel free to learn more from <a href="https://apiumhub.com/tech-blog-barcelona/dimensionality-reduction-tsne/#:~:text=.tensorflow.org%2F-,Perplexity,are%20between%205%20and%2050.">this nifty blog post</a>. We will go forward with a perplexity value equal to 30.</p>
 
 <h1 id="resolution-for-scanpy-findcluster-tool">Resolution (for <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</h1>
 
 <p>Where is <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in our workflow?</p>
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png" alt="Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can use the Parameter Iterator with resolution parameter.</figcaption></figure>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy_parameter-iterator/workflow_resolution.png" alt="Image showing the step we are at: we have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster." width="3360" height="804" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> We have chosen values for Scanpy ComputeGraph and Scanpy RunTSNE, then proceeded to Scanpy RunUMAP to get to Scanpy FindCluster where we can iterate the resolution parameter.</figcaption></figure>
 
 <p>The input data for the <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is the output of <strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, so let’s get this single dataset with the parameter values (from previous tools) of our choice, that is n-neighbours=15 and perplexity=30.</p>
 
@@ -1219,7 +1225,7 @@ Here is the answer: The datasets that are included in the collections can be acc
 
 </blockquote>
 
-<p>The last tool that we can use Parameter Iterator for is <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. We will iterate over the resolution values and in this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters.</p>
+<p>The last tool that we can use Parameter Iterator for is <strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. We will iterate over the resolution values. In this case, those values can be floats, so you can use either ‘List of all parameter values to be iterated’ or ‘Step increase values to be iterated’. Keep in mind that when it comes to the resolution, a high value means more and smaller clusters.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-set-your-values-in-parameter-iterator-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Set your values in Parameter Iterator</div>
@@ -1235,7 +1241,7 @@ Here is the answer: The datasets that are included in the collections can be acc
       </ul>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - resolution</code> (you have to first click on the collection so that you see the datasets, and then raname it)</p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting list of datasets: <code class="language-plaintext highlighter-rouge">Parameter iterated - resolution</code> (you have to first click on the collection so that you see the datasets, and then rename it)</p>
     </li>
     <li><strong>Tag</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> each dataset with its corresponding value:
       <ul>
@@ -1269,7 +1275,7 @@ Here is the answer: The datasets that are included in the collections can be acc
         </li>
       </ul>
     </li>
-    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code> (you have to first click on the collection so that you see the datasets, and then raname it)</li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the Anndata object collection output: <code class="language-plaintext highlighter-rouge">Scanpy FindCluster on collection X: Clusters AnnData (resolution)</code> (you have to first click on the collection so that you see the datasets, and then rename it)</li>
   </ol>
 
 </blockquote>
@@ -1331,15 +1337,10 @@ Here is the answer: The datasets that are included in the collections can be acc
   </li>
 </ul>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
-  <p>If you feel confident both with your data and with the Galaxy tools, you can try to accelerate the process and plot the results of parameter iteration before proceeding to the next step (if that’s possible, oftentimes you would have to run the next tool to get sensible results). Then you can select one dataset from the collection even before running the next tool supported by another Parameter Iterator.</p>
-</blockquote>
-
 <h1 id="conclusion">Conclusion</h1>
-<p>You might want to consult your results with this <a href="https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated">control history</a>, or check out the <a href="https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow">workflow</a> for this tutorial. You can also continue to analyse this data by returning to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial.</p>
+<p>You might want to compare your results with this <a href="https://usegalaxy.eu/u/j.jakiela/h/scanpy-parameter-iterator-updated">control history</a>, or check out the <a href="https://usegalaxy.eu/u/j.jakiela/w/scanpy-parameter-iterator-workflow">workflow</a> for this tutorial. You can also continue to analyse this data by returning to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial.</p>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> In this tutorial you have learnt how to use Parameter Iterator with the number of nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Eventually, you were able to choose the most optimal values for the analysis. Hopefully this tool will make you more confident with the choices you make in terms of the parameters that are crucial for the correct interpretation of biological data.</p>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> You have finished the tutorial! You have learned how to use the Parameter Iterator with the nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Hopefully this tool will help you more quickly assess parameter values, ultimately helping you choose values that both confirm prior knowledge as well as offer new insights on biological data.</p>
 
                 </section>
 
@@ -1349,13 +1350,13 @@ Here is the answer: The datasets that are included in the collections can be acc
                     <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
                     <ul>
                         
-                        <li><p>Scanpy ParameterIterator can be used for n-neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).</p>
+                        <li><p>Scanpy ParameterIterator can be used for k nearest neighbours (Scanpy ComputeGraph), perplexity (Scanpy RunTSNE) and resolution (Scanpy FindCluster).</p>
 </li>
                         
-                        <li><p>You can enter the parameter values either as a list or as step increase values to be iterated.</p>
+                        <li><p>You can enter the parameter values either as a list or as values to be iterated in step.</p>
 </li>
                         
-                        <li><p>Parameter Iterator is a useful tool to quiclky and easily compare the differences in the outputs caused by the changed parameter values. Hence it allows to choose the most optimal parameter values.</p>
+                        <li><p>Parameter Iterator is a useful tool to quickly and easily compare the differences in the outputs caused by changing parameter values. Hence it allows us to choose the optimal parameter values.</p>
 </li>
                         
                     </ul>
@@ -1557,7 +1558,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e63a214f754f0bdcd84a0a4c527df552544d8f2d">e63a214</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/42cfbbba2cc67c86521a90928b9fefb252cac36d">42cfbbb</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1589,7 +1590,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1693008627'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1693083216'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
