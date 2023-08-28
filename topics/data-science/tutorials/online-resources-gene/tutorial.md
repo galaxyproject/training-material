@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 title: One gene across biological resources and formats
 level: Introductory
+draft: true
 zenodo_link: ''
 questions:
 - How to employ bioinformatics resources to investigate a specific protein family (opsins)?
