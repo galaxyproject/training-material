@@ -14,8 +14,8 @@ questions:
 - What does the "Publications" tab list, and how can you filter publications?
 - What is the significance of tracking entry annotation changes over time?
 objectives:
-- By exploring protein entries, understanding how to interpret protein function, taxonomy, structure, interactions, variants, and more. 
-- The tutorial covers topics such as using unique identifiers, downloading protein data, analyzing sequence features, and exploring external resources. 
+- By exploring protein entries in UniProtKB, interpret protein function, taxonomy, structure, interactions, variants, and more.
+- Use unique identifiers to connect databases, download gene and protein data, visualize and compare sequence features.
 time_estimation: 1H
 key_points:
   - How to navigate UniProtKB entries, accessing comprehensive details about proteins, such as their functions, taxonomy, and interactions

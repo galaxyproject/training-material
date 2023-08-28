@@ -10,7 +10,7 @@ questions:
 - How to explore literature and clinical contexts for the OPN1LW gene?
 - How to use protein sequences files to perform similarity searches using BLAST?
 objectives:
-- Starting from a text search, analyse multiple external sources of information to visualise a gene in different Bioinformatics file formats.
+- Starting from a text search, navigate multiple web resources to examine multiple types of information about a gene, conveyed through multiple file formats.
 time_estimation: 1H
 key_points:
 - You can search for genes and proteins using specific text on the NCBI genome. 
