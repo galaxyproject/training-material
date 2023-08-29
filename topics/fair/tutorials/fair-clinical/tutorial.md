@@ -52,35 +52,43 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR a
 {: .agenda}
 
 # Clinical datasets
-Hands-on: describing clinical datasets - time 3 minutes - silent reflection
- How would you describe clinical datasets? In general terms, and specifically
+
+> <hands-on-title>How would you describe what are clinical datasets? - {% icon time %} 2 minutes - Silent reflection</hands-on-title>
+>
+> - consider in general terms
+> - consider more specifically
+
+{: .hands_on}
 
 In general, clinical data are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
 
 ## Metadata that accompanies transcriptomic data
 In GEO and ArrayExpress the elements that we are describing as clinical data is the Characteristics or Source Characteristics.
 
-> <hands-on-title>Explore GEO and ArrayExpress for characteristics</hands-on-title>
+> <hands-on-title>Explore GEO and ArrayExpress for characteristics - {% icon time %} 5 minutes</hands-on-title>
 >
 > 1. Click on the link below for ArrayExpress and open the section for Source Characteristics.
+>    [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12829 )
+> 
+> 2. Take a look at the Experimental Factors.  Notice that there are very few characteristics available for this dataset
 >
->   [GSE65391](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65391)
+> 3. Click on the link below for GEO
+>    [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65391)
 >
-> 2. Also, check out the Experimental Factors (few characteristics)
+> 4. Under the Samples section, click on one of the healthy controls.  Here you will see that this dataset has many characteristics.  Notice, however
+>    that there is not much information gathered on the healthy controls
 >
-> 3. Click on the link below for GEO.
-> [GSE65391](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65391)
-> [GSM1594476](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1594476) This dataset has a lot of characteristics.
-> Explore ArrayExpress and/or GEO for datasets within the domain(s) that you are familiar with
-> Take note of the availability of characteristics data for the different datasets
+> 5. Click on one of the samples with SLE.  Notice here that there is more data collected on SLE subjects
+>
+> 6. Explore ArrayExpress and/or GEO for datasets within the domain(s) that you are familiar with.  Take note of the availability of characteristics data 
+>    for the different datasets
 >
 {: .hands_on}
 
 ## Interventional clinical trials
 In these trials, usually, the participants have a condition or disease, and the research question is related to the effectiveness of a treatment.  Some of the participants are given the treatment(s) under investigation, and the other participants are given either a placebo or non-treatment drug.  Usually, these are under double-blind conditions, both participant and doctor do not know whether they are receiving/dispensing treatment or a placebo.  In addition, there may also be a set of control participants who do not have the condition or disease.  Data is usually collected at baseline or screening before any treatment or placebo is given, and then at least one time point in the future.  The breadth and type of data collected can vary across trials, and this can be limiting when trying to pool data from different trials.  The data collected could be minimal, with basic metadata to accompany the sample or imagining data.  But also could be quite extensive including quality of life questionnaires filled out by the patient.
 
-An example of an interventional clinical trial is TRACTISS, where the aim of the study was to establish whether rituximab improves clinical outcomes for Primary Sjögren's Syndrome patients
-https://bmcmusculoskeletdisord.biomedcentral.com/articles/10.1186/1471-2474-15-21
+An example of an interventional clinical trial is [TRACTISS](https://bmcmusculoskeletdisord.biomedcentral.com/articles/10.1186/1471-2474-15-21), where the aim of the study was to establish whether rituximab improves clinical outcomes for Primary Sjögren's Syndrome patients
 
 ## Observational clinical trials
 In these trials, data is collected at least once, there may not be a follow-up collection.  The research question is usually related directly to the disease or condition, for example, understanding the biomarkers of a disease.  As with interventional clinical trials, the breadth of data collected varies on the trial.  There is often a control group but not always.  
@@ -91,8 +99,10 @@ In these trials, data is collected at least once, there may not be a follow-up c
 ## Registries
 Registries usually record (over a period of time), the disease progression of patients with the same disease or condition.  Often referred to a hub/collection point once the diagnosis is confirmed.  Patients are continually added to the registries and therefore registries can provide a large pool of patients with relatively similar data collected.  As these are registries of patients with a particular condition, there are no control participants.
 
-Here are links to two registry projects.  Both websites describe the projects, the aims and the outputs of the studies.
+Here are links to two registry projects.  Both websites describe the projects, the aims and the outputs of the studies
+
 [UK Sjögren's registry](https://www.sjogrensregistry.org/index.php)
+
 [UK JIA Biologics Registers](https://www.sjogrensregistry.org/index.php)
 
 ## Electronic health records (EHR)
@@ -100,14 +110,20 @@ These are generally the data collected when a person has contact with the health
 
 In the UK, Clinical Practice Research Datalink (CPRD) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset.  For more information about [CPRD](https://cprd.com) 
 
-The Health Data Research Innovation Gateway (https://www.healthdatagateway.org/) can help find and discover UK health datasets, tools and other resources to further health research.
+The [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/) can help find and discover UK health datasets, tools and other resources to further health research.
 
-<hands-on-title>Explore HDRUK Innovation Gateway for datasets</hands-on-title>
-> 1. Click [Datasets](https://web.www.healthdatagateway.org/search?search=&datasetSort=latest&tab=Datasets) 
+<hands-on-title>Explore HDRUK Innovation Gateway for datasets - {% icon time %} 5 minutes</hands-on-title>
+> 
+> 1. Click on Datasets in [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/)
+> 
 > 2. In the filters, expand Publisher and in Search Filter type CPRD and enter.  
+> 
 > 3. Select CPRD
+> 
 > 4. Expand Phenotype search for rheumatoid, and select Rheumatoid Arthritis
+> 
 > 5. Take a look at the information about the two datasets
+> 
 > 6. Clear the filters, and search for datasets related to your areas of interest
 {: .hands_on}
 
@@ -118,8 +134,9 @@ In some recent work in rheumatoid arthritis, it was demonstrated that simple pat
 
 ![RA-MAP.](../../images/RAMAP_graphic.png)
 
-<hands-on-title>Do the datasets have all these characteristics</hands-on-title>
-> For your domain, look at datasets on ArrayExpress and GEO and see how many of them have sex, age, ethnicity/race, and some measure of disease activity.
+<hands-on-title>Do the datasets have all these characteristics - {% icon time %} 5 minutes</hands-on-title>
+>
+> For your domain, look at datasets on ArrayExpress and GEO and see how many of them have sex, age, ethnicity/race, and some measure of disease activity
 {: .hands_on}
 
 
@@ -134,35 +151,44 @@ Usually, after finding potentially interesting datasets on GEO or ArrayExpress, 
 # Practical techniques to make clinical data FAIR
 There are certain concerns when making clinical data freely available through public libraries such as GEO and ArrayExpress. Data needs to be anonymised or at least pseudo-anonymised.  
 
-<hands-on-title>In the data below, what data would be problematic to share?</hands-on-title>
-
-![PatientData.](../../images/Patient_data.png "")
-
-Solution: In the above dataset, remove columns
-C - FIRST
-D - LAST
-H - ADDRESS
-L - ZIP
-as these are clear identifiers of the person
-
-In terms of location, preferable to keep this as broad as possible.  In this case, keep column J - STATE, but drop column I - CITY and column K - COUNTY. It is debatable whether to keep them or not.
-
-Column B - BIRTHDATE is another clear identifier but could be replaced by age.
-
-It is preferable not to keep dates (Columns M - DATEOFASSESSMENT and N - DATEOFDISEASEONSET).  We will discuss data handling in the next section
+<hands-on-title>What data would be problematic to share? - {% icon time %} 5 minutes</hands-on-title>
+>
+> Take a look at the data below and consider which columns and data may be problematic to share
+> ![PatientData.](../../images/Patient_data.png "")
+>
+> Solution: In the above dataset, remove columns
+> C - FIRST
+> D - LAST
+> H - ADDRESS
+> L - ZIP
+> as these are clear identifiers of the person
+>
+> In terms of location, preferable to keep this as broad as possible.  In this case, 
+> keep column J - STATE
+> but drop column I - CITY and column K - COUNTY. 
+> It is debatable whether to keep them or not.
+>
+> Column B - BIRTHDATE is another clear identifier but could be replaced by age.
+>
+> It is preferable not to keep dates (Columns M - DATEOFASSESSMENT and N - DATEOFDISEASEONSET).  We will discuss data handling in the next section
+{: .hands_on}
 
 ## Converting dates to time periods 
 Avoid including dates and convert these into time periods.  For example, use date of birth and date of assessment to calculate Age (at assessment or baseline).  Similarly, can calculate Age at Diagnosis, and Age at Onset, if dates are given.
 
-If there is more than one visits, and if these are not within roughly defined time periods, for example, 4 weeks, or 12 weeks, calculate the number of days between the visits.
+If there are more than one visits, and if these are not within roughly defined time periods, for example, 4 weeks, or 12 weeks, calculate the number of days between the visits.
 
-<hands-on-title>From the dataset shown, which columns would you change to time periods from dates? For those columns, convert to time periods</hands-on-title>
-
-![Patient_Dates.](../../images/Patient_dates.png "")
-
-Solution: Replace BIRTHDATE with AGE (at DATEOFASSESSMENT) and DATEOFDISEASEONSET with AGEATONSET.  Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
-
-![DatesRemoved.](../../images/Datesremoved.png "")
+<hands-on-title>Which columns would you change to time periods from dates? - {% icon time %} 10 minutes</hands-on-title>
+> 
+>  For the dataset below identify the columne you would change to time periods and convert them to time periods
+> ![Patient_Dates.](../../images/Patient_dates.png "")
+>
+> Solution: Replace BIRTHDATE with AGE (at DATEOFASSESSMENT) and DATEOFDISEASEONSET with AGEATONSET.  
+> Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
+>
+>![DatesRemoved.](../../images/Datesremoved.png "")
+>
+{: .hands_on}
 
 ## Comprehensive metadata for omics datasets
 When publishing omics datasets to libraries such as GEO and ArrayExpress, consider at least including Age, Sex, Race/Ethnicity, and if possible some disease activity measure.  Publishing as much as possible is great for researchers to access enriched datasets, and also reduces fielding queries and requests to the PI.
@@ -183,13 +209,15 @@ In this example, data items are encoded, and so their format is numeric, with co
 The validation rule usually refers to instructions given when data was originally input, but it could be the calculation formula for the data item.
 Codes and Labels here are the encoding definitions
 
-<hands-on-title>Create a data dictionary for the dataset below</hands-on-title>
-
-![dataDictHandsOn](../../images/DataDictionaryHandsOn.png "")
-
-Solution: Here is one example of a suitable data dictionary for the dataset
-
-![dataDictSoln](../../images/DataDictSolution.png "")
+<hands-on-title>Create a data dictionary for the dataset below - {% icon time %} 10 minutes</hands-on-title>
+>
+> ![dataDictHandsOn](../../images/DataDictionaryHandsOn.png "")
+>
+> Solution: Here is one example of a suitable data dictionary for the dataset
+> 
+> ![dataDictSoln](../../images/DataDictSolution.png "")
+>
+{: .hands_on}
 
 A key benefit of data dictionaries is that the information captured is generally not confidential or patient-sensitive and therefore, there are few if any restrictions to sharing them.
 
@@ -211,7 +239,7 @@ As with data dictionaries, data catalogues rarely capture any information that n
 [To add: More information about data catalogues can be found in these RDMbites (add links)]
 
 ## Publishing on Zenodo
-Data dictionaries and data catalogues include a wealth of information about the clinical datasets they reference, and in general, contain no sensitive or confidential data.  Zenodo (https://www.zenodo.org) is an open repository for research outcomes hosted by CERN.  It is free to use and each upload is citeable through a Digital Object Identifier (DOI).  Uploads are instantly available, with version control features.  Publishing on platforms such as Zenodo can help make your data findable.
+Data dictionaries and data catalogues include a wealth of information about the clinical datasets they reference, and in general, contain no sensitive or confidential data.  [Zenodo](https://www.zenodo.org) is an open repository for research outcomes hosted by CERN.  It is free to use and each upload is citeable through a Digital Object Identifier (DOI).  Uploads are instantly available, with version control features.  Publishing on platforms such as Zenodo can help make your data findable.
 
 Here, you can see published data dictionaries for a consortium
 ![Zenodo](../../images/CLUSTER_Zenodo.png "")
