@@ -67,12 +67,14 @@ In GEO and ArrayExpress the elements that we are describing as clinical data is 
 
 > <hands-on-title>Explore GEO and ArrayExpress for characteristics - {% icon time %} 5 minutes</hands-on-title>
 >
-> 1. Click on the link below for ArrayExpress and open the section for Source Characteristics.
+> 1. Click on the link below for ArrayExpress and open the section for Source Characteristics
+>
 >    [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12829 )
 > 
 > 2. Take a look at the Experimental Factors.  Notice that there are very few characteristics available for this dataset
 >
 > 3. Click on the link below for GEO
+>
 >    [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65391)
 >
 > 4. Under the Samples section, click on one of the healthy controls.  Here you will see that this dataset has many characteristics.  Notice, however
@@ -108,13 +110,13 @@ Here are links to two registry projects.  Both websites describe the projects, t
 ## Electronic health records (EHR)
 These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at the country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as anonymised data, to avoid the ability to identify individuals from the data.  
 
-In the UK, Clinical Practice Research Datalink (CPRD) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset.  For more information about [CPRD](https://cprd.com) 
+In the UK, Clinical Practice Research Datalink ([CPRD](https://cprd.com)) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset. 
 
 The [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/) can help find and discover UK health datasets, tools and other resources to further health research.
 
 <hands-on-title>Explore HDRUK Innovation Gateway for datasets - {% icon time %} 5 minutes</hands-on-title>
 > 
-> 1. Click on Datasets in [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/)
+> 1. Click on Datasets in the [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/)
 > 
 > 2. In the filters, expand Publisher and in Search Filter type CPRD and enter.  
 > 
@@ -125,6 +127,7 @@ The [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/
 > 5. Take a look at the information about the two datasets
 > 
 > 6. Clear the filters, and search for datasets related to your areas of interest
+>
 {: .hands_on}
 
 # The importance of making clinical datasets FAIR
@@ -137,6 +140,7 @@ In some recent work in rheumatoid arthritis, it was demonstrated that simple pat
 <hands-on-title>Do the datasets have all these characteristics - {% icon time %} 5 minutes</hands-on-title>
 >
 > For your domain, look at datasets on ArrayExpress and GEO and see how many of them have sex, age, ethnicity/race, and some measure of disease activity
+>
 {: .hands_on}
 
 
@@ -157,20 +161,15 @@ There are certain concerns when making clinical data freely available through pu
 > ![PatientData.](../../images/Patient_data.png "")
 >
 > Solution: In the above dataset, remove columns
-> C - FIRST
-> D - LAST
-> H - ADDRESS
-> L - ZIP
-> as these are clear identifiers of the person
+> C - FIRST, D - LAST, H - ADDRESS and L - ZIP as these are clear identifiers of the person
 >
-> In terms of location, preferable to keep this as broad as possible.  In this case, 
-> keep column J - STATE
-> but drop column I - CITY and column K - COUNTY. 
-> It is debatable whether to keep them or not.
+> In terms of location, preferable to keep this as broad as possible.  In this case, keep column J - STATE but drop column I - CITY and column K - 
+> COUNTY.  It is debatable whether to keep them or not.
 >
 > Column B - BIRTHDATE is another clear identifier but could be replaced by age.
 >
 > It is preferable not to keep dates (Columns M - DATEOFASSESSMENT and N - DATEOFDISEASEONSET).  We will discuss data handling in the next section
+>
 {: .hands_on}
 
 ## Converting dates to time periods 
@@ -183,7 +182,8 @@ If there are more than one visits, and if these are not within roughly defined t
 >  For the dataset below identify the columne you would change to time periods and convert them to time periods
 > ![Patient_Dates.](../../images/Patient_dates.png "")
 >
-> Solution: Replace BIRTHDATE with AGE (at DATEOFASSESSMENT) and DATEOFDISEASEONSET with AGEATONSET.  
+> Solution: Replace BIRTHDATE with AGE (at DATEOFASSESSMENT) and DATEOFDISEASEONSET with AGEATONSET. 
+> 
 > Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
 >
 >![DatesRemoved.](../../images/Datesremoved.png "")
