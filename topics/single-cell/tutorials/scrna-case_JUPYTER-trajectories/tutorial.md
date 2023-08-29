@@ -65,7 +65,7 @@ pip install scanpy
 pip install fa2
 ```
 ```python
-pip install python-igraph
+pip install igraph
 ```
 ```python
 pip install louvain

@@ -36,6 +36,7 @@ follow_up_training:
 time_estimation: "1H"
 contributors:
   - thomaswollmann
+  - kostrykin
 tags:
   - HeLa
 
@@ -167,11 +168,14 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >      - {% icon param-check %} `Major Axis Length`
 > 7. Now we can extract the workflow for batch processing
 >    - Name it "feature_extraction".
+>    - Remember to exclude **Unzip** {% icon tool %} by unchecking the tool.
+>    - Don't treat `B2.zip` and `B3.zip` as inputs (the workflow is supposed to be applied to the images directly).
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
 > 8. Edit the workflow you just created
->    - Name the inputs `input image` and `filter rules`.
+>    - Add the tool **Input dataset** {% icon tool %} and name it `input image`.
+>    - Name the input for the rules file `filter rules`.
 >    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
 >
 {: .hands_on}

@@ -175,6 +175,21 @@ layout: base
                 {% endunless %}
 		{% endunless %}
                 </p>
+				{% if page.editor_count > 0 %}
+				<h3>Editorial Roles</h3>
+				<p>This contributor has taken on additional responsibilities as an editor for the following topics. They are responsible for ensuring that the content is up to date, accurate, and follows GTN best practices.</p>
+				<ul>
+				{% for res in page.editors %}
+					<li>
+						{% if res.layout == 'learning-pathway' %}
+						<a href="{{ site.baseurl }}{{ res.url }}">{{ res.title }}</a>
+						{% else %}
+						<a href="{{ site.baseurl }}/topics/{{ res.name }}">{{ res.title }}</a>
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
 
 				{% if page.tutorials_count > 0 %}
 				<h3>Tutorials</h3>
