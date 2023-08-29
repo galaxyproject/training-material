@@ -42,6 +42,18 @@ requirements:
     tutorials:
       - fair-intro
       - data-management
+   
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: fair
+    tutorials:
+        - bioimage-REMBI
+  -
+    type: "internal"
+    topic_name: imaging
+        
 ---
 
 # FAIR Bioimaging
@@ -133,3 +145,6 @@ However, this raises further challenges. At the time of data acquisition, you pr
 > - If a repository has been chosen, use their template (if provided)
 > - Use a Delimited text file format, e.g. .csv, .tsv. You can use spreadsheet software and save to this format, try to use a plain format, e.g. avoid merged/split cells.
 > -  Use data management software suitable for your data, e.g. [OMERO](https://www.openmicroscopy.org/omero/)
+
+# Further steps
+{% icon congratulations %} Congratulations on successfully completing this tutorial! If you want to know more about FAIR data management, we provide training that you can find [here]({% link topics/fair %}). For more detials on FAIR data management in bioimaging, see the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}), and if you want to dive into the imaging analysis, please choose one of the [tutorials]({% link topics/imaging %})!
