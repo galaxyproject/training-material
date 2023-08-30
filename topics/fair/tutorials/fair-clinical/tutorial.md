@@ -12,7 +12,7 @@ questions:
 objectives:
 - Learn how to make clinical datasets FAIR
 - Recognise why FAIR datasets are important
-time_estimation: "10M"
+time_estimation: "1H"
 key_points:
 - FAIR data are data that meet principles of findability, accessibility, interoperability, and reusability (FAIR).
 tags:
@@ -63,7 +63,7 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR a
 In general, clinical data are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
 
 ## Metadata that accompanies transcriptomic data
-In GEO and ArrayExpress the elements that we are describing as clinical data is the Characteristics or Source Characteristics.
+In GEO and ArrayExpress the elements that we are describing as clinical data are the Characteristics or Source Characteristics.
 
 > <hands-on-title>Explore GEO and ArrayExpress for characteristics - {% icon time %} 5 minutes</hands-on-title>
 >
@@ -163,9 +163,9 @@ There are certain concerns when making clinical data freely available through pu
 > > * Column B (BIRTHDATE) is another clear identifier but could be replaced by age  
 > > * It is preferable not to keep dates (Columns (DATEOFASSESSMENT) and N (DATEOFDISEASEONSET))  
 > >
-> > We will discuss date handling in the next section
-> {: .solution}
-{: .hands_on}
+> > We will discuss date handling in the next section  
+> {: .solution}  
+{: .hands_on}  
 
 ## Converting dates to time periods 
 Avoid including dates and convert these into time periods.  For example, use date of birth and date of assessment to calculate Age (at assessment or baseline).  Similarly, can calculate Age at Diagnosis, and Age at Onset, if dates are given.
@@ -182,10 +182,10 @@ If there are more than one visits, and if these are not within roughly defined t
 > > * Replace DATEOFDISEASEONSET with AGEATONSET 
 > > * Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
 > > 
-> > ![DatesRemoved.](../../images/Datesremoved.png "")
+> > ![DatesRemoved.](../../images/Datesremoved.png "")  
 > >
-> {: .solution}
-{: .hands_on}
+> {: .solution}  
+{: .hands_on}  
 
 ## Comprehensive metadata for omics datasets
 When publishing omics datasets to libraries such as GEO and ArrayExpress, consider at least including Age, Sex, Race/Ethnicity, and if possible some disease activity measure.  Publishing as much as possible is great for researchers to access enriched datasets, and also reduces fielding queries and requests to the PI.
@@ -205,7 +205,7 @@ Here’s an example of a data dictionary used on a project
 > * The definition describes the data item more fully  
 > * In data dictionary example shown above, data items are encoded, and so their format is numeric, with constraints
 > * The validation rule usually refers to instructions given when data was originally input, but it could be the calculation formula for the data item  
-> * Codes and Labels here are the encoding definitions
+> * Codes and Labels here are the encoding definitions  
 {: .tip}
 
 > <hands-on-title>Create a data dictionary for the dataset below - {% icon time %} 10 minutes</hands-on-title>
@@ -217,8 +217,8 @@ Here’s an example of a data dictionary used on a project
 > >
 > > ![dataDictSoln](../../images/DataDictSolution.png "")
 > >
-> {: .solution}
-{: .hands_on}
+> {: .solution}  
+{: .hands_on}  
 
 A key benefit of data dictionaries is that the information captured is generally not confidential or patient-sensitive and therefore, there are few if any restrictions to sharing them.
 
@@ -260,7 +260,7 @@ It is really worthwhile clarifying the process of handling data access requests 
 > * Involve the institution's legal team 
 >   - Terms and conditions of use of data and/or samples
 >   - Publication guidelines
-> * Standardise the process with a Data Access Request Form
+> * Standardise the process with a Data Access Request Form  
 {: .tip}
 
 An example of a data access process is shown below
