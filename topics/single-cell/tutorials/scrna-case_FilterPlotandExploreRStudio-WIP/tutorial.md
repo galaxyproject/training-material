@@ -558,7 +558,7 @@ Now it’s the fun bit! We can see where genes are expressed, and start consider
 Let's take another look at what our clusters look like: 
 
 ```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
+DimPlot(object = filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE, group.by = "seurat_clusters") + NoLegend()
 ```
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
