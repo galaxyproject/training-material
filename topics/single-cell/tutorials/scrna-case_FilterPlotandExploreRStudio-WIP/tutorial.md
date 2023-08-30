@@ -117,8 +117,7 @@ Next we will add our dimension names to our matrix. In the end, this will leave 
 {: .tip}
 
 ```r
-matrix.mtx@Dimnames[[1]]<-genes.tsv$V2
-matrix.mtx@Dimnames[[2]]<-barcodes.tsv$V1
+dimnames(matrix.mtx) <- list(genes.tsv$V2, barcodes.tsv$V1)
 ```
 
 In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x() step. Read10x() is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method. 
