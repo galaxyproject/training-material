@@ -29,6 +29,7 @@ priority: 5
 contributions:
   authorship:
     - wee-snufkin
+    - Laura190
     - kkamieniecka
     - poterlowicz-lab
 
@@ -41,6 +42,10 @@ requirements:
       - fair-intro
       - data-management
       - bioimage-metadata
+
+follow_up_training:
+  - type: "internal"
+    topic_name: imaging
 ---
 
 # Metadata guidelines for bioimaging data
