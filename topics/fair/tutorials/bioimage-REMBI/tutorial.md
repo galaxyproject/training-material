@@ -17,7 +17,7 @@ objectives:
 time_estimation: "15min"
 
 key_points:
-- REMBI describes useul guidelines for bioimaging that can help unification and FARIfication of the data.
+- REMBI describes useful guidelines for bioimaging that can help unification and FARIfication of the data.
 
 tags:
 - fair
@@ -75,72 +75,74 @@ The first module of REMBI metadata describes the Study and should include:
 - Study type
 - Study description
 - General dataset information
->
-**Study type**
+
+### Study type
 >
 Ideally, the study type will be part of an ontology. You can look up the main subject of your study using a tool like [OLS](https://www.ebi.ac.uk/ols/index) to find a suitable ontology. This will help others to see where your study sits within the wider research area.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Study type</th>
-    <td>Regulation of mitotic cell division</td>
-  </tr>
-</table>
+>
+> <table>
+>   <tr>
+>     <th>Study type</th>
+>     <td>Regulation of mitotic cell division</td>
+>   </tr>
+> </table>
+>
 {: .comment}
 
 >
-**Study description**
+### Study description
 >
 A brief description of the project. The Study Description should include the title of the study, a brief description and any related publication details such as authors, title and  DOI. If you are gathering metadata prepublication, you can fill in the publication details later or enter a draft title or the journal name you plan to submit to. It’s still a good idea to include the category, so you don’t forget.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <td rowspan="2">Study description</td>
-  </tr>
-  <tr>
-    <th>Title</th>
-    <td>Imaging mitotic cells</td>
-  </tr>
-  <tr>
-    <th>Description</th>
-    <td>Visualising HeLa cells using confocal microscopy</td>
-  </tr>
-  <tr>
-    <th>Publication details</th>
-    <td>TBC</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th colspan="2">Study description</th>
+>   </tr>
+>   <tr>
+>     <th>Title</th>
+>     <td>Imaging mitotic cells</td>
+>   </tr>
+>   <tr>
+>     <th>Description</th>
+>     <td>Visualising HeLa cells using confocal microscopy</td>
+>   </tr>
+>   <tr>
+>     <th>Publication details</th>
+>     <td>TBC</td>
+>   </tr>
+> </table>
 {: .comment}
 
->
-**General dataset information**
+
+### General dataset information
 >
 This should include all the information that relates to all the data in the project. This can include the names of contributors and the repository where the data is or will be stored. State the licence under which you intend to make the data available, the repository you intend to submit to and if you are using a schema for structuring your metadata. This helps to keep all collaborators on the same page. Any other general information with respect to the study can be included here, but try to keep this broad as more detailed information should be included in other sections of the metadata.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <td rowspan="2">General Dataset Information</td>
-  </tr>
-  <tr>
-    <th>Contributors</th>
-    <td>Alica and Bob</td>
-  </tr>
-  <tr>
-    <th>Repository</th>
-    <td>Bioimage Archive</td>
-  </tr>
-  <tr>
-    <th>Licenses</th>
-    <td>CC-BY</td>
-  </tr>
-  <tr>
-    <th>Schemas</th>
-    <td>Datacite Metadata</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th colspan="2">General Dataset Information</th>
+>   </tr>
+>   <tr>
+>     <th>Contributors</th>
+>     <td>Alica and Bob</td>
+>   </tr>
+>   <tr>
+>     <th>Repository</th>
+>     <td>Bioimage Archive</td>
+>   </tr>
+>   <tr>
+>     <th>Licenses</th>
+>     <td>CC-BY</td>
+>   </tr>
+>   <tr>
+>     <th>Schemas</th>
+>     <td>Datacite Metadata</td>
+>   </tr>
+> </table>
 {: .comment}
 
 ## Study component
@@ -154,16 +156,16 @@ Within the Study component we include the Imaging Method which should describe t
 The description of the study component should include an overview of what was imaged as well as any processed data that is created during analysis. 
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Imaging Method</th>
-    <td>Confocal Microscopy</td>
-  </tr>
-  <tr>
-    <th>Study Component Description</th>
-    <td>Images of cells and segmented binary masks</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Imaging Method</th>
+>     <td>Confocal Microscopy</td>
+>   </tr>
+>   <tr>
+>     <th>Study Component Description</th>
+>     <td>Images of cells and segmented binary masks</td>
+>   </tr>
+> </table>
 {: .comment}
 
 
@@ -182,32 +184,32 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 > You can leave out some of the variables if they are not part of your experiment.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Identity</th>
-    <td>CM001</td>
-  </tr>
-  <tr>
-    <th>Biological entity</th>
-    <td>JURKAT E-6.1 cell</td>
-  </tr>
-  <tr>
-    <th>Organism</th>
-    <td>Homo sapiens</td>
-  </tr>
-  <tr>
-    <th>Intrinsic variable</th>
-    <td>Jurkat E6.1 transfected with emerald-VAMP7</td>
-  </tr>
-  <tr>
-    <th>Extrinsic variable</th>
-    <td>Aspirin</td>
-  </tr>
-  <tr>
-    <th>Experimental variables</th>
-    <td>Dose response of aspirin</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Identity</th>
+>     <td>CM001</td>
+>   </tr>
+>   <tr>
+>     <th>Biological entity</th>
+>     <td>JURKAT E-6.1 cell</td>
+>   </tr>
+>   <tr>
+>     <th>Organism</th>
+>     <td>Homo sapiens</td>
+>   </tr>
+>   <tr>
+>     <th>Intrinsic variable</th>
+>     <td>Jurkat E6.1 transfected with emerald-VAMP7</td>
+>   </tr>
+>   <tr>
+>     <th>Extrinsic variable</th>
+>     <td>Aspirin</td>
+>   </tr>
+>   <tr>
+>     <th>Experimental variables</th>
+>     <td>Dose response of aspirin</td>
+>   </tr>
+> </table>
 {: .comment}
 
 ## Specimen
@@ -221,32 +223,32 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 > Include enough information so that someone with experience in the field could reproduce a sample by following the information you provided. Assume they would know typical techniques and name them using terms from an ontology if possible. Only include lots of detail if you are describing a novel technique.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Experimental status</th>
-    <td>Control</td>
-  </tr>
-  <tr>
-    <th>Location within biosample</th>
-    <td>Plasma membrane within 100 nm of coverslip (TIRF)</td>
-  </tr>
-  <tr>
-    <th>Preparation method</th>
-    <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
-  </tr>
-  <tr>
-    <th>Signal/contrast mechanism</th>
-    <td>fluorescent proteins</td>
-  </tr>
-  <tr>
-    <th>Channel – content</th>
-    <td>Green: eGFP, Red: mCherry</td>
-  </tr>
-  <tr>
-    <th>Channel – biological entity</th>
-    <td>Green: EGFR, Red: Src</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Experimental status</th>
+>     <td>Control</td>
+>   </tr>
+>   <tr>
+>     <th>Location within biosample</th>
+>     <td>Plasma membrane within 100 nm of coverslip (TIRF)</td>
+>   </tr>
+>   <tr>
+>     <th>Preparation method</th>
+>     <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
+>   </tr>
+>   <tr>
+>     <th>Signal/contrast mechanism</th>
+>     <td>fluorescent proteins</td>
+>   </tr>
+>   <tr>
+>     <th>Channel – content</th>
+>     <td>Green: eGFP, Red: mCherry</td>
+>   </tr>
+>   <tr>
+>     <th>Channel – biological entity</th>
+>     <td>Green: EGFR, Red: Src</td>
+>   </tr>
+> </table>
 {: .comment}
 
 ## Image acquisition
@@ -255,36 +257,36 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 > Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Instrument attributes</th>
-    <td>Olympus FV3000, laser point scanning confocal, 500-550 nm filter, 37-degree chamber.</td>
-  </tr>
-  <tr>
-    <th>Image acquisition parameters</th>
-    <td> </td>
-  </tr>
-  <tr>
-    <th>Objective</th>
-    <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
-  </tr>
-  <tr>
-    <th>Excitation Wavelength</th>
-    <td>488 nm</td>
-  </tr>
-  <tr>
-    <th>PMT gain</th>
-    <td>500 V</td>
-  </tr>
-  <tr>
-    <th>Pixel dwell time</th>
-    <td>2 𝜇s</td>
-  </tr>
-  <tr>
-    <th>Confocal aperture</th>
-    <td>200 𝜇m</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Instrument attributes</th>
+>     <td>Olympus FV3000, laser point scanning confocal, 500-550 nm filter, 37-degree chamber.</td>
+>   </tr>
+>   <tr>
+>     <th>Image acquisition parameters</th>
+>     <td> </td>
+>   </tr>
+>   <tr>
+>     <th>Objective</th>
+>     <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
+>   </tr>
+>   <tr>
+>     <th>Excitation Wavelength</th>
+>     <td>488 nm</td>
+>   </tr>
+>   <tr>
+>     <th>PMT gain</th>
+>     <td>500 V</td>
+>   </tr>
+>   <tr>
+>     <th>Pixel dwell time</th>
+>     <td>2 𝜇s</td>
+>   </tr>
+>   <tr>
+>     <th>Confocal aperture</th>
+>     <td>200 𝜇m</td>
+>   </tr>
+> </table>
 {: .comment}
 
 > <tip-title>Helpful resources</tip-title>
@@ -300,86 +302,86 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 > Finally, say you have used contrast inversion, do the bright features in the image correspond to areas of high signal, or is it the other way around?
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Type</th>
-    <td>Primary Image, Segmentation</td>
-  </tr>
-  <tr>
-    <th>Format and compression</th>
-    <td>Primary: .oir (Olympus), Segmentation: .tiff</td>
-  </tr>
-  <tr>
-    <th>Dimension extents</th>
-    <td>x: 512, y: 512, z: 25</td>
-  </tr>
-  <tr>
-    <th>Size description</th>
-    <td>153.6 x 153.6 x 25 𝜇m</td>
-  </tr>
-  <tr>
-    <th>Pixel/Voxel size description</th>
-    <td>0.3 x 0.3 x 0.1 𝜇m</td>
-  </tr>
-  <tr>
-    <th>Image processing method</th>
-    <td>Fiji: Median filter (3 pixel kernel), Otsu threshold</td>
-  </tr>
-  <tr>
-    <th>Contrast inversion</th>
-    <td>No</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Type</th>
+>     <td>Primary Image, Segmentation</td>
+>   </tr>
+>   <tr>
+>     <th>Format and compression</th>
+>     <td>Primary: .oir (Olympus), Segmentation: .tiff</td>
+>   </tr>
+>   <tr>
+>     <th>Dimension extents</th>
+>     <td>x: 512, y: 512, z: 25</td>
+>   </tr>
+>   <tr>
+>     <th>Size description</th>
+>     <td>153.6 x 153.6 x 25 𝜇m</td>
+>   </tr>
+>   <tr>
+>     <th>Pixel/Voxel size description</th>
+>     <td>0.3 x 0.3 x 0.1 𝜇m</td>
+>   </tr>
+>   <tr>
+>     <th>Image processing method</th>
+>     <td>Fiji: Median filter (3 pixel kernel), Otsu threshold</td>
+>   </tr>
+>   <tr>
+>     <th>Contrast inversion</th>
+>     <td>No</td>
+>   </tr>
+> </table>
 {: .comment}
 
 
 ## Image correlation
 > If you have used different imaging modalities with the same sample, this part of the metadata should describe how the images relate to one another. You could use this section to describe generally the relationship between images. In the example below, images from different modalities have been aligned.
->
+
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Spatial and temporal alignment</th>
-    <td>Manual</td>
-  </tr>
-  <tr>
-    <th>Fiducials used</th>
-    <td>Soil grains</td>
-  </tr>
-  <tr>
-    <th>Transformation matrix</th>
-    <td>See file: Transforms.csv</td>
-  </tr>
-  <tr>
-    <th>Size description</th>
-    <td>153.6 x 153.6 x 25 𝜇m</td>
-  </tr>
-  <tr>
-    <th>Related images and relationship</th>
-    <td>Primary XCT: Data/XCT
-      Primary XRF: Data/XRF
-      Processed XRF: Data/Transformed_XRF</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Spatial and temporal alignment</th>
+>     <td>Manual</td>
+>   </tr>
+>   <tr>
+>     <th>Fiducials used</th>
+>     <td>Soil grains</td>
+>   </tr>
+>   <tr>
+>     <th>Transformation matrix</th>
+>     <td>See file: Transforms.csv</td>
+>   </tr>
+>   <tr>
+>     <th>Size description</th>
+>     <td>153.6 x 153.6 x 25 𝜇m</td>
+>   </tr>
+>   <tr>
+>     <th>Related images and relationship</th>
+>     <td>Primary XCT: Data/XCT
+>       Primary XRF: Data/XRF
+>       Processed XRF: Data/Transformed_XRF</td>
+>   </tr>
+> </table>
 {: .comment}
 
 ## Analysed data
 > This section should not include metadata for any image data, including processed images, as that should have been covered in the Image Data section. Instead, it should describe the analysis results you have, such as measurements. Have you done some numerical analysis or some phenotyping or something else? There is no need to describe the methods in great detail if they are already described in the relevant publication.
 
 > <comment-title>Example</comment-title>
-<table>
-  <tr>
-    <th>Analysis results type</th>
-    <td>Speed of cell division</td>
-  </tr>
-  <tr>
-    <th>Data used for analysis</th>
-    <td>Preprocessed images, Cell tracks</td>
-  </tr>
-  <tr>
-    <th>Analysis method</th>
-    <td>Track cell lineage: BayesianTracker (btrack) with configuration track_config.json
-      Measure speed: Numerical analysis in Python</td>
-  </tr>
-</table>
+> <table>
+>   <tr>
+>     <th>Analysis results type</th>
+>     <td>Speed of cell division</td>
+>   </tr>
+>   <tr>
+>     <th>Data used for analysis</th>
+>     <td>Preprocessed images, Cell tracks</td>
+>   </tr>
+>   <tr>
+>     <th>Analysis method</th>
+>     <td>Track cell lineage: BayesianTracker (btrack) with configuration track_config.json
+>       Measure speed: Numerical analysis in Python</td>
+>   </tr>
+> </table>
 {: .comment}
