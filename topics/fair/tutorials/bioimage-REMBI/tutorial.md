@@ -17,7 +17,7 @@ objectives:
 time_estimation: "15min"
 
 key_points:
-REMBI describes useul guidelines for bioimaging that can help unification and FARIfication of the data.
+- REMBI describes useul guidelines for bioimaging that can help unification and FARIfication of the data.
 
 tags:
 - fair
