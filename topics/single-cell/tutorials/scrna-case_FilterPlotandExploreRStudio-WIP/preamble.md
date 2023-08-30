@@ -8,8 +8,43 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 
 We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
 
+You can access the data for this tutorial in multiple ways:
+
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html), and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+
+   {% snippet faqs/galaxy/histories_copy_dataset.md %}
+
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe)
+
+   {% snippet faqs/galaxy/histories_import.md %}
+
+3. **Uploading from Zenodo** (see below)
+
+> <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
+>
+>    ```
+>    {{ page.zenodo_link }}/files/Mito-counted_AnnData
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. **Rename** {% icon galaxy-pencil %} the datasets `Mito-counted AnnData`
+> 4. Check that the datatype is `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+{: .hands_on}
+
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > <comment-title></comment-title>
->If you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or you may download the subset dataset(s) from [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe-test). Alternatively, download them from EBI below!
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
 {: .comment}
 
 > <agenda-title></agenda-title>
