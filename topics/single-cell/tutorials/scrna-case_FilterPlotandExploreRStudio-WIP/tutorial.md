@@ -108,7 +108,7 @@ rownames(exp_design.tsv)<-exp_design.tsv$Assay
 Now, in our RStudio environment, we should have all of the data sets necessary to create a Seurat Object: the matrix, a file with feature (gene) names, a file with cell barcodes, and an optional, but highly useful, experimental design file containing sample (cell-level) metadata. 
 
 # Generating a Seurat object
-Next we will add our dimension names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and cells are expression values of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
+Next we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are genes, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
 ><tip-title>About Seurat Objects</tip-title>
 >The order of the dimensions, such that genes are the first and cells are the second is a set characteristic of Seurat objects. 
