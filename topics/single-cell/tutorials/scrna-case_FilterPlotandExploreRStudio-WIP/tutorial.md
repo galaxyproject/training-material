@@ -452,7 +452,7 @@ Now that we have made note within our object of which cells cluster together, we
 {: .tip} 
 
 ```r
-filtered_srt <- RunUMAP(filtered_srt, dims = 1:10)
+filtered_srt <- RunUMAP(filtered_srt, dims = 1:10, seed.use = 1323)
 ```
 
 # Let's Take a Look
