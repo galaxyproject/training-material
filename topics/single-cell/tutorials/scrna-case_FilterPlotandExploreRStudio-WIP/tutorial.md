@@ -108,7 +108,7 @@ rownames(exp_design.tsv)<-exp_design.tsv$Assay
 Now, in our RStudio environment, we should have all of the data sets necessary to create a Seurat Object: the matrix, a file with feature (gene) names, a file with cell barcodes, and an optional, but highly useful, experimental design file containing sample (cell-level) metadata. 
 
 # Generating a Seurat object
-Next we will add our dimension names to our matrix. In the end, this will leave us with a matrix whose rows are gene names, columns are cell barcodes, and cells are expression values of a given gene in a given cell. The first dimension name will be assigned to the genes (rows), and the second dimension name will be assigned to the cells (columns):
+Next we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are genes, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
 ><tip-title>About Seurat Objects</tip-title>
 >The order of the dimensions, such that genes are the first and cells are the second is a set characteristic of Seurat objects. 
@@ -117,8 +117,7 @@ Next we will add our dimension names to our matrix. In the end, this will leave 
 {: .tip}
 
 ```r
-matrix.mtx@Dimnames[[1]]<-genes.tsv$V2
-matrix.mtx@Dimnames[[2]]<-barcodes.tsv$V1
+dimnames(matrix.mtx) <- list(genes.tsv$V2, barcodes.tsv$V1)
 ```
 
 In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x() step. Read10x() is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method. 
@@ -213,16 +212,16 @@ Ideally, we would like to see a relatively even distribution of counts for each 
 Now let's get an idea of how different variables, like the sex or genotype of the mice, might be represented across our dataset. 
 
 1. Sex?
-```r
-VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
-```
-![Violin Plot split by Sex](../../images/scrna-SeuratRStudio/plot2.png "Violin Plot of counts split by Sex.")
+    ```r
+    VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
+    ```
+    ![Violin Plot split by Sex](../../images/scrna-SeuratRStudio/plot2.png "Violin Plot of counts split by Sex.")
 
 2. Genotype?
-```r
-VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
-```
-![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
+    ```r
+    VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
+    ```
+    ![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. First, we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
@@ -528,7 +527,7 @@ We can also see which genes are differentially expressed across other variables 
 
 ```r
 metadata<-as.data.frame(filtered_srt@meta.data)
-filtered_srt<-SetIdent(objects = filtered_srt, value = "genotype")
+filtered_srt<-SetIdent(object = filtered_srt, value = "Genotype")
 ```
 
 The "metadata" object now in your environment is a dataframe with column names representing the different identities you may choose to group your cells by when running differential expression. The second line of code above will set the object's identity class to be the genotype from which the cell came from. 
@@ -559,7 +558,7 @@ Now it’s the fun bit! We can see where genes are expressed, and start consider
 Let's take another look at what our clusters look like: 
 
 ```r
-DimPlot(object = filtered_srt, reduction = "umap", group.by = "seurat_clusters")
+DimPlot(object = filtered_srt, reduction = "umap", label = TRUE, label.box = TRUE, group.by = "seurat_clusters") + NoLegend()
 ```
 ![DimPlot colored by 0.5 resolution cluster](../../images/scrna-SeuratRStudio/plot10.png "DimPlot colored by 0.5 resolution cluster.")
 
