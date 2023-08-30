@@ -212,10 +212,10 @@ Ideally, we would like to see a relatively even distribution of counts for each 
 Now let's get an idea of how different variables, like the sex or genotype of the mice, might be represented across our dataset. 
 
 1. Sex?
-```r
-VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
-```
-![Violin Plot split by Sex](../../images/scrna-SeuratRStudio/plot2.png "Violin Plot of counts split by Sex.")
+    ```r
+    VlnPlot(srt, group.by = "Sex",features = "nCount_RNA",log = TRUE)
+    ```
+    ![Violin Plot split by Sex](../../images/scrna-SeuratRStudio/plot2.png "Violin Plot of counts split by Sex.")
 
 2. Genotype?
 ```r
