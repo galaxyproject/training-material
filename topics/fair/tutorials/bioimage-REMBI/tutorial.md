@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: REMBI: Recommended Metadata for Biological Images – metadata guidelines for bioimaging data
+title: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data
 
 zenodo_link: ''
 
