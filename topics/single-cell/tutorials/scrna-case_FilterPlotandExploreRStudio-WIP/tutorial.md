@@ -218,10 +218,10 @@ Now let's get an idea of how different variables, like the sex or genotype of th
     ![Violin Plot split by Sex](../../images/scrna-SeuratRStudio/plot2.png "Violin Plot of counts split by Sex.")
 
 2. Genotype?
-```r
-VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
-```
-![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
+    ```r
+    VlnPlot(srt, group.by = "Genotype", features = "nCount_RNA", log = TRUE)
+    ```
+    ![Violin Plot split by Genotype](../../images/scrna-SeuratRStudio/plot3.png "Violin Plot of counts split by Genotype--Mutant versus Control.")
 
 # Finding Our Filtering Parameters
 Now that we have a better understanding of what our data looks like, we can begin identifying those spurious reads and low quality cells and then remove them. First, we'll plot the percent mito (perc.mt) against the cell count (nCount_RNA) to get an idea of what threshold we should set for nCount:
