@@ -340,7 +340,7 @@ What does this mean this substitution for the protein? Let's have a deeper look 
 > 
 {: .hands-on}
 
-![Screenshot of the Opsin 1 NIH protein page, two main panels. The one on the left reporting information about the gene, the one on the right is a table of content and a series of links to other resources](../../images/Opsin1NIH.png "Opsin 1 NIH protein page")
+![Screenshot of the Opsin 1 NIH protein page, two main panels. The one on the left reporting information about the gene, the one on the right is a table of content and a series of links to other resources](./images/Opsin1NIH.png "Opsin 1 NIH protein page")
 
 This page presents once again some data that we are familiar with (e.g. distribution of the exons along the gene sequence). 
 

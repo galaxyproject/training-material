@@ -150,7 +150,7 @@ The first result, labeled with `Gene: OPN1LW (RCP)`, is our target, `P04000 · O
 > 1. Click on `P04000 · OPSR_HUMAN`
 {: .hands-on}
 
-![Screenshot of the UniProt entry page header](../../images/online-resources/UniProt.png "UniProt page")
+![Screenshot of the UniProt entry page header](./images/UniProt.png "UniProt page")
 
 To navigate this long page, the menu (navigation bar) on the left will be extremely useful. Just from it, we understand that this database contains information about the entry on: 
 - the know functions, 
@@ -510,7 +510,7 @@ The *Publications* one lists scientific publications related to the protein. The
 
 The *External links* tab puts together all the references to external databases and resources of information that we found in each Entry page section. The links text often reports the unique identifiers that represent the same biological entity in other databases. To get a feeling of this compexity, check the following image (that is already partially outdated).
 
-![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](../../images/online-resources/complexDB.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram ([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php))")
+![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](./images/complexDB.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram ([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php))")
 
 ## History
 
