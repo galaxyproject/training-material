@@ -14,7 +14,7 @@ objectives:
 - Categorise what metadata belongs to each of the submodules of REMBI
 - Gather the metadata for an example bioimage dataset
   
-time_estimation: "15min"
+time_estimation: "15m"
 
 key_points:
 - REMBI describes useful guidelines for bioimaging that can help unification and FARIfication of the data.
