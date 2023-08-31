@@ -50,12 +50,12 @@ follow_up_training:
 
 # Metadata guidelines for bioimaging data
 
-REMBI (Recommended Metadata for Biological Images) was proposed as a draft metadata guidelines to begin addressing the needs of diverse communities within light and electron microscopy. Currently, these guidelines are in draft form to encourage discussion within the community, but they provide a useful guide as to what metadata should be gathered to make your image data FAIR. They divide the metadata requirements into eight submodules, which breaks up what can seem to be a daunting task! To find out more, check the [publication](https://www.nature.com/articles/s41592-021-01166-8).
+REMBI (Recommended Metadata for Biological Images) was proposed as a draft metadata guidelines to begin addressing the needs of diverse communities within light and electron microscopy. Currently, these guidelines are in draft form to encourage discussion within the community, but they provide a useful guide as to what metadata should be gathered to make your image data FAIR. They divide the metadata requirements into eight modules which further split into attributes - that seems to be a daunting task, doesn't it? But at the same time it's exciting news for the community! To find out more, have a look at the [REMBI article](https://www.nature.com/articles/s41592-021-01166-8).
 
 
 > <question-title></question-title>
 >
-> In the [REMBI paper](https://www.nature.com/articles/s41592-021-01166-8), the authors consider three potential user groups who require different metadata. Find out what these three groups are and what their metadata requirements are.
+> In the [REMBI paper](https://www.nature.com/articles/s41592-021-01166-8), the authors consider three potential user groups who require different metadata. Find out what are these three groups and their metadata requirements.
 >
 > > <solution-title></solution-title>
 > > The identified three user groups are: Biologists, Imaging scientists, Computer-vision researchers. 
@@ -68,12 +68,22 @@ REMBI (Recommended Metadata for Biological Images) was proposed as a draft metad
 
 > <tip-title>Instructor Note</tip-title>
 >
-> If you're an instructor leading this training, you might ask people to work in small groups for this exercise and encourage discussion within them. Ask group members to share with their group which of the user groups they identify as and what metadata they would want.
+> If you're an instructor leading this training, you might ask people to work in small groups for this exercise and encourage the discussion. Ask group members to share which of the user groups they identify as and what metadata they would want.
 > 
 {: .tip}
 
 # Categories of metadata 
-REMBI covers different categories of metadata, such as: *study, study component, biosample, specimen, image acquisition, image data, image correlation, analyzed data*. Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well. 
+REMBI covers different categories of metadata, such as: 
+- study
+- study component
+- biosample
+- specimen
+- image acquisition
+- image data
+- image correlation
+- analyzed data
+
+> Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well. 
 
 ## Study 
 The first module of REMBI metadata describes the Study and should include:
@@ -181,7 +191,7 @@ The description of the study component should include an overview of what was im
 
 ## Biosample
 >
-The first thing you need for the biosample metadata is an Identity. This is a code that you assign to each sample you are describing, which will link this metadata to the physical sample. Then, state what the biological entity is, which should be from a relevant ontology. Use a taxonomy to name the organism. Next, describe the variables in your experiment. The REMBI guidelines split the variables into three types:
+The first thing you need for the biosample metadata is an Identity. This is a code that you assign to each sample you are describing, which will link this metadata to the physical sample. Then, state what the biological entity is, which should come from a relevant ontology. Use a taxonomy to name the organism. Next, describe the variables in your experiment. The REMBI guidelines split the variables into three types:
 - intrinsic - describe an innate trait of the biosample, such as a genetic alteration
 - extrinsic - describe something you added to the sample, for example, a reagent
 - experimental - things that you intentionally vary, like time
@@ -257,8 +267,10 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .comment}
 
 ## Image acquisition
-> This all the information about the instrument you have used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?
+> Here you should include all the information about the instrument you used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?
+> 
 > Check with your facility manager if they have any guidelines for what details need to be recorded for your particular instrument. Make sure that the parameters you record can actually be used by someone else if they don’t have exactly the same instrument or setup. For example, don’t say that you used a certain percentage of laser power, as this doesn’t tell you how much power was used unless you also provide the total power of the laser. If the instrument software has automatically generated a metadata file, remember to save this. Depending on its content, this may be sufficient.
+> 
 > Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.
 
 > <comment-title>Example</comment-title>
@@ -390,3 +402,8 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 >   </tr>
 > </table>
 {: .comment}
+
+# Final notes
+> For more examples, check out REMBI Supplementary Information - either in [pdf](https://static-content.springer.com/esm/art%3A10.1038%2Fs41592-021-01166-8/MediaObjects/41592_2021_1166_MOESM1_ESM.pdf) or [spreadsheet](https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit#gid=1023506919).
+> 
+> At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management skills, share them with others and hence contribute to the development of Science toghether. 
