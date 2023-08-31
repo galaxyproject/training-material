@@ -40,6 +40,8 @@ requirements:
 
 The life science community is generally very good at sharing omics data on platforms such as GEO and ArrayExpress.  However, the metadata and clinical data associated with the omics datasets are often incredibly sparse.  Tracking down the meta- and clinical data of omics sets can be time-consuming for both data owner and researcher.  This also means exploration of enriched omics is overlooked at a time when there are so many tools in data analyses, machine learning and AI.
 
+[comment]: <> (Is this how a comment is written in Markdown?)
+
 In this tutorial, you will learn the benefits of making clinical datasets FAIR and how to make them FAIR.
 
 > <agenda-title></agenda-title>
