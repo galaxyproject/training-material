@@ -20,7 +20,7 @@ key_points:
 - NCBI offers a BLAST tool to perform similarity searches with sequences.
 - You can further explore the resources included in this tutorial to learn more about the gene-associated conditions and the variants.
 - You can input a FASTA file containing a sequence of interest for BLAST searches.
-contributors:
+contributions:
   authorship:
     - lisanna
     - bebatut

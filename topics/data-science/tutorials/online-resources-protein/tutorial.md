@@ -29,7 +29,7 @@ requirements:
   topic_name: data-science
   tutorials:
   - online-resources-gene
-contributors:
+contributions:
   authorship:
     - lisanna
     - bebatut
