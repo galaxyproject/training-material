@@ -538,7 +538,7 @@ The first hit should be `P04000 · OPSR_HUMAN`. Before opening the page, two thi
 1. The name of the protein `OPSR_HUMAN` is different than the gene name, as well as their IDs are. 
 2. This entry has a golden star, which means that was manually annotated and curated. 
 
-> <hands-on-title>Searching on UniProt</hands-on-title>
+> <hands-on-title>Open a result on UniProt</hands-on-title>
 >
 > 1. Click on `P04000 · OPSR_HUMAN`
 {: .hands-on}
