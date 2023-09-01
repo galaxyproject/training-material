@@ -471,7 +471,7 @@ It will download a new, slightly different, type of file: an aligned FASTA. If y
 
 While in the previous sections of this tutorial we extensively used the web interfaces of the tools (genomic viewers, quick literature scanning, reading annotations, etc.), this BLAST search is an example of a step that you could fully automate with Galaxy. 
 
-> <hands-on-title> Similarity search against with BLAST </hands-on-title>
+> <hands-on-title> Similarity search with BLAST in Galaxy </hands-on-title>
 >
 > 1. Create a new history for this analysis
 >
@@ -544,6 +544,6 @@ The first hit should be `P04000 · OPSR_HUMAN`. Before opening the page, two thi
 > 1. Click on `P04000 · OPSR_HUMAN`
 {: .hands-on}
 
-![Screenshot of the UniProt entry page header](../../images/online-resources/UniProt.png "UniProt page")
+![Screenshot of the UniProt entry page header](./images/UniProt.png "UniProt page")
 
 This is a long page with a lot of information, we designed an [entire tutorial]({% link topics/data-sciences/tutorials/online-resources-protein/tutorial.md %}) to go through it.  

@@ -113,11 +113,11 @@ To be specific enough, we suggest to use an unique identifier. From the [previou
 > > <solution-title></solution-title>
 > >
 > > 1. 200+ results (at the time of preparation of this tutorial)
-> > 2. We need to clariry what we are looking for: Human OPN1LW
+> > 2. We need to clarify what we are looking for: Human OPN1LW
 > {: .solution}
 {: .question}
 
-We need to `Human` to clarify what we are looking for.
+We need to add `Human` to clarify what we are looking for.
 
 > <hands-on-title>Search for Human OPN1LW on UniProtKB</hands-on-title>
 >
@@ -510,7 +510,7 @@ The *Publications* one lists scientific publications related to the protein. The
 
 The *External links* tab puts together all the references to external databases and resources of information that we found in each Entry page section. The links text often reports the unique identifiers that represent the same biological entity in other databases. To get a feeling of this compexity, check the following image (that is already partially outdated).
 
-![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](./images/complexDB.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram ([source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php))")
+![A graph representing how all the different databases are connected by unique IDs, where major nodes are DBs, and arrows connect them to the IDs (minor nodes) that they report. The map is very crowded, especially around the UniProt Entry Name, Gene ID and Ensembl Gene ID](./images/complexDB.jpeg "Best illustration of the complex ID crossref: bioDBnet Network Diagram - [source](https://biodbnet-abcc.ncifcrf.gov/dbInfo/netGraph.php)")
 
 ## History
 
