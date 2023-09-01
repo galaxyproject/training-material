@@ -24,6 +24,7 @@ contributions:
   authorship:
     - lisanna
     - bebatut
+    - teresa-m
   funding:
     - biont
 ---
@@ -175,7 +176,7 @@ The sequence highlighted in purple here signals a regulatory region.
 > > <solution-title></solution-title>
 > >
 > > 1. The correspondent protein starts with Methionine, M (they all do).
-> > 2. It ends with the last AA of the last intron (found in the 2nd page), hence Alanine, A. After that, the stop codon TGA.
+> > 2. The last AA of the last exon (found in the 2nd page) is Alanine (A). After that, the stop codon TGA comes, which is not translated into an AA.
 > > 3. The first three AAs are: M,A,Q; the last three: S,P,A.
 > >
 > {: .solution}
@@ -399,7 +400,7 @@ This phase will take some time, there is afterall some server somewhere that is 
 
 We access a box containing lots of colored lines. Each line represents a hit from your blast search. If you click on a red line, the narrow box just above the box gives a brief description of the hit. 
 
-> <hands-on-title>Descriptipns of the protein sequences</hands-on-title>
+> <hands-on-title>Descriptions of the protein sequences</hands-on-title>
 >
 > 1. Click on the tab *Descriptions*
 {: .hands-on}
@@ -435,7 +436,7 @@ With this new search, we find the other opsins (green, blue, rod-cell pigment) i
 >
 > 1. the BLAST Score - lableled Score (bits)
 >
->    The BLAST Score indicates the quality of the best alignment between the query sequence and the found sequence (hit). The higher the score, the better the alignment. Scores are reduced by mismatches and gaps in the best alignment. Calculation of the score is complex, involving a substituion matrix, which is a table that assigns a score to each pair of residues aligned. The most widely used matrix for protein alignment is known as BLOSUM62.
+>    The BLAST Score indicates the quality of the best alignment between the query sequence and the found sequence (hit). The higher the score, the better the alignment. Scores are reduced by mismatches and gaps in the best alignment. Calculation of the score is complex, involving a substitution matrix, which is a table that assigns a score to each pair of residues aligned. The most widely used matrix for protein alignment is known as BLOSUM62.
 >
 > 2. the Expectation Value (labeled Expect or E)
 >
