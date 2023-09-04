@@ -46,7 +46,7 @@ $tutorial-box-spacing: 1rem;
 
 	--border: #888;
 
-	--gradient-trans: 
+	--color-disabled: #ccc;
 }
 
 body[data-brightness="light"][data-light_theme="yellow"] {
@@ -71,7 +71,12 @@ body[data-brightness="dark"] {
 
 body[data-brightness="dark"][data-dark_theme="night"] {
 	--color-background: #444;
+	--color-disabled: #222;
 	--text-color: #ccc;
+}
+
+body[data-brightness="dark"][data-dark_theme="midnight"] {
+	--color-disabled: #222;
 }
 
 // High Contrast
@@ -115,6 +120,11 @@ select {
 	border: 1px solid var(--border) !important;
 	background: var(--color-background) !important;
 	color: var(--text-color) !important;
+
+	&:disabled {
+		background: var(--color-disabled) !important;
+		color: var(--text-color-muted) !important;
+	}
 }
 
 hr {
