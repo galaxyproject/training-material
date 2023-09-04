@@ -173,6 +173,14 @@ function savePrivacy() {
 // restore from prefs
 document.getElementById("sentry-opt-out").value = gtnLocalGet("sentry-opt-out") || "opt-in";
 document.getElementById("plausible-opt-out").value = gtnLocalGet("plausible-opt-out") || "opt-in";
+
+if(navigator.doNotTrack === "1"){
+	document.getElementById("sentry-opt-out").disabled = true
+	document.getElementById("plausible-opt-out").disabled = true
+
+	document.getElementById("sentry-opt-out").innerHTML = `<option value="opt-out">Opted-out (Do not track is set in your browser)</option>`
+	document.getElementById("plausible-opt-out").innerHTML = `<option value="opt-out">Opted-out (Do not track is set in your browser)</option>`
+}
 </script>
 
 ## Settings

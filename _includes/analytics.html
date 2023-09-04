@@ -11,7 +11,7 @@ scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
 scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
 
 // Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out') {
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Plausible: opt-in");
 	// Wait for the document to be available
 	document.addEventListener("DOMContentLoaded", function(event) {
@@ -34,7 +34,7 @@ scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js
 scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
 scriptElement.crossOrigin = "anonymous";
 
-if(localStorage.getItem('sentry-opt-out') !== 'opt-out') {
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
 	// Appending the script element to the body
 	document.addEventListener("DOMContentLoaded", function(event) {
