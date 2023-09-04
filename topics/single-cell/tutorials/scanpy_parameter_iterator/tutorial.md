@@ -152,7 +152,7 @@ The kNN graph will be needed for plotting a UMAP. According to the [UMAP develop
 > 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - n-neighbours` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
->    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
+>    - navigate to *Show hidden* ({% icon galaxy-show-hidden %} icon)
 >    - add tags accordingly - *n-neighbours_10*: `#n-neighbours_10` etc.
 >    - If you want to refresh your memory on how to add tags to datasets, have a look here: 
 >
@@ -240,7 +240,7 @@ If you compare the UMAP graphs, you can see the differences that were caused by 
 
 We will go forward with k value equal to 15. But hang on, we’ve been working on a collection and not a single dataset! How can we access that one dataset with the n-neighbour = 15? 
 
-Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on *Show hidden* (crossed eye {% icon galaxy-eye %} icon). You can bring each individual dataset to the visible and active datasets by clicking *Unhide*.
+Here is the answer: The datasets that are included in the collections can be accessed separately if you go to your history and click on *Show hidden* ({% icon galaxy-show-hidden %} icon). You can bring each individual dataset to the visible and active datasets by clicking *Unhide*.
 
 > <hands-on-title> Unhide the dataset of interest </hands-on-title>
 > 1. In *Show hidden* find the dataset `Scanpy ComputeGraph on data X and data Y: Graph object AnnData` with the tag `#n-neighbours_15` (or any value that you want to go forward with).
@@ -270,7 +270,7 @@ The next tool in our workflow is Scanpy RunTSNE, which contains the perplexity p
 > 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - perplexity` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
->    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
+>    - navigate to *Show hidden* ({% icon galaxy-show-hidden %} icon)
 >    - add tags accordingly - *perplexity_15*: `#perplexity_15` etc.
 >    - If you want to refresh your memory on how to add tags to datasets, have a look here: 
 >
@@ -361,7 +361,7 @@ The last tool that we can use Parameter Iterator for is **Scanpy FindCluster** {
 > 2. **Rename** {% icon galaxy-pencil %} the resulting list of datasets: `Parameter iterated - resolution` (you have to first click on the collection so that you see the datasets, and then rename it)
 > 
 > 3. **Tag** {% icon galaxy-tags %} each dataset with its corresponding value: 
->    - navigate to *Show hidden* (crossed eye {% icon galaxy-eye %} icon)
+>    - navigate to *Show hidden* ({% icon galaxy-show-hidden %} icon)
 >    - add tags accordingly - *resolution_0.2*: `#resolution_0.2` etc.
 >    - If you want to refresh your memory on how to add tags to datasets, have a look here: 
 >
