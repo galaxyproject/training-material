@@ -63,6 +63,14 @@ function savePrefs() {
 		.forEach(x => { prefs[x[0]] = x[1] })
 	gtnLocalSet('theme2', JSON.stringify(prefs))
 	processTheme2();
+
+
+	if(prefs.theme === "straya"){
+		document.body.classList.add('downunder');
+		setTimeout(function(){
+			document.body.classList.remove('downunder');
+		}, 8000);
+	}
 }
 
 function restorePrefs(){

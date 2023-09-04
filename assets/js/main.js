@@ -171,18 +171,6 @@ function fixDiffPresentation(codeBlock){
 document.querySelectorAll("article.topic-admin section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
-$("#theme-selector button").click(function(evt){
-	var theme = $(evt.target).data('theme');
-	setTheme(theme);
-	if(theme === "straya"){
-		$("body").addClass('downunder');
-		setTimeout(function(){
-			$("body").removeClass('downunder');
-		}, 8000);
-	}
-})
-
-
 // Redirects
 if(window.location.hostname === "galaxyproject.github.io") {
 	// Redirect
