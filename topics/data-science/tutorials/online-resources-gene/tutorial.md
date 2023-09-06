@@ -51,7 +51,7 @@ Human opsins are found in the cells of your retina. Opsins catch light and begin
 
 # Searching Human Opsins
 
-To seach Human Opsins, we will start by checking the [NCBI Genome Data Viewer](www.ncbi.nlm.nih.gov/genome/gdv). The NCBI Genome Data Viewer (GDV) ({% cite rangwala2021accessing %}) is a genome browser supporting the exploration and analysis of annotated eukaryotic genome assemblies. The GDV browser displays biological information mapped to a genome, including gene annotation, variation data, BLAST alignments, and experimental study data from the NCBI GEO and dbGaP databases. GDV release notes describe new features relating to this browser. 
+To seach Human Opsins, we will start by checking the [NCBI Genome Data Viewer](https://www.ncbi.nlm.nih.gov/genome/gdv). The NCBI Genome Data Viewer (GDV) ({% cite rangwala2021accessing %}) is a genome browser supporting the exploration and analysis of annotated eukaryotic genome assemblies. The GDV browser displays biological information mapped to a genome, including gene annotation, variation data, BLAST alignments, and experimental study data from the NCBI GEO and dbGaP databases. GDV release notes describe new features relating to this browser. 
 
 > <hands-on-title>Open NCBI Genome Data Viewer</hands-on-title>
 >
@@ -546,4 +546,4 @@ The first hit should be `P04000 · OPSR_HUMAN`. Before opening the page, two thi
 
 ![Screenshot of the UniProt entry page header](./images/UniProt.png "UniProt page")
 
-This is a long page with a lot of information, we designed an [entire tutorial]({% link topics/data-sciences/tutorials/online-resources-protein/tutorial.md %}) to go through it.  
+This is a long page with a lot of information, we designed an [entire tutorial]({% link topics/data-science/tutorials/online-resources-protein/tutorial.md %}) to go through it.  

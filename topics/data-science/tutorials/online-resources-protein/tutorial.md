@@ -44,11 +44,11 @@ When doing a biological data analysis, we might end up with some interesting pro
 The aim of this tutorial is to familiarize ourselves with that, using Human opsins as an example.
 
 > <comment-title></comment-title>
-> This tutorial is a bit atypical: we will not work in Galaxy but mostly outside of it, in the [UniProt](uniprot.org) database pages.
+> This tutorial is a bit atypical: we will not work in Galaxy but mostly outside of it, in the [UniProt](https://uniprot.org) database pages.
 {: .comment}
 
 > <comment-title></comment-title>
-> This tutorial  designed to be the continuation of the tutorial ["One gene across file formats"]({% link topics/data.science/tutorials/online-resources-gene/tutorial.md %}), but it can also be consulted as a stand-alone module. 
+> This tutorial  designed to be the continuation of the tutorial ["One gene across file formats"]({% link topics/data-science/tutorials/online-resources-gene/tutorial.md %}), but it can also be consulted as a stand-alone module. 
 {: .comment}
 
 Opsins are found in the cells of your retina. They catch light and begin the sequence of signals that result in vision, and that is the reason why, when compromised, they are associated to color-blindness and other visual impairments. 
@@ -96,7 +96,7 @@ The portal to visit to obtain all information about a protein is [UniProtKB](htt
 
 These 410 results give us the feeling that we need to be more specific (although - spoiler - our actual target is among the first hits).
 
-To be specific enough, we suggest to use an unique identifier. From the [previous tutorial]({% link topics/data.science/tutorials/online-resources-gene/tutorial.md %}) we know the gene name of the protein that we are looking for, `OPN1LW`.
+To be specific enough, we suggest to use an unique identifier. From the [previous tutorial]({% link topics/data-science/tutorials/online-resources-gene/tutorial.md %}) we know the gene name of the protein that we are looking for, `OPN1LW`.
 
 > <hands-on-title>Search for OPN1LW on UniProtKB</hands-on-title>
 >
