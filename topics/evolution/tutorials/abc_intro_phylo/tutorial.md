@@ -50,7 +50,7 @@ It has been adapted to work as a stand-alone, self-paced tutorial, which can run
 	* Distance-based (NJ, BioNJ)
 	* Parsimony
 	* Likelihood (simple models only)
-* Comparing phylogenies --- what do when they aren't all the same
+* Comparing phylogenies --- what to do when they aren't all the same
 * Analysing robustness
 * Interpreting results, 
 	* e.g. confidence interval on dates of divergence;
@@ -69,9 +69,9 @@ It has been adapted to work as a stand-alone, self-paced tutorial, which can run
 
 On successful completion of this workshop you will be able to:
 
-* Estimate a phylogenetic tree based on a set of aligned molecular sequences;
+* Use standard tools to align a set of DNA sequences;
 * Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis;
-* Apply standard methods to aligned data to infer phylogenetic trees;
+* Estimate a phylogenetic tree based on a set of aligned molecular sequences;
 * Assess the reliability of estimated phylogenies.
 
 
@@ -198,7 +198,7 @@ This assumption means that the future evolutionary trajectory of an organism is 
 
 We need to define some terms, which may be new to you.
 
-![Anatomy of a Tree](./images/TreeAnatomy.png){:align="center"}
+![Anatomy of a Tree](./images/TreeAnatomyWithOutgroup.png){:align="center"}
 
 **how to get a figure label on this? Call it Fig 1. Tree Anatomy**
 
@@ -214,8 +214,17 @@ Many phylogenies have a special node assigned as the common ancestor of all the 
 If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
 Such trees and phylogenies are called **rooted**; if there is no such root then they are called **unrooted**. 
 
+*The majority of phylogenetic inference methods produce unrooted trees, but rooted trees are more useful.*
+
 In a rooted phylogeny, all the leaves that are descendant from any given node form a **monophyletic clade** (or often just "**clade**"). 
 (Monophyletic means "one tribe (of) origin" from the Greek.)
+
+One standard way to determine where the root of a tree is, is to include an **outgroup**, which is a set of taxa that are definitely not within the clade of interest (which is then called our **ingroup**) but which share a common ancestor with that clade.
+A good outgroup won't be too distantly related to our ingroup, because if it's too distant then the choice of where it should connect to the ingroup will be hard: ultimately resulting in a guess.
+You can see that in the diagram above the connection of the ingroup to the outgroup could be from multiple locations.
+Once the *unrooted* tree is created, using all the data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
+
+![Rooting a Tree](./images/TreeAnatomyRooting.drawio.png){:align="center"}
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
