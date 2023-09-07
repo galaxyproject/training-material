@@ -282,7 +282,7 @@ That's a lot of information! Let's attack this in sections and see what question
 
 Now that we've assessed the differences in our samples, we will look at the libraries overall to identify appropriate thresholds for our analysis.
 
-> <question-title>Filter Thresholds</question-title>
+> <question-title>Filter Thresholds: genes</question-title>
 >
 > What threshold should you set for `log1p_n_genes_by_counts`?
 > 1. Which plot(s) addresses this?
@@ -299,6 +299,9 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > >   - Some bioinformaticians would recommend filtering each sample individually, but this is difficult in larger scale and in this case (you're welcome to give it a go! You'd have to filter separately and then concatenate), it won't make a notable difference in the final interpretation.
 > >
 > {: .solution}
+{: .question}
+
+> <question-title>Filter Thresholds: UMIs</question-title>
 >
 > What threshold should you set for `log1p_total_counts`?
 > 1. Which plot(s) addresses this?
@@ -313,6 +316,9 @@ Now that we've assessed the differences in our samples, we will look at the libr
 > >   - In an ideal world, you'll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!
 > >
 > {: .solution}
+{: .question}
+
+> <question-title>Filter Thresholds: mito</question-title>
 >
 > What threshold should you set for `pct_counts_mito`?
 > 1. Which plot(s) addresses this?
