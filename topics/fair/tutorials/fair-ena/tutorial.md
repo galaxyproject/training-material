@@ -6,7 +6,6 @@ abbreviations:
 zenodo_link: ''
 questions:
 - How do I submit sequences to ENA for my manuscript?
--  
 objectives:
 - To populate ENA metadata objects for correct submission
 - To submit raw reads to ENA
@@ -233,7 +232,6 @@ To enable verification of the integrity of the uploaded fastq file md5 checksum 
 > > <tip-title></tip-title>
 > > The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describe the methods used to sequence the sample.
 > {: .tip}
-
 
 {: .hands_on}
 
