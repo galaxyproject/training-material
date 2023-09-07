@@ -115,7 +115,7 @@ Here are links to two registry projects.  Both websites describe the projects, t
 ## Electronic health records (EHR)
 These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at the country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as anonymised data, to avoid the ability to identify individuals from the data.
 
-[comment]: <> (This part may need rewording. My understanding is that EHRs are provided by: 1) GPs (two main platforms are EMIS Web and TPP SystmOne) and, 2) NHS trusts (many different suppliers).  NHS England provides advice on accredited suppliers.)
+[comment]: <> (This part may need rewording. My understanding is that EHRs are provided by: GPs where two main platforms are EMIS Web and TPP SystmOne and; NHS trusts with many different suppliers.  NHS England provides advice on accredited suppliers.)
 
 In the UK, Clinical Practice Research Datalink ([CPRD](https://cprd.com)) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset. 
 
@@ -162,7 +162,7 @@ Similarly, in order to make the most of machine learning techniques, datasets ne
 ## Time-saving
 Usually, after finding potentially interesting datasets on GEO or ArrayExpress, the next step in trying to enrich these public datasets is to contact the PI of the study to request additional data.  From experience, the PI is usually happy to share additional data, especially if there have been previous collaborations.  However, even given the willingness to share, there is a time-consuming process of contacting the person who has the data and reaching agreement on what can and will be shared.  This at best will take weeks, but most likely months, especially if there is a lapse in communication between parties.
 
-[comment]: <> (Maybe include a final sentence to bring this together with the time-savings made by initially releasing rich and FAIR (meta)data)
+[comment]: <> (Maybe include a final sentence to bring this together with the time-savings made by initially releasing rich and FAIR data and metadata)
 
 # Practical techniques to make clinical data FAIR
 There are certain privacy concerns when making clinical data freely available through public libraries such as GEO and ArrayExpress. Data needs to be anonymised, or at least pseudo-anonymised.  
