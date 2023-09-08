@@ -83,7 +83,7 @@ REMBI covers different categories of metadata, such as:
 - image correlation
 - analyzed data
 
-> Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well. 
+Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well. 
 
 ## Study 
 The first module of REMBI metadata describes the Study and should include:
@@ -92,7 +92,7 @@ The first module of REMBI metadata describes the Study and should include:
 - General dataset information
 
 ### Study type
->
+
 Ideally, the study type will be part of an ontology. You can look up the main subject of your study using a tool like [OLS](https://www.ebi.ac.uk/ols/index) to find a suitable ontology. This will help others to see where your study sits within the wider research area.
 
 > <comment-title>Example</comment-title>
@@ -106,9 +106,9 @@ Ideally, the study type will be part of an ontology. You can look up the main su
 >
 {: .comment}
 
->
+
 ### Study description
->
+
 A brief description of the project. The Study Description should include the title of the study, a brief description and any related publication details such as authors, title and  DOI. If you are gathering metadata prepublication, you can fill in the publication details later or enter a draft title or the journal name you plan to submit to. It’s still a good idea to include the category, so you don’t forget.
 
 > <comment-title>Example</comment-title>
@@ -133,7 +133,7 @@ A brief description of the project. The Study Description should include the tit
 
 
 ### General dataset information
->
+
 This should include all the information that relates to all the data in the project. This can include the names of contributors and the repository where the data is or will be stored. State the licence under which you intend to make the data available, the repository you intend to submit to and if you are using a schema for structuring your metadata. This helps to keep all collaborators on the same page. Any other general information with respect to the study can be included here, but try to keep this broad as more detailed information should be included in other sections of the metadata.
 
 > <comment-title>Example</comment-title>
@@ -161,13 +161,13 @@ This should include all the information that relates to all the data in the proj
 {: .comment}
 
 ## Study component
->
+
 A study component can be thought of as an experiment, both the physical experiment and subsequent data analysis, or a series of experiments that have been conducted with the same aim in mind.
->
+
 The associated metadata should describe the imaging method used and include a description of the image dataset. The REMBI guidelines store high-level metadata in the study component and then divide the more detailed metadata into other modules. 
->
+
 Within the Study component we include the Imaging Method which should describe the techniques used to acquire the raw data. This could be one or multiple methods, which should be part of a relevant ontology. For Confocal Microscopy data, we can use the Biological Imaging Methods Ontology, although it is also present in a number of other ontologies.
->
+
 The description of the study component should include an overview of what was imaged as well as any processed data that is created during analysis. 
 
 > <comment-title>Example</comment-title>
@@ -190,13 +190,13 @@ The description of the study component should include an overview of what was im
 {: .tip}
 
 ## Biosample
->
+
 The first thing you need for the biosample metadata is an Identity. This is a code that you assign to each sample you are describing, which will link this metadata to the physical sample. Then, state what the biological entity is, which should come from a relevant ontology. Use a taxonomy to name the organism. Next, describe the variables in your experiment. The REMBI guidelines split the variables into three types:
 - intrinsic - describe an innate trait of the biosample, such as a genetic alteration
 - extrinsic - describe something you added to the sample, for example, a reagent
 - experimental - things that you intentionally vary, like time
 
-> You can leave out some of the variables if they are not part of your experiment.
+You can leave out some of the variables if they are not part of your experiment.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -228,14 +228,15 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .comment}
 
 ## Specimen
->
-> The specimen metadata should include:
+
+ The specimen metadata should include:
 - the experimental status (control or test)
 - the location within the biosample, such as a coordinate or a particular well in a plate
 - how the sample was prepared
 - how the signal is being generated
 - the content and biological entities of different channels.
-> Include enough information so that someone with experience in the field could reproduce a sample by following the information you provided. Assume they would know typical techniques and name them using terms from an ontology if possible. Only include lots of detail if you are describing a novel technique.
+
+ Include enough information so that someone with experience in the field could reproduce a sample by following the information you provided. Assume they would know typical techniques and name them using terms from an ontology if possible. Only include lots of detail if you are describing a novel technique.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -267,11 +268,11 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .comment}
 
 ## Image acquisition
-> Here you should include all the information about the instrument you used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?
-> 
-> Check with your facility manager if they have any guidelines for what details need to be recorded for your particular instrument. Make sure that the parameters you record can actually be used by someone else if they don’t have exactly the same instrument or setup. For example, don’t say that you used a certain percentage of laser power, as this doesn’t tell you how much power was used unless you also provide the total power of the laser. If the instrument software has automatically generated a metadata file, remember to save this. Depending on its content, this may be sufficient.
-> 
-> Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.
+Here you should include all the information about the instrument you used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?
+ 
+Check with your facility manager if they have any guidelines for what details need to be recorded for your particular instrument. Make sure that the parameters you record can actually be used by someone else if they don’t have exactly the same instrument or setup. For example, don’t say that you used a certain percentage of laser power, as this doesn’t tell you how much power was used unless you also provide the total power of the laser. If the instrument software has automatically generated a metadata file, remember to save this. Depending on its content, this may be sufficient.
+ 
+Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -313,10 +314,14 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .tip}
 
 ## Image data
-> In this section, you record all the information related to all the images you have. Not only the primary or raw images, but also any processed images,  perhaps such as binary files showing the resulting segmentation.
-> You need to say what format the images are in and if they have undergone any compression, the dimensions of the images, and what the physical size of the pixel or voxel is, including the units. Most of this information you should be able to get from the metadata or header of the image files.
-> Next, you need to state the physical size of the image or magnification, calculated from the pixel or voxel size and the dimension extents. Give any information related to how the channels are represented. For processed images, you need to provide the methods used for processing.
-> Finally, say you have used contrast inversion, do the bright features in the image correspond to areas of high signal, or is it the other way around?
+
+In this section, you record all the information related to all the images you have. Not only the primary or raw images, but also any processed images,  perhaps such as binary files showing the resulting segmentation.
+
+You need to say what format the images are in and if they have undergone any compression, the dimensions of the images, and what the physical size of the pixel or voxel is, including the units. Most of this information you should be able to get from the metadata or header of the image files.
+
+Next, you need to state the physical size of the image or magnification, calculated from the pixel or voxel size and the dimension extents. Give any information related to how the channels are represented. For processed images, you need to provide the methods used for processing.
+
+Finally, say you have used contrast inversion, do the bright features in the image correspond to areas of high signal, or is it the other way around?
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -353,7 +358,8 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 
 
 ## Image correlation
-> If you have used different imaging modalities with the same sample, this part of the metadata should describe how the images relate to one another. You could use this section to describe generally the relationship between images. In the example below, images from different modalities have been aligned.
+
+If you have used different imaging modalities with the same sample, this part of the metadata should describe how the images relate to one another. You could use this section to describe generally the relationship between images. In the example below, images from different modalities have been aligned.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -383,7 +389,8 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .comment}
 
 ## Analysed data
-> This section should not include metadata for any image data, including processed images, as that should have been covered in the Image Data section. Instead, it should describe the analysis results you have, such as measurements. Have you done some numerical analysis or some phenotyping or something else? There is no need to describe the methods in great detail if they are already described in the relevant publication.
+
+This section should not include metadata for any image data, including processed images, as that should have been covered in the Image Data section. Instead, it should describe the analysis results you have, such as measurements. Have you done some numerical analysis or some phenotyping or something else? There is no need to describe the methods in great detail if they are already described in the relevant publication.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -404,6 +411,8 @@ The first thing you need for the biosample metadata is an Identity. This is a co
 {: .comment}
 
 # Final notes
-> For more examples, check out REMBI Supplementary Information - either in [pdf](https://static-content.springer.com/esm/art%3A10.1038%2Fs41592-021-01166-8/MediaObjects/41592_2021_1166_MOESM1_ESM.pdf) or [spreadsheet](https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit#gid=1023506919).
-> 
-> At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management habits, share them with others and hence contribute to the development of Science toghether. 
+
+For more examples, check out REMBI Supplementary Information - either in [pdf](https://static-content.springer.com/esm/art%3A10.1038%2Fs41592-021-01166-8/MediaObjects/41592_2021_1166_MOESM1_ESM.pdf) or [spreadsheet](https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit#gid=1023506919).
+
+
+At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management habits, share them with others and hence contribute to the development of Science toghether. 
