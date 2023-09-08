@@ -153,7 +153,7 @@ The first result, labeled with `Gene: OPN1LW (RCP)`, is our target, `P04000 · O
 ![Screenshot of the UniProt entry page header](./images/UniProt.png "UniProt page")
 
 To navigate this long page, the menu (navigation bar) on the left will be extremely useful. Just from it, we understand that this database contains information about the entry on: 
-- the know functions, 
+- the known functions, 
 - the taxonomy, 
 - the location,
 - variants and associated diseases, 
@@ -238,7 +238,7 @@ We already know where our protein is in the human body (in the retina, as specif
 > <question-title></question-title>
 >
 > 1. Where is our protein in the cell?
-> 2. Is it coherent with the GO annotation observed before?
+> 2. Is it consistent with the GO annotation observed before?
 >
 > > <solution-title></solution-title>
 > > 
@@ -255,7 +255,7 @@ The Subcellular location section includes a *Features* area detailing which sect
 >
 > > <solution-title></solution-title>
 > > 
-> > 8 Transmembrane and 7 Topological domain 
+> > 8 Transmembrane and 7 Topological domains
 > {: .solution}
 {: .question}
 
@@ -265,7 +265,7 @@ As we know from the previous tutorial, this gene/protein is associated to multip
 
 > <question-title></question-title>
 >
-> What types of scientific studies allow to assess the association of a genetic variant to a diseases?
+> What types of scientific studies allow to assess the association of a genetic variant to diseases?
 >
 > > <solution-title></solution-title>
 > > 
@@ -289,7 +289,7 @@ As we know from the previous tutorial, this gene/protein is associated to multip
 > {: .solution}
 {: .question}
 
-Also this section includes a *Features* area, where the natural variants are mapped along the sequence. Below, it also highlights that a more detailed view of features along the sequence is provided in the *Disease & Variants* tab, but let's not open it for now. 
+This section also includes a *Features* area, where the natural variants are mapped along the sequence. Below, it also highlights that a more detailed view of features along the sequence is provided in the *Disease & Variants* tab, but let's not open it for now. 
 
 ### PTM/Processing
 
@@ -297,7 +297,7 @@ A post-translational modification (PTM) is a covalent processing event resulting
 
 > <question-title></question-title>
 >
-> What are Post-translational modifications for our protein?
+> What are the post-translational modifications for our protein?
 >
 > > <solution-title></solution-title>
 > > 
@@ -353,15 +353,15 @@ In this section, you'll find information about experimentally determined protein
 
 > <question-title></question-title>
 >
-> 1. What is the variant associated to Colorblindess?
+> 1. What is the variant associated to color blindness?
 > 2. Can you find that specific amino acid in the structure? 
-> 3. Can you formulate a guess of why this mutation is distruptive?
+> 3. Can you formulate a guess of why this mutation is disruptive?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. In the *Disease & Variants* section, we discover that the change from Glycine (G) to Glutamic acid (E) at position 338 along the protein sequence is associated to Colorblindness. 
-> > 2. In the structure viewer, we can move the molecule around and over the mouse on the structure to find the AA in position 338. It might take some time to follow through the multiple helical arrangements of this structures. The Glycine at 338 it's not in an helix, but in what looks like a loop just before a low confidence area in the structure. 
-> > 3. Based on the information we collected so far, we could make an hypothesis of why this is distruptive. It is not in an helix (usually, in transmembrane proteins, helices are inserted in the membrane), hence, it is in one of the bigger domains that protrude from the membrane, in or out the cell. This mutation probably doesn't distrupt the structure in its intra-membrane segments, but rather one of the functional domain. If you want to dig deeper, you can check if this is the extra- or intra-cellular segment in the **Feature viewer**.
+> > 2. In the structure viewer, we can move the molecule around and hover the mouse on the structure to find the AA in position 338. It might take some time to follow through the multiple helical arrangements of these structures. The Glycine at 338 is not in a helix, but in what looks like a loop just before a low confidence area in the structure. 
+> > 3. Based on the information we collected so far, we could make a hypothesis of why this is distruptive. It is not in a helix (usually, in transmembrane proteins, helices are inserted in the membrane), hence, it is in one of the bigger domains that protrude from the membrane, in or out of the cell. This mutation probably doesn't distrupt the structure in its intra-membrane segments, but rather one of the functional domain. If you want to dig deeper, you can check if this is the extra- or intra-cellular segment in the **Feature viewer**.
 > >
 > {: .solution}
 {: .question}
@@ -371,7 +371,7 @@ Where does the information in the structure viewer come from?
 > <hands-on-title>Search for Human OPN1LW on UniProtKB</hands-on-title>
 >
 > 1. Click on the download icon below the structure
-> 2. Check the file that have been downloaded
+> 2. Check the file that has been downloaded
 >
 {: .hands-on}
 
@@ -379,7 +379,7 @@ This is a PDB (Protein Data Bank) file, allowing you to visualize and analyze th
 
 However, there is no reference to the PDB database in the links among the *3D structure databases*. Instead, the first link refers to the AlphaFoldDB. The AlphaFold Database is a comprehensive resource that provides predicted 3D structures for a wide range of proteins. Using deep learning techniques and evolutionary information, AlphaFold accurately predicts the spatial arrangement of atoms within a protein, contributing to our understanding of protein function and interactions. 
 
-Hence, this is a *prediction* of the structure, not a structure experimentally validated. This is the reason why it is colored by confidence: the sections in blue are those with an high confidence value, so the ones for which the prediction is very reliable, while the ones in orange are less reilable or have a disordered (more flexible and mobile) structure. Nevertheless, this information is represented through a PDB file, because it is still structural. 
+Hence, this is a *prediction* of the structure, not a structure experimentally validated. This is the reason why it is colored by confidence: the sections in blue are those with a high confidence value, so the ones for which the prediction is very reliable, while the ones in orange are less reilable or have a disordered (more flexible and mobile) structure. Nevertheless, this information is represented through a PDB file, because it is still structural. 
 
 ### Family and Domains
 
@@ -439,12 +439,12 @@ The *Variant viewer* maps all the known alternative versions of this sequence. F
 >
 > > <solution-title></solution-title>
 > >
-> > By zooming out in the variant view, we see that we have 5 red points so 5 variants that are likely pathogenic
+> > By zooming out in the variant view, we see that we have 5 red points, so 5 variants that are likely pathogenic.
 > >
 > {: .solution}
 {: .question}
 
-The high number of variants that you find in this section suggests that "protein sequences" (as well as gene sequences, protein structures etc.) are actually less fixed entities than what we could think.
+The high number of variants that you find in this section suggests that "protein sequences" (as well as gene sequences, protein structures etc.) are actually less fixed entities than what we would think.
 
 ## Feature viewer
 

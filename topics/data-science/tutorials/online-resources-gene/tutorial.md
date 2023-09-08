@@ -373,12 +373,12 @@ This page presents once again some data that we are familiar with (e.g. distribu
 
 # Searching by sequence
 
-What could we do with these sequences that we just downloaded? Let's assume that we just sequenced the transcripts that we isolated through an experiment - so we know the sequence of our entity of interest, but don't know what is it. What we need to do in this case is to search the entire database of sequences known to science and match our unknown entity with an entry that has some annotation. Let's do it. 
+What could we do with these sequences that we just downloaded? Let's assume that we just sequenced the transcripts that we isolated through an experiment - so we know the sequence of our entity of interest, but don't know what it is. What we need to do in this case is to search the entire database of sequences known to science and match our unknown entity with an entry that has some annotation. Let's do it. 
 
 > <hands-on-title>Search the protein sequence against all protein sequences</hands-on-title>
 >
-> 1. Open (with the simplest text editor you have installed) the `protein.faa` file that you jsut downloaded.
-> 2. Copy its content
+> 1. Open (with the simplest text editor you have installed) the `protein.faa` file that you just downloaded.
+> 2. Copy its contents
 > 3. Open BLAST [blast.ncbi.nlm.nih.gov](https://blast.ncbi.nlm.nih.gov/Blast.cgi)
 > 4. Click on the `Protein BLAST, protein > protein`
 > 
@@ -424,7 +424,7 @@ The hits are for our red opsin in human but also other opsins in other primates.
 > <hands-on-title>Filter a BLAST Search</hands-on-title>
 >
 > 1. Click on *Edit Search*
-> 2. Type `Homo sapien` in *Organism* field
+> 2. Type `Homo sapiens` in *Organism* field
 > 3. Click the blue button `BLAST`
 {: .hands-on}
 
@@ -505,7 +505,7 @@ While in the previous sections of this tutorial we extensively used the web inte
 
 > <question-title></question-title>
 >
-> Do you think we are looking at exactly the same results than our original search for `opsin` in [www.ncbi.nlm.nih.gov/genome/gdv](https://www.ncbi.nlm.nih.gov/genome/gdv/)? Why?
+> Do you think we are looking at exactly the same results as our original search for `opsin` in [www.ncbi.nlm.nih.gov/genome/gdv](https://www.ncbi.nlm.nih.gov/genome/gdv/)? Why?
 >
 > > <solution-title></solution-title>
 > >
