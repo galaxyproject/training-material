@@ -103,21 +103,21 @@ To register a study you will need the following metadata:
 > 3. Click 'Submit' to create a new study. 
 > 4. If successful, you will receive a confirmation message with two accession numbers - PRJEB* (BioProject accession) and ERP*. Save them as you will need them for read submission step.
 >
-> <tip-title>Filling in study metadata</tip-title>
-> You may want to set the submission date to the maximum allowed - 2 years from today. You can change it when you are ready to release the data. 
-> Study Fields are editable after submission should you need to update any information.
+> > <tip-title>Filling in study metadata</tip-title>
+> >You may want to set the submission date to the maximum allowed - 2 years from today. You can change it when you are ready to release the data. 
+> >Study Fields are editable after submission should you need to update any information.
 > 
 > {: .tip}
 >
-> <question-title></question-title>
+> ><question-title></question-title>
 >
-> How can you confirm that your study has been successfully registered?
+> >How can you confirm that your study has been successfully registered?
 >
-> > <solution-title></solution-title>
+> > > <solution-title></solution-title>
+> > >
+> > > Click on the Dashboard icon, select 'Studies Report'. The accessions for your study should appear next to the Study title and other attributes. 
 > >
-> > Click on the Dashboard icon, select 'Studies Report'. The accessions for your study should appear next to the Study title and other attributes. 
-> >
-> {: .solution}
+> > {: .solution}
 > {: .question}
 >
 {: .hands_on}
@@ -147,22 +147,29 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > 2. Expand the 'Download spreadsheet to register samples' box and select 'Other Checklists'.
 > 3. Click on 'ENA default sample checklist' (or the most appropriate checklist for your study). 
 > 4. The mandatory attributes will be auto-selected. Expand the 'Optional Fields' box and select attributes you would like to include. 
+>
+Your checklist will look like below.  
+| <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
+|-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+| Checklist	| ERC000011	| ENA default sample checklist | | | |
+| tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
+| #units | | | | | |
+ 
 
-** Add table of checklist
-
-> <tip-title>Optional Fields</tip-title>
-> When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable. 
+>
+> > <tip-title>Optional Fields</tip-title>
+> > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable. 
 > 
 > {: .tip}
-> <question-title></question-title>
->
-> What format should the collection date be in? Read descriptions for other attributes to get a clear understanding of the attributes and permitted values. 
->
-> > <solution-title></solution-title>
+> > <question-title></question-title>
 > >
-> > Date/time in any of these formats is acceptable:
-> > 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008
-> {: .solution}
+> > What format should the collection date be in? Read descriptions for other attributes to get a clear understanding of the attributes and permitted values. 
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > Date/time in any of these formats is acceptable:
+> > > 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008
+> > {: .solution}
 > {: .question}
 
 > 5. Click on 'Next' to get to the 'Download TSV Template' button.
@@ -236,10 +243,12 @@ To enable verification of the integrity of the uploaded fastq file md5 checksum 
 {: .hands_on}
 
 ## 5. Read data upload
-- Via a terminal
-- Need java installed on local computer
-- video for running Webin-CLI on Windows - https://www.youtube.com/watch?v=ChCsqoq-r-Y
+- Open terminal
+- Check curl installation
 
+```
+curl -T <<your_file>>.tar.gz -u username:password ftp://193.62.193.143/
+```
 
 ## 6. Post-submission editing
-
+All reports can be edited by clicking on the box-arrow icon in the Action column. The underlying xml can be inspected/edited. 
