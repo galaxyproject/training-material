@@ -23,7 +23,7 @@ contributions:
 # Introduction
 {:.no_toc}
 
-`recetox-aplcms` is a software package designed for the processing of LC/MS based metabolomics data, in particular for peak detection in high resolution mass spectrometry (HRMS) data. 
+`recetox-aplcms` is a software package designed for peak detection and related pre-processing in high resolution mass spectrometry (HRMS) data.
 It supports reading `.mzml` files in raw profile mode and uses a bi-Gaussian chromatographic peak shape ({% cite yu2010quantification %}) for feature detection and quantification. `recetox-aplcms` is based on the apLCMS R package ({% cite 10.1093/bioinformatics/btp291 %}) and includes various software updates and is actively developed and maintained on GitHub.
 
 There are two major routes of data analysis. The first, which we call **unsupervised** analysis, does not use existing knowledge. It detects peaks de novo from the data based on the data itself. The second, which we call **hybrid** analysis, combines de novo peak detection with existing knowledge. The existing knowledge can come from two sources - known metabolites and historically detected features from the same machinery. While the unsupervised approach allows for unbiased exploration and discovery of patterns, the hybrid approach integrates prior knowledge or supervised techniques to enhance targeted analysis and interpretation. The choice between these approaches depends on the research objectives, available prior knowledge, and the specific questions being addressed in the metabolomics study.
@@ -122,6 +122,15 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >    - *"Output Type"*: `mzML`
 >
 {: .hands_on}
+
+After conversion, you can inspect the `mzML` file by clicking the **eye** button on the history dataset to check if your data is still in profile mode.
+If so, you should fine the following line the header of each scan.
+
+```xml
+...
+<cvParam cvRef="MS" accession="MS:1000128" value="" name="profile spectrum" />
+...
+```
 
 # Common part
 
