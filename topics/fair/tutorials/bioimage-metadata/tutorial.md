@@ -136,21 +136,22 @@ Now we know what repositories are available, but how to decide which one is best
 
 # What metadata to collect
 
-> Whichever repository you choose, you will be required to upload some metadata along with your data. In an ideal world, you would remember everything about your data when you submit it. In reality, this is unlikely, the data could have been collected over a long time period or by different people. To overcome these challenges, it is best to collect metadata alongside imaging experiments, don’t leave it all to the end!
+Whichever repository you choose, you will be required to upload some metadata along with your data. In an ideal world, you would remember everything about your data when you submit it. In reality, this is unlikely, the data could have been collected over a long time period or by different people. To overcome these challenges, it is best to collect metadata alongside imaging experiments, don’t leave it all to the end!
 However, this raises further challenges. At the time of data acquisition, you probably won’t know which repository you will submit it to, what the study results will be, or even who will be the target audience for the data. So what metadata do you need to collect?
-> Currently, there is no standard for bioimages, so here is the general outline how to proceed:
-> - If you have chosen a repository, use their template/guidelines.
-> - Otherwise, use [REMBI](https://www.nature.com/articles/s41592-021-01166-8). These are published guidelines which are explained in detail in the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}). REMBI is useful as it should cover most of the metadata requirements of the repositories, even if you haven’t decided which one you want to use yet.
-> - For medical images, see the [DICOM](https://www.dicomstandard.org/) standard.
+
+Currently, there is no standard for bioimages, so here is the general outline how to proceed:
+- If you have chosen a repository, use their template/guidelines.
+- Otherwise, use [REMBI](https://www.nature.com/articles/s41592-021-01166-8). These are published guidelines which are explained in detail in the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}). REMBI is useful as it should cover most of the metadata requirements of the repositories, even if you haven’t decided which one you want to use yet.
+- For medical images, see the [DICOM](https://www.dicomstandard.org/) standard.
 
 # How to store metadata
 
-> Metadata should be stored somewhere that it can be viewed and edited by collaborators. This helps everyone to stay on the same page with regard to what data should and has been collected. This is also useful if different people contribute to different aspects of the image acquisition, e.g. maybe one person prepared the sample, another imaged it under the microscope, and a third person did the post-processing. Each person can then update the metadata related to their part of the study.
+Metadata should be stored somewhere that it can be viewed and edited by collaborators. This helps everyone to stay on the same page with regard to what data should and has been collected. This is also useful if different people contribute to different aspects of the image acquisition, e.g. maybe one person prepared the sample, another imaged it under the microscope, and a third person did the post-processing. Each person can then update the metadata related to their part of the study.
 
-> Recommendations for storing metadata:
-> - If a repository has been chosen, use their template (if provided).
-> - Use a Delimited text file format, e.g. .csv, .tsv. You can use spreadsheet software and save to this format. Try to use a plain format, e.g. avoid merged/split cells.
-> -  Use data management software suitable for your data, e.g. [OMERO](https://www.openmicroscopy.org/omero/).
+Recommendations for storing metadata:
+- If a repository has been chosen, use their template (if provided).
+- Use a Delimited text file format, e.g. .csv, .tsv. You can use spreadsheet software and save to this format. Try to use a plain format, e.g. avoid merged/split cells.
+-  Use data management software suitable for your data, e.g. [OMERO](https://www.openmicroscopy.org/omero/).
 
 # Further steps
-{% icon congratulations %} Congratulations on successfully completing this tutorial! If you want to know more about FAIR data management, we provide training that you can find [here]({% link topics/fair %}). For more detials on FAIR data management in bioimaging, see the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}), and if you want to dive into the imaging analysis straight away, feel free to choose one of the Galaxy [tutorials]({% link topics/imaging %})! Additionally, [Global BioImaging](https://globalbioimaging.org/) offers [training courses](https://globalbioimaging.org/international-training-courses/repository/image-data) dedicated to image data management, sharing, reuse, and image data repositories that were mentioned in this tutorial.
+{% icon congratulations %} Congratulations on successfully completing this tutorial! If you want to know more about FAIR data management, we provide training that you can find in the [FAIR Data, Workflows, and Research]({% link topics/fair %}) section on GTN. For more detials on FAIR data management in bioimaging, see the [REMBI tutorial]({% link topics/fair/tutorials/bioimage-REMBI/tutorial.md %}), and if you want to dive into the imaging analysis straight away, feel free to choose one of the Galaxy [tutorials]({% link topics/imaging %})! Additionally, [Global BioImaging](https://globalbioimaging.org/) offers [training courses](https://globalbioimaging.org/international-training-courses/repository/image-data) dedicated to image data management, sharing, reuse, and image data repositories that were mentioned in this tutorial.
