@@ -212,11 +212,29 @@ Metadata required for this are:
 ### Fastq file preparation
 First, we need to confirm that your read files are in the correct format. Refer to [ENAs file format guidelines](https://ena-docs.readthedocs.io/en/latest/submit/fileprep/reads.html) if you are not sure.
 
-The fastq files are required to be compress for the upload. 
-- (instructions)
+> <hands-on-title>Linux or OSX</hands-on-title>
+> #### On a Linux-based operating system
+> **Step 1**:
+> Compress the fastq files for the upload using gzip. 
+>
+>  Open the terminal on your machine then type the commands below. First move to the directory where fastq files are located, then compress the fastq files using gzip command.
+> ```
+> # In the command below replace '/path/to/fastq/directory' with the correct path
+> cd /path/to/fastq/directory
+> 
+> gzip *.fastq
+> ``` 
+> **Step 2**: 
+> To enable verification of the integrity of the uploaded fastq file, ENA requires md5 checksum for each file.
+> 
+> Type the command below to calculate and print md5 sums to tab-separated file (for easy cut-and-paste later).
+> ```
+> for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
+> ```
+> md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
 
-To enable verification of the integrity of the uploaded fastq file md5 checksum for each file is required.
-- (instructions)
+{: .hands_on}
+
 
 <hands-on-title>Read checklist submission</hands-on-title>
 > 1. From the 'Dashboard' select 'Submit Reads' from Raw Reads box. 
