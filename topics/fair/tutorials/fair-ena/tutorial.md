@@ -101,7 +101,8 @@ To register a study you will need the following metadata:
 > 1. From the Webin dashboard click on 'Register Study' to bring up the study submission form. 
 > 2. Complete the form to your best knowledge ensure attributes with '*' are completed. 
 > 3. Click 'Submit' to create a new study. 
-> 4. If successful, you will receive a confirmation message with two accession numbers - PRJEB* (BioProject accession) and ERP*. Save them as you will need them for read submission step.
+> 4. If successful, you will receive a confirmational pop-up message with two accession numbers - PRJEB* (BioProject accession) and ERP*. Save them as you will need them for read submission step.
+> 5. Check the processing status of your submissions via the Studies Report.
 >
 > > <tip-title>Filling in study metadata</tip-title>
 > >You may want to set the submission date to the maximum allowed - 2 years from today. You can change it when you are ready to release the data. 
@@ -183,7 +184,8 @@ Your checklist will look like below.
 > 4. Make sure you save the checklist.tsv file in tab-delimited format with .tsv or .tab extension and not .xlsx or .csv.
 > 5. In the Webin Portal, select 'Register Samples' and then 'Upload filled spreadsheet to register samples'. Upload your checklist.tsv file via 'Choose File' button. 
 > 6. Click on 'Submit' to submit the checklist.
-> 7. If the structure of your checklist is correct and the upload is successful you will receive a confirmation message and Sample accession numbers -  SAMEA* (BioSample) and ERS*. 
+> 7. If the structure of your checklist is correct and the upload is successful a pop-up message will appear with Sample accession numbers -  SAMEA* (BioSample) and ERS*.
+> 8. Check the processing status of your submissions via Samples Report. 
 
 > <tip-title>Sample Alias</tip-title>
 > Remember to enter sample aliases that correspond to what you use in related publications. This will enable readers to find sample-specific metadata and read files, even if you only state a Project accession number in your paper. Sample aliases can, furthermore, be optionally displayed as Unique name in the Sample report. 
@@ -252,8 +254,10 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > >+ study: use study accession
 > >+ forward/reverse_file_name: make sure this is the same as what will be uploaded. It should be the compressed .gz file you created.
 > >+ forward/reverse_file_md5: copy this from md5sums.tsv you generated earlier.
-> 6. Uploaded the completed spreadsheet and submit.
-> 7. If the upload is successful a run accession (ERR*) and experiment accesion (ERX*) will be issued for each read submission. 
+> 6. Uploaded the completed template spreadsheet and submit.
+> 7. If metadata validation is successful a pop-up message bearing a run accession (ERR*) and experiment accesion (ERX*) will appear for each read submission. 
+> 8. Confirm the processing status of your submission via Runs Report.
+> 9. Any errors generated in the process will be communicated to you on the registered email.
 
 > > <tip-title></tip-title>
 > > The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describe the methods used to sequence the sample.
@@ -270,7 +274,12 @@ If you are using a Linux-based system you can use the below commands without nee
 cd /path/to/fastq.gz
 curl -T <<your_file>>.gz -u Webin-XXX:password ftp://webin2.ebi.ac.uk/
 ```
+
+Check the processing status of your upload via the Run Processing Report.  
+
 Note: The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived.
 
 ## 6. Post-submission editing
-All reports can be edited by clicking on the box-arrow icon in the Action column. The underlying xml can be inspected/edited. 
+Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
+
+However, for complex edits you might have to contact [ENA helpdesk](datasubs@ebi.ac.uk). 
