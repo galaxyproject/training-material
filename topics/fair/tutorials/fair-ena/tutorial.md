@@ -97,7 +97,7 @@ To register a study you will need the following metadata:
 1-3 will be displayed in the Project entry page. Make it as detailed as possible so as to make it searchable. For example see the entry for [PRJEB55803](https://www.ebi.ac.uk/ena/browser/view/PRJEB55803).
 
 > <hands-on-title>Register study</hands-on-title>
-> Once you have the above information at hand let's register your study.
+> Once you have the above information at hand register your study.
 > 1. From the Webin dashboard click on 'Register Study' to bring up the study submission form. 
 > 2. Complete the form to your best knowledge ensure attributes with '*' are completed. 
 > 3. Click 'Submit' to create a new study. 
@@ -247,10 +247,11 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > {: .tip}
 >
 > 4. Click 'Next' and download the spreadsheet .tsv file.
-> 5. Fill in the spreadsheet, pay particular attention to the following:
+> 5. Fill in the spreadsheet, paying particular attention to the following:
 > >+ sample: same as you used in sample submission - alias or accession
 > >+ study: use study accession
-> >+ forward/reverse_file_name: make sure this is the same as what will be uploaded. It should be compressed.
+> >+ forward/reverse_file_name: make sure this is the same as what will be uploaded. It should be the compressed .gz file you created.
+> >+ forward/reverse_file_md5: copy this from md5sums.tsv you generated earlier.
 > 6. Uploaded the completed spreadsheet and submit.
 > 7. If the upload is successful a run accession (ERR*) and experiment accesion (ERX*) will be issued for each read submission. 
 
@@ -261,12 +262,15 @@ First, we need to confirm that your read files are in the correct format. Refer 
 {: .hands_on}
 
 ## 5. Read data upload
-- Open terminal
-- Check curl installation
+ENA offers [several methods](https://ena-docs.readthedocs.io/en/latest/submit/fileprep/upload.html) to achieve this. Please take a look at all the options should any suit your needs better than the one provided below.
+
+If you are using a Linux-based system you can use the below commands without needing to install any software.
 
 ```
-curl -T <<your_file>>.tar.gz -u username:password ftp://193.62.193.143/
+cd /path/to/fastq.gz
+curl -T <<your_file>>.gz -u Webin-XXX:password ftp://webin2.ebi.ac.uk/
 ```
+Note: The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived.
 
 ## 6. Post-submission editing
 All reports can be edited by clicking on the box-arrow icon in the Action column. The underlying xml can be inspected/edited. 
