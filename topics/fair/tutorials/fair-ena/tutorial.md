@@ -210,7 +210,7 @@ Metadata required for this are:
 12. MD5 checksum of reverse fastq file (if not using Webin file uploader)
 
 ### Fastq file preparation
-First, confirm that your read files are in the correct format. Refer to [ENAs file format guidelines](https://ena-docs.readthedocs.io/en/latest/submit/fileprep/reads.html) if you are not sure.
+First, we need to confirm that your read files are in the correct format. Refer to [ENAs file format guidelines](https://ena-docs.readthedocs.io/en/latest/submit/fileprep/reads.html) if you are not sure.
 
 The fastq files are required to be compress for the upload. 
 - (instructions)
