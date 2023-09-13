@@ -38,13 +38,9 @@ requirements:
 
 # Introduction
 
-The life science community is generally very good at sharing omics data on platforms such as [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress).  However, the metadata and clinical data associated with the omics datasets are often incredibly sparse.  Tracking down the meta- and clinical data of omics datasets can be time-consuming for both data owner and researcher.  This also means exploration of enriched omics is overlooked at a time when there are so many tools in data analyses, machine learning and AI.
+The life science community is generally very good at sharing omics data on platforms such as [GEO](https://www.ncbi.nlm.nih.gov/geo/) and [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress).  However, the metadata and clinical data associated with the omics datasets are often incredibly sparse.  Tracking down the meta- and clinical data of omics datasets can be time-consuming for both data owner and researcher and is a significant hurdle when trying to explore enriched omics data.
 
-[comment]: <> (I wonder if "overlooked" could be replaced with "made difficult" or something similar?)
-
-In this tutorial, you will learn the benefits of making clinical datasets FAIR and how to make them FAIR.
-
-[comment]: <> (I know the definition of FAIR in the abbreviations list, but I wonder if it should be spelt out again the first time it is used in the main text.)
+In this tutorial, you will learn the benefits of making clinical datasets FAIR (Findable, Accessible, Interoperable, and Reusable) and how to make them FAIR.
 
 > <agenda-title></agenda-title>
 >
@@ -64,9 +60,7 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR a
 
 {: .hands_on}
 
-In general, clinical data are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
-
-[comment]: <> (Maybe change "In general, clinical data are..." to "In general, the most common clinical data used in research are...")
+In general, the most common clinical data used in research are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
 
 ## Metadata that accompanies transcriptomic data
 In GEO and ArrayExpress the elements that we are describing as clinical data are the Characteristics or Source Characteristics.
@@ -108,14 +102,13 @@ Registries usually record (over a period of time), the disease progression of pa
 Here are links to two registry projects.  Both websites describe the projects, the aims and the outputs of the studies.
 
 [UK Sjögren's registry](https://www.sjogrensregistry.org/index.php)  
-[UK JIA Biologics Registers](https://www.sjogrensregistry.org/index.php) 
-
-[comment]: <> (These two links are pointing to the same page.)
+[UK JIA Biologics Registers](https://sites.manchester.ac.uk/bcrdbspar/) 
 
 ## Electronic health records (EHR)
 These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at the country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as anonymised data, to avoid the ability to identify individuals from the data.
 
 [comment]: <> (This part may need rewording. My understanding is that EHRs are provided by: GPs where two main platforms are EMIS Web and TPP SystmOne and; NHS trusts with many different suppliers.  NHS England provides advice on accredited suppliers.)
+[comment]: <> (to do)
 
 In the UK, Clinical Practice Research Datalink ([CPRD](https://cprd.com)) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset. 
 
@@ -140,9 +133,7 @@ The [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/
 # The importance of making clinical datasets FAIR
 
 ## Associations between clinical features and omics
-In some recent work in rheumatoid arthritis, it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not, many diseases.  
-
-[comment]: <> ("In some recent work in rheumatoid arthritis..." => is there a link you could add to this work?)
+In some recent work in rheumatoid arthritis [The RA-MAP Consortium, 2022](https://www.nature.com/articles/s41597-022-01264-y), it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not, many diseases.  
 
 ![RA-MAP.](../../images/RAMAP_graphic.png)
 
@@ -153,16 +144,17 @@ In some recent work in rheumatoid arthritis, it was demonstrated that simple pat
 {: .hands_on}
 
 ## Powering up cohorts for analyses and machine learning
-For many diseases (or even pan-diseases), there is a need for well-powered cohorts with hundreds to thousands of participants, for analysis purposes.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, three did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data substantially diminish the value of public data sets and violate FAIR principles.
+For many diseases (or across a family of diseases), there is a need for well-powered cohorts with hundreds to thousands of participants, for analysis purposes.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, three did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data substantially diminish the value of public data sets and on the surface to not adhere to FAIR principles.
 
-[comment]: <> ("pan-diseases" may need defining.  Is there a link to the rheumatoid arthritis study example? The use of "violate FAIR principles" sounds harsh. Could this be reworded?)
+[comment]: <> (Is there a link to the rheumatoid arthritis study example?)
+[comment]: <> (need to get link from Mike)
 
 Similarly, in order to make the most of machine learning techniques, datasets need to be reasonably large.  
 
 ## Time-saving
 Usually, after finding potentially interesting datasets on GEO or ArrayExpress, the next step in trying to enrich these public datasets is to contact the PI of the study to request additional data.  From experience, the PI is usually happy to share additional data, especially if there have been previous collaborations.  However, even given the willingness to share, there is a time-consuming process of contacting the person who has the data and reaching agreement on what can and will be shared.  This at best will take weeks, but most likely months, especially if there is a lapse in communication between parties.
 
-[comment]: <> (Maybe include a final sentence to bring this together with the time-savings made by initially releasing rich and FAIR data and metadata)
+By implementing some of the techniques described in the next section can help release rich and FAIR data and metadata in a timely fashion. 
 
 # Practical techniques to make clinical data FAIR
 There are certain privacy concerns when making clinical data freely available through public libraries such as GEO and ArrayExpress. Data needs to be anonymised, or at least pseudo-anonymised.  
@@ -238,8 +230,6 @@ Here’s an example of a data dictionary used on a project
 
 A key benefit of data dictionaries is that the information captured is generally not confidential or patient-sensitive and, therefore, there are few if any restrictions to sharing them.
 
-[comment]: <> (This is an excellent exercise!)
-
 ## Data catalogues
 Data catalogues are useful for teams, projects or consortia where there are many datasets being used and generated by the group.  Data catalogues are the metadata for the individual datasets, and they can provide context and provenance for each dataset within the group of datasets.
 
@@ -287,7 +277,8 @@ An example of a data access process is shown below
 This is an example of a data and sample access request form and contracts associated with data and samples
 [To do: upload example Data access request form to Zenodo and add a link (check Sharepoint for authorship guidelines)]
 
-In the UK, the HDRUK Innovation Gateway may also be a way to manage the data access request process. 
+In the UK, for members of the UK Health Data Research Alliance, the HDRUK Innovation Gateway may also be a way to manage the data access request process.  This requires the metadata of the health datasets to be loaded to the Gateway web portal.  Researchers with an account can then search the portal and request access to datasets. The request access process and also creating collections of metadata are described in more detail in the [Data Custodian Playbook](https://discourse.healthdatagateway.org/t/data-custodian-playbook/980)
 
-[comment]: <> (I understand that the process for centrally managing data access requests via the Innovation Gateway is a work in progress.  Currently, when registered users request access to datasets, this just pings an email to the local dataset contact.)
 
+
+[comment]: <> (need to also include acknowledgement of CLUSTER funding)
