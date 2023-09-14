@@ -274,8 +274,7 @@ It is really worthwhile clarifying the process of handling data access requests 
 An example of a data access process is shown below
 ![DataAccessProcess](../../images/DataAccessProcess.png "")
 
-This is an example of a data and sample access request form and contracts associated with data and samples
-[To do: upload example Data access request form to Zenodo and add a link (check Sharepoint for authorship guidelines)]
+This is an example of a [data and sample access request form](https://zenodo.org/record/8344400) that you might find useful as a starting point to create one for your project.
 
 In the UK, for members of the UK Health Data Research Alliance, the HDRUK Innovation Gateway may also be a way to manage the data access request process.  This requires the metadata of the health datasets to be loaded to the Gateway web portal.  Researchers with an account can then search the portal and request access to datasets. The request access process and also creating collections of metadata are described in more detail in the [Data Custodian Playbook](https://discourse.healthdatagateway.org/t/data-custodian-playbook/980)
 
