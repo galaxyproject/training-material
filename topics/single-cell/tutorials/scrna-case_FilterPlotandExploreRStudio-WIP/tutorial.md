@@ -678,9 +678,9 @@ Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears
 Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?
 
 ```r
-plot1<-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
-plot2<-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Cd4")
-plot1 | plot2
+CellType_DimPlot<-DimPlot(object = filtered_srt, reduction = "umap", group.by = "celltype")
+Cd4_FeaturePlot<-FeaturePlot(object = filtered_srt, reduction = "umap", features = "Cd4")
+CellType_DimPlot | Cd4_FeaturePlot
 ```
 ![Double Positive differentiation?](../../images/scrna-SeuratRStudio/plot20.png "Double Positive differentiation?")
 
@@ -691,5 +691,14 @@ However, the late double positive cluster is both seemingly leaving the larger b
 If we look at the differences between genotypes alone (so the pseudo-bulk), we can see that many, if not most, of the genes in that list are actually ribosomal. This could be a housekeeping background, it might be cell cycle related, it may be biological, or some combination of all three. You might consider investigating the cycling status of the cells, or even regressing this out (which is what the authors did).
 
 Ultimately, there are quite a lot ways to analyse your single-cell data, both within the confines of this tutorial (the many parameters that could be changed throughout) and outside of it (batch correction, sub-clustering, cell-cycle scoring, inferred trajectories, etc.) Most analyses will still yield the same general output, though: there are fewer knockout cells in the mature T-cell population, suggesting some sort of abberant development of T-cells in the Igf2-p0 hets.
+
+Finally, we can export plots and objects from RStudio back into Galaxy. To do so, we'll use the gx_put() function provided to us by Galaxy. Let's save our Seurat object and the cell type labelled DimPlot!
+
+```r
+gx_put(filtered_srt)
+gx_put(CellType_DimPlot)
+```
+
+The above functions will export your object and the plot into your Galaxy history!
 
 Congratulations! You have interpreted your plots in several important ways!
