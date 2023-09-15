@@ -95,6 +95,128 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Generic plugins",
+      "questions": [
+        "How can visualization plugins benefit science?"
+      ],
+      "objectives": [
+        "Implement a first Galaxy visualization",
+        "Understand the client side vs. server side principle"
+      ],
+      "requirements": [
+        {
+          "title": "Javascript knowledge",
+          "type": "none"
+        }
+      ],
+      "time_estimation": "90m",
+      "key_points": [
+        "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access",
+        "Interactivity is what makes visualizations different from static tools",
+        "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS",
+        "Performance is more important than for static Galaxy tools"
+      ],
+      "subtopic": "viz",
+      "contributors": [
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Youri Hoogstrate",
+          "joined": "2017-09",
+          "id": "yhoogstrate",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yhoogstrate.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/"
+        }
+      ],
+      "short_id": "T00121",
+      "url": "/topics/dev/tutorials/visualization-generic/tutorial.html",
+      "topic_name": "dev",
+      "tutorial_name": "visualization-generic",
+      "dir": "topics/dev/tutorials/visualization-generic",
+      "id": "dev/visualization-generic",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "JavaScript plugins",
       "questions": [
         "How can I make a custom visualization plugin for Galaxy?"
@@ -237,77 +359,126 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Galaxy Webhooks",
-      "questions": [
-        "What are Galaxy Webhooks?",
-        "How to create them?"
+      "title": "ToolFactory: Generating Tools From Simple Scripts",
+      "key_points": [
+        "The ToolFactory is an automated Galaxy tool generator for scientists and developers who routinely write command line scripts.",
+        "It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.",
+        "It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.",
+        "It is installed as a self-configuring development code clone.",
+        "The Galaxy server is suited any modern Linux workstation or high-end laptop.",
+        "Useful for learning about system administration or framework code, and for developing tools - all on your own private pop-up server."
       ],
       "objectives": [
-        "Discover what Galaxy Webhooks are",
-        "Be able to create Webhooks",
-        "Be able to add a Galaxy Webhook in a Galaxy instance"
+        "Learn why you might want to use the ToolFactory development server",
+        "Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!",
+        "Run it locally in Docker.",
+        "Install and explore the simple examples provided.",
+        "Modify and re-generate them to see how the changes affect the tool",
+        "Generate new simple Galaxy tools using your own scripts"
       ],
-      "time_estimation": "1h",
-      "key_points": [
-        "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins",
-        "Right now there are 4 entry points: tool, workflow, masthead, history-menu",
-        "With a minimal amount of code you can extend Galaxy's user-interace."
+      "questions": [
+        "What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?",
+        "Can any command line script I've written be wrapped as a Galaxy tool?",
+        "How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?",
+        "What is the difference between a hand-crafted tool and a ToolFactory generated one?"
+      ],
+      "time_estimation": "1H",
+      "subtopic": "tooldev",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "introduction",
+          "tutorials": [
+            "galaxy-intro-short",
+            "galaxy-intro-101-everyone"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "tool-integration",
+            "interactive-environments"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "tool-generators-advanced"
+          ]
+        }
       ],
       "contributors": [
         {
-          "name": "Clemens Blank",
-          "email": "blankclemens@gmail.com",
-          "orcid": "0000-0002-1726-2256",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "blankclemens",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankclemens.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/"
+          "name": "Ross Lazarus",
+          "email": "ross.lazarus@gmail.com",
+          "joined": "2021-02",
+          "elixir_node": "au",
+          "id": "fubar2",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/fubar2.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/"
         },
         {
-          "name": "Martin Čech",
-          "email": "marten@bx.psu.edu",
-          "matrix": "martenson:matrix.org",
-          "orcid": "0000-0002-9318-1781",
-          "elixir_node": "cz",
-          "contact_for_training": true,
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "contact_for_training": false,
           "location": {
-            "country": "USA",
-            "lat": 37.0,
-            "lon": -122.0
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
           },
-          "fediverse": "https://mastodon.world/@martenson",
-          "fediverse_flavor": "mastodon",
-          "joined": "2017-09",
-          "id": "martenson",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
         }
       ],
-      "subtopic": "advanced",
-      "short_id": "T00122",
-      "url": "/topics/dev/tutorials/webhooks/tutorial.html",
+      "short_id": "T00118",
+      "url": "/topics/dev/tutorials/tool-generators/tutorial.html",
       "topic_name": "dev",
-      "tutorial_name": "webhooks",
-      "dir": "topics/dev/tutorials/webhooks",
-      "id": "dev/webhooks",
+      "tutorial_name": "tool-generators",
+      "dir": "topics/dev/tutorials/tool-generators",
+      "id": "dev/tool-generators",
       "video_library": {
-        "tutorial": null,
+        "tutorial": {
+          "description": "ToolFactory Presentation: Abstract tool interface code that wraps simple scripts can be generated using a Galaxy tool.\nIf you haven't already decided that the GTN tutorials linked below might be useful for your work, or if want to hear Ross's opinions on tools,\nabstract interfaces and why they matter, this talk is for you.\n",
+          "materials": [
+            {
+              "link": "topics/dev/tutorials/tool-generators/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "dev"
+          ],
+          "type": null,
+          "versions": [
+            {
+              "captions": [
+                "fubar2"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "30M",
+              "link": "8nKBfVM6240",
+              "speakers": [
+                "fubar2"
+              ]
+            }
+          ],
+          "gtn_id": "dev/tool-generators",
+          "title": "ToolFactory: Generating Tools From Simple Scripts",
+          "captioned": true
+        },
         "slides": null,
         "demo": null,
         "both": null,
@@ -315,7 +486,7 @@
       },
       "hands_on": true,
       "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json",
       "tools": [
 
       ],
@@ -352,7 +523,7 @@
       },
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
-      "video": false,
+      "video": true,
       "translations": {
         "tutorial": [
 
@@ -360,145 +531,12 @@
         "slides": [
 
         ],
-        "video": false
+        "video": true
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Galaxy Code Architecture",
-      "questions": [
-        "How is the Galaxy code structured?",
-        "What do the various other projects related to Galaxy do?",
-        "What happens when I start Galaxy?"
-      ],
-      "objectives": [
-        "Explore various aspects of the Galaxy codebase.",
-        "Understand the various top-level files and modules in Galaxy.",
-        "Understand how dependencies work in Galaxy's frontend and backend."
-      ],
-      "time_estimation": "150m",
-      "requirements": null,
-      "key_points": [
-        "Galaxy runs out of the box and fetches all needed dependencies.",
-        "Running Galaxy in production requires configuration.",
-        "The architecture is designed to be pluggable and extensible.",
-        "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
-      ],
-      "subtopic": "core",
-      "contributors": [
-        {
-          "name": "John Chilton",
-          "email": "jmchilton@gmail.com",
-          "joined": "2017-09",
-          "twitter": "jmchilton",
-          "matrix": "jmchilton:matrix.org",
-          "orcid": "0000-0002-6794-0756",
-          "id": "jmchilton",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        }
-      ],
-      "short_id": "S00043",
-      "url": "/topics/dev/tutorials/architecture/slides.html",
-      "topic_name": "dev",
-      "tutorial_name": "architecture",
-      "dir": "topics/dev/tutorials/architecture",
-      "id": "dev/architecture",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": {
-          "title": "Galaxy Code Architecture Lecture Series",
-          "description": "In this 9-part Lecture series, John Chilton will walk you through the Galaxy Code Architecture.",
-          "videos": [
-            "dev/architecture/slides-ecosystem",
-            "dev/architecture/slides-models-managers",
-            "dev/architecture/slides-app-di",
-            "dev/architecture/slides-project-management",
-            "dev/architecture/slides-web-client",
-            "dev/architecture/slides-pluggable-components",
-            "dev/architecture/slides-principles",
-            "dev/architecture/slides-web-requests",
-            "dev/architecture/slides-files-directories"
-          ]
-        }
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json"
       }
     },
     {
@@ -653,6 +691,458 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-api/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-api/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Galaxy Interactive Environments",
+      "draft": true,
+      "questions": [
+        "What are Galaxy Interactive Environments (GIEs)?",
+        "How to enable GIEs in Galaxy?",
+        "How to develop your own GIE?"
+      ],
+      "objectives": [
+        "Implement a Hello-World Galaxy Interactive Environment"
+      ],
+      "requirements": [
+        {
+          "title": "Docker basics",
+          "type": "none"
+        }
+      ],
+      "time_estimation": "90m",
+      "key_points": [
+        "Interactive Environments offer access to third-party applications within Galaxy",
+        "Interactive Environments run in a docker images for sandboxing and easy dependency management"
+      ],
+      "contributors": [
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        }
+      ],
+      "subtopic": "advanced",
+      "short_id": "S00048",
+      "url": "/topics/dev/tutorials/interactive-environments/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "interactive-environments",
+      "dir": "topics/dev/tutorials/interactive-environments",
+      "id": "dev/interactive-environments",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "tags": [
+        "work-in-progress"
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Tool Shed: sharing Galaxy tools",
+      "questions": [
+        "What is a Tool Shed?",
+        "How to install tools and workflows from a Tool Shed into a Galaxy instance?",
+        "What are the Tool Shed repository types?",
+        "How to publish with Planemo?"
+      ],
+      "objectives": [
+        "Discover what is a Tool Shed",
+        "Be able to install tools and workflows from a Tool Shed into a Galaxy instance",
+        "Be able to publish tools with Planemo"
+      ],
+      "time_estimation": "3h",
+      "subtopic": "tooldev",
+      "key_points": [
+        "Use Planemo",
+        "Contribute to the Main Tool Shed"
+      ],
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inrae.fr",
+          "twitter": "abretau",
+          "matrix": "abretaud:matrix.org",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 48.11,
+            "lon": -1.64
+          },
+          "fediverse": "https://genomic.social/@abretaud",
+          "fediverse_flavor": "mastodon",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
+        },
+        {
+          "name": "Loraine Guéguen",
+          "joined": "2017-09",
+          "id": "loraine-gueguen",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/loraine-gueguen.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/"
+        },
+        {
+          "name": "Stéphanie Legras",
+          "joined": "2017-09",
+          "id": "slegras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slegras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/slegras/"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        }
+      ],
+      "short_id": "S00052",
+      "url": "/topics/dev/tutorials/toolshed/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "toolshed",
+      "dir": "topics/dev/tutorials/toolshed",
+      "id": "dev/toolshed",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/slides.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Tool Dependencies and Conda",
+      "subtopic": "dependencies",
+      "questions": [
+        "How can I connect tools to applications and libraries?",
+        "What are the advantages of declaring dependencies for my tool?",
+        "What are Conda and Bioconda?",
+        "What are Conda recipes and environments?",
+        "How do I find and use existing Conda recipes?",
+        "How do I develop Conda recipes for use within Galaxy tools?"
+      ],
+      "objectives": [
+        "Learn to use existing Conda recipes to enable best practice tool dependency management in Galaxy.",
+        "Learn the basics of building Conda recipes and contributing to Bioconda.",
+        "Learn to use Planemo to assist in developing Galaxy tools from existing and new Conda recipes."
+      ],
+      "time_estimation": "75m",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "tool-integration",
+            "conda_sys"
+          ]
+        }
+      ],
+      "key_points": [
+        "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries.",
+        "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers.",
+        "The Planemo commands `conda_search`, `conda_init`, `conda_install`, `lint`, `test`, and `serve` make it easy to search and use existing Conda recipes when developing tools.",
+        "Conda recipe skeletons, `conda build`, and with `planemo conda_install --conda_use_local` allow easy development of new Conda recipes at the same time as Galaxy tools that wrap them.",
+        "Bioconda is a Galaxy best practice Conda channel for recipe publication.",
+        "Bioconda has easy to follow contribution guidelines and is very welcoming to new contributors."
+      ],
+      "contributors": [
+        {
+          "name": "Nicola Soranzo",
+          "matrix": "nsoranzo:matrix.org",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "elixir_node": "uk",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
+        },
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Hervé Ménager",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "hmenager",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hmenager.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hmenager/"
+        }
+      ],
+      "short_id": "S00045",
+      "url": "/topics/dev/tutorials/conda/slides.html",
+      "topic_name": "dev",
+      "tutorial_name": "conda",
+      "dir": "topics/dev/tutorials/conda",
+      "id": "dev/conda",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/slides.json"
       }
     },
     {
@@ -900,191 +1390,52 @@
       }
     },
     {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Tool Shed: sharing Galaxy tools",
+      "layout": "tutorial_hands_on",
+      "title": "Galaxy Webhooks",
       "questions": [
-        "What is a Tool Shed?",
-        "How to install tools and workflows from a Tool Shed into a Galaxy instance?",
-        "What are the Tool Shed repository types?",
-        "How to publish with Planemo?"
+        "What are Galaxy Webhooks?",
+        "How to create them?"
       ],
       "objectives": [
-        "Discover what is a Tool Shed",
-        "Be able to install tools and workflows from a Tool Shed into a Galaxy instance",
-        "Be able to publish tools with Planemo"
+        "Discover what Galaxy Webhooks are",
+        "Be able to create Webhooks",
+        "Be able to add a Galaxy Webhook in a Galaxy instance"
       ],
-      "time_estimation": "3h",
-      "subtopic": "tooldev",
+      "time_estimation": "1h",
       "key_points": [
-        "Use Planemo",
-        "Contribute to the Main Tool Shed"
+        "A Galaxy Webhook provides an easy way to customize the Galaxy UI with plugins",
+        "Right now there are 4 entry points: tool, workflow, masthead, history-menu",
+        "With a minimal amount of code you can extend Galaxy's user-interace."
       ],
       "contributors": [
         {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inrae.fr",
-          "twitter": "abretau",
-          "matrix": "abretaud:matrix.org",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 48.11,
-            "lon": -1.64
-          },
-          "fediverse": "https://genomic.social/@abretaud",
-          "fediverse_flavor": "mastodon",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
-        },
-        {
-          "name": "Loraine Guéguen",
-          "joined": "2017-09",
-          "id": "loraine-gueguen",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/loraine-gueguen.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/"
-        },
-        {
-          "name": "Stéphanie Legras",
-          "joined": "2017-09",
-          "id": "slegras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/slegras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/slegras/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
+          "name": "Clemens Blank",
+          "email": "blankclemens@gmail.com",
+          "orcid": "0000-0002-1726-2256",
           "joined": "2017-09",
           "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        }
-      ],
-      "short_id": "S00052",
-      "url": "/topics/dev/tutorials/toolshed/slides.html",
-      "topic_name": "dev",
-      "tutorial_name": "toolshed",
-      "dir": "topics/dev/tutorials/toolshed",
-      "id": "dev/toolshed",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/toolshed/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Galaxy Interactive Tours",
-      "questions": [
-        "What is a Galaxy Interactive Tour?",
-        "How to create a Galaxy Interactive Tour?"
-      ],
-      "objectives": [
-        "Discover what is a Galaxy Interactive Tour",
-        "Be able to create a Galaxy Interactive Tour",
-        "Be able to add a Galaxy Interactive Tour in a Galaxy instance"
-      ],
-      "time_estimation": "3h",
-      "key_points": [
-        "An Interactive Tour is easy to create: just a yaml file to fill",
-        "Use the Developper Tools of find the JQuery Selector",
-        "Help yourself by using the available web plugins and record an interactive tour"
-      ],
-      "contributors": [
+          "id": "blankclemens",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankclemens.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/"
+        },
         {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
+          "name": "Martin Čech",
+          "email": "marten@bx.psu.edu",
+          "matrix": "martenson:matrix.org",
+          "orcid": "0000-0002-9318-1781",
+          "elixir_node": "cz",
           "contact_for_training": true,
           "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
+            "country": "USA",
+            "lat": 37.0,
+            "lon": -122.0
           },
-          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse": "https://mastodon.world/@martenson",
           "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+          "joined": "2017-09",
+          "id": "martenson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/"
         },
         {
           "name": "Björn Grüning",
@@ -1103,622 +1454,12 @@
         }
       ],
       "subtopic": "advanced",
-      "short_id": "S00049",
-      "url": "/topics/dev/tutorials/interactive-tours/slides.html",
+      "short_id": "T00122",
+      "url": "/topics/dev/tutorials/webhooks/tutorial.html",
       "topic_name": "dev",
-      "tutorial_name": "interactive-tours",
-      "dir": "topics/dev/tutorials/interactive-tours",
-      "id": "dev/interactive-tours",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "ToolFactory: Generating Tools From Simple Scripts",
-      "key_points": [
-        "The ToolFactory is an automated Galaxy tool generator for scientists and developers who routinely write command line scripts.",
-        "It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.",
-        "It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.",
-        "It is installed as a self-configuring development code clone.",
-        "The Galaxy server is suited any modern Linux workstation or high-end laptop.",
-        "Useful for learning about system administration or framework code, and for developing tools - all on your own private pop-up server."
-      ],
-      "objectives": [
-        "Learn why you might want to use the ToolFactory development server",
-        "Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!",
-        "Run it locally in Docker.",
-        "Install and explore the simple examples provided.",
-        "Modify and re-generate them to see how the changes affect the tool",
-        "Generate new simple Galaxy tools using your own scripts"
-      ],
-      "questions": [
-        "What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?",
-        "Can any command line script I've written be wrapped as a Galaxy tool?",
-        "How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?",
-        "What is the difference between a hand-crafted tool and a ToolFactory generated one?"
-      ],
-      "time_estimation": "1H",
-      "subtopic": "tooldev",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "introduction",
-          "tutorials": [
-            "galaxy-intro-short",
-            "galaxy-intro-101-everyone"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "tool-integration",
-            "interactive-environments"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "tool-generators-advanced"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Ross Lazarus",
-          "email": "ross.lazarus@gmail.com",
-          "joined": "2021-02",
-          "elixir_node": "au",
-          "id": "fubar2",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/fubar2.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
-      "short_id": "T00118",
-      "url": "/topics/dev/tutorials/tool-generators/tutorial.html",
-      "topic_name": "dev",
-      "tutorial_name": "tool-generators",
-      "dir": "topics/dev/tutorials/tool-generators",
-      "id": "dev/tool-generators",
-      "video_library": {
-        "tutorial": {
-          "description": "ToolFactory Presentation: Abstract tool interface code that wraps simple scripts can be generated using a Galaxy tool.\nIf you haven't already decided that the GTN tutorials linked below might be useful for your work, or if want to hear Ross's opinions on tools,\nabstract interfaces and why they matter, this talk is for you.\n",
-          "materials": [
-            {
-              "link": "topics/dev/tutorials/tool-generators/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "dev"
-          ],
-          "type": null,
-          "versions": [
-            {
-              "captions": [
-                "fubar2"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "30M",
-              "link": "8nKBfVM6240",
-              "speakers": [
-                "fubar2"
-              ]
-            }
-          ],
-          "gtn_id": "dev/tool-generators",
-          "title": "ToolFactory: Generating Tools From Simple Scripts",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": true,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": true
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Tool Dependencies and Conda",
-      "subtopic": "dependencies",
-      "questions": [
-        "How can I connect tools to applications and libraries?",
-        "What are the advantages of declaring dependencies for my tool?",
-        "What are Conda and Bioconda?",
-        "What are Conda recipes and environments?",
-        "How do I find and use existing Conda recipes?",
-        "How do I develop Conda recipes for use within Galaxy tools?"
-      ],
-      "objectives": [
-        "Learn to use existing Conda recipes to enable best practice tool dependency management in Galaxy.",
-        "Learn the basics of building Conda recipes and contributing to Bioconda.",
-        "Learn to use Planemo to assist in developing Galaxy tools from existing and new Conda recipes."
-      ],
-      "time_estimation": "75m",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "tool-integration",
-            "conda_sys"
-          ]
-        }
-      ],
-      "key_points": [
-        "Conda and Bioconda are Galaxy best practices for connecting Galaxy tools to underlying applications and libraries.",
-        "Leveraging Conda allows easy installation of your tool's dependencies by Galaxy deployers.",
-        "The Planemo commands `conda_search`, `conda_init`, `conda_install`, `lint`, `test`, and `serve` make it easy to search and use existing Conda recipes when developing tools.",
-        "Conda recipe skeletons, `conda build`, and with `planemo conda_install --conda_use_local` allow easy development of new Conda recipes at the same time as Galaxy tools that wrap them.",
-        "Bioconda is a Galaxy best practice Conda channel for recipe publication.",
-        "Bioconda has easy to follow contribution guidelines and is very welcoming to new contributors."
-      ],
-      "contributors": [
-        {
-          "name": "Nicola Soranzo",
-          "matrix": "nsoranzo:matrix.org",
-          "orcid": "0000-0003-3627-5340",
-          "twitter": "NicolaSoranzo",
-          "joined": "2017-09",
-          "elixir_node": "uk",
-          "id": "nsoranzo",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
-        },
-        {
-          "name": "John Chilton",
-          "email": "jmchilton@gmail.com",
-          "joined": "2017-09",
-          "twitter": "jmchilton",
-          "matrix": "jmchilton:matrix.org",
-          "orcid": "0000-0002-6794-0756",
-          "id": "jmchilton",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        },
-        {
-          "name": "Hervé Ménager",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "hmenager",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hmenager.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hmenager/"
-        }
-      ],
-      "short_id": "S00045",
-      "url": "/topics/dev/tutorials/conda/slides.html",
-      "topic_name": "dev",
-      "tutorial_name": "conda",
-      "dir": "topics/dev/tutorials/conda",
-      "id": "dev/conda",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/conda/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_slides",
-      "logo": "GTN",
-      "title": "Galaxy Interactive Environments",
-      "draft": true,
-      "questions": [
-        "What are Galaxy Interactive Environments (GIEs)?",
-        "How to enable GIEs in Galaxy?",
-        "How to develop your own GIE?"
-      ],
-      "objectives": [
-        "Implement a Hello-World Galaxy Interactive Environment"
-      ],
-      "requirements": [
-        {
-          "title": "Docker basics",
-          "type": "none"
-        }
-      ],
-      "time_estimation": "90m",
-      "key_points": [
-        "Interactive Environments offer access to third-party applications within Galaxy",
-        "Interactive Environments run in a docker images for sandboxing and easy dependency management"
-      ],
-      "contributors": [
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        }
-      ],
-      "subtopic": "advanced",
-      "short_id": "S00048",
-      "url": "/topics/dev/tutorials/interactive-environments/slides.html",
-      "topic_name": "dev",
-      "tutorial_name": "interactive-environments",
-      "dir": "topics/dev/tutorials/interactive-environments",
-      "id": "dev/interactive-environments",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "tags": [
-        "work-in-progress"
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-environments/slides.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Generic plugins",
-      "questions": [
-        "How can visualization plugins benefit science?"
-      ],
-      "objectives": [
-        "Implement a first Galaxy visualization",
-        "Understand the client side vs. server side principle"
-      ],
-      "requirements": [
-        {
-          "title": "Javascript knowledge",
-          "type": "none"
-        }
-      ],
-      "time_estimation": "90m",
-      "key_points": [
-        "Visualizations require a different way of thinking: server and client side; downloading files rather than system level access",
-        "Interactivity is what makes visualizations different from static tools",
-        "Requires understanding of both the Galaxy ecosystem as well as HTML5/JS",
-        "Performance is more important than for static Galaxy tools"
-      ],
-      "subtopic": "viz",
-      "contributors": [
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Youri Hoogstrate",
-          "joined": "2017-09",
-          "id": "yhoogstrate",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yhoogstrate.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/"
-        }
-      ],
-      "short_id": "T00121",
-      "url": "/topics/dev/tutorials/visualization-generic/tutorial.html",
-      "topic_name": "dev",
-      "tutorial_name": "visualization-generic",
-      "dir": "topics/dev/tutorials/visualization-generic",
-      "id": "dev/visualization-generic",
+      "tutorial_name": "webhooks",
+      "dir": "topics/dev/tutorials/webhooks",
+      "id": "dev/webhooks",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1728,7 +1469,7 @@
       },
       "hands_on": true,
       "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json",
       "tools": [
 
       ],
@@ -1777,8 +1518,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/visualization-generic/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/webhooks/tutorial.json"
       }
     },
     {
@@ -1995,71 +1736,69 @@
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "Contributing to BioBlend as a developer",
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Galaxy Interactive Tours",
       "questions": [
-        "How to get started making contributions to BioBlend?"
+        "What is a Galaxy Interactive Tour?",
+        "How to create a Galaxy Interactive Tour?"
       ],
       "objectives": [
-        "Learn the basics behind BioBlend and the Galaxy API from a developer perspective.",
-        "Learn how to implement a simple method in BioBlend.",
-        "Learn how to run the BioBlend test suite."
-      ],
-      "requirements": [
-        {
-          "title": "Basic command line knowledge",
-          "type": "none"
-        },
-        {
-          "title": "Familiarity with git and access to a GitHub account",
-          "type": "none"
-        },
-        {
-          "title": "Familiarity with the Python programming language",
-          "type": "none"
-        },
-        {
-          "title": "Familiarity with HTTP methods and JavaScript Object Notation (JSON)",
-          "type": "none"
-        }
+        "Discover what is a Galaxy Interactive Tour",
+        "Be able to create a Galaxy Interactive Tour",
+        "Be able to add a Galaxy Interactive Tour in a Galaxy instance"
       ],
       "time_estimation": "3h",
       "key_points": [
-        "BioBlend is a Python library that provides methods for easy interaction with the Galaxy API.",
-        "Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy development."
+        "An Interactive Tour is easy to create: just a yaml file to fill",
+        "Use the Developper Tools of find the JQuery Selector",
+        "Help yourself by using the available web plugins and record an interactive tour"
       ],
-      "subtopic": "api",
       "contributors": [
         {
-          "name": "Erik Schill",
-          "joined": "2021-05",
-          "id": "rikeshi",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/rikeshi.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/"
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
         },
         {
-          "name": "Simon Bray",
-          "joined": "2019-05",
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
           "elixir_node": "de",
-          "id": "simonbray",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
         }
       ],
-      "abbreviations": {
-        "LDA": "Library Dataset Association",
-        "HDA": "History Dataset Association",
-        "LDCA": "Library Dataset Collection Association",
-        "HDCA": "History Dataset Collection Association",
-        "API": "Application Programming Interface",
-        "PR": "Pull Request"
-      },
-      "short_id": "T00112",
-      "url": "/topics/dev/tutorials/bioblend-dev/tutorial.html",
+      "subtopic": "advanced",
+      "short_id": "S00049",
+      "url": "/topics/dev/tutorials/interactive-tours/slides.html",
       "topic_name": "dev",
-      "tutorial_name": "bioblend-dev",
-      "dir": "topics/dev/tutorials/bioblend-dev",
-      "id": "dev/bioblend-dev",
+      "tutorial_name": "interactive-tours",
+      "dir": "topics/dev/tutorials/interactive-tours",
+      "id": "dev/interactive-tours",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -2067,9 +1806,9 @@
         "both": null,
         "session": null
       },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json",
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/tutorial.json",
       "tools": [
 
       ],
@@ -2118,22 +1857,33 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tours/slides.json"
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "Contributing a New Feature to Galaxy Core",
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "Galaxy Code Architecture",
       "questions": [
-        "How can I add a new feature to Galaxy that involves modifications to the database, the API, and the UI?"
+        "How is the Galaxy code structured?",
+        "What do the various other projects related to Galaxy do?",
+        "What happens when I start Galaxy?"
       ],
       "objectives": [
-        "Learn to develop extensions to the Galaxy data model",
-        "Learn to implement new API functionality within Galaxy",
-        "Learn to extend the Galaxy user interface with VueJS components"
+        "Explore various aspects of the Galaxy codebase.",
+        "Understand the various top-level files and modules in Galaxy.",
+        "Understand how dependencies work in Galaxy's frontend and backend."
       ],
-      "time_estimation": "3H",
+      "time_estimation": "150m",
+      "requirements": null,
+      "key_points": [
+        "Galaxy runs out of the box and fetches all needed dependencies.",
+        "Running Galaxy in production requires configuration.",
+        "The architecture is designed to be pluggable and extensible.",
+        "Learn more about different Galaxy aspects in our [development section](/topics/dev/)."
+      ],
+      "subtopic": "core",
       "contributors": [
         {
           "name": "John Chilton",
@@ -2147,53 +1897,51 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
         },
         {
-          "name": "John Davis",
-          "email": "jdavcs@gmail.com",
-          "joined": "2019-06",
-          "orcid": "0000-0002-1363-1245",
-          "id": "jdavcs",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jdavcs.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/"
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
         }
       ],
-      "key_points": [
-        "Galaxy database interactions are mitigated via SQLAlchemy code in lib/galaxy/model.",
-        "Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.",
-        "Galaxy client code should do its best to separate API interaction logic from display components."
-      ],
-      "subtopic": "core",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "contributing",
-          "tutorials": [
-            "github-command-line-contribution"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "architecture"
-          ]
-        }
-      ],
-      "short_id": "T00113",
-      "url": "/topics/dev/tutorials/core-contributing/tutorial.html",
+      "short_id": "S00043",
+      "url": "/topics/dev/tutorials/architecture/slides.html",
       "topic_name": "dev",
-      "tutorial_name": "core-contributing",
-      "dir": "topics/dev/tutorials/core-contributing",
-      "id": "dev/core-contributing",
+      "tutorial_name": "architecture",
+      "dir": "topics/dev/tutorials/architecture",
+      "id": "dev/architecture",
       "video_library": {
         "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
-        "session": null
+        "session": {
+          "title": "Galaxy Code Architecture Lecture Series",
+          "description": "In this 9-part Lecture series, John Chilton will walk you through the Galaxy Code Architecture.",
+          "videos": [
+            "dev/architecture/slides-ecosystem",
+            "dev/architecture/slides-models-managers",
+            "dev/architecture/slides-app-di",
+            "dev/architecture/slides-project-management",
+            "dev/architecture/slides-web-client",
+            "dev/architecture/slides-pluggable-components",
+            "dev/architecture/slides-principles",
+            "dev/architecture/slides-web-requests",
+            "dev/architecture/slides-files-directories"
+          ]
+        }
       },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json",
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/tutorial.json",
       "tools": [
 
       ],
@@ -2242,8 +1990,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/architecture/slides.json"
       }
     },
     {
@@ -2405,73 +2153,70 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Writing Automated Tests for Galaxy",
+      "title": "Contributing to BioBlend as a developer",
+      "questions": [
+        "How to get started making contributions to BioBlend?"
+      ],
       "objectives": [
-        "Learn about the different types of automated tests in Galaxy",
-        "Learn to write API tests",
-        "Learn to write unit tests"
-      ],
-      "time_estimation": "3h",
-      "key_points": [
-        "Read the Writing Tests for Galaxy documentation article",
-        "Check for existing examples of similar tests before implementing your own",
-        "Prefer Galaxy's abstractions to writing low level code whenever possible",
-        "Write tests that do not depend on each other or the state of the database",
-        "When testing the API, verify the return status code before checking the response data",
-        "Refactor the code under test if that's needed to make it testable",
-        "Move redundant setup code into fixtures",
-        "Use test doubles (mocks, stubs, etc.) sparingly"
-      ],
-      "contributors": [
-        {
-          "name": "John Davis",
-          "email": "jdavcs@gmail.com",
-          "joined": "2019-06",
-          "orcid": "0000-0002-1363-1245",
-          "id": "jdavcs",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jdavcs.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/"
-        },
-        {
-          "name": "John Chilton",
-          "email": "jmchilton@gmail.com",
-          "joined": "2017-09",
-          "twitter": "jmchilton",
-          "matrix": "jmchilton:matrix.org",
-          "orcid": "0000-0002-6794-0756",
-          "id": "jmchilton",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
-        }
+        "Learn the basics behind BioBlend and the Galaxy API from a developer perspective.",
+        "Learn how to implement a simple method in BioBlend.",
+        "Learn how to run the BioBlend test suite."
       ],
       "requirements": [
         {
-          "type": "none",
-          "title": "Familiarity with basic Git commands"
+          "title": "Basic command line knowledge",
+          "type": "none"
         },
         {
-          "type": "none",
-          "title": "Basic knowledge of Python and JavaScript"
+          "title": "Familiarity with git and access to a GitHub account",
+          "type": "none"
         },
         {
-          "type": "none",
-          "title": "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
+          "title": "Familiarity with the Python programming language",
+          "type": "none"
         },
         {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "architecture"
-          ]
+          "title": "Familiarity with HTTP methods and JavaScript Object Notation (JSON)",
+          "type": "none"
         }
       ],
-      "subtopic": "core",
-      "short_id": "T00123",
-      "url": "/topics/dev/tutorials/writing_tests/tutorial.html",
+      "time_estimation": "3h",
+      "key_points": [
+        "BioBlend is a Python library that provides methods for easy interaction with the Galaxy API.",
+        "Implementing BioBlend methods is generally quite an easy process, making it well suited to beginners and a viable stepping stone into Galaxy development."
+      ],
+      "subtopic": "api",
+      "contributors": [
+        {
+          "name": "Erik Schill",
+          "joined": "2021-05",
+          "id": "rikeshi",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/rikeshi.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/"
+        },
+        {
+          "name": "Simon Bray",
+          "joined": "2019-05",
+          "elixir_node": "de",
+          "id": "simonbray",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simonbray.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/"
+        }
+      ],
+      "abbreviations": {
+        "LDA": "Library Dataset Association",
+        "HDA": "History Dataset Association",
+        "LDCA": "Library Dataset Collection Association",
+        "HDCA": "History Dataset Collection Association",
+        "API": "Application Programming Interface",
+        "PR": "Pull Request"
+      },
+      "short_id": "T00112",
+      "url": "/topics/dev/tutorials/bioblend-dev/tutorial.html",
       "topic_name": "dev",
-      "tutorial_name": "writing_tests",
-      "dir": "topics/dev/tutorials/writing_tests",
-      "id": "dev/writing_tests",
+      "tutorial_name": "bioblend-dev",
+      "dir": "topics/dev/tutorials/bioblend-dev",
+      "id": "dev/bioblend-dev",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -2481,7 +2226,7 @@
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json",
       "tools": [
 
       ],
@@ -2530,8 +2275,335 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/bioblend-dev/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "ToolFactory: Generating Tools From More Complex Scripts",
+      "key_points": [
+        "The ToolFactory Appliance includes an automated form driven tool generator.",
+        "It produces new tools as Toolshed ready archives",
+        "It was designed for scientists and developers who routinely write scripts for their analyses.",
+        "It can quickly turn a working command line script into a working Galaxy tool.",
+        "It generates tools from information entered on a Galaxy form in the familiar UI.",
+        "The new tool is installed in the appliance after generation so can be used and explored immediately.",
+        "New tools can be adjusted as needed by re-running the job that generated the tool and updating the form settings to suit.",
+        "Adding a test to the toolshed archive takes a minute or so and is only needed when the new tool is ready to export for sharing.",
+        "Experimenting with the ToolFactory samples will help acquire insight and skills useful for manual tool building."
+      ],
+      "objectives": [
+        "Further develop your ToolFactory Skills"
+      ],
+      "questions": [
+        "What else can I do with the ToolFactory?"
+      ],
+      "subtopic": "tooldev",
+      "time_estimation": "1H",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "introduction",
+          "tutorials": [
+            "galaxy-intro-short",
+            "galaxy-intro-101-everyone"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "tool-integration",
+            "interactive-environments",
+            "tool-generators"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Ross Lazarus",
+          "email": "ross.lazarus@gmail.com",
+          "joined": "2021-02",
+          "elixir_node": "au",
+          "id": "fubar2",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/fubar2.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/"
+        }
+      ],
+      "short_id": "T00119",
+      "url": "/topics/dev/tutorials/tool-generators-advanced/tutorial.html",
+      "topic_name": "dev",
+      "tutorial_name": "tool-generators-advanced",
+      "dir": "topics/dev/tutorials/tool-generators-advanced",
+      "id": "dev/tool-generators-advanced",
+      "video_library": {
+        "tutorial": {
+          "description": "Hands on demonstration for the Introductory tutorial. Create, run and update a \"Hello World\" tool in Galaxy",
+          "materials": [
+            {
+              "link": "topics/dev/tutorials/tool-generators-advanced/tutorial.html",
+              "title": "ToolFactory: Generating Tools From More Complex Scripts",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "dev"
+          ],
+          "type": null,
+          "versions": [
+            {
+              "captions": [
+                "fubar2"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "7M",
+              "link": "DK1eKz5TRs4",
+              "speakers": [
+                "fubar2"
+              ]
+            }
+          ],
+          "gtn_id": "dev/tool-generators-advanced",
+          "title": "ToolFactory: Generating Tools From More Complex Scripts",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Creating Galaxy tools from Conda Through Deployment",
+      "zenodo_link": "",
+      "questions": [
+        "How do you create a conda package used as a dependency in a Galaxy tool wrapper?",
+        "How do you create a Galaxy tool wrapper and all of its requirements?",
+        "How do you test a Galaxy tool wrapper after it's written?",
+        "How do you deploy a Galaxy tool wrapper?",
+        "How to do you make a Galaxy tool wrapper publicly available?"
+      ],
+      "objectives": [
+        "Learn how to make and deploy a conda package",
+        "Understand how to write a Galaxy tool wrapper",
+        "Be able to use a tool wrapper locally",
+        "Be able to test the tool wrapper",
+        "Learn how to add tools to the Galaxy toolshed and make them available to any user"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo",
+        "Anyone can write and deploy a tool wrapper!"
+      ],
+      "subtopic": "tooldev",
+      "contributors": [
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "orcid": "0000-0002-7901-7109",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
+        },
+        {
+          "name": "Dave B.",
+          "joined": "2021-06",
+          "id": "davebx",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/davebx.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davebx/"
+        },
+        {
+          "name": "Matthias Bernt",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bernt-matthias",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bernt-matthias.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/"
+        }
+      ],
+      "short_id": "T00117",
+      "url": "/topics/dev/tutorials/tool-from-scratch/tutorial.html",
+      "topic_name": "dev",
+      "tutorial_name": "tool-from-scratch",
+      "dir": "topics/dev/tutorials/tool-from-scratch",
+      "id": "dev/tool-from-scratch",
+      "video_library": {
+        "tutorial": {
+          "description": "1. The first step to adding a tool to Galaxy, is to add it to (Bio)Conda.\n   This tutorial will show you how to do that.\n2. Planemo is the Galaxy tool development kit, and will make your tool\n   development process a lot easier! This tutorial will show you how to use\n   Planemo to start the tool wrapping process, and covers the general\n   structure of a Galaxy tool wrapper.\n3. You are now ready to start writing your tool wrapper! This video will\n   show you how.\n4. Each tool wrapper also needs a .shed.yml file, which contains some\n   metadata about the tool.\n5. Here you will learn how to test Galaxy tools using Planemo.\n6. Here you will learn how to publish tools in public tool repositories.\n",
+          "materials": [
+            {
+              "link": "topics/dev/tutorials/tool-from-scratch/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "dev"
+          ],
+          "title": "Galaxy Tool Development",
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "gallardoalba",
+                "astrovsky01"
+              ],
+              "date": "2023-05-18",
+              "galaxy_version": "22.01",
+              "length": "50M",
+              "link": "QRoY1pFUY30",
+              "speakers": [
+                "gallardoalba",
+                "astrovsky01"
+              ]
+            },
+            {
+              "captions": [
+                "gallardoalba"
+              ],
+              "date": "2022-03-11",
+              "galaxy_version": "22.01",
+              "length": "40M",
+              "link": "33L4B9ir0aQ",
+              "speakers": [
+                "gallardoalba"
+              ]
+            },
+            {
+              "captions": [
+                "davebx",
+                "astrovsky01",
+                "bernt-matthias"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H40M",
+              "link": "videoseries?list=PLNFLKDpdM3B9GhA0FryVV2YX3YL35rENK",
+              "speakers": [
+                "davebx",
+                "astrovsky01",
+                "bernt-matthias"
+              ]
+            }
+          ],
+          "gtn_id": "dev/tool-from-scratch",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json"
       }
     },
     {
@@ -2677,6 +2749,261 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/debugging/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/debugging/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Contributing a New Feature to Galaxy Core",
+      "questions": [
+        "How can I add a new feature to Galaxy that involves modifications to the database, the API, and the UI?"
+      ],
+      "objectives": [
+        "Learn to develop extensions to the Galaxy data model",
+        "Learn to implement new API functionality within Galaxy",
+        "Learn to extend the Galaxy user interface with VueJS components"
+      ],
+      "time_estimation": "3H",
+      "contributors": [
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        },
+        {
+          "name": "John Davis",
+          "email": "jdavcs@gmail.com",
+          "joined": "2019-06",
+          "orcid": "0000-0002-1363-1245",
+          "id": "jdavcs",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jdavcs.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/"
+        }
+      ],
+      "key_points": [
+        "Galaxy database interactions are mitigated via SQLAlchemy code in lib/galaxy/model.",
+        "Galaxy API endpoints are implemented in lib/galaxy/webapps/galaxy, but generally defer to application logic in lib/galaxy/managers.",
+        "Galaxy client code should do its best to separate API interaction logic from display components."
+      ],
+      "subtopic": "core",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "contributing",
+          "tutorials": [
+            "github-command-line-contribution"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "architecture"
+          ]
+        }
+      ],
+      "short_id": "T00113",
+      "url": "/topics/dev/tutorials/core-contributing/tutorial.html",
+      "topic_name": "dev",
+      "tutorial_name": "core-contributing",
+      "dir": "topics/dev/tutorials/core-contributing",
+      "id": "dev/core-contributing",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/core-contributing/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Writing Automated Tests for Galaxy",
+      "objectives": [
+        "Learn about the different types of automated tests in Galaxy",
+        "Learn to write API tests",
+        "Learn to write unit tests"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "Read the Writing Tests for Galaxy documentation article",
+        "Check for existing examples of similar tests before implementing your own",
+        "Prefer Galaxy's abstractions to writing low level code whenever possible",
+        "Write tests that do not depend on each other or the state of the database",
+        "When testing the API, verify the return status code before checking the response data",
+        "Refactor the code under test if that's needed to make it testable",
+        "Move redundant setup code into fixtures",
+        "Use test doubles (mocks, stubs, etc.) sparingly"
+      ],
+      "contributors": [
+        {
+          "name": "John Davis",
+          "email": "jdavcs@gmail.com",
+          "joined": "2019-06",
+          "orcid": "0000-0002-1363-1245",
+          "id": "jdavcs",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jdavcs.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/"
+        },
+        {
+          "name": "John Chilton",
+          "email": "jmchilton@gmail.com",
+          "joined": "2017-09",
+          "twitter": "jmchilton",
+          "matrix": "jmchilton:matrix.org",
+          "orcid": "0000-0002-6794-0756",
+          "id": "jmchilton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "none",
+          "title": "Familiarity with basic Git commands"
+        },
+        {
+          "type": "none",
+          "title": "Basic knowledge of Python and JavaScript"
+        },
+        {
+          "type": "none",
+          "title": "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
+        },
+        {
+          "type": "internal",
+          "topic_name": "dev",
+          "tutorials": [
+            "architecture"
+          ]
+        }
+      ],
+      "subtopic": "core",
+      "short_id": "T00123",
+      "url": "/topics/dev/tutorials/writing_tests/tutorial.html",
+      "topic_name": "dev",
+      "tutorial_name": "writing_tests",
+      "dir": "topics/dev/tutorials/writing_tests",
+      "id": "dev/writing_tests",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "topic_name_human": "Development in Galaxy",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/writing_tests/tutorial.json"
       }
     },
     {
@@ -2867,333 +3194,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tools/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/interactive-tools/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Creating Galaxy tools from Conda Through Deployment",
-      "zenodo_link": "",
-      "questions": [
-        "How do you create a conda package used as a dependency in a Galaxy tool wrapper?",
-        "How do you create a Galaxy tool wrapper and all of its requirements?",
-        "How do you test a Galaxy tool wrapper after it's written?",
-        "How do you deploy a Galaxy tool wrapper?",
-        "How to do you make a Galaxy tool wrapper publicly available?"
-      ],
-      "objectives": [
-        "Learn how to make and deploy a conda package",
-        "Understand how to write a Galaxy tool wrapper",
-        "Be able to use a tool wrapper locally",
-        "Be able to test the tool wrapper",
-        "Learn how to add tools to the Galaxy toolshed and make them available to any user"
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Galaxy tools are made in 3 parts -- Conda, tool wrappers, and planemo",
-        "Anyone can write and deploy a tool wrapper!"
-      ],
-      "subtopic": "tooldev",
-      "contributors": [
-        {
-          "name": "Alex Ostrovsky",
-          "email": "a.ostrovsky@mac.com",
-          "orcid": "0000-0002-7901-7109",
-          "joined": "2019-06",
-          "id": "astrovsky01",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
-        },
-        {
-          "name": "Dave B.",
-          "joined": "2021-06",
-          "id": "davebx",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/davebx.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davebx/"
-        },
-        {
-          "name": "Matthias Bernt",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bernt-matthias",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bernt-matthias.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/"
-        }
-      ],
-      "short_id": "T00117",
-      "url": "/topics/dev/tutorials/tool-from-scratch/tutorial.html",
-      "topic_name": "dev",
-      "tutorial_name": "tool-from-scratch",
-      "dir": "topics/dev/tutorials/tool-from-scratch",
-      "id": "dev/tool-from-scratch",
-      "video_library": {
-        "tutorial": {
-          "description": "1. The first step to adding a tool to Galaxy, is to add it to (Bio)Conda.\n   This tutorial will show you how to do that.\n2. Planemo is the Galaxy tool development kit, and will make your tool\n   development process a lot easier! This tutorial will show you how to use\n   Planemo to start the tool wrapping process, and covers the general\n   structure of a Galaxy tool wrapper.\n3. You are now ready to start writing your tool wrapper! This video will\n   show you how.\n4. Each tool wrapper also needs a .shed.yml file, which contains some\n   metadata about the tool.\n5. Here you will learn how to test Galaxy tools using Planemo.\n6. Here you will learn how to publish tools in public tool repositories.\n",
-          "materials": [
-            {
-              "link": "topics/dev/tutorials/tool-from-scratch/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "dev"
-          ],
-          "title": "Galaxy Tool Development",
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "gallardoalba",
-                "astrovsky01"
-              ],
-              "date": "2023-05-18",
-              "galaxy_version": "22.01",
-              "length": "50M",
-              "link": "QRoY1pFUY30",
-              "speakers": [
-                "gallardoalba",
-                "astrovsky01"
-              ]
-            },
-            {
-              "captions": [
-                "gallardoalba"
-              ],
-              "date": "2022-03-11",
-              "galaxy_version": "22.01",
-              "length": "40M",
-              "link": "33L4B9ir0aQ",
-              "speakers": [
-                "gallardoalba"
-              ]
-            },
-            {
-              "captions": [
-                "davebx",
-                "astrovsky01",
-                "bernt-matthias"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H40M",
-              "link": "videoseries?list=PLNFLKDpdM3B9GhA0FryVV2YX3YL35rENK",
-              "speakers": [
-                "davebx",
-                "astrovsky01",
-                "bernt-matthias"
-              ]
-            }
-          ],
-          "gtn_id": "dev/tool-from-scratch",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-from-scratch/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "ToolFactory: Generating Tools From More Complex Scripts",
-      "key_points": [
-        "The ToolFactory Appliance includes an automated form driven tool generator.",
-        "It produces new tools as Toolshed ready archives",
-        "It was designed for scientists and developers who routinely write scripts for their analyses.",
-        "It can quickly turn a working command line script into a working Galaxy tool.",
-        "It generates tools from information entered on a Galaxy form in the familiar UI.",
-        "The new tool is installed in the appliance after generation so can be used and explored immediately.",
-        "New tools can be adjusted as needed by re-running the job that generated the tool and updating the form settings to suit.",
-        "Adding a test to the toolshed archive takes a minute or so and is only needed when the new tool is ready to export for sharing.",
-        "Experimenting with the ToolFactory samples will help acquire insight and skills useful for manual tool building."
-      ],
-      "objectives": [
-        "Further develop your ToolFactory Skills"
-      ],
-      "questions": [
-        "What else can I do with the ToolFactory?"
-      ],
-      "subtopic": "tooldev",
-      "time_estimation": "1H",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "introduction",
-          "tutorials": [
-            "galaxy-intro-short",
-            "galaxy-intro-101-everyone"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "dev",
-          "tutorials": [
-            "tool-integration",
-            "interactive-environments",
-            "tool-generators"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Ross Lazarus",
-          "email": "ross.lazarus@gmail.com",
-          "joined": "2021-02",
-          "elixir_node": "au",
-          "id": "fubar2",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/fubar2.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/"
-        }
-      ],
-      "short_id": "T00119",
-      "url": "/topics/dev/tutorials/tool-generators-advanced/tutorial.html",
-      "topic_name": "dev",
-      "tutorial_name": "tool-generators-advanced",
-      "dir": "topics/dev/tutorials/tool-generators-advanced",
-      "id": "dev/tool-generators-advanced",
-      "video_library": {
-        "tutorial": {
-          "description": "Hands on demonstration for the Introductory tutorial. Create, run and update a \"Hello World\" tool in Galaxy",
-          "materials": [
-            {
-              "link": "topics/dev/tutorials/tool-generators-advanced/tutorial.html",
-              "title": "ToolFactory: Generating Tools From More Complex Scripts",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "dev"
-          ],
-          "type": null,
-          "versions": [
-            {
-              "captions": [
-                "fubar2"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "7M",
-              "link": "DK1eKz5TRs4",
-              "speakers": [
-                "fubar2"
-              ]
-            }
-          ],
-          "gtn_id": "dev/tool-generators-advanced",
-          "title": "ToolFactory: Generating Tools From More Complex Scripts",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "topic_name_human": "Development in Galaxy",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/dev/tutorials/tool-generators-advanced/tutorial.json"
       }
     }
   ]
