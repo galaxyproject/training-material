@@ -22,7 +22,9 @@ To start, let's get our dataset loaded into Galaxy.
 
 You can access the data for this tutorial in multiple ways:
 1. **EBI Data Retrieval** - You may retrieve that files necessary to construct a Seurat Object in this way.Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
+
 > <hands-on-title>GetData</hands-on-title>
+>
 > Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
 > - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
@@ -40,7 +42,7 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 
 4. **Uploading from Zenodo** (see below)
 
-> <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
+> <hands-on-title>Option 4: Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
