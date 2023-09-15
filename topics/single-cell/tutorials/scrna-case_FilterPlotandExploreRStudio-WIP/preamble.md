@@ -30,19 +30,14 @@ You can access the data for this tutorial in multiple ways:
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 
-2. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html), and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
-
-   {% snippet faqs/galaxy/histories_copy_dataset.md %}
-In doing so, you will need to convert the AnnData object into a Seurat one. 
-
-3. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe)
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe)
 
    {% snippet faqs/galaxy/histories_import.md %}
 This also alleviates the necessity to convert the AnnData object into a Seurat one. 
 
-4. **Uploading from Zenodo** (see below)
+3. **Uploading from Zenodo** (see below)
 
-> <hands-on-title>Option 4: Uploading from Zenodo</hands-on-title>
+> <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
