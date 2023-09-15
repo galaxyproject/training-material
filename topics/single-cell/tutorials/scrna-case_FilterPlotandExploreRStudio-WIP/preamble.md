@@ -6,19 +6,39 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 > This tutorial is significantly based on the [Seurat documentation](https://satijalab.org/seurat) as well as [Seurat's Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial.html).
 {: .comment}
 
-We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
+We’ll provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
+
+# Get Data onto Galaxy 
+To start, let's get our dataset loaded into Galaxy. 
 
 You can access the data for this tutorial in multiple ways:
+1. **EBI Data Retrieval** - You may retrieve that files necessary to construct a Seurat Object in this way.Doing to will alleviate the necessity to convert AnnData (Python) objects into Seurat (R) objects:
+> <hands-on-title>GetData</hands-on-title>
+> Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
+> - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
+> - *"Choose the type of matrix to download"*: `Raw filtered counts`
+{: .hands_on}
 
-1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html), and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+2. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the [previous tutorial](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html), and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
+In doing so, you will need to convert the AnnData object into a Seurat one. 
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe)
+3. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/camila-goclowski/h/fpe)
 
    {% snippet faqs/galaxy/histories_import.md %}
+This also alleviates the necessity to convert the AnnData object into a Seurat one. 
 
-3. **Uploading from Zenodo** (see below)
+4. **Uploading from Zenodo** (see below)
 
 > <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
@@ -47,30 +67,11 @@ You can access the data for this tutorial in multiple ways:
 > - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
 {: .comment}
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Get Data onto Galaxy 
-To start, let's get our dataset loaded into Galaxy. 
-
-> <hands-on-title>GetData</hands-on-title>
-> Run{% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters: 
-> - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
-> - *"Choose the type of matrix to download"*: `Raw filtered counts`
-{: .hands_on}
-
 # Open RStudio in Galaxy 
 You now should have imported the matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files into your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
-
 
 
 ><comment-title>Next Step</comment-title>
