@@ -289,7 +289,7 @@ Once again, let's zoom in on the x-axis, but this time to get an idea of which n
 ```r
 plot(x = srt$nFeature_RNA, y = srt$perc.mt, main = "Gene Counts x Percent Mito", xlab = "gene_count", ylab = "percent mito", xlim = c(0,1275))
 ```
-![Gene x mito--zoomed in][def]
+![Gene x mito--zoomed in](../../images/scrna-SeuratRStudio/plot8.png "Gene counts x Percent mito zoomed in.")
 
 ><comment-title>Interpretations</comment-title>
 >You can see how cells with nFeature_RNA up to around, perhaps 575 genes, often have high perc.mt. The same can be said for cells with nFeature_RNA above 1275. 
