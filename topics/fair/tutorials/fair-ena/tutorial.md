@@ -45,7 +45,7 @@ In this tutorial you will learn to upload read data and accompanying metadata to
 ## ENA Submission Routes
 
 There are three routes via which one can submit data to ENA. 
-1.	The Webin Interactive portal, which allows you to submit data by filling out forms on your browser. This is what we will cover in this RDMBite,
+1.	The Webin Interactive portal, which allows you to submit data by filling out forms on your browser. This is what we will cover in this tutorial,
 2.	Webin-command-line interface, which allows submissions through a terminal, and
 3.	Programmatic submission, which requires the submissions to be prepared as XML documents and then uploaded using cURL or Webin portal. 
 
