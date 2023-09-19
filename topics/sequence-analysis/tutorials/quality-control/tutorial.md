@@ -1088,6 +1088,6 @@ Quality control steps are similar for any type of sequencing data:
 - Quality assessment with tools like:
   - *Short Reads*: {% tool [FASTQE](toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2) %}
   - *Short+Long*: {% tool [FASTQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %}
-  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}
+  - *Long Reads*:  {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %}
   - *Nanopore only*: {% tool [PycoQC](toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0) %}
 - Trimming and filtering for **short reads** with a tool like **Cutadapt** {% icon tool %}
