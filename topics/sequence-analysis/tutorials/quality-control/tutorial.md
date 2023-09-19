@@ -912,7 +912,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 
 This plot shows the distribution of fragment sizes in the file that was analyzed.
 Unlike most of Illumina runs, long reads have a variable length and this will show the relative amounts of each different size of sequence fragment.
-In this example, the distribution of read length is centered near 15kbp but the results can be very different depending of your experiment.
+In this example, the distribution of read length is centered near 18kbp but the results can be very different depending of your experiment.
 
 ![Histogram of read lengths](../../images/quality-control/HistogramReadlength.png "Histogram of read length")
 
