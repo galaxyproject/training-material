@@ -878,7 +878,7 @@ In case of long reads, we can check sequence quality with [Nanoplot](https://git
 >    https://zenodo.org/api/files/ff9aa6e3-3d69-451f-9798-7ea69b475989/m64011_190830_220126.Q20.subsample.fastq.gz
 >    ```
 >
-> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> 3. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0) %} with the following parameters
 >    - {% icon param-files %} *"files"*: `m64011_190830_220126.Q20.subsample.fastq.gz`
 >    - *"Options for customizing the plots created"*
 >        - {% icon param-select %} *"Specify the bivariate format of the plots."*: `dot`, `kde`
