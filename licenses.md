@@ -1,35 +1,33 @@
 ---
 layout: page
-title: About
+title: Licenses
 ---
 
-## Licenses
-
-### Atkinson Hyperlegible
+## Atkinson Hyperlegible
 
 <pre>
 {% include assets/fonts/AtkinsonHyperlegible/LICENSE.txt %}
 </pre>
 
-### Yanone Kaffeesatz
+## Yanone Kaffeesatz
 
 <pre>
 {% include assets/fonts/yanonekaffeesatz/LICENSE.txt %}
 </pre>
 
-### Comic Mono
+## Comic Mono
 
 <pre>
 {% include assets/fonts/ComicMono/LICENSE %}
 </pre>
 
-### OpenDyslexic
+## OpenDyslexic
 
 <pre>
 {% include assets/fonts/OpenDyslexic/LICENSE %}
 </pre>
 
-### Font Awesome
+## Font Awesome
 
 <pre>
 {% include assets/fontawesome/LICENSE.txt %}
