@@ -60,15 +60,10 @@ Imagine the following situation: An undergrad student wants to do a lab-based pr
 The only problem is, you can't remember what your post-doc has done so far. This is no problem, as you have followed your data management plan to the letter: _"lab books will be preserved for 10 years in the PI’s office"._ Let's see how effective this strategy actually is.
 
 <question-title></question-title>
->
 The PDF below contains a scan of the lab books in this example. Somewhere, there is an experiment to show the effect of the knock-down of a gene called CHES-I-like on the feeding behaviour of fruit flies. Try to find this information in the lab book.
 
-> - [IDR: Image Data Repository](https://idr.openmicroscopy.org/)
-> - [EMPIAR: Electron Microscopy Public Image Archive](https://www.ebi.ac.uk/empiar/)
-> - [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/)
-> 
-> Visit their websites and find out what their scope is or what sorts of datasets they accept.
->
+> [5 years worth of lab books](Lab-book_excercise1.pdf)
+
 > > <solution-title></solution-title>
 > >
 > > - **IDR: Image Data Repository**: Curated datasets of cell and tissue microscopy images
