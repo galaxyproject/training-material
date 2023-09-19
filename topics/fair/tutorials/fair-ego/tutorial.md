@@ -65,17 +65,25 @@ The PDF below contains a scan of the lab books in this example. Somewhere, there
 > [5 years worth of lab books](Lab-book_excercise1.pdf)
 
 > > <solution-title></solution-title>
-> >
-> > - **IDR: Image Data Repository**: Curated datasets of cell and tissue microscopy images
-> > - **EMPIAR: Electron Microscopy Public Image Archive**: Cryo-EM, Scanning Electron Microscopy, Soft X-ray tomography
-> > - **BioImage Archive**: Everything else and some overlap with IDR and EMPIAR
+> > The information can be found on page XXX of the pdf.
 > {: .solution}
 >
 {: .question}
 
- 
+Too difficult? Maybe try something a bit more easy
 
-Too difficult? The information can be found on page XXX of the lab book. Can you tell me how this experiment was designed?
+<question-title></question-title>
+
+The information can be found on page XXX of the lab book. Can you tell me how this experiment was designed?
+
+> [5 years worth of lab books](Lab-book_excercise1.pdf)
+
+> > <solution-title></solution-title>
+> > No you can't. Neither can I. Obviously our data management plan did not do us any favours here.
+> {: .solution}
+>
+{: .question} 
+
 
 ## Excercise 2: Reproduce the experiment
 
