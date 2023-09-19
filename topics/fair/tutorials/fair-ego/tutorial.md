@@ -87,6 +87,41 @@ The information can be found on page XXX of the lab book. Can you tell me how th
 
 ## Excercise 2: Reproduce the experiment
 
+Imagine the following situation: You have got great data. The editors of Nature, Science and Cell are all knocking on your door to publish in their journals. The only thing standing between you and a Nobel prize is one picture of an immunostaining that is not publication quality and the immunostaining needs to be redone. 
+
+![Wonky immunostaining](flybrain.png "Immunostaining")
+
+<question-title></question-title>
+This is an immunostaining of a fruitfly brain. Can you list 15 more pieces of information that you would need to be able to reproduce this image?
+
+> > <solution-title></solution-title>
+> > 1. Which fly strain
+> > 2. Which developmental stage
+> > 3. Which genotype
+> > 4. Time of day
+> > 5. Feeding conditions
+> > 6. Sex
+> > 7. Mating condition
+> > 8. Fixation time and conditions
+> > 9. Primary antibody
+> > 10. Secondary antibody
+> > 11. Dilutions of antibodies
+> > 12. Staining protocol
+> > 13. Which microscope
+> > 14. Which laser lines
+> > 15. What exposure time
+> > 16. Filter settings
+> > 17. Magnification
+> > 18. Pinhole size
+> > 19. Number of z slices
+> > 20. ...
+> > 
+> {: .solution}
+>
+{: .question}
+
+Too difficult? Maybe try something a bit more easy
+
 
 
 ## Excercise 4: Get the data
