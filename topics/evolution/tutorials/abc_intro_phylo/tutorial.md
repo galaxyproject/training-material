@@ -384,7 +384,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. in Galaxy, search for and select the MAFFT tool from the tool finder on the left.
+> 1. In Galaxy, search for and select the MAFFT tool from the tool finder on the left.
 > 2. When you select it, the "Sequences to align" field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
 > 3. Leave the "Data type" field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
 > 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
