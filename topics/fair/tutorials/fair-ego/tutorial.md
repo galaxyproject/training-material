@@ -124,7 +124,12 @@ Too difficult? Maybe try something a bit more easy
 
 
 
-## Excercise 4: Get the data
+## Excercise 3: Get the data
+
+Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
+
+_**The data that support the findings of this study are available from the corresponding author upon reasonable request.**_
+
 
 
 ## Conclusion
