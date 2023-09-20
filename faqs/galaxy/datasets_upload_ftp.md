@@ -8,12 +8,12 @@ contributors: [bebatut, shiltemann]
 
 Some Galaxies offer FTP upload for very large datasets.
 
-Note that the *"Big Three"* Galaxies (Galaxy Main, Galaxy EU, and Galaxy Australia) no longer support FTP upload, due to the recent improvements
-of the standard web upload, which should now support large file uploads and almost all use cases.
+**Note:** the *"Big Three"* Galaxies (Galaxy Main, Galaxy EU, and Galaxy Australia) no longer support FTP upload, due to the recent improvements
+of the default web upload, which should now support large file uploads and almost all use cases. For situations where uploading via the web
+interface is too tedious, the
+[galaxy-upload commandline utility](https://github.com/galaxyproject/galaxy-upload) is also available as an alternative to FTP.
 
-As an alternative to FTP upload for when uploading via the web interface is too tedious, the
-[galaxy-upload commandline utility](https://github.com/galaxyproject/galaxy-upload) is also available.
-
+To upload files via FTP, please
 
 1. Check that your Galaxy supports FTP upload and look up the FTP settings.
 
