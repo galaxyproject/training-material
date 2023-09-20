@@ -364,8 +364,14 @@ FASTA format is very simple and is commonly used as input to phylogenetic infere
 Sequence alignment is a very well developed process, but there can still be some arbitrariness that can make it tricky.
 For a start, while aligning just *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*.
 
+Aligning sequences amounts to finding the nucleotide positions (sites) that we can be confident have the same evolutionary history: they correspond to each other across species and can be considered to have evolved from the same common ancestor.
+A good clue to identify these sites, which are called <em>homologous</em>, is that they are well conserved, with only a few changes.
+
+Sequence alignment is a complex process and there are many techniques that have been developed to tackle it.
+
 > <comment-title>Dynamic Programming aside</comment-title>
->
+> While aligning multiple (more than two) sequences is computationally too costly to do in such a way as to guarantee that the result is optimal, it <em>is</em> possible to align two sequences in a reasonable amount of time, and guarantee that the result is optimal for some scoring scheme.
+> 
 {: .comment}
 
 
@@ -373,7 +379,7 @@ For a start, while aligning just *two* sequences is "easy", in the sense that an
 
 Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, which is available on Galaxy.
 
-## Question: is there a format convention for program names, like Courier Bold or something?
+<!-- ## Question: is there a format convention for program names, like Courier Bold or something? -->
 
 
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
