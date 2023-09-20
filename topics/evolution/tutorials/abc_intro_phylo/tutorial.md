@@ -47,14 +47,11 @@ It has been adapted to work as a stand-alone, self-paced tutorial, which can run
 	* What to do with difficult data (lots of gaps in the alignment)
 	* The data we will use: an alignment of malaria sequences.
 * Three different main approaches:
-	* Distance-based (NJ, BioNJ)
+	* Distance-based
 	* Parsimony
 	* Likelihood (simple models only)
 * Comparing phylogenies --- what to do when they aren't all the same
 * Analysing robustness
-* Interpreting results, 
-	* e.g. confidence interval on dates of divergence;
-	* selection pressure dN/dS ratios.
 * What can possibly (probably) go wrong?
 * A sensible workflow
 
@@ -93,14 +90,14 @@ This tutorial has the following structure:
 - The Neighbor-Joining method & Minimum Evolution, using FastTree2
 - Building your first tree (on Galaxy)
 - Models of sequence evolution: from the sublime to the ridiculous
-- Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
+- Phylogenetic Networks (**on your own computer, using SplitsTree**), Neighbor-Net
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
 - Maximum Likelihood with IQTree
 
 
 ## What is a Phylogeny?
 
-![IThink](./images/Darwin_tree.png){:width="400"}
+![IThink](./images/Darwin_tree.png){:align="center",:width="400"}
 
 <!-- **needs a reference** -->
 
@@ -122,8 +119,6 @@ to...
 <!-- all birds... -->
 
 ![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width=600}
-<!-- ![AllBirds](./images/nature11631-f2.jpg){:width="400"}
-(from from Jetz *et al.* 2012, Nature (491):444–448) -->
 
 and much bigger projects across all of life:
 
@@ -189,7 +184,7 @@ This assumption means that the future evolutionary trajectory of an organism is 
 > 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
 > 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 >
-> We will (mostly) make *all* these assumptions in this tutorial!
+> We will (mostly) make these assumptions in this tutorial!
 > 
 > 
 {: .comment}
@@ -224,7 +219,11 @@ A good outgroup won't be too distantly related to our ingroup, because if it's t
 You can see that in the diagram above the connection of the ingroup to the outgroup could be from multiple locations.
 Once the *unrooted* tree is created, using all the data from ingroup and outgroup taxa, we can confidently say that the root is on the branch connecting our ingroup to our outgroup:
 
-![Rooting a Tree](./images/TreeAnatomyRooting.drawio.png){:align="center"}
+![Rooting a Tree](./images/TreeAnatomyUnrooted.png){:align="center"}
+
+At this point we can imagine lifting up the unrooted tree at the branch connecting our outgroup and ingroup -- that is our best guess at the hypothetical ancestor of all our taxa and gives us a good indication of the branching order of our ingroup (and outgroup but we won't care):
+
+![Lift here!](./images/TreeAnatomyLiftHere.png){:align="center"}
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
 
@@ -345,7 +344,10 @@ The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each
 > 3. What about the shortest sequence? 
 {: .question}
 
- (Answers: there should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.) XXX this needs to be hidden by default
+<details>
+  <summary>Answer</summary>
+  There should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
+</details>
 
 FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
 
