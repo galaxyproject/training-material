@@ -50,17 +50,17 @@ It has been adapted to work as a stand-alone, self-paced tutorial, which can run
 	* Distance-based
 	* Parsimony
 	* Likelihood (simple models only)
+  * Phylogenetic networks
 * Comparing phylogenies --- what to do when they aren't all the same
-* Analysing robustness
-* What can possibly (probably) go wrong?
-* A sensible workflow
+* Analysing robustness using bootstrapping
+* A little on what can possibly (probably) go wrong?
+* A overview of a workflow
 
 **We will not cover:**
 
 * Workflows from read data to sequences
 * How to get an alignment (much: will use automated methods)
-* Phylogenetic networks
-* MCMC / BEAST / MrBayes
+* Bayesian phylogenetics: MCMC / BEAST / MrBayes
 
 ## Learning Objectives
 
@@ -641,7 +641,7 @@ While this is running you might use your time to read the Models of sequence evo
 > 3. Which do you think is the biggest well-supported clade?
 {: .hands_on}
 
-<!-- # Phylogenetic Networks
+# Phylogenetic Networks
 
 Intro to phylogenetic networks as an alternative to trees
 
@@ -654,7 +654,7 @@ Intro to phylogenetic networks as an alternative to trees
 > 1. Step 1
 > 2. Step 2
 >
-{: .hands_on} -->
+{: .hands_on}
 
 
 ![IQTreePhylovis](./images/PhyloVisTree.png){:align="center"}
