@@ -23,6 +23,8 @@ contributions:
   authorship:
     - korneelhens
     - nomadscientist
+  funding:
+    - elixir-fair-data
 subtopic: fair-data
 
 requirements:
@@ -30,6 +32,9 @@ requirements:
     topic_name: fair
     tutorials:
       - fair-intro
+   
+draft: true
+
 ---
 
 
@@ -159,6 +164,9 @@ If the publisher won't accomodate lengthy protocols in the main paper, what woul
 > {: .solution}
 >
 {: .question}
+
+
+![Alt text (Four graphs showing the decline in responses from authors with age of the paper; the likelihood of getting a response; the likelihood that that is useful and the likelihood that the data still exists.)](emailresponse.jpg "Obstacles to receiving data from the authors")
 
 
 ## Conclusion
