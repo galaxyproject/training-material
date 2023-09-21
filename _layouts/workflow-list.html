@@ -5,7 +5,7 @@ layout: base
 {% assign material = site | fetch_tutorial_material:page.topic_name,page.tutorial_name%}
 
 <section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
+    <h1>Workflows</h1>
     <p>These workflows are associated with <a href="../tutorial.html">{{ material.title }}</a></p>
     <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -61,9 +61,111 @@ layout: base
     </tbody>
     </table>
 
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
+   <h2>Importing into Galaxy</h2>
    Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
 
    {% snippet faqs/galaxy/workflows_import.md box_type="hands_on" %}
+
+
+   <h2>Workflow Testing Results</h2>
+   <p>These workflows have been tested to ensure that they work as expected. The results of these tests are available below.</p>
+
+   {% for workflow in material.workflows %}
+   {% if workflow.test_results != nil %}
+	{% for test in workflow.test_results %}
+	<div class="row">
+		<div class="col-md-3">
+			<h3><a href="https://{{ test.server_name }}">{{ test.server_name }}</a></h3>
+			<p>{{ test.date | date: "%Y-%m-%d" }} ({{ test.date | days_ago }} days ago)</p>
+			
+			<h4>Summary</h4>
+			Errors: {{ test.summary.num_errors }}
+			Failures: {{ test.summary.num_failures }}
+			Skips: {{ test.summary.num_skips }}
+			Tests: {{ test.summary.num_tests}}
+
+		</div>
+
+		<div class="col-md-9">
+			{% for subtest in test.tests %}
+				<div class="row">
+					<div class="col-md-12">
+					<hgroup>
+						<h4>{{ subtest.id }}</h4>
+						<p>{{ subtest.doc }}</p>
+					</hgroup>
+
+					<a href="https://usegalaxy.eu/published/history?id={{ subtest.data.invocation_details.details.history_id }}">View History</a> ({{ subtest.data.invocation_details.details.history_state }})<br/>
+					Runtime: {{ subtest.data.runtime |format_duration}}
+
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Step</th>
+								<th>Runtime</th>
+								<th>Tool</th>
+								<th>Cores</th>
+								<th>Peak Memory</th>
+								<th>Logs</th>
+							</tr>
+						</thead>
+						<tbody>
+					{% for step in subtest.data.invocation_details.steps %}
+						{% for job in step[1].jobs %}
+						<tr>
+							<td>{{ step[0] }}</td>
+							<td>
+								{{ job.runtime |format_duration }}
+							</td>
+							<td>{{ job.tool_id | short_tool_version }}</td>
+							<td>
+								{% assign cores = job.job_metrics | where: "name", "galaxy_slots" %}
+								{{ cores[0]['value'] }}
+							</td>
+							<td>
+								{% assign memory = job.job_metrics | where: "name", "memory.max_usage_in_bytes" %}
+								{{ memory[0]['value'] }}
+							</td>
+							<td>
+								{% if job.stderr != "" %}
+								<details>
+									<summary>job stderr</summary>
+									<pre>{{ job.stderr }}</pre>
+								</details>
+								{% endif %}
+
+								{% if job.stdout != "" %}
+								<details>
+									<summary>job stdout</summary>
+									<pre>{{ job.stdout }}</pre>
+								</details>
+								{% endif %}
+								{% if job.tool_stderr != "" %}
+								<details>
+									<summary>job tool_stderr</summary>
+									<pre>{{ job.tool_stderr }}</pre>
+								</details>
+								{% endif %}
+								{% if job.tool_stdout != "" %}
+								<details>
+									<summary>job tool_stdout</summary>
+									<pre>{{ job.tool_stdout }}</pre>
+								</details>
+								{% endif %}
+							</td>
+						</tr>
+						{% endfor %}
+					{% endfor %}
+						</tbody>
+					</table>
+					</div>
+
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	{% endfor %}
+   {% endif %}
+   {% endfor %}
 
 </section>

@@ -463,10 +463,45 @@ module TopicFilter
 
         # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
-        workflow_test_outputs = {}
+        workflow_test_outputs = []
         workflow_test_results.each do |test_result|
           server = workflow_test_results[0].match(/\.(..)\.json$/)[1]
-          workflow_test_outputs[server] = JSON.parse(File.read(test_result))
+          data = JSON.parse(File.read(test_result))
+          # Fix datetime types to be actual dates in tests
+          data['tests'].each do |test|
+            test['data']['start_datetime'] = DateTime.parse(test['data']['start_datetime'])
+            test['data']['end_datetime'] = DateTime.parse(test['data']['end_datetime'])
+            test['data']['runtime'] = ((test['data']['end_datetime'] - test['data']['start_datetime']) *  86400).to_f
+
+            #prev_job = nil
+            test['data']['invocation_details']['steps'].each do |k, step|
+              if step['jobs']
+                step['jobs'].each do |job|
+                  job['runtime'] = job['job_metrics'].select{|m| m['name'] == 'runtime_seconds'}.first['raw_value'].to_f
+
+                  #if prev_job
+                  #  my_start = job['job_metrics'].select{|m| m['name'] == 'start_epoch'}.first
+                  #  prev_end = prev_job['job_metrics'].select{|m| m['name'] == 'end_epoch'}.first
+                  #  puts "My start: #{my_start['raw_value']}"
+                  #  puts "Prev end: #{prev_end['raw_value']}"
+                  #  job['wait_time'] = (my_start['raw_value'].to_f - prev_end['raw_value'].to_f)
+                  #  puts "wait time", job['wait_time']
+                  #end
+
+                  #prev_job = job
+                end
+              end
+            end
+          end
+
+          data['server'] = server
+          data['server_name'] = {
+            'eu' => 'UseGalaxy.eu',
+            'au' => 'UseGalaxy.org.au',
+            'org' => 'UseGalaxy.org',
+          }[server]
+          data['date'] = File.mtime(test_result)
+          workflow_test_outputs << data
         end
         workflow_test_outputs = nil if workflow_test_outputs.empty?
 
@@ -713,6 +748,22 @@ module TopicFilter
       tool
     end
   end
+  ##
+  # Get a short version of a tool, including the version.
+  # Parameters:
+  # +tool+:: A tool string
+  # Returns:
+  # +String+:: The short version of the tool.
+  #
+  # Examples:
+  # short_tool("toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0") => "galaxyp/regex1@1.0.0"
+  def self.short_tool_version(tool)
+    if tool.count('/') > 4
+      "#{tool.split('/')[2]}/#{tool.split('/')[4]}@#{tool.split('/')[-1]}"
+    else
+      tool
+    end
+  end
 
   ##
   # List materials by tool
@@ -861,6 +912,14 @@ module Jekyll
 
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
+    end
+
+    def short_tool(tool)
+      TopicFilter.short_tool(tool)
+    end
+
+    def short_tool_version(tool)
+      TopicFilter.short_tool_version(tool)
     end
   end
 end

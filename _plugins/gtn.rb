@@ -353,6 +353,59 @@ module Jekyll
     end
 
     ##
+    # Convert an rational time duration into a human readable string
+    # Params:
+    # +Rational+:: The duration to convert
+    # Returns:
+    # +String+:: The human readable duration
+    # Example:
+    # {{ 15 | duration }}
+    # => "15s"
+    # {{ 60 | duration }}
+    # => "1m"
+    # {{ 3600 | duration }}
+    # => "1h"
+    # {{ 3660 | duration }}
+    # => "1h 1m"
+    def format_duration(duration)
+      return '0s' if duration.nil?
+
+      seconds = duration.to_i
+      minutes = seconds / 60
+      hours = minutes / 60
+
+      if hours.positive?
+        "#{hours}h #{minutes % 60}m"
+      elsif minutes.positive?
+        "#{minutes}m #{seconds % 60}s"
+      else
+        "#{seconds}s"
+      end
+    end
+
+    ##
+    # Calculate integer days since a date
+    # Params:
+    # +date+:: The date to calculate days since
+    # Returns:
+    # +Integer+:: The number of days since the date
+    # Example:
+    # {{ "2020-01-01" | days_ago }}
+    # => 1
+    def days_ago(date)
+      return 0 if date.nil?
+      if date.is_a?(String)
+        date = DateTime.parse(date).to_date
+      elif date.is_a?(Time)
+        date = date.to_date
+      elif date.is_a?(DateTime)
+        date = date.to_date
+      end
+
+      (Date.today - date.to_date).to_i
+    end
+
+    ##
     # Gets the 'default' link for a material, hands on if it exists, otherwise slides.
     # Params:
     # +material+:: The material to get the link for
