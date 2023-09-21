@@ -120,16 +120,45 @@ This is an immunostaining of a fruitfly brain. Can you list 15 more pieces of in
 >
 {: .question}
 
-Too difficult? Maybe try something a bit more easy
-
-
-
 ## Excercise 3: Get the data
 
 Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
 
 _**The data that support the findings of this study are available from the corresponding author upon reasonable request.**_
 
+<question-title></question-title>
+Can you list a couple of reasons an author might have not to publish the data he is reporting?
+> > <solution-title></solution-title>
+> >
+> > 1. Conflicts of privacy and confidentiality e.g. patient data
+> > 2. Economically sensitive data e.g. patent applications
+> {: .solution}
+>
+{: .question}
+
+<question-title></question-title>
+Since the authors will provide the data upon **reasonable** request, give an example of an **unreasonable** request
+> > <solution-title></solution-title>
+> > I don't think there are unreasonable requests?
+> {: .solution}
+>
+{: .question}
+
+Recently, the following has appeared in severeal journals: 
+
+_**Contact the authors for detailed protocol**_
+
+<question-title></question-title>
+If the publisher won't accomodate lengthy protocols in the main paper, what would be a good place to publish detailed protocols?
+
+> > <solution-title></solution-title>
+> >
+> > 1. Supplementary Data
+> > 2. Github
+> > 3. Dedicated Methods paper
+> {: .solution}
+>
+{: .question}
 
 
 ## Conclusion
