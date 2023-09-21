@@ -64,7 +64,7 @@ Imagine the following situation: An undergrad student wants to do a lab-based pr
 
 The only problem is, you can't remember what your post-doc has done so far. This is no problem, as you have followed your data management plan to the letter: _"lab books will be preserved for 10 years in the PI’s office"._ Let's see how effective this strategy actually is.
 
-<question-title></question-title>
+<question-title>1</question-title>
 The PDF below contains a scan of the lab books in this example. Somewhere, there is an experiment to show the effect of the knock-down of a gene called CHES-I-like on the feeding behaviour of fruit flies. Try to find this information in the lab book.
 
 > [5 years worth of lab books](Lab-book_excercise1.pdf)
@@ -77,9 +77,9 @@ The PDF below contains a scan of the lab books in this example. Somewhere, there
 
 Too difficult? Maybe try something a bit more easy
 
-<question-title></question-title>
+> <question-title></question-title>
 
-The information can be found on page XXX of the lab book. Can you tell me how this experiment was designed?
+> The information can be found on page XXX of the lab book. Can you tell me how this experiment was designed?
 
 > [5 years worth of lab books](Lab-book_excercise1.pdf)
 
@@ -96,9 +96,8 @@ Imagine the following situation: You have got great data. The editors of Nature,
 
 ![Wonky immunostaining](flybrain.png "Immunostaining")
 
-<question-title></question-title>
-This is an immunostaining of a fruitfly brain. Can you list 15 more pieces of information that you would need to be able to reproduce this image?
-
+> <question-title>2</question-title>
+> This is an immunostaining of a fruitfly brain. Can you list 15 more pieces of information that you would need to be able to reproduce this image?
 > > <solution-title></solution-title>
 > > 1. Which fly strain
 > > 2. Which developmental stage
@@ -131,8 +130,8 @@ Imagine the following situation: it has been a slow couple of years in terms of 
 
 _**The data that support the findings of this study are available from the corresponding author upon reasonable request.**_
 
-<question-title></question-title>
-Can you list a couple of reasons an author might have not to publish the data he is reporting?
+> <question-title>3</question-title>
+> Can you list a couple of reasons an author might have not to publish the data he is reporting?
 > > <solution-title></solution-title>
 > >
 > > 1. Conflicts of privacy and confidentiality e.g. patient data
@@ -141,8 +140,8 @@ Can you list a couple of reasons an author might have not to publish the data he
 >
 {: .question}
 
-<question-title></question-title>
-Since the authors will provide the data upon **reasonable** request, give an example of an **unreasonable** request
+> <question-title>4</question-title>
+> Since the authors will provide the data upon **reasonable** request, give an example of an **unreasonable** request
 > > <solution-title></solution-title>
 > > I don't think there are unreasonable requests?
 > {: .solution}
@@ -153,9 +152,8 @@ Recently, the following has appeared in severeal journals:
 
 _**Contact the authors for detailed protocol**_
 
-<question-title></question-title>
-If the publisher won't accomodate lengthy protocols in the main paper, what would be a good place to publish detailed protocols?
-
+> <question-title>5</question-title>
+> If the publisher won't accomodate lengthy protocols in the main paper, what would be a good place to publish detailed protocols?
 > > <solution-title></solution-title>
 > >
 > > 1. Supplementary Data
