@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: Inferring Trajectories using Scanpy (Python)
-subtopic: single-cell-CS
-priority: 4
+subtopic: single-cell-CS-code
+priority: 3
 zenodo_link: 'https://zenodo.org/record/7075718'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-JUPYTER-trajectories/tutorial
