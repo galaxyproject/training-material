@@ -56,7 +56,7 @@ However, there might be some value in persuading your colleagues to do their RDM
 
 
 
-## Excercise 1: Find the experiment
+# Excercise 1: Find the experiment
 
 Imagine the following situation: An undergrad student wants to do a lab-based project with you. This is great because your post-doc has recently left the lab and there are several promising leads from their work that can be followed up. You propose the following topic to the student: 
 
@@ -90,7 +90,7 @@ Too difficult? Maybe try something a bit more easy
 {: .question} 
 
 
-## Excercise 2: Reproduce the experiment
+# Excercise 2: Reproduce the experiment
 
 Imagine the following situation: You have got great data. The editors of Nature, Science and Cell are all knocking on your door to publish in their journals. The only thing standing between you and a Nobel prize is one picture of an immunostaining that is not publication quality and the immunostaining needs to be redone. 
 
@@ -124,7 +124,7 @@ Imagine the following situation: You have got great data. The editors of Nature,
 >
 {: .question}
 
-## Excercise 3: Get the data
+# Excercise 3: Get the data
 
 Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
 
@@ -185,7 +185,7 @@ In this figure, four obstacles to receiving data from the authors are identified
 >
 {: .question}
 
-## Conclusion
+# Conclusion
 
 The Galaxy Training Network is an example of a robust, effective Community of Practice.
 For more information please look at this great article {% cite hiltemann2023galaxy %}, the corresponding FAIR guidelines {% cite fair-training-materials %} and follow [short introduction to FAIR data stewardship](http://fellowship.elixiruknode.org/).
