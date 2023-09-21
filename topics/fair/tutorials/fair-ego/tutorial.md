@@ -163,9 +163,27 @@ _**Contact the authors for detailed protocol**_
 >
 {: .question}
 
+You have resigned to the fact that you will have to contact the authors to get the data. Let's have a look at this paper {% cite Vines_2014 %} to get an idea how likely it is that you will actually be succesful.
+
+Figure 1 in this paper is especially revealing:
 
 ![Alt text (Four graphs showing the decline in responses from authors with age of the paper; the likelihood of getting a response; the likelihood that that is useful and the likelihood that the data still exists.)](emailresponse.jpg "Obstacles to receiving data from the authors")
 
+In this figure, four obstacles to receiving data from the authors are identified
+1. the probability that the paper had at least one apparently working e-mail. Worryingly, even in the first year, this is only 80 % and drops off as the paper ages. Academics usually put their university email address on the paper, but they also move around from institute to institute causing the emails to get lost.
+2. probability of receiving a response, given that at least one e-mail was apparently working. This is disappointingly low to start with, but remains stable over the years
+3. probability of receiving a response giving the status of the data, given that we received a response. This is also stable at around 80%
+4. probability that the data were extant (either “shared” or “exist but unwilling to share”) given that we received a useful response.
+
+> <question-title>6</question-title>
+> From the previous graph, calculate the likelihood of getting hold of 10 year old data
+> > <solution-title></solution-title>
+> >
+> > 0.75 x 0.5 x 0.8 x 0.75 = 0.225
+> > You have a 22.5% chance of getting the data!
+> {: .solution}
+>
+{: .question}
 
 ## Conclusion
 
