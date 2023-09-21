@@ -387,6 +387,14 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 
+## Internally linking to other training material
+
+If you want to link to other training material within your text, you can use the following, but inputting the correct file location:
+
+```markdown
+{% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}
+```
+
 # Improving the learning experience with Boxes
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content.
