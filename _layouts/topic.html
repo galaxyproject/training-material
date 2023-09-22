@@ -46,8 +46,12 @@ layout: base
     {{ content }}
 
     {% if topic.type == "use" %}
-        <h2 id="docker_image">Galaxy instances</h2>
+        <h2 id="galaxy_instances">Galaxy Instances</h2>
         <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
+
+	badge per server with # of passing workflow tests.
+	docker badge with popup/highlight
+
         {% if topic.docker_image and topic.docker_image != "" %}
             <p>You can also use the following Docker image for these tutorials:</p>
             <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
