@@ -91,9 +91,11 @@ Too difficult? Maybe try something a bit more easy
 ## The solution
 
 The problem descibed above could have been avoided by creating a Data Management Plan (DPM) before the start of the project. A DMP is a document that describes how research data is going to be managed during and after the project. Importantly, A DMP is a living document that may need to be altered during the project. Any time the research plan changes, the DMP should be reviewed and updated.
-Learn more about DPMs from these excellent resources: {% cite RDMkit-Data-management-plan %} and {% cite elixir-belgium-About-DPM %}
+Learn more about DPMs from these excellent resources: {% cite RDMkit-Data-management-plan %} and {% cite elixir-belgium-About-DMP %}
 
 # Excercise 2: Reproduce the experiment
+
+## The Problem
 
 Imagine the following situation: You have got great data. The editors of Nature, Science and Cell are all knocking on your door to publish in their journals. The only thing standing between you and a Nobel prize is one picture of an immunostaining that is not publication quality and the immunostaining needs to be redone. 
 
@@ -126,6 +128,10 @@ Imagine the following situation: You have got great data. The editors of Nature,
 > {: .solution}
 >
 {: .question}
+
+## The solution
+
+Controlled vocabularies and ontologies
 
 # Excercise 3: Get the data
 
