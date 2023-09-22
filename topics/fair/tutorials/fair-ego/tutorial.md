@@ -190,7 +190,7 @@ In this figure, four obstacles to receiving data from the authors are identified
 ## The solution
 
 The problems described above all relate to (lack of) data reuse possibilities by researchers. The FAIR principles of research data management have been established precicely to increase data reuse.
-Learn more about the FAIR principles in this excellent GTN tutorial: {% cite FAIR-in-a-nutshell %}
+Learn more about the FAIR principles in these excellent GTN tutorials: {% cite FAIR-in-a-nutshell %} and {% cite FAIR-data-management-solutions %}
 
 # Conclusion
 
