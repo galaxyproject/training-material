@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: "Clustering 3K PBMCs with Scanpy"
-subtopic: end-to-end
-priority: 4
+subtopic: firstsc
+priority: 2
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial
 zenodo_link: 'https://zenodo.org/record/3581213'
