@@ -463,10 +463,11 @@ module TopicFilter
 
         # /galaxy-intro-101-workflow.eu.json
         workflow_test_results = Dir.glob(wf_path.gsub(/.ga$/, '.*.json'))
-        workflow_test_outputs = []
+        workflow_test_outputs = {"eu" => [], "us" => [], "au" => []}
         workflow_test_results.each do |test_result|
           server = workflow_test_results[0].match(/\.(..)\.json$/)[1]
           data = JSON.parse(File.read(test_result))
+          data['path'] = test_result
           # Fix datetime types to be actual dates in tests
           data['tests'].each do |test|
             test['data']['start_datetime'] = DateTime.parse(test['data']['start_datetime'])
@@ -498,11 +499,20 @@ module TopicFilter
           data['server_name'] = {
             'eu' => 'UseGalaxy.eu',
             'au' => 'UseGalaxy.org.au',
-            'org' => 'UseGalaxy.org',
+            'us' => 'UseGalaxy.org',
           }[server]
-          data['date'] = File.mtime(test_result)
-          workflow_test_outputs << data
+          data['date'] = data['tests'][0]['data']['start_datetime'].to_date
+          workflow_test_outputs[server] << data
         end
+        # Sort by date
+        workflow_test_outputs['eu'].sort_by!{|t| t['date']}.reverse!
+        workflow_test_outputs['au'].sort_by!{|t| t['date']}.reverse!
+        workflow_test_outputs['us'].sort_by!{|t| t['date']}.reverse!
+
+        # Cleanup for liquid
+        workflow_test_outputs.delete('us') if workflow_test_outputs['us'].empty?
+        workflow_test_outputs.delete('eu') if workflow_test_outputs['eu'].empty?
+        workflow_test_outputs.delete('au') if workflow_test_outputs['au'].empty?
         workflow_test_outputs = nil if workflow_test_outputs.empty?
 
         {

@@ -71,18 +71,25 @@ layout: base
    <p>These workflows have been tested to ensure that they work as expected. The results of these tests are available below.</p>
 
    {% for workflow in material.workflows %}
+   <h3>{{ workflow.workflow }}</h3>
    {% if workflow.test_results != nil %}
-	{% for test in workflow.test_results %}
-	<div class="row">
-		<div class="col-md-3">
-			<h3><a href="https://{{ test.server_name }}">{{ test.server_name }}</a></h3>
+	{% for server_id in workflow.test_results %}
+	<!-- {{ server_id[0] }} -->
+	{% for test in server_id[1] %}
+	{% if forloop.index == 1 %}
+	<div class="row" style="border: 1px solid var(--border-light)">
+		<div class="col-md-3 {% if test.summary.num_errors == 0 %}alert-success{% else %}alert-error{% endif %}">
+			<hgroup>
+			<h4><a href="https://{{ test.server_name }}">{{ test.server_name }}</a></h4>
 			<p>{{ test.date | date: "%Y-%m-%d" }} ({{ test.date | days_ago }} days ago)</p>
-			
-			<h4>Summary</h4>
+			</hgroup>
+
+			<p>
 			Errors: {{ test.summary.num_errors }}
 			Failures: {{ test.summary.num_failures }}
 			Skips: {{ test.summary.num_skips }}
 			Tests: {{ test.summary.num_tests}}
+			</p>
 
 		</div>
 
@@ -95,9 +102,9 @@ layout: base
 						<p>{{ subtest.doc }}</p>
 					</hgroup>
 
-					<a href="https://usegalaxy.eu/published/history?id={{ subtest.data.invocation_details.details.history_id }}">View History</a> ({{ subtest.data.invocation_details.details.history_state }})<br/>
-					Runtime: {{ subtest.data.runtime |format_duration}}
+					<a href="https://usegalaxy.eu/published/history?id={{ subtest.data.invocation_details.details.history_id }}">History</a> ({{ subtest.data.invocation_details.details.history_state }}) ran in {{ subtest.data.runtime |format_duration}}.<br/>
 
+					<details><summary>Job Log</summary>
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -158,12 +165,39 @@ layout: base
 					{% endfor %}
 						</tbody>
 					</table>
+					</details>
 					</div>
 
 				</div>
 			{% endfor %}
 		</div>
 	</div>
+	{% else %}
+	<!--
+	<div class="row" style="border: 1px solid var(--border-light)">
+		<div class="col-md-3 {% if test.summary.num_errors == 0 %}alert-success{% else %}alert-warning{% endif %}">
+			<hgroup>
+				<h4><a href="https://{{ test.server_name }}">{{ test.server_name }}</a></h4>
+				<p>{{ test.date | date: "%Y-%m-%d" }} ({{ test.date | days_ago }} days ago)</p>
+			</hgroup>
+		</div>
+		<div class="col-md-9">
+			<p>
+			Errors: {{ test.summary.num_errors }}
+			Failures: {{ test.summary.num_failures }}
+			Skips: {{ test.summary.num_skips }}
+			Tests: {{ test.summary.num_tests}}
+			View Results: <a href="https://github.com/galaxyproject/training-material/blob/main/{{ test.path }}">Test Results (on GitHub)</a>
+			</p>
+			{% for subtest in test.tests %}
+			<a href="https://usegalaxy.eu/published/history?id={{ subtest.data.invocation_details.details.history_id }}">History for {{ subtest.id }}</a> ({{ subtest.data.invocation_details.details.history_state }})<br/>
+			{% endfor %}
+		</div>
+	</div>
+	-->
+	{% endif %}
+
+	{% endfor %}
 	{% endfor %}
    {% endif %}
    {% endfor %}
