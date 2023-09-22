@@ -126,6 +126,8 @@ Imagine the following situation: You have got great data. The editors of Nature,
 
 # Excercise 3: Get the data
 
+## The Problem
+
 Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
 
 _**The data that support the findings of this study are available from the corresponding author upon reasonable request.**_
@@ -163,7 +165,7 @@ _**Contact the authors for detailed protocol**_
 >
 {: .question}
 
-You have resigned to the fact that you will have to contact the authors to get the data. Let's have a look at this paper {% cite Vines_2014 %} to get an idea how likely it is that you will actually be succesful.
+You are resigned to the fact that you will have to contact the authors to get the data. Let's have a look at this paper {% cite Vines_2014 %} to get an idea how likely it is that you will actually be succesful.
 
 Figure 1 in this paper is especially revealing:
 
@@ -184,6 +186,11 @@ In this figure, four obstacles to receiving data from the authors are identified
 > {: .solution}
 >
 {: .question}
+
+## The solution
+
+The problems described above all relate to (lack of) data reuse possibilities by researchers. The FAIR principles of research data management have been established precicely to increase data reuse.
+Learn more about the FAIR principles in this excellent GTN tutorial: {% cite FAIR-in-a-nutshell %}
 
 # Conclusion
 
