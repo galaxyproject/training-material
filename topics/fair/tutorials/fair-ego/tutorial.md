@@ -53,10 +53,9 @@ However, there might be some value in persuading your colleagues to do their RDM
 >
 {: .agenda}
 
-
-
-
 # Excercise 1: Find the experiment
+
+## The Problem
 
 Imagine the following situation: An undergrad student wants to do a lab-based project with you. This is great because your post-doc has recently left the lab and there are several promising leads from their work that can be followed up. You propose the following topic to the student: 
 
@@ -89,6 +88,10 @@ Too difficult? Maybe try something a bit more easy
 >
 {: .question} 
 
+## The solution
+
+The problem descibed above could have been avoided by creating a Data Management Plan (DPM) before the start of the project. A DMP is a document that describes how research data is going to be managed during and after the project. Importantly, A DMP is a living document that may need to be altered during the project. Any time the research plan changes, the DMP should be reviewed and updated.
+Learn more about DPMs from these excellent resources: {% cite RDMkit-Data-management-plan %} and {% cite elixir-belgium-About-DPM %}
 
 # Excercise 2: Reproduce the experiment
 
