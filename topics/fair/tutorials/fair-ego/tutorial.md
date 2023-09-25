@@ -134,8 +134,7 @@ Imagine the following situation: You have got great data. The editors of Nature,
 This excercise illustrates how much information you need to keep to be able to reproduce experiments, be it your own data or that of other scientists.
 More often than not, this level of detail is not recorded / published, which may explain part of the **reproducibility crisis** {% cite Baker2016 %}.
 
-
-metadata
+This information about the data is called **metadata** and is arguably as important as the data itself.  
 
 # Excercise 3: Get the data
 
