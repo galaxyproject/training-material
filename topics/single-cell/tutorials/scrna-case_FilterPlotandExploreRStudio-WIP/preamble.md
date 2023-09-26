@@ -15,7 +15,7 @@ You’ve previously done all the work to make a single cell matrix. Now it’s t
 >
 {: .agenda}
 
-We’ll provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#Bacon2018). This is the full dataset generated from [this tutorial](https://usegalaxy.eu/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html). 
+We’ll provided you with experimental data to analyse from a mouse dataset of fetal growth restriction [Bacon et al. 2018]({% cite Bacon2018 %}). This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.html %}). 
 
 # Get Data onto Galaxy 
 To start, let's get our dataset loaded into Galaxy. 
