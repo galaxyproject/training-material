@@ -502,7 +502,13 @@ module TopicFilter
       page_obj['tools'] += extract_workflow_tool_list(wf_data)
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
-    page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+
+    topic = site.data[page_obj['topic_name']]
+    if topic['type'] == 'use' || topic['type'] == 'basics'
+      page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+    else
+      page_obj['supported_servers'] = []
+    end
 
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
