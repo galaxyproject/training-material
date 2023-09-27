@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@c9e749459c1a5e897bd066ffa989e47f8bcd992b",
+  release: "galaxy-training-network@2cfeb152b02d57750c11e134095d267b9ca45209",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695773445' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695773445' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695806636' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695806636' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring trajectories using Monocle3">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
+<meta name="DC.date" content="2023-09-25 21:57:26 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-17 17:21:19 +0000",
+  "dateModified": "2023-09-25 21:57:26 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Inferring trajectories using Monocle3",
   "interactivityType": "mixed",
@@ -289,7 +289,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695773445'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695806636'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -629,6 +629,8 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -665,6 +667,8 @@ Sentry.init({
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -749,6 +753,8 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -809,6 +815,8 @@ Sentry.init({
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -830,10 +838,6 @@ Sentry.init({
         
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
         <ul class="supporting_material">
-            
-                <li class="btn btn-default"><a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html" title="Slides for this tutorial">
-                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
-                </a></li>
             
 
             
@@ -923,7 +927,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 25, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -950,7 +954,7 @@ Sentry.init({
 
 <p>This tutorial is a follow-up to the <a href="/training-material/topics/single-cell/index.html">‘Single-cell RNA-seq: Case Study’</a>. We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">prepare a single cell matrix</a>, <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">combine datasets</a> and <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">filter, plot and process scRNA-seq data</a> to get the data in the form we’ll be working on today.</p>
 
-<p>In this tutorial we will perform trajectory analysis using <a href="https://cole-trapnell-lab.github.io/monocle3/">monocle3</a>. You can find out more about the theory behind trajectory analysis in our <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html">slide deck</a>. We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: <a href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">Trajectory Analysis using Python (Jupyter Notebook) in Galaxy</a>. However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!</p>
+<p>In this tutorial we will perform trajectory analysis using <a href="https://cole-trapnell-lab.github.io/monocle3/">monocle3</a>. You can find out more about the theory behind trajectory analysis in our <a href="/training-material/topics/single-cell/tutorials/scrna-trajectories/slides.html">slide deck</a>. We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: <a href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">Trajectory Analysis using Python (Jupyter Notebook) in Galaxy</a>. However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!</p>
 
 <!--SNIPPET-->
 <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Using tutorial mode<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
@@ -1762,7 +1766,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers">uses the gene names in one object to add to a table of Ensembl IDs</a>. These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting…or all three!
+    <p>By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers">uses the gene names in one object to add to a table of Ensembl IDs</a>. These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting…or all three!
 The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1.</p>
 
     <p>Whenever you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, check the top markers for that cluster to draw biological conclusions. Thank you Maths!</p>
@@ -2148,7 +2152,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c9e749459c1a5e897bd066ffa989e47f8bcd992b">c9e7494</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2cfeb152b02d57750c11e134095d267b9ca45209">2cfeb15</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2180,7 +2184,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695773445'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695806636'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

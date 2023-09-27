@@ -1,6 +1,6 @@
 # Introduction
 
-This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similar to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch to R. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
+This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series. This tutorial focuses on trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/), similar to the [Monocle3 in Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}). However, in this tutorial we will use the R programming language that hides behind the user-friendly Galaxy tools. Sometimes you might encounter limitations when working with Galaxy tools, or you might want to make a wee modification that has to be done manually. It is therefore useful to be able to switch to R. If you do not feel confident using R, [this tutorial]({% link topics/data-science/tutorials/r-basics/tutorial.md %}) is a good place to start. However, our tutorial is quite straightforward to follow and at the end you will feel like a programmer! On the other hand, if you are not confident with the biological or statistical theory behind trajectory analysis, check out the [slide deck]({% link topics/single-cell/tutorials/scrna-trajectories/slides.html %}). With those resources (including the previous case study tutorials) you are well-equipped to go through this tutorial with ease. Let’s get started!
 
 > <comment-title></comment-title>
 > This tutorial is significantly based on the [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/introduction/).
@@ -14,7 +14,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 > <hands-on-title>Optional data upload into Galaxy history</hands-on-title>
 >
 > You have three options for importing the input data into a Galaxy history.
-> 
+>
 > 1. You can import a history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4trajectories--monocle3--rstudio---input); Import the files from [Zenodo]({{ page.zenodo_link }}); or Import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
