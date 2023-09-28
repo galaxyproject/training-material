@@ -389,11 +389,24 @@ The rendered table is then given as a minimum-width and centred matrix:
 
 ## Internally linking to other training material
 
-If you want to link to other training material within your text, you can use the following, but inputting the correct file location:
+If you want to link to other training material within your text, please use the {%raw%}`{% link path/to/file.ext %}`{%endraw%} tag:
 
+{%raw%}
 ```markdown
-{% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}
+[link text]( {% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %} )
 ```
+{%endraw%}
+
+(Note the `.md` extension, and not `.html`)
+
+If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{% link %}`{%endraw%} tag:
+
+{%raw%}
+```markdown
+[link text]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}#section-name)
+```
+{%endraw%}
+
 
 # Improving the learning experience with Boxes
 
