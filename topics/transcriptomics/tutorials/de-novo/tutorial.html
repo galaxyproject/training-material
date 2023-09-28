@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>De novo transcriptome reconstruction with RNA-Seq</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -306,8 +341,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -350,7 +385,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -398,23 +433,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -835,7 +856,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -906,7 +927,7 @@ Sentry.init({
       <p>Rename the files in your history to retain just the necessary information (<em>e.g.</em> “G1E R1 forward reads”)</p>
     </li>
     <li>
-      <p>Import the data from <a href="https://zenodo.org/record/583140">Zenodo</a> <a href="https://zenodo.org/record/583140"><img src="https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg" alt="DOI. " loading="lazy" /></a></p>
+      <p>Import the data from <a href="https://zenodo.org/record/583140">Zenodo</a> <a href="https://zenodo.org/record/583140"><a href="https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg" rel="noopener noreferrer"><img src="https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg" alt="DOI. " loading="lazy" /></a></a></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/583140/files/G1E_rep1_forward_read_%28SRR549355_1%29
 https://zenodo.org/record/583140/files/G1E_rep1_reverse_read_%28SRR549355_2%29
@@ -989,7 +1010,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
           </ol>
         </blockquote>
       </blockquote>
-      <p><img src="../../images/transcriptomics_images/BeforeAndAfterTrimming.png" alt="Before and after trimming comparison. " width="960" height="540" loading="lazy" /></p>
+      <p><a href="../../images/transcriptomics_images/BeforeAndAfterTrimming.png" rel="noopener noreferrer"><img src="../../images/transcriptomics_images/BeforeAndAfterTrimming.png" alt="Before and after trimming comparison. " width="960" height="540" loading="lazy" /></a></p>
     </li>
     <li>
       <p><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Trimmomatic</code> on the remaining forward/reverse read pairs with the same parameters.</p>
@@ -1388,29 +1409,29 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <li>
     <p>Histogram of <em>p</em>-values for all tests</p>
 
-    <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_histogram3.png" alt="DESeq2 histogram. " width="1050" height="1050" loading="lazy" /></p>
+    <p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_histogram3.png" rel="noopener noreferrer"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_histogram3.png" alt="DESeq2 histogram. " width="1050" height="1050" loading="lazy" /></a></p>
   </li>
   <li>
     <p><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</p>
 
-    <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_MAplot3.png" alt="MA plot. " width="1050" height="1050" loading="lazy" /></p>
+    <p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_MAplot3.png" rel="noopener noreferrer"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_MAplot3.png" alt="MA plot. " width="1050" height="1050" loading="lazy" /></a></p>
   </li>
   <li>
     <p>Principal Component Analysis (<a href="https://en.wikipedia.org/wiki/Principal_component_analysis">PCA</a>) and the first two axes</p>
 
-    <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_PCA3.png" alt="Principal component analysis output. " width="1050" height="1050" loading="lazy" /></p>
+    <p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_PCA3.png" rel="noopener noreferrer"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_PCA3.png" alt="Principal component analysis output. " width="1050" height="1050" loading="lazy" /></a></p>
 
     <p>Each replicate is plotted as an individual data point. This type of plot is useful for visualizing the overall effect of experimental covariates and batch effects.</p>
   </li>
   <li>
     <p>Heatmap of sample-to-sample distance matrix: overview over similarities and dissimilarities between samples</p>
 
-    <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_heatmap3.png" alt="Heatmap of sample-to-sample distance matrix. " width="1050" height="1050" loading="lazy" /></p>
+    <p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_heatmap3.png" rel="noopener noreferrer"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_heatmap3.png" alt="Heatmap of sample-to-sample distance matrix. " width="1050" height="1050" loading="lazy" /></a></p>
   </li>
   <li>
     <p>Dispersion estimates: gene-wise estimates (black), the fitted values (red), and the final maximum a posteriori estimates used in testing (blue)</p>
 
-    <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_dispersion3.png" alt="Dispersion estimates. " width="1050" height="1050" loading="lazy" /></p>
+    <p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_dispersion3.png" rel="noopener noreferrer"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_dispersion3.png" alt="Dispersion estimates. " width="1050" height="1050" loading="lazy" /></a></p>
 
     <p>This dispersion plot is typical, with the final estimates shrunk from the gene-wise estimates towards the fitted estimates. Some gene-wise estimates are flagged as outliers and not shrunk towards the fitted value. The amount of shrinkage can be more or less than seen here, depending on the sample size, the number of coefficients, the row mean and the variability of the gene-wise estimates.</p>
   </li>
@@ -1459,7 +1480,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
         <li>Name your visualization someting descriptive under “Browser name:”</li>
         <li>Choose “Mouse Dec. 2011 (GRCm38/mm10) (mm10)” as the “Reference genome build (dbkey)</li>
         <li>Click “Create” to initiate your Trackster session
-<img src="../../images/transcriptomics_images/Trackster_opening_window.png" alt="Trackster opening window. " width="1264" height="361" loading="lazy" /></li>
+<a href="../../images/transcriptomics_images/Trackster_opening_window.png" rel="noopener noreferrer"><img src="../../images/transcriptomics_images/Trackster_opening_window.png" alt="Trackster opening window. " width="1264" height="361" loading="lazy" /></a></li>
       </ul>
     </li>
     <li><strong>Viz</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Click “Add datasets to visualization”
@@ -1498,7 +1519,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       <p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat the previous step on the other three bigWig files representing the minus strand.</p>
     </li>
     <li><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Adjust the track height of the bigWig files to be consistent for each set of plus strand and minus strand tracks.
-<img src="../../images/transcriptomics_images/Hoxb13_locus_screenshot.png" alt="Adjusting the track height. " width="1754" height="716" loading="lazy" /></li>
+<a href="../../images/transcriptomics_images/Hoxb13_locus_screenshot.png" rel="noopener noreferrer"><img src="../../images/transcriptomics_images/Hoxb13_locus_screenshot.png" alt="Adjusting the track height. " width="1754" height="716" loading="lazy" /></a></li>
     <li><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Direct Trackster to the coordinates: chr11:96191452-96206029, what do you see?</li>
   </ol>
 
@@ -1522,7 +1543,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 <p>In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:</p>
 
-<p><img src="../../images/transcriptomics_images/schematic_for_RNAseq_de_novo_tutorial.png" alt="RNAseq de novo tutorial workflow. " width="960" height="540" loading="lazy" /></p>
+<p><a href="../../images/transcriptomics_images/schematic_for_RNAseq_de_novo_tutorial.png" rel="noopener noreferrer"><img src="../../images/transcriptomics_images/schematic_for_RNAseq_de_novo_tutorial.png" alt="RNAseq de novo tutorial workflow. " width="960" height="540" loading="lazy" /></a></p>
 
                 </section>
 
@@ -1732,7 +1753,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1764,7 +1785,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,8 +102,8 @@ Sentry.init({
 
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -112,7 +147,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -151,23 +186,9 @@ Sentry.init({
             </a>
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -253,7 +274,7 @@ sequences.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff5d8; --color-darker: #fbd800; --color-dimmed: #ffe691;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff1c8; --color-darker: #f8d500; --color-dimmed: #ffe378;">beginner</span>
         
       </div>
     </div>
@@ -288,9 +309,9 @@ sequences.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffc6ee; --color-darker: #ffa0e5; --color-dimmed: #ffb4e9;">genome annotation</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb1e9; --color-darker: #ff8ae1; --color-dimmed: #ff9ee5;">genome annotation</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #56f600; --color-darker: #4bdb00; --color-dimmed: #51e900;">eukaryote</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #50e600; --color-darker: #46cd00; --color-dimmed: #4bda00;">eukaryote</span>
         
       </div>
     </div>
@@ -325,9 +346,9 @@ sequences.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffc6ee; --color-darker: #ffa0e5; --color-dimmed: #ffb4e9;">genome annotation</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb1e9; --color-darker: #ff8ae1; --color-dimmed: #ff9ee5;">genome annotation</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #d8d2ff; --color-darker: #c1b6ff; --color-dimmed: #cdc4ff;">prokaryote</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #cbc2ff; --color-darker: #b6a8ff; --color-dimmed: #c0b5ff;">prokaryote</span>
         
       </div>
     </div>
@@ -364,7 +385,7 @@ steps of biodiversity data analysis: download, check, filter and explore biodive
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff5d8; --color-darker: #fbd800; --color-dimmed: #ffe691;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff1c8; --color-darker: #f8d500; --color-dimmed: #ffe378;">beginner</span>
         
       </div>
     </div>
@@ -402,7 +423,7 @@ the various types of Machine Learning techniques, developing some simple models 
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fff5d8; --color-darker: #fbd800; --color-dimmed: #ffe691;">beginner</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #fff1c8; --color-darker: #f8d500; --color-dimmed: #ffe378;">beginner</span>
         
       </div>
     </div>
@@ -439,7 +460,7 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffcbbf; --color-darker: #ffaa91; --color-dimmed: #ffbba9;">microbiome</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb9a5; --color-darker: #ff9874; --color-dimmed: #ffa98e;">microbiome</span>
         
       </div>
     </div>
@@ -474,9 +495,9 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #c8d7ff; --color-darker: #a3bfff; --color-dimmed: #b6cbff;">python</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #b3c9ff; --color-darker: #8fb3ff; --color-dimmed: #a1bdff;">python</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fbc6ff; --color-darker: #f99fff; --color-dimmed: #fab3ff;">real-course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #fab0ff; --color-darker: #f988ff; --color-dimmed: #f99dff;">real-course</span>
         
       </div>
     </div>
@@ -511,9 +532,9 @@ steps of microbiome data analysis: quality control, taxonomic profiling, taxonom
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #c8d7ff; --color-darker: #a3bfff; --color-dimmed: #b6cbff;">python</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #b3c9ff; --color-darker: #8fb3ff; --color-dimmed: #a1bdff;">python</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #fbc6ff; --color-darker: #f99fff; --color-dimmed: #fab3ff;">real-course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #fab0ff; --color-darker: #f988ff; --color-dimmed: #f99dff;">real-course</span>
         
       </div>
     </div>
@@ -559,9 +580,9 @@ configuring it, and making it production ready.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffc8e1; --color-darker: #ffa4d0; --color-dimmed: #ffb6d8;">Galaxy administrators</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb3d6; --color-darker: #ff8fc7; --color-dimmed: #ffa2cf;">Galaxy administrators</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffcdab; --color-darker: #ffae5f; --color-dimmed: #ffbe8a;">5-day course</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffbb84; --color-darker: #fc9d00; --color-dimmed: #ffac59;">5-day course</span>
         
       </div>
     </div>
@@ -596,9 +617,9 @@ configuring it, and making it production ready.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffcace; --color-darker: #ffa8af; --color-dimmed: #ffb9bf;">Climate</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb6bc; --color-darker: #ff949f; --color-dimmed: #ffa6ae;">Climate</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffd088; --color-darker: #f4b500; --color-dimmed: #ffc141;">Overview</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffbe29; --color-darker: #e5a900; --color-dimmed: #f3b400;">Overview</span>
         
       </div>
     </div>
@@ -633,9 +654,9 @@ configuring it, and making it production ready.
       </div>
       <div class="card-footer">
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffc5f6; --color-darker: #ff9ef1; --color-dimmed: #ffb2f4;">training</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffaff3; --color-darker: #ff88ef; --color-dimmed: #ff9cf1;">training</span>
         
-        <span class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;">trainers</span>
+        <span class="label label-default tutorial_tag" style="--color-primary: #ffb0ea; --color-darker: #ff8ae2; --color-dimmed: #ff9ee6;">trainers</span>
         
       </div>
     </div>
@@ -666,7 +687,7 @@ configuring it, and making it production ready.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -694,7 +715,7 @@ configuring it, and making it production ready.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

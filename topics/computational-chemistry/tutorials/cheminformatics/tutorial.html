@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Protein-ligand docking</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -220,8 +255,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -264,7 +299,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -312,23 +347,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -574,7 +595,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -646,7 +667,7 @@ Sentry.init({
 
 </blockquote>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure. " width="1920" height="1031" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<span class="citation"><a href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a></span>).</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/2brc.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/2brc.png" alt="Hsp90 N-terminus structure. " width="1920" height="1031" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of Hsp90 N-terminus, as recorded on the PDB. Visualization produced using VMD  (<span class="citation"><a href="#Humphrey1996">Humphrey <i>et al.</i> 1996</a></span>).&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
 
@@ -980,7 +1001,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>This produces an SVG image of all the structures generated ordered by molecular weight.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Image showing structures of compounds from ChEMBL. " width="890" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Structures of the compounds from ChEMBL.</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/compound_library.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/compound_library.png" alt="Image showing structures of compounds from ChEMBL. " width="890" height="881" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Structures of the compounds from ChEMBL.&lt;/figcaption&gt;</figure></a></p>
 
 <h3 id="calculation-of-fingerprints-and-clustering">Calculation of fingerprints and clustering</h3>
 
@@ -1017,7 +1038,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Taylor-Butina clustering  (<span class="citation"><a href="#Butina1999">Butina 1999</a></span>) provides a classification of the compounds into different groups or clusters, based on their structural similarity. This methods shows us how similar the compounds are to the original ligand, and after docking, we can compare the results to the proposed clusters to observe if there is any correlation.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Image showing a Fingerprinting System. " width="978" height="728" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/fingerprints.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/fingerprints.png" alt="Image showing a Fingerprinting System. " width="978" height="728" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> A simple fingerprinting system. Each 1 or 0 in the bitstring corresponds to the presence or absence of a particular feature in the molecule. In this case, the presence of phenyl, amine and carboxylic acid groups are encoded.&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-cluster-molecules-using-molecular-fingerprints"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Cluster molecules using molecular fingerprints</div>
@@ -1041,7 +1062,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>The image produced by the NxN clustering shows the clustering in the form of a dendrogram, where individual molecules are represented as vertical lines and merged into clusters. Merges are represented by horizontal lines. The y-axis represents the similarity of data points to each other; thus, the lower a cluster is merged, the more similar the data points are which it contains. Clusters in the dendogram are colored differently. For example, all molecules connected in red are similar enough to be grouped into the same cluster.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering. " width="640" height="480" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/nxn.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/nxn.png" alt="NxN clustering. " width="640" height="480" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Dendrogram produced by NxN clustering. The library used to produce this image is generated with a Tanimoto cutoff of 80; here 15 search results are shown, plus the original ligand contained in the PDB file.&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-further-investigation-optional"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-investigation-optional" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Further investigation (optional)<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1103,7 +1124,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
   <p>There are visualizations available in Galaxy for producing various types of plots - for example, a scatter plot of RMSD (compared to optimal docking pose) against docking score can be calculated very easily:</p>
 
-  <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score. " width="1310" height="935" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatter plot of RMSD against docking score.</figcaption></figure>
+  <p><a href="/training-material/topics/computational-chemistry/images/scatterplot.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/scatterplot.png" alt="Scatter plot of RMSD against docking score. " width="1310" height="935" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatter plot of RMSD against docking score.&lt;/figcaption&gt;</figure></a></p>
 
   <p>The plot shows a correlation between the two variables, as expected, though only a slight one, given the narrow range of docking scores in the dataset and the structural similarity of the ligands tested.</p>
 
@@ -1112,7 +1133,7 @@ Oc1ccc(c(O)c1)c2n[nH]cc2c3ccc4OCOc4c3	CHEMBL577176
 
 <p>Use the NGLviewer to inspect the protein and various ligand poses generated by docking. This can be done using either the visualization of NGLViewer in Galaxy, or via the <a href="http://nglviewer.org/ngl/">NGL website</a>.</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90. " width="1027" height="672" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/activesite.gif" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/activesite.gif" alt="Two docking poses for a ligand bound to Hsp90. " width="1027" height="672" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Two docking poses for a ligand bound to the active site of Hsp90. One (docking score -8.4) can be seen to be bound deeper in the active site than the other (docking score -5.7), which is reflected in the difference between the docking scores.&lt;/figcaption&gt;</figure></a></p>
 
                 </section>
 
@@ -1385,7 +1406,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1417,7 +1438,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

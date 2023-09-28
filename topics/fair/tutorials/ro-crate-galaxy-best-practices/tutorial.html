@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Best practices for workflows in GitHub repositories</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -207,8 +242,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -251,7 +286,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -299,23 +334,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -526,7 +547,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -632,24 +653,24 @@ repo2rocrate <span class="nt">--repo-url</span> https://github.com/iwc-workflows
     <li>Run the workflow on the input dataset: click on “Workflow” in the upper menu, locate <code class="language-plaintext highlighter-rouge">sort-and-change-case</code>, and click on the play button to the right.</li>
   </ol>
 
-  <p><img src="img/workflow-entry.png" alt="Workflow Entry. " width="936" height="192" loading="lazy" /></p>
+  <p><a href="img/workflow-entry.png" rel="noopener noreferrer"><img src="img/workflow-entry.png" alt="Workflow Entry. " width="936" height="192" loading="lazy" /></a></p>
 
   <ol>
     <li>
       <p>This should take you to the workflow running page. The input slot should be already filled with <code class="language-plaintext highlighter-rouge">input.bed</code> since there is nothing else in the history. Click on “Run Workflow” on the upper right of the center panel.</p>
 
-      <p><img src="img/workflow-run-page.png" alt="Workflow Run Page. " width="974" height="175" loading="lazy" /></p>
+      <p><a href="img/workflow-run-page.png" rel="noopener noreferrer"><img src="img/workflow-run-page.png" alt="Workflow Run Page. " width="974" height="175" loading="lazy" /></a></p>
     </li>
     <li>Wait for the workflow execution to finish.</li>
     <li>
       <p>On the upper menu, go to “User” &gt; “Workflow Invocations”, click on the invocation corresponding to the workflow just run and copy the invocation’s ID. In my case it says “Invocation: a043e8c60873170b” on the right, where <code class="language-plaintext highlighter-rouge">a043e8c60873170b</code> is the ID.</p>
 
-      <p><img src="img/workflow-invocation.png" alt="Workflow Invocation. " width="921" height="320" loading="lazy" /></p>
+      <p><a href="img/workflow-invocation.png" rel="noopener noreferrer"><img src="img/workflow-invocation.png" alt="Workflow Invocation. " width="921" height="320" loading="lazy" /></a></p>
     </li>
     <li>
       <p>On the upper menu, go to “User” &gt; “Preferences” &gt; “Manage API Key”. If you don’t have an API key yet, click the button to create a new one. Under “Current API key”, click the button to copy the API Key on the right.</p>
 
-      <p><img src="img/api-key.png" alt="API key. " width="951" height="280" loading="lazy" /></p>
+      <p><a href="img/api-key.png" rel="noopener noreferrer"><img src="img/api-key.png" alt="API key. " width="951" height="280" loading="lazy" /></a></p>
     </li>
     <li>Run <code class="language-plaintext highlighter-rouge">planemo workflow_test_init --galaxy_url https://usegalaxy.eu --from_invocation INVOCATION_ID --galaxy_user_key API_KEY</code>, replacing <code class="language-plaintext highlighter-rouge">INVOCATION_ID</code> with the actual invocation ID and <code class="language-plaintext highlighter-rouge">API_KEY</code> with the actual API key. If you’re not using the Galaxy Europe instance, also replace <code class="language-plaintext highlighter-rouge">https://usegalaxy.eu</code> with the URL of the instance you’re using.</li>
     <li>Rename <code class="language-plaintext highlighter-rouge">sort-and-change-case-(imported-from-uploaded-file).ga</code> to <code class="language-plaintext highlighter-rouge">sort-and-change-case.ga</code> and <code class="language-plaintext highlighter-rouge">sort-and-change-case-(imported-from-uploaded-file)-tests.yml</code> to <code class="language-plaintext highlighter-rouge">sort-and-change-case-tests.yml</code>. The rest of the files generated by Planemo are under <code class="language-plaintext highlighter-rouge">test-data</code>.</li>
@@ -888,7 +909,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -920,7 +941,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

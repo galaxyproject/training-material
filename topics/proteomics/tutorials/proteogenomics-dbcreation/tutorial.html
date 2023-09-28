@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Proteogenomics 1: Database Creation</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -339,8 +374,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -383,7 +418,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -431,23 +466,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -766,7 +787,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -777,11 +798,11 @@ Sentry.init({
 
 <p><strong>Proteogenomics</strong> involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization</p>
 
-<p><img src="../../images/potential_novel_publication.png" alt="Novel Peptides. " width="1995" height="775" loading="lazy" /></p>
+<p><a href="../../images/potential_novel_publication.png" rel="noopener noreferrer"><img src="../../images/potential_novel_publication.png" alt="Novel Peptides. " width="1995" height="775" loading="lazy" /></a></p>
 
 <p>Proteogenomics integrates <strong>RNA-Seq</strong> data for generating customized protein sequence databases with mass spectrometry-based proteomics data, which are matched to these databases to identify protein sequence variants. (<span class="citation"><a href="#Chambers_2017">Chambers <i>et al.</i> 2017</a></span>).</p>
 
-<p><img src="../../images/workflow_objective1.png" alt="Proteogenomics. " width="1445" height="672" loading="lazy" /></p>
+<p><a href="../../images/workflow_objective1.png" rel="noopener noreferrer"><img src="../../images/workflow_objective1.png" alt="Proteogenomics. " width="1445" height="672" loading="lazy" /></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -819,7 +840,7 @@ Sentry.init({
 
 <p>This tutorial focuses on creating a <strong>FASTA</strong> database generated from RNA-seq data. There are two outputs from this workflow: (1) a <strong>sequence database</strong> consisting of variants and known reference sequences and (2) mapping files containing <strong>genomic</strong> and <strong>variant</strong> mapping data.</p>
 
-<p><img src="../../images/database_creation.png" alt="Database creation. " width="1962" height="914" loading="lazy" /></p>
+<p><a href="../../images/database_creation.png" rel="noopener noreferrer"><img src="../../images/database_creation.png" alt="Database creation. " width="1962" height="914" loading="lazy" /></a></p>
 
 <p>The first part of the tutorial deals with creating the FASTA file containing sequences with single amino acid variants (SAVs), insertions and deletions (indels). The second part of the workflow helps in creating a FASTA file with transcript assemblies (splicing variants).</p>
 
@@ -838,7 +859,7 @@ Sentry.init({
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li>Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo <a href="https://doi.org/10.5281/zenodo.1489208"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" alt="DOI. " loading="lazy" /></a>
+    <li>Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo <a href="https://doi.org/10.5281/zenodo.1489208"><a href="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" rel="noopener noreferrer"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" alt="DOI. " loading="lazy" /></a></a>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
 https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
@@ -956,7 +977,7 @@ where fr - first strand corresponds to R and RF; fr - second strand corresponds 
 
 <p><a href="https://github.com/ekg/freebayes">FreeBayes</a> is a Bayesian genetic variant detector designed to find small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment.</p>
 
-<p><img src="../../images/variant_calling.png" alt="Variant calling. " width="1802" height="616" loading="lazy" /></p>
+<p><a href="../../images/variant_calling.png" rel="noopener noreferrer"><img src="../../images/variant_calling.png" alt="Variant calling. " width="1802" height="616" loading="lazy" /></a></p>
 
 <p>Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate a VCF dataset describing SNPs, indels, and complex variants in samples in the input alignments. By default, FreeBayes will consider variants supported by at least two observations in a single sample (<code class="language-plaintext highlighter-rouge">-C</code>) and also by at least 20% of the reads from a single sample (<code class="language-plaintext highlighter-rouge">-F</code>). These settings are suitable for low to high depth sequencing in haploid and diploid samples, but users working with polyploid or pooled samples may adjust them depending on the characteristics of their sequencing data.</p>
 
@@ -1026,7 +1047,7 @@ The reference protein set can be filtered by transcript expression level (RPKM c
 create reference and variant protein sequences. Galaxy administrators can use the CustomProDB
 data manager to create these annotations to make them available for users.</p>
 
-<p><img src="../../images/CustomProDB.png" alt="customproDB. " width="1895" height="697" loading="lazy" /></p>
+<p><a href="../../images/CustomProDB.png" rel="noopener noreferrer"><img src="../../images/CustomProDB.png" alt="customproDB. " width="1895" height="697" loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-protein-fastas-from-exosome-or-transcriptome-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate protein FASTAs from exosome or transcriptome data</div>
@@ -1350,7 +1371,7 @@ We will also need to similarily modify the accessions in the genomic mapping and
 Also, while running the workflow, the Title column for <strong>Tabular-to-FASTA</strong> might come empty, so please make sure you select Title Column as “1”.</p>
 </blockquote>
 
-<p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence. " width="1737" height="412" loading="lazy" /></p>
+<p><a href="../../images/Fasta_sequence.png" rel="noopener noreferrer"><img src="../../images/Fasta_sequence.png" alt="Fasta sequence. " width="1737" height="412" loading="lazy" /></a></p>
 
 <p>For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.</p>
 
@@ -1452,7 +1473,7 @@ We need to modify the CustomProDB protein accessions the same as was done for th
     <li>
       <p>Rename the output as <strong>“genomic_mapping_sqlite”</strong></p>
 
-      <p><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " width="1737" height="427" loading="lazy" /></p>
+      <p><a href="../../images/genomic_mapping_file.png" rel="noopener noreferrer"><img src="../../images/genomic_mapping_file.png" alt="genomic mapping. " width="1737" height="427" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1536,7 +1557,7 @@ FROM variant_annotation
 annotation information from the protein mapping file, will be utilized
 by MVP to visualize the genomic loci of any variant peptides.</p>
 
-<p><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant. " width="1733" height="1241" loading="lazy" /></p>
+<p><a href="../../images/viewing_SNP_Variant_IGV.png" rel="noopener noreferrer"><img src="../../images/viewing_SNP_Variant_IGV.png" alt="SNP variant. " width="1733" height="1241" loading="lazy" /></a></p>
 
 <p>Finally, we can create a database which can be used to search Mass spectrometry (raw/mgf) files to identify peptides that match to this database.</p>
 
@@ -2039,7 +2060,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2071,7 +2092,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

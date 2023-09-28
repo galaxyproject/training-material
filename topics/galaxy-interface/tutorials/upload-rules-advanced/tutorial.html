@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Rule Based Uploader: Advanced</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -263,8 +298,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -307,7 +342,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -355,23 +390,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -729,7 +750,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -766,7 +787,7 @@ Sentry.init({
 
 <p>For this multiomics example, we will start with a uniprot query and build URLs from accession numbers contained within the supplied tabular data. Consider the uniprot query <a href="https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:%22Genome%22">https://uniprot.org/uniprot/?query=proteome:UP000052092+AND+proteomecomponent:”Genome”</a>, pictured below.</p>
 
-<p><img src="../../images/rules/uniprot_url.png" alt="UniProt table screenshot. " width="1701" height="720" loading="lazy" /></p>
+<p><a href="../../images/rules/uniprot_url.png" rel="noopener noreferrer"><img src="../../images/rules/uniprot_url.png" alt="UniProt table screenshot. " width="1701" height="720" loading="lazy" /></a></p>
 
 <p>In order to make this data useful for the Rule Builder, we need to turn these accessoin IDs into URLs.</p>
 
@@ -780,12 +801,12 @@ Sentry.init({
     <li>
       <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">FASTA (canonical)</code></p>
 
-      <p><img src="../../images/rules/uniprot_fasta.png" alt="Link to access FASTA file. " width="1123" height="635" loading="lazy" /></p>
+      <p><a href="../../images/rules/uniprot_fasta.png" rel="noopener noreferrer"><img src="../../images/rules/uniprot_fasta.png" alt="Link to access FASTA file. " width="1123" height="635" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Your browser will redirect to the fasta file</p>
 
-      <p><img src="../../images/rules/uniprot_fasta_url.png" alt="Viewing the FASTA file. " width="861" height="219" loading="lazy" /></p>
+      <p><a href="../../images/rules/uniprot_fasta_url.png" rel="noopener noreferrer"><img src="../../images/rules/uniprot_fasta_url.png" alt="Viewing the FASTA file. " width="861" height="219" loading="lazy" /></a></p>
     </li>
     <li>We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/{identifier}.fasta</code>
 <!-- https://rest.uniprot.org/uniprotkb/search?format=fasta&includeIsoform=true&query=accession:E7C0H6  is also an option, for future editors. --></li>
@@ -816,7 +837,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
 </code></pre></div>          </div>
         </li>
         <li>Click <code class="language-plaintext highlighter-rouge">Build</code>
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_2_initial_rules.png" alt="screenshot. " loading="lazy" /></li>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_2_initial_rules.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_2_initial_rules.png" alt="screenshot. " loading="lazy" /></a></li>
       </ul>
     </li>
     <li>Let’s apply some initial filtering to our data:
@@ -837,14 +858,14 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
               <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">Info</code>, Column <code class="language-plaintext highlighter-rouge">B</code></p>
 
               <p>This is a block of text that will appear in the history panel when the dataset is expanded.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_3_basic_rules.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_3_basic_rules.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_3_basic_rules.png" alt="screenshot. " loading="lazy" /></a></p>
             </li>
           </ul>
         </li>
       </ul>
 
       <p>These datasets appear in a seemingly random order, it will be easier to manage things in the history panel if we sort this data first.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_4_sort.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_4_sort.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_4_sort.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
     <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Sort</code>
       <ul>
@@ -862,7 +883,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
         <li>
           <p>Click <code class="language-plaintext highlighter-rouge">Apply</code></p>
 
-          <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_5_url.png" alt="screenshot. " loading="lazy" /></p>
+          <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_5_url.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_5_url.png" alt="screenshot. " loading="lazy" /></a></p>
         </li>
       </ul>
 
@@ -875,7 +896,7 @@ regular expression (the accession ID) in the resulting column values.</p>
       </blockquote>
 
       <p>The new column C with the URL we built should appear as shown below.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_6_url_built.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_6_url_built.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_6_url_built.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Finally, let us set our column definitions:</p>
     </li>
@@ -890,14 +911,14 @@ regular expression (the accession ID) in the resulting column values.</p>
         <li><em>“Name”</em>: for example <code class="language-plaintext highlighter-rouge">UP000052092</code></li>
         <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
         <li>Click <code class="language-plaintext highlighter-rouge">Build</code>
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png" alt="screenshot. " loading="lazy" /></li>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png" alt="screenshot. " loading="lazy" /></a></li>
       </ul>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-json-rule-definitions"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: JSON Rule Definitions</div>
         <p>This example is ready to go, but before clicking “Build” it may be interesting to check out the rules Galaxy is following to clean and import your data. Click the little Wrench icon at the top of the list of rules. The result is a bunch of JavaScript object notation (JSON) text that you should never need to worry about but that you can build or modify by hand if you find it useful. We will use it the next example to quickly restore the list builder back to this state.</p>
 
-        <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png" alt="screenshot. " loading="lazy" /></p>
+        <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_8_source.png" alt="screenshot. " loading="lazy" /></a></p>
 
         <p>This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.</p>
       </blockquote>
@@ -939,7 +960,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       <p>Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span>. Clicking this will drop down a list of the 10 most recent rule sets you’ve used. Select the most recent one to reuse the rules from the last exercise.</p>
 
       <p>You should now see the rules you created in the last example.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-json-editor"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: JSON Editor</div>
@@ -985,7 +1006,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
     </li>
   </ol>
 
-  <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_5_url.png" alt="screenshot. " loading="lazy" /></p>
+  <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_5_url.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_5_url.png" alt="screenshot. " loading="lazy" /></a></p>
 
   <p>Next we will add two more columns</p>
   <ol>
@@ -1003,7 +1024,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       </ul>
 
       <p>Your very large list of rules should now look like the following screenshot.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_6_presplit.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_6_presplit.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_6_presplit.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.</p>
     </li>
@@ -1014,11 +1035,11 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       </ul>
 
       <p>This will take the row consisting of the columns <code class="language-plaintext highlighter-rouge">ABCDEFGH</code> and build two rows, one with <code class="language-plaintext highlighter-rouge">ABCDEF</code> and the other with <code class="language-plaintext highlighter-rouge">ABFGH</code>
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_7_split_columns.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_7_split_columns.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_7_split_columns.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click <code class="language-plaintext highlighter-rouge">Apply</code> and you should be returned the list of rules.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_8_split.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_8_split.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_8_split.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Finally, we need to add some more column definitions for these new columns we just created:</p>
     </li>
@@ -1032,7 +1053,7 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       </ul>
 
       <p>Notice when these values are being generated from the metadata the option to specify them manually from the <strong>type</strong> and <strong>collection name</strong> boxes from the bottom of the form disappear.
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_9_mapping.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_9_mapping.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_9_mapping.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click <code class="language-plaintext highlighter-rouge">Upload</code></p>
@@ -1158,10 +1179,10 @@ SRR5363715	2017-03-21 11:26:06	2017-03-21 10:59:33	712060	142833136	702138	200	5
 </code></pre></div>        </div>
       </blockquote>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_1_paste.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_1_paste.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_1_paste.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>The resulting table should look something like the following:
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_2_rules_landing.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_2_rules_landing.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_2_rules_landing.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Navigate to the end of the table and notice that column J is the URL target we are hoping to download for each file.</p>
     </li>
@@ -1181,7 +1202,7 @@ SRR5363715	2017-03-21 11:26:06	2017-03-21 10:59:33	712060	142833136	702138	200	5
             <p>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code></p>
             <ul>
               <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Column <code class="language-plaintext highlighter-rouge">J</code>.
-  <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_3_end_of_table.png" alt="screenshot. " loading="lazy" /></li>
+  <a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_3_end_of_table.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_3_end_of_table.png" alt="screenshot. " loading="lazy" /></a></li>
             </ul>
           </blockquote>
         </li>
@@ -1200,7 +1221,7 @@ as an identifier for grouping the datasets. To do this, use the regex column add
       </ul>
 
       <p>The result looks like:
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_4_regex.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-regular-expression-explained-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regular expression explained</div>
@@ -1228,11 +1249,11 @@ first column <code class="language-plaintext highlighter-rouge">A</code> for the
       </ul>
 
       <p>The result should look something like this:
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_5_multiple_identifiers_edit.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_5_multiple_identifiers_edit.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_5_multiple_identifiers_edit.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click <code class="language-plaintext highlighter-rouge">Apply</code> to return to the rule preview screen and notice there are two column listed for the list identifier definition
-  <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_6_multiple_identifiers.png" alt="screenshot. " loading="lazy" /></p>
+  <a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_6_multiple_identifiers.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_6_multiple_identifiers.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
     <li>Finalize your collection:
       <ul>
@@ -1242,7 +1263,7 @@ first column <code class="language-plaintext highlighter-rouge">A</code> for the
       </ul>
 
       <p>Note: set <em>“Type”</em> to <code class="language-plaintext highlighter-rouge">sra</code> if you used real data from SRA instead of the table from exercise.
-  <img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_7_named.png" alt="screenshot. " loading="lazy" /></p>
+  <a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_7_named.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_6_7_named.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1280,7 +1301,7 @@ https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-da
       <ul>
         <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, column <code class="language-plaintext highlighter-rouge">A</code></li>
         <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, column <code class="language-plaintext highlighter-rouge">B</code>
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_2_input_rules.png" alt="screenshot. " loading="lazy" /></li>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_2_input_rules.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_2_input_rules.png" alt="screenshot. " loading="lazy" /></a></li>
       </ul>
     </li>
     <li>Finalize the collection:
@@ -1288,7 +1309,7 @@ https://raw.githubusercontent.com/jmchilton/galaxy/apply_rules_tutorials/test-da
         <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">txt</code></li>
         <li>Give the collection a name.</li>
         <li>Click <code class="language-plaintext highlighter-rouge">Build</code>
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_4_input_list.png" alt="screenshot. " loading="lazy" /></li>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_4_input_list.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_4_input_list.png" alt="screenshot. " loading="lazy" /></a></li>
       </ul>
 
       <p>The first thing we will do to this new collection is add some levels or depth to its structure.
@@ -1300,7 +1321,7 @@ likely be under the <code class="language-plaintext highlighter-rouge">Collectio
       <p>Open the <strong>Apply Rules</strong> tool</p>
 
       <p>The very simple interface should look something like this:
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_5_apply_rules_landing.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>This interface simply lets one pick a collection to operate on and then launch the rule builder
 window to work to describe and preview manipulating the metadata of that collection.</p>
@@ -1309,7 +1330,7 @@ window to work to describe and preview manipulating the metadata of that collect
       <ul>
         <li><em>“Input Collection”</em>: the collection we just uploaded</li>
         <li>Click the <code class="language-plaintext highlighter-rouge">Edit</code> button
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_6_apply_rules_init_flat.png" alt="screenshot. " loading="lazy" /></li>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_6_apply_rules_init_flat.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_6_apply_rules_init_flat.png" alt="screenshot. " loading="lazy" /></a></li>
       </ul>
 
       <p>When a flat collection is used with this tool, the rule builder will initialize a default rule to pull
@@ -1346,10 +1367,10 @@ characters will be matched as the second group. Click to apply this rule and two
         <li>Click <code class="language-plaintext highlighter-rouge">Save</code></li>
       </ul>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_7_apply_rules_add_depth.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_7_apply_rules_add_depth.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_7_apply_rules_add_depth.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>The resulting collection should have two new levels of depth for “untreated” vs “treated” and “paired” vs “single” as shown below:
-<img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png" alt="screenshot. " loading="lazy" /></p>
+<a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_8_nested.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Placing the “single” and “paired” sublists inside the “treated” and “untreated” lists was a bit arbitrary and depending on the
 workflow these may need to be inverted at different parts of an analysis. The <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool can be used to invert these levels
@@ -1361,7 +1382,7 @@ if that is needed.</p>
         <li>Click “Edit”.</li>
       </ul>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_9_apply_rules_init_nested.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_9_apply_rules_init_nested.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_9_apply_rules_init_nested.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Notice when loading a nested collection into the rule builder, there is a column for each layer of the list for each element.
 One can pretty easily invert the outer two layers of the list by simply assigning the list identifiers in a new order. So select to assign “List Identifiers” and this time assign them to columns “B”, “A”, and “C” - in that order.</p>
@@ -1374,11 +1395,11 @@ One can pretty easily invert the outer two layers of the list by simply assignin
         <li>Click <code class="language-plaintext highlighter-rouge">Save</code></li>
       </ul>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_10_apply_rules_inverted.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_10_apply_rules_inverted.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_10_apply_rules_inverted.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>The resulting collection should be inverted.</p>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_11_inverted.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>In addition to structural re-organizations of a collection, the <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool can be used to
 filter elements out of the collection.</p>
@@ -1400,11 +1421,11 @@ filter elements out of the collection.</p>
         </li>
       </ul>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_12_apply_rules_filter.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_12_apply_rules_filter.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_12_apply_rules_filter.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>The resulting collection should be a filtered version of the original list.</p>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the <code class="language-plaintext highlighter-rouge">Apply Rules</code> tool. Use the same regular expression as last time to filter the result but also add a column for “treated” and “untreated” list identifiers.</p>
     </li>
@@ -1432,11 +1453,11 @@ filter elements out of the collection.</p>
         </li>
       </ul>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_14_apply_rules_filtered_and_nested.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_14_apply_rules_filtered_and_nested.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_14_apply_rules_filtered_and_nested.png" alt="screenshot. " loading="lazy" /></a></p>
 
       <p>The resulting collection should be a filtered to only include the “single” data and broken into “treated” and “untreated” sublists.</p>
 
-      <p><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_15_filtered_and_nested.png" alt="screenshot. " loading="lazy" /></p>
+      <p><a href="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_15_filtered_and_nested.png" rel="noopener noreferrer"><img src="https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_15_filtered_and_nested.png" alt="screenshot. " loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1582,7 +1603,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1614,7 +1635,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

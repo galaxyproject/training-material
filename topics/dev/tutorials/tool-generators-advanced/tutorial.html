@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>ToolFactory: Generating Tools From More Complex Scripts</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -319,8 +354,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -363,7 +398,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -411,23 +446,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -904,7 +925,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1290,7 +1311,7 @@ Script::
     <li>The user sees the following form after adding 3 repeats for each of the two available items</li>
   </ul>
 
-  <p><img src="../../images/toolfactory_repeats_sample_form.png" alt="User can add as many repeats as they want for repeated input file and parameter values. " width="1116" height="917" loading="lazy" /></p>
+  <p><a href="../../images/toolfactory_repeats_sample_form.png" rel="noopener noreferrer"><img src="../../images/toolfactory_repeats_sample_form.png" alt="User can add as many repeats as they want for repeated input file and parameter values. " width="1116" height="917" loading="lazy" /></a></p>
 </blockquote>
 
 <h2 id="toolfactory-collection-outputs-are-handy-for-hiding-dozens-of-miscellaneous-tool-outputs-in-a-single-history-item">ToolFactory <code class="language-plaintext highlighter-rouge">collection</code> outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item</h2>
@@ -1329,7 +1350,7 @@ Script::
  is configured as shown below, from “rerunning” the plotter job from the sample history.</li>
   </ul>
 
-  <p><img src="../../images/toolfactory_plotter_demo_form.png" alt="ToolFactory form configuration of the output collection in the plotter example. " width="1238" height="536" loading="lazy" /></p>
+  <p><a href="../../images/toolfactory_plotter_demo_form.png" rel="noopener noreferrer"><img src="../../images/toolfactory_plotter_demo_form.png" alt="ToolFactory form configuration of the output collection in the plotter example. " width="1238" height="536" loading="lazy" /></a></p>
 
   <p>The Rscript is contained in a configfile so<code class="language-plaintext highlighter-rouge">#</code> is escaped - this is automatic.</p>
 
@@ -1441,7 +1462,7 @@ Script::
  Note that the test is over-ridden in the ToolFactory form to generate this tool.
  Without an over-ride to suit your script, an empty test will be generated that will not do any testing - see warning above.</p>
 
-  <p><img src="../../images/toolfactory_plotter_sample_output.png" alt="Plotter collection opens to show all the plots as separate items to be viewed or downloaded. " width="1964" height="1108" loading="lazy" /></p>
+  <p><a href="../../images/toolfactory_plotter_sample_output.png" rel="noopener noreferrer"><img src="../../images/toolfactory_plotter_sample_output.png" alt="Plotter collection opens to show all the plots as separate items to be viewed or downloaded. " width="1964" height="1108" loading="lazy" /></a></p>
 </blockquote>
 
 <h2 id="selects-as-user-supplied-parameters">Selects as user supplied parameters</h2>
@@ -1460,7 +1481,7 @@ Script::
   <p>The ToolFactory form section for user configurable command line settings is
  configured as shown here for the select demonstration</p>
 
-  <p><img src="../../images/toolfactory_select_demo_form.png" alt="Form to configure an additional parameter as a select. " width="1273" height="1060" loading="lazy" /></p>
+  <p><a href="../../images/toolfactory_select_demo_form.png" rel="noopener noreferrer"><img src="../../images/toolfactory_select_demo_form.png" alt="Form to configure an additional parameter as a select. " width="1273" height="1060" loading="lazy" /></a></p>
 
   <p>The generated XML is shown below.</p>
 
@@ -1521,7 +1542,7 @@ Script::
 </code></pre></div>  </div>
   <p>The generated tool form from the select demonstration shows the three options and returns the one selected.</p>
 
-  <p><img src="../../images/toolfactory_select_test_tool.png" alt="Generated form seen by users of the select demonstration tool. " width="1421" height="365" loading="lazy" /></p>
+  <p><a href="../../images/toolfactory_select_test_tool.png" rel="noopener noreferrer"><img src="../../images/toolfactory_select_test_tool.png" alt="Generated form seen by users of the select demonstration tool. " width="1421" height="365" loading="lazy" /></a></p>
 </blockquote>
 
 <h2 id="the-toolfactory-can-wrap-some-conda-packages-correctly-using-a-simple-wrapper-script-to-work-around-limitations">The ToolFactory can wrap some Conda packages correctly using a simple wrapper script to work around limitations.</h2>
@@ -2250,7 +2271,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2282,7 +2303,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

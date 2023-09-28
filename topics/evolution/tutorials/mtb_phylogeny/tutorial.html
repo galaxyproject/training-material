@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Tree thinking for tuberculosis evolution and epidemiology</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -305,8 +340,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -349,7 +384,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -397,23 +432,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -805,7 +826,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -835,7 +856,7 @@ Sentry.init({
 
 <h3 id="rooted-trees-and-tree-topology">Rooted trees and tree topology</h3>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="./images/mtbc_1strainPerLineage.nwk.COMB.svg" type="image/svg+xml" alt="Phylogeny. ">Phylogeny.</object></div><small><a target="_blank" href="./images/mtbc_1strainPerLineage.nwk.COMB.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red.</figcaption></figure>
+<p><a href="./images/mtbc_1strainPerLineage.nwk.COMB.svg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="./images/mtbc_1strainPerLineage.nwk.COMB.svg" type="image/svg+xml" alt="Phylogeny. ">Phylogeny.</object>&lt;/div&gt;<small><a target="_blank" href="./images/mtbc_1strainPerLineage.nwk.COMB.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red.&lt;/figcaption&gt;</figure></a></p>
 
 <p>The trees in figure 1 look rather different at a first glance, but they are identical except for one key aspect: tree A is <strong>rooted</strong> while tree B is not.</p>
 
@@ -849,7 +870,7 @@ Sentry.init({
 
 <p>Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny has been estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="./images/eldholm2016_tree.png" alt="Phylogeny. " width="310" height="734" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016.</figcaption></figure>
+<p><a href="./images/eldholm2016_tree.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="./images/eldholm2016_tree.png" alt="Phylogeny. " width="310" height="734" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Phylogeny of the central Asian clade, including the Oslo outbreak. Modified Eldholm et al. 2016.&lt;/figcaption&gt;</figure></a></p>
 
 <p>As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Figure 2 shows a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 (<span class="citation"><a href="#Eldholm2016">Eldholm <i>et al.</i> 2016</a></span>). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.</p>
 
@@ -902,7 +923,7 @@ Steps 3 - 5 are conducted for the exact same 20 samples used here in the <a href
 <p>Figure 3 shows a snapshot of an illustrative SNP alignment.
 Each row in the alignment represents a different strain, each column a position in the reference genome.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="./images/MEGA_alignment.png" alt="Alignment. " width="1478" height="840" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Illustrative example of a SNP alignment. Note the absence of conserved positions.</figcaption></figure>
+<p><a href="./images/MEGA_alignment.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="./images/MEGA_alignment.png" alt="Alignment. " width="1478" height="840" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Illustrative example of a SNP alignment. Note the absence of conserved positions.&lt;/figcaption&gt;</figure></a></p>
 
 <p>Because this alignment is based on SNPs, it contains <em>only variable positions</em>. This is important to keep in mind! Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation!</p>
 
@@ -1054,7 +1075,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 
       <p>Select it in you Galaxy history and take a look at it with the different <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> visualization options offered by Galaxy.</p>
 
-      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="./images/tree_unrooted_galaxy_vis.png" alt="Unrooted tree Galaxy visualization. " width="500" height="746" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> (Unrooted) RAxML tree in Galaxy's Phylogenetic Tree Visualization</figcaption></figure>
+      <p><a href="./images/tree_unrooted_galaxy_vis.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="./images/tree_unrooted_galaxy_vis.png" alt="Unrooted tree Galaxy visualization. " width="500" height="746" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> (Unrooted) RAxML tree in Galaxy’s Phylogenetic Tree Visualization&lt;/figcaption&gt;</figure></a></p>
     </li>
   </ol>
 
@@ -1149,7 +1170,7 @@ The above replacement operation, drops these unnecessary endings, which we would
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: 1<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p><img src="./images/tree_unrooted.svg" alt="Unrooted tree. " width="449" height="234" loading="lazy" /></p>
+      <p><a href="./images/tree_unrooted.svg" rel="noopener noreferrer"><img src="./images/tree_unrooted.svg" alt="Unrooted tree. " width="449" height="234" loading="lazy" /></a></p>
 
       <ol>
         <li>The tree is unrooted, and the outlier strain is <em>M. canettii</em>, our outgroup. The much longer branch leading to this strain shows that many SNPs separate <em>M. canettii</em> from the common ancestor of the MTBC.</li>
@@ -1176,7 +1197,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 </span></code></pre></div>  </div>
 </blockquote>
 
-<p><img src="./images/tree_rooted.svg" alt="Rooted tree. " width="522" height="429" loading="lazy" /></p>
+<p><a href="./images/tree_rooted.svg" rel="noopener noreferrer"><img src="./images/tree_rooted.svg" alt="Rooted tree. " width="522" height="429" loading="lazy" /></a></p>
 
 <p>This already looks better, the tree topology stands out more clearly now, and we can identify groups of closely related strains.</p>
 
@@ -1245,7 +1266,7 @@ The above replacement operation, drops these unnecessary endings, which we would
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution: 2<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p><img src="./images/tree_rooted_lineages.svg" alt="Colored lineages. " width="473" height="286" loading="lazy" /></p>
+      <p><a href="./images/tree_rooted_lineages.svg" rel="noopener noreferrer"><img src="./images/tree_rooted_lineages.svg" alt="Colored lineages. " width="473" height="286" loading="lazy" /></a></p>
 
       <p>There is indeed a problem with our phylogeny: one L2 and one L5 strain do not cluster with the other strains of these lineages. Instead, they appear near the root of the tree, with very short (ERR5987300) to non-existent (ERR1203059) branches. Other parts of the tree are consistent with Fig. 1A, suggesting that we can focus our first round of troubleshooting on these two strains.</p>
 
@@ -1390,7 +1411,7 @@ The above replacement operation, drops these unnecessary endings, which we would
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p><img src="./images/tree_rooted_dr.svg" alt="Colored DR profiles. " width="490" height="286" loading="lazy" /></p>
+    <p><a href="./images/tree_rooted_dr.svg" rel="noopener noreferrer"><img src="./images/tree_rooted_dr.svg" alt="Colored DR profiles. " width="490" height="286" loading="lazy" /></a></p>
 
     <p>MDR would have evolved three times according to the clustering perspective mentioned above: once in cluster 12, once in ERR6362078, and once in ERR6362653. The phylogeny suggest a simpler alternative: MDR could have been already present in the common ancestor of the six L2 strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2. As for the interpretation of clustering, sampling design is crucial for the interpretation of phylogenies and should always be kept in mind in order to avoid overinterpretation.</p>
 
@@ -1441,7 +1462,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 
 <p>Look at the scale bars of the two trees. Accounting for invariable sites has a huge effect on phylogenetic distances!</p>
 
-<p><img src="./images/tree_rescaled.svg" alt="Rescaled phylogeny. " width="436" height="300" loading="lazy" /></p>
+<p><a href="./images/tree_rescaled.svg" rel="noopener noreferrer"><img src="./images/tree_rescaled.svg" alt="Rescaled phylogeny. " width="436" height="300" loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-outliers-perform-dates-estimation-and-plot-with-time-scale"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove outliers, perform dates estimation and plot with time-scale</div>
@@ -1469,7 +1490,7 @@ The above replacement operation, drops these unnecessary endings, which we would
 
 </blockquote>
 
-<p><img src="./images/tree_dated.svg" alt="Dated phylogeny. " width="406" height="333" loading="lazy" /></p>
+<p><a href="./images/tree_dated.svg" rel="noopener noreferrer"><img src="./images/tree_dated.svg" alt="Dated phylogeny. " width="406" height="333" loading="lazy" /></a></p>
 
 <h2 id="final-exercise">Final exercise</h2>
 
@@ -1684,7 +1705,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1716,7 +1737,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

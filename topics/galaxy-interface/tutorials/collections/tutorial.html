@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Using dataset collections</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -201,8 +236,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -245,7 +280,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -293,23 +328,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -619,7 +640,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -678,11 +699,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
 <p>Because our data is <em>paired</em> we need to create a hierarchical collection called <strong>Paired Dataset Collection</strong> or <strong>Paired Collection</strong>. In such collection there are two layers. The first layer corresponds to individual samples (e.g., <code class="language-plaintext highlighter-rouge">M117-bl</code>). The second layer represent <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> reads corresponding to each sample:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/collections/paired_collection.svg" type="image/svg+xml" alt="paired collection. ">paired collection.</object></div><small><a target="_blank" href="../../images/collections/paired_collection.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.</figcaption></figure>
+<p><a href="../../images/collections/paired_collection.svg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/collections/paired_collection.svg" type="image/svg+xml" alt="paired collection. ">paired collection.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/collections/paired_collection.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The logic of Paired Collection. Here <em>N</em> datasets are bundled into a paired collection with two layers. The first layer corresponds to samples and the second to forward and reverse reads within each sample.&lt;/figcaption&gt;</figure></a></p>
 
 <p>To begin creating a collection we need to select datasets we would like to bundle. This is done using checkbox button of Galaxy’s history menu. Fig. 2 below shows this process.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/collections/select_multiple_datasets.gif" alt="selecting multiple datasets. " width="2560" height="1328" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Selecting multiple datasets and creating a paired collection.</figcaption></figure>
+<p><a href="../../images/collections/select_multiple_datasets.gif" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/collections/select_multiple_datasets.gif" alt="selecting multiple datasets. " width="2560" height="1328" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Selecting multiple datasets and creating a paired collection.&lt;/figcaption&gt;</figure></a></p>
 
 <p>The above process ended with appearance of Galaxy collection wizard. In this case Galaxy automatically assigned pairs using the <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Filters</strong> link (see animation in Fig. 3). The interface will change into its unpaired state.</p>
 
@@ -690,11 +711,11 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
 <p>Now it is time to name the collection: type <code class="language-plaintext highlighter-rouge">M117-collection</code> in <strong>Name</strong> text box and create the collection by clicking <strong>Create collection</strong>. A new item will appear in the history.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/collections/using_collection_wizard.gif" alt="using collection wizard. " width="1440" height="900" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Working with collection wizard. Text above this figure explains each step.</figcaption></figure>
+<p><a href="../../images/collections/using_collection_wizard.gif" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/collections/using_collection_wizard.gif" alt="using collection wizard. " width="1440" height="900" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Working with collection wizard. Text above this figure explains each step.&lt;/figcaption&gt;</figure></a></p>
 
 <p>Clicking on collection will expand it to show four pairs it contains (panel <strong>B</strong>). Clicking individual pairs will expand them further to reveal <strong>forward</strong> and <strong>reverse</strong> datasets (panel <strong>C</strong>). Expanding these further will enable one to see individual datasets (panel <strong>D</strong>).</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/collections/expanding_collection.gif" alt="expanding collection. " width="1440" height="900" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> To look what is inside a collection, just click on it.</figcaption></figure>
+<p><a href="../../images/collections/expanding_collection.gif" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/collections/expanding_collection.gif" alt="expanding collection. " width="1440" height="900" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> To look what is inside a collection, just click on it.&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="processing-data-organized-as-a-collection">Processing data organized as a collection</h1>
 
@@ -739,7 +760,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
   <hr />
 
-  <p><img src="../../images/collections/bwa_mem_interface_coll_tut.png" alt="bwa_mem_interface. " width="832" height="940" loading="lazy" /></p>
+  <p><a href="../../images/collections/bwa_mem_interface_coll_tut.png" rel="noopener noreferrer"><img src="../../images/collections/bwa_mem_interface_coll_tut.png" alt="bwa_mem_interface. " width="832" height="940" loading="lazy" /></a></p>
 
   <hr />
 
@@ -751,7 +772,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
 <p>You will see jobs being submitted and new datasets appearing in the history. Because our collection contains four paired datasets Galaxy will actually generate four separate <code class="language-plaintext highlighter-rouge">BWA-MEM</code> jobs. In the end this <code class="language-plaintext highlighter-rouge">BWA-MEM</code> run will produce a new collection containing four (4) BAM datasets. Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="language-plaintext highlighter-rouge">BWA-MEM</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panel <strong>B</strong>). If you click on any of the datasets you will see that it is indeed a BAM dataset (panel <strong>C</strong>).</p>
 
-<p><img src="../../images/collections/collection_expansion.svg" alt="bwa_memCollection_ABC. " width="900" height="390" loading="lazy" /></p>
+<p><a href="../../images/collections/collection_expansion.svg" rel="noopener noreferrer"><img src="../../images/collections/collection_expansion.svg" alt="bwa_memCollection_ABC. " width="900" height="390" loading="lazy" /></a></p>
 
 <h2 id="calling-variants">Calling variants</h2>
 
@@ -776,7 +797,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
   <hr />
 
-  <p><img src="../../images/collections/lofreq_interface.png" alt="lofreq_interface. " width="848" height="1002" loading="lazy" /></p>
+  <p><a href="../../images/collections/lofreq_interface.png" rel="noopener noreferrer"><img src="../../images/collections/lofreq_interface.png" alt="lofreq_interface. " width="848" height="1002" loading="lazy" /></a></p>
 
   <hr />
 
@@ -804,7 +825,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
   <hr />
 
-  <p><img src="../../images/collections/snpsift_interface.png" alt="snpsift_interface. " width="1354" height="846" loading="lazy" /></p>
+  <p><a href="../../images/collections/snpsift_interface.png" rel="noopener noreferrer"><img src="../../images/collections/snpsift_interface.png" alt="snpsift_interface. " width="1354" height="846" loading="lazy" /></a></p>
 
   <hr />
 
@@ -837,7 +858,7 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 
   <hr />
 
-  <p><img src="../../images/collections/collapse_collection.png" alt="snpsift_interface. " width="854" height="527" loading="lazy" /></p>
+  <p><a href="../../images/collections/collapse_collection.png" rel="noopener noreferrer"><img src="../../images/collections/collapse_collection.png" alt="snpsift_interface. " width="854" height="527" loading="lazy" /></a></p>
 
   <hr />
 
@@ -912,7 +933,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such “lifecycle” is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by <code class="language-plaintext highlighter-rouge">BWA-MEM</code>. Varinat calling by <code class="language-plaintext highlighter-rouge">lofreq</code> and field extraction with <code class="language-plaintext highlighter-rouge">SnpEff</code> maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/collections/collection_lifecycle.svg" type="image/svg+xml" alt="Collection lifecycle. ">Collection lifecycle.</object></div><small><a target="_blank" href="../../images/collections/collection_lifecycle.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example.</figcaption></figure>
+<p><a href="../../images/collections/collection_lifecycle.svg" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/collections/collection_lifecycle.svg" type="image/svg+xml" alt="Collection lifecycle. ">Collection lifecycle.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/collections/collection_lifecycle.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example.&lt;/figcaption&gt;</figure></a></p>
 
 <p>The last step of our analysis, collapsing a collection, is an example of a <em>collection operation</em>. Galaxy contains an entire section of tools designed for handling of collection data. These can be classified as:</p>
 
@@ -938,7 +959,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>This tool takes a dataset collection and filters out (removes) empty datasets. This is useful for continuing a multi-sample analysis when downstream tools require datasets to have content.</p>
 
-<p><img src="../../images/collections/filter_empty.svg" alt="Filtering empty datasets. " width="530" height="210" loading="lazy" /></p>
+<p><a href="../../images/collections/filter_empty.svg" rel="noopener noreferrer"><img src="../../images/collections/filter_empty.svg" alt="Filtering empty datasets. " width="530" height="210" loading="lazy" /></a></p>
 
 <h3 id="filter-failed-datasets">Filter failed datasets</h3>
 
@@ -946,7 +967,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>This tool takes a dataset collection and filters out (removes) datasets in the failed (red) state. This is useful for continuing a multi-sample analysis when one or more of the samples fails at some point.</p>
 
-<p><img src="../../images/collections/filter_error.svg" alt="filter_failed. " width="530" height="210" loading="lazy" /></p>
+<p><a href="../../images/collections/filter_error.svg" rel="noopener noreferrer"><img src="../../images/collections/filter_error.svg" alt="filter_failed. " width="530" height="210" loading="lazy" /></a></p>
 
 <h3 id="build-list">Build list</h3>
 
@@ -954,7 +975,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>This tool combines individual datasets or collections into a new collection. The simplest scenario is building a new colection from individual datasets (case <strong>A</strong> in the image below). You can merge a collection with individual dataset(s). In this case (see <strong>B</strong> in the image below) the individual dataset(s) will be merged with each element of the input collection to create a nested collection. Finally, two or more collection can be merged together creating a nested collection (case <strong>C</strong> in the image below).</p>
 
-<p><img src="../../images/collections/build_list.svg" alt="Build list. " width="820" height="530" loading="lazy" /></p>
+<p><a href="../../images/collections/build_list.svg" rel="noopener noreferrer"><img src="../../images/collections/build_list.svg" alt="Build list. " width="820" height="530" loading="lazy" /></a></p>
 
 <h3 id="filter-collection">Filter collection</h3>
 
@@ -1131,7 +1152,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>This tool takes nested collections such as a list of lists or a list of dataset pairs and produces a flat list from the inputs. It effectively “flattens” the hierarchy. The collection identifiers are merged together (using <code class="language-plaintext highlighter-rouge">_</code> as default) to create new collection identifiers in the flattened result:</p>
 
-<p><img src="../../images/collections/flatten.svg" alt="Flatten collection. " width="530" height="330" loading="lazy" /></p>
+<p><a href="../../images/collections/flatten.svg" rel="noopener noreferrer"><img src="../../images/collections/flatten.svg" alt="Flatten collection. " width="530" height="330" loading="lazy" /></a></p>
 
 <h3 id="merge-collections">Merge collections</h3>
 
@@ -1277,7 +1298,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>If you have one collection containing only forward reads and one containing only reverse, this tools will “zip” them together into a simple paired collection. For example, given two collections with <code class="language-plaintext highlighter-rouge">forward</code> and <code class="language-plaintext highlighter-rouge">reverse</code> reads they can be “zipped” into a single paired collection:</p>
 
-<p><img src="../../images/collections/zip.svg" alt="Zip collection. " width="620" height="586" loading="lazy" /></p>
+<p><a href="../../images/collections/zip.svg" rel="noopener noreferrer"><img src="../../images/collections/zip.svg" alt="Zip collection. " width="620" height="586" loading="lazy" /></a></p>
 
 <h3 id="unzip-collection">Unzip collection</h3>
 
@@ -1285,7 +1306,7 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>Given a paired collection of forward and reverse reads this tool will “unzip” it into two collections containing forward and reverse reads, respectively:</p>
 
-<p><img src="../../images/collections/unzip.svg" alt="Unzip collection. " width="620" height="575" loading="lazy" /></p>
+<p><a href="../../images/collections/unzip.svg" rel="noopener noreferrer"><img src="../../images/collections/unzip.svg" alt="Unzip collection. " width="620" height="575" loading="lazy" /></a></p>
 
 <h2 id="tools-that-combine-elements-of-a-collection">Tools that combine elements of a collection</h2>
 
@@ -1295,13 +1316,13 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
 
 <p>If you have a collection with three elements (image below), merging it on the first column will first produce a union on values found in the first column of each elements and then paste elements having the same value side-by-side:</p>
 
-<p><img src="../../images/collections/join_on_column.svg" alt="Column join. " width="360" height="470" loading="lazy" /></p>
+<p><a href="../../images/collections/join_on_column.svg" rel="noopener noreferrer"><img src="../../images/collections/join_on_column.svg" alt="Column join. " width="360" height="470" loading="lazy" /></a></p>
 
 <h3 id="collapse-collection">Collapse collection</h3>
 
 <p><i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Collapse collection</strong> merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the <strong>Prepend File name</strong> option as shown in the figure below (we used option <strong>A</strong> in the last step of this tutorial). <strong>A</strong> = <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code>; <strong>B</strong> = <code class="language-plaintext highlighter-rouge">Same line and only once per dataset</code>; <strong>C</strong> =  <code class="language-plaintext highlighter-rouge">Line above</code></p>
 
-<p><img src="../../images/collections/collapse_collection.svg" alt="Collapse collection. " width="880" height="720" loading="lazy" /></p>
+<p><a href="../../images/collections/collapse_collection.svg" rel="noopener noreferrer"><img src="../../images/collections/collapse_collection.svg" alt="Collapse collection. " width="880" height="720" loading="lazy" /></a></p>
 
 <!-- GTN:IGNORE:002 -->
 
@@ -1485,7 +1506,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1517,7 +1538,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

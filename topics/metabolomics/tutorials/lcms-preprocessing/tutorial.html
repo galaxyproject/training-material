@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Mass spectrometry: LC-MS preprocessing with XCMS</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -286,8 +321,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -330,7 +365,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -378,23 +413,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -688,7 +709,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -724,7 +745,7 @@ biological samples) and 3 blank samples (‘blanks’ - solvent injection).</p>
 <p>To analyze these data, we will then follow a Galaxy workflow
 developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a> (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).</p>
 
-<p><a href="../../images/lcmspreproc_wf.png"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name. " width="1500" height="1030" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The tutorial workflow&lt;/figcaption&gt;</figure></a></p>
+<p><a href="../../images/lcmspreproc_wf.png"><a href="../../images/lcmspreproc_wf.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name. " width="1500" height="1030" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The tutorial workflow&lt;/figcaption&gt;</figure></a></a></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-workflow4metabolomics-public-history"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Workflow4Metabolomics public history</div>
@@ -814,7 +835,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
         <li>
           <p>Option 2: from Zenodo using the URLs given below</p>
 
-          <p><a href="https://doi.org/10.5281/zenodo.3757956"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3757956.svg" alt="DOI. " loading="lazy" /></a></p>
+          <p><a href="https://doi.org/10.5281/zenodo.3757956"><a href="https://zenodo.org/badge/DOI/10.5281/zenodo.3757956.svg" rel="noopener noreferrer"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3757956.svg" alt="DOI. " loading="lazy" /></a></a></p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3757956/files/Blanc05.mzML
 https://zenodo.org/record/3757956/files/Blanc10.mzML
 https://zenodo.org/record/3757956/files/Blanc16.mzML
@@ -1433,7 +1454,7 @@ this step corresponds to the datasets number 29 and 30.</p>
 <p>This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_BPC12samp.png" alt="Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample." width="2578" height="806" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Base Peak Intensity Chromatograms</figcaption></figure>
+<p><a href="../../images/lcmspreproc_BPC12samp.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_BPC12samp.png" alt="Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample." width="2578" height="806" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Base Peak Intensity Chromatograms&lt;/figcaption&gt;</figure></a></p>
 
 <p>How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis…
 It can vary a lot from one experiment to another due to these characteristics.
@@ -1647,7 +1668,7 @@ The grey areas’ width is associated with the bandwidth parameter.</p>
 
 <p>Here is an example of two m/z slices obtained from the hands-on:</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_group12samp.png" alt="Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice. " width="1689" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Extract from plotChromPeakDensity.pdf</figcaption></figure>
+<p><a href="../../images/lcmspreproc_group12samp.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_group12samp.png" alt="Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice. " width="1689" height="872" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Extract from plotChromPeakDensity.pdf&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1733,7 +1754,7 @@ the datasets number 62 and 63.</p>
 With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 4394 ions
 that have not been found, in any blank.</p>
 
-  <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_ICgp1.png" alt="Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents." width="912" height="881" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Content of IC_Graphs.pdf</figcaption></figure>
+  <p><a href="../../images/lcmspreproc_ICgp1.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/lcmspreproc_ICgp1.png" alt="Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents." width="912" height="881" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Content of IC_Graphs.pdf&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2382,7 +2403,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2414,7 +2435,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

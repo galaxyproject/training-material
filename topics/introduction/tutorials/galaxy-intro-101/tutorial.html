@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy 101</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -340,8 +375,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -384,7 +419,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -432,23 +467,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -779,7 +800,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -842,7 +863,7 @@ Sentry.init({
     <li>
       <p><strong>Exons</strong> are fundamental components of <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">genes</a>. A typical eukaryotic gene contains numerous <em>exons</em> separated by <em>introns</em>. An entire gene containing both exons and introns is <em>transcribed</em> into a pre-messenger RNA or pre-mRNA. During maturation introns are excised from the pre-mRNA in a process called <em><a href="https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/">splicing</a></em>.  A mature messenger RNA, or simply mRNA, is then <em>translated</em> into protein during the process of <em>translation</em>.</p>
 
-      <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model. " width="1101" height="319" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
+      <p><a href="../../images/DNA_exons_introns.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model. " width="1101" height="319" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)&lt;/figcaption&gt;</figure></a></p>
     </li>
   </ul>
 
@@ -867,7 +888,7 @@ But even with your data in hand, you still have the question: “how do I actual
 </ol>
 
 <blockquote class="comment">
-  <figure id="figure-2" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/galaxy_interface.svg" type="image/svg+xml" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. "><img src="../../images/galaxy_interface.png" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. " />Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center.</object></div><small><a target="_blank" href="../../images/galaxy_interface.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em></figcaption></figure>
+  <p><a href="../../images/galaxy_interface.svg" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/galaxy_interface.svg" type="image/svg+xml" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. "><img src="../../images/galaxy_interface.png" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. " />Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/galaxy_interface.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em>&lt;/figcaption&gt;</figure></a></p>
 </blockquote>
 
 <p>When you start Galaxy for very first time, your history will be empty. Let’s add some data to it.</p>
@@ -886,7 +907,7 @@ But even with your data in hand, you still have the question: “how do I actual
     <li>
       <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
 
-      <p><img src="../../../../shared/images/rename_history.png" alt="Rename the history. " width="270" height="320" loading="lazy" /></p>
+      <p><a href="../../../../shared/images/rename_history.png" rel="noopener noreferrer"><img src="../../../../shared/images/rename_history.png" alt="Rename the history. " width="270" height="320" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -902,11 +923,11 @@ But even with your data in hand, you still have the question: “how do I actual
     <li>
       <p>At the top of the <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong></p>
 
-      <p><img src="../../images/upload-data.png" alt="upload data button. " width="276" height="205" loading="lazy" /></p>
+      <p><a href="../../images/upload-data.png" rel="noopener noreferrer"><img src="../../images/upload-data.png" alt="upload data button. " width="276" height="205" loading="lazy" /></a></p>
 
       <p>This brings up a box:</p>
 
-      <p><img src="../../images/upload-box.png" alt="filebox. " width="1792" height="1087" loading="lazy" /></p>
+      <p><a href="../../images/upload-box.png" rel="noopener noreferrer"><img src="../../images/upload-box.png" alt="filebox. " width="1792" height="1087" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click <strong>Paste/Fetch data</strong> and paste in the following URLs in the box that appears.</p>
@@ -951,11 +972,11 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 
         <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main table browser</code></p>
 
-        <p><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry. " width="346" height="160" loading="lazy" /></p>
+        <p><a href="../../images/101_01.png" rel="noopener noreferrer"><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry. " width="346" height="160" loading="lazy" /></a></p>
 
         <p>You will be taken to the <strong>UCSC table browser</strong>, which looks something like this:</p>
 
-        <p><img src="../../images/101_02.png" alt="`UCSC table browser` tool, first screen for exons. " width="1777" height="1290" loading="lazy" /></p>
+        <p><a href="../../images/101_02.png" rel="noopener noreferrer"><img src="../../images/101_02.png" alt="`UCSC table browser` tool, first screen for exons. " width="1777" height="1290" loading="lazy" /></a></p>
 
         <p>Now set the following parameters:</p>
         <ul>
@@ -978,7 +999,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
       <li>
         <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
 
-        <p><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons. " width="1777" height="1290" loading="lazy" /></p>
+        <p><a href="../../images/101_03.png" rel="noopener noreferrer"><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons. " width="1777" height="1290" loading="lazy" /></a></p>
 
         <p>Change <strong>Create one BED record per</strong> to <code class="language-plaintext highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to Galaxy</strong> button.</p>
 
@@ -987,7 +1008,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
           <p>After this you will see your first history item in Galaxy’s right panel. It will go through
 the gray (preparing/queued) and yellow (running) states to become green (success):</p>
 
-          <p><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green. " width="1777" height="1290" loading="lazy" /></p>
+          <p><a href="../../images/101_04.png" rel="noopener noreferrer"><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green. " width="1777" height="1290" loading="lazy" /></a></p>
 
           <p>You might need to login to Galaxy again.</p>
         </blockquote>
@@ -995,7 +1016,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <li>
         <p>When the dataset is green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
 
-        <p><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset. " width="632" height="278" loading="lazy" /></p>
+        <p><a href="../../images/101_exons.png" rel="noopener noreferrer"><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset. " width="632" height="278" loading="lazy" /></a></p>
 
         <p>Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.</p>
       </li>
@@ -1009,7 +1030,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
         <p>Your history should now look something like this:</p>
 
-        <p><img src="../../images/101_rename.png" alt="Rename dataset to `Exons`. " width="1777" height="1290" loading="lazy" /></p>
+        <p><a href="../../images/101_rename.png" rel="noopener noreferrer"><img src="../../images/101_rename.png" alt="Rename dataset to `Exons`. " width="1777" height="1290" loading="lazy" /></a></p>
       </li>
     </ol>
   </blockquote>
@@ -1028,14 +1049,14 @@ the gray (preparing/queued) and yellow (running) states to become green (success
           <li><em>“output format”</em> should be changed again to <code class="language-plaintext highlighter-rouge">BED - browser extensible data</code></li>
         </ul>
 
-        <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs. " width="1777" height="1290" loading="lazy" /></p>
+        <p><a href="../../images/101_06.png" rel="noopener noreferrer"><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs. " width="1777" height="1290" loading="lazy" /></a></p>
 
         <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 151, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
       </li>
       <li>
         <p>Click on the <strong>get output</strong> button to find a form similar to this:</p>
 
-        <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs. " width="1777" height="1290" loading="lazy" /></p>
+        <p><a href="../../images/101_07.png" rel="noopener noreferrer"><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs. " width="1777" height="1290" loading="lazy" /></a></p>
 
         <p>Make sure that <em>“Create one BED record per”</em> is set to <code class="language-plaintext highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to Galaxy</strong>. A second item will appear in your analysis history.</p>
       </li>
@@ -1084,7 +1105,7 @@ tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect
 
   <p>The interface of the tool should look like this:</p>
 
-  <p><img src="../../images/101_bed_intersect_interface.png" alt="Bedtool intersect interval interface. " width="908" height="709" loading="lazy" /></p>
+  <p><a href="../../images/101_bed_intersect_interface.png" rel="noopener noreferrer"><img src="../../images/101_bed_intersect_interface.png" alt="Bedtool intersect interval interface. " width="908" height="709" loading="lazy" /></a></p>
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-how-do-i-use-this-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-use-this-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: How do I use this tool?<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1097,7 +1118,7 @@ tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect
     <li>
       <p>View the resulting file (with the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
 
-      <p><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset. " width="945" height="325" loading="lazy" /></p>
+      <p><a href="../../images/101_joined.png" rel="noopener noreferrer"><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset. " width="945" height="325" loading="lazy" /></a></p>
 
       <p>Here column 4 contains exon IDs (e.g., <code class="language-plaintext highlighter-rouge">ENST00000252835.5_cds_0_0_chr22_15528159_f</code>) and column 10 lists SNP IDs (e.g., <code class="language-plaintext highlighter-rouge">rs9617249</code>) Remember that variations are possible due to using different versions of UCSC databases: as long as you have similar looking columns you did everything right!</p>
     </li>
@@ -1168,7 +1189,7 @@ tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
       </ul>
 
-      <p><img src="../../images/101_datamash_1.png" alt="Datamash tool interface. " width="910" height="267" loading="lazy" /></p>
+      <p><a href="../../images/101_datamash_1.png" rel="noopener noreferrer"><img src="../../images/101_datamash_1.png" alt="Datamash tool interface. " width="910" height="267" loading="lazy" /></a></p>
 
       <ul>
         <li>Scroll tool interface down to <em>“Operation to perform on each group”</em>
@@ -1179,12 +1200,12 @@ tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect
         </li>
       </ul>
 
-      <p><img src="../../images/101_datamash_2.png" alt="Operation to perform on each group. " width="910" height="252" loading="lazy" /></p>
+      <p><a href="../../images/101_datamash_2.png" rel="noopener noreferrer"><img src="../../images/101_datamash_2.png" alt="Operation to perform on each group. " width="910" height="252" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click <strong>Run Tool</strong>. Your new output dataset will look something like this:</p>
 
-      <p><img src="../../images/101_14.png" alt="Contents of the `Group` output dataset. " width="504" height="201" loading="lazy" /></p>
+      <p><a href="../../images/101_14.png" rel="noopener noreferrer"><img src="../../images/101_14.png" alt="Contents of the `Group` output dataset. " width="504" height="201" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1227,7 +1248,7 @@ tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect
     <li>
       <p>Examine the output file.</p>
 
-      <p><img src="../../images/101_16.png" alt="Contents of the `Sort` output dataset. " width="553" height="202" loading="lazy" /></p>
+      <p><a href="../../images/101_16.png" rel="noopener noreferrer"><img src="../../images/101_16.png" alt="Contents of the `Sort` output dataset. " width="553" height="202" loading="lazy" /></a></p>
 
       <p>The file should look similar to before sorting, but now the exons with the highest number of SNPs are at the top.</p>
     </li>
@@ -1295,7 +1316,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Examine your output file. It should contain the locations of your top 5 exons:</p>
 
-      <p><img src="../../images/101_19.png" alt="Contents of the `Compare two Datasets` output dataset. " width="679" height="134" loading="lazy" /></p>
+      <p><a href="../../images/101_19.png" rel="noopener noreferrer"><img src="../../images/101_19.png" alt="Contents of the `Compare two Datasets` output dataset. " width="679" height="134" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1325,16 +1346,16 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click on the dataset in your history to expand it, then click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</p>
 
-      <p><img src="../../images/101_ucsc_visualize.png" alt="visualize button on the expanded history item. " width="227" height="160" loading="lazy" /></p>
+      <p><a href="../../images/101_ucsc_visualize.png" rel="noopener noreferrer"><img src="../../images/101_ucsc_visualize.png" alt="visualize button on the expanded history item. " width="227" height="160" loading="lazy" /></a></p>
     </li>
     <li>
       <p>To <strong>visualize the data in UCSC genome browser</strong>, click on <code class="language-plaintext highlighter-rouge">display at UCSC (main)</code> now visible at the top (blue box) of the Visualize menu.</p>
 
-      <p><img src="../../images/101_displayucsc.png" alt="`display at UCSC main` link. " width="457" height="370" loading="lazy" /></p>
+      <p><a href="../../images/101_displayucsc.png" rel="noopener noreferrer"><img src="../../images/101_displayucsc.png" alt="`display at UCSC main` link. " width="457" height="370" loading="lazy" /></a></p>
 
       <p>This will upload the data to UCSC as custom track. To see your data look at the <code class="language-plaintext highlighter-rouge">User Track</code> near the top. You can enter the coordinates of one of your exons at the top to jump to that location.</p>
 
-      <p><img src="../../images/101_21.png" alt="`User Track` shown in the UCSC genome browser. " width="973" height="732" loading="lazy" /></p>
+      <p><a href="../../images/101_21.png" rel="noopener noreferrer"><img src="../../images/101_21.png" alt="`User Track` shown in the UCSC genome browser. " width="973" height="732" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1345,11 +1366,11 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p>In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>History Options</strong> menu on the top of the history panel:</p>
 
-<p><img src="../../images/history_options_menu.png" alt="History options menu. " width="535" height="624" loading="lazy" /></p>
+<p><a href="../../images/history_options_menu.png" rel="noopener noreferrer"><img src="../../images/history_options_menu.png" alt="History options menu. " width="535" height="624" loading="lazy" /></a></p>
 
 <p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> Multi-history view:</p>
 
-<p><img src="../../images/101_history-overview.png" alt="Overview of histories with their datasets. " width="962" height="578" loading="lazy" /></p>
+<p><a href="../../images/101_history-overview.png" rel="noopener noreferrer"><img src="../../images/101_history-overview.png" alt="Overview of histories with their datasets. " width="962" height="578" loading="lazy" /></a></p>
 
 <p>Here you can:</p>
 <ul>
@@ -1380,11 +1401,11 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>
 
-      <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu. " width="247" height="327" loading="lazy" /></p>
+      <p><a href="../../images/history_menu_extract_workflow.png" rel="noopener noreferrer"><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu. " width="247" height="327" loading="lazy" /></a></p>
 
       <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>
 
-      <p><img src="../../images/101_25.png" alt="Selection of steps for `Extract Workflow` from history. " width="914" height="914" loading="lazy" /></p>
+      <p><a href="../../images/101_25.png" rel="noopener noreferrer"><img src="../../images/101_25.png" alt="Selection of steps for `Extract Workflow` from history. " width="914" height="914" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Replace the <strong>Workflow name</strong> to something more descriptive, for example <code class="language-plaintext highlighter-rouge">Find exons with the highest number of features</code>.</p>
@@ -1402,7 +1423,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click on <strong>Workflow</strong> in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:</p>
 
-      <p><img src="../../images/101_26.png" alt="`Your workflows` list. " width="882" height="259" loading="lazy" /></p>
+      <p><a href="../../images/101_26.png" rel="noopener noreferrer"><img src="../../images/101_26.png" alt="`Your workflows` list. " width="882" height="259" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1418,12 +1439,12 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Click on the triangle to the right of your workflow name.</p>
 
-      <p><img src="../../images/101_27.png" alt="`Edit` option in the menu for the latest workflow. " width="234" height="416" loading="lazy" /></p>
+      <p><a href="../../images/101_27.png" rel="noopener noreferrer"><img src="../../images/101_27.png" alt="`Edit` option in the menu for the latest workflow. " width="234" height="416" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Select <strong>Edit</strong> to launch the workflow editor. You should see something like this:</p>
 
-      <p><img src="../../images/101_28.png" alt="Workflow editor. " width="1628" height="579" loading="lazy" /></p>
+      <p><a href="../../images/101_28.png" rel="noopener noreferrer"><img src="../../images/101_28.png" alt="Workflow editor. " width="1628" height="579" loading="lazy" /></a></p>
 
       <p>When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
 
@@ -1459,7 +1480,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
         </li>
       </ul>
 
-      <p><img src="../../images/101_34.png" alt="Rename the output of the `Select first` tool step. " width="680" height="457" loading="lazy" /></p>
+      <p><a href="../../images/101_34.png" rel="noopener noreferrer"><img src="../../images/101_34.png" alt="Rename the output of the `Select first` tool step. " width="680" height="457" loading="lazy" /></a></p>
     </li>
     <li>
       <p><strong>Repeat</strong> this for the output of the <code class="language-plaintext highlighter-rouge">Compare two Datasets</code> tool, naming it <code class="language-plaintext highlighter-rouge">Top 5 exons</code></p>
@@ -1497,7 +1518,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
 
-      <p><img src="../../images/copying_data.gif" alt="Drag and drop of `Exons` dataset in the history overview. " width="816" height="340" loading="lazy" /></p>
+      <p><a href="../../images/copying_data.gif" rel="noopener noreferrer"><img src="../../images/copying_data.gif" alt="Drag and drop of `Exons` dataset in the history overview. " width="816" height="340" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Click the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <strong>Analyze Data</strong> on older Galaxy versions) at the top to return to the main analysis window</p>
@@ -1549,7 +1570,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Open the <strong>workflow menu</strong> (top menu bar). Find the workflow you made in the previous section, and select the option <code class="language-plaintext highlighter-rouge">Run</code>.</p>
 
-      <p><img src="../../images/101_37.png" alt="`Run` option in the workflow menu. " width="766" height="126" loading="lazy" /></p>
+      <p><a href="../../images/101_37.png" rel="noopener noreferrer"><img src="../../images/101_37.png" alt="`Run` option in the workflow menu. " width="766" height="126" loading="lazy" /></a></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
@@ -1564,7 +1585,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Features”</em>: the <code class="language-plaintext highlighter-rouge">Repeats</code> file we downloaded from UCSC</li>
       </ul>
 
-      <p><img src="../../images/101_38.png" alt="Settings for running the workflow. " width="1260" height="825" loading="lazy" /></p>
+      <p><a href="../../images/101_38.png" rel="noopener noreferrer"><img src="../../images/101_38.png" alt="Settings for running the workflow. " width="1260" height="825" loading="lazy" /></a></p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-potential-workflow-issues"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Potential workflow issues</div>
@@ -1578,7 +1599,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
 
-      <p><img src="../../images/101_39.png" alt="Datasets appearing in the history. " width="1253" height="941" loading="lazy" /></p>
+      <p><a href="../../images/101_39.png" rel="noopener noreferrer"><img src="../../images/101_39.png" alt="Datasets appearing in the history. " width="1253" height="941" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1804,7 +1825,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1836,7 +1857,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

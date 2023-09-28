@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Genomic Data Visualisation with JBrowse</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -268,8 +303,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -312,7 +347,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -360,23 +395,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -671,7 +692,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -802,11 +823,11 @@ https://zenodo.org/record/3591856/files/variants.vcf
     <li>
       <p>View the contents of the file</p>
 
-      <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse-gff-track.png" alt="Screenshot of JBrowse. " width="1202" height="311" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of JBrowse</figcaption></figure>
+      <p><a href="../../images/jbrowse-gff-track.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse-gff-track.png" alt="Screenshot of JBrowse. " width="1202" height="311" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of JBrowse&lt;/figcaption&gt;</figure></a></p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-error-reading-from-name-store"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-error-reading-from-name-store" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Error reading from name store<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p><img src="../../images/jbrowse/error.png" alt="error message. " width="261" height="143" loading="lazy" /></p>
+        <p><a href="../../images/jbrowse/error.png" rel="noopener noreferrer"><img src="../../images/jbrowse/error.png" alt="error message. " width="261" height="143" loading="lazy" /></a></p>
 
         <p>If you see this error message, click OK, this is a known bug.</p>
       </blockquote>
@@ -932,7 +953,7 @@ directly in your templating</p>
     <li>
       <p>View the output</p>
 
-      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/genes.png" alt="genes in JBrowse. " width="1273" height="301" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Genes visualised in JBrowse. The lighter coloured genes on the denovo track are coloured based on the confidence score given to the prediction by AUGUSTUS. NCBI genes do not have scores, these are more like an official gene set.</figcaption></figure>
+      <p><a href="../../images/jbrowse/genes.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/genes.png" alt="genes in JBrowse. " width="1273" height="301" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Genes visualised in JBrowse. The lighter coloured genes on the denovo track are coloured based on the confidence score given to the prediction by AUGUSTUS. NCBI genes do not have scores, these are more like an official gene set.&lt;/figcaption&gt;</figure></a></p>
     </li>
     <li>
       <p>Turn on both tracks of data.</p>
@@ -945,7 +966,7 @@ directly in your templating</p>
 
       <p>This menu option is dynamic, try it with a few other features from the <code class="language-plaintext highlighter-rouge">genes (NCBI).gff3</code> track. These features have a <code class="language-plaintext highlighter-rouge">locus_tag</code> and the menu button we added will open a URL to an NCBI search page for the value of this <code class="language-plaintext highlighter-rouge">locus_tag</code> attribute.</p>
 
-      <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/ncbi.png" alt="ncbi view. " width="1721" height="864" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The NCBI iframe within JBrowse, you can see how to link to external databases from JBrowse and help the viewer obtain as much information or context as they might need... but you have to build it yourself.</figcaption></figure>
+      <p><a href="../../images/jbrowse/ncbi.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/ncbi.png" alt="ncbi view. " width="1721" height="864" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> The NCBI iframe within JBrowse, you can see how to link to external databases from JBrowse and help the viewer obtain as much information or context as they might need… but you have to build it yourself.&lt;/figcaption&gt;</figure></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1052,7 +1073,7 @@ directly in your templating</p>
     <li>
       <p>Execute and then explore the resulting data.</p>
 
-      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/sequencing.png" alt="sequencing tracks in JBrowse. " width="1283" height="928" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All of the sequencing tracks in JBrowse. Try exploring! There are many menu and configuration options which can help you filter and sort your data.</figcaption></figure>
+      <p><a href="../../images/jbrowse/sequencing.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/sequencing.png" alt="sequencing tracks in JBrowse. " width="1283" height="928" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> All of the sequencing tracks in JBrowse. Try exploring! There are many menu and configuration options which can help you filter and sort your data.&lt;/figcaption&gt;</figure></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1122,7 +1143,7 @@ directly in your templating</p>
     <li>
       <p>Execute and then explore the resulting data.</p>
 
-      <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/blast.png" alt="blast results in JBrowse. " width="1286" height="766" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Blast results, coloured according to their e-value. This sort of track is commonly used to help genome annotators have additional genomic context when they are annotating.</figcaption></figure>
+      <p><a href="../../images/jbrowse/blast.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/jbrowse/blast.png" alt="blast results in JBrowse. " width="1286" height="766" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Blast results, coloured according to their e-value. This sort of track is commonly used to help genome annotators have additional genomic context when they are annotating.&lt;/figcaption&gt;</figure></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1296,7 +1317,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1328,7 +1349,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

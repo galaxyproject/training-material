@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Visualization of Climate Data using  NetCDF xarray Map Plotting</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -238,8 +273,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -282,7 +317,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -330,23 +365,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -648,7 +669,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1022,7 +1043,7 @@ Suppose your selected range was <code class="language-plaintext highlighter-roug
     </li>
   </ol>
 
-  <p><img src="../../images/x-array-map-plot/plot1.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 UTC. " width="2000" height="1000" loading="lazy" /></p>
+  <p><a href="../../images/x-array-map-plot/plot1.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/plot1.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 UTC. " width="2000" height="1000" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -1043,131 +1064,131 @@ The <strong>conic type</strong> is based on the concept of projecting the surfac
 
   <p><strong>PlateCarree</strong>
 <strong>Syntax: {“proj”:”PlateCarree”}</strong>
-<img src="../../images/x-array-map-plot/projections/PlateCarree.png" alt="PlateCarree. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/PlateCarree.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/PlateCarree.png" alt="PlateCarree. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EquidistantConic</strong>
 <strong>Syntax: {“proj”:”EquidistantConic”, “central_longitude”: 20.0, “central_latitude”: 70.0 }</strong>
-<img src="../../images/x-array-map-plot/projections/EquidistantConic.png" alt="EquidistantConic. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EquidistantConic.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EquidistantConic.png" alt="EquidistantConic. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>AlbersEqualArea</strong>
 <strong>Syntax: {“proj”:”AlbersEqualArea”, “central_longitude”: 20.0, “central_latitude”: 70.0 }</strong>
-<img src="../../images/x-array-map-plot/projections/AlbersEqualArea.png" alt="AlbersEqualArea. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/AlbersEqualArea.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/AlbersEqualArea.png" alt="AlbersEqualArea. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EuroPP</strong>
 <strong>Syntax: {“proj”:”EuroPP”}</strong>
-<img src="../../images/x-array-map-plot/projections/EuroPP.png" alt="EuroPP. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EuroPP.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EuroPP.png" alt="EuroPP. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>LambertConformal</strong>
 <strong>Syntax:{“proj”:”LambertConformal”  }</strong>
-<img src="../../images/x-array-map-plot/projections/LambertConformal.png" alt="LambertConformal. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/LambertConformal.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/LambertConformal.png" alt="LambertConformal. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>AzimuthalEquidistant</strong>
 <strong>Syntax: {“proj”:”AzimuthalEquidistant” }</strong>
-<img src="../../images/x-array-map-plot/projections/AzimuthalEquidistant.png" alt="AzimuthalEquidistant. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/AzimuthalEquidistant.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/AzimuthalEquidistant.png" alt="AzimuthalEquidistant. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>LambertCylindrical</strong>
 <strong>Syntax:{“proj”:”LambertCylindrical”}</strong>
-<img src="../../images/x-array-map-plot/projections/LambertCylindrical.png" alt="LambertCylindrical. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/LambertCylindrical.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/LambertCylindrical.png" alt="LambertCylindrical. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Mercator</strong>
 <strong>Syntax: {“proj”:”Mercator” }</strong>
-<img src="../../images/x-array-map-plot/projections/Mercator.png" alt="Mercator. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Mercator.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Mercator.png" alt="Mercator. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Miller</strong>
 <strong>Syntax: {“proj”:”Miller”  }</strong>
-<img src="../../images/x-array-map-plot/projections/Miller.png" alt="Miller. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Miller.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Miller.png" alt="Miller. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Mollweide</strong>
 <strong>Syntax: {“proj”:”Mollweide” }</strong>
-<img src="../../images/x-array-map-plot/projections/Mollweide.png" alt="Mollweide. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Mollweide.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Mollweide.png" alt="Mollweide. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Orthographic</strong>
 <strong>Syntax:{“proj”:”Orthographic”  }</strong>
-<img src="../../images/x-array-map-plot/projections/Orthographic.png" alt="Orthographic. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Orthographic.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Orthographic.png" alt="Orthographic. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Robinson</strong>
 <strong>Syntax: {“proj”:”Robinson”  }</strong>
-<img src="../../images/x-array-map-plot/projections/Robinson.png" alt="Robinson. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Robinson.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Robinson.png" alt="Robinson. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Sinusoidal</strong>
 <strong>Syntax: {“proj”:”Sinusoidal”  }</strong>
-<img src="../../images/x-array-map-plot/projections/sinusoidal.png" alt="Sinusoidal. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/sinusoidal.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/sinusoidal.png" alt="Sinusoidal. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Stereographic</strong>
 <strong>Syntax: {“proj”:”Stereographic”  }</strong>
-<img src="../../images/x-array-map-plot/projections/Stereographic.png" alt="Stereographic. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Stereographic.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Stereographic.png" alt="Stereographic. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>TransverseMercator</strong>
 <strong>Syntax:{“proj”:”TransverseMercator”  }</strong>
-<img src="../../images/x-array-map-plot/projections/TransverseMercator.png" alt="TransverseMercator. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/TransverseMercator.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/TransverseMercator.png" alt="TransverseMercator. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>InterruptedGoodeHomolosine</strong>
 <strong>Syntax: {“proj”:”InterruptedGoodeHomolosine”  }</strong>
-<img src="../../images/x-array-map-plot/projections/InterruptedGoodeHomolosine.png" alt="InterruptedGoodeHomolosine. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/InterruptedGoodeHomolosine.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/InterruptedGoodeHomolosine.png" alt="InterruptedGoodeHomolosine. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>RotatedPole</strong>
 <strong>Syntax: {“proj”:”RotatedPole”  }</strong>
-<img src="../../images/x-array-map-plot/projections/RotatedPole.png" alt="RotatedPole. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/RotatedPole.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/RotatedPole.png" alt="RotatedPole. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>OSGB</strong>
 <strong>Syntax:{“proj”:”OSGB”  }</strong>
-<img src="../../images/x-array-map-plot/projections/OSGB.png" alt="OSGB. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/OSGB.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/OSGB.png" alt="OSGB. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Geostationary</strong>
 <strong>Syntax: {“proj”:”Geostationary”  }</strong>
-<img src="../../images/x-array-map-plot/projections/Geostationary.png" alt="Geostationary. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Geostationary.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Geostationary.png" alt="Geostationary. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>NearsidePerspective</strong>
 <strong>Syntax:{“proj”:”NearsidePerspective” }</strong>
-<img src="../../images/x-array-map-plot/projections/NearsidePerspective.png" alt="NearsidePerspective. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/NearsidePerspective.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/NearsidePerspective.png" alt="NearsidePerspective. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertI</strong>
 <strong>Syntax: {“proj”:”EckertI” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertI.png" alt="EckertI. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertI.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertI.png" alt="EckertI. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertII</strong>
 <strong>Syntax: {“proj”:”EckertII” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertII.png" alt="EckertII. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertII.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertII.png" alt="EckertII. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertIII</strong>
 <strong>Syntax: {“proj”:”EckertIII” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertIII.png" alt="EckertIII. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertIII.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertIII.png" alt="EckertIII. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertIV</strong>
 <strong>Syntax: {“proj”:”EckertIV” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertIV.png" alt="EckertIV. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertIV.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertIV.png" alt="EckertIV. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertV</strong>
 <strong>Syntax: {“proj”:”EckertV” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertV.png" alt="EckertV. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertV.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertV.png" alt="EckertV. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EckertVI</strong>
 <strong>Syntax: {“proj”:”EckertVI” }</strong>
-<img src="../../images/x-array-map-plot/projections/EckertVI.png" alt="EckertVI. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EckertVI.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EckertVI.png" alt="EckertVI. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>EqualEarth</strong>
 <strong>Syntax:{“proj”:”EqualEarth” }</strong>
-<img src="../../images/x-array-map-plot/projections/EqualEarth.png" alt="EqualEarth. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/EqualEarth.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/EqualEarth.png" alt="EqualEarth. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>Gnomonic</strong>
 <strong>Syntax: {“proj”:”Gnomonic” }</strong>
-<img src="../../images/x-array-map-plot/projections/Gnomonic.png" alt="Gnomonic. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/Gnomonic.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/Gnomonic.png" alt="Gnomonic. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>LambertAzimuthalEqualArea</strong>
 <strong>Syntax: {“proj”:”LambertAzimuthalEqualArea” }</strong>
-<img src="../../images/x-array-map-plot/projections/LambertAzimuthalEqualArea.png" alt="LambertAzimuthalEqualArea. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/LambertAzimuthalEqualArea.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/LambertAzimuthalEqualArea.png" alt="LambertAzimuthalEqualArea. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>NorthPolarStereo</strong>
 <strong>Syntax: {“proj”:”NorthPolarStereo” }</strong>
-<img src="../../images/x-array-map-plot/projections/NorthPolarStereo.png" alt="NorthPolarStereo. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/NorthPolarStereo.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/NorthPolarStereo.png" alt="NorthPolarStereo. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>OSNI</strong>
 <strong>Syntax: {“proj”:”OSNI” }</strong>
-<img src="../../images/x-array-map-plot/projections/OSNI.png" alt="OSNI. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/OSNI.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/OSNI.png" alt="OSNI. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <p><strong>SouthPolarStereo</strong>
 <strong>Syntax: {“proj”:”SouthPolarStereo” }</strong>
-<img src="../../images/x-array-map-plot/projections/SouthPolarStereo.png" alt="SouthPolarStereo. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/projections/SouthPolarStereo.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/projections/SouthPolarStereo.png" alt="SouthPolarStereo. " width="2000" height="1000" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -1207,22 +1228,22 @@ The <strong>conic type</strong> is based on the concept of projecting the surfac
 
       <p>The final plot is shown below:</p>
 
-      <p><img src="../../images/x-array-map-plot/Interrupted_GoodeHomolosine.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine. " width="2000" height="1000" loading="lazy" /></p>
+      <p><a href="../../images/x-array-map-plot/Interrupted_GoodeHomolosine.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Interrupted_GoodeHomolosine.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine. " width="2000" height="1000" loading="lazy" /></a></p>
 
       <p>Some other potentially interesting types of projections can be found below :</p>
 
       <p><em>{“proj”:”LambertCylindrical” }</em>
-<img src="../../images/x-array-map-plot/Lam.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertCylindrical. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/Lam.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Lam.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertCylindrical. " width="2000" height="1000" loading="lazy" /></a>
 <em>{“proj”:”Orthographic”  }</em>
-<img src="../../images/x-array-map-plot/Ortho.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Orthographic. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/Ortho.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Ortho.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Orthographic. " width="2000" height="1000" loading="lazy" /></a>
 <em>{“proj”:”Sinusoidal” }</em>
-<img src="../../images/x-array-map-plot/sinu.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Sinusoidal. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/sinu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/sinu.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Sinusoidal. " width="2000" height="1000" loading="lazy" /></a>
 <em>{“proj”:”EquidistantConic”}</em>
-<img src="../../images/x-array-map-plot/Equidi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : EquidistantConic. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/Equidi.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Equidi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : EquidistantConic. " width="2000" height="1000" loading="lazy" /></a>
 <em>{“proj”:”LambertConformal” }</em>
-<img src="../../images/x-array-map-plot/Lamcon.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/Lamcon.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Lamcon.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal. " width="2000" height="1000" loading="lazy" /></a>
 <em>{“proj”:”AzimuthalEquidistant” }</em>
-<img src="../../images/x-array-map-plot/Azi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/Azi.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/Azi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant. " width="2000" height="1000" loading="lazy" /></a></p>
     </blockquote>
   </blockquote>
 </blockquote>
@@ -1233,297 +1254,297 @@ The <strong>conic type</strong> is based on the concept of projecting the surfac
 Below is the complete list for reference.</p>
 
   <p><strong>ACCENT</strong>
-<img src="../../images/x-array-map-plot/colormaps/Accent.png" alt="Accent. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Accent.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Accent.png" alt="Accent. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BLUES</strong>
-<img src="../../images/x-array-map-plot/colormaps/Blues.png" alt="Blues. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Blues.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Blues.png" alt="Blues. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BrBg</strong>
-<img src="../../images/x-array-map-plot/colormaps/BrBG.png" alt="BrBg. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/BrBG.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/BrBG.png" alt="BrBg. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BuGn</strong>
-<img src="../../images/x-array-map-plot/colormaps/BuGn.png" alt="BuGn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/BuGn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/BuGn.png" alt="BuGn. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BuPu</strong>
-<img src="../../images/x-array-map-plot/colormaps/BuPu.png" alt="BuPu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/BuPu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/BuPu.png" alt="BuPu. " width="2000" height="1000" loading="lazy" /></a>
  <strong>CMRmap</strong>
-<img src="../../images/x-array-map-plot/colormaps/CMRmap.png" alt="CMRmap. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/CMRmap.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/CMRmap.png" alt="CMRmap. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Dark2</strong>
-<img src="../../images/x-array-map-plot/colormaps/Dark2.png" alt="Dark2. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Dark2.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Dark2.png" alt="Dark2. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Acton</strong>
-<img src="../../images/x-array-map-plot/colormaps/acton.png" alt="Acton. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/acton.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/acton.png" alt="Acton. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Acton_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/acton_r.png" alt="Acton_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/acton_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/acton_r.png" alt="Acton_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Afmhot</strong>
-<img src="../../images/x-array-map-plot/colormaps/afmhot.png" alt="Afmhot. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/afmhot.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/afmhot.png" alt="Afmhot. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Autumn</strong>
-<img src="../../images/x-array-map-plot/colormaps/autumn.png" alt="Autumn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/autumn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/autumn.png" alt="Autumn. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bam</strong>
-<img src="../../images/x-array-map-plot/colormaps/bam.png" alt="BamO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bam.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bam.png" alt="BamO. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BamO</strong>
-<img src="../../images/x-array-map-plot/colormaps/bam0.png" alt="BamO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bam0.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bam0.png" alt="BamO. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BamO_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/bamO_r.png" alt="bamO_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bamO_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bamO_r.png" alt="bamO_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bamako</strong>
-<img src="../../images/x-array-map-plot/colormaps/bamako.png" alt="Accent. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bamako.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bamako.png" alt="Accent. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bamako_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/bamako_r.png" alt="bamako_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bamako_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bamako_r.png" alt="bamako_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Batlow</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlow.png" alt="Batlow. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlow.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlow.png" alt="Batlow. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BatlowK</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlowK.png" alt="BatlowK. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlowK.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlowK.png" alt="BatlowK. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BatlowK_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlowK_r.png" alt="BatlowK_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlowK_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlowK_r.png" alt="BatlowK_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BatlowW</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlowW.png" alt="batlowW. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlowW.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlowW.png" alt="batlowW. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BatlowW_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlowW_r.png" alt="batlowW_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlowW_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlowW_r.png" alt="batlowW_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Batlow_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/batlow_r.png" alt="Batlow_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/batlow_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/batlow_r.png" alt="Batlow_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Berlin</strong>
-<img src="../../images/x-array-map-plot/colormaps/berlin.png" alt="Berlin. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/berlin.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/berlin.png" alt="Berlin. " width="2000" height="1000" loading="lazy" /></a>
  <strong>berlin_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/berlin_r.png" alt="Berlin_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/berlin_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/berlin_r.png" alt="Berlin_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bilbao</strong>
-<img src="../../images/x-array-map-plot/colormaps/bilbao.png" alt="bilbao. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bilbao.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bilbao.png" alt="bilbao. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bilbao_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/bilbao_r.png" alt="Bilbao_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bilbao_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bilbao_r.png" alt="Bilbao_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Binary</strong>
-<img src="../../images/x-array-map-plot/colormaps/binary.png" alt="Binary. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/binary.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/binary.png" alt="Binary. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bone</strong>
-<img src="../../images/x-array-map-plot/colormaps/bone.png" alt="Bone. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bone.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bone.png" alt="Bone. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Brg</strong>
-<img src="../../images/x-array-map-plot/colormaps/brg.png" alt="Brg. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/brg.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/brg.png" alt="Brg. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Broc</strong>
-<img src="../../images/x-array-map-plot/colormaps/broc.png" alt="Broc. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/broc.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/broc.png" alt="Broc. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BrocO</strong>
-<img src="../../images/x-array-map-plot/colormaps/brocO.png" alt="BrocO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/brocO.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/brocO.png" alt="BrocO. " width="2000" height="1000" loading="lazy" /></a>
  <strong>BrocO_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/brocO_r.png" alt="BrocO_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/brocO_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/brocO_r.png" alt="BrocO_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Broc_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/broc_r.png" alt="Broc_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/broc_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/broc_r.png" alt="Broc_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Buda</strong>
-<img src="../../images/x-array-map-plot/colormaps/buda.png" alt="Buda. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/buda.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/buda.png" alt="Buda. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Buda_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/buda_r.png" alt="Buda_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/buda_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/buda_r.png" alt="Buda_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bukavu</strong>
-<img src="../../images/x-array-map-plot/colormaps/bukavu.png" alt="Bukavu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bukavu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bukavu.png" alt="Bukavu. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bukavu_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/bukavu_r.png" alt="Bukavu_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bukavu_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bukavu_r.png" alt="Bukavu_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Bwr</strong>
-<img src="../../images/x-array-map-plot/colormaps/bwr.png" alt="Bwr. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/bwr.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/bwr.png" alt="Bwr. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Cool</strong>
-<img src="../../images/x-array-map-plot/colormaps/cool.png" alt="Cool. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/cool.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/cool.png" alt="Cool. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Coolwarm</strong>
-<img src="../../images/x-array-map-plot/colormaps/coolwarm.png" alt="Coolwarm. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/coolwarm.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/coolwarm.png" alt="Coolwarm. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Copper</strong>
-<img src="../../images/x-array-map-plot/colormaps/copper.png" alt="Copper. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/copper.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/copper.png" alt="Copper. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Cork</strong>
-<img src="../../images/x-array-map-plot/colormaps/cork.png" alt="Cork. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/cork.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/cork.png" alt="Cork. " width="2000" height="1000" loading="lazy" /></a>
  <strong>CorkO</strong>
-<img src="../../images/x-array-map-plot/colormaps/corkO.png" alt="CorkO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/corkO.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/corkO.png" alt="CorkO. " width="2000" height="1000" loading="lazy" /></a>
  <strong>CorkO_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/corkO_r.png" alt="CorkO_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/corkO_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/corkO_r.png" alt="CorkO_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Cork_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/cork_r.png" alt="Cork_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/cork_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/cork_r.png" alt="Cork_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Cubehelix</strong>
-<img src="../../images/x-array-map-plot/colormaps/cubehelix.png" alt="Cubehelix. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/cubehelix.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/cubehelix.png" alt="Cubehelix. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Davos</strong>
-<img src="../../images/x-array-map-plot/colormaps/davos.png" alt="Davos. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/davos.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/davos.png" alt="Davos. " width="2000" height="1000" loading="lazy" /></a>
  <strong>GnBu</strong>
-<img src="../../images/x-array-map-plot/colormaps/GnBu.png" alt="GnBu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/GnBu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/GnBu.png" alt="GnBu. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Greens</strong>
-<img src="../../images/x-array-map-plot/colormaps/Greens.png" alt="Greens. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Greens.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Greens.png" alt="Greens. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Greys</strong>
-<img src="../../images/x-array-map-plot/colormaps/Greys.png" alt="Greys. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Greys.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Greys.png" alt="Greys. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Imola</strong>
-<img src="../../images/x-array-map-plot/colormaps/Imola.png" alt="Imola. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Imola.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Imola.png" alt="Imola. " width="2000" height="1000" loading="lazy" /></a>
  <strong>OrRd</strong>
-<img src="../../images/x-array-map-plot/colormaps/OrRd.png" alt="OrRd. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/OrRd.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/OrRd.png" alt="OrRd. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Oranges</strong>
-<img src="../../images/x-array-map-plot/colormaps/Oranges.png" alt="Oranges. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Oranges.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Oranges.png" alt="Oranges. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Paired</strong>
-<img src="../../images/x-array-map-plot/colormaps/Paired.png" alt="Paired. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Paired.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Paired.png" alt="Paired. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Pastel1</strong>
-<img src="../../images/x-array-map-plot/colormaps/Pastel1.png" alt="Pastel1. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Pastel1.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Pastel1.png" alt="Pastel1. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Pastel2</strong>
-<img src="../../images/x-array-map-plot/colormaps/Pastel2.png" alt="Pastel2. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Pastel2.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Pastel2.png" alt="Pastel2. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Davos_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/davos_r.png" alt="Davos_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/davos_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/davos_r.png" alt="Davos_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Devon_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/devon_r.png" alt="Devon_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/devon_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/devon_r.png" alt="Devon_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Devon</strong>
-<img src="../../images/x-array-map-plot/colormaps/devon.png" alt="Devon. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/devon.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/devon.png" alt="Devon. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Fes</strong>
-<img src="../../images/x-array-map-plot/colormaps/fes.png" alt="Fes. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/fes.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/fes.png" alt="Fes. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Fes_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/fes_r.png" alt="Fes_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/fes_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/fes_r.png" alt="Fes_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Flag</strong>
-<img src="../../images/x-array-map-plot/colormaps/flag.png" alt="Flag. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/flag.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/flag.png" alt="Flag. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_earth</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_earth.png" alt="Gist_earth. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_earth.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_earth.png" alt="Gist_earth. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_gray</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_gray.png" alt="Gist_gray. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_gray.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_gray.png" alt="Gist_gray. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_heat</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_heat.png" alt="Gist_heat. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_heat.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_heat.png" alt="Gist_heat. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_ncar</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_ncar.png" alt="Gist_ncar. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_ncar.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_ncar.png" alt="Gist_ncar. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_rainbow</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_rainbow.png" alt="Gist_rainbow. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_rainbow.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_rainbow.png" alt="Gist_rainbow. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_stern</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_stern.png" alt="Gist_stern. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_stern.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_stern.png" alt="Gist_stern. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gist_yarg</strong>
-<img src="../../images/x-array-map-plot/colormaps/gist_yarg.png" alt="Gist_yarg. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gist_yarg.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gist_yarg.png" alt="Gist_yarg. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gnuplot</strong>
-<img src="../../images/x-array-map-plot/colormaps/gnuplot.png" alt="Gnuplot. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gnuplot.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gnuplot.png" alt="Gnuplot. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gnuplot2</strong>
-<img src="../../images/x-array-map-plot/colormaps/gnuplot2.png" alt="Gnuplot2. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gnuplot2.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gnuplot2.png" alt="Gnuplot2. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Gray</strong>
-<img src="../../images/x-array-map-plot/colormaps/gray.png" alt="Gray. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/gray.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/gray.png" alt="Gray. " width="2000" height="1000" loading="lazy" /></a>
  <strong>GrayC</strong>
-<img src="../../images/x-array-map-plot/colormaps/grayC.png" alt="GrayC. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/grayC.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/grayC.png" alt="GrayC. " width="2000" height="1000" loading="lazy" /></a>
  <strong>GrayC_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/grayC_r.png" alt="GrayC_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/grayC_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/grayC_r.png" alt="GrayC_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Hawaii</strong>
-<img src="../../images/x-array-map-plot/colormaps/hawaii.png" alt="Hawaii. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/hawaii.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/hawaii.png" alt="Hawaii. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Hawaii_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/hawaii_r.png" alt="Hawaii_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/hawaii_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/hawaii_r.png" alt="Hawaii_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Hot</strong>
-<img src="../../images/x-array-map-plot/colormaps/hot.png" alt="Hot. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/hot.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/hot.png" alt="Hot. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Hsv</strong>
-<img src="../../images/x-array-map-plot/colormaps/hsv.png" alt="Hsv. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/hsv.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/hsv.png" alt="Hsv. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Imola_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/imola_r.png" alt="Imola_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/imola_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/imola_r.png" alt="Imola_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Jet</strong>
-<img src="../../images/x-array-map-plot/colormaps/jet.png" alt="Jet. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/jet.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/jet.png" alt="Jet. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lajolla</strong>
-<img src="../../images/x-array-map-plot/colormaps/lajolla.png" alt="Lajolla. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lajolla.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lajolla.png" alt="Lajolla. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lajolla_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/lajolla_r.png" alt="Lajolla_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lajolla_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lajolla_r.png" alt="Lajolla_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lapaz</strong>
-<img src="../../images/x-array-map-plot/colormaps/lapaz.png" alt="Lapaz. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lapaz.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lapaz.png" alt="Lapaz. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lapaz_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/lapaz_r.png" alt="Lapaz_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lapaz_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lapaz_r.png" alt="Lapaz_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lisbon</strong>
-<img src="../../images/x-array-map-plot/colormaps/lisbon.png" alt="Lisbon. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lisbon.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lisbon.png" alt="Lisbon. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Lisbon_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/lisbon_r.png" alt="Lisbon_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/lisbon_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/lisbon_r.png" alt="Lisbon_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Nipy_spectral</strong>
-<img src="../../images/x-array-map-plot/colormaps/nipy_spectral.png" alt="Nipy_spectral. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/nipy_spectral.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/nipy_spectral.png" alt="Nipy_spectral. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Nuuk</strong>
-<img src="../../images/x-array-map-plot/colormaps/nuuk.png" alt="Nuuk. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/nuuk.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/nuuk.png" alt="Nuuk. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Nuuk_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/nuuk_r.png" alt="Nuuk_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/nuuk_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/nuuk_r.png" alt="Nuuk_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Ocean</strong>
-<img src="../../images/x-array-map-plot/colormaps/ocean.png" alt="Ocean. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/ocean.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/ocean.png" alt="Ocean. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Oleron</strong>
-<img src="../../images/x-array-map-plot/colormaps/oleron.png" alt="Oleron. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/oleron.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/oleron.png" alt="Oleron. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Oslo</strong>
-<img src="../../images/x-array-map-plot/colormaps/oslo.png" alt="Oslo. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/oslo.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/oslo.png" alt="Oslo. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Oslo_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/oslo_r.png" alt="Oslo_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/oslo_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/oslo_r.png" alt="Oslo_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Pink</strong>
-<img src="../../images/x-array-map-plot/colormaps/pink.png" alt="Pink. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/pink.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/pink.png" alt="Pink. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PRGn</strong>
-<img src="../../images/x-array-map-plot/colormaps/PRGn.png" alt="PRGn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PRGn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PRGn.png" alt="PRGn. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PiYG</strong>
-<img src="../../images/x-array-map-plot/colormaps/PiYG.png" alt="PiYG. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PiYG.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PiYG.png" alt="PiYG. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PuBu</strong>
-<img src="../../images/x-array-map-plot/colormaps/PuBu.png" alt="PuBu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PuBu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PuBu.png" alt="PuBu. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PuBuGn</strong>
-<img src="../../images/x-array-map-plot/colormaps/PuBuGn.png" alt="PuBuGn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PuBuGn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PuBuGn.png" alt="PuBuGn. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PuOr</strong>
-<img src="../../images/x-array-map-plot/colormaps/PuOr.png" alt="PuOr. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PuOr.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PuOr.png" alt="PuOr. " width="2000" height="1000" loading="lazy" /></a>
  <strong>PuRd</strong>
-<img src="../../images/x-array-map-plot/colormaps/PuRd.png" alt="PuRd. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/PuRd.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/PuRd.png" alt="PuRd. " width="2000" height="1000" loading="lazy" /></a>
  <strong>Purples</strong>
-<img src="../../images/x-array-map-plot/colormaps/Purples.png" alt="Purples. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Purples.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Purples.png" alt="Purples. " width="2000" height="1000" loading="lazy" /></a>
  <strong>RdBu</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdBu.png" alt="RdBu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdBu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdBu.png" alt="RdBu. " width="2000" height="1000" loading="lazy" /></a>
  <strong>RdBu_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdBu_r.png" alt="RdBu_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdBu_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdBu_r.png" alt="RdBu_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>RdBu_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdBu_r.png" alt="RdBu_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdBu_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdBu_r.png" alt="RdBu_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>RdGy_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdGy_r.png" alt="RdGy_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdGy_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdGy_r.png" alt="RdGy_r. " width="2000" height="1000" loading="lazy" /></a>
  <strong>RdPu</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdPu.png" alt="RdPu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdPu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdPu.png" alt="RdPu. " width="2000" height="1000" loading="lazy" /></a>
 <strong>RdPu_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdPu_r.png" alt="RdPu_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdPu_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdPu_r.png" alt="RdPu_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>RdYIBu</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdYIBu.png" alt="RdYIBu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdYIBu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdYIBu.png" alt="RdYIBu. " width="2000" height="1000" loading="lazy" /></a>
 <strong>RdYIGn</strong>
-<img src="../../images/x-array-map-plot/colormaps/RdYIGn.png" alt="RdYIGn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/RdYIGn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/RdYIGn.png" alt="RdYIGn. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Reds</strong>
-<img src="../../images/x-array-map-plot/colormaps/Reds.png" alt="Reds. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Reds.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Reds.png" alt="Reds. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Set1</strong>
-<img src="../../images/x-array-map-plot/colormaps/Set1.png" alt="Set1. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Set1.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Set1.png" alt="Set1. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Set2</strong>
-<img src="../../images/x-array-map-plot/colormaps/Set2.png" alt="Set2. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Set2.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Set2.png" alt="Set2. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Set3</strong>
-<img src="../../images/x-array-map-plot/colormaps/Set3.png" alt="Set3. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Set3.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Set3.png" alt="Set3. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Spectral</strong>
-<img src="../../images/x-array-map-plot/colormaps/Spectral.png" alt="Spectral. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Spectral.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Spectral.png" alt="Spectral. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Wistia</strong>
-<img src="../../images/x-array-map-plot/colormaps/Wistia.png" alt="Wistia. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/Wistia.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/Wistia.png" alt="Wistia. " width="2000" height="1000" loading="lazy" /></a>
 <strong>YIGn</strong>
-<img src="../../images/x-array-map-plot/colormaps/YIGn.png" alt="YIGn. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/YIGn.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/YIGn.png" alt="YIGn. " width="2000" height="1000" loading="lazy" /></a>
 <strong>YIGnBu</strong>
-<img src="../../images/x-array-map-plot/colormaps/YIGnBu.png" alt="YIGnBu. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/YIGnBu.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/YIGnBu.png" alt="YIGnBu. " width="2000" height="1000" loading="lazy" /></a>
 <strong>YIOrBr</strong>
-<img src="../../images/x-array-map-plot/colormaps/YIOrBr.png" alt="YIOrBr. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/YIOrBr.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/YIOrBr.png" alt="YIOrBr. " width="2000" height="1000" loading="lazy" /></a>
 <strong>YIOrRd</strong>
-<img src="../../images/x-array-map-plot/colormaps/YIOrRd.png" alt="YIOrRd. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/YIOrRd.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/YIOrRd.png" alt="YIOrRd. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Prism</strong>
-<img src="../../images/x-array-map-plot/colormaps/prism.png" alt="Prism. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/prism.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/prism.png" alt="Prism. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Rainbow</strong>
-<img src="../../images/x-array-map-plot/colormaps/rainbow.png" alt="Rainbow. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/rainbow.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/rainbow.png" alt="Rainbow. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Roma</strong>
-<img src="../../images/x-array-map-plot/colormaps/roma.png" alt="Roma. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/roma.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/roma.png" alt="Roma. " width="2000" height="1000" loading="lazy" /></a>
 <strong>RomaO</strong>
-<img src="../../images/x-array-map-plot/colormaps/romaO.png" alt="RomaO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/romaO.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/romaO.png" alt="RomaO. " width="2000" height="1000" loading="lazy" /></a>
 <strong>RomaO_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/romaO_r.png" alt="RomaO_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/romaO_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/romaO_r.png" alt="RomaO_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Roma_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/roma_r.png" alt="Roma_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/roma_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/roma_r.png" alt="Roma_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Seismic</strong>
-<img src="../../images/x-array-map-plot/colormaps/seismic.png" alt="Seismic. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/seismic.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/seismic.png" alt="Seismic. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Spring</strong>
-<img src="../../images/x-array-map-plot/colormaps/spring.png" alt="Spring. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/spring.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/spring.png" alt="Spring. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Summer</strong>
-<img src="../../images/x-array-map-plot/colormaps/summer.png" alt="Summer. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/summer.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/summer.png" alt="Summer. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tab10</strong>
-<img src="../../images/x-array-map-plot/colormaps/tab10.png" alt="Tab10. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tab10.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tab10.png" alt="Tab10. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tab20</strong>
-<img src="../../images/x-array-map-plot/colormaps/tab20.png" alt="Tab20. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tab20.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tab20.png" alt="Tab20. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tab20b</strong>
-<img src="../../images/x-array-map-plot/colormaps/tab20b.png" alt="Tab20b. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tab20b.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tab20b.png" alt="Tab20b. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tab20c</strong>
-<img src="../../images/x-array-map-plot/colormaps/tab20c.png" alt="Tab20c. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tab20c.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tab20c.png" alt="Tab20c. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Terrain</strong>
-<img src="../../images/x-array-map-plot/colormaps/terrain.png" alt="Terrain. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/terrain.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/terrain.png" alt="Terrain. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tofino</strong>
-<img src="../../images/x-array-map-plot/colormaps/tofino.png" alt="Tofino. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tofino.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tofino.png" alt="Tofino. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tofino_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/tofino_r.png" alt="Tofino_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tofino_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tofino_r.png" alt="Tofino_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tokyo</strong>
-<img src="../../images/x-array-map-plot/colormaps/tokyo.png" alt="Tokyo. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tokyo.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tokyo.png" alt="Tokyo. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Tokyo_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/tokyo_r.png" alt="Tokyo_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/tokyo_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/tokyo_r.png" alt="Tokyo_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Turku</strong>
-<img src="../../images/x-array-map-plot/colormaps/turku.png" alt="Turku. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/turku.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/turku.png" alt="Turku. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Turku_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/turku_r.png" alt="Turku_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/turku_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/turku_r.png" alt="Turku_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Vanimo</strong>
-<img src="../../images/x-array-map-plot/colormaps/vanimo.png" alt="Vanimo. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vanimo.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vanimo.png" alt="Vanimo. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Vanimo_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/vanimo_r.png" alt="Vanimo_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vanimo_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vanimo_r.png" alt="Vanimo_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Vik</strong>
-<img src="../../images/x-array-map-plot/colormaps/vik.png" alt="Vik. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vik.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vik.png" alt="Vik. " width="2000" height="1000" loading="lazy" /></a>
 <strong>VikO</strong>
-<img src="../../images/x-array-map-plot/colormaps/vikO.png" alt="VikO. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vikO.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vikO.png" alt="VikO. " width="2000" height="1000" loading="lazy" /></a>
 <strong>VikO_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/vikO_r.png" alt="VikO_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vikO_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vikO_r.png" alt="VikO_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Vik_r</strong>
-<img src="../../images/x-array-map-plot/colormaps/vik_r.png" alt="Vik_r. " width="2000" height="1000" loading="lazy" />
+<a href="../../images/x-array-map-plot/colormaps/vik_r.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/vik_r.png" alt="Vik_r. " width="2000" height="1000" loading="lazy" /></a>
 <strong>Winter</strong>
-<img src="../../images/x-array-map-plot/colormaps/winter.png" alt="Winter. " width="2000" height="1000" loading="lazy" /></p>
+<a href="../../images/x-array-map-plot/colormaps/winter.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/colormaps/winter.png" alt="Winter. " width="2000" height="1000" loading="lazy" /></a></p>
 
 </blockquote>
 
@@ -1566,19 +1587,19 @@ Below is the complete list for reference.</p>
       </ol>
 
       <p>The final plot is shown below:
-   <img src="../../images/x-array-map-plot/bat.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" />
+   <a href="../../images/x-array-map-plot/bat.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/bat.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a>
 Some other important color variants of the same map can be found below :</p>
       <ul>
         <li><em>colormap : oslo</em>
-<img src="../../images/x-array-map-plot/os.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/os.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/os.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a></li>
         <li><em>colormap : bamako</em>
-<img src="../../images/x-array-map-plot/bama.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/bama.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/bama.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a></li>
         <li><em>colormap : vik</em>
-<img src="../../images/x-array-map-plot/vi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/vi.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/vi.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a></li>
         <li><em>colormap : tokyo</em>
-<img src="../../images/x-array-map-plot/tok.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/tok.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/tok.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a></li>
         <li><em>colormap : hawaii</em>
-<img src="../../images/x-array-map-plot/hawa.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/hawa.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/hawa.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-25 &gt;at 18:00:00. " width="2000" height="1000" loading="lazy" /></a></li>
       </ul>
     </blockquote>
 
@@ -1616,7 +1637,7 @@ Some other important color variants of the same map can be found below :</p>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Images”</em>: <code class="language-plaintext highlighter-rouge">Map plots</code></li>
       <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>”# of images wide”</em>: <code class="language-plaintext highlighter-rouge">4</code>
 Here you can see that all the projections we plotted above have been shown in a single image using <code class="language-plaintext highlighter-rouge">Image Montage</code>.
-<img src="../../images/x-array-map-plot/montage.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 Monatge for 23:00:00 . " width="8000" height="2000" loading="lazy" /></li>
+<a href="../../images/x-array-map-plot/montage.png" rel="noopener noreferrer"><img src="../../images/x-array-map-plot/montage.png" alt="ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 Monatge for 23:00:00 . " width="8000" height="2000" loading="lazy" /></a></li>
     </ul>
   </blockquote>
 
@@ -1811,7 +1832,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1843,7 +1864,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

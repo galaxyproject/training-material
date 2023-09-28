@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Contributing with GitHub via command-line</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -222,8 +257,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -266,7 +301,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -314,23 +349,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -529,7 +550,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -542,7 +563,7 @@ Sentry.init({
 
 <p>The process of development of new content is open and transparent, using git and following the <a href="https://guides.github.com/introduction/flow/">GitHub flow</a>:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/oss_development_process.png" alt="Open source development process. " width="1947" height="582" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Open source development process</figcaption></figure>
+<p><a href="../../images/oss_development_process.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/oss_development_process.png" alt="Open source development process. " width="1947" height="582" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Open source development process&lt;/figcaption&gt;</figure></a></p>
 
 <ol>
   <li>Create a fork</li>
@@ -581,7 +602,7 @@ Sentry.init({
 
 <p>A fork is a copy of a repository. <a href="https://help.github.com/articles/fork-a-repo/">Forking</a> a repository allows you to freely experiment with changes without affecting the original project:</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_01.png" alt="Explanation of the forking. " width="1006" height="478" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Creation of a fork</figcaption></figure>
+<p><a href="../../images/PR_schema_01.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_01.png" alt="Explanation of the forking. " width="1006" height="478" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Creation of a fork&lt;/figcaption&gt;</figure></a></p>
 
 <p>Forking a repository is a simple two-step process:</p>
 
@@ -593,7 +614,7 @@ Sentry.init({
     <li>
       <p>Click on <strong>Fork</strong> (top-right corner of the page)</p>
 
-      <p><img src="../../images/PR_fork.jpg" alt="Fork. " width="745" height="116" loading="lazy" /></p>
+      <p><a href="../../images/PR_fork.jpg" rel="noopener noreferrer"><img src="../../images/PR_fork.jpg" alt="Fork. " width="745" height="116" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -608,7 +629,7 @@ Sentry.init({
 
 <p>To modify the content of the repository, you need a copy of it on your computer. This step of importing a git repository is called “cloning”:</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_02.png" alt="Explanation of the cloning. " width="1282" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Cloning a repository</figcaption></figure>
+<p><a href="../../images/PR_schema_02.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_02.png" alt="Explanation of the cloning. " width="1282" height="872" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Cloning a repository&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-clone-the-github-repository"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clone the GitHub repository</div>
@@ -619,7 +640,7 @@ Sentry.init({
         <li>
           <p>Click on <strong>Code</strong> (right)</p>
 
-          <p><img src="../../images/clone_code_button.png" alt="Get fork URL. " width="391" height="328" loading="lazy" /></p>
+          <p><a href="../../images/clone_code_button.png" rel="noopener noreferrer"><img src="../../images/clone_code_button.png" alt="Get fork URL. " width="391" height="328" loading="lazy" /></a></p>
         </li>
         <li>
           <p>Copy the URL</p>
@@ -658,7 +679,7 @@ Sentry.init({
 
 <p>When you’re working on a project, you’re going to have a bunch of different features or ideas in progress at any given time – some of which are ready to go, and others which are not. Branching exists to help you manage this workflow. You should develop different features on different branches to help keep the changes you make simple and easy to review.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/PR_branches_01.png" alt="Divergence of a branch compared to main. " width="440" height="88" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> When you create a branch in your project, you're creating an environment where you can try out new ideas. Changes you make on a branch don't affect the main branch</figcaption></figure>
+<p><a href="../../images/PR_branches_01.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/PR_branches_01.png" alt="Divergence of a branch compared to main. " width="440" height="88" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> When you create a branch in your project, you’re creating an environment where you can try out new ideas. Changes you make on a branch don’t affect the main branch&lt;/figcaption&gt;</figure></a></p>
 
 <p>Here for this tutorial, you will create a branch called “my_new_branch” in which you will modify the <code class="language-plaintext highlighter-rouge">CONTRIBUTORS.yaml</code> file, the file used to generate the <a href="/training-material/hall-of-fame.html">Hall of Fame</a>.</p>
 
@@ -690,13 +711,13 @@ Switched to a new branch 'my_new_branch'
 
 <p>This branch is added to your local copy:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_03.png" alt="Creation of a branch on the local copy of the repository. " width="1007" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Creation of a branch on the local copy of the repository</figcaption></figure>
+<p><a href="../../images/PR_schema_03.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_03.png" alt="Creation of a branch on the local copy of the repository. " width="1007" height="872" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Creation of a branch on the local copy of the repository&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="make-your-changes-on-this-branch">Make your changes on this branch</h1>
 
 <p>You have created your first branch! Now you want to make the change in the <code class="language-plaintext highlighter-rouge">CONTRIBUTING.yaml</code> file. By changing a file in this branch, it will diverge from the <code class="language-plaintext highlighter-rouge">main</code> branch. It will contain data that is only on this new branch:</p>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/PR_branches_02.png" alt="Divergence of the branch compared to main. " width="546" height="90" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> The changes on your branch will not be on the main branch</figcaption></figure>
+<p><a href="../../images/PR_branches_02.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/PR_branches_02.png" alt="Divergence of the branch compared to main. " width="546" height="90" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> The changes on your branch will not be on the main branch&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-make-changes-in-a-branch"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Make changes in a branch</div>
@@ -760,7 +781,7 @@ $ git commit -m "Add ..."
         <li>
           <p>Click on <strong>Branch: main</strong> (left)</p>
 
-          <p><img src="../../images/PR_branch_github.png" alt="Selecting branch on GitHub. " width="309" height="152" loading="lazy" /></p>
+          <p><a href="../../images/PR_branch_github.png" rel="noopener noreferrer"><img src="../../images/PR_branch_github.png" alt="Selecting branch on GitHub. " width="309" height="152" loading="lazy" /></a></p>
         </li>
         <li>
           <p>Select the branch “my_new_branch”</p>
@@ -772,13 +793,13 @@ $ git commit -m "Add ..."
 
 </blockquote>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_04.png" alt="Pushing changes to the fork from the local copy. " width="1171" height="872" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Pushing changes from the local copy to the fork on GitHub</figcaption></figure>
+<p><a href="../../images/PR_schema_04.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_04.png" alt="Pushing changes to the fork from the local copy. " width="1171" height="872" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Pushing changes from the local copy to the fork on GitHub&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="open-a-pull-request">Open a pull request</h1>
 
 <p>You pushed your changes to GitHub, but currently they are only on your fork. You want to have these changes in the main GitHub repository in order to appear on our <a href="/training-material/hall-of-fame.html">Hall of Fame</a> online. You can’t add or push directly the main GitHub repository, so you need to create what we call a pull request:</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_05.png" alt="Pull request. " width="1007" height="1012" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Pull Requests provide a way to notify project maintainers about the changes you'd like them to consider</figcaption></figure>
+<p><a href="../../images/PR_schema_05.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/PR_schema_05.png" alt="Pull request. " width="1007" height="1012" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Pull Requests provide a way to notify project maintainers about the changes you’d like them to consider&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-a-pull-request"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a pull request</div>
@@ -788,17 +809,17 @@ $ git commit -m "Add ..."
     <li>
       <p>Click on <strong>Compare &amp; pull request</strong></p>
 
-      <p><img src="../../images/PR_button.png" alt="&quot;Opening a pull request&quot;. " width="988" height="74" loading="lazy" /></p>
+      <p><a href="../../images/PR_button.png" rel="noopener noreferrer"><img src="../../images/PR_button.png" alt="&quot;Opening a pull request&quot;. " width="988" height="74" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Check that the selected branch are correct: <strong>main</strong> on the left and your branch name on the right</p>
 
-      <p><img src="../../images/PR_branch_check.png" alt="Branches in PR. " width="989" height="59" loading="lazy" /></p>
+      <p><a href="../../images/PR_branch_check.png" rel="noopener noreferrer"><img src="../../images/PR_branch_check.png" alt="Branches in PR. " width="989" height="59" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Fill in the pull request description</p>
 
-      <p><img src="../../images/PR_description.png" alt="PR description. " width="713" height="390" loading="lazy" /></p>
+      <p><a href="../../images/PR_description.png" rel="noopener noreferrer"><img src="../../images/PR_description.png" alt="PR description. " width="713" height="390" loading="lazy" /></a></p>
 
       <ol>
         <li>Add a title for the Pull Request</li>
@@ -806,7 +827,7 @@ $ git commit -m "Add ..."
         <li>
           <p>Click on <strong>Create pull request</strong> or switch to <strong>Create draft pull request</strong> from the dropdown menu</p>
 
-          <p><img src="../../images/PR_create_menu.png" alt="Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted. " width="362" height="239" loading="lazy" /></p>
+          <p><a href="../../images/PR_create_menu.png" rel="noopener noreferrer"><img src="../../images/PR_create_menu.png" alt="Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted. " width="362" height="239" loading="lazy" /></a></p>
 
           <blockquote class="details">
             <div class="box-title details-title" id="details-quot-draft-pull-requests-quot"><button class="gtn-boxify-button details" type="button" aria-controls="details-quot-draft-pull-requests-quot" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: &quot;Draft pull requests&quot;<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -891,21 +912,21 @@ $ git commit -m "Add ..."
   <li>
     <p>Yellow (with circle)</p>
 
-    <p><img src="../../images/PR_test_yellow.png" alt="Running. " width="696" height="93" loading="lazy" /></p>
+    <p><a href="../../images/PR_test_yellow.png" rel="noopener noreferrer"><img src="../../images/PR_test_yellow.png" alt="Running. " width="696" height="93" loading="lazy" /></a></p>
 
     <p>The tests are still running</p>
   </li>
   <li>
     <p>Red (with cross)</p>
 
-    <p><img src="../../images/PR_test_red.png" alt="Failed tests. " width="698" height="94" loading="lazy" /></p>
+    <p><a href="../../images/PR_test_red.png" rel="noopener noreferrer"><img src="../../images/PR_test_red.png" alt="Failed tests. " width="698" height="94" loading="lazy" /></a></p>
 
     <p>When it is red, you can investigate why by clicking on <strong>Details</strong>. You will be redirected on <a href="http://travis-ci.com/">Travis</a> where you can see the logs of the tests. Get in touch with us on <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter</a> if you need help to understand the issue.</p>
   </li>
   <li>
     <p>Green (with tick)</p>
 
-    <p><img src="../../images/PR_test_green.png" alt="Passed tests. " width="697" height="51" loading="lazy" /></p>
+    <p><a href="../../images/PR_test_green.png" rel="noopener noreferrer"><img src="../../images/PR_test_green.png" alt="Passed tests. " width="697" height="51" loading="lazy" /></a></p>
 
     <p>The tests passed. Good job!</p>
 
@@ -977,7 +998,7 @@ Reviewers can now approve and merge your pull request.</p>
 
 <p>With this tutorial, you have learned some basics <code class="language-plaintext highlighter-rouge">git</code> commands and principles:</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/PR_global_schema.png" alt="Summary of the links between GitHub, fork and local repository. " width="1380" height="1012" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Summary of the links between GitHub, fork and local repository</figcaption></figure>
+<p><a href="../../images/PR_global_schema.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/PR_global_schema.png" alt="Summary of the links between GitHub, fork and local repository. " width="1380" height="1012" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Summary of the links between GitHub, fork and local repository&lt;/figcaption&gt;</figure></a></p>
 
 <p>You also learned the GitHub flow and its cycle:</p>
 
@@ -1290,7 +1311,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1322,7 +1343,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

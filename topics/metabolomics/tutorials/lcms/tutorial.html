@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Mass spectrometry: LC-MS analysis</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -308,8 +343,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -352,7 +387,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -400,23 +435,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -695,7 +716,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -739,7 +760,7 @@ The workflow is composed of 4 main parts:</p>
   <li><strong>Annotation</strong> puts a name on selected variables</li>
 </ol>
 
-<p><a href="../../images/tutorial-lcms-workflow.png"><img src="../../images/tutorial-lcms-workflow.png" alt="The full tutorial workflow. " width="1230" height="933" loading="lazy" /></a></p>
+<p><a href="../../images/tutorial-lcms-workflow.png"><a href="../../images/tutorial-lcms-workflow.png" rel="noopener noreferrer"><img src="../../images/tutorial-lcms-workflow.png" alt="The full tutorial workflow. " width="1230" height="933" loading="lazy" /></a></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1339,7 +1360,7 @@ you will get colouring according to these groups even without providing a sample
 <p>This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.</p>
 
-<p><img src="../../images/lcms_BPC_9samp.png" alt="Base Peak Intensity Chromatograms. " width="1823" height="570" loading="lazy" /></p>
+<p><a href="../../images/lcms_BPC_9samp.png" rel="noopener noreferrer"><img src="../../images/lcms_BPC_9samp.png" alt="Base Peak Intensity Chromatograms. " width="1823" height="570" loading="lazy" /></a></p>
 
 <h2 id="first-xcms-step-peak-picking">First XCMS step: <em>peak picking</em></h2>
 
@@ -1489,7 +1510,7 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
 
 <p>Here is an example of two m/z slides obtained from the hands-on:</p>
 
-<p><img src="../../images/lcms_group_9samp.png" alt="plotChromPeakDensity.pdf. " width="1228" height="631" loading="lazy" /></p>
+<p><a href="../../images/lcms_group_9samp.png" rel="noopener noreferrer"><img src="../../images/lcms_group_9samp.png" alt="plotChromPeakDensity.pdf. " width="1228" height="631" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1898,7 +1919,7 @@ It provides a variety of useful information:</p>
   <li>Ions’ standard deviation (sd) and mean values (plot top right panel)</li>
 </ul>
 
-<p><img src="../../images/lcms_QM_9samp_raw.png" alt="Quality_Metrics_figure.pdf. " width="1304" height="829" loading="lazy" /></p>
+<p><a href="../../images/lcms_QM_9samp_raw.png" rel="noopener noreferrer"><img src="../../images/lcms_QM_9samp_raw.png" alt="Quality_Metrics_figure.pdf. " width="1304" height="829" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-cross-referencing-information"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: cross-referencing information</div>
@@ -1980,12 +2001,12 @@ When possible, we recommend to use pools to correct the signal drift, that is wh
 
 <p>For each ion independently, the normalisation process works as described in the following picture:</p>
 
-<p><img src="../../images/lcms_BC_theo.png" alt="How this works. " width="1144" height="353" loading="lazy" /></p>
+<p><a href="../../images/lcms_BC_theo.png" rel="noopener noreferrer"><img src="../../images/lcms_BC_theo.png" alt="How this works. " width="1144" height="353" loading="lazy" /></a></p>
 
 <p>The methodology is meant to correct for signal drift. In the tool, it is combined with a correction for batch effect. Thus, if your
 sequence is divided into several batches, the idea is to obtain something similar to the following picture:</p>
 
-<p><img src="../../images/lcms_BC_theo2.png" alt="Before/after picture. " width="1193" height="694" loading="lazy" /></p>
+<p><a href="../../images/lcms_BC_theo2.png" rel="noopener noreferrer"><img src="../../images/lcms_BC_theo2.png" alt="Before/after picture. " width="1193" height="694" loading="lazy" /></a></p>
 
 <p>In the case of <em>linear</em> regression model, the tool performs some tests before applying the normalisation for quality purposes.
 For some ions, if the normalisation process would have led to inconsistent results, the concerned ions are not corrected for signal drift.
@@ -2548,7 +2569,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2580,7 +2601,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

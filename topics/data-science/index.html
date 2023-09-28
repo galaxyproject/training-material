@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,8 +102,8 @@ Sentry.init({
 
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -112,7 +147,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -160,23 +195,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -291,9 +312,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffb0ea; --color-darker: #ff8ae2; --color-dimmed: #ff9ee6;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
-              <a href="/training-material/search?query=json" class="label label-default tutorial_tag" style="--color-primary: #ffc9d9; --color-darker: #ffa5c3; --color-dimmed: #ffb7ce;" title="Click to show all tutorials tagged json">json</a>
+              <a href="/training-material/search?query=json" class="label label-default tutorial_tag" style="--color-primary: #ffb5cc; --color-darker: #ff91b7; --color-dimmed: #ffa3c2;" title="Click to show all tutorials tagged json">json</a>
               
             
             </div>
@@ -492,11 +513,11 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffb0ea; --color-darker: #ff8ae2; --color-dimmed: #ff9ee6;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
-              <a href="/training-material/search?query=sql" class="label label-default tutorial_tag" style="--color-primary: #ffc7eb; --color-darker: #ffa1e0; --color-dimmed: #ffb5e5;" title="Click to show all tutorials tagged sql">sql</a>
+              <a href="/training-material/search?query=sql" class="label label-default tutorial_tag" style="--color-primary: #ffb1e4; --color-darker: #ff8cda; --color-dimmed: #ff9fdf;" title="Click to show all tutorials tagged sql">sql</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -695,13 +716,13 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffc6ef; --color-darker: #ffa0e7; --color-dimmed: #ffb4eb;" title="Click to show all tutorials tagged cyoa">cyoa</a>
+              <a href="/training-material/search?query=cyoa" class="label label-default tutorial_tag" style="--color-primary: #ffb0ea; --color-darker: #ff8ae2; --color-dimmed: #ff9ee6;" title="Click to show all tutorials tagged cyoa">cyoa</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a5db00; --color-darker: #93c300; --color-dimmed: #9ccf00;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dfd0ff; --color-darker: #ccb3ff; --color-dimmed: #d5c1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #d4bfff; --color-darker: #c3a3ff; --color-dimmed: #cbb1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -931,9 +952,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #8cf000; --color-darker: #7cd600; --color-dimmed: #84e300;" title="Click to show all tutorials tagged bash">bash</a>
+              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #83e100; --color-darker: #74c800; --color-dimmed: #7bd400;" title="Click to show all tutorials tagged bash">bash</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -1132,11 +1153,11 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffc6f1; --color-darker: #ffa0e9; --color-dimmed: #ffb3ed;" title="Click to show all tutorials tagged game">game</a>
+              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffb0ec; --color-darker: #ff89e6; --color-dimmed: #ff9ee9;" title="Click to show all tutorials tagged game">game</a>
               
-              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #8cf000; --color-darker: #7cd600; --color-dimmed: #84e300;" title="Click to show all tutorials tagged bash">bash</a>
+              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #83e100; --color-darker: #74c800; --color-dimmed: #7bd400;" title="Click to show all tutorials tagged bash">bash</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -1335,9 +1356,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #8cf000; --color-darker: #7cd600; --color-dimmed: #84e300;" title="Click to show all tutorials tagged bash">bash</a>
+              <a href="/training-material/search?query=bash" class="label label-default tutorial_tag" style="--color-primary: #83e100; --color-darker: #74c800; --color-dimmed: #7bd400;" title="Click to show all tutorials tagged bash">bash</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -3938,9 +3959,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=conda" class="label label-default tutorial_tag" style="--color-primary: #00f782; --color-darker: #00dc73; --color-dimmed: #00e97a;" title="Click to show all tutorials tagged conda">conda</a>
+              <a href="/training-material/search?query=conda" class="label label-default tutorial_tag" style="--color-primary: #00e779; --color-darker: #00ce6b; --color-dimmed: #00da72;" title="Click to show all tutorials tagged conda">conda</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -5730,9 +5751,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffccbc; --color-darker: #ffab8a; --color-dimmed: #ffbca4;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffb9a0; --color-darker: #ff996a; --color-dimmed: #ffa987;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a5db00; --color-darker: #93c300; --color-dimmed: #9ccf00;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -5989,7 +6010,7 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a5db00; --color-darker: #93c300; --color-dimmed: #9ccf00;" title="Click to show all tutorials tagged R">R</a>
               
             
             </div>
@@ -6246,11 +6267,11 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a5db00; --color-darker: #93c300; --color-dimmed: #9ccf00;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dfd0ff; --color-darker: #ccb3ff; --color-dimmed: #d5c1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #d4bfff; --color-darker: #c3a3ff; --color-dimmed: #cbb1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -6480,9 +6501,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc8dc; --color-darker: #ffa5c7; --color-dimmed: #ffb7d2;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffb4d0; --color-darker: #ff90bd; --color-dimmed: #ffa3c6;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -6681,9 +6702,9 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc8dc; --color-darker: #ffa5c7; --color-dimmed: #ffb7d2;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffb4d0; --color-darker: #ff90bd; --color-dimmed: #ffa3c6;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -6882,11 +6903,11 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffc6f1; --color-darker: #ffa0e9; --color-dimmed: #ffb3ed;" title="Click to show all tutorials tagged game">game</a>
+              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffb0ec; --color-darker: #ff89e6; --color-dimmed: #ff9ee9;" title="Click to show all tutorials tagged game">game</a>
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc8dc; --color-darker: #ffa5c7; --color-dimmed: #ffb7d2;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffb4d0; --color-darker: #ff90bd; --color-dimmed: #ffa3c6;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -7085,11 +7106,11 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc8dc; --color-darker: #ffa5c7; --color-dimmed: #ffb7d2;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffb4d0; --color-darker: #ff90bd; --color-dimmed: #ffa3c6;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #ded0ff; --color-darker: #cbb3ff; --color-dimmed: #d4c2ff;" title="Click to show all tutorials tagged Python">Python</a>
+              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #d3c0ff; --color-darker: #c1a4ff; --color-dimmed: #cab2ff;" title="Click to show all tutorials tagged Python">Python</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -7288,13 +7309,13 @@ Sentry.init({
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc8dc; --color-darker: #ffa5c7; --color-dimmed: #ffb7d2;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffb4d0; --color-darker: #ff90bd; --color-dimmed: #ffa3c6;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b1ea00; --color-darker: #9dd000; --color-dimmed: #a7dd00;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #a5db00; --color-darker: #93c300; --color-dimmed: #9ccf00;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dfd0ff; --color-darker: #ccb3ff; --color-dimmed: #d5c1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #d4bfff; --color-darker: #c3a3ff; --color-dimmed: #cbb1ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #23edff; --color-darker: #00d3e4; --color-dimmed: #00e0f2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00deef; --color-darker: #00c6d5; --color-dimmed: #00d2e2;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -8314,12 +8335,12 @@ Sentry.init({
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="Avatar" width="36" height="36">The Carpentries</a><a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=36" alt="Avatar" width="36" height="36">Donny Vrins</a><a href="/training-material/hall-of-fame/tobyhodges/" class="contributor-badge contributor-tobyhodges"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tobyhodges?s=36" alt="Avatar" width="36" height="36">Toby Hodges</a><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Avatar" width="36" height="36">Marius van den Beek</a><a href="/training-material/hall-of-fame/lisanna/" class="contributor-badge contributor-lisanna"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lisanna?s=36" alt="Avatar" width="36" height="36">Lisanna Paladin</a><a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Avatar" width="36" height="36">Bazante Sanders</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/NUKnightLab/" class="contributor-badge contributor-NUKnightLab"><img src="https://avatars.githubusercontent.com/NUKnightLab?s=36" alt="Avatar" width="36" height="36">NU Knight Lab</a><a href="/training-material/hall-of-fame/mcmaniou/" class="contributor-badge contributor-mcmaniou"><img src="https://avatars.githubusercontent.com/mcmaniou?s=36" alt="Avatar" width="36" height="36">Maria Christina Maniou</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Avatar" width="36" height="36">Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Avatar" width="36" height="36">Saskia Hiltemann</a><a href="/training-material/hall-of-fame/Sofokli5/" class="contributor-badge contributor-Sofokli5"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Sofokli5?s=36" alt="Avatar" width="36" height="36">Sofoklis Keisaris</a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-pvanheus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Avatar" width="36" height="36">Peter van Heusden</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Avatar" width="36" height="36">Bérénice Batut</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Avatar" width="36" height="36">Teresa Müller</a>
+    <a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="Avatar" width="36" height="36">The Carpentries</a><a href="/training-material/hall-of-fame/Sofokli5/" class="contributor-badge contributor-Sofokli5"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Sofokli5?s=36" alt="Avatar" width="36" height="36">Sofoklis Keisaris</a><a href="/training-material/hall-of-fame/tobyhodges/" class="contributor-badge contributor-tobyhodges"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tobyhodges?s=36" alt="Avatar" width="36" height="36">Toby Hodges</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Avatar" width="36" height="36">Saskia Hiltemann</a><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Avatar" width="36" height="36">Marius van den Beek</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/NUKnightLab/" class="contributor-badge contributor-NUKnightLab"><img src="https://avatars.githubusercontent.com/NUKnightLab?s=36" alt="Avatar" width="36" height="36">NU Knight Lab</a><a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Avatar" width="36" height="36">Bazante Sanders</a><a href="/training-material/hall-of-fame/fpsom/" class="contributor-badge contributor-fpsom"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/fpsom?s=36" alt="Avatar" width="36" height="36">Fotis E. Psomopoulos</a><a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=36" alt="Avatar" width="36" height="36">Donny Vrins</a><a href="/training-material/hall-of-fame/pvanheus/" class="contributor-badge contributor-pvanheus"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pvanheus?s=36" alt="Avatar" width="36" height="36">Peter van Heusden</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Avatar" width="36" height="36">Bérénice Batut</a><a href="/training-material/hall-of-fame/mcmaniou/" class="contributor-badge contributor-mcmaniou"><img src="https://avatars.githubusercontent.com/mcmaniou?s=36" alt="Avatar" width="36" height="36">Maria Christina Maniou</a><a href="/training-material/hall-of-fame/lisanna/" class="contributor-badge contributor-lisanna"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lisanna?s=36" alt="Avatar" width="36" height="36">Lisanna Paladin</a><a href="/training-material/hall-of-fame/teresa-m/" class="contributor-badge contributor-teresa-m"><img src="https://avatars.githubusercontent.com/teresa-m?s=36" alt="Avatar" width="36" height="36">Teresa Müller</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
     
-    <a href="/training-material/hall-of-fame/erasmusplus/" class="contributor-badge contributor-erasmusplus"><img src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Avatar" width="36" height="36">Erasmus+ Programme</a><a href="/training-material/hall-of-fame/biont/" class="contributor-badge contributor-biont"><img src="http://biont-training.eu/assets/img/BioNT_Logo_Layout_2106_blue_Version_2_cropped.png" alt="Avatar" width="36" height="36">BioNT</a><a href="/training-material/hall-of-fame/avans-atgm/" class="contributor-badge contributor-avans-atgm"><img src="https://avatars.githubusercontent.com/avans-atgm?s=36" alt="Avatar" width="36" height="36">Avans Hogeschool</a>
+    <a href="/training-material/hall-of-fame/avans-atgm/" class="contributor-badge contributor-avans-atgm"><img src="https://avatars.githubusercontent.com/avans-atgm?s=36" alt="Avatar" width="36" height="36">Avans Hogeschool</a><a href="/training-material/hall-of-fame/erasmusplus/" class="contributor-badge contributor-erasmusplus"><img src="https://www.erasmusplus.nl/assets/images/logo.png" alt="Avatar" width="36" height="36">Erasmus+ Programme</a><a href="/training-material/hall-of-fame/biont/" class="contributor-badge contributor-biont"><img src="http://biont-training.eu/assets/img/BioNT_Logo_Layout_2106_blue_Version_2_cropped.png" alt="Avatar" width="36" height="36">BioNT</a>
 
     
 </section>
@@ -8338,7 +8359,7 @@ Sentry.init({
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -8366,7 +8387,7 @@ Sentry.init({
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

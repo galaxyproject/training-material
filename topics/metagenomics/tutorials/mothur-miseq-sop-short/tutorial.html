@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>16S Microbial Analysis with mothur (short)</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -270,8 +305,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -314,7 +349,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -362,23 +397,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -704,7 +725,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -784,7 +805,7 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background: The 16S ribosomal RNA gene</div>
-  <p><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene. " width="1374" height="927" loading="lazy" /> <br /><br /></p>
+  <p><a href="../../images/16S_gene.png" rel="noopener noreferrer"><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene. " width="1374" height="927" loading="lazy" /></a> <br /><br /></p>
 
   <p>The 16S rRNA gene has several properties that make it ideally suited for our purposes</p>
 
@@ -794,7 +815,7 @@ more in-depth discussion of each step, please see the <a href="/training-materia
     <li>Huge reference databases</li>
   </ol>
 
-  <p><img src="../../images/16S_variableregions.jpg" alt="16S Variable regions. " width="1200" height="626" loading="lazy" /></p>
+  <p><a href="../../images/16S_variableregions.jpg" rel="noopener noreferrer"><img src="../../images/16S_variableregions.jpg" alt="16S Variable regions. " width="1200" height="626" loading="lazy" /></a></p>
 
   <p>The highly conserved regions make it easy to target the gene across different organisms,
 while the highly variable regions allow us to distinguish between different species.</p>
@@ -815,7 +836,7 @@ nothing was done to our mice except allow them to eat, get fat, and be merry. We
 weight observed during the first 10 dpw affected the stability microbiome compared to the microbiome observed between days
 140 and 150.”</em></p>
 
-<p><img src="../../images/experiment_setup.png" alt="Experiment setup. " width="986" height="603" loading="lazy" /></p>
+<p><a href="../../images/experiment_setup.png" rel="noopener noreferrer"><img src="../../images/experiment_setup.png" alt="Experiment setup. " width="986" height="603" loading="lazy" /></a></p>
 
 <p>To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
 time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
@@ -840,7 +861,7 @@ in this document differ slightly from the description on their website -->
 
 <p>Now that we know what our input data is, let’s get it into our Galaxy history:</p>
 
-<p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI. " loading="lazy" /></a></p>
+<p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><a href="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" rel="noopener noreferrer"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI. " loading="lazy" /></a></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-obtaining-our-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Obtaining our data</div>
@@ -969,7 +990,7 @@ should be <code class="language-plaintext highlighter-rouge">_R1</code> and <cod
       <p>Click on “Choose Filters” and select <code class="language-plaintext highlighter-rouge">Forward: _R1, Reverse: _R2</code> (note that you can also enter Filters manually in the text fields on the top)</p>
 
       <p>You should now see a list of pairs suggested by Galaxy:
-<img src="../../images/create_collection.png" alt="List of suggested paired datasets. " width="826" height="477" loading="lazy" /></p>
+<a href="../../images/create_collection.png" rel="noopener noreferrer"><img src="../../images/create_collection.png" alt="List of suggested paired datasets. " width="826" height="477" loading="lazy" /></a></p>
     </li>
     <li>Click on <strong>Auto-pair</strong> to create the suggested pairs.
       <ul>
@@ -989,7 +1010,7 @@ should be <code class="language-plaintext highlighter-rouge">_R1</code> and <cod
         </li>
       </ul>
 
-      <p><img src="../../images/create_collection2.png" alt="The result of pairing. " width="790" height="617" loading="lazy" /></p>
+      <p><a href="../../images/create_collection2.png" rel="noopener noreferrer"><img src="../../images/create_collection2.png" alt="The result of pairing. " width="790" height="617" loading="lazy" /></a></p>
     </li>
     <li><strong>Name your collection</strong> at the bottom right of the screen
       <ul>
@@ -1020,7 +1041,7 @@ and several other metrics.</p>
 The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
 significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into <em>contigs</em>.</p>
 
-<p><img src="../../images/16S_merge_contigs.png" alt="Merging into contigs. " width="407" height="224" loading="lazy" /></p>
+<p><a href="../../images/16S_merge_contigs.png" rel="noopener noreferrer"><img src="../../images/16S_merge_contigs.png" alt="Merging into contigs. " width="407" height="224" loading="lazy" /></a></p>
 
 <p>The <strong>Make.contigs</strong> tool creates the contigs, and uses the paired collection as input. <strong>Make.contigs</strong>
 will look at each pair, take the reverse complement reverse read, and then determine the overlap between the
@@ -1461,7 +1482,7 @@ A mock community sample was sequenced for different combinations of sequencer an
 Since we know the expected outcome, we can assess the accuracy of each pipeline. A similar approach can be used to
 assess different parameter settings of the <em>in-silico</em>  analysis pipeline.</p>
 
-  <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates. " width="778" height="560" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)</figcaption></figure>
+  <p><a href="../../images/mock_community.jpg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/mock_community.jpg" alt="example results of mock community sequencing to assess error rates. " width="778" height="560" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Example of usage of a mock community to assess accuracy. On the left is the expected result given that we know the exact composition of the mock sample. This was then used to assess the accuracy of different combinations of sequencing platform and primer set (choice of V-region)&lt;/figcaption&gt;</figure></a></p>
 
   <p><strong>Further reading</strong></p>
 
@@ -1765,7 +1786,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
     <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <p>To understand the difference between richness and evenness, consider the following example:</p>
 
-    <p><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness. " width="1400" height="1053" loading="lazy" /></p>
+    <p><a href="../../images/richness-evenness-blank.png" rel="noopener noreferrer"><img src="../../images/richness-evenness-blank.png" alt="illustration of richness and evenness. " width="1400" height="1053" loading="lazy" /></a></p>
 
     <ol>
       <li>Which of these communities has the highest richness?</li>
@@ -1779,7 +1800,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
         <li>Community B is more even, because each species has the same abundance.</li>
       </ol>
 
-      <p><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness. " width="1400" height="1053" loading="lazy" /></p>
+      <p><a href="../../images/richness-evenness.png" rel="noopener noreferrer"><img src="../../images/richness-evenness.png" alt="illustration of richness and evenness. " width="1400" height="1053" loading="lazy" /></a></p>
     </blockquote>
 
   </blockquote>
@@ -1789,7 +1810,7 @@ ochiai, canberra, thetayc, invsimpson</em>, just to name a few ;). A comparison 
 the other if the species are very dissimilar in one of the samples (have high phylogenetic distance), but very
 closely related to each other in the second sample.</p>
 
-  <p><img src="../../images/phylogenetic-distance.png" alt="illustration of phylogenetic distance. " width="970" height="535" loading="lazy" /></p>
+  <p><a href="../../images/phylogenetic-distance.png" rel="noopener noreferrer"><img src="../../images/phylogenetic-distance.png" alt="illustration of phylogenetic distance. " width="970" height="535" loading="lazy" /></a></p>
 
   <p>Now, you do not need to know what all these different metrics are, but just remember that there is not a single
 definition of diversity and as always, the metric you choose to use may influence your results.</p>
@@ -1849,7 +1870,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 <p>View the rarefaction plot output. From this image can see that the rarefaction curves for all samples have started to level
 off so we are confident we cover a large part of our sample diversity:</p>
 
-<p><img src="../../images/rarefaction_curves.png" alt="Rarefaction curves. " width="480" height="480" loading="lazy" /></p>
+<p><a href="../../images/rarefaction_curves.png" rel="noopener noreferrer"><img src="../../images/rarefaction_curves.png" alt="Rarefaction curves. " width="480" height="480" loading="lazy" /></a></p>
 
 <p>View the <code class="language-plaintext highlighter-rouge">summary</code> output from <strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This shows several alpha diversity metrics:</p>
 <ul>
@@ -1937,15 +1958,15 @@ heatmaps the red colors indicate communities that are more similar than those wi
 
 <p>For example this is the heatmap for the <code class="language-plaintext highlighter-rouge">thetayc</code> calculator (output <code class="language-plaintext highlighter-rouge">thetayc.0.03.lt.ave</code>):</p>
 
-<p><img src="../../images/heatmap.sim_thetayc.png" alt="Heatmap for the thetayc calculator. " width="500" height="500" loading="lazy" /></p>
+<p><a href="../../images/heatmap.sim_thetayc.png" rel="noopener noreferrer"><img src="../../images/heatmap.sim_thetayc.png" alt="Heatmap for the thetayc calculator. " width="500" height="500" loading="lazy" /></a></p>
 
 <p>and the jclass calulator (output <code class="language-plaintext highlighter-rouge">jclass.0.03.lt.ave</code>):</p>
 
-<p><img src="../../images/heatmap.sim_jclass.png" alt="Heatmap for the jclass calculator. " width="500" height="500" loading="lazy" /></p>
+<p><a href="../../images/heatmap.sim_jclass.png" rel="noopener noreferrer"><img src="../../images/heatmap.sim_jclass.png" alt="Heatmap for the jclass calculator. " width="500" height="500" loading="lazy" /></a></p>
 
 <p>Examine the Venn diagram:</p>
 
-<p><img src="../../images/venn.png" alt="Venn diagram and table with shared OTUs. " width="800" height="853" loading="lazy" /></p>
+<p><a href="../../images/venn.png" rel="noopener noreferrer"><img src="../../images/venn.png" alt="Venn diagram and table with shared OTUs. " width="800" height="853" loading="lazy" /></a></p>
 
 <p>This shows that there were a total of 180 OTUs observed between the 4 time points. Only 76 of those OTUs were
 shared by all four time points. We could look deeper at the shared file to see whether those OTUs were
@@ -1956,11 +1977,11 @@ of the others.</p>
 
 <p><code class="language-plaintext highlighter-rouge">thetayc.0.03.lt.ave</code>:</p>
 
-<p><img src="../../images/tree.thetayc.png" alt="Thetayc tree. " width="800" height="790" loading="lazy" /></p>
+<p><a href="../../images/tree.thetayc.png" rel="noopener noreferrer"><img src="../../images/tree.thetayc.png" alt="Thetayc tree. " width="800" height="790" loading="lazy" /></a></p>
 
 <p><code class="language-plaintext highlighter-rouge">jclass.0.03.lt.ave</code>:</p>
 
-<p><img src="../../images/tree.jclass.png" alt="Jclass tree. " width="800" height="790" loading="lazy" /></p>
+<p><a href="../../images/tree.jclass.png" rel="noopener noreferrer"><img src="../../images/tree.jclass.png" alt="Jclass tree. " width="800" height="790" loading="lazy" /></a></p>
 
 <h1 id="visualisations">Visualisations</h1>
 
@@ -1991,7 +2012,7 @@ of the others.</p>
 <p>The resulting file is an HTML file containing an interactive visualization. For instance try double-clicking the
 innermost ring labeled “Bacteroidetes” below:</p>
 
-<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <img src="../../images/krona.png" alt="Krona. " loading="lazy" /> </iframe>
+<iframe id="krona" src="krona_all.html" frameborder="0" width="100%" height="900px"> <a href="../../images/krona.png" rel="noopener noreferrer"><img src="../../images/krona.png" alt="Krona. " loading="lazy" /></a> </iframe>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2004,7 +2025,7 @@ innermost ring labeled “Bacteroidetes” below:</p>
 clearly (16% in our case), click on this segment and the right-hand side will show you the percentages at
 any point in the hierarchy (here 5% of all)</p>
 
-    <p><img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted. " width="800" height="665" loading="lazy" /></p>
+    <p><a href="../../images/krona_lacto.png" rel="noopener noreferrer"><img src="../../images/krona_lacto.png" alt="image showing view with Lactobacillus highlighted. " width="800" height="665" loading="lazy" /></a></p>
   </blockquote>
 </blockquote>
 
@@ -2095,13 +2116,13 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 > 2. **View** the file in Phinch
 >   - If you expand the the output biom dataset, you will see a link to view the file at Phinch
 >
->       <img src="../../../../shared/images/viewatphinch.png"  alt="Icon to view at Phinch. "  width="246" height=127 loading="lazy">
+>       <a href="../../../../shared/images/viewatphinch.png" rel="noopener noreferrer"><img src="../../../../shared/images/viewatphinch.png"  alt="Icon to view at Phinch. "  width="246" height=127 loading="lazy"></a>
 >
 >    - Click on this link ("view biom at Phinch")
 >
 >  This link will lead you to a Phinch server (hosted by Galaxy), which will automatically load your file, and
 >  where you can several interactive visualisations:
->  <img src="../../../../shared/images/phinch_overviewpage.png"  alt="Phinch overview. "  width="1088" height=780 loading="lazy">
+>  <a href="../../../../shared/images/phinch_overviewpage.png" rel="noopener noreferrer"><img src="../../../../shared/images/phinch_overviewpage.png"  alt="Phinch overview. "  width="1088" height=780 loading="lazy"></a>
 >
 > > <div class="box-title comment-title" id="comment-no-link-to-phinch-on-your-dataset"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: No link to Phinch on your dataset?</div>
 > >
@@ -2120,7 +2141,7 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 
 <p>Well done! <i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> You have completed the basics of the Schloss lab’s <a href="https://www.mothur.org/wiki/MiSeq_SOP">Standard Operating Procedure for Illumina MiSeq data</a>. You have worked your way through the following pipeline:</p>
 
-<p><img src="../../images/mothur_sop_pipeline.jpg" alt="mothur sop tutorial pipeline. " width="954" height="1418" loading="lazy" /></p>
+<p><a href="../../images/mothur_sop_pipeline.jpg" rel="noopener noreferrer"><img src="../../images/mothur_sop_pipeline.jpg" alt="mothur sop tutorial pipeline. " width="954" height="1418" loading="lazy" /></a></p>
 
 
                 </section>
@@ -2437,7 +2458,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2469,7 +2490,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

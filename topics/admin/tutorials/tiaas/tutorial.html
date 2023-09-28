@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Training Infrastructure as a Service (TIaaS)</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -376,8 +411,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -420,7 +455,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -468,23 +503,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -1264,7 +1285,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1275,7 +1296,7 @@ Sentry.init({
 Workshop instructors can apply for <abbr title="Training Infrastructure as a Service">TIaaS</abbr>, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tiaas/tiaas_intro.png" alt="TIaaS concept. " width="1917" height="1665" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available.</figcaption></figure>
+<p><a href="../../images/tiaas/tiaas_intro.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/tiaas/tiaas_intro.png" alt="TIaaS concept. " width="1917" height="1665" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available.&lt;/figcaption&gt;</figure></a></p>
 
 <p>This tutorial will go cover how to set up such a service on your own Galaxy server.</p>
 
@@ -1507,7 +1528,7 @@ to perform this process every night at midnight. You can control when this runs 
       <ul>
         <li>Go to <a href="https://my.gat.galaxy.training/?path=/tiaas/new">/tiaas/new</a></li>
         <li>Here you will find the request form users will fill in to request TIaaS:
-<img src="../../images/tiaas/tiaas_request_form.png" alt="TIaaS request form. " width="880" height="627" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_request_form.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_request_form.png" alt="TIaaS request form. " width="880" height="627" loading="lazy" /></a></li>
         <li>For <em>“Training Identifier”</em>, fill in <code class="language-plaintext highlighter-rouge">gat</code>
           <ul>
             <li>This is the <code class="language-plaintext highlighter-rouge">&lt;training-id&gt;</code> used in the URLs listed above used for:
@@ -1520,7 +1541,7 @@ to perform this process every night at midnight. You can control when this runs 
         </li>
         <li>Fill in the rest of the form as you like</li>
         <li>Submit the form and you should see a confirmation dialog:
-<img src="../../images/tiaas/tiaas_request_form_submitted.png" alt="TIaaS requested successfully. " width="613" height="170" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_request_form_submitted.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_request_form_submitted.png" alt="TIaaS requested successfully. " width="613" height="170" loading="lazy" /></a></li>
       </ul>
     </li>
     <li><strong>Approve TIaaS request</strong>
@@ -1533,15 +1554,15 @@ to perform this process every night at midnight. You can control when this runs 
           </ul>
         </li>
         <li>You should now see the admin panel:
-<img src="../../images/tiaas/tiaas_admin_console.png" alt="TIaaS admin console. " width="731" height="352" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_admin_console.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_admin_console.png" alt="TIaaS admin console. " width="731" height="352" loading="lazy" /></a></li>
         <li>Click on <strong>Trainings</strong>, you should see the TIaaS request listed here:
-<img src="../../images/tiaas/tiaas_request_list.png" alt="TIaaS request list. " width="737" height="314" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_request_list.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_request_list.png" alt="TIaaS request list. " width="737" height="314" loading="lazy" /></a></li>
         <li><strong>Approve the request</strong>
           <ul>
             <li>Click on the training</li>
             <li>Scroll down to the bottom</li>
             <li>Change <em>“Processed”</em> to <code class="language-plaintext highlighter-rouge">Approved</code> and <strong>Save</strong>
-<img src="../../images/tiaas/tiaas_request_approve.png" alt="Approve TIaaS. " width="698" height="207" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_request_approve.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_request_approve.png" alt="Approve TIaaS. " width="698" height="207" loading="lazy" /></a></li>
           </ul>
         </li>
         <li>At this point, you would likely email the person who made the request to inform them of approval</li>
@@ -1554,7 +1575,7 @@ to perform this process every night at midnight. You can control when this runs 
           <ul>
             <li><a href="https://my.gat.galaxy.training/?path=/join-training/gat">/join-training/gat</a></li>
             <li>A confirmation dialog should appear if all went well:
-<img src="../../images/tiaas/tiaas_join_training.png" alt="Join TIaaS. " width="587" height="153" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_join_training.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_join_training.png" alt="Join TIaaS. " width="587" height="153" loading="lazy" /></a></li>
           </ul>
         </li>
       </ul>
@@ -1565,11 +1586,11 @@ to perform this process every night at midnight. You can control when this runs 
         <li>Go to <a href="https://my.gat.galaxy.training/?path=/join-training/gat">/join-training/gat</a></li>
         <li>In the Dasboard you should see that one user (you) has joined the training \</li>
         <li>Run some jobs to see the dashboard in action
-<img src="../../images/tiaas/tiaas_dashboard.png" alt="TIaaS dashboard. " width="1206" height="685" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_dashboard.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_dashboard.png" alt="TIaaS dashboard. " width="1206" height="685" loading="lazy" /></a></li>
         <li>Scroll down to get some more information on a per-user level (anonymized)
           <ul>
             <li>Every user designated by their own identifier and colour, but no personal information
-<img src="../../images/tiaas/tiaas_dashboard2.png" alt="TIaaS dashboard. " width="1348" height="640" loading="lazy" /></li>
+<a href="../../images/tiaas/tiaas_dashboard2.png" rel="noopener noreferrer"><img src="../../images/tiaas/tiaas_dashboard2.png" alt="TIaaS dashboard. " width="1348" height="640" loading="lazy" /></a></li>
           </ul>
         </li>
       </ul>
@@ -1844,7 +1865,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1876,7 +1897,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

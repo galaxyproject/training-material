@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -289,8 +324,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -333,7 +368,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -381,23 +416,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -737,7 +758,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -777,7 +798,7 @@ Sentry.init({
 
 <p>To illustrate how to process such data, we will use datasets generated by <a href="https://www.biolytix.ch/">Biolytix</a> with the following approach:</p>
 
-<p><img src="./images/Biolytix_Workflow_Sequencing.png" alt="From left to right: Biolytix logo. Chicken + milk. An arrow going to the right toward Chicken + milk and a syringe with &quot;Contamination with known pathogens&quot; written below. An arrow going to the right toward an Eppendorf tube with &quot;DNA extraction&quot; written below,  An arrow going to the right toward a qPCR machine, and another arrow over the qPCR toward a Nanopore sequencing. . " width="1589" height="387" loading="lazy" /></p>
+<p><a href="./images/Biolytix_Workflow_Sequencing.png" rel="noopener noreferrer"><img src="./images/Biolytix_Workflow_Sequencing.png" alt="From left to right: Biolytix logo. Chicken + milk. An arrow going to the right toward Chicken + milk and a syringe with &quot;Contamination with known pathogens&quot; written below. An arrow going to the right toward an Eppendorf tube with &quot;DNA extraction&quot; written below,  An arrow going to the right toward a qPCR machine, and another arrow over the qPCR toward a Nanopore sequencing. . " width="1589" height="387" loading="lazy" /></a></p>
 
 <p>Food samples, here chicken, are spiked with known pathogens, here:</p>
 <ul>
@@ -1146,7 +1167,7 @@ https://zenodo.org/record/7593928/files/Barcode11_Spike2b.fastq.gz
       <li>
         <p>The “Per base sequence quality” is globally medium: the quality score stays above 20 over the entire length of reads after trimming, while quality below 20 could be seen before trimming specially at the beginning and the end of the reads.</p>
 
-        <p><img src="./images/fastqc_per_base_sequence_quality_plot_barcode10.png" alt="Sequence Quality. " width="1200" height="800" loading="lazy" /></p>
+        <p><a href="./images/fastqc_per_base_sequence_quality_plot_barcode10.png" rel="noopener noreferrer"><img src="./images/fastqc_per_base_sequence_quality_plot_barcode10.png" alt="Sequence Quality. " width="1200" height="800" loading="lazy" /></a></p>
       </li>
       <li>After checking what is wrong, e.g. before trimming, we should think about the errors reported by <strong>FastQC</strong>: they may come from the type of sequencing or what we sequenced (check the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> for more details). However, despite these challenges, we can already see sequences getting slightly better after the trimming and filtering, so now we can proceed with our analyses.</li>
     </ol>
@@ -1467,7 +1488,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
       <li>
         <p>All of them are good visualization of the data but for us to answer these questions, we used the <strong>Taxonomy Bar Chart</strong></p>
 
-        <p><img src="./images/phinch_taxonomy_bar_chart.png" alt="Taxonomy Bar Chart. " width="1920" height="585" loading="lazy" /></p>
+        <p><a href="./images/phinch_taxonomy_bar_chart.png" rel="noopener noreferrer"><img src="./images/phinch_taxonomy_bar_chart.png" alt="Taxonomy Bar Chart. " width="1920" height="585" loading="lazy" /></a></p>
       </li>
     </ol>
 
@@ -1702,7 +1723,7 @@ https://zenodo.org/record/7593928/files/Nanopore_processed_sequenced_reads_Barco
       <li>
         <p>The graph looks like:</p>
 
-        <p><img src="./images/bandage_image_flye_graph.png" alt="Bandage Image Barcode 10 Assembly Graph. " width="1115" height="848" loading="lazy" /></p>
+        <p><a href="./images/bandage_image_flye_graph.png" rel="noopener noreferrer"><img src="./images/bandage_image_flye_graph.png" alt="Bandage Image Barcode 10 Assembly Graph. " width="1115" height="848" loading="lazy" /></a></p>
       </li>
     </ol>
 
@@ -2507,7 +2528,7 @@ https://zenodo.org/record/7593928/files/Contigs_Barcode11.fasta
 
   <p>Now let’s see how your heatmap looks like, you can zoom-in and out in your Galaxy history.</p>
 
-  <p><img src="./images/heatmap.png" alt="Heatmap. " width="926" height="922" loading="lazy" /></p>
+  <p><a href="./images/heatmap.png" rel="noopener noreferrer"><img src="./images/heatmap.png" alt="Heatmap. " width="926" height="922" loading="lazy" /></a></p>
 
   <ol>
     <li>Mention three of the common bacterial pathogen genes found in both samples.</li>
@@ -2645,12 +2666,12 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
       <li>
         <p>In the <code class="language-plaintext highlighter-rouge">Barcode10</code>: Contig 119 and <code class="language-plaintext highlighter-rouge">Barcode11</code>: Contig 1</p>
 
-        <p><img src="./images/AAF37887_tree.png" alt="AAF37887_tree. " width="640" height="142" loading="lazy" /></p>
+        <p><a href="./images/AAF37887_tree.png" rel="noopener noreferrer"><img src="./images/AAF37887_tree.png" alt="AAF37887_tree. " width="640" height="142" loading="lazy" /></a></p>
       </li>
       <li>
         <p>In the <code class="language-plaintext highlighter-rouge">Barcode10</code>: Contig 90 and <code class="language-plaintext highlighter-rouge">Barcode11</code>: Contig 1</p>
 
-        <p><img src="./images/NP_459543_tree.png" alt="NP_459543_tree. " width="610" height="145" loading="lazy" /></p>
+        <p><a href="./images/NP_459543_tree.png" rel="noopener noreferrer"><img src="./images/NP_459543_tree.png" alt="NP_459543_tree. " width="610" height="145" loading="lazy" /></a></p>
       </li>
     </ol>
 
@@ -2661,7 +2682,7 @@ Other factors such as the <strong>time</strong> and <strong>location</strong> of
 
 <p>In this tutorial, we have tried the workflow designed to detect and track pathogens in our food and drinks. Through out the full workflow we used our Nanopore sequenced datasets from Biolytix and analyzed it, found the pathogens and tracked it. This approach can be summarized with the following scheme:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="./images/FoodBorne-Workflow-updated.png" alt="Foodborne full workflow big picture. " width="18000" height="6196" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training</figcaption></figure>
+<p><a href="./images/FoodBorne-Workflow-updated.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="./images/FoodBorne-Workflow-updated.png" alt="Foodborne full workflow big picture. " width="18000" height="6196" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> The complete picture of the workflow used in this training highlighting, not all, but the most important steps done in 5 sub-workflows explained in the training&lt;/figcaption&gt;</figure></a></p>
 
 
                 </section>
@@ -3068,7 +3089,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3100,7 +3121,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

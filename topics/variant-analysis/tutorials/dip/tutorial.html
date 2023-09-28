@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Calling variants in diploid systems</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -304,8 +339,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -348,7 +383,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -396,23 +431,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -760,7 +781,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -859,9 +880,9 @@ READ5:     atcatgacggcaGtagc
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: center"><img src="../../images/pA.png" alt="P(A) polymorphism. " width="377" height="377" loading="lazy" /></td>
-      <td style="text-align: center"><img src="../../images/pB.png" alt="P(B) variant calls. " width="380" height="381" loading="lazy" /></td>
-      <td style="text-align: center"><img src="../../images/pAB.png" alt="P(AB) polymorphism and variant calls. " width="379" height="378" loading="lazy" /></td>
+      <td style="text-align: center"><a href="../../images/pA.png" rel="noopener noreferrer"><img src="../../images/pA.png" alt="P(A) polymorphism. " width="377" height="377" loading="lazy" /></a></td>
+      <td style="text-align: center"><a href="../../images/pB.png" rel="noopener noreferrer"><img src="../../images/pB.png" alt="P(B) variant calls. " width="380" height="381" loading="lazy" /></a></td>
+      <td style="text-align: center"><a href="../../images/pAB.png" rel="noopener noreferrer"><img src="../../images/pAB.png" alt="P(AB) polymorphism and variant calls. " width="379" height="378" loading="lazy" /></a></td>
     </tr>
     <tr>
       <td style="text-align: center">\(P(A)\)</td>
@@ -948,7 +969,7 @@ READ5:     atcatgacggcaGtagc
 
 <p>Freebayes is a <em>haplotype-based</em> variant caller. This implies that instead of looking at an individual positions within an alignment of reads to the reference genome, it looks at a haplotype window, length of which is dynamically determined (see section 3.2. in <a href="https://arxiv.org/pdf/1207.3907v2.pdf">FreeBayes manuscript</a>):</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/freebayes.png" alt="Haplotype-based calling. " width="1502" height="1064" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious variants. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) A(7) and A(6), while A(8) is likely an error. Image by Erik Garrison</figcaption></figure>
+<p><a href="../../images/freebayes.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/freebayes.png" alt="Haplotype-based calling. " width="1502" height="1064" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Looking at a haplotype window makes misalignments tolerable. In this case a low complexity poly(A) stretch is misaligned. As a result looking at individual positions will result in calling multiple spurious variants. In the case of FreeBayes looking at a haplotype identifies two alleles (this is a diploid example) A(7) and A(6), while A(8) is likely an error. Image by Erik Garrison&lt;/figcaption&gt;</figure></a></p>
 
 <h3 id="the-data">The data</h3>
 
@@ -1062,11 +1083,11 @@ READ5:     atcatgacggcaGtagc
 
 <p>The report contains a number of useful metrics such as distribution of variants across gene features:</p>
 
-<p><img src="../../images/snpeff_chart.png" alt="SnpEff output chart. " width="800" height="300" loading="lazy" /></p>
+<p><a href="../../images/snpeff_chart.png" rel="noopener noreferrer"><img src="../../images/snpeff_chart.png" alt="SnpEff output chart. " width="800" height="300" loading="lazy" /></a></p>
 
 <p>or changes to codons:</p>
 
-<p><img src="../../images/snpeff_codons.png" alt="SnpEff output codon changes. " width="966" height="567" loading="lazy" /></p>
+<p><a href="../../images/snpeff_codons.png" rel="noopener noreferrer"><img src="../../images/snpeff_codons.png" alt="SnpEff output codon changes. " width="966" height="567" loading="lazy" /></a></p>
 
 <h1 id="manipulating-variation-data-with-gemini">Manipulating variation data with GEMINI</h1>
 
@@ -1305,21 +1326,21 @@ READ5:     atcatgacggcaGtagc
   <li>
     <p>When the Galaxy history interface opens, you will need to click the <strong>Import history</strong> link highlighted with a red outline in the following figure:</p>
 
-    <p><img src="../../images/import_history.png" alt="Import history. " width="1101" height="761" loading="lazy" /></p>
+    <p><a href="../../images/import_history.png" rel="noopener noreferrer"><img src="../../images/import_history.png" alt="Import history. " width="1101" height="761" loading="lazy" /></a></p>
   </li>
   <li>
     <p>If you have a wide screen arrange browsers tabs side by side:</p>
 
-    <p><img src="../../images/side-by-side.png" alt="Arranging browsers side by side. " width="1981" height="652" loading="lazy" /></p>
+    <p><a href="../../images/side-by-side.png" rel="noopener noreferrer"><img src="../../images/side-by-side.png" alt="Arranging browsers side by side. " width="1981" height="652" loading="lazy" /></a></p>
   </li>
   <li>
     <p>Proceed with the tutorial. For example, to repeat the following command from GEMINI tutorial:</p>
 
-    <p><img src="../../images/gemini_command.png" alt="GEMINI query command. " width="789" height="142" loading="lazy" /></p>
+    <p><a href="../../images/gemini_command.png" rel="noopener noreferrer"><img src="../../images/gemini_command.png" alt="GEMINI query command. " width="789" height="142" loading="lazy" /></a></p>
 
     <p>use Galaxy’s <strong>GEMINI query</strong> tool as below:</p>
 
-    <p><img src="../../images/galaxy_command.png" alt="GEMINI_query tool interface. " width="472" height="431" loading="lazy" /></p>
+    <p><a href="../../images/galaxy_command.png" rel="noopener noreferrer"><img src="../../images/galaxy_command.png" alt="GEMINI_query tool interface. " width="472" height="431" loading="lazy" /></a></p>
   </li>
   <li>and so on….</li>
 </ul>
@@ -1525,7 +1546,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1557,7 +1578,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

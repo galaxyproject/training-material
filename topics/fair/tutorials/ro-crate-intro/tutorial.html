@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>RO-Crate - Introduction</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -248,8 +283,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -292,7 +327,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -340,23 +375,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -685,7 +706,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -752,7 +773,7 @@ Create the file <code class="language-plaintext highlighter-rouge">ro-crate-meta
 
 <p>Your folder should now look like this:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/crate1-folders.svg" type="image/svg+xml" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. "><img src="../../images/ro-crate-intro/crate1-folders.png" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. " />Folder listing of crate1, including data.csv and ro-crate-metadata.json.</object></div><small><a target="_blank" href="../../images/ro-crate-intro/crate1-folders.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code></figcaption></figure>
+<p><a href="../../images/ro-crate-intro/crate1-folders.svg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/ro-crate-intro/crate1-folders.svg" type="image/svg+xml" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. "><img src="../../images/ro-crate-intro/crate1-folders.png" alt="Folder listing of crate1, including data.csv and ro-crate-metadata.json. " />Folder listing of crate1, including data.csv and ro-crate-metadata.json.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/ro-crate-intro/crate1-folders.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Any folder can be made into an RO-Crate by adding <code>ro-crate-metadata.json</code>&lt;/figcaption&gt;</figure></a></p>
 
 <p>The presence of the reserved <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> filename means that <code class="language-plaintext highlighter-rouge">crate1</code> (and its children) can now be considered to be an <strong>RO-Crate</strong>. We call the top-level folder of the crate for the <strong>RO-Crate Root</strong> and can now refer to its content with relative file paths.</p>
 
@@ -846,7 +867,7 @@ it is nevertheless best practice to propagate permalinks where known.</p>
 <p>In a RO-Crate Metadata Document, entities are cross-referenced using <code class="language-plaintext highlighter-rouge">@id</code> reference objects, rather than using deeply nested JSON objects.
 In short, this <em>flattened JSON-LD</em> style (shown below) allows any entity to reference any other entity, and RO-Crate consumers can directly find all the descriptions of a given entity as a single JSON object.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/ro-crate-intro/introduction-figure-1.svg" type="image/svg+xml" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description."><img src="../../images/ro-crate-intro/introduction-figure-1.png" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." />JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.</object></div><small><a target="_blank" href="../../images/ro-crate-intro/introduction-figure-1.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor's <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code></figcaption></figure>
+<p><a href="../../images/ro-crate-intro/introduction-figure-1.svg" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/ro-crate-intro/introduction-figure-1.svg" type="image/svg+xml" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description."><img src="../../images/ro-crate-intro/introduction-figure-1.png" alt="JSON block with id `ro-crate-metadata.json` has some attributes, `conformsTo` RO-Crate 1.2, and `about` referencing id `./`. In second JSON block with id &lt;code&gt;./&lt;/code&gt; we see additional attributes such as its name and description." />JSON block with id <code class="language-plaintext highlighter-rouge">ro-crate-metadata.json</code> has some attributes, <code class="language-plaintext highlighter-rouge">conformsTo</code> RO-Crate 1.2, and <code class="language-plaintext highlighter-rouge">about</code> referencing id <code class="language-plaintext highlighter-rouge">./</code>. In second JSON block with id <code>./</code> we see additional attributes such as its name and description.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/ro-crate-intro/introduction-figure-1.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> showing RO-Crate Metadata descriptor’s <code>about</code> property pointing at the RO-Crate Root entity with matching <code>@id</code>&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1119,7 +1140,7 @@ at line 29 column 5 of the JSON data
 
 <p>This verbose listing of the JSON-LD shows how the <code class="language-plaintext highlighter-rouge">@context</code> has correctly expanded the keys, but is not particularly readable. Try the <em>Visualized</em> tab to see an interactive rendering of the entities:</p>
 
-<p><img src="../../images/ro-crate-intro/jsonld-playground-visualized.png" alt="Visualized in the JSON-LD Playground. " width="1344" height="764" loading="lazy" /></p>
+<p><a href="../../images/ro-crate-intro/jsonld-playground-visualized.png" rel="noopener noreferrer"><img src="../../images/ro-crate-intro/jsonld-playground-visualized.png" alt="Visualized in the JSON-LD Playground. " width="1344" height="764" loading="lazy" /></a></p>
 
 <p>As the RO-Crate Metadata Document is valid JSON-LD it is also possible to process it using Linked Data technologies such as triple stores and SPARQL queries. It is beyond the scope of this tutorial to explain this aspect fully, but interested readers should consider how to <a href="https://www.researchobject.org/ro-crate/1.1/appendix/relative-uris.html">handle relative URI references</a>.
 As an example, try the <em>Table</em> button and notice that the entities with relative identifiers are not included. This is because when converting to RDF you need absolute URIs which do not readily exist when a crate is stored on disk, we’ve not decided where the crate is to be published yet.</p>
@@ -1137,7 +1158,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p><img src="../../images/ro-crate-intro/jsonld-playground-table.png" alt="Triples table in the JSON-LD Playground. " width="1074" height="996" loading="lazy" /></p>
+<p><a href="../../images/ro-crate-intro/jsonld-playground-table.png" rel="noopener noreferrer"><img src="../../images/ro-crate-intro/jsonld-playground-table.png" alt="Triples table in the JSON-LD Playground. " width="1074" height="996" loading="lazy" /></a></p>
 
 <p>Above <code class="language-plaintext highlighter-rouge">arcp://uuid,deffa754-c764-4e04-aabf-e600c6200553/</code> is a randomly generated identifier to represent the RO-Crate root, and now the JSON-LD Playground can show all the triples from the metadata file. You can likewise use the <em>N-Quads</em> button to convert the metadata file to the <a href="http://www.w3.org/TR/n-quads/">RDF N-Quads</a> format. Most RDF libraries and stores have JSON-LD support, but may need to specify a base URI as we did above, making a new UUID for each imported RO-Crate.</p>
 
@@ -1145,7 +1166,7 @@ As an example, try the <em>Table</em> button and notice that the entities with r
 
 <p>An RO-Crate can be distributed on disk, in a packaged format such as a zip file or disk image, or placed on a static website. In any of these cases, an RO-Crate can have an accompanying HTML version (<code class="language-plaintext highlighter-rouge">ro-crate-metadata.html</code>) designed to be human-readable.</p>
 
-<p><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " width="1044" height="1027" loading="lazy" /></p>
+<p><a href="../../images/ro-crate-intro/ro-crate-preview-example.png" rel="noopener noreferrer"><img src="../../images/ro-crate-intro/ro-crate-preview-example.png" alt="Example dataset for RO-Crate specification. " width="1044" height="1027" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1475,7 +1496,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1509,7 +1530,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

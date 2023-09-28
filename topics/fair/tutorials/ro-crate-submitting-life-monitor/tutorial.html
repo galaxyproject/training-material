@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Submitting workflows to LifeMonitor</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -268,8 +303,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -312,7 +347,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -360,23 +395,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -636,7 +657,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -808,7 +829,7 @@ profile</a>: if the buttons shown
 in the image below say “<strong>connected</strong>”, you’re ok; else, click on the
 appropriate “<strong>connect</strong> button and log into the WorkflowHub with the account
 you’d like LifeMonitor to use.
-<img src="./images/account_connections_whub-dev-disconnected.png" alt="Connect WorkflowHub buttons. " width="1225" height="786" loading="lazy" />
+<a href="./images/account_connections_whub-dev-disconnected.png" rel="noopener noreferrer"><img src="./images/account_connections_whub-dev-disconnected.png" alt="Connect WorkflowHub buttons. " width="1225" height="786" loading="lazy" /></a>
 The LifeMonitor documentation has <a href="https://www.lifemonitor.eu/faq#which-external-accounts-are-linked-with-my-lifemonitor-account">a more detailed explanation</a>.</p>
 
 <h3 id="enable-workflowhub-integration-for-your-account">Enable WorkflowHub Integration for your account</h3>
@@ -823,7 +844,7 @@ you may be taken to the WorkflowHub authentication page; in that case, log into
 the WorkflowHub with the same account credentials that you connected in the
 previous step.</p>
 
-<p><img src="./images/lm_config_registry_integration.png" alt="LM config registry integration. " width="1172" height="639" loading="lazy" /></p>
+<p><a href="./images/lm_config_registry_integration.png" rel="noopener noreferrer"><img src="./images/lm_config_registry_integration.png" alt="LM config registry integration. " width="1172" height="639" loading="lazy" /></a></p>
 
 <h2 id="lifemonitor-checks">LifeMonitor Checks</h2>
 
@@ -836,7 +857,7 @@ workflow repository.</p>
 <h3 id="ro-crate-metadata">RO-Crate metadata</h3>
 
 <p>LM might notice that we don’t have an RO-Crate:
-<img src="./images/missing_ro_crate_pr.png" alt="Missing RO-Crate PR. " width="790" height="594" loading="lazy" /></p>
+<a href="./images/missing_ro_crate_pr.png" rel="noopener noreferrer"><img src="./images/missing_ro_crate_pr.png" alt="Missing RO-Crate PR. " width="790" height="594" loading="lazy" /></a></p>
 
 <p>The LM app <strong>automatically</strong> executes
 <a href="https://github.com/crs4/repo2rocrate">repo2crate</a> as recommended by <a href="/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html#best-practice-repositories-and-ro-crate">best
@@ -845,7 +866,7 @@ opens a pull request to propose the resulting RO-Crate for integration in our
 repository.  Review the RO-Crate and integrate additional metadata or correct
 it as necessary. Finally, merge the changes into your repository.  LifeMonitor with
 automatically delete the PR branch once merged, to keep your repository tidy.
-<img src="./images/merge_pr.png" alt="Merge PR. " width="834" height="442" loading="lazy" /></p>
+<a href="./images/merge_pr.png" rel="noopener noreferrer"><img src="./images/merge_pr.png" alt="Merge PR. " width="834" height="442" loading="lazy" /></a></p>
 
 <h3 id="lifemonitor-configuration-file">LifeMonitor configuration file</h3>
 
@@ -853,12 +874,12 @@ automatically delete the PR branch once merged, to keep your repository tidy.
 file</a>
 to our repository.  Through this file in YAML format, we can customize some aspects of
 LifeMonitor’s behavior and provide it with additional metadata.
-<img src="./images/lm_config_pr.png" alt="LM config PR. " width="1021" height="541" loading="lazy" /></p>
+<a href="./images/lm_config_pr.png" rel="noopener noreferrer"><img src="./images/lm_config_pr.png" alt="LM config PR. " width="1021" height="541" loading="lazy" /></a></p>
 
 <p>This time, we’re going to make some changes to the default configuration before
 accepting it.  The PR’s “Conversation” tab on GitHub tells us to push changes to
 a specific branch to make changes to the file:
-<img src="./images/lm_config_pr_branch.png" alt="LM config PR branch. " width="734" height="416" loading="lazy" /></p>
+<a href="./images/lm_config_pr_branch.png" rel="noopener noreferrer"><img src="./images/lm_config_pr_branch.png" alt="LM config PR branch. " width="734" height="416" loading="lazy" /></a></p>
 
 <p>So we’ll go to the local copy of our workflow repository, fetch the remote and
 checkout this branch:</p>
@@ -914,7 +935,7 @@ rewrite .lifemonitor.yaml (63%)
 </code></pre></div></div>
 
 <p>Now you can go back to the Pull Request and merge it.
-<img src="./images/lm_config_pr_merged.png" alt="LM config PR merged. " width="676" height="162" loading="lazy" /></p>
+<a href="./images/lm_config_pr_merged.png" rel="noopener noreferrer"><img src="./images/lm_config_pr_merged.png" alt="LM config PR merged. " width="676" height="162" loading="lazy" /></a></p>
 
 <h3 id="new-and-changing-checks">New and changing checks</h3>
 
@@ -957,7 +978,7 @@ you enabled and selected.</p>
 you that the registration happened and providing you with a direct link to the
 workflow on LifeMonitor (from which you’ll be able to access the corresponding
 WorkflowHub entry).
-<img src="./images/lm_new_registration.png" alt="LM new registration. " width="1148" height="439" loading="lazy" /></p>
+<a href="./images/lm_new_registration.png" rel="noopener noreferrer"><img src="./images/lm_new_registration.png" alt="LM new registration. " width="1148" height="439" loading="lazy" /></a></p>
 </blockquote>
 
 <p>The workflow should also appear on your <a href="https://app.lifemonitor.eu/dashboard">LifeMonitor
@@ -969,7 +990,7 @@ then the system will report its passing or failing status.</p>
 <p>The workflow entry in LifeMonitor also has a link to the corresponding
 WorkflowHub entry.  Follow the link to reach a page with your workflow’s
 metadata:
-<img src="./images/lm_new_registration-workflowhub.png" alt="LM new registration workflowhub. " width="1171" height="393" loading="lazy" /></p>
+<a href="./images/lm_new_registration-workflowhub.png" rel="noopener noreferrer"><img src="./images/lm_new_registration-workflowhub.png" alt="LM new registration workflowhub. " width="1171" height="393" loading="lazy" /></a></p>
 
 <h2 id="profit">Profit</h2>
 
@@ -1171,7 +1192,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1203,7 +1224,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

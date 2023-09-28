@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>CLI basics</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -302,8 +337,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -346,7 +381,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -394,23 +429,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -653,7 +674,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -834,17 +855,17 @@ You may have seen it in a text editor program, for example.</p>
     <li>
       <p>Use the File → New → Terminal menu to launch a terminal.</p>
 
-      <p><img src="../../images/carpentries-cli/mybinder-launch.png" alt="screenshot of jupyterlab showing the File menu expanded to show new and terminal option." width="522" height="160" loading="lazy" /></p>
+      <p><a href="../../images/carpentries-cli/mybinder-launch.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/mybinder-launch.png" alt="screenshot of jupyterlab showing the File menu expanded to show new and terminal option." width="522" height="160" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Disable “Simple” mode in the bottom left hand corner, if it activated.</p>
 
-      <p><img src="../../images/carpentries-cli/mybinder-simple.png" alt="screenshot of jupyterlab showing a toggle labelled simple. " width="198" height="58" loading="lazy" /></p>
+      <p><a href="../../images/carpentries-cli/mybinder-simple.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/mybinder-simple.png" alt="screenshot of jupyterlab showing a toggle labelled simple. " width="198" height="58" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Drag one of the terminal or notebook tabs to the side to have the training materials and terminal side-by-side</p>
 
-      <p><img src="../../images/carpentries-cli/mybinder-final.png" alt="screenshot of jupyterlab with notebook and terminal side-by-side." width="1692" height="347" loading="lazy" /></p>
+      <p><a href="../../images/carpentries-cli/mybinder-final.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/mybinder-final.png" alt="screenshot of jupyterlab with notebook and terminal side-by-side." width="1692" height="347" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -854,12 +875,12 @@ You may have seen it in a text editor program, for example.</p>
     <li>
       <p>Use the <em>Split View</em> functionality of cocalc to split your view into two portions.</p>
 
-      <p><img src="../../images/carpentries-cli/cocalc-split.png" alt="screenshot of cocalc button to split views. " width="474" height="214" loading="lazy" /></p>
+      <p><a href="../../images/carpentries-cli/cocalc-split.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/cocalc-split.png" alt="screenshot of cocalc button to split views. " width="474" height="214" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Change the view of one panel to a terminal</p>
 
-      <p><img src="../../images/carpentries-cli/cocalc-terminal.png" alt="screenshot of cocalc swapping view port to that of a terminal. " width="427" height="443" loading="lazy" /></p>
+      <p><a href="../../images/carpentries-cli/cocalc-terminal.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/cocalc-terminal.png" alt="screenshot of cocalc swapping view port to that of a terminal. " width="427" height="443" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1001,7 +1022,7 @@ which will be constructed in a similar way, but not be exactly identical.</p>
 
 <p>On Nelle’s computer, the filesystem looks like this:</p>
 
-<p><img src="../../images/carpentries-cli/filesystem.svg" alt="The file system is made up of a root directory that contains sub-directories titled bin, data, users, and tmp. " width="54" height="29" loading="lazy" /></p>
+<p><a href="../../images/carpentries-cli/filesystem.svg" rel="noopener noreferrer"><img src="../../images/carpentries-cli/filesystem.svg" alt="The file system is made up of a root directory that contains sub-directories titled bin, data, users, and tmp. " width="54" height="29" loading="lazy" /></a></p>
 
 <p>At the top is the <strong>root directory</strong>
 that holds everything else.
@@ -1034,7 +1055,7 @@ it’s just a separator.</p>
 we find one directory for each user with an account on Nelle’s machine,
 her colleagues <em>imhotep</em> and <em>larry</em>.</p>
 
-<p><img src="../../images/carpentries-cli/home-directories.svg" alt="Like other directories, home directories are sub-directories underneath '/Users' like '/Users/imhotep', '/Users/larry' or '/Users/nelle'. " width="55" height="50" loading="lazy" /></p>
+<p><a href="../../images/carpentries-cli/home-directories.svg" rel="noopener noreferrer"><img src="../../images/carpentries-cli/home-directories.svg" alt="Like other directories, home directories are sub-directories underneath '/Users' like '/Users/imhotep', '/Users/larry' or '/Users/nelle'. " width="55" height="50" loading="lazy" /></a></p>
 
 <p>The user <em>imhotep</em>’s files are stored in <code class="language-plaintext highlighter-rouge">/Users/imhotep</code>,
 user <em>larry</em>’s in <code class="language-plaintext highlighter-rouge">/Users/larry</code>,
@@ -1521,7 +1542,7 @@ what will <code class="language-plaintext highlighter-rouge">ls -F ../backup</co
     <li><code class="language-plaintext highlighter-rouge">original/ pnas_final/ pnas_sub/</code></li>
   </ol>
 
-  <p><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and '/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'. " width="522" height="331" loading="lazy" /></p>
+  <p><a href="../../images/carpentries-cli/filesystem-challenge.svg" rel="noopener noreferrer"><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and '/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'. " width="522" height="331" loading="lazy" /></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1545,7 +1566,7 @@ what command(s) will result in the following output:</p>
   <div class="language-plaintext output highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pnas_sub/ pnas_final/ original/
 </code></pre></div>  </div>
 
-  <p><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and'/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'. " width="522" height="331" loading="lazy" /></p>
+  <p><a href="../../images/carpentries-cli/filesystem-challenge.svg" rel="noopener noreferrer"><img src="../../images/carpentries-cli/filesystem-challenge.svg" alt="A directory tree below the Users directory where '/Users' contains the directories 'backup' and 'thing'; '/Users/backup' contains 'original', 'pnas_final' and 'pnas_sub'; '/Users/thing' contains 'backup'; and'/Users/thing/backup' contains '2012-12-01', '2013-01-08' and '2013-01-27'. " width="522" height="331" loading="lazy" /></a></p>
 
   <ol>
     <li><code class="language-plaintext highlighter-rouge">ls pwd</code></li>
@@ -1830,7 +1851,7 @@ holding it down, press the <kbd>O</kbd> key) to write our data to disk
 (we’ll be asked what file we want to save this to:
 press <kbd>Return</kbd> to accept the suggested default of <code class="language-plaintext highlighter-rouge">draft.txt</code>).</p>
 
-<p><img src="../../images/carpentries-cli/nano-screenshot.png" alt="screenshot of nano text editor in action. " width="1039" height="317" loading="lazy" /></p>
+<p><a href="../../images/carpentries-cli/nano-screenshot.png" rel="noopener noreferrer"><img src="../../images/carpentries-cli/nano-screenshot.png" alt="screenshot of nano text editor in action. " width="1039" height="317" loading="lazy" /></a></p>
 
 <p>Once our file is saved, we can use <kbd>Ctrl</kbd>+<kbd>X</kbd> to quit the editor and
 return to the shell.</p>
@@ -2993,7 +3014,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3025,7 +3046,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

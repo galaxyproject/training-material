@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Production d'indicateurs champs de bloc</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -238,8 +273,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -282,7 +317,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -330,23 +365,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -574,7 +595,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -629,7 +650,7 @@ Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en c
       <li>Se connecter ou s’enregistrer</li>
     </ol>
 
-    <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/galaxy_homepage.png" alt="Capture d'écran de l'interface Galaxy avec le bouton d'enregistrement ou de connexion en surbrillance. " width="1376" height="728" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy homepage</figcaption></figure>
+    <p><a href="../../images/champbloc/galaxy_homepage.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/galaxy_homepage.png" alt="Capture d'écran de l'interface Galaxy avec le bouton d'enregistrement ou de connexion en surbrillance. " width="1376" height="728" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy homepage&lt;/figcaption&gt;</figure></a></p>
 
     <p>Cette capture d’écran présente l’instance Galaxy Ecology, accessible à l’adresse <a href="https://ecology.usegalaxy.eu/">usegalaxy.eu</a></p>
 
@@ -642,14 +663,14 @@ Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en c
     <li>L’historique des analyses et l’ensemble des fichiers utilisés et générés sur la droite</li>
   </ul>
 
-  <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/galaxy_interface.png" alt="Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite." width="1777" height="1290" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Explication de l'interface Galaxy</figcaption></figure>
+  <p><a href="../../images/champbloc/galaxy_interface.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/galaxy_interface.png" alt="Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite." width="1777" height="1290" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Explication de l’interface Galaxy&lt;/figcaption&gt;</figure></a></p>
 
   <p>La première fois que vous utiliserez Galaxy, il n’y aura aucun fichier dans votre panneau d’historique.</p>
 </blockquote>
 
 <p>Concentrons-nous maintenant sur notre workflows d’analyse sur l’état écologique de champ de blocs</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/workflow.png" alt="workflows d'analyse sur l'état écologique du champ de blocs. " width="1760" height="1360" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Workflow</figcaption></figure>
+<p><a href="../../images/champbloc/workflow.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/workflow.png" alt="workflows d'analyse sur l'état écologique du champ de blocs. " width="1760" height="1360" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Workflow&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="centraliser-les-données">Centraliser les données</h1>
 
@@ -715,19 +736,16 @@ Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en c
   <ul>
     <li>Ouvrir l’outil Galaxy de téléversement de données <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span></li>
     <li>Sélectionner <strong>Choose local files</strong>
-      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/upload.png" alt="Choisir les fihiers en local. " width="1465" height="581" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> téléverser vos données</figcaption></figure>
-    </li>
+<a href="../../images/champbloc/upload.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/upload.png" alt="Choisir les fihiers en local. " width="1465" height="581" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> téléverser vos données&lt;/figcaption&gt;</figure></a></li>
     <li>
       <p>Naviguez dans votre ordinateur et récupérez vos fichiers ESTAMP (sélectionnez les trois fichiers mentionnés précédemment : champbloc_ivr.csv, champbloc_qecb.csv et ficheterrain.csv)</p>
     </li>
     <li>Cliquer sur <strong>Start</strong>
-      <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/start.png" alt="Commencer à charger vos données. " width="1239" height="748" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Lancer le chargement des données</figcaption></figure>
-    </li>
+<a href="../../images/champbloc/start.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/start.png" alt="Commencer à charger vos données. " width="1239" height="748" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Lancer le chargement des données&lt;/figcaption&gt;</figure></a></li>
     <li>Cliquer sur <strong>Close</strong>
-      <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/close.png" alt="Fermer la fenêtre de téléversement de données. " width="1254" height="762" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Fermer</figcaption></figure>
-      <p>Vous devez attendre que les données de votre historique s’affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.</p>
-      <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/avant_apres.png" alt="Jeux de données prêts à être utilisés. " width="825" height="544" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Jeux de données prêts</figcaption></figure>
-    </li>
+<a href="../../images/champbloc/close.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/close.png" alt="Fermer la fenêtre de téléversement de données. " width="1254" height="762" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Fermer&lt;/figcaption&gt;</figure></a>
+ Vous devez attendre que les données de votre historique s’affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
+<a href="../../images/champbloc/avant_apres.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/avant_apres.png" alt="Jeux de données prêts à être utilisés. " width="825" height="544" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Jeux de données prêts&lt;/figcaption&gt;</figure></a></li>
   </ul>
 
   <blockquote class="tip">
@@ -789,7 +807,7 @@ L’outil sera affiché dans le panneau central Galaxy.</li>
 
   <p>L’inforamtion est affichée dans le panneau du milieu</p>
 
-  <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/ivr.png" alt="IVR. " width="1855" height="919" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> IVR for Bilfot</figcaption></figure>
+  <p><a href="../../images/champbloc/ivr.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/ivr.png" alt="IVR. " width="1855" height="919" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span> IVR for Bilfot&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-rechercher-les-résultats-de-votre-site"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rechercher-les-résultats-de-votre-site" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Astuce: Rechercher les résultats de votre site<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -846,9 +864,9 @@ Utiliser l’outil <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ec
 
   <p>Les informations sont affichées dans le panneau central</p>
 
-  <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/fs_fi.png" alt="Dissim fs fi. " width="1839" height="895" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> dissimilarité des faces sup et inf</figcaption></figure>
+  <p><a href="../../images/champbloc/fs_fi.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/fs_fi.png" alt="Dissim fs fi. " width="1839" height="895" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 9</strong>:</span> dissimilarité des faces sup et inf&lt;/figcaption&gt;</figure></a></p>
 
-  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/bf_bm.png" alt="Dissim bf bm. " width="1853" height="891" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> dissimilarité des blocs fixes et mobiles</figcaption></figure>
+  <p><a href="../../images/champbloc/bf_bm.png" rel="noopener noreferrer"><figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/champbloc/bf_bm.png" alt="Dissim bf bm. " width="1853" height="891" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 10</strong>:</span> dissimilarité des blocs fixes et mobiles&lt;/figcaption&gt;</figure></a></p>
 
   <ol>
     <li>Téléchargez vos résultats</li>
@@ -1036,7 +1054,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1064,7 +1082,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

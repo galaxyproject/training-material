@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Data Libraries</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -327,8 +362,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -371,7 +406,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -419,23 +454,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -1009,7 +1030,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1021,7 +1042,7 @@ everyone on your server, or to a subset of your users. Datasets in libraries do
 not count against user quotas, so they are commonly used to provide the results
 of a sequencing run or similar project to a group of users on the servers.</p>
 
-<p><img src="/training-material/topics/admin/images/data/data-library-screenshot.png" alt="screenshot of data libraries. " width="1081" height="570" loading="lazy" /></p>
+<p><a href="/training-material/topics/admin/images/data/data-library-screenshot.png" rel="noopener noreferrer"><img src="/training-material/topics/admin/images/data/data-library-screenshot.png" alt="screenshot of data libraries. " width="1081" height="570" loading="lazy" /></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1157,13 +1178,13 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 
 <p>Additionally we have a <code class="language-plaintext highlighter-rouge">user</code> directory, below the user directory are more directories with the user’s email as they directory key. Data can be placed in here, and it will become accessible to those users (we set <code class="language-plaintext highlighter-rouge">user_library_import_dir: /libraries/user</code> for this.)</p>
 
-<p><img src="../../images/data/import-menu.png" alt="An add datasets dropdown menu in galaxy showing the options from history, from user directory, and under admins only, from import directory. " width="307" height="290" loading="lazy" /></p>
+<p><a href="../../images/data/import-menu.png" rel="noopener noreferrer"><img src="../../images/data/import-menu.png" alt="An add datasets dropdown menu in galaxy showing the options from history, from user directory, and under admins only, from import directory. " width="307" height="290" loading="lazy" /></a></p>
 
 <h2 id="from-history">from History</h2>
 
 <p>This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history</p>
 
-<p><img src="../../images/data/import-history.png" alt="A select box is shown listing files in the user's history. " width="767" height="681" loading="lazy" /></p>
+<p><a href="../../images/data/import-history.png" rel="noopener noreferrer"><img src="../../images/data/import-history.png" alt="A select box is shown listing files in the user's history. " width="767" height="681" loading="lazy" /></a></p>
 
 <p>You can easily select multiple files and quickly import them.</p>
 
@@ -1171,7 +1192,7 @@ of a sequencing run or similar project to a group of users on the servers.</p>
 
 <p>If user directories are configured, as we did at the beginning of this tutorial, then users will be able to import any files under their personal directory. This can be used for a wide variety of setups, e.g. providing the output of sequencing machines to users. This can point to the same directory structure that’s used by the FTP service, if you want your users to be able to import files directly from FTP.</p>
 
-<p><img src="../../images/data/import-user.png" alt="Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour." width="766" height="602" loading="lazy" /></p>
+<p><a href="../../images/data/import-user.png" rel="noopener noreferrer"><img src="../../images/data/import-user.png" alt="Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour." width="766" height="602" loading="lazy" /></a></p>
 
 <p>This will enable the option for everyone, any unprivileged user with a folder in the <code class="language-plaintext highlighter-rouge">user_library_import_dir</code> directory <em>and</em> permissions on a data library can import things from their import directory.</p>
 
@@ -1187,7 +1208,7 @@ Then it should appear in Galaxy.</p>
 
 <p>Similarly to the user import directories, there is the option to have an admin only import area. If one admin is responsible for creating the data libraries and importing data this can be a good option.</p>
 
-<p><img src="../../images/data/import-admin.png" alt="Same as the previous image, import popup listing options and one file, admin-wildtype.fna. " width="802" height="613" loading="lazy" /></p>
+<p><a href="../../images/data/import-admin.png" rel="noopener noreferrer"><img src="../../images/data/import-admin.png" alt="Same as the previous image, import popup listing options and one file, admin-wildtype.fna. " width="802" height="613" loading="lazy" /></a></p>
 
 <p>An important feature of data libraries importing is the ability to “link files instead of copying”. If you know your data will not be deleted (e.g. sequencing data sitting on an NFS), then you can use this option to further decrease the amount of storage your Galaxy server requires. The datasets can be used as if they were normal datasets, imported by users and analysed, but not imported into the Galaxy data storage area.</p>
 
@@ -1285,7 +1306,7 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
 
 </blockquote>
 
-<p><img src="../../images/data/imported.png" alt="Screenshot of data libraries, we're in a library folder named &quot;Mouse sequencing project&quot; and a directory and single file are shown. The file has an ugly URL as its name. " width="1167" height="628" loading="lazy" /></p>
+<p><a href="../../images/data/imported.png" rel="noopener noreferrer"><img src="../../images/data/imported.png" alt="Screenshot of data libraries, we're in a library folder named &quot;Mouse sequencing project&quot; and a directory and single file are shown. The file has an ugly URL as its name. " width="1167" height="628" loading="lazy" /></a></p>
 
 <p>That’s it! You should be able to <a href="https://my.gat.galaxy.training/?path=/libraries">see your newly created data library in your Galaxy.</a></p>
 
@@ -1326,15 +1347,15 @@ library already exists! <span class="nb">id</span>: f597429621d6eb2b
 
 <p>The tool form provides a button on the right of every dataset selector which allows users to “Browse datasets”</p>
 
-<p><img src="../../images/data/select-from-lib0.png" alt="tool form with the folder icon to the right of the dataset selector shown, the button with tooltip &quot;Browse datasets&quot; is highlighted. " width="304" height="340" loading="lazy" /></p>
+<p><a href="../../images/data/select-from-lib0.png" rel="noopener noreferrer"><img src="../../images/data/select-from-lib0.png" alt="tool form with the folder icon to the right of the dataset selector shown, the button with tooltip &quot;Browse datasets&quot; is highlighted. " width="304" height="340" loading="lazy" /></a></p>
 
 <p>Users can then choose from datasets in their history, or browse through the data libraries</p>
 
-<p><img src="../../images/data/select-from-lib1.png" alt="Popup with &quot;Data Libraries&quot;, datasets from histories, and an upload button. " width="1296" height="787" loading="lazy" /></p>
+<p><a href="../../images/data/select-from-lib1.png" rel="noopener noreferrer"><img src="../../images/data/select-from-lib1.png" alt="Popup with &quot;Data Libraries&quot;, datasets from histories, and an upload button. " width="1296" height="787" loading="lazy" /></a></p>
 
 <p>Here users can see every file accessible to them in the data library to begin analysing.</p>
 
-<p><img src="../../images/data/select-from-lib2.png" alt="Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data. " width="1062" height="711" loading="lazy" /></p>
+<p><a href="../../images/data/select-from-lib2.png" rel="noopener noreferrer"><img src="../../images/data/select-from-lib2.png" alt="Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data. " width="1062" height="711" loading="lazy" /></a></p>
 
 <!--SNIPPET-->
 <blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path-1"><i class="far fa-comment-dots" aria-hidden="true"></i> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">                    <li class="disabled">         <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">             <div>Step 1</div>             <div>ansible-galaxy</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">             <div>Step 2</div>             <div>backup-cleanup</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/customization/tutorial.html">             <div>Step 3</div>             <div>customization</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">             <div>Step 4</div>             <div>tus</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">             <div>Step 5</div>             <div>cvmfs</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/apptainer/tutorial.html">             <div>Step 6</div>             <div>apptainer</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">             <div>Step 7</div>             <div>tool-management</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="disabled">         <a href="/training-material/topics/admin/tutorials/reference-genomes/tutorial.html">             <div>Step 8</div>             <div>reference-genomes</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="active">         <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">             <div>Step 9</div>             <div>data-library</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">             <div>Step 10</div>             <div>dev/bioblend-api</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">             <div>Step 11</div>             <div>connect-to-compute-cluster</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">             <div>Step 12</div>             <div>job-destinations</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">             <div>Step 13</div>             <div>pulsar</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">             <div>Step 14</div>             <div>celery</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">             <div>Step 15</div>             <div>gxadmin</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">             <div>Step 16</div>             <div>reports</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">             <div>Step 17</div>             <div>monitoring</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">             <div>Step 18</div>             <div>tiaas</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/sentry/tutorial.html">             <div>Step 19</div>             <div>sentry</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">             <div>Step 20</div>             <div>ftp</div>         </a>     </li>               <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>                         <li class="">         <a href="/training-material/topics/admin/tutorials/beacon/tutorial.html">             <div>Step 21</div>             <div>beacon</div>         </a>     </li>           </ol> </blockquote>
@@ -1491,7 +1512,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1523,7 +1544,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

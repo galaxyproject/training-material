@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Filter, Plot and Explore Single-cell RNA-seq Data</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -264,8 +299,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -308,7 +343,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -356,23 +391,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -843,7 +864,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1180,8 +1201,7 @@ Sentry.init({
 
     <ol>
       <li>The plot <code class="language-plaintext highlighter-rouge">violin - batch - log</code> will have what you’re looking for!
-        <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-batch-log.png" alt="Violin - batch - log. " width="2018" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Violin - batch - log (Raw)</figcaption></figure>
-      </li>
+ <a href="../../images/scrna-casestudy/wab-violin-batch-log.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-batch-log.png" alt="Violin - batch - log. " width="2018" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Violin - batch - log (Raw)&lt;/figcaption&gt;</figure></a></li>
       <li>Keeping in mind that this is a log scale - which means that small differences can mean large differences - the violin plots probably look pretty similar.
         <ul>
           <li><code class="language-plaintext highlighter-rouge">N703</code> and <code class="language-plaintext highlighter-rouge">N707</code> might be a bit lower on genes and counts (or UMIs), but the differences aren’t catastrophic.</li>
@@ -1210,9 +1230,8 @@ Sentry.init({
 
     <ol>
       <li>Similar to above, the plots <code class="language-plaintext highlighter-rouge">violin - sex - log</code> and <code class="language-plaintext highlighter-rouge">violin - genotype - log</code> will have what you’re looking for!
-        <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-sex-log.png" alt="Violin - sex - log. " width="2018" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Violin - sex - log (Raw)</figcaption></figure>
-        <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-genotype-log.png" alt="Violin - genotype - log. " width="2018" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Violin - genotype - log (Raw)</figcaption></figure>
-      </li>
+  <a href="../../images/scrna-casestudy/wab-violin-sex-log.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-sex-log.png" alt="Violin - sex - log. " width="2018" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Violin - sex - log (Raw)&lt;/figcaption&gt;</figure></a>
+  <a href="../../images/scrna-casestudy/wab-violin-genotype-log.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-genotype-log.png" alt="Violin - genotype - log. " width="2018" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Violin - genotype - log (Raw)&lt;/figcaption&gt;</figure></a></li>
       <li>There isn’t a major difference in sequencing depth across sex, I would say - though you are welcome to disagree!
         <ul>
           <li>It is clear there are far fewer female cells, which makes sense given that only one sample was female. <em>Note - that was an unfortunate discovery made long after generating libraries. It’s quite hard to identify the sex of a neonate in the lab! In practice, try hard to not let such a confounding factor into your data! You could consider re-running all the following analysis without that female sample, if you wish.</em></li>
@@ -1251,12 +1270,12 @@ Sentry.init({
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Any plot with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> would do here, actually! Some people prefer scatterplots to violins.</li>
-    </ol>
-    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-genesxmito.png" alt="Scatter-genesxmito. " width="609" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Scatter - mito x genes (Raw)</figcaption></figure>
-
-    <ol>
-      <li>In <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code> you can see how cells with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> up to around, perhaps, <code class="language-plaintext highlighter-rouge">5.7</code> (around 300 genes) often have high <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>.
+      <li>
+        <p>Any plot with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> would do here, actually! Some people prefer scatterplots to violins.
+<a href="../../images/scrna-casestudy/wab-scatter-genesxmito.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-genesxmito.png" alt="Scatter-genesxmito. " width="609" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Scatter - mito x genes (Raw)&lt;/figcaption&gt;</figure></a></p>
+      </li>
+      <li>
+        <p>In <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code> you can see how cells with <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code> up to around, perhaps, <code class="language-plaintext highlighter-rouge">5.7</code> (around 300 genes) often have high <code class="language-plaintext highlighter-rouge">pct_counts_mito</code>.</p>
         <ul>
           <li>You can plot this as just <code class="language-plaintext highlighter-rouge">n_counts</code> and see this same trend at around 300 genes, but with this data the log format is clearer so that’s how we’re presenting it.</li>
           <li>You could also use the violin plots to come up with the threshold, and thus also take batch into account. It’s good to look at the violins as well, because you don’t want to accidentally cut out an entire sample (i.e. N703 and N707).</li>
@@ -1281,12 +1300,12 @@ Sentry.init({
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>As before, any plot with <code class="language-plaintext highlighter-rouge">log1p_total_counts</code> will do! Again, we’ll use a scatterplot here, but you can use a violin plot if you wish!</li>
-    </ol>
-    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " width="609" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
-
-    <ol>
-      <li>We can see that we will need to set a higher threshold (which makes sense, as you’d expect more UMI’s per cell rather than unique genes!). Again, perhaps being a bit aggressive in our threshold, we might choose <code class="language-plaintext highlighter-rouge">6.3</code>, for instance (which amounts to around 500 counts/cell).
+      <li>
+        <p>As before, any plot with <code class="language-plaintext highlighter-rouge">log1p_total_counts</code> will do! Again, we’ll use a scatterplot here, but you can use a violin plot if you wish!
+<a href="../../images/scrna-casestudy/wab-scatter-countsxmito.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " width="609" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Scatterplot - mito x UMIs (Raw)&lt;/figcaption&gt;</figure></a></p>
+      </li>
+      <li>
+        <p>We can see that we will need to set a higher threshold (which makes sense, as you’d expect more UMI’s per cell rather than unique genes!). Again, perhaps being a bit aggressive in our threshold, we might choose <code class="language-plaintext highlighter-rouge">6.3</code>, for instance (which amounts to around 500 counts/cell).</p>
         <ul>
           <li>In an ideal world, you’ll see a clear population of real cells separated from a clear population of debris. Many samples, like this one, are under-sequenced, and such separation would likely be seen after deeper sequencing!</li>
         </ul>
@@ -1309,12 +1328,12 @@ Sentry.init({
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Any plot with <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> would do here, however the scatterplots are likely the easiest to interpret. We’ll use the same as last time.</li>
-    </ol>
-    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " width="609" height="413" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatterplot - mito x UMIs (Raw)</figcaption></figure>
-
-    <ol>
-      <li>We can see a clear trend wherein cells that have around 5% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we’ll go more aggressive with a <code class="language-plaintext highlighter-rouge">4.5%</code>.
+      <li>
+        <p>Any plot with <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> would do here, however the scatterplots are likely the easiest to interpret. We’ll use the same as last time.
+<a href="../../images/scrna-casestudy/wab-scatter-countsxmito.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-scatter-countsxmito.png" alt="Scatter-countsxmito. " width="609" height="413" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Scatterplot - mito x UMIs (Raw)&lt;/figcaption&gt;</figure></a></p>
+      </li>
+      <li>
+        <p>We can see a clear trend wherein cells that have around 5% mito counts or higher also have far fewer total counts. These cells are low quality, will muddy our data, and are likely stressed or ruptured prior to encapsulation in a droplet. While 5% is quite a common cut-off, this is quite messy data, so just for kicks we’ll go more aggressive with a <code class="language-plaintext highlighter-rouge">4.5%</code>.</p>
         <ul>
           <li>In general, you must adapt all cut-offs to your data - metabolically active cells might have higher mitochondrial RNA in general, and you don’t want to lose a cell population because of a cut-off.</li>
         </ul>
@@ -1407,7 +1426,7 @@ Sentry.init({
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce. " width="2805" height="1045" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Raw vs 1st filter - genes/cell</figcaption></figure>
+    <p><a href="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-raw-filteredgenes.png" alt="Violinplot-filteronce. " width="2805" height="1045" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Raw vs 1st filter - genes/cell&lt;/figcaption&gt;</figure></a></p>
     <ol>
       <li>The only part that seems to change is the <code class="language-plaintext highlighter-rouge">log1p_n_genes_by_counts</code>.  You can see a flatter bottom to the violin plot - this is the lower threshold set. Ideally, this would create a beautiful violin plot because there would be a clear population of low-gene number cells. Sadly not the case here, but still a reasonable filter.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbygenes</code>, you can see you now have <code class="language-plaintext highlighter-rouge">17,040 cells x 35,734 genes</code>.</li>
@@ -1479,7 +1498,7 @@ Sentry.init({
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice. " width="2759" height="1090" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> 1st filter vs 2nd filter - counts/cell</figcaption></figure>
+    <p><a href="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-filteredgenesxfilteredcounts.png" alt="Violinplot-filtertwice. " width="2759" height="1090" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span> 1st filter vs 2nd filter - counts/cell&lt;/figcaption&gt;</figure></a></p>
     <ol>
       <li>We will focus on the <code class="language-plaintext highlighter-rouge">log1p_total_counts</code> as that shows the biggest change. Similar to above, the bottom of the violin shape has flattered due to the threshold.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbycounts</code>, you can see you now have <code class="language-plaintext highlighter-rouge">8,678 cells x 35,734 genes</code>.</li>
@@ -1561,7 +1580,7 @@ Sentry.init({
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-mitofilter.png" alt="Violinplot-filtermito. " width="2649" height="1035" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Violin plots after filtering genes, counts, and mito content/cell</figcaption></figure>
+    <p><a href="../../images/scrna-casestudy/wab-violin-mitofilter.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violin-mitofilter.png" alt="Violinplot-filtermito. " width="2649" height="1035" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Violin plots after filtering genes, counts, and mito content/cell&lt;/figcaption&gt;</figure></a></p>
     <ol>
       <li>If we carefully check the axes, we can see that the <code class="language-plaintext highlighter-rouge">pct_counts_mito</code> has shrunk.</li>
       <li>In <code class="language-plaintext highlighter-rouge">General - Filterbymito</code>, you can see you now have <code class="language-plaintext highlighter-rouge">8,605 cells x 35,734 genes</code>.</li>
@@ -1571,8 +1590,8 @@ Sentry.init({
 
 </blockquote>
 
-<p>Here’s a quick overall summary for easy visualisation if you fancy it.</p>
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violins2gether.png" alt="Violinplot-Summary. " width="4931" height="3501" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Filtering summary</figcaption></figure>
+<p>Here’s a quick overall summary for easy visualisation if you fancy it.
+<a href="../../images/scrna-casestudy/wab-violins2gether.png" rel="noopener noreferrer"><figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-violins2gether.png" alt="Violinplot-Summary. " width="4931" height="3501" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Filtering summary&lt;/figcaption&gt;</figure></a></p>
 
 <p>Fantastic work! However, you’ve now removed a whole heap of cells, and since the captured genes are sporadic (i.e. a small percentage of the overall transcriptome per cell) this means there are a number of genes in your matrix that are currently not in any of the remaining cells. Genes that do not appear in any cell, or even in only 1 or 2 cells, will make some analytical tools break and overall will not be biologically informative. So let’s remove them! Note that <code class="language-plaintext highlighter-rouge">3</code> is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.</p>
 
@@ -1762,7 +1781,7 @@ Sentry.init({
 
 <p>Why 50 principal components you ask? Well, we’re pretty confident 50 is an over-estimate. Examine <code class="language-plaintext highlighter-rouge">PCA Variance</code>.</p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-pcavariance.png" alt="PCA-variance. " width="575" height="453" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Variability explained per PC</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-pcavariance.png" rel="noopener noreferrer"><figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-pcavariance.png" alt="PCA-variance. " width="575" height="453" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Variability explained per PC&lt;/figcaption&gt;</figure></a></p>
 
 <p>We can see that there is really not much variation explained past component 19. So we might save ourselves a great deal of time and muddied data by focusing on the top <code class="language-plaintext highlighter-rouge">20</code> PCs.</p>
 
@@ -2021,8 +2040,8 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 <blockquote class="question">
   <div class="box-title question-title" id="question-appearance-is-everything"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Appearance is everything</div>
 
-  <p>Which visualisation is the most useful for getting an overview of our data, <em>pca</em>, <em>tsne</em>, or <em>umap</em>?</p>
-  <figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-3visualisations.png" alt="PCA-tSNE-UMAP. " width="2351" height="1008" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Louvain clustering by dimension reduction</figcaption></figure>
+  <p>Which visualisation is the most useful for getting an overview of our data, <em>pca</em>, <em>tsne</em>, or <em>umap</em>?
+<a href="../../images/scrna-casestudy/wab-3visualisations.png" rel="noopener noreferrer"><figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-3visualisations.png" alt="PCA-tSNE-UMAP. " width="2351" height="1008" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Louvain clustering by dimension reduction&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2072,7 +2091,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
   </tbody>
 </table>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-markergeneumaps.png" alt="Marker Gene UMAPs. " width="3931" height="1641" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Known marker gene locations</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-markergeneumaps.png" rel="noopener noreferrer"><figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-markergeneumaps.png" alt="Marker Gene UMAPs. " width="3931" height="1641" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Known marker gene locations&lt;/figcaption&gt;</figure></a></p>
 
 <p>The authors weren’t interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn’t really require such granularity of clusters.</p>
 
@@ -2138,7 +2157,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
 </blockquote>
 
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-annotatedcells.png" alt="Annotated cell types. " width="779" height="500" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Our annotated UMAP</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-annotatedcells.png" rel="noopener noreferrer"><figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-annotatedcells.png" alt="Annotated cell types. " width="779" height="500" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Our annotated UMAP&lt;/figcaption&gt;</figure></a></p>
 
 <p>Now that we know what we’re dealing with, let’s examine the effect of our variable, proper science!</p>
 
@@ -2147,7 +2166,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
   <p>Are there any differences in genotype? Or in biological terms, is there an impact of growth restriction on T-cell development in the thymus?</p>
 
-  <figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-genotypedifferences.png" alt="Genotype Images. " width="3189" height="1051" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Genotype differences</figcaption></figure>
+  <p><a href="../../images/scrna-casestudy/wab-genotypedifferences.png" rel="noopener noreferrer"><figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-genotypedifferences.png" alt="Genotype Images. " width="3189" height="1051" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Genotype differences&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2167,7 +2186,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
 
   <p>Is there a batch effect?</p>
 
-  <figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-batcheffect.png" alt="Batch effect. " width="422" height="343" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Batch effect?</figcaption></figure>
+  <p><a href="../../images/scrna-casestudy/wab-batcheffect.png" rel="noopener noreferrer"><figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-batcheffect.png" alt="Batch effect. " width="422" height="343" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Batch effect?&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2175,7 +2194,7 @@ But first, let’s pick some marker genes from the <code class="language-plainte
     <p>While some shifts are expected and nothing to be concerned about, DP-L looks to be mainly comprised of N705. There might be a bit of batch effect, so you could consider using batch correction on this dataset. However, if we focus our attention on the other cluster - mature T-cells -  where there is batch mixing, we can still assess this biologically even without batch correction.
 Additionally, we will also look at the confounding effect of sex.</p>
 
-    <figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-sex-batch.png" alt="Sex effect. " width="3015" height="760" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Sex differences</figcaption></figure>
+    <p><a href="../../images/scrna-casestudy/wab-sex-batch.png" rel="noopener noreferrer"><figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-sex-batch.png" alt="Sex effect. " width="3015" height="760" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Sex differences&lt;/figcaption&gt;</figure></a></p>
 
     <p>We note that the one female sample - unfortunately one of the mere three knockout samples - seems to be distributed in the same areas as the knockout samples at large, so luckily, this doesn’t seem to be a confounding factor and we can still learn from our data. Ideally, this experiment would be re-run with either more female samples all around or swapping out this female from the male sample.</p>
 
@@ -2188,7 +2207,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Are there any clusters or differences being driven by sequencing depth, a technical and random factor?</p>
 
-  <figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-totalcounts.png" alt="Sequencing depth. " width="1921" height="740" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Counts across clusters</figcaption></figure>
+  <p><a href="../../images/scrna-casestudy/wab-umap-totalcounts.png" rel="noopener noreferrer"><figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-totalcounts.png" alt="Sequencing depth. " width="1921" height="740" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Counts across clusters&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2204,7 +2223,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Do you think we processed these samples well enough?</p>
 
-  <figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-hba.png" alt="Sequencing depth. " width="503" height="514" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Hemoglobin across clusters</figcaption></figure>
+  <p><a href="../../images/scrna-casestudy/wab-hba.png" rel="noopener noreferrer"><figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-hba.png" alt="Sequencing depth. " width="503" height="514" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 19</strong>:</span> Hemoglobin across clusters&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2220,7 +2239,7 @@ Additionally, we will also look at the confounding effect of sex.</p>
 
   <p>Do you think the clustering is appropriate? i.e. are there single clusters that you think should be separate, and multiple clusters that could be combined?</p>
 
-  <figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-itm2a.png" alt="Itm2a Expression. " width="1973" height="754" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Itm2a across clusters</figcaption></figure>
+  <p><a href="../../images/scrna-casestudy/wab-umap-itm2a.png" rel="noopener noreferrer"><figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-umap-itm2a.png" alt="Itm2a Expression. " width="1973" height="754" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 20</strong>:</span> Itm2a across clusters&lt;/figcaption&gt;</figure></a></p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2293,7 +2312,7 @@ For those that did not take the ‘control’ options, please</p>
 <p>In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!</p>
 
 <p>To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
-<a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
+<a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><a href="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" rel="noopener noreferrer"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></a></p>
 
                 </section>
 
@@ -2754,7 +2773,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2786,7 +2805,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

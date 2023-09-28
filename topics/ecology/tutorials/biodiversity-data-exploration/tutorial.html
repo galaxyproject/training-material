@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Biodiversity data exploration</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -297,8 +332,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -341,7 +376,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -389,23 +424,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -728,7 +749,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -895,7 +916,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png" alt="Homoscedasticity and normality_example on Sepioteuthis australis. " loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Homoscedasticity_and_normality_of_%20Sepioteuthis%20australis.png" alt="Homoscedasticity and normality_example on Sepioteuthis australis. " loading="lazy" /></a></p>
 
 <h2 id="autocorrelation-in-your-data">Autocorrelation in your data</h2>
 
@@ -923,7 +944,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Variables_exploration_autocorrelation.png" alt="Variable_exploration_autocorrelation example. " width="2099" height="2099" loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Variables_exploration_autocorrelation.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Variables_exploration_autocorrelation.png" alt="Variable_exploration_autocorrelation example. " width="2099" height="2099" loading="lazy" /></a></p>
 
 <h2 id="check-collinearity-in-your-data">Check collinearity in your data</h2>
 
@@ -949,7 +970,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png" alt="Variable_exploration_collinarity example. " loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Variables_exploration_collinarity_of_Sepioteuthis%20australis.png" alt="Variable_exploration_collinarity example. " loading="lazy" /></a></p>
 
 <h1 id="data-exploration">Data exploration</h1>
 <h2 id="visualize-abundance-repartition-through-space">Visualize abundance repartition through space</h2>
@@ -979,7 +1000,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png" alt="Presence-absence-example. " width="2362" height="1062" loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Presence-absence_and_abundance_mappy.png" alt="Presence-absence-example. " width="2362" height="1062" loading="lazy" /></a></p>
 
 <h2 id="visualize-the-number-of-locations-where-each-taxons-are-present">Visualize the number of locations where each taxons are present</h2>
 
@@ -1031,7 +1052,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Presence-absence_and_abundance_rarefaction.png" alt="Variable_exploration_rarefaction curves. " width="2099" height="2099" loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Presence-absence_and_abundance_rarefaction.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Presence-absence_and_abundance_rarefaction.png" alt="Variable_exploration_rarefaction curves. " width="2099" height="2099" loading="lazy" /></a></p>
 
 <h2 id="visualize-the-dispersion-of-a-numeric-variable-and-the-correlation-between-species-absence">Visualize the dispersion of a numeric variable and the correlation between species absence</h2>
 
@@ -1055,8 +1076,8 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Boxplot_and_dispersion_plot.png" alt="Boxplot dispersion_example. " width="1417" height="2362" loading="lazy" />
-<img src="../../images/BiodivExplo/Absence-correlation_plot.png" alt="Absence correlation_example. " width="2100" height="2100" loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Boxplot_and_dispersion_plot.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Boxplot_and_dispersion_plot.png" alt="Boxplot dispersion_example. " width="1417" height="2362" loading="lazy" /></a>
+<a href="../../images/BiodivExplo/Absence-correlation_plot.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Absence-correlation_plot.png" alt="Absence correlation_example. " width="2100" height="2100" loading="lazy" /></a></p>
 
 <h1 id="beta-diversity">Beta diversity</h1>
 <h2 id="local-and-species-contribution-to-beta-diversity-scbd-and-lcbd">Local and Species Contribution to Beta Diversity (SCBD and LCBD)</h2>
@@ -1087,10 +1108,10 @@ The two tests have to be significant so variances aren’t homogenous and data i
 
 </blockquote>
 
-<p><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Beta_diversity_through_space.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" />
-<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_LCBD_sites_time.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" />
-<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Mean_LCBD_through_time.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" />
-<img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_SCBD_Species_Radar_plot.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" /></p>
+<p><a href="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Beta_diversity_through_space.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Beta_diversity_through_space.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" /></a>
+<a href="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_LCBD_sites_time.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_LCBD_sites_time.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" /></a>
+<a href="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Mean_LCBD_through_time.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_Mean_LCBD_through_time.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" /></a>
+<a href="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_SCBD_Species_Radar_plot.png" rel="noopener noreferrer"><img src="../../images/BiodivExplo/Local_Contributions_to_Beta_Diversity_LCBD_SCBD_Species_Radar_plot.png" alt="Variable_exploration_example. " width="2100" height="2100" loading="lazy" /></a></p>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1337,7 +1358,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1369,7 +1390,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

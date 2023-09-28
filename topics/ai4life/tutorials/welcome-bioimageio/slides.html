@@ -8,29 +8,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Welcome to the BioImage Model Zoo</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -205,7 +240,7 @@ Sentry.init({
 }
         </script>
     </head>
-  <body>
+  <body data-brightness="auto" data-contrast="auto">
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
@@ -374,7 +409,7 @@ You can easily run any of the models in user-friendly tools such as Ilastik, dee
 ---
 ### BioImage Model Zoo: Overview
 
-&lt;figure id=&quot;figure-1&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-01.png&quot;  alt=&quot;Consumer Software of Bioimageio. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;:&lt;/span&gt; Consumer software of the Bioimageio&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-01.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-1&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-01.png&quot;  alt=&quot;Consumer Software of Bioimageio. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 1&lt;/strong&gt;:&lt;/span&gt; Consumer software of the Bioimageio&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 If you access the BioImage Model Zoo webpage you can find all consumer software that can run the bioimage io models.
@@ -382,7 +417,7 @@ If you access the BioImage Model Zoo webpage you can find all consumer software 
 ---
 ### BioImage Model Zoo: Overview
 
-&lt;figure id=&quot;figure-2&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-02.png&quot;  alt=&quot;Choose a category. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;:&lt;/span&gt; Choose a category&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-02.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-2&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-02.png&quot;  alt=&quot;Choose a category. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 2&lt;/strong&gt;:&lt;/span&gt; Choose a category&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 Depending on the task you wish to perform, you may cohose the type of card you are looking for. It will depend on the model, application or dataset you wish to use.
@@ -390,7 +425,7 @@ Depending on the task you wish to perform, you may cohose the type of card you a
 ---
 ### BioImage Model Zoo: Overview
 
-&lt;figure id=&quot;figure-3&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-03.png&quot;  alt=&quot;Search bar. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;:&lt;/span&gt; Search bar&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-03.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-3&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-03.png&quot;  alt=&quot;Search bar. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 3&lt;/strong&gt;:&lt;/span&gt; Search bar&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 In the search bar you can write an image processing task, the name of a model or a bioimaging modality. It will suggest you the existing choices.
@@ -398,7 +433,7 @@ In the search bar you can write an image processing task, the name of a model or
 ---
 ### BioImage Model Zoo: Content
 
-&lt;figure id=&quot;figure-4&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-04.png&quot;  alt=&quot;BioImage Model Zoo Content. &quot;  width=&quot;906&quot; height=500 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Content&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-04.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-4&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-04.png&quot;  alt=&quot;BioImage Model Zoo Content. &quot;  width=&quot;906&quot; height=500 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 4&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Content&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 The content of bioimage io such as models, datasets and applications are provided as cards.
@@ -406,7 +441,7 @@ The content of bioimage io such as models, datasets and applications are provide
 ---
 ### BioImage Model Zoo: Models
 
-&lt;figure id=&quot;figure-5&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-05.png&quot;  alt=&quot;BioImage Model Zoo Model Cards. &quot;  width=&quot;1073&quot; height=615 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 5&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Model Cards&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-05.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-5&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-05.png&quot;  alt=&quot;BioImage Model Zoo Model Cards. &quot;  width=&quot;1073&quot; height=615 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 5&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Model Cards&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 In each model card you can find interactive buttons and the description of the model itself. These buttons will provide you some of the features of that model such as the training dataset or the license.
@@ -415,7 +450,7 @@ You can also choose the consumer software to run the model, share this model, do
 ---
 ### BioImage Model Zoo: Models
 
-&lt;figure id=&quot;figure-6&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-06.png&quot;  alt=&quot;BioImage Model Zoo Model Download. &quot;  width=&quot;950&quot; height=516 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 6&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Model Download&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-06.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-6&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-06.png&quot;  alt=&quot;BioImage Model Zoo Model Download. &quot;  width=&quot;950&quot; height=516 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 6&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Model Download&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 If you want, you can click on the download button to download the method and click on the consumer software you chose.
@@ -426,7 +461,7 @@ It will download automatically.
 
 If you want to know more about the Bioimage Model Zoo, check out the documentation or contact us!
 
-&lt;figure id=&quot;figure-7&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-07.png&quot;  alt=&quot;BioImage Model Zoo Documentation. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 7&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Documentation&lt;/figcaption&gt;&lt;/figure&gt;
+&lt;a href=&quot;../../images/welcome-bioimageio-07.png&quot; rel=&quot;noopener noreferrer&quot;&gt;&lt;figure id=&quot;figure-7&quot; style=&quot;max-width: 90%; margin:auto;&quot;&gt;&lt;img src=&quot;../../images/welcome-bioimageio-07.png&quot;  alt=&quot;BioImage Model Zoo Documentation. &quot;  width=&quot;961&quot; height=721 loading=&quot;lazy&quot;&gt;&lt;figcaption&gt;&lt;span class=&quot;figcaption-prefix&quot;&gt;&lt;strong&gt;Figure 7&lt;/strong&gt;:&lt;/span&gt; BioImage Model Zoo Documentation&lt;/figcaption&gt;&lt;/figure&gt;&lt;/a&gt;
 
 ???
 If you want to know more about the Bioimage Model Zoo, check our documentation or contact us!

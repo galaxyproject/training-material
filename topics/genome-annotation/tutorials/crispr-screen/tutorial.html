@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>CRISPR screen analysis</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -341,8 +376,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -385,7 +420,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -433,23 +468,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -943,7 +964,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -956,7 +977,7 @@ Sentry.init({
 
 <p>The ease of generating gRNAs makes <abbr title="Clustered Regularly Interspaced Short Palindromic Repeats">CRISPR</abbr> one of the most scalable genome editing technologies and it has been recently utilized for genome-wide screens. These screens enable systematic targeting of 1000s of genes, with one gene targeted per cell, to identify genes driving phenotypes, such as cell survival, drug resistance or sensitivity. It is feasible for any laboratory to perform a CRISPR screen (<span class="citation"><a href="#Cluse2018">Cluse <i>et al.</i> 2018</a></span>) and they are being increasingly used to obtain biological insight (<span class="citation"><a href="#Bock2022">Bock <i>et al.</i> 2022</a></span>, <span class="citation"><a href="#Przybyla2021">Przybyla and Gilbert 2021</a></span>). These days, pooled whole-genome knockout, inhibition and activation CRISPR libraries and CRISPR sub-library pools are commonly screened.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/crispr_screen.jpg" alt="Illustration of CRISPR Screen Method. " width="1280" height="1149" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)</figcaption></figure>
+<p><a href="../../images/crispr-screen/crispr_screen.jpg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/crispr_screen.jpg" alt="Illustration of CRISPR Screen Method. " width="1280" height="1149" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> CRISPR knockout and activation methods (from <span class="citation"><a href="#Joung2016">Joung <i>et al.</i> 2016</a></span>)&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1011,7 +1032,7 @@ T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-
         </li>
       </ul>
 
-      <p><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader. " width="1422" height="842" loading="lazy" /></p>
+      <p><a href="../../images/crispr-screen/crispr_rule_uploader.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_uploader.png" alt="Rule-based Uploader. " width="1422" height="842" loading="lazy" /></a></p>
 
       <ul>
         <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
@@ -1033,7 +1054,7 @@ T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-
         <li>In the Name: box type <code class="language-plaintext highlighter-rouge">fastqs</code> and press <kbd>Upload</kbd></li>
       </ul>
 
-      <p><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor. " width="2270" height="976" loading="lazy" /></p>
+      <p><a href="../../images/crispr-screen/crispr_rule_editor.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/crispr_rule_editor.png" alt="Rule-based Editor. " width="2270" height="976" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1044,7 +1065,7 @@ T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-
 <p>First we’ll check the quality of the raw read sequences with <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and aggregate the reports from the multiple samples with <a href="https://multiqc.info/">MultiQC</a> (<span class="citation"><a href="#ewels2016multiqc">Ewels <i>et al.</i> 2016</a></span>). We will check if the base quality is good and for presence of adapters. For more details on quality control and what the other FastQC plots mean see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” tutorial</a>.
 With CRISPR screens we expect adapter sequence to be present, surrounding the guide. The adapters for the Brunello library vector used with this dataset (<a href="https://www.addgene.org/52963/">lentiGuide-Puro</a>) are shown below. We’ll get FASTQC to check for their presence by providing an adapters file with their sequences.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/adapter_sequences_dataset.png" alt="Adapter sequences dataset. " width="543" height="127" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Reads from the T8-APR-246 sample with one of the guide sequences highlighted in blue (controlguide1 from Brunello library file). The adapter sequences are in red, directly adjacent to the guide on the right and left. The bases in purple at the start of the reads are stagger regions of different length (0-8bp), required to maintain diversity across the flowcell during sequencing of CRISPR screens.</figcaption></figure>
+<p><a href="../../images/crispr-screen/adapter_sequences_dataset.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/adapter_sequences_dataset.png" alt="Adapter sequences dataset. " width="543" height="127" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Reads from the T8-APR-246 sample with one of the guide sequences highlighted in blue (controlguide1 from Brunello library file). The adapter sequences are in red, directly adjacent to the guide on the right and left. The bases in purple at the start of the reads are stagger regions of different length (0-8bp), required to maintain diversity across the flowcell during sequencing of CRISPR screens.&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-adapters-file"><button class="gtn-boxify-button details" type="button" aria-controls="details-adapters-file" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Adapters file<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1111,12 +1132,12 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
             <li>
               <p>The base quality is good for the 3 files, as can be seen in the plot below.</p>
 
-              <p><img src="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" alt="Sequence quality. " width="1200" height="800" loading="lazy" /></p>
+              <p><a href="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_per_base_sequence_quality_plot.png" alt="Sequence quality. " width="1200" height="800" loading="lazy" /></a></p>
             </li>
             <li>
               <p>Yes. In the Adapter Content plot (below) we can see the two CRISPR adapters have been detected. The adapter 5 prime of the sgRNA starts appearing at the beginning of the reads and has been detected in nearly 100% of reads. The adapter 3 prime of the sgRNA appears after base 40. There’s also a little Illumina Universal adapter detected towards the ends of some reads which indicate the presence of short fragments, possibly adapter dimers.</p>
 
-              <p><img src="../../images/crispr-screen/fastqc_adapter_content_plot.png" alt="Adapter content. " width="1200" height="800" loading="lazy" /></p>
+              <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot.png" alt="Adapter content. " width="1200" height="800" loading="lazy" /></a></p>
             </li>
           </ol>
         </blockquote>
@@ -1136,7 +1157,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
   <p>In this dataset the adapters start at different positions in the reads, as was shown above. MAGeCK count can trim adapters around the guide sequences. However, the adapters need to start at the same position in each read, requiring the same trimming length, as described on the MAGeCK website <a href="https://sourceforge.net/p/mageck/wiki/advanced_tutorial/">here</a>. An example for what MAGeCK expects is shown below. If you used MAGeCK count trimming with the dataset in this tutorial it wouldn’t be able to trim the 5’ adapter properly and you would only get ~60% reads mapping instead of &gt;80%.</p>
 
-  <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/adapter_sequences_mageck.png" alt="Adapters MAGeCK can trim. " width="544" height="126" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.</figcaption></figure>
+  <p><a href="../../images/crispr-screen/adapter_sequences_mageck.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/adapter_sequences_mageck.png" alt="Adapters MAGeCK can trim. " width="544" height="126" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Example showing what MAGeCK count expects to be able to auto-detect and trim adapters. Guide sequence is higlighted in blue with the adapter sequences directly adjacent on the right and left. MAGeCK count uses the first 20 bases of each read to map so the sequence after the guide is less important to trim exactly.&lt;/figcaption&gt;</figure></a></p>
 
   <p>For this dataset, as the adapters are not at the same position in each read, we need to trim the adapters before running MAGeCK count.</p>
 </blockquote>
@@ -1217,7 +1238,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
 <p>MultiQC produces a 5’ trimmed sequences plot where we can check the results are as expected. Here we can see the length of sequence trimmed from the start of the read ranges from 22bp to 30bp with a dip at 27bp. This corresponds to the length of the adapter (22bp) plus stagger sequence (0,1,2,3,4,6,7,8bp) (<a href="https://media.addgene.org/cms/filer_public/61/16/611619f4-0926-4a07-b5c7-e286a8ecf7f5/broadgpp-sequencing-protocol.pdf">see sequencing protocol</a>). There is no 5bp stagger sequence so 27bp sequences are not expected to be trimmed. The trimmed sequence lengths are what we expect for this dataset and the plot looks similar for all our samples which is good.</p>
 
-<p><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt="Plot showing lengths of sequences trimmed from 5' end of reads. " width="1200" height="800" loading="lazy" /></p>
+<p><a href="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/cutadapt_trimmed_sequences_plot_5.png" alt="Plot showing lengths of sequences trimmed from 5' end of reads. " width="1200" height="800" loading="lazy" /></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-exercise-quality-control-of-the-polished-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exercise: Quality control of the polished datasets</div>
@@ -1233,7 +1254,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 
       <p>In the Adapter Content section we now don’t have any 5’ adapter detected. The first 20bp of the reads, what MAGeCK will use for our dataset, has no adapter detected.</p>
 
-      <p><img src="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" alt="Plot of trimmed sequences showing no adapter detected in first 20 bases. " width="1200" height="800" loading="lazy" /></p>
+      <p><a href="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fastqc_adapter_content_plot_trimmed.png" alt="Plot of trimmed sequences showing no adapter detected in first 20 bases. " width="1200" height="800" loading="lazy" /></a></p>
 
     </blockquote>
   </blockquote>
@@ -1382,16 +1403,16 @@ distribution of the remaining sgRNAs that haven’t been negatively selected. A 
       <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the boxplots, we can see we have largely similiar distributions of counts for the 3 samples. The greater length of the box and between whiskers in the T8 samples compared to the control tells us we have a bit more variability of counts in those samples, more guides with low and high counts in T8 compared to the T0.
-<img src="../../images/crispr-screen/mageck_count_boxplots.png" alt="MAGeCK count boxplots. " width="425" height="370" loading="lazy" /></p>
+<a href="../../images/crispr-screen/mageck_count_boxplots.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_boxplots.png" alt="MAGeCK count boxplots. " width="425" height="370" loading="lazy" /></a></p>
 
       <p>The Distribution of read counts plot shows us how many guides we have for each count (the frequency sums to the total no. of guides 77,441). Similar to the boxplots, the wider distribution for T8 compared to T0 shows us that those samples have more guides with low and high counts. The peak for T0 appears lower just because it has more points (bins) in the plot.
-<img src="../../images/crispr-screen/mageck_count_histogram.png" alt="MAGeCK count histograms. " width="427" height="410" loading="lazy" /></p>
+<a href="../../images/crispr-screen/mageck_count_histogram.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_histogram.png" alt="MAGeCK count histograms. " width="427" height="410" loading="lazy" /></a></p>
 
       <p>The PCA plot shows us the samples from the different conditions separate well. The T8 samples are a bit more similar to each other, to each other on PC1 axis than to T0. If we had more samples we could use this plot to check for clustering of replicates, batch effect or outliers.
-<img src="../../images/crispr-screen/mageck_count_pca.png" alt="MAGeCK count PCA plot. " width="509" height="355" loading="lazy" /></p>
+<a href="../../images/crispr-screen/mageck_count_pca.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_pca.png" alt="MAGeCK count PCA plot. " width="509" height="355" loading="lazy" /></a></p>
 
       <p>The hierarchical clustering plot also shows us that the T8 samples are a bit more similar to each other than to T0.
-<img src="../../images/crispr-screen/mageck_count_clustering.png" alt="MAGeCK count hierarchical clustering plot. " width="439" height="439" loading="lazy" /></p>
+<a href="../../images/crispr-screen/mageck_count_clustering.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_count_clustering.png" alt="MAGeCK count hierarchical clustering plot. " width="439" height="439" loading="lazy" /></a></p>
     </blockquote>
 
   </blockquote>
@@ -1404,13 +1425,13 @@ distribution of the remaining sgRNAs that haven’t been negatively selected. A 
 
 <p>Now that we’ve generated our guide counts, we’ll use MAGeCK test to identify essential genes. Essential means positively or negatively selected sgRNAs and genes. CRISPR positive or negative selection screens can be performed. With a positive selection screen, most cells die after the treatment (selection) and we are interested in identifying genes whose sgRNAs increase and dominate, indicating loss of those genes helps cells survive that treatment. This can help identify genes essential for drug resistance. With a negative selection screen, most cells survive after the treatment. In that case, we are interested in identifying genes whose sgRNAs decrease (drop out) compared to a control (e.g. vehicle), indicating those genes are needed for the cells to survive with that treatment. This can help identify genes essential for drug sensitivity. Regardless of the type of screen performed (positive or negative), MAGeCK can identify both positively and negatively selected genes in the screen (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>). The dataset we are using in this tutorial is from a negative selection screen where the aim is to identify genes whose knockout increases the cancer cells sensitivity to the drug.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/pos_neg_screen.png" alt="Positive and negative selection screens. " width="794" height="405" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Adapted from Addgene</figcaption></figure>
+<p><a href="../../images/crispr-screen/pos_neg_screen.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/pos_neg_screen.png" alt="Positive and negative selection screens. " width="794" height="405" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Adapted from Addgene&lt;/figcaption&gt;</figure></a></p>
 
 <h2 id="two-conditions">Two conditions</h2>
 
 <p>If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8-Vehicle) we can use MAGeCK test. MAGeCK test uses a robust ranking aggregation (RRA) algorithm (<span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>).</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/mageck_rra_algorithm.png" alt="Diagram of MAGeCK RRA algorithm. " width="580" height="632" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>)</figcaption></figure>
+<p><a href="../../images/crispr-screen/mageck_rra_algorithm.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/crispr-screen/mageck_rra_algorithm.png" alt="Diagram of MAGeCK RRA algorithm. " width="580" height="632" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Overview of the MAGeCK algorithm. Raw read counts corresponding to single-guided RNAs (sgRNAs) from different experiments are first normalized using median normalization and mean-variance modeling is used to capture the relationship of mean and variance in replicates. The statistical significance of each sgRNA is calculated using the learned mean-variance model. Essential genes (both positively and negatively selected) are then identified by looking for genes whose sgRNAs are ranked consistently higher (by significance) using robust rank aggregation (RRA) (from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span>)&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-test-for-enrichment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Test for enrichment</div>
@@ -1460,7 +1481,7 @@ For technical replicates, we could combine the fastqs for each sample/biological
 Figure M1 from <span class="citation"><a href="#Li2014">Li <i>et al.</i> 2014</a></span> shows a comparison of median (“median”) versus total (“total”) normalization for two CRISPR screen datasets.
 The distribution of the read counts of significant sgRNAs (FDR=1%) was compared with the mean read count distribution of all sgRNAs (“all”, black). The distribution of the significant sgRNAs should be similar to the distribution of all sgRNAs if the normalization method is unbiased. The difference is small for the leukemia dataset. However, in the melanoma dataset, where a few sgRNAs have very large read counts, the difference is larger, as “total” normalization will prefer sgRNAs with higher read-counts. In contrast, the distribution after “median” normalization is closer to the distribution of all sgRNAs.</p>
 
-  <p><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " width="1372" height="764" loading="lazy" /></p>
+  <p><a href="../../images/crispr-screen/median_vs_total.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/median_vs_total.png" alt="Median versus Total normalization. " width="1372" height="764" loading="lazy" /></a></p>
 
   <p>If many genes have zero counts, such as after treatment in a positive selection screen, the median may be zero and we may get a message in the MAGeCK log that we have to use total normalization.</p>
 
@@ -1628,7 +1649,7 @@ Genes are ranked by the p.neg field (by default). If you need a ranking by the p
 <p>The PDF shows plots of the top 10 negatively and positively selected genes.
 We can see the top genes ranked by RRA scores or p value. These values come from the gene summary file.</p>
 
-<p><img src="../../images/crispr-screen/mageck_test_rra_scores.png" alt="MAGeCK test RRA scores. " width="428" height="388" loading="lazy" /></p>
+<p><a href="../../images/crispr-screen/mageck_test_rra_scores.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_rra_scores.png" alt="MAGeCK test RRA scores. " width="428" height="388" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1640,7 +1661,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
     <p>ESD, MTHFD1L and SHMT2, the same as by RRA score. RRA score is like p-value. Those genes are part of the glutathione pathway which was found to be altered in the published paper for this dataset.</p>
 
-    <p><img src="../../images/crispr-screen/mageck_test_pvalues.png" alt="MAGeCK test pvalues. " width="431" height="389" loading="lazy" /></p>
+    <p><a href="../../images/crispr-screen/mageck_test_pvalues.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_test_pvalues.png" alt="MAGeCK test pvalues. " width="431" height="389" loading="lazy" /></a></p>
 
   </blockquote>
 
@@ -1648,7 +1669,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
 
 <p>The PDF also shows plots with the sgRNA counts for the top 10 genes. These values are the normalized counts for each sgRNA from the sgRNA summary file. With these plots we can see if the counts of all the sgRNAs for these top genes are changing similarly.</p>
 
-<p><img src="../../images/crispr-screen/esd_plot.png" alt="Plot showing guide counts for ESD gene. " width="640" height="642" loading="lazy" /></p>
+<p><a href="../../images/crispr-screen/esd_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/esd_plot.png" alt="Plot showing guide counts for ESD gene. " width="640" height="642" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1666,7 +1687,7 @@ We can see the top genes ranked by RRA scores or p value. These values come from
       <li>None. One reason for this is likely the large number of genes being tested (&gt;20,000). You could try to increase sensitivity with the procedures described <a href="https://sourceforge.net/p/mageck/wiki/QA/#i-see-very-few-genes-that-are-below-the-certain-fdr-cutoff-like-010-why-it-is-that-and-what-should-i-do">here</a>.</li>
     </ol>
 
-    <p><img src="../../images/crispr-screen/fli1_plot.png" alt="Plot showing guide counts for FLI1 gene. " width="632" height="626" loading="lazy" /></p>
+    <p><a href="../../images/crispr-screen/fli1_plot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/fli1_plot.png" alt="Plot showing guide counts for FLI1 gene. " width="632" height="626" loading="lazy" /></a></p>
 
   </blockquote>
 
@@ -1737,7 +1758,7 @@ FLI1    9.0376e-05  0.454208  -0.08872
 
           <p>ATP5E as it is the gene nearest the top of the plot.</p>
 
-          <p><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot for APR compared to vehicle. " width="483" height="482" loading="lazy" /></p>
+          <p><a href="../../images/crispr-screen/volcanoplot.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/volcanoplot.png" alt="Volcano plot for APR compared to vehicle. " width="483" height="482" loading="lazy" /></a></p>
 
         </blockquote>
 
@@ -1914,7 +1935,7 @@ T8-APR-246  1         0       1
     </li>
   </ol>
 
-  <p><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot for APR compared to timepoint zero. " width="444" height="420" loading="lazy" /></p>
+  <p><a href="../../images/crispr-screen/mageck_mle_apr_volcano.png" rel="noopener noreferrer"><img src="../../images/crispr-screen/mageck_mle_apr_volcano.png" alt="Volcano plot for APR compared to timepoint zero. " width="444" height="420" loading="lazy" /></a></p>
 
   <p>Similarly, you could create a plot for the vehicle vs T0 using the gene summary file columns <code class="language-plaintext highlighter-rouge">Gene</code> <code class="language-plaintext highlighter-rouge">Vehicle|beta</code> <code class="language-plaintext highlighter-rouge">Vehicle|wald-p-value</code>  <code class="language-plaintext highlighter-rouge">Vehicle|wald-fdr</code></p>
 
@@ -2167,7 +2188,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2199,7 +2220,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

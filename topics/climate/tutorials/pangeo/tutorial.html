@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -218,8 +253,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -262,7 +297,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -310,23 +345,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -660,7 +681,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -967,7 +988,7 @@ variables:
     </li>
   </ol>
 
-  <p><img src="../../images/PM2_5_galaxy_20211222-00UTC.png" alt="CAMS PM2.5 December, 22th 2021 at 00:00 UTC. " width="2000" height="1000" loading="lazy" /></p>
+  <p><a href="../../images/PM2_5_galaxy_20211222-00UTC.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222-00UTC.png" alt="CAMS PM2.5 December, 22th 2021 at 00:00 UTC. " width="2000" height="1000" loading="lazy" /></a></p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-why-shifting-longitudes"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why shifting longitudes?</div>
@@ -1006,7 +1027,7 @@ variables:
       <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
       <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
       <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code>
-  <img src="../../images/PM2_5_galaxy_20211224-12UTC.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="2000" height="1000" loading="lazy" /></li>
+  <a href="../../images/PM2_5_galaxy_20211224-12UTC.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211224-12UTC.png" alt="CAMS PM2.5 December, 24th 2021 at 12:00 UTC. " width="2000" height="1000" loading="lazy" /></a></li>
     </ul>
   </blockquote>
 </blockquote>
@@ -1148,7 +1169,7 @@ variables:
       </li>
     </ol>
 
-    <p><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021. " width="8000" height="2000" loading="lazy" /></p>
+    <p><a href="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021. " width="8000" height="2000" loading="lazy" /></a></p>
 
     <p>From the plot there is no obvious trend over this entire region of Italy. However, we clearly see that PM2.5 is always higher over Naples and tends to spread in the South-East direction by the end of the day (on that particular date).</p>
   </blockquote>
@@ -1191,7 +1212,7 @@ decreasing order for CAMS.</li>
         <li><em>“Add coastline with alpha value [0-1] (optional)”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
         <li><em>“Specify which colormap to use for plotting (optional)”</em>: <code class="language-plaintext highlighter-rouge">roma_r</code></li>
         <li><em>“Specify the projection (proj4) on which we draw e.g. {“proj”:”PlateCarree”} with double quote (optional)”</em>: <code class="language-plaintext highlighter-rouge">{'proj': 'Mercator', 'central_longitude': 12.0}</code>
-   <img src="../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png" alt="CAMS PM2.5 Italy 10:00  December 22, 2021. " width="2000" height="1000" loading="lazy" />
+   <a href="../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222_Italy-10UTC-30.png" alt="CAMS PM2.5 Italy 10:00  December 22, 2021. " width="2000" height="1000" loading="lazy" /></a>
 Now we clearly see that values of PM2.5 &gt;  30 μm.m<sup>-3</sup> are only found over Naples on December 22, 10:00 UTC.</li>
       </ul>
     </li>
@@ -1239,7 +1260,7 @@ between 10:00 UTC and 17:00 UTC on december 22, 2021?</p>
       </li>
     </ol>
 
-    <p><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 &gt; 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;. " width="8000" height="2000" loading="lazy" />
+    <p><a href="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222_Italy-10-17UTC_30.png" alt="CAMS PM2.5 Italy 10:00 - 17:00 December 22, 2021 with PM2.5 &gt; 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;. " width="8000" height="2000" loading="lazy" /></a>
 Using thresholds, we can clearly identify areas if anywhere there are “high” values of PM2.5. On that particular day there are a few pixels where PM2.5 values exceed 30 μm.m<sup>-3</sup>.</p>
   </blockquote>
 </blockquote>
@@ -1351,7 +1372,7 @@ Using thresholds, we can clearly identify areas if anywhere there are “high”
           <li><em>“Axis text options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
           <li><em>“Plot title options”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
           <li><em>“Axis scaling”</em>: <code class="language-plaintext highlighter-rouge">Automatic axis scaling</code>
- <img src="../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png" alt="CAMS PM2.5 Naples. " width="2100" height="2100" loading="lazy" /></li>
+ <a href="../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222_Naples_ggplot2.png" alt="CAMS PM2.5 Naples. " width="2100" height="2100" loading="lazy" /></a></li>
         </ul>
       </li>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1" title="Column Regex Find And Replace tool" aria-role="link"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1</span></span> with the following parameters:
@@ -1405,7 +1426,7 @@ Using thresholds, we can clearly identify areas if anywhere there are “high”
           <li><em>“format for input date/time column”</em>: <code class="language-plaintext highlighter-rouge">%Y%m%d %H:%M:%S.%f</code></li>
           <li><em>“format for plotting dates on the x-axis”</em>: <code class="language-plaintext highlighter-rouge">%d %b %H hours</code></li>
           <li><em>”“</em>: <code class="language-plaintext highlighter-rouge">winter</code>
- <img src="../../images/PM2_5_galaxy_20211222_Naples_stripes.png" alt="CAMS PM2.5 Naples Stripes. " width="1000" height="200" loading="lazy" />
+ <a href="../../images/PM2_5_galaxy_20211222_Naples_stripes.png" rel="noopener noreferrer"><img src="../../images/PM2_5_galaxy_20211222_Naples_stripes.png" alt="CAMS PM2.5 Naples Stripes. " width="1000" height="200" loading="lazy" /></a>
 From December 24, 2021 at 00:00 UTC and onwards, PM2-5 concentration are much lower than at the beginning. This is bothe visible on the 1D plot and stripes.</li>
         </ul>
       </li>
@@ -1613,7 +1634,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1645,7 +1666,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Understanding Barcodes</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -216,8 +251,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -260,7 +295,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -308,23 +343,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -623,7 +644,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -651,7 +672,7 @@ Sentry.init({
 
 <p>In this case; <em>Read1</em> contains the barcoding information followed by the polyT tail of the messenger RNA, and <em>Read2</em> contains the actual sequence. Here, Read1 is regarded as the ‘forward’ strand and Read2 as the ‘reverse’ strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><div style="overflow-x: auto"><object data="../../images/scrna-umis/celseq2_schema.svg" type="image/svg+xml" alt="CEL-Seq2 Scheme. ">CEL-Seq2 Scheme.</object></div><small><a target="_blank" href="../../images/scrna-umis/celseq2_schema.svg">Open image in new tab</a></small><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Read1 encapsulates the barcodes, and Read2 the mRNA sequence</figcaption></figure>
+<p><a href="../../images/scrna-umis/celseq2_schema.svg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;">&lt;div style="overflow-x: auto"&gt;<object data="../../images/scrna-umis/celseq2_schema.svg" type="image/svg+xml" alt="CEL-Seq2 Scheme. ">CEL-Seq2 Scheme.</object>&lt;/div&gt;<small><a target="_blank" href="../../images/scrna-umis/celseq2_schema.svg">Open image in new tab</a></small>&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Read1 encapsulates the barcodes, and Read2 the mRNA sequence&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -684,11 +705,11 @@ Sentry.init({
 
 <p>Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_pbb_barcodes_add.svg" alt="Cell Barcodes. " width="1340" height="778" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells</figcaption></figure>
+<p><a href="/training-material/topics/single-cell/images/scrna-intro/scrna_pbb_barcodes_add.svg" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_pbb_barcodes_add.svg" alt="Cell Barcodes. " width="1340" height="778" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells&lt;/figcaption&gt;</figure></a></p>
 
 <p>Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-umis/scrna_umi_add.svg" alt="Transcript Barcodes. " width="1365" height="768" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Random oligonucleotides barcodes added to (cell barcoded) reads</figcaption></figure>
+<p><a href="/training-material/topics/single-cell/images/scrna-umis/scrna_umi_add.svg" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-umis/scrna_umi_add.svg" alt="Transcript Barcodes. " width="1365" height="768" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Random oligonucleotides barcodes added to (cell barcoded) reads&lt;/figcaption&gt;</figure></a></p>
 
 <p>There are two things to take note of:</p>
 
@@ -749,7 +770,7 @@ Sentry.init({
 
 <h2 id="naive-amplification">Naive Amplification</h2>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg" alt="Amplification Bias. " width="806" height="389" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> A cell with two reads from different transcripts being amplified unevenly</figcaption></figure>
+<p><a href="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg" alt="Amplification Bias. " width="806" height="389" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> A cell with two reads from different transcripts being amplified unevenly&lt;/figcaption&gt;</figure></a></p>
 
 <p>Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would yield:</p>
 
@@ -781,7 +802,7 @@ How do we correct for this bias?</p>
 
 <p><strong>Unique Molecular Identifiers</strong> (or <em>UMIs</em>) constitute the second portion of a barcode, where their role is to <em>uniquely</em> count reads such that amplicons of the same read are only counted once, e.g:</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs. " width="806" height="389" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue</figcaption></figure>
+<p><a href="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors_umis.svg" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs. " width="806" height="389" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue&lt;/figcaption&gt;</figure></a></p>
 
 <p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:</p>
 
@@ -1182,7 +1203,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   </ol>
 </blockquote>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-umis/scrna_barcodes_fastq.png" alt="FastQC Plot. " width="800" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> FastQC plot of Forward read</figcaption></figure>
+<p><a href="../../images/scrna-umis/scrna_barcodes_fastq.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-umis/scrna_barcodes_fastq.png" alt="FastQC Plot. " width="800" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> FastQC plot of Forward read&lt;/figcaption&gt;</figure></a></p>
 
 <p>Here we can see the three distinct regions along the x-axis that correspond to our expected <a href="#the-cel-seq2-protocol">CEL-Seq2 Schema</a>:</p>
 
@@ -1611,7 +1632,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1643,7 +1664,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

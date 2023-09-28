@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Differential abundance testing of small RNAs</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -282,8 +317,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -326,7 +361,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -374,23 +409,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -744,7 +765,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -837,7 +858,7 @@ As default, Galaxy takes the link as name, so rename them.</p>
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a dataset collection<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build Dataset List</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
 
-      <p><img src="../../images/sRNA/Fig3_dataset_lists_made.png" alt="History section with all the loaded datasets. " width="450" height="669" loading="lazy" /></p>
+      <p><a href="../../images/sRNA/Fig3_dataset_lists_made.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig3_dataset_lists_made.png" alt="History section with all the loaded datasets. " width="450" height="669" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Import the remaining files from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library (ask your instructor)</p>
@@ -887,12 +908,12 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
           <li>
             <p>What does the base/read quality look like for each sample?</p>
 
-            <p><img src="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" alt="The output of FastQC as a boxplot. " width="1200" height="1264" loading="lazy" /></p>
+            <p><a href="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" alt="The output of FastQC as a boxplot. " width="1200" height="1264" loading="lazy" /></a></p>
           </li>
           <li>
             <p>Are there any adaptors present in these reads? Which one(s)?</p>
 
-            <p><img src="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" alt="The output of FastQC stats adapted. " width="1294" height="1064" loading="lazy" /></p>
+            <p><a href="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" alt="The output of FastQC stats adapted. " width="1294" height="1064" loading="lazy" /></a></p>
           </li>
         </ol>
 
@@ -987,13 +1008,13 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
           <li>What is the read length?</li>
         </ol>
 
-        <p><img src="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" alt="FastQC output after trimming. " width="800" height="374" loading="lazy" /></p>
+        <p><a href="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" alt="FastQC output after trimming. " width="800" height="374" loading="lazy" /></a></p>
 
         <ol>
           <li>Are there any adaptors present in these reads? Which one(s)?</li>
         </ol>
 
-        <p><img src="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" alt="FastQC output after trimming. " width="1610" height="1326" loading="lazy" /></p>
+        <p><a href="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" alt="FastQC output after trimming. " width="1610" height="1326" loading="lazy" /></a></p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
@@ -1182,7 +1203,7 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
   </ol>
 </blockquote>
 
-<p><img src="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" alt="FastQC result on both collections. " width="1000" height="1013" loading="lazy" /></p>
+<p><a href="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" rel="noopener noreferrer"><img src="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" alt="FastQC result on both collections. " width="1000" height="1013" loading="lazy" /></a></p>
 
 <p>We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment. There is no distinct peak in the piRNA range (you can find the example of the real piRNA profile in Figure 1 from <a href="http://dx.doi.org/10.1016/j.cell.2009.03.040">Colin D. Malone et al, 2009</a>.</p>
 
@@ -1354,7 +1375,7 @@ https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 
 <h2 id="small-rna-analysis-general-pipeline">Small RNA analysis (general) pipeline</h2>
 
-<p><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="sRNA tutorial workflow. " width="12366" height="4416" loading="lazy" /></p>
+<p><a href="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" rel="noopener noreferrer"><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="sRNA tutorial workflow. " width="12366" height="4416" loading="lazy" /></a></p>
 
                 </section>
 
@@ -1553,7 +1574,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1585,7 +1606,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

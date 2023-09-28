@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -244,8 +279,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -288,7 +323,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -336,23 +371,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -622,7 +643,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -633,11 +654,11 @@ Sentry.init({
 
 <p>Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich (<span class="citation"><a href="#Ehrlich1909">Ehrlich 1909</a></span>). According to the <a href="https://iupac.org/">International Union of Pure and Applied Chemistry (IUPAC)</a>, a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” (<span class="citation"><a href="#Wermuth1998">Wermuth <i>et al.</i> 1998</a></span>). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model (<span class="citation"><a href="#Moumbock2019">Moumbock <i>et al.</i> 2019</a></span>). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets (<span class="citation"><a href="#Steindl2006">Steindl <i>et al.</i> 2006</a></span>).</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of *Plasmodium falciparum* calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/4MVF-STU.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of <em>Plasmodium falciparum</em> calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: <a href="https://www.rcsb.org/structure/4mvf">4MVF</a>. Image generated using Maestro (Schrödinger LLC, NY).&lt;/figcaption&gt;</figure></a></p>
 
 <p>Bioactive compounds often bind to several target proteins, thereby exhibiting polypharmacology. However, experimentally determining these interactions is laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib (<span class="citation"><a href="#Moumbock2021">Moumbock <i>et al.</i> 2021</a></span>) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein–ligand complexes of the screening Protein Data Bank (sc-PDB, <span class="citation"><a href="#Desaphy2014">Desaphy <i>et al.</i> 2014</a></span>). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf)). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/STU.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: <a href="https://www.rcsb.org/structure/4mvf">4MVF</a>). Image generated using Maestro (Schrödinger LLC, NY).&lt;/figcaption&gt;</figure></a></p>
 
 <p>In this tutorial, you will perform pharmacophore-based target prediction of a bioactive ligand known as staurosporine (Figure 2) with the ePharmaLib subset representing <em>Plasmodium falciparum</em> protein targets (138 pharmacophore models) and the open-source pharmacophore alignment program <a href="https://anaconda.org/bioconda/align_it">Align-it</a>, formerly known as PHARAO (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>).</p>
 
@@ -1056,7 +1077,7 @@ column    Content
   <p>The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (<a href="https://zenodo.org/record/6055897">https://zenodo.org/record/6055897</a>) and this workflow is available as a <a href="https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel">Galaxy history</a>.</p>
 </blockquote>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib</figcaption></figure>
+<p><a href="/training-material/topics/computational-chemistry/images/zauberkugel.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="further-analysis">Further analysis</h1>
 
@@ -1259,7 +1280,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1291,7 +1312,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

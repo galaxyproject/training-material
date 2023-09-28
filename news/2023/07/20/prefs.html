@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>New Feature: GTN User Preferences</title>
+        
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+-->
+<script type="text/javascript">
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2023/07/20/prefs.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="New Feature: GTN User Preferences">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-07-20 04:30:55 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: New Feature: GTN User Preferences">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-07-20-prefs.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2023/07/20/prefs.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/news/2023/07/20/prefs.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-09-01/news/2023/07/20/prefs.html">2023-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-08-01/news/2023/07/20/prefs.html">2023-08-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>New Feature: GTN User Preferences</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a></td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="new feature" style="--color-primary: #c3c4ff; --color-darker: #a9acff; --color-dimmed: #b6b8ff;">new feature</span>
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff3af; --color-darker: #edd800; --color-dimmed: #fce600;">gtn</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 20 July 2023</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>We have added a new “User Preferences” page for our GTN users! This gives you more control over both how the GTN looks, and works, for you.</p>
+
+<h2 id="themes">Themes</h2>
+
+<p>This will allow users to set their theme with some more granularity! Previously
+you could only choose between a few themes, now these have been split into
+separate axes giving you more control over how the GTN renders for you.</p>
+
+<h3 id="brightness">Brightness</h3>
+
+<p>Previously you could switch manually between light and dark themes. Now the GTN
+will default to an automatic one that switches the GTN to dark mode when your
+system preferences requests it.
+Alternatively you can override this and choose a light or dark theme as you prefer.</p>
+
+<h3 id="light-theme">Light Theme</h3>
+
+<p>We’ve added a new light theme with a more yellowed background to be less harsh
+on the eyes. When the GTN is using the light mode (automatically or manually)
+you can toggle between this and the plain white version.</p>
+
+<h3 id="dark-theme">Dark Theme</h3>
+
+<p>Likewise, now when the GTN is using the dark mode (automatically or manually)
+you can choose whether it will use the “night” (dark grey) or “midnight” (pure black) themes.</p>
+
+<h3 id="contrast">Contrast</h3>
+
+<p>Have you ever tried to use some applications in high-light environments, such
+as outdoors and found them hard to read? Many websites use unfortunately low
+contrast. The GTN now has a slider that allows you to select low, normal
+(automatic), or high contrast as is your preference. High contrast will make
+all elements a bit more contrasting to ensure you can see them more easily in
+those environments.</p>
+
+<h3 id="themes-1">Themes!</h3>
+
+<p>Previously if you wanted the Halloween theme it would only exist on a dark
+background, but now you can try them out on any background! The same goes for
+all other GTN themes, so please feel free to choose whatever colours suit you,
+knowing you’ll be able to use the GTN day and night.</p>
+
+<h2 id="data-privacy">Data Privacy</h2>
+
+<p>The GTN collects very limited information on you as a person. Most of our
+developers are located in the EU, and live under GDPR. We do not want your personal data at all.</p>
+
+<p>However we do collect very limited statistics (page views), and error logs via
+Sentry (whenever errors occur). If you wish to opt-out of this collection, you
+are welcome to do so here.</p>
+
+<h2 id="local-session-storage-and-cookies">Local, Session Storage and Cookies</h2>
+
+<p>Are you curious what information is stored in this browser that’s available to
+the GTN to use in displaying itself? Check out which variables are set here.</p>
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="GTN logo with a multi-coloured star and the words Galaxy Training Network" src="/training-material//assets/images/GTNLogo1000.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2023/07/20/prefs.html",
+  "name": "New Feature: GTN User Preferences",
+  "headline": "<p>We have added a new “User Preferences” page for our GTN users! This gives you more control over bo",
+  "keywords": [
+    "new feature",
+    "gtn"
+  ],
+  "description": "<p>We have added a new “User Preferences” page for our GTN users! This gives you more control over bo",
+  "articleBody": "<p>We have added a new “User Preferences” page for our GTN users! This gives you more control over both how the GTN looks, and works, for you.</p>\n\n<h2 id=\"themes\">Themes</h2>\n\n<p>This will allow users to set their theme with some more granularity! Previously\nyou could only choose between a few themes, now these have been split into\nseparate axes giving you more control over how the GTN renders for you.</p>\n\n<h3 id=\"brightness\">Brightness</h3>\n\n<p>Previously you could switch manually between light and dark themes. Now the GTN\nwill default to an automatic one that switches the GTN to dark mode when your\nsystem preferences requests it.\nAlternatively you can override this and choose a light or dark theme as you prefer.</p>\n\n<h3 id=\"light-theme\">Light Theme</h3>\n\n<p>We’ve added a new light theme with a more yellowed background to be less harsh\non the eyes. When the GTN is using the light mode (automatically or manually)\nyou can toggle between this and the plain white version.</p>\n\n<h3 id=\"dark-theme\">Dark Theme</h3>\n\n<p>Likewise, now when the GTN is using the dark mode (automatically or manually)\nyou can choose whether it will use the “night” (dark grey) or “midnight” (pure black) themes.</p>\n\n<h3 id=\"contrast\">Contrast</h3>\n\n<p>Have you ever tried to use some applications in high-light environments, such\nas outdoors and found them hard to read? Many websites use unfortunately low\ncontrast. The GTN now has a slider that allows you to select low, normal\n(automatic), or high contrast as is your preference. High contrast will make\nall elements a bit more contrasting to ensure you can see them more easily in\nthose environments.</p>\n\n<h3 id=\"themes-1\">Themes!</h3>\n\n<p>Previously if you wanted the Halloween theme it would only exist on a dark\nbackground, but now you can try them out on any background! The same goes for\nall other GTN themes, so please feel free to choose whatever colours suit you,\nknowing you’ll be able to use the GTN day and night.</p>\n\n<h2 id=\"data-privacy\">Data Privacy</h2>\n\n<p>The GTN collects very limited information on you as a person. Most of our\ndevelopers are located in the EU, and live under GDPR. We do not want your personal data at all.</p>\n\n<p>However we do collect very limited statistics (page views), and error logs via\nSentry (whenever errors occur). If you wish to opt-out of this collection, you\nare welcome to do so here.</p>\n\n<h2 id=\"local-session-storage-and-cookies\">Local, Session Storage and Cookies</h2>\n\n<p>Are you curious what information is stored in this browser that’s available to\nthe GTN to use in displaying itself? Check out which variables are set here.</p>\n",
+  "datePublished": "2023-07-20 00:00:00 +0000",
+  "dateModified": "2023-07-20 04:30:55 +0000",
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2023/07/20/prefs.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="https://ai4life.eurobioimaging.eu/ai4life-teams-up-with-galaxy-training-network-gtn-to-enhance-training-resources/">AI4Life teams up with GTN to enhance training resources</a>
+	</h3>
+	<p>
+	27 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c6c4ff; --color-darker: #adaaff; --color-dimmed: #b9b7ff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb0ef; --color-darker: #ff89ea; --color-dimmed: #ff9dec;">new community</span>
+	
+	</p>
+	<p class="card-text">
+		
+		This is an external post, please follow the link to read it.
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/21/fair.html">ELIXIR-UK Fellow Launches New FAIR Data Management Training</a>
+	</h3>
+	<p>
+	21 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c6c4ff; --color-darker: #adaaff; --color-dimmed: #b9b7ff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffbc76; --color-darker: #f5a100; --color-dimmed: #ffad3b;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Katarzyna Kamieniecka (University of Bradford), a member of the ELIXIR-UK Fellowship Programme, has just launched a new series of lessons to improve {FAIR} data management in the life sciences. The lessons are designed to help researchers and research support staff understand the principles of FAIR data management and apply them to their own work.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/07/pan-galactic-search.html">New Feature: Pan-Galactic Tool Search</a>
+	</h3>
+	<p>
+	7 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c3c4ff; --color-darker: #a9acff; --color-dimmed: #b6b8ff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff3af; --color-darker: #edd800; --color-dimmed: #fce600;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Did you ever want to run a tool, but not know where it might be available?
+The GTN has you covered with the Pan-Galactic Tool Search that is now available.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/01/hart.html">GTN Celebrates Pride Month: Alan Hart & M. Tuberculosis</a>
+	</h3>
+	<p>
+	1 June 2023 &nbsp;
+	
+	</p>
+	<p class="card-text">
+		
+		June is Pride Month in the US and countries around the world. We have automatically activated the new Progress Pride theme on the home page (Click to Activate) if you hadn’t already selected a theme.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/05/15/isoform-usage-training.html">New Galaxy training: Genome-wide alternative splicing analysis</a>
+	</h3>
+	<p>
+	15 May 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffbc76; --color-darker: #f5a100; --color-dimmed: #ffad3b;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		The GTN hosts a new training for analyzing alternative splicing at genome-wide scale!
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-07-20-prefs.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>

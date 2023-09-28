@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -272,8 +307,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -316,7 +351,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -364,23 +399,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -817,7 +838,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1082,8 +1103,7 @@ and switch to the correct history.</p>
     <li>The tool will start running and will stay running permanently</li>
     <li>Click on the “User” menu at the top and go to “Active Interactive Tools” and locate the Panoply instance you started.</li>
     <li>Click on your Panoply instance
-      <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/select_dataset.png" alt="Panoply dataset selection. " width="1539" height="715" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Select dataset</figcaption></figure>
-    </li>
+<a href="../../images/select_dataset.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/select_dataset.png" alt="Panoply dataset selection. " width="1539" height="715" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Select dataset&lt;/figcaption&gt;</figure></a></li>
     <li>Click on <strong>ALP1_exp.nc</strong> dataset</li>
   </ol>
 </blockquote>
@@ -1130,9 +1150,9 @@ if you do not save in the output folder, your plot will get lost.</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
-            <li>We can clearly see a seasonal cycle.</li>
+            <li>We can clearly see a seasonal cycle.
+<a href="../../images/panoply_LEAFC_ALP1_exp.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/panoply_LEAFC_ALP1_exp.png" alt="Panoply LEAFC timeseries. " width="592" height="336" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> LEAFC&lt;/figcaption&gt;</figure></a></li>
           </ol>
-          <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/panoply_LEAFC_ALP1_exp.png" alt="Panoply LEAFC timeseries. " width="592" height="336" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> LEAFC</figcaption></figure>
         </blockquote>
       </blockquote>
     </li>
@@ -1150,9 +1170,9 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
-            <li>We can clearly see a seasonal cycle of PFT2.</li>
+            <li>We can clearly see a seasonal cycle of PFT2.
+<a href="../../images/panoply_MORTALITY_ALP1_exp.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT. " width="592" height="384" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> total mortality per PFT&lt;/figcaption&gt;</figure></a></li>
           </ol>
-          <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT. " width="592" height="384" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> total mortality per PFT</figcaption></figure>
         </blockquote>
       </blockquote>
 
@@ -1231,7 +1251,7 @@ so that we can reuse it for any simulations.</p>
     <li>
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the resulting plot:</p>
 
-      <p><img src="../../images/LEAFC_ALP1_exp_ggplot.png" alt="Snapshot of LEAFC resulting plot. " width="5700" height="1500" loading="lazy" /></p>
+      <p><a href="../../images/LEAFC_ALP1_exp_ggplot.png" rel="noopener noreferrer"><img src="../../images/LEAFC_ALP1_exp_ggplot.png" alt="Snapshot of LEAFC resulting plot. " width="5700" height="1500" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1293,7 +1313,7 @@ and make sure to select “netcdf” in the change datatype field.</li>
 The final workflow would be similar to the one shown below:</li>
       </ul>
 
-      <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/fates_workflow.png" alt="Snapshot of FATES workflow. " width="1185" height="491" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> FATES workflow</figcaption></figure>
+      <p><a href="../../images/fates_workflow.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/fates_workflow.png" alt="Snapshot of FATES workflow. " width="1185" height="491" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> FATES workflow&lt;/figcaption&gt;</figure></a></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1308,7 +1328,7 @@ The final workflow would be similar to the one shown below:</li>
           <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Running 5 years is already sufficient to highlight significant changes.
-<img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2. " width="5700" height="1500" loading="lazy" /></li>
+<a href="../../images/LEAFC_ALP1_4CO2_ggplot.png" rel="noopener noreferrer"><img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2. " width="5700" height="1500" loading="lazy" /></a></li>
             <li>Many suggestions can be given here. One simple addition can be the generation of plots where
 both simulations are represented on the same plot.</li>
           </ol>
@@ -1548,7 +1568,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1580,7 +1600,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

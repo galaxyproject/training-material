@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>RNA-RNA interactome data analysis</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -282,8 +317,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -326,7 +361,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -374,23 +409,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -747,7 +768,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -785,7 +806,7 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
   alignment and outputs only the best alignments per read. The final part of this tutorial gives an insight into how to
   filter, export and visualize your results using the visualization framework <code class="language-plaintext highlighter-rouge">ChiRAViz</code>.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " width="2090" height="2243" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> ChiRA workflow. First the reads deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
+<p><a href="../../images/rna-interactome/chira.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " width="2090" height="2243" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> ChiRA workflow. First the reads deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -948,7 +969,7 @@ standard Illumina adapters, we need to provide them manually.</p>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>Observe the <strong>Per base sequence content</strong>
-<img src="../../images/rna-interactome/chira_fastqc_seq_content.png" alt="FastQC per base sequence content. " width="1125" height="600" loading="lazy" /></li>
+<a href="../../images/rna-interactome/chira_fastqc_seq_content.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chira_fastqc_seq_content.png" alt="FastQC per base sequence content. " width="1125" height="600" loading="lazy" /></a></li>
       </ul>
     </li>
   </ol>
@@ -967,7 +988,7 @@ plot. It looks like there is huge difference in base composition after 55th base
 sequences that constitute this is very important. From the sequence length distribution, most of the sequences are
 between 53 and 57 bases long. We see the abnormality in the per base sequence content because it is from
 very few sequences.
-<img src="../../images/rna-interactome/chira_fastqc_seq_length.png" alt="FastQC sequence length distribution. " width="800" height="600" loading="lazy" /></p>
+<a href="../../images/rna-interactome/chira_fastqc_seq_length.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chira_fastqc_seq_length.png" alt="FastQC sequence length distribution. " width="800" height="600" loading="lazy" /></a></p>
 
   </blockquote>
 
@@ -1196,7 +1217,7 @@ This loads the data into the visualization framework and shows some basic plots 
       <ul>
         <li>The visualization split into two to show the left and the right arms information.</li>
         <li>On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
-<img src="../../images/rna-interactome/chiraviz_view1.png" alt="ChiRAViz home page. " width="1099" height="1161" loading="lazy" /></li>
+<a href="../../images/rna-interactome/chiraviz_view1.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chiraviz_view1.png" alt="ChiRAViz home page. " width="1099" height="1161" loading="lazy" /></a></li>
       </ul>
     </li>
     <li>
@@ -1204,7 +1225,7 @@ This loads the data into the visualization framework and shows some basic plots 
 and then filter the interactions we are interested in next page. To get all interactions, choose <code class="language-plaintext highlighter-rouge">all</code> in both dropdowns
 on the top and then click on <strong>“Get interactions”</strong>.</p>
 
-      <p><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector. " width="663" height="48" loading="lazy" /></p>
+      <p><a href="../../images/rna-interactome/chiraviz_choose.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector. " width="663" height="48" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1232,7 +1253,7 @@ This filters out 10 more records and results in 17 records.</li>
     <li>At this point, you can select individual interactions by clicking the individual checkboxes or by clicking <strong>“Check all”</strong>. Both the possibilities are highlighted in red color in the following figure.</li>
     <li>Click on <strong>Summary</strong> to view the summary plots for the selected interactions.</li>
     <li>Clicking on <strong>Export</strong> to export the selected interactions to a file.
-<img src="../../images/rna-interactome/chiraviz_view2.png" alt="ChiRAViz filter page. " width="1376" height="952" loading="lazy" /></li>
+<a href="../../images/rna-interactome/chiraviz_view2.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chiraviz_view2.png" alt="ChiRAViz filter page. " width="1376" height="952" loading="lazy" /></a></li>
   </ul>
 </blockquote>
 
@@ -1262,7 +1283,7 @@ corresponds to 4 different transcripts of the target gene <code class="language-
         <li><strong>“Chimera”</strong> panel in the middle depicts the mapping positions on the read with read length.</li>
         <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.</li>
         <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
-<img src="../../images/rna-interactome/chiraviz_view3.png" alt="ChiRAViz single interaction. " width="1240" height="749" loading="lazy" /></li>
+<a href="../../images/rna-interactome/chiraviz_view3.png" rel="noopener noreferrer"><img src="../../images/rna-interactome/chiraviz_view3.png" alt="ChiRAViz single interaction. " width="1240" height="749" loading="lazy" /></a></li>
       </ul>
     </li>
   </ul>
@@ -1469,7 +1490,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1501,7 +1522,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

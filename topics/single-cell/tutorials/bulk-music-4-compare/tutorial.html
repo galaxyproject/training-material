@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Comparing inferred cell compositions using MuSiC deconvolution</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -305,8 +340,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -349,7 +384,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -397,23 +432,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -906,7 +927,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -951,7 +972,7 @@ Sentry.init({
 
 <p>In the standard MuSiC tutorial, we used human pancreas data. We will now use the same single cell reference dataset <span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span> with its 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk RNA-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into Expression Set objects in the previous two tutorials. For both the single cell reference and the bulk samples of interest, you have generated Expression Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the scRNA reference. We won’t need the combined bulk RNA dataset. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy single cell reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/comparison.png" alt="Three colours of arrows connect bulk healthy &amp; diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy &amp; bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref)." width="506" height="259" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plan of analysis</figcaption></figure>
+<p><a href="../../images/bulk-music/comparison.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/comparison.png" alt="Three colours of arrows connect bulk healthy &amp; diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy &amp; bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref)." width="506" height="259" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plan of analysis&lt;/figcaption&gt;</figure></a></p>
 
 <p>If you have followed the previous tutorials, you will have built your <a href="/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html">single cell ESet object</a> and your <a href="/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">bulk ESet object</a>, then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you’ll need.</p>
 
@@ -1074,7 +1095,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output file <em>Summarised Plots (MuSiC)</em>. Now the first few pages are similar to the standard deconvolution tool, but now comparing across the factor of interest (disease). Among the myriad of visualisations available, our favourite is on page 5 - a comparison of inferred cell proportions across disease.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/plot_altogether.png" alt="Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample." width="2140" height="1016" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Altogether: Resulting Graph</figcaption></figure>
+<p><a href="../../images/bulk-music/plot_altogether.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/plot_altogether.png" alt="Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample." width="2140" height="1016" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Altogether: Resulting Graph&lt;/figcaption&gt;</figure></a></p>
 
 <p>Here we can see that the bulk-RNA seq samples from the T2D patients contain markedly fewer beta cells as compared with their healthy counterparts. This makes sense, so that’s good!</p>
 
@@ -1082,13 +1103,13 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output file <em>Individual heatmaps (MuSiC)</em>. This shows the cell distribution across each of the individual samples, separated out by disease factor into two separate plots, but ultimately isn’t particularly informative.</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/individual_heatmaps.png" alt="Heatmap showing vertically four samples (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample." width="1738" height="1758" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Altogether: Individual heatmaps</figcaption></figure>
+<p><a href="../../images/bulk-music/individual_heatmaps.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/individual_heatmaps.png" alt="Heatmap showing vertically four samples (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample." width="1738" height="1758" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Altogether: Individual heatmaps&lt;/figcaption&gt;</figure></a></p>
 
 <h3 id="stats">Stats</h3>
 
 <p>If you select the <em>Stats</em> dataset, you’ll find it contains four sets of data, <code class="language-plaintext highlighter-rouge">Bulk_disease: Read Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_healthy: Read Props</code> and <code class="language-plaintext highlighter-rouge">Bulk_healthy: Sample Props</code>. Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>. This contains summary statistics (Min, quartiles, median, mean, etc.) for each phenotype. This could be quite helpful if you’re trying to statistically identify differences across samples.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/summary_statistics.png" alt="Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean." width="1356" height="424" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Altogether: Stats</figcaption></figure>
+<p><a href="../../images/bulk-music/summary_statistics.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/summary_statistics.png" alt="Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean." width="1356" height="424" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Altogether: Stats&lt;/figcaption&gt;</figure></a></p>
 
 <h3 id="tables">Tables</h3>
 
@@ -1096,7 +1117,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <code class="language-plaintext highlighter-rouge">Data Table</code>. This contains the inferred proportions and reads associated with each sample and cell type, along with its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/data_table.png" alt="Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads." width="2022" height="468" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Altogether: Data table</figcaption></figure>
+<p><a href="../../images/bulk-music/data_table.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/data_table.png" alt="Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads." width="2022" height="468" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Altogether: Data table&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1195,7 +1216,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_like.png" alt="Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph." width="2809" height="2676" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Altogether vs like4like</figcaption></figure>
+    <p><a href="../../images/bulk-music/compare_like.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_like.png" alt="Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph." width="2809" height="2676" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Altogether vs like4like&lt;/figcaption&gt;</figure></a></p>
     <ol>
       <li>Overall, our interpretation here is that the differences are less pronounced. It’s interesting to conjecture whether this is an artefact of analysis, or whether - possibly - the beta cells in the diseased samples are not only fewer, but also contain fewer beta-cell specific transcripts (and thereby inhibited beta cell function), thereby lowering the bar for the inference of a beta cell and leading to a higher proportion of interred B-cells.</li>
     </ol>
@@ -1266,7 +1287,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_3.png" alt="Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph." width="2823" height="3992" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The impact of the single cell reference</figcaption></figure>
+    <p><a href="../../images/bulk-music/compare_3.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_3.png" alt="Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph." width="2823" height="3992" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> The impact of the single cell reference&lt;/figcaption&gt;</figure></a></p>
 
     <ol>
       <li>If using a like4like inference reduced the difference between the phenotype, aligning both phenotypes to the same (healthy) reference exacerbated them - there are even fewer beta cells in the output of this analysis.</li>
@@ -1284,7 +1305,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <p>We hope this helps you in your research!</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_workflow.png" alt="Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool. " width="1948" height="1236" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> MuSiC Compare Tutorial Workflow</figcaption></figure>
+<p><a href="../../images/bulk-music/compare_workflow.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/compare_workflow.png" alt="Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool. " width="1948" height="1236" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span> MuSiC Compare Tutorial Workflow&lt;/figcaption&gt;</figure></a></p>
 
 <p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.usegalaxy.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
@@ -1455,7 +1476,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1487,7 +1508,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>A short introduction to Galaxy</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -227,8 +262,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -271,7 +306,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -319,23 +354,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -682,7 +703,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -732,7 +753,7 @@ Sentry.init({
     <li>Log in or register</li>
   </ol>
 
-  <p><img src="../../images/galaxy-login.png" alt="Screenshot of Galaxy Australia with the register or login button highlighted. " width="2196" height="912" loading="lazy" /></p>
+  <p><a href="../../images/galaxy-login.png" rel="noopener noreferrer"><img src="../../images/galaxy-login.png" alt="Screenshot of Galaxy Australia with the register or login button highlighted. " width="2196" height="912" loading="lazy" /></a></p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-different-galaxy-servers"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Different Galaxy servers</div>
@@ -755,7 +776,7 @@ Sentry.init({
   <li>History of analysis and files on the right</li>
 </ul>
 
-<p><img src="../../images/galaxy_interface.png" alt="Screenshot of the Galaxy interface with aforementioned structure. " width="1777" height="1290" loading="lazy" /></p>
+<p><a href="../../images/galaxy_interface.png" rel="noopener noreferrer"><img src="../../images/galaxy_interface.png" alt="Screenshot of the Galaxy interface with aforementioned structure. " width="1777" height="1290" loading="lazy" /></a></p>
 
 <p>The first time you use Galaxy, there will be no files in your history panel.</p>
 
@@ -772,13 +793,13 @@ Sentry.init({
     <li>
       <p>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</p>
 
-      <p><img src="../../../../shared/images/rename_history.png" alt="Screenshot of the galaxy interface with the history name being edited, it currently reads &quot;Unnamed history&quot;, the default value. An input box is below it." width="270" height="320" loading="lazy" /></p>
+      <p><a href="../../../../shared/images/rename_history.png" rel="noopener noreferrer"><img src="../../../../shared/images/rename_history.png" alt="Screenshot of the galaxy interface with the history name being edited, it currently reads &quot;Unnamed history&quot;, the default value. An input box is below it." width="270" height="320" loading="lazy" /></a></p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
 
         <p>In some previous versions of Galaxy, you will need to click on the history name to rename it as shown here:
-<img src="../../../../shared/images/rename_history_old.png" alt="Screenshot of the galaxy interface with the history name being edited, it currently reads &quot;Unnamed history&quot;, the default value." width="256" height="165" loading="lazy" /></p>
+<a href="../../../../shared/images/rename_history_old.png" rel="noopener noreferrer"><img src="../../../../shared/images/rename_history_old.png" alt="Screenshot of the galaxy interface with the history name being edited, it currently reads &quot;Unnamed history&quot;, the default value." width="256" height="165" loading="lazy" /></a></p>
       </blockquote>
     </li>
     <li>Type in a new name, for example, “My Analysis”</li>
@@ -802,11 +823,11 @@ Sentry.init({
     <li>
       <p>At the top of the <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload</strong></p>
 
-      <p><img src="../../images/upload-data.png" alt="upload data button shown in the galaxy interface. " width="276" height="205" loading="lazy" /></p>
+      <p><a href="../../images/upload-data.png" rel="noopener noreferrer"><img src="../../images/upload-data.png" alt="upload data button shown in the galaxy interface. " width="276" height="205" loading="lazy" /></a></p>
 
       <p>This brings up a box:</p>
 
-      <p><img src="../../images/upload-box.png" alt="the complicated galaxy upload dialog, the 'regular' tab is active with a large textarea to paste subsequent URL. " width="1792" height="1087" loading="lazy" /></p>
+      <p><a href="../../images/upload-box.png" rel="noopener noreferrer"><img src="../../images/upload-box.png" alt="the complicated galaxy upload dialog, the 'regular' tab is active with a large textarea to paste subsequent URL. " width="1792" height="1087" loading="lazy" /></a></p>
     </li>
     <li>Click <strong>Paste/Fetch data</strong></li>
     <li>
@@ -858,7 +879,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to the dataset name, to look at the file content</p>
 
-      <p><img src="../../images/eye-icon.png" alt="galaxy history view showing a single dataset mutant_r1.fastq. Display link is being hovered." width="580" height="549" loading="lazy" /></p>
+      <p><a href="../../images/eye-icon.png" rel="noopener noreferrer"><img src="../../images/eye-icon.png" alt="galaxy history view showing a single dataset mutant_r1.fastq. Display link is being hovered." width="580" height="549" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -867,7 +888,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
 <p>This file contains DNA sequencing reads from a bacteria, in FASTQ format:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/fastq.png" alt="preview of a fastq file showing the 4 line structure described in fig caption. 3 reads are shown." width="1088" height="428" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A FastQ file of course has four lines per record: the record identifier (`@mutant-no_snps.gff-24960/`), the sequence (`AATG…`), the plus character (`+`), and then the quality scores for the sequence (`5??A…`).</figcaption></figure>
+<p><a href="../../images/fastq.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/fastq.png" alt="preview of a fastq file showing the 4 line structure described in fig caption. 3 reads are shown." width="1088" height="428" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> A FastQ file of course has four lines per record: the record identifier (<code class="language-plaintext highlighter-rouge">@mutant-no_snps.gff-24960/</code>), the sequence (<code class="language-plaintext highlighter-rouge">AATG…</code>), the plus character (<code class="language-plaintext highlighter-rouge">+</code>), and then the quality scores for the sequence (<code class="language-plaintext highlighter-rouge">5??A…</code>).&lt;/figcaption&gt;</figure></a></p>
 
 <h2 id="use-a-tool">Use a tool</h2>
 
@@ -916,7 +937,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p>The information is displayed in the central panel</p>
 
-      <p><img src="../../images/fastqc-out.png" alt="Graph from fastqc's report. fastqc's images themselves are inaccessible, but this graph shows overall mostly green (good) sequences scores across the length of the read." width="742" height="729" loading="lazy" /></p>
+      <p><a href="../../images/fastqc-out.png" rel="noopener noreferrer"><img src="../../images/fastqc-out.png" alt="Graph from fastqc's report. fastqc's images themselves are inaccessible, but this graph shows overall mostly green (good) sequences scores across the length of the read." width="742" height="729" loading="lazy" /></a></p>
     </li>
   </ul>
 </blockquote>
@@ -979,7 +1000,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
       <p>This expands the information about the file.</p>
 
-      <p><img src="../../images/filter-fastq1.png" alt="Diagram of how to locate the information. As above, clicking on the name expands the dataset, and an info section is shown with the filter settings. 1786 (14%) discarded." width="623" height="696" loading="lazy" /></p>
+      <p><a href="../../images/filter-fastq1.png" rel="noopener noreferrer"><img src="../../images/filter-fastq1.png" alt="Diagram of how to locate the information. As above, clicking on the name expands the dataset, and an info section is shown with the filter settings. 1786 (14%) discarded." width="623" height="696" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1006,7 +1027,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Click on the <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> icon (<strong>Run this job again</strong>) for the output dataset of <strong>Filter by quality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
-      <p><img src="../../images/rerun.png" alt="A dataset is expanded showing the Run Job Again button highlighted. " width="249" height="412" loading="lazy" /></p>
+      <p><a href="../../images/rerun.png" rel="noopener noreferrer"><img src="../../images/rerun.png" alt="A dataset is expanded showing the Run Job Again button highlighted. " width="249" height="412" loading="lazy" /></a></p>
 
       <p>This brings up the tool interface in the central panel with the parameters set to the values used previously to generate this dataset.</p>
     </li>
@@ -1067,11 +1088,11 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Click on <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>
 
-      <p><img src="../../images/history_menu_extract_workflow.png" alt="'Extract Workflow' entry in the history options menu. " width="247" height="327" loading="lazy" /></p>
+      <p><a href="../../images/history_menu_extract_workflow.png" rel="noopener noreferrer"><img src="../../images/history_menu_extract_workflow.png" alt="'Extract Workflow' entry in the history options menu. " width="247" height="327" loading="lazy" /></a></p>
 
       <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>
 
-      <p><img src="../../images/intro_short_workflow_extract.png" alt="Selection of steps for Extract Workflow from history. All three of fastqc, filter by quality, and the second filter by quality are selected." width="1568" height="977" loading="lazy" /></p>
+      <p><a href="../../images/intro_short_workflow_extract.png" rel="noopener noreferrer"><img src="../../images/intro_short_workflow_extract.png" alt="Selection of steps for Extract Workflow from history. All three of fastqc, filter by quality, and the second filter by quality are selected." width="1568" height="977" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Replace the <strong>Workflow name</strong> to something more descriptive, for example: <code class="language-plaintext highlighter-rouge">QC and filtering</code>.</p>
@@ -1130,7 +1151,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
     <li>
       <p>Click on <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> (<strong>History options</strong>) and then click on the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>Show Histories side-by-side</strong></p>
 
-      <p><img src="../../images/galaxy_interface_history_switch.png" alt="History options menu dropdown showing you have 163 histories, and a show histories side-by-side button." width="287" height="120" loading="lazy" /></p>
+      <p><a href="../../images/galaxy_interface_history_switch.png" rel="noopener noreferrer"><img src="../../images/galaxy_interface_history_switch.png" alt="History options menu dropdown showing you have 163 histories, and a show histories side-by-side button." width="287" height="120" loading="lazy" /></a></p>
 
       <p>A new page will appear with all your histories displayed here.</p>
     </li>
@@ -1140,7 +1161,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
         <li>Drag it into the “Next Analysis” history</li>
       </ol>
 
-      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/copy-dataset.gif" alt="Gif of copying datasets between histories in the side-by-side history view. For now this feature is not keyboard accessible, it is a known issue." width="1280" height="720" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Copy a dataset between histories by dragging it</figcaption></figure>
+      <p><a href="../../images/copy-dataset.gif" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/copy-dataset.gif" alt="Gif of copying datasets between histories in the side-by-side history view. For now this feature is not keyboard accessible, it is a known issue." width="1280" height="720" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Copy a dataset between histories by dragging it&lt;/figcaption&gt;</figure></a></p>
 
       <p>This makes a copy of the dataset in the new history (without actually using additional disk space).</p>
     </li>
@@ -1167,7 +1188,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <p>Here you have a list of all your workflows.
 Your newly created workflow should be listed at the top:</p>
 
-      <p><img src="../../images/intro_short_workflow_list.png" alt="Workflow list page showing a single workflow named QC and filtering." width="2538" height="444" loading="lazy" /></p>
+      <p><a href="../../images/intro_short_workflow_list.png" rel="noopener noreferrer"><img src="../../images/intro_short_workflow_list.png" alt="Workflow list page showing a single workflow named QC and filtering." width="2538" height="444" loading="lazy" /></a></p>
 
       <p>If you click on a workflow name, you can see all available actions for the workflow, e.g. edit, copy, rename, delete.</p>
     </li>
@@ -1176,7 +1197,7 @@ Your newly created workflow should be listed at the top:</p>
 
       <p>The central panel will change to allow you to configure and launch the workflow.</p>
 
-      <p><img src="../../images/intro_short_run_workflow.png" alt="Run workflow form with a single input: FASTQ reads. mutant_r1.fastq is selected as the input dataset for that parameter." width="1318" height="167" loading="lazy" /></p>
+      <p><a href="../../images/intro_short_run_workflow.png" rel="noopener noreferrer"><img src="../../images/intro_short_run_workflow.png" alt="Run workflow form with a single input: FASTQ reads. mutant_r1.fastq is selected as the input dataset for that parameter." width="1318" height="167" loading="lazy" /></a></p>
     </li>
     <li>
       <p>Check that the <em>“FASTQ reads”</em> input is set to the FASTQ dataset we have copied to the new history.</p>
@@ -1391,7 +1412,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1423,7 +1444,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>1: RNA-Seq reads to counts</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -382,8 +417,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -426,7 +461,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -474,23 +509,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -1061,7 +1082,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1082,7 +1103,7 @@ Sentry.init({
 
 <p>This is a Galaxy tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R RNAseq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">at a workshop in 2016</a>.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/mouse_exp.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " width="567" height="402" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Tutorial Dataset&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1146,8 +1167,8 @@ Sentry.init({
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-datasets.png" alt="Samples imported as datasets. " width="220" height="725" loading="lazy" /></td>
-      <td><img src="../../images/rna-seq-reads-to-counts/imported-as-collection.png" alt="Samples imported as collection with Rule-based Uploader. " width="196" height="356" loading="lazy" /></td>
+      <td><a href="../../images/rna-seq-reads-to-counts/imported-as-datasets.png" rel="noopener noreferrer"><img src="../../images/rna-seq-reads-to-counts/imported-as-datasets.png" alt="Samples imported as datasets. " width="220" height="725" loading="lazy" /></a></td>
+      <td><a href="../../images/rna-seq-reads-to-counts/imported-as-collection.png" rel="noopener noreferrer"><img src="../../images/rna-seq-reads-to-counts/imported-as-collection.png" alt="Samples imported as collection with Rule-based Uploader. " width="196" height="356" loading="lazy" /></a></td>
     </tr>
   </tbody>
 </table>
@@ -1166,8 +1187,8 @@ Sentry.init({
     </thead>
     <tbody>
       <tr>
-        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png" alt="Sample names without collection. " width="524" height="407" loading="lazy" /></td>
-        <td><img src="../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png" alt="Sample names with collection. " width="424" height="394" loading="lazy" /></td>
+        <td><a href="../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png" rel="noopener noreferrer"><img src="../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png" alt="Sample names without collection. " width="524" height="407" loading="lazy" /></a></td>
+        <td><a href="../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png" rel="noopener noreferrer"><img src="../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png" alt="Sample names with collection. " width="424" height="394" loading="lazy" /></a></td>
       </tr>
     </tbody>
   </table>
@@ -1228,7 +1249,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
         <li>
           <p>Click <strong>Build</strong></p>
 
-          <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader. " width="888" height="531" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Rule-based Uploader</figcaption></figure>
+          <p><a href="../../images/rna-seq-reads-to-counts/rule_uploader.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader. " width="888" height="531" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Rule-based Uploader&lt;/figcaption&gt;</figure></a></p>
         </li>
         <li>
           <p>In the <code class="language-plaintext highlighter-rouge">rules editor</code> that pops up:</p>
@@ -1260,7 +1281,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
             <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
           </ul>
 
-          <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor. " width="1131" height="488" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Rules Editor</figcaption></figure>
+          <p><a href="../../images/rna-seq-reads-to-counts/rule_editor.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor. " width="1131" height="488" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Rules Editor&lt;/figcaption&gt;</figure></a></p>
 
           <p>You should see a collection (list) called <code class="language-plaintext highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
         </li>
@@ -1375,7 +1396,7 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 This information can be seen at the top of the FastQC Webpage as below.</li>
     </ol>
 
-    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage. " width="1960" height="630" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> FastQC Webpage</figcaption></figure>
+    <p><a href="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_webpage.png" alt="FastQC Webpage. " width="1960" height="630" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> FastQC Webpage&lt;/figcaption&gt;</figure></a></p>
 
   </blockquote>
 
@@ -1415,14 +1436,14 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>You should see that most of the plots in the small FASTQs look similar to the full dataset. However, in the small FASTQs, there is less duplication, some Ns in the reads and some overrepresented sequences.</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics. " width="1668" height="704" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> General Statistics</figcaption></figure>
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Sequence Counts</figcaption></figure>
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Sequence Quality</figcaption></figure>
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Per Sequence Quality Scores</figcaption></figure>
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Per Sequence GC Content</figcaption></figure>
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Per base N content</figcaption></figure>
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Sequence Duplication Levels</figcaption></figure>
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Adapter Content</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/fastqc_table.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_table.png" alt="General Statistics. " width="1668" height="704" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> General Statistics&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_counts_plot.png" alt="Sequence Counts. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Sequence Counts&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Sequence Quality&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Per Sequence Quality Scores&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Per Sequence GC Content&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" rel="noopener noreferrer"><figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_per_base_n_content_plot.png" alt="Per base N content. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Per base N content&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" rel="noopener noreferrer"><figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Sequence Duplication Levels&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" rel="noopener noreferrer"><figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/fastqc_adapter_content_plot.png" alt="Adapter Content. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Adapter Content&lt;/figcaption&gt;</figure></a></p>
 
 <p>See the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a> for more information on FastQC plots.</p>
 
@@ -1531,8 +1552,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming. " width="1588" height="632" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Adapter Content post-trimming</figcaption></figure>
-<figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Sequence Length post-trimming</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" rel="noopener noreferrer"><figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_adapter_content.png" alt="Adapter Content post-trimming. " width="1588" height="632" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Adapter Content post-trimming&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" rel="noopener noreferrer"><figure id="figure-14" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/post_cutadapt_fastqc_sequence_length_distribution_plot.png" alt="Sequence Length post-trimming. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Sequence Length post-trimming&lt;/figcaption&gt;</figure></a></p>
 
 <p>After trimming we can see that:</p>
 
@@ -1604,7 +1625,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> HISAT2 mapping</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" rel="noopener noreferrer"><figure id="figure-15" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 15</strong>:</span> HISAT2 mapping&lt;/figcaption&gt;</figure></a></p>
 
 <p>An important metric to check is the percentage of reads mapped to the reference genome. A low percentage can indicate issues with the data or analysis. Over 90% of reads have mapped in all samples, which is a good mapping rate, and the vast majority of reads have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
 
@@ -1797,7 +1818,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> featureCounts assignments</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" rel="noopener noreferrer"><figure id="figure-16" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 16</strong>:</span> featureCounts assignments&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1837,7 +1858,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>Take a look at the output. Note that as the tutorial uses a small subset of the data (~ 1000 reads per sample), to save on processing time, most rows in that matrix will contain all zeros (there will be ~600 non-zero rows). The output for the full dataset is shown below.</p>
 
-<figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix. " width="1356" height="812" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Count matrix</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/count_matrix.png" rel="noopener noreferrer"><figure id="figure-17" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/count_matrix.png" alt="Count matrix. " width="1356" height="812" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Count matrix&lt;/figcaption&gt;</figure></a></p>
 
 <p>Now it is easier to see the counts for a gene across all samples. The accompanying tutorial, <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">RNA-seq counts to genes</a>, shows how gene information (symbols etc) can be added to a count matrix.</p>
 
@@ -1922,7 +1943,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Infer Experiment</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" rel="noopener noreferrer"><figure id="figure-18" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_infer_experiment_plot.png" alt="Infer Experiment. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Infer Experiment&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1974,7 +1995,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> MarkDups metrics</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/picard_deduplication.png" rel="noopener noreferrer"><figure id="figure-19" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/picard_deduplication.png" alt="MarkDups metrics. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 19</strong>:</span> MarkDups metrics&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-5"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2026,8 +2047,8 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 20</strong>:</span> IdxStats Chromosome Mappings</figcaption></figure>
-<figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY . " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 21</strong>:</span> IdxStats X/Y Mappings</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" rel="noopener noreferrer"><figure id="figure-20" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-mapped-reads-plot.png" alt="IdxStats chromsome mappings. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 20</strong>:</span> IdxStats Chromosome Mappings&lt;/figcaption&gt;</figure></a>
+<a href="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" rel="noopener noreferrer"><figure id="figure-21" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/samtools-idxstats-xy-plot.png" alt="IdxStats XY . " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 21</strong>:</span> IdxStats X/Y Mappings&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2091,10 +2112,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Gene Body Coverage</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" rel="noopener noreferrer"><figure id="figure-22" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_gene_body_coverage_plot.png" alt="Gene Body Coverage. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 22</strong>:</span> Gene Body Coverage&lt;/figcaption&gt;</figure></a></p>
 
-<p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.</p>
-<figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison. " width="1298" height="1400" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Gene Body Coverage comparison</figcaption></figure>
+<p>The plot below from the RSeQC website shows what samples with 3’biased coverage would look like.
+<a href="../../images/rna-seq-reads-to-counts/genebodycoverage.png" rel="noopener noreferrer"><figure id="figure-23" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/genebodycoverage.png" alt="Gene Body Coverage comparison. " width="1298" height="1400" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 23</strong>:</span> Gene Body Coverage comparison&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2148,7 +2169,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
 
-<figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Read Distribution</figcaption></figure>
+<p><a href="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" rel="noopener noreferrer"><figure id="figure-24" style="max-width: 90%; margin:auto;"><img src="../../images/rna-seq-reads-to-counts/rseqc_read_distribution_plot.png" alt="Read Distribution. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 24</strong>:</span> Read Distribution&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2540,7 +2561,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2572,7 +2593,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

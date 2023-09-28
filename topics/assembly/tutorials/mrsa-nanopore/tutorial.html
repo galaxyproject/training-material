@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Genome Assembly of MRSA using Oxford Nanopore MinION Data</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -261,8 +296,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -305,7 +340,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -353,23 +388,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -716,7 +737,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1003,8 +1024,8 @@ datasets that will be shown on the screen together.</p>
   </thead>
   <tbody>
     <tr>
-      <td><img src="../../images/mrsa/before.png" alt="before filtering, showing a large mostly gaussian curve. " width="606" height="458" loading="lazy" /></td>
-      <td><img src="../../images/mrsa/after.png" alt="after filtering, same curve as before but everything below 1000bp is gone. " width="610" height="458" loading="lazy" /></td>
+      <td><a href="../../images/mrsa/before.png" rel="noopener noreferrer"><img src="../../images/mrsa/before.png" alt="before filtering, showing a large mostly gaussian curve. " width="606" height="458" loading="lazy" /></a></td>
+      <td><a href="../../images/mrsa/after.png" rel="noopener noreferrer"><img src="../../images/mrsa/after.png" alt="after filtering, same curve as before but everything below 1000bp is gone. " width="610" height="458" loading="lazy" /></a></td>
     </tr>
   </tbody>
 </table>
@@ -1117,7 +1138,7 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
     <li>
       <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the assembly graph image</p>
 
-      <p><img src="../../images/mrsa/bandage.png" alt="Bandage output showing two contigs, one big, one tiny. " width="1152" height="1000" loading="lazy" /></p>
+      <p><a href="../../images/mrsa/bandage.png" rel="noopener noreferrer"><img src="../../images/mrsa/bandage.png" alt="Bandage output showing two contigs, one big, one tiny. " width="1152" height="1000" loading="lazy" /></a></p>
     </li>
   </ol>
 </blockquote>
@@ -1175,7 +1196,7 @@ graphs. The image below looks exceptionally boring. This is a good
 thing, because each corner means one contig. A contig is the contiguous
 sequence made by combining all separate reads in the assembly</p>
 
-      <p><img src="../../images/mrsa/quast.png" alt="Image showing the HTML output of quast including a table over conting information and a cumulative length graph with the contigs." width="973" height="1163" loading="lazy" /></p>
+      <p><a href="../../images/mrsa/quast.png" rel="noopener noreferrer"><img src="../../images/mrsa/quast.png" alt="Image showing the HTML output of quast including a table over conting information and a cumulative length graph with the contigs." width="973" height="1163" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1276,7 +1297,7 @@ the largest contig can mean that it is the total chromosomal DNA of the <em>S. a
 
 <p>To get more information about these antibiotic resistant genes, you can check the <a href="https://card.mcmaster.ca">CARD database</a> (<strong>C</strong>omprehensive <strong>A</strong>ntibiotic <strong>R</strong>esistance <strong>D</strong>atabase) (<span class="citation"><a href="#Jia2016">Jia <i>et al.</i> 2016</a></span>)</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/mrsa/card.png" alt="Screenshot of mecA sequence in CARD database with lots of metadata. " width="1186" height="1061" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
+<p><a href="../../images/mrsa/card.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/mrsa/card.png" alt="Screenshot of mecA sequence in CARD database with lots of metadata. " width="1186" height="1061" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.&lt;/figcaption&gt;</figure></a></p>
 
 <p>CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.</p>
@@ -1468,7 +1489,7 @@ from prokka as an information track.</p>
   <li>
     <p>Under the <strong>View</strong> menu click on the <strong>Search Features</strong> option</p>
 
-    <p><img src="../../images/mrsa/search-features.png" alt="Screenshot of jbrowse top menu with search features button. " width="299" height="162" loading="lazy" /></p>
+    <p><a href="../../images/mrsa/search-features.png" rel="noopener noreferrer"><img src="../../images/mrsa/search-features.png" alt="Screenshot of jbrowse top menu with search features button. " width="299" height="162" loading="lazy" /></a></p>
 
     <p>Now we are going to search for the aac(6’)-aph(2’’) gene (the resistance gene we found with the staramr (resfinder) results)</p>
   </li>
@@ -1480,7 +1501,7 @@ from prokka as an information track.</p>
   <li>
     <p>Now only type: <code class="language-plaintext highlighter-rouge">aac</code> and you’ll find multiple results.</p>
 
-    <p><img src="../../images/mrsa/search-results.png" alt="Screenshot of search table showing multiple results. " width="885" height="554" loading="lazy" /></p>
+    <p><a href="../../images/mrsa/search-results.png" rel="noopener noreferrer"><img src="../../images/mrsa/search-results.png" alt="Screenshot of search table showing multiple results. " width="885" height="554" loading="lazy" /></a></p>
   </li>
   <li>
     <p>Now go back to the staramr (resfinder) results and check the starting position of the aac(6’)-aph(2’’) genes match the prokka results.</p>
@@ -1492,7 +1513,7 @@ parts.</p>
 
     <p>For example if an aac(6’)-aph(2’’) region was found on contig_2 with start 39209 and end 37755, you could write <code class="language-plaintext highlighter-rouge">contig_2:39209..37755</code> in the search box to go directly to that region.</p>
 
-    <p><img src="../../images/mrsa/enter-loc.png" alt="entering a location directly in jbrowse. " width="220" height="26" loading="lazy" /></p>
+    <p><a href="../../images/mrsa/enter-loc.png" rel="noopener noreferrer"><img src="../../images/mrsa/enter-loc.png" alt="entering a location directly in jbrowse. " width="220" height="26" loading="lazy" /></a></p>
   </li>
   <li>
     <p>After browsing to the region, under <strong>view</strong> press <strong>Set highlight</strong> and use the current region</p>
@@ -1500,7 +1521,7 @@ parts.</p>
     <p>Now you can easily see that the aac(6’)-aph(2’’) gene in
 resfinder is much bigger than the genes found by prokka.</p>
 
-    <p><img src="../../images/mrsa/highlight.png" alt="highlighted region covering multiple genes in jbrowse. " width="1779" height="340" loading="lazy" /></p>
+    <p><a href="../../images/mrsa/highlight.png" rel="noopener noreferrer"><img src="../../images/mrsa/highlight.png" alt="highlighted region covering multiple genes in jbrowse. " width="1779" height="340" loading="lazy" /></a></p>
 
     <p>So always know what you’re searching for and specify which tools
 were used with which databases!</p>
@@ -1894,7 +1915,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1926,7 +1947,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

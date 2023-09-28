@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Whole transcriptome analysis of Arabidopsis thaliana</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -341,8 +376,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -385,7 +420,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -433,23 +468,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -831,7 +852,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -844,13 +865,13 @@ Sentry.init({
 
 <p>Brassinosteroids (BRs) are a group of plant steroid hormones essential for plant growth and development, as well as for controlling abiotic and biotic stress. Structurally, BRs are polyhydroxylated sterol derivatives with close similarity to animal hormones (Figure 1). This group of phytohormones is comprised of around 60 different compounds, of which brassinolide (BL), 24-epibrassinolide (EBR), and 28-homobrassinolide (HBR) are considered the most bioactive.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png" alt="fig1:Esteroid hormones. " width="712" height="252" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of various plant and animal steroid hormones.</figcaption></figure>
+<p><a href="/training-material/topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/brassinosteroids.png" alt="fig1:Esteroid hormones. " width="712" height="252" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Structure of various plant and animal steroid hormones.&lt;/figcaption&gt;</figure></a></p>
 
 <p>Several recent studies suggest that the BR-mediated gene regulatory networks have the potential to reshape the future of agriculture, not only by alleviating the antagonistic effect diverse abiotic stress conditios, such as drought, but also by enhancing plant growth and yield. For instance, in tomato (<em>Solanum lycopersicum</em>), EBR treatment enhances drought tolerance, improving photosynthetic capacity, leaf water status, and antioxidant defense (<span class="citation"><a href="#Wang2018">Wang <i>et al.</i> 2018</a></span>). In pepper (<em>Capsicum annuum</em>), BL treatment increased the efficiency of light utilization under drought (<span class="citation"><a href="#Hu2013">Hu <i>et al.</i> 2013</a></span>). Gram (<em>Cicer arietinum</em>) plants exposed to drought stress and treated with BL showed significant increases in weight (<span class="citation"><a href="#Anwar2018">Anwar <i>et al.</i> 2018</a></span>). However, the mechanisms of BRs action in enhancing plant tolerance to abiotic stresses still remain largely unknown.</p>
 
 <p>MicroRNAs (miRNAs), mainly 20–22 nucleotide small RNAs (sRNAs), are characterized for regulating gene expression at the post-transcriptional level. miRNAs are distinguished from other sRNAs by being generated from precursor harboring an imperfect stem‐loop structure. Unlike in animals, the pre-processing of plant miRNA occurs in the nucleus (Figure 2). The pre-miRNAs are then exported to the cytoplasm after methylation and incorporated into the Argonaute 1 protein to form RISC (RNA-induced silencing complex). The miRNA itself does not have the ability to cleave mRNAs or interfere with translation, but it plays a role in scanning the appropriate target.</p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/plant_mirna_synthesis.png" alt="fig2:miRNA biosynthesis. " width="917" height="916" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Plant miRNA biosynthesis, homeostasis and mechanisms of action (<span class="citation"><a href="#Wang2019">Wang <i>et al.</i> 2018</a></span>).</figcaption></figure>
+<p><a href="../../images/transcriptomics_images/plant_mirna_synthesis.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/plant_mirna_synthesis.png" alt="fig2:miRNA biosynthesis. " width="917" height="916" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Plant miRNA biosynthesis, homeostasis and mechanisms of action (<span class="citation"><a href="#Wang2019">Wang <i>et al.</i> 2018</a></span>).&lt;/figcaption&gt;</figure></a></p>
 
 <p>miRNAs have been found to be important regulators of many physiological processes, such as stress and hormonal responses. Four factors justify the miRNAs to be considered as master regulators of the plant response to the surrounding environment:</p>
 
@@ -903,7 +924,7 @@ Sentry.init({
 
 <p>The main objective of this training is to identify potential targets of miRNAs whose expression is induced by brassinosteroids. Our starting hypothesis is that there must be brassinosteroid-induced miRNAs that have high sequence complementarity with mRNAs whose expression is inhibited in the presence of these hormones (Figure 3).</p>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_pipeline.png" alt="fig3:Experimental design. " width="1619" height="750" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Experimental design</figcaption></figure>
+<p><a href="../../images/transcriptomics_images/miRNA_pipeline.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_pipeline.png" alt="fig3:Experimental design. " width="1619" height="750" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Experimental design&lt;/figcaption&gt;</figure></a></p>
 
 <h1 id="background-on-data">Background on data</h1>
 
@@ -1102,9 +1123,9 @@ For more information on the topic of quality control, please see our <a href="/t
 
     <p>The report generated by <strong>MultiQC</strong> indicates that three quality parameters show values outside the recommended limits: per sequence G/C content, overrepresented sequences and adapter content.</p>
 
-    <figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_GC_content.png" alt="fig4:GC content. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per sequence GC content of the miRNA samples.</figcaption></figure>
-    <figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_overepresented.png" alt="fig5:Overrepresented sequences. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Overrepresented sequences in miRNA samples.</figcaption></figure>
-    <figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_adaptors.png" alt="fig6:Adaptor content. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Adaptor content of miRNA samples.</figcaption></figure>
+    <p><a href="../../images/transcriptomics_images/miRNA_GC_content.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_GC_content.png" alt="fig4:GC content. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Per sequence GC content of the miRNA samples.&lt;/figcaption&gt;</figure></a>
+<a href="../../images/transcriptomics_images/miRNA_overepresented.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_overepresented.png" alt="fig5:Overrepresented sequences. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Overrepresented sequences in miRNA samples.&lt;/figcaption&gt;</figure></a>
+<a href="../../images/transcriptomics_images/miRNA_adaptors.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_adaptors.png" alt="fig6:Adaptor content. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Adaptor content of miRNA samples.&lt;/figcaption&gt;</figure></a></p>
 
     <p>Particularly remarkable is the content of adapters, which are up to 80% of the reads in some samples. Given the abundance of adapters, one would expect that if we eliminate this source of contamination, the rest of the parameters would show a noticeable improvement.</p>
 
@@ -1174,7 +1195,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
 <p>The evaluation of the report generated by <strong>MultiQC</strong> after having processed the samples by <strong>Trim Galore</strong> indicates that the G/C content has been successfully corrected, and that the adapter contamination has been eliminated. However, the samples still show a high degree of over-represented sequences (Figure 7).</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_overepresented_processed.png" alt="fig7:Overexpressed sequences. " width="1200" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Report of overexpressed sequences in the miRNA reads</figcaption></figure>
+<p><a href="../../images/transcriptomics_images/miRNA_overepresented_processed.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_overepresented_processed.png" alt="fig7:Overexpressed sequences. " width="1200" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Report of overexpressed sequences in the miRNA reads&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1307,8 +1328,8 @@ For more information on the topic of quality control, please see our <a href="/t
   </ol>
 </blockquote>
 
-<p>DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to inspect the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.</p>
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_PCA.png" alt="fig8:PCA miRNA. " width="1106" height="522" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span>  PCA plot of expression data from control and BR treated miRNA samples.</figcaption></figure>
+<p>DESeq2 generated 2 outputs: a table with the normalized counts and a graphical summary of the results. To evaluate the similarity of our samples, we are going to inspect the Principal Component Analysis (PCA) plot. PCA allows evaluating the dominant directions of the highest variability in the data. Thus, the samples subjected to the same conditions should cluster together.
+<a href="../../images/transcriptomics_images/miRNA_PCA.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_PCA.png" alt="fig8:PCA miRNA. " width="1106" height="522" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 8</strong>:</span>  PCA plot of expression data from control and BR treated miRNA samples.&lt;/figcaption&gt;</figure></a></p>
 
 <p>As can be seen, the main axes account for only 47% and 19% of the total variation. This suggests that the effect of brassinosteroids on miRNA regulation is limited (Figure 8).</p>
 
@@ -1479,7 +1500,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
     <p>All the stats are within acceptable limits. However, the adapter content shows the presence of Illumina universal adapters in our reads, which can be removed to avoid possible interferences at later stages (Figure 10).</p>
 
-    <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_adapter_01.png" alt="fig10:Adapter content of mRNA samples. " width="994" height="500" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Quality assessment of mRNA samples</figcaption></figure>
+    <p><a href="../../images/transcriptomics_images/miRNA_adapter_01.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/miRNA_adapter_01.png" alt="fig10:Adapter content of mRNA samples. " width="994" height="500" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Quality assessment of mRNA samples&lt;/figcaption&gt;</figure></a></p>
 
   </blockquote>
 </blockquote>
@@ -1493,7 +1514,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
 <p>After performing the quality assessment of the reads, we can move on to quantifying the gene expression. The aim of this step is to identify which transcript each read comes from and the total number of reads associated with each transcript. In this tutorial, we will use the Salmon tool (<span class="citation"><a href="#Patro2017">Patro <i>et al.</i> 2017</a></span>) for the quantification of mRNA transcripts.</p>
 
-<p><img src="../../images/transcriptomics_images/salmon_logo.png" alt="fig11:Salmon logo. " width="1513" height="250" loading="lazy" /></p>
+<p><a href="../../images/transcriptomics_images/salmon_logo.png" rel="noopener noreferrer"><img src="../../images/transcriptomics_images/salmon_logo.png" alt="fig11:Salmon logo. " width="1513" height="250" loading="lazy" /></a></p>
 
 <p>One of the characteristics of <strong>Salmon</strong> is that it doesn’t require performing a base-to-base alignment, which is the time-consuming step of tools such as <strong>STAR</strong> and <strong>HISAT2</strong>. Salmon relies on the quasi-mapping concept, a new mapping technique that allows the rapid and accurate mapping of RNA-Seq reads to a target transcriptome. Rather than a standard alignment, quasi-mapping seeks to find the best mappings for each read, and does so by finding minimal collections of dynamically sized, right-maximal, matching contexts between target and query positions (<span class="citation"><a href="#Srivastava2016">Srivastava <i>et al.</i> 2016</a></span>)</p>
 
@@ -1503,8 +1524,8 @@ For more information on the topic of quality control, please see our <a href="/t
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-quasi-mapping-algorithm"><button class="gtn-boxify-button details" type="button" aria-controls="details-quasi-mapping-algorithm" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Quasi-mapping algorithm<span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) that maps each k-mer in T to its SA interval (by default k = 31). During the quasi-mapping procedure, a read is scanned from left to right until a k-mer (k<sub>i</sub>, starting at position i on the read) is encountered that appears in h. The k<sub>i</sub> is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing the k-mer k<sub>i</sub>. Then, the Maximal Mappable Prefix (MMP<sub>i</sub>) is computed by finding the longest substring of the read that matches the reference suffixes. Owing to sequencing errors, the MMPs may not span the complete read. In this case, the next informative position (NIP) is determined based on the longest common prefix of the SA intervals of MMP<sub>i</sub>. Suffix array search continues from k-bases before NIP until the final NIP is less than k-bases before the read end. Finally, for each read, the algorithm reports the transcripts it mapped to, location and strand information (<span class="citation"><a href="#Srivastava2016">Srivastava <i>et al.</i> 2016</a></span>).</p>
-  <figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/salmon_quasialignment.png" alt="fig12:Quasi-mapping algorithm. " width="1542" height="852" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Illustration of the quasi-mapping of a read using k=3. Hash table lookup of k<sub>i</sub> returns the suffix array interval [b, e). The base 'G' at position 6 in the read is a result of sequencing error. Hence, the MMP<sub>i</sub> is 'ATTGA' and the SA interval of MMP<sub>i</sub> is [b', e'). The next k-mer starts at k-bases prior to the NIP which is base after the longest common prefix of the interval [b',e'). In the end, the read in the above example most likely map to the suffix array at [e'-1, e').</figcaption></figure>
+  <p>The quasi-mapping algorithm makes use of two main data structures, the generalized suffix array (SA) of the transcriptome T, and a hash table (h) that maps each k-mer in T to its SA interval (by default k = 31). During the quasi-mapping procedure, a read is scanned from left to right until a k-mer (k<sub>i</sub>, starting at position i on the read) is encountered that appears in h. The k<sub>i</sub> is looked up in the hash table and the SA intervals are retrieved, giving all suffixes containing the k-mer k<sub>i</sub>. Then, the Maximal Mappable Prefix (MMP<sub>i</sub>) is computed by finding the longest substring of the read that matches the reference suffixes. Owing to sequencing errors, the MMPs may not span the complete read. In this case, the next informative position (NIP) is determined based on the longest common prefix of the SA intervals of MMP<sub>i</sub>. Suffix array search continues from k-bases before NIP until the final NIP is less than k-bases before the read end. Finally, for each read, the algorithm reports the transcripts it mapped to, location and strand information (<span class="citation"><a href="#Srivastava2016">Srivastava <i>et al.</i> 2016</a></span>).
+<a href="../../images/transcriptomics_images/salmon_quasialignment.png" rel="noopener noreferrer"><figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/salmon_quasialignment.png" alt="fig12:Quasi-mapping algorithm. " width="1542" height="852" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Illustration of the quasi-mapping of a read using k=3. Hash table lookup of k<sub>i</sub> returns the suffix array interval [b, e). The base ‘G’ at position 6 in the read is a result of sequencing error. Hence, the MMP<sub>i</sub> is ‘ATTGA’ and the SA interval of MMP<sub>i</sub> is [b’, e’). The next k-mer starts at k-bases prior to the NIP which is base after the longest common prefix of the interval [b’,e’). In the end, the read in the above example most likely map to the suffix array at [e’-1, e’).&lt;/figcaption&gt;</figure></a></p>
 
 </blockquote>
 
@@ -1660,7 +1681,7 @@ For more information on the topic of quality control, please see our <a href="/t
   </ol>
 </blockquote>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/mRNA_PCA.png" alt="fig13:PCA plot of mRNA samples. " width="1159" height="532" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span>  PCA plot of differential expression data from control and BR treated samples.</figcaption></figure>
+<p><a href="../../images/transcriptomics_images/mRNA_PCA.png" rel="noopener noreferrer"><figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/mRNA_PCA.png" alt="fig13:PCA plot of mRNA samples. " width="1159" height="532" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 11</strong>:</span>  PCA plot of differential expression data from control and BR treated samples.&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1877,7 +1898,7 @@ For more information on the topic of quality control, please see our <a href="/t
 
 <p>Congratulations! We have identified the following 5 potential genes involved in the brassinosteroid-miRNA regulatory network.</p>
 
-<figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/targetFinder_results.png" alt="fig15:TargetFinder results. " width="1173" height="564" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> TargetFinder results.</figcaption></figure>
+<p><a href="../../images/transcriptomics_images/targetFinder_results.png" rel="noopener noreferrer"><figure id="figure-12" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/targetFinder_results.png" alt="fig15:TargetFinder results. " width="1173" height="564" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 12</strong>:</span> TargetFinder results.&lt;/figcaption&gt;</figure></a></p>
 
 <p>Finally, we can access all the information available on the genes identified in the TAIR database:</p>
 
@@ -1895,7 +1916,7 @@ For more information on the topic of quality control, please see our <a href="/t
   <div class="box-title comment-title" id="comment-hypothesis-testing"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Hypothesis testing</div>
   <p>One of the hypotheses that we could propose from our results is: the inhibition of the AT2G46850 gene can result in plants with improved resistance to drought conditions. Is it possible to validate it? Yes! We propose this approach: to acquire <a href="https://abrc.osu.edu/stocks/392113">AT2G46850 mutant seeds</a> and <a href="http://arabidopsis.info/StockInfo?NASC_id=N1093">wild type seeds</a>, grow them under two controlled conditions: watered and drought stress, and analyze plant weight after 33 days (Figure 13).</p>
 
-  <figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/arabidopis_growth_protocol.png" alt="fig16:Plant growth. " width="1565" height="2481" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Arabidopsis growth conditions protocol (<span class="citation"><a href="#deOllas2019">de Ollas <i>et al.</i> 2019</a></span>).</figcaption></figure>
+  <p><a href="../../images/transcriptomics_images/arabidopis_growth_protocol.png" rel="noopener noreferrer"><figure id="figure-13" style="max-width: 90%; margin:auto;"><img src="../../images/transcriptomics_images/arabidopis_growth_protocol.png" alt="fig16:Plant growth. " width="1565" height="2481" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Arabidopsis growth conditions protocol (<span class="citation"><a href="#deOllas2019">de Ollas <i>et al.</i> 2019</a></span>).&lt;/figcaption&gt;</figure></a></p>
 
 </blockquote>
 
@@ -2168,7 +2189,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2200,7 +2221,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

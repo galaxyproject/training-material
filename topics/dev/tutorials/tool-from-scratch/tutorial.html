@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Creating Galaxy tools from Conda Through Deployment</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +87,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating Galaxy tools from Conda Through Deployment">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-20 09:46:55 +0000">
+<meta name="DC.date" content="2023-07-13 05:44:01 +0000">
 <meta name="DC.creator" content="Alex Ostrovsky">
 <meta name="DC.creator" content="Dave B.">
 <meta name="DC.creator" content="Matthias Bernt">
@@ -95,7 +130,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-20 09:46:55 +0000",
+  "dateModified": "2023-07-13 05:44:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating Galaxy tools from Conda Through Deployment",
   "interactivityType": "mixed",
@@ -251,8 +286,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -295,7 +330,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -343,23 +378,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -570,7 +591,7 @@ Sentry.init({
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 20, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -586,7 +607,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -988,7 +1009,7 @@ Branch bellerophon_bioconda <span class="nb">set </span>up to track remote branc
 
   <p>Once on the github pull request page, you see a preview of the changes we propose, and you can write a short description of the recipe we want to merge. Have a look at the guidelines in the text box to understand how to properly fill the form, and get your Pull Request merged in the end. In real life, when creating a real new recipe, you would then click the <code class="language-plaintext highlighter-rouge">Create pull request</code> button.</p>
 
-  <figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/create_pr.png" alt="Github PR. " width="927" height="612" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An open pull request for the bellerophon conda recipe</figcaption></figure>
+  <p><a href="../../images/create_pr.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/create_pr.png" alt="Github PR. " width="927" height="612" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> An open pull request for the bellerophon conda recipe&lt;/figcaption&gt;</figure></a></p>
 </blockquote>
 
 <h2 id="installing-a-conda-package">Installing a Conda Package</h2>
@@ -1171,7 +1192,7 @@ of the requirement would change the value for <code class="language-plaintext hi
 
   <p>If we go to <a href="https://bio.tools">https://bio.tools</a> and search “Bellerophon”, we find that it already has a bio.tools entry:</p>
 
-  <p><img src="../../images/biotools-profile.png" alt="Bellerophon bio.tools webpage. " width="610" height="274" loading="lazy" /></p>
+  <p><a href="../../images/biotools-profile.png" rel="noopener noreferrer"><img src="../../images/biotools-profile.png" alt="Bellerophon bio.tools webpage. " width="610" height="274" loading="lazy" /></a></p>
 
   <p>We just have to add the biotools ID as a <code class="language-plaintext highlighter-rouge">&lt;macro&gt;</code> tag.</p>
 
@@ -1447,7 +1468,7 @@ It also defines the format of that file and the name shown to the user in the hi
   <p>As Bellerophon has a single output file, add the following outputs section to your tool:</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;outputs&gt;</span>
-    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"outfile"</span> <span class="na">label=</span><span class="s">"${tool.name} on ${on_string}"</span> <span class="na">format=</span><span class="s">"bam"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;data</span> <span class="na">name=</span><span class="s">"outfile"</span> <span class="na">label=</span><span class="s">"${tool.name} on ${on_string}"</span> <span class="na">format=</span><span class="s">"bam"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/outputs&gt;</span>
 </code></pre></div>  </div>
 </blockquote>
@@ -1910,7 +1931,7 @@ TOOL_NAME (Test #2): passed
 
       <p>The HTML report contains a table on the top giving the number of executed, successful, and failed tests:</p>
 
-      <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/planemo_html.png" alt="Planemo HTML report. " width="704" height="565" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Planemo HTML report</figcaption></figure>
+      <p><a href="../../images/planemo_html.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/planemo_html.png" alt="Planemo HTML report. " width="704" height="565" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Planemo HTML report&lt;/figcaption&gt;</figure></a></p>
 
       <p>If there are passed or failed tests you will find the text <code class="language-plaintext highlighter-rouge">Passed tests</code>, <code class="language-plaintext highlighter-rouge">Failed tests</code>, resp., below the table.
 Clicking on this text will unfold the list of passed or failed tests, resp. Clicking again on one of the tests
@@ -2049,8 +2070,7 @@ the development branch may have the name <code class="language-plaintext highlig
 
   <ul>
     <li>Click the <code class="language-plaintext highlighter-rouge">fork</code> button on the top right
-      <figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/iuc-github.png" alt="IUC github repository. " width="1264" height="660" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> IUC github repository</figcaption></figure>
-    </li>
+<a href="../../images/iuc-github.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/iuc-github.png" alt="IUC github repository. " width="1264" height="660" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> IUC github repository&lt;/figcaption&gt;</figure></a></li>
     <li>In the following dialog select your account</li>
     <li>After a short while you will be redirected to your fork of the sandbox repository
 (i.e. a 1:1 copy of the original repository)</li>
@@ -2145,7 +2165,7 @@ The last command will add the original sandbox repository as a remote with the n
 
 <p>The link “Details” on the right of the job brings you to a page showing the detailed output of the jobs (Alternatively the “Checks” tab on top of the PR page brings you to the CI output page.)</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/iuc-ci.png" alt="IUC output of the CI workflow. " width="1599" height="1061" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> output of the CI workflow</figcaption></figure>
+<p><a href="../../images/iuc-ci.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/iuc-ci.png" alt="IUC output of the CI workflow. " width="1599" height="1061" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> output of the CI workflow&lt;/figcaption&gt;</figure></a></p>
 
 <p>The image above shows the CI page for a PR:</p>
 
@@ -2328,7 +2348,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2360,7 +2380,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

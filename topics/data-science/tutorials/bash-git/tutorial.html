@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Version Control with Git</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -207,8 +242,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -251,7 +286,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -299,23 +334,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -573,7 +594,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -609,7 +630,7 @@ to keep track of what one person did and when.
 Even if you aren’t collaborating with other people,
 automated version control is much better than this situation:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bash-git/phd101212s.png" alt="Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'." width="600" height="800" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com</figcaption></figure>
+<p><a href="../../images/bash-git/phd101212s.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bash-git/phd101212s.png" alt="Cartoon titled 'final'.doc, showing a grad student and their advisor going through multiple revisions. The first named final.doc, then final_rev.2.doc, final_rev.6.comments.doc, a long filename with the revision number 18, until a final filename, revision 22, with special characters indicating frustration where the file name includes the text 'why did I come to grad school'." width="600" height="800" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Piled Higher and Deeper by Jorge Cham, http://www.phdcomics.com&lt;/figcaption&gt;</figure></a></p>
 
 <p>We’ve all been in this situation before: it seems unnecessary to have
 multiple nearly-identical versions of the same document. Some word
@@ -625,19 +646,19 @@ think of it as a recording of your progress: you can rewind to start at the base
 document and play back each change you made, eventually arriving at your
 more recent version.</p>
 
-<p><img src="../../images/bash-git/play-changes.svg" alt="Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision." width="615" height="196" loading="lazy" /></p>
+<p><a href="../../images/bash-git/play-changes.svg" rel="noopener noreferrer"><img src="../../images/bash-git/play-changes.svg" alt="Changes Are Saved Sequentially, graphic shows three documents with text being added in each new revision." width="615" height="196" loading="lazy" /></a></p>
 
 <p>Once you think of changes as separate from the document itself, you
 can then think about “playing back” different sets of changes on the base document, ultimately
 resulting in different versions of that document. For example, two users can make independent
 sets of changes on the same document.</p>
 
-<p><img src="../../images/bash-git/versions.svg" alt="Different Versions Can be Saved, showing a document splitting into two, with different changes." width="384" height="354" loading="lazy" /></p>
+<p><a href="../../images/bash-git/versions.svg" rel="noopener noreferrer"><img src="../../images/bash-git/versions.svg" alt="Different Versions Can be Saved, showing a document splitting into two, with different changes." width="384" height="354" loading="lazy" /></a></p>
 
 <p>Unless multiple users make changes to the same section of the document - a conflict - you can
 incorporate two sets of changes into the same base document.</p>
 
-<p><img src="../../images/bash-git/merge.svg" alt="Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes." width="398" height="382" loading="lazy" /></p>
+<p><a href="../../images/bash-git/merge.svg" rel="noopener noreferrer"><img src="../../images/bash-git/merge.svg" alt="Multiple Versions Can be Merged, shows two documents with different changes merging into a final document with both changes." width="398" height="382" loading="lazy" /></a></p>
 
 <p>A version control system is a tool that keeps track of these changes for us,
 effectively creating different versions of our files. It allows us to decide
@@ -1008,7 +1029,7 @@ we can start using it.</p>
 
 <p>We will continue with the story of Sherlock who is investigating a crime and is collecting information about suspects.</p>
 
-<p><img src="../../images/bash-git/sherlock_git.png" alt="Cartoon of sherlock examining the git logo with his magnifying glass." width="968" height="864" loading="lazy" /></p>
+<p><a href="../../images/bash-git/sherlock_git.png" rel="noopener noreferrer"><img src="../../images/bash-git/sherlock_git.png" alt="Cartoon of sherlock examining the git logo with his magnifying glass." width="968" height="864" loading="lazy" /></a></p>
 
 <p>First, let’s create a directory for our work and then move into that directory:</p>
 
@@ -1538,7 +1559,7 @@ or you might find yourself searching for “git undo commit” more
 than you would like!</p>
 </blockquote>
 
-<p><img src="../../images/bash-git/git-staging-area.svg" alt="The Git Staging Area cartoon, a document is shown going into the staging area via &quot;git add&quot;, and then into the repository via &quot;git commit&quot;." width="622" height="218" loading="lazy" /></p>
+<p><a href="../../images/bash-git/git-staging-area.svg" rel="noopener noreferrer"><img src="../../images/bash-git/git-staging-area.svg" alt="The Git Staging Area cartoon, a document is shown going into the staging area via &quot;git add&quot;, and then into the repository via &quot;git commit&quot;." width="622" height="218" loading="lazy" /></a></p>
 
 <p>Let’s watch as our changes to a file move from our editor
 to the staging area
@@ -1826,7 +1847,7 @@ we first need to add the changed files to the staging area
 (<code class="language-plaintext highlighter-rouge">git add</code>) and then commit the staged changes to the
 repository (<code class="language-plaintext highlighter-rouge">git commit</code>):</p>
 
-<p><img src="../../images/bash-git/git-committing.svg" alt="The Git Commit Workflow. " width="622" height="355" loading="lazy" /></p>
+<p><a href="../../images/bash-git/git-committing.svg" rel="noopener noreferrer"><img src="../../images/bash-git/git-committing.svg" alt="The Git Commit Workflow. " width="622" height="355" loading="lazy" /></a></p>
 
 <h1 id="lets-put-us-to-the-test">Let’s put us to the test</h1>
 
@@ -2344,12 +2365,12 @@ the commit in which we made the change we’re trying to discard.
 In the example below, we want to retrieve the state from before the most
 recent commit (<code class="language-plaintext highlighter-rouge">HEAD~1</code>), which is commit <code class="language-plaintext highlighter-rouge">f22b25e</code>:</p>
 
-<p><img src="../../images/bash-git/git-checkout.svg" alt="Git Checkout. " width="622" height="355" loading="lazy" /></p>
+<p><a href="../../images/bash-git/git-checkout.svg" rel="noopener noreferrer"><img src="../../images/bash-git/git-checkout.svg" alt="Git Checkout. " width="622" height="355" loading="lazy" /></a></p>
 
 <p>So, to put it all together,
 here’s how Git works in cartoon form:</p>
 
-<p><img src="../../images/bash-git/git_staging.svg" alt="https://figshare.com/articles/How_Git_works_a_cartoon/1328266. " width="551" height="407" loading="lazy" /></p>
+<p><a href="../../images/bash-git/git_staging.svg" rel="noopener noreferrer"><img src="../../images/bash-git/git_staging.svg" alt="https://figshare.com/articles/How_Git_works_a_cartoon/1328266. " width="551" height="407" loading="lazy" /></a></p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-simplifying-the-common-case"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-simplifying-the-common-case" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Simplifying the Common Case<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2808,7 +2829,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2840,7 +2861,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

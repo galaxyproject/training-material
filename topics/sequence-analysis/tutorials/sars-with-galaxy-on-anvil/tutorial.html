@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>SARS-CoV-2 Viral Sample Alignment and Variant Visualization</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -267,8 +302,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -311,7 +346,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -359,23 +394,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -725,7 +746,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -865,16 +886,16 @@ Sentry.init({
       <ul>
         <li>Select the “Public” tab.</li>
         <li>In the top search bar type the activity workspace <code class="language-plaintext highlighter-rouge">SARS-CoV-2-Genome</code>. You can also go directly to the following link: https://anvil.terra.bio/#workspaces/gdscn-exercises/SARS-CoV-2-Genome.
-  <img src="../../images/sars-with-galaxy-in-anvil/01-sars-workspace.png" alt="Screenshot of the AnVIL platform workspaces page highlighting the Public tab and the SARS-CoV-2-Genome Workspace search result." width="2979" height="1695" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/01-sars-workspace.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/01-sars-workspace.png" alt="Screenshot of the AnVIL platform workspaces page highlighting the Public tab and the SARS-CoV-2-Genome Workspace search result." width="2979" height="1695" loading="lazy" /></a></li>
       </ul>
     </li>
     <li>Clone the workspace by clicking the teardrop button and selecting “Clone”.
-<img src="../../images/sars-with-galaxy-in-anvil/02-clone-button.png" alt="Screenshot showing the teardrop button. The button has been clicked revealing the &quot;clone&quot; option. The Clone option and the teardrop button are highlighted." width="2979" height="1397" loading="lazy" />
+<a href="../../images/sars-with-galaxy-in-anvil/02-clone-button.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/02-clone-button.png" alt="Screenshot showing the teardrop button. The button has been clicked revealing the &quot;clone&quot; option. The Clone option and the teardrop button are highlighted." width="2979" height="1397" loading="lazy" /></a>
       <ul>
         <li>In the new window, give your Workspace clone a name by adding an underscore (“_”) and your name.</li>
         <li>Next, select the Billing project provided by your instructor.</li>
         <li>Leave the Description and Authorization Domain boxes as-is.
-<img src="../../images/sars-with-galaxy-in-anvil/03-clone-settings.png" alt="Screenshot showing the &quot;clone a workspace&quot; popout. The Workspace name, Billing Project, and Clone Workspace button have been filled in and highlighted." width="3208" height="1572" loading="lazy" /></li>
+<a href="../../images/sars-with-galaxy-in-anvil/03-clone-settings.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/03-clone-settings.png" alt="Screenshot showing the &quot;clone a workspace&quot; popout. The Workspace name, Billing Project, and Clone Workspace button have been filled in and highlighted." width="3208" height="1572" loading="lazy" /></a></li>
         <li>Click “CLONE WORKSPACE”.</li>
       </ul>
     </li>
@@ -896,14 +917,14 @@ Sentry.init({
 
   <ol>
     <li>In your new Workspace, click on the “ANALYSES” tab. Next, click on “START”. You should see a popup window on the right side of the screen. 
-<img src="../../images/sars-with-galaxy-in-anvil/05-start-galaxy.png" alt="Screenshot of the Workspace Notebooks tab. The notebook tab name and the plus button that starts a cloud environment for Galaxy have been highlighted." width="3226" height="1663" loading="lazy" /></li>
+<a href="../../images/sars-with-galaxy-in-anvil/05-start-galaxy.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/05-start-galaxy.png" alt="Screenshot of the Workspace Notebooks tab. The notebook tab name and the plus button that starts a cloud environment for Galaxy have been highlighted." width="3226" height="1663" loading="lazy" /></a></li>
     <li>Click on the Galaxy logo to proceed.
       <ul>
         <li>Click on “NEXT” and “CREATE” to keep all settings as-is.</li>
-        <li><img src="../../images/sars-with-galaxy-in-anvil/06-galaxy-next.png" alt="The NEXT button among cloud environments has been highlighted." width="2465" height="1572" loading="lazy" /></li>
-        <li><img src="../../images/sars-with-galaxy-in-anvil/07-galaxy-create.png" alt="The CREATE button among cloud environments has been highlighted." width="3089" height="1645" loading="lazy" /></li>
+        <li><a href="../../images/sars-with-galaxy-in-anvil/06-galaxy-next.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/06-galaxy-next.png" alt="The NEXT button among cloud environments has been highlighted." width="2465" height="1572" loading="lazy" /></a></li>
+        <li><a href="../../images/sars-with-galaxy-in-anvil/07-galaxy-create.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/07-galaxy-create.png" alt="The CREATE button among cloud environments has been highlighted." width="3089" height="1645" loading="lazy" /></a></li>
         <li>Click on the Galaxy icon. You will see that the environment is still being set up. This will take 8-10 minutes. 
-<img src="../../images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png" alt="The Galaxy icon appears if the environment has been successfully launched." width="2649" height="1489" loading="lazy" /></li>
+<a href="../../images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/08-galaxy-provisioning.png" alt="The Galaxy icon appears if the environment has been successfully launched." width="2649" height="1489" loading="lazy" /></a></li>
       </ul>
     </li>
     <li>When it is done, click “Open”. You might need to refresh the page.</li>
@@ -929,7 +950,7 @@ Sentry.init({
 
 <p><strong>History</strong> - When you start a project you will be able to see all of the documents in the project in the history. Now be aware, this can become very busy. Also the naming that Galaxy uses is not very intuitive, so you must make sure that you label your files with something that makes sense to you.</p>
 
-<p><img src="../../images/sars-with-galaxy-in-anvil/10-galaxy-on-anvil.png" alt="Screenshot of the Galaxy landing page. The Tools and History headings have been highlighted." width="1348" height="746" loading="lazy" /></p>
+<p><a href="../../images/sars-with-galaxy-in-anvil/10-galaxy-on-anvil.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/10-galaxy-on-anvil.png" alt="Screenshot of the Galaxy landing page. The Tools and History headings have been highlighted." width="1348" height="746" loading="lazy" /></a></p>
 
 <p>The welcome page includes links to tutorials. You may try these out on your own. If you want to try a new analysis this is a good place to start.</p>
 
@@ -943,7 +964,7 @@ Sentry.init({
   <ol>
     <li>Click on Upload Data in the Tools pane.</li>
     <li>Click on “Choose remote files” at the bottom of the popup. Double-click the top selection, which is the Workspace folder, then “Tables/” then “reference/”. Click the reference .fasta file so that it is highlighted in green and click “Ok”.
-<img src="../../images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png" alt="Screenshot of the Galaxy Data upload page with the current AnVIL workspace highlighted." width="1196" height="732" loading="lazy" /></li>
+<a href="../../images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/11-galaxy-data-workspace.png" alt="Screenshot of the Galaxy Data upload page with the current AnVIL workspace highlighted." width="1196" height="732" loading="lazy" /></a></li>
     <li>Now that your reference has been added, click “Choose remote files” again to add the two sample files. Double-click the Workspace folder, then “Tables/” then “samples/”. Click the two sample <code class="language-plaintext highlighter-rouge">fastq</code> files so that they are highlighted in green and click “OK”.</li>
     <li>Click “Start” and once complete, you can click “Close”.</li>
     <li>Confirm your upload worked by looking at the file names in the History pane.</li>
@@ -959,7 +980,7 @@ Sentry.init({
 
 <p>Use your mouse and click on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the first file <code class="language-plaintext highlighter-rouge">VA_sample_forward_reads.fastq</code>. In the Main screen you will see something like this:</p>
 
-<p><img src="../../images/sars-with-galaxy-in-anvil/12-fastq-view.png" alt="Screenshot of a fastq file. The data includes DNA sequences but also includes many coded characters, making it hard to understand." width="1320" height="686" loading="lazy" /></p>
+<p><a href="../../images/sars-with-galaxy-in-anvil/12-fastq-view.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/12-fastq-view.png" alt="Screenshot of a fastq file. The data includes DNA sequences but also includes many coded characters, making it hard to understand." width="1320" height="686" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1006,7 +1027,7 @@ Sentry.init({
 
 <p>You will open up a summary report for the sequencing file:</p>
 
-<p><img src="../../images/sars-with-galaxy-in-anvil/13-fastqc-report.png" alt="Screenshot of the FastQC results. The Basic Statistics and Per Base Sequence Quality sections for the report on VA_sample_forward_reads.fastq are visible." width="1364" height="742" loading="lazy" /></p>
+<p><a href="../../images/sars-with-galaxy-in-anvil/13-fastqc-report.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/13-fastqc-report.png" alt="Screenshot of the FastQC results. The Basic Statistics and Per Base Sequence Quality sections for the report on VA_sample_forward_reads.fastq are visible." width="1364" height="742" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1105,7 +1126,7 @@ Sentry.init({
 
 <p>You will need to click on the magnifying glasses to zoom in, but you should see the A,C,G, and Ts and their corresponding colors that make up the SARS-CoV-2 genome!</p>
 
-<p><img src="../../images/sars-with-galaxy-in-anvil/15-galaxy-jbrowse-ref.png" alt="Screenshot of preliminary JBrowse results. The eye icon is highlighted, as it should be used to open the JBrowse viewer. The magnifying glasses in JBrowse are also highlighted as they enable zooming in to see the individual bases." width="3226" height="1558" loading="lazy" /></p>
+<p><a href="../../images/sars-with-galaxy-in-anvil/15-galaxy-jbrowse-ref.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/15-galaxy-jbrowse-ref.png" alt="Screenshot of preliminary JBrowse results. The eye icon is highlighted, as it should be used to open the JBrowse viewer. The magnifying glasses in JBrowse are also highlighted as they enable zooming in to see the individual bases." width="3226" height="1558" loading="lazy" /></a></p>
 
 <p>This is interesting, but it doesn’t let us compare the genome to the sample we have. We suspect there may be some differences that indicate our sample is the delta variant.</p>
 
@@ -1146,7 +1167,7 @@ Sentry.init({
 
 </blockquote>
 
-<p><img src="../../images/sars-with-galaxy-in-anvil/14-galaxy-jbrowse-bams.png" alt="Screenshot of JBrowse viewer. The Available Tracks sidebar is shown, with both sample data boxes checked." width="2850" height="1700" loading="lazy" /></p>
+<p><a href="../../images/sars-with-galaxy-in-anvil/14-galaxy-jbrowse-bams.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/14-galaxy-jbrowse-bams.png" alt="Screenshot of JBrowse viewer. The Available Tracks sidebar is shown, with both sample data boxes checked." width="2850" height="1700" loading="lazy" /></a></p>
 
 <p>Let’s look at an example mutation in our sample. Type in the reference position “24410” and click “Go”. You should see a bunch of “A”s highlighted in green throughout our sample. The reference sequence (top line) is a “G” but all of the reads are an “A”. This means that our sample is genetically different from the established SARS-CoV-2 reference genome! Researchers often call these single base differences “SNPs” - Single Nucleotide Polymorphisms.</p>
 
@@ -1185,12 +1206,12 @@ Sentry.init({
 
   <ol>
     <li>Click on the History Menu <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-options</span> and click on “Export History to File”.
-  <img src="../../images/sars-with-galaxy-in-anvil/16-export-history.png" alt="History dropdown menu button and Export History to File buttons are highlighted." width="2456" height="1622" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/16-export-history.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/16-export-history.png" alt="History dropdown menu button and Export History to File buttons are highlighted." width="2456" height="1622" loading="lazy" /></a></li>
     <li>Make sure you select “to a remote file”. Then, click to select where to export your History. On the popup menu, select your Workspace name, then select “Other Data”. Finally, select “Files”. Then click “Select this folder”. Make sure the export directory looks correct.</li>
     <li>Next, name your history “SARS Galaxy Variant Detection” and click “Export”.
-  <img src="../../images/sars-with-galaxy-in-anvil/17-export.png" alt="When exporting History, make sure you select &quot;to a remote file&quot;. The directory should be your workspace name followed by Other Data and Files. The export button is highlighted." width="1240" height="690" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/17-export.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/17-export.png" alt="When exporting History, make sure you select &quot;to a remote file&quot;. The directory should be your workspace name followed by Other Data and Files. The export button is highlighted." width="1240" height="690" loading="lazy" /></a></li>
     <li>Back at your Workspace, click on the “Data” tab, and the Files folder. You should now see the History export in your files. If you click on the file, you can download it or view it in Google Cloud Storage Browser.
-  <img src="../../images/sars-with-galaxy-in-anvil/18-export-verify.png" alt="Back on AnVIL, the Data tab and Files folder are selected. A file called SARS_Galaxy_Variant_Detection is now present." width="3135" height="1709" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/18-export-verify.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/18-export-verify.png" alt="Back on AnVIL, the Data tab and Files folder are selected. A file called SARS_Galaxy_Variant_Detection is now present." width="3135" height="1709" loading="lazy" /></a></li>
   </ol>
 
 </blockquote>
@@ -1203,13 +1224,13 @@ Sentry.init({
   <div class="box-title hands-on-title" id="hands-on-shut-down-galaxy-in-anvil"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Shut Down Galaxy in AnVIL</div>
   <ol>
     <li>Return to AnVIL, and find the Galaxy logo that shows your cloud environment is running. Click on the Galaxy logo.
-  <img src="../../images/sars-with-galaxy-in-anvil/19-galaxy-env.png" alt="Screenshot of the Workspace menu. The currently running Galaxy cloud environment logo on the right of the page is highlighted." width="2653" height="1691" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/19-galaxy-env.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/19-galaxy-env.png" alt="Screenshot of the Workspace menu. The currently running Galaxy cloud environment logo on the right of the page is highlighted." width="2653" height="1691" loading="lazy" /></a></li>
     <li>Click “Settings”.
-  <img src="../../images/sars-with-galaxy-in-anvil/20-galaxy-edit.png" alt="Screenshot of the Environment details menu. The Settings button is highlighted." width="3125" height="1650" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/20-galaxy-edit.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/20-galaxy-edit.png" alt="Screenshot of the Environment details menu. The Settings button is highlighted." width="3125" height="1650" loading="lazy" /></a></li>
     <li>Next, scroll down and click on “DELETE ENVIRONMENT”:
-  <img src="../../images/sars-with-galaxy-in-anvil/21-galaxy-delete.png" alt="Screenshot of the cloud environment pop out menu. The “DELETE ENVIRONMENT” button is highlighted." width="2960" height="1654" loading="lazy" /></li>
+  <a href="../../images/sars-with-galaxy-in-anvil/21-galaxy-delete.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/21-galaxy-delete.png" alt="Screenshot of the cloud environment pop out menu. The “DELETE ENVIRONMENT” button is highlighted." width="2960" height="1654" loading="lazy" /></a></li>
     <li>Finally, select “Delete everything, including persistent disk”. Make sure you are done with the activity and then click “DELETE”.
-<img src="../../images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png" alt="Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted." width="2227" height="1691" loading="lazy" /></li>
+<a href="../../images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png" rel="noopener noreferrer"><img src="../../images/sars-with-galaxy-in-anvil/22-galaxy-delete-pd.png" alt="Screenshot of the cloud environment pop out menu. The “Delete everything, including persistent disk” radio button has been checked and is highlighted. The “DELETE” button is highlighted." width="2227" height="1691" loading="lazy" /></a></li>
   </ol>
 
 </blockquote>
@@ -1420,7 +1441,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1452,7 +1473,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -1,26 +1,61 @@
 @charset "UTF-8";
 @font-face {
   font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102.woff);
+  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2);
   font-display: swap;
 }
 @font-face {
   font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-BoldItalic-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-BoldItalic-102.woff);
+  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-BoldItalic-102a.woff2);
   font-weight: bold;
   font-style: oblique;
   font-display: swap;
 }
 @font-face {
   font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102.woff);
+  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2);
   font-style: oblique;
   font-display: swap;
 }
 @font-face {
   font-family: "Atkinson Hyperlegible";
-  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2), url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102.woff);
+  src: url(/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2);
   font-weight: bold;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url(/training-material/assets/fonts/OpenDyslexic/OpenDyslexic-Bold-Italic.woff2);
+  font-weight: bold;
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url(/training-material/assets/fonts/OpenDyslexic/OpenDyslexic-Bold.woff2);
+  font-weight: bold;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url(/training-material/assets/fonts/OpenDyslexic/OpenDyslexic-Italic.woff2);
+  font-style: oblique;
+  font-display: swap;
+}
+@font-face {
+  font-family: "OpenDyslexic";
+  src: url(/training-material/assets/fonts/OpenDyslexic/OpenDyslexic-Regular.woff2);
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comic Mono";
+  src: url(/training-material/assets/fonts/ComicMono/ComicMono-Bold.ttf);
+  font-weight: bold;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Comic Mono";
+  src: url(/training-material/assets/fonts/ComicMono/ComicMono.ttf);
   font-display: swap;
 }
 :root {
@@ -37,8 +72,8 @@
   --hyperlink-hover: #004590;
   --brand-color: #2c3143;
   --brand-color-contrast: #fff;
-  --navbar-border-size: 0px;
-  --navbar-border-color: white;
+  --navbar-border-size: 1px;
+  --navbar-border-color: transparent;
   --navbar-item-background: transparent;
   --navbar-item-hover: transparent;
   --secondary-color: #e9ecef;
@@ -48,40 +83,398 @@
   --h1-theme-after: "";
   --h2-theme-before: "";
   --h2-theme-after: "";
+  --border: #888;
+  --color-disabled: #ccc;
+}
+
+body[data-brightness=light][data-light_theme=yellow] {
+  --color-background: #ffe;
+  --text-color: #111;
+}
+
+body[data-brightness=dark] {
+  --color-background: #000;
+  --color-foreground: #fff;
+  --text-color: #fff;
+  --text-color-muted: #aaa;
+  --border: #aaa;
+  --hyperlink-hover: #fff;
+  --hyperlink: #7bf;
+  --slide-heading-color: #eee;
+  --secondary-color: #222;
+  --secondary-color-text: var(--text-color);
+}
+
+body[data-brightness=dark][data-dark_theme=night] {
+  --color-background: #444;
+  --color-disabled: #222;
+  --text-color: #ccc;
+}
+
+body[data-brightness=dark][data-dark_theme=midnight] {
+  --color-disabled: #222;
+}
+
+body[data-contrast=high] {
+  --border: #000;
+  --text-color-muted: var(--text-color) !important;
+  --navbar-border-color: var(--text-color);
+}
+
+body[data-contrast=high][data-brightness=dark] {
+  --border: #fff;
+}
+
+body[data-contrast=low] {
+  --border: #ddd;
+}
+
+body[data-contrast=low][data-brightness=dark] {
+  --border: #333;
+}
+
+body[data-font_main=comic-sans] {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+body[data-font_main=open-dyslexic] {
+  font-family: "OpenDyslexic", "Open Dyslexic", serif;
+}
+
+body[data-font_code=comic-sans] pre, body[data-font_code=comic-sans] code {
+  font-family: "Comic Mono", monospace;
+}
+
+body[data-theme=rainbow],
+body[data-theme=progress] {
+  --navbar-item-background: #0008;
+  --navbar-item-hover: #000f;
+}
+
+body[data-theme=rainbow] .contributor-hexylena,
+body[data-theme=trans] .contributor-hexylena,
+body[data-theme=progress] .contributor-hexylena {
+  background: repeating-linear-gradient(45deg, rgba(207, 228, 247, 0.4666666667) 0em, rgba(207, 228, 247, 0.4666666667) 2em, rgba(247, 215, 220, 0.4666666667) 2em, rgba(247, 215, 220, 0.4666666667) 4em, rgba(255, 255, 255, 0.4666666667) 4em, rgba(255, 255, 255, 0.4666666667) 6em, rgba(247, 215, 220, 0.4666666667) 6em, rgba(247, 215, 220, 0.4666666667) 8em, rgba(207, 228, 247, 0.4666666667) 8em, rgba(207, 228, 247, 0.4666666667) 10em);
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child),
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child),
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) {
+  color: red;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) i,
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) i,
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) i {
+  color: red;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child),
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child),
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) {
+  color: orange;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) i,
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) i,
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) i {
+  color: orange;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child),
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child),
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) {
+  color: green;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) i,
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) i,
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) i {
+  color: green;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child),
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child),
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) {
+  color: blue;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) i,
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) i,
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) i {
+  color: blue;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child),
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child),
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) {
+  color: purple;
+}
+body[data-theme=rainbow] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) i,
+body[data-theme=trans] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) i,
+body[data-theme=progress] .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) i {
+  color: purple;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) {
+  color: red;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) i,
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) i,
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) i {
+  color: red;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) {
+  color: orange;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) i,
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) i,
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) i {
+  color: orange;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) {
+  color: green;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) i,
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) i,
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) i {
+  color: green;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) {
+  color: blue;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) i,
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) i,
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) i {
+  color: blue;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) {
+  color: purple;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) i,
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) i,
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) i {
+  color: purple;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+2),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+2),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+2) {
+  color: red;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+3),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+3),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+3) {
+  color: orange;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+4),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+4),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+4) {
+  color: green;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+5),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+5),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+5) {
+  color: blue;
+}
+body[data-theme=rainbow] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+6),
+body[data-theme=trans] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+6),
+body[data-theme=progress] .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+6) {
+  color: purple;
+}
+
+body[data-theme=rainbow] .tutorial {
+  --h1-theme-before: " 🌈 ";
+  --h1-theme-after: " 🌈 ";
+}
+body[data-theme=rainbow] .tutorial h1::after {
+  display: inline-block;
+  transform: scale(-1, 1) translateX(-1rem);
+}
+body[data-theme=rainbow] nav.navbar, body[data-theme=rainbow] .remark-slide .my-header, body[data-theme=rainbow] hr {
+  background: linear-gradient(to bottom, #e2453c 0, #e2453c 16%, #e07e39 16%, #e07e39 32%, #e5d667 32%, #e5d667 48%, #51b95b 48%, #51b95b 66%, #1e72b7 66%, #1e72b7 86%, #6f5ba7 86%) no-repeat !important;
+}
+body[data-theme=rainbow] hr {
+  height: 0.5em;
+  background: linear-gradient(135deg, #e2453c 0, #e2453c 16%, #e07e39 16%, #e07e39 32%, #e5d667 32%, #e5d667 48%, #51b95b 48%, #51b95b 66%, #1e72b7 66%, #1e72b7 86%, #6f5ba7 86%) no-repeat !important;
+}
+
+body[data-theme=progress] .tutorial {
+  --h1-theme-before: "🏳️‍🌈";
+  --h1-theme-after: "🏳️‍⚧️ ";
+}
+body[data-theme=progress] nav.navbar, body[data-theme=progress] .remark-slide .my-header {
+  background: linear-gradient(120deg, #2c3143 0px 130px, #fdda0f 131px 139px, #fff 140px 148px, #f4b0c9 149px 157px, #7ccee6 158px 166px, #93540c 167px 175px, #000 176px 184px, transparent 185px), linear-gradient(45deg, #2c3143 0px 110px, rgba(44, 49, 67, 0) 110px), linear-gradient(180deg, #FE0000 16.66%, #FD8C00 16.66% 33.32%, #FFE500 33.32% 49.98%, #119F0B 49.98% 66.64%, #0644B3 66.64% 83.3%, #C22EDC 83.3%);
+}
+body[data-theme=progress] hr {
+  height: 0.5em;
+}
+body[data-theme=progress] p:nth-child(8n+7)::selection {
+  background: hsl(285, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+0)::selection {
+  background: hsl(330, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+1)::selection {
+  background: hsl(15, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+2)::selection {
+  background: hsl(60, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+3)::selection {
+  background: hsl(105, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+4)::selection {
+  background: hsl(150, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(8n+5)::selection {
+  background: hsl(195, 76%, 57%);
+}
+body[data-theme=progress] p:nth-child(9n+6)::selection {
+  background: hsl(240, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+7)::selection {
+  background: hsl(285, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+0)::selection {
+  background: hsl(330, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+1)::selection {
+  background: hsl(15, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+2)::selection {
+  background: hsl(60, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+3)::selection {
+  background: hsl(105, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+4)::selection {
+  background: hsl(150, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(8n+5)::selection {
+  background: hsl(195, 76%, 57%);
+}
+body[data-theme=progress] li:nth-child(9n+6)::selection {
+  background: hsl(240, 76%, 57%);
+}
+
+body[data-theme=trans] {
+  --brand-color: pink;
+  --brand-color-contrast: black;
+}
+body[data-theme=trans] .tutorial {
+  --h1-theme-before: "🏳️‍⚧️";
+  --h1-theme-after: "🏳️‍⚧️ ";
+}
+body[data-theme=trans] nav.navbar, body[data-theme=trans] .remark-slide .my-header, body[data-theme=trans] hr {
+  background: repeating-linear-gradient(135deg, rgb(148, 187, 233) 0, rgb(148, 187, 233) 2em, rgb(238, 174, 202) 2em, rgb(238, 174, 202) 4em, rgb(255, 255, 255) 4em, rgb(255, 255, 255) 6em);
+}
+body[data-theme=trans] hr {
+  height: 0.5em;
+}
+body[data-theme=trans] blockquote.quote {
+  border-style: solid !important;
+  border-image: linear-gradient(to bottom, pink, white, aqua, pink, white, aqua) 1 100% !important;
+  border-width: 0px 0px 0px 5px !important;
+}
+body[data-theme=trans] p:nth-child(3n+0)::selection {
+  background: rgb(148, 187, 233);
+  color: black;
+}
+body[data-theme=trans] p:nth-child(3n+1)::selection {
+  background: rgb(238, 174, 202);
+  color: black;
+}
+body[data-theme=trans] p:nth-child(3n+2)::selection {
+  background: rgb(200, 200, 200);
+  color: black;
+}
+body[data-theme=trans] li:nth-child(3n+0)::selection {
+  background: rgb(148, 187, 233);
+  color: black;
+}
+body[data-theme=trans] li:nth-child(3n+1)::selection {
+  background: rgb(238, 174, 202);
+  color: black;
+}
+body[data-theme=trans] li:nth-child(3n+2)::selection {
+  background: rgb(200, 200, 200);
+  color: black;
+}
+body[data-theme=trans] nav li li:nth-child(3n+0) {
+  border-left: 3px solid rgb(148, 187, 233);
+}
+body[data-theme=trans] nav li li:nth-child(3n+1) {
+  border-left: 3px solid rgb(238, 174, 202);
+}
+body[data-theme=trans] nav li li:nth-child(3n+2) {
+  border-left: 3px solid rgb(255, 255, 255);
+}
+
+body[data-theme=blm] {
+  --brand-color: #462300;
+}
+body[data-theme=blm] nav.navbar, body[data-theme=blm] .remark-slide .my-header, body[data-theme=blm] hr {
+  background: repeating-linear-gradient(135deg, #731 0, #731 2em, #743 2em, #743 4em, #631 4em, #631 6em, #421 6em, #421 8em, #310 8em, #310 10em, #000 10em, #000 12em);
+}
+body[data-theme=blm] hr {
+  height: 0.5em;
+}
+
+body[data-theme=halloween] {
+  --brand-color: orange;
+  --brand-color-contrast: black;
+  --h1-theme-before: " 🎃 ";
+  --h1-theme-after: " 🎃 ";
+  --h2-theme-before: " 👻 ";
+  --h2-theme-after: " 👻 ";
+}
+
+body[data-theme=straya] {
+  --h1-theme-before: " 🦘 ";
+  --h1-theme-after: " 🦈 ";
+  --h2-theme-before: " 🐨 ";
+  --h2-theme-after: " 🐨 ";
+  --brand-color: #0d47a1;
+}
+body[data-theme=straya] hr {
+  height: 0.5em;
+  background: repeating-linear-gradient(135deg, #000 0, #000 2em, #ff0 2em, #ff0 3em, #f00 3em, #f00 5em);
+}
+
+body.downunder {
+  transform: rotate(180deg);
+}
+
+select {
+  border: 1px solid var(--border) !important;
+  background: var(--color-background) !important;
+  color: var(--text-color) !important;
+}
+select:disabled {
+  background: var(--color-disabled) !important;
+  color: var(--text-color-muted) !important;
+}
+
+hr {
+  border-top: var(--navbar-border-size) solid var(--border) !important;
+}
+
+.table thead th {
+  border-top: 2px solid var(--border) !important;
+  border-bottom: 2px solid var(--border) !important;
+}
+
+.table td, .table th {
+  border-top: 1px solid var(--border) !important;
 }
 
 /* SLIDES */
-/* cyrillic */
 @font-face {
   font-family: "Yanone Kaffeesatz";
   font-style: normal;
-  font-weight: 400;
-  src: url(/training-material/assets/fonts/yanonekaffeesatz/v24/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZc2GKOnU.woff2) format("woff2");
-  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-/* vietnamese */
-@font-face {
-  font-family: "Yanone Kaffeesatz";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/training-material/assets/fonts/yanonekaffeesatz/v24/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZeGGKOnU.woff2) format("woff2");
-  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
-}
-/* latin-ext */
-@font-face {
-  font-family: "Yanone Kaffeesatz";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/training-material/assets/fonts/yanonekaffeesatz/v24/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZeWGKOnU.woff2) format("woff2");
-  unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: "Yanone Kaffeesatz";
-  font-style: normal;
-  font-weight: 400;
-  src: url(/training-material/assets/fonts/yanonekaffeesatz/v24/3y9I6aknfjLm_3lMKjiMgmUUYBs04aUXNxt9gW2LIfto9tWZd2GK.woff2) format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  font-weight: 100 900;
+  font-style: normal oblique;
+  src: url(/training-material/assets/fonts/yanonekaffeesatz/YanoneKaffeesatz-VariableFont_wght.woff2);
 }
 body.remark-container {
   font-family: "Atkinson Hyperlegible";
@@ -525,235 +918,6 @@ body.remark-container .gtn-card .card-text {
 }
 
 /* SYNTAX */
-/* THEMES */
-body.theme-night {
-  --color-background: #444;
-  --text-color: #eee;
-  --text-color-muted: #ccc;
-  --hyperlink: #7bf;
-  --hyperlink-hover: #fff;
-  --brand-color: #424a66;
-  --slide-heading-color: var(--text-color);
-  --secondary-color: #222;
-  --secondary-color-text: #fff;
-}
-
-body.theme-midnight {
-  --brand-color: #000;
-  --color-background: #000;
-  --hyperlink-hover: #fff;
-  --hyperlink: #7bf;
-  --navbar-border-size: 1px;
-  --text-color-muted: #ccc;
-  --text-color: #eee;
-  --slide-heading-color: #eee;
-  --slide-heading-color: var(--text-color);
-  --secondary-color: #222;
-  --secondary-color-text: var(--text-color);
-}
-
-body.theme-blm {
-  --brand-color: #462300;
-  --color-background: #000;
-  --navbar-item-hover: #000;
-  --hyperlink-hover: #fff;
-  --hyperlink: #fba870;
-  --navbar-border-size: 1px;
-  --text-color-muted: #ccc;
-  --text-color: #eee;
-  --slide-heading-color: #eee;
-  --slide-heading-color: var(--text-color);
-  --secondary-color: #222;
-  --secondary-color-text: var(--text-color);
-}
-body.theme-blm nav.navbar, body.theme-blm .remark-slide .my-header {
-  background: repeating-linear-gradient(135deg, #731 0, #731 2em, #743 2em, #743 4em, #631 4em, #631 6em, #421 6em, #421 8em, #310 8em, #310 10em, #000 10em, #000 12em);
-}
-
-body.theme-halloween {
-  --brand-color: orange;
-  --brand-color-contrast: black;
-  --color-background: #000;
-  --hyperlink-hover: #fff;
-  --hyperlink: #7bf;
-  --text-color-muted: #ccc;
-  --text-color: #eee;
-  --slide-heading-color: var(--brand-color);
-  --h1-theme-before: " 🎃 ";
-  --h1-theme-after: " 🎃 ";
-  --h2-theme-before: " 👻 ";
-  --h2-theme-after: " 👻 ";
-  --secondary-color: #402900;
-  --secondary-color-text: var(--text-color);
-}
-
-body.theme-progress, body.theme-rainbow {
-  --brand-color: black;
-  --brand-color-contrast: white;
-  --navbar-item-background: #0008;
-  --navbar-item-hover: #000f;
-}
-body.theme-progress .contributor-hexylena, body.theme-rainbow .contributor-hexylena {
-  background: repeating-linear-gradient(45deg, rgba(207, 228, 247, 0.4666666667) 0em, rgba(207, 228, 247, 0.4666666667) 2em, rgba(247, 215, 220, 0.4666666667) 2em, rgba(247, 215, 220, 0.4666666667) 4em, white 4em, white 6em, rgba(247, 215, 220, 0.4666666667) 6em, rgba(247, 215, 220, 0.4666666667) 8em, rgba(207, 228, 247, 0.4666666667) 8em, rgba(207, 228, 247, 0.4666666667) 10em);
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child), body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) {
-  color: red;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) i, body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+1) td:not(:first-child) i {
-  color: red;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child), body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) {
-  color: orange;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) i, body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+2) td:not(:first-child) i {
-  color: orange;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child), body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) {
-  color: green;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) i, body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+3) td:not(:first-child) i {
-  color: green;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child), body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) {
-  color: blue;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) i, body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+4) td:not(:first-child) i {
-  color: blue;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child), body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) {
-  color: purple;
-}
-body.theme-progress .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) i, body.theme-rainbow .tutorials-list:not(.topic-type-use) table.table-striped tbody tr:nth-of-type(5n+5) td:not(:first-child) i {
-  color: purple;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) {
-  color: red;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) i, body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+2) i {
-  color: red;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) {
-  color: orange;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) i, body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+3) i {
-  color: orange;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) {
-  color: green;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) i, body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+4) i {
-  color: green;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) {
-  color: blue;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) i, body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+5) i {
-  color: blue;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) {
-  color: purple;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) i, body.theme-rainbow .tutorials-list.topic-type-use table.table-striped tbody tr td:nth-of-type(6n+6) i {
-  color: purple;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+2), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+2) {
-  color: red;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+3), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+3) {
-  color: orange;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+4), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+4) {
-  color: green;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+5), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+5) {
-  color: blue;
-}
-body.theme-progress .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+6), body.theme-rainbow .tutorials-list.topic-type-use table.table-striped thead th:nth-of-type(6n+6) {
-  color: purple;
-}
-
-body.theme-rainbow .tutorial {
-  --h1-theme-before: " 🌈 ";
-  --h1-theme-after: " 🌈 ";
-}
-body.theme-rainbow .tutorial h1::after {
-  display: inline-block;
-  transform: scale(-1, 1) translateX(-1rem);
-}
-body.theme-rainbow nav.navbar, body.theme-rainbow .remark-slide .my-header {
-  background: linear-gradient(to bottom, #e2453c 0, #e2453c 16%, #e07e39 16%, #e07e39 32%, #e5d667 32%, #e5d667 48%, #51b95b 48%, #51b95b 66%, #1e72b7 66%, #1e72b7 86%, #6f5ba7 86%) no-repeat !important;
-}
-
-body.theme-progress .tutorial {
-  --h1-theme-before: "🏳️‍🌈";
-  --h1-theme-after: "🏳️‍⚧️ ";
-}
-body.theme-progress nav.navbar, body.theme-progress .remark-slide .my-header {
-  background: linear-gradient(120deg, #2c3143 0px 130px, #fdda0f 131px 139px, #fff 140px 148px, #f4b0c9 149px 157px, #7ccee6 158px 166px, #93540c 167px 175px, #000 176px 184px, transparent 185px), linear-gradient(45deg, #2c3143 0px 110px, rgba(44, 49, 67, 0) 110px), linear-gradient(180deg, #FE0000 16.66%, #FD8C00 16.66% 33.32%, #FFE500 33.32% 49.98%, #119F0B 49.98% 66.64%, #0644B3 66.64% 83.3%, #C22EDC 83.3%);
-}
-body.theme-progress p:nth-child(8n+7)::selection {
-  background: hsl(285, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+0)::selection {
-  background: hsl(330, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+1)::selection {
-  background: hsl(15, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+2)::selection {
-  background: hsl(60, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+3)::selection {
-  background: hsl(105, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+4)::selection {
-  background: hsl(150, 76%, 57%);
-}
-body.theme-progress p:nth-child(8n+5)::selection {
-  background: hsl(195, 76%, 57%);
-}
-body.theme-progress p:nth-child(9n+6)::selection {
-  background: hsl(240, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+7)::selection {
-  background: hsl(285, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+0)::selection {
-  background: hsl(330, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+1)::selection {
-  background: hsl(15, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+2)::selection {
-  background: hsl(60, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+3)::selection {
-  background: hsl(105, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+4)::selection {
-  background: hsl(150, 76%, 57%);
-}
-body.theme-progress li:nth-child(8n+5)::selection {
-  background: hsl(195, 76%, 57%);
-}
-body.theme-progress li:nth-child(9n+6)::selection {
-  background: hsl(240, 76%, 57%);
-}
-
-body.downunder {
-  transform: rotate(180deg);
-}
-
-body.theme-straya h1::after {
-  content: " 🦘";
-}
-body.theme-straya h2::after {
-  content: " 🐨";
-}
-body.theme-straya h3::after {
-  content: " 🦈";
-}
-
 /* Other CSS libraries we use */
 /*
  *  Academicons 1.8.0 by James Walsh - https://github.com/jpswalsh
@@ -17962,6 +18126,37 @@ body h2::after {
   content: var(--h2-theme-after);
 }
 
+@media screen {
+  .box-collapsed {
+    display: none;
+  }
+}
+@media print {
+  .hide-when-printing {
+    display: none;
+  }
+  pre.highlight {
+    background: none !important;
+    color: var(--text-color) !important;
+  }
+  pre.highlight .na {
+    color: #32440d !important;
+  }
+  pre.highlight .sb, pre.highlight .sc, pre.highlight .sd, pre.highlight .s2, pre.highlight .sh, pre.highlight .si, pre.highlight .sx, pre.highlight .sr, pre.highlight .s1, pre.highlight .ss, pre.highlight .s, pre.highlight .sa, pre.highlight .dl {
+    color: #664 !important;
+  }
+  pre.highlight .c, pre.highlight .ch, pre.highlight .cd, pre.highlight .cpf, pre.highlight .cm, pre.highlight .c1 {
+    color: #333 !important;
+  }
+  pre.highlight .gh, pre.highlight .go,
+  pre.highlight .nb, pre.highlight .ni, pre.highlight .nn, pre.highlight .vc, pre.highlight .vg, pre.highlight .vi, pre.highlight .nv, pre.highlight .vm, pre.highlight .w, pre.highlight .bp,
+  pre.highlight .kn, pre.highlight .ow, pre.highlight .o, pre.highlight .nt {
+    color: #222 !important;
+  }
+  pre.highlight .gp {
+    color: #378 !important;
+  }
+}
 div#theme-selector, div#lang-selector, div#archive-selector {
   display: flex;
   flex-direction: row;
@@ -18044,16 +18239,10 @@ pre.highlight .ge {
   color: #f8f8f2;
   font-style: italic;
 }
-pre.highlight .gr {
+pre.highlight .gr, pre.highlight .gt {
   color: #fb7caa;
 }
-pre.highlight .gt {
-  color: #fb7caa;
-}
-pre.highlight .gh {
-  color: #b1b0b0;
-}
-pre.highlight .go {
+pre.highlight .gh, pre.highlight .go {
   color: #b1b0b0;
 }
 pre.highlight .gp {
@@ -18065,146 +18254,34 @@ pre.highlight .gs {
 pre.highlight .gu {
   color: #b1b0b0;
 }
-pre.highlight .k, pre.highlight .kv {
-  color: #66d9ef;
-  font-weight: bold;
-}
-pre.highlight .kc {
-  color: #66d9ef;
-  font-weight: bold;
-}
-pre.highlight .kd {
-  color: #66d9ef;
-  font-weight: bold;
-}
-pre.highlight .kp {
-  color: #66d9ef;
-  font-weight: bold;
-}
-pre.highlight .kr {
-  color: #66d9ef;
-  font-weight: bold;
-}
-pre.highlight .kt {
+pre.highlight .k, pre.highlight .kv, pre.highlight .kc, pre.highlight .kd, pre.highlight .kp, pre.highlight .kr, pre.highlight .kt {
   color: #66d9ef;
   font-weight: bold;
 }
 pre.highlight .nt {
   color: rgb(238, 134, 172);
 }
-pre.highlight .kn {
+pre.highlight .kn, pre.highlight .ow, pre.highlight .o {
   color: rgb(238, 134, 172);
   font-weight: bold;
 }
-pre.highlight .ow {
-  color: rgb(238, 134, 172);
-  font-weight: bold;
-}
-pre.highlight .o {
-  color: rgb(238, 134, 172);
-  font-weight: bold;
-}
-pre.highlight .mf {
+pre.highlight .mf, pre.highlight .mh, pre.highlight .il, pre.highlight .mi, pre.highlight .mo, pre.highlight .m, pre.highlight .mb, pre.highlight .mx, pre.highlight .se {
   color: #b997ff;
 }
-pre.highlight .mh {
-  color: #b997ff;
-}
-pre.highlight .il {
-  color: #b997ff;
-}
-pre.highlight .mi {
-  color: #b997ff;
-}
-pre.highlight .mo {
-  color: #b997ff;
-}
-pre.highlight .m, pre.highlight .mb, pre.highlight .mx {
-  color: #b997ff;
-}
-pre.highlight .se {
-  color: #b997ff;
-}
-pre.highlight .sb {
-  color: #d7d787;
-}
-pre.highlight .sc {
-  color: #d7d787;
-}
-pre.highlight .sd {
-  color: #d7d787;
-}
-pre.highlight .s2 {
-  color: #d7d787;
-}
-pre.highlight .sh {
-  color: #d7d787;
-}
-pre.highlight .si {
-  color: #d7d787;
-}
-pre.highlight .sx {
-  color: #d7d787;
-}
-pre.highlight .sr {
-  color: #d7d787;
-}
-pre.highlight .s1 {
-  color: #d7d787;
-}
-pre.highlight .ss {
-  color: #d7d787;
-}
-pre.highlight .s, pre.highlight .sa, pre.highlight .dl {
+pre.highlight .sb, pre.highlight .sc, pre.highlight .sd, pre.highlight .s2, pre.highlight .sh, pre.highlight .si, pre.highlight .sx, pre.highlight .sr, pre.highlight .s1, pre.highlight .ss, pre.highlight .s, pre.highlight .sa, pre.highlight .dl {
   color: #d7d787;
 }
 pre.highlight .na {
   color: #a6e22e;
 }
-pre.highlight .nc {
-  color: #a6e22e;
-  font-weight: bold;
-}
-pre.highlight .nd {
-  color: #a6e22e;
-  font-weight: bold;
-}
-pre.highlight .ne {
-  color: #a6e22e;
-  font-weight: bold;
-}
-pre.highlight .nf, pre.highlight .fm {
+pre.highlight .nc, pre.highlight .nd, pre.highlight .ne, pre.highlight .nf, pre.highlight .fm {
   color: #a6e22e;
   font-weight: bold;
 }
 pre.highlight .no {
   color: #66d9ef;
 }
-pre.highlight .bp {
-  color: #f8f8f2;
-}
-pre.highlight .nb {
-  color: #f8f8f2;
-}
-pre.highlight .ni {
-  color: #f8f8f2;
-}
-pre.highlight .nn {
-  color: #f8f8f2;
-}
-pre.highlight .vc {
-  color: #f8f8f2;
-}
-pre.highlight .vg {
-  color: #f8f8f2;
-}
-pre.highlight .vi {
-  color: #f8f8f2;
-}
-pre.highlight .nv, pre.highlight .vm {
-  color: #f8f8f2;
-}
-pre.highlight .w {
+pre.highlight .nb, pre.highlight .ni, pre.highlight .nn, pre.highlight .vc, pre.highlight .vg, pre.highlight .vi, pre.highlight .nv, pre.highlight .vm, pre.highlight .w, pre.highlight .bp {
   color: #f8f8f2;
 }
 pre.highlight .nl {
@@ -19535,6 +19612,7 @@ a.btn div {
 .btn-primary {
   background-color: var(--brand-color);
   border-color: var(--brand-color);
+  color: var(--brand-color-contrast);
 }
 
 .btn-success {

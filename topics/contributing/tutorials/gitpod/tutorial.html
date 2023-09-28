@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Running the GTN website online using GitPod</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -200,8 +235,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -244,7 +279,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -292,23 +327,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -514,7 +535,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -552,7 +573,7 @@ Sentry.init({
       <ul>
         <li>Go on the GitHub repository: <a href="https://github.com/galaxyproject/training-material" width="50%">github.com/galaxyproject/training-material</a></li>
         <li>Click on th Fork button (top-right corner of the page)
-<img src="../../images/PR_fork.jpg" alt="The fork button on GitHub. " width="745" height="116" loading="lazy" /></li>
+<a href="../../images/PR_fork.jpg" rel="noopener noreferrer"><img src="../../images/PR_fork.jpg" alt="The fork button on GitHub. " width="745" height="116" loading="lazy" /></a></li>
       </ul>
 
       <blockquote class="tip">
@@ -574,14 +595,14 @@ Sentry.init({
           <li>
             <p>Is your fork using <code class="language-plaintext highlighter-rouge">main</code>? Fantastic, but you might need to update it. GitHub has a built in feature for this as shown below:</p>
 
-            <p><img src="../../images/github_update_fork.png" alt="Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked. " width="1067" height="370" loading="lazy" /></p>
+            <p><a href="../../images/github_update_fork.png" rel="noopener noreferrer"><img src="../../images/github_update_fork.png" alt="Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked. " width="1067" height="370" loading="lazy" /></a></p>
           </li>
         </ul>
       </blockquote>
     </li>
     <li><strong>Open</strong> your browser and navigate to <a href="https://gitpod.io">gitpod.io</a></li>
     <li><strong>Log in</strong> with GitHub
-<img src="../../images/gitpod/signin.png" alt="GitPod sign-in menu with various options, including GitHub. " width="304" height="416" loading="lazy" /></li>
+<a href="../../images/gitpod/signin.png" rel="noopener noreferrer"><img src="../../images/gitpod/signin.png" alt="GitPod sign-in menu with various options, including GitHub. " width="304" height="416" loading="lazy" /></a></li>
     <li>Copy the link to your fork of the GTN, e.g. <code class="language-plaintext highlighter-rouge">https://github.com/shiltemann/training-material</code></li>
     <li>
       <p>In the browser’s address bar, prefix the entire URL with <code class="language-plaintext highlighter-rouge">gitpod.io/#</code> and press Enter.</p>
@@ -598,14 +619,14 @@ Sentry.init({
             </ul>
           </li>
           <li>Now it is just a single click to open any GitHub repository in GitPod
-<img src="../../images/gitpod/browser-extension.png" alt="screenshot of the button the GitPod browser extension adds to GitHub repository . " width="1406" height="215" loading="lazy" /></li>
+<a href="../../images/gitpod/browser-extension.png" rel="noopener noreferrer"><img src="../../images/gitpod/browser-extension.png" alt="screenshot of the button the GitPod browser extension adds to GitHub repository . " width="1406" height="215" loading="lazy" /></a></li>
         </ol>
       </blockquote>
     </li>
     <li>Gitpod will now configure your environment. This may take some time
-<img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup. " width="274" height="303" loading="lazy" /></li>
+<a href="../../images/gitpod/setup.png" rel="noopener noreferrer"><img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup. " width="274" height="303" loading="lazy" /></a></li>
     <li>Once the setup is finished, you should see a page something like this:
-<img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></li>
+<a href="../../images/gitpod/welcomepage.png" rel="noopener noreferrer"><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></a></li>
   </ol>
 </blockquote>
 
@@ -619,7 +640,7 @@ Sentry.init({
   <li><strong>Bottom:</strong> Terminal window. Here you can type commands (e.g. to build the website preview) and read output and error messages.</li>
 </ul>
 
-<p><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></p>
+<p><a href="../../images/gitpod/welcomepage.png" rel="noopener noreferrer"><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></a></p>
 
 <h1 id="build-and-preview-the-gtn-website">Build and preview the GTN website</h1>
 
@@ -633,7 +654,7 @@ Sentry.init({
       <p>In the terminal window (bottom), type the following command:
 <code class="language-plaintext highlighter-rouge">make serve-gitpod</code></p>
 
-      <p><img src="../../images/gitpod/command.png" alt="output in the terminal after issuing the make serve-gitpod command. " width="629" height="271" loading="lazy" /></p>
+      <p><a href="../../images/gitpod/command.png" rel="noopener noreferrer"><img src="../../images/gitpod/command.png" alt="output in the terminal after issuing the make serve-gitpod command. " width="629" height="271" loading="lazy" /></a></p>
     </li>
     <li>The first time you run this command, it will install some dependencies, so it may take a little bit of time (a few minutes)
       <ul>
@@ -647,18 +668,18 @@ Sentry.init({
         <li>
           <p>You may need to click ‘Try Again’ to load the GTN.</p>
 
-          <p><img src="../../images/gitpod_tryagain.png" alt="gitpod with the GTN open in the right panel, but saying &quot;Try again&quot;. " width="1280" height="918" loading="lazy" /></p>
+          <p><a href="../../images/gitpod_tryagain.png" rel="noopener noreferrer"><img src="../../images/gitpod_tryagain.png" alt="gitpod with the GTN open in the right panel, but saying &quot;Try again&quot;. " width="1280" height="918" loading="lazy" /></a></p>
         </li>
         <li>
           <p>Click on the link in the terminal to see the GTN in full-screen: <code class="language-plaintext highlighter-rouge">Server address: http://127.0.0.1:4000/training-material/</code></p>
         </li>
       </ul>
 
-      <p><img src="../../images/gitpod/ready.png" alt="output in the terminal after the build process has completed . " width="519" height="232" loading="lazy" /></p>
+      <p><a href="../../images/gitpod/ready.png" rel="noopener noreferrer"><img src="../../images/gitpod/ready.png" alt="output in the terminal after the build process has completed . " width="519" height="232" loading="lazy" /></a></p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-not-opening"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-not-opening" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Not opening?<span class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p><img src="../../images/gitpod_popup.png" alt="screenshot of firefox permissions dialog which shows blocked windows and an allow menu. " width="766" height="399" loading="lazy" />
+        <p><a href="../../images/gitpod_popup.png" rel="noopener noreferrer"><img src="../../images/gitpod_popup.png" alt="screenshot of firefox permissions dialog which shows blocked windows and an allow menu. " width="766" height="399" loading="lazy" /></a>
 Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.</p>
       </blockquote>
     </li>
@@ -671,7 +692,7 @@ Some browsers block popups by default, you may need to allow GitPod to show popu
 
 </blockquote>
 
-<p><img src="../../images/gitpod.png" alt="screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right. " width="1727" height="1035" loading="lazy" /></p>
+<p><a href="../../images/gitpod.png" rel="noopener noreferrer"><img src="../../images/gitpod.png" alt="screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right. " width="1727" height="1035" loading="lazy" /></a></p>
 
 <h1 id="editing-training-materials-on-gitpod">Editing Training Materials on GitPod</h1>
 
@@ -706,8 +727,8 @@ Some browsers block popups by default, you may need to allow GitPod to show popu
         <li><strong>From:</strong> “A Short Introduction to Galaxy”</li>
         <li><strong>To:</strong> “A Short and Cool Introduction to Galaxy”</li>
         <li>You should immediately see a message in the terminal saying “regenerating”. GitPod has detected your changes and is rebuilding the website.
-<img src="../../images/gitpod/changes.png" alt="we changed the title of the tutorial in the text editor window. " width="595" height="191" loading="lazy" />
-<img src="../../images/gitpod/regenerating.png" alt="the terminal shows a message stating the website is being regenerated. " width="724" height="100" loading="lazy" /></li>
+<a href="../../images/gitpod/changes.png" rel="noopener noreferrer"><img src="../../images/gitpod/changes.png" alt="we changed the title of the tutorial in the text editor window. " width="595" height="191" loading="lazy" /></a>
+<a href="../../images/gitpod/regenerating.png" rel="noopener noreferrer"><img src="../../images/gitpod/regenerating.png" alt="the terminal shows a message stating the website is being regenerated. " width="724" height="100" loading="lazy" /></a></li>
       </ul>
     </li>
     <li>Move to the top right panel where the GTN is previewed and refresh the frame
@@ -718,7 +739,7 @@ Some browsers block popups by default, you may need to allow GitPod to show popu
       </ul>
     </li>
     <li>You should see the change you made:
-<img src="../../images/gitpod-changed.png" alt="The updated preview with our changed tutorial title. " width="1727" height="1035" loading="lazy" /></li>
+<a href="../../images/gitpod-changed.png" rel="noopener noreferrer"><img src="../../images/gitpod-changed.png" alt="The updated preview with our changed tutorial title. " width="1727" height="1035" loading="lazy" /></a></li>
   </ol>
 
 </blockquote>
@@ -749,7 +770,7 @@ git push origin fix-title
         <li>Create a new branch:
           <ul>
             <li>On the bottom-left, click on the branch logo (probably “master” or “main”)
-<img src="../../images/gitpod/branch-change.png" alt="button on the bottom of the page with the current branch. " width="310" height="114" loading="lazy" /></li>
+<a href="../../images/gitpod/branch-change.png" rel="noopener noreferrer"><img src="../../images/gitpod/branch-change.png" alt="button on the bottom of the page with the current branch. " width="310" height="114" loading="lazy" /></a></li>
             <li>Enter <code class="language-plaintext highlighter-rouge">fix-title</code> as the name for your new branch (at top of window)</li>
             <li>Choose “+ Create new branch…” from the dropdown</li>
           </ul>
@@ -757,22 +778,22 @@ git push origin fix-title
         <li>Commit changes:
           <ul>
             <li>On the left menu, click on the “changed files” tab
-<img src="../../images/gitpod/changedfiles.png" alt="button on the left menu to show changed files. " width="305" height="360" loading="lazy" /></li>
+<a href="../../images/gitpod/changedfiles.png" rel="noopener noreferrer"><img src="../../images/gitpod/changedfiles.png" alt="button on the left menu to show changed files. " width="305" height="360" loading="lazy" /></a></li>
             <li>Click on the “+” icon next to the file we edited to <em>stage changes</em>
-<img src="../../images/gitpod/stagechanges.png" alt="stage changes button. " width="389" height="234" loading="lazy" /></li>
+<a href="../../images/gitpod/stagechanges.png" rel="noopener noreferrer"><img src="../../images/gitpod/stagechanges.png" alt="stage changes button. " width="389" height="234" loading="lazy" /></a></li>
             <li>Hit the checkmark icon at the top to commit the changes</li>
             <li>Enter a commit message (top of window)
      - Publish changes</li>
           </ul>
         </li>
         <li>Click the cloud button at bottom left to publish your changes
-<img src="../../images/gitpod/publlish.png" alt="publish changes button. " width="470" height="123" loading="lazy" /></li>
+<a href="../../images/gitpod/publlish.png" rel="noopener noreferrer"><img src="../../images/gitpod/publlish.png" alt="publish changes button. " width="470" height="123" loading="lazy" /></a></li>
       </ul>
     </li>
     <li>Your changes are now saved to your fork, and you can make a PR via the GitHub interface.
       <ul>
         <li>If you used option 1 and want to do that right away, you can click on the link in the terminal:
-<img src="../../images/gitpod/push.png" alt="link in the terminal to open a PR. " width="674" height="271" loading="lazy" /></li>
+<a href="../../images/gitpod/push.png" rel="noopener noreferrer"><img src="../../images/gitpod/push.png" alt="link in the terminal to open a PR. " width="674" height="271" loading="lazy" /></a></li>
       </ul>
     </li>
   </ol>
@@ -780,9 +801,9 @@ git push origin fix-title
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-gitpod-permissions"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gitpod-permissions" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: GitPod Permissions<span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
-<img src="../../images/gitpod/access.png" alt="prompt to changes permissions. " width="467" height="157" loading="lazy" />
+<a href="../../images/gitpod/access.png" rel="noopener noreferrer"><img src="../../images/gitpod/access.png" alt="prompt to changes permissions. " width="467" height="157" loading="lazy" /></a>
 This will take you through a process to authorize GitPod, and set permissions
-<img src="../../images/gitpod/permissions.png" alt="permission settings for GitPod. " width="512" height="652" loading="lazy" />
+<a href="../../images/gitpod/permissions.png" rel="noopener noreferrer"><img src="../../images/gitpod/permissions.png" alt="permission settings for GitPod. " width="512" height="652" loading="lazy" /></a>
 If it doesn’t take you to GitPod’s permission page because your browser blocks popups, you can set them <a href="https://gitpod.io/integrations">on this page</a>.</p>
   </blockquote>
 </blockquote>
@@ -800,7 +821,7 @@ If it doesn’t take you to GitPod’s permission page because your browser bloc
         <li>Choose “Gitpod: Stop Workspace”</li>
       </ul>
 
-      <p><img src="../../images/gitpod/stopworkspace.png" alt="stop workspace option in the main menu. " width="317" height="348" loading="lazy" /></p>
+      <p><a href="../../images/gitpod/stopworkspace.png" rel="noopener noreferrer"><img src="../../images/gitpod/stopworkspace.png" alt="stop workspace option in the main menu. " width="317" height="348" loading="lazy" /></a></p>
     </li>
   </ol>
 
@@ -1080,7 +1101,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1112,7 +1133,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

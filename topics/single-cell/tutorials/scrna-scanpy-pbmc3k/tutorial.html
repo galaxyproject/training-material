@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Clustering 3K PBMCs with Scanpy</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -313,8 +348,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -357,7 +392,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -405,23 +440,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -894,7 +915,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1035,7 +1056,7 @@ https://zenodo.org/record/3581213/files/matrix.mtx
 
 <p>The most common format, called <a href="https://anndata.readthedocs.io/en/stable/"><code class="language-plaintext highlighter-rouge">AnnData</code></a>, stores the matrix as well as gene and cell annotations in a concise, compressed and extremely readable manner:</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg" alt="Anndata format. " width="194" height="158" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.</figcaption></figure>
+<p><a href="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg" alt="Anndata format. " width="194" height="158" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> <code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.&lt;/figcaption&gt;</figure></a></p>
 
 <p>This format is used by <a href="https://scanpy.readthedocs.io/en/stable/index.html">Scanpy</a> (<span class="citation"><a href="#wolf2018scanpy">Wolf <i>et al.</i> 2018</a></span>), the tool suite for analyzing single-cell gene expression data that we will use in this tutorial. So we need first to import the matrix and annotations of genes and cells into an <code class="language-plaintext highlighter-rouge">AnnData</code> object.</p>
 
@@ -1640,7 +1661,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_violin_plot.png" alt="QC violin plot. " width="889" height="265" loading="lazy" />
+        <p><a href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_violin_plot.png" rel="noopener noreferrer"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_violin_plot.png" alt="QC violin plot. " width="889" height="265" loading="lazy" /></a>
 <!-- To update... --></p>
 
         <p>How do the distributions of the 3 QC metrics look?</p>
@@ -1680,7 +1701,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <div class="box-title question-title" id="question-9"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" alt="QC total_counts n_genes_by_counts. " width="630" height="417" loading="lazy" /></p>
+        <p><a href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" rel="noopener noreferrer"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png" alt="QC total_counts n_genes_by_counts. " width="630" height="417" loading="lazy" /></a></p>
 
         <p>Is there any relationship between the cell size and the number of expressed genes?</p>
 
@@ -1715,7 +1736,7 @@ RP11-34P13.8	ENSG00000239945
       <blockquote class="question">
         <div class="box-title question-title" id="question-10"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" alt="QC total_counts pct_counts_mito. " width="617" height="417" loading="lazy" /></p>
+        <p><a href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" rel="noopener noreferrer"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/qc_scatter_n_genes_by_counts_pct_counts_mito.png" alt="QC total_counts pct_counts_mito. " width="617" height="417" loading="lazy" /></a></p>
 
         <ol>
           <li>Is there any relationship between the number of expressed genes and the proportion of reads mapped to mitochondrial genes?</li>
@@ -1981,7 +2002,7 @@ RP11-34P13.8	ENSG00000239945
 
 </blockquote>
 
-<p><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png" alt="Highly variable genes. " width="1061" height="432" loading="lazy" /></p>
+<p><a href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png" rel="noopener noreferrer"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/feature_selection_highly_variable_genes.png" alt="Highly variable genes. " width="1061" height="432" loading="lazy" /></a></p>
 
 <p>Both highly variable genes and other genes are still in the <code class="language-plaintext highlighter-rouge">AnnData</code> object. We can now actually keep only the highly variable genes.</p>
 
@@ -2373,7 +2394,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/pca_overview.png" alt="PCA overview. " width="1158" height="409" loading="lazy" /></p>
+<p><a href="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/pca_overview.png" rel="noopener noreferrer"><img src="/training-material/topics/single-cell/images/scrna-scanpy-pbmc3k/pca_overview.png" alt="PCA overview. " width="1158" height="409" loading="lazy" /></a></p>
 
 <p>On these plots we see the different cells projected onto the first 3 PCs. We can already see subpopulations of cells, but only 3 PCs are represented there and plot like these are not so informative. It may be more interesting to project also the values for the genes, since perhaps these are the genes most involved in the 3 PCs.</p>
 
@@ -2394,7 +2415,7 @@ with the following parameters:
       <blockquote class="question">
         <div class="box-title question-title" id="question-20"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-        <p><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings. " width="1593" height="453" loading="lazy" /></p>
+        <p><a href="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/pca_loadings.png" alt="PCA loadings. " width="1593" height="453" loading="lazy" /></a></p>
 
         <p>What are the top genes for each of the 3 first PCs? What do they represent?</p>
 
@@ -2442,7 +2463,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" alt="PCA scatter for CST3, NKG7 and PPBP. " width="1171" height="1264" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/pca_scatter.png" alt="PCA scatter for CST3, NKG7 and PPBP. " width="1171" height="1264" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-21"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2487,7 +2508,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" alt="PCA variance ratio. " width="569" height="453" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/pca_variance_ratio.png" alt="PCA variance ratio. " width="569" height="453" loading="lazy" /></a></p>
 
 <p>To determine the elbow point, we assume that each of the PCs should explain much more variance than the remaining PCS. So after the last PCs we choose, the percentage of variance explained should not drop much.</p>
 
@@ -2658,7 +2679,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" alt="UMAP coordinates before clustering. " width="1719" height="429" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_before_clustering.png" alt="UMAP coordinates before clustering. " width="1719" height="429" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-25"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2762,7 +2783,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" alt="UMAP coordinates after clustering. " width="1158" height="847" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_after_clustering.png" alt="UMAP coordinates after clustering. " width="1158" height="847" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-27"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -2892,7 +2913,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test. " width="1558" height="1192" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_t-test.png" alt="Rank genes with t-test. " width="1558" height="1192" loading="lazy" /></a></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3042,7 +3063,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon. " width="1558" height="1192" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon.png" alt="Rank genes with Wilcoxon. " width="1558" height="1192" loading="lazy" /></a></p>
 
 <p>We can quickly look at the 5 top ranked genes per cluster:</p>
 
@@ -3180,7 +3201,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering. " width="2024" height="419" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_rank_genes_groups_CST3_NKG7_PPBP.png" alt="Violin plot for CST3, NKG7 and PPBP after clustering. " width="2024" height="419" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-31"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3238,7 +3259,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes. " width="330" height="250" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/violin_plot_marker_genes.png" alt="Violin plot for top marker genes. " width="330" height="250" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-32"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3289,7 +3310,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" alt="Top marker gene expression on a UMAP plot. " width="1146" height="2099" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_plot_marker_genes.png" alt="Top marker gene expression on a UMAP plot. " width="1146" height="2099" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-33"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3327,7 +3348,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/plot_rank_genes_groups_heatmap.png" alt="Heatmap of the gene expression in cells. " width="788" height="505" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/plot_rank_genes_groups_heatmap.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/plot_rank_genes_groups_heatmap.png" alt="Heatmap of the gene expression in cells. " width="788" height="505" loading="lazy" /></a></p>
 
 <p>Each cells is shown in a row and in columns are the marker genes for each cluster.</p>
 
@@ -3401,7 +3422,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon. " width="566" height="453" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png" alt="Rank genes 0 vs 1 with Wilcoxon. " width="566" height="453" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-35"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3439,7 +3460,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon. " width="557" height="495" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/rank_genes_groups_violin_wilcoxon_0_vs_1.png" alt="Violin plot for marker genes for clusters 0 vs 1 with Wilcoxon. " width="557" height="495" loading="lazy" /></a></p>
 
 <p>Previous visualizations like the heatmap can also be used to represent the differential expression of the marker genes between both clusters.</p>
 
@@ -3760,7 +3781,7 @@ with the following parameters:
   </ol>
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters. " width="535" height="429" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png" alt="UMAP plot with annotated clusters. " width="535" height="429" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-38"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -3871,7 +3892,7 @@ with the following parameters:
 
 </blockquote>
 
-<p><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters. " width="709" height="453" loading="lazy" /></p>
+<p><a href="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" rel="noopener noreferrer"><img src="../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png" alt="Dotplot plot with annotated clusters. " width="709" height="453" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-39"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -4171,7 +4192,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -4203,7 +4224,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

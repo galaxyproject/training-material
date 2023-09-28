@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Evaluating and ranking a set of pathways based on multiple metrics</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -342,8 +377,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -386,7 +421,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -434,23 +469,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -717,7 +738,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -742,7 +763,7 @@ Sentry.init({
 
 <p>Finally, the pathway are ranked based on the global score using the <em>Rank Pathways</em> tool.</p>
 
-<p><img src="../../images/pathway_analysis_workflow.jpg" alt="This image shows the pathway analysis workflow viewed from the Galaxy editor interface. The pathway analysis workflow will evaluate and rank pathways based on multiple metrics. First, Flux Balance Analysis (FBA) node will take as inputs a collection of SBMLs representing the heterologous pathways to be evaluated, another SBML representing the chassis, and 2 additional inputs are expected for indicating the biomass reaction ID and the cell compartment ID that will be used during the FBA analysis. The FBA method will optimize the production of the target under the constraint that the model should still produce some level biomass. Then, the Thermo tool is used to estimate thermodynamics values for each pathway to know whether it is favorable towards target production in physiological conditions. After that the Score Pathway tool will calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability. Finally, the pathways are ranked based on the global score using the Rank Pathways tool. All exchange files are SBMLs. The output is a CSV file which contains the pathway IDs and their corresponding global score." width="2698" height="1056" loading="lazy" /></p>
+<p><a href="../../images/pathway_analysis_workflow.jpg" rel="noopener noreferrer"><img src="../../images/pathway_analysis_workflow.jpg" alt="This image shows the pathway analysis workflow viewed from the Galaxy editor interface. The pathway analysis workflow will evaluate and rank pathways based on multiple metrics. First, Flux Balance Analysis (FBA) node will take as inputs a collection of SBMLs representing the heterologous pathways to be evaluated, another SBML representing the chassis, and 2 additional inputs are expected for indicating the biomass reaction ID and the cell compartment ID that will be used during the FBA analysis. The FBA method will optimize the production of the target under the constraint that the model should still produce some level biomass. Then, the Thermo tool is used to estimate thermodynamics values for each pathway to know whether it is favorable towards target production in physiological conditions. After that the Score Pathway tool will calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability. Finally, the pathways are ranked based on the global score using the Rank Pathways tool. All exchange files are SBMLs. The output is a CSV file which contains the pathway IDs and their corresponding global score." width="2698" height="1056" loading="lazy" /></a></p>
 
 <p>Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.</p>
 
@@ -831,7 +852,7 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
 
 <p>We first perform an FBA (with COBRApy) optimizing the biomass reaction and record its maximal theoretical flux. The upper and lower bounds of the biomass reaction are then set to a same amount, equals to a fraction of its previously recorded optimum (default is 75% of its optimum). The method then performs a second FBA where biomass flux is enforced to this fraction of its optimum while optimizing the target production flux. Simulated fluxes are recorded directly into the SBML file and all changed flux bounds are reset to their original values before saving the output file.</p>
 
-<p><img src="../../images/fba_calculation.png" alt="This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway." width="1124" height="571" loading="lazy" /></p>
+<p><a href="../../images/fba_calculation.png" rel="noopener noreferrer"><img src="../../images/fba_calculation.png" alt="This picture describes the process to obtain annotated SBML pathways with calculated fluxes. First, FBA tool takes as input one SBML representing the heterologous pathway and another SBML representing the chassis. The two SBMLs are merged to render an augmented model containing both the reactions of the heterologous pathway and the chassis. Then FBA tool uses the COBRApy package to optimize the producing flux of the target reaction, under the constraint that the flux of the biomass reaction should be equals to 75% of its maximal theoretical value. At the end, the calculated fluxes are recorded as annotations into the SBML of the heterologous pathway." width="1124" height="571" loading="lazy" /></a></p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-comment"><button class="gtn-boxify-button details" type="button" aria-controls="details-comment" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Comment<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -902,7 +923,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 
 <p>Finally, the thermodynamic of a pathway is estimated by combining the Gibbs energy of reactions involved in it. The contribution of individual reactions to the final pathway thermodynamic is balanced using a linear equation system, according to the relative uses of intermediate compounds across the pathway (See Thermodynamics in Methods section for further details: <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>). A pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target.</p>
 
-<p><img src="../../images/rpthermo.png" alt="This image describe the process of computing thermodynamics values of a pathway, to assess whether a pathway is favorable towards target production in physiological conditions. rpThermo tool takes as input the output of rpFBA, which corresponds to the pathway to be analyzed (as an SBML file). rpThermo relies on eQuilibrator libraries to calculate the formation energy of compounds. The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients). From this, the thermodynamic of a pathway is estimated by combining the Gibbs energy of all reactions taking part in it. The individual contribution of reactions to the final pathway thermodynamic is weighted using a linear equation system, to take into consideration of the relative needs of intermediate compounds across the pathway. For the record, a pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target." width="1860" height="1044" loading="lazy" /></p>
+<p><a href="../../images/rpthermo.png" rel="noopener noreferrer"><img src="../../images/rpthermo.png" alt="This image describe the process of computing thermodynamics values of a pathway, to assess whether a pathway is favorable towards target production in physiological conditions. rpThermo tool takes as input the output of rpFBA, which corresponds to the pathway to be analyzed (as an SBML file). rpThermo relies on eQuilibrator libraries to calculate the formation energy of compounds. The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients). From this, the thermodynamic of a pathway is estimated by combining the Gibbs energy of all reactions taking part in it. The individual contribution of reactions to the final pathway thermodynamic is weighted using a linear equation system, to take into consideration of the relative needs of intermediate compounds across the pathway. For the record, a pathway Gibbs energy below zero indicates that the thermodynamic is favorable toward the production of the target." width="1860" height="1044" loading="lazy" /></a></p>
 
 <p>Secondly, we will use the <em>Thermo</em> tool to estimate thermodynamics values (based on Gibbs free energies) for each pathway to know whether a producing pathway is feasible in physiological conditions</p>
 
@@ -1063,7 +1084,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 
 <p>To select the best pathways for producing the lycopene in <em>E. coli</em>, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis workflow.</p>
 
-<p><img src="../../images/pathway_analysis_scheme.png" alt="This scheme represents the pathway analysis workflow enabling the identification of the best pathways for producing a molecule of interest. To do that the workflow takes as input the collection of pathways to be scored and the metabolic model of the chassis (all files are SBMLs). Iteratively, each pathway is merged with the chassis model, and several metrics are evaluated such as the target production flux (using the rpFBA tool) and the thermodynamics of the pathway (using the rpThermo tool). A global score of each pathway combining these metrics with others is computed using a machine learning method (with the rpScore tool). Finally, the pathways are ranked from best to worst according to their global score (using the rpRanker tool). During the workflow, all metrics are stored as SBML annotations. The final output is a CSV file which contains the pathway IDs and their corresponding global score." width="1905" height="820" loading="lazy" /></p>
+<p><a href="../../images/pathway_analysis_scheme.png" rel="noopener noreferrer"><img src="../../images/pathway_analysis_scheme.png" alt="This scheme represents the pathway analysis workflow enabling the identification of the best pathways for producing a molecule of interest. To do that the workflow takes as input the collection of pathways to be scored and the metabolic model of the chassis (all files are SBMLs). Iteratively, each pathway is merged with the chassis model, and several metrics are evaluated such as the target production flux (using the rpFBA tool) and the thermodynamics of the pathway (using the rpThermo tool). A global score of each pathway combining these metrics with others is computed using a machine learning method (with the rpScore tool). Finally, the pathways are ranked from best to worst according to their global score (using the rpRanker tool). During the workflow, all metrics are stored as SBML annotations. The final output is a CSV file which contains the pathway IDs and their corresponding global score." width="1905" height="820" loading="lazy" /></a></p>
 
                 </section>
 
@@ -1231,7 +1252,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1263,7 +1284,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

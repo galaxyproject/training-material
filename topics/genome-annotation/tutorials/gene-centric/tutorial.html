@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Comparative gene analysis in unannotated genomes</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -273,8 +308,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -317,7 +352,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -365,23 +400,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -756,7 +777,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -842,7 +863,7 @@ Sentry.init({
   <li>Create a comparative plot showing distribution of matches across genomes of interest</li>
 </ol>
 
-<p><img src="../../images/gene-centric/gene_analysis.svg" alt="A schematic diagram of the above workflow. " width="539" height="960" loading="lazy" /></p>
+<p><a href="../../images/gene-centric/gene_analysis.svg" rel="noopener noreferrer"><img src="../../images/gene-centric/gene_analysis.svg" alt="A schematic diagram of the above workflow. " width="539" height="960" loading="lazy" /></a></p>
 
 <hr />
 
@@ -892,7 +913,7 @@ Sentry.init({
 
 <p>The best annotated vertebrate is … human. To obtain amino acid translation of individual exons of <em>XBP-1</em> you can use <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr22%3A28794555%2D28800597&amp;hgsid=1433476153_N1Iet0RvAaPQIpPuVl2qbi74BrC3">UCSC Genome browser</a>. The “UCSC annotations of RefSeq RNAs (NM_* and NR_*)” track shows two alternative transcripts produced by <em>XBP-1</em> : spliced and unspliced (here ‘spliced’ and ‘unspliced’ do not refer to the “normal’ splicing process. To learn more about this fascinating gene read here).</p>
 
-<p><img src="../../images/gene-centric/xbp-1.svg" alt="XBP-1. " width="945" height="213" loading="lazy" /></p>
+<p><a href="../../images/gene-centric/xbp-1.svg" rel="noopener noreferrer"><img src="../../images/gene-centric/xbp-1.svg" alt="XBP-1. " width="945" height="213" loading="lazy" /></a></p>
 
 <p>Clicking on the names of the transcripts open a UCSC page specific to that transcript. From there you can obtain genomic sequences corresponding to all exons. You can then translate these sequences using any available online tool (e.g., <a href="https://www.ncbi.nlm.nih.gov/orffinder/">NCBI ORFinder</a>).</p>
 
@@ -1051,7 +1072,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <p>To find location of genes, <a href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/index.html">we will use the following workflow</a> that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance.</p>
 
-<p><img src="../../images/gene-centric/wf.png" alt="WF. " width="2324" height="984" loading="lazy" /></p>
+<p><a href="../../images/gene-centric/wf.png" rel="noopener noreferrer"><img src="../../images/gene-centric/wf.png" alt="WF. " width="2324" height="984" loading="lazy" /></a></p>
 
 <p>The workflow takes three inputs:</p>
 
@@ -1099,10 +1120,10 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
     <li>Expand the collection by clicking on it</li>
     <li>Click on any dataset</li>
     <li>Click the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> icon:
-  <img src="../../images/gene-centric/display_tree.png" alt="Graph icon. " width="247" height="74" loading="lazy" /></li>
+  <a href="../../images/gene-centric/display_tree.png" rel="noopener noreferrer"><img src="../../images/gene-centric/display_tree.png" alt="Graph icon. " width="247" height="74" loading="lazy" /></a></li>
     <li>A selection of tree visualization tools will appear in the center pane of the interface</li>
     <li>Select <code class="language-plaintext highlighter-rouge">Phylogenetic Tre Visualization</code> and play with it:
-  <img src="../../images/gene-centric/tree.png" alt="The tree. " width="878" height="678" loading="lazy" /></li>
+  <a href="../../images/gene-centric/tree.png" rel="noopener noreferrer"><img src="../../images/gene-centric/tree.png" alt="The tree. " width="878" height="678" loading="lazy" /></a></li>
   </ul>
 </blockquote>
 
@@ -1185,7 +1206,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <p>This is a URL pointing to one of the workflow outputs: <code class="language-plaintext highlighter-rouge">Mapping report</code> with the <kbd>PlottingData</kbd> tag. To copy the URL click on the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> icon adjacent to the dataset:</p>
 
-<p><img src="../../images/gene-centric/copy_link.png" alt="Copying the link. " width="282" height="310" loading="lazy" /></p>
+<p><a href="../../images/gene-centric/copy_link.png" rel="noopener noreferrer"><img src="../../images/gene-centric/copy_link.png" alt="Copying the link. " width="282" height="310" loading="lazy" /></a></p>
 
 <p>Running the notebook will generate two graphs explained in the next section.</p>
 
@@ -4895,7 +4916,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <p>Another plot currently produced by the notebook is a summary plot showing the distribution of matches across species and their amino acid identity:</p>
 
-<p><img src="../../images/gene-centric/summary_plot.svg" alt="Copying the link. " width="324" height="203" loading="lazy" /></p>
+<p><a href="../../images/gene-centric/summary_plot.svg" rel="noopener noreferrer"><img src="../../images/gene-centric/summary_plot.svg" alt="Copying the link. " width="324" height="203" loading="lazy" /></a></p>
 
 <h1 id="about-the-gene">About the gene</h1>
 
@@ -5140,7 +5161,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -5172,7 +5193,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

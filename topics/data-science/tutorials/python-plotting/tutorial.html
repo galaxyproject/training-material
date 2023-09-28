@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Plotting in Python</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -293,8 +328,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -337,7 +372,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -385,23 +420,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -718,7 +739,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -824,7 +845,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="../../images/python-plotting/Figure9_Lineplot.png" alt="A line chart is shown with a y axis of gene name and an x axis of p-value. The specific content of the graph is not important other than that it is produced with the expected x and y labels." width="432" height="288" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure9_Lineplot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure9_Lineplot.png" alt="A line chart is shown with a y axis of gene name and an x axis of p-value. The specific content of the graph is not important other than that it is produced with the expected x and y labels." width="432" height="288" loading="lazy" /></a></p>
 
 <p>We use Jupyter Notebook and so running the cell generates the figure directly below the code. The figure is also included in the Notebook document for future viewing. However, other Python environments like an interactive Python session started from a terminal or a Python script executed via the command line require an additional command to display the figure.</p>
 
@@ -864,7 +885,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="../../images/python-plotting/Figure10_Multiple_lines_plot.png" alt="The graph is similar to the last image, now the x axis is the gene name, and the y axis runs from 0 to 7 with an annotation of 1e-65 above. Now there are two lines, one in red labelled p-adj, and one in blue labelled p-value." width="432" height="288" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure10_Multiple_lines_plot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure10_Multiple_lines_plot.png" alt="The graph is similar to the last image, now the x axis is the gene name, and the y axis runs from 0 to 7 with an annotation of 1e-65 above. Now there are two lines, one in red labelled p-adj, and one in blue labelled p-value." width="432" height="288" loading="lazy" /></a></p>
 
 <p>In this example, we select a new subset of the dataset, but plot only the two columns <code class="language-plaintext highlighter-rouge">P-value</code> and <code class="language-plaintext highlighter-rouge">P-adj</code>. Then we use the <code class="language-plaintext highlighter-rouge">plt.xticks()</code> method to change the text and the rotation of the x axis.</p>
 
@@ -875,7 +896,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
-<p><img src="../../images/python-plotting/Figure11_Barplot.png" alt="It is now a bar plot with chromosome as an X axis and some values of N for the y axis for a few chromosomes." width="640" height="480" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure11_Barplot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure11_Barplot.png" alt="It is now a bar plot with chromosome as an X axis and some values of N for the y axis for a few chromosomes." width="640" height="480" loading="lazy" /></a></p>
 
 <p><code class="language-plaintext highlighter-rouge">matplotlib</code> supports also different plot styles from ather popular plotting libraries such as ggplot and seaborn. For example, the previous plot in ggplot style.</p>
 
@@ -885,7 +906,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
 <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
-<p><img src="../../images/python-plotting/Figure12_ggplot_Barplot.png" alt="The same graph as the previous, but with a different aethetic, the background is now light grey instead of white and the bars are red instead of blue to be a bit more like ggplot2 outputs." width="640" height="480" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure12_ggplot_Barplot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure12_ggplot_Barplot.png" alt="The same graph as the previous, but with a different aethetic, the background is now light grey instead of white and the bars are red instead of blue to be a bit more like ggplot2 outputs." width="640" height="480" loading="lazy" /></a></p>
 
 <p>You can also change different parameters and customize the plot.</p>
 
@@ -896,7 +917,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">ylabel</span><span class="p">(</span><span class="sh">'</span><span class="s">N</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="../../images/python-plotting/Figure13_Barplot_2.png" alt="The same graph again, but now the bars are red with a black border." width="640" height="480" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure13_Barplot_2.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure13_Barplot_2.png" alt="The same graph again, but now the bars are red with a black border." width="640" height="480" loading="lazy" /></a></p>
 
 <p>Another useful type of plot is a scatter plot. In the following example we plot the Base mean of a subset of genes.</p>
 
@@ -908,7 +929,7 @@ Sentry.init({
 <span class="n">plt</span><span class="p">.</span><span class="nf">xlabel</span><span class="p">(</span><span class="sh">'</span><span class="s">Gene name</span><span class="sh">'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><img src="../../images/python-plotting/Figure14_Scatterplot.png" alt="A scatterplot is shown comparing gene name to base mean." width="640" height="480" loading="lazy" /></p>
+<p><a href="../../images/python-plotting/Figure14_Scatterplot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure14_Scatterplot.png" alt="A scatterplot is shown comparing gene name to base mean." width="640" height="480" loading="lazy" /></a></p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-plotting-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Plotting</div>
@@ -927,7 +948,7 @@ plt.scatter(x = exercise_data['Chromosome'], y = exercise_data['mean_pvalue'], c
 plt.ylabel('Average P-value')
 plt.xlabel('Chromosome')
 </code></pre></div>    </div>
-    <p><img src="../../images/python-plotting/Figure15_Exercise_plot.png" alt="Another scatterplot showing chromosome vs average p-value, but every column has both a blue and red point, presumably showing the values for different strands." width="640" height="480" loading="lazy" /></p>
+    <p><a href="../../images/python-plotting/Figure15_Exercise_plot.png" rel="noopener noreferrer"><img src="../../images/python-plotting/Figure15_Exercise_plot.png" alt="Another scatterplot showing chromosome vs average p-value, but every column has both a blue and red point, presumably showing the values for different strands." width="640" height="480" loading="lazy" /></a></p>
 
   </blockquote>
 </blockquote>
@@ -1101,7 +1122,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1133,7 +1154,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

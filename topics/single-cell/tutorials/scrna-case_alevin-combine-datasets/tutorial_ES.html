@@ -6,29 +6,64 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</title>
         
-            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
 
 <!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
+-->
 <script type="text/javascript">
-Sentry.init({
-  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@4ee4761d9c8aa320edf5585e1cc1e471e7deea20",
-  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-  sampleRate: 0.1,
-  tracesSampleRate: 0.1,
-  // Capture Replay for no sessions by default
-  replaysSessionSampleRate: 0.01,
-  // plus for 1% of sessions with an error
-  replaysOnErrorSampleRate: 0.01,
-  // PII OFF
-  sendDefaultPii: false, // Off by default but just in case.
-  environment: "production",
-});
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@c93ee501f7ece6f502f6f17dae238bdf50605ecc",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
 </script>
 
         
@@ -41,8 +76,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695898946' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695898946' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695901798' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695901798' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -320,8 +355,8 @@ Sentry.init({
         </script>
         
     </head>
-    <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695898946'></script>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695901798'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -364,7 +399,7 @@ Sentry.init({
         </form>
         -->
 
-        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
@@ -412,23 +447,9 @@ Sentry.init({
             
         
 
-        <div class="dropdown-item">
-            <div>
-                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
-            </div>
-
-            <div id="theme-selector" data-toggle="buttons">
-                    <button class="btn" data-theme="default">Default</button>
-                    <button class="btn" data-theme="night">Night</button>
-                    <button class="btn" data-theme="midnight">Midnight</button>
-                    <button class="btn" data-theme="rainbow">Rainbow</button>
-                    <button class="btn" data-theme="blm">✊🏿</button>
-                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
-                    <button class="btn" data-theme="halloween">🎃</button>
-                    <button class="btn" data-theme="straya">🇦🇺</button>
-            </div>
-
-        </div>
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
 
         <div class="dropdown-item">
             <div>
@@ -840,7 +861,7 @@ Sentry.init({
     <div class="container">
         <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-2">
+            <div class="col-sm-2 hide-when-printing">
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
@@ -1060,9 +1081,9 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <p>Ahora podemos ejecutar Alevin. Esta herramienta no aparecerá en las búsquedas dentro de algunas de las instancias públicas. Si esto sucede, haz click sobre la pestaña Single Cell en la parte izquierda de la pantalla y desplázate hacia abajo hasta encontrar la herramienta Alevin. Consejo: Si haces click sobre las herramientas (tools) dentro de la opción ‘tutorial’ de Galaxy siempre tendrás la versión correcta de la herramienta. En este caso: Galaxy Version 1.3.0+galaxy2 - debe ser la versión por defecto; si no lo es, haz click sobre ‘Versiones’ (‘Versions’) y escoge dicha versión.</p>
 
-<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-tutorial-in-galaxy.png" alt="La opción de tutorial está situada en la parte superior derecha de Galaxy. " width="1513" height="751" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 1</strong>:</span> La opción de tutorial</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-tutorial-in-galaxy.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-tutorial-in-galaxy.png" alt="La opción de tutorial está situada en la parte superior derecha de Galaxy. " width="1513" height="751" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 1</strong>:</span> La opción de tutorial&lt;/figcaption&gt;</figure></a></p>
 
-<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-tutorial-option-filler.png" alt="La herramienta en el tutorial de Galaxy tiene un botón. " width="1910" height="920" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 2</strong>:</span> Haz click sobre la herramienta en el tutorial de Galaxy</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-tutorial-option-filler.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-tutorial-option-filler.png" alt="La herramienta en el tutorial de Galaxy tiene un botón. " width="1910" height="920" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 2</strong>:</span> Haz click sobre la herramienta en el tutorial de Galaxy&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-practica-ejecutando-alevin"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Practica: Ejecutando Alevin</div>
@@ -1219,15 +1240,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 3</strong>:</span> Subconjunto de datos crudos, 400k cadenas</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 3</strong>:</span> Subconjunto de datos crudos, 400k cadenas&lt;/figcaption&gt;</figure></a></p>
 
 <p>La imagen aquí generada (4000k) no es muy informativa - pero ten en cuenta que tan solo estás manejando una fracción de las lecturas. Si procesas la muestra completa (que involucra los mismos pasos mencionados en la parte superior, pero que tardaría mucho más tiempo) obtendrás la imagen siguiente.</p>
 
-<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 4</strong>:</span> Muestra completa - 32,579,453 lecturas - datos crudos</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-raw_barcodes-total.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 4</strong>:</span> Muestra completa - 32,579,453 lecturas - datos crudos&lt;/figcaption&gt;</figure></a></p>
 
 <p>Esta es la formulación del gráfico de código de barras que basamos en una <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discusión</a> que entablamos con miembros de la comunidad científica. Los gráficos de líneas suaves de la izquierda son los principales; estos gráficos muestran, clasificados de los más bajos a los más altos, los conteos de UMIs para códigos de barras individuales. Esperamos una fuerte caída entre las gotas que contienen células y las gotas vacías o que solo contienen restos celulares. Este no es un conjunto de datos ideal, así que en perspectiva, en un mundo ideal un conjunto de datos muy limpio proveniente de procesados 10x, los datos se asemejarían un poco más a la siguiente imagen del atlas de pulmón (ver <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">aquí</a> el estudio del Atlas de Expresión de Células Únicas y la remisión del proyecto <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">aquí</a>).</p>
 
-<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 5</strong>:</span> Datos ‘bonitos’ - crudos</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 5</strong>:</span> Datos ‘bonitos’ - crudos&lt;/figcaption&gt;</figure></a></p>
 
 <p>En este gráfico puedes ver más claramente una flexión tipo “rodilla”, mostrando el corte entre las gotas vacías y las gotas que contienen células.</p>
 
@@ -1251,15 +1272,15 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 </blockquote>
 
-<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 6</strong>:</span> 400k sub-muestreo - Alevin procesado</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-400k.png" alt="raw droplet barcode plots - 400k. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 6</strong>:</span> 400k sub-muestreo - Alevin procesado&lt;/figcaption&gt;</figure></a></p>
 
 <p>Y la muestra completa se ve como la siguiente figura:</p>
 
-<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 7</strong>:</span> Muestra total - 32,579,453 lecturas - Alevin procesado</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 7</strong>:</span> Muestra total - 32,579,453 lecturas - Alevin procesado&lt;/figcaption&gt;</figure></a></p>
 
 <p>Y concluyendo, he aquí el gráfico del atlas de pulmón.</p>
 
-<figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 8</strong>:</span> Datos bonitos - Alevin procesado</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" rel="noopener noreferrer"><figure id="figure-8" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-lung.png" alt="raw droplet barcode plots - total. " width="1000" height="600" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 8</strong>:</span> Datos bonitos - Alevin procesado&lt;/figcaption&gt;</figure></a></p>
 
 <p>Debes ver una caída casi vertical de la curva, que es donde Alevin truncó la distribución (después de haber excluido muchos códigos de barra celulares que tuvieron &lt;10 UMI, Alevin posteriormente selecciona un umbral basándose en la curva y elimina los códigos de barras con menos UMIs)</p>
 
@@ -1637,7 +1658,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <p>Configura el historial de ejemplo con los índices más antiguos en la parte inferior.</p>
 
-<figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-history-files-ascending.png" alt="Ordered history. " width="328" height="642" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 9</strong>:</span> Nota como N701 es el más bajo, en orden ascendente al N707</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-history-files-ascending.png" rel="noopener noreferrer"><figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-history-files-ascending.png" alt="Ordered history. " width="328" height="642" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 9</strong>:</span> Nota como N701 es el más bajo, en orden ascendente al N707&lt;/figcaption&gt;</figure></a></p>
 
 <p>Por tanto, cuando se concatenan, el lote (<code class="language-plaintext highlighter-rouge">batch</code>) aparece de la siguiente manera:</p>
 
@@ -1913,9 +1934,9 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 10</strong>:</span> Flujo de trabajo - Pasos 1-3</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-alevin-part1workflow.png" rel="noopener noreferrer"><figure id="figure-10" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " width="1070" height="884" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 10</strong>:</span> Flujo de trabajo - Pasos 1-3&lt;/figcaption&gt;</figure></a></p>
 
-<figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part2workflow.png" alt="Workflow Part 2. " width="1255" height="692" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figura 11</strong>:</span> Flujo de trabajo - Pasos 4-6</figcaption></figure>
+<p><a href="../../images/scrna-casestudy/wab-alevin-part2workflow.png" rel="noopener noreferrer"><figure id="figure-11" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy/wab-alevin-part2workflow.png" alt="Workflow Part 2. " width="1255" height="692" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figura 11</strong>:</span> Flujo de trabajo - Pasos 4-6&lt;/figcaption&gt;</figure></a></p>
 
 <p>¡Has llegado al final de esta sesión! Quizá te interese echarle un vistazo a un <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1">ejemplo de un historial</a> y a la <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2">Parte 2 del flujo de trabajo</a>. Nota que según la forma en que ejecutes el flujo de trabajo este requerirá que cambies la columna (<code class="language-plaintext highlighter-rouge">column</code>) que contiene el lote de metadatos. <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example">Aquí</a> puedes encontrar el objeto final que contiene todas las lecturas.</p>
 
@@ -1929,7 +1950,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
   <li>Obtenido datos con análisis parciales desde el Single Cell Expression Atlas.</li>
 </ul>
 
-<p>¡Únete a nuestro canal de Gitter de secuenciación de ARN de células únicas para tomar parte en discusiones con científicos con ideas afines a las tuyas! <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
+<p>¡Únete a nuestro canal de Gitter de secuenciación de ARN de células únicas para tomar parte en discusiones con científicos con ideas afines a las tuyas! <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><a href="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" rel="noopener noreferrer"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></a></p>
 
                 </section>
 
@@ -2207,7 +2228,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/4ee4761d9c8aa320edf5585e1cc1e471e7deea20">4ee4761</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c93ee501f7ece6f502f6f17dae238bdf50605ecc">c93ee50</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2235,7 +2256,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695898946'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695901798'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
