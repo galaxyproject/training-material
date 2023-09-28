@@ -5,15 +5,15 @@ abbreviations:
   ENA: European Nucleotide Archive
 zenodo_link: ''
 questions:
-- How do I submit sequences to ENA for my manuscript?
+- How do I submit sequences and metadata to ENA using the Webin portal and cURL?
 objectives:
-- To populate ENA metadata objects for correct submission
-- To submit raw reads to ENA
+- To populate ENA metadata objects through the Webin portal 
+- To submit raw reads to ENA using FTP
 time_estimation: "2H"
 key_points:
 - Preparation of metadata and sequence data for the submission
 - Use ENA Webin interactive portal to submit metadata
-- Use linux command to submit read fastq files
+- Use cURL to submit read fastq files
 tags:
 - ?
 priority: 1
@@ -38,7 +38,7 @@ subtopic: fair-data
 
 Prior to publication many journals and funders require authors to submit their sequence data to one of the three INSDC member databases – ENA, NCBI or DDBJ – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
 
-The three databases have different methods for making submissions. This tutorial will cover how to upload read data and accompanying metadata to the ENA server using the ENA Webin portal. 
+The three databases have different methods for making submissions. If your database of choice is ENA and you are new to sequence submission and need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading read data and accompanying metadata and use cURL to copy read files over to ENA's FTP server. 
 
 If you would like to use Galaxy tools for submission to ENA you may find [this](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
 
