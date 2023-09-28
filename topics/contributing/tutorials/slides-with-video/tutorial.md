@@ -182,4 +182,3 @@ All of this is run on cron by [`.github/workflows/video.yml`](https://github.com
 Many of the scripts internally are prefixed with `ari`, we named our internal version after [github.com/jhudsl/ari/](https://github.com/jhudsl/ari/) which inspired it, but we wanted a version that would be more closely tied to the GTN and integrate with our infrastructure nicely, so we ended up writing our own.
 
 # Conclusion
-

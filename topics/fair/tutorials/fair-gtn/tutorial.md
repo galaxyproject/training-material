@@ -81,7 +81,7 @@ GTN Tutorials aim to follow best practices in course design, so that they can be
 ## Make your training materials (re)usable for trainers
 To help others determine whether the training materials are relevant and adaptable to their particular situations, metadata published alongside training materials should include context and sufficient description including: contributor details, license, description, learning outcomes, audience, requirements, tags/keywords, duration and last revision date Applying the proper licence and tagging training materials with metadata can make it simpler for others to (re)use and adapt them.
 
-GTN provide strong technical support and set of [contributing self learning material](https://training.galaxyproject.org/training-material/topics/contributing/).
+GTN provide strong technical support and set of [contributing self learning material]({% link topics/contributing/index.md %}).
 
 ## Make your training materials usable for trainees
 Prerequisites and learning outcomes are particularly helpful metadata. To be effective, learning objectives must be written using active verbs that describe the expected trainee behaviours as well as the knowledge, skills, and expertise they will have received. Rich metadata requirements and SMART—Specific (Measurable, Attainable, Relevant, and Time-bound) learning outcomes following Bloom's taxonomy {% cite chevron2014metacognitive %} helps to clarify which trainees will benefit most from the training. Self-learning structure of the GTN materials supported by slides and video walkthroughs/tours adds another layer of usability.

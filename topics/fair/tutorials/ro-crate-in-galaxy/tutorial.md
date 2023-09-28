@@ -40,9 +40,9 @@ subtopic: ro-crate
 
 Requirements:
 
-[Using Galaxy and Managing your Data](https://training.galaxyproject.org/training-material/topics/galaxy-interface/):
+- [Using Galaxy and Managing your Data]({% link topics/galaxy-interface/index.md %}):
 - [Creating, Editing and Importing Galaxy Workflows]({% link topics/galaxy-interface/tutorials/workflow-editor/tutorial.md %}) 
-- [Extracting Workflows from Histories](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html )
+- [Extracting Workflows from Histories]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md  %})
 
 
 Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to keep provenance of the workflow invocation (an invocation of a workflow means one run or execution of the workflow) it can be exported from Galaxy in the form of a [Workflow Run Crate](https://w3id.org/ro/wfrun/workflow) RO-Crate profile.

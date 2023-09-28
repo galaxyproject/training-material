@@ -123,7 +123,7 @@ Near the end of this tutorial, we will show and discuss ways to correct for this
 
 > <comment-title>The alternative approach: genome assembly</comment-title>
 >
-> A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials](https://training.galaxyproject.org/training-material/topics/assembly) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. {% cite Zhou2021 %}).
+> A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials]({% link topics/assembly/index.md %}) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. {% cite Zhou2021 %}).
 >
 {: .comment}
 

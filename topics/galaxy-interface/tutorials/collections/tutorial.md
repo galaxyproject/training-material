@@ -511,7 +511,7 @@ More about tags
 > <tip-title>More about tags</tip-title>
 > Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. **Simple** tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. **Name** tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, **group** tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as "treatment" and "control".
 >
->To learn mote about tags go to [training site](https://training.galaxyproject.org/training-material/search?query=tags).
+>To learn mote about tags go to [training site]({% link search.md %}?query=tags).
 {: .tip}
 
 ## Tools that change collection structure
