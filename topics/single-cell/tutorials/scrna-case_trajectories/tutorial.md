@@ -138,7 +138,7 @@ First, we will calculate a [force-directed graph](https://scanpy.readthedocs.io/
 >    >
 >    > We're using the fa or ForceAtlas2 layout for our FDGs. It is the same layout used in the [Jupyter notebook version of this tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) and works well for our data. As well as choosing the fa layout when we create the FDGs, we will also specify the `draw_graph_fa` embedding when drawing the plots. 
 >    {: .comment}
->    > 
+> 
 {: .hands_on}
 
 ## Plot the FDG
@@ -226,9 +226,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). You could use this:
-`sc.tl.louvain(adata, resolution=0.6)`
-However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
+> > 1. Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 > >
 > > ![The T mature and DP L clusters have been stretched out](../../images/scrna-case_trajectories/TrajectoriesFDG2.png "FDG Plot after recalculating neighbours from the diffusion map")
 > {: .solution}
@@ -240,7 +238,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 - Control
    - Go straight to the PAGA section
 - Everyone else:
-   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %} tutorial if you need help with this)
+   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.
         - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
    - you could undo the optional diffusion map step by recalculating the neighbours again using `X_pca` instead of `X_diffmap`
    - you could also try changing the number of neighbors used in that step 
@@ -276,8 +274,6 @@ If you are working in a group, you can now divide up a decision here with one *c
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -375,7 +371,7 @@ We're also interested in the expression of the two genes that are known to be ma
 >    >
 >    > We're using the EnsemblIDs during this tutorial, as discussed above. If you like, you could change the names of these plots to the gene symbols by filling in the optional Figure title field with `Cd4,Cd8`. Make sure that the order of your figure titles matches the order of the EnsemblIDs in the colour by field. ENSMUSG00000023274 is Cd4 and ENSMUSG00000053977 is Cd8.
 >    {: .comment}
-> > 
+> 
 {: .hands_on}
 
 > <question-title></question-title>
