@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@2cfeb152b02d57750c11e134095d267b9ca45209",
+  release: "galaxy-training-network@b24b7c481b0d320e8de2c57e036802e4c95aad9b",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695859912' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695859912' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695895332' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695895332' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Python - Multiprocessing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-02-13 13:04:13 +0000">
+<meta name="DC.date" content="2023-09-27 07:02:02 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-13 13:04:13 +0000",
+  "dateModified": "2023-09-27 07:02:02 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Python - Multiprocessing",
   "interactivityType": "mixed",
@@ -211,7 +211,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695859912'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695895332'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -533,7 +533,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 27, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -722,7 +722,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">fetch_version</span><span class="p">(</span><span class="n">server_url</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="sh">"</span><span class="s">/api/version</span><span class="sh">"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">server_url</span> <span class="o">+</span> <span class="sh">"</span><span class="s">/api/version</span><span class="sh">"</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">).</span><span class="nf">json</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">response</span><span class="p">[</span><span class="sh">'</span><span class="s">version_major</span><span class="sh">'</span><span class="p">]</span>
     <span class="k">except</span> <span class="n">requests</span><span class="p">.</span><span class="n">exceptions</span><span class="p">.</span><span class="n">ConnectTimeout</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">None</span>
@@ -791,21 +791,18 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 
 <p>Let’s convert our previous example from processes to threads, as processes aren’t strictly necessary for such a light weight use case as fetching data from the internet where you’re blocking on network rather than CPU resources.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">concurrent.futures</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">multiprocessing.pool</span>
 <span class="kn">import</span> <span class="n">requests</span>
 <span class="kn">import</span> <span class="n">time</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span>
-<span class="k">with</span> <span class="n">concurrent</span><span class="p">.</span><span class="n">futures</span><span class="p">.</span><span class="nc">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
-    <span class="n">future_to_url</span> <span class="o">=</span> <span class="p">{</span><span class="n">executor</span><span class="p">.</span><span class="nf">submit</span><span class="p">(</span><span class="n">fetch_version</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span> <span class="n">url</span> <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">servers</span><span class="p">}</span>
-    <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">concurrent</span><span class="p">.</span><span class="n">futures</span><span class="p">.</span><span class="nf">as_completed</span><span class="p">(</span><span class="n">future_to_url</span><span class="p">):</span>
-        <span class="n">url</span> <span class="o">=</span> <span class="n">future_to_url</span><span class="p">[</span><span class="n">future</span><span class="p">]</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="n">future</span><span class="p">.</span><span class="nf">result</span><span class="p">()</span>
-            <span class="n">data</span><span class="p">[</span><span class="n">url</span><span class="p">]</span> <span class="o">=</span> <span class="n">version</span>
-        <span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">%r generated an exception: %s</span><span class="sh">'</span> <span class="o">%</span> <span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">exc</span><span class="p">))</span>
+
+<span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="p">.</span><span class="n">pool</span><span class="p">.</span><span class="nc">ThreadPool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pool</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="n">fetch_version</span><span class="p">,</span> <span class="n">servers</span><span class="p">,</span> <span class="n">chunksize</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="nf">for </span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="nf">zip</span><span class="p">(</span><span class="n">servers</span><span class="p">,</span> <span class="n">results</span><span class="p">)}</span>
+<span class="n">pool</span><span class="p">.</span><span class="nf">close</span><span class="p">()</span>
+
 <span class="nf">print</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="nf">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">data</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
@@ -1010,7 +1007,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/2cfeb152b02d57750c11e134095d267b9ca45209">2cfeb15</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b24b7c481b0d320e8de2c57e036802e4c95aad9b">b24b7c4</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1042,7 +1039,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695859912'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695895332'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

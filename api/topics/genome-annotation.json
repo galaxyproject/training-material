@@ -638,184 +638,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "From small to large-scale genome comparison",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4485547",
-      "questions": [
-        "How can we run pairwise genome comparisons using Galaxy?",
-        "How can we run massive chromosome comparisons in Galaxy?",
-        "How can we quickly visualize genome comparisons in Galaxy?"
-      ],
-      "objectives": [
-        "Learn the basics of pairwise sequence comparison",
-        "Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels",
-        "Learn how to post-process your sequence comparisons"
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "We learnt that sequence comparison is a demanding problem and that there are several ways to approach it",
-        "We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively",
-        "We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc."
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "introduction",
-          "tutorials": [
-            "galaxy-intro-101"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Esteban Perez-Wohlfeil",
-          "email": "estebanpw@uma.es",
-          "joined": "2020-11",
-          "elixir_node": "es",
-          "id": "estebanpw",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/estebanpw.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/"
-        }
-      ],
-      "short_id": "T00176",
-      "url": "/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
-      "topic_name": "genome-annotation",
-      "tutorial_name": "hpc-for-lsgc",
-      "dir": "topics/genome-annotation/tutorials/hpc-for-lsgc",
-      "id": "genome-annotation/hpc-for-lsgc",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "CHROMEISTER_chromosome_comparison.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
-          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
-          "wfid": "genome-annotation-hpc-for-lsgc",
-          "wfname": "chromeister_chromosome_comparison",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/chromeister_chromosome_comparison",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "GECKO_pairwise_comparison.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
-          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
-          "wfid": "genome-annotation-hpc-for-lsgc",
-          "wfname": "gecko_pairwise_comparison",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/gecko_pairwise_comparison",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Genome Annotation",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Genome Annotation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "clustalw",
-            "owner": "devteam",
-            "revisions": "d6694932c5e0",
-            "tool_panel_section_label": "Genome Annotation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "chromeister",
-            "owner": "iuc",
-            "revisions": "e483be1014b6",
-            "tool_panel_section_label": "Genome Annotation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gecko",
-            "owner": "iuc",
-            "revisions": "5efbd15675ca",
-            "tool_panel_section_label": "Genome Annotation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clustalw\n  owner: devteam\n  revisions: d6694932c5e0\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chromeister\n  owner: iuc\n  revisions: e483be1014b6\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gecko\n  owner: iuc\n  revisions: 5efbd15675ca\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Refining Genome Annotations with Apollo (prokaryotes)",
       "zenodo_link": "https://zenodo.org/record/3270822",
       "tags": [
@@ -1132,6 +954,184 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/apollo/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/apollo/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "From small to large-scale genome comparison",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4485547",
+      "questions": [
+        "How can we run pairwise genome comparisons using Galaxy?",
+        "How can we run massive chromosome comparisons in Galaxy?",
+        "How can we quickly visualize genome comparisons in Galaxy?"
+      ],
+      "objectives": [
+        "Learn the basics of pairwise sequence comparison",
+        "Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels",
+        "Learn how to post-process your sequence comparisons"
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "We learnt that sequence comparison is a demanding problem and that there are several ways to approach it",
+        "We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively",
+        "We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "introduction",
+          "tutorials": [
+            "galaxy-intro-101"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Esteban Perez-Wohlfeil",
+          "email": "estebanpw@uma.es",
+          "joined": "2020-11",
+          "elixir_node": "es",
+          "id": "estebanpw",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/estebanpw.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/"
+        }
+      ],
+      "short_id": "T00176",
+      "url": "/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
+      "topic_name": "genome-annotation",
+      "tutorial_name": "hpc-for-lsgc",
+      "dir": "topics/genome-annotation/tutorials/hpc-for-lsgc",
+      "id": "genome-annotation/hpc-for-lsgc",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "CHROMEISTER_chromosome_comparison.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
+          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
+          "wfid": "genome-annotation-hpc-for-lsgc",
+          "wfname": "chromeister_chromosome_comparison",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/chromeister_chromosome_comparison",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "GECKO_pairwise_comparison.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
+          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
+          "wfid": "genome-annotation-hpc-for-lsgc",
+          "wfname": "gecko_pairwise_comparison",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/gecko_pairwise_comparison",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Genome Annotation",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Genome Annotation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "clustalw",
+            "owner": "devteam",
+            "revisions": "d6694932c5e0",
+            "tool_panel_section_label": "Genome Annotation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "chromeister",
+            "owner": "iuc",
+            "revisions": "e483be1014b6",
+            "tool_panel_section_label": "Genome Annotation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gecko",
+            "owner": "iuc",
+            "revisions": "5efbd15675ca",
+            "tool_panel_section_label": "Genome Annotation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clustalw\n  owner: devteam\n  revisions: d6694932c5e0\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chromeister\n  owner: iuc\n  revisions: e483be1014b6\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gecko\n  owner: iuc\n  revisions: 5efbd15675ca\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json"
       }
     },
     {

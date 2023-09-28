@@ -17,7 +17,7 @@
 <script type="text/javascript">
 Sentry.init({
   dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-  release: "galaxy-training-network@2cfeb152b02d57750c11e134095d267b9ca45209",
+  release: "galaxy-training-network@b24b7c481b0d320e8de2c57e036802e4c95aad9b",
   integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
   sampleRate: 0.1,
   tracesSampleRate: 0.1,
@@ -41,8 +41,8 @@ Sentry.init({
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695859912' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695859912' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1695895332' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1695895332' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -52,7 +52,7 @@ Sentry.init({
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="How I learned to stop worrying and love the systemd">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-09-28 13:13:58 +0000">
+<meta name="DC.date" content="2023-09-27 06:52:01 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 
         
@@ -93,7 +93,7 @@ Sentry.init({
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-28 13:13:58 +0000",
+  "dateModified": "2023-09-27 06:52:01 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "How I learned to stop worrying and love the systemd",
   "interactivityType": "mixed",
@@ -240,7 +240,7 @@ Sentry.init({
         
     </head>
     <body data-spy="scroll" data-target="#toc">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1695859912'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1695895332'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -523,6 +523,22 @@ Sentry.init({
                         
                     
                         
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
                             
                             <li> Galaxy Installation with Ansible:
                             
@@ -535,22 +551,6 @@ Sentry.init({
                                 
                             
                             </li>
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
                         
                     
                         
@@ -677,7 +677,7 @@ Sentry.init({
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 27, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -714,6 +714,7 @@ Sentry.init({
       <li><a href="#status" id="markdown-toc-status">Status</a></li>
       <li><a href="#restarting" id="markdown-toc-restarting">Restarting</a></li>
       <li><a href="#failed-units" id="markdown-toc-failed-units">Failed Units</a></li>
+      <li><a href="#enabling-units" id="markdown-toc-enabling-units">Enabling Units</a></li>
       <li><a href="#editing-units-or-overriding" id="markdown-toc-editing-units-or-overriding">Editing Units or Overriding</a></li>
       <li><a href="#masking-units" id="markdown-toc-masking-units">Masking Units</a></li>
       <li><a href="#unit-security-optimisation" id="markdown-toc-unit-security-optimisation">Unit Security Optimisation</a></li>
@@ -852,6 +853,19 @@ WantedBy=multi-user.target
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nt">--failed</span>
 </code></pre></div></div>
 
+<h2 id="enabling-units">Enabling Units</h2>
+
+<p>In order to start at boot time, it must be “enabled”, so you can run a service once knowing it won’t come back when the machine reboots (or vice versa). But you should be sure that a unit is enabled if you want it available on restart. You can do this in separate commands</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nb">enable </span>my.service
+systemctl start my.service
+</code></pre></div></div>
+
+<p>Or simultaneously, <a href="https://unix.stackexchange.com/questions/374280/the-now-switch-of-systemctl">if you’re on a systemd v220 or newer</a>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl <span class="nb">enable</span> <span class="nt">--now</span> my.service
+</code></pre></div></div>
+
 <h2 id="editing-units-or-overriding">Editing Units or Overriding</h2>
 
 <p>Sometimes one of the system units provided will have some weird behaviour that you need to override (or your ansible role doesn’t expose it), then you can use <code class="language-plaintext highlighter-rouge">systemctl edit unit</code> to override some settings.</p>
@@ -866,7 +880,7 @@ WantedBy=multi-user.target
 
 <p>This command will prevent the device from reaching or activating any of those targets. Useful for servers when you’re in a bind and don’t know how to remove power management:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 </span></code></pre></div></div>
 
 <h2 id="unit-security-optimisation">Unit Security Optimisation</h2>
@@ -876,7 +890,7 @@ WantedBy=multi-user.target
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@gat-1:~$</span><span class="w"> </span>systemd-analyze security galaxy
 <span class="go">  NAME                                       DESCRIPTION                                         EXPOSURE
 ✗ PrivateNetwork=                            Service has access to the host's network            0.5
-✓ User=/DynamicUser=                         Service runs under a static non-root user identity  
+✓ User=/DynamicUser=                         Service runs under a static non-root user identity
 </span><span class="c">....
 </span><span class="go">✗ CapabilityBoundingSet=~CAP_SYS_CHROOT      Service may issue chroot()                          0.1
 ✗ ProtectHostname=                           Service may change system host/domainname           0.1
@@ -1492,7 +1506,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/2cfeb152b02d57750c11e134095d267b9ca45209">2cfeb15</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b24b7c481b0d320e8de2c57e036802e4c95aad9b">b24b7c4</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1524,7 +1538,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1695859912'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1695895332'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

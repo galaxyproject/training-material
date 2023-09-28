@@ -44,995 +44,35 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/sequence-analysis/tutorials/genetic-map-rad-seq/tutorial",
-        "/short/ecology/genetic-map-rad-seq",
-        "/short/T00130"
-      ],
-      "title": "RAD-Seq to construct genetic maps",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1219888",
-      "tags": [
-        "RAD-seq",
-        "Genetic composition EBV class",
-        "EBV dataset",
-        "EBV workflow"
-      ],
+      "title": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4264936",
       "questions": [
-        "How to analyze RAD sequencing data for a genetic map study?"
+        "How to evaluate properly populations and communities biological state with abundance data?",
+        "How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are doing over time?",
+        "How to compute and analyze biodiversity metrics from abundance data?"
       ],
       "objectives": [
-        "SNP calling from RAD sequencing data",
-        "Find and correct haplotypes",
-        "Create input files for genetic map building software"
+        "Upload data from DATRAS portal of ICES",
+        "Pre-process population data with Galaxy",
+        "Learning how to use an ecological analysis workflow from raw data to graphical representations",
+        "Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question",
+        "Learning how to interpret a Generalized Linear (Mixed) Model"
       ],
-      "time_estimation": "8h",
-      "key_points": null,
-      "contributors": [
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "short_id": "T00130",
-      "url": "/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "genetic-map-rad-seq",
-      "dir": "topics/ecology/tutorials/genetic-map-rad-seq",
-      "id": "ecology/genetic-map-rad-seq",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "genetic-map-rad-seq.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/workflows/genetic-map-rad-seq.ga",
-          "path": "topics/ecology/tutorials/genetic-map-rad-seq/workflows/genetic-map-rad-seq.ga",
-          "wfid": "ecology-genetic-map-rad-seq",
-          "wfname": "genetic-map-rad-seq",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-genetic-map-rad-seq/versions/genetic-map-rad-seq",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_denovomap/stacks_denovomap/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_genotypes/stacks_genotypes/1.46.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "stacks_denovomap",
-            "owner": "iuc",
-            "revisions": "fdbcc560c691",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_genotypes",
-            "owner": "iuc",
-            "revisions": "62a4b8e5e139",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: stacks_denovomap\n  owner: iuc\n  revisions: fdbcc560c691\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_genotypes\n  owner: iuc\n  revisions: 62a4b8e5e139\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Cleaning GBIF data for the use in Ecology",
-      "zenodo_link": "",
-      "questions": [
-        "How can I get ecological data from GBIF?",
-        "How do I check and clean the data from GBIF?",
-        "Which ecoinformatics techniques are important to know for this type of data?"
-      ],
-      "objectives": [
-        "Get occurrence data on a species",
-        "Visualize the data to understand them",
-        "Clean GBIF dataset for further analyses"
-      ],
-      "time_estimation": "0H30M",
+      "time_estimation": "2H",
       "key_points": [
-        "Take the time to look at your data first, manipulate it before analyzing it"
+        "Pre-process abundance data",
+        "Compute Community and Population metrics",
+        "Construct a GL(M)M with common biodiversity metrics",
+        "Interpret (and correct if needed) GL(M)M results",
+        "Learn about and interpret common tests to evaluate the quality of your GL(M)M",
+        "Use an Essential Biodiversity Variables workflow"
       ],
       "tags": [
-        "gbif",
-        "data management",
-        "data cleaning"
-      ],
-      "contributors": [
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        },
-        {
-          "name": "Simon Benateau",
-          "email": "simon.benateau@mnhn.fr",
-          "twitter": "sbenateau",
-          "joined": "2019-03",
-          "elixir_node": "fr",
-          "id": "sbenateau",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/sbenateau.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/"
-        }
-      ],
-      "short_id": "T00129",
-      "url": "/topics/ecology/tutorials/gbif_cleaning/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "gbif_cleaning",
-      "dir": "topics/ecology/tutorials/gbif_cleaning",
-      "id": "ecology/gbif_cleaning",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/gbif_cleaning/workflows/Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
-          "path": "topics/ecology/tutorials/gbif_cleaning/workflows/Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
-          "wfid": "ecology-gbif_cleaning",
-          "wfname": "galaxy-workflow-gbif_data_quality_check_and_filtering_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-gbif_cleaning/versions/galaxy-workflow-gbif_data_quality_check_and_filtering_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json",
-      "tools": [
-        "Count1",
-        "Filter1",
-        "Summary_Statistics1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "gdal_ogr2ogr",
-            "owner": "ecology",
-            "revisions": "e12db3b4d3a6",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "spocc_occ",
-            "owner": "ecology",
-            "revisions": "f9d76a46799a",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: gdal_ogr2ogr\n  owner: ecology\n  revisions: e12db3b4d3a6\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: spocc_occ\n  owner: ecology\n  revisions: f9d76a46799a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Visualization of Climate Data using  NetCDF xarray Map Plotting",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.6621460",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "climate",
-          "tutorials": [
-            "climate-101"
-          ]
-        }
-      ],
-      "questions": [
-        "What is xarray map plotting?",
-        "How to plot NetCDF data using xarray map plotting tool?",
-        "What are the different types of projections and colormap options available in the tool?"
-      ],
-      "objectives": [
-        "Learn about plotting Climate Data",
-        "Learn about NetCDF xarray map plotting tool",
-        "Learn about visualizing the climate data using NetCDF xarray map plotting using the different kinds of projections and colormap options"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "NetCDF xarray climate data visualization",
-        "NetCDF xarray map plotting projections",
-        "NetCDF xarray map plotting colormaps"
-      ],
-      "tags": [
-        "pangeo"
-      ],
-      "contributors": [
-        {
-          "name": "Soumya Jha",
-          "joined": "2022-06",
-          "id": "Quickbeasts51429",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Quickbeasts51429.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Quickbeasts51429/"
-        }
-      ],
-      "short_id": "T00136",
-      "url": "/topics/ecology/tutorials/x-array-map-plot/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "x-array-map-plot",
-      "dir": "topics/ecology/tutorials/x-array-map-plot",
-      "id": "ecology/x-array-map-plot",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main-workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/x-array-map-plot/workflows/main-workflow.ga",
-          "path": "topics/ecology/tutorials/x-array-map-plot/workflows/main-workflow.ga",
-          "wfid": "ecology-x-array-map-plot",
-          "wfname": "main-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-x-array-map-plot/versions/main-workflow",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "Quickbeasts51429",
-              "name": "Soumya Jha"
-            }
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "graphicsmagick_image_montage",
-            "owner": "bgruening",
-            "revisions": "39881709807e",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cdo_operations",
-            "owner": "climate",
-            "revisions": "d5355f6fa02b",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "xarray_coords_info",
-            "owner": "ecology",
-            "revisions": "3e73f657a998",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "xarray_mapplot",
-            "owner": "ecology",
-            "revisions": "dc05bf0af58f",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "xarray_metadata_info",
-            "owner": "ecology",
-            "revisions": "e8650cdf092f",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: graphicsmagick_image_montage\n  owner: bgruening\n  revisions: 39881709807e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cdo_operations\n  owner: climate\n  revisions: d5355f6fa02b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_coords_info\n  owner: ecology\n  revisions: 3e73f657a998\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_mapplot\n  owner: ecology\n  revisions: dc05bf0af58f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_metadata_info\n  owner: ecology\n  revisions: e8650cdf092f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial",
-        "/short/ecology/de-novo-rad-seq",
-        "/short/T00128"
-      ],
-      "title": "RAD-Seq de-novo data analysis",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1134547",
-      "questions": [
-        "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
-      ],
-      "objectives": [
-        "Analysis of RAD sequencing data without a reference genome",
-        "SNP calling from RAD sequencing data",
-        "Calculate population genomics statistics from RAD sequencing data"
-      ],
-      "time_estimation": "8h",
-      "key_points": null,
-      "tags": [
-        "RAD-seq",
-        "Genetic composition EBV class",
-        "Species populations EBV class",
-        "EBV dataset",
-        "EBV workflow"
-      ],
-      "contributors": [
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "short_id": "T00128",
-      "url": "/topics/ecology/tutorials/de-novo-rad-seq/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "de-novo-rad-seq",
-      "dir": "topics/ecology/tutorials/de-novo-rad-seq",
-      "id": "ecology/de-novo-rad-seq",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-de-novo-rad-seq.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/de-novo-rad-seq/workflows/Galaxy-Workflow-de-novo-rad-seq.ga",
-          "path": "topics/ecology/tutorials/de-novo-rad-seq/workflows/Galaxy-Workflow-de-novo-rad-seq.ga",
-          "wfid": "ecology-de-novo-rad-seq",
-          "wfname": "galaxy-workflow-de-novo-rad-seq",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-de-novo-rad-seq/versions/galaxy-workflow-de-novo-rad-seq",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_denovomap/stacks_denovomap/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "f2e8552cf1d0",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_denovomap",
-            "owner": "iuc",
-            "revisions": "fdbcc560c691",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_populations",
-            "owner": "iuc",
-            "revisions": "45db1ba16163",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_procrad",
-            "owner": "iuc",
-            "revisions": "eded025438db",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: f2e8552cf1d0\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_denovomap\n  owner: iuc\n  revisions: fdbcc560c691\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_populations\n  owner: iuc\n  revisions: 45db1ba16163\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_procrad\n  owner: iuc\n  revisions: eded025438db\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "redirect_from": [
-        "/topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial",
-        "/short/ecology/ref-based-rad-seq",
-        "/short/T00133"
-      ],
-      "title": "RAD-Seq Reference-based data analysis",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1134547",
-      "tags": [
-        "RAD-seq",
-        "Genetic composition EBV class",
         "Species population EBV class",
-        "EBV dataset",
-        "EBV workflow"
-      ],
-      "questions": [
-        "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
-      ],
-      "objectives": [
-        "Analysis of RAD sequencing data using a reference genome",
-        "SNP calling from RAD sequencing data",
-        "Calculate population genomics statistics from RAD sequencing data"
-      ],
-      "time_estimation": "8h",
-      "key_points": null,
-      "contributors": [
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "short_id": "T00133",
-      "url": "/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "ref-based-rad-seq",
-      "dir": "topics/ecology/tutorials/ref-based-rad-seq",
-      "id": "ecology/ref-based-rad-seq",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/workflows/Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
-          "path": "topics/ecology/tutorials/ref-based-rad-seq/workflows/Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
-          "wfid": "ecology-ref-based-rad-seq",
-          "wfname": "galaxy-workflow-workflow_constructed_from_history__stacks_rad__population_genomics_with_reference_genome_",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-ref-based-rad-seq/versions/galaxy-workflow-workflow_constructed_from_history__stacks_rad__population_genomics_with_reference_genome_",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/workflows/workflow.ga",
-          "path": "topics/ecology/tutorials/ref-based-rad-seq/workflows/workflow.ga",
-          "wfid": "ecology-ref-based-rad-seq",
-          "wfname": "workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-ref-based-rad-seq/versions/workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json",
-      "tools": [
-        "Convert characters1",
-        "Count1",
-        "Cut1",
-        "Filter1",
-        "Grep1",
-        "Summary_Statistics1",
-        "addValue",
-        "cat1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_refmap/stacks_refmap/1.46.0",
-        "toolshed.g2.bx.psu.edu/repos/kellrott/regex_replace/regex_replace/1.0.0"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "74a8bef53a00",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "64f11cf59c6e",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa_wrappers",
-            "owner": "devteam",
-            "revisions": "b4427dbb6ced",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "ff9530579d1f",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "multiqc",
-            "owner": "iuc",
-            "revisions": "1c2db0054039",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_populations",
-            "owner": "iuc",
-            "revisions": "45db1ba16163",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_procrad",
-            "owner": "iuc",
-            "revisions": "eded025438db",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "stacks_refmap",
-            "owner": "iuc",
-            "revisions": "d7a482f44e08",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "regex_replace",
-            "owner": "kellrott",
-            "revisions": "9a77d5fca67c",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: 74a8bef53a00\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 64f11cf59c6e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa_wrappers\n  owner: devteam\n  revisions: b4427dbb6ced\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: ff9530579d1f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 1c2db0054039\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_populations\n  owner: iuc\n  revisions: 45db1ba16163\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_procrad\n  owner: iuc\n  revisions: eded025438db\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_refmap\n  owner: iuc\n  revisions: d7a482f44e08\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_replace\n  owner: kellrott\n  revisions: 9a77d5fca67c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Champs blocs indicators",
-      "questions": [
-        "Which biological questions are addressed by the tutorial?",
-        "Which bioinformatics techniques are important to know for this type of data?"
-      ],
-      "objectives": [
-        "Calculate IVR (Visual Rollover Indicator)",
-        "Compute dissimilarity indice",
-        "Vizualize some diversity indices"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Diversity indicators",
-        "Champs Blocs",
-        "Boulder Fields"
-      ],
-      "contributors": [
-        {
-          "name": "Marie Josse",
-          "joined": "2022-03",
-          "id": "Marie59",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "translations": {
-        "tutorial": [
-          "fr"
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "short_id": "T00127",
-      "url": "/topics/ecology/tutorials/champs-blocs/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "champs-blocs",
-      "dir": "topics/ecology/tutorials/champs-blocs",
-      "id": "ecology/champs-blocs",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/workflows/main_workflow.ga",
-          "path": "topics/ecology/tutorials/champs-blocs/workflows/main_workflow.ga",
-          "wfid": "ecology-champs-blocs",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-champs-blocs/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json",
-      "tools": [
-        "cb_eco",
-        "cb_ivr",
-        "cb_qecb",
-        "toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "cb_dissim",
-            "owner": "ecology",
-            "revisions": "8dc082da41c1",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cb_div",
-            "owner": "ecology",
-            "revisions": "5b31641e6d30",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cb_ivr",
-            "owner": "ecology",
-            "revisions": "bcbad4f83dec",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cb_dissim\n  owner: ecology\n  revisions: 8dc082da41c1\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cb_div\n  owner: ecology\n  revisions: 5b31641e6d30\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cb_ivr\n  owner: ecology\n  revisions: bcbad4f83dec\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Metabarcoding/eDNA through Obitools",
-      "zenodo_link": "https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1",
-      "questions": [
-        "how to analyze DNA metabarcoding / eDNA data produced on Illumina sequencers using the OBITools?"
-      ],
-      "objectives": [
-        "Deal with paired-end data to create consensus sequences",
-        "Clean, filter and anlayse data to obtain strong results"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "From raw reads you can process, clean and filter data to obtain a list of species from environmental DNA (eDNA) samples."
-      ],
-      "tags": [
-        "Genetic composition EBV class",
         "Community composition EBV class",
         "EBV dataset",
         "EBV workflow",
-        "eDNA",
-        "Metabarcoding"
+        "modeling"
       ],
       "contributors": [
         {
@@ -1047,31 +87,6 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
         },
         {
-          "name": "Olivier Norvez",
-          "email": "olivier.norvez@mnhn.fr",
-          "joined": "2022-02",
-          "elixir_node": "fr",
-          "id": "onorvez",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
-        },
-        {
-          "github": false,
-          "name": "Eric Coissac",
-          "joined": "2022-02",
-          "id": "ecoissac",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/ecoissac.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ecoissac/"
-        },
-        {
-          "github": false,
-          "name": "Frédéric Boyer",
-          "joined": "2022-02",
-          "id": "fboyer",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/fboyer.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fboyer/"
-        },
-        {
           "name": "Yvan Le Bras",
           "email": "yvan.le-bras@mnhn.fr",
           "twitter": "Yvan2935",
@@ -1082,20 +97,28 @@
           "id": "yvanlebras",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Jean-Baptiste Mihoub",
+          "email": "jean-baptiste.mihoub@mnhn.fr",
+          "joined": "2022-03",
+          "id": "jbmihoub",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jbmihoub.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jbmihoub/"
         }
       ],
-      "short_id": "T00124",
-      "url": "/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html",
+      "short_id": "T00125",
+      "url": "/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html",
       "topic_name": "ecology",
-      "tutorial_name": "Obitools-metabarcoding",
-      "dir": "topics/ecology/tutorials/Obitools-metabarcoding",
-      "id": "ecology/Obitools-metabarcoding",
+      "tutorial_name": "PAMPA-toolsuite-tutorial",
+      "dir": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial",
+      "id": "ecology/PAMPA-toolsuite-tutorial",
       "video_library": {
         "tutorial": {
-          "description": "Based on this OBITools official tutorial, you will learn here how to\nanalyze DNA metabarcoding data produced on Illumina sequencers\n",
+          "description": "This tutorial aims to present the PAMPA Galaxy workflow, how to use it to\ncompute common biodiversity metrics from species abundance data and\nanalyse it through generalized linear (mixed) models (GLM and GLMM). This\nworkflow made up of 5 tools will allow you to process temporal series\ndata that include at least year, location and species sampled along with\nabundance value and, finally, generate article-ready data products.\n",
           "materials": [
             {
-              "link": "topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html",
+              "link": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html",
               "type": "Tutorial"
             }
           ],
@@ -1106,19 +129,19 @@
           "versions": [
             {
               "captions": [
-                "yvanlebras"
+                "colineroyaux"
               ],
               "date": "2022-03-03",
               "galaxy_version": "21.09",
-              "length": "1H15M",
-              "link": "o2cUvb_lmLs",
+              "length": "2H",
+              "link": "leMPC2Ckehc",
               "speakers": [
-                "yvanlebras"
+                "colineroyaux"
               ]
             }
           ],
-          "gtn_id": "ecology/Obitools-metabarcoding",
-          "title": "Metabarcoding/eDNA through Obitools",
+          "gtn_id": "ecology/PAMPA-toolsuite-tutorial",
+          "title": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
           "captioned": true
         },
         "slides": null,
@@ -1130,13 +153,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "main_workflow.ga",
+          "workflow": "Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Obitools-metabarcoding/workflows/main_workflow.ga",
-          "path": "topics/ecology/tutorials/Obitools-metabarcoding/workflows/main_workflow.ga",
-          "wfid": "ecology-Obitools-metabarcoding",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-Obitools-metabarcoding/versions/main_workflow",
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/workflows/Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
+          "path": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial/workflows/Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
+          "wfid": "ecology-PAMPA-toolsuite-tutorial",
+          "wfname": "galaxy-workflow-compute_and_analyze_biodiversity_metrics_with_pampa_toolsuite",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-PAMPA-toolsuite-tutorial/versions/galaxy-workflow-compute_and_analyze_biodiversity_metrics_with_pampa_toolsuite",
           "license": null,
           "creators": [
 
@@ -1144,36 +167,42 @@
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json",
       "tools": [
-        "Cut1",
+        "Count1",
         "Filter1",
-        "join1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_illumina_pairend/obi_illumina_pairend/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_ngsfilter/obi_ngsfilter/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13",
-        "toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7",
-        "wc_gnu"
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"
       ],
       "supported_servers": {
         "exact": [
           {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": "true"
-          },
+          }
+        ],
+        "inexact": [
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
             "usegalaxy": "true"
           },
           {
@@ -1181,9 +210,6 @@
             "name": "UseGalaxy.org.au",
             "usegalaxy": "true"
           }
-        ],
-        "inexact": [
-
         ]
       },
       "topic_name_human": "Ecology",
@@ -1193,432 +219,12 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "fastq_groomer",
-            "owner": "devteam",
-            "revisions": "47e5dbc3e790",
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "ddf54b12c295",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "3d0c7bdf12f5",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ncbi_blast_plus",
-            "owner": "devteam",
-            "revisions": "5edc472ec434",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "unzip",
-            "owner": "imgteam",
-            "revisions": "38eec75fbe9b",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_annotate",
-            "owner": "iuc",
-            "revisions": "f82cefbbcea5",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_clean",
-            "owner": "iuc",
-            "revisions": "12baadec7809",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_grep",
-            "owner": "iuc",
-            "revisions": "fe7ec8a3d35e",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_illumina_pairend",
-            "owner": "iuc",
-            "revisions": "83fbdf93d51e",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_ngsfilter",
-            "owner": "iuc",
-            "revisions": "3bf57dadf7cd",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_stat",
-            "owner": "iuc",
-            "revisions": "723a93febe89",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_tab",
-            "owner": "iuc",
-            "revisions": "5f7003111e32",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "obi_uniq",
-            "owner": "iuc",
-            "revisions": "ec215ed98831",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seq_filter_by_id",
-            "owner": "peterjc",
-            "revisions": "141612f8c3e3",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastq_groomer\n  owner: devteam\n  revisions: 47e5dbc3e790\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 5edc472ec434\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_annotate\n  owner: iuc\n  revisions: f82cefbbcea5\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_clean\n  owner: iuc\n  revisions: 12baadec7809\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_grep\n  owner: iuc\n  revisions: fe7ec8a3d35e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_illumina_pairend\n  owner: iuc\n  revisions: 83fbdf93d51e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_ngsfilter\n  owner: iuc\n  revisions: 3bf57dadf7cd\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_stat\n  owner: iuc\n  revisions: 723a93febe89\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_tab\n  owner: iuc\n  revisions: 5f7003111e32\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_uniq\n  owner: iuc\n  revisions: ec215ed98831\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seq_filter_by_id\n  owner: peterjc\n  revisions: 141612f8c3e3\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Sentinel 2 biodiversity",
-      "zenodo_link": "",
-      "questions": [
-        "How to get spectral and biodiversity indicators from remote sensing data ?",
-        "Which kind of ecosystem are you studying ? global or canopy data ?"
-      ],
-      "objectives": [
-        "Getting Sentinel 2 data and reformatting them in a generalized way",
-        "Computing spectral indices such as the NDVI",
-        "Calculating and visualizing biodiversity indicators",
-        "Comparing with in-situ data"
-      ],
-      "time_estimation": "48H",
-      "key_points": [
-        "Remote sensing data can be useful to find hotspots of biodiversity.",
-        "Spectral indices are of key importance to asset vegetation well-being.",
-        "Always keep in mind that remote sensing and in-situ data are complementary."
-      ],
-      "tags": [
-        "Ecology",
-        "Remote sensing"
-      ],
-      "contributions": {
-        "authorship": [
-          "Marie59",
-          "yvanlebras"
-        ]
-      },
-      "short_id": "T00333",
-      "url": "/topics/ecology/tutorials/remote-sensing/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "remote-sensing",
-      "dir": "topics/ecology/tutorials/remote-sensing",
-      "id": "ecology/remote-sensing",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Sentinel-2-example.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/workflows/Sentinel-2-example.ga",
-          "path": "topics/ecology/tutorials/remote-sensing/workflows/Sentinel-2-example.ga",
-          "wfid": "ecology-remote-sensing",
-          "wfname": "sentinel-2-example",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-remote-sensing/versions/sentinel-2-example",
-          "license": "CC-BY-4.0",
-          "creators": [
-            {
-              "class": "Person",
-              "email": "mailto:marie14.josse@gmail.com",
-              "identifier": "Marie59",
-              "name": "Marie Josse"
-            }
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "srs_diversity_maps",
-            "owner": "ecology",
-            "revisions": "9adccd3da70c",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "srs_global_indices",
-            "owner": "ecology",
-            "revisions": "5cae678042ec",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "srs_pca",
-            "owner": "ecology",
-            "revisions": "21e21363a8b4",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "srs_preprocess_s2",
-            "owner": "ecology",
-            "revisions": "33a1e15f7252",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "srs_process_data",
-            "owner": "ecology",
-            "revisions": "cf69ad260611",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "srs_spectral_indices",
-            "owner": "ecology",
-            "revisions": "b40aba3d9e5c",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: srs_diversity_maps\n  owner: ecology\n  revisions: 9adccd3da70c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_global_indices\n  owner: ecology\n  revisions: 5cae678042ec\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_pca\n  owner: ecology\n  revisions: 21e21363a8b4\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_preprocess_s2\n  owner: ecology\n  revisions: 33a1e15f7252\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_process_data\n  owner: ecology\n  revisions: cf69ad260611\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_spectral_indices\n  owner: ecology\n  revisions: b40aba3d9e5c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Marie Josse",
-          "joined": "2022-03",
-          "id": "Marie59",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Species distribution modeling",
-      "questions": [
-        "How to build & evaluate a niche model, visualize and project it ?"
-      ],
-      "objectives": [
-        "Find and download occurrences data from GBIF",
-        "Find and download environmental data",
-        "Process both occurrences and environmental",
-        "Partition occurrence data",
-        "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
-      ],
-      "requirements": null,
-      "time_estimation": "1h",
-      "tags": [
-        "interactive-tools",
-        "modeling",
-        "gbif",
-        "species populations EBV class"
-      ],
-      "key_points": [
-        "Use 'classical' Galaxy tools in combination with Interactive tools",
-        "Identify general steps of a species distribution modeling aproach"
-      ],
-      "contributors": [
-        {
-          "name": "Elisa Michon",
-          "joined": "2019-03",
-          "id": "emichn",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/emichn.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        }
-      ],
-      "short_id": "T00135",
-      "url": "/topics/ecology/tutorials/species-distribution-modeling/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "species-distribution-modeling",
-      "dir": "topics/ecology/tutorials/species-distribution-modeling",
-      "id": "ecology/species-distribution-modeling",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/species-distribution-modeling/workflows/Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
-          "path": "topics/ecology/tutorials/species-distribution-modeling/workflows/Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
-          "wfid": "ecology-species-distribution-modeling",
-          "wfname": "galaxy-workflow-species_distribution_modeling_with_wallace_from_gbif_-_training_material",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-species-distribution-modeling/versions/galaxy-workflow-species_distribution_modeling_with_wallace_from_gbif_-_training_material",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json",
-      "tools": [
-        "Filter1",
-        "interactive_tool_wallace",
-        "tabular_to_csv",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
           {
             "name": "text_processing",
             "owner": "bgruening",
@@ -1629,168 +235,10 @@
           {
             "name": "text_processing",
             "owner": "bgruening",
-            "revisions": "0a8c6b61f0f4",
+            "revisions": "d698c222f354",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
-          {
-            "name": "spocc_occ",
-            "owner": "ecology",
-            "revisions": "f9d76a46799a",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: 0a8c6b61f0f4\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: spocc_occ\n  owner: ecology\n  revisions: f9d76a46799a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Biodiversity data exploration",
-      "zenodo_link": "https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1",
-      "questions": [
-        "How to explore biodiversity data?",
-        "How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?",
-        "How to compare beta diversity taking into account space, time and species components?"
-      ],
-      "objectives": [
-        "Explore Biodiversity data with taxonomic, temporal and geographical informations",
-        "Have an idea about quality content of the data regarding statistical tests like normality or homoscedasticity and coverage like temporal or geographical coverage"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Explore your data before diving into deep analysis"
-      ],
-      "tags": [
-        "taxonomic data",
-        "data quality"
-      ],
-      "contributions": {
-        "authorship": [
-          "onorvez",
-          "Marie59",
-          "colineroyaux",
-          "yvanlebras"
-        ],
-        "funding": [
-          "erasmusplus"
-        ]
-      },
-      "short_id": "T00126",
-      "url": "/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html",
-      "topic_name": "ecology",
-      "tutorial_name": "biodiversity-data-exploration",
-      "dir": "topics/ecology/tutorials/biodiversity-data-exploration",
-      "id": "ecology/biodiversity-data-exploration",
-      "video_library": {
-        "tutorial": {
-          "description": "",
-          "materials": [
-            {
-              "link": "topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "ecology"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "onorvez"
-              ],
-              "date": "2022-03-03",
-              "galaxy_version": "21.09",
-              "length": "1H",
-              "link": "rWfPr-5F3GQ",
-              "speakers": [
-                "onorvez"
-              ]
-            }
-          ],
-          "gtn_id": "ecology/biodiversity-data-exploration",
-          "title": "Biodiversity data exploration",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/biodiversity-data-exploration/workflows/main_workflow.ga",
-          "path": "topics/ecology/tutorials/biodiversity-data-exploration/workflows/main_workflow.ga",
-          "wfid": "ecology-biodiversity-data-exploration",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-biodiversity-data-exploration/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json",
-      "tools": [
-        "Remove beginning1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Ecology",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
           {
             "name": "text_processing",
             "owner": "bgruening",
@@ -1799,44 +247,44 @@
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ecology_beta_diversity",
-            "owner": "ecology",
-            "revisions": "fb7b2cbd80bb",
+            "name": "merge_cols",
+            "owner": "devteam",
+            "revisions": "dd40b1e9eebe",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ecology_homogeneity_normality",
+            "name": "pampa_communitymetrics",
             "owner": "ecology",
-            "revisions": "3df8937fd6fd",
+            "revisions": "c67ece97d4b1",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ecology_link_between_var",
+            "name": "pampa_glmcomm",
             "owner": "ecology",
-            "revisions": "8e8867bf491a",
+            "revisions": "b40fecef616b",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ecology_presence_abs_abund",
+            "name": "pampa_glmsp",
             "owner": "ecology",
-            "revisions": "4ed07d2d442b",
+            "revisions": "7a69e1c8ba46",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ecology_stat_presence_abs",
+            "name": "pampa_plotglm",
             "owner": "ecology",
-            "revisions": "9a2e0195bb43",
+            "revisions": "c448e026f122",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "tool_anonymization",
+            "name": "pampa_presabs",
             "owner": "ecology",
-            "revisions": "726a387cfdc2",
+            "revisions": "1ebb70b59037",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
@@ -1846,10 +294,31 @@
             "revisions": "209b7c5ee9d7",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_find_replace",
+            "owner": "galaxyp",
+            "revisions": "209b7c5ee9d7",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_find_replace",
+            "owner": "galaxyp",
+            "revisions": "ae8c4b2488e7",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "datamash_transpose",
+            "owner": "iuc",
+            "revisions": "22c2a1ac7ae3",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_beta_diversity\n  owner: ecology\n  revisions: fb7b2cbd80bb\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_homogeneity_normality\n  owner: ecology\n  revisions: 3df8937fd6fd\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_link_between_var\n  owner: ecology\n  revisions: 8e8867bf491a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_presence_abs_abund\n  owner: ecology\n  revisions: 4ed07d2d442b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_stat_presence_abs\n  owner: ecology\n  revisions: 9a2e0195bb43\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tool_anonymization\n  owner: ecology\n  revisions: 726a387cfdc2\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: ddf54b12c295\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: merge_cols\n  owner: devteam\n  revisions: dd40b1e9eebe\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_communitymetrics\n  owner: ecology\n  revisions: c67ece97d4b1\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_glmcomm\n  owner: ecology\n  revisions: b40fecef616b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_glmsp\n  owner: ecology\n  revisions: 7a69e1c8ba46\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_plotglm\n  owner: ecology\n  revisions: c448e026f122\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_presabs\n  owner: ecology\n  revisions: 1ebb70b59037\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_transpose\n  owner: iuc\n  revisions: 22c2a1ac7ae3\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -1862,63 +331,9 @@
         "video": false
       },
       "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Olivier Norvez",
-          "email": "olivier.norvez@mnhn.fr",
-          "joined": "2022-02",
-          "elixir_node": "fr",
-          "id": "onorvez",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
-        },
-        {
-          "name": "Marie Josse",
-          "joined": "2022-03",
-          "id": "Marie59",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
-        },
-        {
-          "name": "Coline Royaux",
-          "email": "coline.royaux@mnhn.fr",
-          "twitter": "ColineRoyaux",
-          "orcid": "0000-0003-4308-5617",
-          "joined": "2020-11",
-          "elixir_node": "fr",
-          "id": "colineroyaux",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        },
-        {
-          "name": "Erasmus+ Programme",
-          "joined": "2020-09",
-          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
-          "github": false,
-          "funder": true,
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_system": "erasmusplus",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
-          "id": "erasmusplus",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
-        }
-      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json"
       }
     },
     {
@@ -2224,106 +639,42 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4264936",
+      "title": "Sentinel 2 biodiversity",
+      "zenodo_link": "",
       "questions": [
-        "How to evaluate properly populations and communities biological state with abundance data?",
-        "How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are doing over time?",
-        "How to compute and analyze biodiversity metrics from abundance data?"
+        "How to get spectral and biodiversity indicators from remote sensing data ?",
+        "Which kind of ecosystem are you studying ? global or canopy data ?"
       ],
       "objectives": [
-        "Upload data from DATRAS portal of ICES",
-        "Pre-process population data with Galaxy",
-        "Learning how to use an ecological analysis workflow from raw data to graphical representations",
-        "Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question",
-        "Learning how to interpret a Generalized Linear (Mixed) Model"
+        "Getting Sentinel 2 data and reformatting them in a generalized way",
+        "Computing spectral indices such as the NDVI",
+        "Calculating and visualizing biodiversity indicators",
+        "Comparing with in-situ data"
       ],
-      "time_estimation": "2H",
+      "time_estimation": "48H",
       "key_points": [
-        "Pre-process abundance data",
-        "Compute Community and Population metrics",
-        "Construct a GL(M)M with common biodiversity metrics",
-        "Interpret (and correct if needed) GL(M)M results",
-        "Learn about and interpret common tests to evaluate the quality of your GL(M)M",
-        "Use an Essential Biodiversity Variables workflow"
+        "Remote sensing data can be useful to find hotspots of biodiversity.",
+        "Spectral indices are of key importance to asset vegetation well-being.",
+        "Always keep in mind that remote sensing and in-situ data are complementary."
       ],
       "tags": [
-        "Species population EBV class",
-        "Community composition EBV class",
-        "EBV dataset",
-        "EBV workflow",
-        "modeling"
+        "Ecology",
+        "Remote sensing"
       ],
-      "contributors": [
-        {
-          "name": "Coline Royaux",
-          "email": "coline.royaux@mnhn.fr",
-          "twitter": "ColineRoyaux",
-          "orcid": "0000-0003-4308-5617",
-          "joined": "2020-11",
-          "elixir_node": "fr",
-          "id": "colineroyaux",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
-        },
-        {
-          "name": "Yvan Le Bras",
-          "email": "yvan.le-bras@mnhn.fr",
-          "twitter": "Yvan2935",
-          "matrix": "yvanlebras:matrix.org",
-          "orcid": "0000-0002-8504-068X",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "yvanlebras",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
-        },
-        {
-          "name": "Jean-Baptiste Mihoub",
-          "email": "jean-baptiste.mihoub@mnhn.fr",
-          "joined": "2022-03",
-          "id": "jbmihoub",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jbmihoub.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jbmihoub/"
-        }
-      ],
-      "short_id": "T00125",
-      "url": "/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html",
+      "contributions": {
+        "authorship": [
+          "Marie59",
+          "yvanlebras"
+        ]
+      },
+      "short_id": "T00333",
+      "url": "/topics/ecology/tutorials/remote-sensing/tutorial.html",
       "topic_name": "ecology",
-      "tutorial_name": "PAMPA-toolsuite-tutorial",
-      "dir": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial",
-      "id": "ecology/PAMPA-toolsuite-tutorial",
+      "tutorial_name": "remote-sensing",
+      "dir": "topics/ecology/tutorials/remote-sensing",
+      "id": "ecology/remote-sensing",
       "video_library": {
-        "tutorial": {
-          "description": "This tutorial aims to present the PAMPA Galaxy workflow, how to use it to\ncompute common biodiversity metrics from species abundance data and\nanalyse it through generalized linear (mixed) models (GLM and GLMM). This\nworkflow made up of 5 tools will allow you to process temporal series\ndata that include at least year, location and species sampled along with\nabundance value and, finally, generate article-ready data products.\n",
-          "materials": [
-            {
-              "link": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "ecology"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "colineroyaux"
-              ],
-              "date": "2022-03-03",
-              "galaxy_version": "21.09",
-              "length": "2H",
-              "link": "leMPC2Ckehc",
-              "speakers": [
-                "colineroyaux"
-              ]
-            }
-          ],
-          "gtn_id": "ecology/PAMPA-toolsuite-tutorial",
-          "title": "Compute and analyze biodiversity metrics with PAMPA toolsuite",
-          "captioned": true
-        },
+        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
@@ -2333,63 +684,49 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/workflows/Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
-          "path": "topics/ecology/tutorials/PAMPA-toolsuite-tutorial/workflows/Galaxy-Workflow-Compute_and_analyze_biodiversity_metrics_with_PAMPA_toolsuite.ga",
-          "wfid": "ecology-PAMPA-toolsuite-tutorial",
-          "wfname": "galaxy-workflow-compute_and_analyze_biodiversity_metrics_with_pampa_toolsuite",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-PAMPA-toolsuite-tutorial/versions/galaxy-workflow-compute_and_analyze_biodiversity_metrics_with_pampa_toolsuite",
-          "license": null,
+          "workflow": "Sentinel-2-example.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/remote-sensing/workflows/Sentinel-2-example.ga",
+          "path": "topics/ecology/tutorials/remote-sensing/workflows/Sentinel-2-example.ga",
+          "wfid": "ecology-remote-sensing",
+          "wfname": "sentinel-2-example",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-remote-sensing/versions/sentinel-2-example",
+          "license": "CC-BY-4.0",
           "creators": [
-
+            {
+              "class": "Person",
+              "email": "mailto:marie14.josse@gmail.com",
+              "identifier": "Marie59",
+              "name": "Marie Josse"
+            }
           ],
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json",
       "tools": [
-        "Count1",
-        "Filter1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1"
       ],
       "supported_servers": {
         "exact": [
           {
-            "url": "https://galaxy.genouest.org",
-            "name": "Galaxy@GenOuest",
-            "usegalaxy": "false"
-          },
-          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
+          },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
             "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
           }
+        ],
+        "inexact": [
+
         ]
       },
       "topic_name_human": "Ecology",
@@ -2399,106 +736,50 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "ddf54b12c295",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "merge_cols",
-            "owner": "devteam",
-            "revisions": "dd40b1e9eebe",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pampa_communitymetrics",
+            "name": "srs_diversity_maps",
             "owner": "ecology",
-            "revisions": "c67ece97d4b1",
+            "revisions": "9adccd3da70c",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "pampa_glmcomm",
+            "name": "srs_global_indices",
             "owner": "ecology",
-            "revisions": "b40fecef616b",
+            "revisions": "5cae678042ec",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "pampa_glmsp",
+            "name": "srs_pca",
             "owner": "ecology",
-            "revisions": "7a69e1c8ba46",
+            "revisions": "21e21363a8b4",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "pampa_plotglm",
+            "name": "srs_preprocess_s2",
             "owner": "ecology",
-            "revisions": "c448e026f122",
+            "revisions": "33a1e15f7252",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "pampa_presabs",
+            "name": "srs_process_data",
             "owner": "ecology",
-            "revisions": "1ebb70b59037",
+            "revisions": "cf69ad260611",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "regex_find_replace",
-            "owner": "galaxyp",
-            "revisions": "209b7c5ee9d7",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "regex_find_replace",
-            "owner": "galaxyp",
-            "revisions": "209b7c5ee9d7",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "regex_find_replace",
-            "owner": "galaxyp",
-            "revisions": "ae8c4b2488e7",
-            "tool_panel_section_label": "Ecology",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "datamash_transpose",
-            "owner": "iuc",
-            "revisions": "22c2a1ac7ae3",
+            "name": "srs_spectral_indices",
+            "owner": "ecology",
+            "revisions": "b40aba3d9e5c",
             "tool_panel_section_label": "Ecology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: ddf54b12c295\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: merge_cols\n  owner: devteam\n  revisions: dd40b1e9eebe\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_communitymetrics\n  owner: ecology\n  revisions: c67ece97d4b1\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_glmcomm\n  owner: ecology\n  revisions: b40fecef616b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_glmsp\n  owner: ecology\n  revisions: 7a69e1c8ba46\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_plotglm\n  owner: ecology\n  revisions: c448e026f122\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pampa_presabs\n  owner: ecology\n  revisions: 1ebb70b59037\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_transpose\n  owner: iuc\n  revisions: 22c2a1ac7ae3\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: srs_diversity_maps\n  owner: ecology\n  revisions: 9adccd3da70c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_global_indices\n  owner: ecology\n  revisions: 5cae678042ec\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_pca\n  owner: ecology\n  revisions: 21e21363a8b4\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_preprocess_s2\n  owner: ecology\n  revisions: 33a1e15f7252\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_process_data\n  owner: ecology\n  revisions: cf69ad260611\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: srs_spectral_indices\n  owner: ecology\n  revisions: b40aba3d9e5c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -2511,9 +792,30 @@
         "video": false
       },
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/remote-sensing/tutorial.json"
       }
     },
     {
@@ -3366,6 +1668,840 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Metabarcoding/eDNA through Obitools",
+      "zenodo_link": "https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1",
+      "questions": [
+        "how to analyze DNA metabarcoding / eDNA data produced on Illumina sequencers using the OBITools?"
+      ],
+      "objectives": [
+        "Deal with paired-end data to create consensus sequences",
+        "Clean, filter and anlayse data to obtain strong results"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "From raw reads you can process, clean and filter data to obtain a list of species from environmental DNA (eDNA) samples."
+      ],
+      "tags": [
+        "Genetic composition EBV class",
+        "Community composition EBV class",
+        "EBV dataset",
+        "EBV workflow",
+        "eDNA",
+        "Metabarcoding"
+      ],
+      "contributors": [
+        {
+          "name": "Coline Royaux",
+          "email": "coline.royaux@mnhn.fr",
+          "twitter": "ColineRoyaux",
+          "orcid": "0000-0003-4308-5617",
+          "joined": "2020-11",
+          "elixir_node": "fr",
+          "id": "colineroyaux",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
+        },
+        {
+          "name": "Olivier Norvez",
+          "email": "olivier.norvez@mnhn.fr",
+          "joined": "2022-02",
+          "elixir_node": "fr",
+          "id": "onorvez",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
+        },
+        {
+          "github": false,
+          "name": "Eric Coissac",
+          "joined": "2022-02",
+          "id": "ecoissac",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/ecoissac.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ecoissac/"
+        },
+        {
+          "github": false,
+          "name": "Frédéric Boyer",
+          "joined": "2022-02",
+          "id": "fboyer",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/fboyer.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fboyer/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "short_id": "T00124",
+      "url": "/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "Obitools-metabarcoding",
+      "dir": "topics/ecology/tutorials/Obitools-metabarcoding",
+      "id": "ecology/Obitools-metabarcoding",
+      "video_library": {
+        "tutorial": {
+          "description": "Based on this OBITools official tutorial, you will learn here how to\nanalyze DNA metabarcoding data produced on Illumina sequencers\n",
+          "materials": [
+            {
+              "link": "topics/ecology/tutorials/Obitools-metabarcoding/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "ecology"
+          ],
+          "type": "Lecture",
+          "versions": [
+            {
+              "captions": [
+                "yvanlebras"
+              ],
+              "date": "2022-03-03",
+              "galaxy_version": "21.09",
+              "length": "1H15M",
+              "link": "o2cUvb_lmLs",
+              "speakers": [
+                "yvanlebras"
+              ]
+            }
+          ],
+          "gtn_id": "ecology/Obitools-metabarcoding",
+          "title": "Metabarcoding/eDNA through Obitools",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Obitools-metabarcoding/workflows/main_workflow.ga",
+          "path": "topics/ecology/tutorials/Obitools-metabarcoding/workflows/main_workflow.ga",
+          "wfid": "ecology-Obitools-metabarcoding",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-Obitools-metabarcoding/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json",
+      "tools": [
+        "Cut1",
+        "Filter1",
+        "join1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastq_groomer/fastq_groomer/1.1.5",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastn_wrapper/2.10.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_annotate/obi_annotate/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_clean/obi_clean/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_grep/obi_grep/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_illumina_pairend/obi_illumina_pairend/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_ngsfilter/obi_ngsfilter/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_stat/obi_stat/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_tab/obi_tab/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/iuc/obi_uniq/obi_uniq/1.2.13",
+        "toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7",
+        "wc_gnu"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "fastq_groomer",
+            "owner": "devteam",
+            "revisions": "47e5dbc3e790",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "3d0c7bdf12f5",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ncbi_blast_plus",
+            "owner": "devteam",
+            "revisions": "5edc472ec434",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "38eec75fbe9b",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_annotate",
+            "owner": "iuc",
+            "revisions": "f82cefbbcea5",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_clean",
+            "owner": "iuc",
+            "revisions": "12baadec7809",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_grep",
+            "owner": "iuc",
+            "revisions": "fe7ec8a3d35e",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_illumina_pairend",
+            "owner": "iuc",
+            "revisions": "83fbdf93d51e",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_ngsfilter",
+            "owner": "iuc",
+            "revisions": "3bf57dadf7cd",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_stat",
+            "owner": "iuc",
+            "revisions": "723a93febe89",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_tab",
+            "owner": "iuc",
+            "revisions": "5f7003111e32",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "obi_uniq",
+            "owner": "iuc",
+            "revisions": "ec215ed98831",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seq_filter_by_id",
+            "owner": "peterjc",
+            "revisions": "141612f8c3e3",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastq_groomer\n  owner: devteam\n  revisions: 47e5dbc3e790\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 5edc472ec434\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_annotate\n  owner: iuc\n  revisions: f82cefbbcea5\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_clean\n  owner: iuc\n  revisions: 12baadec7809\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_grep\n  owner: iuc\n  revisions: fe7ec8a3d35e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_illumina_pairend\n  owner: iuc\n  revisions: 83fbdf93d51e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_ngsfilter\n  owner: iuc\n  revisions: 3bf57dadf7cd\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_stat\n  owner: iuc\n  revisions: 723a93febe89\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_tab\n  owner: iuc\n  revisions: 5f7003111e32\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: obi_uniq\n  owner: iuc\n  revisions: ec215ed98831\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seq_filter_by_id\n  owner: peterjc\n  revisions: 141612f8c3e3\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Obitools-metabarcoding/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Champs blocs indicators",
+      "questions": [
+        "Which biological questions are addressed by the tutorial?",
+        "Which bioinformatics techniques are important to know for this type of data?"
+      ],
+      "objectives": [
+        "Calculate IVR (Visual Rollover Indicator)",
+        "Compute dissimilarity indice",
+        "Vizualize some diversity indices"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Diversity indicators",
+        "Champs Blocs",
+        "Boulder Fields"
+      ],
+      "contributors": [
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "translations": {
+        "tutorial": [
+          "fr"
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "short_id": "T00127",
+      "url": "/topics/ecology/tutorials/champs-blocs/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "champs-blocs",
+      "dir": "topics/ecology/tutorials/champs-blocs",
+      "id": "ecology/champs-blocs",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/workflows/main_workflow.ga",
+          "path": "topics/ecology/tutorials/champs-blocs/workflows/main_workflow.ga",
+          "wfid": "ecology-champs-blocs",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-champs-blocs/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json",
+      "tools": [
+        "cb_eco",
+        "cb_ivr",
+        "cb_qecb",
+        "toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "cb_dissim",
+            "owner": "ecology",
+            "revisions": "8dc082da41c1",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cb_div",
+            "owner": "ecology",
+            "revisions": "5b31641e6d30",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cb_ivr",
+            "owner": "ecology",
+            "revisions": "bcbad4f83dec",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cb_dissim\n  owner: ecology\n  revisions: 8dc082da41c1\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cb_div\n  owner: ecology\n  revisions: 5b31641e6d30\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cb_ivr\n  owner: ecology\n  revisions: bcbad4f83dec\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/champs-blocs/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/sequence-analysis/tutorials/genetic-map-rad-seq/tutorial",
+        "/short/ecology/genetic-map-rad-seq",
+        "/short/T00130"
+      ],
+      "title": "RAD-Seq to construct genetic maps",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1219888",
+      "tags": [
+        "RAD-seq",
+        "Genetic composition EBV class",
+        "EBV dataset",
+        "EBV workflow"
+      ],
+      "questions": [
+        "How to analyze RAD sequencing data for a genetic map study?"
+      ],
+      "objectives": [
+        "SNP calling from RAD sequencing data",
+        "Find and correct haplotypes",
+        "Create input files for genetic map building software"
+      ],
+      "time_estimation": "8h",
+      "key_points": null,
+      "contributors": [
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "short_id": "T00130",
+      "url": "/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "genetic-map-rad-seq",
+      "dir": "topics/ecology/tutorials/genetic-map-rad-seq",
+      "id": "ecology/genetic-map-rad-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "genetic-map-rad-seq.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/genetic-map-rad-seq/workflows/genetic-map-rad-seq.ga",
+          "path": "topics/ecology/tutorials/genetic-map-rad-seq/workflows/genetic-map-rad-seq.ga",
+          "wfid": "ecology-genetic-map-rad-seq",
+          "wfname": "genetic-map-rad-seq",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-genetic-map-rad-seq/versions/genetic-map-rad-seq",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_denovomap/stacks_denovomap/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_genotypes/stacks_genotypes/1.46.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "stacks_denovomap",
+            "owner": "iuc",
+            "revisions": "fdbcc560c691",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_genotypes",
+            "owner": "iuc",
+            "revisions": "62a4b8e5e139",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: stacks_denovomap\n  owner: iuc\n  revisions: fdbcc560c691\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_genotypes\n  owner: iuc\n  revisions: 62a4b8e5e139\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/genetic-map-rad-seq/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Biodiversity data exploration",
+      "zenodo_link": "https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1",
+      "questions": [
+        "How to explore biodiversity data?",
+        "How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?",
+        "How to compare beta diversity taking into account space, time and species components?"
+      ],
+      "objectives": [
+        "Explore Biodiversity data with taxonomic, temporal and geographical informations",
+        "Have an idea about quality content of the data regarding statistical tests like normality or homoscedasticity and coverage like temporal or geographical coverage"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Explore your data before diving into deep analysis"
+      ],
+      "tags": [
+        "taxonomic data",
+        "data quality"
+      ],
+      "contributions": {
+        "authorship": [
+          "onorvez",
+          "Marie59",
+          "colineroyaux",
+          "yvanlebras"
+        ],
+        "funding": [
+          "erasmusplus"
+        ]
+      },
+      "short_id": "T00126",
+      "url": "/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "biodiversity-data-exploration",
+      "dir": "topics/ecology/tutorials/biodiversity-data-exploration",
+      "id": "ecology/biodiversity-data-exploration",
+      "video_library": {
+        "tutorial": {
+          "description": "",
+          "materials": [
+            {
+              "link": "topics/ecology/tutorials/biodiversity-data-exploration/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "ecology"
+          ],
+          "type": "Lecture",
+          "versions": [
+            {
+              "captions": [
+                "onorvez"
+              ],
+              "date": "2022-03-03",
+              "galaxy_version": "21.09",
+              "length": "1H",
+              "link": "rWfPr-5F3GQ",
+              "speakers": [
+                "onorvez"
+              ]
+            }
+          ],
+          "gtn_id": "ecology/biodiversity-data-exploration",
+          "title": "Biodiversity data exploration",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/biodiversity-data-exploration/workflows/main_workflow.ga",
+          "path": "topics/ecology/tutorials/biodiversity-data-exploration/workflows/main_workflow.ga",
+          "wfid": "ecology-biodiversity-data-exploration",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-biodiversity-data-exploration/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json",
+      "tools": [
+        "Remove beginning1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ecology_beta_diversity",
+            "owner": "ecology",
+            "revisions": "fb7b2cbd80bb",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ecology_homogeneity_normality",
+            "owner": "ecology",
+            "revisions": "3df8937fd6fd",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ecology_link_between_var",
+            "owner": "ecology",
+            "revisions": "8e8867bf491a",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ecology_presence_abs_abund",
+            "owner": "ecology",
+            "revisions": "4ed07d2d442b",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ecology_stat_presence_abs",
+            "owner": "ecology",
+            "revisions": "9a2e0195bb43",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "tool_anonymization",
+            "owner": "ecology",
+            "revisions": "726a387cfdc2",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_find_replace",
+            "owner": "galaxyp",
+            "revisions": "209b7c5ee9d7",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_beta_diversity\n  owner: ecology\n  revisions: fb7b2cbd80bb\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_homogeneity_normality\n  owner: ecology\n  revisions: 3df8937fd6fd\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_link_between_var\n  owner: ecology\n  revisions: 8e8867bf491a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_presence_abs_abund\n  owner: ecology\n  revisions: 4ed07d2d442b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ecology_stat_presence_abs\n  owner: ecology\n  revisions: 9a2e0195bb43\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: tool_anonymization\n  owner: ecology\n  revisions: 726a387cfdc2\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: 209b7c5ee9d7\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Olivier Norvez",
+          "email": "olivier.norvez@mnhn.fr",
+          "joined": "2022-02",
+          "elixir_node": "fr",
+          "id": "onorvez",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/onorvez.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/onorvez/"
+        },
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Coline Royaux",
+          "email": "coline.royaux@mnhn.fr",
+          "twitter": "ColineRoyaux",
+          "orcid": "0000-0003-4308-5617",
+          "joined": "2020-11",
+          "elixir_node": "fr",
+          "id": "colineroyaux",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/colineroyaux.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/colineroyaux/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Erasmus+ Programme",
+          "joined": "2020-09",
+          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
+          "github": false,
+          "funder": true,
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_system": "erasmusplus",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
+          "id": "erasmusplus",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/biodiversity-data-exploration/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Preparing genomic data for phylogeny reconstruction",
       "zenodo_link": "https://zenodo.org/record/6610704",
       "questions": [
@@ -3581,6 +2717,870 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/phylogeny-data-prep/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/phylogeny-data-prep/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial",
+        "/short/ecology/de-novo-rad-seq",
+        "/short/T00128"
+      ],
+      "title": "RAD-Seq de-novo data analysis",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1134547",
+      "questions": [
+        "How to analyze RAD sequencing data without a reference genome for a population genomics study?"
+      ],
+      "objectives": [
+        "Analysis of RAD sequencing data without a reference genome",
+        "SNP calling from RAD sequencing data",
+        "Calculate population genomics statistics from RAD sequencing data"
+      ],
+      "time_estimation": "8h",
+      "key_points": null,
+      "tags": [
+        "RAD-seq",
+        "Genetic composition EBV class",
+        "Species populations EBV class",
+        "EBV dataset",
+        "EBV workflow"
+      ],
+      "contributors": [
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "short_id": "T00128",
+      "url": "/topics/ecology/tutorials/de-novo-rad-seq/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "de-novo-rad-seq",
+      "dir": "topics/ecology/tutorials/de-novo-rad-seq",
+      "id": "ecology/de-novo-rad-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-de-novo-rad-seq.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/de-novo-rad-seq/workflows/Galaxy-Workflow-de-novo-rad-seq.ga",
+          "path": "topics/ecology/tutorials/de-novo-rad-seq/workflows/Galaxy-Workflow-de-novo-rad-seq.ga",
+          "wfid": "ecology-de-novo-rad-seq",
+          "wfname": "galaxy-workflow-de-novo-rad-seq",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-de-novo-rad-seq/versions/galaxy-workflow-de-novo-rad-seq",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_denovomap/stacks_denovomap/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "f2e8552cf1d0",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_denovomap",
+            "owner": "iuc",
+            "revisions": "fdbcc560c691",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_populations",
+            "owner": "iuc",
+            "revisions": "45db1ba16163",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_procrad",
+            "owner": "iuc",
+            "revisions": "eded025438db",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: f2e8552cf1d0\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_denovomap\n  owner: iuc\n  revisions: fdbcc560c691\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_populations\n  owner: iuc\n  revisions: 45db1ba16163\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_procrad\n  owner: iuc\n  revisions: eded025438db\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/de-novo-rad-seq/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Cleaning GBIF data for the use in Ecology",
+      "zenodo_link": "",
+      "questions": [
+        "How can I get ecological data from GBIF?",
+        "How do I check and clean the data from GBIF?",
+        "Which ecoinformatics techniques are important to know for this type of data?"
+      ],
+      "objectives": [
+        "Get occurrence data on a species",
+        "Visualize the data to understand them",
+        "Clean GBIF dataset for further analyses"
+      ],
+      "time_estimation": "0H30M",
+      "key_points": [
+        "Take the time to look at your data first, manipulate it before analyzing it"
+      ],
+      "tags": [
+        "gbif",
+        "data management",
+        "data cleaning"
+      ],
+      "contributors": [
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Simon Benateau",
+          "email": "simon.benateau@mnhn.fr",
+          "twitter": "sbenateau",
+          "joined": "2019-03",
+          "elixir_node": "fr",
+          "id": "sbenateau",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/sbenateau.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sbenateau/"
+        }
+      ],
+      "short_id": "T00129",
+      "url": "/topics/ecology/tutorials/gbif_cleaning/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "gbif_cleaning",
+      "dir": "topics/ecology/tutorials/gbif_cleaning",
+      "id": "ecology/gbif_cleaning",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/gbif_cleaning/workflows/Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
+          "path": "topics/ecology/tutorials/gbif_cleaning/workflows/Galaxy-Workflow-GBIF_data_Quality_check_and_filtering_workflow.ga",
+          "wfid": "ecology-gbif_cleaning",
+          "wfname": "galaxy-workflow-gbif_data_quality_check_and_filtering_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-gbif_cleaning/versions/galaxy-workflow-gbif_data_quality_check_and_filtering_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json",
+      "tools": [
+        "Count1",
+        "Filter1",
+        "Summary_Statistics1",
+        "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "gdal_ogr2ogr",
+            "owner": "ecology",
+            "revisions": "e12db3b4d3a6",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "spocc_occ",
+            "owner": "ecology",
+            "revisions": "f9d76a46799a",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: gdal_ogr2ogr\n  owner: ecology\n  revisions: e12db3b4d3a6\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: spocc_occ\n  owner: ecology\n  revisions: f9d76a46799a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/gbif_cleaning/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "redirect_from": [
+        "/topics/sequence-analysis/tutorials/ref-based-rad-seq/tutorial",
+        "/short/ecology/ref-based-rad-seq",
+        "/short/T00133"
+      ],
+      "title": "RAD-Seq Reference-based data analysis",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1134547",
+      "tags": [
+        "RAD-seq",
+        "Genetic composition EBV class",
+        "Species population EBV class",
+        "EBV dataset",
+        "EBV workflow"
+      ],
+      "questions": [
+        "How to analyze RAD sequencing data using a reference genome for a population genomics study?"
+      ],
+      "objectives": [
+        "Analysis of RAD sequencing data using a reference genome",
+        "SNP calling from RAD sequencing data",
+        "Calculate population genomics statistics from RAD sequencing data"
+      ],
+      "time_estimation": "8h",
+      "key_points": null,
+      "contributors": [
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        }
+      ],
+      "short_id": "T00133",
+      "url": "/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "ref-based-rad-seq",
+      "dir": "topics/ecology/tutorials/ref-based-rad-seq",
+      "id": "ecology/ref-based-rad-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/workflows/Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
+          "path": "topics/ecology/tutorials/ref-based-rad-seq/workflows/Galaxy-Workflow-Workflow_constructed_from_history__STACKS_RAD__population_genomics_with_reference_genome_.ga",
+          "wfid": "ecology-ref-based-rad-seq",
+          "wfname": "galaxy-workflow-workflow_constructed_from_history__stacks_rad__population_genomics_with_reference_genome_",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-ref-based-rad-seq/versions/galaxy-workflow-workflow_constructed_from_history__stacks_rad__population_genomics_with_reference_genome_",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/ref-based-rad-seq/workflows/workflow.ga",
+          "path": "topics/ecology/tutorials/ref-based-rad-seq/workflows/workflow.ga",
+          "wfid": "ecology-ref-based-rad-seq",
+          "wfname": "workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-ref-based-rad-seq/versions/workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json",
+      "tools": [
+        "Convert characters1",
+        "Count1",
+        "Cut1",
+        "Filter1",
+        "Grep1",
+        "Summary_Statistics1",
+        "addValue",
+        "cat1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa_wrappers/bwa_wrapper/1.2.3",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_populations/stacks_populations/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_procrad/stacks_procrad/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/stacks_refmap/stacks_refmap/1.46.0",
+        "toolshed.g2.bx.psu.edu/repos/kellrott/regex_replace/regex_replace/1.0.0"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "74a8bef53a00",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "64f11cf59c6e",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa_wrappers",
+            "owner": "devteam",
+            "revisions": "b4427dbb6ced",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "ff9530579d1f",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "multiqc",
+            "owner": "iuc",
+            "revisions": "1c2db0054039",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_populations",
+            "owner": "iuc",
+            "revisions": "45db1ba16163",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_procrad",
+            "owner": "iuc",
+            "revisions": "eded025438db",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "stacks_refmap",
+            "owner": "iuc",
+            "revisions": "d7a482f44e08",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_replace",
+            "owner": "kellrott",
+            "revisions": "9a77d5fca67c",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: 74a8bef53a00\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 64f11cf59c6e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa_wrappers\n  owner: devteam\n  revisions: b4427dbb6ced\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: ff9530579d1f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 1c2db0054039\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_populations\n  owner: iuc\n  revisions: 45db1ba16163\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_procrad\n  owner: iuc\n  revisions: eded025438db\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: stacks_refmap\n  owner: iuc\n  revisions: d7a482f44e08\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_replace\n  owner: kellrott\n  revisions: 9a77d5fca67c\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/ref-based-rad-seq/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Species distribution modeling",
+      "questions": [
+        "How to build & evaluate a niche model, visualize and project it ?"
+      ],
+      "objectives": [
+        "Find and download occurrences data from GBIF",
+        "Find and download environmental data",
+        "Process both occurrences and environmental",
+        "Partition occurrence data",
+        "Model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM"
+      ],
+      "requirements": null,
+      "time_estimation": "1h",
+      "tags": [
+        "interactive-tools",
+        "modeling",
+        "gbif",
+        "species populations EBV class"
+      ],
+      "key_points": [
+        "Use 'classical' Galaxy tools in combination with Interactive tools",
+        "Identify general steps of a species distribution modeling aproach"
+      ],
+      "contributors": [
+        {
+          "name": "Elisa Michon",
+          "joined": "2019-03",
+          "id": "emichn",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/emichn.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/emichn/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        }
+      ],
+      "short_id": "T00135",
+      "url": "/topics/ecology/tutorials/species-distribution-modeling/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "species-distribution-modeling",
+      "dir": "topics/ecology/tutorials/species-distribution-modeling",
+      "id": "ecology/species-distribution-modeling",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/species-distribution-modeling/workflows/Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
+          "path": "topics/ecology/tutorials/species-distribution-modeling/workflows/Galaxy-Workflow-Species_Distribution_Modeling_with_Wallace_from_GBIF_-_Training_material.ga",
+          "wfid": "ecology-species-distribution-modeling",
+          "wfname": "galaxy-workflow-species_distribution_modeling_with_wallace_from_gbif_-_training_material",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-species-distribution-modeling/versions/galaxy-workflow-species_distribution_modeling_with_wallace_from_gbif_-_training_material",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json",
+      "tools": [
+        "Filter1",
+        "interactive_tool_wallace",
+        "tabular_to_csv",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "0a8c6b61f0f4",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "spocc_occ",
+            "owner": "ecology",
+            "revisions": "f9d76a46799a",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: 0a8c6b61f0f4\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: spocc_occ\n  owner: ecology\n  revisions: f9d76a46799a\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/species-distribution-modeling/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of Climate Data using  NetCDF xarray Map Plotting",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.6621460",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "climate",
+          "tutorials": [
+            "climate-101"
+          ]
+        }
+      ],
+      "questions": [
+        "What is xarray map plotting?",
+        "How to plot NetCDF data using xarray map plotting tool?",
+        "What are the different types of projections and colormap options available in the tool?"
+      ],
+      "objectives": [
+        "Learn about plotting Climate Data",
+        "Learn about NetCDF xarray map plotting tool",
+        "Learn about visualizing the climate data using NetCDF xarray map plotting using the different kinds of projections and colormap options"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "NetCDF xarray climate data visualization",
+        "NetCDF xarray map plotting projections",
+        "NetCDF xarray map plotting colormaps"
+      ],
+      "tags": [
+        "pangeo"
+      ],
+      "contributors": [
+        {
+          "name": "Soumya Jha",
+          "joined": "2022-06",
+          "id": "Quickbeasts51429",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Quickbeasts51429.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Quickbeasts51429/"
+        }
+      ],
+      "short_id": "T00136",
+      "url": "/topics/ecology/tutorials/x-array-map-plot/tutorial.html",
+      "topic_name": "ecology",
+      "tutorial_name": "x-array-map-plot",
+      "dir": "topics/ecology/tutorials/x-array-map-plot",
+      "id": "ecology/x-array-map-plot",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main-workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/x-array-map-plot/workflows/main-workflow.ga",
+          "path": "topics/ecology/tutorials/x-array-map-plot/workflows/main-workflow.ga",
+          "wfid": "ecology-x-array-map-plot",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/ecology-x-array-map-plot/versions/main-workflow",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "Quickbeasts51429",
+              "name": "Soumya Jha"
+            }
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://galaxy.genouest.org",
+            "name": "Galaxy@GenOuest",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Ecology",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "graphicsmagick_image_montage",
+            "owner": "bgruening",
+            "revisions": "39881709807e",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cdo_operations",
+            "owner": "climate",
+            "revisions": "d5355f6fa02b",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "xarray_coords_info",
+            "owner": "ecology",
+            "revisions": "3e73f657a998",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "xarray_mapplot",
+            "owner": "ecology",
+            "revisions": "dc05bf0af58f",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "xarray_metadata_info",
+            "owner": "ecology",
+            "revisions": "e8650cdf092f",
+            "tool_panel_section_label": "Ecology",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: graphicsmagick_image_montage\n  owner: bgruening\n  revisions: 39881709807e\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cdo_operations\n  owner: climate\n  revisions: d5355f6fa02b\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_coords_info\n  owner: ecology\n  revisions: 3e73f657a998\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_mapplot\n  owner: ecology\n  revisions: dc05bf0af58f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_metadata_info\n  owner: ecology\n  revisions: e8650cdf092f\n  tool_panel_section_label: Ecology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/x-array-map-plot/tutorial.json"
       }
     },
     {
