@@ -163,6 +163,7 @@ And now time to plot it!
 > >
 > > 1. Well now this is exciting! Our DP-late is more clearly separating, and we might also suppose that DP-M1, DP-M2, and DP-M3 are actually earlier on in the differentiation towards mature T-cells. And we're only just getting started!
 > >
+> > ![Plot showing the T Mat and DP L clusters have separated from the rest of the cells](../../images/scrna-case_trajectories/TrajectoriesFDG1.png "FDG Plot of our T-cell dataset")
 > {: .solution}
 >
 {: .question}
@@ -227,6 +228,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 `sc.tl.louvain(adata, resolution=0.6)`
 However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 > >
+> > ![The T mature and DP L clusters have been stretched out](../../images/scrna-case_trajectories/TrajectoriesFDG2.png "FDG Plot after recalculating neighbours from the diffusion map")
 > {: .solution}
 >
 {: .question}
@@ -278,11 +280,14 @@ If you are working in a group, you can now divide up a decision here with one *c
 > <question-title></question-title>
 >
 > 1. How have the relationships between our cell clusters changed now?
+> 2. 
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The way the clusters are arranged has changed a bit now. The M4 cluster is right in the middle of the M1-3 clusters, rather than heading off on its own. The M1 cluster is looking like it is driving towards differentiation, which is not somthing we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.
+> > 2. The expression of both Cd4 and Cd8 appears higher than we might expect in the M4 cluster - perhaps this is a sign that it is closer to the mature T cells than it seems in this simple plot. 
 > >
+> > ![DN cluster is on one side of the plot, with the DP L and T mature clusters on the other side. The other clusters are close together in the centre of the plot. Coloured to show higher Cd4 and Cd8 expression in the M4, DP L and T mature clusters.](../../images/scrna-case_trajectories/TrajectoriesPAGA.png "PAGA plots coloured by cell type, Cd4 expression, and Cd8 expression")
 > {: .solution}
 >
 {: .question}
@@ -315,6 +320,7 @@ Force directed graphs can be initialised randomly, or we can prod it in the righ
 > >
 > > 1. The interesting change here is that our DP-M4 cells are now heading on a clear trajectory towards differentiation. It looks like we've got the correct ordering of cells from DN through the DP groups and on towards T-mature. We didn't see this in our previous plots. 
 > >
+> > ![The M4 cluster is now closer to the DP L cluster](../../images/scrna-case_trajectories/TrajectoriesFDG3.png "FDG plot initiated from the PAGA plot")
 > {: .solution}
 >
 {: .question}
@@ -342,6 +348,7 @@ The easiest way to do this is just to rerun the previous step, but changing the 
 > >
 > > 1. We’re seeing a clear trajectory issue whereby the knockout cells are not found along the trajectory into T-mature (which, well, we kind of already figured out with just the cluster analysis, but we can feel even more confident about our results!) 
 > >
+> > ![Most clusters are coloured as a mix of both genotypes but the DP L and T mature clusters are mainly coloured as wildtype cells](../../images/scrna-case_trajectories/TrajectoriesFDGGenotype.png "FDG plot coloured by genotype")
 > {: .solution}
 >
 {: .question}
@@ -373,6 +380,7 @@ We're also interested in the expression of the two genes that are known to be ma
 > >
 > > 1. It's clear that both Cd4 and Cd8 are being expressed mainly in the later stages of T-cell development, as they head towards the DP-L cluster - although Cd4 expression is a bit more widespread. This is what we would expect to see in genes that are associated with mature T-cells. You might also be able to spot some differences in the expression of the two genes in our mature T-cell group, but there doesn't seem to be a very clear division between the cells that express Cd4 and those that express Cd8. This is a bit disappointing, as we know that there are two types of mature T-cells, which each express a different gene. 
 > >
+> > ![Cells in the DP L cluster are coloured as having the highest expression levels of both Cd4 and Cd8 while most cells in the M4 cluster already show higher expression of Cd8](../../images/scrna-case_trajectories/TrajectoriesFDGExpression.png "FDG plot showing expression of Cd4 and Cd8")
 > {: .solution}
 >
 {: .question}
@@ -412,6 +420,7 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 > >
 > > 1. When we look at the cell type and DPT plots, we can see that there's a clear progresion from our root DN cells, through the various groups of DP cells, into DP-L and then T-mat. This matches with our expectations that the DP-L and DP-mat clusters represent later stages in T-cell development. The DPT plot also confirms that the DP-M4 cluster is heading towards differentiation, which makes sense given its position on our FDG plot. 
 > >
+> > ![Cells in DN cluster are coloured as earliest in pseudotime, which increases through clusters M1 to M4, into cluster DP L and is latest in T mature](../../images/scrna-case_trajectories/TrajectoriesFDGPseudotime.png "FDG plots showing cell types and pseudotime")
 > {: .solution}
 >
 {: .question}
