@@ -20,8 +20,6 @@ priority: 1
 contributions:
   authorship:
     - shenson
-    - kkamieniecka
-    
   editing:
     - 
 subtopic: fair-data
@@ -40,7 +38,9 @@ subtopic: fair-data
 
 Prior to publication many journals and funders require authors to submit their sequence data to one of the three INSDC member databases – ENA, NCBI or DDBJ – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
 
-In this tutorial you will learn to upload read data and accompanying metadata to the ENA test server.  
+The three databases have different methods for making submissions. This tutorial will cover how to upload read data and accompanying metadata to the ENA server using the ENA Webin portal. 
+
+If you would like to use Galaxy tools for submission to ENA you may find [this](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
 
 ## ENA Submission Routes
 
