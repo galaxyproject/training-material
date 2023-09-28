@@ -80,12 +80,14 @@ module Jekyll
           image = insert_image(url, alt, style, dimensions, actual_path)
 
           %(
+          <a href="#{url}" rel="noopener noreferrer">
             <figure id="figure-#{num_figure}" style="max-width: 90%; margin:auto;">
               #{image}
               <figcaption>
                 <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
               </figcaption>
             </figure>
+          </a>
           ).split("\n").map(&:strip).join
         end
       end
@@ -103,7 +105,9 @@ module Jekyll
         end
 
         %(
+        <a href="#{url}" rel="noopener noreferrer">
           <img src="#{url}"  alt="#{alt}" #{style} #{dimensions} loading="lazy">
+        </a>
         ).split("\n").map(&:strip).join
       end
     end
