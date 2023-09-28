@@ -397,7 +397,7 @@ If you want to link to other training material within your text, please use the 
 ```
 {%endraw%}
 
-(Note the `.md` extension, and not `.html`)
+(Note the `.md` extension, and not `.html`, always provide the file name here, it will automatically be converted to the correct link)
 
 If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{% link %}`{%endraw%} tag:
 
