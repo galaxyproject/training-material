@@ -151,6 +151,7 @@ And now time to plot it!
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
+>    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 {: .hands_on}
 
@@ -214,6 +215,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
+>    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}
@@ -238,7 +240,7 @@ If you are working in a group, you can now divide up a decision here with one *c
 - Control
    - Go straight to the PAGA section
 - Everyone else:
-   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps 0.6 or lower (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %} tutorial if you need help with this)
+   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %} tutorial if you need help with this)
         - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
    - you could undo the optional diffusion map step by recalculating the neighbours again using `X_pca` instead of `X_diffmap`
    - you could also try changing the number of neighbors used in that step 
@@ -280,12 +282,12 @@ If you are working in a group, you can now divide up a decision here with one *c
 > <question-title></question-title>
 >
 > 1. How have the relationships between our cell clusters changed now?
-> 2. 
+> 2. Which clusters are expressing our genes of interest, Cd4 and Cd8, at the highest levels?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The way the clusters are arranged has changed a bit now. The M4 cluster is right in the middle of the M1-3 clusters, rather than heading off on its own. The M1 cluster is looking like it is driving towards differentiation, which is not somthing we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.
-> > 2. The expression of both Cd4 and Cd8 appears higher than we might expect in the M4 cluster - perhaps this is a sign that it is closer to the mature T cells than it seems in this simple plot. 
+> > 2. Cd4 and Cd8 expression appears highest in the DP-L cluster. The expression of both Cd4 and Cd8 also appears higher than we might expect in the DP-M4 cluster - perhaps this is a sign that it is closer to the DP-L cluster than it seems in this simple plot. 
 > >
 > > ![DN cluster is on one side of the plot, with the DP L and T mature clusters on the other side. The other clusters are close together in the centre of the plot. Coloured to show higher Cd4 and Cd8 expression in the M4, DP L and T mature clusters.](../../images/scrna-case_trajectories/TrajectoriesPAGA.png "PAGA plots coloured by cell type, Cd4 expression, and Cd8 expression")
 > {: .solution}
@@ -308,6 +310,7 @@ Force directed graphs can be initialised randomly, or we can prod it in the righ
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
+>    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}
@@ -329,7 +332,7 @@ Force directed graphs can be initialised randomly, or we can prod it in the righ
 
 The experiment that produced this data used two different groups of mice - the control or wildtype group and the knockout mice that were missing a gene involved in the maturation of the thymus gland. Since we know the genotype of the mice from which each sample was collected, we can colour in our plots to see if there are any differences in the cells present in wildtype and knockout mice. 
 
-The easiest way to do this is just to rerun the previous step, but changing the attribute we want to use to colour the FDG plot. 
+The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previous step, but changing the attribute we want to use to colour the FDG plot. 
 
 > <hands-on-title> Plot by genotype </hands-on-title>
 >
@@ -337,6 +340,8 @@ The easiest way to do this is just to rerun the previous step, but changing the 
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `genotype`
+>    - *"Use raw attributes if present"*: `No`
+>    - *"Location of legend"*: `On data` 
 >
 {: .hands_on}
 
@@ -363,6 +368,7 @@ We're also interested in the expression of the two genes that are known to be ma
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `ENSMUSG00000023274,ENSMUSG00000053977`
+>    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 > >    > <comment-title> Gene Symbols </comment-title>
@@ -408,6 +414,7 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy DPT** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type,dpt_pseudotime`
+>    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}
@@ -425,15 +432,15 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 >
 {: .question}
 
-This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you're seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm (not all algorithms fit all data!) or the biology.
+This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you're seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the cause is the algorithm (not all algorithms fit all data!) or the biology.
 
-Where might we go from here? We might consider playing with our louvain resolutions, to get the two branches to be called as different clusters, and then comparing them to each other for gene differences or genotype differences. We might also use different objects (for instance, what if we regressed out cell cycle genes?) and see if that changes the results. Perhaps we would eliminate the DN double-branch input. Or perhaps that's real, and we should investigate that. What would you do?
+Where might we go from here? We might consider playing with our louvain resolutions, to see if we can get the two groups of Cd4+ and Cd8+ cells to be called as different clusters, and then comparing them to each other for gene differences or genotype differences. We might also use different objects (for instance, what if we regressed out cell cycle genes?) and see if that changes the results. What would you do?
 
 ## Working in a group? The finale!
-Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the 'Filter, Plot and Explore Single-cell RNA-seq Data', the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
+Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial, the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
 
 # Conclusion
 
-Congratulations! You've made it to the end! You might be interested in this [Example History](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/inferring-trajectories-using-scanpy---example-history) which shows the results you shold expect to see if you follow this tutorial. 
+Congratulations! You've made it to the end! You might be interested in the [workflow](https://humancellatlas.usegalaxy.eu/u/marisa_jl/w/workflow-constructed-from-history-inferring-trajectories-with-scanpy-tutorial-1) for this tutorial or this [Example History](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/inferring-trajectories-using-scanpy---example-history) which shows the results you should expect to see if you follow this tutorial. 
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
