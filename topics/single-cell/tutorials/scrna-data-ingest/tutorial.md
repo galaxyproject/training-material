@@ -38,7 +38,7 @@ tags:
 # Introduction 
 
 You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and... you hit the wall - the format of your files is not compatible with the one used in tutorial! Have you been there? 
-This tutorial was created to help you overcome that problem. Once you get your data into Galaxy in the right format, that's already 50% of success. Additionally, by using format conversion, you will be able to use different packages presented in tutorials that may require different datatypes. 
+This tutorial was created to help you overcome that problem and ensure data interoperability in single cell analysis. Once you get your data into Galaxy in the right format, that's already 50% of success. Additionally, by using format conversion, you will be able to use different packages presented in tutorials that may require different datatypes. 
 
 
 > <agenda-title></agenda-title>
@@ -58,7 +58,7 @@ To start with, here are the most common formats and datatypes that you might com
 - Loom - it is simply an HDF5 file that contains specific groups containing the main matrix as well as row and column attributes and can be read by any language supporting HDF5. [Loompy](https://linnarssonlab.org/loompy/) has been released as a Python API to interact with loom files, and [loomR](https://github.com/mojaveazure/loomR) is its implementation in R. 
 - Tabular - simply using TSV, CSV or TXT formats to store expression matrix as well as cells and genes metadata. 
 - MTX - it's just a sparse matrix format with genes on the rows and cells on the columns as output by Cell Ranger.
-- Seurat objects 
+- Seurat objects - a representation of single-cell expression data for R, in Galaxy you'll see them in **rdata** format.
 - Zarr
 - Single Cell Experiment
 - CDS 
