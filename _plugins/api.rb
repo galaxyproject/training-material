@@ -398,23 +398,41 @@ Jekyll::Hooks.register :site, :post_write do |site|
       crate = {
         '@context' => 'https://w3id.org/ro/crate/1.1/context',
         '@graph' => [
-          {
-            '@id': './',
-            '@type': 'Dataset',
-            datePublished: workflow['modified'],
-          },
+          # {
+          #   '@id': './',
+          #   '@type': 'Dataset',
+          #   datePublished: workflow['modified'],
+          # },
           {
             '@id': 'ro-crate-metadata.json',
             '@type': 'CreativeWork',
             about: {
               '@id': './'
             },
-            conformsTo: {
+            conformsTo: [
+              {
               '@id': 'https://w3id.org/ro/crate/1.1'
+            },
+            {
+              "@id": "https://about.workflowhub.eu/Workflow-RO-Crate/"
+            }
+            ]
+          },
+          {
+            '@id': './',
+            '@type': 'Dataset',
+            datePublished: workflow['modified'].strftime('%Y-%m-%dT%H:%M:%S.%L%:z'),
+            # hasPart: [
+            #   {
+            #     '@id': '#assembly-assembly-quality-control'
+            #   }
+            # ],
+            mainEntity: {
+              '@id': '#' + wfid
             }
           },
           {
-            '@id': '#assembly-assembly-quality-control',
+            '@id': '#' + wfid,
             '@type': %w[
               File
               SoftwareSourceCode
@@ -423,7 +441,22 @@ Jekyll::Hooks.register :site, :post_write do |site|
             author: author_uuids,
             license: workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0',
             name: workflow['name'],
-            version: Gtn::ModificationTimes.obtain_modification_count(workflow['path'])
+            version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
+            programmingLanguage: {
+                "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy"
+            }
+          },
+          {
+              "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy",
+              "@type": "ComputerLanguage",
+              "identifier": {
+                  "@id": "https://galaxyproject.org/"
+              },
+              "name": "Galaxy",
+              "url": {
+                  "@id": "https://galaxyproject.org/"
+              },
+              "version": "23.1"
           }
         ]
       }
