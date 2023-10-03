@@ -24,3 +24,6 @@ gem 'fastimage'
 
 # For our CLI tools
 gem 'commander'
+
+# RO-Crates
+gem 'rubyzip', '~> 2.3.0'

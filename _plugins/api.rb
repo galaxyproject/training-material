@@ -2,6 +2,8 @@
 
 require 'securerandom'
 require 'json'
+require 'zip'
+
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
@@ -372,11 +374,26 @@ Jekyll::Hooks.register :site, :post_write do |site|
     material['workflows'].each do |workflow|
       wfid = workflow['wfid']
       wfname = workflow['wfname']
+      # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
+      # "tests"=>false,
+      # "url"=>
+      # "http://0.0.0.0:4002/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+      # "path"=>
+      # "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+      # "wfid"=>"proteomics-proteogenomics-novel-peptide-analysis",
+      # "wfname"=>"galaxy-workflow-mouse_novel_peptide_analysis",
+      # "trs_endpoint"=>
+      # "http://0.0.0.0:4002/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse_novel_peptide_analysis",
+      # "license"=>nil,
+      # "creators"=>[],
+      # "name"=>"GTN Proteogemics3 Novel Peptide Analysis",
+      # "test_results"=>nil,
+      # "modified"=>2023-06-07 12:09:36.12 +0200}
+
 
       wfdir = File.join(dir, wfid, wfname)
       FileUtils.mkdir_p(wfdir)
       path = File.join(wfdir, 'ro-crate-metadata.json')
-
       Jekyll.logger.debug "[GTN/API/WFRun] Writing #{path}"
 
       uuids = workflow['creators'].map do |c|
@@ -394,6 +411,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
           'name' => c['name'],
         }
       end
+      license = workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0'
 
       crate = {
         '@context' => 'https://w3id.org/ro/crate/1.1/context',
@@ -428,23 +446,30 @@ Jekyll::Hooks.register :site, :post_write do |site|
             #   }
             # ],
             mainEntity: {
-              '@id': '#' + wfid
+              '@id': "#{wfname}.ga"
             }
           },
           {
-            '@id': '#' + wfid,
+            '@id': "#{wfname}.ga",
             '@type': %w[
               File
               SoftwareSourceCode
               ComputationalWorkflow
             ],
             author: author_uuids,
-            license: workflow['license'] ? "https://spdx.org/licenses/#{workflow['license']}" : 'https://spdx.org/licenses/CC-BY-4.0',
+            license: {
+              "@id": license,
+            },
             name: workflow['name'],
             version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
             programmingLanguage: {
                 "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy"
             }
+          },
+          {
+            '@id': license,
+            '@type': 'CreativeWork',
+            name: workflow['license'],
           },
           {
               "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy",
@@ -461,8 +486,15 @@ Jekyll::Hooks.register :site, :post_write do |site|
         ]
       }
       crate['@graph'] += author_linked
-
       File.write(path, JSON.pretty_generate(crate))
+
+      zip_path = File.join(wfdir, "rocrate.zip")
+      Zip::File.open(zip_path, create: true) do |zipfile|
+          # - The name of the file as it will appear in the archive
+          # - The original file, including the path to find it
+        zipfile.add('ro-crate-metadata.json', path)
+        zipfile.add("#{wfname}.ga", workflow['path'])
+      end
     end
   end
 end
