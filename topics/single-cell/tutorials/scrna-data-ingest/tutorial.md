@@ -58,14 +58,23 @@ To start with, here are the most common formats and datatypes that you might com
 - Loom - it is simply an HDF5 file that contains specific groups containing the main matrix as well as row and column attributes and can be read by any language supporting HDF5. [Loompy](https://linnarssonlab.org/loompy/) has been released as a Python API to interact with loom files, and [loomR](https://github.com/mojaveazure/loomR) is its implementation in R. 
 - Tabular - simply using TSV, CSV or TXT formats to store expression matrix as well as cells and genes metadata. 
 - MTX - it's just a sparse matrix format with genes on the rows and cells on the columns as output by Cell Ranger.
-- Seurat objects - a representation of single-cell expression data for R, in Galaxy you'll see them in **rdata** format.
-- Zarr
-- Single Cell Experiment
-- CDS 
+- Zarr - a Python package providing an implementation of compressed, chunked, N-dimensional arrays, designed for use in parallel computing. The Zarr file format offers powerful compression options, supports multiple data store backends, and can read/write your NumPy arrays.
+- Seurat objects - a representation of single-cell expression data for R, in Galaxy you might see them in **rdata** format.
+- Single Cell Experiment (SCE) object - defines a S4 class for storing data from single-cell experiments and provides a more formalized approach towards construction and accession of data. The S4 system is one of R's systems for object oriented programing. In Galaxy you might see SCE objects in **rdata** format.
+- CellDataSet (CDS) object - the main class used by Monocle to hold single cell expression data. In Galaxy you might see CDS objects in **rdata** format.
+
+<!---
+TO FURTHER IMPROVE THE TUTORIAL:
+include images showing the structure of those files
+-->
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 
 # Data ingestion
 
-{% snippet faqs/galaxy/tutorial_mode.md %}
+
+## Downsampling 
 
 
 # Format conversion
