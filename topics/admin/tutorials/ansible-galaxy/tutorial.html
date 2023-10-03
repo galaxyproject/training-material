@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@0c9d252243153e0d408d3eb6b0478dfb6ae973ec",
+	  release: "galaxy-training-network@41ca6f2466e6f75ed8855c1a6237a5e5b6aeab3f",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696291912' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696291912' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696336166' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696336166' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -87,7 +87,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Installation with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-10 08:03:47 +0000">
+<meta name="DC.date" content="2023-10-03 12:01:34 +0000">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
@@ -130,7 +130,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-10 08:03:47 +0000",
+  "dateModified": "2023-10-03 12:01:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Installation with Ansible",
   "interactivityType": "mixed",
@@ -349,7 +349,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696291912'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696336166'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -810,7 +810,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 10, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 3, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -1835,7 +1835,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_version</code></td>
-            <td><code class="language-plaintext highlighter-rouge">4.12.0</code></td>
+            <td><code class="language-plaintext highlighter-rouge">23.9</code></td>
             <td>Install a specific miniconda version, the latest one at the time of writing that was tested and working.</td>
           </tr>
           <tr>
@@ -1868,7 +1868,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 +galaxy_commit_id: release_23.0
 +galaxy_force_checkout: true
 +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
-+miniconda_version: 4.12.0
++miniconda_version: 23.9
 +miniconda_channels: ['conda-forge', 'defaults']
 </span>   
 </code></pre></div>      </div>
@@ -1901,7 +1901,7 @@ A: They are correlated (because generally new Galaxy versions could introduce e.
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -10,3 +10,17 @@</span> galaxy_force_checkout: true
  miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
- miniconda_version: 4.12.0
+ miniconda_version: 23.9
  miniconda_channels: ['conda-forge', 'defaults']
 <span class="gi">+
 +galaxy_config:
@@ -2944,6 +2944,7 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
 -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 </span></code></pre></div>        </div>
 
+        <p>Please also see the changes in <a href="#details-running-this-tutorial-i-without-i-ssl-1">the other SSL tip box</a></p>
       </blockquote>
     </li>
     <li>
@@ -3047,6 +3048,8 @@ Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU tim
 
       <blockquote class="details">
         <div class="box-title details-title" id="details-running-this-tutorial-i-without-i-ssl-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-running-this-tutorial-i-without-i-ssl-1" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Running this tutorial <i>without</i> SSL<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>Please be sure to also make the changes in <a href="#details-running-this-tutorial-i-without-i-ssl">the other SSL box</a>.</p>
 
         <p>In your <code class="language-plaintext highlighter-rouge">galaxy.j2</code> in the above step, you should change the <code class="language-plaintext highlighter-rouge">listen</code> parameter:</p>
 
@@ -3228,7 +3231,7 @@ In a training setting there is no need to request certificates that will be trus
       <div data-commit="Add job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
 </span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -11,6 +11,24 @@</span> miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
- miniconda_version: 4.12.0
+ miniconda_version: 23.9
  miniconda_channels: ['conda-forge', 'defaults']
     
 <span class="gi">+# Galaxy Job Configuration
@@ -3790,7 +3793,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/0c9d252243153e0d408d3eb6b0478dfb6ae973ec">0c9d252</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/41ca6f2466e6f75ed8855c1a6237a5e5b6aeab3f">41ca6f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3822,7 +3825,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696291912'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696336166'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
