@@ -1974,7 +1974,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    > ```
 >    > {% endraw %}
->    >
+>    > Please also see the changes in [the other SSL tip box](#details-running-this-tutorial-i-without-i-ssl-1)
 >    {: .details}
 >
 > 4. Create the directory `templates/nginx` (staying in galaxy directory, after which groups_vars, roles will be siblings of templates), where we will place our configuration files which should be templated out to the server.
@@ -2082,7 +2082,9 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >
 >    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
->    > Ignore the https redirection by omitting `templates/nginx/redirect-ssl.j2`. In your `galaxy.j2` in the above step, you should change the `listen` parameter:
+>    > Please be sure to also make the changes in [the other SSL box](#details-running-this-tutorial-i-without-i-ssl).
+>    > 
+>    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >
 >    > {% raw %}
 >    > ```diff
@@ -2092,7 +2094,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > +listen        *:80 default_server;
 >    > ```
 >    > {% endraw %}
->    >
+>    > 
 >    {: .details}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
