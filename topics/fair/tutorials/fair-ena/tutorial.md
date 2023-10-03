@@ -15,6 +15,8 @@ key_points:
 - Preparation of metadata and sequence data for the submission
 - Use ENA Webin interactive portal to submit metadata
 - Use cURL to submit read fastq files
+requirements:
+- Linux-based machine
 tags:
 - ?
 priority: 1
