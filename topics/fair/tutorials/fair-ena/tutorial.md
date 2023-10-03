@@ -5,6 +5,7 @@ abbreviations:
   ENA: European Nucleotide Archive
 zenodo_link: ''
 questions:
+- I am new to sequence submission to a repository.
 - How do I submit sequences and metadata to ENA using the Webin portal and cURL?
 objectives:
 - To populate ENA metadata objects through the Webin portal 
@@ -35,41 +36,59 @@ subtopic: fair-data
 {: .agenda}
 
 # 01. Introduction
+DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool featuring in thousands of life-science publications every year. 
 
-Prior to publication many journals and funders require authors to submit their sequence data to one of the three INSDC member databases – ENA, NCBI or DDBJ – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
+Prior to publication many journals and funders require authors to submit their raw sequence data to one of the three INSDC member databases – ENA, NCBI or DDBJ – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
 
-The three databases have different methods for making submissions. If your database of choice is ENA and you are new to sequence submission and need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading read data and accompanying metadata and use cURL to copy read files over to ENA's FTP server. 
+The three databases have different methods for making submissions. If your database of choice is ENA and you 
+need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data and accompanying metadata and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
 
 If you would like to use Galaxy tools for submission to ENA you may find [this](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
+
+<tip-title>What is cURL?</tip-title>
+cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.
+{: .tip}
 
 ## ENA Submission Routes
 
 There are three routes via which one can submit data to ENA. 
 1.	The Webin Interactive portal, which allows you to submit data by filling out forms on your browser. This is what we will cover in this tutorial,
-2.	Webin-command-line interface, which allows submissions through a terminal, and
+2.	Webin-command-line interface (CLI), which allows submissions through a terminal, and
 3.	Programmatic submission, which requires the submissions to be prepared as XML documents and then uploaded using cURL or Webin portal. 
 
-![ENA submission routes](images/submission_routes.png)
+**Table 1.** ENA submission routes
+> |       | Interactive | Webin-CLI | Programmatic |
+> | ----- |--------------------|
+> | Study | Y    | N    | Y    |
+> | Sample | Y    | N    | Y    |
+> | Read data | Y    | Y    | Y    |
+> | Genome Assembly | N    | Y    | N    |
+> | Transcriptome Assembly | N    | Y    | N    |
+> | Template Sequence | N    | Y    | N    |
+> | Other Analyses | N    | N    | Y    |
+{: .matrix}
 
-As you can see from the table, you can submit some data types only through a certain route. Read data can be submitted via all three routes. 
+As you can see from the Table 1, you can submit some data types only through a certain route. However, read data can be submitted via all three routes. 
 
-To submit reads to ENA you will need to have a Webin submission account. You can register an account free of cost through the Webin portal (https://www.ebi.ac.uk/ena/submit/webin/login).
+To begin with the submission process you will need to have a Webin submission account. You can register an account free of cost through the Webin portal (https://www.ebi.ac.uk/ena/submit/webin/login).
 
-ENA gives a detailed guide to data submission (guide - https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html). ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
+For data submission ENA provides a detailed guide (guide - https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Bear in mind that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
 
 ## ENA Metadata Model
-![ENA metadata model](./images/metadata_model.png)
-The metadata model represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects. Therefore, understanding the metadata model will enable you to determine what you need to submit. 
+![ENA metadata model](./images/metadata_model.png "ENA metadata model")
+**_Figure 1._** _The ENA metadata model._
+
+The ENA metadata model (Figure 1) represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects. Therefore, understanding the metadata model will enable you to determine what you need to submit. 
 
 ### 1. Study
 All submissions require the study object. This object defines study accession, ownership, affiliation and release date. It also binds together all related objects into one cohesive project.
 
-Upon submission you will receive a BioProject accession (PRJEB*) which can be used for citing data submitted to ENA, and a study accession (ERP*).
+Study object submission generates a BioProject accession (PRJEB*) which can be used for citing data submitted to ENA, and a study accession (ERP*).
 
 ### 2. Sample
-Defines metadata about the sequenced biomaterial, e.g. bacteria, virus, etc. One sample should represent one sequencing library. 
+Sample object defines metadata about the sequenced biomaterial, e.g. bacteria, virus, etc. One sample should represent one sequencing library. 
 
-To ensure that each sample is registered with sufficient metadata so as to provide enough context for the data to be easily interpreted, a mandatory, recommended and optional  set of attributes need to be provided for a sample. These sample checklists differ with the nature of the sample.
+To ensure that each sample is registered with sufficient metadata so as to provide enough context for the data to be easily interpreted, a mandatory, recommended and optional set of attributes need to be provided for a sample.  Sample checklists have been developed in collaboration with different research communities to ensure that they are relevant and realistic for their context. They differ with the nature of the sample.
 
 A registered sample will receive a BioSample accession (SAMEA*) and ENA sample accession (ERS*).
 
@@ -78,12 +97,9 @@ Metadata for raw reads is represented in 'experiment' and 'run' objects, where '
 
 Each read file submission will receive a run accession (ERR*) and an Experiment accession (ERX*). 
 
-## Webin submissions portal
-Making and manage submissions to ENA using this portal - https://www.ebi.ac.uk/ena/submit/webin/.
-
 # 02. Submitting data
 ## 1. Webin login
-Log in to ENA Webin portal https://www.ebi.ac.uk/ena/submit/webin/. If you don't have a login you will have to register for an account. Go ahead and do that - it is free.
+Log in to ENA Webin portal https://www.ebi.ac.uk/ena/submit/webin/. If you don't have a login you will have to register for an account. Go ahead and do that - it is free. Click on the 'Register' button and fill in the information requested.  
 
 ## 2. Study metadata
 
@@ -92,9 +108,9 @@ To register a study you will need the following metadata:
 1. Study Name
 2. Short descriptive study title
 3. Detailed study abstract
-4. Release date (if before 2 years from now)
+4. Release date (if before 2 years from the date of submission)
 
-1-3 will be displayed in the Project entry page. Make it as detailed as possible so as to make it searchable. For example see the entry for [PRJEB55803](https://www.ebi.ac.uk/ena/browser/view/PRJEB55803).
+1-3 will be displayed in the Project entry page. Make it as detailed as possible so as to make it your study searchable. To see an example see the submission for [PRJEB55803](https://www.ebi.ac.uk/ena/browser/view/PRJEB55803).
 
 > <hands-on-title>Register study</hands-on-title>
 > Once you have the above information at hand register your study.
@@ -149,14 +165,15 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > 3. Click on 'ENA default sample checklist' (or the most appropriate checklist for your study). 
 > 4. The mandatory attributes will be auto-selected. Expand the 'Optional Fields' box and select attributes you would like to include. 
 >
-Your checklist will look like below.  
+Your checklist will contain columns shown in Table 2.
+
+**Table 2.** Sample metadata checklist
 | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
 |-------------|-------------|-------------|-------------|-------------|-------------|-------------|
 | Checklist	| ERC000011	| ENA default sample checklist | | | |
 | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
 | #units | | | | | |
  
-
 >
 > > <tip-title>Optional Fields</tip-title>
 > > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable. 
@@ -196,7 +213,7 @@ Your checklist will look like below.
 
 ## 4. Read metadata
 ###  Metadata preparation
-Reads can be submitted in several formats, such as fastq, BAM, CRAM, fast5, etc. Here we will look at submitting paired-end fastq files.
+Having registered the sample, we can now add information about sequence reads generated from them. Reads can be submitted in several formats, such as fastq, BAM, CRAM, fast5, etc. Here we will look at submitting paired-end fastq files.
 Metadata required for this are:
 1. Sample alias or accession (from Sample submission step)
 2. Study alias or accession (from Study submission step)
