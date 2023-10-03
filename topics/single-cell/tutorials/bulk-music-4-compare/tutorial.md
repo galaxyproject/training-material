@@ -63,7 +63,7 @@ In the standard MuSiC tutorial, we used human pancreas data. We will now use the
 
 ![Three colours of arrows connect bulk healthy & diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy & bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref).](../../images/bulk-music/comparison.png "Plan of analysis")
 
-If you have followed the previous tutorials to create your own bulk and single cell expression sets, then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you'll need. 
+If you have followed the previous tutorials, you will have built your [single cell ESet object]({% link topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.md %}) and your [bulk ESet object]({% link topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.md %}), then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you'll need. 
 
 {% snippet  faqs/galaxy/histories_copy_dataset.md %}
 
