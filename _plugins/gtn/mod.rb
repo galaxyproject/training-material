@@ -16,7 +16,7 @@ module Gtn
       puts '[GTN/MOD] Filling Time Cache'
       `git log --name-only --pretty='GTN_GTN:%ct'`
         .split('GTN_GTN:')
-        .map { |x| x.split(/\n\n/) }
+        .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
         .each do |date, files|
         files.split(/\n/).each do |f|

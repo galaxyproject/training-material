@@ -377,19 +377,18 @@ Jekyll::Hooks.register :site, :post_write do |site|
       # {"workflow"=>"galaxy-workflow-mouse_novel_peptide_analysis.ga",
       # "tests"=>false,
       # "url"=>
-      # "http://0.0.0.0:4002/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+      # "http://0.0.0.0:4002/training-material/topics/.../workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
       # "path"=>
-      # "topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.ga",
+      # "topics/proteomics/tutorials/.../galaxy-workflow-mouse_novel_peptide_analysis.ga",
       # "wfid"=>"proteomics-proteogenomics-novel-peptide-analysis",
       # "wfname"=>"galaxy-workflow-mouse_novel_peptide_analysis",
       # "trs_endpoint"=>
-      # "http://0.0.0.0:4002/training-material/api/ga4gh/trs/v2/tools/proteomics-proteogenomics-novel-peptide-analysis/versions/galaxy-workflow-mouse_novel_peptide_analysis",
+      # "http://0.0.0.0:4002/training-material/api/.../versions/galaxy-workflow-mouse_novel_peptide_analysis",
       # "license"=>nil,
       # "creators"=>[],
       # "name"=>"GTN Proteogemics3 Novel Peptide Analysis",
       # "test_results"=>nil,
       # "modified"=>2023-06-07 12:09:36.12 +0200}
-
 
       wfdir = File.join(dir, wfid, wfname)
       FileUtils.mkdir_p(wfdir)
@@ -429,11 +428,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
             },
             conformsTo: [
               {
-              '@id': 'https://w3id.org/ro/crate/1.1'
-            },
-            {
-              "@id": "https://about.workflowhub.eu/Workflow-RO-Crate/"
-            }
+                '@id': 'https://w3id.org/ro/crate/1.1'
+              },
+              {
+                '@id': 'https://about.workflowhub.eu/Workflow-RO-Crate/'
+              }
             ]
           },
           {
@@ -458,12 +457,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
             ],
             author: author_uuids,
             license: {
-              "@id": license,
+              '@id': license,
             },
             name: workflow['name'],
             version: Gtn::ModificationTimes.obtain_modification_count(workflow['path']),
             programmingLanguage: {
-                "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy"
+              '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy'
             }
           },
           {
@@ -472,26 +471,26 @@ Jekyll::Hooks.register :site, :post_write do |site|
             name: workflow['license'],
           },
           {
-              "@id": "https://w3id.org/workflowhub/workflow-ro-crate#galaxy",
-              "@type": "ComputerLanguage",
-              "identifier": {
-                  "@id": "https://galaxyproject.org/"
-              },
-              "name": "Galaxy",
-              "url": {
-                  "@id": "https://galaxyproject.org/"
-              },
-              "version": "23.1"
+            '@id': 'https://w3id.org/workflowhub/workflow-ro-crate#galaxy',
+            '@type': 'ComputerLanguage',
+            identifier: {
+              '@id': 'https://galaxyproject.org/'
+            },
+            name: 'Galaxy',
+            url: {
+              '@id': 'https://galaxyproject.org/'
+            },
+            version: '23.1'
           }
         ]
       }
       crate['@graph'] += author_linked
       File.write(path, JSON.pretty_generate(crate))
 
-      zip_path = File.join(wfdir, "rocrate.zip")
+      zip_path = File.join(wfdir, 'rocrate.zip')
       Zip::File.open(zip_path, create: true) do |zipfile|
-          # - The name of the file as it will appear in the archive
-          # - The original file, including the path to find it
+        # - The name of the file as it will appear in the archive
+        # - The original file, including the path to find it
         zipfile.add('ro-crate-metadata.json', path)
         zipfile.add("#{wfname}.ga", workflow['path'])
       end
