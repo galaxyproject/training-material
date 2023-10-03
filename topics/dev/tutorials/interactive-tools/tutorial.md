@@ -556,7 +556,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 > cat galaxy.yml.interactivetools > galaxy.yml
 > cat tool_conf.xml.sample > tool_conf.xml
 > ```
-> In `galaxy.yml`, ensure that the `galaxy_infrastructure_url` parameter os present under the galaxy section:
+> In `galaxy.yml`, ensure that the `galaxy_infrastructure_url` parameter is present under the galaxy section:
 > ```yaml
 > galaxy:
 >   galaxy_infrastructure_url: http://localhost:8080
