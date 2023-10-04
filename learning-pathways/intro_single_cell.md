@@ -7,8 +7,6 @@ editorial_board:
 - nomadscientist
 - pavanvidem
 
-funding:
-
 title: Introduction to Galaxy and Single Cell RNA Sequence analysis
 description: |
   This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data.
