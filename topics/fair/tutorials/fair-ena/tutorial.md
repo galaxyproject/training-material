@@ -18,7 +18,8 @@ key_points:
 requirements:
 - Linux-based machine
 tags:
-- ?
+- FAIR
+- ENA
 priority: 1
 contributions:
   authorship:
@@ -302,3 +303,5 @@ Note: The Webin upload area is a temporary transit location which is not backed 
 Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
 
 However, for complex edits you might have to contact [ENA helpdesk](datasubs@ebi.ac.uk). 
+
+This work was funded by the ELIXIR-UK: FAIR Data Stewardship training UKRI award (MR/V038966/1).
