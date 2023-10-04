@@ -25,7 +25,7 @@ contributions:
   authorship:
     - shenson
   editing:
-    - 
+    - kkamieniecka
 subtopic: fair-data
 
 ---
