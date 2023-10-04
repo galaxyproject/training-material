@@ -14,7 +14,7 @@ description: |
   This learning path aims to teach you the basics of Galaxy and analysis of Single Cell RNA-seq data.
   You will learn how to use Galaxy for analysis, and an important Galaxy feature for iterative single cell analysis. You'll tbe guided through the general theory of single analysis and then perform a basic analysis of 10X chromium data. For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
 
-priority: 1
+priority: 9
 
 pathway:
   - section: "Module 1: Introduction to Galaxy"
