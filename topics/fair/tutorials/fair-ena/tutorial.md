@@ -10,7 +10,7 @@ questions:
 objectives:
 - To populate ENA metadata objects through the Webin portal 
 - To submit raw reads to ENA using FTP
-time_estimation: "2H"
+time_estimation: "1H"
 key_points:
 - Preparation of metadata and sequence data for the submission
 - Use ENA Webin interactive portal to submit metadata
