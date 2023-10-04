@@ -278,6 +278,6 @@ This is an example of a [data and sample access request form](https://zenodo.org
 
 In the UK, for members of the UK Health Data Research Alliance, the HDRUK Innovation Gateway may also be a way to manage the data access request process.  This requires the metadata of the health datasets to be loaded to the Gateway web portal.  Researchers with an account can then search the portal and request access to datasets. The request access process and also creating collections of metadata are described in more detail in the [Data Custodian Playbook](https://discourse.healthdatagateway.org/t/data-custodian-playbook/980)
 
-
+This work was funded by the ELIXIR-UK: FAIR Data Stewardship training UKRI award (MR/V038966/1).
 
 [comment]: <> (need to also include acknowledgement of CLUSTER funding)
