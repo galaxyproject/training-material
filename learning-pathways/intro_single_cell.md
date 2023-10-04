@@ -44,7 +44,7 @@ pathway:
 
   - section: "The End!"
     description: |
-      And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page]({% link topics/single-cell/index.html %}) for more!
+      And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page](/training-material/topics/single-cell/index.html) for more!
 ---
 
 New to Galaxy and/or the field of scRNA-seq? Follow this learning path to get familiar with the basics!
