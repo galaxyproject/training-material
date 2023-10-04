@@ -72,13 +72,21 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 >    >
 >    > * You can expand the QGIS left panel (where there is 3 dots, verticaly) to access the "clipboard" menu, and paste the content you want to paste on a QGIS form. Then, click outside of this panel to collapse it, and you can click for example on the `url` field to paste the url from your clipbaord
 >    >
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto1.PNG)
 >    {: .tip}
 >
 > 5. Click OK, then you can create the connection with the "connect" button to see a list of available layers
 > 6. Find and select the `antarctica_country_border` layer
-> 7. find and select, holding the "CTRL" button, the `south_poles_wfs`layer
-> 8. Unselect "only request features overlapping the view extent" option then click "add"
-> 9. you now have Antarctica border displayed with a symbol showing the south pole. you can double click each layer at the bottom left to modify symbology, notably colour for "antarctica_country_border", and to "south_poles_wfs", modify the symbol selecting for example "effect drop shadow" and add a label `Geographic South Pole`.
+> 7. Find and select, holding the "CTRL" button, the `south_poles_wfs`layer
+> 9. Unselect "only request features overlapping the view extent" option then click "add"
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto3.PNG)
+> 10. You now have Antarctica border displayed with a symbol showing the south pole
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto4.PNG)
+> 11. You can double click each layer at the bottom left to modify symbology, notably colour for "south_poles_wfs" modifying the symbol selecting for example "effect drop shadow" and add a label `Geographic South Pole`
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto5.PNG)
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto6.PNG)
+> 12. And to "antarctica_country_border".
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto7.PNG)
 > 
 {: .hands_on}
 
@@ -92,9 +100,13 @@ Even if you can select, download and display entire WFS layers, it is often more
 > 2. Click the "open data source manager" button at the top left of QGIS
 > 3. Select "WFS / OGC API - Features" then the already connected `nsidc` server
 > 4. Select the `countries (excluding Antarctica)` layer and click "Build query" button
-> 5. On the new dialog box, you can copy/paste this query: `SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'` using the clipboard functionnality from the left QGIS panel to make a "bridge" between your local clipboard and the virtualized QGIS one.
-> 6. Clicking ok, you can now see the SQL query on a dedicated column of the layers table.
-> 7. Clicking the "Add" button, you now have the South Africa layer added and diplayed on QGIS.
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto8.PNG)
+> 6. On the new dialog box, you can copy/paste this query: `SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'` using the clipboard functionnality from the left QGIS panel to make a "bridge" between your local clipboard and the virtualized QGIS one.
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto9.PNG)
+> 7. Clicking ok, you can now see the SQL query on a dedicated column of the layers table.
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto10.PNG)
+> 9. Clicking the "Add" button, you now have the South Africa layer added and diplayed on QGIS.
+>    > ![QGIS clipboard](../../images/QGIS/qgistuto11.PNG)
 {: .hands_on}
 
 > <question-title></question-title>
