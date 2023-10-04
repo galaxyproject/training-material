@@ -84,33 +84,32 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 
 ## Querying a WFS layer
 
-Even if you can select, download and display entire WFS layers, it is often more efficient to interrogate a layer before load it to QGIS. This is a major interest of the use of such web services, as you can save internet bandwith selecting only part of layers you want in your QGIS instance.
+Even if you can select, download and display entire WFS layers, it is often more efficient to interrogate a layer before load it to QGIS. This is a major interest of the use of such web services, as you can save internet bandwith selecting only part of layers you want in your own QGIS instance.
 
 > <hands-on-title>Querying a WFS layer</hands-on-title>
 >
-> 1. blabla
->    
->
->    > <comment-title></comment-title>
->    >
->    > blablabla.
->    {: .comment}
->
-> 2. 
+> 1. In the WFS server already created in the first step of this tutorial, there is layer called `countries (excluding Antarctica)`. If we want to know where is South Africa related to the `south_poles_wfs`, there is several manner to operate. One can load the entire layer `countries (excluding Antarctica)` and then using it locally, or we can save bandwith and only load locally the needed informations concerning South Africa. We will here use the second manner, querying the WFS layer to obtain only information we will use in our QGIS instance.
+> 2. Click the "open data source manager" button at the top left of QGIS
+> 3. Select "WFS / OGC API - Features" then the already connected `nsidc` server
+> 4. Select the `countries (excluding Antarctica)` layer and click "Build query" button
+> 5. On the new dialog box, you can copy/paste this query: `SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'` using the clipboard functionnality from the left QGIS panel to make a "bridge" between your local clipboard and the virtualized QGIS one.
+> 6. Clicking ok, you can now see the SQL query on a dedicated column of the layers table.
+> 7. Clicking the "Add" button, you now have the South Africa layer added and diplayed on QGIS.
 {: .hands_on}
-
 
 > <question-title></question-title>
 >
-> 1.yjyjj?
+> 1. Are you seeing how GGIS show the fact that a layer is resulting from a query made on a larger layer?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. hhyhyhh.
+> > 1. There is a dedicated "filtre" icon next to the name of the layer.
 > >
 > {: .solution}
 >
 {: .question}
+
+
 
 
 
