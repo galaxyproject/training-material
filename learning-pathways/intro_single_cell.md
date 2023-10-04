@@ -28,14 +28,14 @@ pathway:
 
   - section: "Module 2: Theory of Single-Cell RNA-seq"
     description: |
-    When analysing sequencing data, you should always start with a quality control step to clean your data and make sure your data is good enough to answer your research question. After this step, you will often proceed with a mapping (alignment) or genome assembly step, depending on whether you have a reference genome to work with.
+      When analysing sequencing data, you should always start with a quality control step to clean your data and make sure your data is good enough to answer your research question. After this step, you will often proceed with a mapping (alignment) or genome assembly step, depending on whether you have a reference genome to work with.
     tutorials:
       - name: scrna-intro
         topic: single-cell
 
   - section: "Module 3: Time to analyse data!"
     description: |
-    It's time to apply your skills! You'll now analyse some clean data from the 10X Chromium platform.
+      It's time to apply your skills! You'll now analyse some clean data from the 10X Chromium platform.
     tutorials:
       - name: scrna-preprocessing-tenx
         topic: single-cell
@@ -44,7 +44,7 @@ pathway:
 
   - section: "The End!"
     description: |
-    And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page]({% link topics/single-cell/index.md %}) for more!
+      And now you're done! There are still loads of resources to take you from basic analysis to more difficult decision-making, deconvolution, multiomics, or ingesting from different data sources. See the [Galaxy Single Cell Training page]({% link topics/single-cell/index.md %}) for more!
 ---
 
 New to Galaxy and/or the field of scRNA-seq? Follow this learning path to get familiar with the basics!
