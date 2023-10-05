@@ -15,10 +15,13 @@ key_points:
 - Use ENA Webin interactive portal to submit metadata
 - Preparation of metadata and sequence data for the submission
 - Use cURL to submit read fastq files
-
 requirements:
-- Linux-based machine
-
+- type: none
+  title: "Web browser"
+- type: none
+  title: "A linux-based machine or linux emulator"
+- type: none
+  title: "Read data in fastq format"
 tags:
 - FAIR
 - ENA
@@ -163,17 +166,16 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > 2. Expand the 'Download spreadsheet to register samples' box and select 'Other Checklists'.
 > 3. Click on 'ENA default sample checklist' (or the most appropriate checklist for your study). 
 > 4. The mandatory attributes will be auto-selected. Expand the 'Optional Fields' box and select attributes you would like to include. 
->
-> Your checklist will contain columns shown in Table 2.
 > 
+> Your checklist will contain columns shown in Table 2.
+>    
 > **Table 2.** Sample metadata checklist
 > | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
 > |-------------|-------------|-------------|-------------|-------------|-------------|-------------|
-> | Checklist	| ERC000011	| ENA default sample checklist | | | |
-> | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
+> | Checklist	| ERC000011	| ENA default sample checklist | | | | |
+> | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea) |
 > | #units | | | | | | |
-> {: .matrix} 
->
+> 
 > > <tip-title>Optional Fields</tip-title>
 > > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable.
 > {: .tip}
@@ -184,8 +186,8 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > > > 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008
 > > {: .solution}
 > {: .question}
->
 > 
+> {:start="5"}   
 > 5. Click on 'Next' to get to the 'Download TSV Template' button.
 {: .hands_on}
 
@@ -258,7 +260,8 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > > + To find the sample alias and accession look in 'Sample Reports'
 > > + To find the study accession look in 'Studies Reports'  
 > {: .tip}
->
+> 
+> {:start="4"}
 > 4. Click 'Next' and download the spreadsheet .tsv file.
 > 5. Fill in the spreadsheet, paying particular attention to the following:
 > >+ sample: same as you used in sample submission - alias or accession
