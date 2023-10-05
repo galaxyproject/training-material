@@ -50,8 +50,9 @@ need to submit data stored on a remote server, you are in the right place. This 
 
 If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]( {% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html %}) tutorial helpful. 
 
-><tip-title>What is cURL?</tip-title>
->cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. {: .tip}
+> <tip-title>What is cURL?</tip-title>
+> cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. 
+{: .tip}
 
 ## ENA Submission Routes
 
@@ -79,8 +80,8 @@ To begin with the submission process you will need to have a Webin submission ac
 For data submission ENA provides a detailed guide (https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Bear in mind that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
 
 ## ENA Metadata Model
-![ENA metadata model](./images/metadata_model.png "ENA metadata model")
 
+![ENA metadata model](./images/metadata_model.png "ENA metadata model")
 
 The ENA metadata model (Figure 1) represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects within the metadata model. Therefore, understanding the metadata model will enable you to determine which objects you need to submit. 
 
@@ -183,7 +184,7 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > > > 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008
 > > {: .solution}
 > {: .question}
-
+>
 > 5. Click on 'Next' to get to the 'Download TSV Template' button.
 {: .hands_on}
 
@@ -196,7 +197,7 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > 6. Click on 'Submit' to submit the checklist.
 > 7. If the structure of your checklist is correct and the upload is successful a pop-up message will appear with Sample accession numbers -  SAMEA* (BioSample) and ERS*.
 > 8. Check the processing status of your submissions via Samples Report. 
-
+>
 > > <tip-title>Sample Alias</tip-title>
 > > Remember to enter sample aliases that correspond to what you use in related publications. This will enable readers to find sample-specific metadata and read files, even if you only state a Project accession number in your paper. Sample aliases can, furthermore, be optionally displayed as Unique name in the Sample report. 
 > {: .tip}
@@ -250,6 +251,7 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > 1. From the 'Dashboard' select 'Submit Reads' from Raw Reads box. 
 > 2. Similar to how you downloaded the sample checklist, download the Read submission template for 'paired reads using two fastq files'.
 > 3. Select the relevant optional fields to be included in the spreadsheet.
+> 
 > > <tip-title></tip-title>
 > > + Tick the box next to 'Show Descriptions' to reveal text describing the attributes
 > > + To find the sample alias and accession look in 'Sample Reports'
@@ -286,8 +288,7 @@ curl -T <<your_file>>.gz -u Webin-XXX:password ftp://webin2.ebi.ac.uk/
 Check the processing status of your upload via the Run Processing Report.  
 
 > <warning-title></warning-title>
-> The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived.
-{: .warning}
+> The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived. {: .warning}
 
 ## 6. Post-submission editing
 Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
