@@ -171,8 +171,8 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > |-------------|-------------|-------------|-------------|-------------|-------------|-------------|
 > | Checklist	| ERC000011	| ENA default sample checklist | | | |
 > | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
-> | #units | | | | | |
->  
+> | #units | | | | | | |
+> {: .matrix} 
 >
 > > <tip-title>Optional Fields</tip-title>
 > > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable.
@@ -185,6 +185,7 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > > {: .solution}
 > {: .question}
 >
+> 
 > 5. Click on 'Next' to get to the 'Download TSV Template' button.
 {: .hands_on}
 
@@ -288,7 +289,8 @@ curl -T <<your_file>>.gz -u Webin-XXX:password ftp://webin2.ebi.ac.uk/
 Check the processing status of your upload via the Run Processing Report.  
 
 > <warning-title></warning-title>
-> The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived. {: .warning}
+> The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived. 
+{: .warning}
 
 ## 6. Post-submission editing
 Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
