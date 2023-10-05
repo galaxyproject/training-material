@@ -11,17 +11,15 @@ module Jekyll
     # Params
     # +site+:: The site object
     def generate(site)
-      dir = 'hall-of-fame'
-
       Jekyll.logger.info '[GTN/SyntheticTopics] Generating By-Tag Indexes'
       TopicFilter.list_all_tags(site).map do |tag|
         site.data["by_tag_#{tag}"] = {
-          "name" => "by_tag_#{tag}",
-          "type" => 'use',
-          "title" => tag,
-          "summary" => "Tutorials covering #{tag}",
-          "tag_based" => true,
-          "hidden" => true,
+          'name' => "by_tag_#{tag}",
+          'type' => 'use',
+          'title' => tag,
+          'summary' => "Tutorials covering #{tag}",
+          'tag_based' => true,
+          'hidden' => true,
         }
 
         topic_index = PageWithoutAFile.new(site, '', "tags/#{tag}", 'index.md')
@@ -43,7 +41,6 @@ module Jekyll
 
         site.pages << topic_index
       end
-
     end
   end
 end

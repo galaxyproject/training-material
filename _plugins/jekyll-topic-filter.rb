@@ -13,7 +13,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    self.list_topics_h(site).keys
+    list_topics_h(site).keys
   end
 
   def self.list_topics_h(site)
@@ -27,7 +27,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The topic objects themselves
   def self.enumerate_topics(site)
-    self.list_topics_h(site).values
+    list_topics_h(site).values
   end
 
   ##
@@ -510,11 +510,11 @@ module TopicFilter
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
     topic = site.data[page_obj['topic_name']]
-    if topic['type'] == 'use' || topic['type'] == 'basics'
-      page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
-    else
-      page_obj['supported_servers'] = []
-    end
+    page_obj['supported_servers'] = if topic['type'] == 'use' || topic['type'] == 'basics'
+                                      Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+                                    else
+                                      []
+                                    end
 
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
@@ -660,7 +660,9 @@ module TopicFilter
     # Select out materials with the correct subtopic
     resource_pages = resource_pages.select { |x| x['subtopic'] == subtopic_id }
 
-    Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.empty?
+    if resource_pages.empty?
+      Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}"
+    end
 
     resource_pages
   end
@@ -854,7 +856,7 @@ module Jekyll
     end
 
     def list_topics_ids(site)
-      ['introduction'] +  TopicFilter.list_topics(site).filter { |k| k != 'introduction' }
+      ['introduction'] + TopicFilter.list_topics(site).filter { |k| k != 'introduction' }
     end
 
     def list_topics_h(site)

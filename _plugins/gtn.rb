@@ -274,9 +274,7 @@ module Jekyll
 
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
-      if materials.nil?
-        return []
-      end
+      return [] if materials.nil?
 
       materials.map do |m|
         if m.key?('name') && m.key?('topic')

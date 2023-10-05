@@ -195,10 +195,13 @@ module Jekyll
       # Trigger the topic cache to generate if it hasn't already
       puts '[GTN/API] Tutorials'
       TopicFilter.topic_filter(site, 'does-not-matter')
-      TopicFilter.list_topics(site).map do |topic| out = site.data[topic].dup
+      TopicFilter.list_topics(site).map do |topic|
+        out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
-          q['contributors'] = get_contributors(q).dup.map { |c| mapContributor(site, c) }
+          q['contributors'] = get_contributors(q).dup.map do |c|
+            mapContributor(site, c)
+          end
 
           q['urls'] = {}
 
@@ -220,9 +223,12 @@ module Jekyll
 
           q
         end
-        out['editorial_board'] = out['editorial_board'].map { |c| mapContributor(site, c) }
+        out['editorial_board'] = out['editorial_board'].map do |c|
+          mapContributor(site, c)
+        end
 
-        page2 = PageWithoutAFile.new(site, '', 'api/topics/', "#{topic}.json")
+        page2 = PageWithoutAFile.new(site, '', 'api/topics/',
+                                     "#{topic}.json")
         page2.content = JSON.pretty_generate(out)
         page2.data['layout'] = nil
         site.pages << page2
