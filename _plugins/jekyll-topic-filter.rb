@@ -127,7 +127,7 @@ module TopicFilter
       # We'll construct a new hash of subtopic(parent topic) => tutorials
       out = {}
       seen_ids = []
-      tn = topic_name.gsub(/by_tag_/, '')
+      tn = topic_name.gsub('by_tag_', '')
 
       materials = filter_by_tag(site, tn)
 
