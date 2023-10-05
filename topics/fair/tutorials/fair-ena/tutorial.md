@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: ENA data submission
+title: Sequence data submission to ENA
 abbreviations:
   ENA: European Nucleotide Archive
 zenodo_link: ''
@@ -12,8 +12,8 @@ objectives:
 - To submit raw reads to ENA using FTP
 time_estimation: "1H"
 key_points:
-- Preparation of metadata and sequence data for the submission
 - Use ENA Webin interactive portal to submit metadata
+- Preparation of metadata and sequence data for the submission
 - Use cURL to submit read fastq files
 requirements:
 - Linux-based machine
@@ -39,17 +39,17 @@ subtopic: fair-data
 {: .agenda}
 
 # 01. Introduction
-DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool featuring in thousands of life-science publications every year. 
+DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year. 
 
-Prior to publication many journals and funders require authors to submit their raw sequence data to one of the three INSDC member databases – ENA, NCBI or DDBJ – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
+Prior to publication many journals and funders require authors to submit their raw sequence data to one of the three INSDC member databases – **ENA, NCBI or DDBJ** – between which data is synchronised on a daily basis. INSDC is the core infrastructure for sharing nucleotide sequence data and metadata in the public domain. Data in INSDC member databases is available permanently, for free and with unrestricted access. For each submitted sequence a unique accession number is issued which can be reported in the publication. 
 
 The three databases have different methods for making submissions. If your database of choice is ENA and you 
-need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data and accompanying metadata and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
+need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data as well as accompanying metadata, and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
 
-If you would like to use Galaxy tools for submission to ENA you may find [this](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
+If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
 
 <tip-title>What is cURL?</tip-title>
-cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.
+>cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.
 {: .tip}
 
 ## ENA Submission Routes
@@ -75,13 +75,12 @@ As you can see from the Table 1, you can submit some data types only through a c
 
 To begin with the submission process you will need to have a Webin submission account. You can register an account free of cost through the Webin portal (https://www.ebi.ac.uk/ena/submit/webin/login).
 
-For data submission ENA provides a detailed guide (guide - https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Bear in mind that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
+For data submission ENA provides a detailed guide (https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Bear in mind that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
 
 ## ENA Metadata Model
 ![ENA metadata model](./images/metadata_model.png "ENA metadata model")
-**_Figure 1._** _The ENA metadata model._
 
-The ENA metadata model (Figure 1) represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects. Therefore, understanding the metadata model will enable you to determine what you need to submit. 
+The ENA metadata model (Figure 1) represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects within the metadata model. Therefore, understanding the metadata model will enable you to determine which objects you need to submit. 
 
 ### 1. Study
 All submissions require the study object. This object defines study accession, ownership, affiliation and release date. It also binds together all related objects into one cohesive project.
@@ -91,7 +90,7 @@ Study object submission generates a BioProject accession (PRJEB*) which can be u
 ### 2. Sample
 Sample object defines metadata about the sequenced biomaterial, e.g. bacteria, virus, etc. One sample should represent one sequencing library. 
 
-To ensure that each sample is registered with sufficient metadata so as to provide enough context for the data to be easily interpreted, a mandatory, recommended and optional set of attributes need to be provided for a sample.  Sample checklists have been developed in collaboration with different research communities to ensure that they are relevant and realistic for their context. They differ with the nature of the sample.
+To ensure that each sample is registered with sufficient metadata so as to provide enough context for the data to be easily interpreted, a mandatory, recommended and optional set of attributes should be provided for a sample.  Sample checklists have been developed in collaboration with different research communities to ensure that they are relevant and realistic for their context. They differ with the nature of the sample.
 
 A registered sample will receive a BioSample accession (SAMEA*) and ENA sample accession (ERS*).
 
@@ -105,7 +104,6 @@ Each read file submission will receive a run accession (ERR*) and an Experiment 
 Log in to ENA Webin portal https://www.ebi.ac.uk/ena/submit/webin/. If you don't have a login you will have to register for an account. Go ahead and do that - it is free. Click on the 'Register' button and fill in the information requested.  
 
 ## 2. Study metadata
-
 ###  Metadata preparation
 To register a study you will need the following metadata:
 1. Study Name
@@ -118,7 +116,7 @@ To register a study you will need the following metadata:
 > <hands-on-title>Register study</hands-on-title>
 > Once you have the above information at hand register your study.
 > 1. From the Webin dashboard click on 'Register Study' to bring up the study submission form. 
-> 2. Complete the form to your best knowledge ensure attributes with '*' are completed. 
+> 2. Complete the form to your best knowledge - ensure attributes with '*' are completed. 
 > 3. Click 'Submit' to create a new study. 
 > 4. If successful, you will receive a confirmational pop-up message with two accession numbers - PRJEB* (BioProject accession) and ERP*. Save them as you will need them for read submission step.
 > 5. Check the processing status of your submissions via the Studies Report.
@@ -126,15 +124,11 @@ To register a study you will need the following metadata:
 > > <tip-title>Filling in study metadata</tip-title>
 > >You may want to set the submission date to the maximum allowed - 2 years from today. You can change it when you are ready to release the data. 
 > >Study Fields are editable after submission should you need to update any information.
-> 
 > {: .tip}
 >
 > ><question-title></question-title>
->
 > >How can you confirm that your study has been successfully registered?
->
 > > > <solution-title></solution-title>
-> > >
 > > > Click on the Dashboard icon, select 'Studies Report'. The accessions for your study should appear next to the Study title and other attributes. 
 > >
 > > {: .solution}
