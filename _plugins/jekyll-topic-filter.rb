@@ -583,8 +583,6 @@ module TopicFilter
       p.data['redirect_from'].uniq!
     end
 
-    pp materials
-    p site.data.keys
     materials
   end
 
