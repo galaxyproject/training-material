@@ -45,7 +45,7 @@ In the Geographical Information System landscape, there is existing standards to
 # Managing QGIS Galaxy interactive tool
 QGIS is now integrated in Galaxy as an interactive tool. This kind of tools is working differently than classical tools as it allows the user to interact with a dedicated graphical interface. This kind of tools is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example. 
 
-To use QGIS, you need to use the {% tool [dedicated form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_qgis) %}, you can specify input datasets from your hisrtory you want to use in QGIS, or not ;), then press the execute button to launch a QGIS instance. When the graphical user interface of QGIS is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu.
+To use QGIS, you need to use the {% tool [dedicated form](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_qgis) %}, you can specify input datasets from your hisrtory you want to use in QGIS, or not ;), then press the execute button to launch a QGIS instance. When the graphical user interface of QGIS is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
 
 Once you finished your work on QGIS, if you want to retrieve data and/or entire project, you need to save files in /output, then quit QGIS properly through the "Project" Menu tab.
 
@@ -63,10 +63,11 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 
 > <hands-on-title>Loading WFS layer</hands-on-title>
 >
-> 1. Click the "open data source manager" button at the top left of QGIS
-> 2. Select "WFS / OGC API - Features"
-> 3. Click the "New" button
-> 4. In the dialog that appears, enter the Name as `nsidc` and the URL as `http://nsidc.org/cgi-bin/atlas_south?version=1.1.0`.
+> 1. Go to the top left of QGIS and click on "Layer"
+> 2. Click on the 1st option "Data Source Manager" 
+> 3. Select "WFS / OGC API - Features" on left part of the pop-up panel
+> 4. Click the "New" button
+> 5. In the dialog that appears, enter the Name as `nsidc` and the URL as `http://nsidc.org/cgi-bin/atlas_south?version=1.1.0`.
 >
 >    > <tip-title>copy pasting from computer to QGIS</tip-title>
 >    >
@@ -76,13 +77,13 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 >    {: .tip}
 >
 > 5. Click OK, then you can create the connection with the "connect" button to see a list of available layers
-> 6. Find and select the `antarctica_country_border` layer
-> 7. Find and select, holding the "CTRL" button, the `south_poles_wfs`layer
+> 6. Find and select the `antarctica_country_border` (Antartica border) layer
+> 7. Find and select, holding the "CTRL" button, the `south_poles_wfs` (South border) layer
 > 9. Unselect "only request features overlapping the view extent" option then click "add"
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto3.PNG)
 > 10. You now have Antarctica border displayed with a symbol showing the south pole
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto4.PNG)
-> 11. You can double click each layer at the bottom left to modify symbology, notably colour for "south_poles_wfs" modifying the symbol selecting for example "effect drop shadow" and add a label `Geographic South Pole`
+> 11. You can double click each layer at the bottom left to modify symbology, notably colour for "south_poles_wfs" modifying the symbol selecting for example "effect drop shadow"  click on "Save Symbol..." and add a label `Geographic South Pole`
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto5.PNG)
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto6.PNG)
 > 12. And to "antarctica_country_border".
@@ -97,9 +98,10 @@ Even if you can select, download and display entire WFS layers, it is often more
 > <hands-on-title>Querying a WFS layer</hands-on-title>
 >
 > 1. In the WFS server already created in the first step of this tutorial, there is layer called `countries (excluding Antarctica)`. If we want to know where is South Africa related to the `south_poles_wfs`, there is several manner to operate. One can load the entire layer `countries (excluding Antarctica)` and then using it locally, or we can save bandwith and only load locally the needed informations concerning South Africa. We will here use the second manner, querying the WFS layer to obtain only information we will use in our QGIS instance.
-> 2. Click the "open data source manager" button at the top left of QGIS
-> 3. Select "WFS / OGC API - Features" then the already connected `nsidc` server
-> 4. Select the `countries (excluding Antarctica)` layer and click "Build query" button
+> 2. Go to the top left of QGIS and click on "Layer"
+> 3. Click on the 1st option "Data Source Manager" 
+> 4. Select "WFS / OGC API - Features" then the already connected `nsidc` server
+> 5. Select the `countries (excluding Antarctica)` layer and click "Build query" button
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto8.PNG)
 > 6. On the new dialog box, you can copy/paste this query: `SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'` using the clipboard functionnality from the left QGIS panel to make a "bridge" between your local clipboard and the virtualized QGIS one.
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto9.PNG)
@@ -131,4 +133,4 @@ Even if you can select, download and display entire WFS layers, it is often more
 # Conclusion
 
 
-You just did a classical GIS operation,accessing remote data using WFS webservice through QGIS, retrieving features of interest you can share broadly through Galaxy!
+You just did a classical GIS operation, accessing remote data using WFS webservice through QGIS, retrieving features of interest you can share broadly through Galaxy!
