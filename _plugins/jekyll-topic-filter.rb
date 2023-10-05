@@ -93,8 +93,9 @@ module TopicFilter
 
     fill_cache(site)
 
+    puts "Topic: #{topic_name} Data: #{site.data[topic_name]}"
     # Here we want to either return data structured around subtopics
-    if site.data[topic_name].key?('subtopics')
+    if (!site.data[topic_name]['tag_based']) && site.data[topic_name].key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
       out = {}
       seen_ids = []
@@ -122,8 +123,11 @@ module TopicFilter
       # We'll construct a new hash of subtopic(parent topic) => tutorials
       out = {}
       seen_ids = []
+      tn = topic_name.gsub(/by_tag_/, '')
+      puts "Fixed tn: '#{tn}'"
 
-      materials = filter_by_topic(site, topic_name)
+      materials = filter_by_tag(site, tn)
+      puts materials.length
 
       # Which topics are represented in those materials?
       seen_topics = materials.map { |x| x['topic_name'] }.sort
@@ -140,7 +144,7 @@ module TopicFilter
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
-      all_topics_for_tutorial = filter_by_topic(site, topic_name)
+      all_topics_for_tutorial = filter_by_tag(site, tn)
       out['__OTHER__'] = {
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
@@ -151,7 +155,7 @@ module TopicFilter
       out = {
         '__FLAT__' => {
           'subtopic' => nil,
-          'materials' => filter_by_topic(site, topic_name)
+          'materials' => filter_by_topic(site, tn)
         }
       }
     end
@@ -624,6 +628,24 @@ module TopicFilter
     resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
     puts "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
+
+    resource_pages
+  end
+
+  def self.filter_by_tag(site, topic_name)
+    # Here we make a (cached) call to load materials into memory and sort them
+    # properly.
+    materials = process_pages(site, site.pages)
+
+    # If there is nothing with that topic name, try generating it by tags.
+    resource_pages = materials.select { |x| x.fetch('tags', []).include?(topic_name) }
+
+    # The complete resources we'll return is the introduction slides first
+    # (EDIT: not anymore, we rely on prioritisation!)
+    # and then the rest of the pages.
+    resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
+
+    puts "Error? Could not find any relevant tagged pages for #{topic_name}" if resource_pages.empty?
 
     resource_pages
   end

@@ -2,10 +2,7 @@
 layout: base
 ---
 
-{% assign topic = site.data[page.topic_name] %}
-{% assign contributors = site.data['contributors'] %}
-{% assign instances = site.data['instances'] %}
-{% assign language = site.other_languages %}
+{% assign topic = site.data[page.topic_name] | default: page.topic %}
 {% assign topic_material = site | list_materials_structured:page.topic_name %}
 
 <!-- Gitter -->

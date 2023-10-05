@@ -195,8 +195,7 @@ module Jekyll
       # Trigger the topic cache to generate if it hasn't already
       puts '[GTN/API] Tutorials'
       TopicFilter.topic_filter(site, 'does-not-matter')
-      TopicFilter.list_topics(site).map do |topic|
-        out = site.data[topic].dup
+      TopicFilter.list_topics(site).map do |topic| out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
           q['contributors'] = get_contributors(q).dup.map { |c| mapContributor(site, c) }
