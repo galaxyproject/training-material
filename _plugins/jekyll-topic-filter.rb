@@ -93,7 +93,6 @@ module TopicFilter
 
     fill_cache(site)
 
-    puts "Topic: #{topic_name} Data: #{site.data[topic_name]}"
     # Here we want to either return data structured around subtopics
     if (!site.data[topic_name]['tag_based']) && site.data[topic_name].key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
@@ -124,10 +123,8 @@ module TopicFilter
       out = {}
       seen_ids = []
       tn = topic_name.gsub(/by_tag_/, '')
-      puts "Fixed tn: '#{tn}'"
 
       materials = filter_by_tag(site, tn)
-      puts materials.length
 
       # Which topics are represented in those materials?
       seen_topics = materials.map { |x| x['topic_name'] }.sort

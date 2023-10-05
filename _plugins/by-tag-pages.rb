@@ -31,6 +31,18 @@ module Jekyll
 
         site.pages << topic_index
       end
+
+      Jekyll.logger.info '[GTN/SyntheticTopics] Generating By-Tag Embeds'
+      TopicFilter.list_all_tags(site).map do |tag|
+        topic_index = PageWithoutAFile.new(site, '', "tags/#{tag}", 'embed.html')
+        topic_index.content = ''
+        topic_index.data['layout'] = 'topic-embed'
+        topic_index.data['topic_name'] = "by_tag_#{tag}"
+        topic_index.data['topic'] = site.data["by_tag_#{tag}"]
+
+        site.pages << topic_index
+      end
+
     end
   end
 end
