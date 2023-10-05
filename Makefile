@@ -234,6 +234,7 @@ annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	wget https://github.com/hexylena/toolshed-version-database/raw/main/guid-rev.json -O metadata/toolshed-revisions.json && \
 	python bin/supported-fetch.py
+	bin/workflows-fetch.rb
 .PHONY: annotate
 
 rebuild-search-index: ## Rebuild search index
