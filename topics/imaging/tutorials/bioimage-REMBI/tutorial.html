@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</title>
+        
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+-->
+<script type="text/javascript">
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@62f51f26135efd15194b1753a8e76a073fdc9be0",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696510712' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696510712' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-10-05 12:58:34 +0000">
+<meta name="DC.creator" content="Julia Jakiela">
+<meta name="DC.creator" content="Laura Cooper">
+<meta name="DC.creator" content="Katarzyna Kamieniecka">
+<meta name="DC.creator" content="Krzysztof Poterlowicz">
+
+        
+        
+        
+        
+        <meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: REMBI - Recommended Metadata for Biological Images – meta...">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-10-05 12:58:34 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html",
+  "timeRequired": "PT15M",
+  "teaches": "Organise bioimage metadata\n - Find out what REMBI is and why it is useful\n - Categorise what metadata belongs to each of the submodules of REMBI\n - Gather the metadata for an example bioimage dataset",
+  "keywords": "imaging, fair, data management, bioimaging",
+  "description": "The questions this  addresses are:\n - What is REMBI and why should I use it?\n - What information should be included when collecting bioimage data?\n\n\nThe objectives are:\n - Organise bioimage metadata\n - Find out what REMBI is and why it is useful\n - Categorise what metadata belongs to each of the submodules of REMBI\n - Gather the metadata for an example bioimage dataset\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html",
+      "name": "FAIR in a nutshell",
+      "description": "Hands-on for 'FAIR in a nutshell' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html",
+      "name": "FAIR data management solutions",
+      "description": "Hands-on for 'FAIR data management solutions' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+      "name": "Julia Jakiela",
+      "image": "https://avatars.githubusercontent.com/wee-snufkin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/",
+      "name": "Laura Cooper",
+      "image": "https://avatars.githubusercontent.com/Laura190",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "name": "Katarzyna Kamieniecka",
+      "image": "https://avatars.githubusercontent.com/kkamieniecka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0004-2454-5950",
+      "orcid": "https://orcid.org/0009-0004-2454-5950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "name": "Krzysztof Poterlowicz",
+      "image": "https://avatars.githubusercontent.com/poterlowicz-lab",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6173-5674",
+      "orcid": "https://orcid.org/0000-0001-6173-5674"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "name": "fair"
+    },
+    {
+      "@type": "Thing",
+      "name": "data management"
+    },
+    {
+      "@type": "Thing",
+      "name": "bioimaging"
+    }
+  ],
+  "abstract": "# Metadata guidelines for bioimaging data"
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696510712'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/bioimage-REMBI/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">2023-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-09-01/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">2023-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Avatar" width="36" height="36">Julia Jakiela</a><a href="/training-material/hall-of-fame/Laura190/" class="contributor-badge contributor-Laura190"><img src="https://avatars.githubusercontent.com/Laura190?s=36" alt="Avatar" width="36" height="36">Laura Cooper</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Avatar" width="36" height="36">Katarzyna Kamieniecka</a><a href="/training-material/hall-of-fame/poterlowicz-lab/" class="contributor-badge contributor-poterlowicz-lab"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=36" alt="Avatar" width="36" height="36">Krzysztof Poterlowicz</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is REMBI and why should I use it?</p>
+</li>
+        
+        <li><p>What information should be included when collecting bioimage data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Organise bioimage metadata</p>
+</li>
+        
+        <li><p>Find out what REMBI is and why it is useful</p>
+</li>
+        
+        <li><p>Categorise what metadata belongs to each of the submodules of REMBI</p>
+</li>
+        
+        <li><p>Gather the metadata for an example bioimage dataset</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/fair">FAIR Data, Workflows, and Research</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR Bioimage Metadata:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/fair">FAIR Data, Workflows, and Research</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR in a nutshell:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/fair-intro/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR data management solutions:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/data-management/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> FAIR Bioimage Metadata:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 15 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics//docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 5, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
+             The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="metadata-guidelines-for-bioimaging-data">Metadata guidelines for bioimaging data</h1>
+
+<p>REMBI (Recommended Metadata for Biological Images) was proposed as a draft metadata guidelines to begin addressing the needs of diverse communities within light and electron microscopy. Currently, these guidelines are in draft form to encourage discussion within the community, but they provide a useful guide as to what metadata should be gathered to make your image data FAIR. They divide the metadata requirements into eight modules which further split into attributes - that seems to be a daunting task, doesn’t it? But at the same time it’s exciting news for the community! To find out more, have a look at the <a href="https://www.nature.com/articles/s41592-021-01166-8">REMBI article</a>.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>In the <a href="https://www.nature.com/articles/s41592-021-01166-8">REMBI paper</a>, the authors consider three potential user groups who require different metadata. Find out what are these three groups and their metadata requirements.</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The identified three user groups are: Biologists, Imaging scientists, Computer-vision researchers.</p>
+    <ul>
+      <li>A research biologist may be interested in the biological sample that has been imaged to compare it to similar samples that they are working with.</li>
+      <li>An imaging scientist may be interested in how the image was acquired so they can improve upon current image acquisition techniques.</li>
+      <li>A computer vision researcher may be interested in annotated ground-truth segmentations, that can be obtained from the image, so they can develop faster and more accurate  algorithms.</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-instructor-note"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-instructor-note" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Instructor Note<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>If you’re an instructor leading this training, you might ask people to work in small groups for this exercise and encourage the discussion. Ask group members to share which of the user groups they identify as and what metadata they would want.</p>
+
+</blockquote>
+
+<h1 id="categories-of-metadata">Categories of metadata</h1>
+<p>REMBI covers different categories of metadata, such as:</p>
+<ul>
+  <li>study</li>
+  <li>study component</li>
+  <li>biosample</li>
+  <li>specimen</li>
+  <li>image acquisition</li>
+  <li>image data</li>
+  <li>image correlation</li>
+  <li>analyzed data</li>
+</ul>
+
+<p>Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we’ll show some examples as well.</p>
+
+<h2 id="study">Study</h2>
+<p>The first module of REMBI metadata describes the Study and should include:</p>
+<ul>
+  <li>Study type</li>
+  <li>Study description</li>
+  <li>General dataset information</li>
+</ul>
+
+<h3 id="study-type">Study type</h3>
+
+<p>Ideally, the study type will be part of an ontology. You can look up the main subject of your study using a tool like <a href="https://www.ebi.ac.uk/ols/index">OLS</a> to find a suitable ontology. This will help others to see where your study sits within the wider research area.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+
+  <table>
+  <tr>
+    <th>Study type</th>
+    <td>Regulation of mitotic cell division</td>
+  </tr>
+</table>
+
+</blockquote>
+
+<h3 id="study-description">Study description</h3>
+
+<p>A brief description of the project. The Study Description should include the title of the study, a brief description and any related publication details such as authors, title and  DOI. If you are gathering metadata prepublication, you can fill in the publication details later or enter a draft title or the journal name you plan to submit to. It’s still a good idea to include the category, so you don’t forget.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th colspan="2">Study description</th>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td>Imaging mitotic cells</td>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>Visualising HeLa cells using confocal microscopy</td>
+  </tr>
+  <tr>
+    <th>Publication details</th>
+    <td>TBC</td>
+  </tr>
+</table>
+</blockquote>
+
+<h3 id="general-dataset-information">General dataset information</h3>
+
+<p>This should include all the information that relates to all the data in the project. This can include the names of contributors and the repository where the data is or will be stored. State the licence under which you intend to make the data available, the repository you intend to submit to and if you are using a schema for structuring your metadata. This helps to keep all collaborators on the same page. Any other general information with respect to the study can be included here, but try to keep this broad as more detailed information should be included in other sections of the metadata.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th colspan="2">General Dataset Information</th>
+  </tr>
+  <tr>
+    <th>Contributors</th>
+    <td>Alica and Bob</td>
+  </tr>
+  <tr>
+    <th>Repository</th>
+    <td>Bioimage Archive</td>
+  </tr>
+  <tr>
+    <th>Licenses</th>
+    <td>CC-BY</td>
+  </tr>
+  <tr>
+    <th>Schemas</th>
+    <td>Datacite Metadata</td>
+  </tr>
+</table>
+</blockquote>
+
+<h2 id="study-component">Study component</h2>
+
+<p>A study component can be thought of as an experiment, both the physical experiment and subsequent data analysis, or a series of experiments that have been conducted with the same aim in mind.</p>
+
+<p>The associated metadata should describe the imaging method used and include a description of the image dataset. The REMBI guidelines store high-level metadata in the study component and then divide the more detailed metadata into other modules.</p>
+
+<p>Within the Study component we include the Imaging Method which should describe the techniques used to acquire the raw data. This could be one or multiple methods, which should be part of a relevant ontology. For Confocal Microscopy data, we can use the Biological Imaging Methods Ontology, although it is also present in a number of other ontologies.</p>
+
+<p>The description of the study component should include an overview of what was imaged as well as any processed data that is created during analysis.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-3"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Imaging Method</th>
+    <td>Confocal Microscopy</td>
+  </tr>
+  <tr>
+    <th>Study Component Description</th>
+    <td>Images of cells and segmented binary masks</td>
+  </tr>
+</table>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-storing-metadata"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-storing-metadata" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Storing metadata<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>You could either choose to store the metadata in the same file as your study data or have a new file for each study component. This could be stored in the same place as your study metadata, or you could create a subdirectory structure.</p>
+</blockquote>
+
+<h2 id="biosample">Biosample</h2>
+
+<p>The first thing you need for the biosample metadata is an Identity. This is a code that you assign to each sample you are describing, which will link this metadata to the physical sample. Then, state what the biological entity is, which should come from a relevant ontology. Use a taxonomy to name the organism. Next, describe the variables in your experiment. The REMBI guidelines split the variables into three types:</p>
+<ul>
+  <li>intrinsic - describe an innate trait of the biosample, such as a genetic alteration</li>
+  <li>extrinsic - describe something you added to the sample, for example, a reagent</li>
+  <li>experimental - things that you intentionally vary, like time</li>
+</ul>
+
+<p>You can leave out some of the variables if they are not part of your experiment.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-4"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Identity</th>
+    <td>CM001</td>
+  </tr>
+  <tr>
+    <th>Biological entity</th>
+    <td>JURKAT E-6.1 cell</td>
+  </tr>
+  <tr>
+    <th>Organism</th>
+    <td>Homo sapiens</td>
+  </tr>
+  <tr>
+    <th>Intrinsic variable</th>
+    <td>Jurkat E6.1 transfected with emerald-VAMP7</td>
+  </tr>
+  <tr>
+    <th>Extrinsic variable</th>
+    <td>Aspirin</td>
+  </tr>
+  <tr>
+    <th>Experimental variables</th>
+    <td>Dose response of aspirin</td>
+  </tr>
+</table>
+</blockquote>
+
+<h2 id="specimen">Specimen</h2>
+
+<p>The specimen metadata should include:</p>
+<ul>
+  <li>the experimental status (control or test)</li>
+  <li>the location within the biosample, such as a coordinate or a particular well in a plate</li>
+  <li>how the sample was prepared</li>
+  <li>how the signal is being generated</li>
+  <li>the content and biological entities of different channels.</li>
+</ul>
+
+<p>Include enough information so that someone with experience in the field could reproduce a sample by following the information you provided. Assume they would know typical techniques and name them using terms from an ontology if possible. Only include lots of detail if you are describing a novel technique.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-5"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Experimental status</th>
+    <td>Control</td>
+  </tr>
+  <tr>
+    <th>Location within biosample</th>
+    <td>Plasma membrane within 100 nm of coverslip (TIRF)</td>
+  </tr>
+  <tr>
+    <th>Preparation method</th>
+    <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
+  </tr>
+  <tr>
+    <th>Signal/contrast mechanism</th>
+    <td>fluorescent proteins</td>
+  </tr>
+  <tr>
+    <th>Channel – content</th>
+    <td>Green: eGFP, Red: mCherry</td>
+  </tr>
+  <tr>
+    <th>Channel – biological entity</th>
+    <td>Green: EGFR, Red: Src</td>
+  </tr>
+</table>
+</blockquote>
+
+<h2 id="image-acquisition">Image acquisition</h2>
+<p>Here you should include all the information about the instrument you used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?</p>
+
+<p>Check with your facility manager if they have any guidelines for what details need to be recorded for your particular instrument. Make sure that the parameters you record can actually be used by someone else if they don’t have exactly the same instrument or setup. For example, don’t say that you used a certain percentage of laser power, as this doesn’t tell you how much power was used unless you also provide the total power of the laser. If the instrument software has automatically generated a metadata file, remember to save this. Depending on its content, this may be sufficient.</p>
+
+<p>Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-6"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Instrument attributes</th>
+    <td>Olympus FV3000, laser point scanning confocal, 500-550 nm filter, 37-degree chamber.</td>
+  </tr>
+  <tr>
+    <th>Image acquisition parameters</th>
+    <td> </td>
+  </tr>
+  <tr>
+    <th>Objective</th>
+    <td>Cos-7 cells cultured in DMEM medium, and then plated on #1 coverslips and imaged live in L-15 medium</td>
+  </tr>
+  <tr>
+    <th>Excitation Wavelength</th>
+    <td>488 nm</td>
+  </tr>
+  <tr>
+    <th>PMT gain</th>
+    <td>500 V</td>
+  </tr>
+  <tr>
+    <th>Pixel dwell time</th>
+    <td>2 𝜇s</td>
+  </tr>
+  <tr>
+    <th>Confocal aperture</th>
+    <td>200 𝜇m</td>
+  </tr>
+</table>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-helpful-resources"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-helpful-resources" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Helpful resources<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>To help you collect the information for your own data, you might have a look at the local resources from your institution or universities. For example, at Warwick University, there are <a href="https://warwick.ac.uk/fac/sci/med/research/biomedical/facilities/camdu/methodsreporting/">webpages</a> describing the metadata that needs to be collected for some of the microscopes.</p>
+
+</blockquote>
+
+<h2 id="image-data">Image data</h2>
+
+<p>In this section, you record all the information related to all the images you have. Not only the primary or raw images, but also any processed images,  perhaps such as binary files showing the resulting segmentation.</p>
+
+<p>You need to say what format the images are in and if they have undergone any compression, the dimensions of the images, and what the physical size of the pixel or voxel is, including the units. Most of this information you should be able to get from the metadata or header of the image files.</p>
+
+<p>Next, you need to state the physical size of the image or magnification, calculated from the pixel or voxel size and the dimension extents. Give any information related to how the channels are represented. For processed images, you need to provide the methods used for processing.</p>
+
+<p>Finally, say you have used contrast inversion, do the bright features in the image correspond to areas of high signal, or is it the other way around?</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-7"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Type</th>
+    <td>Primary Image, Segmentation</td>
+  </tr>
+  <tr>
+    <th>Format and compression</th>
+    <td>Primary: .oir (Olympus), Segmentation: .tiff</td>
+  </tr>
+  <tr>
+    <th>Dimension extents</th>
+    <td>x: 512, y: 512, z: 25</td>
+  </tr>
+  <tr>
+    <th>Size description</th>
+    <td>153.6 x 153.6 x 25 𝜇m</td>
+  </tr>
+  <tr>
+    <th>Pixel/Voxel size description</th>
+    <td>0.3 x 0.3 x 0.1 𝜇m</td>
+  </tr>
+  <tr>
+    <th>Image processing method</th>
+    <td>Fiji: Median filter (3 pixel kernel), Otsu threshold</td>
+  </tr>
+  <tr>
+    <th>Contrast inversion</th>
+    <td>No</td>
+  </tr>
+</table>
+</blockquote>
+
+<h2 id="image-correlation">Image correlation</h2>
+
+<p>If you have used different imaging modalities with the same sample, this part of the metadata should describe how the images relate to one another. You could use this section to describe generally the relationship between images. In the example below, images from different modalities have been aligned.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-8"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Spatial and temporal alignment</th>
+    <td>Manual</td>
+  </tr>
+  <tr>
+    <th>Fiducials used</th>
+    <td>Soil grains</td>
+  </tr>
+  <tr>
+    <th>Transformation matrix</th>
+    <td>See file: Transforms.csv</td>
+  </tr>
+  <tr>
+    <th>Size description</th>
+    <td>153.6 x 153.6 x 25 𝜇m</td>
+  </tr>
+  <tr>
+    <th>Related images and relationship</th>
+    <td>Primary XCT: Data/XCT
+      Primary XRF: Data/XRF
+      Processed XRF: Data/Transformed_XRF</td>
+  </tr>
+</table>
+</blockquote>
+
+<h2 id="analysed-data">Analysed data</h2>
+
+<p>This section should not include metadata for any image data, including processed images, as that should have been covered in the Image Data section. Instead, it should describe the analysis results you have, such as measurements. Have you done some numerical analysis or some phenotyping or something else? There is no need to describe the methods in great detail if they are already described in the relevant publication.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-example-9"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Example</div>
+  <table>
+  <tr>
+    <th>Analysis results type</th>
+    <td>Speed of cell division</td>
+  </tr>
+  <tr>
+    <th>Data used for analysis</th>
+    <td>Preprocessed images, Cell tracks</td>
+  </tr>
+  <tr>
+    <th>Analysis method</th>
+    <td>Track cell lineage: BayesianTracker (btrack) with configuration track_config.json
+      Measure speed: Numerical analysis in Python</td>
+  </tr>
+</table>
+</blockquote>
+
+<h1 id="final-notes">Final notes</h1>
+
+<p>For more examples, check out REMBI Supplementary Information - either in <a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41592-021-01166-8/MediaObjects/41592_2021_1166_MOESM1_ESM.pdf">pdf</a> or <a href="https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit#gid=1023506919">spreadsheet</a>.</p>
+
+<p>At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management habits, share them with others and hence contribute to the development of Science toghether.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>REMBI describes useful guidelines for bioimaging that can help unification and FARIfication of the data.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/imaging/faqs/">FAQ page for the Imaging topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data (Imaging)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Julia Jakiela, Laura Cooper, Katarzyna Kamieniecka, Krzysztof Poterlowicz,  <b>REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-bioimage-REMBI,
+author = "Julia Jakiela and Laura Cooper and Katarzyna Kamieniecka and Krzysztof Poterlowicz",
+	title = "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/imaging">Imaging</a>
+        
+    
+    </li>
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-REMBI/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/62f51f26135efd15194b1753a8e76a073fdc9be0">62f51f2</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/bioimage-REMBI/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1696510712'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
