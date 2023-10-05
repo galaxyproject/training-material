@@ -13,7 +13,11 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |k, _v| k }
+    self.list_topics_h(site).keys
+  end
+
+  def self.list_topics_h(site)
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }
   end
 
   ##
@@ -23,7 +27,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The topic objects themselves
   def self.enumerate_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |_k, v| v }
+    self.list_topics_h(site).values
   end
 
   ##
@@ -848,6 +852,14 @@ module Jekyll
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
+    def list_topics_ids(site)
+      ['introduction'] +  TopicFilter.list_topics(site).filter { |k| k != 'introduction' }
+    end
+
+    def list_topics_h(site)
+      TopicFilter.list_topics(site)
+    end
+
     def list_topics_by_category(site, category)
       q = TopicFilter.list_topics(site).map do |k|
         [k, site.data[k]]
@@ -878,6 +890,10 @@ module Jekyll
 
     def topic_filter(site, topic_name)
       TopicFilter.topic_filter(site, topic_name)
+    end
+
+    def topic_filter_tutorial_count(site, topic_name)
+      TopicFilter.topic_filter(site, topic_name).length
     end
 
     def identify_contributors(materials, site)

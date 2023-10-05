@@ -21,6 +21,7 @@ module Jekyll
           "title" => tag,
           "summary" => "Tutorials covering #{tag}",
           "tag_based" => true,
+          "hidden" => true,
         }
 
         topic_index = PageWithoutAFile.new(site, '', "tags/#{tag}", 'index.md')
