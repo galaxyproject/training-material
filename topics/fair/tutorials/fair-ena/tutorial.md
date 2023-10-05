@@ -15,8 +15,10 @@ key_points:
 - Use ENA Webin interactive portal to submit metadata
 - Preparation of metadata and sequence data for the submission
 - Use cURL to submit read fastq files
+
 requirements:
 - Linux-based machine
+
 tags:
 - FAIR
 - ENA
@@ -46,11 +48,10 @@ Prior to publication many journals and funders require authors to submit their r
 The three databases have different methods for making submissions. If your database of choice is ENA and you 
 need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data as well as accompanying metadata, and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
 
-If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html) tutorial helpful. 
+If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]( {% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html %}) tutorial helpful. 
 
-<tip-title>What is cURL?</tip-title>
->cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.
-{: .tip}
+><tip-title>What is cURL?</tip-title>
+>cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. {: .tip}
 
 ## ENA Submission Routes
 
@@ -79,6 +80,7 @@ For data submission ENA provides a detailed guide (https://ena-docs.readthedocs.
 
 ## ENA Metadata Model
 ![ENA metadata model](./images/metadata_model.png "ENA metadata model")
+
 
 The ENA metadata model (Figure 1) represents how metadata for a submission is structured and linked. Different information pertaining to a submission is organised into objects within the metadata model. Therefore, understanding the metadata model will enable you to determine which objects you need to submit. 
 
@@ -130,7 +132,6 @@ To register a study you will need the following metadata:
 > >How can you confirm that your study has been successfully registered?
 > > > <solution-title></solution-title>
 > > > Click on the Dashboard icon, select 'Studies Report'. The accessions for your study should appear next to the Study title and other attributes. 
-> >
 > > {: .solution}
 > {: .question}
 >
@@ -162,33 +163,28 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > 3. Click on 'ENA default sample checklist' (or the most appropriate checklist for your study). 
 > 4. The mandatory attributes will be auto-selected. Expand the 'Optional Fields' box and select attributes you would like to include. 
 >
-Your checklist will contain columns shown in Table 2.
-
-**Table 2.** Sample metadata checklist
-| <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
-|-------------|-------------|-------------|-------------|-------------|-------------|-------------|
-| Checklist	| ERC000011	| ENA default sample checklist | | | |
-| tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
-| #units | | | | | |
- 
+> Your checklist will contain columns shown in Table 2.
+> 
+> **Table 2.** Sample metadata checklist
+> | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
+> |-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+> | Checklist	| ERC000011	| ENA default sample checklist | | | |
+> | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea)
+> | #units | | | | | |
+>  
 >
 > > <tip-title>Optional Fields</tip-title>
-> > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable. 
-> 
+> > When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable.
 > {: .tip}
 > > <question-title></question-title>
-> >
 > > What format should the collection date be in? Read descriptions for other attributes to get a clear understanding of the attributes and permitted values. 
-> >
 > > > <solution-title></solution-title>
-> > >
 > > > Date/time in any of these formats is acceptable:
 > > > 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008
 > > {: .solution}
 > {: .question}
 
 > 5. Click on 'Next' to get to the 'Download TSV Template' button.
-
 {: .hands_on}
 
 > <hands-on-title>Upload sample checklist</hands-on-title>
@@ -201,11 +197,9 @@ Your checklist will contain columns shown in Table 2.
 > 7. If the structure of your checklist is correct and the upload is successful a pop-up message will appear with Sample accession numbers -  SAMEA* (BioSample) and ERS*.
 > 8. Check the processing status of your submissions via Samples Report. 
 
-> <tip-title>Sample Alias</tip-title>
-> Remember to enter sample aliases that correspond to what you use in related publications. This will enable readers to find sample-specific metadata and read files, even if you only state a Project accession number in your paper. Sample aliases can, furthermore, be optionally displayed as Unique name in the Sample report. 
-> 
+> > <tip-title>Sample Alias</tip-title>
+> > Remember to enter sample aliases that correspond to what you use in related publications. This will enable readers to find sample-specific metadata and read files, even if you only state a Project accession number in your paper. Sample aliases can, furthermore, be optionally displayed as Unique name in the Sample report. 
 > {: .tip}
-
 {: .hands_on}
 
 ## 4. Read metadata
@@ -248,11 +242,11 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > for f in *.gz; do md5 $f | awk '{ gsub(/\(|\)/,""); print $2"\t" $4 }'; done > md5sums.tsv
 > ```
 > md5sums.tsv will contain a tab-separated table of fastq.gz filenames and their md5sum. 
-
+>
 {: .hands_on}
 
 
-<hands-on-title>Read checklist submission</hands-on-title>
+> <hands-on-title>Read checklist submission</hands-on-title>
 > 1. From the 'Dashboard' select 'Submit Reads' from Raw Reads box. 
 > 2. Similar to how you downloaded the sample checklist, download the Read submission template for 'paired reads using two fastq files'.
 > 3. Select the relevant optional fields to be included in the spreadsheet.
@@ -272,11 +266,11 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > 7. If metadata validation is successful a pop-up message bearing a run accession (ERR*) and experiment accesion (ERX*) will appear for each read submission. 
 > 8. Confirm the processing status of your submission via Runs Report.
 > 9. Any errors generated in the process will be communicated to you on the registered email.
-
+>
 > > <tip-title></tip-title>
 > > The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describe the methods used to sequence the sample.
 > {: .tip}
-
+>
 {: .hands_on}
 
 ## 5. Read data upload
@@ -291,7 +285,9 @@ curl -T <<your_file>>.gz -u Webin-XXX:password ftp://webin2.ebi.ac.uk/
 
 Check the processing status of your upload via the Run Processing Report.  
 
-Note: The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived.
+> <warning-title></warning-title>
+> The Webin upload area is a temporary transit location which is not backed up. Always ensure you retain a local copy of the data till the files have been successfully submitted and archived.
+{: .warning}
 
 ## 6. Post-submission editing
 Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
