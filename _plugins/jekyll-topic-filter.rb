@@ -98,7 +98,8 @@ module TopicFilter
     fill_cache(site)
 
     # Here we want to either return data structured around subtopics
-    if (!site.data[topic_name]['tag_based']) && site.data[topic_name].key?('subtopics')
+
+    if site.data[topic_name]['tag_based'].nil? && site.data[topic_name].key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
       out = {}
       seen_ids = []
@@ -120,7 +121,7 @@ module TopicFilter
       }
     elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
       # TODO
-      puts 'UNIMPLEMENTED'
+      Jekyll.logger.error 'UNIMPLEMENTED'
       out = {}
     elsif site.data[topic_name]['tag_based'] # Tag based Topic
       # We'll construct a new hash of subtopic(parent topic) => tutorials
@@ -156,7 +157,7 @@ module TopicFilter
       out = {
         '__FLAT__' => {
           'subtopic' => nil,
-          'materials' => filter_by_topic(site, tn)
+          'materials' => filter_by_topic(site, topic_name)
         }
       }
     end
@@ -397,7 +398,7 @@ module TopicFilter
     end
 
     if page.nil?
-      puts '[GTN/TopicFilter] Could not process material'
+      Jekyll.logger.error '[GTN/TopicFilter] Could not process material'
       return {}
     end
 
@@ -582,6 +583,8 @@ module TopicFilter
       p.data['redirect_from'].uniq!
     end
 
+    pp materials
+    p site.data.keys
     materials
   end
 
@@ -628,7 +631,7 @@ module TopicFilter
     # and then the rest of the pages.
     resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
-    puts "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
+    Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
 
     resource_pages
   end
@@ -646,7 +649,7 @@ module TopicFilter
     # and then the rest of the pages.
     resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
-    puts "Error? Could not find any relevant tagged pages for #{topic_name}" if resource_pages.empty?
+    Jekyll.logger.error "Error? Could not find any relevant tagged pages for #{topic_name}" if resource_pages.empty?
 
     resource_pages
   end
@@ -659,7 +662,7 @@ module TopicFilter
     # Select out materials with the correct subtopic
     resource_pages = resource_pages.select { |x| x['subtopic'] == subtopic_id }
 
-    puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.empty?
+    Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.empty?
 
     resource_pages
   end
