@@ -213,7 +213,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 >
 > 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4) %} with the following parameters:
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->        - {% icon param-collection %} *"FASTQ/A file"*: `HiFi_collection`
+>        - {% icon param-collection %} *"FASTQ/A file"*: `HiFi reads`
 >        - In *"Read 1 Options"*:
 >            - In *"5' or 3' (Anywhere) Adapters"*:
 >                - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
