@@ -1,4 +1,108 @@
-<section class="tutorials-list by_tag_storage topic-type-">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+-->
+<script type="text/javascript">
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@10f8726e65655a71ebb3fad05a738b15c8d4a0fb",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/tags/storage/embed.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696596155' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696596155' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="1970-01-01 00:00:00 +0000">
+
+        
+        
+        
+        
+        <meta name="description" content="Tutorials covering storage">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: storage">
+        <meta property="og:description" content="Tutorials covering storage">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+    </head>
+    <body data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696596155'></script>
+        <section class="tutorials-list by_tag_storage topic-type-">
 
 
 
@@ -46,11 +150,11 @@
             
             
               
-              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffa5db; --color-darker: #ff7fd1; --color-dimmed: #ff93d6;" title="Click to show all tutorials tagged ansible">ansible</a>
+              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffd3ec; --color-darker: #ffaede; --color-dimmed: #ffc1e5;" title="Click to show all tutorials tagged ansible">ansible</a>
               
-              <a href="/training-material/search?query=storage" class="label label-default tutorial_tag" style="--color-primary: #ffa4e3; --color-darker: #ff7ddb; --color-dimmed: #ff91df;" title="Click to show all tutorials tagged storage">storage</a>
+              <a href="/training-material/search?query=storage" class="label label-default tutorial_tag" style="--color-primary: #ffd3f0; --color-darker: #ffade5; --color-dimmed: #ffc1eb;" title="Click to show all tutorials tagged storage">storage</a>
               
-              <a href="/training-material/search?query=git-gat" class="label label-default tutorial_tag" style="--color-primary: #ffaaae; --color-darker: #ff898e; --color-dimmed: #ff9a9e;" title="Click to show all tutorials tagged git-gat">git-gat</a>
+              <a href="/training-material/search?query=git-gat" class="label label-default tutorial_tag" style="--color-primary: #ffd6d7; --color-darker: #ffb3b6; --color-dimmed: #ffc5c7;" title="Click to show all tutorials tagged git-gat">git-gat</a>
               
             
             </div>
@@ -335,9 +439,9 @@
             
             
               
-              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffa5db; --color-darker: #ff7fd1; --color-dimmed: #ff93d6;" title="Click to show all tutorials tagged ansible">ansible</a>
+              <a href="/training-material/search?query=ansible" class="label label-default tutorial_tag" style="--color-primary: #ffd3ec; --color-darker: #ffaede; --color-dimmed: #ffc1e5;" title="Click to show all tutorials tagged ansible">ansible</a>
               
-              <a href="/training-material/search?query=storage" class="label label-default tutorial_tag" style="--color-primary: #ffa4e3; --color-darker: #ff7ddb; --color-dimmed: #ff91df;" title="Click to show all tutorials tagged storage">storage</a>
+              <a href="/training-material/search?query=storage" class="label label-default tutorial_tag" style="--color-primary: #ffd3f0; --color-darker: #ffade5; --color-dimmed: #ffc1eb;" title="Click to show all tutorials tagged storage">storage</a>
               
             
             </div>
@@ -537,3 +641,8 @@
 
 
 </section>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1696596155'></script>
+    </body>
+</html>
