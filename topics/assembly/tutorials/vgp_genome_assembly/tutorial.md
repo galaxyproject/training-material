@@ -145,7 +145,7 @@ In order to reduce computation time, we will assemble samples from the yeast _Sa
 >
 {: .details}
 
-These yeast datasets are available on both EU and ORG as data libraries: navigate to "Shared Data" > "Data Libraries" > "VGP- Yeast".
+These yeast datasets are available on ORG as data libraries: navigate to "Shared Data" > "Data Libraries" > "VGP- Yeast" > check all the data and import them into a history.
 
 If these data libraries are not available on your instance, please see the following dropdown box for Zenodo instructions. 
 
