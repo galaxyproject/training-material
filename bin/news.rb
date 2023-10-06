@@ -31,7 +31,7 @@ $rooms = {
   },
   'single-cell' => {
     server: 'https://matrix.org',
-    room: '!BJrgUTWKrSELNCziRi:gitter.im',
+    room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
   }
 }
 
