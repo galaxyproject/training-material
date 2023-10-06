@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Inferring Trajectories using Scanpy
+subtopic: single-cell-CS
+priority: 4
 zenodo_link: https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 questions:
 - How can I infer lineage relationships between single cells based on their RNA, without a time series?
@@ -367,7 +369,7 @@ We're also interested in the expression of the two genes that are known to be ma
 >    - *"Use raw attributes if present"*: `No`
 >    - *"Location of legend"*: `On data`
 >
-> >    > <comment-title> Gene Symbols </comment-title>
+>    > <comment-title> Gene Symbols </comment-title>
 >    >
 >    > We're using the EnsemblIDs during this tutorial, as discussed above. If you like, you could change the names of these plots to the gene symbols by filling in the optional Figure title field with `Cd4,Cd8`. Make sure that the order of your figure titles matches the order of the EnsemblIDs in the colour by field. ENSMUSG00000023274 is Cd4 and ENSMUSG00000053977 is Cd8.
 >    {: .comment}
