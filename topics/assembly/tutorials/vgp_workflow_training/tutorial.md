@@ -23,11 +23,12 @@ contributors:
 - gallardoalba
 - pickettbd
 - abueg
+- nekrut
 abbreviations:
   primary assembly: homozygous regions of the genome plus one set of alleles for the heterozygous loci
   alternate assembly: alternate loci not represented in the primary assembly
   QV: assembly consensus quality
-  unitig:
+  unitig: a uniquely assembleable subset of overlapping fragments
   contigs: contiguous sequences in an assembly
   scaffolds: one or more contigs joined by gap sequence
   Hi-C: all-versus-all chromatin conformation capture
@@ -37,9 +38,7 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-
 # Introduction
-
 
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, Bionano optical maps, and {Hi-C} data.
 
