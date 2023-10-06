@@ -664,7 +664,7 @@
         <span class="ruby-identifier">cell</span>[<span class="ruby-string">&#39;source&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/&lt;img src=&quot;(\.\.[^&quot;]*)/</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">img</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">path</span> = <span class="ruby-identifier">img</span>[<span class="ruby-value">10</span><span class="ruby-operator">..</span>]
           <span class="ruby-identifier">image_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">path</span>)
-      
+
           <span class="ruby-keyword">if</span> <span class="ruby-identifier">img</span>[<span class="ruby-value">-3</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">downcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;png&#39;</span>
             <span class="ruby-comment"># puts &quot;[GTN/Notebook/Images] Embedding png: #{img}&quot;</span>
             <span class="ruby-identifier">data</span> = <span class="ruby-constant">Base64</span>.<span class="ruby-identifier">encode64</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">binread</span>(<span class="ruby-identifier">image_path</span>))

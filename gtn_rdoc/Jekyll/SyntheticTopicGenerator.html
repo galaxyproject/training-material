@@ -115,10 +115,10 @@
             <pre><span class="ruby-comment"># File _plugins/gtn/synthetic.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># Full Bibliography</span>
-  <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/SyntheticTopics] Generating Indexes&#39;</span>
+  <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/SyntheticTopics] Generating Indexes&#39;</span>
 
   <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics</span>(<span class="ruby-identifier">site</span>).<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">t</span>][<span class="ruby-string">&#39;tag_based&#39;</span>] }.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/SyntheticTopics] Creating #{topic} topic&quot;</span>
+    <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;[GTN/SyntheticTopics] Creating #{topic} topic&quot;</span>
 
     <span class="ruby-identifier">topic_index</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-node">&quot;topics/#{topic}&quot;</span>, <span class="ruby-string">&#39;index.md&#39;</span>)
     <span class="ruby-identifier">topic_index</span>.<span class="ruby-identifier">content</span> = <span class="ruby-string">&#39;&#39;</span>

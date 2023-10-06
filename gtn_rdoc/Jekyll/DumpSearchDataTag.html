@@ -118,7 +118,7 @@
             </div>
 
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File _plugins/search.rb, line 10</span>
+            <pre><span class="ruby-comment"># File _plugins/search.rb, line 11</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tag_name</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">tokens</span>)
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@text</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">strip</span>
@@ -147,7 +147,7 @@
           
 
           <div class="method-source-code" id="getlist-source">
-            <pre><span class="ruby-comment"># File _plugins/search.rb, line 15</span>
+            <pre><span class="ruby-comment"># File _plugins/search.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getlist</span>(<span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">attr</span>)
   [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">tutorial</span>[<span class="ruby-identifier">attr</span>].<span class="ruby-identifier">nil?</span>
 
@@ -170,13 +170,12 @@
           
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/search.rb, line 21</span>
+            <pre><span class="ruby-comment"># File _plugins/search.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/Search]&#39;</span>
 
   <span class="ruby-identifier">site</span> = <span class="ruby-identifier">context</span>.<span class="ruby-identifier">registers</span>[<span class="ruby-value">:site</span>]
-  <span class="ruby-identifier">topics</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;type&#39;</span>) }
-               .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">%w[use admin-dev basics]</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;type&#39;</span>] }
+  <span class="ruby-identifier">topics</span> = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">list_topics_h</span>(<span class="ruby-identifier">site</span>)
 
   <span class="ruby-identifier">results</span> = {}
   <span class="ruby-identifier">topics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">topic</span><span class="ruby-operator">|</span>

@@ -76,6 +76,7 @@
     <li ><a href="#method-i-call_engine">#call_engine</a>
     <li ><a href="#method-i-correct">#correct</a>
     <li ><a href="#method-i-data_library_for_tutorial">#data_library_for_tutorial</a>
+    <li ><a href="#method-i-fetch_workflows">#fetch_workflows</a>
     <li ><a href="#method-i-filterSlides">#filterSlides</a>
     <li ><a href="#method-i-filterTutorials">#filterTutorials</a>
     <li ><a href="#method-i-find_duration">#find_duration</a>
@@ -298,6 +299,39 @@
             <pre><span class="ruby-comment"># File bin/update-data-library, line 120</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_library_for_tutorial</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>), <span class="ruby-string">&#39;data-library.yaml&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-fetch_workflows" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">fetch_workflows</span><span
+            class="method-args">(server)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          <p>Get the list of workflows</p>
+
+          <div class="method-source-code" id="fetch_workflows-source">
+            <pre><span class="ruby-comment"># File bin/workflows-fetch.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fetch_workflows</span>(<span class="ruby-identifier">server</span>)
+  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{server}/api/workflows/&quot;</span>)
+  <span class="ruby-identifier">request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>)
+  <span class="ruby-identifier">req_options</span> = {
+    <span class="ruby-value">use_ssl:</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">scheme</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;https&#39;</span>,
+  }
+  <span class="ruby-identifier">response</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">hostname</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>, <span class="ruby-identifier">req_options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">w</span>[<span class="ruby-string">&#39;server&#39;</span>] = <span class="ruby-identifier">server</span>
+    <span class="ruby-identifier">w</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
