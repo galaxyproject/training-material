@@ -71,7 +71,7 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 >
 >    > <tip-title>copy pasting from computer to QGIS</tip-title>
 >    >
->    > * You can expand the QGIS left panel (where there is 3 dots, verticaly) to access the "clipboard" menu, and paste the content you want to paste on a QGIS form. Then, click outside of this panel to collapse it, and you can click for example on the `url` field to paste the url from your clipbaord
+>    > You can expand the QGIS left panel (where there is 3 dots, vertically) to access the "clipboard" menu, and paste the content you want to paste on a QGIS form. Then, click outside of this panel to collapse it, and you can click for example on the `url` field to paste the url from your clipboard
 >    >
 >    > ![QGIS clipboard](../../images/QGIS/qgistuto1.PNG)
 >    {: .tip}
