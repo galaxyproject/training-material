@@ -1,6 +1,6 @@
 ---
 title: How can I talk with other users?
-area: Single-Cell RNA
+area: Community
 box_type: tip
 layout: faq
 contributors: [nomadscientist]

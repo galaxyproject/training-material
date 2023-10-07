@@ -1,6 +1,6 @@
 ---
 title: Use our single cell Galaxy instance
-area: Single-Cell RNA
+area: Resources
 box_type: tip
 layout: faq
 contributors: [nomadscientist]
