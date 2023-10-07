@@ -542,4 +542,4 @@ We have:
  * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
  * Applied the necessary conversion to pass these data to downstream processes.
 
-{% snippet single-cell/faqs/user_community_join.md %}
+{% snippet topics/single-cell/faqs/user_community_join.md %}
