@@ -113,10 +113,7 @@ You can access the data for this tutorial in multiple ways:
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 # Filtering
 
