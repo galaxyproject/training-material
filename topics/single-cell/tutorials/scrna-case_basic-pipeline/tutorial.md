@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, Plot and Explore Single-cell RNA-seq Data
+title: Filter, plot and explore single-cell RNA-seq data
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -35,8 +35,7 @@ tags:
 - single-cell
 - 10x
 - paper-replication
-- español
-- transcriptomics
+
 
 contributions:
   authorship:
@@ -46,8 +45,7 @@ contributions:
     - wee-snufkin
   testing:
     - wee-snufkin
-translations:
-  - es
+
 
 follow_up_training:
   -
@@ -566,7 +564,7 @@ Next up, we're going to scale our data so that all genes have the same variance 
 {% icon congratulations %} Congratulations! You have processed your object!
 
 > <comment-title></comment-title>
-> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
+> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis.
 {: .comment}
 
 # Preparing coordinates
@@ -968,9 +966,9 @@ Be warned - this visualisation tool is a powerful option for exploring your data
 > For those that did not take the 'control' options, please
 > 1. **Rename** your history (by clicking on the history title) as `DECISION-Filtering and Plotting Single-cell RNA-seq Data`
 > 2. Add a history annotation {% icon history-annotate %} that includes which parameters you changed/steps you changed from the *control*
-> 
+>
 >    {% snippet faqs/galaxy/histories_sharing.md %}
-> 
+>
 > 3. Feel free to explore any other similar histories
 {: .details}
 

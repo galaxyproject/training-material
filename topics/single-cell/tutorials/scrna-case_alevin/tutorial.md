@@ -28,8 +28,6 @@ tags:
   - single-cell
   - 10x
   - paper-replication
-  - español
-  - transcriptomics
 
 contributions:
   authorship:
@@ -48,9 +46,6 @@ requirements:
     tutorials:
         - scrna-intro
         - scrna-umis
-
-translations:
-  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -225,7 +220,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <hands-on-title>Running Alevin</hands-on-title>
 >
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %} 
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.9.0+galaxy2) %}
 >
 >     > <question-title></question-title>
 >     >
@@ -264,7 +259,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <comment-title>Alevin file names</comment-title>
 >
-> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*. 
+> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*.
 {: .comment}
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Combining datasets after pre-processing"
+title: "Combining single cell datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
@@ -27,8 +27,7 @@ tags:
   - single-cell
   - 10x
   - paper-replication
-  - español
-  - transcriptomics
+
 
 contributions:
   authorship:
@@ -49,8 +48,6 @@ requirements:
         - scrna-umis
         - scrna-case_alevin
 
-translations:
-  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -87,7 +84,7 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** 
+2. **Importing from a history**
     - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
     - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/hrukkudyr_us/h/cs2combining-datasets-after-pre-processing---input)
 
