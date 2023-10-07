@@ -27,6 +27,7 @@ contributions:
 tags:
   - single-cell
   - transcriptomics
+  - data management
 
 requirements:
   -

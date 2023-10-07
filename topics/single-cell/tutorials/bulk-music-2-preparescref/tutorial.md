@@ -39,6 +39,7 @@ follow_up_training:
 tags:
   - single-cell
   - transcriptomics
+  - data management
 ---
 
 
