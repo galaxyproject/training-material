@@ -501,3 +501,5 @@ In this tutorial, you have annotated and scored the cell cycle genes and regress
 You might want to check your results against this [example history](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/removing-the-effects-of-the-cell-cycle---answer-key).
 
 You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out.
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

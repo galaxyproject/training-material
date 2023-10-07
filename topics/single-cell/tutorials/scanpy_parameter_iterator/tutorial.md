@@ -428,3 +428,5 @@ You might want to compare your results with this [control history](https://usega
 
 
 {% icon congratulations %} You have finished the tutorial! You have learned how to use the Parameter Iterator with the nearest neighbours, perplexity and resolution parameters. You also compared multiple outputs resulting from the analysis using different values at three different steps (Scanpy ComputeGraph, Scanpy RunTSNE and Scanpy FindCluster). Hopefully this tool will help you more quickly assess parameter values, ultimately helping you choose values that both confirm prior knowledge as well as offer new insights on biological data.
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}
