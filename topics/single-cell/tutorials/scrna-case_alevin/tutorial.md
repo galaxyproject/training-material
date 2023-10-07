@@ -542,5 +542,4 @@ We have:
  * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
  * Applied the necessary conversion to pass these data to downstream processes.
 
- To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
- [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+{% snippet single-cell/faqs/user_community_join.md %}
