@@ -38,9 +38,6 @@ follow_up_training:
 
 tags:
   - single-cell
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
 ---
 

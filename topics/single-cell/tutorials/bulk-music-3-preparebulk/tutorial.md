@@ -26,9 +26,6 @@ contributions:
 
 tags:
   - single-cell
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
 
 requirements:

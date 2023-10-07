@@ -8,10 +8,6 @@ priority: 1
 zenodo_link: https://zenodo.org/record/5719228
 tags:
   - single-cell
-  - mouse
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
 questions:
 - How do we infer cell type proportions from bulk RNA-seq data?
