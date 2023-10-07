@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 subtopic: datamanipulation
 priority: 2
 
-title: Bulk matrix to ESet object | Creating the bulk RNA-seq dataset for deconvolution
+title: Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
 zenodo_link: 'https://zenodo.org/record/7319173'
 questions:
 - Where can I find good quality RNA-seq datasets?

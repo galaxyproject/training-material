@@ -26,7 +26,6 @@ key_points:
 tags:
 - single-cell
 - 10x
-- transcriptomics
 
 contributions:
   authorship:
@@ -373,7 +372,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 
 ## Filter the cell cycle genes
 
-To demonstrate the power of cell cycle regression, we're going to reduce our expression matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn't do this during analysis, but for proof of principle, let's go for it! 
+To demonstrate the power of cell cycle regression, we're going to reduce our expression matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn't do this during analysis, but for proof of principle, let's go for it!
 
 > <hands-on-title>Filter the AnnData datasets</hands-on-title>
 >
@@ -482,9 +481,9 @@ Comparing the before and after plots, we can clearly see that the effects of the
 > 1. What impact do you think the cell cycle regression will have when you analyse the whole dataset? What would happen if we plotted all of the genes from the main dataset?
 >
 > > <solution-title></solution-title>
-> > 
+> >
 > > 1. The regression reduces the impact of the cell cycle on the data - this is why the cells are less separated by phase afterwards. When we analyse the whole `CellCycle_Regressed` dataset, with all of the genes, this could allow other differences in gene expression to become more apparent.
-> > 
+> >
 > > We wouldn't expect to see such clear distinctions in PCA plots created using all of the genes (not just the cell cycle ones), even before the regression. Although the cell cycle genes can have a significant effect, these won't be as obvious when other genes are also being taken into account. However, we will still see a difference after we regress out the effects of the cell cycle - the cells in different phases will become more mixed up together. How much of a difference the regression makes will depend on how strong the effects of the cell cycle are in a particular dataset - you can see the effects on this dataset below. You can also replicate these plots after completing the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial by colouring your PCA plots by phase.
 > >
 > > ![PCA plot showing some separation between cells in the G1, S and G2M Phases before regression](../../images/scrna-case_cell-cycle/CellCycle_PCA3.png "PCA Plot using all genes before regression")
