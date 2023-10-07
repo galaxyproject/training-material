@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring trajectories using Monocle3'
+title: 'Inferring single cell trajectories (Monocle3)'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/record/7078524'
@@ -39,7 +39,6 @@ tags:
 - single-cell
 - 10x
 - paper-replication
-- transcriptomics
 
 contributions:
   authorship:

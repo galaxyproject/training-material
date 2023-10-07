@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring Trajectories using Monocle3 (R)'
+title: 'Inferring single cell trajectories (Monocle3, R)'
 subtopic: single-cell-CS-code
 priority: 4
 zenodo_link: 'https://zenodo.org/record/7455590'
@@ -39,7 +39,7 @@ requirements:
 
 tags:
 - single-cell
-- trajectory-analysis
+- 10x
 - paper-replication
 
 contributions:
