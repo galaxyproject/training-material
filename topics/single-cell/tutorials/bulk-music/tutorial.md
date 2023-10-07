@@ -281,7 +281,7 @@ For now we need to construct our Expression set objects that will be consumed by
 
 Here we shall build two ExpressionSet objects corresponding to the bulk and single-cell datatypes.
 
-### **Construct Expression Set Object**
+### Construct Expression Set Object
 
 > <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
@@ -300,7 +300,7 @@ Here we shall build two ExpressionSet objects corresponding to the bulk and sing
 >
 {: .hands_on}
 
-#### **Inspect Expression Set Object**
+#### Inspect Expression Set Object
 
 We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.
 
@@ -507,7 +507,7 @@ Both the MuSiC and the NNLS calculations of this data is best represented in the
 
 You will need to again create ExpressionSet objects, as before.
 
-### **Construct Expression Set Object**
+### Construct Expression Set Object
 
 > <hands-on-title>Build the Expression Set inputs</hands-on-title>
 >
