@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Galaxy Training!</title>
+        <title>Use our single cell Galaxy instance</title>
         
             <!--
 <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@fddc5dc334d2c6abacffcf76da2baa933e8b4f1d",
+	  release: "galaxy-training-network@75a3cb8eb7596774c790ba6ff368125d817c02fb",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -69,15 +69,15 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
         <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
         <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
-        <link rel="canonical" href="https://training.galaxyproject.org/training-material/tags/rstudio/">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/single_cell_omics.html">
         <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696723919' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696723919' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696779011' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696779011' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -85,25 +85,26 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="">
+<meta name="DC.title" content="Use our single cell Galaxy instance">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="1970-01-01 00:00:00 +0000">
+<meta name="DC.date" content="2023-10-08 14:46:45 +0000">
+<meta name="DC.creator" content="Wendi Bacon">
 
         
         
         
         
-        <meta name="description" content="Tutorials covering rstudio">
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training: rstudio">
-        <meta property="og:description" content="Tutorials covering rstudio">
+        <meta property="og:title" content="Galaxy Training: Use our single cell Galaxy instance">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
         
         <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696723919'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696779011'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -151,8 +152,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
            <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
         </a>
         
-        
-        
         <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
             <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
         </a>
@@ -169,7 +168,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     </a>
     <div class="dropdown-menu dropdown-menu-right">
 
-        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/tags/rstudio/index.md" title="Edit on GitHub">
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/faqs/single_cell_omics.md" title="Edit on GitHub">
           <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
         </a>
 
@@ -177,18 +176,15 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
         </a>
 
-        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/tags/rstudio/" title="Show view statistics of this page">
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/faqs/single_cell_omics.html" title="Show view statistics of this page">
             <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
         </a>
 
         <!-- link to feedback -->
         
-            
-            
-                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
-                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
-                </a>
-            
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
@@ -202,11 +198,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
             <div id="archive-selector">
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/tags/rstudio/">smorgasbord2023</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/single-cell/faqs/single_cell_omics.html">smorgasbord2023</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/tags/rstudio/">2023-10-01</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/topics/single-cell/faqs/single_cell_omics.html">2023-10-01</a>
             
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-09-01/tags/rstudio/">2023-09-01</a>
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-09-01/topics/single-cell/faqs/single_cell_omics.html">2023-09-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
             </div>
@@ -238,248 +234,106 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
         <div class="container main-content" role="main">
         
+<section class="tutorial">
 
-
-<!-- Gitter -->
-
-
-<section class="tutorials-list by_tag_rstudio topic-type-use">
-    <h1>rstudio</h1>
-    <p><p>Tutorials covering rstudio</p>
-</p>
-    <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides (<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span>) and tutorial (<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>) buttons below. </i>
-
-    
-
-    <h2 id="material">Material</h2>
-    
-    
-        <!-- subtopic = [single-cell, {subtopic => {"id"=>"single-cell", "title"=>"Single Cell", "description"=>nil}, materials => [ ... ]} ] -->
-
-        
-        <h3 id="st-single-cell">Single Cell</h3>
-        <p></p>
-        
-
-        <table class="table table-responsive table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Lesson</th>
-      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
-      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
-      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/training-material/faqs">All FAQs</a></li>
 
       
-      <th scope="col" title="Datasets used in this tutorial, available from Zenodo.">Input dataset</th>
-      <th scope="col" title="Galaxy workflows used in this tutorial.">Workflows</th>
-      
+
+      <li class="breadcrumb-item"><a href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
 
       
-    </tr>
-  </thead>
-  <tbody class="list">
-
-  
-  
-        <!-- MAT: single-cell/scrna-case_FilterPlotandExploreRStudio -->
-      
-
-        <tr>
-          <td class="tutorial_title">
-            
-            
-            <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">
-                Filter, Plot, and Explore with Seurat in RStudio
-            </a>
-            
-
-
-            <div class="extra">
-            
-            
-              
-              <a href="/training-material/search?query=single-cell" class="label label-default tutorial_tag" style="--color-primary: #00decd; --color-darker: #00c6b6; --color-dimmed: #00d2c1;" title="Click to show all tutorials tagged single-cell">single-cell</a>
-              
-              <a href="/training-material/search?query=seurat" class="label label-default tutorial_tag" style="--color-primary: #82cfff; --color-darker: #00bdfe; --color-dimmed: #5ac6ff;" title="Click to show all tutorials tagged seurat">seurat</a>
-              
-              <a href="/training-material/search?query=rstudio" class="label label-default tutorial_tag" style="--color-primary: #b7c4ff; --color-darker: #98adff; --color-dimmed: #a8b8ff;" title="Click to show all tutorials tagged rstudio">rstudio</a>
-              
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #d2bcff; --color-darker: #c1a0ff; --color-dimmed: #c9aeff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
-              
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00dbec; --color-darker: #00c3d2; --color-dimmed: #00cfdf;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
-              
-            
-            </div>
-
-            <div class="duplicate">
-              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
-              
-
-
-
-<!-- video slides -->
-
-
-              
-    <div class="btn-group">
-        <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html" class="btn btn-default" title="Follow the tutorial">
-            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-         <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-	<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fsingle-cell%2Ftutorials%2Fscrna-case_FilterPlotandExploreRStudio%2Ftutorial.html&edit-text=&act=url" title="">
-            More Languages
-        </a>
-	</li>
-    </ul>
-</div>
-
-
-              
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-              
-                  
-
-
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7053673">
-    <i class="far fa-copy" aria-hidden="true"></i>
-</a>
-
-
-                  
-
-
-
-              
-
-              
-              </div>
-            </div>
-          </td>
-
-          <td> 
-
-
-
-<!-- video slides -->
-
- </td>
-          <td> 
-    <div class="btn-group">
-        <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html" class="btn btn-default" title="Follow the tutorial">
-            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-         <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-	<li class="dropdown-item">
-        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fsingle-cell%2Ftutorials%2Fscrna-case_FilterPlotandExploreRStudio%2Ftutorial.html&edit-text=&act=url" title="">
-            More Languages
-        </a>
-	</li>
-    </ul>
-</div>
-
- </td>
-          <td> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
- </td>
+          <!-- topic-level FAQ file -->
 
           
-          <td> 
-
-
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/7053673">
-    <i class="far fa-copy" aria-hidden="true"></i>
-</a>
-
- </td>
-          <td> 
-
-
- </td>
           
+          <li class="breadcrumb-item"><a href="/training-material/topics/single-cell/faqs">Topic FAQs</a></li>
 
-          
-         </tr>
-       
-    
-  </tbody>
-</table>
-
-
-
-
-    
-
-    
-
-
-    
-        <h2 id="docker_image">Galaxy instances</h2>
-        <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
+         
         
+      
+
+      <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+
+    </ol>
+  </nav>
+
+  <h1>Use our single cell Galaxy instance</h1>
+
     
+    <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Avatar" width="36" height="36">Wendi Bacon</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    <hr>
+    
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+           
+
+
+           <p>Did you know we have a unique Galaxy instance with all our single cell tools highlighted to make it easier to use? We recommend this instance for all your single cell analysis needs, particularly for newer users.</p>
+
+<p>This <strong>subdomain</strong> is uses the main European Galaxy infrastructure and power, it’s just organised better for users of particular analyses…like single cell!</p>
+
+<p>Try it out! All your histories/workflows/logins from the general <a href="https://usegalaxy.eu">European Galaxy instance</a> will be there!</p>
+
+<ul>
+  <li><i class="fa fa-tv" aria-hidden="true"></i> <a href="https://singlecell.usegalaxy.eu">Single cell omics Galaxy instance</a></li>
+</ul>
+
+        </div>
+        <div class="col-md-4">
+          <h5>Still have questions?</h5>
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://gitter.im/Galaxy-Training-Network/Lobby" class="btn btn-square-medium btn-yellow"><div>Gitter Chat Support</div></a>
+
+
+          <!--
+add a button, include configuration options:
+
+ link: "https://example.com"
+ label: this text goes on button
+ size: small/medium/large/extralarge
+ colour:  blue/purple/green/red/yellow/lightblue/white/black
+ square: false , if you want a regular rectangular button
+-->
+
+
+
+
+<a href="https://help.galaxyproject.org" class="btn btn-square-medium btn-purple"><div>Galaxy Help Forum</div></a>
+
+
+
+          <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet  topics/single-cell/faqs/single_cell_omics.md %}
+</code></pre></div></div>
+
+	  
+
+
+
+        </div>
+      </div>
+    </div>
 
     
 
-    
-
-    <p>
-        <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
-    </p>
-
-    <h2 id="contributors">Contributors</h2>
-    <p>This material was contributed to by:</p>
-    
-    <a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Avatar" width="36" height="36">Pavankumar Videm</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Avatar" width="36" height="36">Saskia Hiltemann</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=36" alt="Avatar" width="36" height="36">Mehmet Tekman</a><a href="/training-material/hall-of-fame/Camila-goclowski/" class="contributor-badge contributor-Camila-goclowski"><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=36" alt="Avatar" width="36" height="36">Camila Goclowski</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Avatar" width="36" height="36">Wendi Bacon</a>
-
-    <h2 id="funders">Funders</h2>
-    <p>This material was funded by:</p>
-    
-    
-
-    
 </section>
 
         </div>
@@ -496,7 +350,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/fddc5dc334d2c6abacffcf76da2baa933e8b4f1d">fddc5dc</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/75a3cb8eb7596774c790ba6ff368125d817c02fb">75a3cb8</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -510,7 +364,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					</a>
 				</p>
 				<p>
-					<a href="https://github.com/galaxyproject/training-material/edit/main/tags/rstudio/index.md" title="Edit on GitHub">
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/faqs/single_cell_omics.md" title="Edit on GitHub">
 					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
 					</a>
 				</p>
@@ -524,7 +378,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696723919'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696779011'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

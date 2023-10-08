@@ -53,7 +53,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@fddc5dc334d2c6abacffcf76da2baa933e8b4f1d",
+	  release: "galaxy-training-network@75a3cb8eb7596774c790ba6ff368125d817c02fb",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -83,7 +83,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Automated Cell Annotation">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-09-01 09:26:20 +0000">
+<meta name="DC.date" content="2023-10-08 14:46:45 +0000">
 <meta name="DC.creator" content="Morgan Howells">
 
         
@@ -123,7 +123,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-09-01 09:26:20 +0000",
+  "dateModified": "2023-10-08 14:46:45 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Automated Cell Annotation",
   "interactivityType": "mixed",
@@ -173,14 +173,14 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   "isPartOf": {
     "@type": "CreativeWork",
     "name": "Single Cell",
-    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
     "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
   },
   "learningResourceType": "slides",
   "name": "Slides for 'Automated Cell Annotation' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html",
   "teaches": "Learn the different methods underlying automated cell annotation\n - Understand the data needed to annotate cells\n - Be able to choose the most appropriate method for your data\n - Recognise the common issues and be able to resolve them",
-  "keywords": "single-cell",
+  "keywords": "single-cell, single-cell",
   "description": "The questions this  addresses are:\n - What is automated cell annotation?\n - How is automated cell annotation performed?\n - What methods are available?\n - What is the best method to choose for your data?\n\n\nThe objectives are:\n - Learn the different methods underlying automated cell annotation\n - Understand the data needed to annotate cells\n - Be able to choose the most appropriate method for your data\n - Recognise the common issues and be able to resolve them\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -246,13 +246,16 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     {
       "@type": "CreativeWork",
       "name": "Single Cell",
-      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
       "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
     }
   ],
   "educationalLevel": "Introductory",
   "mentions": [
-
+    {
+      "@type": "Thing",
+      "name": "single-cell"
+    }
   ],
   "abstract": "### What is Cell Annotation?"
 }
@@ -507,9 +510,9 @@ There are some challenges that need to be faced in order to perform automated ce
 
 In order to manually annotate cell data you would first need to reduce the number of dimensions in your data so that you can produce cluster maps, this is done using a reduction method (PCA, tSNE, UMAP, etc)
 
-Now that your data has been separated into distinct clusters you now need to manually annotate each individual cluster. This is typically done using known marker genes and their associated cell types. 
+Now that your data has been separated into distinct clusters you now need to manually annotate each individual cluster. This is typically done using known marker genes and their associated cell types.
 
-The figure shows a graph for each marker gene we are interested in, it can be seen that each marker gene is only present in certain areas of our data, ideally these areas will be individual clusters. 
+The figure shows a graph for each marker gene we are interested in, it can be seen that each marker gene is only present in certain areas of our data, ideally these areas will be individual clusters.
 
 ---
 
@@ -614,7 +617,7 @@ This method has some downsides however, it can take a lot of prior manual labor 
 
 .pull-left[
 
-- Trains a statistical classifier on reference data to predict cell types 
+- Trains a statistical classifier on reference data to predict cell types
 
 - Requires clean reference data for good quality models
 
