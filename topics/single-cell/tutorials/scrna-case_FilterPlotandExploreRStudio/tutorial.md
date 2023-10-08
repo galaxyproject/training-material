@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Filter, Plot, and Explore with Seurat in RStudio'
+title: 'Filter, plot, and explore single cell RNA-seq data (Seurat, R)'
 subtopic: single-cell-CS-code
 priority: 2
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -36,8 +36,8 @@ requirements:
 
 tags:
 - single-cell
-- seurat
-- rstudio
+- 10x
+- paper-replication
 
 contributions:
   authorship:
