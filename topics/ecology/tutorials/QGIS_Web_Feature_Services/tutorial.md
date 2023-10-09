@@ -108,7 +108,7 @@ Even if you can select, download and display entire WFS layers, it is often more
 > 7. Clicking ok, you can now see the SQL query on a dedicated column of the layers table.
 >    > ![Image of QGIS interface showing you the results of the SQL command on the selection of layers in the WFS / OGC API features](../../images/QGIS/qgistuto10.PNG)
 > 9. Clicking the "Add" button, you now have the South Africa layer added and diplayed on QGIS.
->    > ![Image of QGIS interface showing the resulting map of all your changes since the beginning of the tutorial](../../images/QGIS/qgistuto11.PNG)
+>    ![Image of QGIS interface showing the resulting map of all your changes since the beginning of the tutorial](../../images/QGIS/qgistuto11.PNG)
 {: .hands_on}
 
 > <question-title></question-title>
