@@ -9,7 +9,6 @@ priority: 1
 
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
-  - single-cell
 questions:
   - "What is single-cell?"
   - "How do we process a batch?"

@@ -7,7 +7,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna-plant/tutorial
 zenodo_link: 'https://zenodo.org/record/4597857'
 tags:
-  - single-cell
   - plants
   - paper-replication
 questions:
