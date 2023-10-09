@@ -229,7 +229,7 @@
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">format_news</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:news</span>])
-  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">format_news</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:news</span>]).<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">format_news</span>(<span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:news</span>]).<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
@@ -238,14 +238,14 @@
   )
 
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
-  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/topics\/#{filter}/</span> },
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/topics\/#{filter}/</span> }
   )
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
-  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:contributors</span>].<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
     <span class="ruby-identifier">newsworthy</span> = <span class="ruby-keyword">true</span>
