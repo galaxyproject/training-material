@@ -7,7 +7,7 @@ questions:
 objectives:
 - Deal with QGIS execution management
 - Access, filter and import GIS data using WFS webservice
-time_estimation: 0H30
+time_estimation: 0H30M
 key_points:
 - From WFS webservice, you can now access GIS remote data, build a query to select subpart of the data, and import it to Galaxy through QGIS Galaxy interactive tool.
 tags:
