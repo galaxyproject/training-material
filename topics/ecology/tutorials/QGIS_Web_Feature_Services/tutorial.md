@@ -80,14 +80,14 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 > 6. Find and select the `antarctica_country_border` (Antartica border) layer
 > 7. Find and select, holding the "CTRL" button, the `south_poles_wfs` (South border) layer
 > 9. Unselect "only request features overlapping the view extent" option then click "add"
->    > ![Image of QGIS interface to help you see which layers to select in the WFS / OGC API features](../../images/QGIS/qgistuto3.PNG)
+>   ![Image of QGIS interface to help you see which layers to select in the WFS / OGC API features](../../images/QGIS/qgistuto3.PNG)
 > 10. You now have Antarctica border displayed with a symbol showing the south pole
->    > ![Image of QGIS interface showing the reulting map from he selection of your layers](../../images/QGIS/qgistuto4.PNG)
+>   ![Image of QGIS interface showing the reulting map from he selection of your layers](../../images/QGIS/qgistuto4.PNG)
 > 11. You can double click each layer at the bottom left to modify symbology, notably colour for "south_poles_wfs" modifying the symbol selecting for example "effect drop shadow"  click on "Save Symbol..." and add a label `Geographic South Pole`
->    > ![Image of QGIS interface to show you to click on the button "effect drop shadow" to make the south pole more visible on your map.](../../images/QGIS/qgistuto5.PNG)
->    > ![Image of QGIS interface to show you how to add a title and change the color of your south pole marker](../../images/QGIS/qgistuto6.PNG)
+>   ![Image of QGIS interface to show you to click on the button "effect drop shadow" to make the south pole more visible on your map.](../../images/QGIS/qgistuto5.PNG)
+>   ![Image of QGIS interface to show you how to add a title and change the color of your south pole marker](../../images/QGIS/qgistuto6.PNG)
 > 12. And to "antarctica_country_border".
->    > ![Image of QGIS interface showing how to change the background or color of the geographical zone here Antarctica](../../images/QGIS/qgistuto7.PNG)
+>   ![Image of QGIS interface showing how to change the background or color of the geographical zone here Antarctica](../../images/QGIS/qgistuto7.PNG)
 > 
 {: .hands_on}
 
@@ -102,11 +102,11 @@ Even if you can select, download and display entire WFS layers, it is often more
 > 3. Click on the 1st option "Data Source Manager" 
 > 4. Select "WFS / OGC API - Features" then the already connected `nsidc` server
 > 5. Select the `countries (excluding Antarctica)` layer and click "Build query" button
->    > ![Image of QGIS interface to help you see which layers to select in the WFS / OGC API features](../../images/QGIS/qgistuto8.PNG)
+>    ![Image of QGIS interface to help you see which layers to select in the WFS / OGC API features](../../images/QGIS/qgistuto8.PNG)
 > 6. On the new dialog box, you can copy/paste this query: `SELECT * FROM country_borders_excluding_antarctica WHERE "Countryeng" = 'South Africa'` using the clipboard functionnality from the left QGIS panel to make a "bridge" between your local clipboard and the virtualized QGIS one.
->    > ![Image of QGIS interface to help you see what to write in the "SQL query composer"](../../images/QGIS/qgistuto9.PNG)
+>    ![Image of QGIS interface to help you see what to write in the "SQL query composer"](../../images/QGIS/qgistuto9.PNG)
 > 7. Clicking ok, you can now see the SQL query on a dedicated column of the layers table.
->    > ![Image of QGIS interface showing you the results of the SQL command on the selection of layers in the WFS / OGC API features](../../images/QGIS/qgistuto10.PNG)
+>    ![Image of QGIS interface showing you the results of the SQL command on the selection of layers in the WFS / OGC API features](../../images/QGIS/qgistuto10.PNG)
 > 9. Clicking the "Add" button, you now have the South Africa layer added and diplayed on QGIS.
 >    ![Image of QGIS interface showing the resulting map of all your changes since the beginning of the tutorial](../../images/QGIS/qgistuto11.PNG)
 {: .hands_on}
