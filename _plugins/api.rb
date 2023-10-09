@@ -87,7 +87,7 @@ module Jekyll
       page2 = PageWithoutAFile.new(site, '', 'api/', 'configuration.json')
       site.config.update(Gtn::Git.discover)
       # Remove every key that starts with "cached_"
-      conf = site.config.reject { |k, _v| k.to_s.start_with?('cached_') }
+      conf = site.config.reject { |k, _v| k.to_s.start_with?('cached_')  or k.to_s.start_with?('__')}
       page2.content = JSON.pretty_generate(conf)
       page2.data['layout'] = nil
       site.pages << page2
