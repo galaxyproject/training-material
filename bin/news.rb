@@ -149,7 +149,7 @@ def build_news(data, filter: nil)
 
   if filter.nil?
   output += format_news(data[:added][:news])
-  newsworthy = newsworthy | format_news(data[:added][:news]).length
+  newsworthy = newsworthy | format_news(data[:added][:news]).length.positive?
   end
 
   o = format_tutorials(
@@ -158,14 +158,14 @@ def build_news(data, filter: nil)
   )
 
   output += o
-  newsworthy = newsworthy | o.length
+  newsworthy = newsworthy | o.length.positive?
 
   o = format_tutorials(
     data[:added][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
     data[:modified][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ }
   )
   output += o
-  newsworthy = newsworthy | o.length
+  newsworthy = newsworthy | o.length.positive?
 
   if filter.nil? && data[:contributors].length.positive?
     newsworthy = true
