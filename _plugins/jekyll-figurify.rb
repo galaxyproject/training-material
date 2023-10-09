@@ -45,7 +45,6 @@ module Jekyll
             #{alt}
           </object>
           </div>
-          <small><a target="_blank" href="#{url}">Open image in new tab</a></small>
         )
       else
         %(
@@ -81,9 +80,8 @@ module Jekyll
 
           %(
             <figure id="figure-#{num_figure}" style="max-width: 90%; margin:auto;">
-              <a href="#{url}" rel="noopener noreferrer">
               #{image}
-              </a>
+              <a target="_blank" href="#{url}" rel="noopener noreferrer"><small>Open image in new tab</small></a>
               <figcaption>
                 <span class="figcaption-prefix"><strong>#{prefix}#{num_figure}</strong>:</span> #{title}
               </figcaption>
