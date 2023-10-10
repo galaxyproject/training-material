@@ -5,7 +5,6 @@ priority: 4
 title: Comparing inferred cell compositions using MuSiC deconvolution
 zenodo_link: https://zenodo.org/record/7319925
 tags:
-  - single-cell
   - transcriptomics
 questions:
 - How do the cell type distributions vary in bulk RNA samples across my variable of interest?

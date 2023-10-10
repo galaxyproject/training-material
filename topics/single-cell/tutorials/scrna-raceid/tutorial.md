@@ -7,7 +7,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna-raceid/tutorial
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
-  - single-cell
 questions:
   - What is normalisation and why is it necessary?
   - How many types of unwanted variation are there?

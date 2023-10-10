@@ -33,7 +33,6 @@ requirements:
         - scrna-preprocessing
         - scrna-preprocessing-tenx
 tags:
-- single-cell
 - 10x
 contributors:
 - bebatut

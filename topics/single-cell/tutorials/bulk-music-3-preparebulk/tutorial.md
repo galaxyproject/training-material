@@ -25,7 +25,6 @@ contributions:
     - MarisaJL
 
 tags:
-  - single-cell
   - transcriptomics
   - data management
 
