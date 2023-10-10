@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@afc517d9c63b0669a5c1f5c62c6978e8d6668ef9",
+	  release: "galaxy-training-network@93c3c59e6add2313c5dc27586fc7f6936df50505",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696896711' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696896711' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696927768' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696927768' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -280,7 +280,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696896711'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696927768'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -654,11 +654,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 <p>Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich (<span class="citation"><a href="#Ehrlich1909">Ehrlich 1909</a></span>). According to the <a href="https://iupac.org/">International Union of Pure and Applied Chemistry (IUPAC)</a>, a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” (<span class="citation"><a href="#Wermuth1998">Wermuth <i>et al.</i> 1998</a></span>). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model (<span class="citation"><a href="#Moumbock2019">Moumbock <i>et al.</i> 2019</a></span>). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets (<span class="citation"><a href="#Steindl2006">Steindl <i>et al.</i> 2006</a></span>).</p>
 
-<p><a href="/training-material/topics/computational-chemistry/images/4MVF-STU.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of <em>Plasmodium falciparum</em> calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: <a href="https://www.rcsb.org/structure/4mvf">4MVF</a>. Image generated using Maestro (Schrödinger LLC, NY).&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/4MVF-STU.png" alt="PDB ID: 4MVF. " width="683" height="638" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/4MVF-STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Crystal Structure of *Plasmodium falciparum* calcium-dependent protein kinase 2 (CDPK2) complexed with staurosporine (STU) with PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
 
 <p>Bioactive compounds often bind to several target proteins, thereby exhibiting polypharmacology. However, experimentally determining these interactions is laborious, and structure-based virtual screening of bioactive compounds could expedite drug discovery by prioritizing hits for experimental validation. The recently reported ePharmaLib (<span class="citation"><a href="#Moumbock2021">Moumbock <i>et al.</i> 2021</a></span>) dataset is a library of 15,148 e-pharmacophores modeled from solved structures of pharmaceutically relevant protein–ligand complexes of the screening Protein Data Bank (sc-PDB, <span class="citation"><a href="#Desaphy2014">Desaphy <i>et al.</i> 2014</a></span>). ePharmaLib can be used for target fishing of phenotypic hits, side effect predictions, drug repurposing, and scaffold hopping.</p>
 
-<p><a href="/training-material/topics/computational-chemistry/images/STU.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: <a href="https://www.rcsb.org/structure/4mvf">4MVF</a>). Image generated using Maestro (Schrödinger LLC, NY).&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/STU.png" alt="STU. " width="1201" height="751" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/STU.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Depiction of the 2D structure of staurosporine (left) and 3D structure (right) with key pharmacophoric features extracted from the STU–CDPK2 complex (PDB ID: [4MVF](https://www.rcsb.org/structure/4mvf)). Image generated using Maestro (Schrödinger LLC, NY).</figcaption></figure>
 
 <p>In this tutorial, you will perform pharmacophore-based target prediction of a bioactive ligand known as staurosporine (Figure 2) with the ePharmaLib subset representing <em>Plasmodium falciparum</em> protein targets (138 pharmacophore models) and the open-source pharmacophore alignment program <a href="https://anaconda.org/bioconda/align_it">Align-it</a>, formerly known as PHARAO (<span class="citation"><a href="#Taminau2008">Taminau <i>et al.</i> 2008</a></span>).</p>
 
@@ -1077,7 +1077,7 @@ column    Content
   <p>The Zauberkugel workflow requires only two inputs; the ligand structure file (SMI format) and the ePharmaLib dataset (PHAR format). The output of the prediction of human targets of staurosporine performed with the ePharmaLib human target subset (<a href="https://zenodo.org/record/6055897">https://zenodo.org/record/6055897</a>) and this workflow is available as a <a href="https://usegalaxy.eu/u/aurelien_moumbock/h/zauberkugel">Galaxy history</a>.</p>
 </blockquote>
 
-<p><a href="/training-material/topics/computational-chemistry/images/zauberkugel.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/computational-chemistry/images/zauberkugel.png" alt="Snapshot of Zauberkugel workflow. " width="1117" height="346" loading="lazy" /><a target="_blank" href="/training-material/topics/computational-chemistry/images/zauberkugel.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Zauberkugel — protein target prediction of a bioactive ligand with Align-it and ePharmaLib</figcaption></figure>
 
 <h1 id="further-analysis">Further analysis</h1>
 
@@ -1280,7 +1280,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/afc517d9c63b0669a5c1f5c62c6978e8d6668ef9">afc517d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/93c3c59e6add2313c5dc27586fc7f6936df50505">93c3c59</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1312,7 +1312,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696896711'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696927768'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

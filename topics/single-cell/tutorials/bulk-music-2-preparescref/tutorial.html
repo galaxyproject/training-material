@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@afc517d9c63b0669a5c1f5c62c6978e8d6668ef9",
+	  release: "galaxy-training-network@93c3c59e6add2313c5dc27586fc7f6936df50505",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696896711' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696896711' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696927768' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696927768' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -299,7 +299,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696896711'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696927768'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -851,7 +851,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 <p>You can inspect the dataset <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to see that it’s full of annoying “” everywhere, and overly long descriptions of each columns.</p>
 
-<p><a href="../../images/bulk-music/annoying_ebimetadata.png" rel="noopener noreferrer"><figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/annoying_ebimetadata.png" alt="Columns in Galaxy history window contain &quot;Assay&quot; and &quot;&quot; around every word or ID. " width="766" height="448" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Annoying metadata&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/annoying_ebimetadata.png" alt="Columns in Galaxy history window contain &quot;Assay&quot; and &quot;&quot; around every word or ID. " width="766" height="448" loading="lazy" /><a target="_blank" href="../../images/bulk-music/annoying_ebimetadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Annoying metadata</figcaption></figure>
 
 <p>Now, there might be a better way to do this in Galaxy (or you might consider downloading the file locally and changing it in a spreadsheet application or something), but this is what will work to reformat all that annoying text.</p>
 
@@ -1073,7 +1073,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 <p>Fantastic! You’ve completed part 1 - making the single cell metadata file. It should now look like this:</p>
 
-<p><a href="../../images/bulk-music/corrected_ebimetadata.png" rel="noopener noreferrer"><figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/corrected_ebimetadata.png" alt="Columns in the history window of a dataset contain words without any extra symbols or &quot;&quot;. " width="786" height="458" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Pretty scRNA metadata&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/corrected_ebimetadata.png" alt="Columns in the history window of a dataset contain words without any extra symbols or &quot;&quot;. " width="786" height="458" loading="lazy" /><a target="_blank" href="../../images/bulk-music/corrected_ebimetadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Pretty scRNA metadata</figcaption></figure>
 
 <p>You can use the <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--metadata">workflow for this portion of the tutorial</a>, and access an <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--metadata">example history</a>.</p>
 
@@ -1175,7 +1175,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 But…
 As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful shame to get to the end of the MuSiC deconvolution and have all our plots show sad ENS IDs. So, courtesy of the excellent @mtekman, we steal his workflow to collapse the ENS IDs into gene names.</p>
 
-<p><a href="../../images/bulk-music/ensid_collapse.png" rel="noopener noreferrer"><figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensid_collapse.png" alt="First table shows 4 rows with different ENS IDs and a second column with geney symbols and some overlap. Arrow pointing to second table shows 3 rows having collapsed the overlap." width="1597" height="431" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Collapsing ENS IDs&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-3" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensid_collapse.png" alt="First table shows 4 rows with different ENS IDs and a second column with geney symbols and some overlap. Arrow pointing to second table shows 3 rows having collapsed the overlap." width="1597" height="431" loading="lazy" /><a target="_blank" href="../../images/bulk-music/ensid_collapse.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Collapsing ENS IDs</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert from Ensembl to GeneSymbol using workflow</div>
@@ -1205,7 +1205,7 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 
 <p>The output will likely be called <strong>Text transformation</strong> and will look like this:</p>
 
-<p><a href="../../images/bulk-music/ensid_output.png" rel="noopener noreferrer"><figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensid_output.png" alt="Alphabetised gene symbols appear in column one with decimal pointed integers in the following columns corresponding to cells. " width="792" height="480" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Output of the ENS ID collapsing workflow&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-4" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ensid_output.png" alt="Alphabetised gene symbols appear in column one with decimal pointed integers in the following columns corresponding to cells. " width="792" height="480" loading="lazy" /><a target="_blank" href="../../images/bulk-music/ensid_output.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Output of the ENS ID collapsing workflow</figcaption></figure>
 
 <h1 id="construct-expression-set-objects">Construct Expression Set Objects</h1>
 
@@ -1341,11 +1341,11 @@ As biologists, it’s very difficult to interpret ENSIDs. And it’s an awful sh
 
 <p>You have successfully performed, essentially, three workflows. You can find the <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-data-generation--sc--matrix--eset">workflows for generating the ESet object</a> and the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-data-generation--sc--matrix--eset">answer key history for this entire tutorial</a>.</p>
 
-<p><a href="../../images/bulk-music/scref-metadata.png" rel="noopener noreferrer"><figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/scref-metadata.png" alt="6 boxes in the workflow editor. " width="1358" height="354" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow: Manipulating metadata&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-5" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/scref-metadata.png" alt="6 boxes in the workflow editor. " width="1358" height="354" loading="lazy" /><a target="_blank" href="../../images/bulk-music/scref-metadata.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Workflow: Manipulating metadata</figcaption></figure>
 
-<p><a href="../../images/bulk-music/scref-eset.png" rel="noopener noreferrer"><figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/scref-eset.png" alt="9 boxes including a subworkflow in the workflow editor. " width="1090" height="252" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Workflow: Creating the ESet single-cell object&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-6" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/scref-eset.png" alt="9 boxes including a subworkflow in the workflow editor. " width="1090" height="252" loading="lazy" /><a target="_blank" href="../../images/bulk-music/scref-eset.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Workflow: Creating the ESet single-cell object</figcaption></figure>
 
-<p><a href="../../images/bulk-music/ens-id-collapse.png" rel="noopener noreferrer"><figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ens-id-collapse.png" alt="8 boxes in the workflow editor. " width="984" height="632" loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Subworkflow: Collapsing the Ensembl IDs into gene names&lt;/figcaption&gt;</figure></a></p>
+<figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/bulk-music/ens-id-collapse.png" alt="8 boxes in the workflow editor. " width="984" height="632" loading="lazy" /><a target="_blank" href="../../images/bulk-music/ens-id-collapse.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Subworkflow: Collapsing the Ensembl IDs into gene names</figcaption></figure>
 
 <p>With these workflows, you’ve created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!</p>
 
@@ -1681,7 +1681,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/afc517d9c63b0669a5c1f5c62c6978e8d6668ef9">afc517d</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/93c3c59e6add2313c5dc27586fc7f6936df50505">93c3c59</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1713,7 +1713,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696896711'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696927768'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
