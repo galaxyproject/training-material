@@ -41,7 +41,7 @@ When the sequence is mapped against a reference genome, we can then see which ge
 
 Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol {% cite Hashimshony2016 %} used in droplet-based single-cell RNA-seq.
 
-### The CEL-Seq2 Protocol
+## The CEL-Seq2 Protocol
 
 <small>[Back to previous](javascript:window.history.back())</small>
 
