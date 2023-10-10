@@ -1,0 +1,80 @@
+---
+layout: embed
+title: Cross UseGalaxy.* Workflow Search
+---
+
+<style>
+#results {
+	table-layout: fixed;
+}
+#results .tags {
+	display: flex;
+	flex-wrap: wrap;
+}
+</style>
+
+<table class="table" id="results" style="table-layout:fixed">
+	<thead>
+		<tr>
+			<th scope="col">Name</th>
+			<th scope="col">Owner</th>
+			<th scope="col">Updated</th>
+			<th scope="col">Links</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for workflow in site.data['workflows'] -%}
+			<tr id="{{ post.short_id }}">
+				<td><div>{{ workflow.name }}</div>
+					<div class="tags">
+					{%- for tag in workflow.tags -%}
+					<span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+					{%- endfor -%}
+					</div>
+				</td>
+				<td>{{ workflow.owner }}</td>
+				<td>{{ workflow.updated }}</td>
+				<td>
+					{% for id in workflow.ids %}
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+					{% endfor %}
+				</td>
+			</tr>
+		{%- endfor -%}
+	</tbody>
+</table>
+
+<script>
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+NodeList.prototype.forEach = Array.prototype.forEach;
+HTMLCollection.prototype.filter = Array.prototype.filter;
+NodeList.prototype.filter = Array.prototype.filter;
+HTMLCollection.prototype.map = Array.prototype.map;
+NodeList.prototype.map = Array.prototype.map;
+
+const table  = document.getElementById('results'),
+      rows   = table.tBodies[0].rows;
+
+function search(textQuery){
+	var to_hide = rows.filter(row => {
+		if (textQuery != "" && (
+			row.children[0].innerText.toLowerCase() + " " + 
+			row.children[1].innerText.toLowerCase()
+		).indexOf(textQuery.toLowerCase()) == -1) {
+			return true;
+		}
+		return false;
+	});
+
+	// Display all
+	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+	// Hide the rest
+	to_hide.map(r => r.style.display = "none");
+}
+
+// Get the q parameter from URL
+// This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
+var params = (new URL(document.location)).searchParams;
+paramSearch = params.get('query')
+search(paramSearch)
+</script>
