@@ -17,7 +17,7 @@ module Jekyll
         fn = File.join('.', page.url).sub(/html$/, 'Rmd')
 
         # Tag our source page
-        page.data['tags'] = [] unless page.data.key? 'tags'
+        page.data['tags'] = page.data['tags'] || []
         page.data['tags'].push('rmarkdown-notebook')
 
         puts "[GTN/Notebooks/R] Rendering RMarkdown #{fn}"

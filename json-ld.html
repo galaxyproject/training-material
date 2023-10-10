@@ -1,0 +1,257 @@
+---
+layout: page
+title: TeSS LD+JSON Tester
+---
+
+<p>
+Here you can test how data from a page will be mapped to <a href="https://tess.elixir-europe.org/">TeSS</a> fields. This is based on <a href="https://docs.google.com/document/d/1qLbSgJmXA0xnuXaQl4gTvH0IR5K4sHNcGXsOQS5AMno/edit">this TeSS Document</a>
+</p>
+
+<div class="input-group">
+  <input class="form-control" id="input-url" type="text" value="topics/admin/tutorials/ansible-galaxy/tutorial.html">
+  <button id="submit" class="btn btn-primary">Submit</button>
+</div>
+
+<p>If you supply a full URL, your request will be proxied via <a href="https://corsproxy.io/">corsproxy.io</a></p>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Profile Property</th>
+    <th>marginality</th>
+    <th>Maps to TeSS</th>
+    <th>Notes/Vocab</th>
+    <th>🔍 Observed Value</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr id="t-name">
+    <td>name</td>
+    <td>minimum</td>
+    <td>Title</td>
+    <td>String</td>
+    <td></td>
+  </tr>
+  <tr id="t-description">
+    <td>description</td>
+    <td>minimum</td>
+    <td>Description</td>
+    <td>String: markdown-compatible</td>
+    <td></td>
+  </tr>
+  <tr id="t-url">
+    <td>url</td>
+    <td>recommended</td>
+    <td>URL</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-keywords">
+    <td>keywords</td>
+    <td>minimum</td>
+    <td>Keywords</td>
+    <td>String: a comma separated list of keywords</td>
+    <td></td>
+  </tr>
+  <tr id="t-dateCreated">
+    <td>dateCreated</td>
+    <td>optional</td>
+    <td>Date</td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-license">
+    <td>license</td>
+    <td>recommended</td>
+    <td>License</td>
+    <td>Expects a SPDX identifier</td>
+    <td></td>
+  </tr>
+  <tr id="t-learningResourceType">
+    <td>learningResourceType</td>
+    <td>recommended</td>
+    <td>Resource Type</td>
+    <td>E.g. hands-on tutorials, etc</td>
+    <td></td>
+  </tr>
+  <tr id="t-about">
+    <td>about</td>
+    <td>recommended</td>
+    <td>Scientific Topics</td>
+    <td>Expects a DefinedTerm with a name property. EDAM</td>
+    <td></td>
+  </tr>
+  <tr id="t-audience">
+    <td>audience</td>
+    <td>recommended</td>
+    <td>Target Audience</td>
+    <td>Picks the audienceType property from the Audience</td>
+    <td></td>
+  </tr>
+  <tr id="t-author">
+    <td>author</td>
+    <td>recommended</td>
+    <td>Authors</td>
+    <td>Picks the name property from the Person</td>
+    <td></td>
+  </tr>
+  <tr id="t-contributor">
+    <td>contributor</td>
+    <td>optional</td>
+    <td>Contributors</td>
+    <td>Picks the name property from the Person</td>
+    <td></td>
+  </tr>
+  <tr id="t-identifier">
+    <td>identifier</td>
+    <td>recommended</td>
+    <td>DOI</td>
+    <td>Only recognizes DOI identifiers</td>
+    <td></td>
+  </tr>
+  <tr id="t-educationalLevel">
+    <td>educationalLevel</td>
+    <td>recommended</td>
+    <td>Difficulty Level</td>
+    <td>Beginner<br>Intermediate<br>Advanced</td>
+    <td></td>
+  </tr>
+  <tr id="t-abstract">
+    <td>abstract</td>
+    <td>recommended</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-competencyRequired">
+    <td>competencyRequired</td>
+    <td>recommended</td>
+    <td>Prerequisites</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-inLanguage">
+    <td>inLanguage</td>
+    <td>recommended</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-mentions">
+    <td>mentions</td>
+    <td>recommended</td>
+    <td></td>
+    <td>Seems to relate to External Resources</td>
+    <td></td>
+  </tr>
+  <tr id="t-teaches">
+    <td>teaches</td>
+    <td>recommended</td>
+    <td>Learning Objectives</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-timeRequired">
+    <td>timeRequired</td>
+    <td>recommended</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-accessibilitySummary">
+    <td>accessibilitySummary</td>
+    <td>optional</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-dateModified">
+    <td>dateModified</td>
+    <td>optional</td>
+    <td>Date modified</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-datePublished">
+    <td>datePublished</td>
+    <td>optional</td>
+    <td>Date published</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-creativeWorkStatus">
+    <td>creativeWorkStatus</td>
+    <td>optional</td>
+    <td>Status</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-version">
+    <td>version</td>
+    <td>optional</td>
+    <td>Version</td>
+    <td>Available in 1.4</td>
+    <td></td>
+  </tr>
+  <tr id="t-workTranslation">
+    <td>workTranslation</td>
+    <td>optional</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-recordedAt">
+    <td>recordedAt</td>
+    <td>optional</td>
+    <td></td>
+    <td>‘Link’ to Event via name, url pair of CourseInstance</td>
+    <td></td>
+  </tr>
+  <tr id="t-hasPart">
+    <td>hasPart</td>
+    <td>optional</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr id="t-isPartOf">
+    <td>isPartOf</td>
+    <td>optional</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
+
+
+<script>
+
+document.getElementById("submit").onclick = function(){
+var url = document.getElementById("input-url").value
+if(url.slice(0, 8) === "https://") {
+	url = `https://corsproxy.io/?${url}`
+}
+
+fetch(url).then(function(response) {
+  // Once the page is loaded convert it to text
+  return response.text();
+}).then(function(html) {
+  // Replace newlines to allow parsing more easily.
+  html = html.replaceAll(/[\n\r]/g, '');
+  // Parse the json-ld from the page
+  jsonld = JSON.parse(html.match(/<script type="application\/ld\+json">([^<]*)<\/script>/)[1]);
+
+  Object.keys(jsonld).forEach(k => {
+    e = document.getElementById(`t-${k}`)?.lastElementChild
+    if(e){e.innerText = JSON.stringify(jsonld[k])}
+  })
+});
+}
+</script>
+
+<style>
+table tr :nth-child(5) {
+  font-family: monospace;
+}
+</style>

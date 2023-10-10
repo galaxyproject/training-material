@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Combining datasets after pre-processing"
+title: "Combining single cell datasets after pre-processing"
 subtopic: single-cell-CS
 priority: 2
 
@@ -24,11 +24,9 @@ key_points:
   - Retreive partially analysed data from a public repository
 
 tags:
-  - single-cell
   - 10x
   - paper-replication
-  - español
-  - transcriptomics
+
 
 contributions:
   authorship:
@@ -49,8 +47,6 @@ requirements:
         - scrna-umis
         - scrna-case_alevin
 
-translations:
-  - es
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -87,7 +83,7 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** 
+2. **Importing from a history**
     - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)
     - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/hrukkudyr_us/h/cs2combining-datasets-after-pre-processing---input)
 
@@ -127,10 +123,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
+{% snippet topics/single-cell/faqs/single_cell_omics.md %}
 
 ## Concatenating objects
 
@@ -356,5 +349,4 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 You've reached the end of this session!
 You may be interested in seeing an [example history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-answerkey) and [workflow](https://usegalaxy.eu/u/wendi.bacon.training/w/cs2combining-datasets-after-pre-processing-1). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing the total the reads can be found in [this Galaxy History on UseGalaxy EU](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing--total-processed-to-single-object).
 
- To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
- [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg)](https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+{% snippet topics/single-cell/faqs/user_community_join.md %}

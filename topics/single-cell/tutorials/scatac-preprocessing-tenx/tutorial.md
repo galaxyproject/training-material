@@ -8,8 +8,8 @@ redirect_from:
   - /topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/7855968"
 tags:
-  - single-cell
   - 10x
+  - epigenetics
 questions:
   - What is 10X?
   - What are single-cell ATAC fragments and MTX files?
