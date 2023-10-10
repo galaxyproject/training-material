@@ -73,7 +73,7 @@ Once you finished your work on QGIS, if you want to retrieve data and/or entire 
 >    >
 >    > You can expand the QGIS left panel (where there is 3 dots, vertically) to access the "clipboard" menu, and paste the content you want to paste on a QGIS form. Then, click outside of this panel to collapse it, and you can click for example on the `url` field to paste the url from your clipboard
 >    >
->    > ![Image of QGIS interface with on the left the clipboard panel in transparent where you can use the copy paste option.](../../images/QGIS/qgistuto1.PNG)
+>    ![Image of QGIS interface with on the left the clipboard panel in transparent where you can use the copy paste option.](../../images/QGIS/qgistuto1.PNG)
 >    {: .tip}
 >
 > 5. Click OK, then you can create the connection with the "connect" button to see a list of available layers
