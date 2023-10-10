@@ -466,7 +466,7 @@
   <span class="ruby-identifier">materials</span> = <span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
 
   <span class="ruby-comment"># If there is nothing with that topic name, try generating it by tags.</span>
-  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic_name</span>) }
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic_name</span>) }
 
   <span class="ruby-comment"># The complete resources we&#39;ll return is the introduction slides first</span>
   <span class="ruby-comment"># (EDIT: not anymore, we rely on prioritisation!)</span>
@@ -504,7 +504,7 @@
   <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;topic_name&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">topic_name</span> }
 
   <span class="ruby-comment"># If there is nothing with that topic name, try generating it by tags.</span>
-  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic_name</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">resource_pages</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> []).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">topic_name</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">resource_pages</span>.<span class="ruby-identifier">empty?</span>
 
   <span class="ruby-comment"># The complete resources we&#39;ll return is the introduction slides first</span>
   <span class="ruby-comment"># (EDIT: not anymore, we rely on prioritisation!)</span>
@@ -780,7 +780,7 @@
             <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 611</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_all_tags</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span> = <span class="ruby-identifier">process_pages</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span>)
-  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;tags&#39;</span>, []) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">x</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> []) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

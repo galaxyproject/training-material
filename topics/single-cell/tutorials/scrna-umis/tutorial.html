@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@93c3c59e6add2313c5dc27586fc7f6936df50505",
+	  release: "galaxy-training-network@2f1595037b7eb38373214bcc6394f1bd5cd35fae",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696927768' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696927768' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696945656' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696945656' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -87,7 +87,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Understanding Barcodes">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-17 17:21:19 +0000">
+<meta name="DC.date" content="2023-10-10 11:03:14 +0000">
 <meta name="DC.creator" content="Mehmet Tekman">
 
         
@@ -128,7 +128,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-05-17 17:21:19 +0000",
+  "dateModified": "2023-10-10 11:03:14 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Understanding Barcodes",
   "interactivityType": "mixed",
@@ -186,7 +186,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html",
   "timeRequired": "PT2H",
   "teaches": "Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes",
-  "keywords": "single-cell, single-cell",
+  "keywords": "single-cell",
   "description": "The questions this  addresses are:\n - What are barcodes?\n - What is their purpose?\n - How are barcodes formatted?\n\n\nThe objectives are:\n - Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -241,10 +241,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   ],
   "educationalLevel": "Introductory",
   "mentions": [
-    {
-      "@type": "Thing",
-      "name": "single-cell"
-    }
+
   ],
   "abstract": "# Introduction"
 }
@@ -252,7 +249,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696945656'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -628,7 +625,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> May 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 10, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -664,7 +661,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 <p>Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol <span class="citation"><a href="#Hashimshony2016">Hashimshony <i>et al.</i> 2016</a></span> used in droplet-based single-cell RNA-seq.</p>
 
-<h3 id="the-cel-seq2-protocol">The CEL-Seq2 Protocol</h3>
+<h2 id="the-cel-seq2-protocol">The CEL-Seq2 Protocol</h2>
 
 <p><small><a href="javascript:window.history.back()">Back to previous</a></small></p>
 
@@ -680,7 +677,10 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#the-cel-seq2-protocol" id="markdown-toc-the-cel-seq2-protocol">The CEL-Seq2 Protocol</a></li>
+    </ol>
+  </li>
   <li><a href="#understanding-barcodes" id="markdown-toc-understanding-barcodes">Understanding Barcodes</a></li>
   <li><a href="#mitigating-duplicate-transcript-counts-with-umis" id="markdown-toc-mitigating-duplicate-transcript-counts-with-umis">Mitigating duplicate transcript counts with UMIs</a>    <ol>
       <li><a href="#naive-amplification" id="markdown-toc-naive-amplification">Naive Amplification</a></li>
@@ -1632,7 +1632,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/93c3c59e6add2313c5dc27586fc7f6936df50505">93c3c59</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2f1595037b7eb38373214bcc6394f1bd5cd35fae">2f15950</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1664,7 +1664,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696945656'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

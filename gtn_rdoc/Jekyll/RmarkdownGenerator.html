@@ -121,7 +121,7 @@
     <span class="ruby-identifier">fn</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">url</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/html$/</span>, <span class="ruby-string">&#39;Rmd&#39;</span>)
 
     <span class="ruby-comment"># Tag our source page</span>
-    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] = [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;tags&#39;</span>
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> []
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;rmarkdown-notebook&#39;</span>)
 
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/Notebooks/R] Rendering RMarkdown #{fn}&quot;</span>

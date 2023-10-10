@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@93c3c59e6add2313c5dc27586fc7f6936df50505",
+	  release: "galaxy-training-network@2f1595037b7eb38373214bcc6394f1bd5cd35fae",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696927768' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696927768' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696945656' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696945656' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -87,7 +87,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Clustering 3K PBMCs with Scanpy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-09-21 15:52:41 +0000">
+<meta name="DC.date" content="2023-10-09 16:30:03 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Hans-Rudolf Hotz">
 <meta name="DC.creator" content="Mehmet Tekman">
@@ -130,7 +130,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-09-21 15:52:41 +0000",
+  "dateModified": "2023-10-09 16:30:03 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Clustering 3K PBMCs with Scanpy",
   "interactivityType": "mixed",
@@ -188,7 +188,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html",
   "timeRequired": "PT5H",
   "teaches": "Describe an AnnData object to store single-cell data\n - Explain the preprocessing steps for single-cell data\n - Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC\n - Execute data normalization and scaling\n - Identify highly variable genes\n - Construct and run a dimensionality reduction using Principal Component Analysis\n - Perform a graph-based clustering for cells\n - Identify marker genes for the clusters\n - Construct and run a cell type annotation for the clusters",
-  "keywords": "single-cell, single-cell, 10x",
+  "keywords": "single-cell, 10x",
   "description": "The questions this  addresses are:\n - What are the steps to prepare single-cell RNA-Seq data for clustering?\n - How to cluster cells in single-cell RNA-Seq data?\n - How cell type annotation can be assigned to cell clusters?\n\n\nThe objectives are:\n - Describe an AnnData object to store single-cell data\n - Explain the preprocessing steps for single-cell data\n - Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC\n - Execute data normalization and scaling\n - Identify highly variable genes\n - Construct and run a dimensionality reduction using Principal Component Analysis\n - Perform a graph-based clustering for cells\n - Identify marker genes for the clusters\n - Construct and run a cell type annotation for the clusters\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -336,10 +336,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   "mentions": [
     {
       "@type": "Thing",
-      "name": "single-cell"
-    },
-    {
-      "@type": "Thing",
       "name": "10x"
     }
   ],
@@ -349,7 +345,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696945656'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -903,7 +899,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 21, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 9, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -4196,7 +4192,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/93c3c59e6add2313c5dc27586fc7f6936df50505">93c3c59</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2f1595037b7eb38373214bcc6394f1bd5cd35fae">2f15950</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -4228,7 +4224,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696945656'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

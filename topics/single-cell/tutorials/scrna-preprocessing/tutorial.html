@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@93c3c59e6add2313c5dc27586fc7f6936df50505",
+	  release: "galaxy-training-network@2f1595037b7eb38373214bcc6394f1bd5cd35fae",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696927768' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696927768' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1696945656' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1696945656' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -87,7 +87,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pre-processing of Single-Cell RNA Data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-11-17 15:08:06 +0000">
+<meta name="DC.date" content="2023-10-10 11:02:05 +0000">
 <meta name="DC.creator" content="Mehmet Tekman">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Anika Erxleben">
@@ -131,7 +131,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-17 15:08:06 +0000",
+  "dateModified": "2023-10-10 11:02:05 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Pre-processing of Single-Cell RNA Data",
   "interactivityType": "mixed",
@@ -189,7 +189,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html",
   "timeRequired": "PT3H",
   "teaches": "Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes\n - Obtain an overview of general alignment and quantification techniques\n - Generate a count matrix for downstream single-cell RNA analysis",
-  "keywords": "single-cell, single-cell",
+  "keywords": "single-cell",
   "description": "The questions this  addresses are:\n - What is single-cell?\n - How do we process a batch?\n - How do we process multiple batches?\n - How do we check for cross-contamination?\n\n\nThe objectives are:\n - Demultiplex FASTQ data via UMI-tools\n - Understand and validate the extraction of barcodes\n - Obtain an overview of general alignment and quantification techniques\n - Generate a count matrix for downstream single-cell RNA analysis\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -328,10 +328,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   ],
   "educationalLevel": "Introductory",
   "mentions": [
-    {
-      "@type": "Thing",
-      "name": "single-cell"
-    }
+
   ],
   "abstract": "# Introduction"
 }
@@ -339,7 +336,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1696945656'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -790,7 +787,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 17, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 10, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -815,7 +812,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                 <section aria-label="Tutorial Content" id="tutorial-content">
                 <h1 id="introduction">Introduction</h1>
 
-<h4 id="why-do-single-cell-sequencing">Why do Single Cell sequencing?</h4>
+<h2 id="why-do-single-cell-sequencing">Why do Single Cell sequencing?</h2>
 
 <p>Single-cell RNA (scRNA) sequencing is the technological successor to classical “bulk” RNA-seq, where samples are no longer defined at the tissue level but at the individual cell level. The bulk RNA-seq methods seen in <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">previous hands-on material</a> would give the average expression of genes in a sample, whilst overlooking the distinct expression profiles given by the cell sub-populations due to their heterogeneity.</p>
 
@@ -869,9 +866,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#why-do-single-cell-sequencing" id="markdown-toc-why-do-single-cell-sequencing">Why do Single Cell sequencing?</a></li>
+    </ol>
+  </li>
   <li><a href="#analysis-strategy" id="markdown-toc-analysis-strategy">Analysis Strategy</a></li>
   <li><a href="#single-batch-processing" id="markdown-toc-single-batch-processing">Single-Batch Processing</a>    <ol>
+      <li><a href="#data-upload-and-organization" id="markdown-toc-data-upload-and-organization">Data upload and organization</a></li>
       <li><a href="#barcode-extraction" id="markdown-toc-barcode-extraction">Barcode Extraction</a></li>
       <li><a href="#mapping--alignment" id="markdown-toc-mapping--alignment">Mapping / Alignment</a></li>
       <li><a href="#filtering" id="markdown-toc-filtering">Filtering</a></li>
@@ -879,6 +880,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     </ol>
   </li>
   <li><a href="#multi-batch-processing" id="markdown-toc-multi-batch-processing">Multi-Batch Processing</a>    <ol>
+      <li><a href="#data-upload-and-organisation" id="markdown-toc-data-upload-and-organisation">Data upload and organisation</a></li>
       <li><a href="#merging-count-matrices" id="markdown-toc-merging-count-matrices">Merging Count Matrices</a></li>
       <li><a href="#guarding-against-cross-contamination" id="markdown-toc-guarding-against-cross-contamination">Guarding against Cross-Contamination</a></li>
     </ol>
@@ -890,7 +892,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 <h1 id="single-batch-processing">Single-Batch Processing</h1>
 
-<h3 id="data-upload-and-organization">Data upload and organization</h3>
+<h2 id="data-upload-and-organization">Data upload and organization</h2>
 
 <p>In this tutorial we will be analysing scRNA-seq data of bone marrow cells taken from a single C57 mouse by <em>Herman et al.</em> (<span class="citation"><a href="#Herman2018">Herman <i>et al.</i> 2018</a></span>) and producing a count matrix that we can use for later analysis.</p>
 
@@ -1110,7 +1112,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 </blockquote>
 
-<h4 id="confirming-reads-in-the-bam-file">Confirming Reads in the BAM file</h4>
+<h3 id="confirming-reads-in-the-bam-file">Confirming Reads in the BAM file</h3>
 
 <p>We now have a BAM file of our aligned reads, with cell and UMI barcodes embedded in the read headers. We also have the chromosome and base-pair positions of where these reads are aligned. The can be confirmed by peeking into the BAM file:</p>
 
@@ -1159,7 +1161,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
   <li><code class="language-plaintext highlighter-rouge">nM</code>: The number of base mismatches in the alignment of this read to the reference (here <code class="language-plaintext highlighter-rouge">1</code>).</li>
 </ul>
 
-<h4 id="filtering-the-bam-file">Filtering the BAM File</h4>
+<h3 id="filtering-the-bam-file">Filtering the BAM File</h3>
 
 <p>If we perform counting on the current BAM file we will be counting all reads, even the undesirable ones such as those that did not align so optimally.</p>
 
@@ -1533,7 +1535,7 @@ The number of columns can be seen by scrolling the file preview window completel
 
 <p>The first step merely requires us to run the same workflow on each of our batches, using the exact same inputs except for the FASTQ paired data. The second step requires a minimal level of interaction from us; namely using a merge tool and selecting our matrices.</p>
 
-<h3 id="data-upload-and-organisation">Data upload and organisation</h3>
+<h2 id="data-upload-and-organisation">Data upload and organisation</h2>
 
 <p>The count matrix we have generated in the previous section is too sparse to perform any reasonable analysis upon, and constitutes data only of a single batch. Here we will use more populated count matrices from multiple batches, under the assumption that we now know how to generate each individual one of them using the steps provided in the previous section. This data is available at <a href="https://zenodo.org/record/3253142"><code class="language-plaintext highlighter-rouge">Zenodo</code></a>.</p>
 
@@ -1864,7 +1866,7 @@ https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 
 <p>The plot that follows tells us everything we need to know about each of our batches. Each batch is essentially tested against the full set of barcodes in order to assert that only the desired or ‘Real’ barcodes have been sequenced.</p>
 
-<h4 id="cross-contamination-plot">Cross-contamination Plot</h4>
+<h3 id="cross-contamination-plot">Cross-contamination Plot</h3>
 
 <figure id="figure-9" style="max-width: 90%; margin:auto;"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" alt="Contamination Plots. " width="2348" height="1050" loading="lazy" /><a target="_blank" href="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_crosscontamination.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> The Pre-filter and Post-filter plots</figcaption></figure>
 
@@ -2232,7 +2234,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/93c3c59e6add2313c5dc27586fc7f6936df50505">93c3c59</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/2f1595037b7eb38373214bcc6394f1bd5cd35fae">2f15950</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2264,7 +2266,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1696927768'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1696945656'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

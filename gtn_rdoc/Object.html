@@ -682,7 +682,7 @@
     <span class="ruby-identifier">notebook_language</span> = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;notebook&#39;</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;language&#39;</span>, <span class="ruby-string">&#39;python&#39;</span>)
 
     <span class="ruby-comment"># Tag our source page</span>
-    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] = [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;tags&#39;</span>
+    <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] = <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>] <span class="ruby-operator">||</span> []
     <span class="ruby-identifier">page</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tags&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;jupyter-notebook&#39;</span>)
 
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[GTN/Notebooks] Rendering #{notebook_language} #{fn}&quot;</span>

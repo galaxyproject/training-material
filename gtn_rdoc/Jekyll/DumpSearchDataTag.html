@@ -149,9 +149,7 @@
           <div class="method-source-code" id="getlist-source">
             <pre><span class="ruby-comment"># File _plugins/search.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getlist</span>(<span class="ruby-identifier">tutorial</span>, <span class="ruby-identifier">attr</span>)
-  [] <span class="ruby-keyword">if</span> <span class="ruby-identifier">tutorial</span>[<span class="ruby-identifier">attr</span>].<span class="ruby-identifier">nil?</span>
-
-  <span class="ruby-identifier">tutorial</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">attr</span>, [])
+  <span class="ruby-identifier">tutorial</span>[<span class="ruby-identifier">attr</span>] <span class="ruby-operator">||</span> []
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -170,7 +168,7 @@
           
 
           <div class="method-source-code" id="render-source">
-            <pre><span class="ruby-comment"># File _plugins/search.rb, line 22</span>
+            <pre><span class="ruby-comment"># File _plugins/search.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">render</span>(<span class="ruby-identifier">context</span>)
   <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;[GTN/Search]&#39;</span>
 
