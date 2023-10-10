@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 subtopic: datamanipulation
 priority: 2
 
-title: Bulk matrix to ESet object | Creating the bulk RNA-seq dataset for deconvolution
+title: Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
 zenodo_link: 'https://zenodo.org/record/7319173'
 questions:
 - Where can I find good quality RNA-seq datasets?
@@ -26,10 +26,8 @@ contributions:
 
 tags:
   - single-cell
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
+  - data management
 
 requirements:
   -
@@ -304,3 +302,5 @@ You can find the [workflow for generating the ESet object](https://usegalaxy.eu/
 ![7 boxes in the workflow editor and a subworkflow box for converting Ensembl to GeneSymbol](../../images/bulk-music/workflow-bulk.png "Workflow: Generating the bulk ESet Objects")
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

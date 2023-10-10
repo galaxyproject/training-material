@@ -3,6 +3,7 @@
 require 'json'
 require 'liquid'
 require './_plugins/colour-tags'
+require './_plugins/jekyll-topic-filter'
 
 module Jekyll
   # Export search data as JSON
@@ -22,8 +23,7 @@ module Jekyll
       puts '[GTN/Search]'
 
       site = context.registers[:site]
-      topics = site.data.select { |_k, v| v.is_a?(Hash) && v.key?('type') }
-                   .select { |_k, v| %w[use admin-dev basics].include? v['type'] }
+      topics = TopicFilter.list_topics_h(site)
 
       results = {}
       topics.each do |k, topic|
