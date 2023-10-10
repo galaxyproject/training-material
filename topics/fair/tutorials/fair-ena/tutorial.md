@@ -170,8 +170,7 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 > Your checklist will contain columns shown in Table 2.
 >    
 > **Table 2.** Sample metadata checklist
-> | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    | <!-- -->    |
-> |-------------|-------------|-------------|-------------|-------------|-------------|-------------|
+>
 > | Checklist	| ERC000011	| ENA default sample checklist | | | | |
 > | tax_id	| scientific_name |	sample_alias	| sample_title	| sample_description	| collection date	| geographic location (country and/or sea) |
 > | #units | | | | | | |
