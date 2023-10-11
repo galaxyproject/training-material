@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: QGIS Web Feature Services
 questions:
 - how to use WFS webservice to access and import GIS data through Galaxy
