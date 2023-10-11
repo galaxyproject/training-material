@@ -42,6 +42,8 @@ modifiedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=
 
 NOW = Time.now
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
+FUNDERS = YAML.load_file('FUNDERS.yaml')
 
 # new   news
 # new   slidevideos
@@ -106,6 +108,10 @@ data = {
        .map { |x| printableMaterial(x) },
   },
   contributors: `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+  organisations: `git diff --unified --ignore-all-space #{options[:previousCommit]} ORGANISATIONS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+  funders: `git diff --unified --ignore-all-space #{options[:previousCommit]} FUNDERS.yaml`
        .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
 }
 
@@ -176,7 +182,19 @@ def build_news(data, filter: nil, updates: true)
     output += data[:contributors].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
-  [output, newsworthy]
+  if filter.nil? && data[:organisations].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:organisations].length} new organisations!\n\n"
+    output += data[:organisations].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
+  if filter.nil? && data[:funders].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:funders].length} new funders!\n\n"
+    output += data[:funders].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
+  return [output, newsworthy]
 end
 
 def send_news(output, options, channel: 'default')
