@@ -3,6 +3,7 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign entity = site | fetch_contributor: page.contributor %}
 
 <script type="application/ld+json">
 	{{ page.contributor | to_pfo_jsonld: site }}
@@ -20,20 +21,12 @@ layout: base
 
 			<div class="col-md-3">
 				<div>
-				{% if contributors[page.contributor].avatar %}
-					<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" >
-				{% elsif contributors[page.contributor].github != false %}
-					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-				{% else %}
-					<span class="thumbnail">
-						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-					</span>
-				{% endif %}
+					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
 				</div>
 
-				{% if contributors[page.contributor].bio %}
+				{% if entity.bio %}
 				<p class="text-muted">
-					{{ contributors[page.contributor].bio }}
+					{{ entity.bio }}
 				</p>
 				{% endif %}
 
@@ -45,7 +38,7 @@ layout: base
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].github != false %}
+				{% if entity.github != false %}
 				<div class="contact-items">
 					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
 						{% icon github %} {{ page.contributor }}
@@ -53,78 +46,69 @@ layout: base
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].funding_id %}
+				{% if entity.funding_id %}
 					Grant ID:
-					{% if contributors[page.contributor].funding_system %}
-						{% if contributors[page.contributor].funding_system == "cordis" %}
-							<a href="https://cordis.europa.eu/project/id/{{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% elsif contributors[page.contributor].funding_system == "erasmusplus" %}
-							<a href="https://erasmus-plus.ec.europa.eu/projects/search/details/{{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% elsif contributors[page.contributor].funding_system == "ukri" %}
-							<a href="https://gtr.ukri.org/projects?ref={{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% endif %}
+					{% if entity.funding_system %}
+						{% assign url = entity | fetch_funding_url %}
+						<a href="{{ url }}">
+							{{ entity.funding_id }}
+						</a>
 					{% else %}
-						{{ contributors[page.contributor].funding_id }}
+						{{ entity.funding_id }}
 					{% endif %}
 				{% endif %}
 
-				{% if contributors[page.contributor].email %}
+				{% if entity.email %}
 				<div class="contact-items">
-					<a title="E-mail" href="mailto:{{ contributors[page.contributor].email }}">
-						{% icon email %} {{ contributors[page.contributor].email }}
+					<a title="E-mail" href="mailto:{{ entity.email }}">
+						{% icon email %} {{ entity.email }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].matrix %}
+				{% if entity.matrix %}
 				<div class="contact-items">
-					<a title="matrix" href="https://matrix.to/#/@{{ contributors[page.contributor].matrix }}">
-						{% icon gitter %} {{ contributors[page.contributor].matrix }}
+					<a title="matrix" href="https://matrix.to/#/@{{ entity.matrix }}">
+						{% icon gitter %} {{ entity.matrix }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].fediverse %}
+				{% if entity.fediverse %}
 				<div class="contact-items">
-					<a href="{{ contributors[page.contributor].fediverse }}" rel="me">
-						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
+					<a href="{{ entity.fediverse }}" rel="me">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ entity.fediverse }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].twitter %}
+				{% if entity.twitter %}
 				<div class="contact-items">
-					<a title="Twitter" href="https://twitter.com/{{ contributors[page.contributor].twitter }}">
-						{% icon twitter %} {{ contributors[page.contributor].twitter }}
+					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
+						{% icon twitter %} {{ entity.twitter }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].linkedin %}
+				{% if entity.linkedin %}
 				<div class="contact-items">
-					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[page.contributor].linkedin }}">
-						{% icon linkedin %} {{ contributors[page.contributor].linkedin }}
+					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ entity.linkedin }}">
+						{% icon linkedin %} {{ entity.linkedin }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].orcid %}
+				{% if entity.orcid %}
 				<div class="contact-items">
-					<a title="ORCID" href="https://orcid.org/{{ contributors[page.contributor].orcid }}">
-						{% icon orcid %} {{ contributors[page.contributor].orcid }}
+					<a title="ORCID" href="https://orcid.org/{{ entity.orcid }}">
+						{% icon orcid %} {{ entity.orcid }}
 					</a>
 				</div>
 				{% endif %}
 
-				{% if contributors[page.contributor].elixir_node %}
+				{% if entity.elixir_node %}
 				<div class="contact-items">
-					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ contributors[page.contributor].elixir_node }}.svg" alt="elixir logo for {{ contributors[page.contributor].elixir_node | elixirnode2name }}">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ entity.elixir_node }}.svg" alt="elixir logo for {{ entity.elixir_node | elixirnode2name }}">
 				</div>
 				{% endif %}
 
@@ -138,38 +122,38 @@ layout: base
 			<div class="col-md-9">
 				<hgroup>
 					<h1>
-						{{ contributors[page.contributor].name | default: page.contributor }}
+						{{ entity.name | default: page.contributor }}
 					</h1>
-				{% if contributors[page.contributor].funder_name %}
-					<p>Funded by {{ contributors[page.contributor].funder_name }}</p>
+				{% if entity.funder_name %}
+					<p>Funded by {{ entity.funder_name }}</p>
 				{% endif %}
 				</hgroup>
-				{% if contributors[page.contributor].funder %}
+				{% if entity.funder %}
 				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
 				{% endif %}
-				{% if contributors[page.contributor].in_memoriam %}
+				{% if entity.in_memoriam %}
 				<div class="alert alert-dark" role="alert">
 					<h2 class="alert-heading">In Memoriam</h2>
-					<p>{{ contributors[page.contributor].in_memoriam | markdownify }}</p>
+					<p>{{ entity.in_memoriam | markdownify }}</p>
 				</div>
 
 				{% endif %}
 
 				<h2>Contributions</h2>
 
-				{% if contributors[page.contributor].funder %}
-				{% if contributors[page.contributor].url %}
-				<a href="{{ contributors[page.contributor].url }}">{{ contributors[page.contributor].url }}</a>
+				{% if entity.funder %}
+				{% if entity.url %}
+				<a href="{{ entity.url }}">{{ entity.url }}</a>
 				{% endif %}
-				{{ contributors[page.contributor].funding_statement | markdownify }}
+				{{ entity.funding_statement | markdownify }}
 				{% endif %}
 
 				<p class="text-muted">
 					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
-                {% unless contributors[page.contributor].github == false %}
+                {% unless entity.github == false %}
                 <br><br>
-		{% unless contributors[page.contributor].funder %}
+		{% unless entity.funder %}
                 <h3> GitHub Activity</h4>
                 <ul>
                   <li><a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> </li>

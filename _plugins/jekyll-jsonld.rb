@@ -140,6 +140,7 @@ module Jekyll
           '@type': 'Organization',
           'name': Gtn::Contributors.fetch_name(site, id),
           'description': contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+          'url': Gtn::Contributors.fetch_funding_url(contributor),
         }
       }
       if contributor.key?('start_date')
@@ -162,7 +163,6 @@ module Jekyll
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
-      p "PFO: #{id} => #{contributor}"
       if Gtn::Contributors.is_person(site, id)
         JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
       elsif Gtn::Contributors.is_funder(site, id)

@@ -193,6 +193,51 @@ module Jekyll
     end
 
     ##
+    # Params:
+    # +data+:: The site data
+    # +string+:: The contributor id
+    # Returns:
+    # +Hash+:: The contributing entity
+    #
+    # Example:
+    #  {% assign contrib = site | fetch_contributor: page.contributor -%}
+    def fetch_contributor(site, id)
+      Gtn::Contributors.fetch_contributor(site, id)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_funding_url }}
+    def fetch_funding_url(entity)
+      Gtn::Contributors.fetch_funding_url(entity)
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
+    # +String+:: The funding URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar(entity, id, width)
+      w = width.nil? ? "" : "width=\"#{width}\""
+      if ! entity['avatar'].nil?
+        %Q(<img src="#{entity['avatar']}" alt="#{entity['name']} avatar" #{w} />)
+      elsif entity['github'] != false
+        qp = width.nil? ? "" : "?s=#{width}"
+        %Q(<img src="https://avatars.githubusercontent.com/#{id}#{qp}" alt="#{entity['name']} avatar"  #{w}/>)
+      else
+        %Q(<img src="/training-material/assets/images/avatar.png" alt="#{entity['name']} avatar"  #{w}/>)
+      end
+    end
+
+    ##
     # Convert a fedi address to a link
     # Params:
     # +fedi_address+:: The fedi address to convert
