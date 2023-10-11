@@ -221,20 +221,41 @@ module Jekyll
     # Params:
     # +data+:: The contributor's data
     # Returns:
+    # +String+:: The avatar's URL
+    #
+    # Example:
+    #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
+    def fetch_entity_avatar_url(entity, id, width)
+      if entity.nil?
+        return "ERROR_NO_ENTITY"
+      end
+      w = width.nil? ? "" : "width=\"#{width}\""
+      if ! entity['avatar'].nil?
+        entity['avatar']
+      elsif entity['github'] != false
+        qp = width.nil? ? "" : "?s=#{width}"
+        "https://avatars.githubusercontent.com/#{id}#{qp}"
+      else
+        "/training-material/assets/images/avatar.png"
+      end
+    end
+
+    ##
+    # Params:
+    # +data+:: The contributor's data
+    # Returns:
     # +String+:: The funding URL
     #
     # Example:
     #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
     def fetch_entity_avatar(entity, id, width)
-      w = width.nil? ? "" : "width=\"#{width}\""
-      if ! entity['avatar'].nil?
-        %Q(<img src="#{entity['avatar']}" alt="#{entity['name']} avatar" #{w} />)
-      elsif entity['github'] != false
-        qp = width.nil? ? "" : "?s=#{width}"
-        %Q(<img src="https://avatars.githubusercontent.com/#{id}#{qp}" alt="#{entity['name']} avatar"  #{w}/>)
-      else
-        %Q(<img src="/training-material/assets/images/avatar.png" alt="#{entity['name']} avatar"  #{w}/>)
+      if entity.nil?
+        return "<img src=\"/training-material/assets/images/avatar.png\" alt=\"ERROR_NO_ENTITY avatar\" />"
       end
+
+      w = width.nil? ? "" : "width=\"#{width}\""
+      url = fetch_entity_avatar_url(entity, id, width)
+      %Q(<img src="#{url}" alt="#{entity['name']} avatar" #{w} />)
     end
 
     ##
