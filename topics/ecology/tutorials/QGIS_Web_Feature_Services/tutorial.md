@@ -133,5 +133,4 @@ Even if you can select, download and display entire WFS layers, it is often more
 
 # Conclusion
 
-
 You just did a classical GIS operation, accessing remote data using WFS webservice through QGIS, retrieving features of interest you can share broadly through Galaxy!
