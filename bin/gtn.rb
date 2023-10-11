@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
+FUNDERS = YAML.load_file('FUNDERS.yaml')
 
 def automagic_loading(f)
   # Remove our documentation
@@ -13,6 +15,8 @@ def automagic_loading(f)
       automagic_loading(v)
     elsif v.is_a?(Array)
       v.replace CONTRIBUTORS.keys if (k == 'enum') && (v[0] == 'CONTRIBUTORS')
+      v.replace FUNDERS.keys if (k == 'enum') && (v[0] == 'FUNDERS')
+      v.replace ORGANISATIONS.keys if (k == 'enum') && (v[0] == 'ORGANISATIONS')
       v.flatten.each { |x| automagic_loading(x) if x.is_a?(Hash) }
     end
   end

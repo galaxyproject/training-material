@@ -10,9 +10,16 @@ errs = []
 
 CONTRIBUTORS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-contributors.yaml')
 CONTRIBUTORS_SCHEMA = automagic_loading(CONTRIBUTORS_SCHEMA_UNSAFE)
-
-# Build validators now that we've filled out the subtopic enum
 contribs_validator = Kwalify::Validator.new(CONTRIBUTORS_SCHEMA)
+
+FUNDERS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-funders.yaml')
+FUNDERS_SCHEMA = automagic_loading(FUNDERS_SCHEMA_UNSAFE)
+funders_validator = Kwalify::Validator.new(FUNDERS_SCHEMA)
+
+ORGANISATIONS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-organisations.yaml')
+ORGANISATIONS_SCHEMA = automagic_loading(ORGANISATIONS_SCHEMA_UNSAFE)
+organisations_validator = Kwalify::Validator.new(ORGANISATIONS_SCHEMA)
+
 
 def validate_document(document, validator)
   errors = validator.validate(document)
@@ -21,15 +28,25 @@ def validate_document(document, validator)
   []
 end
 
-errs.push(*validate_document(CONTRIBUTORS, contribs_validator))
-
-# If we had no errors, validated successfully
-if errs.empty?
-  puts "\e[38;5;40mCONTRIBUTORS.yaml validated succesfully\e[m"
-  exit 0
-else
-  # Otherwise, print errors and exit non-zero
-  puts "\e[48;5;09mCONTRIBUTORS.yaml  has errors\e[m"
-  errs.each { |x| puts "  #{x}" }
-  exit 1
+def show_errors(file, errs)
+  # If we had no errors, validated successfully
+  if errs.empty?
+    puts "\e[38;5;40m#{file} validated succesfully\e[m"
+    0
+  else
+    # Otherwise, print errors and exit non-zero
+    puts "\e[48;5;09m#{file}  has errors\e[m"
+    errs.each { |x| puts "  #{x}" }
+    1
+  end
 end
+
+
+ec = 0
+# This variable from bin/gtn.rb
+errs.push(*validate_document(CONTRIBUTORS, contribs_validator))
+ec = ec | show_errors('CONTRIBUTORS.yaml', errs)
+errs.push(*validate_document(FUNDERS, funders_validator))
+ec = ec | show_errors('FUNDERS.yaml', errs)
+errs.push(*validate_document(ORGANISATIONS, organisations_validator))
+ec = ec | show_errors('ORGANISATIONS.yaml', errs)
