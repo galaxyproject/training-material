@@ -242,7 +242,8 @@
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/topics\/#{filter}/</span> },
-    <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/topics\/#{filter}/</span> }
+    <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/topics\/#{filter}/</span> },
+    <span class="ruby-value">kind:</span> <span class="ruby-string">&quot;slides&quot;</span>
   )
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
   <span class="ruby-identifier">newsworthy</span> = <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -528,12 +529,12 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;\n\nNew Tutorials:\n\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\nNew #{kind}:\n\n&quot;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">added</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>]}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&quot;\n\nUpdated Tutorials:\n\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\nUpdated #{kind}:\n\n&quot;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>]}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">output</span>
@@ -769,7 +770,7 @@
           <div class="method-source-code" id="linkify-source">
             <pre><span class="ruby-comment"># File bin/news.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">linkify</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">path</span>)
-  <span class="ruby-node">&quot;[#{text}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news)&quot;</span>
+  <span class="ruby-node">&quot;[#{text.gsub(&#39;|&#39;, &#39;-&#39;)}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news)&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1041,7 +1042,7 @@
           
 
           <div class="method-source-code" id="send_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 179</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 180</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_news</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">channel:</span> <span class="ruby-string">&#39;default&#39;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:postToMatrix</span>]
     <span class="ruby-identifier">homeserver</span> = <span class="ruby-identifier">$rooms</span>[<span class="ruby-identifier">channel</span>]
