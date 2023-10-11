@@ -48,7 +48,8 @@ QGIS is now integrated in Galaxy as an interactive tool. This kind of tool works
 
 To use QGIS, you need to use the {% tool [dedicated form](interactive_tool_qgis) %}, you can specify input datasets from your history you want to use in QGIS, or not ;), then press the execute button to launch a QGIS instance. When the graphical user interface of QGIS is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
 
-Once you finish your work on QGIS, if you want to reuse data and/or the entire project, you need to save files in the "output" folder, then quit QGIS properly through the "Project" Menu tab.
+Once you finish your work on QGIS, if you want to reuse data and/or the entire project, you need to save files in the "output" folder (which you can find in the "working" directory). 
+Then, quit QGIS properly through the "Project" Menu tab top left and click on "Exit QGIS".
 
 > <hands-on-title>Deploy your own QGIS instance</hands-on-title>
 >
