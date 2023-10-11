@@ -1,6 +1,6 @@
 # frozen_string_literal: true
-require './_plugins/gtn'
 
+require './_plugins/gtn'
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # Make the directory
@@ -8,8 +8,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
   FileUtils.mkdir_p "#{site.dest}/api/fedi"
 
   Gtn::Contributors.list(site)
-      .select { |_k, v| v['fediverse'] }
-      .each do |k, v|
+                   .select { |_k, v| v['fediverse'] }
+                   .each do |k, v|
     # saving the outputs to
     # training-material/api/fedi/resource=acct%3Ahexylena%40galaxy.training.json
 

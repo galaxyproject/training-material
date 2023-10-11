@@ -20,7 +20,6 @@ ORGANISATIONS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-organisations.yaml')
 ORGANISATIONS_SCHEMA = automagic_loading(ORGANISATIONS_SCHEMA_UNSAFE)
 organisations_validator = Kwalify::Validator.new(ORGANISATIONS_SCHEMA)
 
-
 def validate_document(document, validator)
   errors = validator.validate(document)
   return errors if errors && !errors.empty?
@@ -41,12 +40,11 @@ def show_errors(file, errs)
   end
 end
 
-
 ec = 0
 # This variable from bin/gtn.rb
 errs.push(*validate_document(CONTRIBUTORS, contribs_validator))
-ec = ec | show_errors('CONTRIBUTORS.yaml', errs)
+ec |= show_errors('CONTRIBUTORS.yaml', errs)
 errs.push(*validate_document(FUNDERS, funders_validator))
-ec = ec | show_errors('FUNDERS.yaml', errs)
+ec |= show_errors('FUNDERS.yaml', errs)
 errs.push(*validate_document(ORGANISATIONS, organisations_validator))
-ec = ec | show_errors('ORGANISATIONS.yaml', errs)
+ec | show_errors('ORGANISATIONS.yaml', errs)

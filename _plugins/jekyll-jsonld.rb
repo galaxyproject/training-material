@@ -134,21 +134,18 @@ module Jekyll
       organization = {
         '@context': 'https://schema.org',
         '@type': 'Grant',
-        'identifier': contributor['funding_id'],
-        'url': contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-        'funder': {
+        identifier: contributor['funding_id'],
+        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        funder: {
           '@type': 'Organization',
-          'name': Gtn::Contributors.fetch_name(site, id),
-          'description': contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
-          'url': Gtn::Contributors.fetch_funding_url(contributor),
+          name: Gtn::Contributors.fetch_name(site, id),
+          description: contributor.fetch('funding_statement',
+                                         'An organization supporting the Galaxy Training Network'),
+          url: Gtn::Contributors.fetch_funding_url(contributor),
         }
       }
-      if contributor.key?('start_date')
-        organization['startDate'] = contributor['start_date']
-      end
-      if contributor.key?('end_date')
-        organization['endDate'] = contributor['end_date']
-      end
+      organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
@@ -163,9 +160,9 @@ module Jekyll
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
-      if Gtn::Contributors.is_person(site, id)
+      if Gtn::Contributors.person?(site, id)
         JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
-      elsif Gtn::Contributors.is_funder(site, id)
+      elsif Gtn::Contributors.funder?(site, id)
         JSON.pretty_generate(generate_funder_jsonld(id, contributor, site))
       else
         JSON.pretty_generate(generate_org_jsonld(id, contributor, site))
@@ -180,9 +177,9 @@ module Jekyll
     # Returns:
     # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
-      authors = Gtn::Contributors.get_authors(page.to_h).map { |x| 
+      authors = Gtn::Contributors.get_authors(page.to_h).map do |x|
         to_pfo_jsonld(x, site)
-      }
+      end
 
       data = {
         '@context': 'https://schema.org',
@@ -513,9 +510,9 @@ module Jekyll
 
       # Add contributors/authors
       if material.key?('contributors') || material.key?('contributions')
-        authors = Gtn::Contributors.get_authors(material).map { |x|
+        authors = Gtn::Contributors.get_authors(material).map do |x|
           generate_person_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
-        }
+        end
 
         data['author'] = authors
       end

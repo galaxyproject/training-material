@@ -226,17 +226,16 @@ module Jekyll
     # Example:
     #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
     def fetch_entity_avatar_url(entity, id, width)
-      if entity.nil?
-        return "ERROR_NO_ENTITY"
-      end
-      w = width.nil? ? "" : "width=\"#{width}\""
-      if ! entity['avatar'].nil?
+      return 'ERROR_NO_ENTITY' if entity.nil?
+
+      width.nil? ? '' : "width=\"#{width}\""
+      if !entity['avatar'].nil?
         entity['avatar']
       elsif entity['github'] != false
-        qp = width.nil? ? "" : "?s=#{width}"
+        qp = width.nil? ? '' : "?s=#{width}"
         "https://avatars.githubusercontent.com/#{id}#{qp}"
       else
-        "/training-material/assets/images/avatar.png"
+        '/training-material/assets/images/avatar.png'
       end
     end
 
@@ -249,13 +248,11 @@ module Jekyll
     # Example:
     #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
     def fetch_entity_avatar(entity, id, width)
-      if entity.nil?
-        return "<img src=\"/training-material/assets/images/avatar.png\" alt=\"ERROR_NO_ENTITY avatar\" />"
-      end
+      return '<img src="/training-material/assets/images/avatar.png" alt="ERROR_NO_ENTITY avatar" />' if entity.nil?
 
-      w = width.nil? ? "" : "width=\"#{width}\""
+      w = width.nil? ? '' : "width=\"#{width}\""
       url = fetch_entity_avatar_url(entity, id, width)
-      %Q(<img src="#{url}" alt="#{entity['name']} avatar" #{w} />)
+      %(<img src="#{url}" alt="#{entity['name']} avatar" #{w} />)
     end
 
     ##
@@ -411,7 +408,9 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = Gtn::Contributors.get_authors(post.data).map { |c| Gtn::Contributors.fetch_name(post.site, c) }.join(', ')
+  post.data['author'] = Gtn::Contributors.get_authors(post.data).map do |c|
+    Gtn::Contributors.fetch_name(post.site, c)
+  end.join(', ')
   post.data['image'] = post.data['cover']
 end
 

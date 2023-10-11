@@ -58,11 +58,11 @@ module Jekyll
     def mapContributor(site, c)
       contrib_type, contrib = Gtn::Contributors.fetch(site, c)
       x = contrib
-              .merge({
-                       'id' => c,
-                       'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
-                       'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
-                     })
+          .merge({
+                   'id' => c,
+                   'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
+                   'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+                 })
       visitAndMarkdownify(site, x)
     end
 
@@ -145,8 +145,8 @@ module Jekyll
 
       # Contributors
       puts '[GTN/API] Contributors, Funders, Organisations'
-      ['contributors', 'funders', 'organisations'].each do |type|
-        page2 = PageWithoutAFile.new(site, '', 'api/', type + '.json')
+      %w[contributors funders organisations].each do |type|
+        page2 = PageWithoutAFile.new(site, '', 'api/', "#{type}.json")
         page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
         page2.data['layout'] = nil
         site.pages << page2

@@ -20,6 +20,7 @@ if options[:previousCommit].nil?
   exit 1
 end
 
+# rubocop:disable Style/GlobalVars
 $rooms = {
   'test' => {
     server: 'https://matrix.org',
@@ -34,9 +35,10 @@ $rooms = {
     room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
   }
 }
-
+# rubocop:enable Style/GlobalVars
+#
 addedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=A #{options[:previousCommit]}`.split("\n")
-modifiedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
+mfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
 # modifiedfiles = `git diff --cached --name-only --ignore-all-space
 # --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
@@ -98,21 +100,21 @@ data = {
     news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
   },
   modified: {
-    slides: modifiedfiles
+    slides: mfiles
        .select { |x| filterSlides(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
-    tutorials: modifiedfiles
+    tutorials: mfiles
        .select { |x| filterTutorials(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
   },
   contributors: `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
-       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
   organisations: `git diff --unified --ignore-all-space #{options[:previousCommit]} ORGANISATIONS.yaml`
-       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
   funders: `git diff --unified --ignore-all-space #{options[:previousCommit]} FUNDERS.yaml`
-       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
 }
 
 def titleize(t)
@@ -199,7 +201,9 @@ end
 
 def send_news(output, options, channel: 'default')
   if options[:postToMatrix]
+    # rubocop:disable Style/GlobalVars
     homeserver = $rooms[channel]
+    # rubocop:enable Style/GlobalVars
     pp homeserver
 
     data = {

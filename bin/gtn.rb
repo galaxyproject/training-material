@@ -17,18 +17,10 @@ def automagic_loading(f)
       if k == 'enum'
         repl = []
         # If one of the elements in this array is CONTRIBUTORS, replace it with the same named variable
-        if v.find { |x| x == 'CONTRIBUTORS' }
-          repl << CONTRIBUTORS.keys
-        end
-        if v.find { |x| x == 'FUNDERS' }
-          repl << FUNDERS.keys
-        end
-        if v.find { |x| x == 'ORGANISATIONS' }
-          repl << ORGANISATIONS.keys
-        end
-        if repl.length.positive?
-          v.replace repl.flatten
-        end
+        repl << CONTRIBUTORS.keys if v.find { |x| x == 'CONTRIBUTORS' }
+        repl << FUNDERS.keys if v.find { |x| x == 'FUNDERS' }
+        repl << ORGANISATIONS.keys if v.find { |x| x == 'ORGANISATIONS' }
+        v.replace repl.flatten if repl.length.positive?
       end
       v.flatten.each { |x| automagic_loading(x) if x.is_a?(Hash) }
     end
