@@ -34,7 +34,6 @@ key_points:
 
 
 tags:
-- single-cell
 
 contributions:
   authorship:

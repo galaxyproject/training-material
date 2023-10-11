@@ -185,7 +185,7 @@ module Jekyll
         url: "#{site['url']}#{site['baseurl']}#{page['url']}",
         name: page['title'],
         headline: page.excerpt[0..100].gsub(/\n/, ' '), # TODO: remove html tags.
-        keywords: page.fetch('tags', []),
+        keywords: page['tags'] || [],
         description: page.excerpt[0..100].gsub(/\n/, ' '), # TODO: remove html tags
         articleBody: page.content, # TODO: remove html tags
         datePublished: page.date,
@@ -395,7 +395,7 @@ module Jekyll
         end
 
         # Keywords
-        data['keywords'] = [topic['name']] + material.fetch('tags', [])
+        data['keywords'] = [topic['name']] + (material['tags'] || [])
         data['keywords'] = data['keywords'].join(', ')
         # Zenodo links
         if material.key?('zenodo_link')
@@ -532,7 +532,7 @@ module Jekyll
       data['about'] = about
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
-      data['mentions'] = material.fetch('tags', []).map { |x| { '@type': 'Thing', name: x } }
+      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
       data['abstract'] = material['content'].split("\n").first
 
       JSON.pretty_generate(data)

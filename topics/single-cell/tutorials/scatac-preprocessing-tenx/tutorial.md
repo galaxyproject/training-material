@@ -8,7 +8,6 @@ redirect_from:
   - /topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/7855968"
 tags:
-  - single-cell
   - 10x
   - epigenetics
 questions:

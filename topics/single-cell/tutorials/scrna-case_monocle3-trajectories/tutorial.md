@@ -36,7 +36,6 @@ requirements:
         - scrna-case_basic-pipeline
         - scrna-case_JUPYTER-trajectories
 tags:
-- single-cell
 - 10x
 - paper-replication
 
