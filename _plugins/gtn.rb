@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'English'
+require './_plugins/gtn/contributors'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/images'
@@ -18,37 +19,6 @@ puts '[GTN] WARNING: This Ruby is pretty old, you might want to update.' if vers
 
 ##
 # This module contains functions that are used in the GTN, our internal functions that is.
-
-##
-# This function returns the authors of a material, if it has any. (via contributors or contribution)
-# Params:
-# +material+:: The material to get the authors of
-# Returns:
-# +Array+:: The authors of the material
-def get_authors(material)
-  if material.key?('contributors')
-    material['contributors']
-  elsif material.key?('contributions')
-    material['contributions']['authorship']
-  else
-    []
-  end
-end
-
-##
-# This function returns the name of a user, if it is known. Otherwise, it returns the user name.
-# Params:
-# +user+:: The user to get the name of
-# +site+:: The +Jekyll::Site+ object
-# Returns:
-# +String+:: The name of the user
-def lookup_name(user, site)
-  if site.data['contributors'].key?(user)
-    site.data['contributors'][user].fetch('name', user)
-  else
-    user
-  end
-end
 
 module Jekyll
   # The main GTN function library
@@ -211,21 +181,15 @@ module Jekyll
     end
 
     ##
-    # Basically a dupe of 'get_authors'
     # Params:
-    # +contributors+:: The contributors to the material
-    # +contributions+:: The contributions to the material
+    # +data+:: The page data
     # Returns:
-    # +Array+:: The "authors" of the material
-    #
-    # TODO(hexylena) de-duplicate
+    # +Array+:: The "authors" of the material (list of strings)
     #
     # Example:
-    #  {% assign authors = page.contributors | filter_authors:page.contributions -%}
-    def filter_authors(contributors, contributions)
-      return contributors if !contributors.nil?
-
-      contributions['authorship']
+    #  {% assign authors = page | filter_authors -%}
+    def filter_authors(data)
+      Gtn::Contributors.get_authors(data)
     end
 
     ##
@@ -381,7 +345,7 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 #
 # This exists because the jekyll-feed plugin expects those fields to look like that.
 Jekyll::Hooks.register :posts, :pre_render do |post, _out|
-  post.data['author'] = get_authors(post.data).map { |c| lookup_name(c, post.site) }.join(', ')
+  post.data['author'] = Gtn::Contributors.get_authors(post.data).map { |c| Gtn::Contributors.fetch_name(post.site, c) }.join(', ')
   post.data['image'] = post.data['cover']
 end
 

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
+require './_plugins/gtn'
+
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # Make the directory
   Jekyll.logger.info 'Generating webfinger files'
   FileUtils.mkdir_p "#{site.dest}/api/fedi"
 
-  site.data['contributors']
+  Gtn::Contributors.list(site)
       .select { |_k, v| v['fediverse'] }
       .each do |k, v|
     # saving the outputs to

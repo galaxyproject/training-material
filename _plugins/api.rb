@@ -15,20 +15,6 @@ module Jekyll
   # This class generates the GTN's "api" by writing out a folder full of JSON files.
   class APIGenerator < Generator
     ##
-    # Returns contributors, regardless of whether they are 'contributor' or 'contributions' style
-    # Params:
-    # +data+:: +Hash+ of the YAML frontmatter from a material
-    # Returns:
-    # +Array+ of contributor IDs
-    def get_contributors(data)
-      if data.key?('contributors')
-        data['contributors']
-      elsif data.key?('contributions')
-        data['contributions'].keys.map { |k| data['contributions'][k] }.flatten
-      end
-    end
-
-    ##
     # Use Jekyll's Markdown converter to convert text to HTML
     # Params:
     # +site+:: +Jekyll::Site+ object
@@ -70,11 +56,12 @@ module Jekyll
     # Returns:
     # +Hash+ of contributor information
     def mapContributor(site, c)
-      x = site.data['contributors']
-              .fetch(c, {})
+      contrib_type, contrib = Gtn::Contributors.fetch(site, c)
+      p c, contrib
+      x = contrib
               .merge({
                        'id' => c,
-                       'url' => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
+                       'url' => site.config['url'] + site.config['baseurl'] + "/api/#{contrib_type}s/#{c}.json",
                        'page' => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
                      })
       visitAndMarkdownify(site, x)
@@ -158,16 +145,19 @@ module Jekyll
       site.pages << page2
 
       # Contributors
-      puts '[GTN/API] Contributors'
-      page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.json')
-      page2.content = JSON.pretty_generate(site.data['contributors'].map { |c, _| mapContributor(site, c) })
-      page2.data['layout'] = nil
-      site.pages << page2
-      site.data['contributors'].each do |c, _|
-        page4 = PageWithoutAFile.new(site, '', 'api/', "contributors/#{c}.json")
-        page4.content = JSON.pretty_generate(mapContributor(site, c))
-        page4.data['layout'] = nil
-        site.pages << page4
+      puts '[GTN/API] Contributors, Funders, Organisations'
+      ['contributors', 'funders', 'organisations'].each do |type|
+        page2 = PageWithoutAFile.new(site, '', 'api/', type + '.json')
+        p "type: #{type}: #{site.data[type]}"
+        page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
+        page2.data['layout'] = nil
+        site.pages << page2
+        site.data['contributors'].each do |c, _|
+          page4 = PageWithoutAFile.new(site, '', 'api/', "#{type}s/#{c}.json")
+          page4.content = JSON.pretty_generate(mapContributor(site, c))
+          page4.data['layout'] = nil
+          site.pages << page4
+        end
       end
 
       page2 = PageWithoutAFile.new(site, '', 'api/', 'contributors.geojson')
@@ -202,7 +192,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
-          q['contributors'] = get_contributors(q).dup.map do |c|
+          q['contributors'] = Gtn::Contributors.get_contributors(q).dup.map do |c|
             mapContributor(site, c)
           end
 
@@ -286,7 +276,7 @@ module Jekyll
           page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/slides.json")
           p = material.dup
           p.delete('ref')
-          p['contributors'] = get_contributors(p).dup.map { |c| mapContributor(site, c) }
+          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
 
           # Here we un-do the tutorial metadata priority, and overwrite with
           # slides metadata when available.
@@ -302,7 +292,7 @@ module Jekyll
           page5 = PageWithoutAFile.new(site, '', 'api/', "#{directory}/tutorial.json")
           p = material.dup
           p.delete('ref')
-          p['contributors'] = get_contributors(p).dup.map { |c| mapContributor(site, c) }
+          p['contributors'] = Gtn::Contributors.get_contributors(p).dup.map { |c| mapContributor(site, c) }
           page5.content = JSON.pretty_generate(p)
           page5.data['layout'] = nil
           site.pages << page5
