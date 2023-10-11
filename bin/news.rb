@@ -69,7 +69,7 @@ def onlyEnabled(x)
 end
 
 def linkify(text, path)
-  "[#{text}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news)"
+  "[#{text.gsub('|', '-')}](https://training.galaxyproject.org/training-material/#{path}?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news)"
 end
 
 def printableMaterial(path)
@@ -131,12 +131,12 @@ def format_tutorials(added, modified, kind: "tutorials")
   end
 
   if added.length.positive?
-    output += "\n\nNew Tutorials:\n\n"
+    output += "\n\nNew #{kind}:\n\n"
     output += added.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
   end
 
   if modified.length.positive?
-    output += "\n\nUpdated Tutorials:\n\n"
+    output += "\n\nUpdated #{kind}:\n\n"
     output += modified.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
   end
   output
@@ -162,7 +162,8 @@ def build_news(data, filter: nil)
 
   o = format_tutorials(
     data[:added][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    data[:modified][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ }
+    data[:modified][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
+    kind: "slides"
   )
   output += o
   newsworthy = newsworthy | o.length.positive?
