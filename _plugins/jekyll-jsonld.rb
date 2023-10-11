@@ -129,7 +129,7 @@ module Jekyll
 
       organization
     end
-    
+
     def generate_funder_jsonld(id, contributor, site)
       organization = {
         '@context': 'https://schema.org',
@@ -160,7 +160,9 @@ module Jekyll
     # +site+:: The site object.
     # Returns:
     # +String+:: The JSON-LD metadata.
-    def to_pfo_jsonld(id, contributor, site)
+    def to_pfo_jsonld(id, site)
+      contributor = Gtn::Contributors.fetch_contributor(site, id)
+      p "PFO: #{id} => #{contributor}"
       if Gtn::Contributors.is_person(site, id)
         JSON.pretty_generate(generate_person_jsonld(id, contributor, site))
       elsif Gtn::Contributors.is_funder(site, id)
@@ -179,7 +181,7 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_news_jsonld(page, site)
       authors = Gtn::Contributors.get_authors(page.to_h).map { |x| 
-        to_pfo_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+        to_pfo_jsonld(x, site)
       }
 
       data = {

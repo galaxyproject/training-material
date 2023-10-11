@@ -57,7 +57,6 @@ module Jekyll
     # +Hash+ of contributor information
     def mapContributor(site, c)
       contrib_type, contrib = Gtn::Contributors.fetch(site, c)
-      p c, contrib
       x = contrib
               .merge({
                        'id' => c,
@@ -148,7 +147,6 @@ module Jekyll
       puts '[GTN/API] Contributors, Funders, Organisations'
       ['contributors', 'funders', 'organisations'].each do |type|
         page2 = PageWithoutAFile.new(site, '', 'api/', type + '.json')
-        p "type: #{type}: #{site.data[type]}"
         page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
         page2.data['layout'] = nil
         site.pages << page2

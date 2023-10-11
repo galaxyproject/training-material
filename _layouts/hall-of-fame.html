@@ -4,6 +4,9 @@ lang: en
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign organisations = site.data['organisations'] %}
+{% assign funders = site.data['funders'] %}
+
 {% assign ckeys = "" | split: ',' %}
 {% for x in contributors %}
 	 {% assign ckeys = ckeys | push: x[0] %}
@@ -66,11 +69,10 @@ lang: en
             {% endunless %}
         {% endfor %}
     </div>
-    <h2>Contributing Organizations & Funders</h2>
+
+    <h2>Contributing Organizations</h2>
     <div class="hall-of-fame">
-        {% for username in shuffled_contributors %}
-            {% unless site.data['contributors'][username].halloffame == "no" %}
-            {% if site.data['contributors'][username].funder %}
+        {% for username in organisations %}
             <div class="hall-of-fame-hero" id="{{ username }}">
 
                 <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
@@ -87,9 +89,29 @@ lang: en
                 </div>
                 </a>
             </div>
-	    {% endif %}
-            {% endunless %}
         {% endfor %}
-
     </div>
+
+    <h2>Funders</h2>
+    <div class="hall-of-fame">
+        {% for username in funders %}
+            <div class="hall-of-fame-hero" id="{{ username }}">
+
+                <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail" title="{{ site.data['contributors'][username].name | default: username }}">
+                {% if site.data['contributors'][username].github != false %}
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
+		{% elsif site.data['contributors'][page.contributor].avatar %}
+			<img src="{{ site.data['contributors'][page.contributor].avatar }}" alt="avatar" aria-hidden="true" height="120" width="120">
+                {% else %}
+                    <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true" height="120" width="120">
+                {% endif %}
+
+                <div class="name" aria-hidden="true">
+                    {{ site.data['contributors'][username].name | default: username }}
+                </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
 </section>
