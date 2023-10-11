@@ -72,10 +72,16 @@ include images showing the structure of those files
 
 
 # Data ingestion
+As you can see above, there are multiple ways to store single cell data. Therefore, there are also many ways how you can get that data! 
 
+## EBI SCXA Data Retrieval
+
+If you want to use publicly available data, then EBI's [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) is a great place to get resources from. You can search datasets according to various criteria either using search box in **Home** tab or choosing kingdom, experiment collection, technology type (and others) in **Browse experiments** tab. If 
+
+![Three graphs showing the difference between the resolution of clustering. During automatic determination of this value, there were 6 clusters formed, corresponding to cell types. Manually set resolution=0.001 resulted in 11 clusters so that more than one cluster corresponds to one cell type, and resolution=0.1 resulted in almost 200 very small clusters.](../../images/path/exp_id.jpg "Different granularity of clusters based on the resolution set automatically and manually.")
 
 ## Downsampling 
-
+Sometimes it is useful to work on smaller subset of data (especially for teaching / learning purposes). 
 
 # Format conversion
 
