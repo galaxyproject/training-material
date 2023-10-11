@@ -14,9 +14,22 @@ def automagic_loading(f)
     if v.is_a?(Hash)
       automagic_loading(v)
     elsif v.is_a?(Array)
-      v.replace CONTRIBUTORS.keys if (k == 'enum') && (v[0] == 'CONTRIBUTORS')
-      v.replace FUNDERS.keys if (k == 'enum') && (v[0] == 'FUNDERS')
-      v.replace ORGANISATIONS.keys if (k == 'enum') && (v[0] == 'ORGANISATIONS')
+      if k == 'enum'
+        repl = []
+        # If one of the elements in this array is CONTRIBUTORS, replace it with the same named variable
+        if v.find { |x| x == 'CONTRIBUTORS' }
+          repl << CONTRIBUTORS.keys
+        end
+        if v.find { |x| x == 'FUNDERS' }
+          repl << FUNDERS.keys
+        end
+        if v.find { |x| x == 'ORGANISATIONS' }
+          repl << ORGANISATIONS.keys
+        end
+        if repl.length.positive?
+          v.replace repl.flatten
+        end
+      end
       v.flatten.each { |x| automagic_loading(x) if x.is_a?(Hash) }
     end
   end
