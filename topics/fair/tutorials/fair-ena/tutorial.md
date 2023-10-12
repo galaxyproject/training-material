@@ -28,9 +28,10 @@ tags:
 priority: 1
 contributions:
   authorship:
-    - shenson
+    - sonalhenson
   editing:
     - kkamieniecka
+    - smza
 subtopic: fair-data
 
 ---
