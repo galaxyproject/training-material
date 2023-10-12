@@ -872,12 +872,26 @@ module Jekyll
       # Alllow filtering by a category, or return "all" otherwise.
       if category == 'non-tag'
         q = q.select { |_k, v| v['tag_based'].nil? }
+      elsif category == 'science'
+        q = q.select { |_k, v| ['use', 'basics'].include? v['type'] }
+      elsif category == 'technical'
+        q = q.select { |_k, v| ['admin-dev', 'data-science', 'instructors'].include? v['type'] }
+      elsif category == 'science-technical'
+        q = q.select { |_k, v| ['use', 'basics', 'admin-dev', 'data-science', 'instructors'].include? v['type'] }
       elsif category != 'all'
         q = q.select { |_k, v| v['type'] == category }
       end
 
       # Sort alphabetically by titles
       q.sort { |a, b| a[1]['title'] <=> b[1]['title'] }
+    end
+
+    def to_keys(arr)
+      arr.map { |k| k[0] }
+    end
+
+    def to_vals(arr)
+      arr.map { |k| k[1] }
     end
 
     def list_materials_by_tool(site)
