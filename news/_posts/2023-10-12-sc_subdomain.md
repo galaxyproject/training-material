@@ -7,7 +7,7 @@ cover: "news/images/2023-10-12-singlecell_subdomain.png"
 layout: news
 ---
 
-The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the [single cell](https://singlecell.usegalaxy.eu) Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a single subdomain with a suite of tools in an order that makes sense for users.
+The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the [single cell](https://singlecell.usegalaxy.eu) Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.
 
 The central page was updated for the first time in years, and some excellent workflow and training search widgets were created. This went hand-in-hand with the creation of the [Galaxy Single Cell Community of Practice page](https://galaxyproject.org/projects/singlecell/).
 This infrastructure connects - for the first time - single cell users from novices performing training in Galaxy, to searching more advanced workflows and tools beyond the training, and finally able to contribute, request tools, provide feedback or join the Community of Practice.
