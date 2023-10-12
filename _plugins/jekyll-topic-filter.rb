@@ -610,7 +610,7 @@ module TopicFilter
   #
   def self.list_all_tags(site)
     materials = process_pages(site, site.pages)
-    materials.map { |x| (x['tags'] || []) }.flatten.sort.uniq
+    (materials.map { |x| x['tags'] || [] }.flatten + self.list_topics(site)).sort.uniq
   end
 
   def self.filter_by_topic(site, topic_name)
@@ -639,8 +639,9 @@ module TopicFilter
     # properly.
     materials = process_pages(site, site.pages)
 
-    # If there is nothing with that topic name, try generating it by tags.
-    resource_pages = materials.select { |x| (x['tags'] || []).include?(topic_name) }
+    # Select those with that topic ID or that tag
+    resource_pages = materials.select { |x| x['topic_name'] == topic_name }
+    resource_pages += materials.select { |x| (x['tags'] || []).include?(topic_name) }
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
