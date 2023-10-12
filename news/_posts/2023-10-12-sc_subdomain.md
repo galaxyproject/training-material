@@ -1,7 +1,8 @@
 ---
 title: "Single cell subdomain re-launch: Unified and feedback-driven"
 contributions:
-  authorship: [nomadscientist, pavanvidem, "José Manuel Domínguez"]
+  authorship: [nomadscientist, pavanvidem]
+  infrastructure: [kysrpex]
 tags: [gtn, singlecell]
 cover: "news/images/2023-10-12-singlecell_subdomain.png"
 layout: news
