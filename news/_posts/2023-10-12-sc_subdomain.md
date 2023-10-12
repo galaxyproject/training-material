@@ -4,12 +4,12 @@ contributions:
   authorship: [nomadscientist, pavanvidem]
   infrastructure: [kysrpex]
 tags: [gtn, singlecell]
-cover: "news/images/2023-10-12-singlecell_subdomain.png"
-coveralt: "screenshot of the Single Cell Omics subdomain page, with purple mastheader, Single Cell Tools categories along the side, and an updated logo combining the Single Cell Omics connected cells image with the Human Cell Atlas blue embyro logo"
 layout: news
 ---
 
 The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the [single cell](https://singlecell.usegalaxy.eu) Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.
+
+![Screenshot of the Single Cell Omics subdomain page, with purple mastheader, Single Cell Tools categories along the side, and an updated logo combining the Single Cell Omics connected cells image with the Human Cell Atlas blue embyro logo](../../images/news/images/2023-10-12-singlecell_subdomain.png")
 
 The central page was updated for the first time in years, and some excellent workflow and training search widgets were created. This went hand-in-hand with the creation of the [Galaxy Single Cell Community of Practice page](https://galaxyproject.org/projects/singlecell/).
 This infrastructure connects - for the first time - single cell users from novices performing training in Galaxy, to searching more advanced workflows and tools beyond the training, and finally able to contribute, request tools, provide feedback or join the Community of Practice.
