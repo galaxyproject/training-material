@@ -15,7 +15,8 @@ This infrastructure connects - for the first time - single cell users from novic
 
 # What spawned this project?
 
-"Trying to navigate users through all the quirks of Galaxy when they tried to move outside of the tutorials was challenging, and having to explain why we had two sites that both focused on single cell analysis was also tricky. This subdomain makes it a lot easier to communicate the potential to users - they can immediately see how many different toolsuites are available without being overwhelmed. They don't have to debate whether to learn R or Python, Seurat or Scanpy - they can just try both! Plus, data formats is the thing that stumps users more than anything. My group was constantly losing track of which tool could do what to convert data formats, and I am absolutely thrilled to have an entire section devoted to these random tools that are so vital to applying the analysis to public or private data."
+> Trying to navigate users through all the quirks of Galaxy when they tried to move outside of the tutorials was challenging, and having to explain why we had two sites that both focused on single cell analysis was also tricky. This subdomain makes it a lot easier to communicate the potential to users - they can immediately see how many different toolsuites are available without being overwhelmed. They don't have to debate whether to learn R or Python, Seurat or Scanpy - they can just try both! Plus, data formats is the thing that stumps users more than anything. My group was constantly losing track of which tool could do what to convert data formats, and I am absolutely thrilled to have an entire section devoted to these random tools that are so vital to applying the analysis to public or private data.
+{: .quote}
 
 # What was it like to do this at EGD 2023 CoFest?
 
