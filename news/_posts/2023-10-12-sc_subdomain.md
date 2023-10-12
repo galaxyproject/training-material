@@ -14,6 +14,8 @@ The European Galaxy Days 2023 CoFest combined the forces of administrator, devel
 The central page was updated for the first time in years, and some excellent workflow and training search widgets were created. This went hand-in-hand with the creation of the [Galaxy Single Cell Community of Practice page](https://galaxyproject.org/projects/singlecell/).
 This infrastructure connects - for the first time - single cell users from novices performing training in Galaxy, to searching more advanced workflows and tools beyond the training, and finally able to contribute, request tools, provide feedback or join the Community of Practice.
 
+Let's hear from Wendi about the experience.
+
 # What spawned this project?
 
 > Trying to navigate users through all the quirks of Galaxy when they tried to move outside of the tutorials was challenging, and having to explain why we had two sites that both focused on single cell analysis was also tricky. This subdomain makes it a lot easier to communicate the potential to users - they can immediately see how many different toolsuites are available without being overwhelmed. They don't have to debate whether to learn R or Python, Seurat or Scanpy - they can just try both! Plus, data formats is the thing that stumps users more than anything. My group was constantly losing track of which tool could do what to convert data formats, and I am absolutely thrilled to have an entire section devoted to these random tools that are so vital to applying the analysis to public or private data.
