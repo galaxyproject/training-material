@@ -294,8 +294,8 @@ The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absol
 
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http). -->
 
-This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (Systematic Biology 1999 48(2):254-285; https://doi.org/10.1080/106351599260283).
-The sequences are from the NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, comprising 55 species and an average sequence length of 1419.109 and a range of [1329,1727].
+This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (_Phylogenetic Relationships and Tempo of Early Diversication in Anolis Lizards_; *Systematic Biology* 1999 *48*(2):254-285; https://doi.org/10.1080/106351599260283).
+The sequences are from the mitochondrial NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, with an average sequence length of 1419.109 and a range of [1329,1727].
 
 
 <!-- I got the sequence lengths from the raw FASTA file using gawk:
@@ -402,7 +402,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
-Here is an embedded image of the resulting alignment:
+Here is an image of the resulting alignment:
 
 ![Alignment](./images/MEGA_alignment.png){:width="600"}
 
