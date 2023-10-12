@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Ocean Data View (ODV)
 questions:
-- How to process Argo's gliger data ?
+- How to process Argo's glider data ?
 - How to visualise the glider's stations
 - How to use make salinity temperature profiles for one or more stations ?
 objectives:
