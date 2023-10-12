@@ -23,6 +23,8 @@ contributions:
     - hexhowells
     - wee-snufkin
     - nomadscientist
+  
+funding:
 
 follow_up_training:
   -
@@ -88,130 +90,137 @@ Once you know the experiment ID, you can use EBI SCXA Data Retrieval tool in Gal
 >      - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 >      - *"Choose the type of matrix to download"*: `Raw filtered counts`
 >
->    Now we need to transform this into an AnnData object.
+{: .hands_on}
+
+At this point you might want to do some modifications in the files before downstream analysis. That can include re-formating the cell metadata or changing the names of the column headers, it all depends on your dataset and how you want to perfrom your analysis. It's also fine to transform those files straight away. Now you have the choice to create AnnData object or Seurat object. 
+
+> <hands-on-title>Create AnnData object</hands-on-title>
 >
-> 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
+> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
 >    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 {: .hands_on}
 
-<!---
-CAN FINISH HERE 
-or go further with Anndata operations and input into Filter Plot Explore
--->
 
-It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations). So don't worry if the plots generated using this input method are slightly different! 
-
-Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N701" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name. 
-
-> <hands-on-title> Change batch numbers into names </hands-on-title>
+> <hands-on-title>Create Seurat object / Loom / SCE </hands-on-title>
 >
-> 1. Change the datatype of `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to *tabular*:
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
->
-> 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - *"using column"*: `c12`
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `1`
->            - *"Replacement"*: `N701`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `2`
->            - *"Replacement"*: `N702`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `3`
->            - *"Replacement"*: `N703`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `4`
->            - *"Replacement"*: `N704`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `5`
->            - *"Replacement"*: `N705`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `6`
->            - *"Replacement"*: `N706`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `7`
->            - *"Replacement"*: `N707`
->
-> 3. Rename {% icon galaxy-pencil %} output `Cell metadata`
-> 
-{: .hands_on}
-
-Now we can create an AnnData object!
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %} with the following parameters:
+> {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %} with the following parameters:
+>    - *"Choose the format of the input"*: `10X-type MTX`
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
->    - *"Cell metadata table"*: `Cell metadata`
+>    - *"Cell Metadata"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 >
-> 2. Rename {% icon galaxy-pencil %} output `AnnData object`
-> 
+> You can now choose if you want to get Seurat object, Loom or Single Cell Experiment by selecting your option in *"Choose the format of the output"*.
 {: .hands_on}
 
-Now we will do several modifications within the AnnData object so that you can follow this tutorial despite the other way of getting data! 
-We would like to flag mitochondrial genes. They can be identified quite easily since they names start with mt. Since the tool for flagging the mitochondrial genes is case-sensitive, it might be a good idea to check what is the formatting of mitochondrial genes in our dataset.
 
-> <hands-on-title> Check the format of mitochondrial genes names </hands-on-title>
->
-> 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->    - *"Regular Expression"*: `mt`
->    - *"Output"*: `Highlighted HTML (for easier viewing)`
-> 
-> 2. Rename {% icon galaxy-pencil %} output `Mito genes check`
->
-{: .hands_on}
-
-If you click on that dataset, you will see all the genes containing 'mt' in their name. We can now clearly see that mitochondrial genes in our dataset start with 'mt-'. Keep that in mind, we will use it in a moment!
-
-Speaking about gene names, we will also change the header of the column containing those names from `gene_symbols` to `Symbol`. This edit is only needed to make our AnnData object compatible with this tutorial's workflow. 
-
-As I mentioned at the beginning, we will also change the header of the column storing information about batch. Actually, we will change several other headers as well.
-
-And the good news is that we can do all those steps using only one tool!
-
-> <hands-on-title> Modify AnnData object </hands-on-title>
->
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} with the following parameters:
->    - In *"Change field names in AnnData observations"*:
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[genotype]`
->            - *"New name"*: `genotype`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[individual]`
->            - *"New name"*: `batch`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[sex]`
->            - *"New name"*: `sex`
->        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
->            - *"Original name"*: `Sample Characteristic[cell type]`
->            - *"New name"*: `cell_type`
->    - In *"Change field names in AnnData var"*:
->        - {% icon param-repeat %} *"Insert Change field names in AnnData var"*
->            - *"Original name"*: `gene_symbols`
->            - *"New name"*: `Symbol`
->    - *"Gene symbols field in AnnData"*: `Symbol`
->    - In *"Flag genes that start with these names"*:
->        - {% icon param-repeat %} *"Insert Flag genes that start with these names"*
->            - *"Starts with"*: `mt-`
->            - *"Var name"*: `mito`
->
-> 2. Rename {% icon galaxy-pencil %} output `Mito-counted AnnData for downstream analysis`
->
-{: .hands_on}
-
-And that's all! What's even more exciting about AnnData Operations tool is that it automatically calculates a bunch of metrics, such as log1p_mean_counts, log1p_total_counts, mean_counts, n_cells, n_cells_by_counts, n_counts, pct_dropout_by_counts, total_counts. Amazing, isn't it?
+## Human Cell Atlas Matrix Downloader
+Matrix market format:  matrix mtx, genes tsv, barcodes tsv, exp design tsv
+Scnapy read10x to transform those to AnnData object
+Flagging by using AnnData Operations works well (only need to check name of the column with gene symbols):
+Case sensitive
+No parentheses 
+Dash important 
 
 
+# Downsampling 
 
-
-## Downsampling 
 Sometimes it is useful to work on smaller subset of data (especially for teaching / learning purposes). 
+[Workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/workflow-constructed-from-history-copy-of-cs1generating-a-single-cell-matrix-using-alevin---how-to-downsample)
 
 # Format conversion
 
+## AnnData -> Seurat
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+{: .hands_on}
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"What to inspect?"*: `The full data matrix`
+>
+{: .hands_on}
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
+>
+>
+{: .hands_on}
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
+>    - *"Format for the input matrix"*: `Tabular`
+>    - *"Operation"*: `Filter for Barcodes`
+>        - *"Method"*: `DefaultDrops`
+>            - *"Expected Number of Cells"*: `31178`
+>            - *"Upper Quantile"*: `1.0`
+>            - *"Lower Proportion"*: `0.0`
+>        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>
+{: .hands_on}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %} with the following parameters:
+>    - *"Choose the format of the input"*: `10X-type MTX`
+>
+{: .hands_on}
+
+## AnnData -> SCE
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
+{: .hands_on}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - *"What to inspect?"*: `The full data matrix`
+>
+{: .hands_on}
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy0) %} with the following parameters:
+>
+{: .hands_on}
+
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy2) %} with the following parameters:
+>    - *"Format for the input matrix"*: `Tabular`
+>    - *"Operation"*: `Filter for Barcodes`
+>        - *"Method"*: `DefaultDrops`
+>            - *"Expected Number of Cells"*: `31178`
+>            - *"Upper Quantile"*: `1.0`
+>            - *"Lower Proportion"*: `0.0`
+>        - *"Format for output matrices"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
+>
+{: .hands_on}
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0) %} with the following parameters:
+>    - *"Should metadata file be added?"*: `Yes`
+>
+{: .hands_on}
+
+## Anndata -> CDS
