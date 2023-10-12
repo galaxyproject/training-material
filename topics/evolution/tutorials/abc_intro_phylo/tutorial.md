@@ -294,12 +294,24 @@ The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absol
 
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http). -->
 
-This workshop will use a set of malaria DNA sequences. [needs reference]
+This workshop will use a set of *anolis* lizard DNA sequences, from Jackman, Larson, de Queiroz & Losos (Systematic Biology 1999 48(2):254-285; https://doi.org/10.1080/106351599260283).
+The sequences are from the NADH dehydrogenase subunit 2 gene (ND2) and five transfer RNA (tRNA) genes, comprising 55 species and an average sequence length of 1419.109 and a range of [1329,1727].
+
+
+<!-- I got the sequence lengths from the raw FASTA file using gawk:
+gawk 'BEGIN {OFS=","} {print length,$1}' anolis-raw.fst > anolis-sequence-lengths.csv -->
+<!-- In fact this is even cleverer:
+gawk 'BEGIN {OFS=","} {if (length>100) print length; else print $1}' anolis-raw.fst -->
+<!-- The ultimate in collating sequence lengths with the sequence names:
+sed -r 'N;s/^(>[A-Za-z2\.]+)\n/\1,/g' anolis-sequence-lengths.txt -->
+
 
 We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
 
 
 ## Get the data
+
+<!-- One sequence is here: https://www.ncbi.nlm.nih.gov/nucleotide/AF055943.2?report=genbank&log$=nuclalign&blast_rank=1&RID=JEX49T9G013 -->
 
 > <hands-on-title>Obtain your data</hands-on-title>
 >
@@ -307,10 +319,10 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following files from [GTN](./data/malaria-raw.fst) or from the shared data library.
+> 2. Import the following files from [GTN](./data/anolis-raw.fst) or from the shared data library.
 > Note: Old data here: https://tinyurl.com/phylo-trees-1-data
 >    ```
->    malaria-raw.fst
+>    anolis-raw.fst
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -328,10 +340,10 @@ TTACTAGCTACTACT
 
 The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each with a short set of characters which we can assume are DNA.
 
-> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Mulitple Sequence Alignment tool.
+> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Multiple Sequence Alignment tool.
 > You should see something like this:
 >
-> ![Unaligned Sequences](./images/UnalignedMalaria.png){:width="600"}
+> ![Unaligned Sequences](./images/UnalignedAnolis.png){:width="600"}
 > 
 > Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
 > If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
@@ -643,7 +655,12 @@ While this is running you might use your time to read the Models of sequence evo
 
 # Phylogenetic Networks
 
-Intro to phylogenetic networks as an alternative to trees
+<!-- Intro to phylogenetic networks as an alternative to trees -->
+My go-to for doing a phylogenetic estimation is not to start with a tree but to start with a *phylogenetic network*.
+
+A phylogenetic network can have two purposes: (a) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer events or hybridisation -- or (b) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+
+
 
 **IMAGE HERE: Neighbour net image**
 
