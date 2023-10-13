@@ -105,10 +105,12 @@ Here are links to two registry projects.  Both websites describe the projects, t
 [UK JIA Biologics Registers](https://sites.manchester.ac.uk/bcrdbspar/) 
 
 ## Electronic health records (EHR)
-These are generally the data collected when a person has contact with the health services.  In the UK, EHR data is either at the Trust level or at the country level, e.g. NHS England, and it is usually necessary to specify primary care (GP, pharmacy, dental and optometry) and/or secondary care (hospital and specialists) data.  This data is usually received as anonymised data, to avoid the ability to identify individuals from the data.
+These are generally the data collected when a person has contact with the health services. In England, this can be quite fragmented, as each service provider (i.e. GP, hospital, social care, etc.) collects data as an individual organisation, using one of a number of accredited packages for collecting and storing electronic health records.  
+
+There are strict controls for researchers applying to access this data.  The research purpose must be approved before access is given, and the researchers usually receive data relevant to their research question.  In addition, the data received is usually anonymised to avoid the ability to identify individuals from the data.
 
 [comment]: <> (This part may need rewording. My understanding is that EHRs are provided by: GPs where two main platforms are EMIS Web and TPP SystmOne and; NHS trusts with many different suppliers.  NHS England provides advice on accredited suppliers.)
-[comment]: <> (to do)
+[comment]: <> (SN - have rewritten most of the original paragraph and hope this covers the point above)
 
 In the UK, Clinical Practice Research Datalink ([CPRD](https://cprd.com)) collects anonymised patient data from a network of GP practices links this data to a range of other health-related data and provides a longitudinal, representative UK population health dataset. 
 
@@ -135,7 +137,7 @@ The [Health Data Research Innovation Gateway](https://www.healthdatagateway.org/
 ## Associations between clinical features and omics
 In some recent work in rheumatoid arthritis [The RA-MAP Consortium, 2022](https://www.nature.com/articles/s41597-022-01264-y), it was demonstrated that simple patient demographics such as sex, ethnicity and age are all drivers of expression variation in addition to disease activity.  Principal component driver plots highlighted critical associations between diverse clinical features and omics.  This shows how rich clinical information may be key to analysis in some, if not, many diseases.  
 
-![RA-MAP.](../../images/RAMAP_graphic.png)
+![Image of Unsupervised PCA Driver analysis of mRNA for whole blood, CD8 T-cells and CD14 Monocytes, showing that the clinical features Sex, Ethnicity and Age have some degree of association with principal components 1-5. ](../../images/RAMAP_graphic.png "Example of Unsupervised PCA Driver analysis of multi-omic compartments from the RA-MAP study, showing clinical features and their degree of association with Principal Components 1-5.  Image from: [RA-MAP, molecular immunologival landscapes in early rheumatoid arthritis and healthy vaccine recipients](https://www.nature.com/articles/s41597-022-01264-y#Tab1)")
 
 > <hands-on-title>Do the datasets have all these characteristics - {% icon time %} 5 minutes</hands-on-title>
 >
@@ -144,10 +146,10 @@ In some recent work in rheumatoid arthritis [The RA-MAP Consortium, 2022](https:
 {: .hands_on}
 
 ## Powering up cohorts for analyses and machine learning
-For many diseases (or across a family of diseases), there is a need for well-powered cohorts with hundreds to thousands of participants, for analysis purposes.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, three did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data substantially diminish the value of public data sets and on the surface to not adhere to FAIR principles.
+For many diseases (or across a family of diseases), there is a need for well-powered cohorts with hundreds to thousands of participants, for analysis purposes.  FAIR principles have been widely promoted for omics datasets, but as shown, there are key challenges to meta-analysis.  This is illustrated by an example of collating 17 public rheumatoid arthritis studies, which was done as pre-analysis for the RA-MAP study.  The clinical data in most cases were sparse and incomplete.  For example, of the curated 17 studies, three did not include sex, 5 did not include age and only one study included ethnicity or race.  The limitations in the availability of clinical data substantially diminish the value of public data sets and on the surface to not adhere to FAIR principles.
 
 [comment]: <> (Is there a link to the rheumatoid arthritis study example?)
-[comment]: <> (need to get link from Mike)
+[comment]: <> (SN - no link as this was pre-work before analysis, have changed the text to explain this)
 
 Similarly, in order to make the most of machine learning techniques, datasets need to be reasonably large.  
 
