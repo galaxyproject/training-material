@@ -2,19 +2,20 @@
 layout: tutorial_hands_on
 subtopic: datamanipulation
 priority: 3
-title: 
+title: EBI Single Cell Expression Atlas files to AnnData | Creating preprocessed dataset for sc-RNA Filter, Plot, Explore tutorial
 questions:
-- Where can I find good quality scRNA-seq reference datasets?
-- How can I reformat and manipulate these downloads to create the right format for MuSiC?
+- How do I use EBI Single Cell Expression Atlas?
+- How can I reformat and manipulate the downloads to create the right input for downstream analysis?
 objectives:
-- You will retrieve raw data from the EMBL-EBI Single cell expression atlas.
+- You will retrieve raw data from the EBI Single Cell Expression Atlas.
 - You will manipulate the metadata and matrix files.
-- You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.
-- You will create multiple ESet objects - both combined and separated out by disease phenotype for your single cell reference.
-time_estimation: 1H
+- You will combine the metadata and matrix files into an AnnData object for downstream analysis.
+  
+time_estimation: "15m"
 key_points:
 - The EMBL-EBI Single-cell expression atlas contains high quality datasets.
 - Metadata manipulation is key for generating the correctly formatted resource.
+- To use Scanpy tools, you have to transform your metadata into AnnData object.
 contributions:
   authorship:
     - wee-snufkin
@@ -24,21 +25,24 @@ requirements:
     type: "internal"
     topic_name: single-cell
     tutorials:
-      - bulk-music
+      - scrna-case_alevin
+      - scrna-case_alevin-combine-datasets
 
 follow_up_training:
   -
     type: "internal"
     topic_name: single-cell
     tutorials:
-        - bulk-music-3-preparebulk
+        - scrna-case_basic-pipeline
 
 tags:
   - transcriptomics
   - data management
 ---
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all these steps into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
+# Getting data from Single Cell Expression Atlas
+
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
 > <hands-on-title>Retrieving data from Single Cell Expression Atlas</hands-on-title>
 >
@@ -59,6 +63,8 @@ If you happen to be interested in analysing publicly available data, particularl
 {: .hands_on}
 
 It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations). So don't worry if the plots generated using this input method are slightly different! 
+
+# Metadata manipulation
 
 Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N701" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name. 
 
@@ -98,6 +104,8 @@ Before creating an AnnData object, we need to make a small modification in exper
 
 Now we can create an AnnData object!
 
+# Creating AnnData object
+
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %} with the following parameters:
@@ -109,6 +117,8 @@ Now we can create an AnnData object!
 > 2. Rename {% icon galaxy-pencil %} output `AnnData object`
 > 
 {: .hands_on}
+
+# AnnData manipulation
 
 Now we will do several modifications within the AnnData object so that you can follow this tutorial despite the other way of getting data! 
 We would like to flag mitochondrial genes. They can be identified quite easily since they names start with mt. Since the tool for flagging the mitochondrial genes is case-sensitive, it might be a good idea to check what is the formatting of mitochondrial genes in our dataset.
@@ -162,3 +172,8 @@ And the good news is that we can do all those steps using only one tool!
 {: .hands_on}
 
 And that's all! What's even more exciting about AnnData Operations tool is that it automatically calculates a bunch of metrics, such as log1p_mean_counts, log1p_total_counts, mean_counts, n_cells, n_cells_by_counts, n_counts, pct_dropout_by_counts, total_counts. Amazing, isn't it?
+
+# Conclusion
+Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow! 
+
+Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow]() and the [answer key history](). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them. 
