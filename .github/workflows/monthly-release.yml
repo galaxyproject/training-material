@@ -57,6 +57,7 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          sudo apt-get install -y libxi-dev # for node
           gem install bundler
           pip install pyyaml
           bundle config path vendor/bundle
