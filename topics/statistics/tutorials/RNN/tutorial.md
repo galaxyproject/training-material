@@ -326,8 +326,7 @@ The model builder can be downloaded as a zip file.
 >
 {: .hands_on}
 
-The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained
-model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
+The training step generates 2 datasets. 1) accuracy of the trained model, 2) the trained model, in h5mlm format. These files are needed for prediction in the next step.
 
 ### **Model Prediction**
 
