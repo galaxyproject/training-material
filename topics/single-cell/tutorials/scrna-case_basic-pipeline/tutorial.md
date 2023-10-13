@@ -810,34 +810,26 @@ The authors weren't interested in further annotation of the DP cells, so neither
 
 > <hands-on-title>Annotating clusters</hands-on-title>
 >
-> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
+>    - *"Change field names in AnnData observations"*
+>    - {% icon galaxy-wf-new %} *"Insert Change field names in AnnData observations"*
+>    - *"1: Change field names in AnnData observations"*
+>    - *"Original name"*: `louvain`
+>    - *"New name"*: `cell_type`
+>    - *"Keep original"*: {% icon history-share %} `Yes`
+>    - This makes a copy of the louvain column, which you can change without altering the original
+>
+> 2. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Final object`
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `louvain`
 >    - *"Comma-separated list of new categories"*: `DP-M4,DP-M3,DP-M1,T-mat,DN,DP-L,DP-M2,Macrophages`
->    - Hang on here, though. This unfortunately deletes the original cluster numbering. Just in case you might want this back, we can add that annotation back in.
+> - Note that if you have a slightly different clustering, your list of categories might not match. You could have a different number of categories, or they could be in a different order.
 >
-> 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
->    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
->    - **Keys from obs to copy**
->    - *"+ Insert Keys from obs to copy"*
->    - *"Key contains"*: `louvain`
->    - {% icon param-file %} *"AnnData objects with obs to copy"*: (output of **Manipulate AnnData** {% icon tool %})
->
->    - You've added the new cell annotations in, now titled `louvain_0`. What, that's not good enough? You want to change the title as well? So be it.
->
-> 3. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: (output of **AnnData Operations** {% icon tool %})
->    - **Change field names in AnnData observations**
->    - {% icon galaxy-wf-new %} *"+ Insert Change field names in AnnData observations"*
->    - **1: Change field names in AnnData observations**
->    - *"Original name"*: `louvain_0`
->    - *"New name"*: `cell_type`
->
-> 4. **Rename** {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
+> 3. **Rename** {% icon galaxy-pencil %} output h5ad `Final cell annotated object`
 >   -  Time to re-plot! {% icon time %} Feel free to re-run {% icon galaxy-refresh %} the **Scanpy PlotEmbed** tool {% icon tool %} on the new object plotting `cell_type` to speed this up. Otherwise...
-> 5. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
+> 4. {% tool [Scanpy PlotEmbed](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final cell annotated object`
 >    - *"name of the embedding to plot"*: `umap`
 >    - *"color by attributes, comma separated texts"*: `sex,batch,genotype,Il2ra,Cd8b1,Cd8a,Cd4,Itm2a,Aif1,Hba-a1,log1p_total_counts,cell_type`
