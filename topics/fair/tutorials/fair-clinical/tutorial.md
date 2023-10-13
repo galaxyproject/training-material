@@ -164,7 +164,7 @@ There are certain privacy concerns when making clinical data freely available th
 > <hands-on-title>What data would be problematic to share? - {% icon time %} 5 minutes</hands-on-title>  
 >
 > Take a look at the data below and consider which columns and data may be problematic to share  
-> ![PatientData.](../../images/Patient_data.png "")
+> ![Image of a spreadsheet with the columns Variable Name, Data Item, Definition, Format, Validation Rule, Codes, Labels and Comments.  The spreadsheet gives examples of contents for each of these columns for ID, gender, age at onset, ethnicity and RF](../../images/Patient_data.png "An example of a data dictionary")
 >
 > > <solution-title></solution-title>  
 > > * Remove columns C (FIRST), D (LAST), H (ADDRESS) and L (ZIP) as these are clear identifiers of the person  
@@ -184,15 +184,15 @@ If there are more than one visits, and if these are not within roughly defined t
 
 > <hands-on-title>Which columns would you change to time periods from dates? - {% icon time %} 10 minutes</hands-on-title>
 > 
->  For the dataset below identify the columne you would change to time periods and convert them to time periods
-> ![Patient_Dates.](../../images/Patient_dates.png "")
+>  For the dataset below identify the column you would change to time periods and convert them to time periods
+> ![Image of spreadsheet with columns ID, Birth Date, Race, Ethnicity, Gender, State, Date of Assessment and Date of Disease Onset as the columns, with 10 lines of data filled in below for each of these columns](../../images/Patient_dates.png "Patient data with dates")
 >
 > > <solution-title></solution-title>  
 > > * Replace BIRTHDATE with AGE at DATEOFASSESSMENT  
 > > * Replace DATEOFDISEASEONSET with AGEATONSET 
 > > * Remove BIRTHDATE, DATEOFASSESSMENT and DATEOFDISEASEONSET
 > > 
-> > ![DatesRemoved.](../../images/Datesremoved.png "")  
+> > ![Image of spreadsheet with columns ID, Race, Ethnicity, Gender, State, Age and Age at Onset, with 10 lines of data filled in below for each of these columns](../../images/Datesremoved.png "Patient data with dates removed")  
 > >
 > {: .solution}  
 {: .hands_on}  
@@ -207,7 +207,7 @@ A data dictionary is the metadata of the dataset.  It should include details suc
 
 Here’s an example of a data dictionary used on a project
 
-![datadictionary](../../images/ExampleDataDict1.png "")
+![Image of an example of a data dictionary in a spreadsheet format](../../images/ExampleDataDict1.png "Example of a data dictionary")
 
 > <tip-title>Key things to note</tip-title>  
 >
@@ -220,12 +220,12 @@ Here’s an example of a data dictionary used on a project
 
 > <hands-on-title>Create a data dictionary for the dataset below - {% icon time %} 10 minutes</hands-on-title>
 >
-> ![dataDictHandsOn](../../images/DataDictionaryHandsOn.png "")
+> ![Image of a spreadsheet with columns ID, Race, Ethnicity, Gender, Age and Age at Onset, with 10 rows filled in below](../../images/DataDictionaryHandsOn.png "Create a data dictionary for this dataset")
 >
 > > <solution-title></solution-title>
 > > Here is one example of a suitable data dictionary for the above dataset
 > >
-> > ![dataDictSoln](../../images/DataDictSolution.png "")
+> > ![Image of a spreadsheet with the columns Variable Name, Data Item, Definition, Format, Validation Rule, Codes, Labels and Comments.  The spreadsheet gives examples of contents for each of these columns based on the previous image, for ID, race, ethnicity, gender, age and age at onset](../../images/DataDictSolution.png "Example of a data dictionary for the above dataset")
 > >
 > {: .solution}  
 {: .hands_on}  
@@ -237,7 +237,7 @@ Data catalogues are useful for teams, projects or consortia where there are many
 
 Here is an example of a data catalogue
 
-![DataCat](../../images/DataCat.png "")
+![Image of a spreadsheet example of a data catalogue](../../images/DataCat.png "Example of a data catalogue")
 
 You may not want to capture all these metadata, and you may want to include other items such as phenotype, links to any publications related to the dataset, and links to the published dataset.
 
@@ -247,13 +247,14 @@ When projects and consortia are live, the corresponding data catalogue is a work
 
 As with data dictionaries, data catalogues rarely capture any information that needs to be restricted access and usually can be shared in full.  The exception potentially may be the contact person's email address.  
 
-[To add: More information about data catalogues can be found in these RDMbites (add links)]
+More information about data catalogues can be found here  
+ [Using a data catalogue within a research team](https://tess.elixir-europe.org/materials/rdmbites-using-a-data-catalogue-within-a-research-team)
 
 ## Publishing on Zenodo
 Data dictionaries and data catalogues include a wealth of information about the clinical datasets they reference, and in general, contain no sensitive or confidential data.  [Zenodo](https://www.zenodo.org) is an open repository for research outcomes hosted by CERN.  It is free to use and each upload is citeable through a Digital Object Identifier (DOI).  Uploads are instantly available, with version control features.  Publishing on platforms such as Zenodo can help make your data findable.
 
 Here, you can see published data dictionaries for a consortium
-![Zenodo](../../images/CLUSTER_Zenodo.png "")
+![Image of a screenshot of the CLUSTER Consortium page on the Zenodo website.  There are two entries for data dictionaries of datasets](../../images/CLUSTER_Zenodo.png "Screenshot of CLUSTER Consortium community page on Zenodo website")
 
 To upload, create a login using GitHub ID, ORCID, or email.  Click on Upload (at the top of the page, left of centre), and follow the instructions.
 
@@ -274,7 +275,7 @@ It is really worthwhile clarifying the process of handling data access requests 
 {: .tip}
 
 An example of a data access process is shown below
-![DataAccessProcess](../../images/DataAccessProcess.png "")
+![Image of a four step process to request for data access.  Step 1 email the project.  Step 2 Discuss with the project what data or samples are being requested.  Step 3 approval by relevant committees.  Step 4 Decision communicated to requestor](../../images/DataAccessProcess.png "Example of a data access process")
 
 This is an example of a [data and sample access request form](https://zenodo.org/record/8344400) that you might find useful as a starting point to create one for your project.
 
