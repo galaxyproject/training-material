@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Single cell subdomain re-launch: Unified and feedback-driven</title>
+        
+            <!--
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+-->
+<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
+
+<script>
+var scriptElement = document.createElement("script");
+scriptElement.async = true;
+scriptElement.defer = true;
+scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
+scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
+
+// Appending the script element to the body
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Plausible: opt-in");
+	// Wait for the document to be available
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+}
+</script>
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<!--
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+-->
+<script type="text/javascript">
+var scriptElement = document.createElement("script");
+scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
+scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
+scriptElement.crossOrigin = "anonymous";
+
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	// Appending the script element to the body
+	document.addEventListener("DOMContentLoaded", function(event) {
+		document.body.appendChild(scriptElement);
+	});
+		
+	Sentry.init({
+	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+	  release: "galaxy-training-network@5549a8718415b1feeb732d4d9eab583cb9117ebb",
+	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+	  sampleRate: 0.1,
+	  tracesSampleRate: 0.1,
+	  // Capture Replay for no sessions by default
+	  replaysSessionSampleRate: 0.01,
+	  // plus for 1% of sessions with an error
+	  replaysOnErrorSampleRate: 0.01,
+	  // PII OFF
+	  sendDefaultPii: false, // Off by default but just in case.
+	  environment: "production",
+	});
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/news/2023/10/12/sc_subdomain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1697190244' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1697190244' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Single cell subdomain re-launch: Unified and feedback-driven">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-10-12 10:30:44 +0000">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Pavankumar Videm">
+
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Single cell subdomain re-launch: Unified and feedback-driven">
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w...">
+        
+        <meta property="og:image" content="/training-materialnews/images/2023-10-12-singlecell_subdomain.png">
+
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1697190244'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                           <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-10-12-sc_subdomain.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/news/2023/10/12/sc_subdomain.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+		</a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/news/2023/10/12/sc_subdomain.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/news/2023/10/12/sc_subdomain.html">2023-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-09-01/news/2023/10/12/sc_subdomain.html">2023-09-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  <h1>Single cell subdomain re-launch: Unified and feedback-driven</h1>
+
+  <article>
+
+
+<div class="newsitem">
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Avatar" width="36" height="36">Wendi Bacon</a><a href="/training-material/hall-of-fame/pavanvidem/" class="contributor-badge contributor-pavanvidem"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/pavanvidem?s=36" alt="Avatar" width="36" height="36">Pavankumar Videm</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people managed and provided infrastructure to the GTN or for training purposes">Infrastructure</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/kysrpex/" class="contributor-badge contributor-kysrpex"><img src="https://avatars.githubusercontent.com/kysrpex?s=36" alt="Avatar" width="36" height="36">José Manuel Domínguez</a></td>
+	</tr>
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+
+<span class="label label-default tutorial_tag" id="gtn" style="--color-primary: #fff4b9; --color-darker: #efda00; --color-dimmed: #fee800;">gtn</span>
+
+<span class="label label-default tutorial_tag" id="singlecell" style="--color-primary: #00ee6d; --color-darker: #00d460; --color-dimmed: #00e167;">singlecell</span>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-8">
+    <p class="text-muted" style="display: inline-flex; width: 100%; justify-content: space-between;">
+      <span>Posted on: 12 October 2023</span>
+      <span>
+        
+      </span>
+    </p>
+
+    <p>The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the <a href="https://singlecell.usegalaxy.eu">single cell</a> Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.</p>
+
+<p>The central page was updated for the first time in years, and some excellent workflow and training search widgets were created. This went hand-in-hand with the creation of the <a href="https://galaxyproject.org/projects/singlecell/">Galaxy Single Cell Community of Practice page</a>.
+This infrastructure connects - for the first time - single cell users from novices performing training in Galaxy, to searching more advanced workflows and tools beyond the training, and finally able to contribute, request tools, provide feedback or join the Community of Practice.</p>
+
+<p>Let’s hear from Wendi about the experience.</p>
+
+<h1 id="what-spawned-this-project">What spawned this project?</h1>
+
+<blockquote class="quote">
+  <p>Trying to navigate users through all the quirks of Galaxy when they tried to move outside of the tutorials was challenging, and having to explain why we had two sites that both focused on single cell analysis was also tricky. This subdomain makes it a lot easier to communicate the potential to users - they can immediately see how many different toolsuites are available without being overwhelmed. They don’t have to debate whether to learn R or Python, Seurat or Scanpy - they can just try both! Plus, data formats is the thing that stumps users more than anything. My group was constantly losing track of which tool could do what to convert data formats, and I am absolutely thrilled to have an entire section devoted to these random tools that are so vital to applying the analysis to public or private data.</p>
+</blockquote>
+
+<h1 id="what-was-it-like-to-do-this-at-egd-2023-cofest">What was it like to do this at EGD 2023 CoFest?</h1>
+
+<blockquote class="quote">
+  <p>I had no idea how difficult it would be to make what seemed like quite superficial changes to make the tool panels more usable! José was an absolute star, navigating through all of this seamlessly. Pavan kept finding single cell tools under a ton of different metadata titles, so it was also exciting to see just how many different tools were out there and to get them all in the same place. There’s so much more to play with than I realised! Helena jumped in virtually to make these banging widgets to prevent the sites from becoming outdated, and give contributors more of a voice in the site - if anyone shares a workflow tagged #singlecell on any of the Big 3 public instances, it’s now on our single cell page. I’m so glad we had the CoFest though, because getting together all the different single cell sites, getting all the tools that we found in the right spot, it required the entire day and then some and a lot of collaboration. At one point I was literally highlighting tool IDs in a giant list. It just wouldn’t have been feasible virtually. I’m so excited for the next training session to just see how users navigate the new site.</p>
+</blockquote>
+
+
+    
+
+    
+
+    
+
+    
+    
+
+    
+  </div>
+
+  <div class="col-md-4">
+    <img alt="screenshot of the Single Cell Omics subdomain page, with purple mastheader, Single Cell Tools categories along the side, and an updated logo combining the Single Cell Omics connected cells image with the Human Cell Atlas blue embyro logo" src="/training-material/news/images/2023-10-12-singlecell_subdomain.png" width="300"/>
+  </div>
+</div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "url": "https://training.galaxyproject.org/training-material/news/2023/10/12/sc_subdomain.html",
+  "name": "Single cell subdomain re-launch: Unified and feedback-driven",
+  "headline": "<p>The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer t",
+  "keywords": [
+    "gtn",
+    "singlecell"
+  ],
+  "description": "<p>The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer t",
+  "articleBody": "<p>The European Galaxy Days 2023 CoFest combined the forces of administrator, developer and trainer to update and re-launch the <a href=\"https://singlecell.usegalaxy.eu\">single cell</a> Galaxy instance. Where previously there were two subdomains each with their own sets of tools, there is now a unified subdomain with re-categorized tools that makes sense for users.</p>\n\n<p>The central page was updated for the first time in years, and some excellent workflow and training search widgets were created. This went hand-in-hand with the creation of the <a href=\"https://galaxyproject.org/projects/singlecell/\">Galaxy Single Cell Community of Practice page</a>.\nThis infrastructure connects - for the first time - single cell users from novices performing training in Galaxy, to searching more advanced workflows and tools beyond the training, and finally able to contribute, request tools, provide feedback or join the Community of Practice.</p>\n\n<p>Let’s hear from Wendi about the experience.</p>\n\n<h1 id=\"what-spawned-this-project\">What spawned this project?</h1>\n\n<blockquote class=\"quote\">\n  <p>Trying to navigate users through all the quirks of Galaxy when they tried to move outside of the tutorials was challenging, and having to explain why we had two sites that both focused on single cell analysis was also tricky. This subdomain makes it a lot easier to communicate the potential to users - they can immediately see how many different toolsuites are available without being overwhelmed. They don’t have to debate whether to learn R or Python, Seurat or Scanpy - they can just try both! Plus, data formats is the thing that stumps users more than anything. My group was constantly losing track of which tool could do what to convert data formats, and I am absolutely thrilled to have an entire section devoted to these random tools that are so vital to applying the analysis to public or private data.</p>\n</blockquote>\n\n<h1 id=\"what-was-it-like-to-do-this-at-egd-2023-cofest\">What was it like to do this at EGD 2023 CoFest?</h1>\n\n<blockquote class=\"quote\">\n  <p>I had no idea how difficult it would be to make what seemed like quite superficial changes to make the tool panels more usable! José was an absolute star, navigating through all of this seamlessly. Pavan kept finding single cell tools under a ton of different metadata titles, so it was also exciting to see just how many different tools were out there and to get them all in the same place. There’s so much more to play with than I realised! Helena jumped in virtually to make these banging widgets to prevent the sites from becoming outdated, and give contributors more of a voice in the site - if anyone shares a workflow tagged #singlecell on any of the Big 3 public instances, it’s now on our single cell page. I’m so glad we had the CoFest though, because getting together all the different single cell sites, getting all the tools that we found in the right spot, it required the entire day and then some and a lot of collaboration. At one point I was literally highlighting tool IDs in a giant list. It just wouldn’t have been feasible virtually. I’m so excited for the next training session to just see how users navigate the new site.</p>\n</blockquote>\n",
+  "datePublished": "2023-10-12 00:00:00 +0000",
+  "dateModified": "2023-10-12 10:30:44 +0000",
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/",
+      "name": "Pavankumar Videm",
+      "image": "https://avatars.githubusercontent.com/pavanvidem",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5192-126X",
+      "orcid": "https://orcid.org/0000-0002-5192-126X"
+    }
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://training.galaxyproject.org/news/2023/10/12/sc_subdomain.html"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "width": 60,
+    "height": 60,
+    "url": "/training-material/assets/images/GTN-60px.png"
+  },
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users."
+}
+</script>
+</article>
+
+<hr/>
+<h2>Recent News</h2>
+<a href="/training-material/news.html">See all news</a>
+
+<div>
+
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/10/05/wendi.html">New Feature: Embeddable GTN Tutorial Lists and UseGalaxy Workflow List Widgets</a>
+	</h3>
+	<p>
+	5 October 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c9caff; --color-darker: #afb1ff; --color-dimmed: #bcbeff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff4b9; --color-darker: #efda00; --color-dimmed: #fee800;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We at the GTN strive to bring you the most fun and fancy features we can in a completely static site! Today we’re addressing the question of Wendi Bacon who needed a solution for keeping her single cell subdomain up-to-date with all the latest happenings in the Single Cell world.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/07/20/prefs.html">New Feature: GTN User Preferences</a>
+	</h3>
+	<p>
+	20 July 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c9caff; --color-darker: #afb1ff; --color-dimmed: #bcbeff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff4b9; --color-darker: #efda00; --color-dimmed: #fee800;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		We have added a new “User Preferences” page for our GTN users! This gives you more control over both how the GTN looks, and works, for you.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="https://ai4life.eurobioimaging.eu/ai4life-teams-up-with-galaxy-training-network-gtn-to-enhance-training-resources/">AI4Life teams up with GTN to enhance training resources</a>
+	</h3>
+	<p>
+	27 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #cbcaff; --color-darker: #b3b0ff; --color-dimmed: #bfbdff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffb9f0; --color-darker: #ff92eb; --color-dimmed: #ffa6ed;">new community</span>
+	
+	</p>
+	<p class="card-text">
+		
+		This is an external post, please follow the link to read it.
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/21/fair.html">ELIXIR-UK Fellow Launches New FAIR Data Management Training</a>
+	</h3>
+	<p>
+	21 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #cbcaff; --color-darker: #b3b0ff; --color-dimmed: #bfbdff;">new topic</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #ffc38a; --color-darker: #fca600; --color-dimmed: #ffb45c;">new tutorial</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Katarzyna Kamieniecka (University of Bradford), a member of the ELIXIR-UK Fellowship Programme, has just launched a new series of lessons to improve {FAIR} data management in the life sciences. The lessons are designed to help researchers and research support staff understand the principles of FAIR data management and apply them to their own work.
+
+		
+	</p>
+</article>
+
+
+	<article>
+	<h3>
+		<a href="/training-material/news/2023/06/07/pan-galactic-search.html">New Feature: Pan-Galactic Tool Search</a>
+	</h3>
+	<p>
+	7 June 2023 &nbsp;
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #c9caff; --color-darker: #afb1ff; --color-dimmed: #bcbeff;">new feature</span>
+	
+	<span class="label label-default tutorial_tag" style="--color-primary: #fff4b9; --color-darker: #efda00; --color-dimmed: #fee800;">gtn</span>
+	
+	</p>
+	<p class="card-text">
+		
+		Did you ever want to run a tool, but not know where it might be available?
+The GTN has you covered with the Pan-Galactic Tool Search that is now available.
+
+		
+	</p>
+</article>
+
+
+</div>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/5549a8718415b1feeb732d4d9eab583cb9117ebb">5549a87</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/news/_posts/2023-10-12-sc_subdomain.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+    </div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1697190244'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
