@@ -645,13 +645,10 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
 
-
-# **Conclusion**
-
+# Conclusion
 
 This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
-
 
 {: .comment}
