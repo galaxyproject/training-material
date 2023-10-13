@@ -610,7 +610,7 @@ module TopicFilter
   #
   def self.list_all_tags(site)
     materials = process_pages(site, site.pages)
-    materials.map { |x| (x['tags'] || []) }.flatten.sort.uniq
+    (materials.map { |x| x['tags'] || [] }.flatten + self.list_topics(site)).sort.uniq
   end
 
   def self.filter_by_topic(site, topic_name)
@@ -639,8 +639,9 @@ module TopicFilter
     # properly.
     materials = process_pages(site, site.pages)
 
-    # If there is nothing with that topic name, try generating it by tags.
-    resource_pages = materials.select { |x| (x['tags'] || []).include?(topic_name) }
+    # Select those with that topic ID or that tag
+    resource_pages = materials.select { |x| x['topic_name'] == topic_name }
+    resource_pages += materials.select { |x| (x['tags'] || []).include?(topic_name) }
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
@@ -871,12 +872,26 @@ module Jekyll
       # Alllow filtering by a category, or return "all" otherwise.
       if category == 'non-tag'
         q = q.select { |_k, v| v['tag_based'].nil? }
+      elsif category == 'science'
+        q = q.select { |_k, v| %w[use basics].include? v['type'] }
+      elsif category == 'technical'
+        q = q.select { |_k, v| %w[admin-dev data-science instructors].include? v['type'] }
+      elsif category == 'science-technical'
+        q = q.select { |_k, v| %w[use basics admin-dev data-science instructors].include? v['type'] }
       elsif category != 'all'
         q = q.select { |_k, v| v['type'] == category }
       end
 
       # Sort alphabetically by titles
       q.sort { |a, b| a[1]['title'] <=> b[1]['title'] }
+    end
+
+    def to_keys(arr)
+      arr.map { |k| k[0] }
+    end
+
+    def to_vals(arr)
+      arr.map { |k| k[1] }
     end
 
     def list_materials_by_tool(site)
