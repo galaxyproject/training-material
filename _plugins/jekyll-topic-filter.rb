@@ -873,11 +873,11 @@ module Jekyll
       if category == 'non-tag'
         q = q.select { |_k, v| v['tag_based'].nil? }
       elsif category == 'science'
-        q = q.select { |_k, v| ['use', 'basics'].include? v['type'] }
+        q = q.select { |_k, v| %w[use basics].include? v['type'] }
       elsif category == 'technical'
-        q = q.select { |_k, v| ['admin-dev', 'data-science', 'instructors'].include? v['type'] }
+        q = q.select { |_k, v| %w[admin-dev data-science instructors].include? v['type'] }
       elsif category == 'science-technical'
-        q = q.select { |_k, v| ['use', 'basics', 'admin-dev', 'data-science', 'instructors'].include? v['type'] }
+        q = q.select { |_k, v| %w[use basics admin-dev data-science instructors].include? v['type'] }
       elsif category != 'all'
         q = q.select { |_k, v| v['type'] == category }
       end
