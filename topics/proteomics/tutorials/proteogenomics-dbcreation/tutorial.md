@@ -73,7 +73,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
->    https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
+>    https://zenodo.org/records/1489208/files/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
