@@ -63,16 +63,6 @@ If you happen to be interested in analysing publicly available data, particularl
 >
 {: .hands_on}
 
-
-> <hands-on-title>Create AnnData object</hands-on-title>
->
-> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
->    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
->    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
->    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
->    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
-{: .hands_on}
-
 It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to the pre-processing that has been shown in this case study tutorial series, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations). So don't worry if the plots generated using this input method are slightly different! 
 
 # Metadata manipulation
@@ -82,6 +72,7 @@ Before creating an AnnData object, we need to make a small modification in exper
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
 > 1. Change the datatype of `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to *tabular*:
+>
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
