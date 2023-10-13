@@ -53,10 +53,6 @@ notebook:
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
-> <warning-title>Remember: Notebook-based tutorials can give different outputs!</warning-title>
-> The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to this tutorial. That's ok! The outputs should still be pretty close (the basic interpretation has survived 5 years of analytical updates and counting...).
-{: .warning}
-
 # Install libraries
 
 This tutorial requies some libraries to be installed which is done below (igraph and louvain are not used directly and are just required for plotting). The ```-q``` parameter hides most of the outputs of the installation in order to make the notebook a bit cleaner. If there are any issues with the installation, then removing this parameter may give you more information about the issue.
