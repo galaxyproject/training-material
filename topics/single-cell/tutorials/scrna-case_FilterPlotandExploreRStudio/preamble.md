@@ -56,7 +56,7 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 {: .hands_on}
 
 # Open RStudio in Galaxy
-You now should have imported the matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files into your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
+You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
