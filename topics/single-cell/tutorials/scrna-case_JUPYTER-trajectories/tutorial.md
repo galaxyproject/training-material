@@ -31,7 +31,6 @@ requirements:
     tutorials:
         - galaxy-intro-jupyter
 tags:
-- single-cell
 - 10x
 - paper-replication
 

@@ -36,7 +36,7 @@ title: Cross UseGalaxy.* Workflow Search
 				<td>{{ workflow.updated }}</td>
 				<td>
 					{% for id in workflow.ids %}
-					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}" target="_blank">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
 					{% endfor %}
 				</td>
 			</tr>
@@ -55,12 +55,20 @@ NodeList.prototype.map = Array.prototype.map;
 const table  = document.getElementById('results'),
       rows   = table.tBodies[0].rows;
 
+function clean(query){
+	return query.toLowerCase().replace(/[^a-z0-9]/g, '')
+}
+
 function search(textQuery){
+	// If no query, show all.
+	if (textQuery == "") {
+		document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
+		return;
+	}
+
+	// Otherwise, filter
 	var to_hide = rows.filter(row => {
-		if (textQuery != "" && (
-			row.children[0].innerText.toLowerCase() + " " + 
-			row.children[1].innerText.toLowerCase()
-		).indexOf(textQuery.toLowerCase()) == -1) {
+		if (clean(row.children[0].innerText + row.children[1].innerText).indexOf(clean(textQuery)) == -1) {
 			return true;
 		}
 		return false;

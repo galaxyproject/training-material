@@ -29,7 +29,6 @@ requirements:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
 tags:
-- single-cell
 - 10x
 - paper-replication
 

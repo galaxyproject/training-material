@@ -24,7 +24,6 @@ key_points:
   - Retreive partially analysed data from a public repository
 
 tags:
-  - single-cell
   - 10x
   - paper-replication
 

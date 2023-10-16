@@ -35,7 +35,6 @@ requirements:
 
 
 tags:
-- single-cell
 - 10x
 - paper-replication
 
