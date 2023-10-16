@@ -109,7 +109,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > <tip-title>Copy pasting between computer and ODV</tip-title>
 > You can expand the ODV left panel (where there are 3 dots, vertically) to access the "clipboard" menu, and paste the content you want to paste on a ODV form. From there you can copy paste everything from one side to the other. Then, click outside of this panel to collapse it.
 > 
-> ![Image showing in transparent on the left of the ODV interface the clipboard](../../images/QGIS/clipboard.PNG)
+> ![Image showing in transparent on the left of the ODV interface the clipboard](../../images/coastal_water_dyn/clipboard.png)
 {: .tip}
 
 > <tip-title>ODV - Disconnected</tip-title>
