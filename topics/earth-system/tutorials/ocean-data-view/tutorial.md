@@ -21,10 +21,11 @@ tags:
   - netcdf data
   - Maps
   - Marine data
-contributors:
-- Marie59
-funding:
-- fairease
+contributions:
+  authorship:
+    - Marie59
+  funding:
+    - fairease
 ---
 
 
