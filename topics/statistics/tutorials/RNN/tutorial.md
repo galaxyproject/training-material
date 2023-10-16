@@ -255,7 +255,7 @@ In the section, we define a RNN and train it using IMDB movie reviews training d
 words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset
 and plot the confusion matrix.
 
-### **Create a deep learning model architecture**
+## Create a deep learning model architecture
 
 > <hands-on-title>Model config</hands-on-title>
 >
@@ -284,7 +284,7 @@ an embedding layer, that transforms each review words into a 32 dimensional vect
 *sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review,
 and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
 
-### **Create a deep learning model**
+## Create a deep learning model
 
 > <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
@@ -309,7 +309,7 @@ feed to the network, the training will be very slow (as we have 25000 training e
 only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset.
 The model builder can be downloaded as a zip file.
 
-### **Deep learning training and evaluation**
+## Deep learning training and evaluation
 
 > <hands-on-title>Training the model</hands-on-title>
 >
@@ -328,7 +328,7 @@ The model builder can be downloaded as a zip file.
 
 The training step generates 2 datasets. 1) accuracy of the trained model, 2) the trained model, in h5mlm format. These files are needed for prediction in the next step.
 
-### **Model Prediction**
+## Model Prediction
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
@@ -346,7 +346,7 @@ The training step generates 2 datasets. 1) accuracy of the trained model, 2) the
 The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in
 the test dataset.
 
-### **Machine Learning Visualization Extension**
+## Machine Learning Visualization Extension
 
 > <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
