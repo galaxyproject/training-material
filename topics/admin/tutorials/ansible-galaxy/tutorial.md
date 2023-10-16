@@ -897,7 +897,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_commit_id`              | `release_23.0`                                                   | The git reference to check out, which in this case is the branch for Galaxy Release 23.0
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.
->    `miniconda_version`             | `4.12.0`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_version`             | `23.9`                                                           | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >    `miniconda_channels`          ` | `['conda-forge', 'defaults']`                                    | Use the community-maintained conda-forge channel in addition to the standard defaults channel of Conda.
 >
 >    > <tip-title>Different Galaxy Releases!</tip-title>
@@ -923,7 +923,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_commit_id: release_23.0
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 4.12.0
+>    +miniconda_version: 23.9
 >    +miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
 >    ```
@@ -956,7 +956,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -10,3 +10,17 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.12.0
+>     miniconda_version: 23.9
 >     miniconda_channels: ['conda-forge', 'defaults']
 >    +
 >    +galaxy_config:
@@ -1974,7 +1974,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
 >    > ```
 >    > {% endraw %}
->    >
+>    > Please also see the changes in [the other SSL tip box](#details-running-this-tutorial-i-without-i-ssl-1)
 >    {: .details}
 >
 > 4. Create the directory `templates/nginx` (staying in galaxy directory, after which groups_vars, roles will be siblings of templates), where we will place our configuration files which should be templated out to the server.
@@ -2082,6 +2082,8 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >
 >    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
+>    > Please be sure to also make the changes in [the other SSL box](#details-running-this-tutorial-i-without-i-ssl).
+>    > 
 >    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >
 >    > {% raw %}
@@ -2092,7 +2094,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > +listen        *:80 default_server;
 >    > ```
 >    > {% endraw %}
->    >
+>    > 
 >    {: .details}
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
@@ -2232,7 +2234,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -11,6 +11,24 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.12.0
+>     miniconda_version: 23.9
 >     miniconda_channels: ['conda-forge', 'defaults']
 >     
 >    +# Galaxy Job Configuration

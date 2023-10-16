@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: "Pre-processing of 10X Single-Cell ATAC-seq Datasets"
-subtopic: end-to-end
-priority: 3
+subtopic: scmultiomics
+priority: 1
 redirect_from:
   - /topics/transcriptomics/tutorials/satac-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/7855968"
 tags:
-  - single-cell
   - 10x
+  - epigenetics
 questions:
   - What is 10X?
   - What are single-cell ATAC fragments and MTX files?
@@ -74,7 +74,7 @@ There are two major chemistries (v1 and v2) used in 10x scATAC-seq library const
 * 16bp barcode sequence (R2)
 * 49bp reverse read (R3)
 
-The major differences to 10x scRNA-seq sequencing libraries are: (a) barcode sequences get a separate FASTQ file and (b) there are no UMIs. Note that as opposed to the traditional FASTQ naming, R3 contains reverse mate-pair and R2 contains barcode sequence. 
+The major differences to 10x scRNA-seq sequencing libraries are: (a) barcode sequences get a separate FASTQ file and (b) there are no UMIs. Note that as opposed to the traditional FASTQ naming, R3 contains reverse mate-pair and R2 contains barcode sequence.
 
 
 # Analysis Strategy
@@ -96,7 +96,7 @@ Here we will use a published data set from 10x genomics consisting of thousand p
   * atac\_pbmc\_1k\_nextgem\_S1\_**R2**\_001\_chr21.fastq.gz
   * atac\_pbmc\_1k\_nextgem\_S1\_**R3**\_001\_chr21.fastq.gz
 
-These files are provided in the [Zenodo](https://zenodo.org/record/7855968) data repository. To analyze the full datasets, get the original FASTQ files from [10x genomics website](https://www.10xgenomics.com/resources/datasets/1-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0) 
+These files are provided in the [Zenodo](https://zenodo.org/record/7855968) data repository. To analyze the full datasets, get the original FASTQ files from [10x genomics website](https://www.10xgenomics.com/resources/datasets/1-k-peripheral-blood-mononuclear-cells-pbm-cs-from-a-healthy-donor-next-gem-v-1-1-1-1-standard-2-0-0)
 
 # FASTQ processing and mapping
 
@@ -157,7 +157,7 @@ First, we will attach the barcodes from the barcodes FASTQ file to the ids of fo
 >
 >    > <comment-title>Sinto barcode output</comment-title>
 >    >
->    > After a successful run, the barcode sequences from the barcode FASTQ file are prepended to the read names. We can inspect the output FASTQ files by clicking on the {% icon galaxy-eye %} symbol of the *barcoded read 1* file. 
+>    > After a successful run, the barcode sequences from the barcode FASTQ file are prepended to the read names. We can inspect the output FASTQ files by clicking on the {% icon galaxy-eye %} symbol of the *barcoded read 1* file.
 >    {: .comment}
 >
 {: .hands_on}
@@ -223,10 +223,10 @@ In scRNA-seq we always have the standard set of genes (usually downloaded from p
 * Chunk the genome into equal-sized bins and use these bins as reference locations for quantification
 * Combine the data from all the cells of the scATAC-seq data together and detect open chromatin regions from the data. Later use these detected regions for quantification
 
-In this tutorial, we opt for the 3rd option. 
+In this tutorial, we opt for the 3rd option.
 
 ## Create scATAC-seq fragments file
-An ATAC-seq fragment file is a BED file with Tn5 integration sites, the cell barcode associated with the fragment, and the frequency of the sequenced fragment. PCR duplicates are collapsed. Here we filter out the alignments with low mapping quality. 
+An ATAC-seq fragment file is a BED file with Tn5 integration sites, the cell barcode associated with the fragment, and the frequency of the sequenced fragment. PCR duplicates are collapsed. Here we filter out the alignments with low mapping quality.
 
 > <comment-title>on Tn5 insertion</comment-title>
 >
@@ -295,7 +295,7 @@ If we only assess the coverage of the 5' extremity of the reads, the data would 
 
 # Count matrix creation
 
-Now we have ATAC fragments with cell barcode information as well as the peaks to create a scATAC count matrix. In the context of ATAC-seq, the peaks are also often called features. But the term *feature* is a generic term that denotes a *peak* in the case of scATAC-seq data and a *gene* in case of scRNA-seq data. So the count matrix we build is similar to that of scRNA-seq data with the exception that here we have open chromatin regions instead of genes. In this tutorial, both the terms *feature* and *peak* indicate an *open chromatin region*. 
+Now we have ATAC fragments with cell barcode information as well as the peaks to create a scATAC count matrix. In the context of ATAC-seq, the peaks are also often called features. But the term *feature* is a generic term that denotes a *peak* in the case of scATAC-seq data and a *gene* in case of scRNA-seq data. So the count matrix we build is similar to that of scRNA-seq data with the exception that here we have open chromatin regions instead of genes. In this tutorial, both the terms *feature* and *peak* indicate an *open chromatin region*.
 
 For count matrix creation, we will use **Build count matrix** from **EpiScanpy** tool suite. It takes fragments file and the peaks in either BED format or directly a narrowPeak file of **MACS2** output. Regardless of file type, the tool only considers the first 3 columns which contain chromosome id, start and end positions of the peak regions. Parameters like `--call-summits` from our MACS2 run can result in different peaks with the same peak boundaries. It is always a  good practice to remove duplicate peak regions so that our final count matrix will have unique features.
 
@@ -314,7 +314,7 @@ For count matrix creation, we will use **Build count matrix** from **EpiScanpy**
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. There were initially 1064 regions in the `narrow Peaks` file. Now there are 891 regions after deduplication. More than 15% (173) of regions have the same peak boundaries. 
+> > > 1. There were initially 1064 regions in the `narrow Peaks` file. Now there are 891 regions after deduplication. More than 15% (173) of regions have the same peak boundaries.
 > > >
 > > {: .solution}
 > >
@@ -378,7 +378,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >
 >    > <comment-title>Faster Method for General Information</comment-title>
 >    >
->    > * To view general information of any *Anndata* file: 
+>    > * To view general information of any *Anndata* file:
 >    >    * Click on the name of the dataset in the history to expand it.
 >    >    * General Anndata information would be given in the expanded box:
 >    >
@@ -481,17 +481,17 @@ https://zenodo.org/record/7855968/files/atac_pbmc_1k_uniq_peaks.h5ad
 ```
 
 > <question-title></question-title>
-> 
+>
 > 1. How many barcodes and features are there?
 > 1. What do you observe in comparison to a scRNA-seq count matrix?
-> 
+>
 > > <solution-title></solution-title>
 > >
 > > 1. There are 441038 barcodes and 70120 features
 > > 2. The initial number of barcodes in this raw count matrix is in the same range as the scRNA-seq data. But there is roughly double the number of features compared to a scRNA-seq dataset. The number of features varies from dataset to dataset. Based on the tools and parameters used for peak calling, the size of the initial feature set can grow up to several hundred of thousands.
 > >
 > {: .solution}
-> 
+>
 {: .question}
 
 ## Initial filtering to remove potential empty features and cells
@@ -552,8 +552,8 @@ We will first plot the number of features per cell. This information is stored a
 > > What trends of the data do you observe in the plots?
 > >
 > > > <solution-title></solution-title>
-> > > ![IntialViolin]({% link topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png %} "Violin plot of number of features per cell after initial filtering") 
-> > > Both plots indicate that there are two distinct sets of cells: 
+> > > ![IntialViolin]({% link topics/single-cell/images/scatac-pre-processing/violin_after_initial_filtering.png %} "Violin plot of number of features per cell after initial filtering")
+> > > Both plots indicate that there are two distinct sets of cells:
 > > >    1. Cells with an acceptable number of open chromatin regions.
 > > >    2. Cells with only a few detected peaks. These cells are uninformative and should be excluded.
 > > >
@@ -585,8 +585,8 @@ To determine decent filtering thresholds, we will further look at some histogram
 > > 1. Do you think our minimum number of features threshold of 1000 indicated in the plot makes sense?
 > >
 > > > <solution-title></solution-title>
-> > > ![CoverageCells]({% link topics/single-cell/images/scatac-pre-processing/coverage_cells.png %} "Histogram of the number of open chromatin regions per cell") 
-> > > ![CoverageCellsLog]({% link topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png %} "Histogram of the number of open chromatin regions per cell in log scale") 
+> > > ![CoverageCells]({% link topics/single-cell/images/scatac-pre-processing/coverage_cells.png %} "Histogram of the number of open chromatin regions per cell")
+> > > ![CoverageCellsLog]({% link topics/single-cell/images/scatac-pre-processing/coverage_cells_log.png %} "Histogram of the number of open chromatin regions per cell in log scale")
 > > > 1. The plots show the number of open chromatin regions per cell in 50 bins on the x-axis and the number of cells per bin on the y-axis. It is basically a histogram of the number of open chromatin regions per cell.
 > > > 2. From the first plot with absolute counts, we see that with our threshold of 1000, we can separate between the cells with few detected peaks and cells with high chromatin accessibility.
 > > >
@@ -616,11 +616,11 @@ To determine decent filtering thresholds, we will further look at some histogram
 > > 1. Do you think our minimum number of cells threshold of 5 indicated in the plot makes sense?
 > >
 > > > <solution-title></solution-title>
-> > > ![CoverageFeatures]({% link topics/single-cell/images/scatac-pre-processing/coverage_features.png %} "Histogram of feature commonness in cells") 
+> > > ![CoverageFeatures]({% link topics/single-cell/images/scatac-pre-processing/coverage_features.png %} "Histogram of feature commonness in cells")
 > > > ![CoverageFeaturesLog]({% link topics/single-cell/images/scatac-pre-processing/coverage_features_log.png %} "Histogram of feature commonness in cells in log scale")
 > > > 1. The plots show a histogram of the number of cells sharing a feature. As we initially pooled the data from all the cells to detect the peaks, it is expected to see only a small number of cells have more than 10000 peaks in common.
-> > > 2. The red vertical line of our 5 cells threshold is nearly at the left end of the histogram representing the majority of the features have at least 5 cells in common. 
-> > > From the log scale plot it is also clear that there is a sharp increase in the feature commonness from at least 10 cells (x-axis 1.0). 
+> > > 2. The red vertical line of our 5 cells threshold is nearly at the left end of the histogram representing the majority of the features have at least 5 cells in common.
+> > > From the log scale plot it is also clear that there is a sharp increase in the feature commonness from at least 10 cells (x-axis 1.0).
 > > > So our threshold of 5 is a decent cutoff for filtering out the features. From the plots, only a very few non-informative features are left to be filtered out.   
 > > >
 > > {: .solution}
@@ -630,7 +630,7 @@ To determine decent filtering thresholds, we will further look at some histogram
 
 ## Final filtering to acquire quality cells and features
 
-Based on the above QC plots, we will filter out all the cells with less than 1000 features and all the features that have less than 5 cells in common. Additionally, we will also filter out extreme outlier cells (which can be seen in the initial violin plot or coverage cells plot) with more than 12500 features. 
+Based on the above QC plots, we will filter out all the cells with less than 1000 features and all the features that have less than 5 cells in common. Additionally, we will also filter out extreme outlier cells (which can be seen in the initial violin plot or coverage cells plot) with more than 12500 features.
 
 > <hands-on-title>Final filtering based on QC plots</hands-on-title>
 >
@@ -668,7 +668,7 @@ Based on the above QC plots, we will filter out all the cells with less than 100
 # Conclusion
 
 
-In this tutorial, we have learned how to map reads from 10X ATAC-seq data, identify open chromatin regions from aggregated cell data and generate a count matrix in *Anndata* format. We also performed quality control and filtered out empty and uninformative cells and features to generate a high-quality count matrix for downstream analysis. 
+In this tutorial, we have learned how to map reads from 10X ATAC-seq data, identify open chromatin regions from aggregated cell data and generate a count matrix in *Anndata* format. We also performed quality control and filtered out empty and uninformative cells and features to generate a high-quality count matrix for downstream analysis.
 
 Galaxy workflows for generating [Annadata from FASTQ files](workflows/scATAC-seq-FASTQ-to-Count-Matrix.ga) and [quality filtering of raw count matrix](workflows/scATAC-seq-Count-Matrix-Filtering.ga) are provided.scatac_tenx.ga).
 
