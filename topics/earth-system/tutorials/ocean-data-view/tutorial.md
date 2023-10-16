@@ -23,7 +23,8 @@ tags:
   - Marine data
 contributors:
 - Marie59
-
+funding:
+- fairease
 ---
 
 
@@ -243,7 +244,5 @@ Now, after waiting for everything to turn green in your history, you can see 2 n
 Great you now know how to use argo floater data to create profiles curves in Ocean Data View (ODV) within Galaxy.
 
 # Extra information
-Coming up soon follow ups tutorials on Coastal Water Dynamics workflow. Keep an {% icon galaxy-eye %} open if you are interested !
-Theese tutorials are made within the [EOSC FAIR-EASE project](https://fairease.eu/).
-![Project funded by the european union](../../images/coastal_water_dyn/eu_fe.png)
+Coming up soon follow ups tutorials on Coastal Water Dynamics workflow (and other Earth-System related trainings). Keep an {% icon galaxy-eye %} open if you are interested !
 
