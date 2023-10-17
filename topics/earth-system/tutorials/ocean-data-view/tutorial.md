@@ -144,7 +144,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > <hands-on-title>Create a multiple windows view</hands-on-title>
 > 1. On the top left press **+**
 > 2. Click on **2 Station Windows**
-> ![Image showing where to go to have the 2 STATION Windows](../../images/coastal_water_dyn/2_station.png)
+>    ![Image showing where to go to have the 2 STATION Windows](../../images/coastal_water_dyn/2_station.png)
 > 3. Two more slots appear follow the indication and press + on your keyboard (or SHIFT and +).
 >
 > Here you have created a multiple view on ODV
