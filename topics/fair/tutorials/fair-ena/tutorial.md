@@ -52,7 +52,7 @@ Prior to publication many journals and funders require authors to submit their r
 The three databases have different methods for making submissions. If your database of choice is ENA and you 
 need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data as well as accompanying metadata, and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
 
-If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]( {% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html %}) tutorial helpful. 
+If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]( {% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.md %}) tutorial helpful. 
 
 > <tip-title>What is cURL?</tip-title>
 > cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. 
@@ -61,7 +61,7 @@ If you would like to use Galaxy tools for submission to ENA you may find [Submit
 ## ENA Submission Routes
 
 There are three routes via which one can submit data to ENA. 
-1.	The Webin Interactive portal, which allows you to submit data by filling out forms on your browser. This is what we will cover in this tutorial,
+1.	The Webin Interactive portal allows you to submit data by filling out forms on your browser. This is what we will cover in this tutorial,
 2.	Webin-command-line interface (CLI), which allows submissions through a terminal, and
 3.	Programmatic submission, which requires the submissions to be prepared as XML documents and then uploaded using cURL or Webin portal. 
 
@@ -81,7 +81,7 @@ As you can see from the Table 1, you can submit some data types only through a c
 
 To begin with the submission process you will need to have a Webin submission account. You can register an account free of cost through the Webin portal (https://www.ebi.ac.uk/ena/submit/webin/login).
 
-For data submission ENA provides a detailed guide (https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Bear in mind that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
+For data submission, ENA provides a detailed guide (https://ena-docs.readthedocs.io/en/latest/submit/general-guide.html), which I recommend you consult for questions specific to your user case. Remember that ENA frequently changes its submission protocols, so you should check the ENA guide for updates.
 
 ## ENA Metadata Model
 
@@ -102,7 +102,7 @@ To ensure that each sample is registered with sufficient metadata so as to provi
 A registered sample will receive a BioSample accession (SAMEA*) and ENA sample accession (ERS*).
 
 ### 3. Raw reads
-Metadata for raw reads is represented in 'experiment' and 'run' objects, where 'experiment' holds metadata on sequencing method and 'run' holds metadata about the read files and their location on an FTP server. 
+Metadata for raw reads is represented in 'experiment' and 'run' objects, where 'experiment' holds metadata on the sequencing method and 'run' holds metadata about the read files and their location on an FTP server. 
 
 Each read file submission will receive a run accession (ERR*) and an Experiment accession (ERX*). 
 
@@ -116,9 +116,9 @@ To register a study you will need the following metadata:
 1. Study Name
 2. Short descriptive study title
 3. Detailed study abstract
-4. Release date (if before 2 years from the date of submission)
+4. Release date (if before two years from the date of submission)
 
-1-3 will be displayed in the Project entry page. Make it as detailed as possible so as to make it your study searchable. To see an example see the submission for [PRJEB55803](https://www.ebi.ac.uk/ena/browser/view/PRJEB55803).
+1-3 will be displayed on the Project entry page. Make it as detailed as possible so as to make your study searchable. To see an example see the submission for [PRJEB55803](https://www.ebi.ac.uk/ena/browser/view/PRJEB55803).
 
 > <hands-on-title>Register study</hands-on-title>
 > Once you have the above information at hand register your study.
@@ -146,7 +146,7 @@ To register a study you will need the following metadata:
 ## 3. Sample metadata
 Next, you should register the samples from which your sequence data is derived.  
 ###  Metadata preparation
-Minimum metadata requirement for different checklists varies. Here we list only what is required for the ENA default checklist (ERC000011).
+Minimum metadata requirement for different checklists varies. We list only what is required for the ENA default checklist (ERC000011).
 1. Taxonomy ID of the organism sequenced
 2. Scientific name of the organism sequenced
 3. Unique name of the sample (auto-generated unless provided)
@@ -160,7 +160,7 @@ Other checklists include:
 + Environmental checklist
 + Marine checklist 
 
-Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/checklists).
+Find the complete list of [checklists](https://www.ebi.ac.uk/ena/browser/checklists).
 
 > <hands-on-title>Download sample checklist</hands-on-title>
 > 1. From the Dashboard, inside the 'Samples' box, click on 'Register Samples'.
@@ -208,7 +208,7 @@ Find the complete list of checklists [here](https://www.ebi.ac.uk/ena/submit/che
 
 ## 4. Read metadata
 ###  Metadata preparation
-Having registered the sample, we can now add information about sequence reads generated from them. Reads can be submitted in several formats, such as fastq, BAM, CRAM, fast5, etc. Here we will look at submitting paired-end fastq files.
+Having registered the sample, we can now add information about sequence reads generated from them. Reads can be submitted in several formats, such as fastq, BAM, CRAM, fast5, etc. we will look at submitting paired-end fastq files.
 Metadata required for this are:
 1. Sample alias or accession (from Sample submission step)
 2. Study alias or accession (from Study submission step)
@@ -257,24 +257,24 @@ First, we need to confirm that your read files are in the correct format. Refer 
 > 
 > > <tip-title></tip-title>
 > > + Tick the box next to 'Show Descriptions' to reveal text describing the attributes
-> > + To find the sample alias and accession look in 'Sample Reports'
-> > + To find the study accession look in 'Studies Reports'  
+> > + To find the sample alias and accession, look in 'Sample Reports'
+> > + To find the study accession, look in 'Studies Reports'  
 > {: .tip}
 > 
 > {:start="4"}
 > 4. Click 'Next' and download the spreadsheet .tsv file.
 > 5. Fill in the spreadsheet, paying particular attention to the following:
-> >+ sample: same as you used in sample submission - alias or accession
-> >+ study: use study accession
-> >+ forward/reverse_file_name: make sure this is the same as what will be uploaded. It should be the compressed .gz file you created.
-> >+ forward/reverse_file_md5: copy this from md5sums.tsv you generated earlier.
-> 6. Uploaded the completed template spreadsheet and submit.
-> 7. If metadata validation is successful a pop-up message bearing a run accession (ERR*) and experiment accesion (ERX*) will appear for each read submission. 
+> sample: same as you used in sample submission - alias or accession
+> study: use study accession
+> forward/reverse_file_name: ensure this is the same as what will be uploaded. It should be the compressed .gz file you created.
+> forward/reverse_file_md5: copy this from md5sums.tsv you generated earlier.
+> 6. Uploaded the completed template spreadsheet and submitted it.
+> 7. If metadata validation is successful a pop-up message bearing a run accession (ERR*) and experiment accession (ERX*) will appear for each read submission. 
 > 8. Confirm the processing status of your submission via Runs Report.
 > 9. Any errors generated in the process will be communicated to you on the registered email.
 >
-> > <tip-title></tip-title>
-> > The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describe the methods used to sequence the sample.
+> <tip-title></tip-title>
+>  The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describes the methods used to sequence the sample.
 > {: .tip}
 >
 {: .hands_on}
