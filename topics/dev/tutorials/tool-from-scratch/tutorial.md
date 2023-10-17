@@ -761,7 +761,7 @@ It also defines the format of that file and the name shown to the user in the hi
 >
 > ```xml
 > <outputs>
->     <data name="outfile" label="${tool.name} on ${on_string}" format="bam">
+>     <data name="outfile" label="${tool.name} on ${on_string}" format="bam" />
 > </outputs>
 > ```
 {: .hands_on}

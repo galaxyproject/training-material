@@ -2,13 +2,12 @@
 layout: tutorial_hands_on
 
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
-subtopic: end-to-end
-priority: 3
+subtopic: firstsc
+priority: 1
 redirect_from:
   - /topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial
 zenodo_link: "https://zenodo.org/record/3457880"
 tags:
-  - single-cell
   - 10x
 questions:
   - What is 10X?

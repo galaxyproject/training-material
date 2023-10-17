@@ -17,7 +17,6 @@ key_points:
 - Spectral indices are of key importance to asset vegetation well-being.
 - Always keep in mind that remote sensing and in-situ data are complementary.
 tags:
-- Ecology
 - Remote sensing
 contributions:
     authorship:
