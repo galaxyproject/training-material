@@ -49,7 +49,7 @@ Ocean Data View (ODV) is a software package for the interactive exploration, ana
 # Managing ODV Galaxy interactive tool
 ODV is now integrated in Galaxy as an interactive tool. This kind of tools is working differently than classical tools as it allows the user to interact with a dedicated graphical interface. This kind of tools is used to give access to Jupyter notebooks, RStudio or R Shiny apps for example. 
 
-To use ODV, you need to use the {% tool [dedicated form](https://earth-system.usegalaxy.eu/root?tool_id=interactive_tool_odv) %}, you can specify input datasets from your hisrtory you want to use in ODV, then press the **execute** button to launch a ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
+To use ODV, you need to use the {% tool [dedicated form](interactive_tool_odv) %}, you can specify input datasets from your hisrtory you want to use in ODV, then press the **execute** button to launch a ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
 
 Once you finished your work on ODV, if you want to retrieve data and/or entire project, you need to save files in /output, then quit ODV properly through the "Project" Menu tab.
 
