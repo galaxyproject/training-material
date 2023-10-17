@@ -183,12 +183,12 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > 3. Then, select and click on **Customize**
 > 4. In "Station ID" write the number of the new station of reference (both boxes)
 > 
-> Everything has dissapeared !!! Don't panik it's totally normal ;)
-> - Press **+** on your keyboard (or SHIFT and +)
+>    Everything has dissapeared !!! Don't panik it's totally normal ;)
+>    - Press **+** on your keyboard (or SHIFT and +)
 > 
-> The curves reapeared ! And they correspond to your knew station of reference !
+>    The curves reapeared ! And they correspond to your knew station of reference !
 > 
-> To make the other stations reapear, to allow you to navigate in the other stations while conserving your new station of reference, go on the map once again.
+>    To make the other stations reapear, to allow you to navigate in the other stations while conserving your new station of reference, go on the map once again.
 > 6. Click right and select **Station Filter**
 > 7. This time select and click on **Relax**
 > 
