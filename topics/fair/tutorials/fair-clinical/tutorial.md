@@ -57,7 +57,6 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR (
 >
 > * consider in general terms
 > * consider more specifically
-
 {: .hands_on}
 
 In general, the most common clinical data used in research are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
