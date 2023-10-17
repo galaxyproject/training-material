@@ -51,7 +51,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 		
 	Sentry.init({
 	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@373c66270c910c1fd797630a4cdb5fad7bbf7c11",
+	  release: "galaxy-training-network@4427b4b36340ecece4561727965359941a70d17b",
 	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 	  sampleRate: 0.1,
 	  tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1697533624' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1697533624' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1697547496' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1697547496' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -87,7 +87,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories (Monocle3, R)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-10-09 16:30:03 +0000">
+<meta name="DC.date" content="2023-10-13 13:40:31 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 
         
@@ -128,7 +128,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-10-09 16:30:03 +0000",
+  "dateModified": "2023-10-13 13:40:31 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Inferring single cell trajectories (Monocle3, R)",
   "interactivityType": "mixed",
@@ -303,13 +303,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
       "name": "jupyter-notebook"
     }
   ],
-  "abstract": "## Setting up the environment and file upload"
+  "abstract": "{% snippet topics/single-cell/faqs/notebook_warning.md %}"
 }
         </script>
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1697533624'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1697547496'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -901,7 +901,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -935,7 +935,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                 
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h2 id="setting-up-the-environment-and-file-upload">Setting up the environment and file upload</h2>
+                <!--SNIPPET-->
+<blockquote class="warning">   <div class="box-title warning-title" id="warning-notebook-based-tutorials-can-give-different-outputs"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Warning: Notebook-based tutorials can give different outputs</div>   <p>The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to a tutorial if you are running it in a programming environment like a Jupyter Notebook or R-Studio. That’s ok! The outputs should still be pretty close.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
+<h2 id="setting-up-the-environment-and-file-upload">Setting up the environment and file upload</h2>
 <p>Once the installation is done, we should load the needed packages into our notebook. Navigate back to your <code class="language-plaintext highlighter-rouge">notebook</code>. If you are using our prepopulated notebook, you can follow the tutorial from there. Otherwise, input the following into your fresh notebook.</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">install.packages</span><span class="p">(</span><span class="s2">"Rcpp"</span><span class="p">)</span><span class="w">    </span><span class="c1"># needed for reduce_dimension to avoid AnnoyAngular error; library(Rcpp) might work as well depending on the version</span><span class="w">
@@ -2025,7 +2029,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/373c66270c910c1fd797630a4cdb5fad7bbf7c11">373c662</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/4427b4b36340ecece4561727965359941a70d17b">4427b4b</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2057,7 +2061,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1697533624'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1697547496'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
