@@ -153,12 +153,12 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > <hands-on-title>Create profiles</hands-on-title>
 > 1. On the biggest window click on the right side of your mousse
 > 2. Select **X-Variable**, press **TEMP [degree_Celsius]** and OK.
-> ![Image of the selection of the pression](../../images/coastal_water_dyn/xvar_temp.png)
+>    ![Image of the selection of the pression](../../images/coastal_water_dyn/xvar_temp.png)
 > 3. Select **Y-Variable**, press **PRES [decibar]** and OK. Your profile is now uspide down. 
 > 4. To correct that click right again go on **Y-Variable** and on the bottom of the pop-up screen check the box "Reverse range" and OK.
-> ![ODV interface with the map and the 1st profile pression temperature](../../images/coastal_water_dyn/1st_profile.png)
+>    ![ODV interface with the map and the 1st profile pression temperature](../../images/coastal_water_dyn/1st_profile.png)
 > 5. For the smallest window do the same but for the abscisse select **TEMP_ADJUSTED [degree_Celsius]**. This can be usefull to compare the 2 curves.
-> ![Resulting image of the 2 windows configurated](../../images/coastal_water_dyn/2_profiles.png)
+>    ![Resulting image of the 2 windows configurated](../../images/coastal_water_dyn/2_profiles.png)
 >
 > You now know how to create multiple profiles curves on ODV from netCDF data.
 {: .hands_on}
