@@ -272,7 +272,7 @@ MAGeCK count outputs:
 * a Count Summary file
 * a PDF report
 
-**Count Summary file**
+## Count Summary file
 
 The contents of the count summary file is [explained on the MAGeCK website](https://sourceforge.net/p/mageck/wiki/output/#count_summary_txt), also shown below. The columns are as follows. To help you evaluate the quality of the data, recommended values from the MAGeCK authors are shown in bold.
 
