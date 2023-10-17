@@ -165,11 +165,11 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 
 > <question-title></question-title>
 >
-> 2. How do you do if you want to compare the profiles with another station ?
+> How do you do if you want to compare the profiles with another station ?
 >
 > > <solution-title></solution-title>
 > >
-> > 2. With your keyboard you can use the arrows left and right and go through the different stations one-by-one.
+> > With your keyboard you can use the arrows left and right and go through the different stations one-by-one.
 > > ![See the profiles of another station](../../images/coastal_water_dyn/2_curves.png)
 > >
 > {: .solution}
