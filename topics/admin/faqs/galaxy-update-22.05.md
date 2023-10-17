@@ -90,6 +90,15 @@ Here is the recommended update procedure with ansible:
    - `galaxy_user_name` is defined in all.yml in the latest git-gat
    - git-gat also separates out the DB serving into a `dbservers.yml` host group
 
+   You may also need to add
+
+   ```
+   galaxy_systemd_mode: 'gravity'
+   galaxy_manage_systemd: yes
+   ```
+
+   to your galaxy configuration to have systemd units properly installed.
+
 4. Backup your `venv`, `mv /srv/galaxy/venv/ /srv/galaxy/venv-old/`, as your NodeJS is probably out of date and Galaxy doesn't handle that gracefully
 5. Do any local customs for luck (knocking on wood, etc.)
 6. Run the playbook
