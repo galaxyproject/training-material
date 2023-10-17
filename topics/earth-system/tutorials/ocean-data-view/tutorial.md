@@ -112,7 +112,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 {: .tip}
 
 > <tip-title>ODV - Disconnected</tip-title>
-> If at one point your ODV interface becomes grey with a red pannel "X ODV - Disconnected", do NOT panik ;) you just need to reload your tab (circular arrow top left)
+> If at one point your ODV interface becomes grey with a red panel "X ODV - Disconnected", do NOT panic ;) you just need to reload your tab (circular arrow top left)
 {: .tip}
 
 > <hands-on-title>Loading Argo data</hands-on-title>
