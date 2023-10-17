@@ -89,7 +89,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}  
 >  
-> 3. Select your new data before deploying {% tool [ODV instance](https://earth-system.usegalaxy.eu/root?tool_id=interactive_tool_odv) %} by pressing **execute**
+> 3. Select your new data before deploying {% tool [ODV instance](interactive_tool_odv) %} by pressing **execute**
 > 4. Access ODV 
 >
 > > <tip-title> Reminder on how to acces interactive tool </tip-title>
