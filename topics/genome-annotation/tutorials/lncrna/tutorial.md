@@ -93,9 +93,9 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_assembly.fasta
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_annotation.gff3
->    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/all_RNA_mapped.bam
+>    https://zenodo.org/record/7107050/files/genome_assembly.fasta
+>    https://zenodo.org/record/7107050/files/genome_annotation.gff3
+>    https://zenodo.org/record/7107050/files/all_RNA_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
