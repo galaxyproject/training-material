@@ -23,7 +23,9 @@ priority: 1
 contributions:
   authorship:
     - SNG888
-    - kkamieniecka
+  editing:
+  - kkamieniecka
+  - tb143
     
 subtopic: fair-data
 
