@@ -8,7 +8,7 @@ contributors: [hexylena]
 
 Galaxy introduced a number of changes in 22.05 and 23.0 that are extremely important to be aware of during the upgrade process. Namely a new database migration system, and a new required running environment (gunicorn instead of uwsgi).
 
-Unfortunately the scripts to migrate to the new database migration system were only present in 22.05, and then were subsequently removed, so it is **mandatory** to upgrade to 22.05 if you want to go further.
+The scripts to migrate to the new database migration system are only compatible with release 22.05, and then were subsequently removed, so it is **mandatory** to upgrade to 22.05 if you want to go further.
 
 Here is the recommended update procedure with ansible:
 
