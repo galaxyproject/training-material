@@ -92,9 +92,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > 3. Select your new data before deploying {% tool [ODV instance](interactive_tool_odv) %} by pressing **execute**
 > 4. Access ODV 
 >
-> > <tip-title> Reminder on how to acces interactive tool </tip-title>
-> >  A URL will be displayed at the top of the Galaxy center panel. If you don't see it, you can see and access it through the "Active InteractiveTools" space of the "User" menu or you can click on {% icon galaxy-eye %} on the tool in the history.
-> {: .tip}
+> {% snippet faqs/galaxy/interactive_tools_open.md tool="ODV" %}
 >
 {: .hands_on}
 
