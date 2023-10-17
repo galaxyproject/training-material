@@ -26,7 +26,14 @@ Here is the recommended update procedure with ansible:
 
    1. git clone https://github.com/hexylena/git-gat/
    2. git checkout step-4
-   3. `vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml` (repeat for group_vars/all.yml, group_vars/dbservers.yml, galaxy.yml, requirements.yml, hosts, etc.)
+   3. Diff and sync (e.g. `vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml`) for the main configuration files:
+
+      - group_vars/all.yml
+      - group_vars/dbservers.yml
+      - galaxy.yml
+      - requirements.yml
+      - hosts
+      - templates/nginx/galaxy.j2
 
    But the main change is the swap from uwsgi to gravity+gunicorn
 
@@ -102,3 +109,7 @@ Here is the recommended update procedure with ansible:
 4. Backup your `venv`, `mv /srv/galaxy/venv/ /srv/galaxy/venv-old/`, as your NodeJS is probably out of date and Galaxy doesn't handle that gracefully
 5. Do any local customs for luck (knocking on wood, etc.)
 6. Run the playbook
+7. Things might go wrong with systemd units
+   - try running `galaxyctl -c /srv/galaxy/config/galaxy.yml update` as root
+   - you may also need to `rm /etc/systemd/system/galaxy.service` which is then no longer needed
+   - you'll have a `galaxy.target` and you can instead `systemctl daemon-reload` and `systemctl start galaxy.target`
