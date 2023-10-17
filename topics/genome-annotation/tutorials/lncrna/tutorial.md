@@ -190,7 +190,7 @@ For future analyses, it would be interesting to use an updated annotation contai
 
 > <hands-on-title>Merge the annotations</hands-on-title>
 >
-> {% tool [concatenate](https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/f46f0e4f75c4) %} with the following parameters:
+> {% tool [concatenate](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf`
 >    - Insert Dataset
 >    - {% icon param-file %} *"Dataset"*: `lncRNA annotation with FEELnc`

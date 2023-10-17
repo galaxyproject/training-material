@@ -98,7 +98,7 @@ Since MAdLandDB is the collection of protein sequences, You can perform {% tool 
 | 11 | evalue | Expectation value (E-value) |
 | 12 | bitscore | Bit score |
 
-The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
+The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast]({% link topics/genome-annotation/tutorials/genome-annotation/tutorial.md %}#similarity-searches-blast) tutorial.
 
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
