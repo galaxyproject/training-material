@@ -97,7 +97,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 {: .hands_on}
 
 > <details-title> Some complementary information about your data </details-title>
-> Argo is an international program to observe the interior of the ocean with a fleet of profiling floats drifting in the deep ocean currents (check it [here](https://argo.ucsd.edu)). Argo GDAC is a dataset of 5 billion in situ ocean observations from 18.000 profiling floats (4.000 active) which started 20 years ago. Argo GDAC dataset is a collection of 18.000 NetCDF files. It is a major asset for ocean and climate science, a contributor to IOCCP reports. For more informations click [here]( https://doi.org/10.17882/42182)
+> Argo is an international program to observe the interior of the ocean with a fleet of profiling floats drifting in the deep ocean currents (check it [out on the argo site](https://argo.ucsd.edu)). Argo GDAC is a dataset of 5 billion in situ ocean observations from 18.000 profiling floats (4.000 active) which started 20 years ago. Argo GDAC dataset is a collection of 18.000 NetCDF files. It is a major asset for ocean and climate science, a contributor to IOCCP reports. {% cite argodata %}
 >
 > These data are available on AWS registry of Open Data. This registry exists to help people discover and share datasets that are available via AWS resources. [See recent additions and learn more about sharing data on AWS](https://registry.opendata.aws/).
 {: .details}
