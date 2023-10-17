@@ -70,7 +70,7 @@ Once you finished your work on ODV, if you want to retrieve data and/or entire p
 > * Viewing panel in the middle
 > * History of analysis and files on the right
 >
-> ![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.](../../images/coastal_water_dyn/galaxy_interface.png "Galaxy interface explanation")
+> ![Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right.]({% link shared/images/galaxy_interface.png %} "Galaxy interface explanation")
 >
 > The first time you use Galaxy, there will be no files in your history panel.
 {: .details}
