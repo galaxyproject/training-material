@@ -57,6 +57,7 @@ In this tutorial, you will learn the benefits of making clinical datasets FAIR (
 >
 > * consider in general terms
 > * consider more specifically
+>   
 {: .hands_on}
 
 In general, the most common clinical data used in research are clinical reports (from trials and observational studies) and individual patient data.  In this section, we will explore some of the different types of clinical data.
@@ -69,7 +70,7 @@ In GEO and ArrayExpress the elements that we are describing as clinical data are
 > 1. Click on the link below for ArrayExpress and open the section for Source Characteristics  
 >    [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress/studies/E-MTAB-12829 )
 > 
-> 2. Take a look at the Experimental Factors.  Notice that there are very few characteristics available for this dataset
+> 2. Take a look at the Experimental Factors.  Notice that there are very few characteristics available for this dataset.
 >
 > 3. Click on the link below for GEO  
 >    [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE65391)
@@ -77,10 +78,9 @@ In GEO and ArrayExpress the elements that we are describing as clinical data are
 > 4. Under the Samples section, click on one of the healthy controls.  Here you will see that this dataset has many characteristics.  Notice, however
 >    that there is not much information gathered on the healthy controls
 >
-> 5. Click on one of the samples with systemic lupus erythematosus (SLE).  Notice here that there is more data collected on SLE subjects
+> 5. Click on one of the samples with systemic lupus erythematosus (SLE).  Notice here that there is more data collected on SLE subjects.
 >
-> 6. Explore ArrayExpress and/or GEO for datasets within the domain(s) that you are familiar with.  Take note of the availability of characteristics data 
->    for the different datasets
+> 6. Explore ArrayExpress and/or GEO for datasets within the domain(s) that you are familiar with.  Take note of the availability of characteristic data for the different datasets
 >
 {: .hands_on}
 
