@@ -110,7 +110,7 @@ data = {
 }
 
 def titleize(t)
-  t.gsub(/-/, ' ').gsub(/\w+/, &:capitalize)
+  t.gsub("-", ' ').gsub(/\w+/, &:capitalize)
 end
 
 def format_news(news)
