@@ -83,7 +83,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
 >
 >    ```
->    https://zenodo.org/api/files/e5d1bd5c-60a0-42e4-8f0d-a2ebc863c5d9/drosophila_sample.zip
+>    https://zenodo.org/records/4567084/files/drosophila_sample.zip
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

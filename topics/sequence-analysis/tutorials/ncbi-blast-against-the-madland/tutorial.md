@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "NCBI BLAST+ against the MAdLand"
-zenodo_link: "https://doi.org/10.5281/zenodo.7524427"
+zenodo_link: "https://zenodo.org/records/7524427"
 questions:
   - "What is MAdLand DB?"
   - "How can we perform Blast analysis on Galaxy?"
@@ -48,10 +48,10 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import the file `query.faa` from [Zenodo](https://doi.org/10.5281/zenodo.7524427) 
+> 2. Import the file `query.faa` from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    https://zenodo.org/api/files/40445ead-6429-463c-bfa5-e1fb92095af8/query.faa
+>    https://zenodo.org/records/7524427/files/query.faa
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -98,14 +98,13 @@ Since MAdLandDB is the collection of protein sequences, You can perform {% tool 
 | 11 | evalue | Expectation value (E-value) |
 | 12 | bitscore | Bit score |
 
-The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast](https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html#similarity-searches-blast) tutorial.
+The fields are separated by tabs, and each row represents a single hit. For more details for BLAST analysis and output, we recommand you to follow the [Similarity-searches-blast]({% link topics/genome-annotation/tutorials/genome-annotation/tutorial.md %}#similarity-searches-blast) tutorial.
 
 
 > <details-title>Further Reading about BLAST Tools in Galaxy</details-title>
 >
-> See {% cite Cock2015 %}
-> {% cite Cock2013 %}
-> 
+> See {% cite Cock2015 %} and {% cite Cock2013 %}
+>
 {: .details}
 
 ## More Similarity Search Tools on Galaxy
