@@ -78,9 +78,9 @@ Here we will demonstrate analysing {CRISPR} screen using data from {% cite Fujih
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      T0-Control https://zenodo.org/record/5750854/files/T0-Control.fastq.gz
->      T8-APR-246 https://zenodo.org/record/5750854/files/T8-APR-246.fastq.gz
->      T8-Vehicle https://zenodo.org/record/5750854/files/T8-Vehicle.fastq.gz
+>      T0-Control https://zenodo.org/records/5750854/files/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/records/5750854/files/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/records/5750854/files/T8-Vehicle.fastq.gz
 >      ```
 >
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
@@ -118,7 +118,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 >
 > 1. Import the adapters file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/record/5750854/files/adapter_list.tsv
+>    https://zenodo.org/records/5750854/files/adapter_list.tsv
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -246,7 +246,7 @@ To count how many guides we have for each gene, we need a library file that tell
 > <hands-on-title>Count guides per gene</hands-on-title>
 > 1. Import the sgRNA library file
 >    ```
->    https://zenodo.org/record/5750854/files/brunello.tsv
+>    https://zenodo.org/records/5750854/files/brunello.tsv
 >    ```
 >
 > 2. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
@@ -259,9 +259,9 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 3. We have been using 1% of reads from the samples. Import the MAGeCK count files (sgRNA counts, counts summary and plots pdf) for the full dataset so you can see what results for a real dataset looks like.
 >    ```
->    https://zenodo.org/record/5750854/files/kenji_mageck_sgrna_counts.tsv
->    https://zenodo.org/record/5750854/files/kenji_mageck_count_summary.tsv
->    https://zenodo.org/record/5750854/files/kenji_mageck_count_report.pdf
+>    https://zenodo.org/records/5750854/files/kenji_mageck_sgrna_counts.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_summary.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_report.pdf
 >    ```
 >
 {: .hands_on}

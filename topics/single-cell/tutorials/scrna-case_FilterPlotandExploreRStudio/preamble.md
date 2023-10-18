@@ -55,17 +55,8 @@ This also alleviates the necessity to convert the AnnData object into a Seurat o
 >
 {: .hands_on}
 
-# Important tips for easier analysis
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
-
-> <comment-title></comment-title>
-> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
-{: .comment}
-
 # Open RStudio in Galaxy
-You now should have imported the matrix.mtx, genes.tsv, barcodes.tsv, and exp_design.tsv files into your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
+You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and `exp_design.tsv` files into your Galaxy history. For the rest of the workflow, let's move onto RStudio and get coding!
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
