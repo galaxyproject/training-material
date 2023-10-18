@@ -11,6 +11,9 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 5 - Train-the-Trainer and mentoring programme
 
+cover-image: ./shared/images/Gallantries_logo.png
+cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
+
 priority: 5
 draft: true
 

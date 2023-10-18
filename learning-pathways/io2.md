@@ -12,6 +12,9 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 2 - Large-scale data analysis, and introduction to visualisation and data modelling
 
+cover-image: ./shared/images/Gallantries_logo.png
+cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
+
 priority: 5
 draft: true
 

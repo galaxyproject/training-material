@@ -1,4 +1,3 @@
-
 ---
 layout: learning-pathway
 tags: [beginner]
@@ -11,6 +10,9 @@ funding:
 - erasmusplus
 
 title: Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery
+
+cover-image: ./shared/images/Gallantries_logo.png
+cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
 
 priority: 5
 draft: true
