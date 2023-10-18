@@ -95,8 +95,8 @@ module Gtn
 
       # Discover learning pathways
       lps = Dir.glob('learning-pathways/*.md')
-      lps.reject!{|t| t =~ /index.md/}
-      lps.reject!{|t| t =~ /pathway-example.md/}
+      lps.reject! { |t| t =~ /index.md/ }
+      lps.reject! { |t| t =~ /pathway-example.md/ }
 
       lps.each do |tutorial|
         html_path = "/#{tutorial.gsub(/md$/, 'html')}"
