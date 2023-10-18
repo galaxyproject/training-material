@@ -338,150 +338,106 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Masking repeats with RepeatMasker",
-      "zenodo_link": "https://zenodo.org/record/7085837",
-      "tags": [
-        "eukaryote"
-      ],
+      "title": "From small to large-scale genome comparison",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4485547",
       "questions": [
-        "How to mask repeats in a genome?",
-        "What is the difference between hard and soft-masking?"
+        "How can we run pairwise genome comparisons using Galaxy?",
+        "How can we run massive chromosome comparisons in Galaxy?",
+        "How can we quickly visualize genome comparisons in Galaxy?"
       ],
       "objectives": [
-        "Use Red and RepeatMasker to soft-mask a newly assembled genome"
+        "Learn the basics of pairwise sequence comparison",
+        "Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels",
+        "Learn how to post-process your sequence comparisons"
       ],
-      "time_estimation": "1H",
-      "level": "Introductory",
+      "time_estimation": "2H",
       "key_points": [
-        "RepeatMasker can be used to soft-mask a genome",
-        "It is an essential first step before running structural annotation pipelines"
+        "We learnt that sequence comparison is a demanding problem and that there are several ways to approach it",
+        "We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively",
+        "We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc."
       ],
-      "contributions": {
-        "authorship": [
-          "abretaud",
-          "alexcorm",
-          "lleroi",
-          "r1corre",
-          "stephanierobin",
-          "jkreplak"
-        ],
-        "funding": [
-          "erasmusplus"
-        ]
-      },
-      "abbreviations": {
-        "SINEs": "Short Interspersed Nuclear Elements",
-        "LINEs": "Long Interspersed Nuclear Elements"
-      },
-      "follow_up_training": [
+      "requirements": [
         {
           "type": "internal",
-          "topic_name": "genome-annotation",
+          "topic_name": "introduction",
           "tutorials": [
-            "funannotate"
+            "galaxy-intro-101"
           ]
         }
       ],
-      "subtopic": "eukaryote",
-      "priority": 1,
-      "short_id": "T00178",
-      "url": "/topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
+      "contributors": [
+        {
+          "name": "Esteban Perez-Wohlfeil",
+          "email": "estebanpw@uma.es",
+          "joined": "2020-11",
+          "elixir_node": "es",
+          "id": "estebanpw",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/estebanpw.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/"
+        }
+      ],
+      "short_id": "T00176",
+      "url": "/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
       "topic_name": "genome-annotation",
-      "tutorial_name": "repeatmasker",
-      "dir": "topics/genome-annotation/tutorials/repeatmasker",
-      "id": "genome-annotation/repeatmasker",
+      "tutorial_name": "hpc-for-lsgc",
+      "dir": "topics/genome-annotation/tutorials/hpc-for-lsgc",
+      "id": "genome-annotation/hpc-for-lsgc",
       "video_library": {
-        "tutorial": {
-          "description": "The aim of repeat masking is to identify the location of all repeated\nelements along a genome sequence. Other tools (like annotation pipelines) can\nthen take this information into account when producing their results.\n",
-          "materials": [
-            {
-              "link": "topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "genome-annotation"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "7tYEDmAvHD4",
-              "speakers": [
-                "abretaud"
-              ],
-              "length": "18M",
-              "captions": [
-                "abretaud"
-              ],
-              "galaxy_version": "23.01",
-              "date": "2023-05-10"
-            },
-            {
-              "captions": [
-                "abretaud"
-              ],
-              "date": "2022-03-03",
-              "galaxy_version": "21.09",
-              "length": "16M",
-              "link": "AYAvjwm4cnM",
-              "speakers": [
-                "abretaud"
-              ]
-            }
-          ],
-          "gtn_id": "genome-annotation/repeatmasker",
-          "title": "Masking repeats with RepeatMasker",
-          "captioned": true
-        },
+        "tutorial": null,
         "slides": null,
         "demo": null,
         "both": null,
         "session": null
       },
       "hands_on": true,
-      "slides": false,
+      "slides": true,
       "workflows": [
         {
-          "workflow": "RepeatMasker.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/workflows/RepeatMasker.ga",
-          "path": "topics/genome-annotation/tutorials/repeatmasker/workflows/RepeatMasker.ga",
-          "wfid": "genome-annotation-repeatmasker",
-          "wfname": "repeatmasker",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-repeatmasker/versions/repeatmasker",
-          "license": "GPL-3.0-or-later",
+          "workflow": "CHROMEISTER_chromosome_comparison.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
+          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
+          "wfid": "genome-annotation-hpc-for-lsgc",
+          "wfname": "chromeister_chromosome_comparison",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/chromeister_chromosome_comparison",
+          "license": null,
           "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0003-0914-2470",
-              "name": "Anthony Bretaudeau"
-            }
+
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "GECKO_pairwise_comparison.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
+          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
+          "wfid": "genome-annotation-hpc-for-lsgc",
+          "wfname": "gecko_pairwise_comparison",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/gecko_pairwise_comparison",
+          "license": null,
+          "creators": [
+
           ],
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1"
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"
       ],
       "supported_servers": {
         "exact": [
           {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
             "usegalaxy": "true"
           },
           {
@@ -491,7 +447,11 @@
           }
         ],
         "inexact": [
-
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          }
         ]
       },
       "topic_name_human": "Genome Annotation",
@@ -501,36 +461,36 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "repeat_masker",
+            "name": "text_processing",
             "owner": "bgruening",
-            "revisions": "ba6d2c32f797",
+            "revisions": "d698c222f354",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "repeatmodeler",
-            "owner": "csbl",
-            "revisions": "8661b2607b7e",
+            "name": "clustalw",
+            "owner": "devteam",
+            "revisions": "d6694932c5e0",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "bedtools",
+            "name": "chromeister",
             "owner": "iuc",
-            "revisions": "a1a923cd89e8",
+            "revisions": "e483be1014b6",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "red",
+            "name": "gecko",
             "owner": "iuc",
-            "revisions": "18a46265455b",
+            "revisions": "5efbd15675ca",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: repeat_masker\n  owner: bgruening\n  revisions: ba6d2c32f797\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: repeatmodeler\n  owner: csbl\n  revisions: 8661b2607b7e\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: a1a923cd89e8\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: red\n  owner: iuc\n  revisions: 18a46265455b\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clustalw\n  owner: devteam\n  revisions: d6694932c5e0\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chromeister\n  owner: iuc\n  revisions: e483be1014b6\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gecko\n  owner: iuc\n  revisions: 5efbd15675ca\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -543,92 +503,9 @@
         "video": false
       },
       "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inrae.fr",
-          "twitter": "abretau",
-          "matrix": "abretaud:matrix.org",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 48.11,
-            "lon": -1.64
-          },
-          "fediverse": "https://genomic.social/@abretaud",
-          "fediverse_flavor": "mastodon",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
-        },
-        {
-          "name": "Alexandre Cormier",
-          "email": "alexandre.cormier@ifremer.fr",
-          "twitter": "allanssx",
-          "orcid": "0000-0002-7775-8413",
-          "joined": "2021-11",
-          "id": "alexcorm",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/"
-        },
-        {
-          "name": "Laura Leroi",
-          "email": "laura.leroi@ifremer.fr",
-          "orcid": "0000-0003-3748-4179",
-          "joined": "2021-11",
-          "id": "lleroi",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/"
-        },
-        {
-          "name": "Erwan Corre",
-          "email": "erwan.corre@sb-roscoff.fr",
-          "twitter": "r1corre",
-          "orcid": "0000-0001-6354-2278",
-          "joined": "2019-04",
-          "id": "r1corre",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/"
-        },
-        {
-          "name": "Stéphanie Robin",
-          "email": "stephanie.robin@inrae.fr",
-          "twitter": "robinstphanie1",
-          "orcid": "0000-0001-7379-9173",
-          "joined": "2021-11",
-          "id": "stephanierobin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/"
-        },
-        {
-          "name": "Jonathan Kreplak",
-          "email": "jonathan.kreplak@inrae.fr",
-          "joined": "2020-09",
-          "orcid": "0000-0001-5563-1932",
-          "id": "jkreplak",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/jkreplak.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jkreplak/"
-        },
-        {
-          "name": "Erasmus+ Programme",
-          "joined": "2020-09",
-          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
-          "github": false,
-          "funder": true,
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_system": "erasmusplus",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
-          "id": "erasmusplus",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
-        }
-      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json"
       }
     },
     {
@@ -953,106 +830,150 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "From small to large-scale genome comparison",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4485547",
+      "title": "Masking repeats with RepeatMasker",
+      "zenodo_link": "https://zenodo.org/record/7085837",
+      "tags": [
+        "eukaryote"
+      ],
       "questions": [
-        "How can we run pairwise genome comparisons using Galaxy?",
-        "How can we run massive chromosome comparisons in Galaxy?",
-        "How can we quickly visualize genome comparisons in Galaxy?"
+        "How to mask repeats in a genome?",
+        "What is the difference between hard and soft-masking?"
       ],
       "objectives": [
-        "Learn the basics of pairwise sequence comparison",
-        "Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels",
-        "Learn how to post-process your sequence comparisons"
+        "Use Red and RepeatMasker to soft-mask a newly assembled genome"
       ],
-      "time_estimation": "2H",
+      "time_estimation": "1H",
+      "level": "Introductory",
       "key_points": [
-        "We learnt that sequence comparison is a demanding problem and that there are several ways to approach it",
-        "We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively",
-        "We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc."
+        "RepeatMasker can be used to soft-mask a genome",
+        "It is an essential first step before running structural annotation pipelines"
       ],
-      "requirements": [
+      "contributions": {
+        "authorship": [
+          "abretaud",
+          "alexcorm",
+          "lleroi",
+          "r1corre",
+          "stephanierobin",
+          "jkreplak"
+        ],
+        "funding": [
+          "erasmusplus"
+        ]
+      },
+      "abbreviations": {
+        "SINEs": "Short Interspersed Nuclear Elements",
+        "LINEs": "Long Interspersed Nuclear Elements"
+      },
+      "follow_up_training": [
         {
           "type": "internal",
-          "topic_name": "introduction",
+          "topic_name": "genome-annotation",
           "tutorials": [
-            "galaxy-intro-101"
+            "funannotate"
           ]
         }
       ],
-      "contributors": [
-        {
-          "name": "Esteban Perez-Wohlfeil",
-          "email": "estebanpw@uma.es",
-          "joined": "2020-11",
-          "elixir_node": "es",
-          "id": "estebanpw",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/estebanpw.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/estebanpw/"
-        }
-      ],
-      "short_id": "T00176",
-      "url": "/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
+      "subtopic": "eukaryote",
+      "priority": 1,
+      "short_id": "T00178",
+      "url": "/topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
       "topic_name": "genome-annotation",
-      "tutorial_name": "hpc-for-lsgc",
-      "dir": "topics/genome-annotation/tutorials/hpc-for-lsgc",
-      "id": "genome-annotation/hpc-for-lsgc",
+      "tutorial_name": "repeatmasker",
+      "dir": "topics/genome-annotation/tutorials/repeatmasker",
+      "id": "genome-annotation/repeatmasker",
       "video_library": {
-        "tutorial": null,
+        "tutorial": {
+          "description": "The aim of repeat masking is to identify the location of all repeated\nelements along a genome sequence. Other tools (like annotation pipelines) can\nthen take this information into account when producing their results.\n",
+          "materials": [
+            {
+              "link": "topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "genome-annotation"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "link": "7tYEDmAvHD4",
+              "speakers": [
+                "abretaud"
+              ],
+              "length": "18M",
+              "captions": [
+                "abretaud"
+              ],
+              "galaxy_version": "23.01",
+              "date": "2023-05-10"
+            },
+            {
+              "captions": [
+                "abretaud"
+              ],
+              "date": "2022-03-03",
+              "galaxy_version": "21.09",
+              "length": "16M",
+              "link": "AYAvjwm4cnM",
+              "speakers": [
+                "abretaud"
+              ]
+            }
+          ],
+          "gtn_id": "genome-annotation/repeatmasker",
+          "title": "Masking repeats with RepeatMasker",
+          "captioned": true
+        },
         "slides": null,
         "demo": null,
         "both": null,
         "session": null
       },
       "hands_on": true,
-      "slides": true,
+      "slides": false,
       "workflows": [
         {
-          "workflow": "CHROMEISTER_chromosome_comparison.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
-          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/CHROMEISTER_chromosome_comparison.ga",
-          "wfid": "genome-annotation-hpc-for-lsgc",
-          "wfname": "chromeister_chromosome_comparison",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/chromeister_chromosome_comparison",
-          "license": null,
+          "workflow": "RepeatMasker.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/workflows/RepeatMasker.ga",
+          "path": "topics/genome-annotation/tutorials/repeatmasker/workflows/RepeatMasker.ga",
+          "wfid": "genome-annotation-repeatmasker",
+          "wfname": "repeatmasker",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-repeatmasker/versions/repeatmasker",
+          "license": "GPL-3.0-or-later",
           "creators": [
-
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "GECKO_pairwise_comparison.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
-          "path": "topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/GECKO_pairwise_comparison.ga",
-          "wfid": "genome-annotation-hpc-for-lsgc",
-          "wfname": "gecko_pairwise_comparison",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-hpc-for-lsgc/versions/gecko_pairwise_comparison",
-          "license": null,
-          "creators": [
-
+            {
+              "class": "Person",
+              "identifier": "https://orcid.org/0000-0003-0914-2470",
+              "name": "Anthony Bretaudeau"
+            }
           ],
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"
+        "toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/csbl/repeatmodeler/repeatmodeler/2.0.4+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1"
       ],
       "supported_servers": {
         "exact": [
           {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
             "usegalaxy": "true"
           },
           {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
             "usegalaxy": "true"
           },
           {
@@ -1062,11 +983,7 @@
           }
         ],
         "inexact": [
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          }
+
         ]
       },
       "topic_name_human": "Genome Annotation",
@@ -1076,36 +993,36 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "text_processing",
+            "name": "repeat_masker",
             "owner": "bgruening",
-            "revisions": "d698c222f354",
+            "revisions": "ba6d2c32f797",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "clustalw",
-            "owner": "devteam",
-            "revisions": "d6694932c5e0",
+            "name": "repeatmodeler",
+            "owner": "csbl",
+            "revisions": "8661b2607b7e",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "chromeister",
+            "name": "bedtools",
             "owner": "iuc",
-            "revisions": "e483be1014b6",
+            "revisions": "a1a923cd89e8",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "gecko",
+            "name": "red",
             "owner": "iuc",
-            "revisions": "5efbd15675ca",
+            "revisions": "18a46265455b",
             "tool_panel_section_label": "Genome Annotation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: clustalw\n  owner: devteam\n  revisions: d6694932c5e0\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: chromeister\n  owner: iuc\n  revisions: e483be1014b6\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gecko\n  owner: iuc\n  revisions: 5efbd15675ca\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: repeat_masker\n  owner: bgruening\n  revisions: ba6d2c32f797\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: repeatmodeler\n  owner: csbl\n  revisions: 8661b2607b7e\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bedtools\n  owner: iuc\n  revisions: a1a923cd89e8\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: red\n  owner: iuc\n  revisions: 18a46265455b\n  tool_panel_section_label: Genome Annotation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -1118,9 +1035,92 @@
         "video": false
       },
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inrae.fr",
+          "twitter": "abretau",
+          "matrix": "abretaud:matrix.org",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 48.11,
+            "lon": -1.64
+          },
+          "fediverse": "https://genomic.social/@abretaud",
+          "fediverse_flavor": "mastodon",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
+        },
+        {
+          "name": "Alexandre Cormier",
+          "email": "alexandre.cormier@ifremer.fr",
+          "twitter": "allanssx",
+          "orcid": "0000-0002-7775-8413",
+          "joined": "2021-11",
+          "id": "alexcorm",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/"
+        },
+        {
+          "name": "Laura Leroi",
+          "email": "laura.leroi@ifremer.fr",
+          "orcid": "0000-0003-3748-4179",
+          "joined": "2021-11",
+          "id": "lleroi",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/"
+        },
+        {
+          "name": "Erwan Corre",
+          "email": "erwan.corre@sb-roscoff.fr",
+          "twitter": "r1corre",
+          "orcid": "0000-0001-6354-2278",
+          "joined": "2019-04",
+          "id": "r1corre",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/"
+        },
+        {
+          "name": "Stéphanie Robin",
+          "email": "stephanie.robin@inrae.fr",
+          "twitter": "robinstphanie1",
+          "orcid": "0000-0001-7379-9173",
+          "joined": "2021-11",
+          "id": "stephanierobin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/"
+        },
+        {
+          "name": "Jonathan Kreplak",
+          "email": "jonathan.kreplak@inrae.fr",
+          "joined": "2020-09",
+          "orcid": "0000-0001-5563-1932",
+          "id": "jkreplak",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/jkreplak.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jkreplak/"
+        },
+        {
+          "name": "Erasmus+ Programme",
+          "joined": "2020-09",
+          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
+          "github": false,
+          "funder": true,
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_system": "erasmusplus",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
+          "id": "erasmusplus",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
+        }
+      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/genome-annotation/tutorials/repeatmasker/tutorial.json"
       }
     },
     {

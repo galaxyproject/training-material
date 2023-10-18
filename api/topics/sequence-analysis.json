@@ -255,6 +255,1814 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Quality Control",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.61771",
+      "questions": [
+        "How to perform quality control of NGS raw data?",
+        "What are the quality parameters to check for a dataset?",
+        "How to improve the quality of a dataset?"
+      ],
+      "objectives": [
+        "Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC",
+        "Assess long reads FASTQ quality using Nanoplot and PycoQC",
+        "Perform quality correction with Cutadapt (short reads)",
+        "Summarise quality metrics MultiQC",
+        "Process single-end and paired-end data"
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "mapping"
+          ]
+        }
+      ],
+      "time_estimation": "1H30M",
+      "level": "Introductory",
+      "key_points": [
+        "Perform quality control on every dataset before running any other bioinformatics analysis",
+        "Assess the quality metrics and improve quality if necessary",
+        "Check the impact of the quality control",
+        "Different tools are available to provide additional quality metrics",
+        "For paired-end reads analyze the forward and reverse reads together"
+      ],
+      "contributors": [
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        },
+        {
+          "name": "Alexandre Cormier",
+          "email": "alexandre.cormier@ifremer.fr",
+          "twitter": "allanssx",
+          "orcid": "0000-0002-7775-8413",
+          "joined": "2021-11",
+          "id": "alexcorm",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/"
+        },
+        {
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inrae.fr",
+          "twitter": "abretau",
+          "matrix": "abretaud:matrix.org",
+          "orcid": "0000-0003-0914-2470",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 48.11,
+            "lon": -1.64
+          },
+          "fediverse": "https://genomic.social/@abretaud",
+          "fediverse_flavor": "mastodon",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
+        },
+        {
+          "name": "Laura Leroi",
+          "email": "laura.leroi@ifremer.fr",
+          "orcid": "0000-0003-3748-4179",
+          "joined": "2021-11",
+          "id": "lleroi",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/"
+        },
+        {
+          "name": "Erwan Corre",
+          "email": "erwan.corre@sb-roscoff.fr",
+          "twitter": "r1corre",
+          "orcid": "0000-0001-6354-2278",
+          "joined": "2019-04",
+          "id": "r1corre",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/"
+        },
+        {
+          "name": "Stéphanie Robin",
+          "email": "stephanie.robin@inrae.fr",
+          "twitter": "robinstphanie1",
+          "orcid": "0000-0001-7379-9173",
+          "joined": "2021-11",
+          "id": "stephanierobin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/"
+        },
+        {
+          "name": "Erasmus+ Programme",
+          "joined": "2020-09",
+          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
+          "github": false,
+          "funder": true,
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
+          "funding_id": "2020-1-NL01-KA203-064717",
+          "funding_system": "erasmusplus",
+          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
+          "id": "erasmusplus",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
+        },
+        {
+          "name": "Cameron Hyde",
+          "email": "c.hyde@qcif.edu.au",
+          "orcid": "0000-0002-5913-9766",
+          "joined": "2022-02",
+          "elixir_node": "au",
+          "id": "neoformit",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/neoformit.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/"
+        }
+      ],
+      "short_id": "T00239",
+      "url": "/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "topic_name": "sequence-analysis",
+      "tutorial_name": "quality-control",
+      "dir": "topics/sequence-analysis/tutorials/quality-control",
+      "id": "sequence-analysis/quality-control",
+      "video_library": {
+        "tutorial": {
+          "description": "In this tutorial you will get some hand-on experience performing a quality assessment on sequencing data.",
+          "materials": [
+            {
+              "link": "topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "sequence-analysis"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "link": "coaMGvZazoc",
+              "length": "50M",
+              "speakers": [
+                "LonsBio"
+              ],
+              "captions": [
+                "LonsBio"
+              ],
+              "date": "2023-05-19"
+            },
+            {
+              "captions": [
+                "bebatut",
+                "nagoue",
+                "shiltemann"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "1H10M",
+              "link": "QJRlX2hWDKM",
+              "speakers": [
+                "heylf"
+              ]
+            }
+          ],
+          "gtn_id": "sequence-analysis/quality-control",
+          "title": "Quality Control",
+          "captioned": true
+        },
+        "slides": {
+          "description": "This lecture goes over the concepts involved in assessing the quality of your sequencing data.",
+          "materials": [
+            {
+              "link": "topics/sequence-analysis/tutorials/quality-control/slides.html",
+              "title": "Introduction to Quality Control",
+              "type": "Slides"
+            }
+          ],
+          "tags": [
+            "sequence-analysis"
+          ],
+          "type": "Lecture",
+          "versions": [
+            {
+              "captions": [
+                "ennovytje",
+                "nagoue",
+                "hexylena"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "40M",
+              "link": "BWonTPS4zB8",
+              "speakers": [
+                "heylf"
+              ]
+            }
+          ],
+          "gtn_id": "sequence-analysis/quality-control",
+          "title": "Quality Control",
+          "captioned": true
+        },
+        "demo": null,
+        "both": null,
+        "session": {
+          "title": "Quality Control",
+          "description": "In this sesssion, we will walk you through the basics of quality checking your sequencing data. This session consists of a lecture followed by a hands-on tutorial.",
+          "videos": [
+            "sequence-analysis/quality-control/slides",
+            "sequence-analysis/quality-control/tutorial"
+          ]
+        }
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "quality_control.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
+          "path": "topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
+          "wfid": "sequence-analysis-quality-control",
+          "wfname": "quality_control",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-quality-control/versions/quality_control",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": {
+            "eu": {
+              "summary": {
+                "num_errors": 0,
+                "num_failures": 0,
+                "num_skips": 0,
+                "num_tests": 1
+              },
+              "tests": [
+                {
+                  "data": {
+                    "end_datetime": "2023-05-19T17:08:59.654933",
+                    "inputs": "---\nreads_1:\n  class: File\n  location: https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq\nreads_2:\n  class: File\n  location: https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq\n",
+                    "invocation_details": {
+                      "details": {
+                        "error_message": "",
+                        "history_id": "2f1f9fa04aab9b59",
+                        "history_state": "ok",
+                        "invocation_id": "1375254bd7688d41",
+                        "invocation_state": "scheduled",
+                        "workflow_id": "8d2820cd545d11e7"
+                      },
+                      "steps": {
+                        "0. reads_1": {
+                          "action": null,
+                          "id": "09aab9ccfa6260cb",
+                          "job_id": null,
+                          "jobs": [
+
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 0,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "output": {
+                              "id": "4838ba20a6d86765ff25d30589db09fe",
+                              "src": "hda",
+                              "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T14:59:03.317312",
+                          "workflow_step_id": "41e0f8150fe3cff2",
+                          "workflow_step_label": "reads_1",
+                          "workflow_step_uuid": "3ba96dd1-e62d-4c22-b5b9-92a03e9b0c46"
+                        },
+                        "1. reads_2": {
+                          "action": null,
+                          "id": "53088303de376bb8",
+                          "job_id": null,
+                          "jobs": [
+
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 1,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "output": {
+                              "id": "4838ba20a6d867656914ebcc68e736a5",
+                              "src": "hda",
+                              "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T14:59:03.317318",
+                          "workflow_step_id": "ada35db989250a9c",
+                          "workflow_step_label": "reads_2",
+                          "workflow_step_uuid": "11e6b420-32a1-431d-8eb4-b707a1e9b2df"
+                        },
+                        "2. Unnamed step": {
+                          "action": null,
+                          "id": "d94b4b21ddc3e0c3",
+                          "job_id": "11ac94870d0bb33a2a3328a31b8b1d2e",
+                          "jobs": [
+                            {
+                              "command_line": "ln -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq' && mkdir -p '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files' && fastqc --outdir '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'    --quiet --extract  --kmers 7 -f 'fastq' 'GSM461178_untreat_paired_subset_1_fastq'  && cp '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'/*/fastqc_data.txt output.txt && cp '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'/*\\.html output.html",
+                              "command_version": null,
+                              "create_time": "2023-05-19T14:59:03.313089",
+                              "dependencies": [
+                                {
+                                  "cacheable": false,
+                                  "dependency_resolver": {
+                                    "auto_init": true,
+                                    "auto_install": false,
+                                    "can_uninstall_dependencies": true,
+                                    "ensure_channels": "conda-forge,bioconda",
+                                    "model_class": "CondaDependencyResolver",
+                                    "prefix": "/usr/local/tools/_conda",
+                                    "read_only": false,
+                                    "resolver_type": "conda",
+                                    "resolves_simple_dependencies": true,
+                                    "use_local": false,
+                                    "versionless": false
+                                  },
+                                  "dependency_type": "conda",
+                                  "environment_path": "/usr/local/tools/_conda/envs/__fastqc@0.11.8",
+                                  "exact": true,
+                                  "model_class": "MergedCondaDependency",
+                                  "name": "fastqc",
+                                  "version": "0.11.8"
+                                }
+                              ],
+                              "exit_code": 0,
+                              "external_id": "43535387",
+                              "galaxy_version": "23.0",
+                              "history_id": "2f1f9fa04aab9b59",
+                              "id": "11ac94870d0bb33a2a3328a31b8b1d2e",
+                              "inputs": {
+                                "input_file": {
+                                  "id": "4838ba20a6d86765ff25d30589db09fe",
+                                  "src": "hda",
+                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
+                                }
+                              },
+                              "job_messages": [
+
+                              ],
+                              "job_metrics": [
+                                {
+                                  "name": "hostname",
+                                  "plugin": "hostname",
+                                  "raw_value": "vgcnbwc-worker-c125m425-1589.novalocal",
+                                  "title": "hostname",
+                                  "value": "vgcnbwc-worker-c125m425-1589.novalocal"
+                                },
+                                {
+                                  "name": "galaxy_slots",
+                                  "plugin": "core",
+                                  "raw_value": "8.0000000",
+                                  "title": "Cores Allocated",
+                                  "value": "8"
+                                },
+                                {
+                                  "name": "galaxy_memory_mb",
+                                  "plugin": "core",
+                                  "raw_value": "31129.0000000",
+                                  "title": "Memory Allocated (MB)",
+                                  "value": "31129"
+                                },
+                                {
+                                  "name": "start_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508692.0000000",
+                                  "title": "Job Start Time",
+                                  "value": "2023-05-19 17:04:52"
+                                },
+                                {
+                                  "name": "end_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508707.0000000",
+                                  "title": "Job End Time",
+                                  "value": "2023-05-19 17:05:07"
+                                },
+                                {
+                                  "name": "runtime_seconds",
+                                  "plugin": "core",
+                                  "raw_value": "15.0000000",
+                                  "title": "Job Runtime (Wall Clock)",
+                                  "value": "15 seconds"
+                                },
+                                {
+                                  "name": "cpuacct.usage",
+                                  "plugin": "cgroup",
+                                  "raw_value": "12194724984.0000000",
+                                  "title": "CPU Time",
+                                  "value": "12.194724984 seconds"
+                                },
+                                {
+                                  "name": "memory.failcnt",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Failed to allocate memory count",
+                                  "value": 0.0
+                                },
+                                {
+                                  "name": "memory.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "32749125632.0000000",
+                                  "title": "Memory limit on cgroup (MEM)",
+                                  "value": "30.5 GB"
+                                },
+                                {
+                                  "name": "memory.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "357576704.0000000",
+                                  "title": "Max memory usage (MEM)",
+                                  "value": "341.0 MB"
+                                },
+                                {
+                                  "name": "memory.memsw.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "9223372036854771712.0000000",
+                                  "title": "Memory limit on cgroup (MEM+SWP)",
+                                  "value": "8.0 EB"
+                                },
+                                {
+                                  "name": "memory.memsw.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "357576704.0000000",
+                                  "title": "Max memory usage (MEM+SWP)",
+                                  "value": "341.0 MB"
+                                },
+                                {
+                                  "name": "memory.oom_control.oom_kill_disable",
+                                  "plugin": "cgroup",
+                                  "raw_value": "1.0000000",
+                                  "title": "OOM Control enabled",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.oom_control.under_oom",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Was OOM Killer active?",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.soft_limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Memory softlimit on cgroup",
+                                  "value": "0 bytes"
+                                }
+                              ],
+                              "job_stderr": "",
+                              "job_stdout": "",
+                              "model_class": "Job",
+                              "output_collections": {
+                              },
+                              "outputs": {
+                                "html_file": {
+                                  "id": "4838ba20a6d867651957556f6b54741b",
+                                  "src": "hda",
+                                  "uuid": "a0107efb-9924-481b-99eb-5e7c74c4c697"
+                                },
+                                "text_file": {
+                                  "id": "4838ba20a6d86765967c147adffa4ae2",
+                                  "src": "hda",
+                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
+                                }
+                              },
+                              "params": {
+                                "__input_ext": "\"fastqsanger\"",
+                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
+                                "adapters": null,
+                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                "contaminants": null,
+                                "dbkey": "\"?\"",
+                                "kmers": "\"7\"",
+                                "limits": null,
+                                "min_length": null,
+                                "nogroup": "false"
+                              },
+                              "state": "ok",
+                              "stderr": "",
+                              "stdout": "",
+                              "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+                              "tool_stderr": "",
+                              "tool_stdout": "",
+                              "traceback": null,
+                              "update_time": "2023-05-19T15:05:09.851510",
+                              "user_email": "hxr@informatik.uni-freiburg.de"
+                            }
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 2,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "html_file": {
+                              "id": "4838ba20a6d867651957556f6b54741b",
+                              "src": "hda",
+                              "uuid": "a0107efb-9924-481b-99eb-5e7c74c4c697"
+                            },
+                            "text_file": {
+                              "id": "4838ba20a6d86765967c147adffa4ae2",
+                              "src": "hda",
+                              "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T15:05:09.811263",
+                          "workflow_step_id": "4b6834f9ae6537d8",
+                          "workflow_step_label": null,
+                          "workflow_step_uuid": "026332e1-70ba-4705-b75e-d228fafacc92"
+                        },
+                        "3. Unnamed step": {
+                          "action": null,
+                          "id": "c5c312487856832c",
+                          "job_id": "11ac94870d0bb33a14ad54e496e129b6",
+                          "jobs": [
+                            {
+                              "command_line": "ln -f -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq.fq' &&    cutadapt  -j ${GALAXY_SLOTS:-1}          --output='out1.fq'  --error-rate=0.1 --times=1 --overlap=3         --minimum-length=20   --quality-cutoff=20   'GSM461178_untreat_paired_subset_1_fastq.fq'  > report.txt",
+                              "command_version": "1.16",
+                              "create_time": "2023-05-19T14:59:03.399654",
+                              "dependencies": [
+
+                              ],
+                              "exit_code": 0,
+                              "external_id": "43535389",
+                              "galaxy_version": "23.0",
+                              "history_id": "2f1f9fa04aab9b59",
+                              "id": "11ac94870d0bb33a14ad54e496e129b6",
+                              "inputs": {
+                                "input_1": {
+                                  "id": "4838ba20a6d86765ff25d30589db09fe",
+                                  "src": "hda",
+                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
+                                }
+                              },
+                              "job_messages": [
+
+                              ],
+                              "job_metrics": [
+                                {
+                                  "name": "hostname",
+                                  "plugin": "hostname",
+                                  "raw_value": "vgcnbwc-worker-c125m425-6547.novalocal",
+                                  "title": "hostname",
+                                  "value": "vgcnbwc-worker-c125m425-6547.novalocal"
+                                },
+                                {
+                                  "name": "galaxy_slots",
+                                  "plugin": "core",
+                                  "raw_value": "5.0000000",
+                                  "title": "Cores Allocated",
+                                  "value": "5"
+                                },
+                                {
+                                  "name": "galaxy_memory_mb",
+                                  "plugin": "core",
+                                  "raw_value": "19456.0000000",
+                                  "title": "Memory Allocated (MB)",
+                                  "value": "19456"
+                                },
+                                {
+                                  "name": "start_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508382.0000000",
+                                  "title": "Job Start Time",
+                                  "value": "2023-05-19 16:59:42"
+                                },
+                                {
+                                  "name": "end_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508412.0000000",
+                                  "title": "Job End Time",
+                                  "value": "2023-05-19 17:00:12"
+                                },
+                                {
+                                  "name": "runtime_seconds",
+                                  "plugin": "core",
+                                  "raw_value": "30.0000000",
+                                  "title": "Job Runtime (Wall Clock)",
+                                  "value": "30 seconds"
+                                },
+                                {
+                                  "name": "cpuacct.usage",
+                                  "plugin": "cgroup",
+                                  "raw_value": "7314785524.0000000",
+                                  "title": "CPU Time",
+                                  "value": "7.314785524 seconds"
+                                },
+                                {
+                                  "name": "memory.failcnt",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Failed to allocate memory count",
+                                  "value": 0.0
+                                },
+                                {
+                                  "name": "memory.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "20401094656.0000000",
+                                  "title": "Memory limit on cgroup (MEM)",
+                                  "value": "19.0 GB"
+                                },
+                                {
+                                  "name": "memory.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "251256832.0000000",
+                                  "title": "Max memory usage (MEM)",
+                                  "value": "239.6 MB"
+                                },
+                                {
+                                  "name": "memory.memsw.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "9223372036854771712.0000000",
+                                  "title": "Memory limit on cgroup (MEM+SWP)",
+                                  "value": "8.0 EB"
+                                },
+                                {
+                                  "name": "memory.memsw.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "251256832.0000000",
+                                  "title": "Max memory usage (MEM+SWP)",
+                                  "value": "239.6 MB"
+                                },
+                                {
+                                  "name": "memory.oom_control.oom_kill_disable",
+                                  "plugin": "cgroup",
+                                  "raw_value": "1.0000000",
+                                  "title": "OOM Control enabled",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.oom_control.under_oom",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Was OOM Killer active?",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.soft_limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Memory softlimit on cgroup",
+                                  "value": "0 bytes"
+                                }
+                              ],
+                              "job_stderr": "",
+                              "job_stdout": "",
+                              "model_class": "Job",
+                              "output_collections": {
+                              },
+                              "outputs": {
+                                "out1": {
+                                  "id": "4838ba20a6d8676528f2966e438993df",
+                                  "src": "hda",
+                                  "uuid": "5096388f-425a-42a1-b99e-4f0174665371"
+                                },
+                                "report": {
+                                  "id": "4838ba20a6d8676504b9c2c33c839b66",
+                                  "src": "hda",
+                                  "uuid": "b9909c1d-09b1-47ec-9135-48915855c294"
+                                }
+                              },
+                              "params": {
+                                "__input_ext": "\"input\"",
+                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
+                                "adapter_options": "{\"count\": \"1\", \"error_rate\": \"0.1\", \"match_read_wildcards\": false, \"no_indels\": false, \"overlap\": \"3\"}",
+                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                "dbkey": "\"?\"",
+                                "filter_options": "{\"discard\": false, \"discard_untrimmed\": false, \"mask_adapter\": false, \"max\": \"0\", \"max_n\": null, \"min\": \"20\", \"no_trim\": false, \"pair_filter\": \"any\"}",
+                                "library": "{\"__current_case__\": 0, \"input_1\": {\"values\": [{\"id\": 137417465, \"src\": \"hda\"}]}, \"r1\": {\"adapters\": [], \"anywhere_adapters\": [], \"cut\": \"0\", \"front_adapters\": []}, \"type\": \"single\"}",
+                                "output_options": "{\"info_file\": false, \"report\": true, \"rest_file\": false, \"too_long_file\": false, \"too_short_file\": false, \"untrimmed_file\": false, \"wildcard_file\": false}",
+                                "read_mod_options": "{\"length\": \"0\", \"length_tag\": \"\", \"nextseq_trim\": \"0\", \"prefix\": \"\", \"quality_cutoff\": \"20\", \"strip_suffix\": \"\", \"suffix\": \"\", \"trim_n\": false}"
+                              },
+                              "state": "ok",
+                              "stderr": "",
+                              "stdout": "",
+                              "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
+                              "tool_stderr": "",
+                              "tool_stdout": "",
+                              "traceback": null,
+                              "update_time": "2023-05-19T15:00:22.417608",
+                              "user_email": "hxr@informatik.uni-freiburg.de"
+                            }
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 3,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "out1": {
+                              "id": "4838ba20a6d8676528f2966e438993df",
+                              "src": "hda",
+                              "uuid": "5096388f-425a-42a1-b99e-4f0174665371"
+                            },
+                            "report": {
+                              "id": "4838ba20a6d8676504b9c2c33c839b66",
+                              "src": "hda",
+                              "uuid": "b9909c1d-09b1-47ec-9135-48915855c294"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T15:00:21.982154",
+                          "workflow_step_id": "17cb0d9cde915ee1",
+                          "workflow_step_label": null,
+                          "workflow_step_uuid": "ddd70253-72b8-4a5e-8025-56a579b01975"
+                        },
+                        "4. Unnamed step": {
+                          "action": null,
+                          "id": "a380f2e9cccfcc65",
+                          "job_id": "11ac94870d0bb33aae939aa0a3d41382",
+                          "jobs": [
+                            {
+                              "command_line": "ln -s '/data/dnb08/galaxy_db/files/9/9/6/dataset_9968668a-3051-4e02-aa3d-4997838a0985.dat' 'GSM461178_untreat_paired_subset_2_fastq' && mkdir -p '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files' && fastqc --outdir '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'    --quiet --extract  --kmers 7 -f 'fastq' 'GSM461178_untreat_paired_subset_2_fastq'  && cp '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'/*/fastqc_data.txt output.txt && cp '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'/*\\.html output.html",
+                              "command_version": null,
+                              "create_time": "2023-05-19T14:59:03.488111",
+                              "dependencies": [
+                                {
+                                  "cacheable": false,
+                                  "dependency_resolver": {
+                                    "auto_init": true,
+                                    "auto_install": false,
+                                    "can_uninstall_dependencies": true,
+                                    "ensure_channels": "conda-forge,bioconda",
+                                    "model_class": "CondaDependencyResolver",
+                                    "prefix": "/usr/local/tools/_conda",
+                                    "read_only": false,
+                                    "resolver_type": "conda",
+                                    "resolves_simple_dependencies": true,
+                                    "use_local": false,
+                                    "versionless": false
+                                  },
+                                  "dependency_type": "conda",
+                                  "environment_path": "/usr/local/tools/_conda/envs/__fastqc@0.11.8",
+                                  "exact": true,
+                                  "model_class": "MergedCondaDependency",
+                                  "name": "fastqc",
+                                  "version": "0.11.8"
+                                }
+                              ],
+                              "exit_code": 0,
+                              "external_id": "43535386",
+                              "galaxy_version": "23.0",
+                              "history_id": "2f1f9fa04aab9b59",
+                              "id": "11ac94870d0bb33aae939aa0a3d41382",
+                              "inputs": {
+                                "input_file": {
+                                  "id": "4838ba20a6d867656914ebcc68e736a5",
+                                  "src": "hda",
+                                  "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
+                                }
+                              },
+                              "job_messages": [
+
+                              ],
+                              "job_metrics": [
+                                {
+                                  "name": "hostname",
+                                  "plugin": "hostname",
+                                  "raw_value": "vgcnbwc-worker-c125m425-1589.novalocal",
+                                  "title": "hostname",
+                                  "value": "vgcnbwc-worker-c125m425-1589.novalocal"
+                                },
+                                {
+                                  "name": "galaxy_slots",
+                                  "plugin": "core",
+                                  "raw_value": "8.0000000",
+                                  "title": "Cores Allocated",
+                                  "value": "8"
+                                },
+                                {
+                                  "name": "galaxy_memory_mb",
+                                  "plugin": "core",
+                                  "raw_value": "31129.0000000",
+                                  "title": "Memory Allocated (MB)",
+                                  "value": "31129"
+                                },
+                                {
+                                  "name": "start_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508676.0000000",
+                                  "title": "Job Start Time",
+                                  "value": "2023-05-19 17:04:36"
+                                },
+                                {
+                                  "name": "end_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508692.0000000",
+                                  "title": "Job End Time",
+                                  "value": "2023-05-19 17:04:52"
+                                },
+                                {
+                                  "name": "runtime_seconds",
+                                  "plugin": "core",
+                                  "raw_value": "16.0000000",
+                                  "title": "Job Runtime (Wall Clock)",
+                                  "value": "16 seconds"
+                                },
+                                {
+                                  "name": "cpuacct.usage",
+                                  "plugin": "cgroup",
+                                  "raw_value": "13539752576.0000000",
+                                  "title": "CPU Time",
+                                  "value": "13.539752576 seconds"
+                                },
+                                {
+                                  "name": "memory.failcnt",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Failed to allocate memory count",
+                                  "value": 0.0
+                                },
+                                {
+                                  "name": "memory.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "32749125632.0000000",
+                                  "title": "Memory limit on cgroup (MEM)",
+                                  "value": "30.5 GB"
+                                },
+                                {
+                                  "name": "memory.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "411770880.0000000",
+                                  "title": "Max memory usage (MEM)",
+                                  "value": "392.7 MB"
+                                },
+                                {
+                                  "name": "memory.memsw.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "9223372036854771712.0000000",
+                                  "title": "Memory limit on cgroup (MEM+SWP)",
+                                  "value": "8.0 EB"
+                                },
+                                {
+                                  "name": "memory.memsw.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "411770880.0000000",
+                                  "title": "Max memory usage (MEM+SWP)",
+                                  "value": "392.7 MB"
+                                },
+                                {
+                                  "name": "memory.oom_control.oom_kill_disable",
+                                  "plugin": "cgroup",
+                                  "raw_value": "1.0000000",
+                                  "title": "OOM Control enabled",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.oom_control.under_oom",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Was OOM Killer active?",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.soft_limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Memory softlimit on cgroup",
+                                  "value": "0 bytes"
+                                }
+                              ],
+                              "job_stderr": "",
+                              "job_stdout": "",
+                              "model_class": "Job",
+                              "output_collections": {
+                              },
+                              "outputs": {
+                                "html_file": {
+                                  "id": "4838ba20a6d867650e70120b79b974b3",
+                                  "src": "hda",
+                                  "uuid": "3bc9888e-ec3f-4ae0-b61c-db19dec8e43e"
+                                },
+                                "text_file": {
+                                  "id": "4838ba20a6d867656a6422c26474bdc5",
+                                  "src": "hda",
+                                  "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
+                                }
+                              },
+                              "params": {
+                                "__input_ext": "\"fastqsanger\"",
+                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
+                                "adapters": null,
+                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                "contaminants": null,
+                                "dbkey": "\"?\"",
+                                "kmers": "\"7\"",
+                                "limits": null,
+                                "min_length": null,
+                                "nogroup": "false"
+                              },
+                              "state": "ok",
+                              "stderr": "",
+                              "stdout": "",
+                              "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+                              "tool_stderr": "",
+                              "tool_stdout": "",
+                              "traceback": null,
+                              "update_time": "2023-05-19T15:04:54.529461",
+                              "user_email": "hxr@informatik.uni-freiburg.de"
+                            }
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 4,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "html_file": {
+                              "id": "4838ba20a6d867650e70120b79b974b3",
+                              "src": "hda",
+                              "uuid": "3bc9888e-ec3f-4ae0-b61c-db19dec8e43e"
+                            },
+                            "text_file": {
+                              "id": "4838ba20a6d867656a6422c26474bdc5",
+                              "src": "hda",
+                              "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T15:04:54.499181",
+                          "workflow_step_id": "fc590094641a1ae9",
+                          "workflow_step_label": null,
+                          "workflow_step_uuid": "f48fa351-4a73-4daa-b993-2210274ae84d"
+                        },
+                        "5. Unnamed step": {
+                          "action": null,
+                          "id": "6a0711aa69933475",
+                          "job_id": "11ac94870d0bb33abd6fe235967051f6",
+                          "jobs": [
+                            {
+                              "command_line": "ln -f -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq.fq' &&  ln -f -s '/data/dnb08/galaxy_db/files/9/9/6/dataset_9968668a-3051-4e02-aa3d-4997838a0985.dat' 'GSM461178_untreat_paired_subset_2_fastq.fq' &&   cutadapt  -j ${GALAXY_SLOTS:-1}                  --output='out1.fq' --paired-output='out2.fq'  --error-rate=0.1 --times=1 --overlap=3         --minimum-length=20 --pair-filter=any   --quality-cutoff=20   'GSM461178_untreat_paired_subset_1_fastq.fq' 'GSM461178_untreat_paired_subset_2_fastq.fq'  > report.txt",
+                              "command_version": "1.16",
+                              "create_time": "2023-05-19T14:59:03.590819",
+                              "dependencies": [
+                                {
+                                  "cacheable": false,
+                                  "dependency_resolver": {
+                                    "auto_init": true,
+                                    "auto_install": false,
+                                    "can_uninstall_dependencies": true,
+                                    "ensure_channels": "conda-forge,bioconda",
+                                    "model_class": "CondaDependencyResolver",
+                                    "prefix": "/usr/local/tools/_conda",
+                                    "read_only": false,
+                                    "resolver_type": "conda",
+                                    "resolves_simple_dependencies": true,
+                                    "use_local": false,
+                                    "versionless": false
+                                  },
+                                  "dependency_type": "conda",
+                                  "environment_path": "/usr/local/tools/_conda/envs/__cutadapt@1.16",
+                                  "exact": true,
+                                  "model_class": "MergedCondaDependency",
+                                  "name": "cutadapt",
+                                  "version": "1.16"
+                                }
+                              ],
+                              "exit_code": 0,
+                              "external_id": "43535388",
+                              "galaxy_version": "23.0",
+                              "history_id": "2f1f9fa04aab9b59",
+                              "id": "11ac94870d0bb33abd6fe235967051f6",
+                              "inputs": {
+                                "input_1": {
+                                  "id": "4838ba20a6d86765ff25d30589db09fe",
+                                  "src": "hda",
+                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
+                                },
+                                "input_2": {
+                                  "id": "4838ba20a6d867656914ebcc68e736a5",
+                                  "src": "hda",
+                                  "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
+                                }
+                              },
+                              "job_messages": [
+
+                              ],
+                              "job_metrics": [
+                                {
+                                  "name": "hostname",
+                                  "plugin": "hostname",
+                                  "raw_value": "vgcnbwc-worker-c125m425-6547.novalocal",
+                                  "title": "hostname",
+                                  "value": "vgcnbwc-worker-c125m425-6547.novalocal"
+                                },
+                                {
+                                  "name": "galaxy_slots",
+                                  "plugin": "core",
+                                  "raw_value": "5.0000000",
+                                  "title": "Cores Allocated",
+                                  "value": "5"
+                                },
+                                {
+                                  "name": "galaxy_memory_mb",
+                                  "plugin": "core",
+                                  "raw_value": "19456.0000000",
+                                  "title": "Memory Allocated (MB)",
+                                  "value": "19456"
+                                },
+                                {
+                                  "name": "start_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508356.0000000",
+                                  "title": "Job Start Time",
+                                  "value": "2023-05-19 16:59:16"
+                                },
+                                {
+                                  "name": "end_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508381.0000000",
+                                  "title": "Job End Time",
+                                  "value": "2023-05-19 16:59:41"
+                                },
+                                {
+                                  "name": "runtime_seconds",
+                                  "plugin": "core",
+                                  "raw_value": "25.0000000",
+                                  "title": "Job Runtime (Wall Clock)",
+                                  "value": "25 seconds"
+                                },
+                                {
+                                  "name": "cpuacct.usage",
+                                  "plugin": "cgroup",
+                                  "raw_value": "8873728303.0000000",
+                                  "title": "CPU Time",
+                                  "value": "8.873728303 seconds"
+                                },
+                                {
+                                  "name": "memory.failcnt",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Failed to allocate memory count",
+                                  "value": 0.0
+                                },
+                                {
+                                  "name": "memory.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "20401094656.0000000",
+                                  "title": "Memory limit on cgroup (MEM)",
+                                  "value": "19.0 GB"
+                                },
+                                {
+                                  "name": "memory.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "362237952.0000000",
+                                  "title": "Max memory usage (MEM)",
+                                  "value": "345.5 MB"
+                                },
+                                {
+                                  "name": "memory.memsw.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "9223372036854771712.0000000",
+                                  "title": "Memory limit on cgroup (MEM+SWP)",
+                                  "value": "8.0 EB"
+                                },
+                                {
+                                  "name": "memory.memsw.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "362237952.0000000",
+                                  "title": "Max memory usage (MEM+SWP)",
+                                  "value": "345.5 MB"
+                                },
+                                {
+                                  "name": "memory.oom_control.oom_kill_disable",
+                                  "plugin": "cgroup",
+                                  "raw_value": "1.0000000",
+                                  "title": "OOM Control enabled",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.oom_control.under_oom",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Was OOM Killer active?",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.soft_limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Memory softlimit on cgroup",
+                                  "value": "0 bytes"
+                                }
+                              ],
+                              "job_stderr": "",
+                              "job_stdout": "",
+                              "model_class": "Job",
+                              "output_collections": {
+                              },
+                              "outputs": {
+                                "out1": {
+                                  "id": "4838ba20a6d867658b181ea162b2bff2",
+                                  "src": "hda",
+                                  "uuid": "5647f1a7-5cfe-4e7e-8a12-733901cbbc2f"
+                                },
+                                "out2": {
+                                  "id": "4838ba20a6d8676511267a23c1bb707d",
+                                  "src": "hda",
+                                  "uuid": "7936d330-0e1e-43d9-abc8-e01e2e8ce871"
+                                },
+                                "report": {
+                                  "id": "4838ba20a6d86765b7823a727e8a67cd",
+                                  "src": "hda",
+                                  "uuid": "d3748a3d-cb92-4c98-a590-d687c708ddc8"
+                                }
+                              },
+                              "params": {
+                                "__input_ext": "\"input\"",
+                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
+                                "adapter_options": "{\"count\": \"1\", \"error_rate\": \"0.1\", \"match_read_wildcards\": false, \"no_indels\": false, \"overlap\": \"3\"}",
+                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                "dbkey": "\"?\"",
+                                "filter_options": "{\"discard\": false, \"discard_untrimmed\": false, \"mask_adapter\": false, \"max\": \"0\", \"max_n\": null, \"min\": \"20\", \"no_trim\": false, \"pair_filter\": \"any\"}",
+                                "library": "{\"__current_case__\": 1, \"input_1\": {\"values\": [{\"id\": 137417465, \"src\": \"hda\"}]}, \"input_2\": {\"values\": [{\"id\": 137417509, \"src\": \"hda\"}]}, \"r1\": {\"adapters\": [], \"anywhere_adapters\": [], \"cut\": \"0\", \"front_adapters\": []}, \"r2\": {\"adapters2\": [], \"anywhere_adapters2\": [], \"cut2\": \"0\", \"front_adapters2\": []}, \"type\": \"paired\"}",
+                                "output_options": "{\"info_file\": false, \"report\": true, \"rest_file\": false, \"too_long_file\": false, \"too_short_file\": false, \"untrimmed_file\": false, \"wildcard_file\": false}",
+                                "read_mod_options": "{\"length\": \"0\", \"length_tag\": \"\", \"nextseq_trim\": \"0\", \"prefix\": \"\", \"quality_cutoff\": \"20\", \"strip_suffix\": \"\", \"suffix\": \"\", \"trim_n\": false}"
+                              },
+                              "state": "ok",
+                              "stderr": "",
+                              "stdout": "",
+                              "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
+                              "tool_stderr": "",
+                              "tool_stdout": "",
+                              "traceback": null,
+                              "update_time": "2023-05-19T14:59:42.633522",
+                              "user_email": "hxr@informatik.uni-freiburg.de"
+                            }
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 5,
+                          "output_collections": {
+                          },
+                          "outputs": {
+                            "out1": {
+                              "id": "4838ba20a6d867658b181ea162b2bff2",
+                              "src": "hda",
+                              "uuid": "5647f1a7-5cfe-4e7e-8a12-733901cbbc2f"
+                            },
+                            "out2": {
+                              "id": "4838ba20a6d8676511267a23c1bb707d",
+                              "src": "hda",
+                              "uuid": "7936d330-0e1e-43d9-abc8-e01e2e8ce871"
+                            },
+                            "report": {
+                              "id": "4838ba20a6d86765b7823a727e8a67cd",
+                              "src": "hda",
+                              "uuid": "d3748a3d-cb92-4c98-a590-d687c708ddc8"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T14:59:42.614406",
+                          "workflow_step_id": "1c99f44f251d0c5a",
+                          "workflow_step_label": null,
+                          "workflow_step_uuid": "5ff1e523-c42b-42cd-8857-84d7d83802f8"
+                        },
+                        "6. Unnamed step": {
+                          "action": null,
+                          "id": "c0e9eb97be074ab9",
+                          "job_id": "11ac94870d0bb33a3e4f5384f33fb7c3",
+                          "jobs": [
+                            {
+                              "command_line": "die() { echo \"$@\" 1>&2 ; exit 1; } &&  mkdir multiqc_WDir &&   mkdir multiqc_WDir/fastqc_0 &&    mkdir 'multiqc_WDir/fastqc_0/data_0' &&  mkdir 'multiqc_WDir/fastqc_0/data_0/file_0' && ln -s '/data/dnb08/galaxy_db/files/8/a/a/dataset_8aadb0d6-4752-43b3-9a70-b58359fe1659.dat' 'multiqc_WDir/fastqc_0/data_0/file_0/fastqc_data.txt' && mkdir 'multiqc_WDir/fastqc_0/data_0/file_1' && ln -s '/data/dnb08/galaxy_db/files/e/d/e/dataset_edecc2ea-fa52-4947-9c41-f5956870688a.dat' 'multiqc_WDir/fastqc_0/data_0/file_1/fastqc_data.txt' &&  multiqc multiqc_WDir --filename \"report\"",
+                              "command_version": null,
+                              "create_time": "2023-05-19T14:59:03.693709",
+                              "dependencies": [
+                                {
+                                  "cacheable": false,
+                                  "dependency_resolver": {
+                                    "auto_init": true,
+                                    "auto_install": false,
+                                    "can_uninstall_dependencies": true,
+                                    "ensure_channels": "conda-forge,bioconda",
+                                    "model_class": "CondaDependencyResolver",
+                                    "prefix": "/usr/local/tools/_conda",
+                                    "read_only": false,
+                                    "resolver_type": "conda",
+                                    "resolves_simple_dependencies": true,
+                                    "use_local": false,
+                                    "versionless": false
+                                  },
+                                  "dependency_type": "conda",
+                                  "environment_path": "/usr/local/tools/_conda/envs/__multiqc@1.9",
+                                  "exact": true,
+                                  "model_class": "MergedCondaDependency",
+                                  "name": "multiqc",
+                                  "version": "1.9"
+                                }
+                              ],
+                              "exit_code": 0,
+                              "external_id": "43535462",
+                              "galaxy_version": "23.0",
+                              "history_id": "2f1f9fa04aab9b59",
+                              "id": "11ac94870d0bb33a3e4f5384f33fb7c3",
+                              "inputs": {
+                                "results_0|software_cond|output_0|input": {
+                                  "id": "4838ba20a6d86765967c147adffa4ae2",
+                                  "src": "hda",
+                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
+                                },
+                                "results_0|software_cond|output_0|input1": {
+                                  "id": "4838ba20a6d86765967c147adffa4ae2",
+                                  "src": "hda",
+                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
+                                },
+                                "results_0|software_cond|output_0|input2": {
+                                  "id": "4838ba20a6d867656a6422c26474bdc5",
+                                  "src": "hda",
+                                  "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
+                                }
+                              },
+                              "job_messages": [
+
+                              ],
+                              "job_metrics": [
+                                {
+                                  "name": "hostname",
+                                  "plugin": "hostname",
+                                  "raw_value": "vgcnbwc-worker-c36m225-7634.novalocal",
+                                  "title": "hostname",
+                                  "value": "vgcnbwc-worker-c36m225-7634.novalocal"
+                                },
+                                {
+                                  "name": "galaxy_slots",
+                                  "plugin": "core",
+                                  "raw_value": "1.0000000",
+                                  "title": "Cores Allocated",
+                                  "value": "1"
+                                },
+                                {
+                                  "name": "galaxy_memory_mb",
+                                  "plugin": "core",
+                                  "raw_value": "11673.0000000",
+                                  "title": "Memory Allocated (MB)",
+                                  "value": "11673"
+                                },
+                                {
+                                  "name": "start_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508719.0000000",
+                                  "title": "Job Start Time",
+                                  "value": "2023-05-19 17:05:19"
+                                },
+                                {
+                                  "name": "end_epoch",
+                                  "plugin": "core",
+                                  "raw_value": "1684508927.0000000",
+                                  "title": "Job End Time",
+                                  "value": "2023-05-19 17:08:47"
+                                },
+                                {
+                                  "name": "runtime_seconds",
+                                  "plugin": "core",
+                                  "raw_value": "208.0000000",
+                                  "title": "Job Runtime (Wall Clock)",
+                                  "value": "3 minutes"
+                                },
+                                {
+                                  "name": "cpuacct.usage",
+                                  "plugin": "cgroup",
+                                  "raw_value": "15451533789.0000000",
+                                  "title": "CPU Time",
+                                  "value": "15.451533789 seconds"
+                                },
+                                {
+                                  "name": "memory.failcnt",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Failed to allocate memory count",
+                                  "value": 0.0
+                                },
+                                {
+                                  "name": "memory.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "12348030976.0000000",
+                                  "title": "Memory limit on cgroup (MEM)",
+                                  "value": "11.5 GB"
+                                },
+                                {
+                                  "name": "memory.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "243441664.0000000",
+                                  "title": "Max memory usage (MEM)",
+                                  "value": "232.2 MB"
+                                },
+                                {
+                                  "name": "memory.memsw.limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "9223372036854771712.0000000",
+                                  "title": "Memory limit on cgroup (MEM+SWP)",
+                                  "value": "8.0 EB"
+                                },
+                                {
+                                  "name": "memory.memsw.max_usage_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "243441664.0000000",
+                                  "title": "Max memory usage (MEM+SWP)",
+                                  "value": "232.2 MB"
+                                },
+                                {
+                                  "name": "memory.oom_control.oom_kill_disable",
+                                  "plugin": "cgroup",
+                                  "raw_value": "1.0000000",
+                                  "title": "OOM Control enabled",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.oom_control.under_oom",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Was OOM Killer active?",
+                                  "value": "No"
+                                },
+                                {
+                                  "name": "memory.soft_limit_in_bytes",
+                                  "plugin": "cgroup",
+                                  "raw_value": "0E-7",
+                                  "title": "Memory softlimit on cgroup",
+                                  "value": "0 bytes"
+                                }
+                              ],
+                              "job_stderr": "",
+                              "job_stdout": "",
+                              "model_class": "Job",
+                              "output_collections": {
+                                "stats": {
+                                  "id": "b2ed5bced30ea70a",
+                                  "src": "hdca"
+                                }
+                              },
+                              "outputs": {
+                                "__new_primary_file_stats|fastqc__": {
+                                  "id": "4838ba20a6d8676552151abe856ca468",
+                                  "src": "hda",
+                                  "uuid": "a0afcc44-22b6-4019-938e-4c8b313de6ea"
+                                },
+                                "__new_primary_file_stats|general_stats__": {
+                                  "id": "4838ba20a6d867656f4643c70fbd40cc",
+                                  "src": "hda",
+                                  "uuid": "d41e3789-24ea-4080-868b-0edab34c49a6"
+                                },
+                                "__new_primary_file_stats|sources__": {
+                                  "id": "4838ba20a6d8676518ad2e8586cc7f6b",
+                                  "src": "hda",
+                                  "uuid": "b697c224-e6d6-4f53-a3df-16fe5ca4444c"
+                                },
+                                "html_report": {
+                                  "id": "4838ba20a6d867657c9b5bfe8c22949d",
+                                  "src": "hda",
+                                  "uuid": "a42df514-e2c2-4f72-a9b8-e065ef58237f"
+                                }
+                              },
+                              "params": {
+                                "__input_ext": "\"txt\"",
+                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
+                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
+                                "comment": "\"\"",
+                                "dbkey": "\"?\"",
+                                "export": "false",
+                                "flat": "false",
+                                "results": "[{\"__index__\": 0, \"software_cond\": {\"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"input\": {\"values\": [{\"id\": 137417582, \"src\": \"hda\"}, {\"id\": 137417586, \"src\": \"hda\"}]}, \"type\": \"data\"}], \"software\": \"fastqc\"}}]",
+                                "saveLog": "false",
+                                "title": "\"\""
+                              },
+                              "state": "ok",
+                              "stderr": "[WARNING]         multiqc : MultiQC Version v1.14 now available!\n[INFO   ]         multiqc : This is MultiQC v1.9\n[INFO   ]         multiqc : Template    : default\n[INFO   ]         multiqc : Searching   : /data/jwd05e/main/060/059/60059406/working/multiqc_WDir\n[INFO   ]          fastqc : Found 2 reports\n[INFO   ]         multiqc : Compressing plot data\n[INFO   ]         multiqc : Report      : report.html\n[INFO   ]         multiqc : Data        : report_data\n[INFO   ]         multiqc : MultiQC complete\n",
+                              "stdout": "",
+                              "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+                              "tool_stderr": "[WARNING]         multiqc : MultiQC Version v1.14 now available!\n[INFO   ]         multiqc : This is MultiQC v1.9\n[INFO   ]         multiqc : Template    : default\n[INFO   ]         multiqc : Searching   : /data/jwd05e/main/060/059/60059406/working/multiqc_WDir\n[INFO   ]          fastqc : Found 2 reports\n[INFO   ]         multiqc : Compressing plot data\n[INFO   ]         multiqc : Report      : report.html\n[INFO   ]         multiqc : Data        : report_data\n[INFO   ]         multiqc : MultiQC complete\n",
+                              "tool_stdout": "",
+                              "traceback": null,
+                              "update_time": "2023-05-19T15:08:50.825299",
+                              "user_email": "hxr@informatik.uni-freiburg.de"
+                            }
+                          ],
+                          "model_class": "WorkflowInvocationStep",
+                          "order_index": 6,
+                          "output_collections": {
+                            "stats": {
+                              "id": "b2ed5bced30ea70a",
+                              "src": "hdca"
+                            }
+                          },
+                          "outputs": {
+                            "html_report": {
+                              "id": "4838ba20a6d867657c9b5bfe8c22949d",
+                              "src": "hda",
+                              "uuid": "a42df514-e2c2-4f72-a9b8-e065ef58237f"
+                            }
+                          },
+                          "state": "scheduled",
+                          "subworkflow": null,
+                          "subworkflow_invocation_id": null,
+                          "update_time": "2023-05-19T15:08:50.808688",
+                          "workflow_step_id": "40e61d72c5cedf2a",
+                          "workflow_step_label": null,
+                          "workflow_step_uuid": "abf34a41-0150-42fc-b56a-a29eb92c24c3"
+                        }
+                      }
+                    },
+                    "problem_log": "No log for this engine type.",
+                    "start_datetime": "2023-05-19T16:55:58.620842",
+                    "status": "success"
+                  },
+                  "doc": "Test sample data for Sequence-analyses:Quality-control",
+                  "has_data": true,
+                  "id": "quality_control.ga_0",
+                  "test_type": "galaxy_workflow"
+                }
+              ],
+              "version": "0.1"
+            }
+          }
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Sequence analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "e7b2202befea",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "3d0c7bdf12f5",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqe",
+            "owner": "iuc",
+            "revisions": "89d299153577",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "multiqc",
+            "owner": "iuc",
+            "revisions": "75c93c70d094",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "nanoplot",
+            "owner": "iuc",
+            "revisions": "0f1c34698076",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "pycoqc",
+            "owner": "iuc",
+            "revisions": "dc1500f42073",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cutadapt",
+            "owner": "lparsons",
+            "revisions": "660cffd8d92a",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cutadapt",
+            "owner": "lparsons",
+            "revisions": "44e2cc14f75b",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqe\n  owner: iuc\n  revisions: 89d299153577\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 75c93c70d094\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: 0f1c34698076\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pycoqc\n  owner: iuc\n  revisions: dc1500f42073\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 660cffd8d92a\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 44e2cc14f75b\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+      "questions": [
+        "How can you remove traces of human sequence data from a sequenced viral sample?"
+      ],
+      "objectives": [
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into a collection",
+        "Preprocess and map the data against the human reference genome",
+        "Eliminate reads/read pairs that map to the human genome from the original data"
+      ],
+      "time_estimation": "1h",
+      "level": "Intermediate",
+      "key_points": [
+        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
+        "Human reads can be identified by mapping the data to the human reference genome",
+        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "quality-control",
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
+      "short_id": "T00236",
+      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+      "topic_name": "sequence-analysis",
+      "tutorial_name": "human-reads-removal",
+      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
+      "id": "sequence-analysis/human-reads-removal",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": null,
+          "materials": [
+            {
+              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+              "type": "Tutorial"
+            },
+            {
+              "external": true,
+              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
+              "title": "Example History",
+              "type": "Example History"
+            }
+          ],
+          "tags": [
+            "sequence-analysis"
+          ],
+          "type": "Tutorial",
+          "gtn_id": "sequence-analysis/human-reads-removal",
+          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "human-reads-removal.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "wfid": "sequence-analysis-human-reads-removal",
+          "wfname": "human-reads-removal",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
+      "tools": [
+        "Grep1",
+        "__UNZIP_COLLECTION__",
+        "__ZIP_COLLECTION__",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Sequence analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "e188dc7a68e6",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_fastx",
+            "owner": "iuc",
+            "revisions": "a8d69aee190e",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seqtk",
+            "owner": "iuc",
+            "revisions": "3da72230c066",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "898b67846b47",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "d94aff5ee623",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Mapping",
       "zenodo_link": "https://doi.org/10.5281/zenodo.1324070",
       "questions": [
@@ -2384,1814 +4192,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/mapping/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/mapping/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-      "questions": [
-        "How can you remove traces of human sequence data from a sequenced viral sample?"
-      ],
-      "objectives": [
-        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
-        "Organize the data into a collection",
-        "Preprocess and map the data against the human reference genome",
-        "Eliminate reads/read pairs that map to the human genome from the original data"
-      ],
-      "time_estimation": "1h",
-      "level": "Intermediate",
-      "key_points": [
-        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
-        "Human reads can be identified by mapping the data to the human reference genome",
-        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "quality-control",
-            "mapping"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        }
-      ],
-      "short_id": "T00236",
-      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-      "topic_name": "sequence-analysis",
-      "tutorial_name": "human-reads-removal",
-      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
-      "id": "sequence-analysis/human-reads-removal",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": null,
-          "materials": [
-            {
-              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-              "type": "Tutorial"
-            },
-            {
-              "external": true,
-              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
-              "title": "Example History",
-              "type": "Example History"
-            }
-          ],
-          "tags": [
-            "sequence-analysis"
-          ],
-          "type": "Tutorial",
-          "gtn_id": "sequence-analysis/human-reads-removal",
-          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "human-reads-removal.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "wfid": "sequence-analysis-human-reads-removal",
-          "wfname": "human-reads-removal",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-      "tools": [
-        "Grep1",
-        "__UNZIP_COLLECTION__",
-        "__ZIP_COLLECTION__",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Sequence analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "e188dc7a68e6",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_fastx",
-            "owner": "iuc",
-            "revisions": "a8d69aee190e",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seqtk",
-            "owner": "iuc",
-            "revisions": "3da72230c066",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "898b67846b47",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "d94aff5ee623",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Quality Control",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.61771",
-      "questions": [
-        "How to perform quality control of NGS raw data?",
-        "What are the quality parameters to check for a dataset?",
-        "How to improve the quality of a dataset?"
-      ],
-      "objectives": [
-        "Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC",
-        "Assess long reads FASTQ quality using Nanoplot and PycoQC",
-        "Perform quality correction with Cutadapt (short reads)",
-        "Summarise quality metrics MultiQC",
-        "Process single-end and paired-end data"
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "mapping"
-          ]
-        }
-      ],
-      "time_estimation": "1H30M",
-      "level": "Introductory",
-      "key_points": [
-        "Perform quality control on every dataset before running any other bioinformatics analysis",
-        "Assess the quality metrics and improve quality if necessary",
-        "Check the impact of the quality control",
-        "Different tools are available to provide additional quality metrics",
-        "For paired-end reads analyze the forward and reverse reads together"
-      ],
-      "contributors": [
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        },
-        {
-          "name": "Alexandre Cormier",
-          "email": "alexandre.cormier@ifremer.fr",
-          "twitter": "allanssx",
-          "orcid": "0000-0002-7775-8413",
-          "joined": "2021-11",
-          "id": "alexcorm",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/alexcorm.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alexcorm/"
-        },
-        {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inrae.fr",
-          "twitter": "abretau",
-          "matrix": "abretaud:matrix.org",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 48.11,
-            "lon": -1.64
-          },
-          "fediverse": "https://genomic.social/@abretaud",
-          "fediverse_flavor": "mastodon",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
-        },
-        {
-          "name": "Laura Leroi",
-          "email": "laura.leroi@ifremer.fr",
-          "orcid": "0000-0003-3748-4179",
-          "joined": "2021-11",
-          "id": "lleroi",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/lleroi.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lleroi/"
-        },
-        {
-          "name": "Erwan Corre",
-          "email": "erwan.corre@sb-roscoff.fr",
-          "twitter": "r1corre",
-          "orcid": "0000-0001-6354-2278",
-          "joined": "2019-04",
-          "id": "r1corre",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/r1corre.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/r1corre/"
-        },
-        {
-          "name": "Stéphanie Robin",
-          "email": "stephanie.robin@inrae.fr",
-          "twitter": "robinstphanie1",
-          "orcid": "0000-0001-7379-9173",
-          "joined": "2021-11",
-          "id": "stephanierobin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stephanierobin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stephanierobin/"
-        },
-        {
-          "name": "Erasmus+ Programme",
-          "joined": "2020-09",
-          "avatar": "https://www.erasmusplus.nl/assets/images/logo.png",
-          "github": false,
-          "funder": true,
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erasmusplus.json",
-          "funding_id": "2020-1-NL01-KA203-064717",
-          "funding_system": "erasmusplus",
-          "funding_statement": "This project (<a href=\"https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717\"><code class=\"language-plaintext highlighter-rouge\">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n<img src=\"https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg\" alt=\"eu flag with the text: with the support of the erasmus programme of the european union\" />",
-          "id": "erasmusplus",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erasmusplus/"
-        },
-        {
-          "name": "Cameron Hyde",
-          "email": "c.hyde@qcif.edu.au",
-          "orcid": "0000-0002-5913-9766",
-          "joined": "2022-02",
-          "elixir_node": "au",
-          "id": "neoformit",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/neoformit.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/"
-        }
-      ],
-      "short_id": "T00239",
-      "url": "/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
-      "topic_name": "sequence-analysis",
-      "tutorial_name": "quality-control",
-      "dir": "topics/sequence-analysis/tutorials/quality-control",
-      "id": "sequence-analysis/quality-control",
-      "video_library": {
-        "tutorial": {
-          "description": "In this tutorial you will get some hand-on experience performing a quality assessment on sequencing data.",
-          "materials": [
-            {
-              "link": "topics/sequence-analysis/tutorials/quality-control/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "sequence-analysis"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "coaMGvZazoc",
-              "length": "50M",
-              "speakers": [
-                "LonsBio"
-              ],
-              "captions": [
-                "LonsBio"
-              ],
-              "date": "2023-05-19"
-            },
-            {
-              "captions": [
-                "bebatut",
-                "nagoue",
-                "shiltemann"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "1H10M",
-              "link": "QJRlX2hWDKM",
-              "speakers": [
-                "heylf"
-              ]
-            }
-          ],
-          "gtn_id": "sequence-analysis/quality-control",
-          "title": "Quality Control",
-          "captioned": true
-        },
-        "slides": {
-          "description": "This lecture goes over the concepts involved in assessing the quality of your sequencing data.",
-          "materials": [
-            {
-              "link": "topics/sequence-analysis/tutorials/quality-control/slides.html",
-              "title": "Introduction to Quality Control",
-              "type": "Slides"
-            }
-          ],
-          "tags": [
-            "sequence-analysis"
-          ],
-          "type": "Lecture",
-          "versions": [
-            {
-              "captions": [
-                "ennovytje",
-                "nagoue",
-                "hexylena"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "40M",
-              "link": "BWonTPS4zB8",
-              "speakers": [
-                "heylf"
-              ]
-            }
-          ],
-          "gtn_id": "sequence-analysis/quality-control",
-          "title": "Quality Control",
-          "captioned": true
-        },
-        "demo": null,
-        "both": null,
-        "session": {
-          "title": "Quality Control",
-          "description": "In this sesssion, we will walk you through the basics of quality checking your sequencing data. This session consists of a lecture followed by a hands-on tutorial.",
-          "videos": [
-            "sequence-analysis/quality-control/slides",
-            "sequence-analysis/quality-control/tutorial"
-          ]
-        }
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "quality_control.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
-          "path": "topics/sequence-analysis/tutorials/quality-control/workflows/quality_control.ga",
-          "wfid": "sequence-analysis-quality-control",
-          "wfname": "quality_control",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-quality-control/versions/quality_control",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": {
-            "eu": {
-              "summary": {
-                "num_errors": 0,
-                "num_failures": 0,
-                "num_skips": 0,
-                "num_tests": 1
-              },
-              "tests": [
-                {
-                  "data": {
-                    "end_datetime": "2023-05-19T17:08:59.654933",
-                    "inputs": "---\nreads_1:\n  class: File\n  location: https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq\nreads_2:\n  class: File\n  location: https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq\n",
-                    "invocation_details": {
-                      "details": {
-                        "error_message": "",
-                        "history_id": "2f1f9fa04aab9b59",
-                        "history_state": "ok",
-                        "invocation_id": "1375254bd7688d41",
-                        "invocation_state": "scheduled",
-                        "workflow_id": "8d2820cd545d11e7"
-                      },
-                      "steps": {
-                        "0. reads_1": {
-                          "action": null,
-                          "id": "09aab9ccfa6260cb",
-                          "job_id": null,
-                          "jobs": [
-
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 0,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "output": {
-                              "id": "4838ba20a6d86765ff25d30589db09fe",
-                              "src": "hda",
-                              "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T14:59:03.317312",
-                          "workflow_step_id": "41e0f8150fe3cff2",
-                          "workflow_step_label": "reads_1",
-                          "workflow_step_uuid": "3ba96dd1-e62d-4c22-b5b9-92a03e9b0c46"
-                        },
-                        "1. reads_2": {
-                          "action": null,
-                          "id": "53088303de376bb8",
-                          "job_id": null,
-                          "jobs": [
-
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 1,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "output": {
-                              "id": "4838ba20a6d867656914ebcc68e736a5",
-                              "src": "hda",
-                              "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T14:59:03.317318",
-                          "workflow_step_id": "ada35db989250a9c",
-                          "workflow_step_label": "reads_2",
-                          "workflow_step_uuid": "11e6b420-32a1-431d-8eb4-b707a1e9b2df"
-                        },
-                        "2. Unnamed step": {
-                          "action": null,
-                          "id": "d94b4b21ddc3e0c3",
-                          "job_id": "11ac94870d0bb33a2a3328a31b8b1d2e",
-                          "jobs": [
-                            {
-                              "command_line": "ln -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq' && mkdir -p '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files' && fastqc --outdir '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'    --quiet --extract  --kmers 7 -f 'fastq' 'GSM461178_untreat_paired_subset_1_fastq'  && cp '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'/*/fastqc_data.txt output.txt && cp '/data/jwd01/main/060/059/60059402/working/dataset_a0107efb-9924-481b-99eb-5e7c74c4c697_files'/*\\.html output.html",
-                              "command_version": null,
-                              "create_time": "2023-05-19T14:59:03.313089",
-                              "dependencies": [
-                                {
-                                  "cacheable": false,
-                                  "dependency_resolver": {
-                                    "auto_init": true,
-                                    "auto_install": false,
-                                    "can_uninstall_dependencies": true,
-                                    "ensure_channels": "conda-forge,bioconda",
-                                    "model_class": "CondaDependencyResolver",
-                                    "prefix": "/usr/local/tools/_conda",
-                                    "read_only": false,
-                                    "resolver_type": "conda",
-                                    "resolves_simple_dependencies": true,
-                                    "use_local": false,
-                                    "versionless": false
-                                  },
-                                  "dependency_type": "conda",
-                                  "environment_path": "/usr/local/tools/_conda/envs/__fastqc@0.11.8",
-                                  "exact": true,
-                                  "model_class": "MergedCondaDependency",
-                                  "name": "fastqc",
-                                  "version": "0.11.8"
-                                }
-                              ],
-                              "exit_code": 0,
-                              "external_id": "43535387",
-                              "galaxy_version": "23.0",
-                              "history_id": "2f1f9fa04aab9b59",
-                              "id": "11ac94870d0bb33a2a3328a31b8b1d2e",
-                              "inputs": {
-                                "input_file": {
-                                  "id": "4838ba20a6d86765ff25d30589db09fe",
-                                  "src": "hda",
-                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
-                                }
-                              },
-                              "job_messages": [
-
-                              ],
-                              "job_metrics": [
-                                {
-                                  "name": "hostname",
-                                  "plugin": "hostname",
-                                  "raw_value": "vgcnbwc-worker-c125m425-1589.novalocal",
-                                  "title": "hostname",
-                                  "value": "vgcnbwc-worker-c125m425-1589.novalocal"
-                                },
-                                {
-                                  "name": "galaxy_slots",
-                                  "plugin": "core",
-                                  "raw_value": "8.0000000",
-                                  "title": "Cores Allocated",
-                                  "value": "8"
-                                },
-                                {
-                                  "name": "galaxy_memory_mb",
-                                  "plugin": "core",
-                                  "raw_value": "31129.0000000",
-                                  "title": "Memory Allocated (MB)",
-                                  "value": "31129"
-                                },
-                                {
-                                  "name": "start_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508692.0000000",
-                                  "title": "Job Start Time",
-                                  "value": "2023-05-19 17:04:52"
-                                },
-                                {
-                                  "name": "end_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508707.0000000",
-                                  "title": "Job End Time",
-                                  "value": "2023-05-19 17:05:07"
-                                },
-                                {
-                                  "name": "runtime_seconds",
-                                  "plugin": "core",
-                                  "raw_value": "15.0000000",
-                                  "title": "Job Runtime (Wall Clock)",
-                                  "value": "15 seconds"
-                                },
-                                {
-                                  "name": "cpuacct.usage",
-                                  "plugin": "cgroup",
-                                  "raw_value": "12194724984.0000000",
-                                  "title": "CPU Time",
-                                  "value": "12.194724984 seconds"
-                                },
-                                {
-                                  "name": "memory.failcnt",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Failed to allocate memory count",
-                                  "value": 0.0
-                                },
-                                {
-                                  "name": "memory.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "32749125632.0000000",
-                                  "title": "Memory limit on cgroup (MEM)",
-                                  "value": "30.5 GB"
-                                },
-                                {
-                                  "name": "memory.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "357576704.0000000",
-                                  "title": "Max memory usage (MEM)",
-                                  "value": "341.0 MB"
-                                },
-                                {
-                                  "name": "memory.memsw.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "9223372036854771712.0000000",
-                                  "title": "Memory limit on cgroup (MEM+SWP)",
-                                  "value": "8.0 EB"
-                                },
-                                {
-                                  "name": "memory.memsw.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "357576704.0000000",
-                                  "title": "Max memory usage (MEM+SWP)",
-                                  "value": "341.0 MB"
-                                },
-                                {
-                                  "name": "memory.oom_control.oom_kill_disable",
-                                  "plugin": "cgroup",
-                                  "raw_value": "1.0000000",
-                                  "title": "OOM Control enabled",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.oom_control.under_oom",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Was OOM Killer active?",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.soft_limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Memory softlimit on cgroup",
-                                  "value": "0 bytes"
-                                }
-                              ],
-                              "job_stderr": "",
-                              "job_stdout": "",
-                              "model_class": "Job",
-                              "output_collections": {
-                              },
-                              "outputs": {
-                                "html_file": {
-                                  "id": "4838ba20a6d867651957556f6b54741b",
-                                  "src": "hda",
-                                  "uuid": "a0107efb-9924-481b-99eb-5e7c74c4c697"
-                                },
-                                "text_file": {
-                                  "id": "4838ba20a6d86765967c147adffa4ae2",
-                                  "src": "hda",
-                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
-                                }
-                              },
-                              "params": {
-                                "__input_ext": "\"fastqsanger\"",
-                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
-                                "adapters": null,
-                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
-                                "contaminants": null,
-                                "dbkey": "\"?\"",
-                                "kmers": "\"7\"",
-                                "limits": null,
-                                "min_length": null,
-                                "nogroup": "false"
-                              },
-                              "state": "ok",
-                              "stderr": "",
-                              "stdout": "",
-                              "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-                              "tool_stderr": "",
-                              "tool_stdout": "",
-                              "traceback": null,
-                              "update_time": "2023-05-19T15:05:09.851510",
-                              "user_email": "hxr@informatik.uni-freiburg.de"
-                            }
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 2,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "html_file": {
-                              "id": "4838ba20a6d867651957556f6b54741b",
-                              "src": "hda",
-                              "uuid": "a0107efb-9924-481b-99eb-5e7c74c4c697"
-                            },
-                            "text_file": {
-                              "id": "4838ba20a6d86765967c147adffa4ae2",
-                              "src": "hda",
-                              "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T15:05:09.811263",
-                          "workflow_step_id": "4b6834f9ae6537d8",
-                          "workflow_step_label": null,
-                          "workflow_step_uuid": "026332e1-70ba-4705-b75e-d228fafacc92"
-                        },
-                        "3. Unnamed step": {
-                          "action": null,
-                          "id": "c5c312487856832c",
-                          "job_id": "11ac94870d0bb33a14ad54e496e129b6",
-                          "jobs": [
-                            {
-                              "command_line": "ln -f -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq.fq' &&    cutadapt  -j ${GALAXY_SLOTS:-1}          --output='out1.fq'  --error-rate=0.1 --times=1 --overlap=3         --minimum-length=20   --quality-cutoff=20   'GSM461178_untreat_paired_subset_1_fastq.fq'  > report.txt",
-                              "command_version": "1.16",
-                              "create_time": "2023-05-19T14:59:03.399654",
-                              "dependencies": [
-
-                              ],
-                              "exit_code": 0,
-                              "external_id": "43535389",
-                              "galaxy_version": "23.0",
-                              "history_id": "2f1f9fa04aab9b59",
-                              "id": "11ac94870d0bb33a14ad54e496e129b6",
-                              "inputs": {
-                                "input_1": {
-                                  "id": "4838ba20a6d86765ff25d30589db09fe",
-                                  "src": "hda",
-                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
-                                }
-                              },
-                              "job_messages": [
-
-                              ],
-                              "job_metrics": [
-                                {
-                                  "name": "hostname",
-                                  "plugin": "hostname",
-                                  "raw_value": "vgcnbwc-worker-c125m425-6547.novalocal",
-                                  "title": "hostname",
-                                  "value": "vgcnbwc-worker-c125m425-6547.novalocal"
-                                },
-                                {
-                                  "name": "galaxy_slots",
-                                  "plugin": "core",
-                                  "raw_value": "5.0000000",
-                                  "title": "Cores Allocated",
-                                  "value": "5"
-                                },
-                                {
-                                  "name": "galaxy_memory_mb",
-                                  "plugin": "core",
-                                  "raw_value": "19456.0000000",
-                                  "title": "Memory Allocated (MB)",
-                                  "value": "19456"
-                                },
-                                {
-                                  "name": "start_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508382.0000000",
-                                  "title": "Job Start Time",
-                                  "value": "2023-05-19 16:59:42"
-                                },
-                                {
-                                  "name": "end_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508412.0000000",
-                                  "title": "Job End Time",
-                                  "value": "2023-05-19 17:00:12"
-                                },
-                                {
-                                  "name": "runtime_seconds",
-                                  "plugin": "core",
-                                  "raw_value": "30.0000000",
-                                  "title": "Job Runtime (Wall Clock)",
-                                  "value": "30 seconds"
-                                },
-                                {
-                                  "name": "cpuacct.usage",
-                                  "plugin": "cgroup",
-                                  "raw_value": "7314785524.0000000",
-                                  "title": "CPU Time",
-                                  "value": "7.314785524 seconds"
-                                },
-                                {
-                                  "name": "memory.failcnt",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Failed to allocate memory count",
-                                  "value": 0.0
-                                },
-                                {
-                                  "name": "memory.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "20401094656.0000000",
-                                  "title": "Memory limit on cgroup (MEM)",
-                                  "value": "19.0 GB"
-                                },
-                                {
-                                  "name": "memory.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "251256832.0000000",
-                                  "title": "Max memory usage (MEM)",
-                                  "value": "239.6 MB"
-                                },
-                                {
-                                  "name": "memory.memsw.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "9223372036854771712.0000000",
-                                  "title": "Memory limit on cgroup (MEM+SWP)",
-                                  "value": "8.0 EB"
-                                },
-                                {
-                                  "name": "memory.memsw.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "251256832.0000000",
-                                  "title": "Max memory usage (MEM+SWP)",
-                                  "value": "239.6 MB"
-                                },
-                                {
-                                  "name": "memory.oom_control.oom_kill_disable",
-                                  "plugin": "cgroup",
-                                  "raw_value": "1.0000000",
-                                  "title": "OOM Control enabled",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.oom_control.under_oom",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Was OOM Killer active?",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.soft_limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Memory softlimit on cgroup",
-                                  "value": "0 bytes"
-                                }
-                              ],
-                              "job_stderr": "",
-                              "job_stdout": "",
-                              "model_class": "Job",
-                              "output_collections": {
-                              },
-                              "outputs": {
-                                "out1": {
-                                  "id": "4838ba20a6d8676528f2966e438993df",
-                                  "src": "hda",
-                                  "uuid": "5096388f-425a-42a1-b99e-4f0174665371"
-                                },
-                                "report": {
-                                  "id": "4838ba20a6d8676504b9c2c33c839b66",
-                                  "src": "hda",
-                                  "uuid": "b9909c1d-09b1-47ec-9135-48915855c294"
-                                }
-                              },
-                              "params": {
-                                "__input_ext": "\"input\"",
-                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
-                                "adapter_options": "{\"count\": \"1\", \"error_rate\": \"0.1\", \"match_read_wildcards\": false, \"no_indels\": false, \"overlap\": \"3\"}",
-                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
-                                "dbkey": "\"?\"",
-                                "filter_options": "{\"discard\": false, \"discard_untrimmed\": false, \"mask_adapter\": false, \"max\": \"0\", \"max_n\": null, \"min\": \"20\", \"no_trim\": false, \"pair_filter\": \"any\"}",
-                                "library": "{\"__current_case__\": 0, \"input_1\": {\"values\": [{\"id\": 137417465, \"src\": \"hda\"}]}, \"r1\": {\"adapters\": [], \"anywhere_adapters\": [], \"cut\": \"0\", \"front_adapters\": []}, \"type\": \"single\"}",
-                                "output_options": "{\"info_file\": false, \"report\": true, \"rest_file\": false, \"too_long_file\": false, \"too_short_file\": false, \"untrimmed_file\": false, \"wildcard_file\": false}",
-                                "read_mod_options": "{\"length\": \"0\", \"length_tag\": \"\", \"nextseq_trim\": \"0\", \"prefix\": \"\", \"quality_cutoff\": \"20\", \"strip_suffix\": \"\", \"suffix\": \"\", \"trim_n\": false}"
-                              },
-                              "state": "ok",
-                              "stderr": "",
-                              "stdout": "",
-                              "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
-                              "tool_stderr": "",
-                              "tool_stdout": "",
-                              "traceback": null,
-                              "update_time": "2023-05-19T15:00:22.417608",
-                              "user_email": "hxr@informatik.uni-freiburg.de"
-                            }
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 3,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "out1": {
-                              "id": "4838ba20a6d8676528f2966e438993df",
-                              "src": "hda",
-                              "uuid": "5096388f-425a-42a1-b99e-4f0174665371"
-                            },
-                            "report": {
-                              "id": "4838ba20a6d8676504b9c2c33c839b66",
-                              "src": "hda",
-                              "uuid": "b9909c1d-09b1-47ec-9135-48915855c294"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T15:00:21.982154",
-                          "workflow_step_id": "17cb0d9cde915ee1",
-                          "workflow_step_label": null,
-                          "workflow_step_uuid": "ddd70253-72b8-4a5e-8025-56a579b01975"
-                        },
-                        "4. Unnamed step": {
-                          "action": null,
-                          "id": "a380f2e9cccfcc65",
-                          "job_id": "11ac94870d0bb33aae939aa0a3d41382",
-                          "jobs": [
-                            {
-                              "command_line": "ln -s '/data/dnb08/galaxy_db/files/9/9/6/dataset_9968668a-3051-4e02-aa3d-4997838a0985.dat' 'GSM461178_untreat_paired_subset_2_fastq' && mkdir -p '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files' && fastqc --outdir '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'    --quiet --extract  --kmers 7 -f 'fastq' 'GSM461178_untreat_paired_subset_2_fastq'  && cp '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'/*/fastqc_data.txt output.txt && cp '/data/jwd05e/main/060/059/60059404/working/dataset_3bc9888e-ec3f-4ae0-b61c-db19dec8e43e_files'/*\\.html output.html",
-                              "command_version": null,
-                              "create_time": "2023-05-19T14:59:03.488111",
-                              "dependencies": [
-                                {
-                                  "cacheable": false,
-                                  "dependency_resolver": {
-                                    "auto_init": true,
-                                    "auto_install": false,
-                                    "can_uninstall_dependencies": true,
-                                    "ensure_channels": "conda-forge,bioconda",
-                                    "model_class": "CondaDependencyResolver",
-                                    "prefix": "/usr/local/tools/_conda",
-                                    "read_only": false,
-                                    "resolver_type": "conda",
-                                    "resolves_simple_dependencies": true,
-                                    "use_local": false,
-                                    "versionless": false
-                                  },
-                                  "dependency_type": "conda",
-                                  "environment_path": "/usr/local/tools/_conda/envs/__fastqc@0.11.8",
-                                  "exact": true,
-                                  "model_class": "MergedCondaDependency",
-                                  "name": "fastqc",
-                                  "version": "0.11.8"
-                                }
-                              ],
-                              "exit_code": 0,
-                              "external_id": "43535386",
-                              "galaxy_version": "23.0",
-                              "history_id": "2f1f9fa04aab9b59",
-                              "id": "11ac94870d0bb33aae939aa0a3d41382",
-                              "inputs": {
-                                "input_file": {
-                                  "id": "4838ba20a6d867656914ebcc68e736a5",
-                                  "src": "hda",
-                                  "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
-                                }
-                              },
-                              "job_messages": [
-
-                              ],
-                              "job_metrics": [
-                                {
-                                  "name": "hostname",
-                                  "plugin": "hostname",
-                                  "raw_value": "vgcnbwc-worker-c125m425-1589.novalocal",
-                                  "title": "hostname",
-                                  "value": "vgcnbwc-worker-c125m425-1589.novalocal"
-                                },
-                                {
-                                  "name": "galaxy_slots",
-                                  "plugin": "core",
-                                  "raw_value": "8.0000000",
-                                  "title": "Cores Allocated",
-                                  "value": "8"
-                                },
-                                {
-                                  "name": "galaxy_memory_mb",
-                                  "plugin": "core",
-                                  "raw_value": "31129.0000000",
-                                  "title": "Memory Allocated (MB)",
-                                  "value": "31129"
-                                },
-                                {
-                                  "name": "start_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508676.0000000",
-                                  "title": "Job Start Time",
-                                  "value": "2023-05-19 17:04:36"
-                                },
-                                {
-                                  "name": "end_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508692.0000000",
-                                  "title": "Job End Time",
-                                  "value": "2023-05-19 17:04:52"
-                                },
-                                {
-                                  "name": "runtime_seconds",
-                                  "plugin": "core",
-                                  "raw_value": "16.0000000",
-                                  "title": "Job Runtime (Wall Clock)",
-                                  "value": "16 seconds"
-                                },
-                                {
-                                  "name": "cpuacct.usage",
-                                  "plugin": "cgroup",
-                                  "raw_value": "13539752576.0000000",
-                                  "title": "CPU Time",
-                                  "value": "13.539752576 seconds"
-                                },
-                                {
-                                  "name": "memory.failcnt",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Failed to allocate memory count",
-                                  "value": 0.0
-                                },
-                                {
-                                  "name": "memory.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "32749125632.0000000",
-                                  "title": "Memory limit on cgroup (MEM)",
-                                  "value": "30.5 GB"
-                                },
-                                {
-                                  "name": "memory.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "411770880.0000000",
-                                  "title": "Max memory usage (MEM)",
-                                  "value": "392.7 MB"
-                                },
-                                {
-                                  "name": "memory.memsw.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "9223372036854771712.0000000",
-                                  "title": "Memory limit on cgroup (MEM+SWP)",
-                                  "value": "8.0 EB"
-                                },
-                                {
-                                  "name": "memory.memsw.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "411770880.0000000",
-                                  "title": "Max memory usage (MEM+SWP)",
-                                  "value": "392.7 MB"
-                                },
-                                {
-                                  "name": "memory.oom_control.oom_kill_disable",
-                                  "plugin": "cgroup",
-                                  "raw_value": "1.0000000",
-                                  "title": "OOM Control enabled",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.oom_control.under_oom",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Was OOM Killer active?",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.soft_limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Memory softlimit on cgroup",
-                                  "value": "0 bytes"
-                                }
-                              ],
-                              "job_stderr": "",
-                              "job_stdout": "",
-                              "model_class": "Job",
-                              "output_collections": {
-                              },
-                              "outputs": {
-                                "html_file": {
-                                  "id": "4838ba20a6d867650e70120b79b974b3",
-                                  "src": "hda",
-                                  "uuid": "3bc9888e-ec3f-4ae0-b61c-db19dec8e43e"
-                                },
-                                "text_file": {
-                                  "id": "4838ba20a6d867656a6422c26474bdc5",
-                                  "src": "hda",
-                                  "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
-                                }
-                              },
-                              "params": {
-                                "__input_ext": "\"fastqsanger\"",
-                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
-                                "adapters": null,
-                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
-                                "contaminants": null,
-                                "dbkey": "\"?\"",
-                                "kmers": "\"7\"",
-                                "limits": null,
-                                "min_length": null,
-                                "nogroup": "false"
-                              },
-                              "state": "ok",
-                              "stderr": "",
-                              "stdout": "",
-                              "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-                              "tool_stderr": "",
-                              "tool_stdout": "",
-                              "traceback": null,
-                              "update_time": "2023-05-19T15:04:54.529461",
-                              "user_email": "hxr@informatik.uni-freiburg.de"
-                            }
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 4,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "html_file": {
-                              "id": "4838ba20a6d867650e70120b79b974b3",
-                              "src": "hda",
-                              "uuid": "3bc9888e-ec3f-4ae0-b61c-db19dec8e43e"
-                            },
-                            "text_file": {
-                              "id": "4838ba20a6d867656a6422c26474bdc5",
-                              "src": "hda",
-                              "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T15:04:54.499181",
-                          "workflow_step_id": "fc590094641a1ae9",
-                          "workflow_step_label": null,
-                          "workflow_step_uuid": "f48fa351-4a73-4daa-b993-2210274ae84d"
-                        },
-                        "5. Unnamed step": {
-                          "action": null,
-                          "id": "6a0711aa69933475",
-                          "job_id": "11ac94870d0bb33abd6fe235967051f6",
-                          "jobs": [
-                            {
-                              "command_line": "ln -f -s '/data/dnb08/galaxy_db/files/3/8/3/dataset_3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4.dat' 'GSM461178_untreat_paired_subset_1_fastq.fq' &&  ln -f -s '/data/dnb08/galaxy_db/files/9/9/6/dataset_9968668a-3051-4e02-aa3d-4997838a0985.dat' 'GSM461178_untreat_paired_subset_2_fastq.fq' &&   cutadapt  -j ${GALAXY_SLOTS:-1}                  --output='out1.fq' --paired-output='out2.fq'  --error-rate=0.1 --times=1 --overlap=3         --minimum-length=20 --pair-filter=any   --quality-cutoff=20   'GSM461178_untreat_paired_subset_1_fastq.fq' 'GSM461178_untreat_paired_subset_2_fastq.fq'  > report.txt",
-                              "command_version": "1.16",
-                              "create_time": "2023-05-19T14:59:03.590819",
-                              "dependencies": [
-                                {
-                                  "cacheable": false,
-                                  "dependency_resolver": {
-                                    "auto_init": true,
-                                    "auto_install": false,
-                                    "can_uninstall_dependencies": true,
-                                    "ensure_channels": "conda-forge,bioconda",
-                                    "model_class": "CondaDependencyResolver",
-                                    "prefix": "/usr/local/tools/_conda",
-                                    "read_only": false,
-                                    "resolver_type": "conda",
-                                    "resolves_simple_dependencies": true,
-                                    "use_local": false,
-                                    "versionless": false
-                                  },
-                                  "dependency_type": "conda",
-                                  "environment_path": "/usr/local/tools/_conda/envs/__cutadapt@1.16",
-                                  "exact": true,
-                                  "model_class": "MergedCondaDependency",
-                                  "name": "cutadapt",
-                                  "version": "1.16"
-                                }
-                              ],
-                              "exit_code": 0,
-                              "external_id": "43535388",
-                              "galaxy_version": "23.0",
-                              "history_id": "2f1f9fa04aab9b59",
-                              "id": "11ac94870d0bb33abd6fe235967051f6",
-                              "inputs": {
-                                "input_1": {
-                                  "id": "4838ba20a6d86765ff25d30589db09fe",
-                                  "src": "hda",
-                                  "uuid": "3835c7cb-1707-4e6f-85d2-6f1ad5c31bc4"
-                                },
-                                "input_2": {
-                                  "id": "4838ba20a6d867656914ebcc68e736a5",
-                                  "src": "hda",
-                                  "uuid": "9968668a-3051-4e02-aa3d-4997838a0985"
-                                }
-                              },
-                              "job_messages": [
-
-                              ],
-                              "job_metrics": [
-                                {
-                                  "name": "hostname",
-                                  "plugin": "hostname",
-                                  "raw_value": "vgcnbwc-worker-c125m425-6547.novalocal",
-                                  "title": "hostname",
-                                  "value": "vgcnbwc-worker-c125m425-6547.novalocal"
-                                },
-                                {
-                                  "name": "galaxy_slots",
-                                  "plugin": "core",
-                                  "raw_value": "5.0000000",
-                                  "title": "Cores Allocated",
-                                  "value": "5"
-                                },
-                                {
-                                  "name": "galaxy_memory_mb",
-                                  "plugin": "core",
-                                  "raw_value": "19456.0000000",
-                                  "title": "Memory Allocated (MB)",
-                                  "value": "19456"
-                                },
-                                {
-                                  "name": "start_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508356.0000000",
-                                  "title": "Job Start Time",
-                                  "value": "2023-05-19 16:59:16"
-                                },
-                                {
-                                  "name": "end_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508381.0000000",
-                                  "title": "Job End Time",
-                                  "value": "2023-05-19 16:59:41"
-                                },
-                                {
-                                  "name": "runtime_seconds",
-                                  "plugin": "core",
-                                  "raw_value": "25.0000000",
-                                  "title": "Job Runtime (Wall Clock)",
-                                  "value": "25 seconds"
-                                },
-                                {
-                                  "name": "cpuacct.usage",
-                                  "plugin": "cgroup",
-                                  "raw_value": "8873728303.0000000",
-                                  "title": "CPU Time",
-                                  "value": "8.873728303 seconds"
-                                },
-                                {
-                                  "name": "memory.failcnt",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Failed to allocate memory count",
-                                  "value": 0.0
-                                },
-                                {
-                                  "name": "memory.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "20401094656.0000000",
-                                  "title": "Memory limit on cgroup (MEM)",
-                                  "value": "19.0 GB"
-                                },
-                                {
-                                  "name": "memory.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "362237952.0000000",
-                                  "title": "Max memory usage (MEM)",
-                                  "value": "345.5 MB"
-                                },
-                                {
-                                  "name": "memory.memsw.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "9223372036854771712.0000000",
-                                  "title": "Memory limit on cgroup (MEM+SWP)",
-                                  "value": "8.0 EB"
-                                },
-                                {
-                                  "name": "memory.memsw.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "362237952.0000000",
-                                  "title": "Max memory usage (MEM+SWP)",
-                                  "value": "345.5 MB"
-                                },
-                                {
-                                  "name": "memory.oom_control.oom_kill_disable",
-                                  "plugin": "cgroup",
-                                  "raw_value": "1.0000000",
-                                  "title": "OOM Control enabled",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.oom_control.under_oom",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Was OOM Killer active?",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.soft_limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Memory softlimit on cgroup",
-                                  "value": "0 bytes"
-                                }
-                              ],
-                              "job_stderr": "",
-                              "job_stdout": "",
-                              "model_class": "Job",
-                              "output_collections": {
-                              },
-                              "outputs": {
-                                "out1": {
-                                  "id": "4838ba20a6d867658b181ea162b2bff2",
-                                  "src": "hda",
-                                  "uuid": "5647f1a7-5cfe-4e7e-8a12-733901cbbc2f"
-                                },
-                                "out2": {
-                                  "id": "4838ba20a6d8676511267a23c1bb707d",
-                                  "src": "hda",
-                                  "uuid": "7936d330-0e1e-43d9-abc8-e01e2e8ce871"
-                                },
-                                "report": {
-                                  "id": "4838ba20a6d86765b7823a727e8a67cd",
-                                  "src": "hda",
-                                  "uuid": "d3748a3d-cb92-4c98-a590-d687c708ddc8"
-                                }
-                              },
-                              "params": {
-                                "__input_ext": "\"input\"",
-                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
-                                "adapter_options": "{\"count\": \"1\", \"error_rate\": \"0.1\", \"match_read_wildcards\": false, \"no_indels\": false, \"overlap\": \"3\"}",
-                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
-                                "dbkey": "\"?\"",
-                                "filter_options": "{\"discard\": false, \"discard_untrimmed\": false, \"mask_adapter\": false, \"max\": \"0\", \"max_n\": null, \"min\": \"20\", \"no_trim\": false, \"pair_filter\": \"any\"}",
-                                "library": "{\"__current_case__\": 1, \"input_1\": {\"values\": [{\"id\": 137417465, \"src\": \"hda\"}]}, \"input_2\": {\"values\": [{\"id\": 137417509, \"src\": \"hda\"}]}, \"r1\": {\"adapters\": [], \"anywhere_adapters\": [], \"cut\": \"0\", \"front_adapters\": []}, \"r2\": {\"adapters2\": [], \"anywhere_adapters2\": [], \"cut2\": \"0\", \"front_adapters2\": []}, \"type\": \"paired\"}",
-                                "output_options": "{\"info_file\": false, \"report\": true, \"rest_file\": false, \"too_long_file\": false, \"too_short_file\": false, \"untrimmed_file\": false, \"wildcard_file\": false}",
-                                "read_mod_options": "{\"length\": \"0\", \"length_tag\": \"\", \"nextseq_trim\": \"0\", \"prefix\": \"\", \"quality_cutoff\": \"20\", \"strip_suffix\": \"\", \"suffix\": \"\", \"trim_n\": false}"
-                              },
-                              "state": "ok",
-                              "stderr": "",
-                              "stdout": "",
-                              "tool_id": "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
-                              "tool_stderr": "",
-                              "tool_stdout": "",
-                              "traceback": null,
-                              "update_time": "2023-05-19T14:59:42.633522",
-                              "user_email": "hxr@informatik.uni-freiburg.de"
-                            }
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 5,
-                          "output_collections": {
-                          },
-                          "outputs": {
-                            "out1": {
-                              "id": "4838ba20a6d867658b181ea162b2bff2",
-                              "src": "hda",
-                              "uuid": "5647f1a7-5cfe-4e7e-8a12-733901cbbc2f"
-                            },
-                            "out2": {
-                              "id": "4838ba20a6d8676511267a23c1bb707d",
-                              "src": "hda",
-                              "uuid": "7936d330-0e1e-43d9-abc8-e01e2e8ce871"
-                            },
-                            "report": {
-                              "id": "4838ba20a6d86765b7823a727e8a67cd",
-                              "src": "hda",
-                              "uuid": "d3748a3d-cb92-4c98-a590-d687c708ddc8"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T14:59:42.614406",
-                          "workflow_step_id": "1c99f44f251d0c5a",
-                          "workflow_step_label": null,
-                          "workflow_step_uuid": "5ff1e523-c42b-42cd-8857-84d7d83802f8"
-                        },
-                        "6. Unnamed step": {
-                          "action": null,
-                          "id": "c0e9eb97be074ab9",
-                          "job_id": "11ac94870d0bb33a3e4f5384f33fb7c3",
-                          "jobs": [
-                            {
-                              "command_line": "die() { echo \"$@\" 1>&2 ; exit 1; } &&  mkdir multiqc_WDir &&   mkdir multiqc_WDir/fastqc_0 &&    mkdir 'multiqc_WDir/fastqc_0/data_0' &&  mkdir 'multiqc_WDir/fastqc_0/data_0/file_0' && ln -s '/data/dnb08/galaxy_db/files/8/a/a/dataset_8aadb0d6-4752-43b3-9a70-b58359fe1659.dat' 'multiqc_WDir/fastqc_0/data_0/file_0/fastqc_data.txt' && mkdir 'multiqc_WDir/fastqc_0/data_0/file_1' && ln -s '/data/dnb08/galaxy_db/files/e/d/e/dataset_edecc2ea-fa52-4947-9c41-f5956870688a.dat' 'multiqc_WDir/fastqc_0/data_0/file_1/fastqc_data.txt' &&  multiqc multiqc_WDir --filename \"report\"",
-                              "command_version": null,
-                              "create_time": "2023-05-19T14:59:03.693709",
-                              "dependencies": [
-                                {
-                                  "cacheable": false,
-                                  "dependency_resolver": {
-                                    "auto_init": true,
-                                    "auto_install": false,
-                                    "can_uninstall_dependencies": true,
-                                    "ensure_channels": "conda-forge,bioconda",
-                                    "model_class": "CondaDependencyResolver",
-                                    "prefix": "/usr/local/tools/_conda",
-                                    "read_only": false,
-                                    "resolver_type": "conda",
-                                    "resolves_simple_dependencies": true,
-                                    "use_local": false,
-                                    "versionless": false
-                                  },
-                                  "dependency_type": "conda",
-                                  "environment_path": "/usr/local/tools/_conda/envs/__multiqc@1.9",
-                                  "exact": true,
-                                  "model_class": "MergedCondaDependency",
-                                  "name": "multiqc",
-                                  "version": "1.9"
-                                }
-                              ],
-                              "exit_code": 0,
-                              "external_id": "43535462",
-                              "galaxy_version": "23.0",
-                              "history_id": "2f1f9fa04aab9b59",
-                              "id": "11ac94870d0bb33a3e4f5384f33fb7c3",
-                              "inputs": {
-                                "results_0|software_cond|output_0|input": {
-                                  "id": "4838ba20a6d86765967c147adffa4ae2",
-                                  "src": "hda",
-                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
-                                },
-                                "results_0|software_cond|output_0|input1": {
-                                  "id": "4838ba20a6d86765967c147adffa4ae2",
-                                  "src": "hda",
-                                  "uuid": "8aadb0d6-4752-43b3-9a70-b58359fe1659"
-                                },
-                                "results_0|software_cond|output_0|input2": {
-                                  "id": "4838ba20a6d867656a6422c26474bdc5",
-                                  "src": "hda",
-                                  "uuid": "edecc2ea-fa52-4947-9c41-f5956870688a"
-                                }
-                              },
-                              "job_messages": [
-
-                              ],
-                              "job_metrics": [
-                                {
-                                  "name": "hostname",
-                                  "plugin": "hostname",
-                                  "raw_value": "vgcnbwc-worker-c36m225-7634.novalocal",
-                                  "title": "hostname",
-                                  "value": "vgcnbwc-worker-c36m225-7634.novalocal"
-                                },
-                                {
-                                  "name": "galaxy_slots",
-                                  "plugin": "core",
-                                  "raw_value": "1.0000000",
-                                  "title": "Cores Allocated",
-                                  "value": "1"
-                                },
-                                {
-                                  "name": "galaxy_memory_mb",
-                                  "plugin": "core",
-                                  "raw_value": "11673.0000000",
-                                  "title": "Memory Allocated (MB)",
-                                  "value": "11673"
-                                },
-                                {
-                                  "name": "start_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508719.0000000",
-                                  "title": "Job Start Time",
-                                  "value": "2023-05-19 17:05:19"
-                                },
-                                {
-                                  "name": "end_epoch",
-                                  "plugin": "core",
-                                  "raw_value": "1684508927.0000000",
-                                  "title": "Job End Time",
-                                  "value": "2023-05-19 17:08:47"
-                                },
-                                {
-                                  "name": "runtime_seconds",
-                                  "plugin": "core",
-                                  "raw_value": "208.0000000",
-                                  "title": "Job Runtime (Wall Clock)",
-                                  "value": "3 minutes"
-                                },
-                                {
-                                  "name": "cpuacct.usage",
-                                  "plugin": "cgroup",
-                                  "raw_value": "15451533789.0000000",
-                                  "title": "CPU Time",
-                                  "value": "15.451533789 seconds"
-                                },
-                                {
-                                  "name": "memory.failcnt",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Failed to allocate memory count",
-                                  "value": 0.0
-                                },
-                                {
-                                  "name": "memory.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "12348030976.0000000",
-                                  "title": "Memory limit on cgroup (MEM)",
-                                  "value": "11.5 GB"
-                                },
-                                {
-                                  "name": "memory.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "243441664.0000000",
-                                  "title": "Max memory usage (MEM)",
-                                  "value": "232.2 MB"
-                                },
-                                {
-                                  "name": "memory.memsw.limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "9223372036854771712.0000000",
-                                  "title": "Memory limit on cgroup (MEM+SWP)",
-                                  "value": "8.0 EB"
-                                },
-                                {
-                                  "name": "memory.memsw.max_usage_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "243441664.0000000",
-                                  "title": "Max memory usage (MEM+SWP)",
-                                  "value": "232.2 MB"
-                                },
-                                {
-                                  "name": "memory.oom_control.oom_kill_disable",
-                                  "plugin": "cgroup",
-                                  "raw_value": "1.0000000",
-                                  "title": "OOM Control enabled",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.oom_control.under_oom",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Was OOM Killer active?",
-                                  "value": "No"
-                                },
-                                {
-                                  "name": "memory.soft_limit_in_bytes",
-                                  "plugin": "cgroup",
-                                  "raw_value": "0E-7",
-                                  "title": "Memory softlimit on cgroup",
-                                  "value": "0 bytes"
-                                }
-                              ],
-                              "job_stderr": "",
-                              "job_stdout": "",
-                              "model_class": "Job",
-                              "output_collections": {
-                                "stats": {
-                                  "id": "b2ed5bced30ea70a",
-                                  "src": "hdca"
-                                }
-                              },
-                              "outputs": {
-                                "__new_primary_file_stats|fastqc__": {
-                                  "id": "4838ba20a6d8676552151abe856ca468",
-                                  "src": "hda",
-                                  "uuid": "a0afcc44-22b6-4019-938e-4c8b313de6ea"
-                                },
-                                "__new_primary_file_stats|general_stats__": {
-                                  "id": "4838ba20a6d867656f4643c70fbd40cc",
-                                  "src": "hda",
-                                  "uuid": "d41e3789-24ea-4080-868b-0edab34c49a6"
-                                },
-                                "__new_primary_file_stats|sources__": {
-                                  "id": "4838ba20a6d8676518ad2e8586cc7f6b",
-                                  "src": "hda",
-                                  "uuid": "b697c224-e6d6-4f53-a3df-16fe5ca4444c"
-                                },
-                                "html_report": {
-                                  "id": "4838ba20a6d867657c9b5bfe8c22949d",
-                                  "src": "hda",
-                                  "uuid": "a42df514-e2c2-4f72-a9b8-e065ef58237f"
-                                }
-                              },
-                              "params": {
-                                "__input_ext": "\"txt\"",
-                                "__workflow_invocation_uuid__": "\"a085c588f65511ed82b7001e67d2ec02\"",
-                                "chromInfo": "\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"",
-                                "comment": "\"\"",
-                                "dbkey": "\"?\"",
-                                "export": "false",
-                                "flat": "false",
-                                "results": "[{\"__index__\": 0, \"software_cond\": {\"__current_case__\": 8, \"output\": [{\"__index__\": 0, \"input\": {\"values\": [{\"id\": 137417582, \"src\": \"hda\"}, {\"id\": 137417586, \"src\": \"hda\"}]}, \"type\": \"data\"}], \"software\": \"fastqc\"}}]",
-                                "saveLog": "false",
-                                "title": "\"\""
-                              },
-                              "state": "ok",
-                              "stderr": "[WARNING]         multiqc : MultiQC Version v1.14 now available!\n[INFO   ]         multiqc : This is MultiQC v1.9\n[INFO   ]         multiqc : Template    : default\n[INFO   ]         multiqc : Searching   : /data/jwd05e/main/060/059/60059406/working/multiqc_WDir\n[INFO   ]          fastqc : Found 2 reports\n[INFO   ]         multiqc : Compressing plot data\n[INFO   ]         multiqc : Report      : report.html\n[INFO   ]         multiqc : Data        : report_data\n[INFO   ]         multiqc : MultiQC complete\n",
-                              "stdout": "",
-                              "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
-                              "tool_stderr": "[WARNING]         multiqc : MultiQC Version v1.14 now available!\n[INFO   ]         multiqc : This is MultiQC v1.9\n[INFO   ]         multiqc : Template    : default\n[INFO   ]         multiqc : Searching   : /data/jwd05e/main/060/059/60059406/working/multiqc_WDir\n[INFO   ]          fastqc : Found 2 reports\n[INFO   ]         multiqc : Compressing plot data\n[INFO   ]         multiqc : Report      : report.html\n[INFO   ]         multiqc : Data        : report_data\n[INFO   ]         multiqc : MultiQC complete\n",
-                              "tool_stdout": "",
-                              "traceback": null,
-                              "update_time": "2023-05-19T15:08:50.825299",
-                              "user_email": "hxr@informatik.uni-freiburg.de"
-                            }
-                          ],
-                          "model_class": "WorkflowInvocationStep",
-                          "order_index": 6,
-                          "output_collections": {
-                            "stats": {
-                              "id": "b2ed5bced30ea70a",
-                              "src": "hdca"
-                            }
-                          },
-                          "outputs": {
-                            "html_report": {
-                              "id": "4838ba20a6d867657c9b5bfe8c22949d",
-                              "src": "hda",
-                              "uuid": "a42df514-e2c2-4f72-a9b8-e065ef58237f"
-                            }
-                          },
-                          "state": "scheduled",
-                          "subworkflow": null,
-                          "subworkflow_invocation_id": null,
-                          "update_time": "2023-05-19T15:08:50.808688",
-                          "workflow_step_id": "40e61d72c5cedf2a",
-                          "workflow_step_label": null,
-                          "workflow_step_uuid": "abf34a41-0150-42fc-b56a-a29eb92c24c3"
-                        }
-                      }
-                    },
-                    "problem_log": "No log for this engine type.",
-                    "start_datetime": "2023-05-19T16:55:58.620842",
-                    "status": "success"
-                  },
-                  "doc": "Test sample data for Sequence-analyses:Quality-control",
-                  "has_data": true,
-                  "id": "quality_control.ga_0",
-                  "test_type": "galaxy_workflow"
-                }
-              ],
-              "version": "0.1"
-            }
-          }
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fastqe/fastqe/0.2.6+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.41.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pycoqc/pycoqc/2.5.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Sequence analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "e7b2202befea",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "3d0c7bdf12f5",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqe",
-            "owner": "iuc",
-            "revisions": "89d299153577",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "multiqc",
-            "owner": "iuc",
-            "revisions": "75c93c70d094",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "nanoplot",
-            "owner": "iuc",
-            "revisions": "0f1c34698076",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pycoqc",
-            "owner": "iuc",
-            "revisions": "dc1500f42073",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cutadapt",
-            "owner": "lparsons",
-            "revisions": "660cffd8d92a",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cutadapt",
-            "owner": "lparsons",
-            "revisions": "44e2cc14f75b",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 3d0c7bdf12f5\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqe\n  owner: iuc\n  revisions: 89d299153577\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: 75c93c70d094\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nanoplot\n  owner: iuc\n  revisions: 0f1c34698076\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pycoqc\n  owner: iuc\n  revisions: dc1500f42073\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 660cffd8d92a\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cutadapt\n  owner: lparsons\n  revisions: 44e2cc14f75b\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/quality-control/tutorial.json"
       }
     },
     {

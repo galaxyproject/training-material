@@ -42,6 +42,663 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Introduction to image analysis using Galaxy",
+      "zenodo_link": "https://zenodo.org/record/3362976",
+      "level": "Introductory",
+      "questions": [
+        "How do I use Galaxy with imaging data?",
+        "How do I convert images using Galaxy?",
+        "How do I display images in Galaxy?",
+        "How do I filter images in Galaxy?",
+        "How do I segment simple images in Galaxy?"
+      ],
+      "objectives": [
+        "How to handle images in Galaxy.",
+        "How to perform basic image processing in Galaxy."
+      ],
+      "key_points": [
+        "The **Image Info** tool can provide valuable metadata information of an image.",
+        "TIFF files cannot viewed directly in most web browser, but have to be converted.",
+        "For visualization, images with a bit-depth more than 8-bit have to be histogram equalized."
+      ],
+      "time_estimation": "1H",
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "imaging",
+          "tutorials": [
+            "hela-screen-analysis"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Thomas Wollmann",
+          "orcid": "0000-0002-4741-3844",
+          "joined": "2019-08",
+          "id": "thomaswollmann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Leonid Kostrykin",
+          "orcid": "0000-0003-1323-3762",
+          "joined": "2023-08",
+          "email": "leonid.kostrykin@bioquant.uni-heidelberg.de",
+          "elixir_node": "de",
+          "twitter": "l_kostrykin",
+          "linkedin": "kostrykin",
+          "id": "kostrykin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kostrykin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/"
+        }
+      ],
+      "tags": [
+        "HeLa"
+      ],
+      "short_id": "T00181",
+      "url": "/topics/imaging/tutorials/imaging-introduction/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "imaging-introduction",
+      "dir": "topics/imaging/tutorials/imaging-introduction",
+      "id": "imaging/imaging-introduction",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
+          "path": "topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
+          "wfid": "imaging-imaging-introduction",
+          "wfname": "galaxy-workflow-gtn_tutorial__introduction_to_imaging",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-imaging-introduction/versions/galaxy-workflow-gtn_tutorial__introduction_to_imaging",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.4",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/0.4",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.4",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_segmentation_mask/ip_overlay_segmentation/0.0.6",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Imaging",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "2d_auto_threshold",
+            "owner": "imgteam",
+            "revisions": "81f0cbca04a7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_auto_threshold",
+            "owner": "imgteam",
+            "revisions": "0c777d708acc",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_histogram_equalization",
+            "owner": "imgteam",
+            "revisions": "70316d792fc9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_simple_filter",
+            "owner": "imgteam",
+            "revisions": "dba87c4b32d3",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bfconvert",
+            "owner": "imgteam",
+            "revisions": "b07f4839ca77",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bfconvert",
+            "owner": "imgteam",
+            "revisions": "f3360fbeda64",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "binary2labelimage",
+            "owner": "imgteam",
+            "revisions": "6e65fd971e13",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "count_objects",
+            "owner": "imgteam",
+            "revisions": "664232d2a3f7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "count_objects",
+            "owner": "imgteam",
+            "revisions": "5bf8eb50b280",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "image_info",
+            "owner": "imgteam",
+            "revisions": "7b6d9412c7f8",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "overlay_images",
+            "owner": "imgteam",
+            "revisions": "b74693340624",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "38eec75fbe9b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "unzip",
+            "owner": "imgteam",
+            "revisions": "57f0914ddb7b",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 81f0cbca04a7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 0c777d708acc\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 70316d792fc9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: b07f4839ca77\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: f3360fbeda64\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 6e65fd971e13\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 664232d2a3f7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 5bf8eb50b280\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: image_info\n  owner: imgteam\n  revisions: 7b6d9412c7f8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: overlay_images\n  owner: imgteam\n  revisions: b74693340624\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "End-to-End Tissue Microarray Image Analysis with Galaxy-ME",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.7622545",
+      "questions": [
+        "What tools are available for pre-processing multiplex tissue images in Galaxy?",
+        "What tools are available for downstream analysis of multiplex tissue images in Galaxy?",
+        "How do I pre-process and analyze Tissue Microarray data?",
+        "How can I visualize multiplex tissue images and associated data?",
+        "How can I assign phenotypes to cells in an MTI dataset?"
+      ],
+      "objectives": [
+        "Understand the tools available in Galaxy for multiplex tissue imaging analysis",
+        "Analyze and visualize publicly available TMA data using Galaxy"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Galaxy has tools and workflows that can be used to process and analyze multiplex tissue images",
+        "Cell feature tables produced by the Galaxy TMA workflow can be used for downstream single-cell and spatial analyses",
+        "There are powerful interactive visualization tools available in Galaxy that can combine the real images with associated data",
+        "Tissue Microarray data can be analyzed using workflows that invoke MTI tools in batch",
+        "Segmentation quality can vary significantly depending on features of the input image, tool used, and parameters"
+      ],
+      "contributors": [
+        {
+          "name": "Cameron Watson",
+          "joined": "2022-07",
+          "email": "watsocam@ohsu.edu",
+          "orcid": "0000-0002-6942-2469",
+          "id": "CameronFRWatson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/CameronFRWatson.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CameronFRWatson/"
+        },
+        {
+          "name": "Allison Creason",
+          "email": "creason@ohsu.edu",
+          "orcid": "0000-0001-5724-1276",
+          "joined": "2023-02",
+          "id": "alliecreason",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/alliecreason.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alliecreason/"
+        }
+      ],
+      "short_id": "T00334",
+      "url": "/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "multiplex-tissue-imaging-TMA",
+      "dir": "topics/imaging/tutorials/multiplex-tissue-imaging-TMA",
+      "id": "imaging/multiplex-tissue-imaging-TMA",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
+          "path": "topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
+          "wfid": "imaging-multiplex-tissue-imaging-TMA",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-multiplex-tissue-imaging-TMA/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Imaging",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "mesmer",
+            "owner": "goeckslab",
+            "revisions": "187918c47051",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "rename_tiff_channels",
+            "owner": "goeckslab",
+            "revisions": "09e240a12897",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "scimap_mcmicro_to_anndata",
+            "owner": "goeckslab",
+            "revisions": "8ca435ec19be",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "scimap_phenotyping",
+            "owner": "goeckslab",
+            "revisions": "dcfcad35e847",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "vitessce_spatial",
+            "owner": "goeckslab",
+            "revisions": "9f60ef2d586e",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bfconvert",
+            "owner": "imgteam",
+            "revisions": "f3360fbeda64",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ashlar",
+            "owner": "perssond",
+            "revisions": "33ab2058c6d9",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "basic_illumination",
+            "owner": "perssond",
+            "revisions": "acc6f509968c",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "coreograph",
+            "owner": "perssond",
+            "revisions": "ee92746d141a",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "quantification",
+            "owner": "perssond",
+            "revisions": "3a916c4e9f5f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: mesmer\n  owner: goeckslab\n  revisions: 187918c47051\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rename_tiff_channels\n  owner: goeckslab\n  revisions: '09e240a12897'\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_mcmicro_to_anndata\n  owner: goeckslab\n  revisions: 8ca435ec19be\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_phenotyping\n  owner: goeckslab\n  revisions: dcfcad35e847\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vitessce_spatial\n  owner: goeckslab\n  revisions: 9f60ef2d586e\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: f3360fbeda64\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ashlar\n  owner: perssond\n  revisions: 33ab2058c6d9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: basic_illumination\n  owner: perssond\n  revisions: acc6f509968c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: coreograph\n  owner: perssond\n  revisions: ee92746d141a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quantification\n  owner: perssond\n  revisions: 3a916c4e9f5f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Analyse HeLa fluorescence siRNA screen",
+      "zenodo_link": "https://zenodo.org/record/3362976",
+      "level": "Intermediate",
+      "questions": [
+        "How do I analyze a HeLa fluorescence siRNA screen?",
+        "How do I segment cell nuclei?",
+        "How do I extract features from segmentations?",
+        "How do I filter segmentations by morphological features?",
+        "How do I apply a feature extraction workflow to a screen?",
+        "How do I visualize feature extraction results?"
+      ],
+      "objectives": [
+        "How to segment cell nuclei in Galaxy.",
+        "How to extract features from segmentations in Galaxy.",
+        "How to filter segmentations by morphological features in Galaxy.",
+        "How to extract features from an imaging screen in Galaxy.",
+        "How to analyse extracted features from an imaging screen in Galaxy."
+      ],
+      "key_points": [
+        "Galaxy workflows can be used to scale image analysis pipelines to whole screens.",
+        "Segmented objects can be filtered using the **Filter segmentation** tool.",
+        "Galaxy charts can be used to compare features extracted from screens showing cells with different treatments."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "imaging",
+          "tutorials": [
+            "imaging-introduction"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "statistics",
+          "tutorials": [
+            "machinelearning"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "contributors": [
+        {
+          "name": "Thomas Wollmann",
+          "orcid": "0000-0002-4741-3844",
+          "joined": "2019-08",
+          "id": "thomaswollmann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/"
+        },
+        {
+          "name": "Leonid Kostrykin",
+          "orcid": "0000-0003-1323-3762",
+          "joined": "2023-08",
+          "email": "leonid.kostrykin@bioquant.uni-heidelberg.de",
+          "elixir_node": "de",
+          "twitter": "l_kostrykin",
+          "linkedin": "kostrykin",
+          "id": "kostrykin",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kostrykin.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/"
+        }
+      ],
+      "tags": [
+        "HeLa"
+      ],
+      "short_id": "T00180",
+      "url": "/topics/imaging/tutorials/hela-screen-analysis/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "hela-screen-analysis",
+      "dir": "topics/imaging/tutorials/hela-screen-analysis",
+      "id": "imaging/hela-screen-analysis",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "analyze_screen.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
+          "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
+          "wfid": "imaging-hela-screen-analysis",
+          "wfname": "analyze_screen",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze_screen",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "feature_extraction.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
+          "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
+          "wfid": "imaging-hela-screen-analysis",
+          "wfname": "feature_extraction",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/feature_extraction",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Imaging",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "2d_auto_threshold",
+            "owner": "imgteam",
+            "revisions": "d4da97f51700",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_feature_extraction",
+            "owner": "imgteam",
+            "revisions": "5791a7f65275",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_filter_segmentation_by_features",
+            "owner": "imgteam",
+            "revisions": "e576b73a2e2f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_simple_filter",
+            "owner": "imgteam",
+            "revisions": "dba87c4b32d3",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "2d_split_binaryimage_by_watershed",
+            "owner": "imgteam",
+            "revisions": "f8f7987586b7",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "collapse_collections",
+            "owner": "nml",
+            "revisions": "25136a2b0cfe",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: d4da97f51700\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_feature_extraction\n  owner: imgteam\n  revisions: 5791a7f65275\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_filter_segmentation_by_features\n  owner: imgteam\n  revisions: e576b73a2e2f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_split_binaryimage_by_watershed\n  owner: imgteam\n  revisions: f8f7987586b7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 25136a2b0cfe\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Nucleoli segmentation and feature extraction using CellProfiler",
       "questions": [
         "How do I run an image analysis pipeline on public data using CellProfiler?",
@@ -332,201 +989,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "End-to-End Tissue Microarray Image Analysis with Galaxy-ME",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.7622545",
-      "questions": [
-        "What tools are available for pre-processing multiplex tissue images in Galaxy?",
-        "What tools are available for downstream analysis of multiplex tissue images in Galaxy?",
-        "How do I pre-process and analyze Tissue Microarray data?",
-        "How can I visualize multiplex tissue images and associated data?",
-        "How can I assign phenotypes to cells in an MTI dataset?"
-      ],
-      "objectives": [
-        "Understand the tools available in Galaxy for multiplex tissue imaging analysis",
-        "Analyze and visualize publicly available TMA data using Galaxy"
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Galaxy has tools and workflows that can be used to process and analyze multiplex tissue images",
-        "Cell feature tables produced by the Galaxy TMA workflow can be used for downstream single-cell and spatial analyses",
-        "There are powerful interactive visualization tools available in Galaxy that can combine the real images with associated data",
-        "Tissue Microarray data can be analyzed using workflows that invoke MTI tools in batch",
-        "Segmentation quality can vary significantly depending on features of the input image, tool used, and parameters"
-      ],
-      "contributors": [
-        {
-          "name": "Cameron Watson",
-          "joined": "2022-07",
-          "email": "watsocam@ohsu.edu",
-          "orcid": "0000-0002-6942-2469",
-          "id": "CameronFRWatson",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/CameronFRWatson.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CameronFRWatson/"
-        },
-        {
-          "name": "Allison Creason",
-          "email": "creason@ohsu.edu",
-          "orcid": "0000-0001-5724-1276",
-          "joined": "2023-02",
-          "id": "alliecreason",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/alliecreason.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alliecreason/"
-        }
-      ],
-      "short_id": "T00334",
-      "url": "/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html",
-      "topic_name": "imaging",
-      "tutorial_name": "multiplex-tissue-imaging-TMA",
-      "dir": "topics/imaging/tutorials/multiplex-tissue-imaging-TMA",
-      "id": "imaging/multiplex-tissue-imaging-TMA",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
-          "path": "topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.ga",
-          "wfid": "imaging-multiplex-tissue-imaging-TMA",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-multiplex-tissue-imaging-TMA/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Imaging",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "mesmer",
-            "owner": "goeckslab",
-            "revisions": "187918c47051",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "rename_tiff_channels",
-            "owner": "goeckslab",
-            "revisions": "09e240a12897",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "scimap_mcmicro_to_anndata",
-            "owner": "goeckslab",
-            "revisions": "8ca435ec19be",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "scimap_phenotyping",
-            "owner": "goeckslab",
-            "revisions": "dcfcad35e847",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "vitessce_spatial",
-            "owner": "goeckslab",
-            "revisions": "9f60ef2d586e",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bfconvert",
-            "owner": "imgteam",
-            "revisions": "f3360fbeda64",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ashlar",
-            "owner": "perssond",
-            "revisions": "33ab2058c6d9",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "basic_illumination",
-            "owner": "perssond",
-            "revisions": "acc6f509968c",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "coreograph",
-            "owner": "perssond",
-            "revisions": "ee92746d141a",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "quantification",
-            "owner": "perssond",
-            "revisions": "3a916c4e9f5f",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: mesmer\n  owner: goeckslab\n  revisions: 187918c47051\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: rename_tiff_channels\n  owner: goeckslab\n  revisions: '09e240a12897'\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_mcmicro_to_anndata\n  owner: goeckslab\n  revisions: 8ca435ec19be\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: scimap_phenotyping\n  owner: goeckslab\n  revisions: dcfcad35e847\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vitessce_spatial\n  owner: goeckslab\n  revisions: 9f60ef2d586e\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: f3360fbeda64\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ashlar\n  owner: perssond\n  revisions: 33ab2058c6d9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: basic_illumination\n  owner: perssond\n  revisions: acc6f509968c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: coreograph\n  owner: perssond\n  revisions: ee92746d141a\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: quantification\n  owner: perssond\n  revisions: 3a916c4e9f5f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Object tracking using CellProfiler",
       "zenodo_link": "http://doi.org/10.5281/zenodo.4567084",
       "requirements": [
@@ -749,468 +1211,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Analyse HeLa fluorescence siRNA screen",
-      "zenodo_link": "https://zenodo.org/record/3362976",
-      "level": "Intermediate",
-      "questions": [
-        "How do I analyze a HeLa fluorescence siRNA screen?",
-        "How do I segment cell nuclei?",
-        "How do I extract features from segmentations?",
-        "How do I filter segmentations by morphological features?",
-        "How do I apply a feature extraction workflow to a screen?",
-        "How do I visualize feature extraction results?"
-      ],
-      "objectives": [
-        "How to segment cell nuclei in Galaxy.",
-        "How to extract features from segmentations in Galaxy.",
-        "How to filter segmentations by morphological features in Galaxy.",
-        "How to extract features from an imaging screen in Galaxy.",
-        "How to analyse extracted features from an imaging screen in Galaxy."
-      ],
-      "key_points": [
-        "Galaxy workflows can be used to scale image analysis pipelines to whole screens.",
-        "Segmented objects can be filtered using the **Filter segmentation** tool.",
-        "Galaxy charts can be used to compare features extracted from screens showing cells with different treatments."
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "imaging",
-          "tutorials": [
-            "imaging-introduction"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "statistics",
-          "tutorials": [
-            "machinelearning"
-          ]
-        }
-      ],
-      "time_estimation": "1H",
-      "contributors": [
-        {
-          "name": "Thomas Wollmann",
-          "orcid": "0000-0002-4741-3844",
-          "joined": "2019-08",
-          "id": "thomaswollmann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/"
-        },
-        {
-          "name": "Leonid Kostrykin",
-          "orcid": "0000-0003-1323-3762",
-          "joined": "2023-08",
-          "email": "leonid.kostrykin@bioquant.uni-heidelberg.de",
-          "elixir_node": "de",
-          "twitter": "l_kostrykin",
-          "linkedin": "kostrykin",
-          "id": "kostrykin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kostrykin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/"
-        }
-      ],
-      "tags": [
-        "HeLa"
-      ],
-      "short_id": "T00180",
-      "url": "/topics/imaging/tutorials/hela-screen-analysis/tutorial.html",
-      "topic_name": "imaging",
-      "tutorial_name": "hela-screen-analysis",
-      "dir": "topics/imaging/tutorials/hela-screen-analysis",
-      "id": "imaging/hela-screen-analysis",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "analyze_screen.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
-          "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.ga",
-          "wfid": "imaging-hela-screen-analysis",
-          "wfname": "analyze_screen",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze_screen",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "feature_extraction.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
-          "path": "topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.ga",
-          "wfid": "imaging-hela-screen-analysis",
-          "wfname": "feature_extraction",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/feature_extraction",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Imaging",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "2d_auto_threshold",
-            "owner": "imgteam",
-            "revisions": "d4da97f51700",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_feature_extraction",
-            "owner": "imgteam",
-            "revisions": "5791a7f65275",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_filter_segmentation_by_features",
-            "owner": "imgteam",
-            "revisions": "e576b73a2e2f",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_simple_filter",
-            "owner": "imgteam",
-            "revisions": "dba87c4b32d3",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_split_binaryimage_by_watershed",
-            "owner": "imgteam",
-            "revisions": "f8f7987586b7",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "collapse_collections",
-            "owner": "nml",
-            "revisions": "25136a2b0cfe",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: d4da97f51700\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_feature_extraction\n  owner: imgteam\n  revisions: 5791a7f65275\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_filter_segmentation_by_features\n  owner: imgteam\n  revisions: e576b73a2e2f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_split_binaryimage_by_watershed\n  owner: imgteam\n  revisions: f8f7987586b7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 25136a2b0cfe\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/hela-screen-analysis/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Introduction to image analysis using Galaxy",
-      "zenodo_link": "https://zenodo.org/record/3362976",
-      "level": "Introductory",
-      "questions": [
-        "How do I use Galaxy with imaging data?",
-        "How do I convert images using Galaxy?",
-        "How do I display images in Galaxy?",
-        "How do I filter images in Galaxy?",
-        "How do I segment simple images in Galaxy?"
-      ],
-      "objectives": [
-        "How to handle images in Galaxy.",
-        "How to perform basic image processing in Galaxy."
-      ],
-      "key_points": [
-        "The **Image Info** tool can provide valuable metadata information of an image.",
-        "TIFF files cannot viewed directly in most web browser, but have to be converted.",
-        "For visualization, images with a bit-depth more than 8-bit have to be histogram equalized."
-      ],
-      "time_estimation": "1H",
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "imaging",
-          "tutorials": [
-            "hela-screen-analysis"
-          ]
-        }
-      ],
-      "contributors": [
-        {
-          "name": "Thomas Wollmann",
-          "orcid": "0000-0002-4741-3844",
-          "joined": "2019-08",
-          "id": "thomaswollmann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/thomaswollmann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Leonid Kostrykin",
-          "orcid": "0000-0003-1323-3762",
-          "joined": "2023-08",
-          "email": "leonid.kostrykin@bioquant.uni-heidelberg.de",
-          "elixir_node": "de",
-          "twitter": "l_kostrykin",
-          "linkedin": "kostrykin",
-          "id": "kostrykin",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kostrykin.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/"
-        }
-      ],
-      "tags": [
-        "HeLa"
-      ],
-      "short_id": "T00181",
-      "url": "/topics/imaging/tutorials/imaging-introduction/tutorial.html",
-      "topic_name": "imaging",
-      "tutorial_name": "imaging-introduction",
-      "dir": "topics/imaging/tutorials/imaging-introduction",
-      "id": "imaging/imaging-introduction",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
-          "path": "topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.ga",
-          "wfid": "imaging-imaging-introduction",
-          "wfname": "galaxy-workflow-gtn_tutorial__introduction_to_imaging",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-imaging-introduction/versions/galaxy-workflow-gtn_tutorial__introduction_to_imaging",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.4",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/0.4",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.4",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_segmentation_mask/ip_overlay_segmentation/0.0.6",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2",
-        "toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0"
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Imaging",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "2d_auto_threshold",
-            "owner": "imgteam",
-            "revisions": "81f0cbca04a7",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_auto_threshold",
-            "owner": "imgteam",
-            "revisions": "0c777d708acc",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_histogram_equalization",
-            "owner": "imgteam",
-            "revisions": "70316d792fc9",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "2d_simple_filter",
-            "owner": "imgteam",
-            "revisions": "dba87c4b32d3",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bfconvert",
-            "owner": "imgteam",
-            "revisions": "b07f4839ca77",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bfconvert",
-            "owner": "imgteam",
-            "revisions": "f3360fbeda64",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "binary2labelimage",
-            "owner": "imgteam",
-            "revisions": "6e65fd971e13",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "count_objects",
-            "owner": "imgteam",
-            "revisions": "664232d2a3f7",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "count_objects",
-            "owner": "imgteam",
-            "revisions": "5bf8eb50b280",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "image_info",
-            "owner": "imgteam",
-            "revisions": "7b6d9412c7f8",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "overlay_images",
-            "owner": "imgteam",
-            "revisions": "b74693340624",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "unzip",
-            "owner": "imgteam",
-            "revisions": "38eec75fbe9b",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "unzip",
-            "owner": "imgteam",
-            "revisions": "57f0914ddb7b",
-            "tool_panel_section_label": "Imaging",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 81f0cbca04a7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_auto_threshold\n  owner: imgteam\n  revisions: 0c777d708acc\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_histogram_equalization\n  owner: imgteam\n  revisions: 70316d792fc9\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: 2d_simple_filter\n  owner: imgteam\n  revisions: dba87c4b32d3\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: b07f4839ca77\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bfconvert\n  owner: imgteam\n  revisions: f3360fbeda64\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: binary2labelimage\n  owner: imgteam\n  revisions: 6e65fd971e13\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 664232d2a3f7\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: count_objects\n  owner: imgteam\n  revisions: 5bf8eb50b280\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: image_info\n  owner: imgteam\n  revisions: 7b6d9412c7f8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: overlay_images\n  owner: imgteam\n  revisions: b74693340624\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 38eec75fbe9b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: unzip\n  owner: imgteam\n  revisions: 57f0914ddb7b\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/imaging-introduction/tutorial.json"
       }
     },
     {
