@@ -108,6 +108,7 @@
     <li ><a href="#method-c-should_ignore">::should_ignore</a>
     <li ><a href="#method-c-snippets_too_close_together">::snippets_too_close_together</a>
     <li ><a href="#method-c-youtube_bad">::youtube_bad</a>
+    <li ><a href="#method-c-zenodo_api">::zenodo_api</a>
   </ul>
 </div>
 
@@ -189,7 +190,7 @@
           
 
           <div class="method-source-code" id="bib_missing_mandatory_fields-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 714</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 730</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">bib_missing_mandatory_fields</span>(<span class="ruby-identifier">bib</span>)
   <span class="ruby-identifier">results</span> = []
   <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -712,7 +713,7 @@
           
 
           <div class="method-source-code" id="code_limits-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 844</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 860</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">code_limits</span>(<span class="ruby-identifier">codes</span>)
   <span class="ruby-ivar">@LIMIT_EMITTED_CODES</span> = <span class="ruby-identifier">codes</span>
 <span class="ruby-keyword">end</span></pre>
@@ -733,7 +734,7 @@
           
 
           <div class="method-source-code" id="emit_results-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 904</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 920</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">emit_results</span>(<span class="ruby-identifier">results</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-operator">!</span><span class="ruby-identifier">results</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">results</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
 
@@ -756,7 +757,7 @@
           
 
           <div class="method-source-code" id="enable_auto_fix-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 849</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 865</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enable_auto_fix</span>
   <span class="ruby-ivar">@AUTO_APPLY_FIXES</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
@@ -777,7 +778,7 @@
           
 
           <div class="method-source-code" id="enumerate_all-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1068</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1084</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_all</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/.*/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -798,7 +799,7 @@
           
 
           <div class="method-source-code" id="enumerate_lintable-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1064</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1080</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_lintable</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/bib$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/md$/</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;faqs&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -819,7 +820,7 @@
           
 
           <div class="method-source-code" id="enumerate_symlinks-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1049</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1065</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_symlinks</span>
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-string">&#39;./topics&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -851,7 +852,7 @@
           
 
           <div class="method-source-code" id="enumerate_type-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1034</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1050</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enumerate_type</span>(<span class="ruby-identifier">filter</span>, <span class="ruby-value">root_dir:</span> <span class="ruby-string">&#39;topics&#39;</span>)
   <span class="ruby-identifier">paths</span> = []
   <span class="ruby-constant">Find</span>.<span class="ruby-identifier">find</span>(<span class="ruby-node">&quot;./#{root_dir}&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
@@ -883,7 +884,7 @@
           
 
           <div class="method-source-code" id="filter_results-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 914</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 930</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filter_results</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">ignores</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">results</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-comment"># Remove any empty lists</span>
@@ -936,7 +937,7 @@
           
 
           <div class="method-source-code" id="fix_bib-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 799</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 815</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_bib</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-identifier">bib</span>)
   <span class="ruby-identifier">bad_keys</span> = <span class="ruby-identifier">bib_missing_mandatory_fields</span>(<span class="ruby-identifier">bib</span>)
   <span class="ruby-identifier">results</span> = []
@@ -987,7 +988,7 @@
           
 
           <div class="method-source-code" id="fix_file-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 927</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 943</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_file</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
 
@@ -1111,7 +1112,7 @@
           
 
           <div class="method-source-code" id="fix_ga_wf-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 741</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 757</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_ga_wf</span>(<span class="ruby-identifier">contents</span>)
   <span class="ruby-identifier">results</span> = []
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contents</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;tags&#39;</span>)
@@ -1186,7 +1187,7 @@
           
 
           <div class="method-source-code" id="fix_md-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 687</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 702</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fix_md</span>(<span class="ruby-identifier">contents</span>)
   [
     <span class="ruby-operator">*</span><span class="ruby-identifier">fix_notoc</span>(<span class="ruby-identifier">contents</span>),
@@ -1210,7 +1211,8 @@
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_useless_box_prefix</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_heading_order</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bolded_heading</span>(<span class="ruby-identifier">contents</span>),
-    <span class="ruby-operator">*</span><span class="ruby-identifier">snippets_too_close_together</span>(<span class="ruby-identifier">contents</span>)
+    <span class="ruby-operator">*</span><span class="ruby-identifier">snippets_too_close_together</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">zenodo_api</span>(<span class="ruby-identifier">contents</span>),
   ]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1261,7 +1263,7 @@
           
 
           <div class="method-source-code" id="format_reviewdog_output-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 853</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 869</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">format_reviewdog_output</span>(<span class="ruby-identifier">message</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@LIMIT_EMITTED_CODES</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@LIMIT_EMITTED_CODES</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">message</span>[<span class="ruby-string">&#39;code&#39;</span>][<span class="ruby-string">&#39;value&#39;</span>])
 
@@ -1608,7 +1610,7 @@
           
 
           <div class="method-source-code" id="run_linter_global-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 1072</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 1088</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">run_linter_global</span>
   <span class="ruby-identifier">enumerate_type</span>(<span class="ruby-regexp">/:/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">format_reviewdog_output</span>(
@@ -1661,7 +1663,7 @@
           
 
           <div class="method-source-code" id="set_plain_output-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 835</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 851</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_plain_output</span>
   <span class="ruby-ivar">@PLAIN_OUTPUT</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1682,7 +1684,7 @@
           
 
           <div class="method-source-code" id="set_rdjson_output-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 839</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 855</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_rdjson_output</span>
   <span class="ruby-ivar">@PLAIN_OUTPUT</span> = <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1703,7 +1705,7 @@
           
 
           <div class="method-source-code" id="should_ignore-source">
-            <pre><span class="ruby-comment"># File bin/lint.rb, line 910</span>
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 926</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">should_ignore</span>(<span class="ruby-identifier">contents</span>)
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/GTN:IGNORE:(\d\d\d)/</span>) }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;GTN:#{x.match(/GTN:IGNORE:(\d\d\d)/)[1]}&quot;</span> }.<span class="ruby-identifier">uniq</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1776,6 +1778,38 @@
                <span class="ruby-string">&#39;[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will &#39;</span> \
                <span class="ruby-string">&#39;be more visible for others.&#39;</span>,
       <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:002&#39;</span>
+    )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-zenodo_api" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">zenodo_api</span><span
+            class="method-args">(contents)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="zenodo_api-source">
+            <pre><span class="ruby-comment"># File bin/lint.rb, line 687</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">zenodo_api</span>(<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/(zenodo\.org\/api\/files\/)/</span>)
+    .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
+      <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
+      <span class="ruby-value">idx:</span> <span class="ruby-identifier">idx</span>,
+      <span class="ruby-value">match_start:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">begin</span>(<span class="ruby-value">1</span>),
+      <span class="ruby-value">match_end:</span> <span class="ruby-identifier">selected</span>.<span class="ruby-identifier">end</span>(<span class="ruby-value">1</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>,
+      <span class="ruby-value">replacement:</span> <span class="ruby-keyword">nil</span>,
+      <span class="ruby-value">message:</span> <span class="ruby-string">&#39;The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/..., apologies we cannot fix automatically.&#39;</span>,
+      <span class="ruby-value">code:</span> <span class="ruby-string">&#39;GTN:032&#39;</span>
     )
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
