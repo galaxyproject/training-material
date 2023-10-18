@@ -78,9 +78,9 @@ Here we will demonstrate analysing {CRISPR} screen using data from {% cite Fujih
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      T0-Control https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T0-Control.fastq.gz
->      T8-APR-246 https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-APR-246.fastq.gz
->      T8-Vehicle https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/T8-Vehicle.fastq.gz
+>      T0-Control https://zenodo.org/records/5750854/files/T0-Control.fastq.gz
+>      T8-APR-246 https://zenodo.org/records/5750854/files/T8-APR-246.fastq.gz
+>      T8-Vehicle https://zenodo.org/records/5750854/files/T8-Vehicle.fastq.gz
 >      ```
 >
 >    ![Rule-based Uploader](../../images/crispr-screen/crispr_rule_uploader.png)
@@ -118,7 +118,7 @@ With CRISPR screens we expect adapter sequence to be present, surrounding the gu
 >
 > 1. Import the adapters file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/adapter_list.tsv
+>    https://zenodo.org/records/5750854/files/adapter_list.tsv
 >    ```
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -246,7 +246,7 @@ To count how many guides we have for each gene, we need a library file that tell
 > <hands-on-title>Count guides per gene</hands-on-title>
 > 1. Import the sgRNA library file
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/brunello.tsv
+>    https://zenodo.org/records/5750854/files/brunello.tsv
 >    ```
 >
 > 2. {% tool [MAGeCK count](toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4) %} with the following parameters:
@@ -259,9 +259,9 @@ To count how many guides we have for each gene, we need a library file that tell
 >
 > 3. We have been using 1% of reads from the samples. Import the MAGeCK count files (sgRNA counts, counts summary and plots pdf) for the full dataset so you can see what results for a real dataset looks like.
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_sgrna_counts.tsv
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_summary.tsv
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_count_report.pdf
+>    https://zenodo.org/records/5750854/files/kenji_mageck_sgrna_counts.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_summary.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_count_report.pdf
 >    ```
 >
 {: .hands_on}
@@ -569,7 +569,7 @@ We can perform pathway analysis on the results to identify pathways that are cha
 >
 > 1. Import the Hallmark pathways file [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available). Set the Type to tabular:
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/h.all.v7.4.symbols.gmt
+>    https://zenodo.org/records/5750854/files/h.all.v7.4.symbols.gmt
 >    ```
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
@@ -629,7 +629,7 @@ Examples of more complicated design matrices, for e.g. time series experiments, 
 > <hands-on-title>Test for enrichment with MLE</hands-on-title>
 > 1. Import the design matrix file from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >    ```
->    https://zenodo.org/api/files/6599878c-f569-41bf-a37a-2c6f3d2e67f9/kenji_mageck_mle_design_matrix.tsv
+>    https://zenodo.org/records/5750854/files/kenji_mageck_mle_design_matrix.tsv
 >    ```
 >
 > 2. {% tool [MAGeCKs mle](toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1) %} with the following parameters:
