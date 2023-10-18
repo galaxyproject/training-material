@@ -12,7 +12,7 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 2 - Large-scale data analysis, and introduction to visualisation and data modelling
 
-priority: 1
+priority: 5
 draft: true
 
 pathway:

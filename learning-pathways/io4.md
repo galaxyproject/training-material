@@ -12,7 +12,7 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery
 
-priority: 1
+priority: 5
 draft: true
 
 pathway:

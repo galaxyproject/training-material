@@ -1,0 +1,7 @@
+- Decide on the order of the lessons and who will teach which modules
+- Help the organizer set up the workshop webpage
+- Review the training material and suggest changes at least 3 weeks before
+- Record your lessons
+- Provide the videos to the organiser who will organise captions for you
+- Review and correct the captions
+- Be prepared to help during the week

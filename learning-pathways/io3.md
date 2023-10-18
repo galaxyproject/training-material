@@ -12,7 +12,7 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 3 - Data stewardship, federation, standardisation, and collaboration
 
-priority: 1
+priority: 5
 draft: true
 
 pathway:

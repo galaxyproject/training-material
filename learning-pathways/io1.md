@@ -12,7 +12,7 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 1 - Introduction to data analysis and -management, statistics, and coding
 
-priority: 1
+priority: 5
 draft: true
 
 pathway:
