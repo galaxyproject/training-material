@@ -23,10 +23,8 @@ pathway:
 
   - section: "Hybrid Lesson Development Guide"
     description: |
-      Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
-    tutorials:
-      - name:
-        topic: 
+      ⚠️  **TODO** ⚠️ Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
+    tutorials: []
 
   - section: "Train the Trainer Programme"
     description: |
