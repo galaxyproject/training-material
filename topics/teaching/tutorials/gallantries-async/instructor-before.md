@@ -2,6 +2,7 @@
 - Help the organizer set up the workshop webpage
 - Review the training material and suggest changes at least 3 weeks before
 - Record your lessons
+  - Be sure to review the [recording guidelines](https://gallantries.github.io/video-library/events/smorgasbord2/recording.html)
 - Provide the videos to the organiser who will organise captions for you
 - Review and correct the captions
 - Be prepared to help during the week

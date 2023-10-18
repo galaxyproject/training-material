@@ -46,6 +46,22 @@ Taylor also recruited 4 **instructors**, **Farah** among them. Farah is a traine
 
 With the asynchronous training model, the cost of organizing and participating in the workshop are essentially eliminated: the instructors do not need to travel to the venue, participants can learn wherever is convenient for them, no rooms nor coffee must be organised.
 
+# Event Timeline
+
+Here is an example event timeline we provided for a past Smörgåsbord event:
+
+Date        | Time Left | What's happening
+---         | ---       | ---
+31 January  | 6 weeks   | You tell us which sessions you want to record
+4 February  | 5 weeks   | The final schedule is published
+17 February | 4 weeks   | GTN CoFest! Here we will help you create workflows + workflow tests for your tutorials.
+28 February | 2 weeks   | **Training Videos Due**. Final Course Materials online
+7 March     | 1 week    | Captions deadline & 30-second intro videos due
+14 March    | 0         | It begins!
+
+We also provided instructors with an instructors guideline page [tailored to the event](https://gallantries.github.io/video-library/instructors) and more important, a set of recording guidelines [like the Gallantries'](https://gallantries.github.io/video-library/events/smorgasbord2/recording.html) which helped instructors know what was best practice during video recording.
+
+
 # Workshop Checklists
 
 To help you organize an asynchronous event, we have created some checklists, by timing but also [by role](#checklists-by-role). Most of the items in these checklists are not specific to Gallantries/Smörgåsbord events.
