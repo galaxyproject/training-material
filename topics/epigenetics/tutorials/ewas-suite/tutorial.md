@@ -123,7 +123,9 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
+> 
 > ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
+> 
 {: .hands_on}
 
 
