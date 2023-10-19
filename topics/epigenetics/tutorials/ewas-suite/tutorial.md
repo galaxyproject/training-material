@@ -121,7 +121,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
 >
 > {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
-> \
+> 
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
 > ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
