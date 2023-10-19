@@ -15,110 +15,9 @@ layout: base
 }
 
 </style>
-<section class="contributor-{{ page.contributor }}">
+<section class="contributor-page contributor-{{ page.contributor }}">
 	<div class="stats">
 		<div class="row">
-
-			<div class="col-md-3">
-				<div>
-					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
-				</div>
-
-				{% if entity.bio %}
-				<p class="text-muted">
-					{{ entity.bio }}
-				</p>
-				{% endif %}
-
-				{% if page.has_philosophy %}
-				<div class="contact-items">
-					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
-						Training Philosophy
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.github != false %}
-				<div class="contact-items">
-					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
-						{% icon github %} {{ page.contributor }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.funding_id %}
-					Grant ID:
-					{% if entity.funding_system %}
-						{% assign url = entity | fetch_funding_url %}
-						<a href="{{ url }}">
-							{{ entity.funding_id }}
-						</a>
-					{% else %}
-						{{ entity.funding_id }}
-					{% endif %}
-				{% endif %}
-
-				{% if entity.email %}
-				<div class="contact-items">
-					<a title="E-mail" href="mailto:{{ entity.email }}">
-						{% icon email %} {{ entity.email }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.matrix %}
-				<div class="contact-items">
-					<a title="matrix" href="https://matrix.to/#/@{{ entity.matrix }}">
-						{% icon gitter %} {{ entity.matrix }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.fediverse %}
-				<div class="contact-items">
-					<a href="{{ entity.fediverse }}" rel="me">
-						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ entity.fediverse }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.twitter %}
-				<div class="contact-items">
-					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
-						{% icon twitter %} {{ entity.twitter }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.linkedin %}
-				<div class="contact-items">
-					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ entity.linkedin }}">
-						{% icon linkedin %} {{ entity.linkedin }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.orcid %}
-				<div class="contact-items">
-					<a title="ORCID" href="https://orcid.org/{{ entity.orcid }}">
-						{% icon orcid %} {{ entity.orcid }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if entity.elixir_node %}
-				<div class="contact-items">
-					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ entity.elixir_node }}.svg" alt="elixir logo for {{ entity.elixir_node | elixirnode2name }}">
-				</div>
-				{% endif %}
-
-				<h4>Favourite Topics</h4>
-				<canvas id="myChart" height="300px"></canvas>
-				<h4>Favourite Formats</h4>
-				<canvas id="slidesVsTutorials" height="300px"></canvas>
-
-			</div>
-
 			<div class="col-md-9">
 				<hgroup>
 					<h1>
@@ -128,6 +27,13 @@ layout: base
 					<p>Funded by {{ entity.funder_name }}</p>
 				{% endif %}
 				</hgroup>
+
+				{% if entity.bio %}
+				<p class="text-muted">
+					{{ entity.bio }}
+				</p>
+				{% endif %}
+
 				{% if entity.funder %}
 				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
 				{% endif %}
@@ -137,6 +43,13 @@ layout: base
 					<p>{{ entity.in_memoriam | markdownify }}</p>
 				</div>
 
+				{% endif %}
+
+				{% if entity.affiliations | length > 0 %}
+				<h2>Affiliations</h2>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.affiliations badge=true %}
+				</div>
 				{% endif %}
 
 				<h2>Contributions</h2>
@@ -246,6 +159,108 @@ layout: base
                 {% endfor %}
                 </div>
 				{% endif %}
+
+			</div>
+
+			<div class="col-md-3">
+				<div>
+					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+				</div>
+
+				{% if page.has_philosophy %}
+				<div class="contact-items">
+					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
+						Training Philosophy
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.github != false %}
+				<div class="contact-items">
+					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
+						{% icon github %} {{ page.contributor }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.funding_id %}
+					Grant ID:
+					{% if entity.funding_system %}
+						{% assign url = entity | fetch_funding_url %}
+						<a href="{{ url }}">
+							{{ entity.funding_id }}
+						</a>
+					{% else %}
+						{{ entity.funding_id }}
+					{% endif %}
+				{% endif %}
+
+				{% if entity.email %}
+				<div class="contact-items">
+					<a title="E-mail" href="mailto:{{ entity.email }}">
+						{% icon email %} {{ entity.email }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.matrix %}
+				<div class="contact-items">
+					<a title="matrix" href="https://matrix.to/#/@{{ entity.matrix }}">
+						{% icon gitter %} {{ entity.matrix }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.fediverse %}
+				<div class="contact-items">
+					<a href="{{ entity.fediverse }}" rel="me">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ entity.fediverse }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.twitter %}
+				<div class="contact-items">
+					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
+						{% icon twitter %} {{ entity.twitter }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.linkedin %}
+				<div class="contact-items">
+					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ entity.linkedin }}">
+						{% icon linkedin %} {{ entity.linkedin }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.orcid %}
+				<div class="contact-items">
+					<a title="ORCID" href="https://orcid.org/{{ entity.orcid }}">
+						{% icon orcid %} {{ entity.orcid }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.elixir_node %}
+				<div class="contact-items">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ entity.elixir_node }}.svg" alt="elixir logo for {{ entity.elixir_node | elixirnode2name }}">
+				</div>
+				{% endif %}
+
+				<p>Favourite Topics</p>
+				<canvas id="myChart" height="300px"></canvas>
+				<p>Favourite Formats</p>
+				<canvas id="slidesVsTutorials" height="300px"></canvas>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
 <script src="{% link assets/js/Chart.bundle.js %}"></script>
 
 <script>
@@ -352,11 +367,4 @@ var chart2 = new Chart(ctx2, {
 		}
 	}
 });
-				</script>
-
-			</div>
-
-			</div>
-		</div>
-	</div>
-</section>
+</script>
