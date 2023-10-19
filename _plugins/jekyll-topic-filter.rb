@@ -681,7 +681,7 @@ module TopicFilter
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
-      .reject { |c| Gtn::Contributors.is_funder(site, c) }
+      .reject { |c| Gtn::Contributors.funder?(site, c) }
   end
 
   ##
@@ -695,7 +695,7 @@ module TopicFilter
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
-      .select { |c| Gtn::Contributors.is_funder(site, c) }
+      .select { |c| Gtn::Contributors.funder?(site, c) }
   end
 
   ##
