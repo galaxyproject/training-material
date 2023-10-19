@@ -6,7 +6,6 @@ require 'kwalify'
 require './bin/gtn'
 
 # Any error messages
-errs = []
 
 CONTRIBUTORS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-contributors.yaml')
 CONTRIBUTORS_SCHEMA = automagic_loading(CONTRIBUTORS_SCHEMA_UNSAFE)
@@ -42,9 +41,12 @@ end
 
 ec = 0
 # This variable from bin/gtn.rb
-errs.push(*validate_document(CONTRIBUTORS, contribs_validator))
+errs = validate_document(CONTRIBUTORS, contribs_validator)
 ec |= show_errors('CONTRIBUTORS.yaml', errs)
-errs.push(*validate_document(FUNDERS, funders_validator))
+errs = validate_document(FUNDERS, funders_validator)
 ec |= show_errors('FUNDERS.yaml', errs)
-errs.push(*validate_document(ORGANISATIONS, organisations_validator))
+errs = validate_document(ORGANISATIONS, organisations_validator)
 ec | show_errors('ORGANISATIONS.yaml', errs)
+
+# Exit
+exit ec

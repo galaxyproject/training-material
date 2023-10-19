@@ -89,10 +89,13 @@ mapping:
                 description: Set this to `no` if you would like to be excluded from the hall of fame.
             affiliations:
                 type: seq
-                enum:
+                description: "A set of organisations or grants your are affiliated with"
+                sequence:
+                  - type: str
+                    required: true
+                    enum:
                     - ORGANISATIONS
                     - FUNDERS
-                description: "A set of organisations or grants your are affiliated with"
             elixir_node:
                 type: str
                 enum:
