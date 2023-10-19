@@ -78,7 +78,10 @@ pathway:
 
   - section: "Year 3: Official Gene Set"
     description: |
-       ⚠️  **TODO** ⚠️One of the key tasks in annotation is producing an official gene set (OGS), and ensuring integrity and validation of all of the curated annotations. This will also further familiarise students with public databases and the process for submitting datasets. [SC3.1, SC3.5]
+       One of the key tasks in annotation is producing an official gene set (OGS), and ensuring integrity and validation of all of the curated annotations. This will also further familiarise students with public databases and the process for submitting datasets. [SC3.1, SC3.5]
+    tutorials:
+      - name: official-gene-set
+        topic: genome-annotation
 
 
 ---
