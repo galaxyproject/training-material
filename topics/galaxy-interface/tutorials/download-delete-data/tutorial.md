@@ -172,27 +172,25 @@ This section will show you how to delete and then purge a single dataset from a 
 >
 {: .hands_on}
 
-## Delete an entire History
+## Delete one or more entire Histories
 
-You can delete an entire history and purge it from disk.
+You can delete one or more entire histories and purge them from disk.
 
-> <hands-on-title>Delete an entire History</hands-on-title>
+> <hands-on-title>Delete one or more entire Histories</hands-on-title>
 >
-> 1. Open the **History List** display by clicking on the {% icon galaxy-columns %} history list button
->
->    ![saved histories](../../images/download-delete/saved_histories.png)
+> 1. Open the **Saved Histories List** by clicking on User - Histories
 >
 > 2. You will now see a list of all of your histories
 >
->    ![all_histories](../../images/download-delete/all_histories.png)
->
-> 3. You can now delete a history by clicking on the {% icon galaxy-dropdown %} dropdown arrow at the top of the history, and then selecting **Delete** OR **Purge**.
+> 3. You can now delete a single history by clicking on the {% icon galaxy-dropdown %} dropdown arrow right to the history name, and then selecting **Delete** OR **Delete Permanently**.
 >
 >    > <warning-title>You can lose data</warning-title>
 >    > **NOTE: Selecting Delete Permanently will remove the entire history and all of its non shared datasets from disk. It CANNOT be undone.**
 >    {: .warning}
 >
 > 4. If you only selected **Delete**, the history will be available to un-delete for a certain time[^1]
+> 
+> 5. If you want to delete or purge more than one history, you can use the check-boxes left to the history names and in the bottom of the page click on **Delete** or **Delete Permanently**
 >
 {: .hands_on}
 
