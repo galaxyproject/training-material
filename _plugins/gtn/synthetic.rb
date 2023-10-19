@@ -7,10 +7,10 @@ module Jekyll
   class SyntheticTopicGenerator < Generator
     def generate(site)
       # Full Bibliography
-      puts '[GTN/SyntheticTopics] Generating Indexes'
+      Jekyll.logger.info '[GTN/SyntheticTopics] Generating Indexes'
 
       TopicFilter.list_topics(site).select { |t| site.data[t]['tag_based'] }.each do |topic|
-        puts "[GTN/SyntheticTopics] Creating #{topic} topic"
+        Jekyll.logger.debug "[GTN/SyntheticTopics] Creating #{topic} topic"
 
         topic_index = PageWithoutAFile.new(site, '', "topics/#{topic}", 'index.md')
         topic_index.content = ''

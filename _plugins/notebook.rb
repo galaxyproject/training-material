@@ -526,7 +526,7 @@ module GTNNotebooks
           cell['source'].gsub!(/<img src="(\.\.[^"]*)/) do |img|
             path = img[10..]
             image_path = File.join(dir, path)
-        
+
             if img[-3..].downcase == 'png'
               # puts "[GTN/Notebook/Images] Embedding png: #{img}"
               data = Base64.encode64(File.binread(image_path))

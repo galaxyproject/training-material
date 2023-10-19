@@ -1,9 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, Plot and Explore Single-cell RNA-seq Data (Python)
-subtopic: single-cell-CS
-priority: 3
+title: Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)
+subtopic: single-cell-CS-code
+priority: 2
 zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
@@ -29,10 +29,8 @@ requirements:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
 tags:
-- single-cell
 - 10x
 - paper-replication
-- transcriptomics
 
 contributions:
   authorship:
@@ -52,9 +50,8 @@ notebook:
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
 
 ---
-> <warning-title>Remember: Notebook-based tutorials can give different outputs!</warning-title>
-> The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to this tutorial. That's ok! The outputs should still be pretty close (the basic interpretation has survived 5 years of analytical updates and counting...).
-{: .warning}
+
+{% snippet topics/single-cell/faqs/notebook_warning.md %}
 
 # Install libraries
 
@@ -90,7 +87,7 @@ import pandas as pd
 You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #4 in your history, then you import it with the following:
 
 ```python
-mito_counted_anndata = get(4) 
+mito_counted_anndata = get(4)
 ```
 
 You now need to read it in as a h5ad object.
@@ -139,20 +136,20 @@ We want to filter our cells, but first we need to know what our data looks like.
 ```python
 # Violin - genotype - log
 sc.pl.violin(
-  adata, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
-  groupby='genotype', 
+  adata,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
+  groupby='genotype',
   save='-genotype-log.png'
 )
 ```
- 
-  
+
+
 ```python
 # Violin - sex - log
 sc.pl.violin(
-  adata, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
-  groupby='sex', 
+  adata,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
+  groupby='sex',
   save='-sex-log.png'
 )
 ```
@@ -160,9 +157,9 @@ sc.pl.violin(
 ```python
 # Violin - batch - log
 sc.pl.violin(
-  adata, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
-  groupby='batch', 
+  adata,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
+  groupby='batch',
   save='-batch-log.png'
 )
 ```
@@ -170,9 +167,9 @@ sc.pl.violin(
 ```python
 # Scatter - mito x UMIs
 sc.pl.scatter(
-  adata, 
-  x='log1p_total_counts', 
-  y='pct_counts_mito', 
+  adata,
+  x='log1p_total_counts',
+  y='pct_counts_mito',
   save='-mitoxUMIs.png'
 )
 ```
@@ -180,9 +177,9 @@ sc.pl.scatter(
 ```python
 # Scatter - mito x genes
 sc.pl.scatter(
-  adata, 
-  x='log1p_n_genes_by_counts', 
-  y='pct_counts_mito', 
+  adata,
+  x='log1p_n_genes_by_counts',
+  y='pct_counts_mito',
   save='-mitoxgenes.png'
 )
 ```
@@ -190,10 +187,10 @@ sc.pl.scatter(
 ```python
 # Scatter - genes x UMIs
 sc.pl.scatter(
-  adata, 
-  x='log1p_total_counts', 
-  y='log1p_n_genes_by_counts', 
-  color='pct_counts_mito', 
+  adata,
+  x='log1p_total_counts',
+  y='log1p_n_genes_by_counts',
+  color='pct_counts_mito',
   save='-genesxUMIs.png'
 )
 ```
@@ -322,9 +319,9 @@ We will plot the raw data before applying any filters so that we can more clearl
 ```python
 # Raw
 sc.pl.violin(
-  adata, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
-  groupby='genotype', 
+  adata,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
+  groupby='genotype',
   save='-raw.png'
 )
 ```
@@ -335,9 +332,9 @@ genes_filtered_obj = genes_filtered_obj[genes_filtered_obj.obs['log1p_n_genes_by
 
 # Violin - Filterbygenes
 sc.pl.violin(
-  genes_filtered_obj, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
-  groupby='genotype', 
+  genes_filtered_obj,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
+  groupby='genotype',
   save='-Filterbygenes.png'
 )
 ```
@@ -368,8 +365,8 @@ counts_filtered_obj = counts_filtered_obj[counts_filtered_obj.obs['log1p_total_c
 
 # Violin - Filterbycounts
 sc.pl.violin(
-  counts_filtered_obj, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  counts_filtered_obj,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
   groupby='genotype',
   save='-Filterbycounts.png'
 )
@@ -400,8 +397,8 @@ mito_filtered_obj = mito_filtered_obj[mito_filtered_obj.obs['pct_counts_mito'] <
 
 # Violin - Filterbymito
 sc.pl.violin(
-  mito_filtered_obj, 
-  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'], 
+  mito_filtered_obj,
+  keys=['log1p_total_counts', 'log1p_n_genes_by_counts', 'pct_counts_mito'],
   groupby='genotype',
   save='-Filterbymito.png'
 )
@@ -488,7 +485,7 @@ scaled_data = sc.pp.scale(output_h5ad, max_value=10.0, copy=True)
 {% icon congratulations %} Congratulations! You have processed your object!
 
 > <comment-title></comment-title>
-> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis. 
+> At this point, we might want to remove or regress out the effects of unwanted variation on our data. A common example of this is the cell cycle, which can affect which genes are expressed and how much material is present in our cells. If you’re interested in learning how to do this, then you can move over to the [Removing the Effects of the Cell Cycle]({% link topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.md %}) tutorial now – then return here to complete your analysis.
 {: .comment}
 
 # Preparing coordinates
@@ -500,9 +497,9 @@ We still have too many dimensions. Transcript changes are not usually singular -
 Principal components are calculated from highly dimensional data to find the most spread in the dataset. So in our, ```1982``` highly variable gene dimensions, there will be one line (axis) that yields the most spread and variation across the cells. That will be our first principal component. We can calculate the first ```x``` principal components in our data to drastically reduce the number of dimensions.
 
 > <comment-title>1982???</comment-title>
-> Where did the `1982` come from? 
-> 
-> The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```, therefore: ```sc.pp.highly_variable_genes(output_h5ad, subset=True)```. This subsetting removes any nonvariable genes. 
+> Where did the `1982` come from?
+>
+> The quickest way to figure out how many highly variable genes you have, in my opinion, is to re-run ```sc.pp.highly_variable_genes``` function with the added parameter ```subset=True```, therefore: ```sc.pp.highly_variable_genes(output_h5ad, subset=True)```. This subsetting removes any nonvariable genes.
 >
 > Then you can ```print(output_h5ad)``` and you'll see only 1982 genes. The following processing steps will use only the highly variable genes for their calculations, but depend on keeping all genes in the object. Thus, please use the original output of your ```sc.pp.highly_variable_genes``` function with far more than 1982 genes!, currently stored as ```scaled_data```.
 {: .comment}
@@ -624,16 +621,16 @@ def generate_marker_table(adata):
     # convert row names to columns
     res_df.index.name = 'newhead'
     res_df.reset_index(inplace=True)
-    
+
     # rename generic column names
     res_df = res_df.rename(columns={'level_0': 'rank', 'level_1':'cluster'})
-    
+
     # reorder columns
     res_df = res_df.reindex(columns=['cluster', 'rank', 'genes', 'scores', 'logfoldchanges', 'pvals', 'pvals_adj'])
-    
+
     # insert ref column
     res_df.insert(2, 'ref', 'rest')
-    
+
     return res_df
 ```
 
@@ -679,7 +676,7 @@ It’s time! Let’s plot it all! But first, let’s pick some marker genes from
 ```python
 # PCA
 sc.pl.embedding(
-    markers_cluster, 
+    markers_cluster,
     basis='pca',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
@@ -691,7 +688,7 @@ sc.pl.embedding(
 ```python
 # TSNE
 sc.pl.embedding(
-    markers_cluster, 
+    markers_cluster,
     basis='tsne',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
@@ -703,7 +700,7 @@ sc.pl.embedding(
 ```python
 # UMAP
 sc.pl.embedding(
-    markers_cluster, 
+    markers_cluster,
     basis='umap',  
     color=['louvain','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','log1p_total_counts'],
     gene_symbols='Symbol',
@@ -767,7 +764,7 @@ markers_cluster_copy.obs = markers_cluster_copy.obs.rename(columns={'louvain': '
 
 # Scanpy - plot updated object
 sc.pl.embedding(
-    markers_cluster_copy, 
+    markers_cluster_copy,
     basis='umap',  
     color=['cell_type','sex','batch','genotype','Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','Hba-a1','log1p_total_counts'],
     gene_symbols='Symbol',
@@ -887,6 +884,6 @@ put("figures/plotname.png")
 
 # Conclusion
 
-{% icon congratulations %} Congratulations! You’ve made it to the end! 
+{% icon congratulations %} Congratulations! You’ve made it to the end!
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Inferring trajectories using Monocle3'
+title: 'Inferring single cell trajectories (Monocle3)'
 subtopic: single-cell-CS
 priority: 5
 zenodo_link: 'https://zenodo.org/record/7078524'
@@ -36,10 +36,8 @@ requirements:
         - scrna-case_basic-pipeline
         - scrna-case_JUPYTER-trajectories
 tags:
-- single-cell
 - 10x
 - paper-replication
-- transcriptomics
 
 contributions:
   authorship:
@@ -57,7 +55,7 @@ contributions:
 
 This tutorial is a follow-up to the ['Single-cell RNA-seq: Case Study']({% link topics/single-cell/index.md %}). We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to [prepare a single cell matrix]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}), [combine datasets]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) and [filter, plot and process scRNA-seq data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) to get the data in the form we’ll be working on today.
 
-In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis in our [slide deck]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html %}). We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!
+In this tutorial we will perform trajectory analysis using [monocle3](https://cole-trapnell-lab.github.io/monocle3/). You can find out more about the theory behind trajectory analysis in our [slide deck]({% link topics/single-cell/tutorials/scrna-trajectories/slides.html %}). We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: [Trajectory Analysis using Python (Jupyter Notebook) in Galaxy]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}). However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
@@ -621,7 +619,7 @@ Here we used a priori knowledge regarding the marker genes. If we wanted to appr
 >
 > > <solution-title></solution-title>
 > >
-> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three!
+> > By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that [uses the gene names in one object to add to a table of Ensembl IDs]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}#findmarkers). These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting...or all three!
 > > The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1.
 > >
 > > Whenever you want to explore what might be the function of a particular cluster or why it branches out from the trajectory, check the top markers for that cluster to draw biological conclusions. Thank you Maths!
@@ -723,3 +721,5 @@ Last but not least, you can now identify genes that define the inferred trajecto
 ![A scheme connecting all the tools used in this tutorial.](../../images/scrna-casestudy-monocle/workflow.jpg "Full workflow for this tutorial.")
 
 If you're following the Case Study tutorials from the beginning, you have already experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. You now know that trajectory analysis is even more sensitive to parameter values, so it's often trying to find the best set of values that would give the most reasonable results and go in accordance with biology. Moreover, not all trajectory analysis methods are designed to infer all kinds of biological processes - due to the fact that they use different algorithms, some would work better for analysing your sample. Since Monocle is quite widely used for trajectory analysis, it might be a good practice to compare its results with other methods. The more evidence you have to confirm your findings, the more confident you can be about their reliability!
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

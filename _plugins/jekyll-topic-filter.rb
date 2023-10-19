@@ -13,7 +13,11 @@ module TopicFilter
   # Returns:
   # +Array+:: The list of topics
   def self.list_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |k, _v| k }
+    list_topics_h(site).keys
+  end
+
+  def self.list_topics_h(site)
+    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }
   end
 
   ##
@@ -23,7 +27,7 @@ module TopicFilter
   # Returns:
   # +Array+:: The topic objects themselves
   def self.enumerate_topics(site)
-    site.data.select { |_k, v| v.is_a?(Hash) && v.key?('editorial_board') }.map { |_k, v| v }
+    list_topics_h(site).values
   end
 
   ##
@@ -94,7 +98,8 @@ module TopicFilter
     fill_cache(site)
 
     # Here we want to either return data structured around subtopics
-    if site.data[topic_name].key?('subtopics')
+
+    if site.data[topic_name]['tag_based'].nil? && site.data[topic_name].key?('subtopics')
       # We'll construct a new hash of subtopic => tutorials
       out = {}
       seen_ids = []
@@ -116,14 +121,15 @@ module TopicFilter
       }
     elsif site.data[topic_name]['tag_based'] && site.data[topic_name]['custom_ordering']
       # TODO
-      puts 'UNIMPLEMENTED'
+      Jekyll.logger.error 'UNIMPLEMENTED'
       out = {}
     elsif site.data[topic_name]['tag_based'] # Tag based Topic
       # We'll construct a new hash of subtopic(parent topic) => tutorials
       out = {}
       seen_ids = []
+      tn = topic_name.gsub('by_tag_', '')
 
-      materials = filter_by_topic(site, topic_name)
+      materials = filter_by_tag(site, tn)
 
       # Which topics are represented in those materials?
       seen_topics = materials.map { |x| x['topic_name'] }.sort
@@ -140,7 +146,7 @@ module TopicFilter
 
       # And we'll have this __OTHER__ subtopic for any tutorials that weren't
       # in a subtopic.
-      all_topics_for_tutorial = filter_by_topic(site, topic_name)
+      all_topics_for_tutorial = filter_by_tag(site, tn)
       out['__OTHER__'] = {
         'subtopic' => { 'title' => 'Other', 'description' => 'Assorted Tutorials', 'id' => 'other' },
         'materials' => all_topics_for_tutorial.reject { |x| seen_ids.include?(x['id']) }
@@ -392,7 +398,7 @@ module TopicFilter
     end
 
     if page.nil?
-      puts '[GTN/TopicFilter] Could not process material'
+      Jekyll.logger.error '[GTN/TopicFilter] Could not process material'
       return {}
     end
 
@@ -502,7 +508,13 @@ module TopicFilter
       page_obj['tools'] += extract_workflow_tool_list(wf_data)
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
-    page_obj['supported_servers'] = Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+
+    topic = site.data[page_obj['topic_name']]
+    page_obj['supported_servers'] = if topic['type'] == 'use' || topic['type'] == 'basics'
+                                      Gtn::Supported.calculate(site.data['public-server-tools'], page_obj['tools'])
+                                    else
+                                      []
+                                    end
 
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
@@ -598,7 +610,7 @@ module TopicFilter
   #
   def self.list_all_tags(site)
     materials = process_pages(site, site.pages)
-    materials.map { |x| x.fetch('tags', []) }.flatten.sort.uniq
+    (materials.map { |x| x['tags'] || [] }.flatten + self.list_topics(site)).sort.uniq
   end
 
   def self.filter_by_topic(site, topic_name)
@@ -610,14 +622,33 @@ module TopicFilter
     resource_pages = materials.select { |x| x['topic_name'] == topic_name }
 
     # If there is nothing with that topic name, try generating it by tags.
-    resource_pages = materials.select { |x| x.fetch('tags', []).include?(topic_name) } if resource_pages.empty?
+    resource_pages = materials.select { |x| (x['tags'] || []).include?(topic_name) } if resource_pages.empty?
 
     # The complete resources we'll return is the introduction slides first
     # (EDIT: not anymore, we rely on prioritisation!)
     # and then the rest of the pages.
     resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
 
-    puts "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
+    Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name}" if resource_pages.empty?
+
+    resource_pages
+  end
+
+  def self.filter_by_tag(site, topic_name)
+    # Here we make a (cached) call to load materials into memory and sort them
+    # properly.
+    materials = process_pages(site, site.pages)
+
+    # Select those with that topic ID or that tag
+    resource_pages = materials.select { |x| x['topic_name'] == topic_name }
+    resource_pages += materials.select { |x| (x['tags'] || []).include?(topic_name) }
+
+    # The complete resources we'll return is the introduction slides first
+    # (EDIT: not anymore, we rely on prioritisation!)
+    # and then the rest of the pages.
+    resource_pages = resource_pages.sort_by { |k| k.fetch('priority', 1) }
+
+    Jekyll.logger.error "Error? Could not find any relevant tagged pages for #{topic_name}" if resource_pages.empty?
 
     resource_pages
   end
@@ -630,7 +661,9 @@ module TopicFilter
     # Select out materials with the correct subtopic
     resource_pages = resource_pages.select { |x| x['subtopic'] == subtopic_id }
 
-    puts "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}" if resource_pages.empty?
+    if resource_pages.empty?
+      Jekyll.logger.error "Error? Could not find any relevant pages for #{topic_name} / #{subtopic_id}"
+    end
 
     resource_pages
   end
@@ -823,6 +856,14 @@ module Jekyll
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
+    def list_topics_ids(site)
+      ['introduction'] + TopicFilter.list_topics(site).filter { |k| k != 'introduction' }
+    end
+
+    def list_topics_h(site)
+      TopicFilter.list_topics(site)
+    end
+
     def list_topics_by_category(site, category)
       q = TopicFilter.list_topics(site).map do |k|
         [k, site.data[k]]
@@ -831,12 +872,26 @@ module Jekyll
       # Alllow filtering by a category, or return "all" otherwise.
       if category == 'non-tag'
         q = q.select { |_k, v| v['tag_based'].nil? }
+      elsif category == 'science'
+        q = q.select { |_k, v| %w[use basics].include? v['type'] }
+      elsif category == 'technical'
+        q = q.select { |_k, v| %w[admin-dev data-science instructors].include? v['type'] }
+      elsif category == 'science-technical'
+        q = q.select { |_k, v| %w[use basics admin-dev data-science instructors].include? v['type'] }
       elsif category != 'all'
         q = q.select { |_k, v| v['type'] == category }
       end
 
       # Sort alphabetically by titles
       q.sort { |a, b| a[1]['title'] <=> b[1]['title'] }
+    end
+
+    def to_keys(arr)
+      arr.map { |k| k[0] }
+    end
+
+    def to_vals(arr)
+      arr.map { |k| k[1] }
     end
 
     def list_materials_by_tool(site)
@@ -853,6 +908,10 @@ module Jekyll
 
     def topic_filter(site, topic_name)
       TopicFilter.topic_filter(site, topic_name)
+    end
+
+    def topic_filter_tutorial_count(site, topic_name)
+      TopicFilter.topic_filter(site, topic_name).length
     end
 
     def identify_contributors(materials, site)

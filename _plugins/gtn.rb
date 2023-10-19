@@ -274,6 +274,8 @@ module Jekyll
 
     def convert_to_material_list(site, materials)
       # [{"name"=>"introduction", "topic"=>"admin"}]
+      return [] if materials.nil?
+
       materials.map do |m|
         if m.key?('name') && m.key?('topic')
           found = TopicFilter.fetch_tutorial_material(site, m['topic'], m['name'])

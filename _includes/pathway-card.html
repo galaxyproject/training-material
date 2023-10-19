@@ -17,7 +17,7 @@
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{path.title}}</h5>
         <p class="card-text">
-          {{path.description}}
+          {{path.description | markdownify | strip_html | truncatewords: 60}}
         </p>
       </div>
       <div class="card-footer">
