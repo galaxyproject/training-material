@@ -693,7 +693,7 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: nil,
-        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/..., apologies we cannot fix automatically.',
+        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/...',
         code: 'GTN:032'
       )
     end

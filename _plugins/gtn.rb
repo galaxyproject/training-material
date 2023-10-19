@@ -248,7 +248,9 @@ module Jekyll
     # Example:
     #  {{ entity | fetch_entity_avatar: 'alice', 120 }}
     def fetch_entity_avatar(entity, id, width)
-      return '<img src="/training-material/assets/images/avatar.png" alt="ERROR_NO_ENTITY avatar" class="avatar"/>' if entity.nil?
+      if entity.nil?
+        return '<img src="/training-material/assets/images/avatar.png" alt="ERROR_NO_ENTITY avatar" class="avatar"/>'
+      end
 
       w = width.nil? ? '' : "width=\"#{width}\""
       url = fetch_entity_avatar_url(entity, id, width)
