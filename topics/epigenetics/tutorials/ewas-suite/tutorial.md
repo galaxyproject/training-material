@@ -113,7 +113,6 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >   - On the next page, click on the **Send Query to Galaxy** button
 >   - Wait for the upload to finish
 >
-> ![UCSC](../../images/5UCSC.png "UCSC")
 >
 > After exporting the reference genome from UCSC, we need to make sure that it is in the right dataset build.
 > 
@@ -121,7 +120,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
 >
 > {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
-> 
+>
 > Click on `display at UCSC` towards the bottom of the history item.
 > This will launch UCSC Genome Browser with your Custom Track
 > ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
@@ -147,20 +146,18 @@ The main goal of the **Infinium Human Methylation BeadChip** analysis is to simp
 > 1. Run {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} with the following parameters to map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
 >    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
 >    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
-> ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
+>
 >
 > Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and disrupt downstream analysis of results. {% cite Hansen %} It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
 >
 >    - *"(Optional) Preprocessing Method"*: `Remove SNPS`
-> ![idat_preprocessing](../../images/2idat_preprocessing.png)
+>
 >
 >    - *"Phenotype Table"*:`The phenotypeTable.txt file uploaded from Zenodo`
 >    - *"maxGap Size"*:`250`
 >    We will use the default gap of 250 base pairs (bps), i.e. any two points more than 250 bps away are put in a new cluster.
 >    - *"Cutoff Size"*:`0.1`
 >    In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1
-> ![pheno table](../../images/3parameters.png)
->
 >    - *"Number of Resamples"*:`0`
 > Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using 'bootstrap' method.
 >    - *"nullMethod"*:`permutation`
@@ -168,13 +165,11 @@ The main goal of the **Infinium Human Methylation BeadChip** analysis is to simp
 > ‘permutation’ (defaults to ‘permutation’).
 >    - *"Phenotype Type"*:`categorical`
 > Identify regions where methylation is associated with a continuous or categorical phenotype.
-> ![params](../../images/4parameters.png)
 >    - *"qCutoff Size"*:`0.5`
 > Diffrentialy methylated positions with an FDR q-value greater than this value will not be returned.
 >    - *"Variance Shrinkage"*:` TRUE`
 > Default TRUE as it is recommended when sample sizes are small <10
 >    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
-> ![params](../../images/5parameters.png) 
 >
 {: .hands_on}
 

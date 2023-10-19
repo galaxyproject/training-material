@@ -40,4 +40,16 @@
       class: File
       path: test-data/UCSC Main on Human.gtf
       filetype: gtf
-  outputs: {}
+  outputs:
+    GO Enrichment Analysis of a Gene Set:
+      asserts:
+        has_text:
+          text: "ADCY8"
+    Table of Translated Gene ID's:
+      asserts:
+        has_text:
+          text: "ZCCHC3"      
+    Differentially Methylated Positions:
+      asserts:
+        has_n_columns:
+          n: 6        
