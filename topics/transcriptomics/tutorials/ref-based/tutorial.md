@@ -1729,7 +1729,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 >    We will now select only the genes with a fold change (FC) > 2 or FC < 0.5. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2 or FC < 0.5).
 >
-> 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
+> 3. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
 >    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
 >    - *"With following condition"*: `abs(c3)>1`
 >    - *"Number of header lines to skip"*: `1`
@@ -1743,7 +1743,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. 114, or 11.79% of the significantly differentially expressed genes.
+>    > > 1. We get 113 (114 lines including a header) genes, or 11.79% of the significantly differentially expressed genes.
 >    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
 >    > {: .solution}
 >    {: .question}
@@ -1822,7 +1822,7 @@ You should obtain something similar to:
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.
+> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 113 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.
 > > 2. The samples are clustering by treatment.
 > > 3. The scale changes and we only see few genes.
 > > 4. Because the normalized expression of the gene `FBgn0013688` in `GSM461180_treat_paired` is at `0`.
@@ -2097,9 +2097,9 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
     > > <solution-title></solution-title>
     > >
     > > 1. The file has 128 lines including an header, so 127 KEGG pathways have been identified.
-    > > 2. 2 KEGG pathways (2.34%) are over-represented, using **Filter** on c6 (adjusted p-value for over-represented KEGG pathways)
+    > > 2. 2 KEGG pathways (2.34%) are over-represented, using {% tool [Filter](Filter1) %} on c6 (adjusted p-value for over-represented KEGG pathways)
     > > 3. The 2 KEGG pathways over-represented are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
-    > > 4. No KEGG pathway is under-represented, using **Filter** on c7 (adjusted p-value for under-represented KEGG pathways)
+    > > 4. No KEGG pathway is under-represented, using {% tool [Filter](Filter1) %} on c7 (adjusted p-value for under-represented KEGG pathways)
     > {: .solution}
     {: .question}
 
