@@ -2097,7 +2097,7 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
     > > <solution-title></solution-title>
     > >
     > > 1. The file has 128 lines including an header, so 127 KEGG pathways have been identified.
-    > > 2. 2 KEGG pathways (2.34%) are over-represented, using {% tool [Filter](Filter1) %} on c6 (adjusted p-value for over-represented KEGG pathways)
+    > > 2. 2 KEGG pathways (2.34%) are over-represented, using {% tool [Filter data on any column using simple expressions](Filter1) %} on c6 (adjusted p-value for over-represented KEGG pathways)
     > > 3. The 2 KEGG pathways over-represented are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
     > > 4. No KEGG pathway is under-represented, using {% tool [Filter](Filter1) %} on c7 (adjusted p-value for under-represented KEGG pathways)
     > {: .solution}
