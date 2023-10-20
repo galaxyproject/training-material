@@ -3,7 +3,7 @@ redirect_from:
 - /topics/transcriptomics/faqs/techniques
 
 title: Can RNA-seq techniques be applied to scRNA-seq?
-area: Analysis
+area: Single-Cell RNA
 box_type: tip
 layout: faq
 contributors: [nomadscientist,mtekman,rahmot]
