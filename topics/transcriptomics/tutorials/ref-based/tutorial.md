@@ -1743,7 +1743,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. We get 113 (114 lines including a header) genes, or 11.79% of the significantly differentially expressed genes.
+>    > > 1. We get 113 genes (114 lines including a header), or 11.79% of the significantly differentially expressed genes.
 >    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
 >    > {: .solution}
 >    {: .question}
