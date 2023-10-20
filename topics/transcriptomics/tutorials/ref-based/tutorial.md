@@ -2029,7 +2029,7 @@ We have now the two required input files for goseq.
     > >
     > > 1. 60 GO terms (0.50%) are over-represented and 7 (0.07%) under-represented.
     > >
-    > >    {% tool [Filter](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
+    > >    {% tool [Filter data on any column using simple expressions](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
     > >
     > > 2. For over-represented, 50 BP, 5 CC and 5 MF and for under-represented, 5 BP, 2 CC and 0 MF
     > >
@@ -2295,7 +2295,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
 > > <question-title></question-title>
 > >
