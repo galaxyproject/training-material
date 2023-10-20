@@ -56,7 +56,7 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/6861851/files/proteins.fasta
+>    https://zenodo.org/api/files/6628a5e4-d6be-47bd-bdaa-f2646112578e/proteins.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

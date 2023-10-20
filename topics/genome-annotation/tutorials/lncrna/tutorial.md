@@ -93,9 +93,9 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/7107050/files/genome_assembly.fasta
->    https://zenodo.org/record/7107050/files/genome_annotation.gff3
->    https://zenodo.org/record/7107050/files/all_RNA_mapped.bam
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_assembly.fasta
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/genome_annotation.gff3
+>    https://zenodo.org/api/files/0f8d27c5-8c8d-4379-90c4-c3cd950de391/all_RNA_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -190,7 +190,7 @@ For future analyses, it would be interesting to use an updated annotation contai
 
 > <hands-on-title>Merge the annotations</hands-on-title>
 >
-> {% tool [concatenate](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+> {% tool [concatenate](https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/f46f0e4f75c4) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf`
 >    - Insert Dataset
 >    - {% icon param-file %} *"Dataset"*: `lncRNA annotation with FEELnc`

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Genome assembly using PacBio data'
-zenodo_link: 'https://zenodo.org/record/5702408'
+zenodo_link: 'https://zenodo.org/record/5702408#.YZUb5uvjIiU'
 tags:
   - assembly
   - pacbio
@@ -58,12 +58,12 @@ We will use long reads sequencing data: CLR (continuous long reads) from PacBio 
 > <hands-on-title>Data upload from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
+> 2. Import the files from [Zenodo](https://zenodo.org/record/5702408)
 >
 >    ```
->    https://zenodo.org/records/5702408/files/SRR8534473_subreads.fastq.gz
->    https://zenodo.org/records/5702408/files/SRR8534474_subreads.fastq.gz
->    https://zenodo.org/records/5702408/files/SRR8534475_subreads.fastq.gz
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534473_subreads.fastq.gz
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534474_subreads.fastq.gz
+>    https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_subreads.fastq.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

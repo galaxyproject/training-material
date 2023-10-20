@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Refining Genome Annotations with Apollo (prokaryotes)
-zenodo_link: https://zenodo.org/record/4889110
+zenodo_link: https://zenodo.org/record/3270822
 tags:
   - prokaryote
 questions:
@@ -106,21 +106,21 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 > 3. Copy & Paste the following table into the Rule-based uploader textbox:
 >
 >    ```
->    https://zenodo.org/records/4889110/files/augustus.gff3	Augustus	gff3
->    https://zenodo.org/records/4889110/files/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
->    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
->    https://zenodo.org/records/4889110/files/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
->    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
->    https://zenodo.org/records/4889110/files/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
->    https://zenodo.org/records/4889110/files/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
->    https://zenodo.org/records/4889110/files/K12_Variants.vcf	K12 Variants	vcf
->    https://zenodo.org/records/4889110/files/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
->    https://zenodo.org/records/4889110/files/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
->    https://zenodo.org/records/4889110/files/O104_Variants.vcf	O104 Variants	vcf
->    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
->    https://zenodo.org/records/4889110/files/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
->    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
->    https://zenodo.org/records/4889110/files/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/augustus.gff3	Augustus	gff3
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/blastp_vs_swissprot_2018-01-22.blastxml	Blastp vs swissprot	blastxml
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Coverage.bigwig	BWA-MEM K12 Coverage	bigwig
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_K12_Mapping.bam	BWA-MEM K12 Mapping	bam
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Coverage.bigwig	BWA-MEM O104 Coverage	bigwig
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/BWA-MEM_O104_Mapping.bam	BWA-MEM O104 Mapping	bam
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/E._coli_str_K-12_substr_MG1655_100kb_subset.fasta	Genome	fasta
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/K12_Variants.vcf	K12 Variants	vcf
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/NCBI_AnnotWriter_Genes.gff3	NCBI AnnotWriter Genes	gff3
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_H4_LASTZ_Alignment.bed	O104 H4 LASTZ Alignment	bed
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/O104_Variants.vcf	O104 Variants	vcf
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1.bam	TopHat SRR1927169 rep1	bam
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927169_rep1_Coverage.bigwig	TopHat SRR1927169 rep1 Coverage	bigwig
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2.bam	TopHat SRR1927170 rep2	bam
+>    https://zenodo.org/api/files/6080d6d6-68ec-4ade-afef-bbd83f9b5e2b/TopHat_SRR1927170_rep2_Coverage.bigwig	TopHat SRR1927170 rep2 Coverage	bigwig
 >    ```
 > 4. Click **Build**
 >

@@ -71,10 +71,10 @@ First we need to upload and prepare the following inputs to analyze:
 > 2. Import the input files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
->    https://zenodo.org/record/6123887/files/dnabot_london_settings.yaml
->    https://zenodo.org/record/6123887/files/dnabot_paris_settings.yaml
->    https://zenodo.org/record/6123887/files/parts_for_lycopene.csv
->    https://zenodo.org/record/6123887/files/rp_002_0011.xml
+>    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_london_settings.yaml
+>    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/dnabot_paris_settings.yaml
+>    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/parts_for_lycopene.csv
+>    https://zenodo.org/api/files/f58fe126-0ca2-4ca5-bc4b-0063f3a8951c/rp_002_0011.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

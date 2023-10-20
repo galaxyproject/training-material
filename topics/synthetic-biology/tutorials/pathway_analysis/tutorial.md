@@ -70,16 +70,16 @@ First we need to upload and prepare the following inputs to analyze:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) :
 >
 >    ```
->    https://zenodo.org/record/6628296/files/rp_001_0001.xml
->    https://zenodo.org/record/6628296/files/rp_001_0006.xml
->    https://zenodo.org/record/6628296/files/rp_001_0011.xml
->    https://zenodo.org/record/6628296/files/rp_002_0001.xml
->    https://zenodo.org/record/6628296/files/rp_002_0006.xml
->    https://zenodo.org/record/6628296/files/rp_002_0011.xml
->    https://zenodo.org/record/6628296/files/rp_003_0001.xml
->    https://zenodo.org/record/6628296/files/rp_003_0116.xml
->    https://zenodo.org/record/6628296/files/rp_003_0231.xml
->    https://zenodo.org/record/6628296/files/SBML_Model_iML1515.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0001.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0006.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_001_0011.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0001.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0006.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_002_0011.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0001.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0116.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/rp_003_0231.xml
+>    https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML1515.xml
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

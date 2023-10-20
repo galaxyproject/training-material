@@ -206,18 +206,18 @@ We've included this file in the example data libraries repository we cloned at t
 >   description: some data
 >   synopsis: samples collected from somewhere
 > items:
-> - url: https://zenodo.org/records/582600/files/wildtype.fna
+> - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/wildtype.fna
 >   src: url
 >   ext: fasta
 >   info: https://doi.org/10.5281/zenodo.582600
 > - name: A directory
 >   description: Exome sequencing means that all protein-coding genes in a genome are
 >   items:
->   - url: https://zenodo.org/records/582600/files/mutant_R1.fastq
+>   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600
->   - url: https://zenodo.org/records/582600/files/mutant_R2.fastq
+>   - url: https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq
 >     src: url
 >     ext: fastqsanger
 >     info: https://doi.org/10.5281/zenodo.582600
