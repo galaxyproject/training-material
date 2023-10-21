@@ -185,7 +185,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    +    # Tool Dependencies
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>    +    container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
@@ -195,7 +195,7 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>    +    dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +
@@ -393,14 +393,14 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 > <hands-on-title>Optional: Configure Galaxy to use Apptainer containers from CVMFS</hands-on-title>
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
+> 1. Edit the `group_vars/galaxyservers.yml` file and add `container_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
 >    {% raw %}
 >    ```yaml
 >    galaxy_singularity_images_cvmfs_path: "/cvmfs/singularity.galaxyproject.org/all/"
 >    galaxy_config:
 >      galaxy:
 >        ...
->        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>        container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >    {% endraw %}
 >
