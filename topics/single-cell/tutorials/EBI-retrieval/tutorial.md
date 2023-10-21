@@ -67,40 +67,41 @@ It's important to note that this matrix is processed somewhat through the SCXA p
 
 # Metadata manipulation
 
-Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N701" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name. 
+Before creating an AnnData object, we need to make a small modification in experimental design table. The dataset contains information about 7 samples N701 – N707), however in the experimental design table (cell metadata) they are just numbered from 1 to 7. The plotting tool that we will going to use later will fail if the entries are integers and not categoricals, so we will change "1" to "N01" and so on. You can simply preview the experimental design dataset and move to the column "Sample Characteristic[individual]" (that's where the information about batch is - don't worry, we will rename the column header later!). Make a note of the number of that column - number 12 - we will need it to change the batch number to batch name. 
 
 > <hands-on-title> Change batch numbers into names </hands-on-title>
 >
-> 1. Change the datatype of `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to *tabular*:
+> 1. Change the datatype of `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv` to `tabular`:
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 2. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
+>    - *"Select cells from"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
 >    - *"using column"*: `c12`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `1`
->            - *"Replacement"*: `N701`
+>            - *"Replacement"*: `N01`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `2`
->            - *"Replacement"*: `N702`
+>            - *"Replacement"*: `N02`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `3`
->            - *"Replacement"*: `N703`
+>            - *"Replacement"*: `N03`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `4`
->            - *"Replacement"*: `N704`
+>            - *"Replacement"*: `N04`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `5`
->            - *"Replacement"*: `N705`
+>            - *"Replacement"*: `N05`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `6`
->            - *"Replacement"*: `N706`
+>            - *"Replacement"*: `N06`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `7`
->            - *"Replacement"*: `N707`
+>            - *"Replacement"*: `N07`
 >
-> 3. Rename {% icon galaxy-pencil %} output `Cell metadata`
+> 4. Rename {% icon galaxy-pencil %} output `Cell metadata`
 > 
 {: .hands_on}
 
@@ -110,13 +111,17 @@ Now we can create an AnnData object!
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %} with the following parameters:
+> 
+> 1. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %}
+> 2. Make sure you are using version **1.8.1+galaxy9** of the tool (change by clicking on {% icon tool-versions %} Versions button):
+>   ![List of available tool versions shown when clicking on the 'Versions' button on the top of the page.](../../images/scrna-casestudy/version.png "How to change the version of the tool")
+> 3. Set the following parameters:
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
 >    - *"Cell metadata table"*: `Cell metadata`
 >
-> 2. Rename {% icon galaxy-pencil %} output `AnnData object`
+> 4. Rename {% icon galaxy-pencil %} output `AnnData object`
 > 
 {: .hands_on}
 
@@ -128,10 +133,13 @@ We would like to flag mitochondrial genes. They can be identified quite easily s
 > <hands-on-title> Check the format of mitochondrial genes names </hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - *"Select lines from"*: `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
+>    - *"that"*: `Match`
 >    - *"Regular Expression"*: `mt`
+>    - *"Match type"*: `case insensitive`
 >    - *"Output"*: `Highlighted HTML (for easier viewing)`
 > 
-> 2. Rename {% icon galaxy-pencil %} output `Mito genes check`
+> 3. Rename {% icon galaxy-pencil %} output `Mito genes check`
 >
 {: .hands_on}
 
@@ -145,7 +153,10 @@ And the good news is that we can do all those steps using only one tool!
 
 > <hands-on-title> Modify AnnData object </hands-on-title>
 >
-> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %}
+> 2. Make sure you are using version **1.8.1+galaxy92** of the tool (change by clicking on {% icon tool-versions %} Versions button)
+> 3. Set the following parameters:
+>    - In *"Input object in hdf5 AnnData format"*: `AnnData object`
 >    - In *"Change field names in AnnData observations"*:
 >        - {% icon param-repeat %} *"Insert Change field names in AnnData observations"*
 >            - *"Original name"*: `Sample Characteristic[genotype]`
@@ -169,7 +180,7 @@ And the good news is that we can do all those steps using only one tool!
 >            - *"Starts with"*: `mt-`
 >            - *"Var name"*: `mito`
 >
-> 2. Rename {% icon galaxy-pencil %} output `Mito-counted AnnData for downstream analysis`
+> 4. Rename {% icon galaxy-pencil %} output `Mito-counted AnnData for downstream analysis`
 >
 {: .hands_on}
 
@@ -178,4 +189,4 @@ And that's all! What's even more exciting about AnnData Operations tool is that 
 # Conclusion
 Now you can use this object as input for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and its associated workflow! 
 
-Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow]() and the [answer key history](). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them. 
+Even though this tutorial was designed specifically to modify the AnnData object to be compatible with the subsequent tutorial, it also shows useful tools that you can use for your own, independent data analysis. You can find the [workflow](https://singlecell.usegalaxy.eu/u/j.jakiela/w/ebi-single-cell-expression-atlas-files-to-anndata) and the [answer key history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-single-cell-expression-atlas-files-to-anndata-1). However, if you want to use the workflow from this tutorial, you have to keep in mind that different datasets may have different column names. So you have to check them first, and only then you can modify them. 
