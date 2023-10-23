@@ -25,6 +25,8 @@ pathway:
     description: |
       ⚠️  **TODO** ⚠️ Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
     tutorials: []
+    - name: create-new-tutorial-content
+      topic: contributing
 
   - section: "Train the Trainer Programme"
     description: |
