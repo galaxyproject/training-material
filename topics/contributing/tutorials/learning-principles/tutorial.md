@@ -26,7 +26,7 @@ contributions:
     - gallardoalba
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
 # Introduction

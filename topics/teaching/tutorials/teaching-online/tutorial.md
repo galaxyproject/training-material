@@ -18,7 +18,7 @@ contributions:
     - bebatut
     - fpsom
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
 The different ways of teaching online (synchronous vs asynchronous), recording videos or not, adding captions, mix of synchronous and asynchronous (what do you need to have, type of support, Q&A sessions)

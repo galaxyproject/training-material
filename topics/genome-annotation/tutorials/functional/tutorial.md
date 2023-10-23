@@ -18,7 +18,7 @@ contributions:
   authorship:
     - abretaud
   funding:
-    - erasmusplus
+    - gallantries
 subtopic: eukaryote
 priority: 6
 ---

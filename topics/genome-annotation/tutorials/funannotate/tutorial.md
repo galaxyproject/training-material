@@ -32,7 +32,7 @@ contributions:
     - r1corre
     - stephanierobin
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling

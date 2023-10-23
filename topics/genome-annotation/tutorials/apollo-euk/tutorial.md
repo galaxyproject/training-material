@@ -28,7 +28,7 @@ contributions:
   authorship:
     - abretaud
   funding:
-    - erasmusplus
+    - gallantries
 
 requirements:
   - type: "internal"

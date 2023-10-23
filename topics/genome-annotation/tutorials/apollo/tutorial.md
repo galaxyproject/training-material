@@ -30,7 +30,7 @@ contributions:
     - nathandunn
     - mboudet
   funding:
-    - erasmusplus
+    - gallantries
 
 requirements:
   - type: "internal"

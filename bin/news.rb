@@ -74,8 +74,8 @@ end
 
 def printableMaterial(path)
   d = YAML.load_file(path)
-  {md: linkify(d['title'], path.gsub(/.md/, '.html')),
-  path: path}
+  { md: linkify(d['title'], path.gsub(/.md/, '.html')),
+    path: path }
 end
 
 def fixNews(n)
@@ -110,13 +110,11 @@ data = {
 }
 
 def titleize(t)
-  t.gsub(/-/, ' ').gsub(/\w+/) do |word|
-    word.capitalize
-  end
+  t.gsub('-', ' ').gsub(/\w+/, &:capitalize)
 end
 
 def format_news(news)
-  output = ""
+  output = ''
   if news.length.positive?
     output += "\n\n## Big News!\n\n"
     output += news.join("\n").gsub(/^/, '- ')
@@ -124,20 +122,18 @@ def format_news(news)
   output
 end
 
-def format_tutorials(added, modified, kind: "tutorials")
-  output =""
-  if added.length.positive? or modified.length.positive?
-    output += "\n\n## #{added.length + modified.length} #{kind}!"
-  end
+def format_tutorials(added, modified, kind: 'tutorials')
+  output = ''
+  output += "\n\n## #{added.length + modified.length} #{kind}!" if added.length.positive? || modified.length.positive?
 
   if added.length.positive?
     output += "\n\nNew #{kind}:\n\n"
-    output += added.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
+    output += added.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
 
   if modified.length.positive?
     output += "\n\nUpdated #{kind}:\n\n"
-    output += modified.map{|n| n[:md]}.join("\n").gsub(/^/, '- ')
+    output += modified.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
   output
 end
@@ -148,25 +144,25 @@ def build_news(data, filter: nil)
   newsworthy = false
 
   if filter.nil?
-  output += format_news(data[:added][:news])
-  newsworthy = newsworthy | format_news(data[:added][:news]).length.positive?
+    output += format_news(data[:added][:news])
+    newsworthy |= format_news(data[:added][:news]).length.positive?
   end
 
   o = format_tutorials(
-    data[:added][:tutorials].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    data[:modified][:tutorials].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ }
+    data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    data[:modified][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} }
   )
 
   output += o
-  newsworthy = newsworthy | o.length.positive?
+  newsworthy |= o.length.positive?
 
   o = format_tutorials(
-    data[:added][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    data[:modified][:slides].select{|n| filter.nil? || n[:path] =~ /topics\/#{filter}/ },
-    kind: "slides"
+    data[:added][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    data[:modified][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    kind: 'slides'
   )
   output += o
-  newsworthy = newsworthy | o.length.positive?
+  newsworthy |= o.length.positive?
 
   if filter.nil? && data[:contributors].length.positive?
     newsworthy = true
@@ -174,7 +170,7 @@ def build_news(data, filter: nil)
     output += data[:contributors].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
-  return output, newsworthy
+  [output, newsworthy]
 end
 
 def send_news(output, options, channel: 'default')
@@ -200,23 +196,21 @@ def send_news(output, options, channel: 'default')
     resp = JSON.parse(req.body)
     puts resp
 
-    if resp['errcode'] == 'M_FORBIDDEN'
-      if resp['error'] =~ /not in room/
-        puts "Not in room, attempting to join"
-        # Join room
-        #  POST /_matrix/client/v3/join/{roomIdOrAlias}
-        uri_join = URI("#{homeserver[:server]}/_matrix/client/v3/join/#{homeserver[:room]}")
-        req = Net::HTTP.post(uri_join, JSON.generate({}), headers)
+    if resp['errcode'] == 'M_FORBIDDEN' && (resp['error'] =~ /not in room/)
+      puts 'Not in room, attempting to join'
+      # Join room
+      #  POST /_matrix/client/v3/join/{roomIdOrAlias}
+      uri_join = URI("#{homeserver[:server]}/_matrix/client/v3/join/#{homeserver[:room]}")
+      req = Net::HTTP.post(uri_join, JSON.generate({}), headers)
+      # Parse response
+      resp = JSON.parse(req.body)
+
+      # Now we're safe to re-try
+      if resp.key?('room_id')
+        req = Net::HTTP.post(uri_send_message, JSON.generate(data), headers)
         # Parse response
         resp = JSON.parse(req.body)
-
-        # Now we're safe to re-try
-        if resp.key?('room_id')
-          req = Net::HTTP.post(uri_send_message, JSON.generate(data), headers)
-          # Parse response
-          resp = JSON.parse(req.body)
-          puts resp
-        end
+        puts resp
       end
     end
   else
@@ -231,6 +225,4 @@ if newsworthy
 end
 
 output, newsworthy = build_news(data, filter: 'single-cell')
-if newsworthy
-  send_news(output, options, channel: 'single-cell')
-end
+send_news(output, options, channel: 'single-cell') if newsworthy
