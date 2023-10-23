@@ -32,6 +32,9 @@ contributions:
     - Laura190
     - kkamieniecka
     - poterlowicz-lab
+  funding:
+      - ELIXIR-UK-DaSH
+      - ukri
 
 subtopic: fair-data
 
