@@ -57,3 +57,9 @@ pathway:
       - name: gallantries-coursebuilder
         topic: teaching
 ---
+
+Success Criteria:
+
+- SC5.1) Hybrid Training Material Development. Hybrid training brings new challenges, and instructors need to be familiar with the particular issues training materials may experience in the face of hybrid training delivery.
+- SC5.2) Hybrid Training Methodology. This will enable instructors to effectively host hybrid events and be prepared to address potential issues which may arise there.
+- SC5.3) Transnational Training Organisation. Instructors will need instruction in the additional constraints of organising events across countries and timezones.

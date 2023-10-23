@@ -97,3 +97,13 @@ pathway:
         topic: data-science
 
 ---
+
+Success Criteria:
+
+- SC2.1) Large-scale data analyses and -handling. In this module, learners will gain competency in managing, organizing, and analysing large collections of datasets.
+- SC2.2) Analysis of high-dimensional datasets. Real-world scientific studies often involve more complex datasets. For example, combining data from different experiments or timepoints. This more complex experimental setup translates to increased complexity in data analysis.
+- SC2.3) Data visualisation. This module will cover the basics of data visualisation to aid with exploration, interpretation of complex datasets.
+- SC2.4) Data modelling. This module will introduce learners to the basics data modelling techniques. This is often required for the identification of patterns in data required for e.g. classification.
+- SC2.5) Machine learning. This module will also cover more advanced data modelling techniques such as machine learning.
+- SC2.6) Reasoning about impact of computation on results. Many choices must be made during data analysis. This includes experimental design, choice of data analysis tools and their parameter settings, and external reference databases. Each of these choices will impact the results. Accurate interpretation of results is only possible with an understanding and awareness of the impact of these factors.
+

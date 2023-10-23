@@ -85,3 +85,12 @@ pathway:
 
 
 ---
+
+
+Success Criteria:
+
+- SC3.1) Data stewardship. This competency will provide learners with the necessary skills to evaluate data owned by their organisation, identify key metadata and content requirements, and establish controls and assurance metrics to ensure new data produced by their organisation is of sufficient quality.
+- SC3.2) Data federation. While hosting data internally is good, sharing data with teams across the Union and around the world is even better. Students need to understand how to achieve data federation and interchange with other organisations.
+- SC3.3) Data standardisation. A key component of stewardship and federation, standardisation of data allows it to be reused internally by common pipelines, but more importantly to be submitted to external databases. This is a key requirement of many data related projects.
+- SC3.4) Data collaboration. Many projects now scale beyond the ability of an individual to work on alone. Students need to learn how to work together with large datasets.
+- SC3.5) FAIR Data. For high quality, reproducible science, datasets should be FAIR; findable, accessible, interoperable, and reusable. This competency aids learners in ensuring their data is FAIR.

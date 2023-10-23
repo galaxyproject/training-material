@@ -135,3 +135,12 @@ pathway:
 ---
 
 In total, this module will form a course of around 10 days (± 2 days depending on exact analysis stories we identify). Some of these introductory submodules will build on existing training material available in the GTN or Carpentries (~15%).
+
+Success Criteria:
+
+- SC1.1) Basic coding skills. This module will cover the basics of the R and Python coding languages for novices. No coding experience will be assumed nor expected. Basic coding concepts will be introduced (variables, functions, data structures).
+- SC1.2) Research software development. We will cover best practices for research software development. It will follow Open Science principles, and include topics such as collaborative code development (e.g. git), reproducible research, code review, and quality control.
+- SC1.3) Familiarity with federated data analysis, management, and compute infrastructures. We will introduce the Galaxy platform, a user-friendly web-based analysis platform capable of distributing work across public/private clouds and High-Performance Computing (HPC) resources.
+- SC1.4) Basic statistical analysis skills. This submodule will cover the basic concepts involved in statistical analysis of scientific data.
+- SC1.5) Data acquisition and integration. Scientific data analyses often require interaction with external datasets. We will cover ways to retrieve data from online data sources, transform it to the required format, and integrate it into the analysis.
+- SC1.6) Reproducibility and data sharing. A cornerstone of scientific research is reproducibility. We will cover how to effectively share data and analysis pipelines in order to make scientific results optimally reproducible.

@@ -46,3 +46,9 @@ pathway:
         topic: ecology
 
 ---
+
+Success Criteria:
+- SC4.1) Statistical analysis. This will build on the basic statistics covered in IO1 to give a much better statistical comprehension often needed in more advanced analyses like modeling.
+- SC4.2) Interactive data visualisation. For most cases, existing visualisations are sufficient, but knowing which visualisation is appropriate and why can be a key point often missed. Additionally sometimes analyses will require custom visualisation such as for geographic information system data.
+- SC4.3) Hypothesis generation. When a researcher is handed a large pile of data, figuring out which questions to ask, and what the expected answer is, is the first step of good science.
+- SC4.4) Advanced data modelling. Given a hypothesis for some data, a researcher should know how to model changes across some unknown variables, predicting into the future or filling in potential missing gaps in data.
