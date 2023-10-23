@@ -24,7 +24,7 @@ contributions:
     - stephanierobin
     - jkreplak
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements

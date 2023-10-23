@@ -3,6 +3,12 @@
 module Gtn
   # This module is responsible for generating shortlinks for tutorials and FAQs
   module Shortlinks
+    CATEGORY_TUTORIAL = 'T'
+    CATEGORY_SLIDES = 'S'
+    CATEGORY_FAQ = 'F'
+    CATEGORY_NEWS = 'N'
+    CATEGORY_PATHWAYS = 'P'
+
     def self.mapped?(tutorial, current_mapping)
       current_mapping['id'].values.include? tutorial
     end
@@ -18,8 +24,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'T' }.length.to_s.rjust(5, '0')
-          short_code = "T#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_TUTORIAL }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_TUTORIAL + short_code_number
           puts "Discovered tutorial #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -37,8 +43,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'S' }.length.to_s.rjust(5, '0')
-          short_code = "S#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_SLIDES }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_SLIDES + short_code_number
           puts "Discovered slides #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -64,8 +70,8 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'F' }.length.to_s.rjust(5, '0')
-          short_code = "F#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_FAQ }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_FAQ + short_code_number
           puts "Discovered FAQ #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
@@ -79,9 +85,27 @@ module Gtn
         # If it's not already mapped by a key, add it.
         if !mapped?(html_path, current_mapping)
           # Generate a short code
-          short_code_number = current_mapping['id'].select { |x| x[0] == 'N' }.length.to_s.rjust(5, '0')
-          short_code = "N#{short_code_number}"
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_NEWS }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_NEWS + short_code_number
           puts "Discovered news #{short_code}"
+          # If the target of this flavour of short code isn't already in here, then add it
+          current_mapping['id'][short_code] = html_path
+        end
+      end
+
+      # Discover learning pathways
+      lps = Dir.glob('learning-pathways/*.md')
+      lps.reject! { |t| t =~ /index.md/ }
+      lps.reject! { |t| t =~ /pathway-example.md/ }
+
+      lps.each do |tutorial|
+        html_path = "/#{tutorial.gsub(/md$/, 'html')}"
+        # If it's not already mapped by a key, add it.
+        if !mapped?(html_path, current_mapping)
+          # Generate a short code
+          short_code_number = current_mapping['id'].select { |x| x[0] == CATEGORY_PATHWAYS }.length.to_s.rjust(5, '0')
+          short_code = CATEGORY_PATHWAYS + short_code_number
+          puts "Discovered slides #{short_code}"
           # If the target of this flavour of short code isn't already in here, then add it
           current_mapping['id'][short_code] = html_path
         end

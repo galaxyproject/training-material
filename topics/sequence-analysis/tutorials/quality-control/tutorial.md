@@ -35,7 +35,7 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
+  - gallantries
   - neoformit
 
 ---

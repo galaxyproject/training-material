@@ -23,7 +23,7 @@ contributors:
 - r1corre
 - lleroi
 - stephanierobin
-- erasmusplus
+- gallantries
 
 follow_up_training:
  - type: internal
