@@ -43,7 +43,7 @@ key_points:
 - To be added
 contributors:
   - fpsom
-  - erasmusplus
+  - gallantries
 ---
 
 # Introduction to Machine Learning and Data mining

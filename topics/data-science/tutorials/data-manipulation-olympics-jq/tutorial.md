@@ -27,7 +27,7 @@ contributions:
     - shiltemann
     - hexylena
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 
 subtopic: olympics
