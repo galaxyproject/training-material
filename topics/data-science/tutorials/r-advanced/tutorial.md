@@ -45,7 +45,7 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 tags:
 - R
 ---
