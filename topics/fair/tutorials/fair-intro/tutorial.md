@@ -28,7 +28,6 @@ contributions:
     - hexylena
   funding:
       - ELIXIR-UK-DaSH
-      - ukri
 subtopic: fair-data
 
 ---

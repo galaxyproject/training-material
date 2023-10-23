@@ -36,7 +36,6 @@ contributions:
     - poterlowicz-lab
   funding:
       - ELIXIR-UK-DaSH
-
 subtopic: fair-data
 
 requirements:
