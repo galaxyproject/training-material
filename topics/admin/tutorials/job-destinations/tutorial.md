@@ -652,7 +652,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
 >    @@ -137,6 +146,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>         dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
