@@ -32,7 +32,7 @@ contributions:
     - r1corre
     - stephanierobin
   funding:
-    - erasmusplus
+    - gallantries
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -95,12 +95,12 @@ To annotate our genome using Funannotate, we will use the following files:
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/genome_masked.fasta
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/rnaseq_R1.fq.gz
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/rnaseq_R2.fq.gz
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/SwissProt_subset.fasta
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/alternate_annotation.gbk
->    https://zenodo.org/api/files/47406781-e8af-42e7-855d-d29e4a098f6f/alternate_annotation.gff3
+>    https://zenodo.org/record/7867921/files/genome_masked.fasta
+>    https://zenodo.org/record/7867921/files/rnaseq_R1.fq.gz
+>    https://zenodo.org/record/7867921/files/rnaseq_R2.fq.gz
+>    https://zenodo.org/record/7867921/files/SwissProt_subset.fasta
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gbk
+>    https://zenodo.org/record/7867921/files/alternate_annotation.gff3
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

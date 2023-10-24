@@ -31,7 +31,7 @@ contributions:
     - plushz
     - bebatut
   funding:
-    - erasmusplus
+    - gallantries
 tags:
   - assembly
   - metagenomics

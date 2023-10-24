@@ -37,11 +37,8 @@ follow_up_training:
         - bulk-music-3-preparebulk
 
 tags:
-  - single-cell
-  - human
-  - deconvolution
-  - bulk
   - transcriptomics
+  - data management
 ---
 
 
@@ -424,3 +421,5 @@ You have successfully performed, essentially, three workflows. You can find the 
 With these workflows, you've created three Expression Set objects, capable of running in the MuSiC Compare tutorial. Now you just need the bulk RNA-seq Expression Set objects!
 
 This tutorial is part of the [https://singlecell.usegalaxy.eu](https://singlecell.usegalaxy.eu) portal ({% cite tekman2020single %}).
+
+{% snippet topics/single-cell/faqs/user_community_join.md %}

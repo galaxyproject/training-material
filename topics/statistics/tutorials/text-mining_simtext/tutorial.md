@@ -56,10 +56,10 @@ The input data is a simple table with the genes we want to analyze as well as th
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the input file from [Zenodo](https://zenodo.org/api/files/b7b2b1d8-bb18-423d-9fe4-3bce858265ac/clingen_data)
+> 2. Import the input file from [Zenodo](https://zenodo.org/records/4638516)
 >
 >    ```
->    https://zenodo.org/api/files/b7b2b1d8-bb18-423d-9fe4-3bce858265ac/clingen_data
+>    https://zenodo.org/records/4638516/files/clingen_data
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}

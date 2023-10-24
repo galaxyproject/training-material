@@ -48,7 +48,7 @@ def jupyter_pre_render(site)
     notebook_language = page.data['notebook'].fetch('language', 'python')
 
     # Tag our source page
-    page.data['tags'] = [] unless page.data.key? 'tags'
+    page.data['tags'] = page.data['tags'] || []
     page.data['tags'].push('jupyter-notebook')
 
     puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"

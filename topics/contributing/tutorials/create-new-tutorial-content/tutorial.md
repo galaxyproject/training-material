@@ -192,8 +192,8 @@ All tutorials and slides must give credit to all contributors. This can be any t
    To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
 
    ```yaml
-   erasmusplus:
-     name: Erasmus+ Programme
+   gallantries:
+     name: Gallantries Project
      joined: 2020-09
      avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
      github: false
@@ -1284,7 +1284,6 @@ If you have created a new tutorial, please also consider writing a [GTN news pos
 
 
 ## Footnotes (Rendered)
-
 
 <script type="text/javascript">
 // Replace all ZWSPs with nothing, to prevent users copying them and them not working.

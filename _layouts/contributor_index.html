@@ -137,9 +137,14 @@ layout: base
 			</div>
 
 			<div class="col-md-9">
-				<h1>
-					{{ contributors[page.contributor].name | default: page.contributor }}
-				</h1>
+				<hgroup>
+					<h1>
+						{{ contributors[page.contributor].name | default: page.contributor }}
+					</h1>
+				{% if contributors[page.contributor].funder_name %}
+					<p>Funded by {{ contributors[page.contributor].funder_name }}</p>
+				{% endif %}
+				</hgroup>
 				{% if contributors[page.contributor].funder %}
 				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
 				{% endif %}

@@ -41,7 +41,7 @@ contributions:
   - fpsom
   - tobyhodges
   funding:
-  - erasmusplus
+  - gallantries
 ---
 
 # Introduction
