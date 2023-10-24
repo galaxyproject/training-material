@@ -26,6 +26,8 @@ contributions:
     - poterlowicz-lab
   editing:
     - hexylena
+  funding:
+      - ELIXIR-UK-DaSH
 subtopic: fair-data
 
 requirements:
