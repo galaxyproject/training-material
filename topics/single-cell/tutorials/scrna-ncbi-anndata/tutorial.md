@@ -2,8 +2,8 @@
 layout: tutorial_hands_on
 
 title: Converting NCBI data to the AnnData Format
-subtopic: single-cell-CS-code
-priority: 2
+subtopic: Single cell data ingestion and formats conversion
+priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
@@ -42,6 +42,71 @@ follow_up_training:
 
 ---
 
+The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.
+
+# Obtaining the Data
+
+The first step is the obtain the data, for this tutorial we will use data from [this](https://pubmed.ncbi.nlm.nih.gov/35013146/) paper. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data, the link to the data can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031).
+
+Looking at the GEO repository we can see a lot of data including descriptions of the data and associated paper, what we are interested in however is the supplemental data found at the bottom of the page. Under the download section ```(custom)``` allows us to select individual files to download, however we are going to download all of the data by selecting the ```(http)``` link.
+
+We now have the raw gene expression data that we will be processing downloaded, however we will need to manually add some metadata which requires finding out some more information about our data. Looking at the link for the paper [https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/) we can see a link for accessing the full text, clicking on that will lead us to a page [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
+
+# Understanding the Data
+
+Looking at the excel file we can see multiple sheets, navigating to ```Clinical_info``` shows us that the data consists of 11 different patients with some patients having multiple different samples of different tumor specimens. For this tutorial we are only going to process the first 3 patients, a summary of the relevant data can be seen below:
+
+| PatientID | Biopsy samples | Tumor Specimen |
+|-----------|----------------|----------------|
+| Patient 1 | AUG_PB1A       | left-mid       |
+|           | AUG_PB1B       | right-mid      |
+| Patient 2 | MAY_PB1A       | right-mid      |
+|           | MAY_PB1B       | right-apex     |
+| Patient 3 | MAY_PB2A       | right-anterior |
+|           | MAY_PB2B       | right-mid      |
+
+We can see that each patient has 2 different samples from different tumor locations, this is important information that needs to be added to our data so that we can seperate the data during analysis.
+
+Finally we need to find the files relating to each patient, inspecting ```GSE176031_RAW``` (downloaded earlier) we can see 53 files, unfortunately the names of the files don't exactly match the data in our excel sheet which can make finding the right samples a bit difficult, a summary of which samples match which file can be found below:
+
+- **AUG_PB1A** ---> **PA_AUG_PB_1A**
+- **AUG_PB1B** ---> **PA_AUG_PB_1B**
+- **MAY_PB1A** ---> **PA_PB1A**
+- **MAY_PB1B** ---> **PA_PB1B**
+- **MAY_PB2A** ---> **PA_PB2A**
+- **MAY_PB2B** ---> **PA_PB2B**
+
+You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X** these are replications where multiple samples are taken of the same tumor area which helps get a more comprehensive view of the gene data of the tumor.
+
+# Importing the Data
+
+Now we have a general understanding of our data we can import it into Galaxy and start processing it!
+
+> <hands-on-title>Upload data to Galaxy</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the following files from the ```GSE176031_RAW``` folder
+> ```
+GSM5353214_PA_AUG_PB_1A_S1.dge.txt
+GSM5353215_PA_AUG_PB_1B_S2.dge.txt
+GSM5353216_PA_PB1A_Pool_1_3_S50_L002_dge.txt
+GSM5353217_PA_PB1A_Pool_2_S107_L004_dge.txt
+GSM5353218_PA_PB1B_Pool_1_2_S74_L003_dge.txt
+GSM5353219_PA_PB1B_Pool_3_5_S100_L002_dge.txt
+GSM5353220_PA_PB1B_Pool_3_5_S51_L002_dge.txt
+GSM5353221_PA_PB2A_Pool_1_3_S25_L001_dge.txt
+GSM5353222_PA_PB2B_Pool_1_3_S52_L002_dge.txt
+GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
+> ```
+>
+{: .hands_on}
+
+It is also a good idea to add tags to each sample in order to keep track of what data is being processed, below the imported data has tags including the patient and sample id:
+
+![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
+
+# Converting to AnnData and Combining Samples
+
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
 >
 > 1. {% tool [Import AnnData and loom](toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy1) %} with the following parameters:
@@ -73,6 +138,8 @@ follow_up_training:
 > 2. **Rename** {% icon galaxy-pencil %} output `Combined Object`
 >
 {: .hands_on}
+
+# Annotating the Data
 
 > <hands-on-title></hands-on-title>
 >
@@ -273,6 +340,8 @@ follow_up_training:
 > 2. **Rename** {% icon galaxy-pencil %} output `Annotated Object`
 >
 {: .hands_on}
+
+# Further Processing the Data
 
 > <hands-on-title>Add initial metadata</hands-on-title>
 >
