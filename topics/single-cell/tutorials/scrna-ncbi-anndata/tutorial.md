@@ -101,11 +101,13 @@ GSM5353223_PA_PB2B_Pool_2_S26_L001_dge.txt
 >
 {: .hands_on}
 
-It is also a good idea to add tags to each sample in order to keep track of what data is being processed, below the imported data has tags including the patient and sample id:
+It is also a good idea to add tags to each sample in order to keep track of what data is being processed, below is some of the imported data with added tags for the patient and sample id:
 
 ![Imported data with tags](../../images/scrna-ncbi-anndata/metadata.png "Imported data with tags")
 
 # Converting to AnnData and Combining Samples
+
+The first step is to convert all of the raw files into AnnData objects, this can be done one at a time or all at once by selecting ```multiple datasets``` when chosing the input and highlighting all the raw data files.
 
 > <hands-on-title>Convert raw data to AnnData</hands-on-title>
 >
@@ -115,7 +117,13 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >         - {% icon param-file %} *"Annotated data matrix"*: `Select all imported files`
 >         - *"Does the first column store the row names?"*: `Yes`
 >
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `select any one of the AnnData files`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
 {: .hands_on}
+
+Looking at the observation data (obs) of one of the files we can see that it is storing cell data, however we need the variable data (var) to store the cells and the observation data to store the genes, so we also need to transpose all of our AnnData objects, again we can speed up the process by selecting all of the AnnData objects and process them at once.
 
 > <hands-on-title>Transpose AnnData objects</hands-on-title>
 >
@@ -124,6 +132,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >    - *"Function to manipulate the object"*: `Transpose the data matrix, leaving observations and variables interchanged`
 >
 {: .hands_on}
+
+Now we have all the AnnData files with the data in the correct position we can combine all the data into a single AnnData file which will make it much easier to work with. This combination operation will add an additional column called **batch** which tells us which AnnData object each bit of data came from, this will be useful for further processing!
 
 > <hands-on-title>Combine AnnData objects</hands-on-title>
 >
@@ -139,7 +149,11 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+Now we have all of our gene expression data stored in a single AnnData object! Now we just need to add our metadata!
+
 # Annotating the Data
+
+The next step is to annotate our data using the information gathered from the excel sheet earlier, we will do this by leveraging the batch column generated when the objects were combined for each individual patient/sample (indicated by the batch number) we will add in the relevant annotations. First lets extract the observation data so we can manipulate it.
 
 > <hands-on-title></hands-on-title>
 >
@@ -150,6 +164,10 @@ It is also a good idea to add tags to each sample in order to keep track of what
 > 2. **Rename** {% icon galaxy-pencil %} output `Combined Object`
 >
 {: .hands_on}
+
+Now for each new column we want to add we need to replace the relvant batch numbers with the appropriate metadata. After that we can cut the modified column out so it is separated. We will repeat this process for each piece of metadata we want to add, all the relevant data can be found in the first table of this tutorial.
+
+First lets add the replicate column which tells us which rows are part of pools of the same patient and tumor location.
 
 > <hands-on-title>Create replicate metadata</hands-on-title>
 >
@@ -189,6 +207,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+Next we will add the metadata indicating which patient each row came from.
+
 > <hands-on-title>Create patient data</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
@@ -222,7 +242,9 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
-> <hands-on-title>Create patient metadata</hands-on-title>
+We will now add a column to indicate which sample each row came from using the sample ID's described earlier.
+
+> <hands-on-title>Create sample id metadata</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Observation data`
@@ -270,6 +292,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+Finally we will add the tumor column which indicates which tumor sample each row belongs to.
+
 > <hands-on-title>Create tumor metadata</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
@@ -308,6 +332,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+Now with all the individual metadata columns created we can combine them together to make a single tabular file containing our metadata. Since the ```Paste``` operation only allows us to combine two columns at once we will need to run the tool a few times to add all the columns together.
+
 > <hands-on-title>Combine metadata</hands-on-title>
 >
 > 1. {% tool [Paste](Paste1) %} with the following parameters:
@@ -329,6 +355,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+With the metadata completed the last step is to add it to our original combined object!
+
 > <hands-on-title>Add metadata to AnnData object</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
@@ -341,7 +369,13 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+Congratulations! You have successfully interpreted some data and added all the relevant annotations to the AnnData object! All thats left to do is to add some additional metadata using automated tools!
+
 # Further Processing the Data
+
+With the manual annotations added we need to do some further processing to add some statistical metadata about the genes, this is done automatically by running two different tools.
+
+We can run the ```Scanpy FilterCells``` tool with a large range of filtering values to not actually filter anything but instead add some metadata about the counts and number of expressed genes.
 
 > <hands-on-title>Add initial metadata</hands-on-title>
 >
@@ -359,6 +393,8 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 {: .hands_on}
 
+The final tool to run is the ```AnnData Operations``` tool which will add the rest of our metadata, mostly information about the mitocondrial cells in the object which are indicated with cells that start with **MT-**.
+
 > <hands-on-title>Add final metadata</hands-on-title>
 >
 > 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
@@ -374,4 +410,12 @@ It is also a good idea to add tags to each sample in order to keep track of what
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Final Object`
 >
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `Final Object`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+>
 {: .hands_on}
+
+With that run we should be finished! check the observation file to see all the metadata that we've added in throughout the tutorial and take this time to check that all the columns contain data, if any of the columns are blank then there was probably an issue with one of the tools (likely the last 2!).
+
+Congratulations! Now your data is ready for any further processing or analysis!
