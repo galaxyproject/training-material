@@ -37,7 +37,7 @@ contributors:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  - gallantries
 ---
 
 # Introduction

@@ -610,7 +610,7 @@ module TopicFilter
   #
   def self.list_all_tags(site)
     materials = process_pages(site, site.pages)
-    (materials.map { |x| x['tags'] || [] }.flatten + self.list_topics(site)).sort.uniq
+    (materials.map { |x| x['tags'] || [] }.flatten + list_topics(site)).sort.uniq
   end
 
   def self.filter_by_topic(site, topic_name)

@@ -11,7 +11,7 @@ cover-image-alt: "Galaxy Genome Annotation logo"
 editorial_board:
 - abretaud
 funding:
-- erasmusplus
+- gallantries
 
 pathway:
   - section: "Module 1: Introduction"

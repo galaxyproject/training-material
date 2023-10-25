@@ -30,7 +30,7 @@ contributions:
     - guerler
     - mvdbeek
   funding:
-    - erasmusplus
+    - gallantries
 level: Intermediate
 subtopic: workflows
 ---

@@ -25,7 +25,7 @@ contributions:
     - shiltemann
     - hexylena
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 
 notebook:
