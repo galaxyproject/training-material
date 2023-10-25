@@ -23,11 +23,12 @@ contributors:
 - gallardoalba
 - pickettbd
 - abueg
+- nekrut
 abbreviations:
   primary assembly: homozygous regions of the genome plus one set of alleles for the heterozygous loci
   alternate assembly: alternate loci not represented in the primary assembly
   QV: assembly consensus quality
-  unitig:
+  unitig: A uniquely assembleable subset of overlapping fragments. A unitig is an assembly of fragments for which there are no competing internal overlaps. A unitig is either a correctly assembled portion of a contig or a collapsed assembly of several high-fidelity copies of a repeat.
   contigs: contiguous sequences in an assembly
   scaffolds: one or more contigs joined by gap sequence
   Hi-C: all-versus-all chromatin conformation capture
@@ -41,11 +42,7 @@ abbreviations:
 # Introduction
 
 
-The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, Bionano optical maps, and {Hi-C} data.
-
-As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). The following tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the {GWS}.
-
-GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis workflow, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.
+The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick explanation on how these workflows can be used for producing high quality assemblies. It is intended for the "inpatient" types. 
 
 > <agenda-title></agenda-title>
 >
@@ -72,81 +69,80 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 
 The {VGP} assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
 
-![Figure 1: VGP pipeline modules](../../images/vgp_assembly/VGP_workflow_modules.png "VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.")
+-----
 
-The VGP pipeline first uses an assembly program to generate {contigs}. When {Hi-C} data and Bionano data are avilable, then they are used to generate {scaffolds}. When both data types are available, then Bionano scaffolding is run first before Hi-C scaffolding, but if optical maps are not available then HiC scaffolding can be run on the contigs. 
+![Figure 1: The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 
-> <comment-title>Input option order</comment-title>
-> This tutorial assumes the input datasets are high-quality. QC on raw read data should be performed before it is used. QC on raw read data is outside the scope of this tutorial.
+----
+
+The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using hifiasm16. The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles7. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication— is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. 
+
+> <comment-title>A note on data quality</comment-title>
+> For high quality genome assemblies, we recommends at least 30✕ of each HiFi and Hi-C per haplotype (i.e. 60✕ coverage for diploid genomes). The higher the quality and the coverage, the higher the continuity and the quality of the final assembly. 
 {: .comment}
 
-## Get data
+# Assembling the yeast genome
 
-For this tutorial, the first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.
+The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeast ([*Saccharomyces cerevisiae*](https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae)). The tutorial represents trajectory **B** from Fig. 1 above.
 
-> <hands-on-title>Data upload</hands-on-title>
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Datasets`
->    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
->
->       ```
->   Hi-C_dataset_F   https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz?download=1   fastqsanger.gz    Hi-C
->   Hi-C_dataset_R   https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz?download=1   fastqsanger.gz    Hi-C
->   Bionano_dataset    https://zenodo.org/record/5550653/files/bionano.cmap?download=1   cmap    Bionano
->       ```
->
->    - From **Rules** menu select `Add / Modify Column Definitions`
->       - Click `Add Definition` button and select `Name`: column `A`
->       - Click `Add Definition` button and select `URL`: column `B`
->       - Click `Add Definition` button and select `Type`: column `C`
->       - Click `Add Definition` button and select `Name Tag`: column `D`
->    - Click `Apply` and press <kbd>Upload</kbd>
->
-> 3. Import the remaining datasets from [Zenodo]({{ page.zenodo_link }})
->
->    - Open the file {% icon galaxy-upload %} __upload__ menu
->    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Collections`
->    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
->
->       ```
->   dataset_01    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta?download=1  fasta    HiFi  HiFi_collection
->   dataset_02    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta?download=1  fasta    HiFi  HiFi_collection
->   dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta?download=1  fasta    HiFi  HiFi_collection
->       ```
->
->    - From **Rules** menu select `Add / Modify Column Definitions`
->       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
->       - Click `Add Definition` button and select `URL`: column `B`
->       - Click `Add Definition` button and select `Type`: column `C`
->       - Click `Add Definition` button and select `Group Tag`: column `D`
->       - Click `Add Definition` button and select `Collection Name`: column `E`
->    - Click `Apply` and press <kbd>Upload</kbd>
->
-{: .hands_on}
+## Getting the data
+
+For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
+
+1. A set of PacBio {HiFi} reads in `fasta` format
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format
+
+### Uploading `fasta` datasets from Zenodo
+
+The following two steps demonstrate how to upload three PacBio {HiFi} datasets into you Galaxy history.
+
+#### **Step 1**: Copy the following URLs into clipboard
+(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+
+```
+https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
+https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
+https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
+```
+
+#### **Step 2**: Upload datasets into Galaxy
+
+These datasets are in `fasta` format. Upload by following the steps shown in the figure below.
+
+![Figure 2: Uploading fasta files in Galaxy]({{site.baseurl}}/faqs/galaxy/images/upload_fasta_via_url.png "Here we upload three fasta files. Compressed (.gz or .bz2) datasets are uploaded in exactly the same fashion by selecting an appropriate datatype (fasta.gz or fasta.bz2)")
 
 
-> <details-title>Working with your own data</details-title>
->
-> If working on a genome other than the example yeast genome, you can upload the VGP data from the [VGP/Genome Ark AWS S3 bucket](https://genomeark.s3.amazonaws.com/index.html) as follows:
->
-> > <hands-on-title>Import data from GenomeArk</hands-on-title>
-> >
-> > 1. Open the file {% icon galaxy-upload %} __upload__ menu
-> > 2. Click on **Choose remote files** tab
-> > 3. Click on the **Genome Ark** button and then click on **species**
-> {: .hands_on}
->
-> You can find the VGP data following this path: `/species/${Genus}_${species}/${specimen_code}/genomic_data`. Inside a given datatype directory (*e.g.* `pacbio`), select all the relevant files individually until all the desired files are highlighted and click the <kbd>Ok</kbd> button. Note that there may be multiple pages of files listed. Also note that you may not want every file listed.
->
-> {% snippet faqs/galaxy/collections_build_list.md %}
->
-{: .details}
+### Uploading `fastqsanger.gz` datasets from Zenodo
+
+Illumina {Hi-C} data is uploaded in essentially the same way as shown in the following two steps.
+
+> <warning-title>DANGER: Make sure you choose correct format!</warning-title>
+> When selecting datatype in "**Type (set all)**" drop-down, make sure you select `fastaqsanger` or `fastqsanger.gz` BUT NOT `fastqcssanger` or anything else!
+{: .warning}
+
+#### **Step 1**: Copy the following URLs into clipboard
+(you can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.)
+
+```
+https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz
+https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
+```
+
+#### **Step 2**: Upload datasets into Galaxy
+
+These datasets are in `fastqsanger.gz` format. Upload by following the steps shown in the figure below.
+
+![Figure 3: Uploading Fasta files in Galaxy]({{site.baseurl}}/faqs/galaxy/images/upload_fastqsanger_via_url.png "Here we upload two fastqsanger.gz files. Uncompressed or bz2 compressed (.bz2) detests are uploaded in exactly the same fashion by selecting an appropriation datatype (fastqsanger or fastasanger.bz2)")
+
+### Other ways to upload data
+
+You can obviously upload your own datasets via URLs as illustrated above or from your local system. In addition, you can upload data from a major repository called [GenomeArk](https://genomeark.org). GenomeArk is integrated directly into Galaxy Upload. To use follow these steps:
+
+{% snippet faqs/galaxy/dataset_upload_from_genomeark.md %}
+
+
+{% snippet faqs/galaxy/collections_build_list.md %}
+
 
 Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
 
@@ -373,6 +369,8 @@ With respect to the total sequence length, we can conclude that the size of our 
 ![Figure 10: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated using the final assembly (a) and the reference genome (b).")
 
 If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
+
+# FAQs
 
 
 
