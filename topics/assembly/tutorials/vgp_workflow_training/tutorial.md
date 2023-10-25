@@ -38,11 +38,10 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-
 # Introduction
 
-
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick explanation on how these workflows can be used for producing high quality assemblies. It is intended for the "inpatient" types. 
+
 
 > <agenda-title></agenda-title>
 >
@@ -68,8 +67,6 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 # VGP assembly workflow structure
 
 The {VGP} assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
-
------
 
 ![Figure 1: The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 
