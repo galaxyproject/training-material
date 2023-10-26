@@ -5,6 +5,7 @@ abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
   GTN: Galaxy Training Network
   RDM: Research Data Management
+  DPM: Data Management Plan
 level: Introductory
 zenodo_link: ''
 questions:
@@ -40,8 +41,8 @@ draft: true
 
 # Introduction
 
-**You** are obviously too important to bother with this research data management (RDM) nonsense. Just copy the data management plan from a previous grant application and stop wasting time.
-However, there might be some value in persuading your colleagues to do their RDM properly and to adhere to FAIR standards. In this tutorial, we explore the purely selfish reasons for encouraging good data management practices based on some real-life examples.
+**You** are obviously too important to bother with this research data management ({RDM}) nonsense. Just copy the data management plan ({DPM})from a previous grant application and stop wasting time.
+However, there might be some value in persuading your colleagues to do their {RDM} properly and to adhere to {FAIR} standards. In this tutorial, we explore the purely selfish reasons for encouraging good data management practices based on some real-life examples.
 
 
 > <agenda-title></agenda-title>
@@ -83,15 +84,15 @@ Too difficult? Maybe try something a bit more easy
 > [5 years worth of lab books](Lab-book_excercise1.pdf)
 
 > > <solution-title></solution-title>
-> > No you can't. Neither can I. Obviously our data management plan did not do us any favours here.
+> > No you can't. Neither can I. Obviously our {DMP} did not do us any favours here.
 > {: .solution}
 >
 {: .question} 
 
 ## The solution
 
-The problem descibed above could have been avoided by creating a Data Management Plan (DPM) before the start of the project. A DMP is a document that describes how research data is going to be managed during and after the project. Importantly, A DMP is a living document that may need to be altered during the project. Any time the research plan changes, the DMP should be reviewed and updated.
-Learn more about DPMs from these excellent resources: {% cite RDMkit-Data-management-plan %} and {% cite elixir-belgium-About-DMP %}
+The problem descibed above could have been avoided by creating a {DMP} before the start of the project. A {DMP} is a document that describes how research data is going to be managed during and after the project. Importantly, A {DMP} is a living document that may need to be altered during the project. Any time the research plan changes, the {DMP} should be reviewed and updated.
+Learn more about {DPM}s from these excellent resources: {% cite RDMkit-Data-management-plan %} and {% cite elixir-belgium-About-DMP %}
 
 # Excercise 2: Reproduce the experiment
 
@@ -140,11 +141,16 @@ This information about the data is called **metadata** and is arguably as import
 
 ## The Problem
 
+
 Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
 
 > The data that support the findings of this study are available from the corresponding author upon reasonable request.
 {: .quote}
 
+
+> > The data that support the findings of this study are available from the corresponding author upon reasonable request.
+{: .quote}
+> 
 > <question-title>3</question-title>
 > Can you list a couple of reasons an author might have not to publish the data he is reporting?
 > > <solution-title></solution-title>
@@ -165,7 +171,8 @@ Imagine the following situation: it has been a slow couple of years in terms of 
 
 Recently, the following has appeared in severeal journals: 
 
-_**Contact the authors for detailed protocol**_
+> Contact the authors for detailed protocol
+{: .quote}
 
 > <question-title>5</question-title>
 > If the publisher won't accomodate lengthy protocols in the main paper, what would be a good place to publish detailed protocols?
@@ -202,10 +209,9 @@ In this figure, four obstacles to receiving data from the authors are identified
 
 ## The solution
 
-The problems described above all relate to (lack of) data reuse possibilities by researchers. The FAIR principles of research data management have been established precicely to increase data reuse.
-Learn more about the FAIR principles in these excellent GTN tutorials: {% cite FAIR-in-a-nutshell %} and {% cite FAIR-data-management-solutions %}
+The problems described above all relate to (lack of) data reuse possibilities by researchers. The {FAIR} principles of research data management have been established precicely to increase data reuse.
+Learn more about the {FAIR} principles in these excellent GTN tutorials: {% cite FAIR-in-a-nutshell %} and {% cite FAIR-data-management-solutions %}
 
 # Conclusion
 
-The Galaxy Training Network is an example of a robust, effective Community of Practice.
-For more information please look at this great article {% cite hiltemann2023galaxy %}, the corresponding FAIR guidelines {% cite fair-training-materials %} and follow [short introduction to FAIR data stewardship](http://fellowship.elixiruknode.org/).
+
