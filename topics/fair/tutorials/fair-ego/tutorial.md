@@ -141,7 +141,12 @@ This information about the data is called **metadata** and is arguably as import
 
 ## The Problem
 
-Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data out there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
+
+Imagine the following situation: it has been a slow couple of years in terms of publications and grant income. You really need to get papers out, but you are short of research money. No worries! There is tons of data pit there for you to re-analyse, interpret, and integrate with your own data. You have found a particularly useful study in a paper and you want to use the data to get your research going again. In the data sharing statement, you find the following sentence: 
+
+> The data that support the findings of this study are available from the corresponding author upon reasonable request.
+{: .quote}
+
 
 > > The data that support the findings of this study are available from the corresponding author upon reasonable request.
 {: .quote}
