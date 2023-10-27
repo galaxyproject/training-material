@@ -1833,237 +1833,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-      "questions": [
-        "How can you remove traces of human sequence data from a sequenced viral sample?"
-      ],
-      "objectives": [
-        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
-        "Organize the data into a collection",
-        "Preprocess and map the data against the human reference genome",
-        "Eliminate reads/read pairs that map to the human genome from the original data"
-      ],
-      "time_estimation": "1h",
-      "level": "Intermediate",
-      "key_points": [
-        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
-        "Human reads can be identified by mapping the data to the human reference genome",
-        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "sequence-analysis",
-          "tutorials": [
-            "quality-control",
-            "mapping"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        }
-      ],
-      "tags": [
-        "covid19"
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        }
-      ],
-      "short_id": "T00236",
-      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-      "topic_name": "sequence-analysis",
-      "tutorial_name": "human-reads-removal",
-      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
-      "id": "sequence-analysis/human-reads-removal",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": null,
-          "materials": [
-            {
-              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
-              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
-              "type": "Tutorial"
-            },
-            {
-              "external": true,
-              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
-              "title": "Example History",
-              "type": "Example History"
-            }
-          ],
-          "tags": [
-            "sequence-analysis"
-          ],
-          "type": "Tutorial",
-          "gtn_id": "sequence-analysis/human-reads-removal",
-          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "human-reads-removal.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
-          "wfid": "sequence-analysis-human-reads-removal",
-          "wfname": "human-reads-removal",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-      "tools": [
-        "Grep1",
-        "__UNZIP_COLLECTION__",
-        "__ZIP_COLLECTION__",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxy.mesocentre.uca.fr",
-            "name": "Galaxy@AuBi",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Sequence analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "e188dc7a68e6",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_fastx",
-            "owner": "iuc",
-            "revisions": "a8d69aee190e",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "seqtk",
-            "owner": "iuc",
-            "revisions": "3da72230c066",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "898b67846b47",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "d94aff5ee623",
-            "tool_panel_section_label": "Sequence analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Mapping",
       "zenodo_link": "https://doi.org/10.5281/zenodo.1324070",
       "questions": [
@@ -4197,59 +3966,123 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "NCBI BLAST+ against the MAdLand",
-      "zenodo_link": "https://zenodo.org/records/7524427",
+      "title": "Removal of human reads from SARS-CoV-2 sequencing data",
       "questions": [
-        "What is MAdLand DB?",
-        "How can we perform Blast analysis on Galaxy?"
+        "How can you remove traces of human sequence data from a sequenced viral sample?"
       ],
       "objectives": [
-        "Load FASTA sequence into Galaxy",
-        "Perform NCBI-Blast+ analysis against MAdLandDB"
+        "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+        "Organize the data into a collection",
+        "Preprocess and map the data against the human reference genome",
+        "Eliminate reads/read pairs that map to the human genome from the original data"
       ],
-      "time_estimation": "15m",
+      "time_estimation": "1h",
+      "level": "Intermediate",
       "key_points": [
-        "Blast tool searches a database of sequences for similar sequences to a query sequence.",
-        "Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a \"database diamond\".",
-        "MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search."
+        "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
+        "Human reads can be identified by mapping the data to the human reference genome",
+        "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "sequence-analysis",
+          "tutorials": [
+            "quality-control",
+            "mapping"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        }
+      ],
+      "tags": [
+        "covid19"
       ],
       "contributors": [
         {
-          "name": "Deepti Varshney",
-          "joined": "2022-12",
-          "id": "deeptivarshney",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/deeptivarshney.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/"
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
         }
       ],
-      "short_id": "T00238",
-      "url": "/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html",
+      "short_id": "T00236",
+      "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
       "topic_name": "sequence-analysis",
-      "tutorial_name": "ncbi-blast-against-the-madland",
-      "dir": "topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland",
-      "id": "sequence-analysis/ncbi-blast-against-the-madland",
+      "tutorial_name": "human-reads-removal",
+      "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
+      "id": "sequence-analysis/human-reads-removal",
       "video_library": {
         "tutorial": null,
         "slides": null,
         "demo": null,
-        "both": null,
+        "both": {
+          "description": null,
+          "materials": [
+            {
+              "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+              "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+              "type": "Tutorial"
+            },
+            {
+              "external": true,
+              "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
+              "title": "Example History",
+              "type": "Example History"
+            }
+          ],
+          "tags": [
+            "sequence-analysis"
+          ],
+          "type": "Tutorial",
+          "gtn_id": "sequence-analysis/human-reads-removal",
+          "title": "Removal of human reads from SARS-CoV-2 sequencing data"
+        },
         "session": null
       },
       "hands_on": true,
       "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+      "workflows": [
+        {
+          "workflow": "human-reads-removal.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "path": "topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga",
+          "wfid": "sequence-analysis-human-reads-removal",
+          "wfname": "human-reads-removal",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/sequence-analysis-human-reads-removal/versions/human-reads-removal",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
       "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2"
+        "Grep1",
+        "__UNZIP_COLLECTION__",
+        "__ZIP_COLLECTION__",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
       ],
       "supported_servers": {
         "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
@@ -4259,18 +4092,9 @@
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
           }
         ],
         "inexact": [
-          {
-            "url": "https://cpt.tamu.edu/galaxy-public/",
-            "name": "Center for Phage Technology (CPT)"
-          },
           {
             "url": "https://galaxy.mesocentre.uca.fr",
             "name": "Galaxy@AuBi",
@@ -4282,8 +4106,23 @@
             "usegalaxy": "false"
           },
           {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
             "url": "https://usegalaxy.no/",
             "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
             "usegalaxy": "true"
           }
         ]
@@ -4295,29 +4134,50 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "diamond",
+            "name": "text_processing",
             "owner": "bgruening",
-            "revisions": "1e3323a44643",
+            "revisions": "d698c222f354",
             "tool_panel_section_label": "Sequence analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ncbi_blast_plus",
+            "name": "bwa",
             "owner": "devteam",
-            "revisions": "0e3cf9594bb7",
+            "revisions": "e188dc7a68e6",
             "tool_panel_section_label": "Sequence analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "ncbi_blast_plus",
-            "owner": "devteam",
-            "revisions": "0e3cf9594bb7",
+            "name": "samtools_fastx",
+            "owner": "iuc",
+            "revisions": "a8d69aee190e",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "seqtk",
+            "owner": "iuc",
+            "revisions": "3da72230c066",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "898b67846b47",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "d94aff5ee623",
             "tool_panel_section_label": "Sequence analysis",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: diamond\n  owner: bgruening\n  revisions: 1e3323a44643\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_fastx\n  owner: iuc\n  revisions: a8d69aee190e\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: 898b67846b47\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -4331,8 +4191,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.json"
       }
     },
     {
@@ -4596,6 +4456,146 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "NCBI BLAST+ against the MAdLand",
+      "zenodo_link": "https://zenodo.org/records/7524427",
+      "questions": [
+        "What is MAdLand DB?",
+        "How can we perform Blast analysis on Galaxy?"
+      ],
+      "objectives": [
+        "Load FASTA sequence into Galaxy",
+        "Perform NCBI-Blast+ analysis against MAdLandDB"
+      ],
+      "time_estimation": "15m",
+      "key_points": [
+        "Blast tool searches a database of sequences for similar sequences to a query sequence.",
+        "Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a \"database diamond\".",
+        "MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search."
+      ],
+      "contributors": [
+        {
+          "name": "Deepti Varshney",
+          "joined": "2022-12",
+          "id": "deeptivarshney",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/deeptivarshney.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/deeptivarshney/"
+        }
+      ],
+      "short_id": "T00238",
+      "url": "/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.html",
+      "topic_name": "sequence-analysis",
+      "tutorial_name": "ncbi-blast-against-the-madland",
+      "dir": "topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland",
+      "id": "sequence-analysis/ncbi-blast-against-the-madland",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond/2.0.15+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://cpt.tamu.edu/galaxy-public/",
+            "name": "Center for Phage Technology (CPT)"
+          },
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Sequence analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "diamond",
+            "owner": "bgruening",
+            "revisions": "1e3323a44643",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ncbi_blast_plus",
+            "owner": "devteam",
+            "revisions": "0e3cf9594bb7",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ncbi_blast_plus",
+            "owner": "devteam",
+            "revisions": "0e3cf9594bb7",
+            "tool_panel_section_label": "Sequence analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: diamond\n  owner: bgruening\n  revisions: 1e3323a44643\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ncbi_blast_plus\n  owner: devteam\n  revisions: 0e3cf9594bb7\n  tool_panel_section_label: Sequence analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/sequence-analysis/tutorials/ncbi-blast-against-the-madland/tutorial.json"
       }
     }
   ]
