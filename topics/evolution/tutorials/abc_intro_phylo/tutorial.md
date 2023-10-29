@@ -23,6 +23,7 @@ contributors:
 # Introduction
 
 This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
+A video recording of that workshop is available on the Australian BioCommons YouTube channel <a href="https://www.youtube.com/watch?v=wAHLgHi7hHI">here</a>.
 
 The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
 
@@ -656,10 +657,44 @@ While this is running you might use your time to read the Models of sequence evo
 # Phylogenetic Networks
 
 <!-- Intro to phylogenetic networks as an alternative to trees -->
-My go-to for doing a phylogenetic estimation is not to start with a tree but to start with a *phylogenetic network*.
 
-A phylogenetic network can have two purposes: (a) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer events or hybridisation -- or (b) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+Now, perhaps surprisingly, my go-to for doing a phylogenetic estimation is _not_ to start with a tree but to start with a *phylogenetic network*.
 
+A phylogenetic network can have two purposes: (a) to show an estimate of the evolutonary history that is not strictly branching, so, involving horizontal gene transfer or hybridisation events -- or (b) to show conflicting phylogenetic signal in the data set, suggesting different possible trees.
+
+We will be using the networks for the second purpose here, because we are for this tutorial working under the assumption that there is a true tree, which is the actual evolutionary history of our species of interest.
+
+To understand what this kind of phylogenetic network is, and how to interpret one, we need to think about what the branches of a tree _do_: they *split* the taxa into two groups: those on one side of the branch, and those on the other.  We are thinking about unrooted trees in this context, so the two branches coming from the root constitute a single such split.
+
+Thus every branch of a tree can be thought of as a _split_ and a tree is a collection of *compatible* splits: where by "compatible" we just mean that they can be on the same tree.
+
+<!-- [diagram here of splits?] -->
+
+So our tree search is an attempt to find some "best" set of _splits_ that are all compatible, and which together explain the evolutionary relationships among the taxa of interest.
+
+However in any data set there may be support for multiple splits that are _not_ compatible: for example, we might have a set of nucleotide sequence data like this:
+
+| Taxon | Sequence          | constant | singleton | 12,34  | 23,14 | 13,24 |
+| ----- | ----------------- | -------- | --------- | ------ | ----- | ----- |
+| 1     | `ACTGAGTTAGGTCTA` | `ACTG`   | `AGTT`    | `AGGT` | `CT`  | `A`   |
+| 2     | `ACTGCTTTAGGTTGC` | `ACTG`   | `CTTT`    | `AGGT` | `TG`  | `C`   |
+| 3     | `ACTGCGCTGCACTGA` | `ACTG`   | `CGCT`    | `GCAC` | `TG`  | `A`   |
+| 4     | `ACTGCGTAGCCGAAG` | `ACTG`   | `CGTA`    | `GCCG` | `AA`  | `G`   |
+|       | ----------------- | -------- | --------- | ------ | ----- | ----- |
+| Site: | `123456789012345` | `1234`   | `5678`    | `9012` | `34`  | `5`   |
+|       | `         1     ` |          |           | ` 1  ` |       |       |
+
+
+Above you can see the first four sites are _constant_, so don't tell us anything much about the phylogeny.
+Each of the next four "singleton" sites segregates one taxon from the others (which is again not terribly useful in terms of resolving the branching in the phylogeny).
+The so-called "parsimony informative" sites start at site 9.
+These sites tell us about the support for the _internal_ branches of the tree.
+
+Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split 12:34 for brevity, or even just 12.
+The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23:14 or 14:23 or just 14.
+The last site suggests that taxa 1 and 3 should go together.
+
+Remind people splits <-> set of parallel lines
 
 
 **IMAGE HERE: Neighbour net image**
@@ -668,9 +703,10 @@ A phylogenetic network can have two purposes: (a) to show an estimate of the evo
 
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
-> 1. Step 1
-> 2. Step 2
->
+> 1. If you haven't already got it, download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) to your own computer and install it. SplitsTree 4 is now rather old, but works well; SplitsTree 6 is still in development but appears (at the time of writing this) to be working well.  They do the same thing, and we will only use tools common to both versions.
+> 2. Download the aligned data .FASTA file to your own computer.
+> 3. Start up SplitsTree and open the file.  Within moments you should see 
+> 
 {: .hands_on}
 
 
@@ -705,8 +741,7 @@ XXX More to go here.
 sequences.
 - Optimality criteria (e.g., MP, ML) help us decide which trees are “good” – by how well they explain the data.
 - We can search tree space for medium-sized problems with branch-and-bound, and bigger problems with heuristics.
-- Bayesian analysis is a way of incorporating prior knowledge in ML analyses.
-- Trees can be assessed for robustness by resampling. testing.
+- Trees can be assessed for robustness by comparing methods, resampling (bootstrap), and considering a phylogenetic network.
 
 
 # Troubleshooting
