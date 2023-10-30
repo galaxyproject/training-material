@@ -545,7 +545,7 @@ More biological realism allows for different proportions of the nucleotides -- d
 A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
 Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
 
-![HKY85](./images/HKY85RateMatrix.png){:align="center"}
+![HKY85](./images/HKY85RateMatrix.png){:align="center",:width="400px"}
 
 In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
 
@@ -674,7 +674,9 @@ So our tree search is an attempt to find some "best" set of _splits_ that are al
 
 However in any data set there may be support for multiple splits that are _not_ compatible: for example, we might have a set of nucleotide sequence data like this:
 
-| Taxon | Sequence          | constant | singleton | 12,34  | 23,14 | 13,24 |
+![TableOfSitesAndSplits](./images/tableOfSitesForSplits.png){:align="center"}
+
+<!-- | Taxon | Sequence          | constant | singleton | 12,34  | 23,14 | 13,24 |
 | ----- | ----------------- | -------- | --------- | ------ | ----- | ----- |
 | 1     | `ACTGAGTTAGGTCTA` | `ACTG`   | `AGTT`    | `AGGT` | `CT`  | `A`   |
 | 2     | `ACTGCTTTAGGTTGC` | `ACTG`   | `CTTT`    | `AGGT` | `TG`  | `C`   |
@@ -682,16 +684,17 @@ However in any data set there may be support for multiple splits that are _not_ 
 | 4     | `ACTGCGTAGCCGAAG` | `ACTG`   | `CGTA`    | `GCCG` | `AA`  | `G`   |
 |       | ----------------- | -------- | --------- | ------ | ----- | ----- |
 | Site: | `123456789012345` | `1234`   | `5678`    | `9012` | `34`  | `5`   |
-|       | `         1     ` |          |           | ` 1  ` |       |       |
+|       | `         1     ` |          |           | ` 1  ` |       |       | -->
 
+In this table the sequence is first listed in the second column, then broken up into different categories.
 
 Above you can see the first four sites are _constant_, so don't tell us anything much about the phylogeny.
 Each of the next four "singleton" sites segregates one taxon from the others (which is again not terribly useful in terms of resolving the branching in the phylogeny).
 The so-called "parsimony informative" sites start at site 9.
 These sites tell us about the support for the _internal_ branches of the tree.
 
-Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split 12:34 for brevity, or even just 12.
-The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23:14 or 14:23 or just 14.
+Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a split 12|34 for brevity, or even just 12.
+The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23|14 or 14|23 or just 14.
 The last site suggests that taxa 1 and 3 should go together.
 
 Remind people splits <-> set of parallel lines
