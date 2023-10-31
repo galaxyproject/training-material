@@ -54,7 +54,8 @@ Prior to publication many journals and funders require authors to submit their r
 The three databases have different methods for making submissions. If your database of choice is ENA and you 
 need to submit data stored on a remote server, you are in the right place. This tutorial will cover how to find your way around the ENA Webin portal for uploading raw sequencing read data as well as accompanying metadata, and use [cURL](https://en.wikipedia.org/wiki/CURL) to copy read files over to ENA's FTP server. 
 
-If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]( {% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.md %}) tutorial helpful. 
+If you would like to use Galaxy tools for submission to ENA you may find [Submitting sequence data to ENA]({% link topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.md %}) tutorial helpful. 
+
 
 > <tip-title>What is cURL?</tip-title>
 > cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it's a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests. 
