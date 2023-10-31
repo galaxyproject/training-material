@@ -123,7 +123,7 @@ to...
 
 and much bigger projects across all of life:
 
-![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center", :width="500"}
+![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center",:width="500"}
 
 (from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
 
@@ -182,7 +182,7 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
 > 
 > 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
-> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
+> 3. The **Molecular clock** assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is one of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
 > 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 >
 > We will (mostly) make these assumptions in this tutorial!
@@ -245,6 +245,13 @@ Distances have very desirable properties, that can be summarised as follows, for
 Here is a flow-chart of the process:
 
 ![Tree Construction](./images/TreeConstruction.drawio.png){:align="center"}
+
+The most commonly used kid of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest.
+
+*Aligning* sequences is the process of identifying which individual positions in those sequences are homologous -- that is, which particular nucleotides have evolved from the same common ancestor.
+The alignment up of such individual sequence positions across the taxon set is called a *site*, so we talk about the *first site in the alignment*, say, as the position where a particular gene begins for all the species.
+
+In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*.
 
 ## Challenges
 
@@ -706,9 +713,10 @@ Remind people splits <-> set of parallel lines
 
 > <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
-> 1. If you haven't already got it, download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) to your own computer and install it. SplitsTree 4 is now rather old, but works well; SplitsTree 6 is still in development but appears (at the time of writing this) to be working well.  They do the same thing, and we will only use tools common to both versions.
+> 1. If you haven't already got it, download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) to your own computer and install it. SplitsTree 4 is now rather old, but works well; SplitsTree 6 is still in development but appears (at the time of writing this) to be working well.  They do the same thing, and we will only use tools common to both versions.  Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file to your own computer.
-> 3. Start up SplitsTree and open the file.  Within moments you should see 
+> 3. Start up SplitsTree and open the file.  Within moments you should see something like this:
+
 > 
 {: .hands_on}
 
@@ -731,8 +739,6 @@ You will also see the Newick Format of the best tree found.
 
 
 XXX More to go here.
-
-# Possible new section on formatting and exporting a pretty tree
 
 
 
