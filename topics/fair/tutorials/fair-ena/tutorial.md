@@ -111,7 +111,7 @@ Each read file submission will receive a run accession (ERR*) and an Experiment 
 
 # 02. Submitting data
 ## 1. Webin login
-Log in to ENA Webin portal https://www.ebi.ac.uk/ena/submit/webin/. If you don't have a login you will have to register for an account. Go ahead and do that - it is free. Click on the 'Register' button and fill in the information requested.  
+[Log in to ENA Webin portal](https://www.ebi.ac.uk/ena/submit/webin/). If you don't have a login you will have to register for an account. Go ahead and do that - it is free. Click on the 'Register' button and fill in the information requested.  
 
 ## 2. Study metadata
 ###  Metadata preparation
