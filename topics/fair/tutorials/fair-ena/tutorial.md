@@ -302,5 +302,3 @@ Check the processing status of your upload via the Run Processing Report.
 Metadata submitted for each object can be edited via the Reports (Studies, Samples, Runs) by clicking on the box-arrow icon in the Action column next to the table presenting the reports. The underlying xml of the submitted item can be inspected and edited. 
 
 However, for complex edits you might have to contact [ENA helpdesk](https://www.ebi.ac.uk/ena/browser/support). 
-
-This work was funded by the ELIXIR-UK: FAIR Data Stewardship training UKRI award (MR/V038966/1).
