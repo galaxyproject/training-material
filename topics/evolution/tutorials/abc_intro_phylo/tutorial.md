@@ -119,7 +119,7 @@ to...
 
 <!-- all birds... -->
 
-![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width=600}
+![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width="600"}
 
 and much bigger projects across all of life:
 
@@ -152,7 +152,7 @@ Aside from fundamental understanding, there are other strong motivators for infe
 
 # Basic Methodology
 
-First and foremost, **phylogenetic inferences is a statistic estimation process.**
+First and foremost, **phylogenetic inference is a statistic estimation process.**
 
 It is not generally possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
 One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
@@ -234,7 +234,7 @@ In this tutorial we will only be considering trees that are binary.
 
 ## Building a Tree
 
-The basic method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
+The first method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
 Distances have very desirable properties, that can be summarised as follows, for any objects $$ x $$, $$y$$, $$z$$, and writing $$d(x,y)$$ to mean the distance from $$x$$ to $$y$$ etc.  These properties are:
  * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
@@ -246,12 +246,23 @@ Here is a flow-chart of the process:
 
 ![Tree Construction](./images/TreeConstruction.drawio.png){:align="center"}
 
-The most commonly used kid of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest.
+The blue boxes on the left show some of the input data forms: from the "standard" sequence data to a range of molecular-based measures like DNA-DNA hybridisatin, gene presence/absence, and morphology (physical dimensions).
+The most commonly used kind of data in modern phylogenetics is *aligned molecular sequences* -- typically, DNA, RNA, or Amino Acids (AA) from equivalent (homologous) genes in the set of species of interest.
+(Other data are in the form of distances or dissimilarity measures; we will not use that kind of data today.)
 
 *Aligning* sequences is the process of identifying which individual positions in those sequences are homologous -- that is, which particular nucleotides have evolved from the same common ancestor.
 The alignment up of such individual sequence positions across the taxon set is called a *site*, so we talk about the *first site in the alignment*, say, as the position where a particular gene begins for all the species.
 
-In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*.
+In molecular phylogenetics -- which is what we are doing when we use DNA, RNA and AA data -- the fundamental unit of information that we use to estimate the phylogeny is the *site*. (There are some methods based on using more than one site at a time but they are not in common use and we do not cover them in this introduction.)
+Hence, lining up those homologous sites -- *alignment* -- is a critical part of molecular phylogenetics.
+
+Aligned sequences (see Alignment below) can be converted into distances (green box above), using models for how the sites have evolved.
+These distances can be expressed as a matrix _D_, which becomes the input to a distance-based method.
+
+At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
+Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together:
+
+![Joining Clades](./images/JoiningCladesForTreeConstruction.png){:align="center"}
 
 ## Challenges
 
@@ -315,6 +326,7 @@ sed -r 'N;s/^(>[A-Za-z2\.]+)\n/\1,/g' anolis-sequence-lengths.txt -->
 
 
 We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
+It is not uncommon for a phylogenetic analysis to span hundreds, or even thousands, of taxa.
 
 
 ## Get the data
@@ -328,26 +340,50 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [GTN](./data/anolis-raw.fst) or from the shared data library.
-> Note: Old data here: https://tinyurl.com/phylo-trees-1-data
 >    ```
 >    anolis-raw.fst
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >  
-> You can click on the `eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
+> You can click on the 'eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
 >
-This is a file in **FASTA** format, which has a very simple structure, as follows:
+This is a file in **FASTA** or **Fasta** format (pronounced like "faster", not sounding the 'r', or Fast-Eh to rhyme with the first letter of the alphabet), which has a very simple structure, as follows:
 
-```
+1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
+2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
+
+Example:
+
+<!-- ```
 >SEQUENCE_1
 GAGCTATACGACGT
 >SEQUENCE_2
 TTACTAGCTACTACT
+``` -->
+
+```
+>Taxon_1
+ACTGCGTTAGGTCTAGCC
+>Taxon_2
+GATCTACTGCTTTAGGTTGAGCC
+>Taxon_3
+ACTGCTCTAGCACTGAGCCCA
+>Taxon_4
+ACTTGGCGTAGCCGGAGGCC
 ```
 
-The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each with a short set of characters which we can assume are DNA.
+The above toy file has four sequences in it named Taxon_1, Taxon_2, ..., each with a short set of characters which we can assume are DNA.
 
+<!-- A line beginning with the greater-than sign `>` holds the sequence name or identifier/ID; the other lines hold the sequence data for the sequence ID above. -->
+
+*Note:* The Fasta format can also include symbols such as a question mark '?' for missing data, or hyphen '-' to indicate an insertion event in that sequence or deletion event in the others, collectively *indel*; thus it is also common to represent a multiple sequence alignment in Fasta format too.
+
+Fasta format is very simple and is commonly used as input to phylogenetic inference programs.  (It is also a common format for storing high-throughput read data, but *without quality scores* -- if you want include read quality you would use FASTQ format.)
+
+<br>
+
+> <hands-on-title>View your data</hands-on-title>
 > Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Multiple Sequence Alignment tool.
 > You should see something like this:
 >
@@ -369,14 +405,6 @@ The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each
   There should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.
 </details>
 
-FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
-
-> <comment-title>FASTA format</comment-title>
-> The FASTA (pronounced like "faster" (not sounding the 'r'!) or Fast-Eh to rhyme with the first letter of the alphabet) format works as follows:
-> 1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
-> 2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
->
-{: .comment}
 
 
 # Sequence Alignment
@@ -394,7 +422,25 @@ Sequence alignment is a complex process and there are many techniques that have 
 > 
 {: .comment}
 
+Below we have another toy example, beginning with the original sequences on the left, an alignment of those sequences in the middle, and then a "trimmed" version of the alignment, without parts that we cannot use today:
 
+![Aligning a toy example](./images/ToyAlignmentAndTrim.png){:width="700"}
+
+On the left are the toy sequences from the Fasta format example.
+In the second table we see an alignment of those sequences, which has a number of gaps in it that help line up the sites so more of them agree.
+A sign of a "good" alignment is one in which there are a lot of colours that line up vertically.
+
+The Fasta format file that would contain this "trimmed" alignment is
+```
+>Taxon_1
+ACTGCGTTAGGTCTAGCC
+>Taxon_2
+ACTGCTTTAGGTTGAGCC
+>Taxon_3
+ACTGCTCTAGCCTGAGCC
+>Taxon_4
+ACTGGCGTAGCCGGAGGC
+```
 ## Aligning sequences with MAFFT
 
 Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, which is available on Galaxy.
@@ -410,7 +456,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
-Here is an image of the resulting alignment:
+Here is an image of the resulting alignment (yours may look a little different -- don't worry if it does):
 
 ![Alignment](./images/MEGA_alignment.png){:width="600"}
 
@@ -440,8 +486,9 @@ The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a s
 
 NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
 
-> <comment-title>Aside on FastTree2</comment-title>
-> The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description (with some minor formatting) from the FastTree2 website at http://www.microbesonline.org/fasttree/
+The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  A detailed description of how FastTree works is available at http://www.microbesonline.org/fasttree/.
+
+<!-- 
 >
 >**Heuristic Neighbor-Joining**
 >
@@ -453,7 +500,7 @@ NJ is only rarely used as a complete tool for phylogenetic analysis, since altho
 >
 >Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
 >
-{: .comment}
+{: .comment} -->
 
 
 It won't take very long for FastTree to build your tree.
@@ -485,7 +532,8 @@ Note that these two trees are very similar; they only differ in the position of 
 
 Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
 That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred it, and those calculated from such as sequence data.
-The Minimum Evolution criterion optimises... XXX Mike to complete.
+
+<!-- The Minimum Evolution criterion optimises the total length of the tree -- the sum of all its branch lengths -- that gives the best match of the tree-based distances to the input distances in the original matrix *D*. -->
 
 > <hands-on-title>Visualising a tree</hands-on-title>
 > Click on the title of the completed job and find the row of small icons for saving, linking etc.: 
@@ -502,20 +550,23 @@ The Minimum Evolution criterion optimises... XXX Mike to complete.
 > 
 > At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
 > Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree these branches are much shorter.
-> Note! **Short branches are much harder to get right.**
+> Note! *Short branches are much harder to get right.*
 >
 {: .hands_on}
 
 # Searching for the "best" tree
 
-The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching all of the set of possible trees for the tree or trees that optimises this score.
+The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then *searching* all of the set of possible trees for the tree or trees that optimises this score.
+
 Note that such scores are "surrogates for truth," in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
 
-**If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
+*If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.*
+
+Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
 
 ## Minimum Evolution (ME)
 
-Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  The interested reader is directed to... [refs]
+Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  The interested reader is directed to an article by Rzhetsky and Nei (1993) at https://academic.oup.com/mbe/article/10/5/1073/1037508.
 
 There are some variations on this ME criterion, and FastTree uses an approximation to one of them to find good trees.
 
@@ -540,39 +591,40 @@ Biologically we know this isn't always the case, but in practice this turns out 
 Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen, per unit time -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
 
-### Models of sequence evolution
-
-*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
-
-Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
-The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
-
-More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
-
-A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
-Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
-
-![HKY85](./images/HKY85RateMatrix.png){:align="center",:width="400px"}
-
-In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
-
-A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
-
-![GTR](./images/GTRRateMatrix.png){:align="center"}
-
-A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
-
-The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
-The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
-This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
-
-There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
-Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
-
-The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
-In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
-
-There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+> <aside-title>Models of sequence evolution</aside-title>
+>
+>*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
+>
+>Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
+>The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+>
+>More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
+>
+>A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
+>Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
+> 
+> ![HKY85](./images/HKY85RateMatrix.png){:align="center"}
+>
+>In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
+>
+>A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
+>
+> ![GTR](./images/GTRRateMatrix.png){:align="center"}
+>
+>A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
+>
+>The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
+>The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
+>This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
+>
+>There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
+>Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
+>
+>The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
+>In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
+>
+>There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+{: .aside}
 
 ## Searching for trees and their branch lengths
 
@@ -704,8 +756,7 @@ Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a s
 The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23|14 or 14|23 or just 14.
 The last site suggests that taxa 1 and 3 should go together.
 
-Remind people splits <-> set of parallel lines
-
+![]
 
 **IMAGE HERE: Neighbour net image**
 
@@ -740,6 +791,7 @@ You will also see the Newick Format of the best tree found.
 
 XXX More to go here.
 
+- What have we learned and done?
 
 
 # Summary 
