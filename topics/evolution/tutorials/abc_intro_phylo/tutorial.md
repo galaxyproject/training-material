@@ -119,7 +119,7 @@ to...
 
 <!-- all birds... -->
 
-![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width="600"}
+![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width=600}
 
 and much bigger projects across all of life:
 
@@ -152,7 +152,7 @@ Aside from fundamental understanding, there are other strong motivators for infe
 
 # Basic Methodology
 
-First and foremost, **phylogenetic inference is a statistic estimation process.**
+First and foremost, **phylogenetic inferences is a statistic estimation process.**
 
 It is not generally possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
 One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
@@ -456,7 +456,7 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
-Here is an image of the resulting alignment (yours may look a little different -- don't worry if it does):
+Here is an image of the resulting alignment:
 
 ![Alignment](./images/MEGA_alignment.png){:width="600"}
 
@@ -532,8 +532,7 @@ Note that these two trees are very similar; they only differ in the position of 
 
 Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
 That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred it, and those calculated from such as sequence data.
-
-<!-- The Minimum Evolution criterion optimises the total length of the tree -- the sum of all its branch lengths -- that gives the best match of the tree-based distances to the input distances in the original matrix *D*. -->
+The Minimum Evolution criterion optimises... XXX Mike to complete.
 
 > <hands-on-title>Visualising a tree</hands-on-title>
 > Click on the title of the completed job and find the row of small icons for saving, linking etc.: 
@@ -550,17 +549,16 @@ That is why methods like FastTree are employed to find a tree with the best poss
 > 
 > At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
 > Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree these branches are much shorter.
-> Note! *Short branches are much harder to get right.*
+> Note! **Short branches are much harder to get right.**
 >
 {: .hands_on}
 
 # Searching for the "best" tree
 
-The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then *searching* all of the set of possible trees for the tree or trees that optimises this score.
-
+The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching all of the set of possible trees for the tree or trees that optimises this score.
 Note that such scores are "surrogates for truth," in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
 
-*If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.*
+**If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
 
 Minimum Evolution, Maximum Parsimony, and Maximum Likelihood are common such score functions.
 
@@ -571,6 +569,11 @@ Minimum Evolution is the idea that the sum of the branch lengths should be as sm
 There are some variations on this ME criterion, and FastTree uses an approximation to one of them to find good trees.
 
 ## Maximum Parsimony (MP) and Parsimony Length
+
+Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary ``work'' that has to be done to turn one sequence into another.
+
+This can be given as the *minimum number of character state changes required* -- the so-called *parsimony length* -- to convert the (hypothetical) sequence at one end of a branch to that at the other end.
+The Maximum Parsimony method is based on this approach.
 
 The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g., nucleotides) at the leaves of that tree.
 Finding the parsimony length of a site pattern is easy and fast due to a clever algorithm created by Walter Fitch; hence, finding the score (the ``goodness'') of a tree is fast -- but still, finding the tree that minimises this score is still computationally intractable, because the space of trees is so huge.
@@ -591,40 +594,39 @@ Biologically we know this isn't always the case, but in practice this turns out 
 Another assumption we make is that the substitution rate -- the rate at which changes of nucleotide at a given position in the sequence happen, per unit time -- is only dependent on the current state, i.e., we do not care about how a sequence came to be what it is, only what the sequence is now, to determine what are the probable evolutions of it.
 This seems much more biologically reasonable and makes this into a Markov process, which in turn enables a lot of calculations to be made simply.
 
-> <aside-title>Models of sequence evolution</aside-title>
->
->*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
->
->Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
->The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
->
->More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
->
->A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
->Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
-> 
-> ![HKY85](./images/HKY85RateMatrix.png){:align="center"}
->
->In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
->
->A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
->
-> ![GTR](./images/GTRRateMatrix.png){:align="center"}
->
->A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
->
->The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
->The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
->This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
->
->There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
->Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
->
->The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
->In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
->
->There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
-{: .aside}
+### Models of sequence evolution
+
+*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
+
+Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
+The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+
+More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
+
+A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
+Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
+
+![HKY85](./images/HKY85RateMatrix.png){:align="center",:width="300px"}
+
+In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
+
+A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
+
+![GTR](./images/GTRRateMatrix.png){:align="center"}
+
+A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
+
+The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
+The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
+This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
+
+There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
+Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
+
+The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
+In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
+
+There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
 
 ## Searching for trees and their branch lengths
 
@@ -651,10 +653,16 @@ This means that it is meaningful to assess the reliability of *branches* of your
 
 ## Resolution
 
-Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary ``work'' that has to be done to turn one sequence into another.
+A good phylogenetic tree is one that is *well resolved* -- that is, every time a lineage branches, it forms two new branches.
+Equivalently, every internal node has three edges touching it.
 
-This can be given as the *minimum number of character state changes required* -- the so-called *parsimony length* -- to convert the (hypothetical) sequence at one end of a branch to that at the other end.
-The Maximum Parsimony method is based on this approach
+An unresolved node *may* be a true representation of the branching pattern of a group of lineages, but that is generally in the case of very rapid diversification, such as during an island radiation (species arrives in new place with lots of niches; diversifies incredibly quickly).
+
+In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
+
+![Unresolved](./images/Unresolved.png){:align="center",:width="400px"}
+
+If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
 ## Bootstrapping
 
@@ -756,7 +764,8 @@ Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a s
 The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23|14 or 14|23 or just 14.
 The last site suggests that taxa 1 and 3 should go together.
 
-![]
+Remind people splits <-> set of parallel lines
+
 
 **IMAGE HERE: Neighbour net image**
 
@@ -791,7 +800,6 @@ You will also see the Newick Format of the best tree found.
 
 XXX More to go here.
 
-- What have we learned and done?
 
 
 # Summary 
