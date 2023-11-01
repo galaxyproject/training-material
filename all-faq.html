@@ -17,7 +17,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@aab18d5e70814f26bf528ca5f6e9838509f38254",
+		release: "galaxy-training-network@0507f052632bdb31ae85da4c40971ffe851dc3de",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -55,8 +55,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698860561' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698860561' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698860811' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698860811' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -82,7 +82,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698860561'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698860811'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1294,6 +1294,13 @@ When you get a red dataset in your history, it means something went wrong. But h
 <h4 class="faq-area"> Running Ansible on your remote machine <a href="/training-material/topics/admin/faqs/ansible_local.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-running-ansible-on-your-remote-machine"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-ansible-on-your-remote-machine" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running Ansible on your remote machine<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.</p>   <p>Your hosts file will need to use <code class="language-plaintext highlighter-rouge">localhost</code>,  and whenever you run playbooks with <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code>, you will need to add <code class="language-plaintext highlighter-rouge">-c local</code> to your command.</p>   <p>Be <strong>certain</strong> that the playbook that you’re writing on the remote machine is stored somewhere safe, like your user home directory, or backed up on your local machine. The cloud can be unreliable and things can disappear at any time.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Updating from 22.01 to 23.0 with Ansible <a href="/training-material/topics/admin/faqs/galaxy-update-22.05.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-updating-from-22-01-to-23-0-with-ansible"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-updating-from-22-01-to-23-0-with-ansible" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Updating from 22.01 to 23.0 with Ansible<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Galaxy introduced a number of changes in 22.05 and 23.0 that are extremely important to be aware of during the upgrade process. Namely a new database migration system, and a new required running environment (gunicorn instead of uwsgi).</p>   <p>The scripts to migrate to the new database migration system are only compatible with release 22.05, and then were subsequently removed, so it is <strong>mandatory</strong> to upgrade to 22.05 if you want to go further.</p>   <p>Here is the recommended update procedure with ansible:</p>   <ol>   <li>Update to 22.01 normally</li>   <li>Change the release to 22.05, and run the upgrade     <ol>       <li>Galaxy will probably not start correctly here, ignore it.</li>       <li>         <p>Run the database migration manually</p>         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml sh manage_db.sh -c /srv/galaxy/config/galaxy.yml upgrade<br></code></pre></div>        </div>       </li>     </ol>   </li>   <li>Update your system’s ansible, you probably need something with a major version greater than 2.</li>   <li>     <p>Set the release to <code class="language-plaintext highlighter-rouge">23.0</code> and make other required changes. There are a lot of useful changes, but the easiest procedure is probably something like:</p>     <ol>       <li>git clone https://github.com/hexylena/git-gat/</li>       <li>git checkout step-4</li>       <li>         <p>Diff and sync (e.g. <code class="language-plaintext highlighter-rouge">vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml</code>) for the main configuration files:</p>         <ul>           <li>group_vars/all.yml</li>           <li>group_vars/dbservers.yml</li>           <li>galaxy.yml</li>           <li>requirements.yml</li>           <li>hosts</li>           <li>templates/nginx/galaxy.j2</li>         </ul>       </li>     </ol>     <p>But the main change is the swap from uwsgi to gravity+gunicorn</p>     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">-  uwsgi:<br>-    socket: 127.0.0.1:8080<br>-    buffer-size: 16384<br>-    processes: 1<br>-    threads: 4<br>-    offload-threads: 2<br>-    static-map:<br>-      - /static=/static<br>-      - /favicon.ico=/static/favicon.ico<br>-    static-safe: client/galaxy/images<br>-    master: true<br>-    virtualenv: ""<br>-    pythonpath: "/lib"<br>-    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()<br>-    thunder-lock: true<br>-    die-on-term: true<br>-    hook-master-start:<br>-      - unix_signal:2 gracefully_kill_them_all<br>-      - unix_signal:15 gracefully_kill_them_all<br>-    py-call-osafterfork: true<br>-    enable-threads: true<br>-    mule:<br>-      - lib/galaxy/main.py<br>-      - lib/galaxy/main.py<br>-    farm: job-handlers:1,2<br></span><span class="gi">+  gravity:<br>+    process_manager: systemd<br>+    galaxy_root: "/server"<br>+    galaxy_user: ""<br>+    virtualenv: ""<br>+    gunicorn:<br>+      # listening options<br>+      bind: "unix:/gunicorn.sock"<br>+      # performance options<br>+      workers: 2<br>+      # Other options that will be passed to gunicorn<br>+      # This permits setting of 'secure' headers like REMOTE_USER (and friends)<br>+      # https://docs.gunicorn.org/en/stable/settings.html#forwarded-allow-ips<br>+      extra_args: '--forwarded-allow-ips="*"'<br>+      # This lets Gunicorn start Galaxy completely before forking which is faster.<br>+      # https://docs.gunicorn.org/en/stable/settings.html#preload-app<br>+      preload: true<br>+    celery:<br>+      concurrency: 2<br>+      loglevel: DEBUG<br>+    handlers:<br>+      handler:<br>+        processes: 2<br>+        pools:<br>+          - job-handlers<br>+          - workflow-schedulers<br></span></code></pre></div>    </div>     <p>Some other important changes include:</p>     <ul>       <li>uchida.miniconda is replaced with galaxyproject.conda</li>       <li>usegalaxy_eu.systemd is no longer needed</li>       <li><code class="language-plaintext highlighter-rouge">galaxy_user_name</code> is defined in all.yml in the latest git-gat</li>       <li>git-gat also separates out the DB serving into a <code class="language-plaintext highlighter-rouge">dbservers.yml</code> host group</li>     </ul>   </li>   <li>Backup your <code class="language-plaintext highlighter-rouge">venv</code>, <code class="language-plaintext highlighter-rouge">mv /srv/galaxy/venv/ /srv/galaxy/venv-old/</code>, as your NodeJS is probably out of date and Galaxy doesn’t handle that gracefully</li>   <li>Do any local customs for luck (knocking on wood, etc.)</li>   <li>Run the playbook</li>   <li>Things might go wrong with systemd units     <ul>       <li>try running <code class="language-plaintext highlighter-rouge">galaxyctl -c /srv/galaxy/config/galaxy.yml update</code> as root</li>       <li>you may also need to <code class="language-plaintext highlighter-rouge">rm /etc/systemd/system/galaxy.service</code> which is then no longer needed</li>       <li>you’ll have a <code class="language-plaintext highlighter-rouge">galaxy.target</code> and you can instead <code class="language-plaintext highlighter-rouge">systemctl daemon-reload</code> and <code class="language-plaintext highlighter-rouge">systemctl start galaxy.target</code></li>     </ul>   </li> </ol> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -2616,7 +2623,7 @@ Undelete your deleted histories
 
 <h4 class="faq-area"> GTN Stats <a href="/training-material/faqs/gtn/gtn_stats.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">372</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">397</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">331</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.3</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">372</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">398</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">331</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.3</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
 
 
 
@@ -3493,7 +3500,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/aab18d5e70814f26bf528ca5f6e9838509f38254">aab18d5</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/0507f052632bdb31ae85da4c40971ffe851dc3de">0507f05</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3521,7 +3528,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698860561'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698860811'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
