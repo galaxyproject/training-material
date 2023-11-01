@@ -63,7 +63,8 @@ You now should have imported the `matrix.mtx`, `genes.tsv`, `barcodes.tsv`, and 
 
 
 ><comment-title>Next Step</comment-title>
-> The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar of the usegalaxy page)> Active Interactive Tools > RStudio)
+> The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page:
+> (User (in the top bar of the usegalaxy page) > Active Interactive Tools > RStudio)
 >
 >Alternatively, you may use the view (eye) button in your Galaxy History to open the interactive RStudio environment.
 {: .comment}
