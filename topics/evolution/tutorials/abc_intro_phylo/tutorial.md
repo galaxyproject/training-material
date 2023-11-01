@@ -22,13 +22,13 @@ contributors:
 
 # Introduction
 
-This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
-A video recording of that workshop is available on the Australian BioCommons YouTube channel <a href="https://www.youtube.com/watch?v=wAHLgHi7hHI">here</a>.
+Phylogenetics is essential for comparing biological species and understanding biodiversity for conservation. This tutorial discusses the basic principles and methods of phylogenetic inference and what you can learn from phylogenetic estimation. It is intended to help you make informed decisions about which methods to use in your own research.  
 
-The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
+Using real-life data and standard tools that are (mostly) available in Galaxy the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
 
-It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
+The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
+This tutorial does not cover workflows from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
 
 ## Scope:
 **We will cover:**
@@ -895,6 +895,12 @@ An external link[RAxML](https://cme.h-its.org/exelixis/web/software/raxml/)
 >
 {: .question}
 
+# About this workshop
+This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
+
+The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
+
+It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
 
 # Resources
 To develop a deeper understanding of phylogenetic trees, there is no better way than estimating phylogenies yourself --- and work through a book on the topic in your own mind's pace.
