@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Introduction to Genomics and Galaxy</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -260,7 +239,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -352,7 +331,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -1120,11 +1099,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>Try the <strong>tools search box</strong>.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.</li>
     <li>If you haven’t already searched with it, <em>enter</em> <code class="language-plaintext highlighter-rouge">filter</code> in the <strong>tool search box</strong>.  Among the results you should see
       <ul>
-        <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> data on any column using simple expressions.</li>
+        <li><span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> data on any column using simple expressions.</li>
         <li>That might work.</li>
       </ul>
     </li>
-    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> to open the Filter tool in the central panel.</li>
     <li>Take a look at the <strong>Syntax</strong> and <strong>Example</strong> sections to understand what the tool does.</li>
   </ol>
 
@@ -1172,7 +1151,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   <ol>
     <li>Open the dataset preview by <em>clicking</em> on the name of the <code class="language-plaintext highlighter-rouge">Genes, forward strand</code> dataset.  This shows an icon than the uploaded <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset did not: a looping arrow.</li>
     <li><em>Click</em> the <strong>looping arrow</strong> (“Run this job again”) icon.  This won’t actually run the job again.  What it will do is bring up the Filter tool form with <em>the exact same settings that were used to produce this dataset.</em></li>
-    <li>Rerun <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> but with
+    <li>Rerun <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> but with
       <ul>
         <li><em>“Condition”</em>:  <code class="language-plaintext highlighter-rouge">c6 == "-" </code></li>
       </ul>
@@ -1182,7 +1161,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
   <p><strong>Method 2</strong></p>
   <ol>
-    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="link"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> in the tool panel to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter</strong></span> in the tool panel to open the Filter tool in the central panel.</li>
     <li><em>Fill</em> the form as before, <em>except</em>:
       <ul>
         <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes chr22</code> dataset.</li>
@@ -1248,7 +1227,7 @@ In Galaxy, a <em>genomic interval</em> is a something that spans part of a chrom
   <div class="box-title hands-on-title" id="hands-on-genomic-interval-tools-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Genomic Interval Tools</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1" title="Intersect tool" aria-role="link"><strong>Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1" title="Intersect tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Intersect</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
       <ul>
         <li><em>“Return”</em>:  <code class="language-plaintext highlighter-rouge">Overlapping Intervals</code>.
 This looks like it might return whole genes, while <code class="language-plaintext highlighter-rouge">Overlapping pieces</code> may return only the parts that overlap.  We suspect that whole genes might be more useful.</li>
@@ -1294,7 +1273,7 @@ This looks like it might return whole genes, while <code class="language-plainte
   <ol>
     <li><em>Open</em> the <strong>Text Manipulation</strong> toolbox.</li>
     <li>Near the top of the toolbox is <strong>Concatenate datasets tail-to-head</strong>. <em>Click</em> on it.  Lets try that tool.</li>
-    <li><span class="tool" data-tool="cat1" title="Concatenate tool" aria-role="link"><strong>Concatenate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="cat1" title="Concatenate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Overlapping reverse genes</code>.</li>
         <li><em>“Dataset</em>”</li>
@@ -1459,7 +1438,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
   <div class="box-title hands-on-title" id="hands-on-get-the-exon-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the exon data</div>
 
   <ol>
-    <li>Get the exon information, either by revisiting UCSC, or by using the <span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED expander tool" aria-role="link"><strong>Gene BED To Exon/Intron/Codon BED expander</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: gene2exon1</span></span> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
+    <li>Get the exon information, either by revisiting UCSC, or by using the <span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED expander tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene BED To Exon/Intron/Codon BED expander</strong></span> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
     <li>Give the resulting dataset a meaningful name.</li>
   </ol>
 </blockquote>
@@ -1697,7 +1676,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1729,7 +1708,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

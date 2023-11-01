@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -75,8 +54,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -101,7 +80,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <section class="tutorials-list by_tag_Spatial data topic-type-">
 
 
@@ -150,19 +129,19 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=GIS" class="label label-default tutorial_tag" style="--color-primary: #4fe3ff; --color-darker: #00cde8; --color-dimmed: #00d9f6;" title="Click to show all tutorials tagged GIS">GIS</a>
+              <a href="/training-material/search?query=GIS" class="label label-default tutorial_tag" style="--color-primary: #84e8ff; --color-darker: #00d5f1; --color-dimmed: #1ee1ff;" title="Click to show all tutorials tagged GIS">GIS</a>
               
-              <a href="/training-material/search?query=Geographical Information System" class="label label-default tutorial_tag" style="--color-primary: #d1db00; --color-darker: #bac300; --color-dimmed: #c5cf00;" title="Click to show all tutorials tagged Geographical Information System">Geographical Information System</a>
+              <a href="/training-material/search?query=Geographical Information System" class="label label-default tutorial_tag" style="--color-primary: #d9e300; --color-darker: #c1ca00; --color-dimmed: #cdd700;" title="Click to show all tutorials tagged Geographical Information System">Geographical Information System</a>
               
-              <a href="/training-material/search?query=WFS" class="label label-default tutorial_tag" style="--color-primary: #ffc3c0; --color-darker: #ffa19c; --color-dimmed: #ffb3ae;" title="Click to show all tutorials tagged WFS">WFS</a>
+              <a href="/training-material/search?query=WFS" class="label label-default tutorial_tag" style="--color-primary: #ffcfcc; --color-darker: #ffaca8; --color-dimmed: #ffbeba;" title="Click to show all tutorials tagged WFS">WFS</a>
               
-              <a href="/training-material/search?query=Spatial data" class="label label-default tutorial_tag" style="--color-primary: #d9caff; --color-darker: #c7adff; --color-dimmed: #d0bbff;" title="Click to show all tutorials tagged Spatial data">Spatial data</a>
+              <a href="/training-material/search?query=Spatial data" class="label label-default tutorial_tag" style="--color-primary: #e0d4ff; --color-darker: #cdb6ff; --color-dimmed: #d6c5ff;" title="Click to show all tutorials tagged Spatial data">Spatial data</a>
               
-              <a href="/training-material/search?query=QGIS" class="label label-default tutorial_tag" style="--color-primary: #99e700; --color-darker: #87ce00; --color-dimmed: #90db00;" title="Click to show all tutorials tagged QGIS">QGIS</a>
+              <a href="/training-material/search?query=QGIS" class="label label-default tutorial_tag" style="--color-primary: #9ff000; --color-darker: #8dd600; --color-dimmed: #96e300;" title="Click to show all tutorials tagged QGIS">QGIS</a>
               
-              <a href="/training-material/search?query=Maps" class="label label-default tutorial_tag" style="--color-primary: #ffc1d2; --color-darker: #ff9ebc; --color-dimmed: #ffb0c7;" title="Click to show all tutorials tagged Maps">Maps</a>
+              <a href="/training-material/search?query=Maps" class="label label-default tutorial_tag" style="--color-primary: #ffcddb; --color-darker: #ffa9c3; --color-dimmed: #ffbbcf;" title="Click to show all tutorials tagged Maps">Maps</a>
               
-              <a href="/training-material/search?query=OGC" class="label label-default tutorial_tag" style="--color-primary: #ffc3be; --color-darker: #ffa298; --color-dimmed: #ffb3ac;" title="Click to show all tutorials tagged OGC">OGC</a>
+              <a href="/training-material/search?query=OGC" class="label label-default tutorial_tag" style="--color-primary: #ffcfcb; --color-darker: #ffada5; --color-dimmed: #ffbeb8;" title="Click to show all tutorials tagged OGC">OGC</a>
               
             
             </div>
@@ -304,6 +283,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </section>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
     </body>
 </html>

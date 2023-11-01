@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Sentinel 2 biodiversity</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -283,7 +262,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -375,7 +354,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -798,7 +777,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <div class="box-title hands-on-title" id="hands-on-preprocess"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Preprocess</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1" title="Preprocessing sentinel 2 data tool" aria-role="link"><strong>Preprocessing sentinel 2 data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_preprocess_s2/srs_preprocess_s2/0.0.1" title="Preprocessing sentinel 2 data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Preprocessing sentinel 2 data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input data”</em>: <code class="language-plaintext highlighter-rouge">sentinel_2_data.zip</code> (Input dataset)</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Where does your data come from ?”</em>: ‘From Theia’</li>
@@ -885,7 +864,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
     <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Principal components analysis for remote sensing data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="link"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute a PCA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
             <ul>
@@ -928,7 +907,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
     <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-global-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Biodiversity indicators for global remote sensing data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1" title="Compute biodiversity indices tool" aria-role="link"><strong>Compute biodiversity indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_global_indices/srs_global_indices/0.0.1" title="Compute biodiversity indices tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute biodiversity indices</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
             <ul>
@@ -1014,7 +993,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
     <div class="box-title hands-on-title" id="hands-on-principal-components-analysis-for-remote-sensing-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Principal components analysis for remote sensing data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="link"><strong>Compute a PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_pca/srs_pca/0.0.1" title="Compute a PCA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute a PCA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
             <ul>
@@ -1057,7 +1036,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
     <div class="box-title hands-on-title" id="hands-on-biodiversity-indicators-for-canopy-remote-sensing-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Biodiversity indicators for canopy remote sensing data</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1" title="Mapping diversity tool" aria-role="link"><strong>Mapping diversity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_diversity_maps/srs_diversity_maps/0.0.1" title="Mapping diversity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Mapping diversity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
             <ul>
@@ -1102,7 +1081,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-comparing-biodiversity-indicators-for-canopy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Comparing biodiversity indicators for canopy</div>
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1" title="Comparing remote sensing data tool" aria-role="link"><strong>Comparing remote sensing data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1" title="Comparing remote sensing data tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Comparing remote sensing data</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
         <ul>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
             <ul>
@@ -1162,7 +1141,7 @@ Select Reflectance, Sentinel 2 and “Niveau 2A” (level 2A).</p>
   <div class="box-title hands-on-title" id="hands-on-compute-spectral-indices"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Compute spectral indices</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1" title="Compute spectral indices tool" aria-role="link"><strong>Compute spectral indices</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/srs_spectral_indices/srs_spectral_indices/0.0.1" title="Compute spectral indices tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Compute spectral indices</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following parameters:
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“In which format are your data ?”</em>: ‘The data you are using are in a zip folder Reflectance’
           <ul>
@@ -1454,7 +1433,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1486,7 +1465,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

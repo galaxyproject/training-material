@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -192,7 +171,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -308,7 +287,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -633,9 +612,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #95e800; --color-darker: #84ce00; --color-dimmed: #8ddb00;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -832,11 +811,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=workflows" class="label label-default tutorial_tag" style="--color-primary: #ffc69e; --color-darker: #ffa74c; --color-dimmed: #ffb67c;" title="Click to show all tutorials tagged workflows">workflows</a>
+              <a href="/training-material/search?query=workflows" class="label label-default tutorial_tag" style="--color-primary: #ffd1b3; --color-darker: #ffb16e; --color-dimmed: #ffc194;" title="Click to show all tutorials tagged workflows">workflows</a>
               
-              <a href="/training-material/search?query=variant-analysis" class="label label-default tutorial_tag" style="--color-primary: #00edba; --color-darker: #00d3a5; --color-dimmed: #00e0af;" title="Click to show all tutorials tagged variant-analysis">variant-analysis</a>
+              <a href="/training-material/search?query=variant-analysis" class="label label-default tutorial_tag" style="--color-primary: #00f6c1; --color-darker: #00dbab; --color-dimmed: #00e9b6;" title="Click to show all tutorials tagged variant-analysis">variant-analysis</a>
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -1049,9 +1028,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=ncbi" class="label label-default tutorial_tag" style="--color-primary: #ffc1d4; --color-darker: #ff9dbe; --color-dimmed: #ffafc9;" title="Click to show all tutorials tagged ncbi">ncbi</a>
+              <a href="/training-material/search?query=ncbi" class="label label-default tutorial_tag" style="--color-primary: #ffcddc; --color-darker: #ffa9c5; --color-dimmed: #ffbbd0;" title="Click to show all tutorials tagged ncbi">ncbi</a>
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -1346,7 +1325,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -1613,7 +1592,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -1836,7 +1815,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -2025,11 +2004,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
-              <a href="/training-material/search?query=virology" class="label label-default tutorial_tag" style="--color-primary: #ffc0e0; --color-darker: #ff9bd1; --color-dimmed: #ffadd8;" title="Click to show all tutorials tagged virology">virology</a>
+              <a href="/training-material/search?query=virology" class="label label-default tutorial_tag" style="--color-primary: #ffcce6; --color-darker: #ffa7d6; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged virology">virology</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #95e800; --color-darker: #84ce00; --color-dimmed: #8ddb00;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -2252,11 +2231,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
-              <a href="/training-material/search?query=virology" class="label label-default tutorial_tag" style="--color-primary: #ffc0e0; --color-darker: #ff9bd1; --color-dimmed: #ffadd8;" title="Click to show all tutorials tagged virology">virology</a>
+              <a href="/training-material/search?query=virology" class="label label-default tutorial_tag" style="--color-primary: #ffcce6; --color-darker: #ffa7d6; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged virology">virology</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #95e800; --color-darker: #84ce00; --color-dimmed: #8ddb00;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -2480,12 +2459,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Avatar" width="36" height="36">Marius van den Beek</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/blankenberg?s=36" alt="Avatar" width="36" height="36">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/cutsort/" class="contributor-badge contributor-cutsort"><img src="https://avatars.githubusercontent.com/cutsort?s=36" alt="Avatar" width="36" height="36">Frederick Tan</a><a href="/training-material/hall-of-fame/nakucher/" class="contributor-badge contributor-nakucher"><img src="https://avatars.githubusercontent.com/nakucher?s=36" alt="Avatar" width="36" height="36">Natalie Kucher</a><a href="/training-material/hall-of-fame/katherinecox/" class="contributor-badge contributor-katherinecox"><img src="https://avatars.githubusercontent.com/katherinecox?s=36" alt="Avatar" width="36" height="36">Katherine Cox</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Avatar" width="36" height="36">Anton Nekrutenko</a><a href="/training-material/hall-of-fame/ehumph/" class="contributor-badge contributor-ehumph"><img src="https://avatars.githubusercontent.com/ehumph?s=36" alt="Avatar" width="36" height="36">Elizabeth Humphries</a><a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tnabtaf?s=36" alt="Avatar" width="36" height="36">Dave Clements</a><a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge contributor-jontrow"><img src="https://avatars.githubusercontent.com/jontrow?s=36" alt="Avatar" width="36" height="36">Jon Trow</a><a href="/training-material/hall-of-fame/cansavvy/" class="contributor-badge contributor-cansavvy"><img src="https://avatars.githubusercontent.com/cansavvy?s=36" alt="Avatar" width="36" height="36">Candace Savonen</a><a href="/training-material/hall-of-fame/RareSeas/" class="contributor-badge contributor-RareSeas"><img src="https://avatars.githubusercontent.com/RareSeas?s=36" alt="Avatar" width="36" height="36">Adelaide Rhodes</a><a href="/training-material/hall-of-fame/roncoronimiguel/" class="contributor-badge contributor-roncoronimiguel"><img src="https://avatars.githubusercontent.com/roncoronimiguel?s=36" alt="Avatar" width="36" height="36">Miguel Roncoroni</a><a href="/training-material/hall-of-fame/avahoffman/" class="contributor-badge contributor-avahoffman"><img src="https://avatars.githubusercontent.com/avahoffman?s=36" alt="Avatar" width="36" height="36">Ava Hoffman</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar" width="36" height="36">Simon Bray</a><a href="/training-material/hall-of-fame/bedroesb/" class="contributor-badge contributor-bedroesb"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bedroesb?s=36" alt="Avatar" width="36" height="36">Bert Droesbeke</a><a href="/training-material/hall-of-fame/robertmeller/" class="contributor-badge contributor-robertmeller"><img src="https://avatars.githubusercontent.com/robertmeller?s=36" alt="Avatar" width="36" height="36">Robert Meller</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Avatar" width="36" height="36">Bérénice Batut</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Avatar" width="36" height="36">Wolfgang Maier</a>
+    <a href="/training-material/hall-of-fame/katherinecox/" class="contributor-badge contributor-katherinecox"><img src="https://avatars.githubusercontent.com/katherinecox?s=36" alt="Avatar" width="36" height="36">Katherine Cox</a><a href="/training-material/hall-of-fame/cansavvy/" class="contributor-badge contributor-cansavvy"><img src="https://avatars.githubusercontent.com/cansavvy?s=36" alt="Avatar" width="36" height="36">Candace Savonen</a><a href="/training-material/hall-of-fame/cutsort/" class="contributor-badge contributor-cutsort"><img src="https://avatars.githubusercontent.com/cutsort?s=36" alt="Avatar" width="36" height="36">Frederick Tan</a><a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge contributor-mvdbeek"><img src="https://avatars.githubusercontent.com/mvdbeek?s=36" alt="Avatar" width="36" height="36">Marius van den Beek</a><a href="/training-material/hall-of-fame/wm75/" class="contributor-badge contributor-wm75"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wm75?s=36" alt="Avatar" width="36" height="36">Wolfgang Maier</a><a href="/training-material/hall-of-fame/simonbray/" class="contributor-badge contributor-simonbray"><img src="https://avatars.githubusercontent.com/simonbray?s=36" alt="Avatar" width="36" height="36">Simon Bray</a><a href="/training-material/hall-of-fame/jontrow/" class="contributor-badge contributor-jontrow"><img src="https://avatars.githubusercontent.com/jontrow?s=36" alt="Avatar" width="36" height="36">Jon Trow</a><a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge contributor-tnabtaf"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/tnabtaf?s=36" alt="Avatar" width="36" height="36">Dave Clements</a><a href="/training-material/hall-of-fame/robertmeller/" class="contributor-badge contributor-robertmeller"><img src="https://avatars.githubusercontent.com/robertmeller?s=36" alt="Avatar" width="36" height="36">Robert Meller</a><a href="/training-material/hall-of-fame/ehumph/" class="contributor-badge contributor-ehumph"><img src="https://avatars.githubusercontent.com/ehumph?s=36" alt="Avatar" width="36" height="36">Elizabeth Humphries</a><a href="/training-material/hall-of-fame/RareSeas/" class="contributor-badge contributor-RareSeas"><img src="https://avatars.githubusercontent.com/RareSeas?s=36" alt="Avatar" width="36" height="36">Adelaide Rhodes</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Avatar" width="36" height="36">Bérénice Batut</a><a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge contributor-blankenberg"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/blankenberg?s=36" alt="Avatar" width="36" height="36">Daniel Blankenberg</a><a href="/training-material/hall-of-fame/avahoffman/" class="contributor-badge contributor-avahoffman"><img src="https://avatars.githubusercontent.com/avahoffman?s=36" alt="Avatar" width="36" height="36">Ava Hoffman</a><a href="/training-material/hall-of-fame/roncoronimiguel/" class="contributor-badge contributor-roncoronimiguel"><img src="https://avatars.githubusercontent.com/roncoronimiguel?s=36" alt="Avatar" width="36" height="36">Miguel Roncoroni</a><a href="/training-material/hall-of-fame/nekrut/" class="contributor-badge contributor-nekrut"><img src="https://avatars.githubusercontent.com/nekrut?s=36" alt="Avatar" width="36" height="36">Anton Nekrutenko</a><a href="/training-material/hall-of-fame/bedroesb/" class="contributor-badge contributor-bedroesb"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bedroesb?s=36" alt="Avatar" width="36" height="36">Bert Droesbeke</a><a href="/training-material/hall-of-fame/nakucher/" class="contributor-badge contributor-nakucher"><img src="https://avatars.githubusercontent.com/nakucher?s=36" alt="Avatar" width="36" height="36">Natalie Kucher</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
     
-    <a href="/training-material/hall-of-fame/by-covid/" class="contributor-badge contributor-by-covid"><img src="https://avatars.githubusercontent.com/by-covid?s=36" alt="Avatar" width="36" height="36">BeYond-COVID</a><a href="/training-material/hall-of-fame/elixir-converge/" class="contributor-badge contributor-elixir-converge"><img src="https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png" alt="Avatar" width="36" height="36">ELIXIR-CONVERGE</a><a href="/training-material/hall-of-fame/nhgri-gdscn/" class="contributor-badge contributor-nhgri-gdscn"><img src="https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg" alt="Avatar" width="36" height="36">National Human Genome Research Institute Genomic Data Science Community Network</a><a href="/training-material/hall-of-fame/nhgri-anvil/" class="contributor-badge contributor-nhgri-anvil"><img src="https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg" alt="Avatar" width="36" height="36">National Human Genome Research Institute Genomic Data Science Analysis, Visualization, and Informatics Lab-Space</a>
+    <a href="/training-material/hall-of-fame/nhgri-anvil/" class="contributor-badge contributor-nhgri-anvil"><img src="https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg" alt="Avatar" width="36" height="36">National Human Genome Research Institute Genomic Data Science Analysis, Visualization, and Informatics Lab-Space</a><a href="/training-material/hall-of-fame/by-covid/" class="contributor-badge contributor-by-covid"><img src="https://avatars.githubusercontent.com/by-covid?s=36" alt="Avatar" width="36" height="36">BeYond-COVID</a><a href="/training-material/hall-of-fame/nhgri-gdscn/" class="contributor-badge contributor-nhgri-gdscn"><img src="https://www.genome.gov/themes/custom/nhgri/assets/global/NHGRI-logo.svg" alt="Avatar" width="36" height="36">National Human Genome Research Institute Genomic Data Science Community Network</a><a href="/training-material/hall-of-fame/elixir-converge/" class="contributor-badge contributor-elixir-converge"><img src="https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png" alt="Avatar" width="36" height="36">ELIXIR-CONVERGE</a>
 
     
 </section>
@@ -2504,7 +2483,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2532,7 +2511,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

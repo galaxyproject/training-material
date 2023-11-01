@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -336,7 +315,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -428,7 +407,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -603,8 +582,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                         
                     
                         
-                    
-                        
                             
                             <li> Mass spectrometry: LC-MS preprocessing with XCMS:
                             
@@ -617,6 +594,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -915,13 +894,13 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 
 <h2 id="convert-the-raw-data-to-mzml">Convert the raw data to mzML</h2>
 
-<p>Our input data are in <code class="language-plaintext highlighter-rouge">.raw</code> format, which is not suitable for the downstream tools in this tutorial. We use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2" title="msconvert tool" aria-role="link"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2</span></span> to convert our samples to the appropriate format (<code class="language-plaintext highlighter-rouge">.mzML</code> in this case).</p>
+<p>Our input data are in <code class="language-plaintext highlighter-rouge">.raw</code> format, which is not suitable for the downstream tools in this tutorial. We use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2" title="msconvert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>msconvert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.20287.2)</span> to convert our samples to the appropriate format (<code class="language-plaintext highlighter-rouge">.mzML</code> in this case).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-convert-the-raw-data-to-mzml"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Convert the raw data to mzML</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2" title="msconvert tool" aria-role="link"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2" title="msconvert tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>msconvert</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.20287.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input unrefined MS data”</em>: <code class="language-plaintext highlighter-rouge">input</code> (Input dataset collection)</li>
         <li><em>“Do you agree to the vendor licenses?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -945,13 +924,13 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 
 <h2 id="create-the-xcms-object">Create the XCMS object</h2>
 
-<p>The first part of data processing is using the <strong>XCMS</strong> tool to detect peaks in the MS signal. For that, we first need to take the <code class="language-plaintext highlighter-rouge">.mzML</code> files and create a format usable by the <strong>XCMS</strong> tool. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="link"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0</span></span> (<span class="citation"><a href="#gatto2012msnbase">Gatto and Lilley 2012</a></span>. <span class="citation"><a href="#gatto2020msnbase">Gatto <i>et al.</i> 2020</a></span>) takes as input our files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first <strong>XCMS</strong> step.</p>
+<p>The first part of data processing is using the <strong>XCMS</strong> tool to detect peaks in the MS signal. For that, we first need to take the <code class="language-plaintext highlighter-rouge">.mzML</code> files and create a format usable by the <strong>XCMS</strong> tool. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSnbase readMSData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.16.1+galaxy0)</span> (<span class="citation"><a href="#gatto2012msnbase">Gatto and Lilley 2012</a></span>. <span class="citation"><a href="#gatto2020msnbase">Gatto <i>et al.</i> 2020</a></span>) takes as input our files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first <strong>XCMS</strong> step.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-the-xcms-object"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create the XCMS object</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="link"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="MSnbase readMSData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSnbase readMSData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.16.1+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File(s) from your history containing your chromatograms”</em>: <code class="language-plaintext highlighter-rouge">input.mzML</code> (output of <strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1013,12 +992,12 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 
 <h2 id="peak-picking">Peak picking</h2>
 
-<p>The first step is to extract peaks from each of your data files independently. For this purpose, we use the <em>centWave</em> chromatographic peak detection algorithm implemented in <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" aria-role="link"><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0</span></span>.</p>
+<p>The first step is to extract peaks from each of your data files independently. For this purpose, we use the <em>centWave</em> chromatographic peak detection algorithm implemented in <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks (xcmsSet)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-peak-picking"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Peak picking</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" aria-role="link"><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="xcms findChromPeaks (xcmsSet) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks (xcmsSet)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">input.raw.RData</code> (output of <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code>
@@ -1046,7 +1025,7 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-merging-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Merging files</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="xcms findChromPeaks Merger tool" aria-role="link"><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="xcms findChromPeaks Merger tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms findChromPeaks Merger</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">input.raw.xset.RData</code> (output of <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sample_metadata.tsv</code> (Input dataset)</li>
@@ -1061,7 +1040,7 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-grouping-peaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Grouping peaks</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="link"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms groupChromPeaks (group)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code> (output of <strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
@@ -1084,7 +1063,7 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-retention-time-correction"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Retention time correction</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0" title="xcms adjustRtime (retcor) tool" aria-role="link"><strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0" title="xcms adjustRtime (retcor) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms adjustRtime (retcor)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code> (output of <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Method to use for retention time correction”</em>: <code class="language-plaintext highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
@@ -1105,7 +1084,7 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-grouping-peaks-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Grouping peaks</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="link"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="xcms groupChromPeaks (group) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms groupChromPeaks (group)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code> (output of <strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
@@ -1134,7 +1113,7 @@ https://zenodo.org/record/7890956/files/sample_metadata.tsv
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-integrating-areas-of-missing-peaks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Integrating areas of missing peaks</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="xcms fillChromPeaks (fillPeaks) tool" aria-role="link"><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="xcms fillChromPeaks (fillPeaks) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>xcms fillChromPeaks (fillPeaks)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.12.0+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.RData</code> (output of <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li>In <em>“Peak List”</em>:
@@ -1162,7 +1141,7 @@ your data:</p>
 
 <h1 id="peak-deconvolution">Peak deconvolution</h1>
 
-<p>The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the chemical compounds present in the sample, separated by the chromatography and ionized in the mass spectrometer. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0" title="RAMClustR tool" aria-role="link"><strong>RAMClustR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0</span></span> is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While each feature is typically derived from a single compound and represents a fragment, the whole mass spectrum can be used to more accurately identify the precursor compound or molecular ion. <strong>RAMClustR</strong> uses a novel grouping method that operates in an unsupervised manner to group peaks into spectra without relying on the predicting in-source phenomena (in-source fragments or adduct formation) or fragmentation mechanisms.</p>
+<p>The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the chemical compounds present in the sample, separated by the chromatography and ionized in the mass spectrometer. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0" title="RAMClustR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RAMClustR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.0+galaxy0)</span> is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While each feature is typically derived from a single compound and represents a fragment, the whole mass spectrum can be used to more accurately identify the precursor compound or molecular ion. <strong>RAMClustR</strong> uses a novel grouping method that operates in an unsupervised manner to group peaks into spectra without relying on the predicting in-source phenomena (in-source fragments or adduct formation) or fragmentation mechanisms.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-ramclust-method"><button class="gtn-boxify-button details" type="button" aria-controls="details-ramclust-method" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details:  RAMClust method<span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1179,7 +1158,7 @@ your data:</p>
   <div class="box-title hands-on-title" id="hands-on-peak-deconvolution"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Peak deconvolution</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0" title="RAMClustR tool" aria-role="link"><strong>RAMClustR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.3.0+galaxy0" title="RAMClustR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RAMClustR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.3.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Choose input format:”</em>: <code class="language-plaintext highlighter-rouge">XCMS</code>
           <ul>
@@ -1254,7 +1233,7 @@ Num Peaks:165
   <blockquote class="details">
     <div class="box-title details-title" id="details-negative-ion-mode"><button class="gtn-boxify-button details" type="button" aria-controls="details-negative-ion-mode" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details:  Negative ion mode<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>You might wonder how can the ionisation mode (<em>IONMODE</em>) for GC-MS data be negative when using electron impact (EI+) ionization. This is, of course, incorrect. This is actually just a default behaviour of <strong>RAMClustR</strong>. We can optionally change this by providing <strong>RAMClustR</strong> an experiment definition file. This file can be created manually or using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2" title="RAMClustR define experiment tool" aria-role="link"><strong>RAMClustR define experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2</span></span> tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI+ in our case), and this will be transfered to the <code class="language-plaintext highlighter-rouge">.msp</code> file. Finally, we can provide such a file as an input to <strong>RAMClustR</strong> in the <em>Extras</em> inputs section.</p>
+    <p>You might wonder how can the ionisation mode (<em>IONMODE</em>) for GC-MS data be negative when using electron impact (EI+) ionization. This is, of course, incorrect. This is actually just a default behaviour of <strong>RAMClustR</strong>. We can optionally change this by providing <strong>RAMClustR</strong> an experiment definition file. This file can be created manually or using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2" title="RAMClustR define experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RAMClustR define experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI+ in our case), and this will be transfered to the <code class="language-plaintext highlighter-rouge">.msp</code> file. Finally, we can provide such a file as an input to <strong>RAMClustR</strong> in the <em>Extras</em> inputs section.</p>
 
   </blockquote>
 
@@ -1270,13 +1249,13 @@ Num Peaks:165
 
 <p>The retention index (<span class="citation"><a href="#van1963generalization">Van Den Dool and Kratz 1963</a></span>) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants for GC-based experiments. The retention index of a compound is computed from the retention time by interpolating between the retention times adjacent alkanes which are assigned a fixed retention index. This can be different for the individual chromatographic system, but the derived retention indices are independent and allow comparing values measured by different analytical laboratories.</p>
 
-<p>We use the package <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1" title="RIAssigner tool" aria-role="link"><strong>RIAssigner</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1</span></span> to compute retention indices for files in the <code class="language-plaintext highlighter-rouge">.msp</code> format using an indexed reference list of alkanes in <code class="language-plaintext highlighter-rouge">.csv</code> or <code class="language-plaintext highlighter-rouge">.msp</code> format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification (<span class="citation"><a href="#kumari2011applying">Kumari <i>et al.</i> 2011</a></span>). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.</p>
+<p>We use the package <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1" title="RIAssigner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RIAssigner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.4+galaxy1)</span> to compute retention indices for files in the <code class="language-plaintext highlighter-rouge">.msp</code> format using an indexed reference list of alkanes in <code class="language-plaintext highlighter-rouge">.csv</code> or <code class="language-plaintext highlighter-rouge">.msp</code> format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification (<span class="citation"><a href="#kumari2011applying">Kumari <i>et al.</i> 2011</a></span>). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-retention-index-calculation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Retention index calculation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1" title="RIAssigner tool" aria-role="link"><strong>RIAssigner</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.4+galaxy1" title="RIAssigner tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RIAssigner</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3.4+galaxy1)</span> with the following parameters:
       <ul>
         <li>In <em>“Query dataset”</em>:
           <ul>
@@ -1345,7 +1324,7 @@ Num Peaks:165
   <div class="box-title hands-on-title" id="hands-on-compute-similarity-scores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Compute similarity scores</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0" title="matchms similarity tool" aria-role="link"><strong>matchms similarity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_similarity/matchms_similarity/0.20.0+galaxy0" title="matchms similarity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>matchms similarity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Queries spectra”</em>: <code class="language-plaintext highlighter-rouge">RI using kovats of Mass spectra from RAMClustR</code> (output of <strong>RIAssigner</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Symmetric”</em>: <code class="language-plaintext highlighter-rouge">No</code> (if we were to query our spectra agains itself, we would select <code class="language-plaintext highlighter-rouge">Yes</code>)
@@ -1393,7 +1372,7 @@ Num Peaks:165
 
 <h2 id="format-the-output">Format the output</h2>
 
-<p>The output of the previous step is a <code class="language-plaintext highlighter-rouge">json</code> file. This format is very simple to read for our computers, but not so much for us. We can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0" title="matchms scores formatter tool" aria-role="link"><strong>matchms scores formatter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0</span></span> to convert the data to a tab-separated file with a scores matrix.</p>
+<p>The output of the previous step is a <code class="language-plaintext highlighter-rouge">json</code> file. This format is very simple to read for our computers, but not so much for us. We can use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0" title="matchms scores formatter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>matchms scores formatter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.0+galaxy0)</span> to convert the data to a tab-separated file with a scores matrix.</p>
 
 <p>The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output can be filtered to only contain the top matches (3 by default) and/or to contain only pairs with a score and number of matched ions larger than provided thresholds.</p>
 
@@ -1401,7 +1380,7 @@ Num Peaks:165
   <div class="box-title hands-on-title" id="hands-on-format-the-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Format the output</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0" title="matchms scores formatter tool" aria-role="link"><strong>matchms scores formatter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.20.0+galaxy0" title="matchms scores formatter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>matchms scores formatter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.20.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Scores object”</em>: <code class="language-plaintext highlighter-rouge">CosineGreedy scores</code> (output of <strong>matchms similarity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1468,8 +1447,8 @@ It is suitable for both high- and low-resolution GC-MS data acquired in either p
 
 <p>Before further statistical analysis, the information from the scores table can be included in the library of deconvoluted spectra manually to add the putative identifications. The further processing can then leverage this information and the intensity information contained in the <strong>SpecAbundance</strong> output from <strong>RAMclustR</strong>.</p>
 
-<p>Note that this tutorial doesn’t cover all steps which are possible or compatible with this workflow. Other options include the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_filtering/matchms_filtering/0.17.0+galaxy0" title="matchms filtering tool" aria-role="link"><strong>matchms filtering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/matchms_filtering/matchms_filtering/0.17.0+galaxy0</span></span> tool with which you can normalize your spectra or remove low-abundant ions before matching.
-Another option for normalization outside of the built-in normalization tools of <strong>RAMClustR</strong> is the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/waveica/waveica/0.2.0+galaxy2" title="WaveICA tool" aria-role="link"><strong>WaveICA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/recetox/waveica/waveica/0.2.0+galaxy2</span></span> tool for correction of batch effects.</p>
+<p>Note that this tutorial doesn’t cover all steps which are possible or compatible with this workflow. Other options include the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/matchms_filtering/matchms_filtering/0.17.0+galaxy0" title="matchms filtering tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>matchms filtering</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.17.0+galaxy0)</span> tool with which you can normalize your spectra or remove low-abundant ions before matching.
+Another option for normalization outside of the built-in normalization tools of <strong>RAMClustR</strong> is the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/recetox/waveica/waveica/0.2.0+galaxy2" title="WaveICA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>WaveICA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2.0+galaxy2)</span> tool for correction of batch effects.</p>
 
                 </section>
 
@@ -1720,7 +1699,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1752,7 +1731,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

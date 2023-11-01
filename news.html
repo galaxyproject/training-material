@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>The Latest GTN News</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -187,7 +166,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -302,9 +281,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00f16e; --color-darker: #00d661; --color-dimmed: #00e468;">singlecell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00fb73; --color-darker: #00df65; --color-dimmed: #00ed6c;">singlecell</span>
 
     <hr />
     <p class="card-text">
@@ -382,9 +361,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -462,9 +441,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -536,9 +515,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbdf1; --color-darker: #ff96eb; --color-dimmed: #ffaaee;">new community</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcaf4; --color-darker: #ffa3ed; --color-dimmed: #ffb7f0;">new community</span>
 
     <hr />
     <p class="card-text">
@@ -609,9 +588,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
     <hr />
     <p class="card-text">
@@ -683,9 +662,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -828,7 +807,7 @@ The GTN has you covered with the Pan-Galactic Tool Search that is now available.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
     <hr />
     <p class="card-text">
@@ -906,9 +885,9 @@ The GTN has you covered with the Pan-Galactic Tool Search that is now available.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -981,9 +960,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1055,9 +1034,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1129,9 +1108,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1203,9 +1182,9 @@ brought several RO-Crate related tutorials into the Galaxy Training Network, und
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1278,7 +1257,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -1350,11 +1329,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #99e700; --color-darker: #87ce00; --color-dimmed: #90db00;">community building</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #9ff000; --color-darker: #8dd600; --color-dimmed: #96e300;">community building</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #b1e200; --color-darker: #9ec900; --color-dimmed: #a8d600;">capacity building</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #b9ec00; --color-darker: #a4d100; --color-dimmed: #aede00;">capacity building</span>
 
     <hr />
     <p class="card-text">
@@ -1426,9 +1405,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1570,7 +1549,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
     <hr />
     <p class="card-text">
@@ -1642,9 +1621,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr />
     <p class="card-text">
@@ -1716,9 +1695,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -1790,7 +1769,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #fecc00; --color-darker: #e2b500; --color-dimmed: #f0c000;">paper</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd56b; --color-darker: #ebbc00; --color-dimmed: #f9c800;">paper</span>
 
     <hr />
     <p class="card-text">
@@ -1862,11 +1841,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #e6d400; --color-darker: #cdbd00; --color-dimmed: #dac800;">transcriptomics</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #efdd00; --color-darker: #d5c400; --color-dimmed: #e2d000;">transcriptomics</span>
 
     <hr />
     <p class="card-text">
@@ -1938,11 +1917,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -2014,7 +1993,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
     <hr />
     <p class="card-text">
@@ -2086,9 +2065,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #add6ff; --color-darker: #76c1ff; --color-dimmed: #94cbff;">Galaxy Tips &amp; Tricks</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #beddff; --color-darker: #8ac8ff; --color-dimmed: #a5d2ff;">Galaxy Tips &amp; Tricks</span>
 
     <hr />
     <p class="card-text">
@@ -2160,7 +2139,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -2232,11 +2211,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #dfc8ff; --color-darker: #cfaaff; --color-dimmed: #d7b9ff;">tutorial authors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #e4d2ff; --color-darker: #d4b4ff; --color-dimmed: #dcc3ff;">tutorial authors</span>
 
     <hr />
     <p class="card-text">
@@ -2308,13 +2287,13 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;">assembly</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;">assembly</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc0df; --color-darker: #ff9bd0; --color-dimmed: #ffaed7;">pacbio</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcce5; --color-darker: #ffa7d5; --color-dimmed: #ffbadd;">pacbio</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbeed; --color-darker: #ff98e5; --color-dimmed: #ffabe9;">vgp</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcaf0; --color-darker: #ffa4e7; --color-dimmed: #ffb8ec;">vgp</span>
 
     <hr />
     <p class="card-text">
@@ -2386,9 +2365,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -2460,7 +2439,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8ef; --color-darker: #00cfd5; --color-dimmed: #00dbe2;">event</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1f8; --color-darker: #00d7dd; --color-dimmed: #00e4eb;">event</span>
 
     <hr />
     <p class="card-text">
@@ -2531,7 +2510,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #fff972; --color-darker: #e5de00; --color-dimmed: #f3ec00;">new-feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fffa99; --color-darker: #e7e000; --color-dimmed: #f5ee00;">new-feature</span>
 
     <hr />
     <p class="card-text">
@@ -2603,11 +2582,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;">assembly</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;">assembly</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #afe300; --color-darker: #9bca00; --color-dimmed: #a5d600;">genome-annotation</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #b6ec00; --color-darker: #a1d200; --color-dimmed: #acdf00;">genome-annotation</span>
 
     <hr />
     <p class="card-text">
@@ -2679,7 +2658,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc1cf; --color-darker: #ff9eb7; --color-dimmed: #ffb0c3;">faq</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcdd8; --color-darker: #ffaabe; --color-dimmed: #ffbccb;">faq</span>
 
     <hr />
     <p class="card-text">
@@ -2751,9 +2730,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -2825,9 +2804,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -2899,11 +2878,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc5aa; --color-darker: #ffa56e; --color-dimmed: #ffb58f;">authors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd0bc; --color-darker: #ffaf84; --color-dimmed: #ffc0a2;">authors</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbdf5; --color-darker: #ff95f0; --color-dimmed: #ffaaf3;">developers</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcaf7; --color-darker: #ffa3f2; --color-dimmed: #ffb7f4;">developers</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc3be; --color-darker: #ffa298; --color-dimmed: #ffb3ac;">performance</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcfcb; --color-darker: #ffada5; --color-dimmed: #ffbeb8;">performance</span>
 
     <hr />
     <p class="card-text">
@@ -2975,9 +2954,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
     <hr />
     <p class="card-text">
@@ -3049,7 +3028,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #f3c0ff; --color-darker: #ed9dff; --color-dimmed: #f0afff;">feedback</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #f5cdff; --color-darker: #efa9ff; --color-dimmed: #f2bbff;">feedback</span>
 
     <hr />
     <p class="card-text">
@@ -3121,9 +3100,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -3195,9 +3174,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8f0; --color-darker: #00cfd6; --color-dimmed: #00dbe3;">contributors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1fa; --color-darker: #00d7de; --color-dimmed: #00e4ec;">contributors</span>
 
     <hr />
     <p class="card-text">
@@ -3269,7 +3248,7 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -3341,11 +3320,11 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00edba; --color-darker: #00d3a5; --color-dimmed: #00e0af;">variant-analysis</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f6c1; --color-darker: #00dbab; --color-dimmed: #00e9b6;">variant-analysis</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ecc3ff; --color-darker: #e4a1ff; --color-dimmed: #e8b2ff;">covid-19</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #efceff; --color-darker: #e7acff; --color-dimmed: #ebbdff;">covid-19</span>
 
     <hr />
     <p class="card-text">
@@ -3417,9 +3396,9 @@ If you are on either usegalaxy.org or usegalaxy.eu, we have implemented easy but
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc0da; --color-darker: #ff9cc8; --color-dimmed: #ffaed1;">visualization</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcce1; --color-darker: #ffa8ce; --color-dimmed: #ffbad7;">visualization</span>
 
     <hr />
     <p class="card-text">
@@ -3493,9 +3472,9 @@ Happy plotting!
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8f0; --color-darker: #00cfd6; --color-dimmed: #00dbe3;">contributors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1fa; --color-darker: #00d7de; --color-dimmed: #00e4ec;">contributors</span>
 
     <hr />
     <p class="card-text">
@@ -3567,9 +3546,9 @@ Happy plotting!
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #afe300; --color-darker: #9bca00; --color-dimmed: #a5d600;">genome-annotation</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #b6ec00; --color-darker: #a1d200; --color-dimmed: #acdf00;">genome-annotation</span>
 
     <hr />
     <p class="card-text">
@@ -3641,7 +3620,7 @@ Happy plotting!
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -3714,7 +3693,7 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
     <hr />
     <p class="card-text">
@@ -3786,7 +3765,7 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -3858,9 +3837,9 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00eadf; --color-darker: #00d0c6; --color-dimmed: #00ddd2;">español</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f3e8; --color-darker: #00d8ce; --color-dimmed: #00e6db;">español</span>
 
     <hr />
     <p class="card-text">
@@ -3932,13 +3911,13 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #e6d400; --color-darker: #cdbd00; --color-dimmed: #dac800;">transcriptomics</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #efdd00; --color-darker: #d5c400; --color-dimmed: #e2d000;">transcriptomics</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #6ced00; --color-darker: #60d300; --color-dimmed: #66e000;">plants</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #71f700; --color-darker: #64dc00; --color-dimmed: #6ae900;">plants</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbee6; --color-darker: #ff99db; --color-dimmed: #fface0;">mirna</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbea; --color-darker: #ffa6de; --color-dimmed: #ffb9e4;">mirna</span>
 
     <hr />
     <p class="card-text">
@@ -4010,11 +3989,11 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e7fc; --color-darker: #00cde0; --color-dimmed: #00daee;">video</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #62ecff; --color-darker: #00d5e9; --color-dimmed: #00e3f8;">video</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -4086,11 +4065,11 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #dcc9ff; --color-darker: #caacff; --color-dimmed: #d3baff;">plant</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #e2d3ff; --color-darker: #d0b5ff; --color-dimmed: #d8c4ff;">plant</span>
 
     <hr />
     <p class="card-text">
@@ -4162,17 +4141,17 @@ On every tag, we’d build a copy of the website which we would place online and
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;">assembly</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;">assembly</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8f0; --color-darker: #00cfd6; --color-dimmed: #00dbe3;">mrsa</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1fa; --color-darker: #00d7de; --color-dimmed: #00e4ec;">mrsa</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;">amr</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;">amr</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;">nanopore</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;">nanopore</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc880; --color-darker: #f5ad00; --color-dimmed: #ffb93e;">illumina</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd29f; --color-darker: #feb400; --color-dimmed: #ffc370;">illumina</span>
 
     <hr />
     <p class="card-text">
@@ -4250,13 +4229,13 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8f0; --color-darker: #00cfd6; --color-dimmed: #00dbe3;">contributors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1fa; --color-darker: #00d7de; --color-dimmed: #00e4ec;">contributors</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ecc5; --color-darker: #00d2af; --color-dimmed: #00dfba;">instructors</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f6ce; --color-darker: #00dab7; --color-dimmed: #00e8c2;">instructors</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr />
     <p class="card-text">
@@ -4328,9 +4307,9 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbfe5; --color-darker: #ff9ad9; --color-dimmed: #ffaddf;">imaging</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbea; --color-darker: #ffa6dd; --color-dimmed: #ffb9e3;">imaging</span>
 
     <hr />
     <p class="card-text">
@@ -4402,7 +4381,7 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbdf1; --color-darker: #ff96eb; --color-dimmed: #ffaaee;">cofest</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcaf4; --color-darker: #ffa3ed; --color-dimmed: #ffb7f0;">cofest</span>
 
     <hr />
     <p class="card-text">
@@ -4474,7 +4453,7 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8ef; --color-darker: #00cfd5; --color-dimmed: #00dbe2;">event</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1f8; --color-darker: #00d7dd; --color-dimmed: #00e4eb;">event</span>
 
     <hr />
     <p class="card-text">
@@ -4545,11 +4524,11 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8ef; --color-darker: #00cfd5; --color-dimmed: #00dbe2;">event</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1f8; --color-darker: #00d7dd; --color-dimmed: #00e4eb;">event</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc1d3; --color-darker: #ff9ebd; --color-dimmed: #ffb0c8;">pandemic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcddb; --color-darker: #ffa9c4; --color-dimmed: #ffbbd0;">pandemic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #81deff; --color-darker: #00cbf5; --color-dimmed: #40d6ff;">remote-teaching</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #9fe4ff; --color-darker: #00d3fe; --color-dimmed: #71dbff;">remote-teaching</span>
 
     <hr />
     <p class="card-text">
@@ -4621,7 +4600,7 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #91dbff; --color-darker: #00cafd; --color-dimmed: #64d3ff;">galaxy</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #aae2ff; --color-darker: #4dd0ff; --color-dimmed: #84d8ff;">galaxy</span>
 
     <hr />
     <p class="card-text">
@@ -4693,15 +4672,15 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef99; --color-darker: #00d588; --color-dimmed: #00e290;">videos</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f99f; --color-darker: #00dd8d; --color-dimmed: #00eb96;">videos</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc1d3; --color-darker: #ff9ebd; --color-dimmed: #ffb0c8;">pandemic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcddb; --color-darker: #ffa9c4; --color-dimmed: #ffbbd0;">pandemic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #81deff; --color-darker: #00cbf5; --color-dimmed: #40d6ff;">remote-teaching</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #9fe4ff; --color-darker: #00d3fe; --color-dimmed: #71dbff;">remote-teaching</span>
 
     <hr />
     <p class="card-text">
@@ -4773,15 +4752,15 @@ JBrowse.
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef99; --color-darker: #00d588; --color-dimmed: #00e290;">admin</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f99f; --color-darker: #00dd8d; --color-dimmed: #00eb96;">admin</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00edb4; --color-darker: #00d3a0; --color-dimmed: #00e0aa;">gat</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f7bb; --color-darker: #00dca6; --color-dimmed: #00e9b0;">gat</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00e8ef; --color-darker: #00cfd5; --color-dimmed: #00dbe2;">event</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f1f8; --color-darker: #00d7dd; --color-dimmed: #00e4eb;">event</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc1d3; --color-darker: #ff9ebd; --color-dimmed: #ffb0c8;">pandemic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcddb; --color-darker: #ffa9c4; --color-dimmed: #ffbbd0;">pandemic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #81deff; --color-darker: #00cbf5; --color-dimmed: #40d6ff;">remote-teaching</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #9fe4ff; --color-darker: #00d3fe; --color-dimmed: #71dbff;">remote-teaching</span>
 
     <hr />
     <p class="card-text">
@@ -4819,7 +4798,7 @@ JBrowse.
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -4847,7 +4826,7 @@ JBrowse.
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Genome-wide alternative splicing analysis</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -349,7 +328,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -441,7 +420,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -601,8 +580,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                 
                     
                         
-                    
-                        
                             
                             <li> Quality Control:
                             
@@ -623,9 +600,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                     
                         
                     
-                
-                    
                         
+                    
+                
                     
                         
                     
@@ -642,6 +619,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -968,25 +947,25 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
     <div class="box-title hands-on-title" id="hands-on-dataset-subsampling"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dataset subsampling</div>
 
     <ol>
-      <li><span class="tool" data-tool="CONVERTER_fasta_to_tabular" title="Convert FASTA to Tabular tool" aria-role="link"><strong>Convert FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: CONVERTER_fasta_to_tabular</span></span> converter with the following parameters:
+      <li><span class="tool" data-tool="CONVERTER_fasta_to_tabular" title="Convert FASTA to Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert FASTA to Tabular</strong></span> converter with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Fasta file”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.genome.fa.gz</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> converter with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> converter with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: Output of <strong>Convert FASTA to Tabular</strong></li>
           <li><em>“Regular Expression2”</em>: <code class="language-plaintext highlighter-rouge">chr5</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="link"><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</span></span> converter with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tabular-to-FASTA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Tabular-to-FASTA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> converter with the following parameters:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Tab-delimited file”</em>: Output of <strong>Search in textfiles</strong></li>
           <li><em>“Title column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
           <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1" title="HISAT2 tool" aria-role="link"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1</span></span> converter with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1" title="HISAT2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>HISAT2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> converter with the following parameters:
         <ul>
           <li>In <em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
             <ul>
@@ -1024,12 +1003,12 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
     <div class="box-title hands-on-title" id="hands-on-initial-quality-evaluation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Initial quality evaluation</div>
 
     <ol>
-      <li><span class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" aria-role="link"><strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>FLATTEN</strong></span></span> with the following parameters convert the list of pairs into a simple list:
+      <li><span class="tool" data-tool="__FLATTEN__" title="Flatten collection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Flatten collection</strong></span> with the following parameters convert the list of pairs into a simple list:
         <ul>
           <li><em>“Input Collection”</em>: <code class="language-plaintext highlighter-rouge">All samples</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> with the following parameters:
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Raw read data from your current history”</em>: Output of <strong>Flatten collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> selected as <strong>Dataset collection</strong></li>
         </ul>
@@ -1038,7 +1017,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
         <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Selecting a dataset collection as input<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
         <p><!--END_SNIPPET--></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> with the following parameters:
         <ul>
           <li>In <em>“Results”</em>:
             <ul>
@@ -1084,7 +1063,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-pre-process-reads-with-fastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Pre-process reads with fastp</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="link"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="fastp tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>fastp</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.23.2+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
           <ul>
@@ -1147,7 +1126,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
     <div class="box-title hands-on-title" id="hands-on-inference-of-intron-size"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inference of intron size</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="link"><strong>Convert GTF to BED12</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</span></span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357" title="Convert GTF to BED12 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Convert GTF to BED12</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 357)</span> with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF File to convert”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
           <li><em>“Advanced options”</em>: <code class="language-plaintext highlighter-rouge">Set advanced options</code>
@@ -1160,7 +1139,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
       <li>
         <p>Rename the output as <code class="language-plaintext highlighter-rouge">BED12 annotation</code></p>
       </li>
-      <li><span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED tool" aria-role="link"><strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: gene2exon1</span></span> with the following parameters:
+      <li><span class="tool" data-tool="gene2exon1" title="Gene BED To Exon/Intron/Codon BED tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene BED To Exon/Intron/Codon BED</strong></span> with the following parameters:
         <ul>
           <li><em>“Extract”</em>: <code class="language-plaintext highlighter-rouge">Introns</code>
             <ul>
@@ -1169,13 +1148,13 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
           </li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with awk with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{print $3-$2}</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+      <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> data in ascending or descending order with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li>“<em>On column</em>”: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
@@ -1183,7 +1162,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
           <li>“<em>Output unique values</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with awk with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}</code></li>
@@ -1192,7 +1171,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
       <li>
         <p>Rename the output as <code class="language-plaintext highlighter-rouge">Minimum intron size</code></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with awk with the following parameters:
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Gene BED To Exon/Intron/Codon BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}</code></li>
@@ -1218,7 +1197,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-generate-intermediate-file-with-rna-star"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Generate intermediate file with RNA STAR</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="link"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.10b+galaxy3)</span> with the following parameters:
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
@@ -1279,30 +1258,30 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-pre-processing-of-splice-junction-coordinates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Pre-processing of splice junction coordinates</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Datasets to concatenate”</em>: <code class="language-plaintext highlighter-rouge">spliced junctions.bed</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with awk with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with awk with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>“<em>AWK Program</em>”: <code class="language-plaintext highlighter-rouge">($5 &gt; 0 &amp;&amp; $7 &gt; 2 &amp;&amp; $6==0)</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
         <li>“<em>Cut columns</em>”: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c4,c5,c6</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> data in ascending or descending order with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>“<em>On column</em>”: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="sort1" title="Unique lines tool" aria-role="link"><strong>Unique lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> assuming sorted input file with the following parameters:
+    <li><span class="tool" data-tool="sort1" title="Unique lines tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unique lines</strong></span> assuming sorted input file with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1317,7 +1296,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-sequence-alignment-with-star"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Sequence alignment with STAR</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="link"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3" title="RNA STAR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>RNA STAR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.10b+galaxy3)</span> with the following parameters:
       <ul>
         <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
@@ -1405,19 +1384,19 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-raw-reads-qc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Raw reads QC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1" title="Infer Experiment tool" aria-role="link"><strong>Infer Experiment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1" title="Infer Experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Infer Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1" title="Gene body coverage (BAM) tool" aria-role="link"><strong>Gene body coverage (BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1" title="Gene body coverage (BAM) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Gene body coverage (BAM)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1" title="Junction Saturation tool" aria-role="link"><strong>Junction Saturation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1" title="Junction Saturation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Junction Saturation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
@@ -1425,20 +1404,20 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
         <li><em>“Output R-Script”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1" title="Junction Annotation tool" aria-role="link"><strong>Junction Annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1" title="Junction Annotation tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Junction Annotation</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
         <li><em>“Minimum intron length (bp)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1" title="Read Distribution tool" aria-role="link"><strong>Read Distribution</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1" title="Read Distribution tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Read Distribution</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2" title="Inner Distance tool" aria-role="link"><strong>Inner Distance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2" title="Inner Distance tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inner Distance</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.1+galaxy2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input BAM/SAM file”</em>: <code class="language-plaintext highlighter-rouge">Mapped collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">BED12 annotation</code></li>
@@ -1454,7 +1433,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-report-integration-with-multiqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Report integration with MultiQC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> with the following parameters:
       <ul>
         <li>In <em>“Results”</em>:
           <ul>
@@ -1627,7 +1606,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-transcriptome-assembly-with-stringtie"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transcriptome assembly with StringTie</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="link"><strong>StringTie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>StringTie</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Input options”</em>: <code class="language-plaintext highlighter-rouge">Short reads</code>
           <ul>
@@ -1654,7 +1633,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
     <li>
       <p>Rename the generated collection as <code class="language-plaintext highlighter-rouge">Assembled transcripts coordinates</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gffread</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts</code></li>
         <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
@@ -1668,7 +1647,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
     <li>
       <p>Rename the collection as <code class="language-plaintext highlighter-rouge">Assembled transcripts sequences</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1" title="StringTie merge tool" aria-role="link"><strong>StringTie merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1</span></span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts</code> (output of <strong>StringTie</strong>)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1" title="StringTie merge tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>StringTie merge</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts</code> (output of <strong>StringTie</strong>)
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference annotation to include in the merging”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
       </ul>
@@ -1684,7 +1663,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-isoform-quantification-with-stringtie"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Isoform quantification with StringTie</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="link"><strong>StringTie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1" title="StringTie tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>StringTie</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Input options”</em>: <code class="language-plaintext highlighter-rouge">Short reads</code>
           <ul>
@@ -1741,7 +1720,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-extract-reference-transcriptome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract reference transcriptome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gffread</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code></li>
         <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
@@ -1770,7 +1749,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-transcriptome-accuracy-evaluation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transcriptome accuracy evaluation</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0" title="GFFCompare tool" aria-role="link"><strong>GFFCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0</span></span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0" title="GFFCompare tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GFFCompare</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.12.6+galaxy0)</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation</code> (output of <strong>StringTie merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Use reference annotation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
@@ -1830,32 +1809,32 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-extract-novel-transcripts-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract novel transcripts information</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <strong>TMAP</strong> file</li>
         <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">$3=="i"{print $0}</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="link"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> columns from a table with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> columns from a table with the following parameters:
       <ul>
         <li>“<em>Cut columns</em>”: <code class="language-plaintext highlighter-rouge">c4</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: sort1</span></span> data in ascending or descending order with the following parameters:
+    <li><span class="tool" data-tool="sort1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong></span> data in ascending or descending order with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Dataset”</em>: output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>“<em>Output unique values</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Reference transcriptome annotation </code></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
         <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">\"MSTRG.7\"</code>(content of the file generated by <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gffread</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input BED, GFF3 or GTF feature file “</em>: output of <strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
@@ -1888,7 +1867,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-transcriptome-evaluation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Transcriptome evaluation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1" title="rnaQUAST tool" aria-role="link"><strong>rnaQUAST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1" title="rnaQUAST tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>rnaQUAST</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">Assembled transcripts sequences</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
@@ -1963,19 +1942,19 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-split-collection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Split collection</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="link"><strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2" title="Extract element identifiers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Extract element identifiers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.2)</span> with the following parameters:
       <ul>
         <li><em>“Dataset collection”</em>: <code class="language-plaintext highlighter-rouge">Transcriptomes quantification</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Extract element identifiers on data N</code> (output of  <strong>Extract element identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
         <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">Cancer</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="__FILTER_FROM_FILE__" title="Filter collecion tool" aria-role="link"><strong>Filter collecion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>FILTER_FROM_FILE</strong></span></span> with the following parameters:
+    <li><span class="tool" data-tool="__FILTER_FROM_FILE__" title="Filter collecion tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter collecion</strong></span> with the following parameters:
       <ul>
         <li><em>“Input collection”</em>: <code class="language-plaintext highlighter-rouge">StringTie on collection N: transcript-level expression measurements</code></li>
         <li><em>“How should the elements to remove be determined”</em>: <code class="language-plaintext highlighter-rouge">Remove if identifiers are ABSENT from file</code>
@@ -2005,7 +1984,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-import-data-with-isoformswitchanalyzer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import data with IsoformSwitchAnalyzeR</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IsoformSwitchAnalyzeR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0+galaxy5)</span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Import data</code>
           <ul>
@@ -2077,7 +2056,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-isoformswitchanalyzer-pre-processing-step"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: IsoformSwitchAnalyzeR pre-processing step</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IsoformSwitchAnalyzeR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0+galaxy5)</span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part one: Extract isoform switches and their sequences</code>
           <ul>
@@ -2137,7 +2116,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-domain-identification-with-pfamscan"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Domain identification with PfamScan</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0" title="PfamScan tool" aria-role="link"><strong>PfamScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0" title="PfamScan tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>PfamScan</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein sequences FASTA file”</em>: <code class="language-plaintext highlighter-rouge">aminoacid sequences</code> (output of <strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pfam-A HMM library”</em>: <code class="language-plaintext highlighter-rouge">Pfam-A.hmm.gz</code></li>
@@ -2183,21 +2162,21 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-extract-lncrna-and-protein-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract lncRNA and protein sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> converter with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> converter with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
         <li><em>“Regular Expression2”</em>: <code class="language-plaintext highlighter-rouge">lncRNA</code></li>
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.lncRNA.gtf</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="link"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span> converter with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Search in textfiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Search in textfiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> converter with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.gtf</code></li>
         <li><em>“Regular Expression2”</em>: <code class="language-plaintext highlighter-rouge">protein_coding</code></li>
       </ul>
     </li>
     <li>Rename the output as <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.pc.gtf</code></li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="link"><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0" title="gffread tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>gffread</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.2.1.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input BED, GFF3 or GTF feature file “</em>: <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.lncRNA.gtf</code> and <code class="language-plaintext highlighter-rouge">gencode.v43.annotation.chrm5.pc.gtf</code></li>
         <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">From your history</code>
@@ -2218,7 +2197,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-coding-prediction-with-cpat"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Coding prediction with CPAT</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0" title="CPAT tool" aria-role="link"><strong>CPAT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0" title="CPAT tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>CPAT</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.0.4+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query nucletide sequences”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide sequences</code> (output of <strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">GRCh38.p13.chrom5.fasta.gz</code></li>
@@ -2245,19 +2224,19 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-required-format-modifications-on-cpat-output"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Required format modifications on CPAT output</div>
 
   <ol>
-    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="link"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> with the following parameters:
       <ul>
         <li><em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">ORF best probabilities (TSV)</code> (output of <strong>CPAT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="link"><strong>Text reformatting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Text reformatting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text reformatting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Remove beginning</strong></li>
         <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">{print i++"\t"$1"\t"$3"\t"$8"\t"$9"\t"$10"\t"$11"\t""-"}</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="link"><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: cat1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="cat1" title="Concatenate datasets tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Concatenate datasets</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">CPAT_header.tab</code></li>
         <li>In <em>“Dataset”</em>:
@@ -2301,7 +2280,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-gene-specific-isoform-switching-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Gene-specific isoform switching analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IsoformSwitchAnalyzeR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0+galaxy5)</span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part two: Plot all isoform switches and their annotation</code>
           <ul>
@@ -2346,7 +2325,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-check-isoform-switching-with-pygenometracks-from-star-coverage"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check isoform switching with pyGenometracks from STAR coverage</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool" aria-role="link"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1</span></span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1" title="pyGenomeTracks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>pyGenomeTracks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.8+galaxy1)</span>:
       <ul>
         <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr5:98,762,495-98,803,294</code></li>
         <li>In <em>“Include tracks in your plot”</em>:
@@ -2428,7 +2407,7 @@ Pfam-A.hmm.gz	https://zenodo.org/record/7974884/files/Pfam-A.hmm.gz
   <div class="box-title hands-on-title" id="hands-on-isoform-switch-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Isoform switch analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="link"><strong>IsoformSwitchAnalyzeR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5" title="IsoformSwitchAnalyzeR tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>IsoformSwitchAnalyzeR</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.20.0+galaxy5)</span> with the following parameters:
       <ul>
         <li><em>“Tool function mode”</em>: <code class="language-plaintext highlighter-rouge">Analysis part two: Plot all isoform switches and their annotation</code>
           <ul>
@@ -3110,7 +3089,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3142,7 +3121,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

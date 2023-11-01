@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Filtrado, representación y exploración de secuenciación de ARN de células únicas</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -369,7 +348,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -461,7 +440,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -613,10 +592,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                         
                     
                         
-                    
-                        
-                    
-                        
                             
                             <li> Generating a single cell matrix using Alevin:
                             
@@ -626,6 +601,10 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -924,19 +903,19 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
       <div class="box-title hands-on-title" id="hands-on-inspeccionando-objetos-anndata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Inspeccionando objetos AnnData</div>
 
       <ol>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
           </ul>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
           </ul>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
             <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -981,7 +960,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
   <div class="box-title hands-on-title" id="hands-on-haciendo-gráficos-qc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Haciendo gráficos QC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -999,7 +978,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> salida <code class="language-plaintext highlighter-rouge">Violin - genotype - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1017,7 +996,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - sex - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1035,7 +1014,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - batch - log</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1053,7 +1032,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Scatter - mito x UMIs</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1071,7 +1050,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Scatter - mito x genes</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Scatter plot along observations or variables axes, using 'pl.scatter'</code>
@@ -1274,7 +1253,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-filtra-las-células-por-log1p-n-genes-by-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Filtra las células por log1p_n_genes_by_counts</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Mito-counted AnnData</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1293,7 +1272,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot con scanpy tool" aria-role="link"><strong>Plot con scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot con scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot con scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1311,7 +1290,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbygenes</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li><em>“What to inspect??”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1348,7 +1327,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-log1p-total-counts"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Filtrar células con base en log1p_total_counts</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“nput object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Genes-filtered Object</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1367,7 +1346,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with  scanpy tool" aria-role="link"><strong>Plot with  scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with  scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with  scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1385,7 +1364,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbycounts</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="link"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect  AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1420,7 +1399,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-filtrar-células-con-base-en-pct-counts-mito"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Filtrar células con base en pct_counts_mito</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="link"><strong>Scanpy FilterCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.6.0+galaxy0" title="Scanpy FilterCells tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterCells</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Counts-filtered Object</code></li>
         <li>En <em>“Parameters to select cells to keep”</em>:
@@ -1439,7 +1418,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de la salida a <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">Generic: Violin plot, using 'pl.violin'</code>
@@ -1467,7 +1446,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Violin - Filterbymito</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="link"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect  AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1517,7 +1496,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-filtrado-de-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Filtrado de genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0" title="Scanpy FilterGenes tool" aria-role="link"><strong>Scanpy FilterGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.6.0+galaxy0" title="Scanpy FilterGenes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FilterGenes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Mito-filtered Object</code></li>
         <li>En <em>“Parameters to select genes to keep”</em>:
@@ -1536,7 +1515,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
     <li>
       <p><strong>Cambiar nombre</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> de salida a <code class="language-plaintext highlighter-rouge">Filtered Object</code></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="link"><strong>Inspect  AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect  AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect  AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matriz anotada de datos”</em>: <code class="language-plaintext highlighter-rouge">Filtered Object</code></li>
         <li><em>“¿Qué inspeccionar?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
@@ -1597,7 +1576,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-normalización"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Normalización</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0" title="Scanpy NormaliseData tool" aria-role="link"><strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.6.0+galaxy0" title="Scanpy NormaliseData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy NormaliseData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Filtered Object</code></li>
       </ul>
@@ -1613,7 +1592,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-encuentra-los-genes-variables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Encuentra los genes variables</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0" title="Scanpy FindVariableGenes tool" aria-role="link"><strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.6.0+galaxy0" title="Scanpy FindVariableGenes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindVariableGenes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de  <strong>Scanpy NormaliseData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Flavor of computing normalised dispersion”</em>: <code class="language-plaintext highlighter-rouge">Seurat</code></li>
@@ -1628,7 +1607,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-escalar-datos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Escalar datos</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0" title="Scanpy ScaleData tool" aria-role="link"><strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0</span></span> utilizando los siguiente parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.6.0+galaxy0" title="Scanpy ScaleData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy ScaleData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> utilizando los siguiente parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy FindVariableGenes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Truncate to this value after scaling”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
@@ -1655,13 +1634,13 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-cálculo-de-los-componentes-principales"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Cálculo de los Componentes Principales</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1" title="Scanpy RunPCA tool" aria-role="link"><strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.6.0+galaxy1" title="Scanpy RunPCA tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy RunPCA</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy1)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy ScaleData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of PCs to producer”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="link"><strong>Plot with scanpy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0" title="Plot with scanpy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot with scanpy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.7.1+galaxy0)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Method used for plotting”</em>: <code class="language-plaintext highlighter-rouge">PCA: Scatter plot in PCA coordinates, using 'pl.pca_variance_ratio'</code></li>
@@ -1702,7 +1681,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-cómputo-de-gráfico-computegraph"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Cómputo de gráfico - ComputeGraph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4" title="Scanpy ComputeGraph tool" aria-role="link"><strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.6.0+galaxy4" title="Scanpy ComputeGraph tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy ComputeGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy4)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunPCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1734,14 +1713,14 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-cálculo-de-tsne-y-umap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Cálculo de  tSNE y UMAP</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2" title="Scanpy RunTSNE tool" aria-role="link"><strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.6.0+galaxy2" title="Scanpy RunTSNE tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy RunTSNE</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy2)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy ComputeGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“The perplexity is related to the number of nearest neighbours, select a value between 5 and 50”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1" title="Scanpy RunUMAP tool" aria-role="link"><strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.6.0+galaxy1" title="Scanpy RunUMAP tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy RunUMAP</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy1)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunTSNE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1789,7 +1768,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-encontrar-agrupamientos-findclusters"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Encontrar agrupamientos - FindClusters</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4" title="Scanpy FindCluster tool" aria-role="link"><strong>Scanpy FindCluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4</span></span> utilizando los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.6.0+galaxy4" title="Scanpy FindCluster tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindCluster</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy4)</span> utilizando los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy RunUMAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Utilizar los valores por defecto del programa”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1807,7 +1786,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-encuentra-marcadores"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Encuentra marcadores</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3" title="Scanpy FindMarkers tool" aria-role="link"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3</span></span>  con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy3" title="Scanpy FindMarkers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindMarkers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy3)</span>  con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">output_h5ad</code> (salida de <strong>Scanpy FindClusters</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use programme defaults”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <code class="language-plaintext highlighter-rouge">No</code> &lt;— Confía en mí, hay un fallo extraño en algunas versiones de la herramienta que se soluciona simplemente marcando <code class="language-plaintext highlighter-rouge">No</code> aquí &gt;</li>
@@ -1822,7 +1801,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Pero también estamos interesados en las diferencias entre los genotipos, así que también comprobemos eso (ten en cuenta que en este caso se está convirtiendo en un análisis de RNA-seq masivo, porque estamos comparando todas las células de un determinado genotipo contra todas las células del otro)</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4" title="Scanpy FindMarkers tool" aria-role="link"><strong>Scanpy FindMarkers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.6.0+galaxy4" title="Scanpy FindMarkers tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindMarkers</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy4)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“The sample grouping/clustering to use”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
@@ -1843,7 +1822,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <div class="box-title hands-on-title" id="hands-on-añadir-los-nombres-de-los-genes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Añadir los nombres de los genes</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="link"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -1854,7 +1833,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Esto proporciona a nuestra tabla todos los posibles genes con sus nombres.</p>
 
   <ol>
-    <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="link"><strong>Join two Datasets side by side on a specified field</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="join1" title="Join two Datasets side by side on a specified field tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Join two Datasets side by side on a specified field</strong></span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Select multiple files: <code class="language-plaintext highlighter-rouge">Markers - cluster</code> and <code class="language-plaintext highlighter-rouge">Markers - genotype</code></li>
         <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
@@ -1871,7 +1850,7 @@ Cualquier persona experta en bioinformática te diría que la mejor forma de obt
   <p>Tenemos una gran cantidad de información extra en nuestra tabla de marcadores de genes que no necesitamos, así que..</p>
 
   <ol>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> con los siguientes parámetros:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c4,c11,c5,c6,c7,c8</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> Selecciona varios documentos: <code class="language-plaintext highlighter-rouge">out_file1</code> y <code class="language-plaintext highlighter-rouge">output_file2</code> (salidas de <strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1892,7 +1871,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
   <div class="box-title hands-on-title" id="hands-on-representemos-gráficamente-las-células"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: ¡Representemos gráficamente las células!</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy PlotEmbed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">pca</code></li>
@@ -1901,7 +1880,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> <em>Puedes volver a ejecutar  <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> la misma herramienta de nuevo, pero cambia <code class="language-plaintext highlighter-rouge">pca</code>por <code class="language-plaintext highlighter-rouge">tsne</code>y finalmente por <code class="language-plaintext highlighter-rouge">umap</code> para saltarte los dos pasos siguientes.</em></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy PlotEmbed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">tsne</code></li>
@@ -1909,7 +1888,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li><em>“Field for gene symbols”</em>: <code class="language-plaintext highlighter-rouge">Symbol</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy PlotEmbed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
@@ -1998,7 +1977,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
   <div class="box-title hands-on-title" id="hands-on-anotando-agrupaciones"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Anotando agrupaciones</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool" aria-role="link"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Manipulate AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Manipulate AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy0)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Rename categories of annotation</code></li>
@@ -2007,7 +1986,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>Un momento… Lamentablemente esto elimina la numeración original de las agrupaciones. En caso de que quieras recuperarla, se puede volver a añadir la anotación.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool" aria-role="link"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy1)</span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: <code class="language-plaintext highlighter-rouge">Final object</code></li>
         <li><em>“Copy observations (such as clusters)”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">history-share</span> <em>Yes</em></li>
@@ -2018,7 +1997,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>Has añadido las nuevas anotaciones de las células, ahora titulada  `louvain_0´. ¿Qué, no es suficiente? ¿Quieres cambiar el título también? Que así sea.</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool" aria-role="link"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1</span></span> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> con los siguientes parámetros::
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.6.0+galaxy1" title="AnnData Operations tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>AnnData Operations</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy1)</span> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> con los siguientes parámetros::
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in hdf5 AnnData format”</em>: (output of <strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Change field names in AnnData observations”</em></li>
@@ -2033,7 +2012,7 @@ Pero primero, escojamos algunos genes marcadores de la lista de “agrupamiento 
         <li>¡Es hora de volver a visualizar con gráficos! <i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Siéntete libre de volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> la herramienta <strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> en el nuevo objeto que visualiza gráficamente <code class="language-plaintext highlighter-rouge">cell_type</code> para acelerar esto. De lo contrario…</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="link"><strong>Scanpy PlotEmbed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0</span></span> con los siguientes parámetros::
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.6.0+galaxy0" title="Scanpy PlotEmbed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy PlotEmbed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.6.0+galaxy0)</span> con los siguientes parámetros::
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">umap</code></li>
@@ -2150,7 +2129,7 @@ Si miramos las diferencias entre solo los genotipos (por así decir, el “pseud
   <div class="box-title hands-on-title" id="hands-on-cellxgene"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Práctica: Cellxgene</div>
 
   <ol>
-    <li><span class="tool" data-tool="interactive_tool_cellxgene" title="Interactive CellXgene Environment tool" aria-role="link"><strong>Interactive CellXgene Environment</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_cellxgene</span></span> con los siguientes parámetros:
+    <li><span class="tool" data-tool="interactive_tool_cellxgene" title="Interactive CellXgene Environment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive CellXgene Environment</strong></span> con los siguientes parámetros:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate dataset”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>
       </ul>
@@ -2663,7 +2642,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2691,7 +2670,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

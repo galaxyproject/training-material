@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>GTN Contributor: Fotis E. Psomopoulos</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -187,7 +166,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -413,80 +392,29 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Foundations of Data Science
 						</a>
 						/
-						<a href="/training-material//topics/data-science/tutorials/bash-git/tutorial.html">
-						Version Control with Git
-						</a>
-						
-						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/data-science">
-							Foundations of Data Science
-						</a>
-						/
-						<a href="/training-material//topics/data-science/tutorials/python-plotting/tutorial.html">
-						Plotting in Python
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/data-science">
-							Foundations of Data Science
-						</a>
-						/
-						<a href="/training-material//topics/data-science/tutorials/r-advanced/tutorial.html">
-						Advanced R in Galaxy
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/data-science">
-							Foundations of Data Science
-						</a>
-						/
-						<a href="/training-material//topics/data-science/tutorials/bash-variant-calling/tutorial.html">
-						Variant Calling Workflow
-						</a>
-						
-						
-	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/data-science">
-							Foundations of Data Science
-						</a>
-						/
 						<a href="/training-material//topics/data-science/tutorials/python-basics/tutorial.html">
 						Introduction to Python
 						</a>
 						
 						
 	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/bash-git/tutorial.html">
+						Version Control with Git
+						</a>
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
 
 
 					</li>
@@ -528,12 +456,80 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/galaxy-interface">
-							Using Galaxy and Managing your Data
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
 						</a>
 						/
-						<a href="/training-material//topics/galaxy-interface/tutorials/rstudio/tutorial.html">
-						RStudio in Galaxy
+						<a href="/training-material//topics/data-science/tutorials/bash-variant-calling/tutorial.html">
+						Variant Calling Workflow
+						</a>
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/python-plotting/tutorial.html">
+						Plotting in Python
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/data-science">
+							Foundations of Data Science
+						</a>
+						/
+						<a href="/training-material//topics/data-science/tutorials/r-advanced/tutorial.html">
+						Advanced R in Galaxy
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/transcriptomics">
+							Transcriptomics
+						</a>
+						/
+						<a href="/training-material//topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html">
+						RNA-seq Alignment with STAR
+						</a>
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/transcriptomics">
+							Transcriptomics
+						</a>
+						/
+						<a href="/training-material//topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html">
+						RNA Seq Counts to Viz in R
 						</a>
 						
 						
@@ -551,23 +547,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 						/
 						<a href="/training-material//topics/teaching/tutorials/learner_participation_engagement/tutorial.html">
 						Training techniques to enhance learner participation and engagement
-						</a>
-						
-						
-	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/teaching">
-							Teaching and Hosting Galaxy training
-						</a>
-						/
-						<a href="/training-material//topics/teaching/tutorials/hybrid-training/tutorial.html">
-						Hybrid training
 						</a>
 						
 						
@@ -634,8 +613,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Teaching and Hosting Galaxy training
 						</a>
 						/
-						<a href="/training-material//topics/teaching/tutorials/workshop-final-exercise/tutorial.html">
-						Train-the-Trainer: putting it all together
+						<a href="/training-material//topics/teaching/tutorials/assessment/tutorial.html">
+						Assessment and feedback in training and teachings
 						</a>
 						
 						
@@ -651,8 +630,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Teaching and Hosting Galaxy training
 						</a>
 						/
-						<a href="/training-material//topics/teaching/tutorials/assessment/tutorial.html">
-						Assessment and feedback in training and teachings
+						<a href="/training-material//topics/teaching/tutorials/workshop-final-exercise/tutorial.html">
+						Train-the-Trainer: putting it all together
 						</a>
 						
 						
@@ -681,16 +660,16 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/statistics">
-							Statistics and machine learning
+						<a href="/training-material/topics/teaching">
+							Teaching and Hosting Galaxy training
 						</a>
 						/
-						<a href="/training-material//topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html">
-						Introduction to Machine Learning using R
+						<a href="/training-material//topics/teaching/tutorials/hybrid-training/tutorial.html">
+						Hybrid training
 						</a>
 						
 						
-	
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
 
 
 					</li>
@@ -732,12 +711,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/transcriptomics">
-							Transcriptomics
+						<a href="/training-material/topics/statistics">
+							Statistics and machine learning
 						</a>
 						/
-						<a href="/training-material//topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html">
-						RNA Seq Counts to Viz in R
+						<a href="/training-material//topics/statistics/tutorials/intro-to-ml-with-r/tutorial.html">
+						Introduction to Machine Learning using R
 						</a>
 						
 						
@@ -749,16 +728,16 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/transcriptomics">
-							Transcriptomics
+						<a href="/training-material/topics/galaxy-interface">
+							Using Galaxy and Managing your Data
 						</a>
 						/
-						<a href="/training-material//topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html">
-						RNA-seq Alignment with STAR
+						<a href="/training-material//topics/galaxy-interface/tutorials/rstudio/tutorial.html">
+						RStudio in Galaxy
 						</a>
 						
 						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+	
 
 
 					</li>
@@ -828,9 +807,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #00ef92; --color-darker: #00d582; --color-dimmed: #00e28a;">gtn infrastructure</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f998; --color-darker: #00de87; --color-dimmed: #00eb90;">gtn infrastructure</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
     <hr/>
     <p class="card-text">
@@ -892,7 +871,11 @@ var topics = [
 
 	
 	
-	"Using Galaxy and Managing your Data",
+	"Transcriptomics",
+
+	
+	
+	"Transcriptomics",
 
 	
 	
@@ -925,6 +908,14 @@ var topics = [
 	
 	
 	"Teaching and Hosting Galaxy training",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
+
+	
+	
+	"Contributing to the Galaxy Training Material",
 
 	
 	
@@ -932,19 +923,7 @@ var topics = [
 
 	
 	
-	"Contributing to the Galaxy Training Material",
-
-	
-	
-	"Contributing to the Galaxy Training Material",
-
-	
-	
-	"Transcriptomics",
-
-	
-	
-	"Transcriptomics",
+	"Using Galaxy and Managing your Data",
 
 
 ];
@@ -1087,7 +1066,7 @@ var chart2 = new Chart(ctx2, {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1115,7 +1094,7 @@ var chart2 = new Chart(ctx2, {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

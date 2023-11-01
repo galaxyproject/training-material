@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>ATAC-Seq data analysis</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -366,7 +345,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -458,7 +437,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -592,8 +571,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                 
                     
                         
-                    
-                        
                             
                             <li> Quality Control:
                             
@@ -614,9 +591,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                     
                         
                     
-                
-                    
                         
+                    
+                
                     
                         
                     
@@ -633,6 +610,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -1007,7 +986,7 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 
       <p>This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:</p>
     </li>
-    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="link"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Cut columns from a table tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut columns from a table</strong></span> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c3,c5,c6,c13,c12,c4</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1090,7 +1069,7 @@ To be able to have the exon information, you could use a GTF file which can be d
   <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: Choose here either only the <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> file with <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> or use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> and <code class="language-plaintext highlighter-rouge">SRR891268_R2</code>.</li>
       </ul>
@@ -1163,7 +1142,7 @@ They correspond to adapters amplified head-to-head.
   <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Cutadapt tool" aria-role="link"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.5)</span> with the following parameters:
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1258,7 +1237,7 @@ They correspond to adapters amplified head-to-head.
   <div class="box-title hands-on-title" id="hands-on-check-adapter-removal-with-fastqc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check Adapter Removal with FastQC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.72+galaxy1)</span> with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: select the output of <strong>Cutadapt</strong> <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">Read 1 Output</code> and <code class="language-plaintext highlighter-rouge">Read 2 Output</code>.</li>
       </ul>
@@ -1295,7 +1274,7 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
   <div class="box-title hands-on-title" id="hands-on-mapping-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mapping reads to reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Bowtie2 tool" aria-role="link"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Bowtie2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Bowtie2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.2+galaxy0)</span> with the following parameters:
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1367,7 +1346,7 @@ Another reason is that we have reads that map to the mitochondrial genome. The m
   <div class="box-title hands-on-title" id="hands-on-filtering-of-uninformative-reads"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Filtering of uninformative reads</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="link"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Filter BAM datasets on a variety of attributes tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter BAM datasets on a variety of attributes</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.4.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset(s) to filter”</em>: Select the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em></li>
         <li>In <em>“Condition”</em>:
@@ -1447,9 +1426,9 @@ However, it does not predict the quality of the rest of the data. It is just tha
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-getting-the-number-of-mitochondrial-reads"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-the-number-of-mitochondrial-reads" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Getting the number of mitochondrial reads<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>To get the number of reads that mapped to the mitochondrial genome (chrM) you can run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Samtools idxstats tool" aria-role="link"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span> on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
+  <p>To get the number of reads that mapped to the mitochondrial genome (chrM) you can run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Samtools idxstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Samtools idxstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.3)</span> on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
 The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
-The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="link"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>):</p>
+The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Sort tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Sort</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span>):</p>
 
   <figure id="figure-7" style="max-width: 90%; margin:auto;"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result. " width="262" height="58" loading="lazy" /><a target="_blank" href="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Samtools idxstats result</figcaption></figure>
 
@@ -1464,7 +1443,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Remove duplicates</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" aria-role="link"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="MarkDuplicates tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MarkDuplicates</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.18.2.2)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: Select the output of  <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM”</em></li>
         <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1490,7 +1469,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
   <div class="box-title tip-title" id="tip-formatting-the-markduplicate-metrics-for-readability"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-formatting-the-markduplicate-metrics-for-readability" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Formatting the MarkDuplicate metrics for readability<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="link"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Select lines that match an expression tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Select lines that match an expression</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“that</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1504,7 +1483,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" aria-role="link"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span>:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Transpose rows/columns in a tabular file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Transpose rows/columns in a tabular file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1545,7 +1524,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
   <div class="box-title hands-on-title" id="hands-on-plot-the-distribution-of-fragment-sizes"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Plot the distribution of fragment sizes.</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Paired-end histogram tool" aria-role="link"><strong>Paired-end histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Paired-end histogram tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Paired-end histogram</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM output”</em></li>
         <li><em>“Lower bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
@@ -1623,7 +1602,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <div class="box-title hands-on-title" id="hands-on-convert-the-bam-to-bed"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert the BAM to BED</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0" title="bedtools BAM to BED converter tool" aria-role="link"><strong>bedtools BAM to BED converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0" title="bedtools BAM to BED converter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools BAM to BED converter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to BED”</em>: Select the output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1639,7 +1618,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <div class="box-title hands-on-title" id="hands-on-call-peaks-with-macs2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Call peaks with MACS2</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool" aria-role="link"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="MACS2 callpeak tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MACS2 callpeak</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1.20160309.6)</span> with the following parameters:
       <ul>
         <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
           <ul>
@@ -1695,13 +1674,13 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <div class="box-title hands-on-title" id="hands-on-select-ctcf-peaks-from-chr22-in-intergenic-regions"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Select CTCF peaks from chr22 in intergenic regions:</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.bed.gz</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="bedtools Intersect intervals find overlapping intervals in various ways tool" aria-role="link"><strong>bedtools Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="bedtools Intersect intervals find overlapping intervals in various ways tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bedtools Intersect intervals find overlapping intervals in various ways</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.30.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the output of <strong>Filter</strong> data on any column using simple expressions <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Combined or separate output files”</em>: <code class="language-plaintext highlighter-rouge">One output file per 'input B' file</code>
@@ -1726,7 +1705,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 
   <p>In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.</p>
 
-  <p>To do so, we will use <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with the following parameters:</p>
+  <p>To do so, we will use <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (Bedgraph Treatment).</li>
     <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
@@ -1741,7 +1720,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-convert-bedgraphs-to-bigwig"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert bedgraphs to bigWig.</div>
 
   <ol>
-    <li><span class="tool" data-tool="wig_to_bigWig" title="Wig/BedGraph-to-bigWig tool" aria-role="link"><strong>Wig/BedGraph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: wig_to_bigWig</span></span> with the following parameters:
+    <li><span class="tool" data-tool="wig_to_bigWig" title="Wig/BedGraph-to-bigWig tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Wig/BedGraph-to-bigWig</strong></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (Bedgraph Treatment).</li>
         <li><em>“Converter settings to use”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
@@ -1763,7 +1742,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-matrix"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate the matrix</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="link"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeMatrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span> with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
@@ -1801,7 +1780,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-heatmap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate the heatmap</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="link"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotHeatmap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1843,7 +1822,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-matrix-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Generate the matrix</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="link"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="computeMatrix tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>computeMatrix</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.0)</span> with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
@@ -1873,7 +1852,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="link"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="plotHeatmap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>plotHeatmap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.2.0.1)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>:  Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1915,7 +1894,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-task-description-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6" title="pyGenomeTracks tool" aria-role="link"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6" title="pyGenomeTracks tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>pyGenomeTracks</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.6)</span> with the following parameters:
       <ul>
         <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr22:37,193,000-37,252,000</code></li>
         <li>In <em>“Include tracks in your plot”</em>:
@@ -2276,7 +2255,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2308,7 +2287,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

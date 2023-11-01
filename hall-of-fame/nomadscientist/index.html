@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>GTN Contributor: Wendi Bacon</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -187,7 +166,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -405,6 +384,91 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
+						Removing the effects of the cell cycle
+						</a>
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
+						Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
+						</a>
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">
+						Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)
+						</a>
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">
+						Filter, plot, and explore single cell RNA-seq data (Seurat, R)
+						</a>
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html">
+						Inferring single cell trajectories (Monocle3, R)
+						</a>
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
 						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">
 						Combining single cell datasets after pre-processing
 						</a>
@@ -439,12 +503,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/bulk-music/tutorial.html">
-						Bulk RNA Deconvolution with MuSiC
+						<a href="/training-material//topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">
+						Scanpy Parameter Iterator
 						</a>
 						
 						
-	
+	<abbr title="This person tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">⚙️</abbr>
 
 
 					</li>
@@ -456,25 +520,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html">
-						Inferring single cell trajectories (Monocle3, R)
-						</a>
-						
-						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">
-						Comparing inferred cell compositions using MuSiC deconvolution
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
+						Generating a single cell matrix using Alevin
 						</a>
 						
 						
@@ -541,93 +588,25 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">
+						Comparing inferred cell compositions using MuSiC deconvolution
+						</a>
+						
+						
+	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/single-cell">
+							Single Cell
+						</a>
+						/
 						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
 						Filter, plot and explore single-cell RNA-seq data (Scanpy)
-						</a>
-						
-						
-	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
-						Removing the effects of the cell cycle
-						</a>
-						
-						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">
-						Scanpy Parameter Iterator
-						</a>
-						
-						
-	<abbr title="This person tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">⚙️</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">
-						Filter, plot, and explore single cell RNA-seq data (Seurat, R)
-						</a>
-						
-						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">
-						Filter, plot and explore single-cell RNA-seq data (Scanpy, Python)
-						</a>
-						
-						
-	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
-						</a>
-						/
-						<a href="/training-material//topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
-						Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution
 						</a>
 						
 						
@@ -660,12 +639,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
-						Generating a single cell matrix using Alevin
+						<a href="/training-material//topics/single-cell/tutorials/bulk-music/tutorial.html">
+						Bulk RNA Deconvolution with MuSiC
 						</a>
 						
 						
-	<abbr title="This person wrote the bulk of the training material, they may have done the analysis, built the workflow, and wrote the text themselves.">✍️</abbr>
+	
 
 
 					</li>
@@ -694,8 +673,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html">
-						Filtrado, representación y exploración de secuenciación de ARN de células únicas
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html">
+						Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin
 						</a>
 						
 						
@@ -711,8 +690,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html">
-						Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin
+						<a href="/training-material//topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html">
+						Filtrado, representación y exploración de secuenciación de ARN de células únicas
 						</a>
 						
 						
@@ -748,12 +727,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/introduction">
-							Introduction to Galaxy Analyses
+						<a href="/training-material/topics/single-cell">
+							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/slides_CAT_ES.html">
-						Una breve introducción a Galaxy
+						<a href="/training-material//topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html">
+						Introducción al análisis de datos de scRNA-seq
 						</a>
 						
 						
@@ -765,12 +744,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html">
-						Introducción al análisis de datos de scRNA-seq
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-short/slides_CAT_ES.html">
+						Una breve introducción a Galaxy
 						</a>
 						
 						
@@ -848,9 +827,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00f16e; --color-darker: #00d661; --color-dimmed: #00e468;">singlecell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00fb73; --color-darker: #00df65; --color-dimmed: #00ed6c;">singlecell</span>
 
     <hr/>
     <p class="card-text">
@@ -925,9 +904,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #fff5be; --color-darker: #efdb00; --color-dimmed: #fee800;">gtn</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #fff7cc; --color-darker: #f1dc00; --color-dimmed: #ffea42;">gtn</span>
 
     <hr/>
     <p class="card-text">
@@ -996,11 +975,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #e6d400; --color-darker: #cdbd00; --color-dimmed: #dac800;">transcriptomics</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #efdd00; --color-darker: #d5c400; --color-dimmed: #e2d000;">transcriptomics</span>
 
     <hr/>
     <p class="card-text">
@@ -1069,11 +1048,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ccceff; --color-darker: #b2b4ff; --color-dimmed: #bfc1ff;">new feature</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d6d7ff; --color-darker: #babcff; --color-dimmed: #c8c9ff;">new feature</span>
 
     <hr/>
     <p class="card-text">
@@ -1142,9 +1121,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00eadf; --color-darker: #00d0c6; --color-dimmed: #00ddd2;">español</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f3e8; --color-darker: #00d8ce; --color-dimmed: #00e6db;">español</span>
 
     <hr/>
     <p class="card-text">
@@ -1259,11 +1238,11 @@ var topics = [
 
 	
 	
-	"Introduction to Galaxy Analyses",
+	"Single Cell",
 
 	
 	
-	"Single Cell",
+	"Introduction to Galaxy Analyses",
 
 ];
 
@@ -1418,7 +1397,7 @@ var chart2 = new Chart(ctx2, {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1446,7 +1425,7 @@ var chart2 = new Chart(ctx2, {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

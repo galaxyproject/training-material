@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -192,7 +171,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -308,9 +287,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc1d7; --color-darker: #ff9dc3; --color-dimmed: #ffafcd;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffcdde; --color-darker: #ffa9c9; --color-dimmed: #ffbbd4;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e7f9; --color-darker: #00cede; --color-dimmed: #00daec;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #50eeff; --color-darker: #00d6e7; --color-dimmed: #00e3f5;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -467,9 +446,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc1d7; --color-darker: #ff9dc3; --color-dimmed: #ffafcd;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffcdde; --color-darker: #ffa9c9; --color-dimmed: #ffbbd4;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e7f9; --color-darker: #00cede; --color-dimmed: #00daec;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #50eeff; --color-darker: #00d6e7; --color-dimmed: #00e3f5;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -626,11 +605,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffbdef; --color-darker: #ff97e8; --color-dimmed: #ffabeb;" title="Click to show all tutorials tagged game">game</a>
+              <a href="/training-material/search?query=game" class="label label-default tutorial_tag" style="--color-primary: #ffcaf2; --color-darker: #ffa4ea; --color-dimmed: #ffb8ee;" title="Click to show all tutorials tagged game">game</a>
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc1d7; --color-darker: #ff9dc3; --color-dimmed: #ffafcd;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffcdde; --color-darker: #ffa9c9; --color-dimmed: #ffbbd4;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e7f9; --color-darker: #00cede; --color-dimmed: #00daec;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #50eeff; --color-darker: #00d6e7; --color-dimmed: #00e3f5;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -787,11 +766,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc1d7; --color-darker: #ff9dc3; --color-dimmed: #ffafcd;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffcdde; --color-darker: #ffa9c9; --color-dimmed: #ffbbd4;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #d9caff; --color-darker: #c7adff; --color-dimmed: #d0bbff;" title="Click to show all tutorials tagged Python">Python</a>
+              <a href="/training-material/search?query=Python" class="label label-default tutorial_tag" style="--color-primary: #e0d4ff; --color-darker: #cdb6ff; --color-dimmed: #d6c5ff;" title="Click to show all tutorials tagged Python">Python</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e7f9; --color-darker: #00cede; --color-dimmed: #00daec;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #50eeff; --color-darker: #00d6e7; --color-dimmed: #00e3f5;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -948,13 +927,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffc1d7; --color-darker: #ff9dc3; --color-dimmed: #ffafcd;" title="Click to show all tutorials tagged SQL">SQL</a>
+              <a href="/training-material/search?query=SQL" class="label label-default tutorial_tag" style="--color-primary: #ffcdde; --color-darker: #ffa9c9; --color-dimmed: #ffbbd4;" title="Click to show all tutorials tagged SQL">SQL</a>
               
-              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #ace400; --color-darker: #99ca00; --color-dimmed: #a2d700;" title="Click to show all tutorials tagged R">R</a>
+              <a href="/training-material/search?query=R" class="label label-default tutorial_tag" style="--color-primary: #b3ed00; --color-darker: #9fd300; --color-dimmed: #a9e000;" title="Click to show all tutorials tagged R">R</a>
               
-              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #dac9ff; --color-darker: #c9acff; --color-dimmed: #d1bbff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
+              <a href="/training-material/search?query=rmarkdown-notebook" class="label label-default tutorial_tag" style="--color-primary: #e1d3ff; --color-darker: #ceb6ff; --color-dimmed: #d7c5ff;" title="Click to show all tutorials tagged rmarkdown-notebook">rmarkdown-notebook</a>
               
-              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #00e7f9; --color-darker: #00cede; --color-dimmed: #00daec;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
+              <a href="/training-material/search?query=jupyter-notebook" class="label label-default tutorial_tag" style="--color-primary: #50eeff; --color-darker: #00d6e7; --color-dimmed: #00e3f5;" title="Click to show all tutorials tagged jupyter-notebook">jupyter-notebook</a>
               
             
             </div>
@@ -1112,7 +1091,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="Avatar" width="36" height="36">The Carpentries</a><a href="/training-material/hall-of-fame/NUKnightLab/" class="contributor-badge contributor-NUKnightLab"><img src="https://avatars.githubusercontent.com/NUKnightLab?s=36" alt="Avatar" width="36" height="36">NU Knight Lab</a><a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=36" alt="Avatar" width="36" height="36">Donny Vrins</a><a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Avatar" width="36" height="36">Bazante Sanders</a>
+    <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Avatar" width="36" height="36">Helena Rasche</a><a href="/training-material/hall-of-fame/bazante1/" class="contributor-badge contributor-bazante1"><img src="https://avatars.githubusercontent.com/bazante1?s=36" alt="Avatar" width="36" height="36">Bazante Sanders</a><a href="/training-material/hall-of-fame/NUKnightLab/" class="contributor-badge contributor-NUKnightLab"><img src="https://avatars.githubusercontent.com/NUKnightLab?s=36" alt="Avatar" width="36" height="36">NU Knight Lab</a><a href="/training-material/hall-of-fame/carpentries/" class="contributor-badge contributor-carpentries"><img src="https://avatars.githubusercontent.com/carpentries?s=36" alt="Avatar" width="36" height="36">The Carpentries</a><a href="/training-material/hall-of-fame/dirowa/" class="contributor-badge contributor-dirowa"><img src="https://avatars.githubusercontent.com/dirowa?s=36" alt="Avatar" width="36" height="36">Donny Vrins</a>
 
     <h2 id="funders">Funders</h2>
     <p>This material was funded by:</p>
@@ -1136,7 +1115,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1164,7 +1143,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Galaxy Training!</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -75,8 +54,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -101,7 +80,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <section class="tutorials-list by_tag_assembly topic-type-">
 
 
@@ -618,9 +597,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #edd200; --color-darker: #d3bb00; --color-dimmed: #e0c600;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f7da00; --color-darker: #dbc200; --color-dimmed: #e9ce00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
             
             </div>
@@ -793,9 +772,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #edd200; --color-darker: #d3bb00; --color-dimmed: #e0c600;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f7da00; --color-darker: #dbc200; --color-dimmed: #e9ce00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
             
             </div>
@@ -958,9 +937,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #6ced00; --color-darker: #60d300; --color-dimmed: #66e000;" title="Click to show all tutorials tagged plants">plants</a>
+              <a href="/training-material/search?query=plants" class="label label-default tutorial_tag" style="--color-primary: #71f700; --color-darker: #64dc00; --color-dimmed: #6ae900;" title="Click to show all tutorials tagged plants">plants</a>
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
             
             </div>
@@ -1744,9 +1723,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=quality control" class="label label-default tutorial_tag" style="--color-primary: #c8cfff; --color-darker: #aab6ff; --color-dimmed: #b9c3ff;" title="Click to show all tutorials tagged quality control">quality control</a>
+              <a href="/training-material/search?query=quality control" class="label label-default tutorial_tag" style="--color-primary: #d2d8ff; --color-darker: #b4beff; --color-dimmed: #c3cbff;" title="Click to show all tutorials tagged quality control">quality control</a>
               
             
             </div>
@@ -1979,9 +1958,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=quality control" class="label label-default tutorial_tag" style="--color-primary: #c8cfff; --color-darker: #aab6ff; --color-dimmed: #b9c3ff;" title="Click to show all tutorials tagged quality control">quality control</a>
+              <a href="/training-material/search?query=quality control" class="label label-default tutorial_tag" style="--color-primary: #d2d8ff; --color-darker: #b4beff; --color-dimmed: #c3cbff;" title="Click to show all tutorials tagged quality control">quality control</a>
               
             
             </div>
@@ -2204,13 +2183,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc880; --color-darker: #f5ad00; --color-dimmed: #ffb93e;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffd29f; --color-darker: #feb400; --color-dimmed: #ffc370;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #95e800; --color-darker: #84ce00; --color-dimmed: #8ddb00;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -2373,13 +2352,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffc880; --color-darker: #f5ad00; --color-dimmed: #ffb93e;" title="Click to show all tutorials tagged illumina">illumina</a>
+              <a href="/training-material/search?query=illumina" class="label label-default tutorial_tag" style="--color-primary: #ffd29f; --color-darker: #feb400; --color-dimmed: #ffc370;" title="Click to show all tutorials tagged illumina">illumina</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;" title="Click to show all tutorials tagged amr">amr</a>
               
-              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #95e800; --color-darker: #84ce00; --color-dimmed: #8ddb00;" title="Click to show all tutorials tagged one-health">one-health</a>
+              <a href="/training-material/search?query=one-health" class="label label-default tutorial_tag" style="--color-primary: #9bf100; --color-darker: #89d600; --color-dimmed: #92e400;" title="Click to show all tutorials tagged one-health">one-health</a>
               
             
             </div>
@@ -2542,11 +2521,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;" title="Click to show all tutorials tagged amr">amr</a>
               
             
             </div>
@@ -2709,11 +2688,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;" title="Click to show all tutorials tagged amr">amr</a>
               
             
             </div>
@@ -2886,9 +2865,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffc0df; --color-darker: #ff9bd0; --color-dimmed: #ffaed7;" title="Click to show all tutorials tagged pacbio">pacbio</a>
+              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffcce5; --color-darker: #ffa7d5; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged pacbio">pacbio</a>
               
             
             </div>
@@ -3061,9 +3040,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffc0df; --color-darker: #ff9bd0; --color-dimmed: #ffaed7;" title="Click to show all tutorials tagged pacbio">pacbio</a>
+              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffcce5; --color-darker: #ffa7d5; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged pacbio">pacbio</a>
               
             
             </div>
@@ -3226,11 +3205,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=polishing" class="label label-default tutorial_tag" style="--color-primary: #ffc0de; --color-darker: #ff9bcf; --color-dimmed: #ffaed6;" title="Click to show all tutorials tagged polishing">polishing</a>
+              <a href="/training-material/search?query=polishing" class="label label-default tutorial_tag" style="--color-primary: #ffcce4; --color-darker: #ffa7d3; --color-dimmed: #ffbadc;" title="Click to show all tutorials tagged polishing">polishing</a>
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
             
             </div>
@@ -3451,11 +3430,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=polishing" class="label label-default tutorial_tag" style="--color-primary: #ffc0de; --color-darker: #ff9bcf; --color-dimmed: #ffaed6;" title="Click to show all tutorials tagged polishing">polishing</a>
+              <a href="/training-material/search?query=polishing" class="label label-default tutorial_tag" style="--color-primary: #ffcce4; --color-darker: #ffa7d3; --color-dimmed: #ffbadc;" title="Click to show all tutorials tagged polishing">polishing</a>
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
             
             </div>
@@ -3676,7 +3655,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d3ccff; --color-darker: #bdb0ff; --color-dimmed: #c8beff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #dbd5ff; --color-darker: #c4b9ff; --color-dimmed: #cfc7ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
             
             </div>
@@ -3849,7 +3828,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #d3ccff; --color-darker: #bdb0ff; --color-dimmed: #c8beff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
+              <a href="/training-material/search?query=prokaryote" class="label label-default tutorial_tag" style="--color-primary: #dbd5ff; --color-darker: #c4b9ff; --color-dimmed: #cfc7ff;" title="Click to show all tutorials tagged prokaryote">prokaryote</a>
               
             
             </div>
@@ -4082,7 +4061,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffbfe3; --color-darker: #ff9ad6; --color-dimmed: #ffaddd;" title="Click to show all tutorials tagged covid19">covid19</a>
+              <a href="/training-material/search?query=covid19" class="label label-default tutorial_tag" style="--color-primary: #ffcbe8; --color-darker: #ffa6db; --color-dimmed: #ffb9e1;" title="Click to show all tutorials tagged covid19">covid19</a>
               
             
             </div>
@@ -4373,11 +4352,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffc0df; --color-darker: #ff9bd0; --color-dimmed: #ffaed7;" title="Click to show all tutorials tagged pacbio">pacbio</a>
+              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffcce5; --color-darker: #ffa7d5; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged pacbio">pacbio</a>
               
-              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #53f000; --color-darker: #49d500; --color-dimmed: #4ee200;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
+              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #57f900; --color-darker: #4dde00; --color-dimmed: #52ec00;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
               
-              <a href="/training-material/search?query=VGP" class="label label-default tutorial_tag" style="--color-primary: #ffc696; --color-darker: #ffa822; --color-dimmed: #ffb76d;" title="Click to show all tutorials tagged VGP">VGP</a>
+              <a href="/training-material/search?query=VGP" class="label label-default tutorial_tag" style="--color-primary: #ffd1ad; --color-darker: #ffb25a; --color-dimmed: #ffc28a;" title="Click to show all tutorials tagged VGP">VGP</a>
               
             
             </div>
@@ -4550,11 +4529,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffc0df; --color-darker: #ff9bd0; --color-dimmed: #ffaed7;" title="Click to show all tutorials tagged pacbio">pacbio</a>
+              <a href="/training-material/search?query=pacbio" class="label label-default tutorial_tag" style="--color-primary: #ffcce5; --color-darker: #ffa7d5; --color-dimmed: #ffbadd;" title="Click to show all tutorials tagged pacbio">pacbio</a>
               
-              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #53f000; --color-darker: #49d500; --color-dimmed: #4ee200;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
+              <a href="/training-material/search?query=eukaryote" class="label label-default tutorial_tag" style="--color-primary: #57f900; --color-darker: #4dde00; --color-dimmed: #52ec00;" title="Click to show all tutorials tagged eukaryote">eukaryote</a>
               
-              <a href="/training-material/search?query=VGP" class="label label-default tutorial_tag" style="--color-primary: #ffc696; --color-darker: #ffa822; --color-dimmed: #ffb76d;" title="Click to show all tutorials tagged VGP">VGP</a>
+              <a href="/training-material/search?query=VGP" class="label label-default tutorial_tag" style="--color-primary: #ffd1ad; --color-darker: #ffb25a; --color-dimmed: #ffc28a;" title="Click to show all tutorials tagged VGP">VGP</a>
               
             
             </div>
@@ -4749,13 +4728,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #aad6ff; --color-darker: #6ec2ff; --color-dimmed: #8fccff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
+              <a href="/training-material/search?query=nanopore" class="label label-default tutorial_tag" style="--color-primary: #bcdeff; --color-darker: #84c9ff; --color-dimmed: #a2d3ff;" title="Click to show all tutorials tagged nanopore">nanopore</a>
               
-              <a href="/training-material/search?query=plasmids" class="label label-default tutorial_tag" style="--color-primary: #00edb4; --color-darker: #00d3a0; --color-dimmed: #00e0aa;" title="Click to show all tutorials tagged plasmids">plasmids</a>
+              <a href="/training-material/search?query=plasmids" class="label label-default tutorial_tag" style="--color-primary: #00f7bb; --color-darker: #00dca6; --color-dimmed: #00e9b0;" title="Click to show all tutorials tagged plasmids">plasmids</a>
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #c1d1ff; --color-darker: #9eb9ff; --color-dimmed: #afc5ff;" title="Click to show all tutorials tagged amr">amr</a>
+              <a href="/training-material/search?query=amr" class="label label-default tutorial_tag" style="--color-primary: #cdd9ff; --color-darker: #a9c1ff; --color-dimmed: #bbcdff;" title="Click to show all tutorials tagged amr">amr</a>
               
             
             </div>
@@ -4986,9 +4965,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
             
             
               
-              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffbfe2; --color-darker: #ff9ad4; --color-dimmed: #ffaddb;" title="Click to show all tutorials tagged assembly">assembly</a>
+              <a href="/training-material/search?query=assembly" class="label label-default tutorial_tag" style="--color-primary: #ffcbe7; --color-darker: #ffa7d8; --color-dimmed: #ffb9df;" title="Click to show all tutorials tagged assembly">assembly</a>
               
-              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #edd200; --color-darker: #d3bb00; --color-dimmed: #e0c600;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
+              <a href="/training-material/search?query=metagenomics" class="label label-default tutorial_tag" style="--color-primary: #f7da00; --color-darker: #dbc200; --color-dimmed: #e9ce00;" title="Click to show all tutorials tagged metagenomics">metagenomics</a>
               
             
             </div>
@@ -5204,6 +5183,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 </section>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
     </body>
 </html>

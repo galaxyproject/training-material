@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -383,7 +362,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -475,7 +454,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -647,8 +626,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                 
                     
                         
-                    
-                        
                             
                             <li> Quality Control:
                             
@@ -669,9 +646,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                     
                         
                     
-                
-                    
                         
+                    
+                
                     
                         
                     
@@ -688,6 +665,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -729,24 +708,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                         
                     
                         
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
-                    
-                        
                             
                             <li> Using dataset collections:
                             
@@ -756,6 +717,24 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                         
@@ -794,8 +773,6 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                         
                     
                         
-                    
-                        
                             
                             <li> From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis:
                             
@@ -805,6 +782,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -1221,7 +1200,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
 
       <ol>
         <li>Copy the links above</li>
-        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> Manager</li>
+        <li>Open the <span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> Manager</li>
         <li>In the top row of tabs select <strong>Collection</strong></li>
         <li>Configure the drop-down select boxes on that tab like this:
           <ul>
@@ -1289,13 +1268,13 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
 
       <ol>
         <li>
-          <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
+          <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
 
           <!--SNIPPET-->
           <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
           <p><!--END_SNIPPET--></p>
         </li>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="link"><strong>Replace Text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span> to simplify the reference sequence name
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> to simplify the reference sequence name
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the uploaded reference sequence from the ENA</li>
             <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Replacement”</em>:
@@ -1318,7 +1297,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
       </ol>
     </li>
     <li>
-      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="link"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the mapping for translation product identifiers in tabular format</p>
+      <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the mapping for translation product identifiers in tabular format</p>
 
       <p>This mapping really consists of just a few lines of text. Each line lists the NCBI Protein Refseq identifier of a SARS-CoV-2 translation product (which the tool SnpEff knows about and will use for annotating mutation effects), followed by a more commonly used name for that product (which we would like to see in final mutation reports). The last line specifies a “mapping” for the <strong>.</strong> annotation, which SnpEff uses for mutations that do not affect any viral open-reading frame. We do not have a better name for it so we specify that we want to retain this annotation unaltered in reports.</p>
 
@@ -2093,7 +2072,7 @@ The small cluster at the bottom of the plot consists of only two samples, the cl
         <p>What about the mutations that seem to be unique to <strong>SRR17051933</strong> from the plot?
 We can obtain a nice tabular report of them by filtering the <strong>Combined Variant Report by Variant</strong>.</p>
 
-        <p>Run <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="link"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span> with</p>
+        <p>Run <span class="tool" data-tool="Filter1" title="Filter data on any column using simple expressions tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter data on any column using simple expressions</strong></span> with</p>
 
         <ul>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <strong>Combined Variant Report by Variant</strong></li>
@@ -2230,7 +2209,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
   <div class="box-title hands-on-title" id="hands-on-reporting-masked-positions-in-consensus-sequences"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Reporting masked positions in consensus sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="link"><strong>Fasta regular expression finder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0" title="Fasta regular expression finder tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Fasta regular expression finder</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input”</em>: <code class="language-plaintext highlighter-rouge">Consensus sequence with masking</code> collection produced by the last workflow run</li>
         <li>
@@ -2310,7 +2289,7 @@ This means there is no objective basis for thinking that these samples represent
   <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-pangolin"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From consensus sequences to clade assignments using Pangolin</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0" title="Pangolin tool" aria-role="link"><strong>Pangolin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0" title="Pangolin tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Pangolin</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.2+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
         <li><em>“Include header line in output file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -2327,7 +2306,7 @@ This means there is no objective basis for thinking that these samples represent
 <blockquote class="question">
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-  <p>Can you configure the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> to produce a three-column lineage summary from the pangolin output, in which each line lists:</p>
+  <p>Can you configure the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> to produce a three-column lineage summary from the pangolin output, in which each line lists:</p>
   <ul>
     <li>one of the assigned lineages (from column 2 of the pangolin output) on the first column,</li>
     <li>how many samples had that lineage assigned on the second column, and</li>
@@ -2337,7 +2316,7 @@ This means there is no objective basis for thinking that these samples represent
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> like this:</p>
+    <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> like this:</p>
     <ul>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: the output of pangolin</li>
       <li>
@@ -2438,7 +2417,7 @@ Several possibilities exist:</p>
   <div class="box-title hands-on-title" id="hands-on-from-consensus-sequences-to-clade-assignments-using-nextclade"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: From consensus sequences to clade assignments using Nextclade</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0" title="Nextclade tool" aria-role="link"><strong>Nextclade</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0</span></span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0" title="Nextclade tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Nextclade</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.7.0+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file with input sequences”</em>: <code class="language-plaintext highlighter-rouge">Multisample consensus FASTA</code></li>
         <li><em>“Version of database to use”</em>: <code class="language-plaintext highlighter-rouge">Download latest available database version from web</code></li>
@@ -2463,14 +2442,14 @@ Several possibilities exist:</p>
 <blockquote class="question">
   <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
-  <p>Can you configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> to produce a report summarizing the Nextclade results by <code class="language-plaintext highlighter-rouge">Nextclade_pango</code> (column 3 of Nextclade’s output) for direct comparison to the pangolin results summary?</p>
+  <p>Can you configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> to produce a report summarizing the Nextclade results by <code class="language-plaintext highlighter-rouge">Nextclade_pango</code> (column 3 of Nextclade’s output) for direct comparison to the pangolin results summary?</p>
 
   <p>This report should include the corresponding info from the <code class="language-plaintext highlighter-rouge">clade</code> column (column 2, which is Nextclade’s native classification system) and from the <code class="language-plaintext highlighter-rouge">clade_who</code> (column 6), together with the sample counts and identifiers as previously calculated from pangolin’s output.</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="link"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0</span></span> like this:</p>
+    <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> like this:</p>
     <ul>
       <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: the output of Nextclade</li>
       <li>
@@ -2763,7 +2742,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2795,7 +2774,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

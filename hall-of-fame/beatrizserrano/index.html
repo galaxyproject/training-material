@@ -6,63 +6,42 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>GTN Contributor: Beatriz Serrano-Solano</title>
         
-            <!--
-<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
--->
-<!-- We let users opt-out, so if they've opted in, we need to append the plausible script to the body -->
-
-<script>
-var scriptElement = document.createElement("script");
-scriptElement.async = true;
-scriptElement.defer = true;
-scriptElement.setAttribute("data-domain", "training.galaxyproject.org");
-scriptElement.src = "https://plausible.galaxyproject.eu/js/plausible.js";
-
-// Appending the script element to the body
-if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
-	console.log("Plausible: opt-in");
-	// Wait for the document to be available
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-}
-</script>
-
-<!-- JavaScript Error Monitoring, and performance tracking. -->
-<!--
+            <!-- JavaScript Error Monitoring, and performance tracking. -->
 <script
   src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
   integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
   crossorigin="anonymous"
 ></script>
--->
 <script type="text/javascript">
-var scriptElement = document.createElement("script");
-scriptElement.src = "https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js";
-scriptElement.integrity = "sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43";
-scriptElement.crossOrigin = "anonymous";
-
 if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
 	console.log("Sentry: opt-in");
-	// Appending the script element to the body
-	document.addEventListener("DOMContentLoaded", function(event) {
-		document.body.appendChild(scriptElement);
-	});
-		
 	Sentry.init({
-	  dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-	  release: "galaxy-training-network@e6fda7bf33d4162d693c257dff7ab6b13cac6485",
-	  integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
-	  sampleRate: 0.1,
-	  tracesSampleRate: 0.1,
-	  // Capture Replay for no sessions by default
-	  replaysSessionSampleRate: 0.01,
-	  // plus for 1% of sessions with an error
-	  replaysOnErrorSampleRate: 0.01,
-	  // PII OFF
-	  sendDefaultPii: false, // Off by default but just in case.
-	  environment: "production",
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
 	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
 }
 </script>
 
@@ -76,8 +55,8 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698828484' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698828484' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -103,7 +82,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -187,7 +166,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
         
 
 		<a href="/training-material/preferences.html" class="dropdown-item">
-			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Themes have moved <span class="badge badge-secondary">New</span>
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
 		</a>
 
         <div class="dropdown-item">
@@ -393,29 +372,12 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/imaging">
-							Imaging
+						<a href="/training-material/topics/transcriptomics">
+							Transcriptomics
 						</a>
 						/
-						<a href="/training-material//topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">
-						Object tracking using CellProfiler
-						</a>
-						
-						
-	
-
-
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/imaging">
-							Imaging
-						</a>
-						/
-						<a href="/training-material//topics/imaging/tutorials/tutorial-CP/tutorial.html">
-						Nucleoli segmentation and feature extraction using CellProfiler
+						<a href="/training-material//topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">
+						Whole transcriptome analysis of Arabidopsis thaliana
 						</a>
 						
 						
@@ -444,12 +406,29 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 					<li>
 						
 						
-						<a href="/training-material/topics/transcriptomics">
-							Transcriptomics
+						<a href="/training-material/topics/imaging">
+							Imaging
 						</a>
 						/
-						<a href="/training-material//topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">
-						Whole transcriptome analysis of Arabidopsis thaliana
+						<a href="/training-material//topics/imaging/tutorials/tutorial-CP/tutorial.html">
+						Nucleoli segmentation and feature extraction using CellProfiler
+						</a>
+						
+						
+	
+
+
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/imaging">
+							Imaging
+						</a>
+						/
+						<a href="/training-material//topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">
+						Object tracking using CellProfiler
 						</a>
 						
 						
@@ -562,9 +541,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cfcdff; --color-darker: #b6b3ff; --color-dimmed: #c2c0ff;">new topic</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #d7d6ff; --color-darker: #bdbbff; --color-dimmed: #cac9ff;">new topic</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbdf1; --color-darker: #ff96eb; --color-dimmed: #ffaaee;">new community</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcaf4; --color-darker: #ffa3ed; --color-dimmed: #ffb7f0;">new community</span>
 
     <hr/>
     <p class="card-text">
@@ -632,9 +611,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00eadf; --color-darker: #00d0c6; --color-dimmed: #00ddd2;">español</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f3e8; --color-darker: #00d8ce; --color-dimmed: #00e6db;">español</span>
 
     <hr/>
     <p class="card-text">
@@ -703,13 +682,13 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #e6d400; --color-darker: #cdbd00; --color-dimmed: #dac800;">transcriptomics</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #efdd00; --color-darker: #d5c400; --color-dimmed: #e2d000;">transcriptomics</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #6ced00; --color-darker: #60d300; --color-dimmed: #66e000;">plants</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #71f700; --color-darker: #64dc00; --color-dimmed: #6ae900;">plants</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbee6; --color-darker: #ff99db; --color-dimmed: #fface0;">mirna</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbea; --color-darker: #ffa6de; --color-dimmed: #ffb9e4;">mirna</span>
 
     <hr/>
     <p class="card-text">
@@ -778,11 +757,11 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #00ead8; --color-darker: #00d1c0; --color-dimmed: #00decc;">single-cell</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #00f4e1; --color-darker: #00d9c8; --color-dimmed: #00e6d4;">single-cell</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #dcc9ff; --color-darker: #caacff; --color-dimmed: #d3baff;">plant</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #e2d3ff; --color-darker: #d0b5ff; --color-dimmed: #d8c4ff;">plant</span>
 
     <hr/>
     <p class="card-text">
@@ -851,9 +830,9 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 
 
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffc793; --color-darker: #ffa801; --color-dimmed: #ffb769;">new tutorial</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffd1ab; --color-darker: #ffb254; --color-dimmed: #ffc287;">new tutorial</span>
 
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbfe5; --color-darker: #ff9ad9; --color-dimmed: #ffaddf;">imaging</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffcbea; --color-darker: #ffa6dd; --color-dimmed: #ffb9e3;">imaging</span>
 
     <hr/>
     <p class="card-text">
@@ -887,11 +866,7 @@ var topics = [
 
 	
 	
-	"Imaging",
-
-	
-	
-	"Imaging",
+	"Transcriptomics",
 
 	
 	
@@ -899,7 +874,11 @@ var topics = [
 
 	
 	
-	"Transcriptomics",
+	"Imaging",
+
+	
+	
+	"Imaging",
 
 	
 	
@@ -1029,7 +1008,7 @@ var chart2 = new Chart(ctx2, {
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e6fda7bf33d4162d693c257dff7ab6b13cac6485">e6fda7b</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1057,7 +1036,7 @@ var chart2 = new Chart(ctx2, {
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698828484'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
