@@ -45,6 +45,219 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry imaging: Finding differential analytes",
+      "zenodo_link": "https://zenodo.org/record/2628280",
+      "level": "Intermediate",
+      "questions": [
+        "Can N-linked glycans from FFPE tissues be detected by MALDI imaging?",
+        "Can potential N-linked glycans be identified by an additional LC-MS/MS experiment?",
+        "Do specific kidney compartments have different N-linked glycan compositions?"
+      ],
+      "objectives": [
+        "Combining MSI datasets while using the information about each subfile in further steps.",
+        "Preprocessing raw MSI data.",
+        "Performing supervised and unsupervised statistical analysis."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Several files can be combined and the spectra used to obtain the annotation of their original file.",
+        "Preprocessing reduces the file size and can improve further analysis steps.",
+        "Unsupervised and supervised statistical analysis can reveal analytes with different abundances.",
+        "The spatial distribution of N-glycans in a tissue section can be measured by MALDI imaging.",
+        "Additional LC-MS/MS experiments enable the identification of N-glycans measured by MSI.",
+        "Some N-glycans are located to specific kidney compartments."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "proteomics",
+          "tutorials": [
+            "mass-spectrometry-imaging-loading-exploring-data"
+          ]
+        }
+      ],
+      "contributors": [
+        {
+          "name": "Melanie Föll",
+          "email": "melanie.foell@mol-med.uni-freiburg.de",
+          "twitter": "MCFoell",
+          "matrix": "foellmelanie:matrix.org",
+          "orcid": "0000-0002-1887-7543",
+          "joined": "2018-10",
+          "elixir_node": "de",
+          "id": "foellmelanie",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        }
+      ],
+      "short_id": "T00199",
+      "url": "/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.html",
+      "topic_name": "metabolomics",
+      "tutorial_name": "msi-finding-nglycans",
+      "dir": "topics/metabolomics/tutorials/msi-finding-nglycans",
+      "id": "metabolomics/msi-finding-nglycans",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "msi-finding-diff-analytes.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/msi-finding-nglycans/workflows/msi-finding-diff-analytes.ga",
+          "path": "topics/metabolomics/tutorials/msi-finding-nglycans/workflows/msi-finding-diff-analytes.ga",
+          "wfid": "metabolomics-msi-finding-nglycans",
+          "wfname": "msi-finding-diff-analytes",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json",
+      "tools": [
+        "Filter1",
+        "Grep1",
+        "Summary_Statistics1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Metabolomics",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "join_files_on_column_fuzzy",
+            "owner": "bgruening",
+            "revisions": "22ec3c1a20cd",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_classification",
+            "owner": "galaxyp",
+            "revisions": "b574b84afc4d",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_combine",
+            "owner": "galaxyp",
+            "revisions": "48c07268f341",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_mz_images",
+            "owner": "galaxyp",
+            "revisions": "25b83cbd596a",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_preprocessing",
+            "owner": "galaxyp",
+            "revisions": "ed9ed1e6cca2",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_quality_report",
+            "owner": "galaxyp",
+            "revisions": "3b7a35d50ebf",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cardinal_segmentations",
+            "owner": "galaxyp",
+            "revisions": "82f6c2f4332d",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "maldi_quant_peak_detection",
+            "owner": "galaxyp",
+            "revisions": "e9300ef37403",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "maldi_quant_preprocessing",
+            "owner": "galaxyp",
+            "revisions": "71411ac28268",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: join_files_on_column_fuzzy\n  owner: bgruening\n  revisions: 22ec3c1a20cd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_classification\n  owner: galaxyp\n  revisions: b574b84afc4d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_combine\n  owner: galaxyp\n  revisions: 48c07268f341\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: 25b83cbd596a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_preprocessing\n  owner: galaxyp\n  revisions: ed9ed1e6cca2\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_quality_report\n  owner: galaxyp\n  revisions: 3b7a35d50ebf\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_segmentations\n  owner: galaxyp\n  revisions: 82f6c2f4332d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: maldi_quant_peak_detection\n  owner: galaxyp\n  revisions: e9300ef37403\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: maldi_quant_preprocessing\n  owner: galaxyp\n  revisions: 71411ac28268\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Mass spectrometry: LC-MS analysis",
       "zenodo_link": "https://zenodo.org/record/3244991",
       "questions": [
@@ -293,36 +506,26 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Mass spectrometry imaging: Finding differential analytes",
-      "zenodo_link": "https://zenodo.org/record/2628280",
-      "level": "Intermediate",
+      "title": "Mass spectrometry imaging: Examining the spatial distribution of analytes",
+      "zenodo_link": "https://zenodo.org/record/484496",
+      "level": "Introductory",
       "questions": [
-        "Can N-linked glycans from FFPE tissues be detected by MALDI imaging?",
-        "Can potential N-linked glycans be identified by an additional LC-MS/MS experiment?",
-        "Do specific kidney compartments have different N-linked glycan compositions?"
+        "What is the typical mass range of VOCs?",
+        "In which compartments of the chilli are the measured VOCs located?",
+        "In which compartment of the chilli is the capsaicin located?"
       ],
       "objectives": [
-        "Combining MSI datasets while using the information about each subfile in further steps.",
-        "Preprocessing raw MSI data.",
-        "Performing supervised and unsupervised statistical analysis."
+        "Plot average mass spectra and overlaid mass spectra of single spectra.",
+        "Filter MSI data for a specific m/z range.",
+        "Automatic generation of many m/z images.",
+        "Overlay the distribution of several m/z in one image."
       ],
-      "time_estimation": "2H",
+      "time_estimation": "1H",
       "key_points": [
-        "Several files can be combined and the spectra used to obtain the annotation of their original file.",
-        "Preprocessing reduces the file size and can improve further analysis steps.",
-        "Unsupervised and supervised statistical analysis can reveal analytes with different abundances.",
-        "The spatial distribution of N-glycans in a tissue section can be measured by MALDI imaging.",
-        "Additional LC-MS/MS experiments enable the identification of N-glycans measured by MSI.",
-        "Some N-glycans are located to specific kidney compartments."
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "proteomics",
-          "tutorials": [
-            "mass-spectrometry-imaging-loading-exploring-data"
-          ]
-        }
+        "Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment-specific peaks.",
+        "MSI data can be filtered for m/z ranges of interest to speed up analysis time.",
+        "Distribution images for many analytes can be automatically generated with the MSI m/z image tool.",
+        "The MSI m/z image tools allow overlaying the distribution images for several analytes."
       ],
       "contributors": [
         {
@@ -336,14 +539,21 @@
           "id": "foellmelanie",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+        },
+        {
+          "name": "Maren Stillger",
+          "joined": "2020-10",
+          "id": "MarenStillger",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarenStillger.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarenStillger/"
         }
       ],
-      "short_id": "T00199",
-      "url": "/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.html",
+      "short_id": "T00198",
+      "url": "/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html",
       "topic_name": "metabolomics",
-      "tutorial_name": "msi-finding-nglycans",
-      "dir": "topics/metabolomics/tutorials/msi-finding-nglycans",
-      "id": "metabolomics/msi-finding-nglycans",
+      "tutorial_name": "msi-analyte-distribution",
+      "dir": "topics/metabolomics/tutorials/msi-analyte-distribution",
+      "id": "metabolomics/msi-analyte-distribution",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -355,13 +565,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "msi-finding-diff-analytes.ga",
+          "workflow": "wf_MSI_distribution.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/msi-finding-nglycans/workflows/msi-finding-diff-analytes.ga",
-          "path": "topics/metabolomics/tutorials/msi-finding-nglycans/workflows/msi-finding-diff-analytes.ga",
-          "wfid": "metabolomics-msi-finding-nglycans",
-          "wfname": "msi-finding-diff-analytes",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes",
+          "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/workflows/wf_MSI_distribution.ga",
+          "path": "topics/metabolomics/tutorials/msi-analyte-distribution/workflows/wf_MSI_distribution.ga",
+          "wfid": "metabolomics-msi-analyte-distribution",
+          "wfname": "wf_msi_distribution",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-analyte-distribution/versions/wf_msi_distribution",
           "license": null,
           "creators": [
 
@@ -369,28 +579,19 @@
           "test_results": null
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json",
       "tools": [
         "Filter1",
-        "Grep1",
-        "Summary_Statistics1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3"
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3"
       ],
       "supported_servers": {
         "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
           {
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
@@ -398,6 +599,16 @@
           }
         ],
         "inexact": [
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
@@ -422,71 +633,57 @@
         "install_resolver_dependencies": true,
         "tools": [
           {
-            "name": "join_files_on_column_fuzzy",
-            "owner": "bgruening",
-            "revisions": "22ec3c1a20cd",
+            "name": "cardinal_data_exporter",
+            "owner": "galaxyp",
+            "revisions": "4fbffddde8cd",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "cardinal_classification",
+            "name": "cardinal_filtering",
             "owner": "galaxyp",
-            "revisions": "b574b84afc4d",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_combine",
-            "owner": "galaxyp",
-            "revisions": "48c07268f341",
+            "revisions": "b8c79e70516d",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "cardinal_mz_images",
             "owner": "galaxyp",
-            "revisions": "25b83cbd596a",
+            "revisions": "daf2ee9127fd",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "cardinal_preprocessing",
+            "name": "cardinal_mz_images",
             "owner": "galaxyp",
-            "revisions": "ed9ed1e6cca2",
+            "revisions": "59e85306eae5",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "cardinal_quality_report",
             "owner": "galaxyp",
-            "revisions": "3b7a35d50ebf",
+            "revisions": "5a35e3a8d013",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "cardinal_segmentations",
+            "name": "cardinal_spectra_plots",
             "owner": "galaxyp",
-            "revisions": "82f6c2f4332d",
+            "revisions": "d2596e1be091",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
-            "name": "maldi_quant_peak_detection",
+            "name": "cardinal_spectra_plots",
             "owner": "galaxyp",
-            "revisions": "e9300ef37403",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "maldi_quant_preprocessing",
-            "owner": "galaxyp",
-            "revisions": "71411ac28268",
+            "revisions": "1693b2126f30",
             "tool_panel_section_label": "Metabolomics",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: join_files_on_column_fuzzy\n  owner: bgruening\n  revisions: 22ec3c1a20cd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_classification\n  owner: galaxyp\n  revisions: b574b84afc4d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_combine\n  owner: galaxyp\n  revisions: 48c07268f341\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: 25b83cbd596a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_preprocessing\n  owner: galaxyp\n  revisions: ed9ed1e6cca2\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_quality_report\n  owner: galaxyp\n  revisions: 3b7a35d50ebf\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_segmentations\n  owner: galaxyp\n  revisions: 82f6c2f4332d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: maldi_quant_peak_detection\n  owner: galaxyp\n  revisions: e9300ef37403\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: maldi_quant_preprocessing\n  owner: galaxyp\n  revisions: 71411ac28268\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cardinal_data_exporter\n  owner: galaxyp\n  revisions: 4fbffddde8cd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_filtering\n  owner: galaxyp\n  revisions: b8c79e70516d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: daf2ee9127fd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: 59e85306eae5\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_quality_report\n  owner: galaxyp\n  revisions: 5a35e3a8d013\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_spectra_plots\n  owner: galaxyp\n  revisions: d2596e1be091\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_spectra_plots\n  owner: galaxyp\n  revisions: 1693b2126f30\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -500,8 +697,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json"
       }
     },
     {
@@ -789,55 +986,39 @@
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "Mass spectrometry imaging: Examining the spatial distribution of analytes",
-      "zenodo_link": "https://zenodo.org/record/484496",
-      "level": "Introductory",
-      "questions": [
-        "What is the typical mass range of VOCs?",
-        "In which compartments of the chilli are the measured VOCs located?",
-        "In which compartment of the chilli is the capsaicin located?"
-      ],
-      "objectives": [
-        "Plot average mass spectra and overlaid mass spectra of single spectra.",
-        "Filter MSI data for a specific m/z range.",
-        "Automatic generation of many m/z images.",
-        "Overlay the distribution of several m/z in one image."
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Average and annotated mass spectra show the relevant m/z range of the dataset and different compartment-specific peaks.",
-        "MSI data can be filtered for m/z ranges of interest to speed up analysis time.",
-        "Distribution images for many analytes can be automatically generated with the MSI m/z image tool.",
-        "The MSI m/z image tools allow overlaying the distribution images for several analytes."
+      "layout": "introduction_slides",
+      "logo": "GTN",
+      "title": "Introduction to Metabolomics",
+      "priority": 1,
+      "redirect_from": [
+        "/topics/metabolomics/slides/introduction",
+        "/short/metabolomics/introduction/slides",
+        "/short/S00076"
       ],
       "contributors": [
         {
-          "name": "Melanie Föll",
-          "email": "melanie.foell@mol-med.uni-freiburg.de",
-          "twitter": "MCFoell",
-          "matrix": "foellmelanie:matrix.org",
-          "orcid": "0000-0002-1887-7543",
-          "joined": "2018-10",
-          "elixir_node": "de",
-          "id": "foellmelanie",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/foellmelanie.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/"
+          "name": "Gildas Le Corguillé",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "id": "lecorguille",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/"
         },
         {
-          "name": "Maren Stillger",
-          "joined": "2020-10",
-          "id": "MarenStillger",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarenStillger.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarenStillger/"
+          "name": "Cécile Canlet",
+          "github": false,
+          "joined": "2018-09",
+          "id": "cecilecanlet",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/cecilecanlet.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cecilecanlet/"
         }
       ],
-      "short_id": "T00198",
-      "url": "/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.html",
+      "short_id": "S00076",
+      "url": "/topics/metabolomics/tutorials/introduction/slides.html",
       "topic_name": "metabolomics",
-      "tutorial_name": "msi-analyte-distribution",
-      "dir": "topics/metabolomics/tutorials/msi-analyte-distribution",
-      "id": "metabolomics/msi-analyte-distribution",
+      "tutorial_name": "introduction",
+      "dir": "topics/metabolomics/tutorials/introduction",
+      "id": "metabolomics/introduction",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -845,68 +1026,31 @@
         "both": null,
         "session": null
       },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "wf_MSI_distribution.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/msi-analyte-distribution/workflows/wf_MSI_distribution.ga",
-          "path": "topics/metabolomics/tutorials/msi-analyte-distribution/workflows/wf_MSI_distribution.ga",
-          "wfid": "metabolomics-msi-analyte-distribution",
-          "wfname": "wf_msi_distribution",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-analyte-distribution/versions/wf_msi_distribution",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json",
+      "hands_on": false,
+      "slides": true,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/tutorial.json",
       "tools": [
-        "Filter1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.2",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.3"
+
       ],
       "supported_servers": {
         "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
+
         ],
         "inexact": [
           {
-            "url": "https://galaxy.hyphy.org/",
-            "name": "HyPhy HIV NGS Tools",
-            "usegalaxy": "false"
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "usegalaxy": true
           },
           {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "usegalaxy": true
           },
           {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
+            "url": "https://usegalaxy.org.au",
+            "usegalaxy": true
           }
         ]
       },
@@ -916,58 +1060,10 @@
         "install_repository_dependencies": true,
         "install_resolver_dependencies": true,
         "tools": [
-          {
-            "name": "cardinal_data_exporter",
-            "owner": "galaxyp",
-            "revisions": "4fbffddde8cd",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_filtering",
-            "owner": "galaxyp",
-            "revisions": "b8c79e70516d",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_mz_images",
-            "owner": "galaxyp",
-            "revisions": "daf2ee9127fd",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_mz_images",
-            "owner": "galaxyp",
-            "revisions": "59e85306eae5",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_quality_report",
-            "owner": "galaxyp",
-            "revisions": "5a35e3a8d013",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_spectra_plots",
-            "owner": "galaxyp",
-            "revisions": "d2596e1be091",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cardinal_spectra_plots",
-            "owner": "galaxyp",
-            "revisions": "1693b2126f30",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
+
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: cardinal_data_exporter\n  owner: galaxyp\n  revisions: 4fbffddde8cd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_filtering\n  owner: galaxyp\n  revisions: b8c79e70516d\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: daf2ee9127fd\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_mz_images\n  owner: galaxyp\n  revisions: 59e85306eae5\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_quality_report\n  owner: galaxyp\n  revisions: 5a35e3a8d013\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_spectra_plots\n  owner: galaxyp\n  revisions: d2596e1be091\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cardinal_spectra_plots\n  owner: galaxyp\n  revisions: 1693b2126f30\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -981,8 +1077,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/msi-analyte-distribution/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/slides.json"
       }
     },
     {
@@ -1203,39 +1299,47 @@
       }
     },
     {
-      "layout": "introduction_slides",
-      "logo": "GTN",
-      "title": "Introduction to Metabolomics",
-      "priority": 1,
-      "redirect_from": [
-        "/topics/metabolomics/slides/introduction",
-        "/short/metabolomics/introduction/slides",
-        "/short/S00076"
+      "layout": "tutorial_hands_on",
+      "title": "Mass spectrometry: LC-MS data processing",
+      "zenodo_link": "https://zenodo.org/record/5179809",
+      "level": "Introductory",
+      "questions": [
+        "Why should one consider performing data processing steps when dealing with Metabolomics data?",
+        "How to conduct LCMS-based untargeted metabolomic data processing using Galaxy?"
+      ],
+      "objectives": [
+        "To comprehend the key role of data processing.",
+        "To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.",
+        "To be familiar with the \"identify then perform\" approach necessary to deploy relevant data processing strategies."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Data processing is a key step in untargeted Metabolomics analyses. The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. In particular, blank filtering, pool variation study and signal drift correction are common aspects to consider when dealing with LC-MS.",
+        "Although some main steps are standard, various ways to combine tools exist. Remember that depending on your context (type of samples, protocol specificities...) specific filters/normalisations may be needed, independently of standards ones.",
+        "A variety of tools is available in Galaxy, but do not forget that you need appropriate knowledge to decide what to use depending on your data."
       ],
       "contributors": [
         {
-          "name": "Gildas Le Corguillé",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "id": "lecorguille",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/"
+          "name": "Mélanie Petera",
+          "joined": "2019-06",
+          "id": "melpetera",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/melpetera.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/melpetera/"
         },
         {
-          "name": "Cécile Canlet",
-          "github": false,
-          "joined": "2018-09",
-          "id": "cecilecanlet",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/cecilecanlet.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cecilecanlet/"
+          "name": "Workflow4Metabolomics core team",
+          "joined": "2019-06",
+          "id": "workflow4metabolomics",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/workflow4metabolomics.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/workflow4metabolomics/"
         }
       ],
-      "short_id": "S00076",
-      "url": "/topics/metabolomics/tutorials/introduction/slides.html",
+      "short_id": "T00196",
+      "url": "/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html",
       "topic_name": "metabolomics",
-      "tutorial_name": "introduction",
-      "dir": "topics/metabolomics/tutorials/introduction",
-      "id": "metabolomics/introduction",
+      "tutorial_name": "lcms-dataprocessing",
+      "dir": "topics/metabolomics/tutorials/lcms-dataprocessing",
+      "id": "metabolomics/lcms-dataprocessing",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1243,31 +1347,35 @@
         "both": null,
         "session": null
       },
-      "hands_on": false,
-      "slides": true,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/tutorial.json",
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json",
       "tools": [
-
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10",
+        "toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8",
+        "toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/normalization/normalization/1.0.7",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01",
+        "toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8"
       ],
       "supported_servers": {
         "exact": [
-
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
         ],
         "inexact": [
           {
-            "name": "UseGalaxy.eu",
             "url": "https://usegalaxy.eu",
-            "usegalaxy": true
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
           },
           {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "usegalaxy": true
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
           }
         ]
       },
@@ -1277,10 +1385,51 @@
         "install_repository_dependencies": true,
         "install_resolver_dependencies": true,
         "tools": [
-
+          {
+            "name": "multivariate",
+            "owner": "ethevenot",
+            "revisions": "5526f8258e8a",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "qualitymetrics",
+            "owner": "ethevenot",
+            "revisions": "acdf51018708",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "normalization",
+            "owner": "marie-tremblay-metatoul",
+            "revisions": "221cbd549c40",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "batchcorrection",
+            "owner": "melpetera",
+            "revisions": "23314e1192d4",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "generic_filter",
+            "owner": "melpetera",
+            "revisions": "cfd7c4aa5c26",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "intensity_checks",
+            "owner": "melpetera",
+            "revisions": "a31f3f802b2b",
+            "tool_panel_section_label": "Metabolomics",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: multivariate\n  owner: ethevenot\n  revisions: 5526f8258e8a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualitymetrics\n  owner: ethevenot\n  revisions: acdf51018708\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: normalization\n  owner: marie-tremblay-metatoul\n  revisions: 221cbd549c40\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: batchcorrection\n  owner: melpetera\n  revisions: 23314e1192d4\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: generic_filter\n  owner: melpetera\n  revisions: cfd7c4aa5c26\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intensity_checks\n  owner: melpetera\n  revisions: a31f3f802b2b\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "translations": {
@@ -1294,8 +1443,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/slides.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/introduction/slides.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json"
       }
     },
     {
@@ -1453,155 +1602,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/gcms/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/gcms/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Mass spectrometry: LC-MS data processing",
-      "zenodo_link": "https://zenodo.org/record/5179809",
-      "level": "Introductory",
-      "questions": [
-        "Why should one consider performing data processing steps when dealing with Metabolomics data?",
-        "How to conduct LCMS-based untargeted metabolomic data processing using Galaxy?"
-      ],
-      "objectives": [
-        "To comprehend the key role of data processing.",
-        "To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic data processing.",
-        "To be familiar with the \"identify then perform\" approach necessary to deploy relevant data processing strategies."
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "Data processing is a key step in untargeted Metabolomics analyses. The question of data filtering and correction must be addressed in all projects, even thought in some cases it may lead to the decision of no action on data. In particular, blank filtering, pool variation study and signal drift correction are common aspects to consider when dealing with LC-MS.",
-        "Although some main steps are standard, various ways to combine tools exist. Remember that depending on your context (type of samples, protocol specificities...) specific filters/normalisations may be needed, independently of standards ones.",
-        "A variety of tools is available in Galaxy, but do not forget that you need appropriate knowledge to decide what to use depending on your data."
-      ],
-      "contributors": [
-        {
-          "name": "Mélanie Petera",
-          "joined": "2019-06",
-          "id": "melpetera",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/melpetera.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/melpetera/"
-        },
-        {
-          "name": "Workflow4Metabolomics core team",
-          "joined": "2019-06",
-          "id": "workflow4metabolomics",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/workflow4metabolomics.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/workflow4metabolomics/"
-        }
-      ],
-      "short_id": "T00196",
-      "url": "/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html",
-      "topic_name": "metabolomics",
-      "tutorial_name": "lcms-dataprocessing",
-      "dir": "topics/metabolomics/tutorials/lcms-dataprocessing",
-      "id": "metabolomics/lcms-dataprocessing",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/ethevenot/multivariate/Multivariate/2.3.10",
-        "toolshed.g2.bx.psu.edu/repos/ethevenot/qualitymetrics/quality_metrics/2.2.8",
-        "toolshed.g2.bx.psu.edu/repos/marie-tremblay-metatoul/normalization/normalization/1.0.7",
-        "toolshed.g2.bx.psu.edu/repos/melpetera/batchcorrection/Batch_correction/3.0.0",
-        "toolshed.g2.bx.psu.edu/repos/melpetera/generic_filter/generic_filter/2020.01",
-        "toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Metabolomics",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "multivariate",
-            "owner": "ethevenot",
-            "revisions": "5526f8258e8a",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "qualitymetrics",
-            "owner": "ethevenot",
-            "revisions": "acdf51018708",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "normalization",
-            "owner": "marie-tremblay-metatoul",
-            "revisions": "221cbd549c40",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "batchcorrection",
-            "owner": "melpetera",
-            "revisions": "23314e1192d4",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "generic_filter",
-            "owner": "melpetera",
-            "revisions": "cfd7c4aa5c26",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "intensity_checks",
-            "owner": "melpetera",
-            "revisions": "a31f3f802b2b",
-            "tool_panel_section_label": "Metabolomics",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: multivariate\n  owner: ethevenot\n  revisions: 5526f8258e8a\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualitymetrics\n  owner: ethevenot\n  revisions: acdf51018708\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: normalization\n  owner: marie-tremblay-metatoul\n  revisions: 221cbd549c40\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: batchcorrection\n  owner: melpetera\n  revisions: 23314e1192d4\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: generic_filter\n  owner: melpetera\n  revisions: cfd7c4aa5c26\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: intensity_checks\n  owner: melpetera\n  revisions: a31f3f802b2b\n  tool_panel_section_label: Metabolomics\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.json"
       }
     }
   ]
