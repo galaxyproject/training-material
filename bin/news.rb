@@ -122,23 +122,27 @@ def format_news(news)
   output
 end
 
-def format_tutorials(added, modified, kind: 'tutorials')
+def format_tutorials(added, modified, kind: 'tutorials', updates: true)
   output = ''
-  output += "\n\n## #{added.length + modified.length} #{kind}!" if added.length.positive? || modified.length.positive?
+  count = added.length
+  if updates
+    count += modified.length
+  end
+  output += "\n\n## #{count} #{kind}!" if count.positive?
 
   if added.length.positive?
     output += "\n\nNew #{kind}:\n\n"
     output += added.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
 
-  if modified.length.positive?
+  if updates && modified.length.positive?
     output += "\n\nUpdated #{kind}:\n\n"
     output += modified.map { |n| n[:md] }.join("\n").gsub(/^/, '- ')
   end
   output
 end
 
-def build_news(data, filter: nil)
+def build_news(data, filter: nil, updates: true)
   infix = filter.nil? ? '' : titleize(filter)
   output = "# GTN #{infix} News for #{NOW.strftime('%b %d')}"
   newsworthy = false
@@ -150,7 +154,8 @@ def build_news(data, filter: nil)
 
   o = format_tutorials(
     data[:added][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
-    data[:modified][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} }
+    data[:modified][:tutorials].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
+    updates: updates
   )
 
   output += o
@@ -159,7 +164,8 @@ def build_news(data, filter: nil)
   o = format_tutorials(
     data[:added][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
     data[:modified][:slides].select { |n| filter.nil? || n[:path] =~ %r{topics/#{filter}} },
-    kind: 'slides'
+    kind: 'slides',
+    updates: updates
   )
   output += o
   newsworthy |= o.length.positive?
@@ -214,7 +220,9 @@ def send_news(output, options, channel: 'default')
       end
     end
   else
+    puts "=============="
     puts output
+    puts "=============="
   end
 end
 
@@ -224,5 +232,5 @@ if newsworthy
   send_news(output, options, channel: channel)
 end
 
-output, newsworthy = build_news(data, filter: 'single-cell')
+output, newsworthy = build_news(data, filter: 'single-cell', updates: false)
 send_news(output, options, channel: 'single-cell') if newsworthy
