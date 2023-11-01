@@ -1,4 +1,4 @@
---
+---
 layout: tutorial_hands_on
 title: Creating an Official Gene Set
 zenodo_link: ""
@@ -15,7 +15,7 @@ contributions:
   authorship:
   - abretaud
   funding:
-  - erasmusplus
+  - gallantries
 
 draft: true
 ---

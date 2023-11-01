@@ -14,7 +14,7 @@ contributions:
   authorship:
   - hexylena
   funding:
-  - erasmusplus
+  - gallantries
 requirements:
   - type: "internal"
     topic_name: contributing

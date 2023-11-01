@@ -23,7 +23,7 @@ contributions:
     - fpsom
     - hexylena
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
 **asynchronous training events**, i.e. MOOC style courses pair pre-recorded and written lesson materials with online participants following along at their own pace and convenience.
