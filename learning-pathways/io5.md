@@ -11,20 +11,20 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 5 - Train-the-Trainer and mentoring programme
 
+description: |
+  This Learning Pathway collects the results of Intellectual Output 5 in the Gallantries Project
+
 cover-image: ./shared/images/Gallantries_logo.png
 cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
 
 priority: 5
 draft: true
 
-
-
 pathway:
-
   - section: "Hybrid Lesson Development Guide"
     description: |
       Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
-    tutorials: []
+    tutorials:
     - name: create-new-tutorial-content
       topic: contributing
 

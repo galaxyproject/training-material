@@ -12,6 +12,9 @@ funding:
 
 title: Gallantries Grant - Intellectual Output 1 - Introduction to data analysis and -management, statistics, and coding
 
+description: |
+  This Learning Pathway collects the results of Intellectual Output 1 in the Gallantries Project
+
 cover-image: ./shared/images/Gallantries_logo.png
 cover-image-alt: "Gallantries logo with the carpentries wrench in galaxy 2 stripes 1 strip colour scheme."
 
