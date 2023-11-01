@@ -8,7 +8,7 @@ editorial_board:
 - hexylena
 - bebatut
 funding:
-- erasmusplus
+- gallantries
 
 title: Gallantries Grant - Intellectual Output 2 - Large-scale data analysis, and introduction to visualisation and data modelling
 
@@ -77,7 +77,7 @@ pathway:
 
   - section: "Year 2: Introduction to the Galaxy visualisation framework"
     description: |
-       ⚠️  **TODO** ⚠️ Galaxy has many options for visualisation of scientific data. This module will cover how to use this framework to create and share visualisation. [SC2.2-3; SC1.1,3,6]
+       (This module was cancelled due to insufficiencies in the Galaxy Visualisation Framework.) Galaxy has many options for visualisation of scientific data. This module will cover how to use this framework to create and share visualisation. [SC2.2-3; SC1.1,3,6]
     tutorials: []
 
   - section: "Year 3: Visualisation of complex multidimensional data"

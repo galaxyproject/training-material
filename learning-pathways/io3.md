@@ -8,7 +8,7 @@ editorial_board:
 - hexylena
 - shiltemann
 funding:
-- erasmusplus
+- gallantries
 
 title: Gallantries Grant - Intellectual Output 3 - Data stewardship, federation, standardisation, and collaboration
 

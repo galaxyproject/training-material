@@ -7,7 +7,7 @@ editorial_board:
 - bebatut
 - fpsom
 funding:
-- erasmusplus
+- gallantries
 
 title: Gallantries Grant - Intellectual Output 5 - Train-the-Trainer and mentoring programme
 
@@ -23,7 +23,7 @@ pathway:
 
   - section: "Hybrid Lesson Development Guide"
     description: |
-      ⚠️  **TODO** ⚠️ Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
+      Covers an introduction to pedagogy for instructors and how to adapt training materials to hybrid methodology and key points and indicators that instructors should use when evaluating or adapting training materials to hybrid training delivery [SC5.1]
     tutorials: []
     - name: create-new-tutorial-content
       topic: contributing

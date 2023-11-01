@@ -7,7 +7,7 @@ editorial_board:
 - yvanlebras
 - bebatut
 funding:
-- erasmusplus
+- gallantries
 
 title: Gallantries Grant - Intellectual Output 4 - Data analysis and modelling for evidence and hypothesis generation and knowledge discovery
 
