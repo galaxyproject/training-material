@@ -21,8 +21,6 @@ First on the to-do list is importing our dataset. You can do this in a number of
 > - *"Choose the type of matrix to download"*: `Raw filtered counts`
 {: .hands_on}
 
-
-#ONCE WE'RE IN R:
 look at pre analysis RNAseq matrix
 Note that this dataset also contains ~5% of mouse cells, which we can use as negative controls for the protein measurements. For this reason, the gene expression matrix has HUMAN_ or MOUSE_ appended to the beginning of each gene
 ```{r}
@@ -45,7 +43,6 @@ gx_get(3)
 
 markers from ADT Assay 
 AKA protein markers
-
 ```{r}
 gx_get(4)
 protein_markers<-read.table('/import/4', header = T)
