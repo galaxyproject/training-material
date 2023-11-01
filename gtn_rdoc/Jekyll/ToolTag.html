@@ -161,11 +161,23 @@
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span>
     <span class="ruby-comment"># check if a variable was provided for the tool id</span>
     <span class="ruby-identifier">tool</span> = <span class="ruby-identifier">context</span>[<span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;{}&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)] <span class="ruby-operator">||</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>]
+    <span class="ruby-identifier">version</span> = <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>).<span class="ruby-identifier">last</span>
 
-    <span class="ruby-node">&quot;&lt;span class=\&quot;tool\&quot; data-tool=\&quot;#{tool}\&quot; title=\&quot;#{m[1]} tool\&quot; aria-role=\&quot;link\&quot;&gt;&quot;</span> \
-      <span class="ruby-node">&quot;&lt;strong&gt;#{m[1]}&lt;/strong&gt; &quot;</span> \
-      <span class="ruby-string">&#39;&lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;i aria-hidden=&quot;true&quot; class=&quot;fas fa-cog&quot;&gt;&lt;/i&gt;&#39;</span> \
-      <span class="ruby-node">&quot;&lt;span class=\&quot;visually-hidden\&quot;&gt;Tool: #{tool}&lt;/span&gt;&lt;/span&gt;&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-node">&quot;&lt;span class=\&quot;tool\&quot; data-tool=\&quot;#{tool}\&quot; title=\&quot;#{m[1]} tool\&quot; aria-role=\&quot;button\&quot;&gt;&quot;</span> \
+        <span class="ruby-string">&#39;&lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &#39;</span> \
+        <span class="ruby-node">&quot;&lt;strong&gt;#{m[1]}&lt;/strong&gt;&quot;</span> \
+      <span class="ruby-string">&#39;&lt;/span&gt;&#39;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-node">&quot;&lt;span class=\&quot;tool\&quot; data-tool=\&quot;#{tool}\&quot; title=\&quot;#{m[1]} tool\&quot; aria-role=\&quot;button\&quot;&gt;&quot;</span> \
+        <span class="ruby-string">&#39;&lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &#39;</span> \
+        <span class="ruby-node">&quot;&lt;strong&gt;#{m[1]}&lt;/strong&gt; &quot;</span> \
+        <span class="ruby-string">&#39;(&#39;</span> \
+        <span class="ruby-string">&#39;&lt;i class=&quot;fas fa-cubes&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt; &#39;</span> \
+        <span class="ruby-node">&quot;Galaxy version #{version}&quot;</span> \
+        <span class="ruby-string">&#39;)&#39;</span> \
+      <span class="ruby-string">&#39;&lt;/span&gt;&#39;</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-node">%(&lt;span&gt;&lt;strong&gt;#{@text}&lt;/strong&gt; &lt;i class=&quot;fas fa-wrench&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;)</span>
   <span class="ruby-keyword">end</span>

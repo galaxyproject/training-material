@@ -213,7 +213,7 @@
       <div id="method-i-build_news" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">build_news</span><span
-            class="method-args">(data, filter: nil)</span>
+            class="method-args">(data, filter: nil, updates: true)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -221,8 +221,8 @@
           
 
           <div class="method-source-code" id="build_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File bin/news.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">build_news</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">filter:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">infix</span> = <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">titleize</span>(<span class="ruby-identifier">filter</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-node">&quot;# GTN #{infix} News for #{NOW.strftime(&#39;%b %d&#39;)}&quot;</span>
   <span class="ruby-identifier">newsworthy</span> = <span class="ruby-keyword">false</span>
@@ -234,7 +234,8 @@
 
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:tutorials</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> },
-    <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:tutorials</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> }
+    <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:tutorials</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> },
+    <span class="ruby-value">updates:</span> <span class="ruby-identifier">updates</span>
   )
 
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
@@ -243,7 +244,8 @@
   <span class="ruby-identifier">o</span> = <span class="ruby-identifier">format_tutorials</span>(
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:added</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> },
     <span class="ruby-identifier">data</span>[<span class="ruby-value">:modified</span>][<span class="ruby-value">:slides</span>].<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:path</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{topics/#{filter}}</span> },
-    <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;slides&#39;</span>
+    <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;slides&#39;</span>,
+    <span class="ruby-value">updates:</span> <span class="ruby-identifier">updates</span>
   )
   <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">o</span>
   <span class="ruby-identifier">newsworthy</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">o</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
@@ -513,7 +515,7 @@
       <div id="method-i-format_tutorials" class="method-detail ">
         <div class="method-heading">
           <span class="method-name">format_tutorials</span><span
-            class="method-args">(added, modified, kind: &#39;tutorials&#39;)</span>
+            class="method-args">(added, modified, kind: &#39;tutorials&#39;, updates: true)</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
 
@@ -522,16 +524,20 @@
 
           <div class="method-source-code" id="format_tutorials-source">
             <pre><span class="ruby-comment"># File bin/news.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_tutorials</span>(<span class="ruby-identifier">added</span>, <span class="ruby-identifier">modified</span>, <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;tutorials&#39;</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_tutorials</span>(<span class="ruby-identifier">added</span>, <span class="ruby-identifier">modified</span>, <span class="ruby-value">kind:</span> <span class="ruby-string">&#39;tutorials&#39;</span>, <span class="ruby-value">updates:</span> <span class="ruby-keyword">true</span>)
   <span class="ruby-identifier">output</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\n## #{added.length + modified.length} #{kind}!&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
+  <span class="ruby-identifier">count</span> = <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">updates</span>
+    <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\n## #{count} #{kind}!&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">count</span>.<span class="ruby-identifier">positive?</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">added</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\nNew #{kind}:\n\n&quot;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">added</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>] }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">updates</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\nUpdated #{kind}:\n\n&quot;</span>
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">modified</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>[<span class="ruby-value">:md</span>] }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
@@ -1040,7 +1046,7 @@
           
 
           <div class="method-source-code" id="send_news-source">
-            <pre><span class="ruby-comment"># File bin/news.rb, line 176</span>
+            <pre><span class="ruby-comment"># File bin/news.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">send_news</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">options</span>, <span class="ruby-value">channel:</span> <span class="ruby-string">&#39;default&#39;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:postToMatrix</span>]
     <span class="ruby-identifier">homeserver</span> = <span class="ruby-identifier">$rooms</span>[<span class="ruby-identifier">channel</span>]
@@ -1082,7 +1088,9 @@
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;==============&quot;</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-identifier">output</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;==============&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

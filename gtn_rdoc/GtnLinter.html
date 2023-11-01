@@ -1212,7 +1212,7 @@
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bad_heading_order</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">check_bolded_heading</span>(<span class="ruby-identifier">contents</span>),
     <span class="ruby-operator">*</span><span class="ruby-identifier">snippets_too_close_together</span>(<span class="ruby-identifier">contents</span>),
-    <span class="ruby-operator">*</span><span class="ruby-identifier">zenodo_api</span>(<span class="ruby-identifier">contents</span>),
+    <span class="ruby-operator">*</span><span class="ruby-identifier">zenodo_api</span>(<span class="ruby-identifier">contents</span>)
   ]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1800,7 +1800,7 @@
           <div class="method-source-code" id="zenodo_api-source">
             <pre><span class="ruby-comment"># File bin/lint.rb, line 687</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">zenodo_api</span>(<span class="ruby-identifier">contents</span>)
-  <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">/(zenodo\.org\/api\/files\/)/</span>)
+  <span class="ruby-identifier">find_matching_texts</span>(<span class="ruby-identifier">contents</span>, <span class="ruby-regexp">%r{(zenodo\.org/api/files/)}</span>)
     .<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span>, <span class="ruby-identifier">_text</span>, <span class="ruby-identifier">selected</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">ReviewDogEmitter</span>.<span class="ruby-identifier">error</span>(
       <span class="ruby-value">path:</span> <span class="ruby-ivar">@path</span>,
