@@ -32,6 +32,7 @@ contributions:
   editing:
     - kkamieniecka
     - smza
+    - poterlowicz-lab
   funding:
     - ELIXIR-UK-DaSH
 subtopic: fair-data
