@@ -90,3 +90,11 @@ Now that we have some explorable data in our Galaxy history, let's move into RSt
 > <hands-on-title>Open RStudio in Galaxy</hands-on-title>
 > Run {% tool [RStudio](interactive_tool_rstudio)%}
 {: .hands_on}
+
+><comment-title>Next Step</comment-title>
+> The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar of the usegalaxy page) > Active Interactive Tools > RStudio)
+>
+>Alternatively, you may use the view (eye) icon in your Galaxy History to open the interactive RStudio environment.
+{: .comment}
+
+It may be useful to explore some of these output files that are now in your history. Take a look at some of the output previews and see if you can get a grasp of what's what. If not, no worries at all, we'll start looking more closely once we've made it into RStudio!
