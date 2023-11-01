@@ -17,7 +17,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		release: "galaxy-training-network@38bdea67ff5bd1d4aa0075dcd4a2dd3ee05b3d5b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -55,8 +55,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850801' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850801' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -350,7 +350,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850801'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -823,7 +823,7 @@ as RefSeq entry <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/">NC_0
   <div class="box-title hands-on-title" id="hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Get the data</div>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Import</strong></span> the following files from <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> or from the shared data library
+    <li><span class="tool" data-tool="upload1" title="Import tool" aria-role="link"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span> the following files from <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> or from the shared data library
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
 https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
 https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
@@ -862,7 +862,7 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
 
   <ol>
     <li>
-      <p>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span> on both of your fastq datasets</p>
+      <p>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span> on both of your fastq datasets</p>
 
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: select both FASTQ datasets.</li>
@@ -892,7 +892,7 @@ dataset) will get added to your history.</p>
   <div class="box-title hands-on-title" id="hands-on-combining-qc-results"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Combining QC results</div>
 
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MultiQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.11+galaxy1)</span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1" title="MultiQC tool" aria-role="link"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</span></span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -943,7 +943,7 @@ fastq datasets in the next step</li>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-trimming"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Quality trimming</div>
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</span> to clean up the reads and remove the poor quality sections.
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1</span></span> to clean up the reads and remove the poor quality sections.
       <ul>
         <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired End (two separate input files)</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">004-2_1.fastq.gz</code></li>
@@ -995,7 +995,7 @@ fastq datasets in the next step</li>
   <div class="box-title hands-on-title" id="hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Kraken2</div>
 
   <ol>
-    <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Kraken2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy1)</span> with the following parameters
+    <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="link"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span> with the following parameters
       <ul>
         <li><em>“Single or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
       </ul>
@@ -1056,7 +1056,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
   <div class="box-title hands-on-title" id="hands-on-run-snippy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Snippy</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Snippy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.6.0+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="link"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0</span></span> with the following parameters
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
         <li><em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code></li>
@@ -1141,7 +1141,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-snippy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run Snippy</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0" title="TB Variant Filter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Filter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4.0+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0" title="TB Variant Filter tool" aria-role="link"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.4.0+galaxy0</span></span> with the following parameters
       <ul>
         <li><em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">snippy on data XX, data XX, and data XX mapped reads vcf file</code></li>
         <li><em>“Filters to apply”</em>: Select <code class="language-plaintext highlighter-rouge">Filter variants by region</code> and <code class="language-plaintext highlighter-rouge">Filter sites by read alignment depth</code>.</li>
@@ -1201,7 +1201,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-tb-profiler-and-tb-variant-report"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run TB Profiler and TB Variant Report</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0" title="TB-Profiler profile tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB-Profiler profile</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.4.1+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0" title="TB-Profiler profile tool" aria-role="link"><strong>TB-Profiler profile</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/4.4.1+galaxy0</span></span> with the following parameters
       <ul>
         <li><em>“Input File Type”</em>: <code class="language-plaintext highlighter-rouge">BAM</code></li>
       </ul>
@@ -1214,14 +1214,14 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
     <li>
       <p>When <em>snippy</em> is run with Genbank format input it prepends <code class="language-plaintext highlighter-rouge">GENE_</code> to gene names in the VCF annotation. This causes a problem for <em>TB Variant report</em>, so we need to edit the output with sed.</p>
 
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1" title="Text transformation with sed tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Text transformation with sed</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.1)</span> with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1" title="Text transformation with sed tool" aria-role="link"><strong>Text transformation with sed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1</span></span> with the following parameters:</p>
 
       <ul>
         <li><em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">TB Variant Filter on data XX</code></li>
         <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/GENE_//g</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.10+galaxy0" title="TB Variant Report tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TB Variant Report</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.10+galaxy0)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.10+galaxy0" title="TB Variant Report tool" aria-role="link"><strong>TB Variant Report</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.10+galaxy0</span></span> with the following parameters
       <ul>
         <li><em>“Input SnpEff annotated M.tuberculosis VCF(s)”</em>: <code class="language-plaintext highlighter-rouge">Text transformation on data XX</code></li>
         <li><em>“TBProfiler Drug Resistance Report (Optional)”</em>: <code class="language-plaintext highlighter-rouge">TB-Profiler Profile on data XX: Results.json</code></li>
@@ -1269,7 +1269,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
 
   <!-- GTN:IGNORE:006 -->
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0" title="seqret tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>seqret</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.0.0)</span> to convert the Genbank format reference (<code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code>) to FASTA format. Use the following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0" title="seqret tool" aria-role="link"><strong>seqret</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/emboss_5/EMBOSS:%20seqret84/5.0.0</span></span> to convert the Genbank format reference (<code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code>) to FASTA format. Use the following parameters:
       <ul>
         <li><em>“Sequences”</em>: <code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code></li>
         <li><em>“Use feature information”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1277,7 +1277,7 @@ evolutionary history to “free standing” SNVs/SNPs, so the “close to indel 
         <li><em>“Output sequence file format”</em>: <code class="language-plaintext highlighter-rouge">FASTA (m)</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>JBrowse</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.16.11+galaxy1)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="JBrowse tool" aria-role="link"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1</span></span> with the following parameters
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -1362,10 +1362,10 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span>.</p>
+      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>.</p>
     </li>
     <li>
-      <p>Examine the sample composition with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Kraken2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy1)</span>.</p>
+      <p>Examine the sample composition with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1" title="Kraken2 tool" aria-role="link"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1</span></span>.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-6"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1411,13 +1411,13 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>FastQC</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.73+galaxy0)</span>.</p>
+      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0" title="FastQC tool" aria-role="link"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</span></span>.</p>
     </li>
     <li>
-      <p>Perform quality trimming with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Trimmomatic</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.38.1)</span></p>
+      <p>Perform quality trimming with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1" title="Trimmomatic tool" aria-role="link"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1</span></span></p>
     </li>
     <li>
-      <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Snippy</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.6.0+galaxy0)</span></p>
+      <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0" title="Snippy tool" aria-role="link"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.6.0+galaxy0</span></span></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-7"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1446,10 +1446,10 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
       </blockquote>
     </li>
     <li>
-      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4" title="samtools stats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>samtools stats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.0.4)</span> on the <em>snippy on data XX, data XX, and data XX mapped reads (bam)</em> file. In the output, pay attention to the <em>sequences</em>, <em>reads mapped</em> and <em>reads unmapped</em> results.</p>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4" title="samtools stats tool" aria-role="link"><strong>samtools stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.4</span></span> on the <em>snippy on data XX, data XX, and data XX mapped reads (bam)</em> file. In the output, pay attention to the <em>sequences</em>, <em>reads mapped</em> and <em>reads unmapped</em> results.</p>
     </li>
     <li>
-      <p>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0" title="BAM Coverage Plotter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BAM Coverage Plotter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 20201223+galaxy0)</span> on the mapped reads BAM file that you got from <strong>snippy</strong> using the FASTA format reference you made with <strong>seqret</strong> as the reference.</p>
+      <p>Run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0" title="BAM Coverage Plotter tool" aria-role="link"><strong>BAM Coverage Plotter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0</span></span> on the mapped reads BAM file that you got from <strong>snippy</strong> using the FASTA format reference you made with <strong>seqret</strong> as the reference.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-8"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -1722,7 +1722,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/38bdea67ff5bd1d4aa0075dcd4a2dd3ee05b3d5b">38bdea6</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1754,7 +1754,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850801'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

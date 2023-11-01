@@ -17,7 +17,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c2783f2a3ce40db73b0d28538107041dfc501d3d",
+		release: "galaxy-training-network@38bdea67ff5bd1d4aa0075dcd4a2dd3ee05b3d5b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -55,8 +55,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850744' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850744' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698850801' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698850801' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -312,7 +312,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698850744'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698850801'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -809,7 +809,7 @@ for you to find it again later if needed.</li>
       <p>Rename the datasets “reef_life_molluscs” for example and preview your dataset</p>
 
       <p>You can see that the dataset hasn’t been detected to be a CSV dataframe, it is because RLS data directly puts the
-metadata of the dataframe in the first lines before the dataframe so you’ll have to remove these lines using the <span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Remove beginning</strong></span> with the following parameters:
+metadata of the dataframe in the first lines before the dataframe so you’ll have to remove these lines using the <span class="tool" data-tool="Remove beginning1" title="Remove beginning tool" aria-role="link"><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Remove beginning1</span></span> with the following parameters:
     - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">72</code>
     - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: reef_life_molluscs data file</p>
 
@@ -834,7 +834,7 @@ metadata of the dataframe in the first lines before the dataframe so you’ll ha
   <div class="box-title hands-on-title" id="hands-on-clean-your-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Clean your data</div>
 
   <ol>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced cut columns from a table (cut) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced cut columns from a table (cut)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0)</span>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Advanced cut columns from a table (cut) tool" aria-role="link"><strong>Advanced cut columns from a table (cut)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>
 with following parameters :
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to cut”</em>: Convert CSV to tabular data file</li>
@@ -847,7 +847,7 @@ with following parameters :
         </li>
       </ul>
     </li>
-    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.0)</span> with following parameters:
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Column Regex Find And Replace tool" aria-role="link"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0</span></span> with following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: Advanced Cut data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
@@ -871,7 +871,7 @@ with following parameters :
   <div class="box-title hands-on-title" id="hands-on-here-we-will-check-homogeneity-of-variances-levene-test-for-every-species-and-represent-it-through-multiple-boxplots-and-the-normal-distribution-kolmogorov-smirnov-test-represented-by-a-distribution-histogram-and-a-q-q-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Here we will check homogeneity of variances (Levene test) for every species and represent it through multiple boxplots and the normal distribution (Kolmogorov-Smirnov test) represented by a distribution histogram and a Q-Q plot.</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0" title="Homoscedasticity and normality tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Homoscedasticity and normality</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0" title="Homoscedasticity and normality tool" aria-role="link"><strong>Homoscedasticity and normality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_homogeneity_normality/ecology_homogeneity_normality/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -897,7 +897,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-autocorrelation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Autocorrelation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Variables exploration tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Variables exploration</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Variables exploration tool" aria-role="link"><strong>Variables exploration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -925,7 +925,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-collinearity-between-numerical-variables"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Collinearity between numerical variables</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Variables exploration tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Variables exploration</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0" title="Variables exploration tool" aria-role="link"><strong>Variables exploration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_link_between_var/ecology_link_between_var/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -952,7 +952,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-abundance-map-in-the-environment"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Abundance map in the environment</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Presence-absence and abundance</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="link"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -981,7 +981,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-presence-count-of-taxons-barplot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Presence count of taxons (barplot)</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Presence-absence and abundance</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="link"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1006,7 +1006,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-rarefaction-curve-of-species"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Rarefaction curve of species</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Presence-absence and abundance</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0" title="Presence-absence and abundance tool" aria-role="link"><strong>Presence-absence and abundance</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_presence_abs_abund/ecology_presence_abs_abund/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1033,7 +1033,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-boxplot-of-dispersion-and-correlation-of-absence"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Boxplot of dispersion and correlation of absence</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0" title="Statistics on presence-absence tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Statistics on presence-absence</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0" title="Statistics on presence-absence tool" aria-role="link"><strong>Statistics on presence-absence</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_stat_presence_abs/ecology_stat_presence_abs/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1059,7 +1059,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0" title="Local Contributions to Beta Diversity (LCBD) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Local Contributions to Beta Diversity (LCBD)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0" title="Local Contributions to Beta Diversity (LCBD) tool" aria-role="link"><strong>Local Contributions to Beta Diversity (LCBD)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/ecology_beta_diversity/ecology_beta_diversity/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: formatted biodiversity data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1100,7 +1100,7 @@ The two tests have to be significant so variances aren’t homogenous and data i
   <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0" title="Spatial coordinates anonymization tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Spatial coordinates anonymization</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.0)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0" title="Spatial coordinates anonymization tool" aria-role="link"><strong>Spatial coordinates anonymization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/tool_anonymization/tool_anonymization/0.0.0</span></span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input table”</em>: Column Regex Find and Replace data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1332,7 +1332,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/c2783f2a3ce40db73b0d28538107041dfc501d3d">c2783f2</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/38bdea67ff5bd1d4aa0075dcd4a2dd3ee05b3d5b">38bdea6</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1364,7 +1364,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1698850744'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698850801'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
