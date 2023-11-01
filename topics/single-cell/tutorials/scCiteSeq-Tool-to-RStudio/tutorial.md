@@ -4,14 +4,15 @@ layout: tutorial_hands_on
 title: 'Cite-Seq Tool Data Processing into RStudio Visualization (Cite-Seq, Seurat, R)'
 subtopic: single-cell-CS-code
 priority: 2
-zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
-- How do I visualize?
-- How do I generate and annotate cell clusters?
+- How can I use Seurat's Cite-Seq capabilities?
+- How can I visualize and interpret multimodal data in Seurat?
 
 objectives:
-- 
+- Learn to use Galaxy's Seurat tool with Cite-seq capabilities to create a Seurat Object 
+- Understand the parameters of the Seurat tool 
+- Move between Galaxy and RStudio to holistically explore Cite-Seq data
 
 time_estimation: 3H
 
@@ -26,21 +27,17 @@ requirements:
     topic_name: single-cell
     tutorials:
         
-
-
 tags:
 - Cite-Seq
+- RStudio
 
 contributions:
   authorship:
     - Camila-goclowski
 
-
-
-
 notebook:
   language: r
-  snippet: topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/preamble.md
+  snippet: topics/single-cell/tutorials/scCiteSeq-Tool-to-RStudio/preamble.md
 ---
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
