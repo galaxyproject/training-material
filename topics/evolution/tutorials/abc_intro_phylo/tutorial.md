@@ -98,7 +98,7 @@ This tutorial has the following structure:
 
 ## What is a Phylogeny?
 
-![IThink](./images/Darwin_tree.png){:align="center",:width="400"}
+![IThink](./images/Darwin_tree.png){:align="center", width="400px"}
 
 <!-- **needs a reference** -->
 
@@ -119,11 +119,11 @@ to...
 
 <!-- all birds... -->
 
-![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center",:width=600}
+![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center", width=600}
 
 and much bigger projects across all of life:
 
-![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center",:width="500"}
+![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center", width="500"}
 
 (from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
 
@@ -262,7 +262,7 @@ These distances can be expressed as a matrix _D_, which becomes the input to a d
 At each step in the distance-based methods (orange boxes) the algorithm selects a pair of taxa, or clades that have been created thus far, to join together to make a new clade.
 Once that decision is made, the two taxa / clades that have been joined are replaced with the clade that the two of them make together:
 
-![Joining Clades](./images/JoiningCladesForTreeConstruction.png){:align="center"}
+![Joining Clades](./images/JoiningCladesForTreeConstruction.png){: align="center"}
 
 ## Challenges
 
@@ -307,7 +307,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
 
-![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500"}
+![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500px"}
 
 *Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
 
@@ -458,14 +458,15 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 Here is an image of the resulting alignment:
 
-![Alignment](./images/MEGA_alignment.png){:width="600"}
+![Alignment](./images/MEGA_alignment.png){:width="600px"}
 
+You should ALWAYS check your alignment to see if it makes sense.
+A tool you can use on your own computer is SeaView, available at https://doua.prabi.fr/software/seaview.
 
 # Distance-based phylogenetic inference
 
-Now we will build our first tree, using a very common method called _Neighbor-Joining_.  This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also 
-Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988.
-*Molecular Biology and Evolution* **5**(6): 729-731) 
+Now we will build our first tree, using a very common method called _Neighbor-Joining_.  
+This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988. *Molecular Biology and Evolution* **5**(6): 729-731) 
 
 ## Building a Neighbor-Joining Tree 
 
@@ -598,35 +599,39 @@ This seems much more biologically reasonable and makes this into a Markov proces
 
 *If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
 
-Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
-The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+> <details-title>Model Details</details-title>
 
-More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
-
-A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
-Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
-
-![HKY85](./images/HKY85RateMatrix.png){:align="center",:width="300px"}
-
-In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
-
-A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
-
-![GTR](./images/GTRRateMatrix.png){:align="center"}
-
-A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
-
-The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
-The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
-This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
-
-There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
-Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
-
-The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
-In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
-
-There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+> Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
+> The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
+> 
+> More biological realism allows for different proportions of the nucleotides -- different base rates -- outside the uniform 25% rate.  This is the Felsenstein 1981 model, known as F81, and it has three more parameters for the rates (not four: given the first three base frequencies this defines the other one).
+> 
+> A next step up in sophistication is the Hasegawa-Kishino-Yano model (HKY) published in 1985, which also acknowledges that transitions (changes of state within the purines A, G or within the pyrimidines C, T) occur more readily than transversions (changes from purine to pyrimidine or vice versa).
+> Hence the HKY85 model has an additional parameter of these different types of subtitution: it can be represented by the substitution rate matrix below:
+> 
+> ![HKY85](./images/HKY85RateMatrix.png){: align="center", width="300px"}
+> 
+> In the above, the $$\pi$$ symbol is used for the base frequencies, and a $$\kappa$$ symbol is used for the transition/transversion ratio parameter.  The asterisk "*" is a short-hand to mean "- the sum of everything else in the row."
+> 
+> A more general model still is the *General Time-Reversible* model (GTR), in which each substitution type has its own rate.  It still keeps the property that a substitution from $$x$$ to $$y$$ has the same probability as one from $$y$$ to $$x$$ (this comes from the `reversible' property) but otherwise all rates are independent of each other:
+> 
+> ![GTR](./images/GTRRateMatrix.png){: align="center", width="300px"}
+>
+> A further level of sophistication is the recognition that some sites may be constrained from changing at all: for example, there may be some that have a critical role in fixing the correct amino acid for a protein to function.  This addition to the above methods is known as "invariable" sites and is usually represented by a "+I" appended to the model name.
+> 
+> The last level we will think about today is that some sites may evolve faster than others, even if they are under the same kind of model with the same parameters in the matrix $$Q$$.
+> The most common way to allow this is to imagine that the relative rate for a particular site is drawn from a Gamma $$\Gamma$$ probability distribution, which has some nice properties like, for example, allowing most sites to change very slowly and permitting some to change rapidly.
+> This is usually denoted by a "+$$\Gamma$$" or "+G" appended to the model name. 
+> 
+> There are **many** more models, with many more parameters and constraints.  Finding the best one to fit a data set is a complex task of itself!
+> Fortunately there are tools to help determine the most appropriate model for a given data set, such as the Akaike Information Criterion (AIC) and some variations of that.
+> 
+> The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
+> In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
+> 
+> There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+> 
+{: .details}
 
 ## Searching for trees and their branch lengths
 
@@ -660,7 +665,7 @@ An unresolved node *may* be a true representation of the branching pattern of a 
 
 In phylogenetics unresolved nodes are more often due to a lack of resolving power in the data, so the phylogenetic method cannot choose the branch ordering:
 
-![Unresolved](./images/Unresolved.png){:align="center",:width="400px"}
+![Unresolved](./images/Unresolved.png){: align="center", width="400px"}
 
 If there are many unresolved branches in the phylogeny, this is an indication that there is not enough information in your data: you'll need to obtain more.
 
@@ -715,6 +720,14 @@ Also, it's on Galaxy!
 While this is running you might use your time to read the Models of sequence evolution and Bootstrapping sections above.
 (Though actually, you may not get that much time.)
 
+![IQTreePhylovis](./images/PhyloVisTree.png){:align="center"}
+
+The resulting tree found by IQTree, displayed using PhyloVis.
+
+Observe the bootstrap values for deep branches are not as high.
+
+Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
+
 > <hands-on-title>Visualising your tree</hands-on-title>
 > 1. View your tree!
 > 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
@@ -764,10 +777,14 @@ Sites 9-12 suggest splitting the taxa into (1,2) vs (3,4).  We write this as a s
 The next two sites, numbers 13 and 14, suggest the split (2,3) vs (1,4), which we could write as 23|14 or 14|23 or just 14.
 The last site suggests that taxa 1 and 3 should go together.
 
-Remind people splits <-> set of parallel lines
+![Simplest Network](./images/SimpleSplits.png){: align="center"}
 
+In the above figure we have four taxa 1,2,3,4, in a phylogenetic network.
+The pairs of parallel lines correspond to two of the _splits_ that could separate taxa from each other, and which could (separately) appear in phylogenetic trees.
+The green, horizontal branches separate taxa 1 and 2 from 3 and 4; the split 12|34.
+These are longer than the blue, vertical ones, which separate taxa 1 and 3 from 2 and 4: the split 13:24.
+The beauty of the network is that both thes pieces of information can be shown on the same figure, despite them not being compatible -- they can't both be on the same tree.
 
-**IMAGE HERE: Neighbour net image**
 
 ## Building a Neighbor-Net phylogenetic network
 
@@ -775,21 +792,20 @@ Remind people splits <-> set of parallel lines
 >
 > 1. If you haven't already got it, download and install <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree4/welcome.html">SplitsTree 4</a> or <a href="https://software-ab.cs.uni-tuebingen.de/download/splitstree6/welcome.html">SplitsTree 6 CE</a> (Community Edition) to your own computer and install it. SplitsTree 4 is now rather old, but works well; SplitsTree 6 is still in development but appears (at the time of writing this) to be working well.  They do the same thing, and we will only use tools common to both versions.  Installing either version takes a minute or two.
 > 2. Download the aligned data .FASTA file to your own computer.
-> 3. Start up SplitsTree and open the file.  Within moments you should see something like this:
-
-> 
+> 3. Start up SplitsTree and open the file.  Within moments you should see something like this (using SplitsTree 4):
+> ![Default phylogenetic network](./images/ST4-default.png){: align="center"}
+> This network shows a number of deep branches that are quite well resolved, in the sense that they have very long, thin parallelograms, but there is a jumble of very small parallelograms in the centre of the network, indicating that there is not a lot of information in the data to determine the early branching order of the _Anolis_ phylogeny.
+> Click on some of the interior branches, which will highlight sets of parallel lines, that correspond to each split that is shown in the network.
+> 4. Now note that the initial distance measure is using "Uncorrected P" distance, which is simply the proportion of sites that differ between each pair of sequences.  It is also possible to use the more sophisticated models above for maximum likelihood, such as Jukes-Cantor and HKY85. Click on the "Distances" menu and select "HKY85".  A dialog will appear with some options, but you can just click "Apply" and get a network like this:
+> ![HKY85 Network](./images/ST4-HKY85.png){: align="center"}
+> The above shows you that the basic structure of the network does not change very much using different distance measures, which is a good thing because it means reasonable assumptions you make about your data are not drastically changing the results.
+> 5. Finally, perform a bootstrap analysis on this network.  Click on the Analysis menu and select Bootstrap.  Leave the default number of replicates as 1000 and click `run`: it will not take too long.  After a few seconds (less than a minute) you should see something like this:
+> ![HKY85 Network with Bootstrap](./images/ST4-HKY85-BS.png){: align="center"}
+> The above shows the percentage of times out of those 1000 replicates that each split shown was in the network created for each replicate.  Zoom in (there is a magnifying glass tool at the top) and scroll around the figure to see which are the strongly supported *splits*, which should correspond to the well supported bootstrap values in the trees you inferred above.
 {: .hands_on}
 
 
-![IQTreePhylovis](./images/PhyloVisTree.png){:align="center"}
-
-The resulting tree found by IQTree, displayed using PhyloVis.
-
-Observe the bootstrap values for deep branches are not as high.
-
-Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
-
-### Report on the final tree
+<!-- ### Report on the final tree
 
 Look at the IQTree Report file.
 
@@ -799,7 +815,7 @@ You will also see the Newick Format of the best tree found.
 
 
 XXX More to go here.
-
+ -->
 
 
 # Summary 
