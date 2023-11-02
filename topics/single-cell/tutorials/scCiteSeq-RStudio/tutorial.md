@@ -52,11 +52,11 @@ We'll begin to understand:
 4. [RNA Markers](#rnamarkers)
 5. [Processed Seurat Object](#processedseuratobject)
 6. [Combined RNA & Protein Markers](#combinedmarkers)
+
 ><comment-title>gx_get</comment-title>
 > RStudio in galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
 > To use it, simply use the numbered position of the dataset you are looking to import. For example: 
 > If we want to find the first dataset we imported, simply run the following command: 
-
 > ```r
 > gx_get(1)
 > ```
