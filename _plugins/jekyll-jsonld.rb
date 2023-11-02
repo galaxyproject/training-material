@@ -352,7 +352,6 @@ module Jekyll
         # "alternateName":,
         # "description" described below
         # "disambiguatingDescription":,
-        identifier: 'https://gxy.io/GTN:' + material['short_id'],
         # "image":,
         # "mainEntityOfPage":,
         # "name" described below
@@ -363,6 +362,11 @@ module Jekyll
         workTranslation: [],
         creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
+
+      if material.key?('short_id')
+        data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}"
+      end
+
       data.update(A11Y)
 
       # info depending if tutorial, hands-on or slide level

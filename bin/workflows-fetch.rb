@@ -15,9 +15,13 @@ def fetch_workflows(server)
     http.request(request)
   end
 
-  JSON.parse(response.body).map do |w|
-    w['server'] = server
-    w
+  begin
+    JSON.parse(response.body).map do |w|
+      w['server'] = server
+      w
+    end
+  rescue
+    []
   end
 end
 
