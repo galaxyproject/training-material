@@ -46,7 +46,7 @@ We will use the same sample from the previous three tutorials, which contains la
 
 # Citation
 
-Please note, this tutorial is largely based on the trajectories tutorial found on the Scanpy site itself [https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
+Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
 > <agenda-title></agenda-title>
 >
@@ -100,7 +100,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 > <comment-title></comment-title>
 > - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
 {: .comment}
 
 ## Filtering for T-cells
@@ -238,7 +238,7 @@ Now that we've recalculated the nearest neighbours, we can use these new neighbo
 ## Working in a group? Decision-time!
 If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary numbers so that you can compare results throughout the tutorials.
 - Control
-   - Go straight to the PAGA section
+   - Go straight to the [PAGA section](#paga)
 - Everyone else:
    - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.
         - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
