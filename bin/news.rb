@@ -133,9 +133,7 @@ end
 def format_tutorials(added, modified, kind: 'tutorials', updates: true)
   output = ''
   count = added.length
-  if updates
-    count += modified.length
-  end
+  count += modified.length if updates
   output += "\n\n## #{count} #{kind}!" if count.positive?
 
   if added.length.positive?
@@ -196,7 +194,7 @@ def build_news(data, filter: nil, updates: true)
     output += data[:funders].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
-  return [output, newsworthy]
+  [output, newsworthy]
 end
 
 def send_news(output, options, channel: 'default')
@@ -242,9 +240,9 @@ def send_news(output, options, channel: 'default')
       end
     end
   else
-    puts "=============="
+    puts '=============='
     puts output
-    puts "=============="
+    puts '=============='
   end
 end
 

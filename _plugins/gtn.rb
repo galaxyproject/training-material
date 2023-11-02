@@ -424,15 +424,13 @@ Jekyll::Hooks.register :site, :post_read do |site|
     if contributor.key?('affiliations')
       contributor['affiliations'].each do |affiliation|
         if site.data['organisations'].key?(affiliation)
-          if ! site.data['organisations'][affiliation].key?('members')
+          if !site.data['organisations'][affiliation].key?('members')
             site.data['organisations'][affiliation]['members'] = []
           end
 
           site.data['organisations'][affiliation]['members'] << name
         elsif site.data['funders'].key?(affiliation)
-          if ! site.data['funders'][affiliation].key?('members')
-            site.data['funders'][affiliation]['members'] = []
-          end
+          site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
 
           site.data['funders'][affiliation]['members'] << name
         end
