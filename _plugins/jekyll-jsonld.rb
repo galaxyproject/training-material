@@ -376,6 +376,9 @@ module Jekyll
         end
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
+        # Requires https://github.com/galaxyproject/training-material/pull/4271
+        # data['version'] = Gtn::ModificationTimes.obtain_modification_count(material['path'])
+
         # Time required
         if material.key?('time_estimation') && !material['time_estimation'].nil?
           data['timeRequired'] = "PT#{material['time_estimation'].upcase}"
