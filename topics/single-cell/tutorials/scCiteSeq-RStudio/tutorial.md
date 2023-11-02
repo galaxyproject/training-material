@@ -25,7 +25,6 @@ requirements:
 -
     type: "internal"
     topic_name: single-cell
-    tutorials:
         
 tags:
 - Cite-Seq
