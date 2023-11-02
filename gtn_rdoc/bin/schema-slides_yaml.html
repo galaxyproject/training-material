@@ -85,8 +85,10 @@
     <li><a href="../bin/publish-archive.html">publish-archive</a>
     <li><a href="../bin/schema-contributors_yaml.html">schema-contributors.yaml</a>
     <li><a href="../bin/schema-faq_yaml.html">schema-faq.yaml</a>
+    <li><a href="../bin/schema-funders_yaml.html">schema-funders.yaml</a>
     <li><a href="../bin/schema-learning-pathway_yaml.html">schema-learning-pathway.yaml</a>
     <li><a href="../bin/schema-news_yaml.html">schema-news.yaml</a>
+    <li><a href="../bin/schema-organisations_yaml.html">schema-organisations.yaml</a>
     <li><a href="../bin/schema-quiz_yaml.html">schema-quiz.yaml</a>
     <li><a href="../bin/schema-requirement-external_yaml.html">schema-requirement-external.yaml</a>
     <li><a href="../bin/schema-requirement-internal_yaml.html">schema-requirement-internal.yaml</a>
@@ -197,6 +199,8 @@ contributors:
           required: true
           enum:
           - CONTRIBUTORS
+          - FUNDERS
+          - ORGANISATIONS
     description: |
         List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
     examples:
@@ -232,6 +236,7 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
         editing:
             type: seq
             description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -239,6 +244,7 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
         testing:
             type: seq
             description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -246,6 +252,7 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
         ux:
             type: seq
             description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -253,6 +260,7 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
         infrastructure:
             type: seq
             description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -260,13 +268,16 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
+              - FUNDERS
         funding:
             type: seq
             description: These entities provided funding support for the development of this resource
             sequence:
             - type: str
               enum:
-              - CONTRIBUTORS
+              - ORGANISATIONS
+              - FUNDERS
         translation:
             type: seq
             description: These entities did translation and localisation work on this resource
@@ -274,6 +285,7 @@ contributions:
             - type: str
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
 hands_on:
     type: str
     enum:

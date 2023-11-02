@@ -85,8 +85,10 @@
     <li><a href="../bin/publish-archive.html">publish-archive</a>
     <li><a href="../bin/schema-contributors_yaml.html">schema-contributors.yaml</a>
     <li><a href="../bin/schema-faq_yaml.html">schema-faq.yaml</a>
+    <li><a href="../bin/schema-funders_yaml.html">schema-funders.yaml</a>
     <li><a href="../bin/schema-learning-pathway_yaml.html">schema-learning-pathway.yaml</a>
     <li><a href="../bin/schema-news_yaml.html">schema-news.yaml</a>
+    <li><a href="../bin/schema-organisations_yaml.html">schema-organisations.yaml</a>
     <li><a href="../bin/schema-quiz_yaml.html">schema-quiz.yaml</a>
     <li><a href="../bin/schema-requirement-external_yaml.html">schema-requirement-external.yaml</a>
     <li><a href="../bin/schema-requirement-internal_yaml.html">schema-requirement-internal.yaml</a>
@@ -203,6 +205,15 @@
             enum:
                 - &quot;no&quot;
             description: Set this to `no` if you would like to be excluded from the hall of fame.
+        affiliations:
+            type: seq
+            description: &quot;A set of organisations or grants your are affiliated with&quot;
+            sequence:
+              - type: str
+                required: true
+                enum:
+                - ORGANISATIONS
+                - FUNDERS
         elixir_node:
             type: str
             enum:
@@ -231,35 +242,6 @@
             description: The 2 letter code identifying the ELIXIR node to which you are a member or are associated with. If you are from norway, you will need to quote your value, `&quot;no&quot;`, unlike everyone else, due to the [Norway Problem with YAML](https://hitchdev.com/strictyaml/why/implicit-typing-removed/)
         avatar:
             type: str
-        funder:
-            type: bool
-            description: Set this to true if this entity is a funding agency.
-        funder_name:
-            type: str
-            description: A human-readable name which will be the biggest name on their contributor page.
-        funding_id:
-            type: str
-            description: The short identifier for your grant.
-            examples:
-                - 2020-1-NL01-KA203-064717
-        url:
-            type: str
-            description: associated webpage (NOTE, funders only!)
-            examples:
-              - &quot;https://elixir-europe.org&quot;
-        funding_system:
-            type: str
-            description: Automatically link to the grant&#39;s information in the appropriate funding system site.
-            enum:
-                - cordis
-                - erasmusplus
-                - ukri
-        funding_statement:
-            type: str
-            description: A short statement about the funder, markdown is supported.
-            examples:
-                - This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
-
         in_memoriam:
             type: str
             description: |
