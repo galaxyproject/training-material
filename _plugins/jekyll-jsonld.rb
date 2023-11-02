@@ -363,9 +363,7 @@ module Jekyll
         creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
 
-      if material.key?('short_id')
-        data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}"
-      end
+      data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
       data.update(A11Y)
 
@@ -379,13 +377,12 @@ module Jekyll
       data['isPartOf'] = topic_desc
 
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
-        if material['name'] == 'tutorial.md'
-          data['learningResourceType'] = 'hands-on tutorial'
-          data['name'] = material['title']
-        else
-          data['learningResourceType'] = 'slides'
-          data['name'] = material['title']
-        end
+        data['learningResourceType'] = if material['name'] == 'tutorial.md'
+                                         'hands-on tutorial'
+                                       else
+                                         'slides'
+                                       end
+        data['name'] = material['title']
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
         # Requires https://github.com/galaxyproject/training-material/pull/4271
@@ -533,9 +530,9 @@ module Jekyll
 
       # Add non-author contributors
       if material.key?('contributions')
-        data['contributor'] = Gtn::Contributors.get_non_authors(material).map { |x|
+        data['contributor'] = Gtn::Contributors.get_non_authors(material).map do |x|
           generate_person_jsonld(x, site['data']['contributors'][x], site)
-        }
+        end
       end
 
       about = []

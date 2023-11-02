@@ -49,8 +49,8 @@ module Gtn
         []
       elsif material.key?('contributions')
         material['contributions']
-          .reject{|k| k== 'funding'}
-          .reject{|k| k== 'authorship'}
+          .reject { |k| k == 'funding' }
+          .reject { |k| k == 'authorship' }
           .values.flatten.uniq
       else
         []

@@ -20,7 +20,7 @@ def fetch_workflows(server)
       w['server'] = server
       w
     end
-  rescue
+  rescue StandardError
     []
   end
 end
