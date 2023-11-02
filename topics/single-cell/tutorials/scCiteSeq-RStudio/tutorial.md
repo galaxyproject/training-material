@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Cite-Seq Tool Data Processing into RStudio Visualization (Cite-Seq, Seurat, R)'
+title: 'Cite-Seq Data Processing into RStudio Visualization (Cite-Seq, Seurat, R)'
 subtopic: scmultiomics
 priority: 2
 
@@ -45,76 +45,155 @@ Before we can do any real biological investigation, we need to understand what e
 
 We'll begin to understand: 
 
-# Table of Contents
+## Datatypes We'll Review
 1. [RNA Matrix](#rnamatrix)
 2. [ADT Matrix](#adtmatrix)
 3. [Protein Markers](#proteinmarkers)
 4. [RNA Markers](#rnamarkers)
-5. []
+5. [Processed Seurat Object](#processedseuratobject)
+6. [Combined RNA & Protein Markers](#combinedmarkers)
 
-><comment-title>gx_get()</comment-title>
-> RStudio in galaxy comes with a gx_get() function. This function is critical to understand and be able to use in order to move datasets from your history and into RStudio. The function will output the file path with which you can access the data via RStudio.
-> To use it, simply use the numbered location of the dataset you are looking to import. For example: 
+><comment-title>gx_get</comment-title>
+> RStudio in galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
+> To use it, simply use the numbered position of the dataset you are looking to import. For example: 
 > If we want to find the first dataset we imported, simply run the following command: 
-```{r}
-gx_get(1)
-```
+
+> ```r
+> gx_get(1)
+> ```
 >The result of this command will be a file path to the first dataset in your galaxy history. Use that file path for importing purposes. 
 {: .comment}
 
-## RNA Matrix <a name="rnamatrix"><>/a>
+### RNA Matrix <a name="rnamatrix"></a>
 To take a look at the pre analysis RNA-seq matrix, use the following commands: 
-```{r}
+```r
 gx_get(1)
 RNA<-read.csv('/import/1')
 ```
 Note that the dataset we are using also contains ~5% of mouse cells, which we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix has "HUMAN_" or "MOUSE_" appended to each gene. 
 
 Now let's take a look at what's in here. 
-```{r}
+```r
 view(RNA)
 ```
+![RNA Matrix](../../images/scCiteSeq-RStudio/Plot3.png "RNA Matrix")
+
 If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix! In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
 
 You may have noticed there are TONS of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and these zeros are one of the first things that the Seurat preprocessing tool will accomplish. This matrix that we've labelled as RNA is *not* what we will be analyzing further into this tutorial. We are simply taking a look to ground ourselves in what the data looked like *before* preprocessing. 
 
-## ADT (Protein) Matrix <a name="adtmatrix"></a>
+### ADT (Protein) Matrix <a name="adtmatrix"></a>
 We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it! 
-```{r}
+```r
 gx_get(2)
 ADT<-read.csv('/import/2')
 ```
 Again, let's take a look at what's in here:
-```{r}
+```r
 view(ADT)
 ```
+![ADT Matrix](../../images/scCiteSeq-RStudio/Plot4.png "ADT Matrix")
 Looks shockingly similar, doesn't it?!
 
 In the ADT matrix, we have cell surface proteins (instead of gene names) as row names and the same cell barcodes as column names. 
 
 If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log. This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry. Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
 
-## Protein Markers <a name="proteinmarkers"></a>
+### Protein Markers <a name="proteinmarkers"></a>
 The next output in my galaxy history are protein markers! Let's take a look: 
-```{r}
+```r
 gx_get(4)
 protein_markers<-read.table('/import/4', header = T)
 view(protein_markers)
 ```
-There are tons of markers in this list and if you look closely, you'll see that some are not statistically significant. Let's take care of that and filter out any marker that has an adjusted p-value above 0.045:
-```{r}
+![Protein Marker Sheet](../../images/scCiteSeq-RStudio/Plot5.png "Protein Markers")
+
+There are tons of markers in this list and if you dig through them all, you'll likely see that some are not statistically significant. Let's take care of that and filter out any marker that has an adjusted p-value above 0.045:
+```r
 protein_markers<-subset(protein_markers, p_val_adj < 0.045)
 ```
+Doesn't look like there were actually *any* insignifcant markers in that list! Although we got lucky this time, I have found that it is in your best interest to always attempt this filter, especially when working with bigger, messier datasets!
 
 Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included here, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details and options. 
 
-## RNA Markers <a name="rnamarkers"></a>
+### RNA Markers <a name="rnamarkers"></a>
 The next dataset in our history should be RNA markers. Let's import them, remove the statistically insignifcant ones, and take a look: 
-```{r}
+```r
 gx_get(5)
 rna_markers<-read.table('/import/5', header = T)
 rna_markers<-subset(rna_markers, p_val_adj < 0.045)
 view(rna_markers)
 ```
+![RNA Markers](../../images/scCiteSeq-RStudio/Plot6.png "RNA Markers")
 
 Just like the RNA and ADT matrices looked quite similar, the protein and RNA markers will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools. So once again, if you're interested in what some of the statistic on the rna_markers file mean, take a look at the [Seurat documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers). 
+
+### Processed Seurat Object <a name="processedseuratobject"></a> 
+The next dataset in our history is arguably the most important--the processed Seurat object. This is the dataset we will be further processing and exploring.
+
+Before we can import the object, we'll need to call the Seurat packages: 
+```r
+library(Seurat)
+library(SeuratObject)
+```
+This library() function tells RStudio to prepare an installed package for use. If you don't call up the package, RStudio will not recognize your commands using that package. 
+
+Now that Seurat is loaded, we can import and open the processed object: 
+```r
+gx_get(6)
+srt<-readRDS('/import/6')
+```
+
+Now the processed Seurat object, containing both RNA and ADT data, has been loaded into your RStudio environment! We'll come back to this object in a moment for further processing and investigation!
+
+### Combined Protein & RNA Markers <a name="combinedmarkers"></a>
+The final dataset that I have in my history now is a combined marker list. Let's import and filter this marker list:
+```r
+gx_get(8)
+markers<-read.table('/import/8', header = T)
+markers<-subset(markers, p_val_adj < 0.045)
+```
+
+We now have a comprehensive list of statistically significant markers.
+
+### A Bit More Processing
+Now that we have reviewed all of the datasets that were output by our Seurat Cite-Seq Tool, there's one last step before we can start asking some biological questions: normalization. 
+
+Currently, the Seurat tool's functionality does not allow it to normalize the ADT counts. This option will likely be added shortly, and when it is, this tutorial will be updated as well! For now, let's manually normalize the ADT data and get to the science! 
+
+```r
+srt <- NormalizeData(srt, normalization.method = "CLR", margin = 2, assay = "ADT")
+```
+
+### Basic Visualizations
+Now, let's get visualizing. Call up the ggplot2 package so RStudio is ready to plot:
+```r
+library(ggplot2)
+```
+
+Say you want to know how these CBMCs' CD19 protein expression compares to it's RNA expression... To visualize this let's first start with plotting the protein expression: 
+```r
+DefaultAssay(srt)<-"ADT"
+adt_cd19<-FeaturePlot(srt, features = "CD19", order = T) + ggtitle("CD19 Protein")
+```
+Take a look: 
+```r
+view(adt_cd19)
+```
+![CD19 Protein Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot7.png "CD19 Protein Expression")
+
+Next, we'll plot the RNA expression: 
+```r
+DefaultAssay(srt)<-"RNA"
+rna_cd19<-FeaturePlot(srt, features = "CD19", order = T) + ggtitle("CD19 RNA")
+```
+![CD19 RNA Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot8.png "CD19 RNA Expression")
+
+
+Finally, we can plot them side by side for more effective comparison:
+```r
+adt_cd19|rna_cd19
+```
+![CD19 Protein & RNA Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot9.png "CD19 Protein & RNA Expression")
+
+
