@@ -431,22 +431,20 @@ UCSC provides a large number of tracks that can help you get a sense of your gen
 
 # Galaxy management
 
-In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-gear %} **History Options** menu on the top of the history panel:
+In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the {% icon galaxy-dropdown %} dropdown arrow **History Options** menu on the top of the history panel:
 
 ![History options menu](../../images/history_options_menu.png)
 
-If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the {% icon galaxy-columns %} Multi-history view:
+If you create a new history, your current history does not disappear. If you would like to list all of your histories just use **Saved Histories List** by clicking on User - Histories
 
 ![Overview of histories with their datasets](../../images/101_history-overview.png)
 
 Here you can:
+
 - switch between different histories,
 - delete a history,
-- purge it (i.e. permanently delete it, this action cannot be reversed)
+- permanently delete it (this action cannot be reversed)
 - copy histories
-- copy datasets between histories (by dragging and dropping)
-
-You can always return to your analysis view by clicking on Home icon {% icon galaxy-home %} (**Analyze Data** on older versions of Galaxy) in the top menu bar.
 
 ## Convert your analysis history into a workflow
 
@@ -542,13 +540,11 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
+> 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history.
 >
->    ![Drag and drop of `Exons` dataset in the history overview](../../images/copying_data.gif)
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
-> 3. Click the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) at the top to return to the main analysis window
->
-> 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
+> 3. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
 >    ```
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
@@ -579,9 +575,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    > {: .hands_on}
 >    {: .tip}
 >
-> 5. **Rename** {% icon galaxy-pencil %} the dataset to `Repeats`
+> 4. **Rename** {% icon galaxy-pencil %} the dataset to `Repeats`
 >
-> 6. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
+> 5. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
@@ -589,7 +585,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >
-> 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+> 6. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >    - Select `Expand to full workflow form`
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
 >    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
@@ -602,7 +598,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
 >    {: .comment}
 >
-> 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+> 7. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}

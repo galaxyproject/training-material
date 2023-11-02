@@ -570,11 +570,10 @@ We again need our peak file, but we'd like to work in a clean history. Instead o
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
+> 2. Copy the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
 >
->       You should see both of your histories side-by-side now
+>    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 >
-> 3. Drag and drop the edited peak file (`Peak regions`, after the replace steps), which contains the summit information, to your new history.
 > 4. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older Galaxy versions) in the top menu bar to go back to your analysis window
 >
 {: .hands_on}
