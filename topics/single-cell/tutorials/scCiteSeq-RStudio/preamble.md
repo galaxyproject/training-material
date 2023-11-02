@@ -46,7 +46,7 @@ Select "Start" and then close once both files indicate they are 100% ready.
 
 The two csv data files should now begin importing into your Galaxy history!  
 
-> # **Option 2.** Import A History
+> **Option 2.** Import A History
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq-tutorial-data) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
