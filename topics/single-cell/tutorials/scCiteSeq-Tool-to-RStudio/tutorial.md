@@ -10,11 +10,12 @@ questions:
 - How can I visualize and interpret multimodal data in Seurat?
 
 objectives:
-- Learn to use Galaxy's Seurat tool with Cite-seq capabilities to create a Seurat Object 
-- Understand the parameters of the Seurat tool 
+- Learn to use Galaxy's Seurat tool to create a Seurat Object with Cite-seq analysis          
+capabilities
+- Understand the parameters of Galaxy's Seurat tool 
 - Move between Galaxy and RStudio to holistically explore Cite-Seq data
 
-time_estimation: 3H
+time_estimation: 1H
 
 key_points:
 - Being able to switch between Galaxy and RStudio when analyzing datasets can be useful when looking to adjust default parameters within Seurat's functions and workflow.
@@ -42,7 +43,16 @@ notebook:
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
-Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets here, together. 
+Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
+
+We'll begin to understand: 
+
+# Table of Contents
+1. [RNA Matrix](#rnamatrix)
+2. [ADT Matrix](#adtmatrix)
+3. [Protein Markers](#proteinmarkers)
+4. [RNA Markers](#rnamarkers)
+5. []
 
 ><comment-title>gx_get()</comment-title>
 > RStudio in galaxy comes with a gx_get() function. This function is critical to understand and be able to use in order to move datasets from your history and into RStudio. The function will output the file path with which you can access the data via RStudio.
@@ -54,6 +64,7 @@ gx_get(1)
 >The result of this command will be a file path to the first dataset in your galaxy history. Use that file path for importing purposes. 
 {: .comment}
 
+## RNA Matrix <a name="rnamatrix"><>/a>
 To take a look at the pre analysis RNA-seq matrix, use the following commands: 
 ```{r}
 gx_get(1)
@@ -69,6 +80,7 @@ If you're familiar with scRNA-seq matrices, this may look familiar to you. That'
 
 You may have noticed there are TONS of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and these zeros are one of the first things that the Seurat preprocessing tool will accomplish. This matrix that we've labelled as RNA is *not* what we will be analyzing further into this tutorial. We are simply taking a look to ground ourselves in what the data looked like *before* preprocessing. 
 
+## ADT (Protein) Matrix <a name="adtmatrix"></a>
 We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it! 
 ```{r}
 gx_get(2)
@@ -84,6 +96,7 @@ In the ADT matrix, we have cell surface proteins (instead of gene names) as row 
 
 If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log. This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry. Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
 
+## Protein Markers <a name="proteinmarkers"></a>
 The next output in my galaxy history are protein markers! Let's take a look: 
 ```{r}
 gx_get(4)
@@ -95,8 +108,9 @@ There are tons of markers in this list and if you look closely, you'll see that 
 protein_markers<-subset(protein_markers, p_val_adj < 0.045)
 ```
 
-Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included here, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details. 
+Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included here, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details and options. 
 
+## RNA Markers <a name="rnamarkers"></a>
 The next dataset in our history should be RNA markers. Let's import them, remove the statistically insignifcant ones, and take a look: 
 ```{r}
 gx_get(5)
@@ -105,5 +119,5 @@ rna_markers<-subset(rna_markers, p_val_adj < 0.045)
 view(rna_markers)
 ```
 
-Just like the RNA and ADT matrices looked quite similar, the protein and rna markers will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools. So once again, if you're interested in what some of the statistic on the rna_markers file mean, take a look at the [Seurat documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers). 
+Just like the RNA and ADT matrices looked quite similar, the protein and RNA markers will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools. So once again, if you're interested in what some of the statistic on the rna_markers file mean, take a look at the [Seurat documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers). 
 
