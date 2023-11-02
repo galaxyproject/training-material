@@ -26,9 +26,11 @@ Phylogenetics is essential for comparing biological species and understanding bi
 
 Using real-life data and standard tools that are (mostly) available in Galaxy the tutorial demonstrates the principles behind a variety of methods used to estimate phylogenetic trees from aligned sequence data or distance data. 
 
+This is not a "how to" tutorial, but is instead aimed at giving you a better understanding of the principles of how the methods work.
+
 The exercises are beginner level, but you should know how molecular sequence data is produced and what it looks like. Maybe you've even built phylogenetic trees before but want to know more about the principles behind the tools.
 
-This tutorial does not cover workflows from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
+This tutorial does not cover workflows all the way from read data to phylogeny, multiple sequence alignment or Bayesian methods. We’ve included recommended reading and tutorials on these topics in the resources section.
 
 ## Scope:
 **We will cover:**
@@ -121,11 +123,15 @@ to...
 
 ![Microbetree](https://commons.wikimedia.org/wiki/File:Nmicrobiol201648-f1.jpg){:align="center", width=600}
 
+![Insecta](./images/Hexapoda_phylogenetic_tree.png){: align="center"}
+(Rainford JL, Hofreiter M, Nicholson DB, Mayhew PJ (2014) Phylogenetic Distribution of Extant Richness Suggests Metamorphosis Is a Key Innovation Driving Diversification in Insects. PLoS ONE 9(10): e109085. https://doi.org/10.1371/journal.pone.0109085; CCBY 4.0 DEED license)
+ © 2014 Rainford et al. This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+
+
 and much bigger projects across all of life:
 
 ![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center", width="500"}
-
-(from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
+(from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu) (CC BY-NC-SA 4.0)
 
 Aside from fundamental understanding, there are other strong motivators for inferring phylogenetic relationships:
 
@@ -271,7 +277,7 @@ One of the many challenges that make it hard is the sheer number of possible tre
 
 The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number for $$n$$ taxa (we use `taxa' in general, since not all phylogenetic inference is at the species level) is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
 
-### The Number of Rooted Binary Trees
+### The Number of Unrooted Binary Trees
 
 > | *n*          | # trees    | notes       |
 > |--------------|------------|-------------|
