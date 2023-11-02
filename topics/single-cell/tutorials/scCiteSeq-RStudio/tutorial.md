@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Cite-Seq Tool Data Processing into RStudio Visualization (Cite-Seq, Seurat, R)'
-subtopic: single-cell-CS-code
+subtopic: scmultiomics
 priority: 2
 
 questions:
