@@ -43,7 +43,7 @@ notebook:
 
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
 
-## Datatypes We'll Review
+# Datatypes We'll Review
 1. [RNA Matrix](#rnamatrix)
 2. [ADT Matrix](#adtmatrix)
 3. [Protein Markers](#proteinmarkers)
@@ -61,7 +61,7 @@ Before we can do any real biological investigation, we need to understand what e
 >The result of this command will be a file path to the first dataset in your galaxy history. Use that file path for importing purposes. 
 {: .comment}
 
-### RNA Matrix <a name="rnamatrix"></a>
+## RNA Matrix <a name="rnamatrix"></a>
 To take a look at the pre analysis RNA-seq matrix, use the following commands: 
 ```r
 gx_get(1)
@@ -81,7 +81,7 @@ You may have noticed there are lots of zero values in this matrix. You may also 
 
 This matrix, with these values shown, are *not* what we will be analyzing later on in this tutorial. We are simply taking a look to get an understanding of what the data looks like *before* preprocessing. 
 
-### ADT (Protein) Matrix <a name="adtmatrix"></a>
+## ADT (Protein) Matrix <a name="adtmatrix"></a>
 We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it.
 ```r
 gx_get(2)
@@ -100,7 +100,7 @@ In the ADT matrix, we have cell surface proteins (instead of gene names) as row 
 If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log. This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry. Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
 ![Eye Button](../../images/scCiteSeq-RStudio/Plot13.png "Eye Button")
 
-### Protein Markers <a name="proteinmarkers"></a>
+## Protein Markers <a name="proteinmarkers"></a>
 The next output in my galaxy history are protein markers, let's take a look: 
 ```r
 gx_get(4)
@@ -117,7 +117,7 @@ Doesn't look like there were actually any insignifcant markers in that list! Alt
 
 Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details. 
 
-### RNA Markers <a name="rnamarkers"></a>
+## RNA Markers <a name="rnamarkers"></a>
 The next dataset in our history should be RNA markers. Let's import them, remove any statistically insignifcant ones, and take a look: 
 ```r
 gx_get(5)
@@ -129,7 +129,7 @@ view(rna_markers)
 
 Just like the RNA and ADT matrices looked quite similar, the protein and RNA markers will as well. This is because Seurat is interpretting and analyzing the RNA and ADT assays in the same manner, with the same tools. So once again, if you're interested in what some of the statistic on the rna_markers file mean, take a look at the [Seurat documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers). 
 
-### Processed Seurat Object <a name="processedseuratobject"></a> 
+## Processed Seurat Object <a name="processedseuratobject"></a> 
 The next dataset in our history is arguably the most important--the processed Seurat object. This is the dataset we will be further processing and exploring.
 
 Before we can import the object, we'll need to call the Seurat packages: 
@@ -147,7 +147,7 @@ srt<-readRDS('/import/6')
 
 Now the processed Seurat object, containing both RNA and ADT data, has been loaded into your RStudio environment! We'll come back to this object in a moment for further processing and investigation!
 
-### Combined Protein & RNA Markers <a name="combinedmarkers"></a>
+## Combined Protein & RNA Markers <a name="combinedmarkers"></a>
 The final dataset that I have in my history now is a combined marker list. Let's import and filter this marker list:
 ```r
 gx_get(8)
@@ -157,7 +157,7 @@ markers<-subset(markers, p_val_adj < 0.045)
 
 We now have a comprehensive list of statistically significant markers.
 
-### A Bit More Processing
+## A Bit More Processing
 Now that we have reviewed all of the datasets that were output by our Seurat Cite-Seq Tool, there's one last step before we can start asking some biological questions: normalization. 
 
 Currently, the Seurat tool's functionality does not allow it to normalize the ADT counts. This option will likely be added shortly, and when it is, this tutorial will be updated as well! For now, let's manually normalize the ADT data and get to the science! 
@@ -166,7 +166,7 @@ Currently, the Seurat tool's functionality does not allow it to normalize the AD
 srt <- NormalizeData(srt, normalization.method = "CLR", margin = 2, assay = "ADT")
 ```
 
-### Basic Visualizations
+## Basic Visualizations
 Now, let's get visualizing. Call up the ggplot2 package so RStudio is ready to plot:
 ```r
 library(ggplot2)

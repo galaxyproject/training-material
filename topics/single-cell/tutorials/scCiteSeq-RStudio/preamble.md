@@ -36,7 +36,7 @@ Then select the "Paste/Fetch Data" option:
 ![Paste/Fetch Data Button](../../images/scCiteSeq-RStudio/Plot2.png "Paste/Fetch Data")
     
 Copy the following links into the box:
-# **IS THERE A BETTER WAY TO FORMAT THIS?**
+# IS THERE A BETTER WAY TO FORMAT THIS?
 
 [] ADT data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
 
