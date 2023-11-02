@@ -10,8 +10,7 @@ questions:
 - How can I visualize and interpret multimodal data in Seurat?
 
 objectives:
-- Learn to use Galaxy's Seurat tool to create a Seurat Object with Cite-seq analysis          
-capabilities
+- Learn to use Galaxy's Seurat tool to create a Seurat Object with Cite-seq analysis capabilities
 - Understand the parameters of Galaxy's Seurat tool 
 - Move between Galaxy and RStudio to holistically explore Cite-Seq data
 
