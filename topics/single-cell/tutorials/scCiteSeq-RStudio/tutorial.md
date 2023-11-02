@@ -157,7 +157,7 @@ markers<-subset(markers, p_val_adj < 0.045)
 
 We now have a comprehensive list of statistically significant markers.
 
-## A Bit More Processing
+# A Bit More Processing
 Now that we have reviewed all of the datasets that were output by our Seurat Cite-Seq Tool, there's one last step before we can start asking some biological questions: normalization. 
 
 Currently, the Seurat tool's functionality does not allow it to normalize the ADT counts. This option will likely be added shortly, and when it is, this tutorial will be updated as well! For now, let's manually normalize the ADT data and get to the science! 
@@ -166,12 +166,12 @@ Currently, the Seurat tool's functionality does not allow it to normalize the AD
 srt <- NormalizeData(srt, normalization.method = "CLR", margin = 2, assay = "ADT")
 ```
 
-## Basic Visualizations
+# Basic Visualizations
 Now, let's get visualizing. Call up the ggplot2 package so RStudio is ready to plot:
 ```r
 library(ggplot2)
 ```
-
+## FeaturePlots 
 Say you want to know how these CBMCs' CD19 protein expression compares to it's RNA expression... To visualize this let's first start with plotting the protein expression: 
 ```r
 DefaultAssay(srt)<-"ADT"
@@ -197,6 +197,7 @@ adt_cd19|rna_cd19
 ```
 ![CD19 Protein & RNA Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot9.png "CD19 Protein & RNA Expression")
 
+# Alternative FeaturePlot Method
 As always with Seurat, there are a couple of different ways we can get the same output. Instead of swapping the DefaultAssay back and forth like we did in the above example, we can use specific assay keys. 
 
 Let's find out what the RNA key is: 
@@ -219,6 +220,7 @@ cd19_adt|cd19_rna
 
 Voila! The same plot but in two different ways! This may feel repetetive, but finding these alternative means of accomplishing the same goal has been one of my biggest aids in troubleshooting these kinds of analyses. Quite often a function will break, be retired, or simply no longer be compatible with your workflow. When these situations arise it is important to not panic and just remember: there is *always* another way. 
 
+# FeatureScatter
 We can also plot scatter plots of the cell surface protein expression. These will be functionally similar to biaxial plots used for FACS! 
 ```r
 FeatureScatter(srt, feature1 = "adt_CD19", feature2 = "adt_CD3")
@@ -231,6 +233,7 @@ FeatureScatter(srt, feature1 = "adt_CD3", feature2 = "rna_CD3E")
 ```
 ![CD3 Protein & CD3E RNA ScatterPlot](../../images/scCiteSeq-RStudio/Plot11.png "CD3 Protein & CD3E RNA Expression")
 
+# Further Analysis Options
 There are endless options for continuing to explore your multimodal data from here. In their own [vignette](https://satijalab.org/seurat/articles/multimodal_vignette), Seurat describes future directions of analysis you might be interested in pursuing. 
 
 Congratulations on completing this tutorial!
