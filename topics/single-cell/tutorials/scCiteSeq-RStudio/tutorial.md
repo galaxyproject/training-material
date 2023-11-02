@@ -52,7 +52,6 @@ We'll begin to understand:
 4. [RNA Markers](#rnamarkers)
 5. [Processed Seurat Object](#processedseuratobject)
 6. [Combined RNA & Protein Markers](#combinedmarkers)
-
 ><comment-title>gx_get</comment-title>
 > RStudio in galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
 > To use it, simply use the numbered position of the dataset you are looking to import. For example: 
@@ -196,4 +195,26 @@ adt_cd19|rna_cd19
 ```
 ![CD19 Protein & RNA Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot9.png "CD19 Protein & RNA Expression")
 
+As always with Seurat, there are a couple of different ways we can get the same output. Instead of swapping the DefaultAssay back and forth like we did in the above example, we can use specific assay keys. 
 
+Let's find out what the RNA key is: 
+```r
+Key(srt[["RNA"]])
+```
+What about the ADT:
+```r
+Key(srt[["ADT"]])
+```
+
+Now that we've identified what the keys are, we can just include that in the feature name when we ask for a FeaturePlot like follows: 
+
+```r
+cd19_adt<-FeaturePlot(srt, features = "adt_CD19") + ggtitle("CD19 Protein")
+cd19_rna<-FeaturePlot(srt, features = "rna_CD19") + ggtitle("CD19 RNA")
+cd19_adt|cd19_rna
+```
+![CD19 Protein & RNA Expression FeaturePlot](../../images/scCiteSeq-RStudio/Plot9.png "CD19 Protein & RNA Expression")
+
+Voila! The same plot but in two different ways! This may feel repetetive, but finding these alternative means of accomplishing the same goal has been one of my biggest aids in troubleshooting these kinds of analyses. Quite often a function will break, be retired, or simply no longer be compatible with your workflow. When these situations arise it is important to not panic and just remember: there is *always* another way. 
+
+Alterntively, 
