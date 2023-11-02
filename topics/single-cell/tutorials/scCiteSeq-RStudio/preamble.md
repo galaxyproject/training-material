@@ -18,12 +18,12 @@ Before we can start exploring, we'll process our transcriptomic and surface prot
 {: .comment}
 
 # Get Your Data
-For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mononuclear cells (CBMCs) which have been sequenced for transcriptomic measurements as well as 11 surface proteins. 
+For this tutorial, we'll use a publicly available dataset of 8,617 cord blood mononuclear cells (CBMCs) which have been sequenced for transcriptomic measurements as well as 11 surface proteins ({% cite Satija&Smibert2017 %}). 
 
 ><comment-title></comment-title>
 >A quick note on nomenclature when working with Cite-Seq.
->ADT: (or antibody derived tag) represents the cell surface protein measurements
->RNA: represents the transcriptomic measurements
+>ADT: ( antibody derived tag) refers to the cell surface protein abundance measurements
+>meanwhile RNA: represents the transcriptomic measurements
 {: .comment}
 
 First on the to-do list is importing our csv files. You can do this in a couple of ways: 
@@ -36,15 +36,17 @@ Then select the "Paste/Fetch Data" option:
 ![Paste/Fetch Data Button](../../images/scCiteSeq-RStudio/Plot2.png "Paste/Fetch Data")
     
 Copy the following links into the box:
+# **IS THERE A BETTER WAY TO FORMAT THIS?**
 
-1. ADT data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
-2. RNA data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
+[] ADT data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
+
+[] RNA data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
     
 Select "Start" and then close once both files indicate they are 100% ready. 
 
 The two csv data files should now begin importing into your Galaxy history!  
 
-> **Option 2.** Import A History
+> # **Option 2.** Import A History
 You can access [this history](https://usegalaxy.eu/u/camila-goclowski/h/cite-seq-tutorial-data) by clicking on the link provided.
 
 {% snippet faqs/galaxy/histories_import.md %}
@@ -83,7 +85,7 @@ Now we'll run those csv files through the updated Seurat tool with the following
 >  - *"Output list of cite-seq markers"*: `Yes`
 >  - *"Compare specific feature's effect on protein and rna expression?"*: `No`
 >  - *"Compare top RNA and protein features graphicaly against themselves and one another"*: `No`
->  - *"How many of the top featyre should be shown"*: `5`
+>  - *"How many of the top features should be shown"*: `5`
 {: .hands_on}
 
 ><comment-title></comment-title>
@@ -97,8 +99,10 @@ Now that we have some explorable data in our Galaxy history, let's move into RSt
 
 ><comment-title>Next Step</comment-title>
 > The interactive RStudio tool should begin to load now. Make your way over to your Active Interactive Tools page (User (in the top bar of the usegalaxy page) > Active Interactive Tools > RStudio)
+> ![Interactive Tools Button](../../images/scCiteSeq-RStudio/Plot12.png "Interactive Tools")
 >
->Alternatively, you may use the view (eye) icon in your Galaxy History to open the interactive RStudio environment.
+>Alternatively, you can use the view (eye) icon in your Galaxy History to open the interactive RStudio environment.
+> ![Eye Button](../../images/scCiteSeq-RStudio/Plot13.png "Eye Button")
 {: .comment}
 
-It may be useful to explore some of these output files that are now in your history. Take a look at some of the output previews and see if you can get a grasp of what's what. If not, no worries at all, we'll start looking more closely once we've made it into RStudio!
+It may be a good time to explore some of these output files that are now in your history. Take a look at some of the previews and see if you can get a grasp of what's what. If not, no worries at all, we'll start looking more closely once we've made it into RStudio!

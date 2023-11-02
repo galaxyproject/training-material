@@ -43,8 +43,6 @@ notebook:
 
 Before we can do any real biological investigation, we need to understand what each of the outputs from our Seurat tool are. Maybe you've already begun to dissect what's what, but just in case, let's run through each of the datasets together. 
 
-We'll begin to understand: 
-
 ## Datatypes We'll Review
 1. [RNA Matrix](#rnamatrix)
 2. [ADT Matrix](#adtmatrix)
@@ -54,7 +52,7 @@ We'll begin to understand:
 6. [Combined RNA & Protein Markers](#combinedmarkers)
 
 ><comment-title>gx_get</comment-title>
-> RStudio in galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
+> RStudio in Galaxy comes with a gx_get() function. This  is critical to understand and be able to use in order to move datasets from your history into RStudio. The function outputs the file path with which you can access your data via RStudio.
 > To use it, simply use the numbered position of the dataset you are looking to import. For example: 
 > If we want to find the first dataset we imported, simply run the following command: 
 > ```r
@@ -69,7 +67,7 @@ To take a look at the pre analysis RNA-seq matrix, use the following commands:
 gx_get(1)
 RNA<-read.csv('/import/1')
 ```
-Note that the dataset we are using also contains ~5% of mouse cells, which we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix has "HUMAN_" or "MOUSE_" appended to each gene. 
+It's worth mentioning that the dataset we are using contains ~5% mouse cells, which we can use as negative controls for the cell surface protein measurements. As such, the RNA expression matrix initially has "HUMAN_" or "MOUSE_" appended to each gene. 
 
 Now let's take a look at what's in here. 
 ```r
@@ -77,12 +75,14 @@ view(RNA)
 ```
 ![RNA Matrix](../../images/scCiteSeq-RStudio/Plot3.png "RNA Matrix")
 
-If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix! In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
+If you're familiar with scRNA-seq matrices, this may look familiar to you. That's because it is exactly that--an RNA-seq matrix. In these matrices we have genes as row names and cell barcodes as column names. The values within the matrix denote the number of transcripts from a given gene within a given cell.
 
-You may have noticed there are TONS of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and these zeros are one of the first things that the Seurat preprocessing tool will accomplish. This matrix that we've labelled as RNA is *not* what we will be analyzing further into this tutorial. We are simply taking a look to ground ourselves in what the data looked like *before* preprocessing. 
+You may have noticed there are lots of zero values in this matrix. You may also be thinking, "Won't that create noise in the dataset??" The answer is yes, and removing these zeros is one of the first problems that the Seurat preprocessing tool will solve. 
+
+This matrix, with these values shown, are *not* what we will be analyzing later on in this tutorial. We are simply taking a look to get an understanding of what the data looks like *before* preprocessing. 
 
 ### ADT (Protein) Matrix <a name="adtmatrix"></a>
-We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it! 
+We can do the same thing with the pre-analysis protein matrix. We'll call it the ADT matrix for now, since that is how Seurat recognizes it.
 ```r
 gx_get(2)
 ADT<-read.csv('/import/2')
@@ -92,14 +92,16 @@ Again, let's take a look at what's in here:
 view(ADT)
 ```
 ![ADT Matrix](../../images/scCiteSeq-RStudio/Plot4.png "ADT Matrix")
-Looks shockingly similar, doesn't it?!
+
+Looks shockingly similar, doesn't it?
 
 In the ADT matrix, we have cell surface proteins (instead of gene names) as row names and the same cell barcodes as column names. 
-
+# IMPORT HTML INTO RSTUDIO?
 If you ran the same parameters as I did, the next output (number 3 in our history) will be Seurat's run log. This is unfortunately not super easy to import into RStudio since it comes as an html format. It contains all of the run information from the background coding done by the tool. Any warnings, errors, or progress bars will be present in here and are often useful for troubleshooting in case something goes awry. Because of the html formatting, we will not look at this output together, but feel free to explore it on your own using the view (eye) icon in your history. 
+![Eye Button](../../images/scCiteSeq-RStudio/Plot13.png "Eye Button")
 
 ### Protein Markers <a name="proteinmarkers"></a>
-The next output in my galaxy history are protein markers! Let's take a look: 
+The next output in my galaxy history are protein markers, let's take a look: 
 ```r
 gx_get(4)
 protein_markers<-read.table('/import/4', header = T)
@@ -111,12 +113,12 @@ There are tons of markers in this list and if you dig through them all, you'll l
 ```r
 protein_markers<-subset(protein_markers, p_val_adj < 0.045)
 ```
-Doesn't look like there were actually *any* insignifcant markers in that list! Although we got lucky this time, I have found that it is in your best interest to always attempt this filter, especially when working with bigger, messier datasets!
+Doesn't look like there were actually any insignifcant markers in that list! Although we got lucky this time, I have found that it is in everyone's best interest to always attempt this filter, especially when working with bigger, messier datasets!
 
-Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included here, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details and options. 
+Now we have a statistically signficant list of protein markers per cluster! There are a number of statistics that are included in these dataframes, if you're interested in better understanding them, take a look at [Seurat's documentation of FindAllMarkers] (https://satijalab.org/seurat/reference/findallmarkers) for more details. 
 
 ### RNA Markers <a name="rnamarkers"></a>
-The next dataset in our history should be RNA markers. Let's import them, remove the statistically insignifcant ones, and take a look: 
+The next dataset in our history should be RNA markers. Let's import them, remove any statistically insignifcant ones, and take a look: 
 ```r
 gx_get(5)
 rna_markers<-read.table('/import/5', header = T)
