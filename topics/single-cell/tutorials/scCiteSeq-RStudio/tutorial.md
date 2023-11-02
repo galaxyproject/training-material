@@ -37,7 +37,7 @@ contributions:
 
 notebook:
   language: r
-  snippet: topics/single-cell/tutorials/scCiteSeq-Tool-to-RStudio/preamble.md
+  snippet: topics/single-cell/tutorials/scCiteSeq-RStudio/preamble.md
 ---
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}

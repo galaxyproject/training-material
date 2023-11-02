@@ -29,10 +29,10 @@ RNA: represents the transcriptomic measurements
 First on the to-do list is importing our csv files. You can do this in a couple of ways: 
 
 Option 1.  Use the Upload Data button on the upper left of your screen:
-    ![Upload Data Button](../../images/scCiteSeq-Tool-to-RStudio/Plot1.png)
+    ![Upload Data Button](../../images/scCiteSeq-RStudio/Plot1.png)
 
     Select the "Paste/Fetch Data" Option
-    ![Paste/Fetch Data Button](../../images/scCiteSeq-Tool-to-RStudio/Plot2.png)
+    ![Paste/Fetch Data Button](../../images/scCiteSeq-RStudio/Plot2.png)
     
     Copy the following links into the box:
 
