@@ -29,6 +29,7 @@ contributions:
   funding: []
   testing:
     - cat-bro
+    - edmontosaurus
 tags:
   - jobs
   - git-gat
