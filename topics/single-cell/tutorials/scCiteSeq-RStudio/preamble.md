@@ -37,11 +37,12 @@ Then select the "Paste/Fetch Data" option:
     
 Copy the following links into the box:
 # IS THERE A BETTER WAY TO FORMAT THIS?
+> <hands-on-title></hands-on-title>
+> - ADT data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
 
-[] ADT data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-ADT_umi.csv.gz
-
-[] RNA data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
-    
+> - RNA data: ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE100nnn/GSE100866/suppl/GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz
+{: .hands_on}
+   
 Select "Start" and then close once both files indicate they are 100% ready. 
 
 The two csv data files should now begin importing into your Galaxy history!  
