@@ -369,10 +369,10 @@ module Jekyll
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
         if material['name'] == 'tutorial.md'
           data['learningResourceType'] = 'hands-on tutorial'
-          data['name'] = "Hands-on for '#{material['title']}' tutorial"
+          data['name'] = material['title']
         else
           data['learningResourceType'] = 'slides'
-          data['name'] = "Slides for '#{material['title']}' tutorial"
+          data['name'] = material['title']
         end
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
