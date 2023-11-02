@@ -49,11 +49,48 @@ mapping:
         - type: str
           #enum:
           #- CONTRIBUTORS
+
     tags:
         type: seq
+        description: Any relevant tags that would help a user discover this LP
         sequence:
             - type: str
         required: true
+
+    type:
+        type: str
+        description: |
+            The type of topic, some have subtly different behaviours.
+
+            `admin-dev`
+            :  should be used for admin and developer topics that are not scientifically focused.
+
+            `basics`
+            :  Only used for galaxy-interface type topics
+
+            `data-science`
+            :  Topics which are not necessarily Galaxy focused but expand into broader communities
+
+            `use`
+            :  These topics use galaxy for some analysis
+
+            `instructors`
+            :  Specific to topics related to instruction of Galaxy
+        required: true
+        enum:
+            - admin-dev
+            - basics
+            - data-science
+            - use
+            - instructors
+
+    draft:
+        type: bool
+        description: |
+            `true` to hide your LP from the LP list (optional). This
+            is useful if you need an LP for a workshop, but have not
+            finished making it up to GTN standards.
+
     pathway:
         type: seq
         required: true
@@ -67,7 +104,6 @@ mapping:
                   type: str
                 tutorials:
                   type: seq
-                  required: true
                   sequence:
                     - type: map
                       mapping:

@@ -1,5 +1,5 @@
 ---
-title: GTN Videos
+title: GTN Automated Videos
 layout: page
 redirect_from:
   - /topics/admin/videos/index
@@ -36,7 +36,8 @@ redirect_from:
     {% endif %}
 {% endfor %}
 
-The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
+The GTN now automatically generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
+Additionally there is a much larger [Video Library](https://gallantries.github.io/video-library/) available with recordings from human instructors teaching each tutorial.
 
 {% for topic in sorted_topics %}
 {% assign topic_id = topic[0] %}
