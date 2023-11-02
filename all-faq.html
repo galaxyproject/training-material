@@ -17,7 +17,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6d73a704c398ef0facf9bcc90a9053c5989c1666",
+		release: "galaxy-training-network@68b856db07414f17661f1f1b057c80ae4d065810",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -55,8 +55,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698915723' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698915723' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698919281' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698919281' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -82,7 +82,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698915723'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698919281'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -608,6 +608,34 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <h4 class="faq-area"> Only one Planemo test runs at a time. Why doesn't the server allow more than one at once? <a href="/training-material/topics/dev/tutorials/tool-generators/faqs/planemo_multiple.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
 <!--SNIPPET--><blockquote class="question">   <div class="box-title question-title" id="question-only-one-planemo-test-runs-at-a-time-why-doesn-t-the-server-allow-more-than-one-at-once"><i class="far fa-question-circle" aria-hidden="true"></i> Question: Only one Planemo test runs at a time. Why doesn't the server allow more than one at once?</div>   <ul>   <li>When a new dependency is being installed in the Planemo Conda repository, there is no locking to prevent a second process from overwriting or otherwise interfering with it’s own independent repository update.</li>   <li>The result is not pretty.</li>   <li>Allowing two tests to run at once has proven to be unstable so the Appliance is currently limited to one.</li> </ul> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Preparing materials for asynchronous learning: CYOA <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-cyoa"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-cyoa" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: CYOA<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you are running a remote training, and expect your users to follow a specific path, be <strong>certain</strong> to include the URL parameter to select the pathway to avoid student confusion. Please note that all tutorials using a CYOA <em>should</em> be tagged which will give you a heads up as a trainer.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Preparing materials for asynchronous learning: FAQs <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-faqs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-faqs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: FAQs<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When you are running a remote, asynchronous lesson, you’ll want to be sure you collect all student questions and add them back to your tutorial afterwards, as FAQs. This will help other learners as they progress through the materials, and can give you a very easy URL to point your learners to if they get stuck on a particular task.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Preparing materials for asynchronous learning: Self-Study <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-self-study"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-self-study" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: Self-Study<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In the context of remote trainings, where a teacher isn’t synchronously available, ensuring that you have questions throughout your materials for students to check their understanding is incredibly key.</p>   <p>Additionally ensuring that solutions are provided, and are correct and up-to-date (or use a snippet explaining data variability along with with ways to check the results) is mandatory. Students will then use these questions to self-check their understanding against what you expected them to learn.</p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Preparing materials for asynchronous learning: Tips <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-tips"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-tips" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: Tips<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The use of snippets is <strong>extremely</strong> important for asynchronous, remote learning. In this situation as students do not have a teacher immediately on hand, and likely do not have friends or colleagues sitting working with them, they will rely on these boxes to refresh their knowledge and know what to do.</p>   <p>Please ensure you test your learning materials with a learner or colleague not familiar the material, and if possible, (<strong>silently</strong>) watch them go through your lesson. You’ll easily identify which portions need more explanations and details.</p> </blockquote> <!--END_SNIPPET-->
 
 
 
@@ -2623,7 +2651,7 @@ Undelete your deleted histories
 
 <h4 class="faq-area"> GTN Stats <a href="/training-material/faqs/gtn/gtn_stats.html"><i class="fas fa-external-link-alt"></i></a> </h4>
 
-<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">372</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">398</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">331</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.3</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-4">  <div class="gtn-card color-agenda">    <div class="card-title">29</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-tip">    <div class="card-title">375</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-4">  <div class="gtn-card color-details">    <div class="card-title">402</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-comment">    <div class="card-title">331</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-6">  <div class="gtn-card color-handson">    <div class="card-title">8.3</div>    <div class="card-text">Years</div>  </div> </div> </div> <!--END_SNIPPET-->
 
 
 
@@ -3500,7 +3528,7 @@ add a button, include configuration options:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6d73a704c398ef0facf9bcc90a9053c5989c1666">6d73a70</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/68b856db07414f17661f1f1b057c80ae4d065810">68b856d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -3524,11 +3552,7 @@ add a button, include configuration options:
 </footer>
 
 
-    </div>
-</footer>
-
-
-        <script src='/training-material/assets/js/bundle.main.js?v=1698915723'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698919281'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

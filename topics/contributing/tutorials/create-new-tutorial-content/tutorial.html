@@ -17,7 +17,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6d73a704c398ef0facf9bcc90a9053c5989c1666",
+		release: "galaxy-training-network@68b856db07414f17661f1f1b057c80ae4d065810",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -55,8 +55,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698915723' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698915723' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1698919281' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1698919281' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -66,7 +66,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating content in Markdown">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-10-23 09:44:54 +0000">
+<meta name="DC.date" content="2023-11-01 16:15:43 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Helena Rasche">
 
@@ -108,7 +108,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-10-23 09:44:54 +0000",
+  "dateModified": "2023-11-01 16:15:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Creating content in Markdown",
   "interactivityType": "mixed",
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1698915723'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1698919281'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -528,7 +528,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 23, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 1, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -567,6 +567,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </ol>
   </li>
   <li><a href="#content" id="markdown-toc-content">Content</a>    <ol>
+      <li><a href="#self-study-tutorials" id="markdown-toc-self-study-tutorials">Self Study Tutorials</a></li>
       <li><a href="#adding-images-with-captions" id="markdown-toc-adding-images-with-captions">Adding images with captions</a></li>
       <li><a href="#writing-mathematical-expressions" id="markdown-toc-writing-mathematical-expressions">Writing mathematical expressions</a></li>
       <li><a href="#tables-and-matrices" id="markdown-toc-tables-and-matrices">Tables and Matrices</a></li>
@@ -577,7 +578,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li><a href="#overview-box" id="markdown-toc-overview-box"><strong>Overview</strong> box</a></li>
       <li><a href="#agenda-box" id="markdown-toc-agenda-box"><strong>Agenda</strong> box</a></li>
       <li><a href="#hands-on-box" id="markdown-toc-hands-on-box"><strong>Hands-on</strong> box</a></li>
-      <li><a href="#questions-and-solution-boxes" id="markdown-toc-questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</a></li>
+      <li><a href="#questions-and-solutions-boxes" id="markdown-toc-questions-and-solutions-boxes"><strong>Questions</strong> and <strong>Solutions</strong> boxes</a></li>
       <li><a href="#tips-box" id="markdown-toc-tips-box"><strong>Tips</strong> box</a></li>
       <li><a href="#comments-boxes" id="markdown-toc-comments-boxes"><strong>Comments</strong> boxes</a></li>
       <li><a href="#details-box" id="markdown-toc-details-box"><strong>Details</strong> box</a></li>
@@ -6312,6 +6313,18 @@ their Hall of Fame profile.</p>
 
 </blockquote>
 
+<h2 id="self-study-tutorials">Self Study Tutorials</h2>
+
+<p>By following all of the guidelines in this file you can be sure that your tutorial will be optimised for self-study.
+The GTN framework encourages the use of snippets, and PTDK ensures tutorials have fully detailed parameters learners should configure.
+If you make use of snippets in appropriate places, learners can easily follow a tutorial despite different skill levels with Galaxy.</p>
+
+<p>Additionally use of <a href="#questions-and-solution-boxes">Question and Solution boxes</a> can ensure that students can self-check their understanding and progress as they progress through the tutorial.
+Generally we recommend one or more questions (and associated correct solutions!) after every hands-on box (which might have a one or more steps to follow.)
+These questions will let students be sure their work is correct before they proceed too far.
+As such you should design your questions carefully in order to catch common and likely failure modes that learners may encounter.
+If a student might forget to select a less-common or deeply-nested parameter, be sure that your question following that hands on tests that properly, and if possible explain that in the solutions.</p>
+
 <h2 id="adding-images-with-captions">Adding images with captions</h2>
 
 <p>To add an image in Markdown file, we need to use the markdown syntax for this: <code class="language-plaintext highlighter-rouge">!​[proper alt text describing the image for visually impaired learners](../../images/image.png)</code>.</p>
@@ -6476,14 +6489,14 @@ This can be avoided by using the <code class="language-plaintext highlighter-rou
 
 <h2 id="internally-linking-to-other-training-material">Internally linking to other training material</h2>
 
-<p>If you want to link to other training material within your text, please use the <code class="language-plaintext highlighter-rouge">{% link path/to/file.ext %}</code> tag:</p>
+<p>If you want to link to other training material within your text, please use the <code class="language-plaintext highlighter-rouge">{​% link path/to/file.ext %​}</code> tag:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">link text</span><span class="p">](</span> <span class="sx">{%</span> link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %} )
 </code></pre></div></div>
 
 <p>(Note the <code class="language-plaintext highlighter-rouge">.md</code> extension, and not <code class="language-plaintext highlighter-rouge">.html</code>, always provide the file name here, it will automatically be converted to the correct link)</p>
 
-<p>If you want to link to a specific section in a tutorial using an anchor (e.g. <code class="language-plaintext highlighter-rouge">#getting-started</code>), place it outside of the <code class="language-plaintext highlighter-rouge">{% link %}</code> tag:</p>
+<p>If you want to link to a specific section in a tutorial using an anchor (e.g. <code class="language-plaintext highlighter-rouge">#getting-started</code>), place it outside of the <code class="language-plaintext highlighter-rouge">{​% link %​}</code> tag:</p>
 
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="nv">link text</span><span class="p">](</span><span class="sx">{%</span> link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}#section-name)
 </code></pre></div></div>
@@ -6694,7 +6707,7 @@ but may be helpful in some cases (for example to distinguish between single file
   </ol>
 </blockquote>
 
-<h2 id="questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</h2>
+<h2 id="questions-and-solutions-boxes"><strong>Questions</strong> and <strong>Solutions</strong> boxes</h2>
 
 <p>Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
 They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.</p>
@@ -6738,6 +6751,10 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.</p>
 
 <p>In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-self-study"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-self-study" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: Self-Study<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>In the context of remote trainings, where a teacher isn’t synchronously available, ensuring that you have questions throughout your materials for students to check their understanding is incredibly key.</p>   <p>Additionally ensuring that solutions are provided, and are correct and up-to-date (or use a snippet explaining data variability along with with ways to check the results) is mandatory. Students will then use these questions to self-check their understanding against what you expected them to learn.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
 
 <h2 id="tips-box"><strong>Tips</strong> box</h2>
 
@@ -6980,6 +6997,10 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 <h2 id="faqs-snippets">FAQs (snippets)</h2>
 
 <p>Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of <em>snippets</em>.</p>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-tips"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-tips" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: Tips<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>The use of snippets is <strong>extremely</strong> important for asynchronous, remote learning. In this situation as students do not have a teacher immediately on hand, and likely do not have friends or colleagues sitting working with them, they will rely on these boxes to refresh their knowledge and know what to do.</p>   <p>Please ensure you test your learning materials with a learner or colleague not familiar the material, and if possible, (<strong>silently</strong>) watch them go through your lesson. You’ll easily identify which portions need more explanations and details.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
 
 <h3 id="finding-snippets">Finding snippets</h3>
 <p>These are available in folders named <code class="language-plaintext highlighter-rouge">faqs</code>, either at the project level, topic level, or tutorial level.</p>
@@ -7575,6 +7596,10 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 	
 
 </blockquote>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-faqs"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-faqs" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: FAQs<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When you are running a remote, asynchronous lesson, you’ll want to be sure you collect all student questions and add them back to your tutorial afterwards, as FAQs. This will help other learners as they progress through the materials, and can give you a very easy URL to point your learners to if they get stuck on a particular task.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
 
 <h3 id="faq-pages">FAQ pages</h3>
 
@@ -8455,6 +8480,10 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   <li><a href="?gtn-cyoa=Avocados#choose-your-own-tutorial">See this page with Avocados</a></li>
 </ul>
 
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-preparing-materials-for-asynchronous-learning-cyoa"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-preparing-materials-for-asynchronous-learning-cyoa" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Preparing materials for asynchronous learning: CYOA<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you are running a remote training, and expect your users to follow a specific path, be <strong>certain</strong> to include the URL parameter to select the pathway to avoid student confusion. Please note that all tutorials using a CYOA <em>should</em> be tagged which will give you a heads up as a trainer.</p> </blockquote>
+<p><!--END_SNIPPET--></p>
+
 <h1 id="citations">Citations</h1>
 <p>If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called <code class="language-plaintext highlighter-rouge">tutorial.bib</code> next to your <code class="language-plaintext highlighter-rouge">tutorial.md</code> file. In this file you may enter <a href="http://www.bibtex.org/Using/">bibtex</a> formatted citations. An example is given below:</p>
 
@@ -9085,6 +9114,28 @@ author = "Bérénice Batut and Helena Rasche",
 
                 
                 
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/gallantries/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		<p>This project (<a href="https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717"><code class="language-plaintext highlighter-rouge">2020-1-NL01-KA203-064717</code></a>) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+<img src="https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg" alt="eu flag with the text: with the support of the erasmus programme of the european union" />
+<img src="https://www.erasmusplus.nl/assets/images/logo.png" alt="erasmus plus logo" /></p>
+
+	</div>
+
+</div>
+</div>
+
 
                 
 
@@ -9276,7 +9327,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/6d73a704c398ef0facf9bcc90a9053c5989c1666">6d73a70</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/68b856db07414f17661f1f1b057c80ae4d065810">68b856d</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -9304,11 +9355,7 @@ tools:
 </footer>
 
 
-    </div>
-</footer>
-
-
-        <script src='/training-material/assets/js/bundle.main.js?v=1698915723'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1698919281'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
