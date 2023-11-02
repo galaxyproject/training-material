@@ -25,6 +25,14 @@ module Jekyll
                             'for non-visual users.',
     }.freeze
 
+    EDU_ROLES = {
+      'use' => 'Students',
+      'admin-dev' => 'Galaxy Administrators',
+      'basics' => 'Students',
+      'data-science' => 'Data-Science Students',
+      'instructors' => 'Instructors',
+    }
+
     ##
     # Generate the Dublin Core metadata for a material.
     # Parmaeters:
@@ -260,7 +268,7 @@ module Jekyll
         # "associatedMedia":,
         audience: {
           '@type': 'EducationalAudience',
-          educationalRole: 'Students'
+          educationalRole: EDU_ROLES[topic['type']]
         },
         # "audio":,
         # "award":,
@@ -344,7 +352,7 @@ module Jekyll
         # "alternateName":,
         # "description" described below
         # "disambiguatingDescription":,
-        identifier: site['github_repository'],
+        identifier: 'https://gxy.io/GTN:' + material['short_id'],
         # "image":,
         # "mainEntityOfPage":,
         # "name" described below
@@ -353,7 +361,7 @@ module Jekyll
         # "subjectOf":,
         # "url" described below
         workTranslation: [],
-        creativeWorkStatus: material['draft'] ? 'Under development' : 'Active',
+        creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
       data.update(A11Y)
 
@@ -377,7 +385,7 @@ module Jekyll
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
         # Requires https://github.com/galaxyproject/training-material/pull/4271
-        # data['version'] = Gtn::ModificationTimes.obtain_modification_count(material['path'])
+        data['version'] = Gtn::ModificationTimes.obtain_modification_count(material['path'])
 
         # Time required
         if material.key?('time_estimation') && !material['time_estimation'].nil?
@@ -400,8 +408,7 @@ module Jekyll
         end
 
         # Keywords
-        data['keywords'] = [topic['name']] + (material['tags'] || [])
-        data['keywords'] = data['keywords'].join(', ')
+        data['keywords'] = [topic['title']] + (material['tags'] || [])
         # Zenodo links
         if material.key?('zenodo_link')
           mentions.push({
@@ -518,6 +525,13 @@ module Jekyll
         end
 
         data['author'] = authors
+      end
+
+      # Add non-author contributors
+      if material.key?('contributions')
+        data['contributor'] = Gtn::Contributors.get_non_authors(material).map { |x|
+          generate_person_jsonld(x, site['data']['contributors'][x], site)
+        }
       end
 
       about = []

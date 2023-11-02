@@ -38,6 +38,25 @@ module Gtn
       end
     end
 
+    ##
+    # Get the non-author contributors of a material.
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_non_authors(material)
+      if material.key?('contributors')
+        []
+      elsif material.key?('contributions')
+        material['contributions']
+          .reject{|k| k== 'funding'}
+          .reject{|k| k== 'authorship'}
+          .values.flatten.uniq
+      else
+        []
+      end
+    end
+
     # Convenience method to allow us to handle nil sites, and load directly
     # from disk ourselves.
     def self._load_file(site, category)
