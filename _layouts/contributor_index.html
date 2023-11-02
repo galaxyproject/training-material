@@ -45,7 +45,8 @@ layout: base
 
 				{% endif %}
 
-				{% if entity.affiliations | length > 0 %}
+				{% assign affil_count  = entity.affiliations | length %}
+				{% if affil_count > 0 %}
 				<h2>Affiliations</h2>
 				<div class="contributors-line">
 					{% include _includes/contributor-list.html contributors=entity.affiliations badge=true %}

@@ -416,6 +416,25 @@ Jekyll::Hooks.register :posts, :pre_render do |post, _out|
   post.data['image'] = post.data['cover']
 end
 
+# Create back-refs for affiliations
+Jekyll::Hooks.register :site, :post_read do |site|
+  # Users list affiliations on their profile in site.data['contributors']
+  # And we want to create a back-ref to the user from the affiliation
+  site.data['contributors'].each do |name, contributor|
+    if contributor.key?('affiliations')
+      contributor['affiliations'].each do |affiliation|
+        if site.data['organisations'].key?(affiliation)
+          site.data['organisations'][affiliation]['affiliations'] ||= []
+          site.data['organisations'][affiliation]['affiliations'] << name
+        elsif site.data['funders'].key?(affiliation)
+          site.data['funders'][affiliation]['affiliations'] ||= []
+          site.data['funders'][affiliation]['affiliations'] << name
+        end
+      end
+    end
+  end
+end
+
 if $PROGRAM_NAME == __FILE__
   result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(%r{^/}, ''))
   puts "Modification time of #{ARGV[0].gsub(%r{^/}, '')} is #{result}"
