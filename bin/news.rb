@@ -20,6 +20,7 @@ if options[:previousCommit].nil?
   exit 1
 end
 
+# rubocop:disable Style/GlobalVars
 $rooms = {
   'test' => {
     server: 'https://matrix.org',
@@ -34,14 +35,17 @@ $rooms = {
     room: '!yuLoaCWKpFHkWPmVEO:gitter.im',
   }
 }
-
+# rubocop:enable Style/GlobalVars
+#
 addedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=A #{options[:previousCommit]}`.split("\n")
-modifiedfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
+mfiles = `git diff --cached --name-only --ignore-all-space --diff-filter=M #{options[:previousCommit]}`.split("\n")
 # modifiedfiles = `git diff --cached --name-only --ignore-all-space
 # --diff-filter=M #{options[:previousCommit]}`.split("\n")
 
 NOW = Time.now
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
+FUNDERS = YAML.load_file('FUNDERS.yaml')
 
 # new   news
 # new   slidevideos
@@ -96,17 +100,21 @@ data = {
     news: addedfiles.grep(%r{news/_posts/.*\.md}).map { |x| printableMaterial(x) }.map { |n| fixNews(n) }
   },
   modified: {
-    slides: modifiedfiles
+    slides: mfiles
        .select { |x| filterSlides(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
-    tutorials: modifiedfiles
+    tutorials: mfiles
        .select { |x| filterTutorials(x) }
        .select { |x| onlyEnabled(x) }
        .map { |x| printableMaterial(x) },
   },
   contributors: `git diff --unified --ignore-all-space #{options[:previousCommit]} CONTRIBUTORS.yaml`
-       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] }
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
+  organisations: `git diff --unified --ignore-all-space #{options[:previousCommit]} ORGANISATIONS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
+  funders: `git diff --unified --ignore-all-space #{options[:previousCommit]} FUNDERS.yaml`
+       .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
 }
 
 def titleize(t)
@@ -125,9 +133,7 @@ end
 def format_tutorials(added, modified, kind: 'tutorials', updates: true)
   output = ''
   count = added.length
-  if updates
-    count += modified.length
-  end
+  count += modified.length if updates
   output += "\n\n## #{count} #{kind}!" if count.positive?
 
   if added.length.positive?
@@ -176,12 +182,26 @@ def build_news(data, filter: nil, updates: true)
     output += data[:contributors].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
+  if filter.nil? && data[:organisations].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:organisations].length} new organisations!\n\n"
+    output += data[:organisations].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
+  if filter.nil? && data[:funders].length.positive?
+    newsworthy = true
+    output += "\n\n## #{data[:funders].length} new funders!\n\n"
+    output += data[:funders].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+  end
+
   [output, newsworthy]
 end
 
 def send_news(output, options, channel: 'default')
   if options[:postToMatrix]
+    # rubocop:disable Style/GlobalVars
     homeserver = $rooms[channel]
+    # rubocop:enable Style/GlobalVars
     pp homeserver
 
     data = {
@@ -220,9 +240,9 @@ def send_news(output, options, channel: 'default')
       end
     end
   else
-    puts "=============="
+    puts '=============='
     puts output
-    puts "=============="
+    puts '=============='
   end
 end
 

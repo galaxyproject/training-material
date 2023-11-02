@@ -24,11 +24,11 @@ module Jekyll
         tool = context[m[2].tr('{}', '')] || m[2]
         version = tool.split('/').last
 
-        if tool.count('/') == 0
+        if tool.count('/').zero?
           "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
             '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
             "<strong>#{m[1]}</strong>" \
-          '</span>'
+            '</span>'
         else
           "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
             '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
@@ -37,7 +37,7 @@ module Jekyll
             '<i class="fas fa-cubes" aria-hidden="true"></i> ' \
             "Galaxy version #{version}" \
             ')' \
-          '</span>'
+            '</span>'
         end
       else
         %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>)
