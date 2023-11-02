@@ -54,7 +54,7 @@ pathway:
     tutorials:
       - name: beer-data-analysis
         topic: metagenomics
-      - name: nanopore-16s-metagenomics
+      - name: nanopore-16S-metagenomics
         topic: metagenomics
 
   - section: "Year 1: Advanced microbiome analysis"

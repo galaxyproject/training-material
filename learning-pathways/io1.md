@@ -28,7 +28,7 @@ pathway:
     tutorials:
       - name: python-basics
         topic: data-science
-      - name: python-advaced-np-pd
+      - name: python-advanced-np-pd
         topic: data-science
 
   - section: "Year 1: Coding in Python Modular (Avans)"
