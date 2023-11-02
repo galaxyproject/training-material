@@ -8,7 +8,7 @@ Multiomic analyses are a new and exciting way to understand the world of biology
 Seurat has kept up to date with the capacities of multimodal technologies such as Cite-Seq, which means once you've familiarized yourself with Seurat, you can seamlessly continue to use the package to analyze and explore many other types multimodal single-cell datasets. 
 
 ><comment-title></comment-title>
->Check out [Filter, Plot, and Explore with Seurat]({% link ../../topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md %}) to start doing so in RStudio with an scRNA-seq dataset!
+>Check out [Filter, Plot, and Explore with Seurat]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio %}) to start doing so in RStudio with an scRNA-seq dataset!
 {: .comment}
 
 Before we can start exploring, we'll process our transcriptomic and surface protein measurements into a Seurat object. The hardworking Galaxy programmers have kindly optimized the Seurat tool to include Cite-Seq functionality. This enables the tool to take our raw csv files as input and output Seurat objects which are easy to explore! 
