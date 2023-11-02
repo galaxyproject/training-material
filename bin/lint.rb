@@ -685,7 +685,7 @@ module GtnLinter
   end
 
   def self.zenodo_api(contents)
-    find_matching_texts(contents, /(zenodo\.org\/api\/files\/)/)
+    find_matching_texts(contents, %r{(zenodo\.org/api/files/)})
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
         path: @path,
@@ -723,7 +723,7 @@ module GtnLinter
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
-      *zenodo_api(contents),
+      *zenodo_api(contents)
     ]
   end
 
