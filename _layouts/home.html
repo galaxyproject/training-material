@@ -243,10 +243,10 @@ layout: base
 		<figcaption>
 			{% if entity[1].url %}
 			<a href="{{ entity[1].url }}">
-				{{ entity[1].name }}
+				{{ entity[1].short_name | default: entity[1].name }}
 			</a>
 			{% else %}
-				{{ entity[1].name }}
+				{{ entity[1].short_name | default: entity[1].name }}
 			{% endif %}
 		</figcaption>
 	</figure>
@@ -265,10 +265,10 @@ layout: base
 		<figcaption>
 			{% if entity[1].url %}
 			<a href="{{ entity[1].url }}">
-				{{ entity[1].name }}
+				{{ entity[1].short_name | default: entity[1].name }}
 			</a>
 			{% else %}
-				{{ entity[1].name }}
+				{{ entity[1].short_name | default: entity[1].name }}
 			{% endif %}
 		</figcaption>
 	</figure>

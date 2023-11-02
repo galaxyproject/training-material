@@ -71,7 +71,7 @@ lang: en
                 <a href="{{ site.baseurl }}/hall-of-fame/{{ org[0] }}/" class="thumbnail">
 			{{ org[1] | fetch_entity_avatar: org[0], 120 }}
 			<div class="name">
-				{{ org[1].name | default: username }}
+				{{ org[1].short_name | default: org[1].name | default: username }}
 			</div>
                 </a>
             </div>
@@ -86,7 +86,7 @@ lang: en
                 <a href="{{ site.baseurl }}/hall-of-fame/{{ funder[0] }}/" class="thumbnail">
 			{{ funder[1] | fetch_entity_avatar: funder[0], 120 }}
 			<div class="name">
-				{{ funder[1].name | default: username }}
+				{{ funder[1].short_name | default: funder[1].name | default: username }}
 			</div>
                 </a>
             </div>
