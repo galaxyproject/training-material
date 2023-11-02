@@ -691,696 +691,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Microbial Variant Calling",
-      "subtopic": "introduction",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
-      "tags": [
-        "prokaryote"
-      ],
-      "questions": [
-        "How do we detect differences between a set of reads from a microorganism and a reference genome"
-      ],
-      "objectives": [
-        "Find variants between a reference genome and a set of reads",
-        "Visualise the SNP in context of the reads aligned to the genome",
-        "Determine the effect of those variants on genomic features",
-        "Understand if the SNP is potentially affecting the phenotype"
-      ],
-      "time_estimation": "45m",
-      "key_points": [
-        "We used a tool called Snippy to call variants between our reads and our reference genome.",
-        "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype.",
-        "We used the JBrowse genome browser to visualise what these changes look like."
-      ],
-      "contributors": [
-        {
-          "name": "Anna Syme",
-          "joined": "2017-09",
-          "orcid": "0000-0002-9906-0673",
-          "id": "annasyme",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/"
-        },
-        {
-          "name": "Simon Gladman",
-          "email": "simon.gladman@unimelb.edu.au",
-          "joined": "2017-09",
-          "elixir_node": "au",
-          "orcid": "0000-0002-6100-4385",
-          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
-          "id": "slugger70",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/"
-        },
-        {
-          "name": "Torsten Seemann",
-          "joined": "2018-06",
-          "elixir_node": "au",
-          "id": "tseemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tseemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/"
-        }
-      ],
-      "short_id": "T00313",
-      "url": "/topics/variant-analysis/tutorials/microbial-variants/tutorial.html",
-      "topic_name": "variant-analysis",
-      "tutorial_name": "microbial-variants",
-      "dir": "topics/variant-analysis/tutorials/microbial-variants",
-      "id": "variant-analysis/microbial-variants",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "microbial_variant_calling.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.ga",
-          "path": "topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.ga",
-          "wfid": "variant-analysis-microbial-variants",
-          "wfname": "microbial_variant_calling",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-microbial-variants/versions/microbial_variant_calling",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://galaxytrakr.org/",
-            "name": "GalaxyTrakr",
-            "usegalaxy": "false"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Variant Analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "jbrowse",
-            "owner": "iuc",
-            "revisions": "836d1aa3e89a",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snippy",
-            "owner": "iuc",
-            "revisions": "c9a8ef2aa380",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: jbrowse\n  owner: iuc\n  revisions: 836d1aa3e89a\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snippy\n  owner: iuc\n  revisions: c9a8ef2aa380\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Identification of somatic and germline variants from tumor and normal sample pairs",
-      "subtopic": "human-genetics-cancer",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.2582555",
-      "questions": [
-        "What are the specific challenges in somatic variant calling that set it apart from regular diploid variant calling?",
-        "How can you call variants and classify them according to their presence/absence in/from tumor and normal tissue of the same individual?",
-        "How can you annotate variants and affected genes with prior knowledge from human genetic and cancer-specific databases to generate clinically relevant reports?"
-      ],
-      "objectives": [
-        "Call variants and their somatic status from whole-exome sequencing data",
-        "Annotate variants with a wealth of human genetic and cancer-specific information extracted from public databases",
-        "Add gene-level annotations and generate reports of annotated somatic and germline variants, loss-of-heterozygosity (LOH) events, and affected genes, ready for interpretation by clinicians"
-      ],
-      "time_estimation": "7h",
-      "key_points": [
-        "Follow best practices for read mapping, quality control and mapped reads postprocessing to minimize false-positive variant calls.",
-        "Use a dedicated somatic variant caller to call variants and to classify them into somatic, germline and LOH event variants on statistical grounds.",
-        "Annotations and queries based on variant properties add relevance to variant and gene reports.",
-        "A framework like GEMINI is very helpful for managing, annotating and querying lists of variants in a flexible way.",
-        "Prefer public, free annotation sources to foster reproducibility and information sharing."
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        }
-      ],
-      "short_id": "T00318",
-      "url": "/topics/variant-analysis/tutorials/somatic-variants/tutorial.html",
-      "topic_name": "variant-analysis",
-      "tutorial_name": "somatic-variants",
-      "dir": "topics/variant-analysis/tutorials/somatic-variants",
-      "id": "variant-analysis/somatic-variants",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "somatic_variants_tutorial_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.ga",
-          "path": "topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.ga",
-          "wfid": "variant-analysis-somatic-variants",
-          "wfname": "somatic_variants_tutorial_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-somatic-variants/versions/somatic_variants_tutorial_workflow",
-          "license": null,
-          "creators": [
-
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Variant Analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "column_arrange_by_header",
-            "owner": "bgruening",
-            "revisions": "6c6d26ff01ff",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "0a8c6b61f0f4",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bamtools_filter",
-            "owner": "devteam",
-            "revisions": "cb20f99fd45b",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "3fe632431b68",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "e7b2202befea",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "freebayes",
-            "owner": "devteam",
-            "revisions": "57def2d7c093",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_calmd",
-            "owner": "devteam",
-            "revisions": "06dc50b7b711",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_rmdup",
-            "owner": "devteam",
-            "revisions": "586f9e1cdb2b",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_annotate",
-            "owner": "iuc",
-            "revisions": "cf0f0f05ba9f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_load",
-            "owner": "iuc",
-            "revisions": "2270a8b83c12",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_query",
-            "owner": "iuc",
-            "revisions": "da74170c55c7",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "multiqc",
-            "owner": "iuc",
-            "revisions": "bf675f34b056",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpeff",
-            "owner": "iuc",
-            "revisions": "5c7b70713fb5",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "varscan_somatic",
-            "owner": "iuc",
-            "revisions": "cf8ffc79db67",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "dfa082f84068",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: column_arrange_by_header\n  owner: bgruening\n  revisions: 6c6d26ff01ff\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: 0a8c6b61f0f4\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bamtools_filter\n  owner: devteam\n  revisions: cb20f99fd45b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: 57def2d7c093\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_calmd\n  owner: devteam\n  revisions: 06dc50b7b711\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_annotate\n  owner: iuc\n  revisions: cf0f0f05ba9f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_query\n  owner: iuc\n  revisions: da74170c55c7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: varscan_somatic\n  owner: iuc\n  revisions: cf8ffc79db67\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: dfa082f84068\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
-      "subtopic": "human-genetics-cancer",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.6483454",
-      "questions": [
-        "How do you import data from the EGA?",
-        "How to download files with HTSGET in Galaxy?",
-        "How do you pre-process VCFs?",
-        "How do you identify causative variants?"
-      ],
-      "objectives": [
-        "Requesting DAC access and importing data from the EGA.",
-        "Pre-process VCFs using regular expressions.",
-        "Use annotations and phenotype information to find the causative variant(s)."
-      ],
-      "time_estimation": "2H",
-      "key_points": [
-        "Downloading whole datasets with HTSGET is safe and easy with Galaxy.",
-        "Regex is a usefull tool for pre-processing VCF files.",
-        "Variant annotations allows us to strictly filter VCFs to find the causative variant."
-      ],
-      "contributors": [
-        {
-          "name": "Jasper Ouwerkerk",
-          "email": "j.ouwerkerk.1@erasmusmc.nl",
-          "joined": "2022-04",
-          "elixir_node": "nl",
-          "id": "JasperO98",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/JasperO98.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/"
-        },
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        },
-        {
-          "name": "Helena Rasche",
-          "email": "hexylena@galaxians.org",
-          "orcid": "0000-0001-9760-8992",
-          "maintainer_contact": "gitter",
-          "matrix": "hexylena:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "nl",
-          "fediverse": "https://galaxians.garden/hexylena",
-          "fediverse_flavor": "akkoma",
-          "contact_for_training": false,
-          "location": {
-            "country": "NL",
-            "lat": 51.91,
-            "lon": 4.46
-          },
-          "id": "hexylena",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
-        },
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "twitter": "shiltemann",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        }
-      ],
-      "tags": [
-        "cyoa"
-      ],
-      "short_id": "T00320",
-      "url": "/topics/variant-analysis/tutorials/trio-analysis/tutorial.html",
-      "topic_name": "variant-analysis",
-      "tutorial_name": "trio-analysis",
-      "dir": "topics/variant-analysis/tutorials/trio-analysis",
-      "id": "variant-analysis/trio-analysis",
-      "video_library": {
-        "tutorial": {
-          "description": "To discover causal mutations of inherited diseases it’s common practice to do a trio\nanalysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this\nmethod, it’s possible to identify multiple inheritance patterns.\n",
-          "materials": [
-            {
-              "link": "topics/variant-analysis/tutorials/trio-analysis/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "variant-analysis"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "3OWXWOkJRqU",
-              "speakers": [
-                "JasperO98"
-              ],
-              "captions": [
-                "JasperO98"
-              ],
-              "date": "2023-05-12",
-              "length": "40M"
-            }
-          ],
-          "gtn_id": "variant-analysis/trio-analysis",
-          "title": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga",
-          "path": "topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga",
-          "wfid": "variant-analysis-trio-analysis",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0003-2556-2125",
-              "name": "Jasper Ouwerkerk"
-            }
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json",
-      "tools": [
-        "CONVERTER_gz_to_uncompressed",
-        "CONVERTER_uncompressed_to_gz",
-        "Filter1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Variant Analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "d698c222f354",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "regex_find_replace",
-            "owner": "galaxyp",
-            "revisions": "ae8c4b2488e7",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bcftools_merge",
-            "owner": "iuc",
-            "revisions": "86296490704e",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bcftools_norm",
-            "owner": "iuc",
-            "revisions": "da6fc9f4a367",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ega_download_client",
-            "owner": "iuc",
-            "revisions": "7d87a9d58aa1",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_inheritance",
-            "owner": "iuc",
-            "revisions": "2c68e29c3527",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_load",
-            "owner": "iuc",
-            "revisions": "2270a8b83c12",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "geneiobio",
-            "owner": "iuc",
-            "revisions": "c0af7b196a89",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpeff",
-            "owner": "iuc",
-            "revisions": "5c7b70713fb5",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_merge\n  owner: iuc\n  revisions: 86296490704e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: da6fc9f4a367\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ega_download_client\n  owner: iuc\n  revisions: 7d87a9d58aa1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: geneiobio\n  owner: iuc\n  revisions: c0af7b196a89\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Pox virus genome analysis from tiled-amplicon sequencing data",
       "subtopic": "one-health",
       "level": "Advanced",
@@ -1716,6 +1026,993 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
+      "subtopic": "one-health",
+      "level": "Intermediate",
+      "zenodo_link": "https://zenodo.org/record/5036687",
+      "questions": [
+        "How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?",
+        "How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?",
+        "What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?",
+        "How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?"
+      ],
+      "objectives": [
+        "Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries",
+        "Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms",
+        "Run a workflow to summarize and visualize the mutation discovery results for a batch of samples",
+        "Run a workflow to construct viral consensus sequences for the samples in a batch",
+        "Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages",
+        "Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data"
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.",
+        "The workflows enable processing of whole batches of samples with rather limited user interaction.",
+        "They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail."
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "variant-analysis",
+          "tutorials": [
+            "sars-cov-2"
+          ]
+        }
+      ],
+      "contributions": {
+        "authorship": [
+          "wm75",
+          "bebatut"
+        ],
+        "funding": [
+          "by-covid",
+          "elixir-converge"
+        ]
+      },
+      "tags": [
+        "covid19",
+        "virology",
+        "one-health"
+      ],
+      "short_id": "T00316",
+      "url": "/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "sars-cov-2-variant-discovery",
+      "dir": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery",
+      "id": "variant-analysis/sars-cov-2-variant-discovery",
+      "video_library": {
+        "tutorial": {
+          "materials": [
+            {
+              "link": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "variant-analysis"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "link": "hjlmCWQhBvI",
+              "date": "2023-05-10",
+              "speakers": [
+                "wm75"
+              ],
+              "captions": [
+                "wm75"
+              ],
+              "length": "55M"
+            },
+            {
+              "captions": [
+                "hexylena"
+              ],
+              "date": "2021-08-09",
+              "length": "1H30M",
+              "link": "vnFQ2fR_fzw",
+              "speakers": [
+                "wm75"
+              ]
+            }
+          ],
+          "gtn_id": "variant-analysis/sars-cov-2-variant-discovery",
+          "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
+      "tools": [
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0",
+        "upload1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Variant Analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "datamash_ops",
+            "owner": "iuc",
+            "revisions": "4c07ddedc198",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "nextclade",
+            "owner": "iuc",
+            "revisions": "128ba8da994f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "pangolin",
+            "owner": "iuc",
+            "revisions": "03ed9524dcd1",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fasta_regex_finder",
+            "owner": "mbernt",
+            "revisions": "9a811adb714f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: datamash_ops\n  owner: iuc\n  revisions: 4c07ddedc198\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nextclade\n  owner: iuc\n  revisions: 128ba8da994f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: 03ed9524dcd1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_regex_finder\n  owner: mbernt\n  revisions: 9a811adb714f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
+        {
+          "name": "BeYond-COVID",
+          "joined": "2023-04",
+          "funder": true,
+          "funding_id": "101046203",
+          "funding_system": "cordis",
+          "funding_statement": "BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.\n\nThis project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement № 101046203 (BY-COVID)",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/by-covid.json",
+          "id": "by-covid",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
+        },
+        {
+          "name": "ELIXIR-CONVERGE",
+          "github": false,
+          "joined": "2023-01",
+          "avatar": "https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/elixir-converge.json",
+          "funder": true,
+          "funding_id": "871075",
+          "funding_system": "cordis",
+          "funding_statement": "ELIXIR CONVERGE is connecting and align ELIXIR Nodes to deliver sustainable FAIR life-science data management services. This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement № 871075",
+          "id": "elixir-converge",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-converge/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
+      "subtopic": "human-genetics-cancer",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.6483454",
+      "questions": [
+        "How do you import data from the EGA?",
+        "How to download files with HTSGET in Galaxy?",
+        "How do you pre-process VCFs?",
+        "How do you identify causative variants?"
+      ],
+      "objectives": [
+        "Requesting DAC access and importing data from the EGA.",
+        "Pre-process VCFs using regular expressions.",
+        "Use annotations and phenotype information to find the causative variant(s)."
+      ],
+      "time_estimation": "2H",
+      "key_points": [
+        "Downloading whole datasets with HTSGET is safe and easy with Galaxy.",
+        "Regex is a usefull tool for pre-processing VCF files.",
+        "Variant annotations allows us to strictly filter VCFs to find the causative variant."
+      ],
+      "contributors": [
+        {
+          "name": "Jasper Ouwerkerk",
+          "email": "j.ouwerkerk.1@erasmusmc.nl",
+          "joined": "2022-04",
+          "elixir_node": "nl",
+          "id": "JasperO98",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/JasperO98.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/JasperO98/"
+        },
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        },
+        {
+          "name": "Helena Rasche",
+          "email": "hexylena@galaxians.org",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "fediverse": "https://galaxians.garden/hexylena",
+          "fediverse_flavor": "akkoma",
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "twitter": "shiltemann",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
+      "tags": [
+        "cyoa"
+      ],
+      "short_id": "T00320",
+      "url": "/topics/variant-analysis/tutorials/trio-analysis/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "trio-analysis",
+      "dir": "topics/variant-analysis/tutorials/trio-analysis",
+      "id": "variant-analysis/trio-analysis",
+      "video_library": {
+        "tutorial": {
+          "description": "To discover causal mutations of inherited diseases it’s common practice to do a trio\nanalysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this\nmethod, it’s possible to identify multiple inheritance patterns.\n",
+          "materials": [
+            {
+              "link": "topics/variant-analysis/tutorials/trio-analysis/tutorial.html",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "variant-analysis"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "link": "3OWXWOkJRqU",
+              "speakers": [
+                "JasperO98"
+              ],
+              "captions": [
+                "JasperO98"
+              ],
+              "date": "2023-05-12",
+              "length": "40M"
+            }
+          ],
+          "gtn_id": "variant-analysis/trio-analysis",
+          "title": "Trio Analysis using Synthetic Datasets from RD-Connect GPAP",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga",
+          "path": "topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga",
+          "wfid": "variant-analysis-trio-analysis",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main_workflow",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0003-2556-2125",
+              "name": "Jasper Ouwerkerk"
+            }
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json",
+      "tools": [
+        "CONVERTER_gz_to_uncompressed",
+        "CONVERTER_uncompressed_to_gz",
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_merge/bcftools_merge/1.10",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ega_download_client/pyega3/5.0.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/geneiobio/gene_iobio_display_generation_iframe/4.7.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Variant Analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "d698c222f354",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "regex_find_replace",
+            "owner": "galaxyp",
+            "revisions": "ae8c4b2488e7",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bcftools_merge",
+            "owner": "iuc",
+            "revisions": "86296490704e",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bcftools_norm",
+            "owner": "iuc",
+            "revisions": "da6fc9f4a367",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ega_download_client",
+            "owner": "iuc",
+            "revisions": "7d87a9d58aa1",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_inheritance",
+            "owner": "iuc",
+            "revisions": "2c68e29c3527",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_load",
+            "owner": "iuc",
+            "revisions": "2270a8b83c12",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "geneiobio",
+            "owner": "iuc",
+            "revisions": "c0af7b196a89",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpeff",
+            "owner": "iuc",
+            "revisions": "5c7b70713fb5",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: regex_find_replace\n  owner: galaxyp\n  revisions: ae8c4b2488e7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_merge\n  owner: iuc\n  revisions: 86296490704e\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: da6fc9f4a367\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ega_download_client\n  owner: iuc\n  revisions: 7d87a9d58aa1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: geneiobio\n  owner: iuc\n  revisions: c0af7b196a89\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/trio-analysis/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Microbial Variant Calling",
+      "subtopic": "introduction",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.582600",
+      "tags": [
+        "prokaryote"
+      ],
+      "questions": [
+        "How do we detect differences between a set of reads from a microorganism and a reference genome"
+      ],
+      "objectives": [
+        "Find variants between a reference genome and a set of reads",
+        "Visualise the SNP in context of the reads aligned to the genome",
+        "Determine the effect of those variants on genomic features",
+        "Understand if the SNP is potentially affecting the phenotype"
+      ],
+      "time_estimation": "45m",
+      "key_points": [
+        "We used a tool called Snippy to call variants between our reads and our reference genome.",
+        "As our reference genome had annotations, we could see what effect the changes have on the features as annotated in the reference and therefore make inferences on the possible changes to the phenotype.",
+        "We used the JBrowse genome browser to visualise what these changes look like."
+      ],
+      "contributors": [
+        {
+          "name": "Anna Syme",
+          "joined": "2017-09",
+          "orcid": "0000-0002-9906-0673",
+          "id": "annasyme",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annasyme.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/"
+        },
+        {
+          "name": "Simon Gladman",
+          "email": "simon.gladman@unimelb.edu.au",
+          "joined": "2017-09",
+          "elixir_node": "au",
+          "orcid": "0000-0002-6100-4385",
+          "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
+          "id": "slugger70",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/"
+        },
+        {
+          "name": "Torsten Seemann",
+          "joined": "2018-06",
+          "elixir_node": "au",
+          "id": "tseemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tseemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/"
+        }
+      ],
+      "short_id": "T00313",
+      "url": "/topics/variant-analysis/tutorials/microbial-variants/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "microbial-variants",
+      "dir": "topics/variant-analysis/tutorials/microbial-variants",
+      "id": "variant-analysis/microbial-variants",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "microbial_variant_calling.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.ga",
+          "path": "topics/variant-analysis/tutorials/microbial-variants/workflows/microbial_variant_calling.ga",
+          "wfid": "variant-analysis-microbial-variants",
+          "wfname": "microbial_variant_calling",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-microbial-variants/versions/microbial_variant_calling",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": "false"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Variant Analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "jbrowse",
+            "owner": "iuc",
+            "revisions": "836d1aa3e89a",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snippy",
+            "owner": "iuc",
+            "revisions": "c9a8ef2aa380",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: jbrowse\n  owner: iuc\n  revisions: 836d1aa3e89a\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snippy\n  owner: iuc\n  revisions: c9a8ef2aa380\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/microbial-variants/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Exome sequencing data analysis for diagnosing a genetic disease",
+      "subtopic": "human-genetics-cancer",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.3054169",
+      "questions": [
+        "How do you identify genetic variants in samples based on exome sequencing data?",
+        "How do you, among the set of detected variants, identify candidate causative variants for a given phenotype/disease?"
+      ],
+      "objectives": [
+        "Jointly call variants and genotypes for a family trio from whole-exome sequencing data",
+        "Use variant annotation and the observed inheritance pattern of a phenotype to identify candidate causative variants and to prioritize them"
+      ],
+      "time_estimation": "5h",
+      "key_points": [
+        "Exome sequencing is an efficient way to identify disease-relevant genetic variants.",
+        "Freebayes is a good variant and genotype caller for the joint analysis of multiple samples. It is straightforward to use and requires only minimal processing of mapped reads.",
+        "Variant annotation and being able to exploit genotype information across family members is key to identifying candidate disease variants. SnpEff and GEMINI, in particular, are powerful tools offered by Galaxy for that purpose."
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        },
+        {
+          "name": "Bérénice Batut",
+          "email": "berenice.batut@gmail.com",
+          "twitter": "bebatut",
+          "linkedin": "berenicebatut",
+          "matrix": "bebatut:matrix.org",
+          "orcid": "0000-0001-9852-1987",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 45.77,
+            "lon": 3.08
+          },
+          "fediverse": "https://piaille.fr/@bebatut",
+          "fediverse_flavor": "mastodon",
+          "id": "bebatut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+        },
+        {
+          "name": "Torsten Houwaart",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "torhou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/torhou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/torhou/"
+        },
+        {
+          "name": "Anika Erxleben",
+          "email": "anikaerxleben@gmail.com",
+          "orcid": "0000-0002-7427-6478",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "erxleben",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "linkedin": "bgruening",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        }
+      ],
+      "short_id": "T00311",
+      "url": "/topics/variant-analysis/tutorials/exome-seq/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "exome-seq",
+      "dir": "topics/variant-analysis/tutorials/exome-seq",
+      "id": "variant-analysis/exome-seq",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "workflow_exome_seq_from_premapped.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.ga",
+          "path": "topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.ga",
+          "wfid": "variant-analysis-exome-seq",
+          "wfname": "workflow_exome_seq_from_premapped",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-exome-seq/versions/workflow_exome_seq_from_premapped",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0002-9464-6640",
+              "name": "Wolfgang Maier"
+            }
+          ],
+          "test_results": null
+        },
+        {
+          "workflow": "workflow_exome_seq_full.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.ga",
+          "path": "topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.ga",
+          "wfid": "variant-analysis-exome-seq",
+          "wfname": "workflow_exome_seq_full",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-exome-seq/versions/workflow_exome_seq_full",
+          "license": "MIT",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0002-9464-6640",
+              "name": "Wolfgang Maier"
+            }
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3+T.galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Variant Analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "e188dc7a68e6",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "5ec9f6bceaee",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "freebayes",
+            "owner": "devteam",
+            "revisions": "a5937157062f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_rmdup",
+            "owner": "devteam",
+            "revisions": "586f9e1cdb2b",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bcftools_norm",
+            "owner": "iuc",
+            "revisions": "ebb2e12a6de1",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_inheritance",
+            "owner": "iuc",
+            "revisions": "2c68e29c3527",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_load",
+            "owner": "iuc",
+            "revisions": "2270a8b83c12",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "multiqc",
+            "owner": "iuc",
+            "revisions": "abfd8a6544d7",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_view",
+            "owner": "iuc",
+            "revisions": "5826298f6a73",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpeff",
+            "owner": "iuc",
+            "revisions": "5b80f544c67f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpeff",
+            "owner": "iuc",
+            "revisions": "5b80f544c67f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "d94aff5ee623",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: a5937157062f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: ebb2e12a6de1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
       "subtopic": "one-health",
       "questions": [
@@ -2031,6 +2328,259 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Identification of somatic and germline variants from tumor and normal sample pairs",
+      "subtopic": "human-genetics-cancer",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.2582555",
+      "questions": [
+        "What are the specific challenges in somatic variant calling that set it apart from regular diploid variant calling?",
+        "How can you call variants and classify them according to their presence/absence in/from tumor and normal tissue of the same individual?",
+        "How can you annotate variants and affected genes with prior knowledge from human genetic and cancer-specific databases to generate clinically relevant reports?"
+      ],
+      "objectives": [
+        "Call variants and their somatic status from whole-exome sequencing data",
+        "Annotate variants with a wealth of human genetic and cancer-specific information extracted from public databases",
+        "Add gene-level annotations and generate reports of annotated somatic and germline variants, loss-of-heterozygosity (LOH) events, and affected genes, ready for interpretation by clinicians"
+      ],
+      "time_estimation": "7h",
+      "key_points": [
+        "Follow best practices for read mapping, quality control and mapped reads postprocessing to minimize false-positive variant calls.",
+        "Use a dedicated somatic variant caller to call variants and to classify them into somatic, germline and LOH event variants on statistical grounds.",
+        "Annotations and queries based on variant properties add relevance to variant and gene reports.",
+        "A framework like GEMINI is very helpful for managing, annotating and querying lists of variants in a flexible way.",
+        "Prefer public, free annotation sources to foster reproducibility and information sharing."
+      ],
+      "contributors": [
+        {
+          "name": "Wolfgang Maier",
+          "orcid": "0000-0002-9464-6640",
+          "matrix": "wm75:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "fediverse": "https://scholar.social/@zerodivision",
+          "fediverse_flavor": "mastodon",
+          "id": "wm75",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+        }
+      ],
+      "short_id": "T00318",
+      "url": "/topics/variant-analysis/tutorials/somatic-variants/tutorial.html",
+      "topic_name": "variant-analysis",
+      "tutorial_name": "somatic-variants",
+      "dir": "topics/variant-analysis/tutorials/somatic-variants",
+      "id": "variant-analysis/somatic-variants",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "somatic_variants_tutorial_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.ga",
+          "path": "topics/variant-analysis/tutorials/somatic-variants/workflows/somatic_variants_tutorial_workflow.ga",
+          "wfid": "variant-analysis-somatic-variants",
+          "wfname": "somatic_variants_tutorial_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-somatic-variants/versions/somatic_variants_tutorial_workflow",
+          "license": null,
+          "creators": [
+
+          ],
+          "test_results": null
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_calmd/samtools_calmd/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/varscan_somatic/varscan_somatic/2.4.3.6",
+        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": "true"
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": "true"
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": "true"
+          }
+        ]
+      },
+      "topic_name_human": "Variant Analysis",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "column_arrange_by_header",
+            "owner": "bgruening",
+            "revisions": "6c6d26ff01ff",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "0a8c6b61f0f4",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bamtools_filter",
+            "owner": "devteam",
+            "revisions": "cb20f99fd45b",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "bwa",
+            "owner": "devteam",
+            "revisions": "3fe632431b68",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "fastqc",
+            "owner": "devteam",
+            "revisions": "e7b2202befea",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "freebayes",
+            "owner": "devteam",
+            "revisions": "57def2d7c093",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_calmd",
+            "owner": "devteam",
+            "revisions": "06dc50b7b711",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "samtools_rmdup",
+            "owner": "devteam",
+            "revisions": "586f9e1cdb2b",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_annotate",
+            "owner": "iuc",
+            "revisions": "cf0f0f05ba9f",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_load",
+            "owner": "iuc",
+            "revisions": "2270a8b83c12",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "gemini_query",
+            "owner": "iuc",
+            "revisions": "da74170c55c7",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "multiqc",
+            "owner": "iuc",
+            "revisions": "bf675f34b056",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "snpeff",
+            "owner": "iuc",
+            "revisions": "5c7b70713fb5",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "varscan_somatic",
+            "owner": "iuc",
+            "revisions": "cf8ffc79db67",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "trimmomatic",
+            "owner": "pjbriggs",
+            "revisions": "dfa082f84068",
+            "tool_panel_section_label": "Variant Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: column_arrange_by_header\n  owner: bgruening\n  revisions: 6c6d26ff01ff\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: text_processing\n  owner: bgruening\n  revisions: 0a8c6b61f0f4\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bamtools_filter\n  owner: devteam\n  revisions: cb20f99fd45b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 3fe632431b68\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: e7b2202befea\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: 57def2d7c093\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_calmd\n  owner: devteam\n  revisions: 06dc50b7b711\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_annotate\n  owner: iuc\n  revisions: cf0f0f05ba9f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_query\n  owner: iuc\n  revisions: da74170c55c7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: bf675f34b056\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5c7b70713fb5\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: varscan_somatic\n  owner: iuc\n  revisions: cf8ffc79db67\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: dfa082f84068\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/somatic-variants/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Somatic Variant Discovery from WES Data Using Control-FREEC",
       "zenodo_link": "https://doi.org/10.5281/zenodo.2582555",
       "subtopic": "human-genetics-cancer",
@@ -2329,307 +2879,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Exome sequencing data analysis for diagnosing a genetic disease",
-      "subtopic": "human-genetics-cancer",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.3054169",
-      "questions": [
-        "How do you identify genetic variants in samples based on exome sequencing data?",
-        "How do you, among the set of detected variants, identify candidate causative variants for a given phenotype/disease?"
-      ],
-      "objectives": [
-        "Jointly call variants and genotypes for a family trio from whole-exome sequencing data",
-        "Use variant annotation and the observed inheritance pattern of a phenotype to identify candidate causative variants and to prioritize them"
-      ],
-      "time_estimation": "5h",
-      "key_points": [
-        "Exome sequencing is an efficient way to identify disease-relevant genetic variants.",
-        "Freebayes is a good variant and genotype caller for the joint analysis of multiple samples. It is straightforward to use and requires only minimal processing of mapped reads.",
-        "Variant annotation and being able to exploit genotype information across family members is key to identifying candidate disease variants. SnpEff and GEMINI, in particular, are powerful tools offered by Galaxy for that purpose."
-      ],
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "Torsten Houwaart",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "torhou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/torhou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/torhou/"
-        },
-        {
-          "name": "Anika Erxleben",
-          "email": "anikaerxleben@gmail.com",
-          "orcid": "0000-0002-7427-6478",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "erxleben",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
-        },
-        {
-          "name": "Björn Grüning",
-          "email": "bjoern.gruening@gmail.com",
-          "twitter": "bjoerngruening",
-          "fediverse": "https://fosstodon.org/@bgruening",
-          "fediverse_flavor": "mastodon",
-          "matrix": "bgruening:matrix.org",
-          "orcid": "0000-0002-3079-6586",
-          "linkedin": "bgruening",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "bgruening",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
-        }
-      ],
-      "short_id": "T00311",
-      "url": "/topics/variant-analysis/tutorials/exome-seq/tutorial.html",
-      "topic_name": "variant-analysis",
-      "tutorial_name": "exome-seq",
-      "dir": "topics/variant-analysis/tutorials/exome-seq",
-      "id": "variant-analysis/exome-seq",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "workflow_exome_seq_from_premapped.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.ga",
-          "path": "topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.ga",
-          "wfid": "variant-analysis-exome-seq",
-          "wfname": "workflow_exome_seq_from_premapped",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-exome-seq/versions/workflow_exome_seq_from_premapped",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0002-9464-6640",
-              "name": "Wolfgang Maier"
-            }
-          ],
-          "test_results": null
-        },
-        {
-          "workflow": "workflow_exome_seq_full.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.ga",
-          "path": "topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.ga",
-          "wfid": "variant-analysis-exome-seq",
-          "wfname": "workflow_exome_seq_full",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-exome-seq/versions/workflow_exome_seq_full",
-          "license": "MIT",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0002-9464-6640",
-              "name": "Wolfgang Maier"
-            }
-          ],
-          "test_results": null
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json",
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.3.6+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.15.1+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff_download/4.3+T.galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org.au",
-            "name": "UseGalaxy.org.au",
-            "usegalaxy": "true"
-          }
-        ]
-      },
-      "topic_name_human": "Variant Analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "bwa",
-            "owner": "devteam",
-            "revisions": "e188dc7a68e6",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fastqc",
-            "owner": "devteam",
-            "revisions": "5ec9f6bceaee",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "freebayes",
-            "owner": "devteam",
-            "revisions": "a5937157062f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_rmdup",
-            "owner": "devteam",
-            "revisions": "586f9e1cdb2b",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "bcftools_norm",
-            "owner": "iuc",
-            "revisions": "ebb2e12a6de1",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_inheritance",
-            "owner": "iuc",
-            "revisions": "2c68e29c3527",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "gemini_load",
-            "owner": "iuc",
-            "revisions": "2270a8b83c12",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "multiqc",
-            "owner": "iuc",
-            "revisions": "abfd8a6544d7",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "samtools_view",
-            "owner": "iuc",
-            "revisions": "5826298f6a73",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpeff",
-            "owner": "iuc",
-            "revisions": "5b80f544c67f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "snpeff",
-            "owner": "iuc",
-            "revisions": "5b80f544c67f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "trimmomatic",
-            "owner": "pjbriggs",
-            "revisions": "d94aff5ee623",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastqc\n  owner: devteam\n  revisions: 5ec9f6bceaee\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: freebayes\n  owner: devteam\n  revisions: a5937157062f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_rmdup\n  owner: devteam\n  revisions: 586f9e1cdb2b\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bcftools_norm\n  owner: iuc\n  revisions: ebb2e12a6de1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_inheritance\n  owner: iuc\n  revisions: 2c68e29c3527\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: gemini_load\n  owner: iuc\n  revisions: 2270a8b83c12\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: multiqc\n  owner: iuc\n  revisions: abfd8a6544d7\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: snpeff\n  owner: iuc\n  revisions: 5b80f544c67f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: trimmomatic\n  owner: pjbriggs\n  revisions: d94aff5ee623\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/exome-seq/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Mapping and molecular identification of phenotype-causing mutations",
       "subtopic": "model-organisms",
       "zenodo_link": "https://doi.org/10.5281/zenodo.1098033",
@@ -2819,255 +3068,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
-      "subtopic": "one-health",
-      "level": "Intermediate",
-      "zenodo_link": "https://zenodo.org/record/5036687",
-      "questions": [
-        "How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?",
-        "How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?",
-        "What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?",
-        "How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?"
-      ],
-      "objectives": [
-        "Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries",
-        "Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms",
-        "Run a workflow to summarize and visualize the mutation discovery results for a batch of samples",
-        "Run a workflow to construct viral consensus sequences for the samples in a batch",
-        "Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages",
-        "Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data"
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.",
-        "The workflows enable processing of whole batches of samples with rather limited user interaction.",
-        "They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail."
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "variant-analysis",
-          "tutorials": [
-            "sars-cov-2"
-          ]
-        }
-      ],
-      "contributions": {
-        "authorship": [
-          "wm75",
-          "bebatut"
-        ],
-        "funding": [
-          "by-covid",
-          "elixir-converge"
-        ]
-      },
-      "tags": [
-        "covid19",
-        "virology",
-        "one-health"
-      ],
-      "short_id": "T00316",
-      "url": "/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
-      "topic_name": "variant-analysis",
-      "tutorial_name": "sars-cov-2-variant-discovery",
-      "dir": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery",
-      "id": "variant-analysis/sars-cov-2-variant-discovery",
-      "video_library": {
-        "tutorial": {
-          "materials": [
-            {
-              "link": "topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "variant-analysis"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "link": "hjlmCWQhBvI",
-              "date": "2023-05-10",
-              "speakers": [
-                "wm75"
-              ],
-              "captions": [
-                "wm75"
-              ],
-              "length": "55M"
-            },
-            {
-              "captions": [
-                "hexylena"
-              ],
-              "date": "2021-08-09",
-              "length": "1H30M",
-              "link": "vnFQ2fR_fzw",
-              "speakers": [
-                "wm75"
-              ]
-            }
-          ],
-          "gtn_id": "variant-analysis/sars-cov-2-variant-discovery",
-          "title": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
-      "tools": [
-        "Filter1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/2.7.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/mbernt/fasta_regex_finder/fasta_regex_finder/0.1.0",
-        "upload1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": "true"
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": "true"
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Variant Analysis",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "datamash_ops",
-            "owner": "iuc",
-            "revisions": "4c07ddedc198",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "nextclade",
-            "owner": "iuc",
-            "revisions": "128ba8da994f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "pangolin",
-            "owner": "iuc",
-            "revisions": "03ed9524dcd1",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "fasta_regex_finder",
-            "owner": "mbernt",
-            "revisions": "9a811adb714f",
-            "tool_panel_section_label": "Variant Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: datamash_ops\n  owner: iuc\n  revisions: 4c07ddedc198\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: nextclade\n  owner: iuc\n  revisions: 128ba8da994f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: pangolin\n  owner: iuc\n  revisions: 03ed9524dcd1\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fasta_regex_finder\n  owner: mbernt\n  revisions: 9a811adb714f\n  tool_panel_section_label: Variant Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Wolfgang Maier",
-          "orcid": "0000-0002-9464-6640",
-          "matrix": "wm75:matrix.org",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "fediverse": "https://scholar.social/@zerodivision",
-          "fediverse_flavor": "mastodon",
-          "id": "wm75",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
-        },
-        {
-          "name": "Bérénice Batut",
-          "email": "berenice.batut@gmail.com",
-          "twitter": "bebatut",
-          "linkedin": "berenicebatut",
-          "matrix": "bebatut:matrix.org",
-          "orcid": "0000-0001-9852-1987",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 45.77,
-            "lon": 3.08
-          },
-          "fediverse": "https://piaille.fr/@bebatut",
-          "fediverse_flavor": "mastodon",
-          "id": "bebatut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
-        },
-        {
-          "name": "BeYond-COVID",
-          "joined": "2023-04",
-          "funder": true,
-          "funding_id": "101046203",
-          "funding_system": "cordis",
-          "funding_statement": "BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.\n\nThis project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement № 101046203 (BY-COVID)",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/by-covid.json",
-          "id": "by-covid",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
-        },
-        {
-          "name": "ELIXIR-CONVERGE",
-          "github": false,
-          "joined": "2023-01",
-          "avatar": "https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/elixir-converge.json",
-          "funder": true,
-          "funding_id": "871075",
-          "funding_system": "cordis",
-          "funding_statement": "ELIXIR CONVERGE is connecting and align ELIXIR Nodes to deliver sustainable FAIR life-science data management services. This project has received funding from the European Union’s Horizon 2020 research and innovation programme under grant agreement № 871075",
-          "id": "elixir-converge",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-converge/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json"
       }
     },
     {
