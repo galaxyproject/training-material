@@ -217,4 +217,18 @@ cd19_adt|cd19_rna
 
 Voila! The same plot but in two different ways! This may feel repetetive, but finding these alternative means of accomplishing the same goal has been one of my biggest aids in troubleshooting these kinds of analyses. Quite often a function will break, be retired, or simply no longer be compatible with your workflow. When these situations arise it is important to not panic and just remember: there is *always* another way. 
 
-Alterntively, 
+We can also plot scatter plots of the cell surface protein expression. These will be functionally similar to biaxial plots used for FACS! 
+```r
+FeatureScatter(srt, feature1 = "adt_CD19", feature2 = "adt_CD3")
+```
+![CD19 & CD3 Protein ScatterPlot](../../images/scCiteSeq-RStudio/Plot10.png "CD19 & CD3 Protein Expression")
+
+We can even visualize the RNA vs. protein differences in a scatterplot format: 
+```{r}
+FeatureScatter(srt, feature1 = "adt_CD3", feature2 = "rna_CD3E")
+```
+![CD3 Protein & CD3E RNA ScatterPlot](../../images/scCiteSeq-RStudio/Plot11.png "CD3 Protein & CD3E RNA Expression")
+
+There are endless options for continuing to explore your multimodal data from here. In their own [vignette](https://satijalab.org/seurat/articles/multimodal_vignette), Seurat describes future directions of analysis you might be interested in pursuing. 
+
+Congratulations on completing this tutorial!
