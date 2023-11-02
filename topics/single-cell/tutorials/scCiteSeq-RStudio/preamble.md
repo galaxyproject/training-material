@@ -56,6 +56,7 @@ Zenodo? NCBI? OmicsDI?
 - Currently stored on NCBI & currently searching through the NCBI tools to see if one will work for import 
 
 Now we'll run those csv files through the updated Seurat tool with the following parameters:
+> <hands-on-title></hands-on-title>
 > Run {% tool [Seurat](toolshed.g2.bx.psu.edu/repos/iuc/seurat/seurat/4.3.0.1+galaxy1) %} with the following parameters:
 > - *"Which Seuray method should be run"*: `Cite-seq`
 > - *"RNA counts file"*: `1: GSE100866_CBMC_8K_13AB_10X-RNA_umi.csv.gz`
