@@ -357,6 +357,10 @@ module Jekyll
       end
     end
 
+    def get_version_number(page)
+      Gtn::ModificationTimes.obtain_modification_count(page['path'])
+    end
+
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
