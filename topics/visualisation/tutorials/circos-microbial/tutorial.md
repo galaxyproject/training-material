@@ -2,9 +2,9 @@
 layout: tutorial_hands_on
 
 title: Ploting a Microbial Genome with Circos
-zenodo_link: https://doi.org/10.5281/zenodo.3591856
+zenodo_link: "https://doi.org/10.5281/zenodo.3591856"
 questions:
-  - "How can I visualise common genomic datasets like GFF3, BigWig, and VCF
+  - "How can I visualise common genomic datasets like GFF3, BigWig, and VCF"
 objectives:
   - Plot an *E. coli* genome in Galaxy
   - With tracks for the annotations, sequencing data, and variants.
