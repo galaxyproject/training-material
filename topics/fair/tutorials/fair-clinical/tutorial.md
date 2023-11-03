@@ -26,6 +26,7 @@ contributions:
   editing:
   - kkamieniecka
   - tb143
+  - poterlowicz-lab
     
 subtopic: fair-data
 
