@@ -31,7 +31,7 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
 
 <!-- GTN:IGNORE:002 -->

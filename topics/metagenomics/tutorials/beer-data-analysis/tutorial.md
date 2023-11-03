@@ -30,7 +30,7 @@ contributions:
     - bebatut
     - teresa-m
     funding:
-    - erasmusplus
+    - gallantries
 ---
 
 # Introduction

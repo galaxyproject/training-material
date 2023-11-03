@@ -23,7 +23,7 @@ contributions:
   - colineroyaux
   - yvanlebras
   funding:
-  - erasmusplus
+  - gallantries
 
 ---
 

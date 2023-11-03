@@ -30,6 +30,7 @@ contributions:
   - lldelisle
   testing:
   - mira-miracoli
+  - edmontosaurus
 tags:
   - ansible
   - deploying
@@ -1142,6 +1143,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > You can add this file to your repository with `git add .gitattributes`
 >    > to ensure colleagues get a copy of the file too. Just **be sure**
 >    > `.vault-password.txt` is listed in your `.gitignore` file!
+>    >
+>    > You will also need to run this command to define how the `ansible-vault` differ should work:
+>    >
+>    > ```
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
 >    >
 >    > If you have more vault secrets, you can adjust this line (or add more,
 >    > wildcards are supported) to list all of your secret files. This tells

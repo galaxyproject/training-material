@@ -22,11 +22,23 @@ module Jekyll
       if m
         # check if a variable was provided for the tool id
         tool = context[m[2].tr('{}', '')] || m[2]
+        version = tool.split('/').last
 
-        "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"link\">" \
-          "<strong>#{m[1]}</strong> " \
-          '<i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i>' \
-          "<span class=\"visually-hidden\">Tool: #{tool}</span></span>"
+        if tool.count('/').zero?
+          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+            '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
+            "<strong>#{m[1]}</strong>" \
+            '</span>'
+        else
+          "<span class=\"tool\" data-tool=\"#{tool}\" title=\"#{m[1]} tool\" aria-role=\"button\">" \
+            '<i class="fas fa-wrench" aria-hidden="true"></i> ' \
+            "<strong>#{m[1]}</strong> " \
+            '(' \
+            '<i class="fas fa-cubes" aria-hidden="true"></i> ' \
+            "Galaxy version #{version}" \
+            ')' \
+            '</span>'
+        end
       else
         %(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>)
       end

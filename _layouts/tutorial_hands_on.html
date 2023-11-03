@@ -356,7 +356,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-{% assign authors = page.contributors | filter_authors:page.contributions -%}
+{% assign authors = page | filter_authors -%}
 	author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 	title = "{{ page.title }} (Galaxy Training Materials)",
 	year = "{{ page.last_modified_at | date: "%Y"}}",
