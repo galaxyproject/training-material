@@ -90,6 +90,8 @@ pathway:
     tutorials:
       - name: circos
         topic: visualisation
+      - name: circos-microbial
+        topic: visualisation
 
   - section: "Year 3: Introduction to Visualisation with R and Python"
     description: |
