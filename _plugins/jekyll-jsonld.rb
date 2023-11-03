@@ -10,7 +10,8 @@ module Jekyll
       '@type': 'Organization',
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
-      url: 'https://galaxyproject.org/teach/gtn/'
+      url: 'https://training.galaxyproject.org',
+      logo: 'https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png',
     }.freeze
 
     A11Y = {
