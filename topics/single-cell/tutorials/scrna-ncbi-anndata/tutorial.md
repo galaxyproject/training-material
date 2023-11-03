@@ -39,7 +39,7 @@ The goal of this tutorial is to take raw NCBI data from some published research,
 
 # Obtaining the Data
 
-The first step is the obtain the data, for this tutorial we will use data from [this](https://pubmed.ncbi.nlm.nih.gov/35013146/) paper. The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data, the link to the data can be found [here](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031).
+The first step is the obtain the data, for this tutorial we will use data from the following paper: [https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/). The data for this research is stored in the Gene Expression Omnibus (GEO) which is a public repository storing public genomics data, the link to the data can be found in the following GEO repository: [https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE176031).
 
 Looking at the GEO repository we can see a lot of data including descriptions of the data and associated paper, what we are interested in however is the supplemental data found at the bottom of the page. Under the download section ```(custom)``` allows us to select individual files to download, however we are going to download all of the data by selecting the ```(http)``` link.
 
