@@ -153,9 +153,9 @@ module Gtn
       # These are all collapsed by default, details, tip, and solution.
       # rubocop:disable Layout/LineLength
       [box_id, %(
-        <div class="box-title #{box_type}-title" id="#{box_id}">
+        <div class="box-title #{box_type}-title" id="#{box_id}" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
         <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}#{refers_to_contents}" aria-expanded="true">
-          #{get_icon(box_type)} #{box_title}
+          #{get_icon(box_type)} <span itemprop="name">#{box_title}</span>
           <span class="fold-unfold fa fa-minus-square"></span>
         </button>
         </div>
@@ -197,7 +197,7 @@ module Gtn
       %(
         <div class="box #{box_type}" markdown=0>
         #{box_title}
-        <div class="box-content" id="#{box_id}-contents" markdown=1>
+        <div class="box-content" id="#{box_id}-contents" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer" markdown=1>
       ).split(/\n/).map(&:strip).join.strip
     end
 
