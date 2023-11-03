@@ -139,21 +139,36 @@ module Jekyll
     end
 
     def generate_funder_jsonld(id, contributor, site)
-      organization = {
-        '@context': 'https://schema.org',
-        '@type': 'Grant',
-        identifier: contributor['funding_id'],
-        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-        funder: {
+      organization = [
+        {
+          '@context': 'https://schema.org',
           '@type': 'Organization',
+          'http://purl.org/dc/terms/conformsTo': {
+            '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+            '@type': 'CreativeWork'
+          },
           name: Gtn::Contributors.fetch_name(site, id),
-          description: contributor.fetch('funding_statement',
-                                         'An organization supporting the Galaxy Training Network'),
-          url: Gtn::Contributors.fetch_funding_url(contributor),
+          description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+          url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
+          logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Grant',
+          identifier: contributor['funding_id'],
+          url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+          funder: {
+            '@type': 'Organization',
+            name: contributor['funder_name'],
+            description: contributor.fetch('funding_statement',
+                                           'An organization supporting the Galaxy Training Network'),
+            url: Gtn::Contributors.fetch_funding_url(contributor),
+          }
         }
-      }
-      organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
-      organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
+      ]
+
+      organization[1]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization[1]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
