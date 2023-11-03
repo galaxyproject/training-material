@@ -37,8 +37,6 @@ contributions:
     - biont
 ---
 
-# Introduction
-
 When doing a biological data analysis, we might end up with some interesting proteins, that we need explore these genes. But how can we do that? What are the resources available for that? And how to navigate through them?
 
 The aim of this tutorial is to familiarize ourselves with that, using Human opsins as an example.

@@ -21,8 +21,6 @@ contributors:
 - simonbray
 ---
 
-# Introduction
-
 
 In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
 

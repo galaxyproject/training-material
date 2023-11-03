@@ -50,8 +50,6 @@ follow_up_training:
 ---
 
 
-# Introduction
-
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant

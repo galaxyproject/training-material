@@ -42,7 +42,6 @@ abbreviations:
   QV: consensus accuracy quality value
 ---
 
-# Introduction
 
 Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produced highly accurate but short (up to 800bp) reads. Those read extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 

@@ -19,7 +19,6 @@ contributors:
   - wm75
 ---
 
-# Introduction
 
 
 In order to map and identify phenotype-causing mutations efficiently from a

@@ -28,8 +28,6 @@ contributors:
 ---
 
 
-# Introduction
-
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 

@@ -26,7 +26,6 @@ contributors:
 subtopic: upload
 ---
 
-# Introduction
 
 
 This builds on the previous Rule Based Uploader tutorial to cover even more advanced topics.
