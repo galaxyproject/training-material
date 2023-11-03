@@ -12,6 +12,13 @@ time_estimation: 30m
 key_points:
   - Circos is incredibly customisable
   - Not all customisations have to be done with rules, but they can be a useful method
+
+requirements:
+  - type: "internal"
+    topic_name: visualisation
+    tutorials:
+      - circos
+
 contributions:
   authorship:
   - hexylena
