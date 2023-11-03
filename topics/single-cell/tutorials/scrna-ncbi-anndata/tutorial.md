@@ -2,31 +2,25 @@
 layout: tutorial_hands_on
 
 title: Converting NCBI data to the AnnData Format
-subtopic: Single cell data ingestion and formats conversion
+subtopic: datamanipulation
 priority: 3
-zenodo_link: 'https://zenodo.org/record/7053673'
 
 questions:
 - How do i understand NCBI data?
 - How can i convert raw gene data to the AnnData format?
 - How do i manually and automatically add metadata to my AnnData object?
 objectives:
-- add objectives here
+- Analyse some gene data from NCBI.
+- Convert raw gene expression data into the AnnData format.
+- Add metadata to the AnnData object to prepare it for analysis.
 time_estimation: 1H
 key_points:
-- Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
-- Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
+- Single cell data often requires additional processing and conversion before it is able to be analysed.
+- Metadata and annotations can be added in both manually and automatically with various tools and resources.
 
-requirements:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-case_alevin
-        - scrna-case_alevin-combine-datasets
 tags:
-- 10x
-- paper-replication
+- single-cell
+- data-management
 
 contributions:
   authorship:
@@ -36,11 +30,10 @@ follow_up_training:
   -
     type: "internal"
     topic_name: single-cell
-    tutorials:
-        - scrna-case_JUPYTER-trajectories
-        - scrna-case_monocle3-trajectories
 
 ---
+
+# Introduction
 
 The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.
 
@@ -50,7 +43,9 @@ The first step is the obtain the data, for this tutorial we will use data from [
 
 Looking at the GEO repository we can see a lot of data including descriptions of the data and associated paper, what we are interested in however is the supplemental data found at the bottom of the page. Under the download section ```(custom)``` allows us to select individual files to download, however we are going to download all of the data by selecting the ```(http)``` link.
 
-We now have the raw gene expression data that we will be processing downloaded, however we will need to manually add some metadata which requires finding out some more information about our data. Looking at the link for the paper [https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/) we can see a link for accessing the full text, clicking on that will lead us to a page [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
+That should download a .TAR file which contains all the files compressed into one archive, we will need to decompress/extract this to reveal a folder full of .GZ files, these individual files are further compressed and will each need to be decompressed, this can be done all at once by highlighting all the files in the folder and decompressing/extracting them together.
+
+We now have the raw gene expression data that we will be processing downloaded, however we will need to manually add some metadata which requires finding out some more information about our files. Looking at the link for the paper ([https://pubmed.ncbi.nlm.nih.gov/35013146/](https://pubmed.ncbi.nlm.nih.gov/35013146/)) we can see a link for accessing the full text, clicking on that will lead us to a page ([https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8748675/)) which contains more supplementary materials. Under this section we should see various .xlsx files (Excel spreadsheets), go ahead and download Supplementary Dataset 1 (```41467_2021_27322_MOESM2_ESM.xlsx```), this one spreadsheet contains all the information we need to further understand our data.
 
 # Understanding the Data
 
@@ -65,7 +60,7 @@ Looking at the excel file we can see multiple sheets, navigating to ```Clinical_
 | Patient 3 | MAY_PB2A       | right-anterior |
 |           | MAY_PB2B       | right-mid      |
 
-We can see that each patient has 2 different samples from different tumor locations, this is important information that needs to be added to our data so that we can seperate the data during analysis.
+We can see that each patient has 2 different samples from different tumor locations, this is important information that needs to be added to our data so that we can seperate it during analysis if needed.
 
 Finally we need to find the files relating to each patient, inspecting ```GSE176031_RAW``` (downloaded earlier) we can see 53 files, unfortunately the names of the files don't exactly match the data in our excel sheet which can make finding the right samples a bit difficult, a summary of which samples match which file can be found below:
 
@@ -76,7 +71,7 @@ Finally we need to find the files relating to each patient, inspecting ```GSE176
 - **MAY_PB2A** ---> **PA_PB2A**
 - **MAY_PB2B** ---> **PA_PB2B**
 
-You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X** these are replications where multiple samples are taken of the same tumor area which helps get a more comprehensive view of the gene data of the tumor.
+You may also notice that we have multiple sample files with the same name suffixed with **_Pool_X** these are replications where multiple samples are taken of the same tumor area in order to get a more comprehensive view of the gene data of the tumor, we will need to combine these replication files during processing.
 
 # Importing the Data
 
@@ -124,6 +119,10 @@ The first step is to convert all of the raw files into AnnData objects, this can
 {: .hands_on}
 
 Looking at the observation data (obs) of one of the files we can see that it is storing cell data, however we need the variable data (var) to store the cells and the observation data to store the genes, so we also need to transpose all of our AnnData objects, again we can speed up the process by selecting all of the AnnData objects and process them at once.
+
+> <comment-title>Check your data</comment-title>
+> Whilst for this specific data the object needed to be transposed this won't always be the case! The easiest way is to check the obs data of the AnnData object using the ```Inspect AnnData``` tool. The obs file should have a column containing gene letters (something like **CGGAAGTGATAC**) if thats the case then the data doesn't need to be transposed!
+{: .comment}
 
 > <hands-on-title>Transpose AnnData objects</hands-on-title>
 >
@@ -369,7 +368,7 @@ With the metadata completed the last step is to add it to our original combined 
 >
 {: .hands_on}
 
-Congratulations! You have successfully interpreted some data and added all the relevant annotations to the AnnData object! All thats left to do is to add some additional metadata using automated tools!
+{% icon congratulations %} Congratulations! You have successfully interpreted some data and added all the relevant annotations to the AnnData object! All thats left to do is to add some additional metadata using automated tools!
 
 # Further Processing the Data
 
@@ -416,6 +415,10 @@ The final tool to run is the ```AnnData Operations``` tool which will add the re
 >
 {: .hands_on}
 
-With that run we should be finished! check the observation file to see all the metadata that we've added in throughout the tutorial and take this time to check that all the columns contain data, if any of the columns are blank then there was probably an issue with one of the tools (likely the last 2!).
+With that run we should be finished! check the observation file to see all the metadata that we've added in throughout the tutorial and take this time to check that all the columns contain data.
 
-Congratulations! Now your data is ready for any further processing or analysis!
+> <warning-title>Check your final object!</warning-title>
+> The above tools will sometimes run without error but not produce the correct results, inspecing the obs file of the final AnnData object you should see that all the columns contain data, if any of the columns are blank then something has gone wrong!
+{: .warning}
+
+{% icon congratulations %} Congratulations! Now your data is ready for further processing or analysis!
