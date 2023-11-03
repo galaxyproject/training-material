@@ -484,17 +484,21 @@ The regions marked with red circles highlight the most notable difference betwee
 
 # Conclusion
 
-To sum up, it is worthwhile to compare the final assembly with the [_S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt).
+To sum up, it is worthwhile to compare the final assembly with the [_S. cerevisiae_ S288C reference genome](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt):
 
-![Figure 9: Final stats](../../images/vgp_assembly/stats_conclusion.png "Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).")
+-----
 
-With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.9a,b). It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 9b).
+![Figure 9: Quast plot](../../images/vgp_assembly/quast_plot.png "Cumulative continuity plot comparing assembly generated here (red line) with existing yeast reference (black dotted line). Our assembly is slightly smaller (11,287,131 bp versus 12,071,326. Our assembly is lacking the mitochondrial genome (~86 kb) beacuse the initial data does include mitochondrial reads. This is partially responsible for this discrepancy. ")
 
-![Figure 10: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.png "Comparison between contact maps generated using the final assembly (a) and the reference genome (b).")
+------
 
-If we compare the contact map of our assembled genome (fig. 10a) with the reference assembly (fig. 10b), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
+With respect to the total sequence length, we can conclude that the size of our genome assembly is very similar to the reference genome. It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. (The above comparison is performed using {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} using Primary assembly generated with scaffolding workflow (WF8) and yeast reference.)
 
-# FAQs
+-----
 
+![Figure 10: Comparison reference genome](../../images/vgp_assembly/hi-c_pretext_conclusion.svg "Comparison between contact maps generated using the final Primary assembly from this tutorial (left) and the reference genome (right).")
 
+------
+
+If we compare the contact map of our assembled genome with the reference assembly (Fig. above), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.
 
