@@ -29,6 +29,7 @@ contributions:
   funding: []
   testing:
     - cat-bro
+    - edmontosaurus
 tags:
   - jobs
   - git-gat
@@ -181,7 +182,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    ```
 >    {: data-commit="Add tpv-auto-lint to requirements"}
 >
-> 1. Install the missing role
+> 2. Install the missing role
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -190,7 +191,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 2. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
+> 3. Change your `group_vars/galaxyservers.yml`. We need to create a new directory where the TPV configs will be stored after linting, and add that directory name as variable for the role. The default name is 'TPV_DO_NOT_TOUCH' for extra safety 😉. If you want a different name, you need to change the `tpv_config_dir_name` variable, too. We also need to create a directory, `tpv_mutable_dir` (a role default variable), where TPV configs are copied before linting.
 >
 >    {% raw %}
 >    ```diff
@@ -220,7 +221,7 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TPV config dir"}
-> 3. Add the role to your `galaxy.yml` playbook.
+> 4. Add the role to your `galaxy.yml` playbook.
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
@@ -236,14 +237,9 @@ And of course, Galaxy has an Ansible Role for that.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tpv-auto-lint role"}
-> 4. Run the Galaxy playbook. Because we modified the job configuration, Galaxy will be restarted to reread its config files.
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > ansible-playbook galaxy.yml
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
+> 5. At this point we won't run the modified playbook just yet. Because TPV itself has not yet been installed,
+>    the tpv_auto_lint role would fail at this point. So first, we'll have to install and configure TPV itself before the
+>    linter can work.
 >
 {: .hands_on}
 ## Configuring TPV
@@ -652,7 +648,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         slow_query_log_threshold: 5
 >         enable_per_request_sql_debugging: true
 >    @@ -137,6 +146,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>         dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2

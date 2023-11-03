@@ -48,7 +48,7 @@ contributions:
     - hexylena
   funding:
     - carpentries
-    - erasmusplus
+    - gallantries
 
 ---
 

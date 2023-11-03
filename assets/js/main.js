@@ -44,7 +44,7 @@ $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title>button", this).click();
 });
 
-$("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
+$("section#tutorial-content .hands_on,section#tutorial-content .hands-on").each((idx, el) => {
 	var box_id = $(".box-title", el).attr("id");
 	$(el).append(`
 		<p class="text-muted" style="text-align:right;font-size:0.9rem;">

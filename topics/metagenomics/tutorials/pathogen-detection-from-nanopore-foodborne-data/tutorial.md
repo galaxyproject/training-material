@@ -31,7 +31,7 @@ contributions:
     - hrhotz
     - wm75
    funding:
-    - erasmusplus
+    - gallantries
     - eosc-life
 ---
 
