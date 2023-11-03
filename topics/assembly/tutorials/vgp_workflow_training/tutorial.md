@@ -41,11 +41,11 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-
 # Introduction
 
+------
 
-The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick explanation on how these workflows can be used for producing high quality assemblies. It is intended for the "inpatient" types. 
+The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual). 
 
 > <agenda-title></agenda-title>
 >
@@ -58,7 +58,9 @@ The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, ne
 
 # Getting started on Galaxy
 
-This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
+--------
+
+This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommend you visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
 - [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
 - [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
 - [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
@@ -67,21 +69,35 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 - [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
 - [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
+# The VGP-Galaxy pipeline
 
-# VGP-Galaxy pipeline: A collection of versatile workflows
+-------
 
-The {VGP} assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
+The {VGP} assembly pipeline has a modular organization, consisting in ten workflows (Fig. 1). It can used with the following types of input data:
 
------
+|  Input | Assembly quality  | Analysis trajectory <br>(Fig. 1) |
+|------|---------------|-----|
+| HiFi | The minimum requirement | A |
+| HiFi + HiC| Better continuity | B |
+| HiFi + BioNano | Better continuity | C |  
+| HiFi + Hi-C + BioNano | Even better continuity | D |
+| HiFi + parental data| Better haplotype resolution | E |
+| HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F | 
+| HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
+| HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
+
+If this table "HiFi" and "Hi-C" are derived from the individual whose genome is being assembled. "Parental data" is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
+
+----
 
 ![Figure 1: The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 
 ----
 
-The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using hifiasm16. The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles7. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication— is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. 
+The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
-> For high quality genome assemblies, we recommends at least 30✕ of each HiFi and Hi-C per haplotype (i.e. 60✕ coverage for diploid genomes). The higher the quality and the coverage, the higher the continuity and the quality of the final assembly. 
+> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions. 
 {: .comment}
 
 # Getting the data
@@ -140,6 +156,12 @@ These datasets are in `fastqsanger.gz` format. Upload by following the steps sho
 ![Figure 3: Uploading Fasta files in Galaxy]({{site.baseurl}}/faqs/galaxy/images/upload_fastqsanger_via_url.png "Here we upload two fastqsanger.gz files. Uncompressed or bz2 compressed (.bz2) detests are uploaded in exactly the same fashion by selecting an appropriation datatype (fastqsanger or fastasanger.bz2)")
 
 -----
+
+> <warning-title>These datasets are large!</warning-title>
+> Hi-C datasets are large. It will take some time (~15 min) for them to be fully uploaded. Please, be patient.
+{: .warning}
+
+
 
 ## Other ways to upload data
 
@@ -303,7 +325,7 @@ Let's have a look at the stats generated by **gfastats**. This output summarizes
 
 >| Statistic | Hap 1 | Hap 2 |
 >|-----------|----------:|------:|
->| # coontigs | 16 | 19 |
+>| # contigs | 16 | 19 |
 >| Total contig length | 12,050,076 | 12,360,746 |
 >| Average contig length | 753,129.75  | 650,565.58 |
 >| Contig N50 |  923,452 | 922,430 |
