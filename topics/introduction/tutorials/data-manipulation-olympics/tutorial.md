@@ -27,7 +27,7 @@ contributions:
   editing:
     - hexylena
   funding:
-    - erasmusplus
+    - gallantries
 level: Introductory
 
 subtopic: next-steps

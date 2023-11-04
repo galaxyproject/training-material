@@ -25,7 +25,7 @@ contributions:
     - bebatut
     - paulzierep
    funding:
-    - erasmusplus
+    - gallantries
 tags:
 - metagenomics
 - taxonomic profiling

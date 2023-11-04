@@ -9,8 +9,8 @@ redirect_from:
 
 <!-- topic stats -->
 {% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
-{% assign topics_science = topics | where: "type","use" | where_exp:"item","item.enable != false" | sort: "name" %}
-{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'" | where_exp: "item", "item.type != 'map'" | where_exp:"item","item.enable != false" %}
+{% assign topics_science = site | list_topics_by_category: "science" | to_vals %}
+{% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}
 
 <!-- contributors stats -->
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}

@@ -127,8 +127,6 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 
 ## Concatenating objects
 
-{% snippet faqs/galaxy/tutorial_mode.md %}
-
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:

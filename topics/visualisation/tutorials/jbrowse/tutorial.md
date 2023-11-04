@@ -17,7 +17,7 @@ key_points:
 contributors:
   - hexylena
   - shiltemann
-  - erasmusplus
+  - gallantries
 ---
 
 # Introduction
