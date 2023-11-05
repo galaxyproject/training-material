@@ -112,7 +112,7 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 
 > <hands-on-title>Calculating the flux of a target using Flux Balance Analysis (FBA)</hands-on-title>
 >
-> 1. Run {% tool [Flux balance analysis](toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1) %} with the following parameters:
+> 1. Run {% tool [Flux balance analysis](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpfba/rptools_rpfba/6.3.2+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Pathway (rpSBML)"*: Select `Heterologous pathways` (Input dataset collection) from your current history.
 >    - {% icon param-file %} *"Model (SBML)"*: Select `SBML_Model_iML1515.xml` (Input dataset) from your current history.
 >    - *"SBML compartment ID"*: Leave the default value `c`.
@@ -140,7 +140,7 @@ We first perform an FBA (with COBRApy) optimizing the biomass reaction and recor
 >
 > > <solution-title></solution-title>
 > >
-> > 1. View the SBML rp_003_0001 file and look for `fba_fraction` value in `<groups:listOfGroups>` section: value= `0.23693089430893874`.
+> > 1. View the SBML rp_003_0001 file and look for `fba_fraction` value in `<groups:listOfGroups>` section: value= `0.2369`.
 > >
 > {: .solution}
 >
@@ -160,8 +160,8 @@ Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based
 
 > <hands-on-title>Compute thermodynamics values for each pathway using rpThermo tool</hands-on-title>
 >
-> 1. {% tool [Thermo](toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1) %} with the following parameters:
->    - {% icon param-file %} *"Input File"*: `pathway_with_fba` (output of **Flux balance analysis** {% icon tool %})
+> 1. {% tool [Thermo](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpthermo/rptools_rpthermo/6.3.2) %} with the following parameters:
+>    - {% icon param-file %} *"SBML Input File"*: `Flux balance accross collection` (output of **Flux balance analysis** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
