@@ -176,7 +176,7 @@ Secondly, we will use the _Thermo_ tool to estimate thermodynamics values (based
 >
 > > <solution-title></solution-title>
 > >
-> > 1. View the SBML rp_001_0001 file and search the reaction ID `2.5.1.29` contained in `<listOfReactions>`. The corresponding value is indicated in `thermo_dGm_prime` field : `-242.348`.
+> > 1. View the SBML rp_001_0001 file and search the reaction ID `2.5.1.29` contained in `<listOfReactions>`. The corresponding value is indicated in `thermo_dGm_prime` field : `-242.3`.
 > >
 > {: .solution}
 >
@@ -188,8 +188,8 @@ The _Pathway Score_ tool provides a global score for a given pathway previously 
 
 > <hands-on-title>Compute the global score using the _Pathway Score_ tool</hands-on-title>
 >
-> 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1) %} with the following parameters:
->    - {% icon param-file %} *"Pathway (rpSBML)"*: `pathway_with_thermo` (output of **Thermo** {% icon tool %})
+> 1. {% tool [Score Pathway](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpscore/rptools_rpscore/6.3.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Pathway (rpSBML)"*: `Thermo - Flux balance analysis accross collection` (output of **Thermo** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
@@ -204,7 +204,7 @@ The _Pathway Score_ tool provides a global score for a given pathway previously 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. View the SBML file `rp_001_0001` and search for `global_score` : value=`0.975147980451584`.
+> > 1. View the SBML file `rp_001_0001` and search for `global_score` : value=`0.975`.
 > >
 > {: .solution}
 >
@@ -216,8 +216,8 @@ Finally, _Rank Pathways_ ranks the previous set of heterologous pathways, based 
 
 > <hands-on-title>Rank annotated pathways using rpRanker tool</hands-on-title>
 >
-> 1. {% tool [Rank Pathways](toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1) %} with the following parameters:
->    - {% icon param-file %} *"Pathways"*: `scored_pathway` (output of **Score Pathway** {% icon tool %})
+> 1. {% tool [Rank Pathways](toolshed.g2.bx.psu.edu/repos/tduigou/rptools_rpranker/rptools_rpranker/6.3.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Pathways"*: `Score - Thermo - Flux balance analysis accross collection` (output of **Score Pathway** {% icon tool %})
 >
 >    > <comment-title></comment-title>
 >    >
@@ -255,7 +255,7 @@ In this section, you can run the Pathway Analysis Workflow more easily and fastl
 >    - {% icon param-file %} *"Heterologous pathways":* Select `Heterologous pathways` (Input dataset collection) from your current history.
 >    - {% icon param-file %} *"Chassis where to produce target from"*: Select `SBML_Model_iML1515.xml` (Input dataset) from your current history.
 >    - *"Cell compartment ID"*: Enter value `c`.
->    - *"biomass reaction ID"*: Specify the biomass reaction ID that will be restricted in the "fraction" simulation type `R_BIOMASS_Ec_iML1515_core_75p37M`.
+>    - *"Biomass reaction ID"*: Specify the biomass reaction ID that will be restricted in the "fraction" simulation type `R_BIOMASS_Ec_iML1515_core_75p37M`.
 >
 >    > <comment-title></comment-title>
 >    >
