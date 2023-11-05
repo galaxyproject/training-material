@@ -92,6 +92,9 @@ Before we start working on the tutorial notebook, we need to install required pa
 >```
 >conda install -y -c bioconda bioconductor-dropletutils
 >```
+>```
+>conda install -y -c bioconda atlas-gene-annotation-manipulation
+>```
 >
 {: .hands_on}
 
