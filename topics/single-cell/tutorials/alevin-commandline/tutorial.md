@@ -158,7 +158,28 @@ Why filtered FASTA?
 Sometimes it's important that there are no transcripts in a FASTA-format transcriptome that cannot be matched to a transcript/gene mapping. Salmon, for example,  used to produce errors when this mismatch was present. We can synchronise the cDNA file by removing mismatches as we have done above.
 
 
-## Generate a transcriptome index & quantify!
+## Generate a transcriptome index
+
+We will use Salmon in mapping-based mode, so first we have to build a salmon index for our transcriptome. We will run the salmon indexer as so:
+
+```bash
+salmon-latest_linux_x86_64/bin/salmon index -t filtered_fasta_code -i salmon_index_code -k 31
+```
+
+Where `-t` stands for our filtered FASTA file, and `-i` is the output the mapping-based index. To build it, the funciton is using an auxiliary k-mer hash over k-mers of length 31. While the mapping algorithms will make used of arbitrarily long matches between the query and reference, the k size selected here will act as the minimum acceptable length for a valid match. Thus, a smaller value of k may slightly improve sensitivity. We find that a k of 31 seems to work well for reads of 75bp or longer, but you might consider a smaller k if you plan to deal with shorter reads. Also, a shorter value of k may improve sensitivity even more when using selective alignment (enabled via the –validateMappings flag). So, if you are seeing a smaller mapping rate than you might expect, consider building the index with a slightly smaller k.
+
+<!---
+reference salmon
+-->
+
+
+<!---
+check if we need decoy
+-->
+
+## Use Alevin
+
+
 
 > <warning-title>Process stopping</warning-title>
 >  
