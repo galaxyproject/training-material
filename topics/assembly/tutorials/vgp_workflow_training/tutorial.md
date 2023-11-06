@@ -183,20 +183,33 @@ The three {HiFi} fasta files are better represented as a collection: {collection
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
-
 Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
 
 # Importing workflows
 
+All analyses described in this tutorial are performed using *workflows*--chains of tools. Before we can proceed we need to import workflows into your Galaxy account. In order to do this you need to follow the instruction below.
+
+## Workflows for this tutorial
+
+All current assembly workflows were shown in Fig. 1 above. In this tutorial we will use only four following workflows:
+
+*K*-mer profiling workflow (WF1)
+```
+https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/kmer-profiling-hifi-VGP1/kmer-profiling-hifi-VGP1.ga`
+```
+
+
 ## From DockStore
+
+{% snippet faqs/galaxy/workflows_import_from_dockstore.md %}
 
 ## From WorkflowHub
 
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
+
 ## From GitHub
 
-## From a file
-
-{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
+{% snippet faqs/galaxy/workflows_import_from_github.md %}
 
 The workflows imported are marked with a red square in the following figure:
 
