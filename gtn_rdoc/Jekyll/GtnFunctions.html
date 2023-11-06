@@ -79,6 +79,7 @@
     <li ><a href="#method-i-fix_box_titles">#fix_box_titles</a>
     <li ><a href="#method-i-get_default_link">#get_default_link</a>
     <li ><a href="#method-i-get_topic">#get_topic</a>
+    <li ><a href="#method-i-get_version_number">#get_version_number</a>
     <li ><a href="#method-i-gtn_mod_date">#gtn_mod_date</a>
     <li ><a href="#method-i-how_many_topic_feedbacks">#how_many_topic_feedbacks</a>
     <li ><a href="#method-i-how_many_tutorial_feedbacks">#how_many_tutorial_feedbacks</a>
@@ -559,7 +560,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 </dd></dl>
 
           <div class="method-source-code" id="get_default_link-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 388</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 392</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_default_link</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;NO LINK&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
@@ -605,10 +606,31 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
 <pre>{{ page | get_topic }}</pre>
 
           <div class="method-source-code" id="get_topic-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 377</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 381</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_topic</span>(<span class="ruby-identifier">page</span>)
   <span class="ruby-comment"># Arrays that will store all introduction slides and tutorials we discover.</span>
   <span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">1</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-get_version_number" class="method-detail ">
+        <div class="method-heading">
+          <span class="method-name">get_version_number</span><span
+            class="method-args">(page)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="get_version_number-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 360</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_version_number</span>(<span class="ruby-identifier">page</span>)
+  <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">ModificationTimes</span>.<span class="ruby-identifier">obtain_modification_count</span>(<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;path&#39;</span>])
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -1012,7 +1034,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
           
 
           <div class="method-source-code" id="topic_name_from_page-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 360</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 364</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topic_name_from_page</span>(<span class="ruby-identifier">page</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">page</span>.<span class="ruby-identifier">key?</span> <span class="ruby-string">&#39;topic_name&#39;</span>
     <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">page</span>[<span class="ruby-string">&#39;topic_name&#39;</span>]][<span class="ruby-string">&#39;title&#39;</span>]
