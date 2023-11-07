@@ -65,7 +65,6 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 - [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
 - [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
 - [Using Dataset Collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %})
-- [Introduction to Galaxy Analyses](https://training.galaxyproject.org/training-material/topics/introduction)
 - [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
 - [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
