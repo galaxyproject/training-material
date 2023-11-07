@@ -191,7 +191,7 @@ Once we have imported the datasets, the next step is to import the VGP workflows
 
 -----
 
-All analyses described in this tutorial are performed using *workflows*--chains of tools. Before we can proceed we need to import workflows into your Galaxy account. In order to do this you need to follow the instruction below.
+All analyses described in this tutorial are performed using *workflows*--chains of tools. Before we can proceed, we need to import workflows into your Galaxy account. In order to do this you need to follow the instruction below.
 
 ## Workflows for this tutorial
 
@@ -341,7 +341,7 @@ The assembly workflow takes the following inputs:
 
 <p align="center"><iframe width="560" height="315" src="https://www.youtube.com/embed/xEYBEcpG6t0?si=5RpPillmp2fUZ9em" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p>
 
-> **Video 1**. Launching assembly and sending results to a new history. 
+**Video 1**. Launching assembly and sending results to a new history. 
 
 -----
 
