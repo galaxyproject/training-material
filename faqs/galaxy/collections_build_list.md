@@ -6,7 +6,7 @@ layout: faq
 contributors: [shiltemann, hexylena]
 ---
 
-#### Step-by-step
+**Step-by-step**
 
 ------
 
@@ -20,7 +20,7 @@ contributors: [shiltemann, hexylena]
 * Click **Create List** to build your collection
 * Click on the checkmark icon at the top of your history again
 
-#### Everything together
+**Everything together**
 
 ------
 
