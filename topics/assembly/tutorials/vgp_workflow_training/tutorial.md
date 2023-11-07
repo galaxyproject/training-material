@@ -102,6 +102,8 @@ The first stage of the pipeline is the generation of *k*-mer profiles of the raw
 
 # Getting the data
 
+-----
+
 The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeast ([*Saccharomyces cerevisiae*](https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae)). The tutorial represents trajectory **B** from Fig. 1 above. For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
 1. A set of PacBio {HiFi} reads in `fasta` format
@@ -187,27 +189,46 @@ Once we have imported the datasets, the next step is to import the VGP workflows
 
 # Importing workflows
 
+-----
+
 All analyses described in this tutorial are performed using *workflows*--chains of tools. Before we can proceed we need to import workflows into your Galaxy account. In order to do this you need to follow the instruction below.
 
 ## Workflows for this tutorial
 
-All current assembly workflows were shown in Fig. 1 above. In this tutorial we will use only four following workflows:
+All current assembly workflows were shown in Fig. 1 above. In this tutorial we will use the four workflows listed below. 
 
-*K*-mer profiling workflow (WF1)
+### *K*-mer profiling workflow (WF1) 
+
 ```
-https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/kmer-profiling-hifi-VGP1/kmer-profiling-hifi-VGP1.ga`
+https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/kmer-profiling-hifi-VGP1/kmer-profiling-hifi-VGP1.ga)
+```
+### Assembly (contiging) with Hi-C (WF4) 
+
+```
+https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/Assembly-Hifi-HiC-phasing-VGP4/Assembly-Hifi-HiC-phasing-VGP4.ga
+```
+### Purge duplicate contigs (WF6)
+
+```
+https://github.com/galaxyproject/iwc/raw/main/workflows/VGP-assembly-v2/Purge-duplicate-contigs-VGP6/Purge-duplicate-contigs-VGP6.ga
+```
+### Scaffolding with Hi-C (WF8)
+
+```
+https://raw.githubusercontent.com/galaxyproject/iwc/main/workflows/VGP-assembly-v2/Scaffolding-HiC-VGP8/Scaffolding-HiC-VGP8.ga
 ```
 
+## Other ways to import workflows into Galaxy
 
-## From DockStore
+### From DockStore
 
 {% snippet faqs/galaxy/workflows_import_from_dockstore.md %}
 
-## From WorkflowHub
+### From WorkflowHub
 
 {% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
 
-## From GitHub
+### From GitHub
 
 {% snippet faqs/galaxy/workflows_import_from_github.md %}
 
