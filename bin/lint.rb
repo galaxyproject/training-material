@@ -403,6 +403,7 @@ module GtnLinter
     'cat1',
     'comp1',
     'gene2exon1',
+    'gff2bed1',
     'intermine',
     'join1',
     'param_value_from_file',
