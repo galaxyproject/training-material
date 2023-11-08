@@ -96,7 +96,7 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 >    - In *"Parameter Group"*:
 >        - {% icon param-files %} *"Infiles"*: `sample1`, `sample2`
 >        - *"missed cleavages"*: `1`
->        - *"variable modifications"*: `unselect all variable modifications`
+>        - *"enzyme"*: `Trypsin/P`
 >        - *"Quantitation Methods"*: `label free quantification`
 >    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `Yes`
 >    - In *"Output Options"*:
@@ -258,7 +258,7 @@ To explore the proteomic composition of the two serum samples some postprocessin
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 2 (272 lines (Protein Groups) minus 272 lines (Filter))
+> > 1. 2 (272 lines (Protein Groups) minus 270 lines (Filter))
 > > 2. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins ([plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms)).
 > > 3. Sample1 was depleted, sample2 was pure serum.
 > > 4. In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.
@@ -333,7 +333,7 @@ After analyzing the composition of each sample separately, the intensities betwe
 > 1. The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.
 > 2. A necessary first step is to log2-transform the LFQ intensities.
 > 3. Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.
-> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as [LIMMA](https://www.doi.org/10.1093/nar/gkv007), [SAM](https://www.doi.org/10.1073/pnas.091062498) and [MSstats](https://doi.org/10.1093/bioinformatics/btu305) {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %}. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
+> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as LIMMA ({% cite Ritchie2015 %}), SAM ({% cite Tusher2001 %}) and MSstats ({% cite Choi2014 %}) {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %}. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
 >
 {: .tip}
 
