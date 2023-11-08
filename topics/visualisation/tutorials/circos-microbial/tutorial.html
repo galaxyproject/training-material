@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Ploting a Microbial Genome with Circos</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@e76855af4130dfa469c6f1d05e62ef96a0029325",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699437130' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699437130' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Ploting a Microbial Genome with Circos">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2023-11-03 13:38:24 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material for data visualisation in Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Galaxy Training: Ploting a Microbial Genome with Circos">
+        <meta property="og:description" content="Training material for data visualisation in Galaxy">
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png">
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-11-03 13:38:24 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Ploting a Microbial Genome with Circos",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Visualisation",
+    "description": "Training material for data visualisation in Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/visualisation/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Ploting a Microbial Genome with Circos' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html",
+  "timeRequired": "PT30M",
+  "teaches": "Plot an *E. coli* genome in Galaxy\n - With tracks for the annotations, sequencing data, and variants.",
+  "keywords": "visualisation",
+  "description": "The questions this  addresses are:\n - How can I visualise common genomic datasets like GFF3, BigWig, and VCF\n\n\nThe objectives are:\n - Plot an *E. coli* genome in Galaxy\n - With tracks for the annotations, sequencing data, and variants.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos/slides.html",
+      "name": "Circos",
+      "description": "Slides for 'Circos' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos/tutorial.html",
+      "name": "Visualisation with Circos",
+      "description": "Hands-on for 'Visualisation with Circos' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/",
+      "name": "Helena Rasche",
+      "image": "https://avatars.githubusercontent.com/hexylena",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9760-8992",
+      "orcid": "https://orcid.org/0000-0001-9760-8992"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Visualisation",
+      "description": "Training material for data visualisation in Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/visualisation/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0337",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0337",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0337"
+    }
+  ],
+  "educationalLevel": "Introductory",
+  "mentions": [
+
+  ],
+  "abstract": "Once you're comfortable with [Circos in Galaxy]({% link topics/visualisation/tutorials/circos/tutorial.md %}), you might want to explore some real world use cases with Circos such as making a simple Genome Annotation plot, like one might want to publish alongside their genome annotation publication"
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script src='/training-material/assets/js/bundle.theme.js?v=1699437130'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/visualisation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Visualisation
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/visualisation/faqs/" title="Check our FAQs for the Visualisation topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/visualisation/tutorials/circos-microbial/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+		<a href="/training-material/preferences.html" class="dropdown-item">
+			<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> User Preferences <span class="badge badge-secondary">New</span>
+		</a>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/smorgasbord2023/topics/visualisation/tutorials/circos-microbial/tutorial.html">smorgasbord2023</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-11-01/topics/visualisation/tutorials/circos-microbial/tutorial.html">2023-11-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-10-01/topics/visualisation/tutorials/circos-microbial/tutorial.html">2023-10-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-visualisation">
+    <h1 data-toc-skip>Ploting a Microbial Genome with Circos</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How can I visualise common genomic datasets like GFF3, BigWig, and VCF</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Plot an <em>E. coli</em> genome in Galaxy</p>
+</li>
+        
+        <li><p>With tracks for the annotations, sequencing data, and variants.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/visualisation">Visualisation</a>
+        
+            <ul>
+                
+                    
+                        
+                            
+                            <li> Visualisation with Circos:
+                            
+                                <a href="/training-material/topics/visualisation/tutorials/circos/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 30 minutes</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://doi.org/10.5281/zenodo.3591856">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/visualisation/tutorials/circos-microbial/workflows/" title="Ploting a Microbial Genome with Circos workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr/" title="">
+			UseGalaxy.fr <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
+			UseGalaxy.no
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main)
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+    
+
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 3, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>.
+             The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Once you’re comfortable with <a href="/training-material/topics/visualisation/tutorials/circos/tutorial.html">Circos in Galaxy</a>, you might want to explore some real world use cases with Circos such as making a simple Genome Annotation plot, like one might want to publish alongside their genome annotation publication</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#fast-option-using-a-workflow" id="markdown-toc-fast-option-using-a-workflow">Fast Option: Using a Workflow</a></li>
+  <li><a href="#manual-configuration" id="markdown-toc-manual-configuration">Manual Configuration</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<p>There are a few common data formats and potentially required transformations for working with genome annotation data in Galaxy:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Data type</th>
+      <th>Transformations</th>
+      <th>Visualisation Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Genome Annotations</td>
+      <td>Circos Interval to Tiles, Circos Interval to Text Labels</td>
+      <td>Tiles (classic gene box-type viz), Text labels (used for annotating the important genes names), or a histogram (feature density)</td>
+    </tr>
+    <tr>
+      <td>Sequencing</td>
+      <td>BAM Coverage → Circos BigWig to Scatter</td>
+      <td>Histogram is probably the most common visualisation option</td>
+    </tr>
+    <tr>
+      <td>Variants</td>
+      <td>From BAM + variant calling, cut tool</td>
+      <td>Select specific columns of the VCF file (i.e. chromosome, position, position, quality)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create and name a new history for this tutorial.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the datasets we will visualize:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3591856/files/genome.fa
+https://zenodo.org/record/3591856/files/dna%20sequencing%20coverage.bw
+https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%201.bw
+https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%202.bw
+https://zenodo.org/record/3591856/files/genes%20(NCBI).gff3
+https://zenodo.org/record/3591856/files/variants.vcf
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This is a subset<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> of <em>Escherichia coli str. K-12 substr. MG1655</em>, and associated sequencing data.</p>
+
+<p>And we’ll be using that data to make the following plot:</p>
+
+<figure id="figure-1" style="max-width: 90%; margin:auto;"><img src="images/plot.png" alt="plot of NC_000913 showing a range of datasets, from outside to in: a pink band representing the genome, two rna seq datasets and a dna seq coverage dataset showing coverage spikes around 10 and 20kb. Next inside is an overlapping set of genes presumably on the plus strand in dark blue overlapped with lilac triangles representing variants. Next a set of gene names, and finally a set of minus strand genes before a GC skew map in red and blue." width="3000" height="3000" loading="lazy" /><a target="_blank" href="images/plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Resulting Circos Plot showing a set of gene annotations, RNA-Seq, DNA-Seq coverage, as well as variants.</figcaption></figure>
+
+<h2 id="fast-option-using-a-workflow">Fast Option: Using a Workflow</h2>
+
+<p>If you would like to try the ‘fast’ option, once you’ve imported the datasets, you can run the following workflow:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run workflow</div>
+
+  <ol>
+    <li>
+      <p><strong>Import the workflow</strong> into Galaxy</p>
+
+      <!--SNIPPET-->
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a workflow</div>   <div class="show-when-galaxy-proxy-active"> Click here to run the  <span class="workflow" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control"><strong>Quality Control</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> workflow. </div>   <p class="hide-when-galaxy-proxy-active">Or copy the URL (e.g. via right-click) of <a href="https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga">this workflow</a>, and import the workflow into Galaxy</p>   <div class="hide-when-galaxy-proxy-active"> <!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote> <!--END_SNIPPET--> </div> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Run the workflow <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:</p>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">genome.fa</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes”</em>: <code class="language-plaintext highlighter-rouge">genes (NCBI).gff3</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA Seq Coverage (1)”</em>: <code class="language-plaintext highlighter-rouge">RNA-Seq Coverage 1.bw</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA Seq Coverage (2)”</em>: <code class="language-plaintext highlighter-rouge">RNA-Seq Coverage 2.bw</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DNA Sequencing Coverage”</em>: <code class="language-plaintext highlighter-rouge">dna sequencing coverage.bw</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variants”</em>: <code class="language-plaintext highlighter-rouge">variants.vcf</code></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Alternatively you can run the pre-processing steps and configure Circos manually as follows:</p>
+
+<h2 id="manual-configuration">Manual Configuration</h2>
+
+<p>We’ll calculate the GC skew first from the genome sequence:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-gc-skew"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: GC Skew</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_gc_skew/0.69.8+galaxy9" title="GC Skew tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GC Skew</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><em>“Source for reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">genome.fa</code> (Input dataset)</li>
+          </ul>
+        </li>
+        <li><em>“Window size”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-window-size"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Window size</div>
+        <p>The optimal window size is sometimes a process of trial and error to find the right balance between too many datapoints, and the expected smooth curve that should appear indicating forward or reverse strand genes.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="preparing-bigwig-files">Preparing BigWig Files</h3>
+
+<p>With that file available, we’re ready to convert these into a format Circos can understand. Natively we store the files in BigWig because it’s a very space efficient format, however Circos only processes text files, and expects a dataset with the following structure:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Column</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Chromosome name</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Start</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>End</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>value</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>so we’ll use a tool to convert them into the Circos-preferred format.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-dataset-pre-processing"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dataset Pre-processing</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_wiggle_to_scatter/0.69.8+galaxy9" title="Circos: bigWig to Scatter tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: bigWig to Scatter</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data file”</em>:
+          <ul>
+            <li>output of <strong>GC Skew</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li>RNA-Seq coverage 1.bw (Uploaded Dataset)</li>
+            <li>RNA-Seq coverage 2.bw (Uploaded Dataset)</li>
+            <li>DNA sequencing coverage.bw (Uploaded Dataset)</li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-multi-select-to-automate-processing"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Multi-select to automate processing</div>
+        <p>Multi-select allows you to easily process several datasets at once in Galaxy</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-creating-bigwig-files-from-coverage"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Creating BigWig files from coverage</div>
+  <p>You can use a tool like <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.5.4+galaxy0" title="bamCoverage: generates a coverage bigWig file from a given BAM or CRAM file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>bamCoverage: generates a coverage bigWig file from a given BAM or CRAM file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.5.4+galaxy0)</span> to create a bigWig file from a BAM or CRAM sequencing dataset.</p>
+</blockquote>
+
+<h3 id="preparing-variant-calls">Preparing Variant Calls</h3>
+
+<p>Variant calls in a <code class="language-plaintext highlighter-rouge">vcf</code> format can easily be transformed into the same format as we converted the BigWigs to.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-dataset-pre-processing-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Dataset Pre-processing</div>
+
+  <ol>
+    <li><span class="tool" data-tool="Cut1" title="Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cut</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c2,c6</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">variants.vcf</code> (Uploaded dataset)</li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <ol>
+          <li>Why these columns? What do they represent?</li>
+          <li>Why is <code class="language-plaintext highlighter-rouge">c2</code> selected twice?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li><code class="language-plaintext highlighter-rouge">c1</code> is the chromosome name, <code class="language-plaintext highlighter-rouge">c2</code> is the position of the variant, and <code class="language-plaintext highlighter-rouge">c6</code> is the quality column.</li>
+            <li><code class="language-plaintext highlighter-rouge">c2</code> is used twice because in Circos there are no ‘point’ values, everything has a start and end. So here we re-use the start position to represent a 1 base long feature.</li>
+          </ol>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="preparing-gene-annotations">Preparing Gene Annotations</h3>
+
+<p>Gene annotations (gff3, bed, gtf), known as “intervals” in the Circos world, can be converted into a couple different formats, namely <a href="http://circos.ca/documentation/tutorials/quick_start/text/">text labels</a> and <a href="http://circos.ca/documentation/tutorials/quick_start/tiles/">tiles</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-prepare-gene-calls"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare gene calls</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_text/0.69.8+galaxy9" title="Circos: Interval to Circos Text Labels tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Interval to Circos Text Labels</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><em>“Data Format”</em>: <code class="language-plaintext highlighter-rouge">GFF3</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF3 File”</em>: <code class="language-plaintext highlighter-rouge">genes (NCBI).gff3</code> (Input dataset)</li>
+            <li><em>“GFF3 Attribute to pull value from”</em>: <code class="language-plaintext highlighter-rouge">Name</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="gff2bed1" title="GFF-to-BED tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GFF-to-BED</strong></span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert this dataset”</em>: <code class="language-plaintext highlighter-rouge">genes (NCBI).gff3</code> (Input dataset)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos_interval_to_tile/0.69.8+galaxy9" title="Circos: Interval to Tiles tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos: Interval to Tiles</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy9)</span> with the following parameters:
+      <ul>
+        <li><em>“Data Format”</em>: <code class="language-plaintext highlighter-rouge">BED6+</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED File (BED6+ only)”</em>: output of <strong>GFF-to-BED</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="making-the-plot">Making the Plot</h3>
+
+<p>With our:</p>
+
+<ul>
+  <li>gene calls</li>
+  <li>variant calls</li>
+  <li>and sequencing depth</li>
+</ul>
+
+<p>We’re ready to run Circos! As this is a ‘near-final’ circos plot it’s requires complicated configuration. Normally you would reach configuration like this with a lot of iterations. It took the tutorial author around 20 executions of the Circos tool to produce this plot.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-circos"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Circos</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy9" title="Circos tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Circos</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.69.8+galaxy9)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Karyotype”</em>:
+          <ul>
+            <li><em>“Reference Genome Source”</em>: ` FASTA File from History (can be slow, generate a length file to improve execution time.)`
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source FASTA Sequence”</em>: <code class="language-plaintext highlighter-rouge">genome.fa</code> (Uploaded dataset)</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Ideogram”</em>:
+          <ul>
+            <li><em>“Chromosome units”</em>: <code class="language-plaintext highlighter-rouge">Kilobases</code></li>
+            <li><em>“Spacing Between Ideograms (in chromosome units)”</em>: <code class="language-plaintext highlighter-rouge">0.3</code></li>
+            <li><em>“Thickness”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+            <li>In <em>“Labels”</em>:
+              <ul>
+                <li><em>“Label Font Size”</em>: <code class="language-plaintext highlighter-rouge">48</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“2D Data Tracks”</em>:
+          <ul>
+            <li>In <em>“2D Data Plot”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.98</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.92</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Histogram</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Histogram Data Source”</em>: output of <strong>Circos: bigWig to Scatter</strong>  on RNA Seq Coverage 2 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#f08fa4</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.92</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.86</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Histogram</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Histogram Data Source”</em>: output of <strong>Circos: bigWig to Scatter</strong>  on RNA Seq Coverage 1 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#8ff0a4</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.86</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Histogram</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Histogram Data Source”</em>: output of <strong>Circos: bigWig to Scatter</strong>  on DNA sequencing coverage <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#ffbe6f</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.79</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.6</code></li>
+                    <li><em>“Z-index”</em>: <code class="language-plaintext highlighter-rouge">10</code> (This is used to plot <em>over</em> the genes which are added later.)</li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Scatter</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Scatter Data Source”</em>: output of <strong>cut</strong>  on variants.vcf <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Glyph”</em>: <code class="language-plaintext highlighter-rouge">Triangle</code></li>
+                            <li><em>“Glyph Size”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#dc8add</code></li>
+                            <li><em>“Stroke Thickness”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>In <em>“Axes”</em>:
+                      <ul>
+                        <li>In <em>“Axis”</em>:
+                          <ul>
+                            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Axis”</em>
+                              <ul>
+                                <li><em>“Radial Position”</em>: <code class="language-plaintext highlighter-rouge">Absolute position (values match data values)</code>
+                                  <ul>
+                                    <li><em>“Spacing”</em>: <code class="language-plaintext highlighter-rouge">5000.0</code></li>
+                                  </ul>
+                                </li>
+                                <li><em>“y1”</em>: <code class="language-plaintext highlighter-rouge">40000.0</code></li>
+                                <li><em>“Color”</em>: <code class="language-plaintext highlighter-rouge">#1a5fb4</code></li>
+                                <li><em>“Color Transparency”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.6</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.55</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Text Labels</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Text Data Source”</em>: output of <strong>Circos: Interval to Text</strong>  on genes (NCBI).gff <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Label Size”</em>: <code class="language-plaintext highlighter-rouge">18</code></li>
+                            <li><em>“Show Link”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                            <li><em>“Snuggle Labels”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.6</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Tiles</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tile Data Source”</em>: output of <strong>Circos: Interval to Tiles</strong>  on genes (NCBI).gff <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#1c71d8</code></li>
+                            <li><em>“Overflow Behavior”</em>: <code class="language-plaintext highlighter-rouge">Hide: overflow tiles are not drawn</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Based on qualifier value (when available)</code>
+                                          <ul>
+                                            <li><em>“Qualifier name”</em>: <code class="language-plaintext highlighter-rouge">strand</code></li>
+                                            <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Less than (numeric)</code></li>
+                                            <li><em>“Qualifier value to compare against”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="language-plaintext highlighter-rouge">Change Visibility</code></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.53</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.45</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Tiles</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tile Data Source”</em>: output of <strong>Circos: Interval to Tiles</strong>  on genes (NCBI).gff <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Overflow Behavior”</em>: <code class="language-plaintext highlighter-rouge">Hide: overflow tiles are not drawn</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><em>“Orient Inwards”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Based on qualifier value (when available)</code>
+                                          <ul>
+                                            <li><em>“Qualifier name”</em>: <code class="language-plaintext highlighter-rouge">strand</code></li>
+                                            <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Greater than (numeric)</code></li>
+                                            <li><em>“Qualifier value to compare against”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="language-plaintext highlighter-rouge">Change Visibility</code></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Apply to Every Point</code></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="language-plaintext highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#99c1f1</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert 2D Data Plot”</em>
+                  <ul>
+                    <li><em>“Outside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.45</code></li>
+                    <li><em>“Inside Radius”</em>: <code class="language-plaintext highlighter-rouge">0.35</code></li>
+                    <li><em>“Plot Type”</em>: <code class="language-plaintext highlighter-rouge">Histogram</code>
+                      <ul>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Histogram Data Source”</em>: output of <strong>Circos: bigWig to Scatter</strong> on the GC Skew Plot <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+                        <li>In <em>“Plot Format Specific Options”</em>:
+                          <ul>
+                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#ff5757</code></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>In <em>“Rules”</em>:
+                      <ul>
+                        <li>In <em>“Rule”</em>:
+                          <ul>
+                            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Rule”</em>
+                              <ul>
+                                <li>In <em>“Conditions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Conditions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">Based on value (ONLY for scatter/histogram/heatmap/line)</code>
+                                          <ul>
+                                            <li><em>“Points below this value”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                                <li>In <em>“Actions to Apply”</em>:
+                                  <ul>
+                                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Actions to Apply”</em>
+                                      <ul>
+                                        <li><em>“Action”</em>: <code class="language-plaintext highlighter-rouge">Change Fill Color for all points</code>
+                                          <ul>
+                                            <li><em>“Fill Color”</em>: <code class="language-plaintext highlighter-rouge">#5092f7</code></li>
+                                          </ul>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Ticks”</em>:
+          <ul>
+            <li><em>“Skip first label”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li>In <em>“Tick Group”</em>:
+              <ul>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Tick Group”</em>
+                  <ul>
+                    <li><em>“Tick Spacing”</em>: <code class="language-plaintext highlighter-rouge">10.0</code></li>
+                    <li><em>“Tick Size”</em>: <code class="language-plaintext highlighter-rouge">20.0</code></li>
+                    <li><em>“Show Tick Labels”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Tick Group”</em>
+                  <ul>
+                    <li><em>“Tick Size”</em>: <code class="language-plaintext highlighter-rouge">15.0</code></li>
+                    <li><em>“Show Tick Labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                  </ul>
+                </li>
+                <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Tick Group”</em>
+                  <ul>
+                    <li><em>“Tick Spacing”</em>: <code class="language-plaintext highlighter-rouge">0.25</code></li>
+                    <li><em>“Color”</em>: <code class="language-plaintext highlighter-rouge">#9a9996</code></li>
+                    <li><em>“Show Tick Labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-circos-is-complicated"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Circos is complicated</div>
+        <p>Please check your parameters carefully, and expect that mistakes can be made. Just re-run the tool and modify your parameters!
+And while this example is probably very overwhelming, when you create a
+Circos plot from scratch, it will be less overwhelming; it’ll be your
+data which you know better, and you’ll add one track at a time.</p>
+
+        <p><a href="images/montage.gif" rel="noopener noreferrer"><img src="images/montage.gif" alt="gif of a circos plot being iteratively modified to reach something that looks like the final plot. " width="300" height="300" loading="lazy" /></a></p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congratulations on plotting a microbial genome subset in Circos!</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Plotting with Circos is essentially infinitely customisable but here we offer suggestions for a default plotting workflow.</p>
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>reduced for faster plotting and faster data download <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Circos is incredibly customisable</p>
+</li>
+                        
+                        <li><p>Not all customisations have to be done with rules, but they can be a useful method</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/visualisation/faqs/">FAQ page for the Visualisation topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Ploting a Microbial Genome with Circos (Visualisation)" alt="Feedback form link">
+                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
+                </a>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Helena Rasche,  <b>Ploting a Microbial Genome with Circos (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html">https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{visualisation-circos-microbial,
+author = "Helena Rasche",
+	title = "Ploting a Microbial Genome with Circos (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/circos-microbial/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+<div markdown="1">
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="row">
+
+	<div class="col-md-3 col-xs-12">
+		
+		<img class="funder-avatar" src="https://avatars.githubusercontent.com/gallantries" alt="Logo">
+		
+		<a href="/training-material/hall-of-fame/gallantries/" class="btn btn-secondary">See Funder Profile</a>
+	</div>
+	<div class="col-md-9 col-xs-12">
+		
+
+	</div>
+
+</div>
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
+                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/visualisation/tutorials/circos-microbial/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: deeptools_bam_coverage
+  owner: bgruening
+  revisions: 0e49b109abc2
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: circos
+  owner: iuc
+  revisions: 31a35811dda6
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: circos
+  owner: iuc
+  revisions: 31a35811dda6
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: circos
+  owner: iuc
+  revisions: 31a35811dda6
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: circos
+  owner: iuc
+  revisions: 31a35811dda6
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: circos
+  owner: iuc
+  revisions: 31a35811dda6
+  tool_panel_section_label: Visualisation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-6" style="text-align: left">
+				<p>
+					The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+					provides researchers with online training materials, connects them with local trainers, and helps promoting FAIR and Open Science practices worldwide. All contributions are subject to the <a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Galaxy Project Code of Conduct</a>.
+				</p>
+				<p>
+				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+				</p>
+				<p>
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/e76855af4130dfa469c6f1d05e62ef96a0029325">e76855a</a>, built with Jekyll (4.3.2 | production)
+				</p>
+			</div>
+			<div class="col-sm-6" style="text-align: right">
+				
+				<p>
+					<i>This Material</i>:
+					
+					is licensed under
+					<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+						Creative Commons Attribution 4.0 International License
+					</a>
+				</p>
+				<p>
+					<a href="https://github.com/galaxyproject/training-material/edit/main/topics/visualisation/tutorials/circos-microbial/tutorial.md" title="Edit on GitHub">
+					<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+					</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script src='/training-material/assets/js/bundle.main.js?v=1699437130'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    </body>
+</html>
