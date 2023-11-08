@@ -10,7 +10,8 @@ module Jekyll
       '@type': 'Organization',
       email: 'galaxytrainingnetwork@gmail.com',
       name: 'Galaxy Training Network',
-      url: 'https://galaxyproject.org/teach/gtn/'
+      url: 'https://training.galaxyproject.org',
+      logo: 'https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png',
     }.freeze
 
     A11Y = {
@@ -24,6 +25,14 @@ module Jekyll
                             'tutorial, from images being completely inaccessible, to images with good descriptions ' \
                             'for non-visual users.',
     }.freeze
+
+    EDU_ROLES = {
+      'use' => 'Students',
+      'admin-dev' => 'Galaxy Administrators',
+      'basics' => 'Students',
+      'data-science' => 'Data-Science Students',
+      'instructors' => 'Instructors',
+    }
 
     ##
     # Generate the Dublin Core metadata for a material.
@@ -131,21 +140,36 @@ module Jekyll
     end
 
     def generate_funder_jsonld(id, contributor, site)
-      organization = {
-        '@context': 'https://schema.org',
-        '@type': 'Grant',
-        identifier: contributor['funding_id'],
-        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
-        funder: {
+      organization = [
+        {
+          '@context': 'https://schema.org',
           '@type': 'Organization',
+          'http://purl.org/dc/terms/conformsTo': {
+            '@id': 'https://bioschemas.org/profiles/Organization/0.3-DRAFT',
+            '@type': 'CreativeWork'
+          },
           name: Gtn::Contributors.fetch_name(site, id),
-          description: contributor.fetch('funding_statement',
-                                         'An organization supporting the Galaxy Training Network'),
-          url: Gtn::Contributors.fetch_funding_url(contributor),
+          description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+          url: contributor.fetch('url', "https://training.galaxyproject.org/training-material/hall-of-fame/#{id}/"),
+          logo: contributor.fetch('avatar', "https://github.com/#{id}.png"),
+        },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'Grant',
+          identifier: contributor['funding_id'],
+          url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+          funder: {
+            '@type': 'Organization',
+            name: contributor['funder_name'],
+            description: contributor.fetch('funding_statement',
+                                           'An organization supporting the Galaxy Training Network'),
+            url: Gtn::Contributors.fetch_funding_url(contributor),
+          }
         }
-      }
-      organization['startDate'] = contributor['start_date'] if contributor.key?('start_date')
-      organization['endDate'] = contributor['end_date'] if contributor.key?('end_date')
+      ]
+
+      organization[1]['startDate'] = contributor['start_date'] if contributor.key?('start_date')
+      organization[1]['endDate'] = contributor['end_date'] if contributor.key?('end_date')
 
       organization
     end
@@ -260,7 +284,7 @@ module Jekyll
         # "associatedMedia":,
         audience: {
           '@type': 'EducationalAudience',
-          educationalRole: 'Students'
+          educationalRole: EDU_ROLES[topic['type']]
         },
         # "audio":,
         # "award":,
@@ -344,7 +368,6 @@ module Jekyll
         # "alternateName":,
         # "description" described below
         # "disambiguatingDescription":,
-        identifier: site['github_repository'],
         # "image":,
         # "mainEntityOfPage":,
         # "name" described below
@@ -353,8 +376,11 @@ module Jekyll
         # "subjectOf":,
         # "url" described below
         workTranslation: [],
-        creativeWorkStatus: material['draft'] ? 'Under development' : 'Active',
+        creativeWorkStatus: material['draft'] ? 'Draft' : 'Active',
       }
+
+      data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
+
       data.update(A11Y)
 
       # info depending if tutorial, hands-on or slide level
@@ -367,14 +393,16 @@ module Jekyll
       data['isPartOf'] = topic_desc
 
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
-        if material['name'] == 'tutorial.md'
-          data['learningResourceType'] = 'hands-on tutorial'
-          data['name'] = "Hands-on for '#{material['title']}' tutorial"
-        else
-          data['learningResourceType'] = 'slides'
-          data['name'] = "Slides for '#{material['title']}' tutorial"
-        end
+        data['learningResourceType'] = if material['name'] == 'tutorial.md'
+                                         'hands-on tutorial'
+                                       else
+                                         'slides'
+                                       end
+        data['name'] = material['title']
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
+
+        # Requires https://github.com/galaxyproject/training-material/pull/4271
+        data['version'] = Gtn::ModificationTimes.obtain_modification_count(material['path'])
 
         # Time required
         if material.key?('time_estimation') && !material['time_estimation'].nil?
@@ -397,8 +425,7 @@ module Jekyll
         end
 
         # Keywords
-        data['keywords'] = [topic['name']] + (material['tags'] || [])
-        data['keywords'] = data['keywords'].join(', ')
+        data['keywords'] = [topic['title']] + (material['tags'] || [])
         # Zenodo links
         if material.key?('zenodo_link')
           mentions.push({
@@ -515,6 +542,13 @@ module Jekyll
         end
 
         data['author'] = authors
+      end
+
+      # Add non-author contributors
+      if material.key?('contributions')
+        data['contributor'] = Gtn::Contributors.get_non_authors(material).map do |x|
+          generate_person_jsonld(x, site['data']['contributors'][x], site)
+        end
       end
 
       about = []
