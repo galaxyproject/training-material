@@ -29,7 +29,6 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
 
 Non coding RNAs (ncRNA) that are homologous, meaning that they share a common ancestor RNA, can be identified
 by sharing a common sequence or structure. Since the biological function depends on the
@@ -233,8 +232,7 @@ We will now run a similar analysis using a RNA-aware multi alignment tool and wi
 > 1. **LocARNA Multiple Aligner** {% icon tool %} with the following parameters:
 >    - *"Input type"*: `Fasta input (strict)`
 >        - {% icon param-file %} *"Sequence input"*: `output` (Input dataset)
->    - *"Alignment mode"*: `Global alignment
-                (LocARNA)`
+>    - *"Alignment mode"*: `Global alignment (LocARNA)`
 >    - *"Output options"*: ``
 >    - In *"Scoring parameters"*:
 >        - *"Indel opening score"*: `-900`
@@ -494,7 +492,6 @@ Finally we want to search other genomes with the RNA family model constructed fo
 {: .question}
 
 # Conclusion
-{:.no_toc}
 
 In summary we applied to different alignment strategies to test if the input alignment is encoding a protein and if there is a conserved RNA secondary structure indicating
 a biological function as non-coding RNA. We learned that using RNA secondary structure information during alignment can be beneficial to detect conserved RNA secondary
