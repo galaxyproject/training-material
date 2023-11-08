@@ -231,6 +231,10 @@ Once all the above requirement are satisfied, Alevin can be run using the follow
 salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 transcript_701.fastq --dropseq  -i salmon_index_code -p 10 -o alevin_output_code --tgMap map_code --freqThreshold 3 --keepCBFraction 1 --dumpFeatures
 ```
 
+
+This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find different parameters such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis. 
+
+
 > <warning-title>Process stopping</warning-title>
 >  
 > The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel and that should help.
@@ -239,52 +243,9 @@ salmon-latest_linux_x86_64/bin/salmon alevin -l ISR -1 barcodes_701.fastq -2 tra
 
 
 <!---
-check if we can get alevinQC to work 
+check if we can get alevinQC to work - paste the info from the other tutorial?
 -->
 
-
-We now have:
-
-* Barcode/ UMI reads
-* cDNA reads
-* transcript/ gene mapping
-* filtered FASTA
-
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2.
-
-> <comment-title>What if I'm running a 10x sample?</comment-title>
->
-> The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead.
-{: .comment}
-
-> <comment-title>Alevin file names</comment-title>
->
-> You will notice that the names of the output files of Alevin are written in a certain convention, mentioning which tool was used and on which files, for example: *"Alevin on data X, data Y, and others: whitelist"*. Remember that you can always rename the files if you wish! For simplicity, when we refer to those files in the tutorial, we skip the information about tool and only use the second part of the name - in this case it would be simply *"whitelist"*. 
-{: .comment}
-
-This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
-
-* the matrix itself (*per-cell gene-count matrix (MTX)* - the count by gene and cell)
-* the row (cell/ barcode) identifiers (*row index (CB-ids)*) and
-* the column (gene) labels (*column headers (gene-ids)*).
-
-
-> <question-title></question-title>
->
-> After you've run Alevin, {% icon galaxy-eye %} look through all the different files. Can you find:
-> 1. The Mapping Rate?
-> 2. How many cells are present in the matrix output?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} *Salmon log file*. You can see the mapping rate is a paltry `25.45%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
-> > 2. Inspect {% icon galaxy-eye %} the file {% icon param-file %} *row index (CB-ids)*, and you can see it has `2163` lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!
-> >
-> {: .solution}
->
-{: .question}
-
-{% icon congratulations %} Congratulations - you've made an expression matrix! We could almost stop here. But it's sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.
 
 # Basic QC
 
