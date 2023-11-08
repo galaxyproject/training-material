@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b8cff075ec81fc107d75c0e6e5a2bd620846906d",
+		release: "galaxy-training-network@cc97e0ec6f076a29505939739da252cd45e78f36",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,8 +57,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699438679' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699438679' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699439657' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699439657' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -67,7 +67,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Label-free data analysis using MaxQuant">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000">
+<meta name="DC.date" content="2023-11-08 10:06:20 +0000">
 <meta name="DC.creator" content="Melanie Föll">
 <meta name="DC.creator" content="Matthias Fahrner">
 
@@ -110,7 +110,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org",
     "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-11-08 10:06:20 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Label-free data analysis using MaxQuant",
   "interactivityType": "mixed",
@@ -169,7 +169,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Label-free data analysis using MaxQuant",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html",
-  "version": 16,
+  "version": 18,
   "timeRequired": "PT1H",
   "teaches": "Analysis of human serum proteome samples with label-free quantification in MaxQuant",
   "keywords": [
@@ -281,7 +281,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1699438679'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1699439657'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -656,7 +656,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
         </ul>
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 8, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             
@@ -667,7 +667,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div><strong><i class="fas fa-fingerprint" aria-hidden="true"></i><span class="visually-hidden">purl</span> <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:T00218">https://gxy.io/GTN:T00218</a> </div>
         
 
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -786,7 +786,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
           <ul>
             <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Infiles”</em>: <code class="language-plaintext highlighter-rouge">sample1</code>, <code class="language-plaintext highlighter-rouge">sample2</code></li>
             <li><em>“missed cleavages”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><em>“variable modifications”</em>: <code class="language-plaintext highlighter-rouge">unselect all variable modifications</code></li>
+            <li><em>“enzyme”</em>: <code class="language-plaintext highlighter-rouge">Trypsin/P</code></li>
             <li><em>“Quantitation Methods”</em>: <code class="language-plaintext highlighter-rouge">label free quantification</code></li>
           </ul>
         </li>
@@ -1000,7 +1000,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>2 (272 lines (Protein Groups) minus 272 lines (Filter))</li>
+      <li>2 (272 lines (Protein Groups) minus 270 lines (Filter))</li>
       <li>Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins (<a href="https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms">plasma proteins found by MS</a>).</li>
       <li>Sample1 was depleted, sample2 was pure serum.</li>
       <li>In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.</li>
@@ -1111,7 +1111,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
     <li>The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.</li>
     <li>A necessary first step is to log2-transform the LFQ intensities.</li>
     <li>Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.</li>
-    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as <a href="https://www.doi.org/10.1093/nar/gkv007">LIMMA</a>, <a href="https://www.doi.org/10.1073/pnas.091062498">SAM</a> and <a href="https://doi.org/10.1093/bioinformatics/btu305">MSstats</a> <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.20.1.0)</span>. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
+    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as LIMMA (<span class="citation"><a href="#Ritchie2015">Ritchie <i>et al.</i> 2015</a></span>), SAM (<span class="citation"><a href="#Tusher2001">Tusher <i>et al.</i> 2001</a></span>) and MSstats (<span class="citation"><a href="#Choi2014">Choi <i>et al.</i> 2014</a></span>) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="MSstats tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>MSstats</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.20.1.0)</span>. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
   </ol>
 
 </blockquote>
@@ -1150,8 +1150,11 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 
                 
                 <h1 id="bibliography">References</h1>
-                <ol class="bibliography"><li id="Cox2008">Cox, J., and M. Mann, 2008 <b>MaxQuant enables high peptide identification rates,  individualized p.p.b.-range mass accuracies and proteome-wide protein quantification</b>. Nature Biotechnology 26: 1367–1372. <a href="https://doi.org/10.1038/nbt.1511">10.1038/nbt.1511</a></li>
+                <ol class="bibliography"><li id="Tusher2001">Tusher, V. G., R. Tibshirani, and G. Chu, 2001 <b>Significance analysis of microarrays applied to the ionizing radiation response</b>. Proceedings of the National Academy of Sciences 98: 5116–5121. <a href="https://doi.org/10.1073/pnas.091062498">10.1073/pnas.091062498</a></li>
+<li id="Cox2008">Cox, J., and M. Mann, 2008 <b>MaxQuant enables high peptide identification rates,  individualized p.p.b.-range mass accuracies and proteome-wide protein quantification</b>. Nature Biotechnology 26: 1367–1372. <a href="https://doi.org/10.1038/nbt.1511">10.1038/nbt.1511</a></li>
+<li id="Choi2014">Choi, M., C.-Y. Chang, T. Clough, D. Broudy, T. Killeen <i>et al.</i>, 2014 <b>MSstats: an R package for statistical analysis of quantitative mass spectrometry-based proteomic experiments</b>. Bioinformatics 30: 2524–2526. <a href="https://doi.org/10.1093/bioinformatics/btu305">10.1093/bioinformatics/btu305</a> <a href="https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:">https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:</a></li>
 <li id="Bielow2015">Bielow, C., G. Mastrobuoni, and S. Kempa, 2015 <b>Proteomics Quality Control: Quality Control Software for MaxQuant Results</b>. Journal of Proteome Research 15: 777–787. <a href="https://doi.org/10.1021/acs.jproteome.5b00780">10.1021/acs.jproteome.5b00780</a></li>
+<li id="Ritchie2015">Ritchie, M. E., B. Phipson, D. Wu, Y. Hu, C. W. Law <i>et al.</i>, 2015 <b>limma powers differential expression analyses for RNA-sequencing and microarray studies</b>. Nucleic Acids Research 43: e47–e47. <a href="https://doi.org/10.1093/nar/gkv007">10.1093/nar/gkv007</a></li>
 <li id="Geyer2017">Geyer, P. E., L. M. Holdt, D. Teupser, and M. Mann, 2017 <b>Revisiting biomarker discovery by plasma proteomics</b>. Molecular Systems Biology 13: 942. <a href="https://doi.org/10.15252/msb.20156297">10.15252/msb.20156297</a></li></ol>
                 
 
@@ -1304,7 +1307,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/b8cff075ec81fc107d75c0e6e5a2bd620846906d">b8cff07</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/cc97e0ec6f076a29505939739da252cd45e78f36">cc97e0e</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1332,7 +1335,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1699438679'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1699439657'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>
