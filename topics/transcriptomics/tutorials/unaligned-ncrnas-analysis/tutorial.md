@@ -20,9 +20,12 @@ key_points:
 - RNA
 - Secondary structure
 - Coding potential
-contributors:
-- eggzilla
-- bebatut
+contributions:
+  authorship:
+    - eggzilla
+    - bebatut
+  editing:
+    - pavanvidem
 ---
 
 # Introduction
@@ -35,7 +38,7 @@ spatial structure of a molecule, it is often strongly conserved for ncRNAs.
 This workflow investigates a set of sequences for their sequence and structure conservation and for
 their alignability. We will inspect a set of dual function RNAs and a set of epidermal growth factor sequences with the workflow and compare the different outcomes.
 
-The first step in any analysis of unaligned ncRNAs is to run a multi alignment tool on the sequences of the ncRNAs. Using the multi alignment, we can extract some representative sequences, analyze them for protein coding potential, compute consensus structure and predict stable secondary structure. 
+The first step in any analysis of unaligned ncRNAs is to run a multi alignment tool on the sequences of the ncRNAs. Using the multi alignment, we can extract some representative sequences, analyze them for protein coding potential, compute consensus structure and predict stable secondary structure.
 
 For the multi-alignment, two types of tools are used: one generic multi-aligner and one RNA-secondary structure aware.
 
@@ -53,14 +56,14 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
->    
+>
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3482616) or from the shared data library
 >
 >    We will retrieve two files one file containing homolog sequences from the
 >    SgrS family, which has been discovered to be a dual-function RNA.
 >    This allows us to show the ability of the workflow to test for protein
 >    coding potential, as well as for predicting functional non-coding RNAs.
->    
+>
 >    Search for Upload File in the Tool search field and select it from the search results.
 >    The popup for file upload that opens offers the Paste/Fetch data option.
 >    Select it and paste following URLs into the URL field and press Start:
@@ -123,7 +126,7 @@ We can now analyze more in depth the representative sequences of the alignment: 
 
 We would like first to know if there is any potential protein coding regions left in the alignment. We use **RNAcode** {% icon tool %} which predicts protein coding regions in an alignment of homologous nucleotide sequences. The prediction is based on evolutionary signatures typical for protein genes, i.e. the presence of synonyomous/conservative nucleotide mutations, conservation of the reading frame and absence of stop codons.
 
-**RNAcode** {% icon tool %} does not rely on any species specific sequence characteristics whatsoever and does not use any machine learning techniques. 
+**RNAcode** {% icon tool %} does not rely on any species specific sequence characteristics whatsoever and does not use any machine learning techniques.
 
 > ### {% icon hands_on %} Hands-on: Identify potential protein coding regions
 >
@@ -153,7 +156,7 @@ We would like first to know if there is any potential protein coding regions lef
 
 ## Consensus structure prediction
 
-We now calculate secondary structures for a set of aligned RNAs using **RNAalifold** {% icon tool %}. This tool reads aligned RNA sequences and calculate their minimum free energy (mfe) structure, partition function (pf) and base pairing probability matrix. 
+We now calculate secondary structures for a set of aligned RNAs using **RNAalifold** {% icon tool %}. This tool reads aligned RNA sequences and calculate their minimum free energy (mfe) structure, partition function (pf) and base pairing probability matrix.
 
 > ### {% icon hands_on %} Hands-on: Compute consensus structure
 >
@@ -385,18 +388,18 @@ We would like now to construct a probabilistic model representing structure and 
 
 The output of **cmbuild** contains information about the size of the input alignment (in aligned columns and # of sequences), and about the size of the resulting model.
 
-In addition to writing CM(s) to the output file, **cmbuild** also outputs a single line for each model created to stdout. Each line has the following fields: 
-- `aln`: the index of the alignment used to build the CM 
-- `idx`: the index of the CM in the output file 
-- `name`: the name of the CM 
-- `nseq`: the number of sequences in the alignment used to build the CM 
-- `eff nseq`: the effective number of sequences used to build the model 
-- `alen`: the length of the alignment used to build the CM 
-- `clen`: the number of columns from the alignment defined as consensus (match) columns 
-- `bps`: the number of basepairs in the CM 
-- `bifs`: the number of bifurcations in the CM 
-- `rel entropy`: CM: the total relative entropy of the model divided by the number of consensus columns 
-- `rel entropy`: HMM: the total relative entropy of the model ignoring secondary structure divided by the number of consensus columns 
+In addition to writing CM(s) to the output file, **cmbuild** also outputs a single line for each model created to stdout. Each line has the following fields:
+- `aln`: the index of the alignment used to build the CM
+- `idx`: the index of the CM in the output file
+- `name`: the name of the CM
+- `nseq`: the number of sequences in the alignment used to build the CM
+- `eff nseq`: the effective number of sequences used to build the model
+- `alen`: the length of the alignment used to build the CM
+- `clen`: the number of columns from the alignment defined as consensus (match) columns
+- `bps`: the number of basepairs in the CM
+- `bifs`: the number of bifurcations in the CM
+- `rel entropy`: CM: the total relative entropy of the model divided by the number of consensus columns
+- `rel entropy`: HMM: the total relative entropy of the model ignoring secondary structure divided by the number of consensus columns
 - `description`: description of the model/alignment.
 
 
@@ -489,7 +492,7 @@ Infernal is used to search sequence databases for homologs of structural RNA seq
 >        - {% icon param-file %} *"Covariance models file from the history."*: `cmfile_outfile` (output of **Build covariance models** {% icon tool %})
 {: .hands_on}
 
-Finally we want to search other genomes with the RNA family model constructed for our input alignment. 
+Finally we want to search other genomes with the RNA family model constructed for our input alignment.
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
