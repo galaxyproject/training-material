@@ -42,7 +42,7 @@ The first step in any analysis of unaligned ncRNAs is to run a multi alignment t
 
 For the multi-alignment, two types of tools are used: one generic multi-aligner and one RNA-secondary structure aware.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -53,7 +53,7 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 
 # Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -91,7 +91,7 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 
 ## Align sequences and extract representative sequences
 
-> ### {% icon hands_on %} Hands-on: Run multi-alignment tool and extract representative sequences from the alignment
+> <hands-on-title> Run multi-alignment tool and extract representative sequences from the alignment </hands-on-title>
 >
 > 1. **MAFFT** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to align"*: `output` (Input dataset)
@@ -107,14 +107,13 @@ MAFFT is a general purpose alignment tool that outputs a multiple seqence alignm
 alignment to test the sequences for coding potential and to test if there is a conserved secondary
 structure, without using secondary structure information to guide the alignment.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What additional characters can you observe in the multiple sequence alignment constrast to the individual sequences?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question
-> >    We can observe gap characters that are representing insertions and deletions
+> > 1. We can observe gap characters that are representing insertions and deletions
 > >    in case the individual sequences are of different length.
 > {: .solution}
 >
@@ -128,7 +127,7 @@ We would like first to know if there is any potential protein coding regions lef
 
 **RNAcode** {% icon tool %} does not rely on any species specific sequence characteristics whatsoever and does not use any machine learning techniques.
 
-> ### {% icon hands_on %} Hands-on: Identify potential protein coding regions
+> <hands-on-title> Identify potential protein coding regions </hands-on-title>
 >
 > 1. **RNAcode** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Multiple Alignment"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -140,14 +139,13 @@ We would like first to know if there is any potential protein coding regions lef
 **RNAcode** {% icon tool %} reports local regions of unusual high coding potential together with an associated p-value.
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What are features that RNAcode uses to detect reagions with coding potential?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    RNAcode uses the conservation of a reading frame, synonymous mutations and the absence of stop codons
+> > 1. RNAcode uses the conservation of a reading frame, synonymous mutations and the absence of stop codons
 > >    in the individual sequences of the different species to detect coding potential.
 > >
 > {: .solution}
@@ -158,7 +156,7 @@ We would like first to know if there is any potential protein coding regions lef
 
 We now calculate secondary structures for a set of aligned RNAs using **RNAalifold** {% icon tool %}. This tool reads aligned RNA sequences and calculate their minimum free energy (mfe) structure, partition function (pf) and base pairing probability matrix.
 
-> ### {% icon hands_on %} Hands-on: Compute consensus structure
+> <hands-on-title> Compute consensus structure </hands-on-title>
 >
 > 1. **RNAalifold** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Clustal file"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -179,14 +177,13 @@ We now calculate secondary structures for a set of aligned RNAs using **RNAalifo
 
 **RNAalifold** returns the mfe structure in bracket notation, its energy, the free energy of the thermodynamic ensemble and the frequency of the mfe structure in the ensemble to stdout. It also produces Postscript files with plots of the resulting secondary structure graph and a "dot plot" of the base pairing matrix.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is covariation of structure in terms of homologous RNA sequences?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    Covariation is the conservation of functionally important base-pairs after mutation events.
+> > 1. Covariation is the conservation of functionally important base-pairs after mutation events.
 > >    If a base-pair is disrupted by a mutation that relevant for obtaining the correct spatial structure
 > >    a second mutation of the pairing nucleotide can restore the base-pair. The more of these mutations
 > >    that can be observed over multiple specices the higher the likelyhood that this base-pair is of
@@ -200,7 +197,7 @@ We now calculate secondary structures for a set of aligned RNAs using **RNAalifo
 
 To predict structurally conserved and thermodynamically stable RNA secondary structures from our data, we use RNAz. It can be used in genome wide screens to detect functional RNA structures, as found in noncoding RNAs and cis-acting regulatory elements of mRNAs.
 
-> ### {% icon hands_on %} Hands-on: Predict the stable RNA secondary structure
+> <hands-on-title> Predict the stable RNA secondary structure </hands-on-title>
 >
 > 1. **RNAz** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input Alignment File"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -212,14 +209,13 @@ to be structured RNA.
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why is a conserved secondary structure an indicator that the region detected by RNAz possessed a biologial function?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    Biologically functional RNA molecules need to fold into the necessary spatial structure to perform their function.
+> > 1. Biologically functional RNA molecules need to fold into the necessary spatial structure to perform their function.
 > >    If the secondary structure is conserved over larger phylogenetic distances this is a strong indicator that
 > >    the function is preserved in multiple species and therefore has been maintained despite mutation events.
 > >
@@ -233,7 +229,7 @@ We will now run a similar analysis using a RNA-aware multi alignment tool and wi
 
 ## Align sequences and extract representative sequences
 
-> ### {% icon hands_on %} Hands-on: Run multi-alignment tool and extract representative sequences from the alignment
+> <hands-on-title> Run multi-alignment tool and extract representative sequences from the alignment </hands-on-title>
 >
 > 1. **LocARNA Multiple Aligner** {% icon tool %} with the following parameters:
 >    - *"Input type"*: `Fasta input (strict)`
@@ -261,14 +257,13 @@ make it more difficult to detect common open reading frames and coding potential
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the difference of aliging the individual sequnces with MAFFT or with LocaRNA?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    MAFFT is a general purpose alignment tool based on sequence information only, while LocaRNA uses
+> > 1. MAFFT is a general purpose alignment tool based on sequence information only, while LocaRNA uses
 > >    secondary structure information. In the MAFFT alignment we expect to see nucleotides to be in the
 > >    same column based on reading frame information. In LocaRNA output there is a preference to align
 > >    nucleotides in the same column if they are part of the same base-pair, even when the sequence is
@@ -284,7 +279,7 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 
 ### Analysis for potential protein coding regions
 
-> ### {% icon hands_on %} Hands-on: Identify potential protein coding regions
+> <hands-on-title> Identify potential protein coding regions </hands-on-title>
 >
 > 1. **RNAcode** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Multiple Alignment"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -294,14 +289,13 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Is it easier to detect coding potential with the alignment output of MAFFT or of LocaRNA?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    It is easier to detect with the MAFFT output, since LocaRNA gives preference to maintain base-pairs over
+> > 1. It is easier to detect with the MAFFT output, since LocaRNA gives preference to maintain base-pairs over
 > >    the reading frames.
 > >
 > {: .solution}
@@ -310,7 +304,7 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 
 ### Consensus structure prediction
 
-> ### {% icon hands_on %} Hands-on: Predict the consensus structure
+> <hands-on-title> Predict the consensus structure </hands-on-title>
 >
 > 1. **RNAalifold** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Clustal file"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -330,14 +324,13 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Compare the predicted secondary structure with the one predicted with the MAFFT alignment?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > TODO add answer
+> > 1. TODO add answer
 > >
 > {: .solution}
 >
@@ -345,7 +338,7 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 
 ### Stable RNA secondary structure prediction
 
-> ### {% icon hands_on %} Hands-on: Predict the stable RNA secondary structure
+> <hands-on-title> Predict the stable RNA secondary structure </hands-on-title>
 >
 > 1. **RNAz** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input Alignment File"*: `clustal` (output of **Select Sequences** {% icon tool %})
@@ -354,12 +347,12 @@ As with output of MAFFT, we can now analyze more in depth the representative seq
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Compare the result of the prediction vs the one performed with the MAFFT alignment?
 > 2. Question2?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Answer for question1
 > > 2. TODO add answer
@@ -376,7 +369,7 @@ We would like now to construct a probabilistic model representing structure and 
 
 **cmbuild** {% icon tool %} is a tool which makes consensus RNA secondary structure profiles, and uses them to search nucleic acid sequence databases for homologous RNAs, or to create new structure-based multiple sequence alignments. It builds a covariance model of an RNA multiple alignment and uses the consensus structure to determine the architecture of the CM.
 
-> ### {% icon hands_on %} Hands-on: Create RNA family model
+> <hands-on-title> Create RNA family model </hands-on-title>
 >
 > 1. **Build covariance models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequence database"*: `stockholm` (output of **LocARNA Multiple Aligner** {% icon tool %})
@@ -403,17 +396,15 @@ In addition to writing CM(s) to the output file, **cmbuild** also outputs a sing
 - `description`: description of the model/alignment.
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What does a RNA family model represent?
 > 2. What is the practical application of a RNA family model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    RNA family model capture the sequence and structure information of the aligned individual sequences of a RNA family with a probabilistic model, also called covariance model.
-> > 2. Answer for question2
-> >    RNA family models can be used for homology search that considers the secondary structure of the RNA family and enables to identify novel members of the RNA family.
+> > 1. RNA family model capture the sequence and structure information of the aligned individual sequences of a RNA family with a probabilistic model, also called covariance model.
+> > 2. RNA family models can be used for homology search that considers the secondary structure of the RNA family and enables to identify novel members of the RNA family.
 > {: .solution}
 >
 {: .question}
@@ -422,7 +413,7 @@ In addition to writing CM(s) to the output file, **cmbuild** also outputs a sing
 
 To get a better idea about the RNA family, we can extract summary statistics for the covariance model generated by **cmbuild**, e.g. number of nodes, information content of sequence and structure.
 
-> ### {% icon hands_on %} Hands-on: Generate RNA family statistics
+> <hands-on-title> Generate RNA family statistics </hands-on-title>
 >
 > 1. **Summary statistics** {% icon tool %} with the following parameters:
 >    - *"Subject covariance models"*: `Covariance model from your history`
@@ -436,14 +427,13 @@ for protein coding sequences. However for functional ncRNAs we expect that there
 a higher CM information content.
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How is the information content for HMM and CM components of the RNA family model different for ncRNA and protein coding genes?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    Protein coding genes often posses no or only limited conserved secondary structure, we therefore expect that the CM information content that models the secondary structure will be low.
+> > 1. Protein coding genes often posses no or only limited conserved secondary structure, we therefore expect that the CM information content that models the secondary structure will be low.
 > >    For non-coding RNAs a higher CM information content is expected.
 > >
 > {: .solution}
@@ -452,7 +442,7 @@ a higher CM information content.
 
 We can also visualize the RNA family model by showing nodes and probabilites of the model.
 
-> ### {% icon hands_on %} Hands-on: Visualize the RNA family model
+> <hands-on-title> Visualize the RNA family model </hands-on-title>
 >
 > 1. **cmv** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input model"*: `cmfile_outfile` (output of **Build covariance models** {% icon tool %})
@@ -465,14 +455,13 @@ state contained in the model the visualization simplyfies to investigate the mod
 with additional information.
 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many nodes does the newly constructed model posses?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    TODO answer question
+> > 1. TODO answer question
 > >
 > {: .solution}
 >
@@ -484,7 +473,7 @@ The RNA family model can also be used to detect further potentially homologous R
 
 Infernal is used to search sequence databases for homologs of structural RNA sequences, and to make sequence- and structure-based RNA sequence alignments. Infernal needs a profile from a structurally annotated multiple sequence alignment of an RNA family with a position-specific scoring system for substitutions, insertions, and deletions. Positions in the profile that are basepaired in the consensus secondary structure of the alignment are modeled as dependent on one another, allowing Infernal’s scoring system to consider the secondary structure, in addition to the primary sequence, of the family being modeled. Infernal profiles are probabilistic models called “covariance models”, a specialized type of stochastic context-free grammar (SCFG)
 
-> ### {% icon hands_on %} Hands-on: Search for homologous RNA sequences
+> <hands-on-title> Search for homologous RNA sequences </hands-on-title>
 > 1. Import the sequence database file from [Zenodo]() or from the shared data library
 > 2. **Search covariance model(s)** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequence database"*: `output` (Input dataset)
@@ -496,14 +485,13 @@ Finally we want to search other genomes with the RNA family model constructed fo
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many potentially homolog sequences were detected by searching with the model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> >    TODO answer question
+> > 1. TODO answer question
 > >
 > {: .solution}
 >
