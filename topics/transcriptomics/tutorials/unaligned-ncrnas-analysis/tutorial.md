@@ -4,10 +4,10 @@ layout: tutorial_hands_on
 title: Analyse unaligned ncRNAs
 zenodo_link: 'https://zenodo.org/record/3482616'
 questions:
-- Which biological questions are addressed by the tutorial?
+  - Which biological questions are addressed by the tutorial?
   - Is my set of RNAs of interest homologous?
   - Are the RNAs in the set coding for a protein?
-- Which bioinformatics techniques are important to know for this type of data?
+  - Which bioinformatics techniques are important to know for this type of data?
   - Alignment
   - RNA secondary structure folding
 objectives:
@@ -472,7 +472,7 @@ The RNA family model can also be used to detect further potentially homologous R
 Infernal is used to search sequence databases for homologs of structural RNA sequences, and to make sequence- and structure-based RNA sequence alignments. Infernal needs a profile from a structurally annotated multiple sequence alignment of an RNA family with a position-specific scoring system for substitutions, insertions, and deletions. Positions in the profile that are basepaired in the consensus secondary structure of the alignment are modeled as dependent on one another, allowing Infernal’s scoring system to consider the secondary structure, in addition to the primary sequence, of the family being modeled. Infernal profiles are probabilistic models called “covariance models”, a specialized type of stochastic context-free grammar (SCFG)
 
 > <hands-on-title> Search for homologous RNA sequences </hands-on-title>
-> 1. Import the sequence database file from [Zenodo]() or from the shared data library
+> 1. Import the sequence database file from Zenodo or from the shared data library
 > 2. **Search covariance model(s)** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequence database"*: `output` (Input dataset)
 >    - *"Subject covariance models"*: `Covariance model from your history`
