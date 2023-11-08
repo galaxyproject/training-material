@@ -80,7 +80,7 @@ View(olympics)
 4. How many columns?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 1. When you expand the `olympics.tsv` dataset in your history (see also screenshot below), you will see `format: tabular`, this is another term for a tab-separated (`tsv`) file.
 2. Each row represents an athlete's participation in an event. If an athlete competes in multiple events, there is a line for each event.
 3. 234,522. Look at the bottom of the View or Environment panels to see this number.
@@ -320,7 +320,7 @@ Use what you just learned to create a scatter plot of `height` over
 Is this a good way to show this type of data?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 ```{r}
 ggplot(data = olympics,
@@ -374,7 +374,7 @@ a beanplot), where the shape (of the density of points) is drawn.
 - Replace the box plot with a violin plot; see `geom_violin()`.
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 ```
 ggplot(olympics_small, aes(x = height, y = sport)) +
 geom_jitter(alpha = 0.3, color = "orange") +
@@ -392,7 +392,7 @@ incrementally adding commands). Try making these modifications:
 - Represent height on the `log_10` scale; see `scale_y_log10()` and `scale_x_log10()`.
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 ```{r}
 ggplot(olympics_small, aes(x = height, y = sport)) +
@@ -409,7 +409,7 @@ Create boxplot for `age` by sport.  Overlay the boxplot layer on a jitter
 layer to show actual measurements.
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 ```{r}
 ggplot(olympics_small, aes(x = age, y = sport)) +
 geom_jitter(alpha = 0.3, color = "orange") +
@@ -425,7 +425,7 @@ from integer to factor. Why does this change how R makes the graph?
 
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 ```{r}
 ggplot(olympics_small, aes(x = age, y = sport)) +
 geom_jitter(alpha = 0.3, aes(color=year)) +
@@ -567,7 +567,7 @@ ggplot(data = year_detail_counts, mapping = aes(x = year, y = n, color = medal))
 ```
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-facet-grid-wrap-with"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-facet-grid-wrap-with" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: facet_grid/wrap with ~<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-facet-grid-wrap-with"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-facet-grid-wrap-with" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: facet_grid/wrap with ~</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 `ggplot2` before version 3.0.0 used formulas to specify how plots are faceted.
 If you encounter `facet_grid`/`wrap(...)` code containing `~`, please read
 [https://ggplot2.tidyverse.org/news/#tidy-evaluation](https://ggplot2.tidyverse.org/news/#tidy-evaluation).
@@ -606,7 +606,7 @@ provides a wide variety of options.
 Use what you just learned to create a plot the relationship between height and weight,
 of participants, broken down by NOC and Sport.
 :::{.solution}
-<div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 ```{r}
 ggplot(data = olympics_small, mapping = aes(x = height, y = weight, color = medal)) +
 geom_point() +
@@ -705,7 +705,7 @@ Here are some ideas:
 - Try using a different color palette (see [https://r-graphics.org/chapter-colors](https://r-graphics.org/chapter-colors)).
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 This optional exercise currently lacks solutions. If you have them, please feel free to contribute suggestions here :)
 :::
 

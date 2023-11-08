@@ -73,7 +73,7 @@ gene_metadata <- ann$var
 ```
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-uploading-files-from-your-computer-is-also-an-option"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uploading-files-from-your-computer-is-also-an-option" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Uploading files from your computer is also an option!<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-uploading-files-from-your-computer-is-also-an-option"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-uploading-files-from-your-computer-is-also-an-option" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Uploading files from your computer is also an option!</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 If you already have files containing the expression matrix, genes and cells metadata, you can upload them to JupyLab and generate a cds file from them instead. For example, if you first downloaded the files from Galaxy, your files will have the `.tabular` extension. In this case, we will use the `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names.
 ```{r}
@@ -88,7 +88,7 @@ expression_matrix <- read.delim('expression.tabular', row.names=1)
 
 Why should we set `row.names=1`?
 
-> <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+> <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 >
 > This allows us to ensure that the expression value matrix has the same number of columns as the `cell_metadata` has rows and the same number of rows as the `gene_metadata` has rows. Importantly, the row names of the `cell_metadata` object should match the column names of the expression matrix and the row names of the `gene_metadata` object should match the row names of the expression matrix.
 >
@@ -99,7 +99,7 @@ Why should we set `row.names=1`?
 
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-reading-in-the-files-for-rstudio-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reading-in-the-files-for-rstudio-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Reading in the files for RStudio users<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-reading-in-the-files-for-rstudio-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-reading-in-the-files-for-rstudio-users" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Reading in the files for RStudio users</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 If you are working in RStudio Cloud, you have to click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded data files to upload. You should now see all three files in this window. You might want to rename the files to make their names shorter.
 
@@ -160,7 +160,7 @@ cds <- new_cell_data_set(expression_matrix, cell_metadata, gene_metadata)
 We are now ready to process our data!
 
 :::{.details}
-<div class="box-title details-title" id="details-format-conversion"><button class="gtn-boxify-button details" type="button" aria-controls="details-format-conversion" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Format conversion<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title details-title" id="details-format-conversion"><button class="gtn-boxify-button details" type="button" aria-controls="details-format-conversion" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Format conversion</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Since Monocle’s CDS object is analogous to Python's AnnData, why don’t we use some kind of conversion between those two formats? There is indeed a package called `sceasy` that helps easy conversion of different single-cell data formats to each other. However, when we tested this conversion on our dataset and then used Monocle to plot the expression of genes, the plots were not correct – the expression was shown to be identical throughout the sample. For comparison, Seurat did well when plotting gene expression of the same converted object! Although conversion functions are very handy, you have to be aware that their output might be interpreted differently by certain packages. Therefore, to make sure that the analysis is reliable, we decided to generate CDS object directly using Monocle’s function.
 <figure id="figure-2" style="max-width: 90%; margin:auto;"><img src="../../images/scrna-casestudy-monocle/monocle_seurat.png"  alt="Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool. Gene expression in Monocle plots is identical throughout the sample, while the expression of the same genes plotted by Seurat is noticeable only in specific clusters."  width="866" height=839 loading="lazy"><a target="_blank" href="../../images/scrna-casestudy-monocle/monocle_seurat.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Comparison between plots of gene expression generated by Monocle and Seurat using the CDS object that was converted from AnnData using SCEasy tool.</figcaption></figure>
@@ -310,7 +310,7 @@ plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)
 Does your plot look the same as the one in the Figure?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Your plot might be slightly different to the one shown in the Figure but this is fine, as long as you see analogical patterns. Some libraries that you're using might have been updated, giving non-identical output. However, the principle behind the analysis is still the same, so you can peacefully follow the tutorial. Just keep your eyes open and... THINK!
 
@@ -324,7 +324,7 @@ Now we can move to the next step and perform dimensionality reduction.
 
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-plotting-labels-vs-legend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-labels-vs-legend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Plotting: labels vs legend<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-plotting-labels-vs-legend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-labels-vs-legend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Plotting: labels vs legend</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 When creating graphs, we sometimes use labels and sometimes just a legend. You can choose whichever you think makes the data clear and readable.
 
@@ -340,7 +340,7 @@ Monocle uses a technique called "community detection" (@Traag_2019) to group cel
 Monocle also divides the cells into larger, more well separated groups called partitions, using a statistical test from @Wolf_2019, introduced as part of their [PAGA](https://github.com/theislab/paga) algorithm.
 
 :::{.details}
-<div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Clusters vs partitions<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Clusters vs partitions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene expression. The relationships between different clusters are analysed to identify possible trajectories.
 
@@ -401,7 +401,7 @@ plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster',
 Have the clusters change after changing the partition q-value?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 It might be the case that after changing partition q-value, you will notice that additional clusters appeared. In that situation, you might either play around the `resolution` and `partition_qval` values, go forward with the current clustering (adjusting the parameters accordingly), or check the other method of assigning cells to one partition given below.
 
@@ -452,7 +452,7 @@ plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'pa
 
 
 :::{.details}
-<div class="box-title details-title" id="details-and-operators"><button class="gtn-boxify-button details" type="button" aria-controls="details-and-operators" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: @ and $ operators<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title details-title" id="details-and-operators"><button class="gtn-boxify-button details" type="button" aria-controls="details-and-operators" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: @ and $ operators</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 As you saw above, we used `@` and `$` operators to navigate in CDS object. What is the difference between them? `$` operator is used to access one variable/column, while `@` extracts the contents of a slot in an object with a formal (S4) class structure. If you use `View()` function on our CDS object, you will see the elements of type "S4" that you can access using `@` operator. The suggestion list of elements that can be accessed should also pop up as you type the name of the object followed by the corresponding operator.
 
@@ -487,7 +487,7 @@ plot_cells(cds_clustered, genes=c('Il2ra','Cd8b1','Cd8a','Cd4','Itm2a','Aif1','H
 Based on the gene expression graph that we just generated, the table above and your knowledge from the previous tutorials, how would you assign the clusters?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Keep in mind that these results refer to our numbered clusters, while yours might be slightly different.
 - `Il2ra` (DN): mostly expressed in cluster 4
@@ -546,7 +546,7 @@ You can group the cells by any categorical variable in `colData(cds_clustered)`.
 What are the variables stored in `marker_test` data frame and what do they mean?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Those are 10 variables that you can check easily either using colnames(marker_test) or `View(marker_test)` which will also display all the corresponding values.
 - `gene_id` - Ensembl gene ID
@@ -589,7 +589,7 @@ plot_genes_by_group(cds_clustered,                    # our CDS object
 ```
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-unexpectedly-too-many-genes-on-y-axis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-unexpectedly-too-many-genes-on-y-axis" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Unexpectedly too many genes on y-axis?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-unexpectedly-too-many-genes-on-y-axis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-unexpectedly-too-many-genes-on-y-axis" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Unexpectedly too many genes on y-axis?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 If you notice that on your dot plot any cluster has more genes than you specified (here we set one gene per cluster `top_n(1, pseudo_R2)`), go back to the code and create a new cell, right after assigning `top_specific_markers` object and just before `top_marker_names`. In the new cell, paste and execute the following:
 
@@ -643,14 +643,14 @@ generate_garnett_marker_file(garnett_markers_filtered, file="./marker_file.txt")
 A new file should appear in the ‘Files’ window. If you click on it, you will see the cell types and their corresponding marker genes, satisfying your chosen conditions.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-marker-genes-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-marker-genes-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Marker genes file<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-marker-genes-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-marker-genes-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Marker genes file</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 Note that you can use the above block of code to generate file with the marker genes for unannotated CDS object to help you identify and check specifically expressed genes – you’d only have to change `group_cells_by` parameter from "cell_type" to “cluster”.
 :::
 
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Only for users of local RStudio</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 If you are working in RStudio locally, you might want to try a great function `choose_cells()`, which allows you to make a subset of the CDS object containing only cells of interest to investigate certain clusters more in-depth. It only works in interactive mode, so can be only used locally - when you call it, then a pop-up window will appear where you can choose cells to subset.
 ```{r}
@@ -753,7 +753,7 @@ cds_order_2 <- order_cells(cds_trajectory, root_cells = DN_cells)
 ```
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Only for users of local RStudio<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-only-for-users-of-local-rstudio-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-for-users-of-local-rstudio-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Only for users of local RStudio</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 If you are working in RStudio locally, you can use `order_cells()` function in the interactive mode. The pop-up window should appear and then you can simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.
 
@@ -905,7 +905,7 @@ You can also visualise the modules using `plot_cells()` function. We've chosen s
 Which modules to plot?
 
 :::{.solution}
-<div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
 This is totally up to you! It might be the case that you got different numbering of modules, so then using the numbers specified in the code below won't make much sense. Just look at your heatmap, compare the differences between modules and think which ones would be the most interesing to visualise.
 

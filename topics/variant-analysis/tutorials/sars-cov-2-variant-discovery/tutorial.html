@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e76855af4130dfa469c6f1d05e62ef96a0029325",
+		release: "galaxy-training-network@b8cff075ec81fc107d75c0e6e5a2bd620846906d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,12 +57,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699437130' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699437130' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699438679' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699438679' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
@@ -108,7 +107,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "dateModified": "2023-06-22 08:06:41 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
@@ -121,25 +121,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "provider": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "sourceOrganization": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "identifier": "https://github.com/galaxyproject/training-material",
   "workTranslation": [
 
   ],
   "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:T00316",
   "accessMode": [
     "textual",
     "visual"
@@ -164,11 +167,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data' tutorial",
+  "name": "Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html",
+  "version": 33,
   "timeRequired": "PT3H",
   "teaches": "Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries\n - Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms\n - Run a workflow to summarize and visualize the mutation discovery results for a batch of samples\n - Run a workflow to construct viral consensus sequences for the samples in a batch\n - Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages\n - Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data",
-  "keywords": "variant-analysis, covid19, virology, one-health",
+  "keywords": [
+    "Variant Analysis",
+    "covid19",
+    "virology",
+    "one-health"
+  ],
   "description": "The questions this  addresses are:\n - How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?\n - How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?\n - What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?\n - How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?\n\n\nThe objectives are:\n - Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries\n - Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms\n - Run a workflow to summarize and visualize the mutation discovery results for a batch of samples\n - Run a workflow to construct viral consensus sequences for the samples in a batch\n - Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages\n - Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -186,7 +195,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -201,7 +211,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -216,7 +227,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -231,7 +243,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -246,7 +259,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -261,7 +275,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     },
     {
@@ -276,7 +291,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         "@type": "Organization",
         "email": "galaxytrainingnetwork@gmail.com",
         "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
       }
     }
   ],
@@ -298,7 +314,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           "@type": "Organization",
           "email": "galaxytrainingnetwork@gmail.com",
           "name": "Galaxy Training Network",
-          "url": "https://galaxyproject.org/teach/gtn/"
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
         }
       ],
       "identifier": "https://orcid.org/0000-0002-9464-6640",
@@ -321,12 +338,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           "@type": "Organization",
           "email": "galaxytrainingnetwork@gmail.com",
           "name": "Galaxy Training Network",
-          "url": "https://galaxyproject.org/teach/gtn/"
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
         }
       ],
       "identifier": "https://orcid.org/0000-0001-9852-1987",
       "orcid": "https://orcid.org/0000-0001-9852-1987"
     }
+  ],
+  "contributor": [
+
   ],
   "about": [
     {
@@ -364,7 +385,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1699437130'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1699438679'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -1104,14 +1125,14 @@ This data has been Illumina paired-end sequenced after amplification with the AR
       <p>Create a new history for this analysis</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a history<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
@@ -1137,7 +1158,7 @@ This data has been Illumina paired-end sequenced after amplification with the AR
       <p>In all of these cases you will also have to organize the imported data into a dataset collection like explained in detail for the suggested example data.</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-data-logistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-logistics" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Data logistics<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-data-logistics"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-logistics" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Data logistics</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>A detailed explanation of all of the above-mentioned options for getting your data into Galaxy and organizing it in your history is beyond the scope of this tutorial.
 If you are struggling with getting your own data set up like shown for the example data in this section, please:</p>
@@ -1153,7 +1174,7 @@ If you are struggling with getting your own data set up like shown for the examp
       <p>Alternatively, if your data is available from <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI’s Sequence Read Archive (SRA)</a>, you can import it with the help of a dedicated tool, which will organize the data into collections for you.</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-getting-data-from-sra"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-data-from-sra" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Getting data from SRA<span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-getting-data-from-sra"><button class="gtn-boxify-button details" type="button" aria-controls="details-getting-data-from-sra" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Getting data from SRA</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>The simpler <a href="/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">SARS-CoV-2 sequencing data analysis tutorial</a> uses and explains this alternative way of importing.</p>
 
@@ -1278,7 +1299,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
           <p><span class="tool" data-tool="upload1" title="Upload tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Upload</strong></span> the reference to your history via the link above and make sure the dataset format is set to <code class="language-plaintext highlighter-rouge">fasta</code>.</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fasta</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
           <p><!--END_SNIPPET--></p>
         </li>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Replace Text in entire line tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Replace Text in entire line</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.2)</span> to simplify the reference sequence name
@@ -1298,7 +1319,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR170/039/SRR17051939/SRR17051939_2.fastq.gz
           <p>When the Replace Text tool run is finished, <strong>rename</strong> the output dataset to make it clear that this is the SARS-CoV-2 reference dataset to use in the analysis.</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Renaming a dataset<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">SARS-CoV-2 reference</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">SARS-CoV-2 reference</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
           <p><!--END_SNIPPET--></p>
         </li>
       </ol>
@@ -1344,7 +1365,7 @@ GU280_gp11        orf10
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Creating a new file<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong> at the bottom</li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Change the dataset name from “New File” to <code class="language-plaintext highlighter-rouge">SARS-CoV-2 feature mapping</code></li>   <li>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code>* From the Settings menu (<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>) select <strong>Convert spaces to tabs</strong>* Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new file</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong> at the bottom</li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Change the dataset name from “New File” to <code class="language-plaintext highlighter-rouge">SARS-CoV-2 feature mapping</code></li>   <li>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code>* From the Settings menu (<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span>) select <strong>Convert spaces to tabs</strong>* Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
@@ -1359,7 +1380,7 @@ GU280_gp11        orf10
 </ul>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info"><button class="gtn-boxify-button details" type="button" aria-controls="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info"><button class="gtn-boxify-button details" type="button" aria-controls="details-using-your-own-tiled-amplicon-data-provide-the-correct-primer-scheme-and-amplicon-info" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Using your own tiled-amplicon data? Provide the correct primer scheme and amplicon info.</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The instructions below assume that you are going to analyze viral samples amplified using <strong>version 4 of the ARTIC network’s SARS-CoV-2 set of primers</strong>, which is the case for the suggested Omicron batch of data.</p>
 
@@ -1387,7 +1408,7 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
       <p>and upload it to Galaxy as a dataset of type <code class="language-plaintext highlighter-rouge">bed</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">bed</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">bed</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
     <li>
@@ -1399,7 +1420,7 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
       <p>and upload it to Galaxy as a dataset of type <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Importing via links<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
   </ol>
@@ -1436,7 +1457,7 @@ If in doubt, download the ARTIC v4 files through the URLs provided below, and us
 <p>If any of these items have not been assigned the correct format (expand the view of each dataset to reveal the format Galaxy has recorded for it), please fix them now.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> Tip: Changing the datatype<span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>In the lower part <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong>, select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <p>If everything looks fine, you are ready to start the actual data analysis.</p>
@@ -1513,7 +1534,7 @@ This would be:</p>
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: About the workflows<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-about-the-workflows"><button class="gtn-boxify-button details" type="button" aria-controls="details-about-the-workflows" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: About the workflows</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Differences between the four different <em>variation analysis</em> workflow flavors are as follows:</p>
   <ul>
@@ -1641,7 +1662,7 @@ The <a href="https://artic.network/ncov-2019/ncov2019-bioinformatics-sop.html">A
   </div>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Running a workflow<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Running a workflow</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <!--SNIPPET-->
     <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul>
@@ -1668,7 +1689,7 @@ Here, however, we only want to do one analysis of our batch of data so we are fi
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1790,7 +1811,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
     <p>This report is meant as a faster and more legible way for studying the collection of per-sample mutations in VCF format directly.</p>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-structure-of-the-by-sample-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-by-sample-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Structure of the by-sample mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-structure-of-the-by-sample-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-by-sample-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Structure of the by-sample mutation report</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <table>
         <thead>
@@ -1922,7 +1943,7 @@ Generating an optimal plot sometimes requires some experimenting with this value
     <p>This table aggregates the information about each mutation <em>across</em> samples. It is much more concise than the by-sample report at only a small amount of information loss.</p>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-structure-of-the-across-samples-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-across-samples-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> Details: Structure of the across-samples mutation report<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-structure-of-the-across-samples-mutation-report"><button class="gtn-boxify-button details" type="button" aria-controls="details-structure-of-the-across-samples-mutation-report" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Structure of the across-samples mutation report</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <table>
         <thead>
@@ -2057,7 +2078,7 @@ The small cluster at the bottom of the plot consists of only two samples, the cl
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The two samples forming the smallest cluster, <strong>SRR17054502</strong> and <strong>SRR17054506</strong>, and two of the samples in the three-samples cluster, <strong>SRR17054505</strong> and <strong>SRR17054508</strong>, are exactly the four samples we observed as having particularly low coverage in the <strong>Preprocessing and mapping reports</strong> before.</li>
       <li>
@@ -2265,7 +2286,7 @@ It is relatively obvious then that most of these variants have a AF value betwee
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2321,7 +2342,7 @@ This means there is no objective basis for thinking that these samples represent
   </ul>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> like this:</p>
     <ul>
@@ -2377,7 +2398,7 @@ What is that lineage?</p>
   </ol>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -2454,7 +2475,7 @@ Several possibilities exist:</p>
   <p>This report should include the corresponding info from the <code class="language-plaintext highlighter-rouge">clade</code> column (column 2, which is Nextclade’s native classification system) and from the <code class="language-plaintext highlighter-rouge">clade_who</code> (column 6), together with the sample counts and identifiers as previously calculated from pangolin’s output.</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Configure <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.8+galaxy0" title="Datamash tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Datamash</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8+galaxy0)</span> like this:</p>
     <ul>
@@ -2500,7 +2521,7 @@ If you are following along with the suggested batch of data, here’s a question
   <p>Which samples have been assigned differently by pangolin and Nextclade, and why?</p>
 
   <blockquote class="solution">
-    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><strong>SRR17054508</strong>, one of the two samples left unassigned by pangolin is assigned to BA.1 by Nextclade.</p>
 
@@ -2747,7 +2768,7 @@ tools:
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e76855af4130dfa469c6f1d05e62ef96a0029325">e76855a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b8cff075ec81fc107d75c0e6e5a2bd620846906d">b8cff07</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -2775,7 +2796,7 @@ tools:
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1699437130'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1699438679'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

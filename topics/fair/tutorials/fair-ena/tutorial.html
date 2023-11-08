@@ -19,7 +19,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e76855af4130dfa469c6f1d05e62ef96a0029325",
+		release: "galaxy-training-network@b8cff075ec81fc107d75c0e6e5a2bd620846906d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -57,12 +57,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
-        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699437130' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699437130' as='script'>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.js?v=1699438679' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.js?v=1699438679' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
@@ -96,7 +95,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   },
   "audience": {
     "@type": "EducationalAudience",
-    "educationalRole": "Students"
+    "educationalRole": "Data-Science Students"
   },
   "citation": {
     "@type": "CreativeWork",
@@ -107,7 +106,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "dateModified": "2023-11-01 16:25:10 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
@@ -120,25 +120,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "provider": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
   "sourceOrganization": {
     "@type": "Organization",
     "email": "galaxytrainingnetwork@gmail.com",
     "name": "Galaxy Training Network",
-    "url": "https://galaxyproject.org/teach/gtn/"
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
   },
-  "identifier": "https://github.com/galaxyproject/training-material",
   "workTranslation": [
 
   ],
   "creativeWorkStatus": "Active",
+  "identifier": "https://gxy.io/GTN:T00369",
   "accessMode": [
     "textual",
     "visual"
@@ -163,11 +166,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/fair/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "Hands-on for 'Sequence data submission to ENA' tutorial",
+  "name": "Sequence data submission to ENA",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-ena/tutorial.html",
+  "version": 5,
   "timeRequired": "PT1H",
   "teaches": "To populate ENA metadata objects through the Webin portal\n - To submit raw reads to ENA using FTP",
-  "keywords": "fair, FAIR, ENA",
+  "keywords": [
+    "FAIR Data, Workflows, and Research",
+    "FAIR",
+    "ENA"
+  ],
   "description": "The questions this  addresses are:\n - I am new to sequence submission to a repository.\n - How do I submit sequences and metadata to ENA using the Webin portal and cURL?\n\n\nThe objectives are:\n - To populate ENA metadata objects through the Webin portal\n - To submit raw reads to ENA using FTP\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -197,9 +205,82 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           "@type": "Organization",
           "email": "galaxytrainingnetwork@gmail.com",
           "name": "Galaxy Training Network",
-          "url": "https://galaxyproject.org/teach/gtn/"
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
         }
       ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "name": "Katarzyna Kamieniecka",
+      "image": "https://avatars.githubusercontent.com/kkamieniecka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0004-2454-5950",
+      "orcid": "https://orcid.org/0009-0004-2454-5950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/smza/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/smza/",
+      "name": "Munazah Andrabi",
+      "image": "https://avatars.githubusercontent.com/smza",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "name": "Krzysztof Poterlowicz",
+      "image": "https://avatars.githubusercontent.com/poterlowicz-lab",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6173-5674",
+      "orcid": "https://orcid.org/0000-0001-6173-5674"
     }
   ],
   "about": [
@@ -227,7 +308,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
-        <script src='/training-material/assets/js/bundle.theme.js?v=1699437130'></script>
+        <script src='/training-material/assets/js/bundle.theme.js?v=1699438679'></script>
         <header>
     <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
         <div class="container">
@@ -597,7 +678,7 @@ need to submit data stored on a remote server, you are in the right place. This 
 <p>If you would like to use Galaxy tools for submission to ENA you may find <a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html">Submitting sequence data to ENA</a> tutorial helpful.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-what-is-curl"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-curl" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What is cURL?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-is-curl"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-curl" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What is cURL?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>cURL is a command-line tool and library for transferring data over the internet. It allows you to send and receive data from various protocols like HTTP, FTP, and more. In simple terms, it’s a tool that helps your computer talk to other computers on the internet and fetch or send information, like downloading files from a website or making API requests.</p>
 </blockquote>
 
@@ -725,7 +806,7 @@ need to submit data stored on a remote server, you are in the right place. This 
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-filling-in-study-metadata"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-filling-in-study-metadata" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Filling in study metadata<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-filling-in-study-metadata"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-filling-in-study-metadata" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Filling in study metadata</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>You may want to set the submission date to the maximum allowed - 2 years from today. You can change it when you are ready to release the data. 
 Study Fields are editable after submission should you need to update any information.</p>
   </blockquote>
@@ -734,7 +815,7 @@ Study Fields are editable after submission should you need to update any informa
     <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <p>How can you confirm that your study has been successfully registered?</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Click on the Dashboard icon, select ‘Studies Report’. The accessions for your study should appear next to the Study title and other attributes.</p>
     </blockquote>
   </blockquote>
@@ -810,14 +891,14 @@ Study Fields are editable after submission should you need to update any informa
   </table>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-optional-fields"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-fields" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Optional Fields<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-optional-fields"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-fields" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Optional Fields</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>When registering a sample, it is recommended that you provide as much metadata as possible so as to make your study more searchable and useable.</p>
   </blockquote>
   <blockquote class="question">
     <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
     <p>What format should the collection date be in? Read descriptions for other attributes to get a clear understanding of the attributes and permitted values.</p>
     <blockquote class="solution">
-      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> Solution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Date/time in any of these formats is acceptable:
 2008-01-23T19:23:10+00:00; 2008-01-23T19:23:10; 2008-01-23; 2008-01; 2008</p>
     </blockquote>
@@ -842,7 +923,7 @@ Study Fields are editable after submission should you need to update any informa
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip-sample-alias"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sample-alias" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Sample Alias<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-sample-alias"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sample-alias" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Sample Alias</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Remember to enter sample aliases that correspond to what you use in related publications. This will enable readers to find sample-specific metadata and read files, even if you only state a Project accession number in your paper. Sample aliases can, furthermore, be optionally displayed as Unique name in the Sample report.</p>
   </blockquote>
 </blockquote>
@@ -900,7 +981,7 @@ To enable verification of the integrity of the uploaded fastq file, ENA requires
   </ol>
 
   <blockquote class="tip">
-    <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip<span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ul>
       <li>Tick the box next to ‘Show Descriptions’ to reveal text describing the attributes</li>
       <li>To find the sample alias and accession, look in ‘Sample Reports’</li>
@@ -921,7 +1002,7 @@ forward/reverse_file_md5: copy this from md5sums.tsv you generated earlier.</li>
     <li>Any errors generated in the process will be communicated to you on the registered email.</li>
   </ol>
 
-  <div class="box-title tip-title" id="tip-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip<span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
   <p class="tip">The run submission holds information about the raw read files generated in a run of sequencing as well as their location on an FTP server. The experiment submission holds metadata that describes the methods used to sequence the sample.</p>
 
 </blockquote>
@@ -1136,7 +1217,7 @@ tools: []
 				The GTN infrastructure is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
 				</p>
 				<p>
-				Revision <a href="https://github.com/galaxyproject/training-material/commit/e76855af4130dfa469c6f1d05e62ef96a0029325">e76855a</a>, built with Jekyll (4.3.2 | production)
+				Revision <a href="https://github.com/galaxyproject/training-material/commit/b8cff075ec81fc107d75c0e6e5a2bd620846906d">b8cff07</a>, built with Jekyll (4.3.2 | production)
 				</p>
 			</div>
 			<div class="col-sm-6" style="text-align: right">
@@ -1164,7 +1245,7 @@ tools: []
 </footer>
 
 
-        <script src='/training-material/assets/js/bundle.main.js?v=1699437130'></script>
+        <script src='/training-material/assets/js/bundle.main.js?v=1699438679'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     </body>
 </html>

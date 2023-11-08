@@ -417,9 +417,13 @@
     <span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">request</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">w</span>[<span class="ruby-string">&#39;server&#39;</span>] = <span class="ruby-identifier">server</span>
-    <span class="ruby-identifier">w</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">w</span>[<span class="ruby-string">&#39;server&#39;</span>] = <span class="ruby-identifier">server</span>
+      <span class="ruby-identifier">w</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span>
+    []
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>

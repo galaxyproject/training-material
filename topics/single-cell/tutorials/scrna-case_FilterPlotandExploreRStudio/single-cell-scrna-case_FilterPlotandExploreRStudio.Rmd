@@ -90,7 +90,7 @@ Now, in our RStudio environment, we should have all of the data sets necessary t
 Next we will add row and column names to our matrix. In the end, this will leave us with a matrix whose rows are genes, columns are cell barcodes, and each value in the matrix represent the expression value of a given gene in a given cell.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-about-seurat-objects"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-about-seurat-objects" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: About Seurat Objects<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-about-seurat-objects"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-about-seurat-objects" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: About Seurat Objects</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 The order of the dimensions, such that genes are the first and cells are the second is a set characteristic of Seurat objects.
 
 You will recieve an error if you try to label the first dimension with cell barcodes or the second with genes. This is because the Dimname slots are like empty fill in the blanks: if the number of labels input doesn't match the number of blanks in that dimension, that is the number of labels don't match the number of cells/genes, Seurat will not accept the labels.
@@ -103,7 +103,7 @@ dimnames(matrix.mtx) <- list(genes.tsv$V2, barcodes.tsv$V1)
 In a more typical Seurat pipeline, or on a local version of RStudio, this step would be replaced with a Read10x() step. Read10x() is Seurat's function to create a matrix and add in feature and barcode names simultaneously. However, due to the nature of how Galaxy's histories and interactive environments communicate with one another, we'll use this manual method.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-how-to-use-read10x"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-use-read10x" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: How to Use Read10X<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-how-to-use-read10x"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-use-read10x" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: How to Use Read10X</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 The only necessary parameter of Seurat's Read10X() fucntion is the file path to the directory (folder) containing the matrix.mtx, barcodes.tsv, and genes.tsv (sometimes also called features.tsv) files.
 
 So if the EBI SCXA Retrieval tool were to have output a data directory in the sixth history position, the following code would be able to import a labelled counts matrix called "labelled matrix" into our RStudio environment:
@@ -140,7 +140,7 @@ srt$Cell.Type<-exp_design.tsv$Sample.Characteristic.cell.type.
 srt$Factor.Value.Genotype<-exp_design.tsv$Factor.Value.genotype.
 ```
 :::{.tip}
-<div class="box-title tip-title" id="tip-syntax-lesson"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Syntax Lesson<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-syntax-lesson"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Syntax Lesson</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 The code preceding the left pointing arrow will indicate where to put your metadata (the name of your new metadata column: object$new_metadata_columnname), and the code following the arrow will denote where to find that metadata information (metadata_table$columnname)
 
 :::
@@ -188,7 +188,7 @@ This plot shows us the number of cells split by the individual (mouse) from whic
 Ideally, we would like to see a relatively even distribution of counts for each individual (or batch) but if there isn’t, fear not, we can regress this variable out in a later step.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-syntax-lesson-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Syntax Lesson<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-syntax-lesson-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Syntax Lesson</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 In order to accurately assess potential batch effects, use the "group.by" parameter to indicate the variable which differed across experiments.
 
 :::
@@ -297,7 +297,7 @@ prop.table(table(srt@meta.data$nFeature_RNA > 1275 | srt@meta.data$nFeature_RNA 
 Once we are happy with our filtering thresholds, it’s time to apply them to our data!
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-create-a-new-object"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-a-new-object" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Create a new object<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-create-a-new-object"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-a-new-object" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Create a new object</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 You will notice in the next line of code, we have indicated a new object name for this filtered (subset) data. This is good practice  so that you don't have to start all over in case you decide to change your filtering parameters, which you likely will, or if something goes awry.
 
 :::
@@ -321,7 +321,7 @@ Genes that do not appear in any cell, or even in only 1 or 2 cells, may break so
 We can use the filtered matrix we just extracted to create a new Seurat object, this time including the argument: min.cells = 3. This will remove any genes from our matrix that have less than 3 cells expressing them.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-more-thresholds"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-thresholds" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: More Thresholds<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-more-thresholds"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-more-thresholds" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: More Thresholds</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 Note that 3 is not necessarily the best number, rather it is a fairly conservative threshold. You could go as high as 10 or more.
 
 :::
@@ -383,7 +383,7 @@ Principal components (PCs) are calculated from highly dimensional data to find t
 We can calculate the first handful of principal components in our data to drastically reduce the number of dimensions:
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-running-computationally-demanding-steps-on-variable-features"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-computationally-demanding-steps-on-variable-features" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Running Computationally Demanding Steps on Variable Features<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-running-computationally-demanding-steps-on-variable-features"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-computationally-demanding-steps-on-variable-features" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Running Computationally Demanding Steps on Variable Features </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 You'll notice that the RunPCA() function is run using the variable features from the previous step. This signficantly decreases the number of genes, and their expression changes, that must be grouped into principal components by this step.
 :::
 
@@ -433,7 +433,7 @@ Unfortunately, identifying clusters is not as majestic as biologists often think
 So, we’re going to make the best of it as a starting point and see what happens! We will define clusters from the kNN graph, based on how many connections cells have with one another. Roughly, this will depend on a resolution parameter for how granular you want to be.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-on-clustering-resolution"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-clustering-resolution" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: On Clustering Resolution<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-on-clustering-resolution"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-clustering-resolution" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: On Clustering Resolution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 The resolution parameter available in the FindClusters() function allows for you, the bioinformatician, to dictate the granularity of the clusters.
 
 For example, a higher clustering resolution dictates increased granularity, and more stringent clusters. That is--cells must more closely resemble one another in order to be grouped into the same cluster than at a lower clustering resolution.
@@ -444,7 +444,7 @@ In general, I find it easiest to think of a higher resolution producing more clu
 Now that we have made note within our object of which cells cluster together, we can start to visualize our data! Two major visualizations for this data type are tSNE and UMAP. We can calculate the coordinates for both prior to visualization. For tSNE, the parameter perplexity can be changed to best represent the data, while for UMAP the main change would be to change the kNN graph above itself, via the FindNeighbors() function.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-on-umap"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-umap" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: On UMAP<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-on-umap"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-on-umap" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: On UMAP</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 UMAP is the most recently developed, and most widely used dimensionality reduction for visualization of principal component data. It has been optimized since tSNE to better preserve global structure and is less computationally demanding.
 
 :::
@@ -472,7 +472,7 @@ FeaturePlot(filtered_srt, features = "Gapdh", order = TRUE)
 We just plotted a housekeeping gene, Gapdh, so the broad expression we observe is expected.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-weird-scale"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-weird-scale" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Weird scale?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-weird-scale"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-weird-scale" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Weird scale?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 If the scale of your data looks weird, it may be due to the DefaultAssay of your object. When we ran SCTransform, the function creates an entirely new assay within our Seurat object that includes scaled and normalized count values. This SCT Assay is what we want to visualize our expression values off of. So, if your scale is super broad, or goes negative, try running the following command before attempting to plot again:
 ```{r}
 DefaultAssay(filtered_srt)<-"SCT"
@@ -498,7 +498,7 @@ Following an initial look at the DimPlots and FeaturePlots, we can take an even 
 In order to do so we can run cluster level differential expression tests. First, we will need to set our object's active identity to be the clusters. This will ensure that when Seurat's differential expression function is run, the groupings of cells across which it will compare are the clusters.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-what-are-identities"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-are-identities" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: What are Identities?<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-what-are-identities"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-are-identities" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: What are Identities?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 Identities are, at their core, categorical metadata values. They are columns of cell-level metadata that somehow group the cells together. Examples of identities could be cluster number, cell type if/once known, genotype, etc.
 
 :::
@@ -508,7 +508,7 @@ Idents(filtered_srt)<- filtered_srt$seurat_clusters
 ```
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-syntax-lesson-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Syntax Lesson<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-syntax-lesson-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syntax-lesson-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Syntax Lesson</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 There are often many different ways to get the same job done in R, but especially when manipulating Seurat objects. We could alternatively set the active identity of our object with the following line of code too:
 
 ```{r}
@@ -582,7 +582,7 @@ It would be nice to know what these cells are. This analysis (googling all of th
 Feel free to plot these markers onto our dataset to see where they fall. This is generally a useful method of discerning cell types and can be useful for initial annotations.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-plotting-markers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-markers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Plotting Markers<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-plotting-markers"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-markers" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Plotting Markers</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 To do so, simply use the same FeaturePlot() function we used above, but replace the feature parameter with your new marker of interest.
 ```{r}
 FeaturePlot(object = filtered_srt, features = c("Il2ra", "Cd8b1", "Cd8a", "Cd4", "Itm2a"), order = T, ncol = 3)
@@ -662,7 +662,7 @@ Luckily, and importantly, we don’t see the double negative or mature T-cells b
 
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-overprocessing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-overprocessing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Overprocessing<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-overprocessing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-overprocessing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Overprocessing</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 The less you can regress/modify your data, in general, the better--you want to stay as true as you can to the raw data, and only use maths to correct your data when you really need to (and not to create insights where there are none!).
 :::
 
@@ -678,7 +678,7 @@ FeaturePlot(object = filtered_srt, reduction = "umap", features = "Hba-a1")
 Hemoglobin--a red blood cell marker that should NOT be found in T-cells--appears throughout the entire dataset in low numbers and as a likely marker of Cluster 6. This suggests that some background noise may have been introduced by the media the cells were in. We might consider in the wet lab trying to get a purer, happier sample, with less background or in the dry lab, we can take advantage of techniques such as SoupX or others to remove this technical noise.
 
 :::{.tip}
-<div class="box-title tip-title" id="tip-removing-noise"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-removing-noise" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> Tip: Removing Noise<span class="fold-unfold fa fa-minus-square"></span></button></div>
+<div class="box-title tip-title" id="tip-removing-noise"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-removing-noise" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Removing Noise</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 Adjusting the filtering settings (increasing minimum counts/cell, etc.) is often the place to start in these scenarios.
 :::
 
