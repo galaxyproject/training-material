@@ -52,37 +52,40 @@ For the multi-alignment, two types of tools are used: one generic multi-aligner 
 
 # Get data
 
+We will retrieve two files one file containing homolog sequences from the
+SgrS family, which has been discovered to be a dual-function RNA.
+This allows us to show the ability of the workflow to test for protein
+coding potential, as well as for predicting functional non-coding RNAs.
+
+
 > <hands-on-title> Data upload </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the files from [Zenodo](https://zenodo.org/record/3482616) or from the shared data library
 >
->    We will retrieve two files one file containing homolog sequences from the
->    SgrS family, which has been discovered to be a dual-function RNA.
->    This allows us to show the ability of the workflow to test for protein
->    coding potential, as well as for predicting functional non-coding RNAs.
+>    ```
+>    {{page.zenodo_link}}/files/RF00534.fasta
+>    {{page.zenodo_link}}/files/GCF_000005845.2_ASM584v2_genomic.fna
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    Search for Upload File in the Tool search field and select it from the search results.
->    The popup for file upload that opens offers the Paste/Fetch data option.
->    Select it and paste following URLs into the URL field and press Start:
->    https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1
->    https://zenodo.org/record/3482616/files/RF00534.fasta?download=1
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. {% icon galaxy-pencil %} **Rename** the datasets
+>    - Rename `reGCF_000005845.2_ASM584v2_genomic.fna` to `genome.fa`
+>    - Rename `RF00534.fasta` to `sgrs.fa`
 >
->    The two datasets uploaded from Zenodo will now be renamed with less verbose names.
->    The history on the left shows two items which symbolize the uploaded datasets.
->    We rename the first from
->    https://zenodo.org/record/3482616/files/GCF_000005845.2_ASM584v2_genomic.fna?download=1
->    to  genome.fa
->    and we also rename
->    https://zenodo.org/record/3482616/files/RF00534.fasta?download=1
->    to sgrs.fa
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
-> 4. Check that the datatype
+> 4. Check the datatypes for both files
+>    - Both files should automatically be detected as `fasta` format files.
+>    - If this is not the case, please manually set the datatype
 >
->    Both uploaded and renamed files should automatically be detected as fasta format files.
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fasta" %}
+>
 >
 {: .hands_on}
 
