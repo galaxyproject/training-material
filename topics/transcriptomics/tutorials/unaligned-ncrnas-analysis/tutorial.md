@@ -207,7 +207,6 @@ To predict structurally conserved and thermodynamically stable RNA secondary str
 RNAz screens the input alignment for conserved secondary structures which are classified by a Support Vector Machine
 to be structured RNA.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -255,7 +254,6 @@ In contrast to the alignment with MAFFT we now aligned the individual sequences 
 structure. This will make it easier to test for a conserved structure with RNAz, but it will
 make it more difficult to detect common open reading frames and coding potential.
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -482,8 +480,6 @@ Infernal is used to search sequence databases for homologs of structural RNA seq
 {: .hands_on}
 
 Finally we want to search other genomes with the RNA family model constructed for our input alignment.
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
